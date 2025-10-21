@@ -476,7 +476,7 @@ async def create_training(training: TrainingCreate):
 async def get_trainings():
     """Get all training programs"""
     try:
-        trainings = list(trainings_collection.find())
+        trainings = await trainings_collection.find().to_list(1000)
         for training in trainings:
             training["id"] = str(training["_id"])
             del training["_id"]
