@@ -291,21 +291,203 @@ export default function SiteMapAnnotationOptimized({
         } else if (e.key === 's') {
           e.preventDefault();
           handleSave();
+        } else if (e.key === 'c') {
+          e.preventDefault();
+          handleCopy();
+        } else if (e.key === 'v') {
+          e.preventDefault();
+          handlePaste();
+        } else if (e.key === 'a') {
+          e.preventDefault();
+          handleSelectAll();
         }
-      } else if (e.key === 'Delete' && selectedAnnotation) {
-        deleteAnnotation(selectedAnnotation);
+      } else if (e.key === 'Delete' && (selectedAnnotation || selectedAnnotations.length > 0)) {
+        e.preventDefault();
+        handleDeleteSelected();
       } else if (e.key === 'Escape') {
         setTool('select');
         setSelectedAnnotation(null);
+        setSelectedAnnotations([]);
         setDrawingPolygon(false);
         setPolygonPoints([]);
         tempPolygonLineRef.current = [];
+      } else if (e.key === 'g') {
+        e.preventDefault();
+        setShowGrid(!showGrid);
+      } else if (e.key === 'r') {
+        e.preventDefault();
+        setShowRuler(!showRuler);
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [selectedAnnotation, historyStep]);
+  }, [selectedAnnotation, selectedAnnotations, historyStep, showGrid, showRuler]);
+
+  // NEW FEATURES - Snap to Grid Helper
+  const snapToGridPoint = useCallback((x: number, y: number) => {
+    if (!snapToGrid) return { x, y };
+    return {
+      x: Math.round(x / gridSize) * gridSize,
+      y: Math.round(y / gridSize) * gridSize,
+    };
+  }, [snapToGrid, gridSize]);
+
+  // NEW FEATURES - Multi-select handlers
+  const handleSelectAll = useCallback(() => {
+    setSelectedAnnotations(annotations.map(a => a.id));
+  }, [annotations]);
+
+  const toggleAnnotationSelection = useCallback((id: string, ctrlKey: boolean) => {
+    if (ctrlKey) {
+      setSelectedAnnotations(prev => 
+        prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id]
+      );
+    } else {
+      setSelectedAnnotations([id]);
+      setSelectedAnnotation(id);
+    }
+  }, []);
+
+  // NEW FEATURES - Copy/Paste
+  const handleCopy = useCallback(() => {
+    const selected = selectedAnnotations.length > 0 
+      ? annotations.filter(a => selectedAnnotations.includes(a.id))
+      : selectedAnnotation 
+      ? annotations.filter(a => a.id === selectedAnnotation)
+      : [];
+    setClipboard(selected);
+  }, [annotations, selectedAnnotation, selectedAnnotations]);
+
+  const handlePaste = useCallback(() => {
+    if (clipboard.length === 0) return;
+    
+    const newAnnotations = clipboard.map(ann => ({
+      ...ann,
+      id: Date.now().toString() + Math.random(),
+      x: (ann.x || 0) + 20,
+      y: (ann.y || 0) + 20,
+    }));
+
+    setAnnotations(prev => {
+      const updated = [...prev, ...newAnnotations];
+      addToHistory(updated);
+      return updated;
+    });
+    
+    setSelectedAnnotations(newAnnotations.map(a => a.id));
+  }, [clipboard, addToHistory]);
+
+  // NEW FEATURES - Delete selected
+  const handleDeleteSelected = useCallback(() => {
+    const toDelete = selectedAnnotations.length > 0 ? selectedAnnotations : [selectedAnnotation].filter(Boolean);
+    if (toDelete.length === 0) return;
+
+    setAnnotations(prev => {
+      const updated = prev.filter(a => !toDelete.includes(a.id));
+      addToHistory(updated);
+      return updated;
+    });
+    
+    setSelectedAnnotation(null);
+    setSelectedAnnotations([]);
+  }, [selectedAnnotation, selectedAnnotations, addToHistory]);
+
+  // NEW FEATURES - Alignment tools
+  const alignAnnotations = useCallback((direction: 'left' | 'center' | 'right' | 'top' | 'middle' | 'bottom') => {
+    if (selectedAnnotations.length < 2) return;
+
+    const selected = annotations.filter(a => selectedAnnotations.includes(a.id));
+    const coords = selected.map(a => ({ id: a.id, x: a.x || 0, y: a.y || 0 }));
+
+    let targetValue: number;
+    if (direction === 'left') {
+      targetValue = Math.min(...coords.map(c => c.x));
+    } else if (direction === 'right') {
+      targetValue = Math.max(...coords.map(c => c.x));
+    } else if (direction === 'center') {
+      const minX = Math.min(...coords.map(c => c.x));
+      const maxX = Math.max(...coords.map(c => c.x));
+      targetValue = (minX + maxX) / 2;
+    } else if (direction === 'top') {
+      targetValue = Math.min(...coords.map(c => c.y));
+    } else if (direction === 'bottom') {
+      targetValue = Math.max(...coords.map(c => c.y));
+    } else {
+      const minY = Math.min(...coords.map(c => c.y));
+      const maxY = Math.max(...coords.map(c => c.y));
+      targetValue = (minY + maxY) / 2;
+    }
+
+    setAnnotations(prev => {
+      const updated = prev.map(ann => {
+        if (!selectedAnnotations.includes(ann.id)) return ann;
+        if (direction === 'left' || direction === 'right' || direction === 'center') {
+          return { ...ann, x: targetValue };
+        } else {
+          return { ...ann, y: targetValue };
+        }
+      });
+      addToHistory(updated);
+      return updated;
+    });
+  }, [selectedAnnotations, annotations, addToHistory]);
+
+  // NEW FEATURES - Area calculator
+  const calculatePolygonArea = useCallback((points: number[]) => {
+    if (points.length < 6) return 0;
+    
+    let area = 0;
+    const numPoints = points.length / 2;
+    
+    for (let i = 0; i < numPoints; i++) {
+      const j = (i + 1) % numPoints;
+      area += points[i * 2] * points[j * 2 + 1];
+      area -= points[j * 2] * points[i * 2 + 1];
+    }
+    
+    return Math.abs(area / 2);
+  }, []);
+
+  // NEW FEATURES - Ruler tool distance
+  const calculateDistance = useCallback((x1: number, y1: number, x2: number, y2: number) => {
+    return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+  }, []);
+
+  // NEW FEATURES - Templates
+  const templates = useMemo(() => [
+    {
+      id: 'parking-lot',
+      name: 'Standard Parking Lot',
+      description: '20-space parking configuration',
+      annotations: [] as Annotation[], // Add pre-configured annotations
+    },
+    {
+      id: 'sidewalk-pattern',
+      name: 'Sidewalk Pattern',
+      description: 'Common sidewalk layout',
+      annotations: [] as Annotation[],
+    },
+    {
+      id: 'loading-zone',
+      name: 'Loading Zone',
+      description: 'Commercial loading area',
+      annotations: [] as Annotation[],
+    },
+  ], []);
+
+  const applyTemplate = useCallback((templateId: string) => {
+    const template = templates.find(t => t.id === templateId);
+    if (!template) return;
+
+    setAnnotations(prev => {
+      const updated = [...prev, ...template.annotations];
+      addToHistory(updated);
+      return updated;
+    });
+    
+    setShowTemplates(false);
+  }, [templates, addToHistory]);
 
   // Optimized auto-save with proper cleanup (RELIABILITY FIX)
   useEffect(() => {
