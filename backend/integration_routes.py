@@ -59,7 +59,7 @@ async def get_integrations(integration_type: Optional[str] = None):
         if integration_type:
             query["integration_type"] = integration_type
         
-        integrations = list(integrations_collection.find(query))
+        integrations = await integrations_collection.find(query).to_list(1000)
         for integration in integrations:
             integration["id"] = str(integration["_id"])
             del integration["_id"]
