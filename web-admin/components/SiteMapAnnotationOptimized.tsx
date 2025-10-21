@@ -163,10 +163,27 @@ export default function SiteMapAnnotationOptimized({
   const [autoSaveEnabled, setAutoSaveEnabled] = useState(true);
   const [lastSaved, setLastSaved] = useState<Date | null>(null);
   
+  // NEW ENHANCEMENTS
+  const [snapToGrid, setSnapToGrid] = useState(false);
+  const [gridSize, setGridSize] = useState(50);
+  const [showRuler, setShowRuler] = useState(false);
+  const [rulerPoints, setRulerPoints] = useState<number[]>([]);
+  const [showPropertiesPanel, setShowPropertiesPanel] = useState(false);
+  const [layers, setLayers] = useState([
+    { id: 'main', name: 'Main Layer', visible: true, locked: false }
+  ]);
+  const [currentLayer, setCurrentLayer] = useState('main');
+  const [selectedAnnotations, setSelectedAnnotations] = useState<string[]>([]);
+  const [clipboard, setClipboard] = useState<Annotation[]>([]);
+  const [showTemplates, setShowTemplates] = useState(false);
+  const [showAreaCalculator, setShowAreaCalculator] = useState(false);
+  const [annotationNotes, setAnnotationNotes] = useState<{[key: string]: string}>({});
+  
   // Polygon state
   const [polygonPoints, setPolygonPoints] = useState<number[]>([]);
   const [drawingPolygon, setDrawingPolygon] = useState(false);
   const [currentAreaType, setCurrentAreaType] = useState<string>('');
+  const [editingPolygon, setEditingPolygon] = useState<string | null>(null);
   
   // Use refs instead of state for high-frequency updates (PERFORMANCE FIX)
   const isDrawingRef = useRef(false);
