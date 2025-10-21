@@ -897,7 +897,7 @@ export default function CustomerFormPage() {
                       <button
                         type="button"
                         onClick={() => router.push(`/sites/create?company_id=${customerId}`)}
-                        className="flex items-center space-x-2 px-4 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-colors"
+                        className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-[#2c5282] transition-colors"
                       >
                         <Plus className="w-4 h-4" />
                         <span>Add Site</span>

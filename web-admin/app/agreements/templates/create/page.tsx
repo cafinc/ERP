@@ -119,7 +119,7 @@ export default function CreateAgreementTemplatePage() {
         />
 
         {/* Template Info */}
-        <div className="mt-6 bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+        <div className="mt-6 bg-white rounded-lg shadow-lg border border-gray-200 p-8">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">Template Information</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
@@ -130,7 +130,7 @@ export default function CreateAgreementTemplatePage() {
                 type="text"
                 value={template.template_name}
                 onChange={(e) => setTemplate({ ...template, template_name: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 placeholder="e.g., Standard Snow Removal Agreement"
               />
             </div>
@@ -141,7 +141,7 @@ export default function CreateAgreementTemplatePage() {
               <select
                 value={template.category}
                 onChange={(e) => setTemplate({ ...template, category: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               >
                 <option value="Snow Removal Services">Snow Removal Services</option>
                 <option value="Lawn Care Services">Lawn Care Services</option>
@@ -159,7 +159,7 @@ export default function CreateAgreementTemplatePage() {
                 value={template.description}
                 onChange={(e) => setTemplate({ ...template, description: e.target.value })}
                 rows={2}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 placeholder="Brief description of this agreement template..."
               />
             </div>
@@ -170,7 +170,7 @@ export default function CreateAgreementTemplatePage() {
               <select
                 value={template.pricing_structure}
                 onChange={(e) => setTemplate({ ...template, pricing_structure: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               >
                 <option value="seasonal">Seasonal</option>
                 <option value="per_occurrence">Per Occurrence</option>
@@ -186,7 +186,7 @@ export default function CreateAgreementTemplatePage() {
               <select
                 value={template.payment_terms}
                 onChange={(e) => setTemplate({ ...template, payment_terms: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               >
                 <option value="Net 30">Net 30</option>
                 <option value="Net 15">Net 15</option>
@@ -201,7 +201,7 @@ export default function CreateAgreementTemplatePage() {
                   type="checkbox"
                   checked={template.auto_renew}
                   onChange={(e) => setTemplate({ ...template, auto_renew: e.target.checked })}
-                  className="w-4 h-4 text-[#3f72af] border-gray-300 rounded focus:ring-[#3f72af]"
+                  className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                 />
                 <span className="text-sm font-medium text-gray-700">Auto-renew agreement</span>
               </label>
@@ -215,7 +215,7 @@ export default function CreateAgreementTemplatePage() {
             <h3 className="text-lg font-semibold text-gray-900">Agreement Sections</h3>
             <button
               onClick={handleAddCustomSection}
-              className="flex items-center space-x-2 px-3 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg text-sm font-medium transition-colors"
+              className="flex items-center space-x-2 px-3 py-2 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg text-sm font-medium transition-colors"
             >
               <Plus className="w-4 h-4" />
               <span>Add Section</span>
@@ -231,7 +231,7 @@ export default function CreateAgreementTemplatePage() {
                   onClick={() => setActiveTab(section.id)}
                   className={`w-full flex items-center justify-between px-4 py-3 text-left border-b border-gray-100 transition-colors ${
                     activeTab === section.id
-                      ? 'bg-[#3f72af] text-white'
+                      ? 'bg-blue-600 text-white'
                       : 'hover:bg-gray-50 text-gray-700'
                   }`}
                 >
@@ -266,7 +266,7 @@ export default function CreateAgreementTemplatePage() {
                             ),
                           }));
                         }}
-                        className="text-xl font-semibold text-gray-900 border-b-2 border-transparent hover:border-gray-300 focus:border-[#3f72af] outline-none transition-colors"
+                        className="text-xl font-semibold text-gray-900 border-b-2 border-transparent hover:border-gray-300 focus:border-blue-500 outline-none transition-colors"
                       />
                       {currentSection.required && (
                         <span className="inline-block ml-2 px-2 py-1 bg-red-100 text-red-700 rounded text-xs font-medium">
@@ -287,7 +287,7 @@ export default function CreateAgreementTemplatePage() {
                     value={currentSection.content}
                     onChange={(e) => handleSectionUpdate(currentSection.id, e.target.value)}
                     rows={15}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent font-mono text-sm"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent font-mono text-sm"
                     placeholder="Enter section content here...\n\nYou can use placeholders like:\n{{customer_name}}\n{{service_address}}\n{{start_date}}\n{{contract_value}}"
                   />
                   <p className="mt-2 text-xs text-gray-500">

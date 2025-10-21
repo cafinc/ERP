@@ -230,7 +230,7 @@ export default function WorkflowEditorPage() {
       <DashboardLayout>
         <div className="flex items-center justify-center h-full">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#3f72af] mx-auto mb-4"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
             <p className="text-gray-600">Loading workflow...</p>
           </div>
         </div>
@@ -240,7 +240,7 @@ export default function WorkflowEditorPage() {
 
   return (
     <DashboardLayout>
-      <div className="p-4">
+      <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto">
         <CompactHeader
           title={isEdit ? 'Edit Workflow' : 'Create Workflow'}
           icon={Zap}
@@ -262,7 +262,7 @@ export default function WorkflowEditorPage() {
 
         <div className="mx-6 space-y-6">
           {/* Basic Info */}
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-8">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Basic Information</h3>
             
             <div className="space-y-4">
@@ -274,7 +274,7 @@ export default function WorkflowEditorPage() {
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3f72af]"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="e.g., Send customer arrival notification"
                 />
               </div>
@@ -287,7 +287,7 @@ export default function WorkflowEditorPage() {
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   rows={3}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3f72af]"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="Describe what this workflow does..."
                 />
               </div>
@@ -298,7 +298,7 @@ export default function WorkflowEditorPage() {
                   id="enabled"
                   checked={enabled}
                   onChange={(e) => setEnabled(e.target.checked)}
-                  className="w-4 h-4 text-[#3f72af] rounded focus:ring-[#3f72af]"
+                  className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
                 />
                 <label htmlFor="enabled" className="text-sm font-medium text-gray-700">
                   Enable workflow immediately
@@ -315,7 +315,7 @@ export default function WorkflowEditorPage() {
                     value={tagInput}
                     onChange={(e) => setTagInput(e.target.value)}
                     onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addTag())}
-                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3f72af]"
+                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="Add tags (press Enter)"
                   />
                   <button
@@ -340,7 +340,7 @@ export default function WorkflowEditorPage() {
           </div>
 
           {/* Trigger Configuration */}
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-8">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Trigger Configuration</h3>
             
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
@@ -352,11 +352,11 @@ export default function WorkflowEditorPage() {
                     onClick={() => setTriggerType(type.value)}
                     className={`p-4 border-2 rounded-lg text-center transition-all ${
                       triggerType === type.value
-                        ? 'border-[#3f72af] bg-blue-50'
+                        ? 'border-blue-500 bg-blue-50'
                         : 'border-gray-200 hover:border-gray-300'
                     }`}
                   >
-                    <Icon className={`w-6 h-6 mx-auto mb-2 ${triggerType === type.value ? 'text-[#3f72af]' : 'text-gray-400'}`} />
+                    <Icon className={`w-6 h-6 mx-auto mb-2 ${triggerType === type.value ? 'text-blue-600' : 'text-gray-400'}`} />
                     <div className="text-sm font-medium text-gray-900">{type.label}</div>
                     <div className="text-xs text-gray-500 mt-1">{type.description}</div>
                   </button>
@@ -374,7 +374,7 @@ export default function WorkflowEditorPage() {
                   type="text"
                   value={triggerConfig.schedule || ''}
                   onChange={(e) => setTriggerConfig({ ...triggerConfig, schedule: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3f72af]"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="e.g., 0 7 * * * (7 AM daily)"
                 />
                 <p className="text-xs text-gray-500 mt-1">
@@ -391,7 +391,7 @@ export default function WorkflowEditorPage() {
                 <select
                   value={triggerConfig.event || ''}
                   onChange={(e) => setTriggerConfig({ ...triggerConfig, event: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3f72af]"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
                   <option value="">Select event...</option>
                   {systemEvents.map(event => (
@@ -403,12 +403,12 @@ export default function WorkflowEditorPage() {
           </div>
 
           {/* Actions */}
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-8">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-semibold text-gray-900">Actions</h3>
               <button
                 onClick={() => setShowActionSelector(true)}
-                className="flex items-center space-x-2 px-4 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
+                className="flex items-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors"
               >
                 <Plus className="w-4 h-4" />
                 <span>Add Action</span>
@@ -590,7 +590,7 @@ export default function WorkflowEditorPage() {
                     <button
                       key={type.value}
                       onClick={() => addAction(type.value)}
-                      className="p-4 border-2 border-gray-200 rounded-lg hover:border-[#3f72af] hover:bg-blue-50 text-left transition-all"
+                      className="p-4 border-2 border-gray-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 text-left transition-all"
                     >
                       <Icon className="w-6 h-6 text-gray-700 mb-2" />
                       <div className="font-medium text-gray-900">{type.label}</div>

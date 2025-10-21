@@ -142,7 +142,7 @@ export default function DispatchCreatePage() {
     return (
       <DashboardLayout>
         <div className="flex items-center justify-center h-full">
-          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
+          <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
         </div>
       </DashboardLayout>
     );
@@ -168,7 +168,7 @@ export default function DispatchCreatePage() {
         <form onSubmit={handleSubmit} className="max-w-5xl">
           <div className="space-y-6">
             {/* Basic Info */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
               <h2 className="text-lg font-semibold text-gray-900 mb-4">Basic Information</h2>
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -181,7 +181,7 @@ export default function DispatchCreatePage() {
                     value={dispatchForm.route_name}
                     onChange={(e) => setDispatchForm({ ...dispatchForm, route_name: e.target.value })}
                     required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="e.g., Downtown Route, North Zone"
                   />
                 </div>
@@ -197,7 +197,7 @@ export default function DispatchCreatePage() {
                       value={dispatchForm.scheduled_date}
                       onChange={(e) => setDispatchForm({ ...dispatchForm, scheduled_date: e.target.value })}
                       required
-                      className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent text-sm"
+                      className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                     />
                   </div>
                 </div>
@@ -213,7 +213,7 @@ export default function DispatchCreatePage() {
                       value={dispatchForm.scheduled_time}
                       onChange={(e) => setDispatchForm({ ...dispatchForm, scheduled_time: e.target.value })}
                       required
-                      className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent text-sm"
+                      className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                     />
                   </div>
                 </div>
@@ -221,7 +221,7 @@ export default function DispatchCreatePage() {
             </div>
 
             {/* Services */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
               <h2 className="text-lg font-semibold text-gray-900 mb-4">Services *</h2>
               <p className="text-sm text-gray-600 mb-4">Select the services to be performed</p>
               
@@ -233,13 +233,13 @@ export default function DispatchCreatePage() {
                     onClick={() => handleServiceToggle(service.value)}
                     className={`flex items-center justify-between p-3 border-2 rounded-lg transition-all ${
                       dispatchForm.services.includes(service.value)
-                        ? 'border-[#3f72af] bg-blue-50'
+                        ? 'border-blue-500 bg-blue-50'
                         : 'border-gray-200 hover:border-gray-300'
                     }`}
                   >
                     <span className="text-sm font-medium">{service.label}</span>
                     {dispatchForm.services.includes(service.value) ? (
-                      <CheckSquare className="w-5 h-5 text-[#3f72af]" />
+                      <CheckSquare className="w-5 h-5 text-blue-600" />
                     ) : (
                       <Square className="w-5 h-5 text-gray-400" />
                     )}
@@ -249,7 +249,7 @@ export default function DispatchCreatePage() {
             </div>
 
             {/* Crew Selection */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
               <div className="flex items-center justify-between mb-4">
                 <div>
                   <h2 className="text-lg font-semibold text-gray-900">Crew Members</h2>
@@ -270,7 +270,7 @@ export default function DispatchCreatePage() {
                       onClick={() => handleCrewToggle(user._id)}
                       className={`flex items-center justify-between p-3 border-2 rounded-lg transition-all ${
                         dispatchForm.crew_ids.includes(user._id)
-                          ? 'border-[#3f72af] bg-blue-50'
+                          ? 'border-blue-500 bg-blue-50'
                           : 'border-gray-200 hover:border-gray-300'
                       }`}
                     >
@@ -282,7 +282,7 @@ export default function DispatchCreatePage() {
                         </div>
                       </div>
                       {dispatchForm.crew_ids.includes(user._id) ? (
-                        <CheckSquare className="w-5 h-5 text-[#3f72af]" />
+                        <CheckSquare className="w-5 h-5 text-blue-600" />
                       ) : (
                         <Square className="w-5 h-5 text-gray-400" />
                       )}
@@ -295,7 +295,7 @@ export default function DispatchCreatePage() {
             </div>
 
             {/* Equipment Selection */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
               <div className="flex items-center justify-between mb-4">
                 <div>
                   <h2 className="text-lg font-semibold text-gray-900">Equipment</h2>
@@ -316,7 +316,7 @@ export default function DispatchCreatePage() {
                       onClick={() => handleEquipmentToggle(equip._id)}
                       className={`flex items-center justify-between p-3 border-2 rounded-lg transition-all ${
                         dispatchForm.equipment_ids.includes(equip._id)
-                          ? 'border-[#3f72af] bg-blue-50'
+                          ? 'border-blue-500 bg-blue-50'
                           : 'border-gray-200 hover:border-gray-300'
                       }`}
                     >
@@ -328,7 +328,7 @@ export default function DispatchCreatePage() {
                         </div>
                       </div>
                       {dispatchForm.equipment_ids.includes(equip._id) ? (
-                        <CheckSquare className="w-5 h-5 text-[#3f72af]" />
+                        <CheckSquare className="w-5 h-5 text-blue-600" />
                       ) : (
                         <Square className="w-5 h-5 text-gray-400" />
                       )}
@@ -341,7 +341,7 @@ export default function DispatchCreatePage() {
             </div>
 
             {/* Site Selection */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
               <div className="flex items-center justify-between mb-4">
                 <div>
                   <h2 className="text-lg font-semibold text-gray-900">Sites *</h2>
@@ -362,7 +362,7 @@ export default function DispatchCreatePage() {
                       onClick={() => handleSiteToggle(site._id)}
                       className={`flex items-center justify-between p-3 border-2 rounded-lg transition-all ${
                         dispatchForm.site_ids.includes(site._id)
-                          ? 'border-[#3f72af] bg-blue-50'
+                          ? 'border-blue-500 bg-blue-50'
                           : 'border-gray-200 hover:border-gray-300'
                       }`}
                     >
@@ -374,7 +374,7 @@ export default function DispatchCreatePage() {
                         </div>
                       </div>
                       {dispatchForm.site_ids.includes(site._id) ? (
-                        <CheckSquare className="w-5 h-5 text-[#3f72af]" />
+                        <CheckSquare className="w-5 h-5 text-blue-600" />
                       ) : (
                         <Square className="w-5 h-5 text-gray-400" />
                       )}
@@ -387,12 +387,12 @@ export default function DispatchCreatePage() {
             </div>
 
             {/* Notes */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
               <h2 className="text-lg font-semibold text-gray-900 mb-4">Notes</h2>
               <textarea
                 value={dispatchForm.notes}
                 onChange={(e) => setDispatchForm({ ...dispatchForm, notes: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 rows={4}
                 placeholder="Add any additional notes or instructions..."
               />
@@ -403,7 +403,7 @@ export default function DispatchCreatePage() {
               <button
                 type="submit"
                 disabled={saving}
-                className="flex-1 flex items-center justify-center space-x-2 px-6 py-3 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors disabled:opacity-50"
+                className="flex-1 flex items-center justify-center space-x-2 px-6 py-3 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors disabled:opacity-50"
               >
                 {saving ? (
                   <>

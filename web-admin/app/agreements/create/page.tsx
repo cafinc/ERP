@@ -179,23 +179,23 @@ export default function CreateAgreementPage() {
         {/* Step Indicator */}
         <div className="mt-6 mb-8">
           <div className="flex items-center justify-center space-x-4">
-            <div className={`flex items-center space-x-2 ${step === 'select' ? 'text-[#3f72af]' : 'text-gray-400'}`}>
+            <div className={`flex items-center space-x-2 ${step === 'select' ? 'text-blue-600' : 'text-gray-400'}`}>
               <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                step === 'select' ? 'bg-[#3f72af] text-white' : 'bg-gray-200'
+                step === 'select' ? 'bg-blue-600 text-white' : 'bg-gray-200'
               }`}>1</div>
               <span className="font-medium">Select Method</span>
             </div>
             <div className="w-16 h-0.5 bg-gray-300" />
-            <div className={`flex items-center space-x-2 ${step === 'details' ? 'text-[#3f72af]' : 'text-gray-400'}`}>
+            <div className={`flex items-center space-x-2 ${step === 'details' ? 'text-blue-600' : 'text-gray-400'}`}>
               <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                step === 'details' ? 'bg-[#3f72af] text-white' : 'bg-gray-200'
+                step === 'details' ? 'bg-blue-600 text-white' : 'bg-gray-200'
               }`}>2</div>
               <span className="font-medium">Agreement Details</span>
             </div>
             <div className="w-16 h-0.5 bg-gray-300" />
-            <div className={`flex items-center space-x-2 ${step === 'review' ? 'text-[#3f72af]' : 'text-gray-400'}`}>
+            <div className={`flex items-center space-x-2 ${step === 'review' ? 'text-blue-600' : 'text-gray-400'}`}>
               <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                step === 'review' ? 'bg-[#3f72af] text-white' : 'bg-gray-200'
+                step === 'review' ? 'bg-blue-600 text-white' : 'bg-gray-200'
               }`}>3</div>
               <span className="font-medium">Review & Save</span>
             </div>
@@ -204,7 +204,7 @@ export default function CreateAgreementPage() {
 
         {/* Step 1: Select Creation Method */}
         {step === 'select' && (
-          <div className="max-w-6xl mx-auto">
+          <div className="max-w-6xl mx-auto p-6">
             <h2 className="text-2xl font-bold text-gray-900 mb-2 text-center">How would you like to create this agreement?</h2>
             <p className="text-gray-600 mb-8 text-center">Choose a method to get started</p>
 
@@ -214,11 +214,11 @@ export default function CreateAgreementPage() {
                 onClick={() => setCreationMethod('template')}
                 className={`p-6 border-2 rounded-lg cursor-pointer transition-all ${
                   creationMethod === 'template'
-                    ? 'border-[#3f72af] bg-[#3f72af]/5'
-                    : 'border-gray-200 hover:border-[#3f72af]/50'
+                    ? 'border-blue-500 bg-blue-600/5'
+                    : 'border-gray-200 hover:border-blue-500/50'
                 }`}
               >
-                <FileText className="w-12 h-12 text-[#3f72af] mb-4" />
+                <FileText className="w-12 h-12 text-blue-600 mb-4" />
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">From Template</h3>
                 <p className="text-sm text-gray-600 mb-4">
                   Use a pre-configured agreement template with standard terms and sections
@@ -232,7 +232,7 @@ export default function CreateAgreementPage() {
                         const template = templates.find(t => t._id === e.target.value);
                         if (template) handleTemplateSelect(template);
                       }}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     >
                       <option value="">Choose a template...</option>
                       {templates.map((template: any) => (
@@ -250,11 +250,11 @@ export default function CreateAgreementPage() {
                 onClick={() => setCreationMethod('estimate')}
                 className={`p-6 border-2 rounded-lg cursor-pointer transition-all ${
                   creationMethod === 'estimate'
-                    ? 'border-[#3f72af] bg-[#3f72af]/5'
-                    : 'border-gray-200 hover:border-[#3f72af]/50'
+                    ? 'border-blue-500 bg-blue-600/5'
+                    : 'border-gray-200 hover:border-blue-500/50'
                 }`}
               >
-                <FileSignature className="w-12 h-12 text-[#3f72af] mb-4" />
+                <FileSignature className="w-12 h-12 text-blue-600 mb-4" />
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">From Accepted Estimate</h3>
                 <p className="text-sm text-gray-600 mb-4">
                   Convert an accepted estimate into a service agreement automatically
@@ -268,7 +268,7 @@ export default function CreateAgreementPage() {
                         const estimate = estimates.find(est => est._id === e.target.value);
                         if (estimate) handleEstimateSelect(estimate);
                       }}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     >
                       <option value="">Choose an estimate...</option>
                       {estimates.map((estimate: any) => (
@@ -289,11 +289,11 @@ export default function CreateAgreementPage() {
                 }}
                 className={`p-6 border-2 rounded-lg cursor-pointer transition-all ${
                   creationMethod === 'scratch'
-                    ? 'border-[#3f72af] bg-[#3f72af]/5'
-                    : 'border-gray-200 hover:border-[#3f72af]/50'
+                    ? 'border-blue-500 bg-blue-600/5'
+                    : 'border-gray-200 hover:border-blue-500/50'
                 }`}
               >
-                <Plus className="w-12 h-12 text-[#3f72af] mb-4" />
+                <Plus className="w-12 h-12 text-blue-600 mb-4" />
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">From Scratch</h3>
                 <p className="text-sm text-gray-600 mb-4">
                   Create a custom agreement from the ground up with your own terms
@@ -305,8 +305,8 @@ export default function CreateAgreementPage() {
 
         {/* Step 2: Agreement Details */}
         {step === 'details' && (
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+          <div className="max-w-4xl mx-auto p-6">
+            <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-8">
               <h2 className="text-xl font-semibold text-gray-900 mb-6">Agreement Information</h2>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -319,7 +319,7 @@ export default function CreateAgreementPage() {
                   <select
                     value={agreement.customer_id}
                     onChange={(e) => setAgreement({ ...agreement, customer_id: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     required
                   >
                     <option value="">Select customer...</option>
@@ -339,7 +339,7 @@ export default function CreateAgreementPage() {
                     value={agreement.agreement_number}
                     onChange={(e) => setAgreement({ ...agreement, agreement_number: e.target.value })}
                     placeholder="Auto-generated if left blank"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
 
@@ -349,7 +349,7 @@ export default function CreateAgreementPage() {
                   <select
                     value={agreement.agreement_type}
                     onChange={(e) => setAgreement({ ...agreement, agreement_type: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   >
                     <option value="Snow Removal Services">Snow Removal Services</option>
                     <option value="Lawn Care Services">Lawn Care Services</option>
@@ -369,7 +369,7 @@ export default function CreateAgreementPage() {
                     type="date"
                     value={agreement.start_date}
                     onChange={(e) => setAgreement({ ...agreement, start_date: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     required
                   />
                 </div>
@@ -381,7 +381,7 @@ export default function CreateAgreementPage() {
                     type="date"
                     value={agreement.end_date}
                     onChange={(e) => setAgreement({ ...agreement, end_date: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
 
@@ -396,7 +396,7 @@ export default function CreateAgreementPage() {
                     value={agreement.agreement_value}
                     onChange={(e) => setAgreement({ ...agreement, agreement_value: e.target.value })}
                     placeholder="0.00"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     required
                   />
                 </div>
@@ -407,7 +407,7 @@ export default function CreateAgreementPage() {
                   <select
                     value={agreement.payment_terms}
                     onChange={(e) => setAgreement({ ...agreement, payment_terms: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   >
                     <option value="Net 30">Net 30</option>
                     <option value="Net 15">Net 15</option>
@@ -424,7 +424,7 @@ export default function CreateAgreementPage() {
                       type="checkbox"
                       checked={agreement.auto_renew}
                       onChange={(e) => setAgreement({ ...agreement, auto_renew: e.target.checked })}
-                      className="w-4 h-4 text-[#3f72af] border-gray-300 rounded focus:ring-[#3f72af]"
+                      className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                     />
                     <span className="text-sm font-medium text-gray-700">Auto-renew agreement</span>
                   </label>
@@ -437,7 +437,7 @@ export default function CreateAgreementPage() {
                     value={agreement.notes}
                     onChange={(e) => setAgreement({ ...agreement, notes: e.target.value })}
                     rows={3}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="Additional notes or special conditions..."
                   />
                 </div>
@@ -471,7 +471,7 @@ export default function CreateAgreementPage() {
                                 setAgreement({ ...agreement, sections: newSections });
                               }}
                               rows={6}
-                              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent font-mono text-sm"
+                              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent font-mono text-sm"
                             />
                           </div>
                         )}
@@ -492,7 +492,7 @@ export default function CreateAgreementPage() {
                 <button
                   onClick={() => setStep('review')}
                   disabled={!agreement.customer_id || !agreement.start_date || !agreement.agreement_value}
-                  className="px-6 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#3f72af]/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-600/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Continue to Review
                 </button>
@@ -503,8 +503,8 @@ export default function CreateAgreementPage() {
 
         {/* Step 3: Review & Save */}
         {step === 'review' && (
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+          <div className="max-w-4xl mx-auto p-6">
+            <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-8">
               <h2 className="text-xl font-semibold text-gray-900 mb-6">Review Agreement</h2>
 
               <div className="space-y-4">
@@ -568,7 +568,7 @@ export default function CreateAgreementPage() {
                 <button
                   onClick={handleSave}
                   disabled={saving}
-                  className="flex items-center space-x-2 px-6 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#3f72af]/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex items-center space-x-2 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-600/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Save className="w-5 h-5" />
                   <span>{saving ? 'Creating...' : 'Create Agreement'}</span>

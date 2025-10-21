@@ -163,7 +163,7 @@ export default function ProjectCreatePage() {
         </div>
 
         <div className="max-w-3xl">
-          <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
             {/* Customer Selection */}
             <div className="mb-6">
               <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -175,7 +175,7 @@ export default function ProjectCreatePage() {
                   value={projectForm.customer_id}
                   onChange={(e) => handleCustomerChange(e.target.value)}
                   required
-                  className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent text-sm"
+                  className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                 >
                   <option value="">Select a customer</option>
                   {customers.map((customer) => (
@@ -199,7 +199,7 @@ export default function ProjectCreatePage() {
                   onChange={(e) => setProjectForm({ ...projectForm, estimate_id: e.target.value })}
                   required
                   disabled={!projectForm.customer_id}
-                  className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent text-sm disabled:bg-gray-100 disabled:cursor-not-allowed"
+                  className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm disabled:bg-gray-100 disabled:cursor-not-allowed"
                 >
                   <option value="">
                     {projectForm.customer_id ? 'Select an accepted estimate' : 'Select a customer first'}
@@ -230,7 +230,7 @@ export default function ProjectCreatePage() {
                   value={projectForm.name}
                   onChange={(e) => setProjectForm({ ...projectForm, name: e.target.value })}
                   required
-                  className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent text-sm"
+                  className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                   placeholder="Enter project name"
                 />
               </div>
@@ -244,7 +244,7 @@ export default function ProjectCreatePage() {
               <textarea
                 value={projectForm.description}
                 onChange={(e) => setProjectForm({ ...projectForm, description: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 rows={4}
                 placeholder="Enter project description (optional)"
               />
@@ -261,7 +261,7 @@ export default function ProjectCreatePage() {
                   type="date"
                   value={projectForm.start_date}
                   onChange={(e) => setProjectForm({ ...projectForm, start_date: e.target.value })}
-                  className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent text-sm"
+                  className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                 />
               </div>
             </div>
@@ -274,7 +274,7 @@ export default function ProjectCreatePage() {
               <select
                 value={projectForm.status}
                 onChange={(e) => setProjectForm({ ...projectForm, status: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               >
                 <option value="planning">Planning</option>
                 <option value="active">Active</option>
@@ -286,7 +286,7 @@ export default function ProjectCreatePage() {
               <button
                 type="submit"
                 disabled={saving || !projectForm.customer_id || !projectForm.estimate_id}
-                className="flex-1 flex items-center justify-center space-x-2 px-6 py-3 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex-1 flex items-center justify-center space-x-2 px-6 py-3 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {saving ? (
                   <>

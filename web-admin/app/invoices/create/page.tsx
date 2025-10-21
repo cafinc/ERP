@@ -170,7 +170,7 @@ export default function InvoiceCreatePage() {
             {/* Main Content */}
             <div className="lg:col-span-2 space-y-6">
               {/* Customer & Terms */}
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+              <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
                 <h2 className="text-lg font-semibold text-gray-900 mb-4">Invoice Details</h2>
                 
                 <div className="grid grid-cols-2 gap-4">
@@ -184,7 +184,7 @@ export default function InvoiceCreatePage() {
                         value={invoiceForm.customer_id}
                         onChange={(e) => setInvoiceForm({ ...invoiceForm, customer_id: e.target.value })}
                         required
-                        className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent text-sm"
+                        className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                       >
                         <option value="">Select a customer</option>
                         {customers.map((customer) => (
@@ -203,7 +203,7 @@ export default function InvoiceCreatePage() {
                     <select
                       value={invoiceForm.payment_terms}
                       onChange={(e) => setInvoiceForm({ ...invoiceForm, payment_terms: e.target.value })}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     >
                       <option value="due_on_receipt">Due on Receipt</option>
                       <option value="net_15">Net 15 (3% discount)</option>
@@ -222,7 +222,7 @@ export default function InvoiceCreatePage() {
                         step="0.01"
                         value={invoiceForm.discount_amount}
                         onChange={(e) => setInvoiceForm({ ...invoiceForm, discount_amount: parseFloat(e.target.value) || 0 })}
-                        className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent text-sm"
+                        className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                         placeholder="0.00"
                       />
                     </div>
@@ -236,7 +236,7 @@ export default function InvoiceCreatePage() {
                       type="checkbox"
                       checked={invoiceForm.deposit_required}
                       onChange={(e) => setInvoiceForm({ ...invoiceForm, deposit_required: e.target.checked })}
-                      className="rounded text-[#3f72af] focus:ring-[#3f72af]"
+                      className="rounded text-blue-600 focus:ring-blue-500"
                     />
                     <span className="text-sm font-medium text-gray-700">Require Deposit</span>
                   </label>
@@ -255,7 +255,7 @@ export default function InvoiceCreatePage() {
                           max="100"
                           value={invoiceForm.deposit_percentage}
                           onChange={(e) => setInvoiceForm({ ...invoiceForm, deposit_percentage: parseInt(e.target.value) || 0 })}
-                          className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent text-sm"
+                          className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                           placeholder="25"
                         />
                       </div>
@@ -270,7 +270,7 @@ export default function InvoiceCreatePage() {
                       type="checkbox"
                       checked={invoiceForm.late_fee_enabled}
                       onChange={(e) => setInvoiceForm({ ...invoiceForm, late_fee_enabled: e.target.checked })}
-                      className="rounded text-[#3f72af] focus:ring-[#3f72af]"
+                      className="rounded text-blue-600 focus:ring-blue-500"
                     />
                     <span className="text-sm font-medium text-gray-700">Enable Late Fees</span>
                   </label>
@@ -289,7 +289,7 @@ export default function InvoiceCreatePage() {
                           max="100"
                           value={invoiceForm.late_fee_percentage}
                           onChange={(e) => setInvoiceForm({ ...invoiceForm, late_fee_percentage: parseFloat(e.target.value) || 0 })}
-                          className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent text-sm"
+                          className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                           placeholder="1.5"
                         />
                       </div>
@@ -299,13 +299,13 @@ export default function InvoiceCreatePage() {
               </div>
 
               {/* Line Items */}
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+              <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-lg font-semibold text-gray-900">Line Items</h2>
                   <button
                     type="button"
                     onClick={addLineItem}
-                    className="flex items-center space-x-1 px-3 py-1.5 text-sm bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
+                    className="flex items-center space-x-1 px-3 py-1.5 text-sm bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors"
                   >
                     <Plus className="w-4 h-4" />
                     <span>Add Item</span>
@@ -321,7 +321,7 @@ export default function InvoiceCreatePage() {
                             type="text"
                             value={item.description}
                             onChange={(e) => updateLineItem(item.id, 'description', e.target.value)}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent text-sm"
+                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                             placeholder="Description"
                             required
                           />
@@ -331,7 +331,7 @@ export default function InvoiceCreatePage() {
                             type="number"
                             value={item.quantity}
                             onChange={(e) => updateLineItem(item.id, 'quantity', parseFloat(e.target.value) || 0)}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent text-sm"
+                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                             placeholder="Qty"
                             min="0"
                             step="0.01"
@@ -342,7 +342,7 @@ export default function InvoiceCreatePage() {
                             type="number"
                             value={item.unit_price}
                             onChange={(e) => updateLineItem(item.id, 'unit_price', parseFloat(e.target.value) || 0)}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent text-sm"
+                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                             placeholder="Price"
                             min="0"
                             step="0.01"
@@ -370,14 +370,14 @@ export default function InvoiceCreatePage() {
               </div>
 
               {/* Notes */}
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+              <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Notes (Optional)
                 </label>
                 <textarea
                   value={invoiceForm.notes}
                   onChange={(e) => setInvoiceForm({ ...invoiceForm, notes: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   rows={4}
                   placeholder="Add any additional notes or terms..."
                 />
@@ -386,7 +386,7 @@ export default function InvoiceCreatePage() {
 
             {/* Sidebar - Totals */}
             <div className="space-y-6">
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 sticky top-6">
+              <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8 sticky top-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Invoice Summary</h3>
                 
                 <div className="space-y-3">
@@ -409,7 +409,7 @@ export default function InvoiceCreatePage() {
                   
                   <div className="flex items-center justify-between text-lg font-bold pt-3 border-t border-gray-200">
                     <span className="text-gray-900">Total</span>
-                    <span className="text-[#3f72af]">${totals.total.toFixed(2)}</span>
+                    <span className="text-blue-600">${totals.total.toFixed(2)}</span>
                   </div>
 
                   {invoiceForm.deposit_required && (
@@ -427,7 +427,7 @@ export default function InvoiceCreatePage() {
                 <button
                   type="submit"
                   disabled={saving}
-                  className="w-full mt-6 flex items-center justify-center space-x-2 px-6 py-3 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors disabled:opacity-50"
+                  className="w-full mt-6 flex items-center justify-center space-x-2 px-6 py-3 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors disabled:opacity-50"
                 >
                   {saving ? (
                     <>
