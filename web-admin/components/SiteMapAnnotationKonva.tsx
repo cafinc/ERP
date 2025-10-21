@@ -91,8 +91,28 @@ export default function SiteMapAnnotation({
       img.onload = () => {
         setBaseImage(img);
       };
+    } else {
+      // Automatically load Google Maps screenshot for the site
+      loadGoogleMapsScreenshot();
     }
   }, [initialMapData]);
+
+  const loadGoogleMapsScreenshot = async () => {
+    try {
+      // Use Google Maps Static API to get a screenshot of the site location
+      const apiKey = 'AIzaSyCUDEtt2lRq3PGRqDKZAwk6i-iZkiyTzJw';
+      const mapUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${encodeURIComponent(siteAddress)}&zoom=18&size=1000x700&maptype=satellite&key=${apiKey}`;
+      
+      const img = new window.Image();
+      img.crossOrigin = 'anonymous';
+      img.src = mapUrl;
+      img.onload = () => {
+        setBaseImage(img);
+      };
+    } catch (error) {
+      console.error('Error loading Google Maps screenshot:', error);
+    }
+  };
 
   const addToHistory = (newAnnotations: Annotation[]) => {
     const newHistory = history.slice(0, historyStep + 1);
