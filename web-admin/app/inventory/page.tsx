@@ -166,7 +166,7 @@ export default function InventoryPage() {
             {
               label: 'Add Item',
               icon: Plus,
-              onClick: () => alert('Add Inventory Item feature coming soon!'),
+              onClick: () => router.push('/inventory/add'),
               variant: 'primary',
             },
             {
