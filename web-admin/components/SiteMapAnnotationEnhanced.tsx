@@ -379,21 +379,12 @@ export default function SiteMapAnnotationEnhanced({
     const area = AREA_TYPES.find(a => a.id === areaId);
     if (!area) return;
 
-    const newAnnotation: Annotation = {
-      id: Date.now().toString(),
-      type: 'rectangle',
-      category: areaId,
-      label: area.label,
-      color: area.color,
-      x: 100,
-      y: 100,
-      width: 200,
-      height: 150,
-    };
-    
-    const updated = [...annotations, newAnnotation];
-    setAnnotations(updated);
-    addToHistory(updated);
+    // Start polygon drawing mode
+    setDrawingPolygon(true);
+    setCurrentAreaType(areaId);
+    setPolygonPoints([]);
+    setTempPolygonLine([]);
+    setTool('polygon');
   };
 
   const handleCopyAnnotation = () => {
