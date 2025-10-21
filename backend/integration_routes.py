@@ -11,7 +11,7 @@ from fastapi import APIRouter, HTTPException
 from typing import List, Optional
 from datetime import datetime
 from bson import ObjectId
-from pymongo import MongoClient
+from motor.motor_asyncio import AsyncIOMotorClient
 import os
 from dotenv import load_dotenv
 
@@ -24,7 +24,7 @@ from models import (
 
 # Initialize MongoDB client
 mongo_url = os.getenv("MONGO_URL", "mongodb://localhost:27017")
-client = MongoClient(mongo_url)
+client = AsyncIOMotorClient(mongo_url)
 db = client["snow_removal_db"]
 
 # Collections
@@ -44,7 +44,7 @@ async def create_integration(integration: IntegrationCreate):
         integration_dict["created_at"] = datetime.utcnow()
         integration_dict["updated_at"] = datetime.utcnow()
         
-        result = integrations_collection.insert_one(integration_dict)
+        result = await integrations_collection.insert_one(integration_dict)
         integration_dict["id"] = str(result.inserted_id)
         
         return {"success": True, "integration": integration_dict}
@@ -75,7 +75,7 @@ async def get_integrations(integration_type: Optional[str] = None):
 async def get_integration(integration_id: str):
     """Get integration by ID"""
     try:
-        integration = integrations_collection.find_one({"_id": ObjectId(integration_id)})
+        integration = await integrations_collection.find_one({"_id": ObjectId(integration_id)})
         if not integration:
             raise HTTPException(status_code=404, detail="Integration not found")
         
@@ -97,7 +97,7 @@ async def update_integration(integration_id: str, integration_update: Integratio
         update_data = {k: v for k, v in integration_update.dict().items() if v is not None}
         update_data["updated_at"] = datetime.utcnow()
         
-        result = integrations_collection.update_one(
+        result = await integrations_collection.update_one(
             {"_id": ObjectId(integration_id)},
             {"$set": update_data}
         )
@@ -113,7 +113,7 @@ async def update_integration(integration_id: str, integration_update: Integratio
 async def delete_integration(integration_id: str):
     """Delete integration"""
     try:
-        result = integrations_collection.delete_one({"_id": ObjectId(integration_id)})
+        result = await integrations_collection.delete_one({"_id": ObjectId(integration_id)})
         
         if result.deleted_count == 0:
             raise HTTPException(status_code=404, detail="Integration not found")
@@ -126,12 +126,12 @@ async def delete_integration(integration_id: str):
 async def connect_integration(integration_id: str):
     """Connect/activate an integration (MOCK)"""
     try:
-        integration = integrations_collection.find_one({"_id": ObjectId(integration_id)})
+        integration = await integrations_collection.find_one({"_id": ObjectId(integration_id)})
         if not integration:
             raise HTTPException(status_code=404, detail="Integration not found")
         
         # MOCK: Simulate connection
-        integrations_collection.update_one(
+        await integrations_collection.update_one(
             {"_id": ObjectId(integration_id)},
             {"$set": {
                 "status": IntegrationStatus.CONNECTED,
@@ -153,7 +153,7 @@ async def connect_integration(integration_id: str):
 async def disconnect_integration(integration_id: str):
     """Disconnect/deactivate an integration"""
     try:
-        result = integrations_collection.update_one(
+        result = await integrations_collection.update_one(
             {"_id": ObjectId(integration_id)},
             {"$set": {
                 "status": IntegrationStatus.DISCONNECTED,
@@ -172,7 +172,7 @@ async def disconnect_integration(integration_id: str):
 async def sync_integration(integration_id: str, sync_type: str = "incremental"):
     """Trigger manual sync for an integration (MOCK)"""
     try:
-        integration = integrations_collection.find_one({"_id": ObjectId(integration_id)})
+        integration = await integrations_collection.find_one({"_id": ObjectId(integration_id)})
         if not integration:
             raise HTTPException(status_code=404, detail="Integration not found")
         
@@ -189,10 +189,10 @@ async def sync_integration(integration_id: str, sync_type: str = "incremental"):
             "records_synced": 0,
             "errors": []
         }
-        log_result = sync_logs_collection.insert_one(sync_log)
+        log_result = await sync_logs_collection.insert_one(sync_log)
         
         # MOCK: Simulate successful sync
-        sync_logs_collection.update_one(
+        await sync_logs_collection.update_one(
             {"_id": log_result.inserted_id},
             {"$set": {
                 "completed_at": datetime.utcnow(),
@@ -206,7 +206,7 @@ async def sync_integration(integration_id: str, sync_type: str = "incremental"):
         )
         
         # Update last sync time
-        integrations_collection.update_one(
+        await integrations_collection.update_one(
             {"_id": ObjectId(integration_id)},
             {"$set": {"last_sync": datetime.utcnow()}}
         )
@@ -227,7 +227,7 @@ async def sync_quickbooks_payroll():
     """Sync payroll data with QuickBooks (MOCK)"""
     try:
         # Check if QuickBooks integration exists
-        integration = integrations_collection.find_one({"integration_type": IntegrationType.QUICKBOOKS})
+        integration = await integrations_collection.find_one({"integration_type": IntegrationType.QUICKBOOKS})
         
         if not integration:
             # Create placeholder integration
@@ -241,7 +241,7 @@ async def sync_quickbooks_payroll():
                 "created_at": datetime.utcnow(),
                 "updated_at": datetime.utcnow()
             }
-            result = integrations_collection.insert_one(integration_data)
+            result = await integrations_collection.insert_one(integration_data)
             integration_id = str(result.inserted_id)
         else:
             integration_id = str(integration["_id"])
@@ -261,7 +261,7 @@ async def sync_quickbooks_payroll():
                 "message": "Placeholder payroll sync. Connect QuickBooks to enable real-time payroll synchronization."
             }
         }
-        log_result = sync_logs_collection.insert_one(sync_log)
+        log_result = await sync_logs_collection.insert_one(sync_log)
         
         return {
             "success": True,
@@ -277,7 +277,7 @@ async def sync_quickbooks_payroll():
 async def sync_quickbooks_time_tracking():
     """Sync time tracking data with QuickBooks (MOCK)"""
     try:
-        integration = integrations_collection.find_one({"integration_type": IntegrationType.QUICKBOOKS})
+        integration = await integrations_collection.find_one({"integration_type": IntegrationType.QUICKBOOKS})
         
         if not integration:
             integration_data = {
@@ -290,7 +290,7 @@ async def sync_quickbooks_time_tracking():
                 "created_at": datetime.utcnow(),
                 "updated_at": datetime.utcnow()
             }
-            result = integrations_collection.insert_one(integration_data)
+            result = await integrations_collection.insert_one(integration_data)
             integration_id = str(result.inserted_id)
         else:
             integration_id = str(integration["_id"])
@@ -309,7 +309,7 @@ async def sync_quickbooks_time_tracking():
                 "message": "Placeholder time tracking sync. Connect QuickBooks to enable real-time time tracking synchronization."
             }
         }
-        log_result = sync_logs_collection.insert_one(sync_log)
+        log_result = await sync_logs_collection.insert_one(sync_log)
         
         return {
             "success": True,
@@ -327,7 +327,7 @@ async def sync_quickbooks_time_tracking():
 async def setup_microsoft365_sso():
     """Setup Microsoft 365 SSO (MOCK)"""
     try:
-        integration = integrations_collection.find_one({"integration_type": IntegrationType.MICROSOFT_365})
+        integration = await integrations_collection.find_one({"integration_type": IntegrationType.MICROSOFT_365})
         
         if not integration:
             integration_data = {
@@ -346,7 +346,7 @@ async def setup_microsoft365_sso():
                 "created_at": datetime.utcnow(),
                 "updated_at": datetime.utcnow()
             }
-            result = integrations_collection.insert_one(integration_data)
+            result = await integrations_collection.insert_one(integration_data)
             integration_id = str(result.inserted_id)
         else:
             integration_id = str(integration["_id"])
@@ -365,7 +365,7 @@ async def setup_microsoft365_sso():
 async def sync_microsoft365_teams():
     """Sync with Microsoft Teams (MOCK)"""
     try:
-        integration = integrations_collection.find_one({"integration_type": IntegrationType.MICROSOFT_365})
+        integration = await integrations_collection.find_one({"integration_type": IntegrationType.MICROSOFT_365})
         integration_id = str(integration["_id"]) if integration else "mock_id"
         
         sync_log = {
@@ -382,7 +382,7 @@ async def sync_microsoft365_teams():
                 "message": "Placeholder Teams sync. Connect Microsoft 365 to enable team collaboration features."
             }
         }
-        log_result = sync_logs_collection.insert_one(sync_log)
+        log_result = await sync_logs_collection.insert_one(sync_log)
         
         return {
             "success": True,
@@ -397,7 +397,7 @@ async def sync_microsoft365_teams():
 async def sync_microsoft365_outlook():
     """Sync with Outlook Calendar (MOCK)"""
     try:
-        integration = integrations_collection.find_one({"integration_type": IntegrationType.MICROSOFT_365})
+        integration = await integrations_collection.find_one({"integration_type": IntegrationType.MICROSOFT_365})
         integration_id = str(integration["_id"]) if integration else "mock_id"
         
         sync_log = {
@@ -414,7 +414,7 @@ async def sync_microsoft365_outlook():
                 "message": "Placeholder Outlook sync. Connect Microsoft 365 to sync calendars and emails."
             }
         }
-        log_result = sync_logs_collection.insert_one(sync_log)
+        log_result = await sync_logs_collection.insert_one(sync_log)
         
         return {
             "success": True,
@@ -429,7 +429,7 @@ async def sync_microsoft365_outlook():
 async def sync_microsoft365_onedrive():
     """Sync with OneDrive (MOCK)"""
     try:
-        integration = integrations_collection.find_one({"integration_type": IntegrationType.MICROSOFT_365})
+        integration = await integrations_collection.find_one({"integration_type": IntegrationType.MICROSOFT_365})
         integration_id = str(integration["_id"]) if integration else "mock_id"
         
         sync_log = {
@@ -446,7 +446,7 @@ async def sync_microsoft365_onedrive():
                 "message": "Placeholder OneDrive sync. Connect Microsoft 365 to enable document storage and sharing."
             }
         }
-        log_result = sync_logs_collection.insert_one(sync_log)
+        log_result = await sync_logs_collection.insert_one(sync_log)
         
         return {
             "success": True,
@@ -461,7 +461,7 @@ async def sync_microsoft365_onedrive():
 async def sync_microsoft365_powerbi():
     """Sync with Power BI (MOCK)"""
     try:
-        integration = integrations_collection.find_one({"integration_type": IntegrationType.MICROSOFT_365})
+        integration = await integrations_collection.find_one({"integration_type": IntegrationType.MICROSOFT_365})
         integration_id = str(integration["_id"]) if integration else "mock_id"
         
         sync_log = {
@@ -478,7 +478,7 @@ async def sync_microsoft365_powerbi():
                 "message": "Placeholder Power BI sync. Connect Microsoft 365 to enable advanced analytics and reporting."
             }
         }
-        log_result = sync_logs_collection.insert_one(sync_log)
+        log_result = await sync_logs_collection.insert_one(sync_log)
         
         return {
             "success": True,
@@ -511,7 +511,7 @@ async def get_sync_logs(
             log["id"] = str(log["_id"])
             del log["_id"]
         
-        total = sync_logs_collection.count_documents(query)
+        total = await sync_logs_collection.count_documents(query)
         
         return {"success": True, "logs": logs, "total": total}
     except Exception as e:
