@@ -7,7 +7,7 @@ class QuickBooksSettings(BaseSettings):
     """QuickBooks Online configuration"""
     QUICKBOOKS_CLIENT_ID: Optional[str] = None
     QUICKBOOKS_CLIENT_SECRET: Optional[str] = None
-    QUICKBOOKS_REDIRECT_URI: str = "https://snowtrack-admin-1.preview.emergentagent.com/api/quickbooks/auth/callback"
+    QUICKBOOKS_REDIRECT_URI: str = "https://snowtrackr.preview.emergentagent.com/api/quickbooks/auth/callback"
     QUICKBOOKS_ENVIRONMENT: str = "sandbox"  # or "production"
     
     class Config:

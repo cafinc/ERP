@@ -50,6 +50,9 @@ import {
   Container,
   Box,
   Zap,
+  UserPlus,
+  Calendar,
+  Camera,
 } from 'lucide-react';
 import { useState } from 'react';
 import CallPopup from './CallPopup';
