@@ -371,61 +371,79 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             <div key={item.label}>
               {item.submenu ? (
                 <>
-                  <div className={`w-full flex items-center ${isSidebarMinimized ? 'justify-center' : 'justify-between'} rounded-lg overflow-hidden`}>
-                    {/* Label - clickable to navigate to dashboard and expand submenu */}
+                  <div className={`w-full flex items-center ${isSidebarMinimized ? 'justify-center' : 'justify-between'} rounded-lg overflow-hidden ${isMenuActive(item) ? 'bg-[#3f72af]/5' : ''}`}>
+                    {/* Label - clickable to navigate to dashboard and toggle submenu */}
                     <button
                       onClick={() => handleMenuLabelClick(item)}
-                      className={`flex-1 flex items-center px-4 py-3 text-gray-700 hover:bg-[#3f72af]/10 hover:text-[#3f72af] transition-colors ${isSidebarMinimized ? 'justify-center' : 'gap-3'}`}
+                      className={`flex-1 flex items-center px-4 py-3 rounded-lg transition-all duration-200 ${isSidebarMinimized ? 'justify-center' : 'gap-3'} ${
+                        isMenuActive(item)
+                          ? 'text-[#3f72af] font-medium'
+                          : 'text-gray-700 hover:bg-[#3f72af]/10 hover:text-[#3f72af]'
+                      }`}
                       title={isSidebarMinimized ? item.label : ''}
                     >
-                      <item.icon className="w-5 h-5" />
+                      <item.icon className={`w-5 h-5 ${isMenuActive(item) ? 'stroke-[2.5]' : ''}`} />
                       {!isSidebarMinimized && <span className="font-medium">{item.label}</span>}
                     </button>
                     
                     {/* Arrow - clickable to toggle submenu */}
                     {!isSidebarMinimized && (
                       <button
-                        onClick={() => toggleMenu(item.key!)}
-                        className="px-2 py-3 text-gray-700 hover:bg-[#3f72af]/10 hover:text-[#3f72af] transition-colors mr-2"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          toggleMenu(item.key!);
+                        }}
+                        className={`px-2 py-3 rounded-lg transition-all duration-200 mr-2 ${
+                          isMenuActive(item)
+                            ? 'text-[#3f72af] hover:bg-[#3f72af]/20'
+                            : 'text-gray-700 hover:bg-[#3f72af]/10 hover:text-[#3f72af]'
+                        }`}
+                        title={expandedMenus.includes(item.key!) ? 'Collapse' : 'Expand'}
                       >
-                        {expandedMenus.includes(item.key!) ? (
-                          <ChevronDown className="w-4 h-4" />
-                        ) : (
-                          <ChevronRight className="w-4 h-4" />
-                        )}
+                        <ChevronDown 
+                          className={`w-4 h-4 transition-transform duration-300 ${
+                            expandedMenus.includes(item.key!) ? 'rotate-0' : '-rotate-90'
+                          }`}
+                        />
                       </button>
                     )}
                   </div>
-                  {!isSidebarMinimized && expandedMenus.includes(item.key!) && (
-                    <div className="ml-4 mt-1 space-y-1">
+                  <div 
+                    className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                      !isSidebarMinimized && expandedMenus.includes(item.key!)
+                        ? 'max-h-[1000px] opacity-100'
+                        : 'max-h-0 opacity-0'
+                    }`}
+                  >
+                    <div className="ml-4 mt-1 space-y-1 pb-1">
                       {item.submenu.map((subItem) => (
                         <Link
                           key={subItem.href}
                           href={subItem.href}
-                          className={`flex items-center gap-3 px-4 py-2 text-sm rounded-lg transition-colors ${
-                            pathname === subItem.href
-                              ? 'bg-[#3f72af]/10 text-[#3f72af] font-medium'
+                          className={`flex items-center gap-3 px-4 py-2 text-sm rounded-lg transition-all duration-200 ${
+                            pathname === subItem.href || pathname.startsWith(subItem.href + '/')
+                              ? 'bg-[#3f72af]/10 text-[#3f72af] font-medium shadow-sm'
                               : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                           }`}
                         >
-                          {subItem.icon && <subItem.icon className="w-4 h-4" />}
+                          {subItem.icon && <subItem.icon className={`w-4 h-4 ${pathname === subItem.href || pathname.startsWith(subItem.href + '/') ? 'stroke-[2.5]' : ''}`} />}
                           {subItem.label}
                         </Link>
                       ))}
                     </div>
-                  )}
+                  </div>
                 </>
               ) : (
                 <Link
                   href={item.href!}
-                  className={`flex items-center ${isSidebarMinimized ? 'justify-center' : 'gap-3'} px-4 py-3 rounded-lg transition-colors ${
-                    pathname === item.href
-                      ? 'bg-[#3f72af]/10 text-[#3f72af] font-medium'
+                  className={`flex items-center ${isSidebarMinimized ? 'justify-center' : 'gap-3'} px-4 py-3 rounded-lg transition-all duration-200 ${
+                    isMenuActive(item)
+                      ? 'bg-[#3f72af]/10 text-[#3f72af] font-medium shadow-sm'
                       : 'text-gray-700 hover:bg-[#3f72af]/10 hover:text-[#3f72af]'
                   }`}
                   title={isSidebarMinimized ? item.label : ''}
                 >
-                  <item.icon className="w-5 h-5 flex-shrink-0" />
+                  <item.icon className={`w-5 h-5 flex-shrink-0 ${isMenuActive(item) ? 'stroke-[2.5]' : ''}`} />
                   {!isSidebarMinimized && <span className="font-medium">{item.label}</span>}
                 </Link>
               )}
