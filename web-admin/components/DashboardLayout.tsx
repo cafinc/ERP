@@ -140,8 +140,10 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       dashboardHref: '/crm/dashboard',
       submenu: [
         { icon: Users, label: 'Customers', href: '/customers' },
+        { icon: UserPlus, label: 'Leads', href: '/leads' },
         { icon: FileText, label: 'Estimates', href: '/estimates' },
         { icon: FileText, label: 'Agreements', href: '/contracts' },
+        { icon: FileText, label: 'Agreement Templates', href: '/agreements/templates' },
         { icon: FolderOpen, label: 'Projects', href: '/projects' },
         { icon: Receipt, label: 'Invoices', href: '/invoices' },
       ],
@@ -165,8 +167,10 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       key: 'access',
       dashboardHref: '/access/dashboard',
       submenu: [
+        { icon: Shield, label: 'Access Control', href: '/access' },
         { icon: Users, label: 'Team', href: '/team' },
         { icon: Users, label: 'Crew', href: '/crew' },
+        { icon: Clock, label: 'Shift History', href: '/shifts/history' },
       ],
     },
     {
@@ -179,6 +183,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         { icon: Truck, label: 'Vehicles', href: '/assets/vehicles' },
         { icon: Box, label: 'Trailers', href: '/assets/trailers' },
         { icon: Wrench, label: 'Tools', href: '/assets/tools' },
+        { icon: Package, label: 'Inventory', href: '/inventory' },
         { icon: Wrench, label: 'Maintenance', href: '/equipment/maintenance' },
         { icon: ClipboardList, label: 'Inspections', href: '/equipment/inspections' },
       ],
@@ -189,10 +194,16 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       key: 'dispatch',
       dashboardHref: '/dispatch/dashboard',
       submenu: [
+        { icon: Calendar, label: 'Dispatch', href: '/dispatch' },
         { icon: MapPin, label: 'Sites', href: '/sites' },
         { icon: Map, label: 'Routes', href: '/routes' },
+        { icon: Map, label: 'Route Optimization', href: '/routes/optimize' },
+        { icon: MapPin, label: 'Geofence', href: '/geofence' },
+        { icon: Navigation, label: 'Tracking', href: '/tracking' },
         { icon: Package, label: 'Consumables', href: '/consumables' },
+        { icon: BarChart3, label: 'Consumables Analytics', href: '/consumables/analytics' },
         { icon: Wrench, label: 'Services', href: '/services' },
+        { icon: Cloud, label: 'Weather', href: '/weather' },
       ],
     },
     {
@@ -203,6 +214,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       submenu: [
         { icon: MessageSquare, label: 'Messages', href: '/messages' },
         { icon: Phone, label: 'RingCentral', href: '/ringcentral' },
+        { icon: Phone, label: 'RC Active Calls', href: '/ringcentral/active-calls' },
+        { icon: MessageSquare, label: 'RC SMS', href: '/ringcentral/sms' },
         { icon: Mail, label: 'Gmail', href: '/gmail' },
         { icon: AlertTriangle, label: 'Emergency Alert', href: '/emergency-alert' },
         { icon: Star, label: 'Customer Feedback', href: '/feedback' },
@@ -228,9 +241,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     { icon: Zap, label: 'Automation', href: '/automation' },
     { icon: CheckSquare, label: 'Tasks', href: '/tasks' },
     { icon: FileText, label: 'Forms', href: '/forms' },
+    { icon: Camera, label: 'Photos', href: '/photos' },
     { icon: BarChart3, label: 'Analytics', href: '/analytics' },
     { icon: TrendingUp, label: 'Reports', href: '/reports' },
-    { icon: Shield, label: 'Access', href: '/access' },
     { icon: Settings, label: 'Settings', href: '/settings' },
   ];
 
