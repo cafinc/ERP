@@ -24,6 +24,8 @@ from models import (
     User, UserCreate, UserUpdate,
     Customer, CustomerCreate, CustomerUpdate,
     Site, SiteCreate, SiteUpdate,
+    # Site Map models
+    SiteMap, SiteMapCreate, SiteMapUpdate, SiteMapAnnotation,
     Equipment, EquipmentCreate, EquipmentUpdate,
     Route, RouteCreate, RouteUpdate,
     Dispatch, DispatchCreate, DispatchUpdate,
