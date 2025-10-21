@@ -880,13 +880,20 @@ export default function SiteMapAnnotationOptimized({
                   } else if (ann.type === 'feature-icon') {
                     const feature = FEATURE_ICONS.find(f => f.id === ann.category);
                     return (
-                      <Group key={ann.id} draggable onClick={() => setSelectedAnnotation(ann.id)}>
-                        <FeatureIconShape shape={feature?.shape || 'circle'} color={ann.color} x={ann.x} y={ann.y} selected={selectedAnnotation === ann.id} />
-                        <KonvaText x={(ann.x || 0) - 60} y={(ann.y || 0) + 30} text={ann.text} fontSize={12} fill={ann.color} fontStyle="bold" align="center" width={120} />
+                      <Group 
+                        key={ann.id} 
+                        draggable 
+                        x={ann.x}
+                        y={ann.y}
+                        onClick={() => setSelectedAnnotation(ann.id)}
+                        onDragEnd={(e) => handleDragEnd(ann.id, e)}
+                      >
+                        <FeatureIconShape shape={feature?.shape || 'circle'} color={ann.color} x={0} y={0} selected={selectedAnnotation === ann.id} />
+                        <KonvaText x={-60} y={30} text={ann.text} fontSize={12} fill={ann.color} fontStyle="bold" align="center" width={120} />
                       </Group>
                     );
                   } else if (ann.type === 'text') {
-                    return <KonvaText key={ann.id} x={ann.x} y={ann.y} text={ann.text} fontSize={16} fill={ann.color} draggable onClick={() => setSelectedAnnotation(ann.id)} />;
+                    return <KonvaText key={ann.id} x={ann.x} y={ann.y} text={ann.text} fontSize={16} fill={ann.color} draggable onClick={() => setSelectedAnnotation(ann.id)} onDragEnd={(e) => handleDragEnd(ann.id, e)} />;
                   }
                   return null;
                 })}
