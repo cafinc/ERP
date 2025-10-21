@@ -338,7 +338,7 @@ async def get_pto_requests(
         if status:
             query["status"] = status
         
-        requests = list(pto_requests_collection.find(query).sort("created_at", -1).skip(skip).limit(limit))
+        requests = await pto_requests_collection.find(query).sort("created_at", -1).skip(skip).limit(limit).to_list(limit)
         for req in requests:
             req["id"] = str(req["_id"])
             del req["_id"]
