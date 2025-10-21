@@ -5,10 +5,12 @@ from enum import Enum
 
 # Enums
 class UserRole(str, Enum):
-    ADMIN = "admin"
-    CREW = "crew"
-    SUBCONTRACTOR = "subcontractor"
-    CUSTOMER = "customer"
+    MASTER = "master"  # Full system control - platform owner
+    ADMIN = "admin"  # Administrative access
+    CREW = "crew"  # Field workers
+    SUBCONTRACTOR = "subcontractor"  # External contractors
+    CUSTOMER = "customer"  # Clients
+    VENDOR = "vendor"  # Suppliers
 
 class UserStatus(str, Enum):
     ON_SHIFT = "on_shift"
