@@ -435,34 +435,34 @@ export default function CustomerFormPage() {
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Customer Type Selection */}
             {!isEdit && (
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                <h2 className="text-xl font-semibold text-[#112d4e] mb-4">Customer Type *</h2>
-                <div className="grid grid-cols-2 gap-4">
+              <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">Customer Type *</h2>
+                <div className="grid grid-cols-2 gap-6">
                   <button
                     type="button"
                     onClick={() => handleTypeSelection('individual')}
-                    className={`p-6 border-2 rounded-lg transition-all ${
+                    className={`p-8 border-2 rounded-xl transition-all hover:scale-105 ${
                       customerForm.customer_type === 'individual'
-                        ? 'border-[#3f72af] bg-blue-50'
-                        : 'border-gray-300 hover:border-gray-400'
+                        ? 'border-blue-500 bg-blue-50 shadow-lg'
+                        : 'border-gray-300 hover:border-gray-400 hover:shadow-md'
                     }`}
                   >
-                    <Users className="w-10 h-10 mx-auto mb-3 text-[#3f72af]" />
-                    <p className="font-semibold text-[#112d4e] text-lg">Individual</p>
-                    <p className="text-sm text-gray-600 mt-1">Person or homeowner</p>
+                    <Users className="w-12 h-12 mx-auto mb-4 text-blue-600" />
+                    <p className="font-bold text-gray-900 text-xl">Individual</p>
+                    <p className="text-sm text-gray-600 mt-2">Person or homeowner</p>
                   </button>
                   <button
                     type="button"
                     onClick={() => handleTypeSelection('company')}
-                    className={`p-6 border-2 rounded-lg transition-all ${
+                    className={`p-8 border-2 rounded-xl transition-all hover:scale-105 ${
                       customerForm.customer_type === 'company'
-                        ? 'border-[#3f72af] bg-blue-50'
-                        : 'border-gray-300 hover:border-gray-400'
+                        ? 'border-blue-500 bg-blue-50 shadow-lg'
+                        : 'border-gray-300 hover:border-gray-400 hover:shadow-md'
                     }`}
                   >
-                    <Building className="w-10 h-10 mx-auto mb-3 text-[#3f72af]" />
-                    <p className="font-semibold text-[#112d4e] text-lg">Company</p>
-                    <p className="text-sm text-gray-600 mt-1">Business or organization</p>
+                    <Building className="w-12 h-12 mx-auto mb-4 text-blue-600" />
+                    <p className="font-bold text-gray-900 text-xl">Company</p>
+                    <p className="text-sm text-gray-600 mt-2">Business or organization</p>
                   </button>
                 </div>
               </div>
