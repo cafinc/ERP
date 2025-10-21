@@ -1,8 +1,11 @@
 'use client';
 
 import { useState } from 'react';
+import { useAuth } from '@/lib/auth';
+import api from '@/lib/api';
 import CompactHeader from '@/components/CompactHeader';
-import { User, Mail, Phone, MapPin, Calendar, Building } from 'lucide-react';
+import AvatarPicker from '@/components/AvatarPicker';
+import { User, Mail, Phone, MapPin, Calendar, Building, Camera } from 'lucide-react';
 
 export default function AccountSettingsPage() {
   const [formData, setFormData] = useState({
