@@ -1,0 +1,165 @@
+{
+  "total_tests": 15,
+  "passed_tests": 14,
+  "failed_tests": 1,
+  "success_rate": 93.33333333333333,
+  "results": [
+    {
+      "test": "Webhook - Incoming Call Processing",
+      "success": true,
+      "details": "Webhook accepted incoming call event (Status: 200)",
+      "timestamp": "2025-10-19T00:52:59.249255",
+      "response_data": {
+        "status": "success"
+      }
+    },
+    {
+      "test": "Webhook - Call Status Change",
+      "success": true,
+      "details": "Status change webhook processed (Status: 200)",
+      "timestamp": "2025-10-19T00:52:59.265639",
+      "response_data": {
+        "status": "success"
+      }
+    },
+    {
+      "test": "Webhook - Invalid Payload Handling",
+      "success": true,
+      "details": "Invalid payload handled gracefully",
+      "timestamp": "2025-10-19T00:52:59.276294",
+      "response_data": null
+    },
+    {
+      "test": "Active Calls - Endpoint Response",
+      "success": true,
+      "details": "Retrieved 4 active calls",
+      "timestamp": "2025-10-19T00:52:59.286620",
+      "response_data": {
+        "call_count": 4,
+        "structure": "valid"
+      }
+    },
+    {
+      "test": "Active Calls - Data Structure",
+      "success": true,
+      "details": "Call data contains all required fields",
+      "timestamp": "2025-10-19T00:52:59.286652",
+      "response_data": {
+        "sample_call": {
+          "session_id": "call-session-789",
+          "direction": "Inbound",
+          "from_name": "Sarah Customer",
+          "from_number": "+14165551234",
+          "status": "ringing",
+          "timestamp": "2025-10-19T00:47:36.827000",
+          "to_number": "+15879876543",
+          "id": "68f4352898bd3935fcc83293"
+        }
+      }
+    },
+    {
+      "test": "SSE Stream - Connection",
+      "success": true,
+      "details": "SSE connection established (Content-Type: text/event-stream; charset=utf-8)",
+      "timestamp": "2025-10-19T00:52:59.296028",
+      "response_data": null
+    },
+    {
+      "test": "SSE Stream - Connected Event",
+      "success": true,
+      "details": "Received 'connected' event on stream start",
+      "timestamp": "2025-10-19T00:53:03.301082",
+      "response_data": {
+        "events": [
+          {
+            "type": "connected",
+            "message": "Call stream connected"
+          },
+          {
+            "type": "call",
+            "call": {
+              "session_id": "call-session-789",
+              "direction": "Inbound",
+              "from_name": "Sarah Customer",
+              "from_number": "+14165551234",
+              "status": "ringing",
+              "timestamp": "2025-10-19T00:47:36.827000",
+              "to_number": "+15879876543",
+              "id": "68f4352898bd3935fcc83293"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "test": "SSE Stream - Data Events",
+      "success": true,
+      "details": "Received data events: ['connected', 'call', 'call']",
+      "timestamp": "2025-10-19T00:53:03.301121",
+      "response_data": {
+        "event_count": 3
+      }
+    },
+    {
+      "test": "Customer Matching - Test Customer Created",
+      "success": true,
+      "details": "Created test customer: John Test Customer (+14165551234)",
+      "timestamp": "2025-10-19T00:53:03.322077",
+      "response_data": null
+    },
+    {
+      "test": "Customer Matching - Phone Number Match",
+      "success": false,
+      "details": "Customer not matched. Expected: 68f4366f7448b3942d8ec91c, Got: 68f4364827ab923afae2d6af",
+      "timestamp": "2025-10-19T00:53:03.342472",
+      "response_data": {
+        "session_id": "test-session-customer-match",
+        "customer_email": "john.test@example.com",
+        "customer_id": "68f4364827ab923afae2d6af",
+        "customer_name": "John Test Customer",
+        "direction": "Inbound",
+        "from_name": "John Test Customer",
+        "from_number": "+14165551234",
+        "status": "ringing",
+        "timestamp": "2025-10-19T00:53:03.328000",
+        "to_number": "+15879876543",
+        "id": "68f4364898bd3935fcc832dc"
+      }
+    },
+    {
+      "test": "Call Lifecycle - Incoming Call",
+      "success": true,
+      "details": "Incoming call webhook processed",
+      "timestamp": "2025-10-19T00:53:03.351834",
+      "response_data": null
+    },
+    {
+      "test": "Call Lifecycle - Call Answered",
+      "success": true,
+      "details": "Call answered webhook processed",
+      "timestamp": "2025-10-19T00:53:03.401676",
+      "response_data": null
+    },
+    {
+      "test": "Call Lifecycle - Status Update",
+      "success": true,
+      "details": "Call status updated to: CallConnected",
+      "timestamp": "2025-10-19T00:53:03.412132",
+      "response_data": null
+    },
+    {
+      "test": "Call Lifecycle - Call Ended",
+      "success": true,
+      "details": "Call ended webhook processed",
+      "timestamp": "2025-10-19T00:53:03.421183",
+      "response_data": null
+    },
+    {
+      "test": "Call Lifecycle - Call Removal",
+      "success": true,
+      "details": "Call removed from active calls after disconnect",
+      "timestamp": "2025-10-19T00:53:03.436109",
+      "response_data": null
+    }
+  ]
+}

@@ -1,0 +1,202 @@
+import React, { useEffect, useState } from 'react';
+import { View, Text } from 'react-native';
+import { Tabs } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
+import { Colors } from '../../utils/theme';
+import { useAuth } from '../../contexts/AuthContext';
+import api from '../../utils/api';
+
+// Messages Tab Icon with Notification Badge
+function MessageTabIcon({ color, size }: { color: string; size: number }) {
+  const { isAdmin, isCrew, currentUser } = useAuth();
+  const [pendingCount, setPendingCount] = useState(0);
+
+  useEffect(() => {
+    fetchPendingCount();
+    const interval = setInterval(fetchPendingCount, 30000); // Check every 30 seconds
+    return () => clearInterval(interval);
+  }, [isAdmin, isCrew, currentUser]);
+
+  const fetchPendingCount = async () => {
+    try {
+      if (isAdmin) {
+        const response = await api.get('/messages/pending-admin');
+        setPendingCount(response.data.length);
+      } else if (isCrew && currentUser?.id) {
+        const response = await api.get(`/messages/pending-crew/${currentUser.id}`);
+        setPendingCount(response.data.length);
+      } else {
+        // Customer - count pending messages from user
+        const response = await api.get(`/messages?from_user_id=${currentUser?.id}&status=pending`);
+        setPendingCount(response.data.length);
+      }
+    } catch (error) {
+      console.error('Error fetching pending count:', error);
+      setPendingCount(0);
+    }
+  };
+
+  return (
+    <View style={{ position: 'relative' }}>
+      <Ionicons name="chatbubbles" size={size} color={color} />
+      {pendingCount > 0 && (
+        <View style={{
+          position: 'absolute',
+          top: -6,
+          right: -6,
+          backgroundColor: '#ef4444',
+          borderRadius: 10,
+          minWidth: 20,
+          height: 20,
+          justifyContent: 'center',
+          alignItems: 'center',
+          borderWidth: 2,
+          borderColor: '#fff',
+        }}>
+          <Text style={{
+            color: '#fff',
+            fontSize: 11,
+            fontWeight: '700',
+          }}>
+            {pendingCount > 99 ? '99+' : pendingCount}
+          </Text>
+        </View>
+      )}
+    </View>
+  );
+}
+
+export default function TabLayout() {
+  const { isAdmin, isCrew, isCustomer } = useAuth();
+
+  return (
+    <Tabs
+      screenOptions={{
+        headerShown: true,
+        tabBarActiveTintColor: Colors.primary,
+        tabBarInactiveTintColor: Colors.gray500,
+        tabBarStyle: {
+          backgroundColor: Colors.white,
+          borderTopWidth: 1,
+          borderTopColor: Colors.border,
+          paddingBottom: 8,
+          paddingTop: 8,
+          height: 70,
+        },
+        tabBarLabelStyle: {
+          fontSize: 12,
+          fontWeight: '600',
+        },
+        headerStyle: {
+          backgroundColor: Colors.white,
+        },
+        headerTintColor: Colors.textPrimary,
+      }}
+    >
+      <Tabs.Screen
+        name="index"
+        options={{
+          title: 'Dashboard',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="home" size={size} color={color} />
+          ),
+        }}
+      />
+      {/* Dispatch - Admin and Crew only */}
+      {!isCustomer && (
+        <Tabs.Screen
+          name="dispatch"
+          options={{
+            title: 'Dispatch',
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="send" size={size} color={color} />
+            ),
+          }}
+        />
+      )}
+
+      {/* Forms - Everyone sees but different content by role */}
+      <Tabs.Screen
+        name="forms"
+        options={{
+          title: 'Forms',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="document-text" size={size} color={color} />
+          ),
+        }}
+      />
+      
+      {/* Messages Tab - Everyone sees but different content by role */}
+      <Tabs.Screen
+        name="messages"
+        options={{
+          title: 'Messages',
+          tabBarIcon: ({ color, size }) => <MessageTabIcon color={color} size={size} />,
+        }}
+      />
+
+      {/* Customers - Admin only */}
+      {isAdmin && (
+        <Tabs.Screen
+          name="customers"
+          options={{
+            title: 'Customers',
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="people" size={size} color={color} />
+            ),
+          }}
+        />
+      )}
+      
+      {/* Admin and Crew see Sites */}
+      {!isCustomer && (
+        <Tabs.Screen
+          name="sites"
+          options={{
+            title: 'Sites',
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="map" size={size} color={color} />
+            ),
+          }}
+        />
+      )}
+
+      {/* GPS Tracking - Available for admin and crew */}
+      {!isCustomer && (
+        <Tabs.Screen
+          name="tracking"
+          options={{
+            title: 'GPS',
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="location" size={size} color={color} />
+            ),
+          }}
+        />
+      )}
+
+      {/* Crew Tracking - Admin only */}
+      {isAdmin && (
+        <Tabs.Screen
+          name="crew-tracking"
+          options={{
+            title: 'Live Tracking',
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="people" size={size} color={color} />
+            ),
+          }}
+        />
+      )}
+      
+      {/* Everyone sees Settings (but content differs by role) */}
+      <Tabs.Screen
+        name="settings"
+        options={{
+          title: isAdmin ? 'Settings' : isCustomer ? 'My Account' : 'Profile',
+          tabBarIcon: ({ color, size}) => (
+            <Ionicons name={isAdmin ? "settings" : "person"} size={size} color={color} />
+          ),
+        }}
+      />
+    </Tabs>
+  );
+}

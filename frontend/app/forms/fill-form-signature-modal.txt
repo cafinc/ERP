@@ -1,0 +1,46 @@
+      {/* Signature Modal */}
+      <Modal
+        visible={showSignatureModal}
+        animationType="slide"
+        transparent
+        onRequestClose={() => setShowSignatureModal(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <KeyboardAvoidingView 
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            style={styles.modalContainer}
+          >
+            <View style={styles.modalContent}>
+              <Text style={styles.modalTitle}>Add Signature</Text>
+              <Text style={styles.modalSubtitle}>Please enter your full name</Text>
+              
+              <TextInput
+                style={styles.modalInput}
+                value={signatureName}
+                onChangeText={setSignatureName}
+                placeholder="Enter your full name"
+                placeholderTextColor={Colors.gray400}
+                autoFocus
+              />
+              
+              <View style={styles.modalButtons}>
+                <TouchableOpacity
+                  style={[styles.modalButton, styles.modalButtonCancel]}
+                  onPress={() => {
+                    setShowSignatureModal(false);
+                    setSignatureName('');
+                  }}
+                >
+                  <Text style={styles.modalButtonTextCancel}>Cancel</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={[styles.modalButton, styles.modalButtonConfirm]}
+                  onPress={saveSignature}
+                >
+                  <Text style={styles.modalButtonTextConfirm}>Sign</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </KeyboardAvoidingView>
+        </View>
+      </Modal>

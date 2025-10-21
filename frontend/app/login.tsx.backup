@@ -1,0 +1,600 @@
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  ActivityIndicator,
+  Alert,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  Image,
+  Linking,
+} from 'react-native';
+import { useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
+import { useAuth } from '../contexts/AuthContext';
+import api from '../utils/api';
+import { Colors } from '../utils/theme';
+import * as WebBrowser from 'expo-web-browser';
+
+export default function LoginScreen() {
+  const router = useRouter();
+  const { login } = useAuth();
+  
+  // Tab selection: 'phone', 'email'
+  const [loginMethod, setLoginMethod] = useState<'phone' | 'email'>('phone');
+  
+  // Phone login state
+  const [step, setStep] = useState<'phone' | 'otp'>('phone');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [otp, setOtp] = useState('');
+  const [mockCode, setMockCode] = useState<string | null>(null);
+  
+  // Email login state
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  
+  const [loading, setLoading] = useState(false);
+
+  const formatPhoneNumber = (text: string) => {
+    // Remove all non-digits
+    const cleaned = text.replace(/\D/g, '');
+    
+    // Format as +1 (XXX) XXX-XXXX
+    if (cleaned.length <= 1) {
+      return cleaned ? `+${cleaned}` : '';
+    }
+    if (cleaned.length <= 4) {
+      return `+${cleaned.slice(0, 1)} (${cleaned.slice(1)}`;
+    }
+    if (cleaned.length <= 7) {
+      return `+${cleaned.slice(0, 1)} (${cleaned.slice(1, 4)}) ${cleaned.slice(4)}`;
+    }
+    return `+${cleaned.slice(0, 1)} (${cleaned.slice(1, 4)}) ${cleaned.slice(4, 7)}-${cleaned.slice(7, 11)}`;
+  };
+
+  const handleSendOTP = async () => {
+    // Extract just the digits
+    const cleanPhone = phoneNumber.replace(/\D/g, '');
+    
+    console.log('Login: Attempting to send OTP to:', `+${cleanPhone}`);
+    
+    if (cleanPhone.length < 10) {
+      Alert.alert('Invalid Phone', 'Please enter a valid phone number');
+      return;
+    }
+
+    setLoading(true);
+    try {
+      console.log('Login: Calling /auth/send-otp...');
+      const response = await api.post('/auth/send-otp', {
+        phone_number: `+${cleanPhone}`,
+        purpose: 'login'
+      });
+
+      console.log('Login: OTP response:', response.data);
+
+      if (response.data.mock_code) {
+        setMockCode(response.data.mock_code);
+        console.log('Login: Mock code received:', response.data.mock_code);
+        Alert.alert(
+          'Development Mode',
+          `OTP Code: ${response.data.mock_code}\n\nCopy this code and enter it in the next screen.`,
+          [{ text: 'OK' }]
+        );
+      } else {
+        Alert.alert('OTP Sent', 'Please check your phone for the verification code');
+      }
+
+      setStep('otp');
+    } catch (error: any) {
+      console.error('Login: Send OTP error:', error);
+      console.error('Login: Error response:', error.response?.data);
+      Alert.alert('Error', error.response?.data?.detail || error.message || 'Failed to send OTP');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleVerifyOTP = async () => {
+    if (otp.length !== 6) {
+      Alert.alert('Invalid OTP', 'Please enter the 6-digit code');
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const cleanPhone = phoneNumber.replace(/\D/g, '');
+      
+      console.log('Login: Attempting to verify OTP...');
+      console.log('Login: Phone:', `+${cleanPhone}`);
+      console.log('Login: Code:', otp);
+      
+      // First verify OTP
+      const verifyResponse = await api.post('/auth/verify-otp', {
+        phone_number: `+${cleanPhone}`,
+        code: otp,
+        purpose: 'login'
+      });
+
+      console.log('Login: Verify response:', verifyResponse.data);
+
+      if (!verifyResponse.data.success) {
+        Alert.alert('Invalid Code', 'The code you entered is incorrect');
+        setLoading(false);
+        return;
+      }
+
+      console.log('Login: OTP verified successfully, finding/creating user...');
+
+      // Then find or create user
+      const usersResponse = await api.get(`/users?phone=+${cleanPhone}`);
+      
+      console.log('Login: User search response:', usersResponse.data);
+      
+      let user;
+      if (usersResponse.data && usersResponse.data.length > 0) {
+        user = usersResponse.data[0];
+        console.log('Login: Found existing user:', user.id);
+      } else {
+        console.log('Login: Creating new user...');
+        // Create new user (customer by default)
+        const newUserResponse = await api.post('/users', {
+          phone: `+${cleanPhone}`,
+          name: `User ${cleanPhone.slice(-4)}`,
+          role: 'customer',
+          active: true
+        });
+        user = newUserResponse.data;
+        console.log('Login: Created new user:', user.id);
+      }
+
+      console.log('Login: Calling login() with user...');
+      // Login
+      await login(user);
+      
+      console.log('Login: Login successful, redirecting to dashboard...');
+      
+      // Redirect to tabs (will show index/dashboard by default)
+      router.replace('/(tabs)');
+    } catch (error: any) {
+      console.error('Login: Verify OTP error:', error);
+      console.error('Login: Error response:', error.response?.data);
+      Alert.alert('Error', error.response?.data?.detail || error.message || 'Failed to verify OTP');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleBack = () => {
+    setStep('phone');
+    setOtp('');
+    setMockCode(null);
+  };
+
+  const handleEmailLogin = async () => {
+    if (!email || !password) {
+      Alert.alert('Error', 'Please enter both email and password');
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const response = await api.post('/auth/login-email', {
+        email: email.trim(),
+        password,
+      });
+
+      // Store session token and user
+      await login(response.data.user, response.data.session_token);
+      router.replace('/(tabs)');
+    } catch (error: any) {
+      console.error('Email login error:', error);
+      Alert.alert('Login Failed', error.response?.data?.detail || 'Invalid email or password');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      setLoading(true);
+      
+      // Open Emergent OAuth URL
+      const oauthUrl = 'https://demobackend.emergentagent.com/auth/v1/env/oauth/authorize?provider=google';
+      
+      // Open browser for OAuth
+      const result = await WebBrowser.openAuthSessionAsync(
+        oauthUrl,
+        'exp://your-app-url/auth-callback' // This will be handled by deep linking
+      );
+
+      if (result.type === 'success' && result.url) {
+        // Extract session ID from redirect URL
+        const url = new URL(result.url);
+        const sessionId = url.searchParams.get('session_id');
+        
+        if (sessionId) {
+          // Exchange session ID for user data
+          const response = await api.get('/auth/session-data', {
+            headers: {
+              'X-Session-ID': sessionId,
+            },
+          });
+
+          // Store session token and user
+          await login(response.data.user, response.data.session_token);
+          router.replace('/(tabs)');
+        } else {
+          Alert.alert('Error', 'Failed to complete Google sign-in');
+        }
+      }
+    } catch (error: any) {
+      console.error('Google OAuth error:', error);
+      Alert.alert('Error', 'Failed to sign in with Google');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleForgotPassword = () => {
+    router.push('/forgot-password');
+  };
+
+  return (
+    <KeyboardAvoidingView 
+      style={styles.container}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    >
+      <ScrollView 
+        contentContainerStyle={styles.scrollContent}
+        keyboardShouldPersistTaps="handled"
+      >
+        {/* Logo/Header */}
+        <View style={styles.header}>
+          <View style={styles.logoContainer}>
+            <Image 
+              source={require('../assets/logo-white.svg')}
+              style={styles.logo}
+              resizeMode="contain"
+            />
+          </View>
+          <Text style={styles.title}>CAF Property Services</Text>
+          <Text style={styles.subtitle}>Snow Removal Management</Text>
+        </View>
+
+        {/* Login Tabs */}
+        <View style={styles.tabContainer}>
+          <TouchableOpacity
+            style={[styles.tab, loginMethod === 'phone' && styles.tabActive]}
+            onPress={() => {
+              setLoginMethod('phone');
+              setStep('phone');
+            }}
+          >
+            <Ionicons 
+              name="call-outline" 
+              size={20} 
+              color={loginMethod === 'phone' ? Colors.primary : Colors.gray500} 
+            />
+            <Text style={[styles.tabText, loginMethod === 'phone' && styles.tabTextActive]}>
+              Phone
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={[styles.tab, loginMethod === 'email' && styles.tabActive]}
+            onPress={() => setLoginMethod('email')}
+          >
+            <Ionicons 
+              name="mail-outline" 
+              size={20} 
+              color={loginMethod === 'email' ? Colors.primary : Colors.gray500} 
+            />
+            <Text style={[styles.tabText, loginMethod === 'email' && styles.tabTextActive]}>
+              Email
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        {/* Login Forms */}
+        <View style={styles.formContainer}>
+          {loginMethod === 'phone' ? (
+            // Phone Login
+            step === 'phone' ? (
+              <>
+                <Text style={styles.formTitle}>Sign In with Phone</Text>
+                <Text style={styles.formDescription}>
+                  Enter your phone number to receive a verification code
+                </Text>
+
+                <View style={styles.inputContainer}>
+                  <Ionicons name="call-outline" size={20} color={Colors.textSecondary} style={styles.inputIcon} />
+                  <TextInput
+                    style={styles.input}
+                    placeholder="+1 (555) 123-4567"
+                    placeholderTextColor={Colors.textSecondary}
+                    value={phoneNumber}
+                    onChangeText={(text) => setPhoneNumber(formatPhoneNumber(text))}
+                    keyboardType="phone-pad"
+                    autoFocus
+                    maxLength={18}
+                  />
+                </View>
+
+                <TouchableOpacity
+                  style={[styles.button, loading && styles.buttonDisabled]}
+                  onPress={handleSendOTP}
+                  disabled={loading}
+                >
+                  {loading ? (
+                    <ActivityIndicator color="white" />
+                  ) : (
+                  <>
+                    <Text style={styles.buttonText}>Send Code</Text>
+                    <Ionicons name="arrow-forward" size={20} color="white" />
+                  </>
+                )}
+              </TouchableOpacity>
+
+              {/* Quick Test Login */}
+              <View style={styles.divider}>
+                <View style={styles.dividerLine} />
+                <Text style={styles.dividerText}>or</Text>
+                <View style={styles.dividerLine} />
+              </View>
+
+              <TouchableOpacity
+                style={styles.testLoginButton}
+                onPress={() => {
+                  setPhoneNumber('+1 (587) 877-0293');
+                }}
+              >
+                <Ionicons name="flash" size={18} color={Colors.primary} />
+                <Text style={styles.testLoginText}>Use Test Number</Text>
+              </TouchableOpacity>
+            </>
+          ) : (
+            <>
+              <TouchableOpacity style={styles.backButton} onPress={handleBack}>
+                <Ionicons name="arrow-back" size={24} color={Colors.primary} />
+              </TouchableOpacity>
+
+              <Text style={styles.formTitle}>Enter Code</Text>
+              <Text style={styles.formDescription}>
+                We sent a verification code to{'\n'}
+                <Text style={styles.phoneHighlight}>{phoneNumber}</Text>
+              </Text>
+
+              {mockCode && (
+                <View style={styles.mockCodeContainer}>
+                  <Ionicons name="information-circle" size={20} color={Colors.warning} />
+                  <Text style={styles.mockCodeText}>Dev Mode: {mockCode}</Text>
+                </View>
+              )}
+
+              <View style={styles.inputContainer}>
+                <Ionicons name="lock-closed-outline" size={20} color={Colors.textSecondary} style={styles.inputIcon} />
+                <TextInput
+                  style={styles.input}
+                  placeholder="123456"
+                  placeholderTextColor={Colors.textSecondary}
+                  value={otp}
+                  onChangeText={setOtp}
+                  keyboardType="number-pad"
+                  maxLength={6}
+                  autoFocus
+                />
+              </View>
+
+              <TouchableOpacity
+                style={[styles.button, loading && styles.buttonDisabled]}
+                onPress={handleVerifyOTP}
+                disabled={loading}
+              >
+                {loading ? (
+                  <ActivityIndicator color="white" />
+                ) : (
+                  <>
+                    <Text style={styles.buttonText}>Verify & Sign In</Text>
+                    <Ionicons name="checkmark-circle" size={20} color="white" />
+                  </>
+                )}
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.resendButton}
+                onPress={handleSendOTP}
+                disabled={loading}
+              >
+                <Text style={styles.resendText}>Didn't receive code? Resend</Text>
+              </TouchableOpacity>
+            </>
+          )}
+        </View>
+
+        {/* Footer */}
+        <View style={styles.footer}>
+          <Text style={styles.footerText}>
+            By signing in, you agree to our Terms & Privacy Policy
+          </Text>
+        </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: Colors.background,
+  },
+  scrollContent: {
+    flexGrow: 1,
+    justifyContent: 'center',
+    padding: 24,
+  },
+  header: {
+    alignItems: 'center',
+    marginBottom: 48,
+  },
+  logoContainer: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    backgroundColor: Colors.primary,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  logo: {
+    width: 70,
+    height: 70,
+    tintColor: Colors.white,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: Colors.textPrimary,
+    marginBottom: 8,
+  },
+  subtitle: {
+    fontSize: 16,
+    color: Colors.textSecondary,
+  },
+  formContainer: {
+    backgroundColor: Colors.white,
+    borderRadius: 16,
+    padding: 24,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 3,
+  },
+  backButton: {
+    alignSelf: 'flex-start',
+    marginBottom: 16,
+    padding: 8,
+  },
+  formTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: Colors.textPrimary,
+    marginBottom: 8,
+  },
+  formDescription: {
+    fontSize: 14,
+    color: Colors.textSecondary,
+    marginBottom: 24,
+    lineHeight: 20,
+  },
+  phoneHighlight: {
+    fontWeight: '600',
+    color: Colors.primary,
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: Colors.border,
+    borderRadius: 12,
+    marginBottom: 16,
+    paddingHorizontal: 16,
+    backgroundColor: Colors.background,
+  },
+  inputIcon: {
+    marginRight: 12,
+  },
+  input: {
+    flex: 1,
+    height: 50,
+    fontSize: 16,
+    color: Colors.textPrimary,
+  },
+  button: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: Colors.primary,
+    borderRadius: 12,
+    height: 50,
+    gap: 8,
+  },
+  buttonDisabled: {
+    opacity: 0.6,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  divider: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 24,
+  },
+  dividerLine: {
+    flex: 1,
+    height: 1,
+    backgroundColor: Colors.border,
+  },
+  dividerText: {
+    marginHorizontal: 16,
+    color: Colors.textSecondary,
+    fontSize: 14,
+  },
+  testLoginButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: Colors.primary,
+    borderRadius: 12,
+    height: 50,
+    gap: 8,
+  },
+  testLoginText: {
+    color: Colors.primary,
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  mockCodeContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: Colors.warningLight,
+    padding: 12,
+    borderRadius: 8,
+    marginBottom: 16,
+    gap: 8,
+  },
+  mockCodeText: {
+    color: Colors.warning,
+    fontSize: 14,
+    fontWeight: '600',
+  },
+  resendButton: {
+    marginTop: 16,
+    alignItems: 'center',
+    padding: 12,
+  },
+  resendText: {
+    color: Colors.primary,
+    fontSize: 14,
+    fontWeight: '500',
+  },
+  footer: {
+    marginTop: 32,
+    alignItems: 'center',
+  },
+  footerText: {
+    fontSize: 12,
+    color: Colors.textSecondary,
+    textAlign: 'center',
+    lineHeight: 18,
+  },
+});
