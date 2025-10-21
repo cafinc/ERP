@@ -1410,5 +1410,6 @@ export default function SiteMapAnnotationOptimized({
         </div>
       </div>
     </div>
+    </div>
   );
 }
