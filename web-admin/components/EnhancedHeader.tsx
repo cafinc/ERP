@@ -30,12 +30,32 @@ export default function EnhancedHeader() {
   const [unreadMessageCount, setUnreadMessageCount] = useState(0);
   const [unreadEmailCount, setUnreadEmailCount] = useState(0);
   const [unreadNotificationCount, setUnreadNotificationCount] = useState(0);
+  
+  // Branding state
+  const [headerColor, setHeaderColor] = useState('#3f72af');
+  const [logoUrl, setLogoUrl] = useState('');
+  const [companyName, setCompanyName] = useState('');
 
   const notificationRef = useRef<HTMLDivElement>(null);
   const messagesRef = useRef<HTMLDivElement>(null);
   const emailsRef = useRef<HTMLDivElement>(null);
   const callsRef = useRef<HTMLDivElement>(null);
   const profileRef = useRef<HTMLDivElement>(null);
+
+  // Load branding settings
+  useEffect(() => {
+    const savedBranding = localStorage.getItem('branding_settings');
+    if (savedBranding) {
+      try {
+        const branding = JSON.parse(savedBranding);
+        setHeaderColor(branding.header_color || '#3f72af');
+        setLogoUrl(branding.logo_url || '');
+        setCompanyName(branding.company_name || '');
+      } catch (error) {
+        console.error('Error loading branding settings:', error);
+      }
+    }
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
