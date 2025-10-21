@@ -674,9 +674,9 @@ export default function SiteMapAnnotationOptimized({
   }, [addToHistory]);
 
   return (
-    <div className="flex flex-col h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden">
+    <div className="flex flex-col min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto">
       {/* Modern Header Bar */}
-      <div className="bg-white border-b border-gray-200 shadow-sm flex-shrink-0">
+      <div className="bg-white border-b border-gray-200 shadow-sm flex-shrink-0 sticky top-0 z-10">
         <div className="flex items-center justify-between px-6 py-4">
           <div>
             <h2 className="text-xl font-bold text-gray-900">Site Map Editor</h2>
