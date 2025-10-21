@@ -24,6 +24,7 @@ export default function SecuritySettingsPage() {
       <CompactHeader
         title="Security Settings"
         subtitle="Manage your password, 2FA, and active sessions"
+        backUrl="/settings"
       />
 
       {/* Change Password */}
