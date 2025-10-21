@@ -15,6 +15,7 @@ export default function PreferencesPage() {
       <CompactHeader
         title="Preferences"
         subtitle="Configure your timezone and regional settings"
+        backUrl="/settings"
       />
 
       <div style={{ marginTop: '24px', display: 'grid', gap: '24px' }}>
