@@ -529,19 +529,42 @@ export default function SiteMapAnnotationOptimized({
     const feature = FEATURE_ICONS.find(f => f.id === featureId);
     if (!feature) return;
 
-    const newAnnotation: Annotation = {
-      id: Date.now().toString(),
-      type: 'feature-icon',
-      category: featureId,
-      label: feature.label,
-      color: feature.color,
-      x: 500,
-      y: 350,
-      text: feature.label,
-    };
+    // Get center of visible canvas area
+    const stage = stageRef.current;
+    if (stage) {
+      const centerX = (-stagePos.x + 500) / zoom;
+      const centerY = (-stagePos.y + 350) / zoom;
+      
+      const newAnnotation: Annotation = {
+        id: Date.now().toString(),
+        type: 'feature-icon',
+        category: featureId,
+        label: feature.label,
+        color: feature.color,
+        x: centerX,
+        y: centerY,
+        text: feature.label,
+      };
+      
+      setAnnotations(prev => {
+        const updated = [...prev, newAnnotation];
+        addToHistory(updated);
+        return updated;
+      });
+    }
+  }, [addToHistory, stagePos, zoom]);
+
+  // Handler for drag end - updates annotation position
+  const handleDragEnd = useCallback((annotationId: string, e: any) => {
+    const newX = e.target.x();
+    const newY = e.target.y();
     
     setAnnotations(prev => {
-      const updated = [...prev, newAnnotation];
+      const updated = prev.map(ann => 
+        ann.id === annotationId 
+          ? { ...ann, x: newX, y: newY }
+          : ann
+      );
       addToHistory(updated);
       return updated;
     });
