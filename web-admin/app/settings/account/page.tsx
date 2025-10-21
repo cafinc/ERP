@@ -35,6 +35,7 @@ export default function AccountSettingsPage() {
       <CompactHeader
         title="Account Settings"
         subtitle="Manage your personal information and preferences"
+        backUrl="/settings"
       />
 
       <form onSubmit={handleSubmit} style={{ marginTop: '24px' }}>
