@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import DashboardLayout from "@/components/DashboardLayout";
 import CompactHeader from "@/components/CompactHeader";
 import {
   Users,
@@ -62,13 +63,21 @@ export default function HRModulePage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <CompactHeader title="HR Module" backUrl="/" />
+    <DashboardLayout>
+      <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
+        <CompactHeader
+          title="HR Module"
+          icon={Users}
+          badges={[
+            { label: "24 Employees", color: "blue" },
+            { label: "12 Active", color: "green" },
+            { label: "5 PTO Pending", color: "purple" },
+          ]}
+        />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Overview Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-white rounded-lg shadow p-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6 mt-6">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-600">Total Employees</p>
@@ -78,7 +87,7 @@ export default function HRModulePage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow p-6">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-600">Active Time Entries</p>
@@ -88,7 +97,7 @@ export default function HRModulePage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow p-6">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-600">Pending PTO Requests</p>
@@ -105,7 +114,7 @@ export default function HRModulePage() {
             <div
               key={module.href}
               onClick={() => router.push(module.href)}
-              className="bg-white rounded-lg shadow hover:shadow-lg transition-shadow cursor-pointer overflow-hidden group"
+              className="bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-lg hover:border-blue-500 transition-all cursor-pointer overflow-hidden group"
             >
               <div className={`${module.color} h-2`} />
               <div className="p-6">
@@ -125,26 +134,26 @@ export default function HRModulePage() {
         </div>
 
         {/* Quick Actions */}
-        <div className="mt-8 bg-white rounded-lg shadow p-6">
+        <div className="mt-6 bg-white rounded-xl shadow-sm border border-gray-200 p-6">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <button
               onClick={() => router.push("/hr/employees")}
-              className="flex items-center justify-center gap-2 px-4 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+              className="flex items-center justify-center gap-2 px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
             >
               <Users className="h-5 w-5" />
               Add Employee
             </button>
             <button
               onClick={() => router.push("/hr/time-attendance")}
-              className="flex items-center justify-center gap-2 px-4 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
+              className="flex items-center justify-center gap-2 px-4 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
             >
               <Clock className="h-5 w-5" />
               Review Timesheets
             </button>
             <button
               onClick={() => router.push("/hr/pto")}
-              className="flex items-center justify-center gap-2 px-4 py-3 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-colors"
+              className="flex items-center justify-center gap-2 px-4 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
             >
               <Calendar className="h-5 w-5" />
               Approve PTO
@@ -152,6 +161,6 @@ export default function HRModulePage() {
           </div>
         </div>
       </div>
-    </div>
+    </DashboardLayout>
   );
 }
