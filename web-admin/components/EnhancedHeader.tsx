@@ -164,16 +164,29 @@ export default function EnhancedHeader() {
   };
 
   return (
-    <header className="bg-[#3f72af] text-white shadow-lg">
+    <header className="bg-[#3f72af] text-white shadow-lg" style={{ backgroundColor: headerColor }}>
       <div className="px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Left: Logo & Branding */}
           <div className="flex items-center">
-            <img 
-              src="https://customer-assets.emergentagent.com/job_snow-ops-hub/artifacts/cj7hlxxz_noBgWhite.png" 
-              alt="CAF Logo" 
-              className="h-16 w-auto"
-            />
+            {logoUrl ? (
+              <img 
+                src={logoUrl}
+                alt="Company Logo" 
+                className="h-16 w-auto"
+                style={{ maxWidth: '200px', objectFit: 'contain' }}
+              />
+            ) : companyName ? (
+              <div style={{ fontSize: '24px', fontWeight: 'bold', color: 'white' }}>
+                {companyName}
+              </div>
+            ) : (
+              <img 
+                src="https://customer-assets.emergentagent.com/job_snow-ops-hub/artifacts/cj7hlxxz_noBgWhite.png" 
+                alt="Default Logo" 
+                className="h-16 w-auto"
+              />
+            )}
           </div>
 
           {/* Right: Date/Time, Actions & Profile */}
