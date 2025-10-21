@@ -14,6 +14,7 @@ export default function ApiSettingsPage() {
       <CompactHeader
         title="API Settings"
         subtitle="Manage your API keys and access tokens"
+        backUrl="/settings"
         action={{
           label: '+ Generate New Key',
           onClick: () => alert('Generate new API key')
