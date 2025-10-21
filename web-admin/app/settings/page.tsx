@@ -175,7 +175,7 @@ export default function SettingsPage() {
 
   return (
     <DashboardLayout>
-      <div className="p-4">
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
         {/* Compact Header */}
         <CompactHeader
           title="Settings"

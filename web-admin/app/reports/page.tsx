@@ -139,7 +139,7 @@ export default function ReportsPage() {
 
   return (
     <DashboardLayout>
-      <div className="p-4">
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
         {/* Compact Header */}
         <CompactHeader
           title="Automated Reports"
@@ -229,7 +229,7 @@ export default function ReportsPage() {
                   <button
                     onClick={() => handleGenerateReport(report.id)}
                     disabled={loading}
-                    className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-[#3f72af] hover:bg-[#2c5282] text-white rounded-lg font-medium transition-colors text-sm disabled:opacity-50"
+                    className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 hover:bg-[#2c5282] text-white rounded-lg font-medium transition-colors text-sm disabled:opacity-50"
                   >
                     <Download className="w-4 h-4" />
                     Generate

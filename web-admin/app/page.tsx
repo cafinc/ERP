@@ -179,7 +179,7 @@ export default function HomePage() {
             <a
               key={stat.label}
               href={stat.href}
-              className="bg-white rounded-xl shadow-sm border border-gray-200 p-5 hover:shadow-lg hover:border-[#3f72af] transition-all cursor-pointer transform hover:scale-105"
+              className="bg-white rounded-xl shadow-sm border border-gray-200 p-5 hover:shadow-lg hover:border-blue-500 transition-all cursor-pointer transform hover:scale-105"
             >
               <div className="flex items-center justify-between">
                 <div>

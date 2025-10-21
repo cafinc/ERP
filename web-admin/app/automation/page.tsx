@@ -113,7 +113,7 @@ export default function AutomationDashboardPage() {
     return (
       <DashboardLayout>
         <div className="flex items-center justify-center h-full">
-          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
+          <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
         </div>
       </DashboardLayout>
     );
@@ -124,7 +124,7 @@ export default function AutomationDashboardPage() {
 
   return (
     <DashboardLayout>
-      <div className="p-4">
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
         <CompactHeader
           title="Automation Dashboard"
           icon={Zap}
@@ -274,7 +274,7 @@ export default function AutomationDashboardPage() {
                 <div className="flex items-center space-x-2">
                   <button
                     onClick={() => triggerWorkflow(name)}
-                    className="flex-1 flex items-center justify-center space-x-1.5 px-3 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg text-sm font-medium transition-colors"
+                    className="flex-1 flex items-center justify-center space-x-1.5 px-3 py-2 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg text-sm font-medium transition-colors"
                   >
                     <Play className="w-4 h-4" />
                     <span>Trigger Now</span>

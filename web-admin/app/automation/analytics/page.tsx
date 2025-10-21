@@ -118,7 +118,7 @@ export default function AutomationAnalyticsPage() {
     return (
       <DashboardLayout>
         <div className="flex items-center justify-center h-full">
-          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
+          <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
         </div>
       </DashboardLayout>
     );
@@ -126,7 +126,7 @@ export default function AutomationAnalyticsPage() {
 
   return (
     <DashboardLayout>
-      <div className="p-4">
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
         {/* Compact Header */}
         <CompactHeader
           title="Automation Analytics"
@@ -301,7 +301,7 @@ export default function AutomationAnalyticsPage() {
                 
                 <button
                   onClick={() => router.push(`/automation/workflows/${metric.workflow_id}/history`)}
-                  className="mt-2 w-full px-4 py-2 bg-[#3f72af] hover:bg-[#2c5282] text-white rounded-lg transition-colors text-sm font-medium flex items-center justify-center gap-2"
+                  className="mt-2 w-full px-4 py-2 bg-blue-600 hover:bg-[#2c5282] text-white rounded-lg transition-colors text-sm font-medium flex items-center justify-center gap-2"
                 >
                   <Activity className="w-4 h-4" />
                   Execution History

@@ -161,7 +161,7 @@ export default function AccessDashboardPage() {
 
   return (
     <DashboardLayout>
-      <div className="p-4">
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
         {/* Header */}
         <CompactHeader
           title="Access Control Dashboard"
@@ -328,7 +328,7 @@ export default function AccessDashboardPage() {
                       <td className="px-6 py-4 text-sm text-gray-900">
                         <button
                           onClick={() => alert(`Permissions:\n${user.permissions.join('\n')}`)}
-                          className="text-[#3f72af] hover:text-[#2c5282] flex items-center gap-1"
+                          className="text-blue-600 hover:text-[#2c5282] flex items-center gap-1"
                         >
                           <Eye className="w-4 h-4" />
                           View ({user.permissions.length})
