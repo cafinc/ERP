@@ -144,13 +144,20 @@ export default function IntegrationsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <CompactHeader title="Integration Hub" backUrl="/" />
+    <DashboardLayout>
+      <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
+        <CompactHeader
+          title="Integration Hub"
+          icon={LinkIcon}
+          badges={[
+            { label: `${integrations.length} Total`, color: "blue" },
+            { label: `${integrations.filter((i: any) => i.status === "connected").length} Connected`, color: "green" },
+          ]}
+        />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Stats Overview */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white rounded-lg shadow p-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6 mt-6">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-600">Total Integrations</p>
