@@ -472,7 +472,7 @@ export default function CustomerFormPage() {
             {customerForm.customer_type === 'individual' && (
               <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
                 <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center space-x-2">
-                  <User className="w-5 h-5 text-[#3f72af]" />
+                  <User className="w-5 h-5 text-blue-600" />
                   <span>Individual Information</span>
                 </h2>
 
@@ -584,7 +584,7 @@ export default function CustomerFormPage() {
               <>
                 <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
                   <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center space-x-2">
-                    <Building className="w-5 h-5 text-[#3f72af]" />
+                    <Building className="w-5 h-5 text-blue-600" />
                     <span>Company Information</span>
                   </h2>
 
@@ -646,7 +646,7 @@ export default function CustomerFormPage() {
                 {/* Main Contact for Company */}
                 <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
                   <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center space-x-2">
-                    <User className="w-5 h-5 text-[#3f72af]" />
+                    <User className="w-5 h-5 text-blue-600" />
                     <span>Main Contact *</span>
                   </h2>
 
@@ -768,7 +768,7 @@ export default function CustomerFormPage() {
                 {/* Company Accounting */}
                 <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
                   <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center space-x-2">
-                    <CreditCard className="w-5 h-5 text-[#3f72af]" />
+                    <CreditCard className="w-5 h-5 text-blue-600" />
                     <span>Accounting Information</span>
                   </h2>
 
@@ -876,7 +876,7 @@ export default function CustomerFormPage() {
                               },
                             })
                           }
-                          className="w-5 h-5 text-[#3f72af] rounded focus:ring-[#3f72af]"
+                          className="w-5 h-5 text-blue-600 rounded focus:ring-[#3f72af]"
                         />
                         <span className="text-sm font-medium text-gray-700">
                           Purchase Order Required
@@ -891,7 +891,7 @@ export default function CustomerFormPage() {
                   <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
                     <div className="flex items-center justify-between mb-6">
                       <h2 className="text-2xl font-bold text-gray-900 flex items-center space-x-2">
-                        <MapPin className="w-5 h-5 text-[#3f72af]" />
+                        <MapPin className="w-5 h-5 text-blue-600" />
                         <span>Sites</span>
                       </h2>
                       <button
@@ -914,7 +914,7 @@ export default function CustomerFormPage() {
             {/* Address Section (Common for both) */}
             <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
               <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center space-x-2">
-                <MapPin className="w-5 h-5 text-[#3f72af]" />
+                <MapPin className="w-5 h-5 text-blue-600" />
                 <span>Address *</span>
               </h2>
 
@@ -1003,7 +1003,7 @@ export default function CustomerFormPage() {
             {/* Additional Notes */}
             <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
               <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center space-x-2">
-                <FileText className="w-5 h-5 text-[#3f72af]" />
+                <FileText className="w-5 h-5 text-blue-600" />
                 <span>Additional Information</span>
               </h2>
 
@@ -1027,7 +1027,7 @@ export default function CustomerFormPage() {
                       onChange={e =>
                         setCustomerForm({ ...customerForm, active: e.target.checked })
                       }
-                      className="w-5 h-5 text-[#3f72af] rounded focus:ring-[#3f72af]"
+                      className="w-5 h-5 text-blue-600 rounded focus:ring-[#3f72af]"
                     />
                     <span className="text-sm font-medium text-gray-700">Active Customer</span>
                   </label>
