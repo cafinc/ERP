@@ -295,6 +295,7 @@ export default function MasterUsersPage() {
                   <td style={{ padding: '16px', textAlign: 'right' }}>
                     <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
                       <button
+                        onClick={() => handleEditUser(masterUser)}
                         style={{
                           padding: '8px 12px',
                           backgroundColor: '#f1f5f9',
@@ -314,6 +315,7 @@ export default function MasterUsersPage() {
                       </button>
                       {masterUsers.length > 1 && (
                         <button
+                          onClick={() => handleDeleteUser(masterUser.id)}
                           style={{
                             padding: '8px 12px',
                             backgroundColor: '#fee2e2',
@@ -326,11 +328,6 @@ export default function MasterUsersPage() {
                             display: 'flex',
                             alignItems: 'center',
                             gap: '6px'
-                          }}
-                          onClick={() => {
-                            if (confirm('Are you sure you want to remove this master user? This action cannot be undone.')) {
-                              // Handle delete
-                            }
                           }}
                         >
                           <Trash2 style={{ width: '14px', height: '14px' }} />
