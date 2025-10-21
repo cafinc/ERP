@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import DashboardLayout from '@/components/DashboardLayout';
-import SiteMapAnnotation from '@/components/SiteMapAnnotationFinal';
+import SiteMapAnnotation from '@/components/SiteMapAnnotationOptimized';
 import api from '@/lib/api';
 import {
   ArrowLeft,
