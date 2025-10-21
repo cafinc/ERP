@@ -83,8 +83,8 @@ export default function CompactHeader({
               </div>
             )}
             <div>
-              <h1 className="text-xl font-bold text-gray-900 truncate">{title}</h1>
-              {subtitle && <p className="text-sm text-gray-600">{subtitle}</p>}
+              <h1 className="text-2xl font-bold text-gray-900 truncate">{title}</h1>
+              {subtitle && <p className="text-sm text-gray-500 mt-0.5">{subtitle}</p>}
             </div>
             
             {badges.length > 0 && (
@@ -92,7 +92,7 @@ export default function CompactHeader({
                 {badges.map((badge, index) => (
                   <span
                     key={index}
-                    className={`px-2 py-0.5 rounded-full text-xs font-medium ${badgeColors[badge.color]}`}
+                    className={`px-3 py-1 rounded-full text-xs font-semibold ${badgeColors[badge.color]}`}
                   >
                     {badge.label}
                   </span>
