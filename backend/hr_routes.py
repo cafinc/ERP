@@ -103,7 +103,7 @@ async def get_employees(
             emp["id"] = str(emp["_id"])
             del emp["_id"]
         
-        total = employees_collection.count_documents(query)
+        total = await employees_collection.count_documents(query)
         
         return {"success": True, "employees": employees, "total": total}
     except Exception as e:
@@ -113,7 +113,7 @@ async def get_employees(
 async def get_employee(employee_id: str):
     """Get employee by ID"""
     try:
-        employee = employees_collection.find_one({"_id": ObjectId(employee_id)})
+        employee = await employees_collection.find_one({"_id": ObjectId(employee_id)})
         if not employee:
             raise HTTPException(status_code=404, detail="Employee not found")
         
@@ -131,7 +131,7 @@ async def update_employee(employee_id: str, employee_update: EmployeeUpdate):
         update_data = {k: v for k, v in employee_update.dict().items() if v is not None}
         update_data["updated_at"] = datetime.utcnow()
         
-        result = employees_collection.update_one(
+        result = await employees_collection.update_one(
             {"_id": ObjectId(employee_id)},
             {"$set": update_data}
         )
@@ -139,7 +139,7 @@ async def update_employee(employee_id: str, employee_update: EmployeeUpdate):
         if result.matched_count == 0:
             raise HTTPException(status_code=404, detail="Employee not found")
         
-        updated_employee = employees_collection.find_one({"_id": ObjectId(employee_id)})
+        updated_employee = await employees_collection.find_one({"_id": ObjectId(employee_id)})
         updated_employee["id"] = str(updated_employee["_id"])
         del updated_employee["_id"]
         
@@ -151,7 +151,7 @@ async def update_employee(employee_id: str, employee_update: EmployeeUpdate):
 async def delete_employee(employee_id: str):
     """Delete employee (soft delete - set status to terminated)"""
     try:
-        result = employees_collection.update_one(
+        result = await employees_collection.update_one(
             {"_id": ObjectId(employee_id)},
             {"$set": {"employment_status": EmploymentStatus.TERMINATED, "termination_date": datetime.utcnow()}}
         )
@@ -170,7 +170,7 @@ async def create_time_entry(time_entry: TimeEntryCreate):
     """Clock in - create new time entry"""
     try:
         # Get employee name
-        employee = employees_collection.find_one({"_id": ObjectId(time_entry.employee_id)})
+        employee = await employees_collection.find_one({"_id": ObjectId(time_entry.employee_id)})
         if not employee:
             raise HTTPException(status_code=404, detail="Employee not found")
         
@@ -180,7 +180,7 @@ async def create_time_entry(time_entry: TimeEntryCreate):
         time_entry_dict["created_at"] = datetime.utcnow()
         time_entry_dict["updated_at"] = datetime.utcnow()
         
-        result = time_entries_collection.insert_one(time_entry_dict)
+        result = await time_entries_collection.insert_one(time_entry_dict)
         time_entry_dict["id"] = str(result.inserted_id)
         
         return {"success": True, "time_entry": time_entry_dict}
@@ -191,7 +191,7 @@ async def create_time_entry(time_entry: TimeEntryCreate):
 async def clock_out(entry_id: str, clock_out_time: Optional[datetime] = None):
     """Clock out - update time entry with clock out time"""
     try:
-        entry = time_entries_collection.find_one({"_id": ObjectId(entry_id)})
+        entry = await time_entries_collection.find_one({"_id": ObjectId(entry_id)})
         if not entry:
             raise HTTPException(status_code=404, detail="Time entry not found")
         
@@ -207,7 +207,7 @@ async def clock_out(entry_id: str, clock_out_time: Optional[datetime] = None):
         break_minutes = entry.get("break_duration_minutes", 0)
         total_hours -= break_minutes / 60
         
-        result = time_entries_collection.update_one(
+        result = await time_entries_collection.update_one(
             {"_id": ObjectId(entry_id)},
             {"$set": {
                 "clock_out": clock_out,
@@ -216,7 +216,7 @@ async def clock_out(entry_id: str, clock_out_time: Optional[datetime] = None):
             }}
         )
         
-        updated_entry = time_entries_collection.find_one({"_id": ObjectId(entry_id)})
+        updated_entry = await time_entries_collection.find_one({"_id": ObjectId(entry_id)})
         updated_entry["id"] = str(updated_entry["_id"])
         del updated_entry["_id"]
         
@@ -251,7 +251,7 @@ async def get_time_entries(
             entry["id"] = str(entry["_id"])
             del entry["_id"]
         
-        total = time_entries_collection.count_documents(query)
+        total = await time_entries_collection.count_documents(query)
         
         return {"success": True, "time_entries": entries, "total": total}
     except Exception as e:
@@ -261,7 +261,7 @@ async def get_time_entries(
 async def approve_time_entry(entry_id: str, approved_by: str):
     """Approve a time entry"""
     try:
-        result = time_entries_collection.update_one(
+        result = await time_entries_collection.update_one(
             {"_id": ObjectId(entry_id)},
             {"$set": {
                 "status": TimeEntryStatus.APPROVED,
@@ -282,7 +282,7 @@ async def approve_time_entry(entry_id: str, approved_by: str):
 async def reject_time_entry(entry_id: str, approved_by: str):
     """Reject a time entry"""
     try:
-        result = time_entries_collection.update_one(
+        result = await time_entries_collection.update_one(
             {"_id": ObjectId(entry_id)},
             {"$set": {
                 "status": TimeEntryStatus.REJECTED,
@@ -306,7 +306,7 @@ async def create_pto_request(pto_request: PTORequestCreate):
     """Create a new PTO request"""
     try:
         # Get employee name
-        employee = employees_collection.find_one({"_id": ObjectId(pto_request.employee_id)})
+        employee = await employees_collection.find_one({"_id": ObjectId(pto_request.employee_id)})
         if not employee:
             raise HTTPException(status_code=404, detail="Employee not found")
         
@@ -316,7 +316,7 @@ async def create_pto_request(pto_request: PTORequestCreate):
         pto_dict["created_at"] = datetime.utcnow()
         pto_dict["updated_at"] = datetime.utcnow()
         
-        result = pto_requests_collection.insert_one(pto_dict)
+        result = await pto_requests_collection.insert_one(pto_dict)
         pto_dict["id"] = str(result.inserted_id)
         
         return {"success": True, "pto_request": pto_dict}
@@ -343,7 +343,7 @@ async def get_pto_requests(
             req["id"] = str(req["_id"])
             del req["_id"]
         
-        total = pto_requests_collection.count_documents(query)
+        total = await pto_requests_collection.count_documents(query)
         
         return {"success": True, "pto_requests": requests, "total": total}
     except Exception as e:
@@ -353,12 +353,12 @@ async def get_pto_requests(
 async def approve_pto_request(request_id: str, reviewed_by: str, review_notes: Optional[str] = None):
     """Approve a PTO request"""
     try:
-        pto_request = pto_requests_collection.find_one({"_id": ObjectId(request_id)})
+        pto_request = await pto_requests_collection.find_one({"_id": ObjectId(request_id)})
         if not pto_request:
             raise HTTPException(status_code=404, detail="PTO request not found")
         
         # Deduct from PTO balance
-        pto_balance = pto_balances_collection.find_one({
+        pto_balance = await pto_balances_collection.find_one({
             "employee_id": pto_request["employee_id"],
             "year": datetime.utcnow().year
         })
@@ -369,24 +369,24 @@ async def approve_pto_request(request_id: str, reviewed_by: str, review_notes: O
             
             if pto_type == "vacation":
                 new_balance = pto_balance.get("vacation_balance", 0) - days_requested
-                pto_balances_collection.update_one(
+                await pto_balances_collection.update_one(
                     {"_id": pto_balance["_id"]},
                     {"$set": {"vacation_balance": new_balance, "updated_at": datetime.utcnow()}}
                 )
             elif pto_type == "sick":
                 new_balance = pto_balance.get("sick_balance", 0) - days_requested
-                pto_balances_collection.update_one(
+                await pto_balances_collection.update_one(
                     {"_id": pto_balance["_id"]},
                     {"$set": {"sick_balance": new_balance, "updated_at": datetime.utcnow()}}
                 )
             elif pto_type == "personal":
                 new_balance = pto_balance.get("personal_balance", 0) - days_requested
-                pto_balances_collection.update_one(
+                await pto_balances_collection.update_one(
                     {"_id": pto_balance["_id"]},
                     {"$set": {"personal_balance": new_balance, "updated_at": datetime.utcnow()}}
                 )
         
-        result = pto_requests_collection.update_one(
+        result = await pto_requests_collection.update_one(
             {"_id": ObjectId(request_id)},
             {"$set": {
                 "status": PTOStatus.APPROVED,
@@ -405,7 +405,7 @@ async def approve_pto_request(request_id: str, reviewed_by: str, review_notes: O
 async def deny_pto_request(request_id: str, reviewed_by: str, review_notes: Optional[str] = None):
     """Deny a PTO request"""
     try:
-        result = pto_requests_collection.update_one(
+        result = await pto_requests_collection.update_one(
             {"_id": ObjectId(request_id)},
             {"$set": {
                 "status": PTOStatus.DENIED,
@@ -428,7 +428,7 @@ async def get_pto_balance(employee_id: str, year: Optional[int] = None):
     """Get PTO balance for an employee"""
     try:
         current_year = year or datetime.utcnow().year
-        balance = pto_balances_collection.find_one({
+        balance = await pto_balances_collection.find_one({
             "employee_id": employee_id,
             "year": current_year
         })
@@ -446,7 +446,7 @@ async def get_pto_balance(employee_id: str, year: Optional[int] = None):
                 "personal_accrued": 0.0,
                 "updated_at": datetime.utcnow()
             }
-            result = pto_balances_collection.insert_one(balance)
+            result = await pto_balances_collection.insert_one(balance)
             balance["id"] = str(result.inserted_id)
         else:
             balance["id"] = str(balance["_id"])
@@ -465,7 +465,7 @@ async def create_training(training: TrainingCreate):
         training_dict = training.dict()
         training_dict["created_at"] = datetime.utcnow()
         
-        result = trainings_collection.insert_one(training_dict)
+        result = await trainings_collection.insert_one(training_dict)
         training_dict["id"] = str(result.inserted_id)
         
         return {"success": True, "training": training_dict}
@@ -490,8 +490,8 @@ async def assign_training(employee_training: EmployeeTrainingCreate):
     """Assign training to an employee"""
     try:
         # Get employee and training details
-        employee = employees_collection.find_one({"_id": ObjectId(employee_training.employee_id)})
-        training = trainings_collection.find_one({"_id": ObjectId(employee_training.training_id)})
+        employee = await employees_collection.find_one({"_id": ObjectId(employee_training.employee_id)})
+        training = await trainings_collection.find_one({"_id": ObjectId(employee_training.training_id)})
         
         if not employee or not training:
             raise HTTPException(status_code=404, detail="Employee or training not found")
@@ -503,7 +503,7 @@ async def assign_training(employee_training: EmployeeTrainingCreate):
         emp_training_dict["assigned_date"] = emp_training_dict.get("assigned_date") or datetime.utcnow()
         emp_training_dict["created_at"] = datetime.utcnow()
         
-        result = employee_trainings_collection.insert_one(emp_training_dict)
+        result = await employee_trainings_collection.insert_one(emp_training_dict)
         emp_training_dict["id"] = str(result.inserted_id)
         
         return {"success": True, "employee_training": emp_training_dict}
@@ -537,15 +537,15 @@ async def update_employee_training(training_id: str, training_update: EmployeeTr
         
         # Calculate expiration if completed
         if update_data.get("status") == TrainingStatus.COMPLETED and update_data.get("completion_date"):
-            emp_training = employee_trainings_collection.find_one({"_id": ObjectId(training_id)})
+            emp_training = await employee_trainings_collection.find_one({"_id": ObjectId(training_id)})
             if emp_training:
-                training = trainings_collection.find_one({"_id": ObjectId(emp_training["training_id"])})
+                training = await trainings_collection.find_one({"_id": ObjectId(emp_training["training_id"])})
                 if training and training.get("expiration_months"):
                     completion = update_data["completion_date"]
                     expiration = completion + timedelta(days=training["expiration_months"] * 30)
                     update_data["expiration_date"] = expiration
         
-        result = employee_trainings_collection.update_one(
+        result = await employee_trainings_collection.update_one(
             {"_id": ObjectId(training_id)},
             {"$set": update_data}
         )
@@ -564,8 +564,8 @@ async def create_performance_review(review: PerformanceReviewCreate):
     """Create a performance review"""
     try:
         # Get employee and reviewer names
-        employee = employees_collection.find_one({"_id": ObjectId(review.employee_id)})
-        reviewer = employees_collection.find_one({"_id": ObjectId(review.reviewer_id)})
+        employee = await employees_collection.find_one({"_id": ObjectId(review.employee_id)})
+        reviewer = await employees_collection.find_one({"_id": ObjectId(review.reviewer_id)})
         
         if not employee or not reviewer:
             raise HTTPException(status_code=404, detail="Employee or reviewer not found")
@@ -577,7 +577,7 @@ async def create_performance_review(review: PerformanceReviewCreate):
         review_dict["created_at"] = datetime.utcnow()
         review_dict["updated_at"] = datetime.utcnow()
         
-        result = performance_reviews_collection.insert_one(review_dict)
+        result = await performance_reviews_collection.insert_one(review_dict)
         review_dict["id"] = str(result.inserted_id)
         
         return {"success": True, "review": review_dict}
@@ -616,7 +616,7 @@ async def update_performance_review(review_id: str, review_update: PerformanceRe
         update_data = {k: v for k, v in review_update.dict().items() if v is not None}
         update_data["updated_at"] = datetime.utcnow()
         
-        result = performance_reviews_collection.update_one(
+        result = await performance_reviews_collection.update_one(
             {"_id": ObjectId(review_id)},
             {"$set": update_data}
         )
@@ -634,7 +634,7 @@ async def update_performance_review(review_id: str, review_update: PerformanceRe
 async def get_payroll_settings():
     """Get payroll settings"""
     try:
-        settings = payroll_settings_collection.find_one()
+        settings = await payroll_settings_collection.find_one()
         if not settings:
             # Create default settings
             settings = {
@@ -645,7 +645,7 @@ async def get_payroll_settings():
                 "double_time_multiplier": 2.0,
                 "updated_at": datetime.utcnow()
             }
-            result = payroll_settings_collection.insert_one(settings)
+            result = await payroll_settings_collection.insert_one(settings)
             settings["id"] = str(result.inserted_id)
         else:
             settings["id"] = str(settings["_id"])
@@ -662,14 +662,14 @@ async def update_payroll_settings(settings: PayrollSettings):
         settings_dict = settings.dict()
         settings_dict["updated_at"] = datetime.utcnow()
         
-        existing = payroll_settings_collection.find_one()
+        existing = await payroll_settings_collection.find_one()
         if existing:
-            result = payroll_settings_collection.update_one(
+            result = await payroll_settings_collection.update_one(
                 {"_id": existing["_id"]},
                 {"$set": settings_dict}
             )
         else:
-            result = payroll_settings_collection.insert_one(settings_dict)
+            result = await payroll_settings_collection.insert_one(settings_dict)
         
         return {"success": True, "message": "Payroll settings updated"}
     except Exception as e:
