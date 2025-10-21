@@ -235,15 +235,16 @@ export default function SiteMapAnnotation({
     const feature = FEATURE_ICONS.find(f => f.id === featureId);
     if (!feature) return;
 
+    // Create a more visible icon marker
     const newAnnotation: Annotation = {
       id: Date.now().toString(),
-      type: 'text',
+      type: 'feature-icon',
       category: featureId,
       label: feature.label,
       color: feature.color,
       x: 400,
       y: 300,
-      text: `📍 ${feature.label}`,
+      text: feature.label,
     };
     
     const updated = [...annotations, newAnnotation];
