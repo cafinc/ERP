@@ -16,6 +16,7 @@ export default function EmailTemplatesPage() {
       <CompactHeader
         title="Email Templates"
         subtitle="Manage your email templates for automated communications"
+        backUrl="/settings"
         action={{
           label: '+ New Template',
           onClick: () => alert('Create new template')
