@@ -68,8 +68,18 @@ export default function AdminsPage() {
         backUrl="/access"
         action={{
           label: '+ Add Admin',
-          onClick: () => alert('Add admin modal')
+          onClick: handleAddUser
         }}
+      />
+
+      {/* User Form Modal */}
+      <UserFormModal
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        onSave={handleSaveUser}
+        role="admin"
+        user={selectedUser}
+        mode={modalMode}
       />
 
       <div style={{
