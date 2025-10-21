@@ -1,21 +1,20 @@
 #!/usr/bin/env python3
 """
-Backend Testing Suite for Automation Analytics Endpoints
-Tests the newly implemented automation analytics endpoints for workflow execution metrics.
+Backend API Testing for HR Module and Integration Hub
+Tests all HR and Integration endpoints with comprehensive CRUD operations
 """
 
-import asyncio
-import aiohttp
+import requests
 import json
 from datetime import datetime, timedelta
-from typing import Dict, List, Any
+import uuid
 import sys
-import traceback
+import os
 
-# Backend URL from frontend environment
+# Backend URL from environment
 BACKEND_URL = "https://snowtrack-admin-2.preview.emergentagent.com/api"
 
-class AutomationAnalyticsTestSuite:
+class BackendTester:
     def __init__(self):
         self.session = None
         self.test_results = []
