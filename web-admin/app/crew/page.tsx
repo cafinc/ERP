@@ -110,7 +110,7 @@ export default function CrewPage() {
     return (
       <DashboardLayout>
         <div className="flex items-center justify-center h-full">
-          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
+          <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
         </div>
       </DashboardLayout>
     );
@@ -118,7 +118,7 @@ export default function CrewPage() {
 
   return (
     <DashboardLayout>
-      <div className="p-4">
+      <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         {/* Compact Header */}
         <CompactHeader
           title="Crew Members"
@@ -171,7 +171,7 @@ export default function CrewPage() {
               onClick={() => setFilterStatus('all')}
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                 filterStatus === 'all'
-                  ? 'bg-[#3f72af] text-white'
+                  ? 'bg-blue-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
@@ -181,7 +181,7 @@ export default function CrewPage() {
         </div>
 
         {/* Search Bar */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-3 mb-4 mx-6 mt-6">
+        <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-3 mb-4 mx-6 mt-6">
           <div className="flex items-center gap-4">
             <div className="flex-1 relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -190,7 +190,7 @@ export default function CrewPage() {
                 placeholder="Search crew members..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent text-sm"
+                className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
               />
             </div>
             <button
@@ -216,7 +216,7 @@ export default function CrewPage() {
             {!searchQuery && filterStatus === 'active' && (
               <button
                 onClick={() => router.push('/team/create')}
-                className="inline-flex items-center space-x-2 px-6 py-3 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
+                className="inline-flex items-center space-x-2 px-6 py-3 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors"
               >
                 <Plus className="w-5 h-5" />
                 <span>Add First Crew Member</span>
@@ -294,7 +294,7 @@ export default function CrewPage() {
                       e.stopPropagation();
                       router.push(`/team/${user.id}`);
                     }}
-                    className="flex-1 flex items-center justify-center space-x-2 px-4 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors text-sm"
+                    className="flex-1 flex items-center justify-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors text-sm"
                   >
                     <Eye className="w-4 h-4" />
                     <span>View</span>

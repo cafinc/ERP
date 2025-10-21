@@ -533,7 +533,7 @@ export default function GmailPage() {
             </p>
             <button
               onClick={connectGmail}
-              className="w-full bg-[#3f72af] hover:bg-[#3f72af]/90 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+              className="w-full bg-blue-600 hover:bg-blue-600/90 text-white px-6 py-3 rounded-lg font-medium transition-colors"
             >
               Connect Gmail Account
             </button>
@@ -556,7 +556,7 @@ export default function GmailPage() {
           <div className="p-3 border-b border-gray-200 flex-shrink-0 space-y-2">
             <button
               onClick={() => setShowCompose(true)}
-              className="w-full bg-[#3f72af] hover:bg-[#3f72af]/90 text-white px-4 py-2 rounded-lg font-medium flex items-center justify-center space-x-2 text-sm"
+              className="w-full bg-blue-600 hover:bg-blue-600/90 text-white px-4 py-2 rounded-lg font-medium flex items-center justify-center space-x-2 text-sm"
             >
               <Plus className="w-4 h-4" />
               <span>Compose</span>
@@ -646,7 +646,7 @@ export default function GmailPage() {
                   placeholder="Search emails..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent text-sm text-sm"
+                  className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm text-sm"
                 />
               </div>
               <button
@@ -953,7 +953,7 @@ export default function GmailPage() {
                     type="email"
                     value={composeData.to}
                     onChange={(e) => setComposeData({ ...composeData, to: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="recipient@example.com"
                   />
                 </div>
@@ -964,7 +964,7 @@ export default function GmailPage() {
                     type="text"
                     value={composeData.subject}
                     onChange={(e) => setComposeData({ ...composeData, subject: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="Email subject"
                   />
                 </div>
@@ -975,7 +975,7 @@ export default function GmailPage() {
                     value={composeData.body}
                     onChange={(e) => setComposeData({ ...composeData, body: e.target.value })}
                     rows={12}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent resize-none"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
                     placeholder="Type your message here..."
                   />
                 </div>
@@ -994,7 +994,7 @@ export default function GmailPage() {
                 </button>
                 <button
                   onClick={sendEmail}
-                  className="px-6 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium"
+                  className="px-6 py-2 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium"
                 >
                   Send
                 </button>
@@ -1081,7 +1081,7 @@ export default function GmailPage() {
                           type="text"
                           value={templateForm.name}
                           onChange={(e) => setTemplateForm({ ...templateForm, name: e.target.value })}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent text-sm"
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                           placeholder="Template name"
                         />
                       </div>
@@ -1092,7 +1092,7 @@ export default function GmailPage() {
                           type="text"
                           value={templateForm.category}
                           onChange={(e) => setTemplateForm({ ...templateForm, category: e.target.value })}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent text-sm"
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                           placeholder="e.g., Follow-up, Quote"
                         />
                       </div>
@@ -1103,7 +1103,7 @@ export default function GmailPage() {
                           type="text"
                           value={templateForm.subject}
                           onChange={(e) => setTemplateForm({ ...templateForm, subject: e.target.value })}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent text-sm"
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                           placeholder="Email subject"
                         />
                       </div>
@@ -1114,7 +1114,7 @@ export default function GmailPage() {
                           value={templateForm.body}
                           onChange={(e) => setTemplateForm({ ...templateForm, body: e.target.value })}
                           rows={8}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent resize-none text-sm"
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none text-sm"
                           placeholder="Email body (use {{customer_name}}, {{company_name}} for placeholders)"
                         />
                       </div>
@@ -1131,7 +1131,7 @@ export default function GmailPage() {
 
                       <button
                         onClick={editingTemplate ? updateTemplate : createTemplate}
-                        className="w-full px-4 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium"
+                        className="w-full px-4 py-2 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium"
                       >
                         {editingTemplate ? 'Update Template' : 'Create Template'}
                       </button>
@@ -1168,7 +1168,7 @@ export default function GmailPage() {
                     placeholder="Search customers..."
                     value={customerSearchQuery}
                     onChange={(e) => setCustomerSearchQuery(e.target.value)}
-                    className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent text-sm text-sm"
+                    className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm text-sm"
                   />
                 </div>
               </div>

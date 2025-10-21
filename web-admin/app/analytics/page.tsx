@@ -216,7 +216,7 @@ export default function AnalyticsPage() {
             <select
               value={timeframe}
               onChange={(e) => setTimeframe(e.target.value)}
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+              className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             >
               <option value="7">Last 7 Days</option>
               <option value="30">Last 30 Days</option>

@@ -843,7 +843,7 @@ export default function CreateEstimatePage() {
                   />
                 </div>
               </div>
-              <div className="p-6">
+              <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
                 {filteredCustomers.length === 0 ? (
                   <p className="text-center text-gray-600 py-8">No customers found</p>
                 ) : (

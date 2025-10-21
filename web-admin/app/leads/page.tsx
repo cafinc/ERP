@@ -286,7 +286,7 @@ export default function LeadsPage() {
       <DashboardLayout>
         <div className="flex items-center justify-center h-full">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#3f72af] mx-auto"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto"></div>
             <p className="mt-4 text-gray-600">Loading leads...</p>
           </div>
         </div>
@@ -296,7 +296,7 @@ export default function LeadsPage() {
 
   return (
     <DashboardLayout>
-      <div className="p-6">
+      <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         <div className="max-w-7xl mx-auto">
           {/* Compact Header */}
           <CompactHeader
@@ -333,7 +333,7 @@ export default function LeadsPage() {
                   <p className="text-xs text-gray-500 mt-1">{stats.active} active</p>
                 </div>
                 <div className="p-3 bg-blue-100 rounded-lg">
-                  <Users className="w-6 h-6 text-[#3f72af]" />
+                  <Users className="w-6 h-6 text-blue-600" />
                 </div>
               </div>
             </div>
@@ -355,13 +355,13 @@ export default function LeadsPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-gray-600">Pipeline Value</p>
-                  <p className="text-3xl font-bold text-[#3f72af] mt-2">
+                  <p className="text-3xl font-bold text-blue-600 mt-2">
                     ${(stats.totalValue / 1000).toFixed(1)}k
                   </p>
                   <p className="text-xs text-gray-500 mt-1">Total potential</p>
                 </div>
                 <div className="p-3 bg-blue-100 rounded-lg">
-                  <DollarSign className="w-6 h-6 text-[#3f72af]" />
+                  <DollarSign className="w-6 h-6 text-blue-600" />
                 </div>
               </div>
             </div>
@@ -388,7 +388,7 @@ export default function LeadsPage() {
               onClick={() => setView('pipeline')}
               className={`px-4 py-2 rounded-lg font-medium transition-colors text-sm ${
                 view === 'pipeline'
-                  ? 'bg-[#3f72af] text-white'
+                  ? 'bg-blue-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
@@ -399,7 +399,7 @@ export default function LeadsPage() {
               onClick={() => setView('list')}
               className={`px-4 py-2 rounded-lg font-medium transition-colors text-sm ${
                 view === 'list'
-                  ? 'bg-[#3f72af] text-white'
+                  ? 'bg-blue-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
@@ -410,7 +410,7 @@ export default function LeadsPage() {
               onClick={() => setView('analytics')}
               className={`px-4 py-2 rounded-lg font-medium transition-colors text-sm ${
                 view === 'analytics'
-                  ? 'bg-[#3f72af] text-white'
+                  ? 'bg-blue-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
@@ -430,7 +430,7 @@ export default function LeadsPage() {
                   placeholder="Search leads by name, email, phone, or company..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent text-sm"
+                  className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                 />
               </div>
 
@@ -438,7 +438,7 @@ export default function LeadsPage() {
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="px-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent text-sm"
+                className="px-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
               >
                 <option value="all">All Status</option>
                 {Object.entries(STATUS_CONFIG).map(([key, config]) => (
@@ -452,7 +452,7 @@ export default function LeadsPage() {
               <select
                 value={priorityFilter}
                 onChange={(e) => setPriorityFilter(e.target.value)}
-                className="px-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent text-sm"
+                className="px-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
               >
                 <option value="all">All Priority</option>
                 <option value="high">High Priority</option>
@@ -542,7 +542,7 @@ export default function LeadsPage() {
                                   e.stopPropagation();
                                   handleStatusChange(lead.id, e.target.value as Lead['status']);
                                 }}
-                                className="w-full text-xs px-2 py-1 border border-gray-300 rounded focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                                className="w-full text-xs px-2 py-1 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                 onClick={(e) => e.stopPropagation()}
                               >
                                 {Object.entries(STATUS_CONFIG).map(([key, cfg]) => (
@@ -644,7 +644,7 @@ export default function LeadsPage() {
                             )}
                             <button
                               onClick={() => handleEdit(lead)}
-                              className="p-2 text-[#3f72af] hover:bg-blue-50 rounded-lg transition-colors"
+                              className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
                             >
                               <Edit className="w-4 h-4" />
                             </button>
@@ -708,7 +708,7 @@ export default function LeadsPage() {
                             <div className="flex items-center gap-2">
                               <div className="w-32 bg-gray-200 rounded-full h-2">
                                 <div
-                                  className="bg-[#3f72af] h-2 rounded-full"
+                                  className="bg-blue-600 h-2 rounded-full"
                                   style={{ width: `${percentage}%` }}
                                 />
                               </div>
@@ -746,7 +746,7 @@ export default function LeadsPage() {
                     type="text"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     required
                   />
                 </div>
@@ -757,7 +757,7 @@ export default function LeadsPage() {
                     type="text"
                     value={formData.company}
                     onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
               </div>
@@ -769,7 +769,7 @@ export default function LeadsPage() {
                     type="email"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     required
                   />
                 </div>
@@ -780,7 +780,7 @@ export default function LeadsPage() {
                     type="tel"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     required
                   />
                 </div>
@@ -792,7 +792,7 @@ export default function LeadsPage() {
                   type="text"
                   value={formData.address}
                   onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>
 
@@ -802,7 +802,7 @@ export default function LeadsPage() {
                   <select
                     value={formData.source}
                     onChange={(e) => setFormData({ ...formData, source: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   >
                     {LEAD_SOURCES.map(source => (
                       <option key={source} value={source}>
@@ -817,7 +817,7 @@ export default function LeadsPage() {
                   <select
                     value={formData.priority}
                     onChange={(e) => setFormData({ ...formData, priority: e.target.value as Lead['priority'] })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   >
                     <option value="low">Low</option>
                     <option value="medium">Medium</option>
@@ -834,7 +834,7 @@ export default function LeadsPage() {
                       step="0.01"
                       value={formData.estimated_value}
                       onChange={(e) => setFormData({ ...formData, estimated_value: e.target.value })}
-                      className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                      className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       placeholder="0.00"
                     />
                   </div>
@@ -847,7 +847,7 @@ export default function LeadsPage() {
                   type="date"
                   value={formData.next_follow_up}
                   onChange={(e) => setFormData({ ...formData, next_follow_up: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>
 
@@ -857,7 +857,7 @@ export default function LeadsPage() {
                   value={formData.notes}
                   onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
                   rows={4}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   placeholder="Additional notes about this lead..."
                 />
               </div>
@@ -876,7 +876,7 @@ export default function LeadsPage() {
               <button
                 onClick={handleCreateOrUpdate}
                 disabled={saving}
-                className="px-6 py-2 bg-[#3f72af] hover:bg-[#2c5282] disabled:bg-gray-300 text-white rounded-lg font-medium transition-colors"
+                className="px-6 py-2 bg-blue-600 hover:bg-[#2c5282] disabled:bg-gray-300 text-white rounded-lg font-medium transition-colors"
               >
                 {saving ? 'Saving...' : editingLead ? 'Update' : 'Create'}
               </button>

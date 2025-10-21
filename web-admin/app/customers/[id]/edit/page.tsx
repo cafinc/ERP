@@ -83,7 +83,7 @@ export default function CustomerEditPage() {
     return (
       <DashboardLayout>
         <div className="flex items-center justify-center h-full">
-          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
+          <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
         </div>
       </DashboardLayout>
     );
@@ -120,7 +120,7 @@ export default function CustomerEditPage() {
                   value={customerForm.name}
                   onChange={(e) => setCustomerForm({ ...customerForm, name: e.target.value })}
                   required
-                  className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent text-sm"
+                  className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                   placeholder="Enter customer name"
                 />
               </div>
@@ -138,7 +138,7 @@ export default function CustomerEditPage() {
                   value={customerForm.email}
                   onChange={(e) => setCustomerForm({ ...customerForm, email: e.target.value })}
                   required
-                  className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent text-sm"
+                  className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                   placeholder="customer@example.com"
                 />
               </div>
@@ -156,7 +156,7 @@ export default function CustomerEditPage() {
                   value={customerForm.phone}
                   onChange={(e) => setCustomerForm({ ...customerForm, phone: e.target.value })}
                   required
-                  className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent text-sm"
+                  className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                   placeholder="(123) 456-7890"
                 />
               </div>
@@ -173,7 +173,7 @@ export default function CustomerEditPage() {
                   value={customerForm.address}
                   onChange={(e) => setCustomerForm({ ...customerForm, address: e.target.value })}
                   required
-                  className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent text-sm"
+                  className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                   rows={3}
                   placeholder="Enter full address"
                 />
@@ -190,7 +190,7 @@ export default function CustomerEditPage() {
                 <textarea
                   value={customerForm.notes}
                   onChange={(e) => setCustomerForm({ ...customerForm, notes: e.target.value })}
-                  className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent text-sm"
+                  className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                   rows={4}
                   placeholder="Add any additional notes about this customer..."
                 />
@@ -204,7 +204,7 @@ export default function CustomerEditPage() {
                   type="checkbox"
                   checked={customerForm.active}
                   onChange={(e) => setCustomerForm({ ...customerForm, active: e.target.checked })}
-                  className="rounded text-[#3f72af] focus:ring-[#3f72af]"
+                  className="rounded text-blue-600 focus:ring-blue-500"
                 />
                 <span className="text-sm font-medium text-gray-700">Active Customer</span>
               </label>
@@ -218,7 +218,7 @@ export default function CustomerEditPage() {
               <button
                 type="submit"
                 disabled={saving}
-                className="flex-1 flex items-center justify-center space-x-2 px-6 py-3 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex-1 flex items-center justify-center space-x-2 px-6 py-3 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {saving ? (
                   <>

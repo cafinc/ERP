@@ -115,7 +115,7 @@ export default function AgreementTemplatesPage() {
 
   return (
     <DashboardLayout>
-      <div className="p-6">
+      <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         <CompactHeader
           title="Agreement Templates"
           backUrl="/contracts"
@@ -132,13 +132,13 @@ export default function AgreementTemplatesPage() {
         />
 
         {/* Filter Tabs */}
-        <div className="mt-6 bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+        <div className="mt-6 bg-white rounded-xl shadow-lg border border-gray-200 p-4">
           <div className="flex items-center space-x-4">
             <button
               onClick={() => setFilter('active')}
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                 filter === 'active'
-                  ? 'bg-[#3f72af] text-white'
+                  ? 'bg-blue-600 text-white'
                   : 'text-gray-600 hover:bg-gray-100'
               }`}
             >
@@ -148,7 +148,7 @@ export default function AgreementTemplatesPage() {
               onClick={() => setFilter('archived')}
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                 filter === 'archived'
-                  ? 'bg-[#3f72af] text-white'
+                  ? 'bg-blue-600 text-white'
                   : 'text-gray-600 hover:bg-gray-100'
               }`}
             >
@@ -158,7 +158,7 @@ export default function AgreementTemplatesPage() {
               onClick={() => setFilter('all')}
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                 filter === 'all'
-                  ? 'bg-[#3f72af] text-white'
+                  ? 'bg-blue-600 text-white'
                   : 'text-gray-600 hover:bg-gray-100'
               }`}
             >
@@ -173,7 +173,7 @@ export default function AgreementTemplatesPage() {
             <p className="text-gray-600">Loading templates...</p>
           </div>
         ) : templates.length === 0 ? (
-          <div className="mt-6 bg-white rounded-lg shadow-sm border border-gray-200 p-12 text-center">
+          <div className="mt-6 bg-white rounded-xl shadow-lg border border-gray-200 p-12 text-center">
             <FileText className="w-16 h-16 text-gray-300 mx-auto mb-4" />
             <h3 className="text-lg font-semibold text-gray-900 mb-2">
               {filter === 'archived' ? 'No Archived Templates' : 'No Templates Yet'}
@@ -187,7 +187,7 @@ export default function AgreementTemplatesPage() {
             {filter !== 'archived' && (
               <button
                 onClick={() => router.push('/agreements/templates/create')}
-                className="inline-flex items-center space-x-2 px-6 py-3 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
+                className="inline-flex items-center space-x-2 px-6 py-3 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors"
               >
                 <Plus className="w-5 h-5" />
                 <span>Create First Template</span>
@@ -197,17 +197,17 @@ export default function AgreementTemplatesPage() {
         ) : (
           <div className="mt-6 space-y-6">
             {Object.entries(templatesByCategory).map(([category, categoryTemplates]: [string, any]) => (
-              <div key={category} className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+              <div key={category} className="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
                 <div className="bg-gray-50 px-6 py-3 border-b border-gray-200">
                   <div className="flex items-center space-x-2">
-                    <Folder className="w-5 h-5 text-[#3f72af]" />
+                    <Folder className="w-5 h-5 text-blue-600" />
                     <h3 className="text-lg font-semibold text-gray-900">{category}</h3>
                     <span className="px-2 py-1 bg-gray-200 text-gray-700 rounded-full text-xs font-medium">
                       {categoryTemplates.length}
                     </span>
                   </div>
                 </div>
-                <div className="p-6">
+                <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {categoryTemplates.map((template: any) => (
                       <div
@@ -215,7 +215,7 @@ export default function AgreementTemplatesPage() {
                         className={`p-4 border-2 rounded-lg transition-all ${
                           template.is_archived
                             ? 'border-gray-200 bg-gray-50'
-                            : 'border-gray-200 hover:border-[#3f72af] hover:shadow-md cursor-pointer'
+                            : 'border-gray-200 hover:border-blue-500 hover:shadow-md cursor-pointer'
                         }`}
                       >
                         <div className="flex items-start justify-between mb-3">
@@ -260,7 +260,7 @@ export default function AgreementTemplatesPage() {
                         <div className="flex items-center space-x-2">
                           <button
                             onClick={() => router.push(`/agreements/templates/${template._id}`)}
-                            className="flex-1 flex items-center justify-center space-x-1 px-3 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg text-sm font-medium transition-colors"
+                            className="flex-1 flex items-center justify-center space-x-1 px-3 py-2 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg text-sm font-medium transition-colors"
                           >
                             <Eye className="w-4 h-4" />
                             <span>View</span>

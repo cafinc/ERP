@@ -282,7 +282,7 @@ export default function MessagesPage() {
               <h1 className="text-2xl font-bold text-gray-900">Messages</h1>
               <button
                 onClick={() => setShowNewConversation(true)}
-                className="p-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#3f72af]/90 transition-colors"
+                className="p-2 bg-blue-600 text-white rounded-lg hover:bg-blue-600/90 transition-colors"
                 title="New Conversation"
               >
                 <Plus className="w-5 h-5" />
@@ -298,7 +298,7 @@ export default function MessagesPage() {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
                 placeholder="Search messages..."
-                className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent text-sm"
+                className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
               />
             </div>
           </div>
@@ -313,7 +313,7 @@ export default function MessagesPage() {
                 <p>No conversations yet</p>
                 <button
                   onClick={() => setShowNewConversation(true)}
-                  className="mt-4 text-[#3f72af] hover:underline"
+                  className="mt-4 text-blue-600 hover:underline"
                 >
                   Start a new conversation
                 </button>
@@ -325,7 +325,7 @@ export default function MessagesPage() {
                   onClick={() => handleSelectConversation(conv)}
                   className={`p-4 border-b border-gray-100 cursor-pointer transition-colors ${
                     selectedConversation?._id === conv._id
-                      ? 'bg-[#3f72af]/10'
+                      ? 'bg-blue-600/10'
                       : 'hover:bg-gray-50'
                   }`}
                 >
@@ -336,7 +336,7 @@ export default function MessagesPage() {
                           {conv.title || conv.participants?.map((p: any) => p.user_name).join(', ')}
                         </h3>
                         {conv.unread_count > 0 && (
-                          <span className="px-2 py-0.5 bg-[#3f72af] text-white rounded-full text-xs font-medium">
+                          <span className="px-2 py-0.5 bg-blue-600 text-white rounded-full text-xs font-medium">
                             {conv.unread_count}
                           </span>
                         )}
@@ -399,7 +399,7 @@ export default function MessagesPage() {
                         <div
                           className={`rounded-lg px-4 py-2 ${
                             isOwnMessage
-                              ? 'bg-[#3f72af] text-white'
+                              ? 'bg-blue-600 text-white'
                               : 'bg-white text-gray-900 border border-gray-200'
                           }`}
                         >
@@ -485,7 +485,7 @@ export default function MessagesPage() {
                     title="Attach file"
                   >
                     {uploadingFile ? (
-                      <div className="w-5 h-5 border-2 border-[#3f72af] border-t-transparent rounded-full animate-spin" />
+                      <div className="w-5 h-5 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
                     ) : (
                       <Paperclip className="w-5 h-5 text-gray-600" />
                     )}
@@ -502,14 +502,14 @@ export default function MessagesPage() {
                     }}
                     placeholder="Type a message... Use @ to mention someone"
                     rows={1}
-                    className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent resize-none"
+                    className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
                     style={{ minHeight: '40px', maxHeight: '120px' }}
                   />
                   
                   <button
                     onClick={handleSendMessage}
                     disabled={sending || (!newMessage.trim() && attachments.length === 0)}
-                    className="p-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#3f72af]/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="p-2 bg-blue-600 text-white rounded-lg hover:bg-blue-600/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <Send className="w-5 h-5" />
                   </button>
@@ -552,7 +552,7 @@ export default function MessagesPage() {
                     onClick={() => setConversationType('direct')}
                     className={`flex-1 py-2 px-4 rounded-lg border ${
                       conversationType === 'direct'
-                        ? 'bg-[#3f72af] text-white border-[#3f72af]'
+                        ? 'bg-blue-600 text-white border-blue-500'
                         : 'bg-white text-gray-700 border-gray-300'
                     }`}
                   >
@@ -563,7 +563,7 @@ export default function MessagesPage() {
                     onClick={() => setConversationType('group')}
                     className={`flex-1 py-2 px-4 rounded-lg border ${
                       conversationType === 'group'
-                        ? 'bg-[#3f72af] text-white border-[#3f72af]'
+                        ? 'bg-blue-600 text-white border-blue-500'
                         : 'bg-white text-gray-700 border-gray-300'
                     }`}
                   >
@@ -582,7 +582,7 @@ export default function MessagesPage() {
                     value={groupName}
                     onChange={(e) => setGroupName(e.target.value)}
                     placeholder="Enter group name"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
               )}
@@ -612,7 +612,7 @@ export default function MessagesPage() {
                             setSelectedUsers(selectedUsers.filter(id => id !== contact._id));
                           }
                         }}
-                        className="w-4 h-4 text-[#3f72af] border-gray-300 rounded focus:ring-[#3f72af]"
+                        className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       />
                       <div className="flex-1">
                         <p className="font-medium text-gray-900">{contact.display_name}</p>
@@ -639,7 +639,7 @@ export default function MessagesPage() {
                 <button
                   onClick={handleCreateConversation}
                   disabled={selectedUsers.length === 0}
-                  className="px-4 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#3f72af]/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-600/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Create Conversation
                 </button>

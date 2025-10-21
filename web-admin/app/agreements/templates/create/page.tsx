@@ -102,7 +102,7 @@ export default function CreateAgreementTemplatePage() {
 
   return (
     <DashboardLayout>
-      <div className="p-6">
+      <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         <CompactHeader
           title="Create Agreement Template"
           backUrl="/agreements/templates"
@@ -210,7 +210,7 @@ export default function CreateAgreementTemplatePage() {
         </div>
 
         {/* Sections Editor */}
-        <div className="mt-6 bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+        <div className="mt-6 bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
           <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 bg-gray-50">
             <h3 className="text-lg font-semibold text-gray-900">Agreement Sections</h3>
             <button

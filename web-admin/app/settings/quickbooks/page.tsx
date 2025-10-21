@@ -325,7 +325,7 @@ export default function QuickBooksSettings() {
     return (
       <DashboardLayout>
         <div className="flex items-center justify-center h-64">
-          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
+          <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
         </div>
       </DashboardLayout>
     );
@@ -333,7 +333,7 @@ export default function QuickBooksSettings() {
 
   return (
     <DashboardLayout>
-      <div className="p-6">
+      <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         {/* Header */}
         <div className="mb-6">
           <h1 className="text-3xl font-bold text-[#112d4e]">QuickBooks Online Integration</h1>
@@ -343,7 +343,7 @@ export default function QuickBooksSettings() {
         </div>
 
         {/* Connection Status Card */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
+        <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6 mb-6">
           <div className="flex items-center justify-between mb-4">
             <div>
               <h2 className="text-xl font-semibold text-[#112d4e]">Connection Status</h2>
@@ -404,7 +404,7 @@ export default function QuickBooksSettings() {
               </div>
               <button
                 onClick={handleConnect}
-                className="px-6 py-3 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-colors flex items-center gap-2"
+                className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-[#2c5282] transition-colors flex items-center gap-2"
               >
                 <ExternalLink className="w-5 h-5" />
                 Connect to QuickBooks
@@ -415,7 +415,7 @@ export default function QuickBooksSettings() {
 
         {/* Sync Settings (only show when connected) */}
         {connection?.connected && (
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
+          <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6 mb-6">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-xl font-semibold text-[#112d4e]">Sync Settings</h2>
               <SettingsIcon className="w-5 h-5 text-gray-400" />
@@ -434,7 +434,7 @@ export default function QuickBooksSettings() {
                     onChange={(e) => setSyncSettings({ ...syncSettings, sync_enabled: e.target.checked })}
                     className="sr-only peer"
                   />
-                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#3f72af]"></div>
+                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
                 </label>
               </div>
 
@@ -446,7 +446,7 @@ export default function QuickBooksSettings() {
                 <select
                   value={syncSettings.sync_direction}
                   onChange={(e) => setSyncSettings({ ...syncSettings, sync_direction: e.target.value })}
-                  className="px-3 py-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3f72af]"
+                  className="px-3 py-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
                   <option value="one_way">One-way (to QuickBooks)</option>
                   <option value="two_way">Two-way (bidirectional)</option>
@@ -471,7 +471,7 @@ export default function QuickBooksSettings() {
                       <button
                         onClick={() => handleSyncEntity(entityType)}
                         disabled={syncingEntity === entityType}
-                        className="flex items-center gap-1 px-3 py-1 text-sm bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="flex items-center gap-1 px-3 py-1 text-sm bg-blue-600 text-white rounded-lg hover:bg-[#2c5282] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                         title={`Sync all ${label.toLowerCase()} to QuickBooks`}
                       >
                         {syncingEntity === entityType ? (
@@ -493,7 +493,7 @@ export default function QuickBooksSettings() {
                           onChange={(e) => setSyncSettings({ ...syncSettings, [key]: e.target.checked })}
                           className="sr-only peer"
                         />
-                        <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#3f72af]"></div>
+                        <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
                       </label>
                     </div>
                   </div>
@@ -504,7 +504,7 @@ export default function QuickBooksSettings() {
                 <button
                   onClick={handleUpdateSyncSettings}
                   disabled={savingSettings}
-                  className="px-6 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                  className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-[#2c5282] transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
                 >
                   {savingSettings ? (
                     <>
@@ -525,12 +525,12 @@ export default function QuickBooksSettings() {
 
         {/* Sync Logs (only show when connected) */}
         {connection?.connected && (
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+          <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-xl font-semibold text-[#112d4e]">Recent Sync Activity</h2>
               <button
                 onClick={fetchSyncLogs}
-                className="text-sm text-[#3f72af] hover:text-[#2c5282] flex items-center gap-1"
+                className="text-sm text-blue-600 hover:text-[#2c5282] flex items-center gap-1"
               >
                 <RefreshCw className="w-4 h-4" />
                 Refresh
@@ -591,7 +591,7 @@ export default function QuickBooksSettings() {
         )}
 
         {/* Features Overview */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+        <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
           <h2 className="text-xl font-semibold text-[#112d4e] mb-4">Integration Features</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {[
@@ -620,8 +620,8 @@ export default function QuickBooksSettings() {
                 key={index}
                 className="flex items-start gap-3 p-4 bg-gray-50 rounded-lg"
               >
-                <div className="p-2 bg-[#3f72af] bg-opacity-10 rounded-lg">
-                  <feature.icon className="w-5 h-5 text-[#3f72af]" />
+                <div className="p-2 bg-blue-600 bg-opacity-10 rounded-lg">
+                  <feature.icon className="w-5 h-5 text-blue-600" />
                 </div>
                 <div>
                   <h3 className="font-medium text-[#112d4e]">{feature.title}</h3>

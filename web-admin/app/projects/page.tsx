@@ -280,7 +280,7 @@ export default function ProjectsPage() {
             {!searchQuery && filterStatus === 'all' && (
               <button
                 onClick={() => router.push('/projects/create')}
-                className="inline-flex items-center space-x-2 px-6 py-3 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
+                className="inline-flex items-center space-x-2 px-6 py-3 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors"
               >
                 <Plus className="w-5 h-5" />
                 <span>Create First Project</span>
@@ -297,7 +297,7 @@ export default function ProjectsPage() {
               return (
                 <div
                   key={project._id || `project-${index}`}
-                  className="bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-lg hover:border-[#3f72af] transition-all cursor-pointer overflow-hidden"
+                  className="bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-lg hover:border-blue-500 transition-all cursor-pointer overflow-hidden"
                   onClick={() => project._id && router.push(`/projects/${project._id}`)}
                 >
                   {/* Card Header */}
@@ -350,7 +350,7 @@ export default function ProjectsPage() {
                       </div>
                       <div className="w-full bg-gray-200 rounded-full h-2">
                         <div
-                          className="bg-[#3f72af] h-2 rounded-full transition-all"
+                          className="bg-blue-600 h-2 rounded-full transition-all"
                           style={{ width: `${project.completion_percentage}%` }}
                         />
                       </div>
@@ -373,7 +373,7 @@ export default function ProjectsPage() {
                             router.push(`/projects/${project._id}`);
                           }
                         }}
-                        className="flex-1 px-3 py-1.5 bg-[#3f72af] hover:bg-[#2c5282] text-white text-xs rounded-lg transition-colors flex items-center justify-center gap-1"
+                        className="flex-1 px-3 py-1.5 bg-blue-600 hover:bg-[#2c5282] text-white text-xs rounded-lg transition-colors flex items-center justify-center gap-1"
                       >
                         <Eye className="w-3 h-3" />
                         View
@@ -406,7 +406,7 @@ export default function ProjectsPage() {
               return (
                 <div
                   key={project._id || `project-${index}`}
-                  className="bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-md hover:border-[#3f72af] transition-all cursor-pointer p-4"
+                  className="bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-md hover:border-blue-500 transition-all cursor-pointer p-4"
                   onClick={() => router.push(`/projects/${project._id}`)}
                 >
                   <div className="flex items-center gap-4">
@@ -445,7 +445,7 @@ export default function ProjectsPage() {
                         <div className="flex items-center gap-2">
                           <div className="w-24 bg-gray-200 rounded-full h-2">
                             <div
-                              className="bg-[#3f72af] h-2 rounded-full"
+                              className="bg-blue-600 h-2 rounded-full"
                               style={{ width: `${project.completion_percentage}%` }}
                             />
                           </div>
@@ -468,7 +468,7 @@ export default function ProjectsPage() {
                           e.stopPropagation();
                           router.push(`/projects/${project._id}`);
                         }}
-                        className="px-4 py-2 bg-[#3f72af] hover:bg-[#2c5282] text-white text-sm rounded-lg transition-colors flex items-center gap-1"
+                        className="px-4 py-2 bg-blue-600 hover:bg-[#2c5282] text-white text-sm rounded-lg transition-colors flex items-center gap-1"
                       >
                         <Eye className="w-4 h-4" />
                         View

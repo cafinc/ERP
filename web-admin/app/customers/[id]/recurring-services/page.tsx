@@ -213,7 +213,7 @@ export default function RecurringServicesPage() {
       <DashboardLayout>
         <div className="flex items-center justify-center h-full">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#3f72af] mx-auto"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto"></div>
             <p className="mt-4 text-gray-600">Loading recurring services...</p>
           </div>
         </div>
@@ -223,7 +223,7 @@ export default function RecurringServicesPage() {
 
   return (
     <DashboardLayout>
-      <div className="p-6">
+      <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         <div className="max-w-7xl mx-auto">
           {/* Compact Header */}
           <CompactHeader
@@ -274,7 +274,7 @@ export default function RecurringServicesPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-gray-600">Monthly Revenue</p>
-                  <p className="text-3xl font-bold text-[#3f72af] mt-2">
+                  <p className="text-3xl font-bold text-blue-600 mt-2">
                     ${activeServices.reduce((sum, s) => {
                       const monthly = s.frequency === 'monthly' ? s.price_per_service :
                                     s.frequency === 'weekly' ? s.price_per_service * 4 :
@@ -285,7 +285,7 @@ export default function RecurringServicesPage() {
                   </p>
                 </div>
                 <div className="p-3 bg-blue-100 rounded-lg">
-                  <DollarSign className="w-6 h-6 text-[#3f72af]" />
+                  <DollarSign className="w-6 h-6 text-blue-600" />
                 </div>
               </div>
             </div>
@@ -322,7 +322,7 @@ export default function RecurringServicesPage() {
                       <div className="flex items-start justify-between gap-4">
                         <div className="flex-1">
                           <div className="flex items-center gap-3 mb-2">
-                            <Snowflake className="w-5 h-5 text-[#3f72af]" />
+                            <Snowflake className="w-5 h-5 text-blue-600" />
                             <h3 className="font-semibold text-gray-900">
                               {getServiceTypeLabel(service.service_type)}
                             </h3>
@@ -375,7 +375,7 @@ export default function RecurringServicesPage() {
                           </button>
                           <button
                             onClick={() => handleEdit(service)}
-                            className="p-2 text-[#3f72af] hover:bg-blue-50 rounded-lg transition-colors"
+                            className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
                           >
                             <Edit className="w-4 h-4" />
                           </button>
@@ -439,7 +439,7 @@ export default function RecurringServicesPage() {
                           </button>
                           <button
                             onClick={() => handleEdit(service)}
-                            className="p-2 text-[#3f72af] hover:bg-blue-50 rounded-lg transition-colors"
+                            className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
                           >
                             <Edit className="w-4 h-4" />
                           </button>
@@ -470,7 +470,7 @@ export default function RecurringServicesPage() {
                     resetForm();
                     setShowModal(true);
                   }}
-                  className="px-6 py-2 bg-[#3f72af] hover:bg-[#2c5282] text-white rounded-lg font-medium transition-colors inline-flex items-center gap-2"
+                  className="px-6 py-2 bg-blue-600 hover:bg-[#2c5282] text-white rounded-lg font-medium transition-colors inline-flex items-center gap-2"
                 >
                   <Plus className="w-4 h-4" />
                   Add First Service
@@ -499,7 +499,7 @@ export default function RecurringServicesPage() {
                 <select
                   value={formData.site_id}
                   onChange={(e) => setFormData({ ...formData, site_id: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   required
                 >
                   <option value="">Select a site</option>
@@ -519,7 +519,7 @@ export default function RecurringServicesPage() {
                   <select
                     value={formData.service_type}
                     onChange={(e) => setFormData({ ...formData, service_type: e.target.value as any })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   >
                     <option value="snow_removal">Snow Removal</option>
                     <option value="lawn_care">Lawn Care</option>
@@ -534,7 +534,7 @@ export default function RecurringServicesPage() {
                   <select
                     value={formData.frequency}
                     onChange={(e) => setFormData({ ...formData, frequency: e.target.value as any })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   >
                     <option value="daily">Daily</option>
                     <option value="weekly">Weekly</option>
@@ -554,7 +554,7 @@ export default function RecurringServicesPage() {
                     type="date"
                     value={formData.start_date}
                     onChange={(e) => setFormData({ ...formData, start_date: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     required
                   />
                 </div>
@@ -567,7 +567,7 @@ export default function RecurringServicesPage() {
                     type="date"
                     value={formData.end_date}
                     onChange={(e) => setFormData({ ...formData, end_date: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
               </div>
@@ -583,7 +583,7 @@ export default function RecurringServicesPage() {
                     step="0.01"
                     value={formData.price_per_service}
                     onChange={(e) => setFormData({ ...formData, price_per_service: e.target.value })}
-                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="0.00"
                     required
                   />
@@ -596,7 +596,7 @@ export default function RecurringServicesPage() {
                     type="checkbox"
                     checked={formData.auto_invoice}
                     onChange={(e) => setFormData({ ...formData, auto_invoice: e.target.checked })}
-                    className="w-4 h-4 text-[#3f72af] rounded focus:ring-[#3f72af]"
+                    className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
                   />
                   <span className="text-sm text-gray-700">Automatically create invoices</span>
                 </label>
@@ -606,7 +606,7 @@ export default function RecurringServicesPage() {
                     type="checkbox"
                     checked={formData.auto_dispatch}
                     onChange={(e) => setFormData({ ...formData, auto_dispatch: e.target.checked })}
-                    className="w-4 h-4 text-[#3f72af] rounded focus:ring-[#3f72af]"
+                    className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
                   />
                   <span className="text-sm text-gray-700">Automatically create dispatch jobs</span>
                 </label>
@@ -620,7 +620,7 @@ export default function RecurringServicesPage() {
                   value={formData.notes}
                   onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
                   rows={3}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   placeholder="Additional notes about this recurring service..."
                 />
               </div>
@@ -639,7 +639,7 @@ export default function RecurringServicesPage() {
               <button
                 onClick={handleCreateOrUpdate}
                 disabled={saving}
-                className="px-6 py-2 bg-[#3f72af] hover:bg-[#2c5282] disabled:bg-gray-300 text-white rounded-lg font-medium transition-colors"
+                className="px-6 py-2 bg-blue-600 hover:bg-[#2c5282] disabled:bg-gray-300 text-white rounded-lg font-medium transition-colors"
               >
                 {saving ? 'Saving...' : editingService ? 'Update' : 'Create'}
               </button>

@@ -250,7 +250,7 @@ export default function GeofenceManagementPage() {
       <DashboardLayout>
         <div className="flex items-center justify-center h-full">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#3f72af] mx-auto"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto"></div>
             <p className="mt-4 text-gray-600">Loading geofence data...</p>
           </div>
         </div>
@@ -260,7 +260,7 @@ export default function GeofenceManagementPage() {
 
   return (
     <DashboardLayout>
-      <div className="p-6">
+      <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         <div className="max-w-7xl mx-auto">
           {/* Compact Header */}
           <CompactHeader
@@ -291,7 +291,7 @@ export default function GeofenceManagementPage() {
                   <p className="text-3xl font-bold text-gray-900 mt-2">{stats.total_geofences}</p>
                 </div>
                 <div className="p-3 bg-blue-100 rounded-lg">
-                  <MapIcon className="w-6 h-6 text-[#3f72af]" />
+                  <MapIcon className="w-6 h-6 text-blue-600" />
                 </div>
               </div>
             </div>
@@ -312,13 +312,13 @@ export default function GeofenceManagementPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-gray-600">Events Today</p>
-                  <p className="text-3xl font-bold text-[#3f72af] mt-2">{stats.total_events_today}</p>
+                  <p className="text-3xl font-bold text-blue-600 mt-2">{stats.total_events_today}</p>
                   <p className="text-xs text-gray-500 mt-1">
                     {stats.entry_events_today} entries • {stats.exit_events_today} exits
                   </p>
                 </div>
                 <div className="p-3 bg-blue-100 rounded-lg">
-                  <Activity className="w-6 h-6 text-[#3f72af]" />
+                  <Activity className="w-6 h-6 text-blue-600" />
                 </div>
               </div>
             </div>
@@ -343,7 +343,7 @@ export default function GeofenceManagementPage() {
               onClick={() => setView('list')}
               className={`px-4 py-2 rounded-lg font-medium transition-colors text-sm ${
                 view === 'list'
-                  ? 'bg-[#3f72af] text-white'
+                  ? 'bg-blue-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
@@ -354,7 +354,7 @@ export default function GeofenceManagementPage() {
               onClick={() => setView('map')}
               className={`px-4 py-2 rounded-lg font-medium transition-colors text-sm ${
                 view === 'map'
-                  ? 'bg-[#3f72af] text-white'
+                  ? 'bg-blue-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
@@ -365,7 +365,7 @@ export default function GeofenceManagementPage() {
               onClick={() => setView('logs')}
               className={`px-4 py-2 rounded-lg font-medium transition-colors text-sm ${
                 view === 'logs'
-                  ? 'bg-[#3f72af] text-white'
+                  ? 'bg-blue-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
@@ -376,7 +376,7 @@ export default function GeofenceManagementPage() {
               onClick={() => setView('analytics')}
               className={`px-4 py-2 rounded-lg font-medium transition-colors text-sm ${
                 view === 'analytics'
-                  ? 'bg-[#3f72af] text-white'
+                  ? 'bg-blue-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
@@ -398,7 +398,7 @@ export default function GeofenceManagementPage() {
                       placeholder="Search geofences by site name..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent text-sm"
+                      className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                     />
                   </div>
 
@@ -406,7 +406,7 @@ export default function GeofenceManagementPage() {
                   <select
                     value={filterStatus}
                     onChange={(e) => setFilterStatus(e.target.value as any)}
-                    className="px-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent text-sm"
+                    className="px-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                   >
                     <option value="all">All Status</option>
                     <option value="active">Active Only</option>
@@ -436,7 +436,7 @@ export default function GeofenceManagementPage() {
                         <div className="flex items-start justify-between gap-4">
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-3 mb-2">
-                              <MapPin className="w-5 h-5 text-[#3f72af] flex-shrink-0" />
+                              <MapPin className="w-5 h-5 text-blue-600 flex-shrink-0" />
                               <h3 className="font-semibold text-gray-900 truncate">{geofence.site_name}</h3>
                               <div className="flex items-center gap-2 flex-shrink-0">
                                 {geofence.exists === false ? (
@@ -478,7 +478,7 @@ export default function GeofenceManagementPage() {
                                   onChange={(e) =>
                                     handleRadiusChange(geofence.site_id, Number(e.target.value))
                                   }
-                                  className="w-20 px-2 py-1 border border-gray-300 rounded text-sm focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                                  className="w-20 px-2 py-1 border border-gray-300 rounded text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                 />
                                 <span className="text-sm text-gray-600">m</span>
                                 <span className="text-xs text-gray-500">
@@ -500,7 +500,7 @@ export default function GeofenceManagementPage() {
                                         );
                                         setGeofences(updated);
                                       }}
-                                      className="w-4 h-4 text-[#3f72af] rounded focus:ring-[#3f72af]"
+                                      className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
                                     />
                                     <Bell className="w-4 h-4 text-gray-600" />
                                     <span className="text-sm text-gray-700">Alert on Entry</span>
@@ -518,7 +518,7 @@ export default function GeofenceManagementPage() {
                                         );
                                         setGeofences(updated);
                                       }}
-                                      className="w-4 h-4 text-[#3f72af] rounded focus:ring-[#3f72af]"
+                                      className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
                                     />
                                     <Bell className="w-4 h-4 text-gray-600" />
                                     <span className="text-sm text-gray-700">Alert on Exit</span>
@@ -545,7 +545,7 @@ export default function GeofenceManagementPage() {
                             <button
                               onClick={() => handleSaveGeofence(geofence)}
                               disabled={saving === geofence.site_id}
-                              className="px-3 py-1.5 bg-[#3f72af] hover:bg-[#2c5282] disabled:bg-gray-300 text-white rounded-lg font-medium transition-colors flex items-center gap-2 text-sm"
+                              className="px-3 py-1.5 bg-blue-600 hover:bg-[#2c5282] disabled:bg-gray-300 text-white rounded-lg font-medium transition-colors flex items-center gap-2 text-sm"
                             >
                               <Save className="w-4 h-4" />
                               <span>{saving === geofence.site_id ? 'Saving...' : 'Save'}</span>

@@ -51,7 +51,7 @@ function CustomerPortalLayout({ children }: CustomerPortalLayoutProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-[#3f72af] rounded-lg flex items-center justify-center">
+              <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
                 <Home className="w-6 h-6 text-white" />
               </div>
               <div>
@@ -185,7 +185,7 @@ export default function CustomerDashboardPage() {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+          <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-4">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
                 <MapPin className="w-5 h-5 text-blue-600" />
@@ -197,7 +197,7 @@ export default function CustomerDashboardPage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+          <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-4">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
                 <Calendar className="w-5 h-5 text-green-600" />
@@ -209,7 +209,7 @@ export default function CustomerDashboardPage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+          <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-4">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
                 <Receipt className="w-5 h-5 text-orange-600" />
@@ -221,7 +221,7 @@ export default function CustomerDashboardPage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+          <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-4">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
                 <DollarSign className="w-5 h-5 text-purple-600" />
@@ -233,7 +233,7 @@ export default function CustomerDashboardPage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+          <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-4">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-cyan-100 rounded-lg flex items-center justify-center flex-shrink-0">
                 <FolderOpen className="w-5 h-5 text-cyan-600" />
@@ -245,7 +245,7 @@ export default function CustomerDashboardPage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+          <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-4">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center flex-shrink-0">
                 <MessageSquare className="w-5 h-5 text-red-600" />
@@ -259,14 +259,14 @@ export default function CustomerDashboardPage() {
         </div>
 
         {/* Tabs Navigation */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200">
+        <div className="bg-white rounded-xl shadow-lg border border-gray-200">
           <div className="border-b border-gray-200">
             <div className="flex space-x-8 px-6">
               <button
                 onClick={() => setActiveTab('overview')}
                 className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
                   activeTab === 'overview'
-                    ? 'border-[#3f72af] text-[#3f72af]'
+                    ? 'border-blue-500 text-blue-600'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                 }`}
               >
@@ -276,7 +276,7 @@ export default function CustomerDashboardPage() {
                 onClick={() => setActiveTab('sites')}
                 className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
                   activeTab === 'sites'
-                    ? 'border-[#3f72af] text-[#3f72af]'
+                    ? 'border-blue-500 text-blue-600'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                 }`}
               >
@@ -286,7 +286,7 @@ export default function CustomerDashboardPage() {
                 onClick={() => setActiveTab('upcoming')}
                 className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
                   activeTab === 'upcoming'
-                    ? 'border-[#3f72af] text-[#3f72af]'
+                    ? 'border-blue-500 text-blue-600'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                 }`}
               >
@@ -296,7 +296,7 @@ export default function CustomerDashboardPage() {
                 onClick={() => setActiveTab('invoices')}
                 className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
                   activeTab === 'invoices'
-                    ? 'border-[#3f72af] text-[#3f72af]'
+                    ? 'border-blue-500 text-blue-600'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                 }`}
               >
@@ -306,7 +306,7 @@ export default function CustomerDashboardPage() {
           </div>
 
           {/* Tab Content */}
-          <div className="p-6">
+          <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
             {activeTab === 'overview' && (
               <div className="space-y-4">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
@@ -315,7 +315,7 @@ export default function CustomerDashboardPage() {
                     onClick={() => router.push('/customer-portal/requests')}
                     className="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-lg p-6 hover:shadow-md transition-shadow text-left"
                   >
-                    <ClipboardList className="w-8 h-8 text-[#3f72af] mb-3" />
+                    <ClipboardList className="w-8 h-8 text-blue-600 mb-3" />
                     <h3 className="font-semibold text-gray-900 mb-1">Request Service</h3>
                     <p className="text-sm text-gray-600">Submit a new service request</p>
                   </button>
@@ -407,7 +407,7 @@ export default function CustomerDashboardPage() {
                     </div>
                     <div className="text-right">
                       <p className="text-xl font-bold text-gray-900">${invoice.amount}</p>
-                      <button className="mt-2 px-4 py-1 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white text-sm rounded-lg transition-colors">
+                      <button className="mt-2 px-4 py-1 bg-blue-600 hover:bg-blue-600/90 text-white text-sm rounded-lg transition-colors">
                         Pay Now
                       </button>
                     </div>
@@ -422,19 +422,19 @@ export default function CustomerDashboardPage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Communication Center (2/3 width) */}
           <div className="lg:col-span-2">
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200">
+            <div className="bg-white rounded-xl shadow-lg border border-gray-200">
               <div className="p-6 border-b border-gray-200">
                 <h3 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
                   <MessageSquare className="w-5 h-5" />
                   Communication Center
                 </h3>
               </div>
-              <div className="p-6">
+              <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
                 <div className="mb-4">
                   <textarea
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent resize-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
                     rows={4}
                     placeholder="Type your message to our team..."
                   />
@@ -444,7 +444,7 @@ export default function CustomerDashboardPage() {
                     <Paperclip className="w-4 h-4" />
                     <span className="text-sm">Attach File</span>
                   </button>
-                  <button className="flex items-center gap-2 px-6 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg transition-colors">
+                  <button className="flex items-center gap-2 px-6 py-2 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg transition-colors">
                     <Send className="w-4 h-4" />
                     <span>Send Message</span>
                   </button>
@@ -455,7 +455,7 @@ export default function CustomerDashboardPage() {
 
           {/* Recent Activity (1/3 width) */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200">
+            <div className="bg-white rounded-xl shadow-lg border border-gray-200">
               <div className="p-6 border-b border-gray-200">
                 <h3 className="text-lg font-semibold text-gray-900">Recent Activity</h3>
               </div>

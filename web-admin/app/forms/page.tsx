@@ -174,7 +174,7 @@ export default function FormsPage() {
 
   return (
     <DashboardLayout>
-      <div className="p-4">
+      <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         {/* Compact Header */}
         <CompactHeader
           title="Forms Management"
@@ -220,7 +220,7 @@ export default function FormsPage() {
               onClick={() => setActiveTab('templates')}
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                 activeTab === 'templates'
-                  ? 'bg-[#3f72af] text-white'
+                  ? 'bg-blue-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
@@ -230,7 +230,7 @@ export default function FormsPage() {
               onClick={() => setActiveTab('responses')}
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                 activeTab === 'responses'
-                  ? 'bg-[#3f72af] text-white'
+                  ? 'bg-blue-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
@@ -241,7 +241,7 @@ export default function FormsPage() {
 
         {loading ? (
           <div className="flex items-center justify-center py-12">
-            <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
+            <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
           </div>
         ) : (
           <div className="mx-6 mt-6">

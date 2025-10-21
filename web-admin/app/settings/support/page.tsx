@@ -51,7 +51,7 @@ export default function SupportPage() {
 
   return (
     <DashboardLayout>
-      <div className="p-6">
+      <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         {/* Header */}
         <div className="mb-6">
           <h1 className="text-3xl font-bold text-[#112d4e]">Help & Support</h1>
@@ -63,7 +63,7 @@ export default function SupportPage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Contact Information */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
+            <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6 mb-6">
               <h2 className="text-xl font-semibold text-[#112d4e] mb-4">Contact Us</h2>
 
               <div className="space-y-4">
@@ -71,7 +71,7 @@ export default function SupportPage() {
                   href="mailto:support@cafinc.ca"
                   className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
                 >
-                  <Mail className="w-5 h-5 text-[#3f72af] mt-0.5" />
+                  <Mail className="w-5 h-5 text-blue-600 mt-0.5" />
                   <div>
                     <p className="font-medium text-gray-900">Email Support</p>
                     <p className="text-sm text-gray-600">support@cafinc.ca</p>
@@ -83,7 +83,7 @@ export default function SupportPage() {
                   href="tel:+15878770293"
                   className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
                 >
-                  <Phone className="w-5 h-5 text-[#3f72af] mt-0.5" />
+                  <Phone className="w-5 h-5 text-blue-600 mt-0.5" />
                   <div>
                     <p className="font-medium text-gray-900">Phone Support</p>
                     <p className="text-sm text-gray-600">+1 (587) 877-0293</p>
@@ -92,7 +92,7 @@ export default function SupportPage() {
                 </a>
 
                 <div className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
-                  <MessageCircle className="w-5 h-5 text-[#3f72af] mt-0.5" />
+                  <MessageCircle className="w-5 h-5 text-blue-600 mt-0.5" />
                   <div>
                     <p className="font-medium text-gray-900">Live Chat</p>
                     <p className="text-sm text-gray-600">Coming soon</p>
@@ -103,7 +103,7 @@ export default function SupportPage() {
             </div>
 
             {/* Quick Links */}
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
               <h2 className="text-xl font-semibold text-[#112d4e] mb-4">Quick Links</h2>
 
               <div className="space-y-2">
@@ -146,7 +146,7 @@ export default function SupportPage() {
 
           {/* Contact Form */}
           <div className="lg:col-span-2">
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
               <h2 className="text-xl font-semibold text-[#112d4e] mb-4">Send us a Message</h2>
 
               {submitted ? (
@@ -158,7 +158,7 @@ export default function SupportPage() {
                   </p>
                   <button
                     onClick={() => setSubmitted(false)}
-                    className="px-6 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-colors"
+                    className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-[#2c5282] transition-colors"
                   >
                     Send Another Message
                   </button>
@@ -177,7 +177,7 @@ export default function SupportPage() {
                         required
                         value={formData.name}
                         onChange={handleChange}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3f72af]"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="John Smith"
                       />
                     </div>
@@ -193,7 +193,7 @@ export default function SupportPage() {
                         required
                         value={formData.email}
                         onChange={handleChange}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3f72af]"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="john@example.com"
                       />
                     </div>
@@ -209,7 +209,7 @@ export default function SupportPage() {
                       required
                       value={formData.subject}
                       onChange={handleChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3f72af]"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     >
                       <option value="">Select a topic</option>
                       <option value="Account & Billing">Account & Billing</option>
@@ -232,7 +232,7 @@ export default function SupportPage() {
                       value={formData.message}
                       onChange={handleChange}
                       rows={6}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3f72af]"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                       placeholder="Please describe your issue or question in detail..."
                     />
                   </div>
@@ -241,7 +241,7 @@ export default function SupportPage() {
                     <button
                       type="submit"
                       disabled={sending}
-                      className="px-6 py-3 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                      className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-[#2c5282] transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
                     >
                       {sending ? (
                         <>
@@ -261,7 +261,7 @@ export default function SupportPage() {
             </div>
 
             {/* FAQs */}
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mt-6">
+            <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6 mt-6">
               <h2 className="text-xl font-semibold text-[#112d4e] mb-4">Frequently Asked Questions</h2>
 
               <div className="space-y-4">

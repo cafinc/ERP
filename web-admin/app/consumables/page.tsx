@@ -126,7 +126,7 @@ export default function ConsumablesPage() {
             </button>
             <button
               onClick={() => setShowCreateModal(true)}
-              className="flex items-center gap-2 bg-[#3f72af] text-white px-4 py-2 rounded-lg hover:bg-[#2c5282]"
+              className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-[#2c5282]"
             >
               <Plus className="w-5 h-5" />
               Add Consumable
@@ -186,7 +186,7 @@ export default function ConsumablesPage() {
               <p className="text-sm text-gray-600 mt-2">Add your first consumable to start tracking inventory</p>
               <button
                 onClick={() => setShowCreateModal(true)}
-                className="mt-4 inline-flex items-center gap-2 bg-[#3f72af] text-white px-4 py-2 rounded-lg hover:bg-[#2c5282]"
+                className="mt-4 inline-flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-[#2c5282]"
               >
                 <Plus className="w-4 h-4" />
                 Add Consumable
@@ -350,7 +350,7 @@ export default function ConsumablesPage() {
                 <div className="flex gap-3 pt-4">
                   <button
                     type="submit"
-                    className="flex-1 bg-[#3f72af] text-white py-2 rounded-lg hover:bg-[#2c5282]"
+                    className="flex-1 bg-blue-600 text-white py-2 rounded-lg hover:bg-[#2c5282]"
                   >
                     Create
                   </button>

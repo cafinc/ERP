@@ -171,7 +171,7 @@ export default function WorkflowBuilderPage() {
     return (
       <DashboardLayout>
         <div className="flex items-center justify-center h-full">
-          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
+          <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
         </div>
       </DashboardLayout>
     );
@@ -179,7 +179,7 @@ export default function WorkflowBuilderPage() {
 
   return (
     <DashboardLayout>
-      <div className="p-4">
+      <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         <CompactHeader
           title="Workflow Builder"
           icon={Zap}
@@ -214,7 +214,7 @@ export default function WorkflowBuilderPage() {
             <h3 className="text-lg font-semibold text-gray-900 mb-3">Get Started with Templates</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {templates.map((template, idx) => (
-                <div key={idx} className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+                <div key={idx} className="bg-white rounded-xl shadow-lg border border-gray-200 p-4">
                   <div className="flex items-start justify-between mb-2">
                     <h4 className="font-semibold text-gray-900">{template.name}</h4>
                     <Zap className="w-5 h-5 text-blue-600" />
@@ -226,7 +226,7 @@ export default function WorkflowBuilderPage() {
                   </div>
                   <button
                     onClick={() => handleUseTemplate(template)}
-                    className="w-full px-3 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg text-sm font-medium transition-colors"
+                    className="w-full px-3 py-2 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg text-sm font-medium transition-colors"
                   >
                     Use Template
                   </button>
@@ -241,13 +241,13 @@ export default function WorkflowBuilderPage() {
           <h3 className="text-lg font-semibold text-gray-900 mb-3">Your Custom Workflows</h3>
           
           {workflows.length === 0 ? (
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-12 text-center">
+            <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-12 text-center">
               <Zap className="w-12 h-12 text-gray-400 mx-auto mb-4" />
               <h3 className="text-lg font-semibold text-gray-900 mb-2">No Custom Workflows Yet</h3>
               <p className="text-gray-600 mb-4">Create your first workflow to automate your operations</p>
               <button
                 onClick={handleCreateWorkflow}
-                className="px-4 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
+                className="px-4 py-2 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors"
               >
                 Create Workflow
               </button>
@@ -258,7 +258,7 @@ export default function WorkflowBuilderPage() {
                 const TriggerIcon = getTriggerIcon(workflow.trigger?.trigger_type);
                 
                 return (
-                  <div key={workflow.id} className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+                  <div key={workflow.id} className="bg-white rounded-xl shadow-lg border border-gray-200 p-4">
                     {/* Header */}
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex-1">
@@ -319,7 +319,7 @@ export default function WorkflowBuilderPage() {
                     <div className="flex items-center space-x-2">
                       <button
                         onClick={() => handleExecuteWorkflow(workflow.id)}
-                        className="flex-1 flex items-center justify-center space-x-1 px-3 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg text-sm font-medium transition-colors"
+                        className="flex-1 flex items-center justify-center space-x-1 px-3 py-2 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg text-sm font-medium transition-colors"
                         disabled={!workflow.enabled}
                       >
                         <Play className="w-4 h-4" />

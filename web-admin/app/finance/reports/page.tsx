@@ -104,9 +104,9 @@ export default function ReportsPage() {
         icon={BarChart3}
       />
 
-      <div className="p-6">
+      <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         {/* Period Selector */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 mb-6">
+        <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-4 mb-6">
           <div className="flex items-center gap-4">
             <Calendar className="w-5 h-5 text-gray-400" />
             <label className="text-sm font-medium text-gray-700">Report Period:</label>

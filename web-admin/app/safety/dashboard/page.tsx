@@ -27,7 +27,7 @@ export default function SafetyDashboardPage() {
 
   return (
     <DashboardLayout>
-      <div className="p-4">
+      <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         {/* Compact Header */}
         <CompactHeader
           title="Safety Dashboard"
@@ -147,7 +147,7 @@ export default function SafetyDashboardPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <button
               onClick={() => router.push('/safety/hazards')}
-              className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow text-left"
+              className="bg-white rounded-xl shadow-lg border border-gray-200 p-4 hover:shadow-md transition-shadow text-left"
             >
               <FileText className="w-8 h-8 text-orange-600 mb-2" />
               <h3 className="font-semibold text-gray-900">Hazard Assessments</h3>
@@ -156,7 +156,7 @@ export default function SafetyDashboardPage() {
 
             <button
               onClick={() => router.push('/safety/ppe')}
-              className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow text-left"
+              className="bg-white rounded-xl shadow-lg border border-gray-200 p-4 hover:shadow-md transition-shadow text-left"
             >
               <HardHat className="w-8 h-8 text-yellow-600 mb-2" />
               <h3 className="font-semibold text-gray-900">PPE Management</h3>
@@ -165,7 +165,7 @@ export default function SafetyDashboardPage() {
 
             <button
               onClick={() => router.push('/safety/policies')}
-              className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow text-left"
+              className="bg-white rounded-xl shadow-lg border border-gray-200 p-4 hover:shadow-md transition-shadow text-left"
             >
               <FileText className="w-8 h-8 text-blue-600 mb-2" />
               <h3 className="font-semibold text-gray-900">Safety Policies</h3>
@@ -174,7 +174,7 @@ export default function SafetyDashboardPage() {
 
             <button
               onClick={() => router.push('/safety/emergency')}
-              className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow text-left"
+              className="bg-white rounded-xl shadow-lg border border-gray-200 p-4 hover:shadow-md transition-shadow text-left"
             >
               <AlertTriangle className="w-8 h-8 text-red-600 mb-2" />
               <h3 className="font-semibold text-gray-900">Emergency Plans</h3>

@@ -120,9 +120,9 @@ export default function PaymentsPage() {
         }
       />
 
-      <div className="p-6">
+      <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         {/* Search and Filters */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-3 mb-4">
+        <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-3 mb-4">
           <div className="flex items-center gap-3">
             <div className="flex-1 relative">
               <Search className="absolute left-2.5 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
@@ -182,7 +182,7 @@ export default function PaymentsPage() {
         </div>
 
         {/* Payments List */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200">
+        <div className="bg-white rounded-xl shadow-lg border border-gray-200">
           <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">

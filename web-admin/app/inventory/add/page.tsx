@@ -86,7 +86,7 @@ export default function AddInventoryItemPage() {
 
   return (
     <DashboardLayout>
-      <div className="p-4">
+      <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         {/* Header */}
         <CompactHeader
           title="Add Inventory Item"
@@ -120,7 +120,7 @@ export default function AddInventoryItemPage() {
                     onChange={handleChange}
                     placeholder="e.g., Snow Plow Blade"
                     required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
 
@@ -134,7 +134,7 @@ export default function AddInventoryItemPage() {
                     value={formData.category}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   >
                     {categories.map((cat) => (
                       <option key={cat.value} value={cat.value}>
@@ -156,7 +156,7 @@ export default function AddInventoryItemPage() {
                     onChange={handleChange}
                     placeholder="e.g., Main Warehouse"
                     required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
               </div>
@@ -180,7 +180,7 @@ export default function AddInventoryItemPage() {
                     step="0.01"
                     min="0"
                     required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
 
@@ -194,7 +194,7 @@ export default function AddInventoryItemPage() {
                     value={formData.unit}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   >
                     {units.map((unit) => (
                       <option key={unit} value={unit}>
@@ -218,7 +218,7 @@ export default function AddInventoryItemPage() {
                     step="0.01"
                     min="0"
                     required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                   <p className="text-xs text-gray-500 mt-1">Alert threshold for low stock</p>
                 </div>
@@ -240,7 +240,7 @@ export default function AddInventoryItemPage() {
                     value={formData.supplier}
                     onChange={handleChange}
                     placeholder="e.g., Heavy Equipment Co."
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
 
@@ -255,7 +255,7 @@ export default function AddInventoryItemPage() {
                     value={formData.supplier_contact}
                     onChange={handleChange}
                     placeholder="Phone or email"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
               </div>
@@ -279,7 +279,7 @@ export default function AddInventoryItemPage() {
                     step="0.01"
                     min="0"
                     required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
 
@@ -311,7 +311,7 @@ export default function AddInventoryItemPage() {
                   onChange={handleChange}
                   rows={3}
                   placeholder="Any additional information about this item..."
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>
             </div>
@@ -329,7 +329,7 @@ export default function AddInventoryItemPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="px-6 py-2 bg-[#3f72af] hover:bg-[#2c5282] text-white rounded-lg font-medium transition-colors disabled:opacity-50 flex items-center gap-2"
+                className="px-6 py-2 bg-blue-600 hover:bg-[#2c5282] text-white rounded-lg font-medium transition-colors disabled:opacity-50 flex items-center gap-2"
               >
                 <Save className="w-4 h-4" />
                 {loading ? 'Adding...' : 'Add Item'}

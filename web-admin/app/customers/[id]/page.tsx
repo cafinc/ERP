@@ -479,7 +479,7 @@ export default function CustomerDetailPage() {
 
   return (
     <DashboardLayout>
-      <div className="p-4">
+      <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         {/* Compact Header */}
         <CompactHeader
           title={customer.name}
@@ -521,7 +521,7 @@ export default function CustomerDetailPage() {
         <div className="flex gap-4">
           {/* Left Sidebar Navigation */}
           <div className="w-64 flex-shrink-0">
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-3 sticky top-4">
+            <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-3 sticky top-4">
               {tabGroups.map((group, groupIndex) => (
                 <div key={groupIndex} className={groupIndex > 0 ? 'mt-4' : ''}>
                   <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2 px-2">
@@ -537,7 +537,7 @@ export default function CustomerDetailPage() {
                           onClick={() => setActiveTab(tab.id)}
                           className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                             isActive
-                              ? 'bg-[#3f72af] text-white'
+                              ? 'bg-blue-600 text-white'
                               : 'text-gray-700 hover:bg-gray-100'
                           }`}
                         >
@@ -564,7 +564,7 @@ export default function CustomerDetailPage() {
           {/* Right Content Area */}
           <div className="flex-1 min-w-0">
             {/* Tab Content */}
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
           {/* Overview Tab */}
           {activeTab === 'overview' && (
             <div>
@@ -743,7 +743,7 @@ export default function CustomerDetailPage() {
                 <h2 className="text-xl font-semibold text-gray-900">Estimates</h2>
                 <button
                   onClick={() => router.push(`/estimates/create?customer_id=${customerId}`)}
-                  className="flex items-center space-x-2 px-4 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
+                  className="flex items-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors"
                 >
                   <Plus className="w-4 h-4" />
                   <span>New Estimate</span>
@@ -758,7 +758,7 @@ export default function CustomerDetailPage() {
                   </p>
                   <button
                     onClick={() => router.push(`/estimates/create?customer_id=${customerId}`)}
-                    className="inline-flex items-center space-x-2 px-6 py-3 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
+                    className="inline-flex items-center space-x-2 px-6 py-3 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors"
                   >
                     <Plus className="w-5 h-5" />
                     <span>Create Estimate</span>
@@ -770,7 +770,7 @@ export default function CustomerDetailPage() {
                     <div
                       key={estimate._id || estimate.id}
                       onClick={() => router.push(`/estimates/${estimate._id || estimate.id}`)}
-                      className="p-4 border border-gray-200 rounded-lg hover:border-[#3f72af] hover:bg-blue-50 cursor-pointer transition-all"
+                      className="p-4 border border-gray-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 cursor-pointer transition-all"
                     >
                       <div className="flex items-center justify-between">
                         <div className="flex-1">
@@ -821,7 +821,7 @@ export default function CustomerDetailPage() {
                 <h2 className="text-xl font-semibold text-gray-900">Projects</h2>
                 <button
                   onClick={() => router.push(`/projects/create?customer_id=${customerId}`)}
-                  className="flex items-center space-x-2 px-4 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
+                  className="flex items-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors"
                 >
                   <Plus className="w-4 h-4" />
                   <span>New Project</span>
@@ -836,7 +836,7 @@ export default function CustomerDetailPage() {
                   </p>
                   <button
                     onClick={() => router.push(`/projects/create?customer_id=${customerId}`)}
-                    className="inline-flex items-center space-x-2 px-6 py-3 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
+                    className="inline-flex items-center space-x-2 px-6 py-3 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors"
                   >
                     <Plus className="w-5 h-5" />
                     <span>Create Project</span>
@@ -848,7 +848,7 @@ export default function CustomerDetailPage() {
                     <div
                       key={project._id || project.id}
                       onClick={() => router.push(`/projects/${project._id || project.id}`)}
-                      className="p-4 border border-gray-200 rounded-lg hover:border-[#3f72af] hover:bg-blue-50 cursor-pointer transition-all"
+                      className="p-4 border border-gray-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 cursor-pointer transition-all"
                     >
                       <div className="flex items-center justify-between">
                         <div className="flex-1">
@@ -877,7 +877,7 @@ export default function CustomerDetailPage() {
                             {project.completion_percentage !== undefined && (
                               <span className="flex items-center space-x-1">
                                 <span>Progress:</span>
-                                <span className="font-medium text-[#3f72af]">{project.completion_percentage}%</span>
+                                <span className="font-medium text-blue-600">{project.completion_percentage}%</span>
                               </span>
                             )}
                           </div>
@@ -895,7 +895,7 @@ export default function CustomerDetailPage() {
                         <div className="mt-3">
                           <div className="w-full bg-gray-200 rounded-full h-2">
                             <div
-                              className="bg-[#3f72af] h-2 rounded-full transition-all"
+                              className="bg-blue-600 h-2 rounded-full transition-all"
                               style={{ width: `${project.completion_percentage}%` }}
                             />
                           </div>
@@ -925,7 +925,7 @@ export default function CustomerDetailPage() {
                     </button>
                     <button
                       onClick={() => router.push(`/agreements/create?customer_id=${customerId}`)}
-                      className="flex items-center space-x-2 px-4 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
+                      className="flex items-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors"
                     >
                       <Plus className="w-4 h-4" />
                       <span>New Agreement</span>
@@ -986,7 +986,7 @@ export default function CustomerDetailPage() {
                                 e.stopPropagation();
                                 alert('Send reminder functionality coming soon!');
                               }}
-                              className="mt-2 text-xs text-[#3f72af] hover:text-[#3f72af]/80 font-medium"
+                              className="mt-2 text-xs text-blue-600 hover:text-blue-600/80 font-medium"
                             >
                               Send Reminder →
                             </button>
@@ -1010,7 +1010,7 @@ export default function CustomerDetailPage() {
                     </p>
                     <button
                       onClick={() => router.push(`/agreements/create?customer_id=${customerId}`)}
-                      className="inline-flex items-center space-x-2 px-6 py-3 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
+                      className="inline-flex items-center space-x-2 px-6 py-3 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors"
                     >
                       <Plus className="w-5 h-5" />
                       <span>Create Agreement</span>
@@ -1024,12 +1024,12 @@ export default function CustomerDetailPage() {
                       <div
                         key={agreement._id}
                         onClick={() => router.push(`/agreements/${agreement._id}`)}
-                        className="p-4 border border-gray-200 rounded-lg hover:border-[#3f72af] hover:bg-blue-50 cursor-pointer transition-all"
+                        className="p-4 border border-gray-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 cursor-pointer transition-all"
                       >
                         <div className="flex items-center justify-between">
                           <div className="flex-1">
                             <div className="flex items-center space-x-3 mb-2">
-                              <FileSignature className="w-5 h-5 text-[#3f72af]" />
+                              <FileSignature className="w-5 h-5 text-blue-600" />
                               <h4 className="font-semibold text-gray-900">
                                 {agreement.agreement_number || agreement.contract_number || `AGR-${agreement._id?.slice(-6)}`}
                               </h4>
@@ -1052,7 +1052,7 @@ export default function CustomerDetailPage() {
                                 <span>End: {new Date(agreement.end_date).toLocaleDateString()}</span>
                               )}
                               {agreement.auto_renew && (
-                                <span className="flex items-center space-x-1 text-[#3f72af]">
+                                <span className="flex items-center space-x-1 text-blue-600">
                                   <span>🔄</span>
                                   <span>Auto-Renew</span>
                                 </span>
@@ -1082,7 +1082,7 @@ export default function CustomerDetailPage() {
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-xl font-semibold text-gray-900">Tasks</h2>
                 <button
-                  className="flex items-center space-x-2 px-4 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
+                  className="flex items-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors"
                   onClick={() => alert('Task creation coming soon!')}
                 >
                   <Plus className="w-4 h-4" />
@@ -1097,7 +1097,7 @@ export default function CustomerDetailPage() {
                     Create tasks and assign them to team members for {customer?.name}
                   </p>
                   <button 
-                    className="inline-flex items-center space-x-2 px-6 py-3 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
+                    className="inline-flex items-center space-x-2 px-6 py-3 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors"
                     onClick={() => alert('Task creation coming soon!')}
                   >
                     <Plus className="w-5 h-5" />
@@ -1109,7 +1109,7 @@ export default function CustomerDetailPage() {
                   {tasks.map((task: any) => (
                     <div
                       key={task._id || task.id}
-                      className="p-4 border border-gray-200 rounded-lg hover:border-[#3f72af] hover:bg-blue-50 cursor-pointer transition-all"
+                      className="p-4 border border-gray-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 cursor-pointer transition-all"
                     >
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
@@ -1219,7 +1219,7 @@ export default function CustomerDetailPage() {
                 <div className="flex space-x-2">
                   <button 
                     onClick={() => router.push(`/gmail?to=${customer?.email}`)}
-                    className="flex items-center space-x-2 px-4 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
+                    className="flex items-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors"
                   >
                     <Mail className="w-4 h-4" />
                     <span>Send Email</span>
@@ -1243,7 +1243,7 @@ export default function CustomerDetailPage() {
                   <div className="flex items-center justify-center space-x-3">
                     <button 
                       onClick={() => router.push(`/gmail?to=${customer?.email}`)}
-                      className="inline-flex items-center space-x-2 px-6 py-3 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
+                      className="inline-flex items-center space-x-2 px-6 py-3 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors"
                     >
                       <Mail className="w-5 h-5" />
                       <span>Send Email</span>
@@ -1262,19 +1262,19 @@ export default function CustomerDetailPage() {
                   {communications.map((comm: any) => (
                     <div
                       key={comm.id}
-                      className="p-4 border border-gray-200 rounded-lg hover:border-[#3f72af] hover:bg-blue-50 cursor-pointer transition-all"
+                      className="p-4 border border-gray-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 cursor-pointer transition-all"
                     >
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
                           <div className="flex items-center space-x-3 mb-2">
                             {comm.type === 'email' ? (
-                              <Mail className="w-5 h-5 text-[#3f72af]" />
+                              <Mail className="w-5 h-5 text-blue-600" />
                             ) : (
                               <Phone className="w-5 h-5 text-green-600" />
                             )}
                             <h3 className="font-semibold text-gray-900">{comm.subject || 'SMS Message'}</h3>
                             {!comm.read && (
-                              <span className="w-2 h-2 bg-[#3f72af] rounded-full"></span>
+                              <span className="w-2 h-2 bg-blue-600 rounded-full"></span>
                             )}
                           </div>
                           <p className="text-sm text-gray-600 mb-2 line-clamp-2">{comm.snippet}</p>

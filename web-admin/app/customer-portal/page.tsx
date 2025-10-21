@@ -54,7 +54,7 @@ export default function CustomerPortalLoginPage() {
       <div className="max-w-md w-full">
         {/* Logo/Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-[#3f72af] rounded-full mb-4">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-full mb-4">
             <Home className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Customer Portal</h1>
@@ -78,7 +78,7 @@ export default function CustomerPortalLoginPage() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 placeholder="you@company.com"
                 required
               />
@@ -92,7 +92,7 @@ export default function CustomerPortalLoginPage() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 placeholder="••••••••"
                 required
               />
@@ -100,10 +100,10 @@ export default function CustomerPortalLoginPage() {
 
             <div className="flex items-center justify-between">
               <label className="flex items-center">
-                <input type="checkbox" className="rounded border-gray-300 text-[#3f72af] focus:ring-[#3f72af]" />
+                <input type="checkbox" className="rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
                 <span className="ml-2 text-sm text-gray-600">Remember me</span>
               </label>
-              <a href="#" className="text-sm text-[#3f72af] hover:underline">
+              <a href="#" className="text-sm text-blue-600 hover:underline">
                 Forgot password?
               </a>
             </div>
@@ -111,7 +111,7 @@ export default function CustomerPortalLoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-[#3f72af] hover:bg-[#3f72af]/90 text-white font-medium py-3 rounded-lg transition-colors disabled:opacity-50"
+              className="w-full bg-blue-600 hover:bg-blue-600/90 text-white font-medium py-3 rounded-lg transition-colors disabled:opacity-50"
             >
               {loading ? 'Signing in...' : 'Sign In'}
             </button>
@@ -120,7 +120,7 @@ export default function CustomerPortalLoginPage() {
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
               New customer?{' '}
-              <a href="#" className="text-[#3f72af] hover:underline font-medium">
+              <a href="#" className="text-blue-600 hover:underline font-medium">
                 Contact us for access
               </a>
             </p>
@@ -131,25 +131,25 @@ export default function CustomerPortalLoginPage() {
         <div className="mt-8 grid grid-cols-2 gap-4">
           <div className="text-center">
             <div className="bg-white rounded-lg p-4 shadow-sm">
-              <MapPin className="w-6 h-6 text-[#3f72af] mx-auto mb-2" />
+              <MapPin className="w-6 h-6 text-blue-600 mx-auto mb-2" />
               <p className="text-xs text-gray-600">View Sites</p>
             </div>
           </div>
           <div className="text-center">
             <div className="bg-white rounded-lg p-4 shadow-sm">
-              <FileText className="w-6 h-6 text-[#3f72af] mx-auto mb-2" />
+              <FileText className="w-6 h-6 text-blue-600 mx-auto mb-2" />
               <p className="text-xs text-gray-600">Track Services</p>
             </div>
           </div>
           <div className="text-center">
             <div className="bg-white rounded-lg p-4 shadow-sm">
-              <Receipt className="w-6 h-6 text-[#3f72af] mx-auto mb-2" />
+              <Receipt className="w-6 h-6 text-blue-600 mx-auto mb-2" />
               <p className="text-xs text-gray-600">View Invoices</p>
             </div>
           </div>
           <div className="text-center">
             <div className="bg-white rounded-lg p-4 shadow-sm">
-              <MessageSquare className="w-6 h-6 text-[#3f72af] mx-auto mb-2" />
+              <MessageSquare className="w-6 h-6 text-blue-600 mx-auto mb-2" />
               <p className="text-xs text-gray-600">Message Us</p>
             </div>
           </div>

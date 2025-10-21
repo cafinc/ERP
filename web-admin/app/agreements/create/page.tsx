@@ -168,7 +168,7 @@ export default function CreateAgreementPage() {
 
   return (
     <DashboardLayout>
-      <div className="p-6">
+      <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         <CompactHeader
           title="Create Service Agreement"
           backUrl={customerId ? `/customers/${customerId}?tab=agreements` : '/contracts'}

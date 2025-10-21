@@ -92,7 +92,7 @@ export default function DispatchDetailPage() {
     return (
       <DashboardLayout>
         <div className="flex items-center justify-center h-full">
-          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
+          <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
         </div>
       </DashboardLayout>
     );
@@ -107,7 +107,7 @@ export default function DispatchDetailPage() {
             <h3 className="text-xl font-semibold text-gray-900 mb-2">Dispatch Not Found</h3>
             <button
               onClick={() => router.push('/dispatch')}
-              className="inline-flex items-center space-x-2 px-6 py-3 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
+              className="inline-flex items-center space-x-2 px-6 py-3 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors"
             >
               <ArrowLeft className="w-5 h-5" />
               <span>Back to Dispatch</span>
@@ -203,7 +203,7 @@ export default function DispatchDetailPage() {
                   <Users className="w-5 h-5 text-gray-400" />
                   <h3 className="text-lg font-semibold text-gray-900">Crew Members</h3>
                 </div>
-                <p className="text-3xl font-bold text-[#3f72af]">{dispatch.crew_ids.length}</p>
+                <p className="text-3xl font-bold text-blue-600">{dispatch.crew_ids.length}</p>
               </div>
 
               <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
@@ -211,7 +211,7 @@ export default function DispatchDetailPage() {
                   <Truck className="w-5 h-5 text-gray-400" />
                   <h3 className="text-lg font-semibold text-gray-900">Equipment</h3>
                 </div>
-                <p className="text-3xl font-bold text-[#3f72af]">{dispatch.equipment_ids.length}</p>
+                <p className="text-3xl font-bold text-blue-600">{dispatch.equipment_ids.length}</p>
               </div>
             </div>
           </div>
@@ -261,7 +261,7 @@ export default function DispatchDetailPage() {
                 <MapPin className="w-5 h-5 text-gray-400" />
                 <h3 className="text-lg font-semibold text-gray-900">Sites</h3>
               </div>
-              <p className="text-3xl font-bold text-[#3f72af]">{dispatch.site_ids.length}</p>
+              <p className="text-3xl font-bold text-blue-600">{dispatch.site_ids.length}</p>
             </div>
           </div>
         </div>

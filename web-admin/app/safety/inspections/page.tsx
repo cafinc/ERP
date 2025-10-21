@@ -66,7 +66,7 @@ export default function SafetyInspectionsPage() {
 
   return (
     <DashboardLayout>
-      <div className="p-4">
+      <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         <CompactHeader
           title="Safety Inspections"
           icon={ClipboardCheck}
@@ -131,7 +131,7 @@ export default function SafetyInspectionsPage() {
         </div>
 
         {/* Search Bar */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-3 mb-4 mx-6 mt-6">
+        <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-3 mb-4 mx-6 mt-6">
           <div className="relative">
             <Search className="absolute left-2.5 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
             <input
@@ -197,7 +197,7 @@ export default function SafetyInspectionsPage() {
                     e.stopPropagation();
                     router.push(`/safety/inspections/${inspection.id}`);
                   }}
-                  className="flex-1 flex items-center justify-center space-x-2 px-4 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors text-sm"
+                  className="flex-1 flex items-center justify-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors text-sm"
                 >
                   <Eye className="w-4 h-4" />
                   <span>View</span>

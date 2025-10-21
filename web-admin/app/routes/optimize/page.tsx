@@ -277,7 +277,7 @@ export default function RouteOptimizationPage() {
       <DashboardLayout>
         <div className="flex items-center justify-center h-full">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#3f72af] mx-auto"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto"></div>
             <p className="mt-4 text-gray-600">Loading sites...</p>
           </div>
         </div>
@@ -287,7 +287,7 @@ export default function RouteOptimizationPage() {
 
   return (
     <DashboardLayout>
-      <div className="p-6">
+      <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         <div className="max-w-7xl mx-auto">
           {/* Compact Header */}
           <CompactHeader
@@ -312,7 +312,7 @@ export default function RouteOptimizationPage() {
               onClick={() => setView('optimizer')}
               className={`px-4 py-2 rounded-lg font-medium transition-colors text-sm ${
                 view === 'optimizer'
-                  ? 'bg-[#3f72af] text-white'
+                  ? 'bg-blue-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
@@ -323,7 +323,7 @@ export default function RouteOptimizationPage() {
               onClick={() => setView('templates')}
               className={`px-4 py-2 rounded-lg font-medium transition-colors text-sm ${
                 view === 'templates'
-                  ? 'bg-[#3f72af] text-white'
+                  ? 'bg-blue-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
@@ -334,7 +334,7 @@ export default function RouteOptimizationPage() {
               onClick={() => setView('analytics')}
               className={`px-4 py-2 rounded-lg font-medium transition-colors text-sm ${
                 view === 'analytics'
-                  ? 'bg-[#3f72af] text-white'
+                  ? 'bg-blue-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
@@ -364,7 +364,7 @@ export default function RouteOptimizationPage() {
                           type="checkbox"
                           checked={selectedSiteIds.includes(site.id)}
                           onChange={() => handleSiteToggle(site.id)}
-                          className="w-4 h-4 text-[#3f72af] rounded focus:ring-[#3f72af] mt-0.5"
+                          className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500 mt-0.5"
                         />
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-2">
@@ -383,7 +383,7 @@ export default function RouteOptimizationPage() {
 
                   <button
                     onClick={() => setSelectedSiteIds(sites.map(s => s.id))}
-                    className="text-sm text-[#3f72af] hover:underline mb-4"
+                    className="text-sm text-blue-600 hover:underline mb-4"
                   >
                     Select All
                   </button>
@@ -404,7 +404,7 @@ export default function RouteOptimizationPage() {
                       <select
                         value={optimizationMode}
                         onChange={(e) => setOptimizationMode(e.target.value as any)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent text-sm"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                       >
                         <option value="distance">Shortest Distance</option>
                         <option value="time">Fastest Time</option>
@@ -417,7 +417,7 @@ export default function RouteOptimizationPage() {
                         type="checkbox"
                         checked={considerWeather}
                         onChange={(e) => setConsiderWeather(e.target.checked)}
-                        className="w-4 h-4 text-[#3f72af] rounded focus:ring-[#3f72af]"
+                        className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
                       />
                       <CloudSnow className="w-4 h-4 text-gray-600" />
                       <span className="text-sm text-gray-700">Consider Weather Conditions</span>
@@ -432,7 +432,7 @@ export default function RouteOptimizationPage() {
                         value={routeName}
                         onChange={(e) => setRouteName(e.target.value)}
                         placeholder="My Route Template"
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent text-sm"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                       />
                     </div>
                   </div>
@@ -441,7 +441,7 @@ export default function RouteOptimizationPage() {
                     <button
                       onClick={handleOptimize}
                       disabled={selectedSiteIds.length < 2 || optimizing}
-                      className="w-full px-4 py-2 bg-[#3f72af] hover:bg-[#2c5282] disabled:bg-gray-300 text-white rounded-lg font-medium transition-colors flex items-center justify-center gap-2 text-sm"
+                      className="w-full px-4 py-2 bg-blue-600 hover:bg-[#2c5282] disabled:bg-gray-300 text-white rounded-lg font-medium transition-colors flex items-center justify-center gap-2 text-sm"
                     >
                       {optimizing ? (
                         <>
@@ -476,7 +476,7 @@ export default function RouteOptimizationPage() {
                     <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
                       <div className="flex items-center gap-3">
                         <div className="p-2 bg-blue-100 rounded-lg">
-                          <Navigation className="w-5 h-5 text-[#3f72af]" />
+                          <Navigation className="w-5 h-5 text-blue-600" />
                         </div>
                         <div>
                           <p className="text-xs text-gray-600">Distance</p>
@@ -572,13 +572,13 @@ export default function RouteOptimizationPage() {
                             onDragEnd={handleDragEnd}
                             className={`flex items-center gap-3 p-3 bg-gray-50 rounded-lg border-2 transition-all cursor-move ${
                               draggedIndex === index
-                                ? 'border-[#3f72af] shadow-lg scale-105'
+                                ? 'border-blue-500 shadow-lg scale-105'
                                 : 'border-gray-200 hover:border-gray-300'
                             }`}
                           >
                             <div className="flex items-center gap-2">
                               <GripVertical className="w-4 h-4 text-gray-400" />
-                              <div className="w-7 h-7 bg-[#3f72af] text-white rounded-full flex items-center justify-center font-bold text-sm">
+                              <div className="w-7 h-7 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-sm">
                                 {index + 1}
                               </div>
                             </div>
@@ -593,7 +593,7 @@ export default function RouteOptimizationPage() {
                               <p className="text-xs text-gray-600">{site?.address}</p>
                               {routeDetail?.distance_from_previous_km !== undefined &&
                                 routeDetail.distance_from_previous_km > 0 && (
-                                  <p className="text-xs text-[#3f72af] mt-1">
+                                  <p className="text-xs text-blue-600 mt-1">
                                     {routeDetail.distance_from_previous_km.toFixed(2)} km from previous
                                   </p>
                                 )}
@@ -658,7 +658,7 @@ export default function RouteOptimizationPage() {
                         <div className="flex items-center gap-2">
                           <button
                             onClick={() => handleLoadTemplate(route)}
-                            className="px-3 py-1.5 bg-[#3f72af] hover:bg-[#2c5282] text-white rounded-lg font-medium transition-colors text-sm flex items-center gap-1"
+                            className="px-3 py-1.5 bg-blue-600 hover:bg-[#2c5282] text-white rounded-lg font-medium transition-colors text-sm flex items-center gap-1"
                           >
                             <Copy className="w-4 h-4" />
                             Load

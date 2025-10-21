@@ -357,7 +357,7 @@ export default function LiveTrackingPage() {
           {/* Manual Refresh */}
           <button
             onClick={loadAllData}
-            className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-colors"
+            className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-[#2c5282] transition-colors"
           >
             <RefreshCw className="w-4 h-4" />
             Refresh Now

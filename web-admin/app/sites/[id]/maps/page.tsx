@@ -210,7 +210,7 @@ export default function SiteMapsPage() {
         )}
 
         {/* Map Editor/Viewer */}
-        <div className="flex-1 bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+        <div className="flex-1 bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
           {(showNewMap || currentMap) ? (
             <SiteMapAnnotation
               siteId={siteId}

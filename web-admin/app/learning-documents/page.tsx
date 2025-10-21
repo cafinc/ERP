@@ -111,7 +111,7 @@ export default function LearningDocumentsPage() {
           </div>
           <button
             onClick={() => setShowCreateModal(true)}
-            className="flex items-center gap-2 bg-[#3f72af] text-white px-4 py-2 rounded-lg hover:bg-[#2c5282]"
+            className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-[#2c5282]"
           >
             <Plus className="w-5 h-5" />
             Add Document
@@ -255,7 +255,7 @@ export default function LearningDocumentsPage() {
               <p className="text-gray-600 mb-4">Document upload feature coming soon. You can add documents via API.</p>
               <button
                 onClick={() => setShowCreateModal(false)}
-                className="w-full bg-[#3f72af] text-white py-2 rounded-lg hover:bg-[#2c5282]"
+                className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-[#2c5282]"
               >
                 Close
               </button>

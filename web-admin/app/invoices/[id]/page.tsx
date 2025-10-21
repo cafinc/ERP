@@ -137,7 +137,7 @@ export default function InvoiceDetailPage() {
     return (
       <DashboardLayout>
         <div className="flex items-center justify-center h-full">
-          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
+          <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
         </div>
       </DashboardLayout>
     );
@@ -153,7 +153,7 @@ export default function InvoiceDetailPage() {
             <p className="text-gray-600 mb-6">The invoice you're looking for doesn't exist.</p>
             <button
               onClick={() => router.push('/invoices')}
-              className="inline-flex items-center space-x-2 px-6 py-3 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
+              className="inline-flex items-center space-x-2 px-6 py-3 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors"
             >
               <ArrowLeft className="w-5 h-5" />
               <span>Back to Invoices</span>
@@ -296,7 +296,7 @@ export default function InvoiceDetailPage() {
                 </div>
                 <div className="flex items-center justify-between text-lg font-bold pt-2 border-t border-gray-200">
                   <span className="text-gray-900">Total</span>
-                  <span className="text-[#3f72af]">${invoice.total_amount.toFixed(2)}</span>
+                  <span className="text-blue-600">${invoice.total_amount.toFixed(2)}</span>
                 </div>
               </div>
             </div>
@@ -356,7 +356,7 @@ export default function InvoiceDetailPage() {
                 </div>
                 <div className="flex items-center justify-between pt-3 border-t border-gray-200">
                   <span className="text-sm font-semibold text-gray-900">Amount Due</span>
-                  <span className="text-xl font-bold text-[#3f72af]">${invoice.amount_due.toFixed(2)}</span>
+                  <span className="text-xl font-bold text-blue-600">${invoice.amount_due.toFixed(2)}</span>
                 </div>
               </div>
 
@@ -425,7 +425,7 @@ export default function InvoiceDetailPage() {
                       step="0.01"
                       value={paymentForm.amount}
                       onChange={(e) => setPaymentForm({ ...paymentForm, amount: e.target.value })}
-                      className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent text-sm"
+                      className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                       placeholder="0.00"
                       max={invoice.amount_due}
                     />
@@ -442,7 +442,7 @@ export default function InvoiceDetailPage() {
                   <select
                     value={paymentForm.payment_method}
                     onChange={(e) => setPaymentForm({ ...paymentForm, payment_method: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   >
                     <option value="helcim_card">Helcim Card</option>
                     <option value="helcim_ach">Helcim ACH</option>
@@ -460,7 +460,7 @@ export default function InvoiceDetailPage() {
                     type="text"
                     value={paymentForm.transaction_id}
                     onChange={(e) => setPaymentForm({ ...paymentForm, transaction_id: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="Enter transaction ID"
                   />
                 </div>
@@ -472,7 +472,7 @@ export default function InvoiceDetailPage() {
                   <textarea
                     value={paymentForm.notes}
                     onChange={(e) => setPaymentForm({ ...paymentForm, notes: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     rows={3}
                     placeholder="Add any notes about this payment"
                   />
@@ -483,7 +483,7 @@ export default function InvoiceDetailPage() {
                 <button
                   onClick={handleAddPayment}
                   disabled={submitting}
-                  className="flex-1 flex items-center justify-center space-x-2 px-4 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors disabled:opacity-50"
+                  className="flex-1 flex items-center justify-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors disabled:opacity-50"
                 >
                   {submitting ? <RefreshCw className="w-4 h-4 animate-spin" /> : <CheckCircle className="w-4 h-4" />}
                   <span>Record Payment</span>
