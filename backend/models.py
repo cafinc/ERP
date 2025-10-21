@@ -350,6 +350,51 @@ class SiteUpdate(BaseModel):
     access_fields: Optional[List[SiteAccessField]] = None
     active: Optional[bool] = None
 
+
+# Site Map Models - For annotated site layout maps
+class SiteMapAnnotation(BaseModel):
+    """Individual annotation on a site map (icon, line, shape, area, text)"""
+    id: str  # Unique ID for this annotation
+    type: str  # 'icon', 'line', 'arrow', 'rectangle', 'circle', 'polygon', 'text', 'freehand'
+    category: Optional[str] = None  # 'curb', 'drain', 'speed_bump', 'handicap', 'sidewalk', 'plowing_zone', 'fire_hydrant', 'entrance', 'exit', 'custom'
+    label: Optional[str] = None  # Text label for the annotation
+    color: Optional[str] = '#3B82F6'  # Color in hex format
+    coordinates: List[dict]  # Position data [{x, y}] or multiple points for polygons/lines
+    properties: Optional[dict] = {}  # Additional properties (icon type, stroke width, fill, etc.)
+
+class SiteMap(BaseModel):
+    """Site map with annotations for documenting site layout"""
+    id: Optional[str] = None
+    site_id: str
+    version: int = 1  # Version number for tracking map updates
+    name: str  # e.g., "Winter 2024 Layout", "Updated Plowing Zones"
+    base_map_type: str  # 'google_maps', 'uploaded_image'
+    base_map_data: Optional[str] = None  # Base64 image data or Google Maps screenshot
+    base_map_url: Optional[str] = None  # If using Google Maps, store the coordinates/address
+    annotations: List[SiteMapAnnotation] = []
+    legend_items: Optional[List[dict]] = []  # Auto-generated legend [{category, label, color, icon}]
+    created_by: Optional[str] = None
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    updated_at: datetime = Field(default_factory=datetime.utcnow)
+    is_current: bool = True  # Mark if this is the current/active version
+
+class SiteMapCreate(BaseModel):
+    site_id: str
+    name: str
+    base_map_type: str
+    base_map_data: Optional[str] = None
+    base_map_url: Optional[str] = None
+    annotations: List[SiteMapAnnotation] = []
+    legend_items: Optional[List[dict]] = []
+    created_by: Optional[str] = None
+
+class SiteMapUpdate(BaseModel):
+    name: Optional[str] = None
+    annotations: Optional[List[SiteMapAnnotation]] = None
+    legend_items: Optional[List[dict]] = None
+    is_current: Optional[bool] = None
+
+
 # Equipment Models
 class EquipmentType(str, Enum):
     PLOW_TRUCK = "plow_truck"
