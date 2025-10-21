@@ -174,26 +174,25 @@ export default function EmployeesPage() {
           ]}
         />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white rounded-lg shadow p-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6 mt-6">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <p className="text-sm text-gray-600">Total Employees</p>
             <p className="text-3xl font-bold text-gray-900">{employees.length}</p>
           </div>
-          <div className="bg-white rounded-lg shadow p-6">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <p className="text-sm text-gray-600">Active</p>
             <p className="text-3xl font-bold text-green-600">
               {employees.filter((e: any) => e.employment_status === "active").length}
             </p>
           </div>
-          <div className="bg-white rounded-lg shadow p-6">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <p className="text-sm text-gray-600">On Leave</p>
             <p className="text-3xl font-bold text-yellow-600">
               {employees.filter((e: any) => e.employment_status === "on_leave").length}
             </p>
           </div>
-          <div className="bg-white rounded-lg shadow p-6">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <p className="text-sm text-gray-600">Departments</p>
             <p className="text-3xl font-bold text-blue-600">
               {new Set(employees.map((e: any) => e.department)).size}
@@ -202,7 +201,7 @@ export default function EmployeesPage() {
         </div>
 
         {/* Filters and Actions */}
-        <div className="bg-white rounded-lg shadow p-6 mb-6">
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
           <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
             <div className="flex gap-4 flex-1 w-full md:w-auto">
               <div className="relative flex-1">
