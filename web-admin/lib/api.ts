@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://snowmap-admin.preview.emergentagent.com/api';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://snowtrack-admin-2.preview.emergentagent.com/api';
 
 const api = axios.create({
   baseURL: API_URL,

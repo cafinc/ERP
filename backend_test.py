@@ -13,7 +13,7 @@ import sys
 import traceback
 
 # Backend URL from frontend environment
-BACKEND_URL = "https://snowmap-admin.preview.emergentagent.com/api"
+BACKEND_URL = "https://snowtrack-admin-2.preview.emergentagent.com/api"
 
 class AutomationAnalyticsTestSuite:
     def __init__(self):

@@ -1,31 +1,29 @@
 <analysis>
-The AI engineer successfully progressed the web admin application through several critical development phases. Initially, the focus was on completing the comprehensive navigation sidebar by fixing missing icon imports in , thereby exposing all previously hidden pages as per user request. This involved debugging service connection issues (correcting port from 3001 to 3000) and verifying functionality through screenshots.
-
-Following this, the major feature implementation was the Site Map Annotation for . This involved a full-stack effort: defining  models and API endpoints in FastAPI, integrating Google Maps, and building a rich frontend annotation component. Initial attempts with Fabric.js faced persistent import issues, leading to a strategic pivot to Konva.js for better Next.js compatibility. The feature was iteratively enhanced, addressing user feedback on icon display, polygon drawing for areas, responsive layout, performance, and modern design.
-
-The latter part of the trajectory focused on a broad UI/UX modernization initiative. This encompassed systematically updating all create pages (14 identified), list pages, detail pages, the main dashboard, and the  component to a consistent, modern design. Finally, the AI worked on completing the settings submenu pages, creating placeholder files for missing ones, and applying the new design paradigm. The trajectory concludes with the AI creating functional pages for missing settings sub-sections like Profile and Security, preparing to complete the remaining ones.
+The AI engineer successfully completed a series of significant feature developments and UI/UX enhancements. Initial efforts focused on completing the settings submenu pages, correcting mislabeled pages (Account/Security), and implementing a consistent back navigation button. Subsequently, the navigation sidebar was enhanced for a smoother user experience, including auto-expansion and highlighting active menu items. Major feature implementations included an Avatar Emoji System, a White-Label Branding System for company logos and header customization, and an Advanced User Roles & Permissions System, encompassing a new UserRole enum, dedicated role management pages, a , and a . The trajectory concludes with the user authorizing the comprehensive build of an HR Module and Integration Hub, with a detailed integration strategy for QuickBooks and Microsoft 365.
 </analysis>
 
 <product_requirements>
-The product is a comprehensive web admin dashboard for snow removal, built with Next.js and a FastAPI backend, mirroring an Expo mobile app. Initial requirements included QuickBooks Online Integration (customers, invoices, payments, estimates sync) and customer creation form improvements (individual focus, separated names, verified address).
+The product is a comprehensive web admin dashboard for snow removal, built with Next.js (web-admin) and a FastAPI backend, mirroring an Expo mobile app. Initial requirements included QuickBooks Online Integration (customers, invoices, payments, estimates sync) and customer creation form improvements. Key feature areas included Dashboard & Navigation, various operational pages (Customers, Estimates, Projects, Invoices, Sites), and an Access Dashboard for role-based access.
 
-A key roadmap included:
-- **Dashboard & Navigation**: Audit, link stats cards, mobile responsiveness, feedback.
-- **Pages (Customers, Estimates, Projects, Invoices, Sites)**: Redesigns, feature additions (grid/list views, forms, relationships, tracking, filtering, exports).
-- **Access Dashboard**: Role-based access, granular permissions, audit logging.
-- **Inventory/Assets**: Tracking, alerts, supplier info.
-- **Dispatch Dashboard**: Live map, drag-and-drop, filtering, schedule sync.
-Bug fixes included a non-functional photo upload button and a 400 error on project detail.
-Most recent major feature: **Site Map Annotation**. This involves taking Google Maps screenshots of site locations, marking them up with features (curbs, speed bumps, drains), defining areas (sidewalks, plowing) with click-to-draw polygons, and including a legend with site name/address. Enhancements included zoom/pan, measurement tools, auto-save, visual icon graphics, performance optimizations, and a modern, responsive layout.
+Significant features implemented include:
+- **Site Map Annotation**: Google Maps integration for marking features (curbs, speed bumps, drains) and defining areas (sidewalks, plowing) with click-to-draw polygons, zoom/pan, measurement tools, and auto-save.
+- **UI/UX Modernization**: Consistent, modern design applied across all create, list, and detail pages, the main dashboard, and header components.
+- **Settings Submenu**: Fully populated with dedicated pages for Account, Security, Notifications, App Integration, Email Templates, Roles & Permissions, API, Webhooks, Preferences, and QuickBooks, including a consistent back navigation.
+- **Navigation Enhancements**: Improved sidebar interactivity with auto-expansion, active state highlighting, and persistent expanded state.
+- **Avatar Emoji System**: Users can select and display diverse avatars, integrated into user profiles and the header.
+- **White-Label Branding System**: Allows company logo upload and header color customization for resale.
+- **Advanced User Roles & Permissions**: New roles (Master, Admin, Crew, Subcontractor, Customer, Vendor) with dedicated management pages, a  for CRUD operations, and a .
+
+The upcoming major feature is a complete HR Module and a comprehensive Integration Hub, designed with QuickBooks (Payroll, Time Tracking) and Microsoft 365 (SSO, Teams, Outlook, OneDrive, Power BI) integrations in mind.
 </product_requirements>
 
 <key_technical_concepts>
-- **Full-stack Monorepo**: Next.js (frontend), FastAPI (backend), MongoDB.
-- **Data Modeling**: Pydantic models for API validation.
-- **Mapping & Annotation**: Google Maps API integration, Konva.js for canvas-based drawing and annotation (after Fabric.js issues).
-- **UI/UX Modernization**: Component-based design, responsive layouts, bulk styling updates (), consistency across pages.
-- **API Design**: RESTful endpoints, CRUD operations.
-- **Error Handling & Debugging**: Build error resolution, cache clearing, log analysis, service restarts.
+-   **Full-stack Monorepo**: Next.js (frontend), FastAPI (backend), MongoDB.
+-   **Data Modeling**: Pydantic for API validation (e.g.,  model with  and  enum).
+-   **Frontend State Management**: React Context (e.g., AuthContext).
+-   **UI/UX**: Component-based design, responsive layouts, sidebar navigation with submenus,  for consistent page headers.
+-   **Mapping/Annotation**: Konva.js for canvas-based drawing (Site Map).
+-   **Integration Strategy**: Tiered approach for QuickBooks, Microsoft 365, Google Workspace, and other payroll/HR platforms.
 </key_technical_concepts>
 
 <code_architecture>
@@ -34,59 +32,60 @@ The application uses a monorepo structure with  (FastAPI) and  (Next.js) directo
 
 
 -   ****:
-    -   **Summary**: Defines Pydantic data models for the FastAPI application.
-    -   **Changes**: Added , ,  models to support the new site map annotation feature.
+    -   **Summary**: Defines Pydantic data models.
+    -   **Changes**:  enum updated to include new roles (Master, Admin, Crew, Subcontractor, Customer, Vendor).  model implicitly supports  field.
 -   ****:
-    -   **Summary**: Main FastAPI application defining API endpoints.
-    -   **Changes**: Added API endpoints for creating, retrieving, updating, and deleting site maps (). Updated imports to include new  models.
+    -   **Summary**: Main navigation sidebar.
+    -   **Changes**: Updated to include new settings sub-menu items, Access role management pages, and enhanced navigation logic for auto-expansion, active states, and persistent expanded state.
 -   ****:
-    -   **Summary**: Controls the main navigation sidebar of the web admin dashboard.
-    -   **Changes**: Initially updated to include missing icon imports (, , ) and to add links for all previously hidden pages and new modules, ensuring full discoverability.
+    -   **Summary**: Reusable header component.
+    -   **Changes**: Modified to conditionally display a back arrow based on a  prop, integrated into all settings submenu pages.
 -   ****:
-    -   **Summary**: The detail page for a specific site.
-    -   **Changes**: Added a Site Maps button that navigates to the new site map annotation page.
+    -   **Summary**: Header component with advanced features.
+    -   **Changes**: Updated to display user avatars and apply branding settings (company logo, header color).
+-   ****:
+    -   **Summary**: Account settings page.
+    -   **Changes**: Content was corrected (it initially contained security settings), and then modified to include the  component for user avatar selection.
 -   ** (NEW)**:
-    -   **Summary**: New page for the site map annotation feature.
-    -   **Changes**: Created to host the  component (iteratively replaced from  to various  versions, finally ).
+    -   **Summary**: Dedicated page for security settings.
+    -   **Changes**: Created from the original content of the mislabeled account page, then updated with  and back navigation.
+-   ** (REWRITTEN)**:
+    -   **Summary**: Page for white-label branding settings.
+    -   **Changes**: Completely rewritten to support company logo upload and header color customization, integrated with .
 -   ** (NEW)**:
-    -   **Summary**: The current implementation of the site map annotation component, using Konva.js.
-    -   **Changes**: Rewritten multiple times: first from Fabric.js to Konva.js, then enhanced with various features (zoom/pan, measurement tools, auto-save), improved to display actual icons and support polygon drawing, optimized for performance, and finally updated with a modern design and responsive layout fixes. Crucially, a build error due to incomplete JSX replacement was fixed.
+    -   **Summary**: Page for fine-grained permission management.
+    -   **Changes**: Created as a placeholder for enterprise-grade access control.
+-   ** (NEW)**:
+    -   **Summary**: Component for selecting user avatars using DiceBear API.
+    -   **Changes**: New file creation.
+-   ** (NEW)**:
+    -   **Summary**: Reusable modal for adding and editing user details.
+    -   **Changes**: New file creation, integrated into Access role management pages.
+-   ** (NEW pages for Master, Admins, Crew, Subcontractors, Customers, Vendors)**:
+    -   **Summary**: Dedicated pages for managing users within specific roles.
+    -   **Changes**: Created with a consistent modern design, integrating the  for user CRUD operations.
 -   ****:
-    -   **Summary**: A reusable header component used across many pages.
-    -   **Changes**: Updated with modern styling for titles, subtitles, and buttons as part of the broader UI/UX enhancement.
--   ** (and 13 other  files)**:
-    -   **Summary**: Example of a page for creating a new customer.
-    -   **Changes**: All 14 identified create pages were systematically updated to a consistent, modern design, including main wrappers and form card styling, using a bulk script approach.
--   **Various  (list and detail pages)**:
-    -   **Summary**: A large number of list () and detail () pages across modules.
-    -   **Changes**: Systematically updated to align with the new modern design system, following the pattern established for create pages.
--   ** (NEW)**, ** (NEW)**:
-    -   **Summary**: Newly created pages for previously missing submenu items.
-    -   **Changes**: Created with a modern design template.
--   ** (NEW)**, ** (NEW)**:
-    -   **Summary**: Newly created pages for previously missing settings sub-sections.
-    -   **Changes**: Created with modern design and functional placeholders.
+    -   **Summary**: Authentication context.
+    -   **Changes**: Identified that  was missing and avatar field was not in user interface, leading to temporary workarounds in the Account page.
 </code_architecture>
 
 <pending_tasks>
-- Complete the creation of the remaining 7 missing settings subpages (notifications, app-integration, email-templates, roles-permissions, api, webhooks, timezone, preferences).
-- Implement advanced GPS features (geofence alerts UI).
-- Refine existing modules: Mobile responsiveness for Dashboard/Navigation; full project/customer/site/invoice feature completion (e.g., lazy loading, advanced filtering).
-- Complete backend/frontend integrations: Invoicing-accounting, project-level progress tracking.
-- Build out full functionality for new modules: Granular permissions and audit logging for Access; low-stock alerts, usage integration, import/export for Inventory; fully interactive live map for Dispatch.
-- Develop Add/Edit forms for Inventory items and User management.
+-   **HR Module Development**: Complete the full HR module as per the detailed plan, including foundation, navigation, employee management, time & attendance, PTO, training, payroll setup, and performance management.
+-   **Integration Hub Implementation**: Build out the functional integrations with QuickBooks Payroll/Time Tracking, Microsoft 365 (Azure AD SSO, Teams, Outlook, OneDrive, Power BI), and other third-party payroll/HR services.
 </pending_tasks>
 
 <current_work>
-Immediately before this summary request, the AI engineer was engaged in completing the Settings submenu pages. The user requested to create any missing settings subpages (Profile, Security, Notifications, etc.) and ensure they match the modern design and layout. The AI identified 9 missing pages from the settings menu.
+Immediately before this summary request, the AI engineer had completed significant enhancements to the core platform, including the Avatar Emoji System, White-Label Branding System, and the Advanced User Roles & Permissions System (including dedicated role management pages and a ).
 
-The AI has successfully created two of these missing pages:
-1.  
-2.  
+The user then initiated a discussion about future enhancements, specifically an HR module and deeper integrations with QuickBooks and Microsoft 365. The AI provided a comprehensive plan for building a full HR Module and an Integration Hub, detailing the scope for each, a phased approach, and an integration architecture. The user explicitly granted permission for the AI to build it all HR module, Full integration hub overnight.
 
-These pages were created with a modern design and functional placeholders. The AI was in the process of creating the remaining 7 missing settings pages when the trajectory ended, intending to do so in batches. This ongoing task ensures that the Settings section of the web admin is fully populated and consistently designed.
+The current work state is that the AI has presented the plan and is now awaiting the user's continue command to begin the first phase of building the HR Module and Integration Hub.
 </current_work>
 
 <optional_next_step>
-Create the remaining 7 missing settings subpages (, , etc.) with modern design.
+The next step is to initiate the build of the HR Module and Integration Hub.
 </optional_next_step>
+
+<direct_quotes_for_next_step>
+Please send continue to start building each component step-by-step.
+</direct_quotes_for_next_step>
