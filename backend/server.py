@@ -1977,6 +1977,131 @@ async def delete_site(site_id: str):
         raise HTTPException(status_code=404, detail="Site not found")
     return {"message": "Site deleted successfully"}
 
+
+# ==================== SITE MAPS ENDPOINTS ====================
+@api_router.post("/site-maps", response_model=SiteMap)
+async def create_site_map(site_map: SiteMapCreate):
+    """Create a new annotated site map"""
+    try:
+        # Verify site exists
+        site = await db.sites.find_one({"_id": ObjectId(site_map.site_id)})
+        if not site:
+            raise HTTPException(status_code=404, detail="Site not found")
+        
+        # Mark all existing maps for this site as not current
+        await db.site_maps.update_many(
+            {"site_id": site_map.site_id, "is_current": True},
+            {"$set": {"is_current": False}}
+        )
+        
+        # Get current version number
+        latest_map = await db.site_maps.find_one(
+            {"site_id": site_map.site_id},
+            sort=[("version", -1)]
+        )
+        next_version = (latest_map.get("version", 0) + 1) if latest_map else 1
+        
+        site_map_dict = site_map.dict()
+        site_map_dict["version"] = next_version
+        site_map_dict["is_current"] = True
+        site_map_dict["created_at"] = datetime.utcnow()
+        site_map_dict["updated_at"] = datetime.utcnow()
+        
+        result = await db.site_maps.insert_one(site_map_dict)
+        site_map_dict["id"] = str(result.inserted_id)
+        
+        return SiteMap(**site_map_dict)
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error creating site map: {str(e)}")
+
+@api_router.get("/site-maps/site/{site_id}", response_model=List[SiteMap])
+async def get_site_maps_by_site(site_id: str, current_only: bool = False):
+    """Get all site maps for a specific site"""
+    try:
+        query = {"site_id": site_id}
+        if current_only:
+            query["is_current"] = True
+        
+        maps = await db.site_maps.find(query).sort("version", -1).to_list(100)
+        return [SiteMap(**serialize_doc(map_doc)) for map_doc in maps]
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error fetching site maps: {str(e)}")
+
+@api_router.get("/site-maps/{map_id}", response_model=SiteMap)
+async def get_site_map(map_id: str):
+    """Get a specific site map by ID"""
+    site_map = await db.site_maps.find_one({"_id": ObjectId(map_id)})
+    if not site_map:
+        raise HTTPException(status_code=404, detail="Site map not found")
+    return SiteMap(**serialize_doc(site_map))
+
+@api_router.put("/site-maps/{map_id}", response_model=SiteMap)
+async def update_site_map(map_id: str, map_update: SiteMapUpdate):
+    """Update an existing site map"""
+    try:
+        update_data = {k: v for k, v in map_update.dict().items() if v is not None}
+        if not update_data:
+            raise HTTPException(status_code=400, detail="No data to update")
+        
+        update_data["updated_at"] = datetime.utcnow()
+        
+        result = await db.site_maps.update_one(
+            {"_id": ObjectId(map_id)},
+            {"$set": update_data}
+        )
+        
+        if result.matched_count == 0:
+            raise HTTPException(status_code=404, detail="Site map not found")
+        
+        updated_map = await db.site_maps.find_one({"_id": ObjectId(map_id)})
+        return SiteMap(**serialize_doc(updated_map))
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error updating site map: {str(e)}")
+
+@api_router.delete("/site-maps/{map_id}")
+async def delete_site_map(map_id: str):
+    """Delete a site map"""
+    result = await db.site_maps.delete_one({"_id": ObjectId(map_id)})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Site map not found")
+    return {"message": "Site map deleted successfully"}
+
+@api_router.post("/site-maps/{map_id}/set-current")
+async def set_current_site_map(map_id: str):
+    """Set a specific map version as the current one"""
+    try:
+        # Get the map to find its site_id
+        site_map = await db.site_maps.find_one({"_id": ObjectId(map_id)})
+        if not site_map:
+            raise HTTPException(status_code=404, detail="Site map not found")
+        
+        # Mark all maps for this site as not current
+        await db.site_maps.update_many(
+            {"site_id": site_map["site_id"], "is_current": True},
+            {"$set": {"is_current": False}}
+        )
+        
+        # Mark this map as current
+        await db.site_maps.update_one(
+            {"_id": ObjectId(map_id)},
+            {"$set": {"is_current": True}}
+        )
+        
+        return {"message": "Site map set as current successfully"}
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error setting current map: {str(e)}")
+
+
 # ==================== EQUIPMENT ENDPOINTS ====================
 @api_router.post("/equipment", response_model=Equipment)
 async def create_equipment(equipment: EquipmentCreate):
