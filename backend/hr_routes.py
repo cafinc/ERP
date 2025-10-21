@@ -98,7 +98,7 @@ async def get_employees(
         if department:
             query["department"] = department
         
-        employees = list(employees_collection.find(query).skip(skip).limit(limit))
+        employees = await employees_collection.find(query).skip(skip).limit(limit).to_list(limit)
         for emp in employees:
             emp["id"] = str(emp["_id"])
             del emp["_id"]
