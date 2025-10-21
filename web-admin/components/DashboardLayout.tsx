@@ -254,7 +254,24 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     { icon: Camera, label: 'Photos', href: '/photos' },
     { icon: BarChart3, label: 'Analytics', href: '/analytics' },
     { icon: TrendingUp, label: 'Reports', href: '/reports' },
-    { icon: Settings, label: 'Settings', href: '/settings' },
+    {
+      icon: Settings,
+      label: 'Settings',
+      key: 'settings',
+      dashboardHref: '/settings',
+      submenu: [
+        { icon: UserCog, label: 'Account', href: '/settings/account' },
+        { icon: Lock, label: 'Security', href: '/settings/security' },
+        { icon: Bell, label: 'Notifications', href: '/settings/notifications' },
+        { icon: Zap, label: 'App Integration', href: '/settings/app-integration' },
+        { icon: Mail, label: 'Email Templates', href: '/settings/email-templates' },
+        { icon: Shield, label: 'Roles & Permissions', href: '/settings/roles-permissions' },
+        { icon: Code, label: 'API Settings', href: '/settings/api' },
+        { icon: Webhook, label: 'Webhooks', href: '/settings/webhooks' },
+        { icon: Globe, label: 'Preferences', href: '/settings/preferences' },
+        { icon: Key, label: 'QuickBooks', href: '/settings/quickbooks' },
+      ],
+    },
   ];
 
   return (
