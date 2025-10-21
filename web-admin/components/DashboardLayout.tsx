@@ -175,9 +175,13 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   }
 
   const toggleMenu = (menu: string) => {
-    setExpandedMenus((prev) =>
-      prev.includes(menu) ? prev.filter((m) => m !== menu) : [...prev, menu]
-    );
+    setExpandedMenus((prev) => {
+      const newExpanded = prev.includes(menu) 
+        ? prev.filter((m) => m !== menu) 
+        : [...prev, menu];
+      localStorage.setItem('expandedMenus', JSON.stringify(newExpanded));
+      return newExpanded;
+    });
   };
 
   const handleMenuLabelClick = (item: any) => {
@@ -186,13 +190,19 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       router.push(item.dashboardHref);
     }
     
-    // If item has submenu, expand it and collapse others
+    // If item has submenu, toggle it
     if (item.submenu && item.key) {
-      if (!expandedMenus.includes(item.key)) {
-        // Close all other menus and open this one
-        setExpandedMenus([item.key]);
-      }
+      toggleMenu(item.key);
     }
+  };
+
+  // Check if any submenu item is active
+  const isMenuActive = (item: any) => {
+    if (item.href && pathname === item.href) return true;
+    if (item.submenu) {
+      return item.submenu.some((subItem: any) => pathname === subItem.href || pathname.startsWith(subItem.href + '/'));
+    }
+    return false;
   };
 
   const toggleSidebar = () => {
