@@ -53,6 +53,13 @@ import {
   UserPlus,
   Calendar,
   Camera,
+  Bell,
+  Key,
+  Webhook,
+  Code,
+  Lock,
+  UserCog,
+  Globe,
 } from 'lucide-react';
 import { useState } from 'react';
 import CallPopup from './CallPopup';
