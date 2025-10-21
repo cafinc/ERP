@@ -1,0 +1,121 @@
+---
+backend:
+  - task: "Site Maps API - Create site map with annotations"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ POST /api/site-maps endpoint working correctly. Successfully creates site maps with annotations, auto-increments version numbers, and sets current flag properly."
+
+  - task: "Site Maps API - Get site maps by site"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ GET /api/site-maps/site/{site_id} endpoint working correctly. Supports current_only parameter, proper sorting by version, and maintains only one current map per site."
+
+  - task: "Site Maps API - Get specific site map"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ GET /api/site-maps/{map_id} endpoint working correctly. Returns proper site map structure with annotations."
+
+  - task: "Site Maps API - Update site map"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ PUT /api/site-maps/{map_id} endpoint working correctly. Successfully updates name, annotations, and maintains updated_at timestamp."
+
+  - task: "Site Maps API - Set current map version"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ POST /api/site-maps/{map_id}/set-current endpoint working correctly. Properly manages current flag across all versions."
+
+  - task: "Site Maps API - Delete site map"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ DELETE /api/site-maps/{map_id} endpoint working correctly. Successfully deletes site maps and returns proper confirmation."
+
+  - task: "Site Maps API - Error handling for invalid ObjectIds"
+    implemented: true
+    working: false
+    file: "/app/backend/server.py"
+    stuck_count: 1
+    priority: "low"
+    needs_retesting: false
+    status_history:
+      - working: false
+        agent: "testing"
+        comment: "Minor: Invalid ObjectId validation returns 500 errors instead of 404. Affects GET, PUT, POST set-current, and DELETE endpoints when non-existent IDs are provided. Core functionality works perfectly."
+
+frontend:
+  - task: "Site Maps Frontend Integration"
+    implemented: false
+    working: "NA"
+    file: "N/A"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "testing"
+        comment: "Frontend integration not tested as per system limitations. Backend APIs are ready for frontend integration."
+
+metadata:
+  created_by: "testing_agent"
+  version: "1.0"
+  test_sequence: 1
+  run_ui: false
+
+test_plan:
+  current_focus:
+    - "Site Maps API - Create site map with annotations"
+    - "Site Maps API - Get site maps by site"
+    - "Site Maps API - Get specific site map"
+    - "Site Maps API - Update site map"
+    - "Site Maps API - Set current map version"
+    - "Site Maps API - Delete site map"
+  stuck_tasks:
+    - "Site Maps API - Error handling for invalid ObjectIds"
+  test_all: false
+  test_priority: "high_first"
+
+agent_communication:
+  - agent: "testing"
+    message: "Site Maps backend API testing completed successfully. 30/34 tests passed (88.2% success rate). All core functionality working correctly including CRUD operations, version management, and annotation handling. Only minor issue with ObjectId validation error handling."
