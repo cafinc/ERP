@@ -630,7 +630,10 @@ export default function SiteMapAnnotationOptimized({
     if (tool === 'select') return;
     
     const stage = e.target.getStage();
-    const pos = getTransformedPointerPosition(stage);
+    let pos = getTransformedPointerPosition(stage);
+    
+    // Apply snap-to-grid if enabled
+    pos = snapToGridPoint(pos.x, pos.y);
 
     if (drawingPolygon) {
       setPolygonPoints(prev => [...prev, pos.x, pos.y]);
@@ -687,7 +690,7 @@ export default function SiteMapAnnotationOptimized({
       };
       setAnnotations(prev => [...prev, newAnnotation]);
     }
-  }, [tool, selectedColor, drawingPolygon, addToHistory, getTransformedPointerPosition]);
+  }, [tool, selectedColor, drawingPolygon, addToHistory, getTransformedPointerPosition, snapToGridPoint]);
 
   const handleMouseUp = useCallback(() => {
     if (isDrawingRef.current) {
