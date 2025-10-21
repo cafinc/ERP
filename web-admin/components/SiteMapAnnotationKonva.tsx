@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Stage, Layer, Line, Circle, Rect, Text as KonvaText, Image as KonvaImage } from 'react-konva';
 import {
   Download,
