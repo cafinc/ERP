@@ -16,6 +16,7 @@ export default function RolesPermissionsPage() {
       <CompactHeader
         title="Roles & Permissions"
         subtitle="Manage user roles and access permissions"
+        backUrl="/settings"
         action={{
           label: '+ New Role',
           onClick: () => alert('Create new role')
