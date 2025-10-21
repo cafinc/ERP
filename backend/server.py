@@ -16,6 +16,10 @@ from typing import List, Optional, Dict, Any
 from bson import ObjectId
 from datetime import datetime, timedelta, timezone
 
+# Suppress noisy Google API logs
+logging.getLogger('googleapiclient.discovery_cache').setLevel(logging.WARNING)
+logging.getLogger('google_auth_httplib2').setLevel(logging.WARNING)
+
 from models import (
     User, UserCreate, UserUpdate,
     Customer, CustomerCreate, CustomerUpdate,
