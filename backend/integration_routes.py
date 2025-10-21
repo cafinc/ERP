@@ -31,7 +31,7 @@ db = client["snow_removal_db"]
 integrations_collection = db["integrations"]
 sync_logs_collection = db["sync_logs"]
 
-router = APIRouter(prefix="/api/integrations", tags=["Integration Hub"])
+router = APIRouter(prefix="/integrations", tags=["Integration Hub"])
 
 # ==================== INTEGRATION MANAGEMENT ====================
 
