@@ -62,22 +62,26 @@ export default function CompactHeader({
   const isActionsArray = Array.isArray(actions);
 
   return (
-    <div className="mb-4 bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+    <div className="mb-6 bg-white rounded-xl shadow-lg border border-gray-200 p-6">
       <div className="flex items-center justify-between flex-wrap gap-3">
         {/* Left: Back button + Title + Badges */}
         <div className="flex items-center space-x-3 min-w-0">
           {backUrl && (
             <button
               onClick={() => router.push(backUrl)}
-              className="p-1.5 hover:bg-gray-100 rounded-lg transition-colors flex-shrink-0"
+              className="p-2 hover:bg-gray-100 rounded-lg transition-all flex-shrink-0"
               title="Go back"
             >
               <ArrowLeft className="w-5 h-5 text-gray-600" />
             </button>
           )}
           
-          <div className="flex items-center space-x-2 min-w-0">
-            {Icon && <Icon className="w-5 h-5 text-gray-600 flex-shrink-0" />}
+          <div className="flex items-center space-x-3 min-w-0">
+            {Icon && (
+              <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                <Icon className="w-5 h-5 text-white" />
+              </div>
+            )}
             <div>
               <h1 className="text-xl font-bold text-gray-900 truncate">{title}</h1>
               {subtitle && <p className="text-sm text-gray-600">{subtitle}</p>}
