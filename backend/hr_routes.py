@@ -600,7 +600,7 @@ async def get_performance_reviews(
         if status:
             query["status"] = status
         
-        reviews = list(performance_reviews_collection.find(query).sort("scheduled_date", -1))
+        reviews = await performance_reviews_collection.find(query).sort("scheduled_date", -1).to_list(1000)
         for review in reviews:
             review["id"] = str(review["_id"])
             del review["_id"]
