@@ -117,8 +117,18 @@ export default function MasterUsersPage() {
         backUrl="/access"
         action={{
           label: '+ Add Master User',
-          onClick: () => setShowAddModal(true)
+          onClick: handleAddUser
         }}
+      />
+
+      {/* User Form Modal */}
+      <UserFormModal
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        onSave={handleSaveUser}
+        role="master"
+        user={selectedUser}
+        mode={modalMode}
       />
 
       {/* Warning Banner */}
