@@ -63,6 +63,7 @@ import {
   Crown,
   User,
   Palette,
+  Link2,
 } from 'lucide-react';
 import { useState } from 'react';
 import CallPopup from './CallPopup';
