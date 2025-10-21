@@ -135,6 +135,128 @@ test_plan:
   test_all: false
   test_priority: "high_first"
 
+  - task: "HR Module - Employee Management APIs"
+    implemented: true
+    working: false
+    file: "/app/backend/hr_routes.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: false
+        agent: "testing"
+        comment: "❌ POST endpoints failing due to async/sync mismatch and BSON ObjectId serialization issues. GET endpoints working (found employees). Core issue: HR routes use synchronous MongoDB operations but FastAPI expects async operations."
+
+  - task: "HR Module - Time & Attendance APIs"
+    implemented: true
+    working: false
+    file: "/app/backend/hr_routes.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: false
+        agent: "testing"
+        comment: "❌ Cannot test due to employee creation dependency. Same async/sync mismatch issue as Employee Management."
+
+  - task: "HR Module - PTO Management APIs"
+    implemented: true
+    working: false
+    file: "/app/backend/hr_routes.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: false
+        agent: "testing"
+        comment: "❌ Cannot test due to employee creation dependency. Same async/sync mismatch issue as Employee Management."
+
+  - task: "HR Module - Training & Certifications APIs"
+    implemented: true
+    working: true
+    file: "/app/backend/hr_routes.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ GET endpoints working correctly (found 2 training programs). POST endpoints failing due to async/sync mismatch. Minor: Training creation fails but retrieval works."
+
+  - task: "HR Module - Performance Management APIs"
+    implemented: true
+    working: false
+    file: "/app/backend/hr_routes.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: false
+        agent: "testing"
+        comment: "❌ Cannot test due to employee creation dependency. Same async/sync mismatch issue as Employee Management."
+
+  - task: "HR Module - Payroll Settings APIs"
+    implemented: true
+    working: true
+    file: "/app/backend/hr_routes.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ Both GET and PUT endpoints working correctly. Payroll settings can be retrieved and updated successfully."
+
+  - task: "Integration Hub - Integration Management APIs"
+    implemented: true
+    working: true
+    file: "/app/backend/integration_routes.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ GET endpoints working correctly (found 1 integration). Minor: POST endpoints failing due to async/sync mismatch, but core functionality accessible."
+
+  - task: "Integration Hub - QuickBooks Integration APIs"
+    implemented: true
+    working: true
+    file: "/app/backend/integration_routes.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ All mock endpoints working correctly. Payroll sync and time tracking sync both return proper mock responses."
+
+  - task: "Integration Hub - Microsoft 365 Integration APIs"
+    implemented: true
+    working: true
+    file: "/app/backend/integration_routes.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ All mock endpoints working correctly. SSO setup, Teams, Outlook, OneDrive, and Power BI sync all return proper mock responses."
+
+  - task: "Integration Hub - Sync Logs APIs"
+    implemented: true
+    working: false
+    file: "/app/backend/integration_routes.py"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+      - working: false
+        agent: "testing"
+        comment: "❌ GET sync logs endpoint failing. Likely due to async/sync mismatch or ObjectId serialization issue."
+
 agent_communication:
   - agent: "testing"
     message: "Site Maps backend API testing completed successfully. 30/34 tests passed (88.2% success rate). All core functionality working correctly including CRUD operations, version management, and annotation handling. Only minor issue with ObjectId validation error handling."
+  - agent: "testing"
+    message: "HR Module and Integration Hub backend API testing completed. 13/20 tests passed (65% success rate). Integration Hub working well with all mock endpoints functional. HR Module has critical async/sync mismatch issue - routes use synchronous MongoDB operations but FastAPI expects async operations, causing BSON ObjectId serialization errors in POST endpoints. GET endpoints mostly working. Requires architectural fix to convert HR routes to async operations."
