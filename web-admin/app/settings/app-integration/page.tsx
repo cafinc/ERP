@@ -16,6 +16,7 @@ export default function AppIntegrationPage() {
       <CompactHeader
         title="App Integrations"
         subtitle="Connect and manage third-party integrations"
+        backUrl="/settings"
       />
 
       <div style={{ marginTop: '24px', display: 'grid', gap: '16px' }}>
