@@ -176,7 +176,9 @@ export default function AdminsPage() {
                       display: 'flex',
                       alignItems: 'center',
                       gap: '6px'
-                    }}>
+                    }}
+                    onClick={() => handleEditUser(admin)}
+                    >
                       <Edit style={{ width: '14px', height: '14px' }} />
                       Edit
                     </button>
@@ -192,7 +194,9 @@ export default function AdminsPage() {
                       display: 'flex',
                       alignItems: 'center',
                       gap: '6px'
-                    }}>
+                    }}
+                    onClick={() => handleDeleteUser(admin.id)}
+                    >
                       <Trash2 style={{ width: '14px', height: '14px' }} />
                       Remove
                     </button>
