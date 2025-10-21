@@ -3,11 +3,15 @@
 import { useState, useEffect } from 'react';
 import api from '@/lib/api';
 import CompactHeader from '@/components/CompactHeader';
+import UserFormModal from '@/components/UserFormModal';
 import { UserCog, Plus, Edit, Trash2, Shield, CheckCircle, XCircle, Settings } from 'lucide-react';
 
 export default function AdminsPage() {
   const [admins, setAdmins] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedUser, setSelectedUser] = useState<any>();
+  const [modalMode, setModalMode] = useState<'add' | 'edit'>('add');
 
   useEffect(() => {
     // Mock data for demo
@@ -17,6 +21,44 @@ export default function AdminsPage() {
     ]);
     setLoading(false);
   }, []);
+
+  const handleAddUser = () => {
+    setModalMode('add');
+    setSelectedUser(undefined);
+    setShowModal(true);
+  };
+
+  const handleEditUser = (user: any) => {
+    setModalMode('edit');
+    setSelectedUser(user);
+    setShowModal(true);
+  };
+
+  const handleSaveUser = async (userData: any) => {
+    if (modalMode === 'add') {
+      const newUser = {
+        id: Date.now().toString(),
+        ...userData,
+        role: 'admin',
+        created_at: new Date().toISOString().split('T')[0],
+        last_login: 'Never'
+      };
+      setAdmins([...admins, newUser]);
+      alert('Admin user added successfully!');
+    } else {
+      setAdmins(admins.map(u => 
+        u.id === selectedUser?.id ? { ...u, ...userData } : u
+      ));
+      alert('Admin user updated successfully!');
+    }
+  };
+
+  const handleDeleteUser = (userId: string) => {
+    if (confirm('Are you sure you want to remove this admin user?')) {
+      setAdmins(admins.filter(u => u.id !== userId));
+      alert('Admin user removed successfully');
+    }
+  };
 
   return (
     <div style={{ padding: '24px', backgroundColor: '#f8fafc', minHeight: '100vh' }}>
