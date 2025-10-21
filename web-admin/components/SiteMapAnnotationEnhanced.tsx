@@ -100,6 +100,10 @@ export default function SiteMapAnnotationEnhanced({
   const [measuring, setMeasuring] = useState(false);
   const [measurePoints, setMeasurePoints] = useState<number[]>([]);
   const [imageLoading, setImageLoading] = useState(true);
+  const [polygonPoints, setPolygonPoints] = useState<number[]>([]);
+  const [tempPolygonLine, setTempPolygonLine] = useState<number[]>([]);
+  const [drawingPolygon, setDrawingPolygon] = useState(false);
+  const [currentAreaType, setCurrentAreaType] = useState<string>('');
   
   const stageRef = useRef<any>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
