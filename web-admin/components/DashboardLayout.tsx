@@ -292,6 +292,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       submenu: [
         { icon: Calendar, label: 'Dispatch', href: '/dispatch' },
         { icon: MapPin, label: 'Sites', href: '/sites' },
+        { icon: Map, label: 'Site Maps', href: '/sites/maps' },
         { icon: Map, label: 'Routes', href: '/routes' },
         { icon: Map, label: 'Route Optimization', href: '/routes/optimize' },
         { icon: MapPin, label: 'Geofence', href: '/geofence' },
