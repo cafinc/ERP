@@ -368,7 +368,7 @@ class SiteMapsTestSuite:
         success, response, status = await self.make_request(
             "GET", 
             f"/site-maps/site/{self.test_site_id}",
-            params={"current_only": True}
+            params={"current_only": "true"}
         )
         
         if success and isinstance(response, list):
