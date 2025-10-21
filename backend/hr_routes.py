@@ -246,7 +246,7 @@ async def get_time_entries(
                 "$lte": datetime.fromisoformat(end_date)
             }
         
-        entries = list(time_entries_collection.find(query).sort("clock_in", -1).skip(skip).limit(limit))
+        entries = await time_entries_collection.find(query).sort("clock_in", -1).skip(skip).limit(limit).to_list(limit)
         for entry in entries:
             entry["id"] = str(entry["_id"])
             del entry["_id"]
