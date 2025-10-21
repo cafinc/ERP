@@ -70,7 +70,101 @@ export default function AccountSettingsPage() {
         backUrl="/settings"
       />
 
+      {/* Avatar Picker Modal */}
+      {showAvatarPicker && (
+        <AvatarPicker
+          currentAvatar={formData.avatar}
+          onSelect={handleAvatarSelect}
+          onClose={() => setShowAvatarPicker(false)}
+        />
+      )}
+
       <form onSubmit={handleSubmit} style={{ marginTop: '24px' }}>
+        {/* Avatar Section */}
+        <div style={{
+          backgroundColor: 'white',
+          borderRadius: '12px',
+          padding: '24px',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+          marginBottom: '24px'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
+            <div style={{ position: 'relative' }}>
+              {formData.avatar ? (
+                <img
+                  src={formData.avatar}
+                  alt="Avatar"
+                  style={{
+                    width: '100px',
+                    height: '100px',
+                    borderRadius: '50%',
+                    border: '4px solid #e2e8f0',
+                    objectFit: 'cover'
+                  }}
+                />
+              ) : (
+                <div style={{
+                  width: '100px',
+                  height: '100px',
+                  borderRadius: '50%',
+                  backgroundColor: '#e2e8f0',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  border: '4px solid #e2e8f0'
+                }}>
+                  <User style={{ width: '48px', height: '48px', color: '#94a3b8' }} />
+                </div>
+              )}
+              <button
+                type="button"
+                onClick={() => setShowAvatarPicker(true)}
+                style={{
+                  position: 'absolute',
+                  bottom: '0',
+                  right: '0',
+                  width: '36px',
+                  height: '36px',
+                  borderRadius: '50%',
+                  backgroundColor: '#3b82f6',
+                  border: '3px solid white',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.2)'
+                }}
+              >
+                <Camera style={{ width: '18px', height: '18px', color: 'white' }} />
+              </button>
+            </div>
+            <div>
+              <h2 style={{ fontSize: '20px', fontWeight: '600', marginBottom: '4px', color: '#1e293b' }}>
+                Profile Avatar
+              </h2>
+              <p style={{ fontSize: '14px', color: '#64748b', marginBottom: '12px' }}>
+                Choose a custom avatar to personalize your profile
+              </p>
+              <button
+                type="button"
+                onClick={() => setShowAvatarPicker(true)}
+                style={{
+                  padding: '8px 16px',
+                  backgroundColor: '#3b82f6',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '8px',
+                  fontSize: '14px',
+                  fontWeight: '500',
+                  cursor: 'pointer'
+                }}
+              >
+                Change Avatar
+              </button>
+            </div>
+          </div>
+        </div>
+
         {/* Profile Information */}
         <div style={{
           backgroundColor: 'white',
