@@ -1,4 +1,23 @@
 ---
+user_problem_statement: |
+  Build complete HR Module and Integration Hub overnight autonomously.
+  
+  HR Module includes:
+  - Employee Management (CRUD, profiles, documents, emergency contacts)
+  - Time & Attendance (clock in/out, timesheets, approvals, GPS tracking)
+  - PTO Management (requests, approvals, balance tracking, calendar)
+  - Training & Certifications (programs, assignments, tracking, expirations)
+  - Performance Management (reviews, goals, ratings)
+  - Payroll Settings & Configuration
+  
+  Integration Hub includes:
+  - Integration Management (CRUD operations)
+  - QuickBooks Integration (Payroll, Time Tracking sync - mock/placeholder)
+  - Microsoft 365 Integration (Azure AD SSO, Teams, Outlook, OneDrive, Power BI - mock/placeholder)
+  - Sync Logs tracking
+  
+  All integrations use mock/placeholder flows until API credentials are provided.
+
 backend:
   - task: "Site Maps API - Create site map with annotations"
     implemented: true
