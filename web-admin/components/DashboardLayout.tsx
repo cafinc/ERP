@@ -60,6 +60,9 @@ import {
   Lock,
   UserCog,
   Globe,
+  Crown,
+  User,
+  Palette,
 } from 'lucide-react';
 import { useState } from 'react';
 import CallPopup from './CallPopup';
