@@ -352,6 +352,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         { icon: Zap, label: 'App Integration', href: '/settings/app-integration' },
         { icon: Mail, label: 'Email Templates', href: '/settings/email-templates' },
         { icon: Shield, label: 'Roles & Permissions', href: '/settings/roles-permissions' },
+        { icon: Settings, label: 'Permissions Matrix', href: '/settings/permissions-matrix' },
         { icon: Code, label: 'API Settings', href: '/settings/api' },
         { icon: Webhook, label: 'Webhooks', href: '/settings/webhooks' },
         { icon: Globe, label: 'Preferences', href: '/settings/preferences' },
