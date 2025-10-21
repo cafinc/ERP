@@ -13,7 +13,7 @@ from fastapi import APIRouter, HTTPException, Depends
 from typing import List, Optional
 from datetime import datetime, timedelta
 from bson import ObjectId
-from pymongo import MongoClient
+from motor.motor_asyncio import AsyncIOMotorClient
 import os
 from dotenv import load_dotenv
 
@@ -28,9 +28,9 @@ from models import (
     PayrollSettings, EmploymentStatus, TimeEntryStatus, PTOStatus, TrainingStatus, ReviewStatus
 )
 
-# Initialize MongoDB client
+# Initialize Async MongoDB client
 mongo_url = os.getenv("MONGO_URL", "mongodb://localhost:27017")
-client = MongoClient(mongo_url)
+client = AsyncIOMotorClient(mongo_url)
 db = client["snow_removal_db"]
 
 # Collections
