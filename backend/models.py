@@ -1977,3 +1977,367 @@ class WorkflowExecution(BaseModel):
 
     last_restocked: Optional[datetime] = None
     notes: Optional[str] = None
+
+
+
+# ==================== HR MODULE MODELS ====================
+
+# Employee Management Models
+class EmploymentType(str, Enum):
+    FULL_TIME = "full_time"
+    PART_TIME = "part_time"
+    CONTRACT = "contract"
+    SEASONAL = "seasonal"
+    TEMPORARY = "temporary"
+
+class EmploymentStatus(str, Enum):
+    ACTIVE = "active"
+    ON_LEAVE = "on_leave"
+    TERMINATED = "terminated"
+    SUSPENDED = "suspended"
+
+class Employee(BaseModel):
+    id: Optional[str] = None
+    user_id: Optional[str] = None  # Link to User model
+    employee_number: str  # Unique employee identifier
+    first_name: str
+    last_name: str
+    email: EmailStr
+    phone: str
+    date_of_birth: Optional[datetime] = None
+    hire_date: datetime
+    termination_date: Optional[datetime] = None
+    employment_type: EmploymentType
+    employment_status: EmploymentStatus = EmploymentStatus.ACTIVE
+    department: Optional[str] = None
+    job_title: str
+    manager_id: Optional[str] = None  # Employee ID of manager
+    hourly_rate: Optional[float] = None
+    salary: Optional[float] = None
+    address: Optional[str] = None
+    emergency_contact_name: Optional[str] = None
+    emergency_contact_phone: Optional[str] = None
+    emergency_contact_relationship: Optional[str] = None
+    documents: List[dict] = []  # Employment docs, I-9, W-4, etc.
+    notes: Optional[str] = None
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    updated_at: datetime = Field(default_factory=datetime.utcnow)
+
+class EmployeeCreate(BaseModel):
+    user_id: Optional[str] = None
+    first_name: str
+    last_name: str
+    email: EmailStr
+    phone: str
+    date_of_birth: Optional[datetime] = None
+    hire_date: datetime
+    employment_type: EmploymentType
+    department: Optional[str] = None
+    job_title: str
+    manager_id: Optional[str] = None
+    hourly_rate: Optional[float] = None
+    salary: Optional[float] = None
+    address: Optional[str] = None
+    emergency_contact_name: Optional[str] = None
+    emergency_contact_phone: Optional[str] = None
+    emergency_contact_relationship: Optional[str] = None
+
+class EmployeeUpdate(BaseModel):
+    first_name: Optional[str] = None
+    last_name: Optional[str] = None
+    email: Optional[EmailStr] = None
+    phone: Optional[str] = None
+    date_of_birth: Optional[datetime] = None
+    employment_type: Optional[EmploymentType] = None
+    employment_status: Optional[EmploymentStatus] = None
+    department: Optional[str] = None
+    job_title: Optional[str] = None
+    manager_id: Optional[str] = None
+    hourly_rate: Optional[float] = None
+    salary: Optional[float] = None
+    address: Optional[str] = None
+    emergency_contact_name: Optional[str] = None
+    emergency_contact_phone: Optional[str] = None
+    emergency_contact_relationship: Optional[str] = None
+    termination_date: Optional[datetime] = None
+
+# Time & Attendance Models
+class TimeEntryType(str, Enum):
+    REGULAR = "regular"
+    OVERTIME = "overtime"
+    DOUBLE_TIME = "double_time"
+    BREAK = "break"
+
+class TimeEntryStatus(str, Enum):
+    PENDING = "pending"
+    APPROVED = "approved"
+    REJECTED = "rejected"
+
+class TimeEntry(BaseModel):
+    id: Optional[str] = None
+    employee_id: str
+    employee_name: Optional[str] = None
+    clock_in: datetime
+    clock_out: Optional[datetime] = None
+    break_duration_minutes: int = 0
+    total_hours: Optional[float] = None
+    entry_type: TimeEntryType = TimeEntryType.REGULAR
+    status: TimeEntryStatus = TimeEntryStatus.PENDING
+    approved_by: Optional[str] = None
+    approved_at: Optional[datetime] = None
+    location_in: Optional[dict] = None  # {lat, lng, address}
+    location_out: Optional[dict] = None
+    notes: Optional[str] = None
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    updated_at: datetime = Field(default_factory=datetime.utcnow)
+
+class TimeEntryCreate(BaseModel):
+    employee_id: str
+    clock_in: datetime
+    clock_out: Optional[datetime] = None
+    break_duration_minutes: int = 0
+    entry_type: TimeEntryType = TimeEntryType.REGULAR
+    location_in: Optional[dict] = None
+    notes: Optional[str] = None
+
+class TimeEntryUpdate(BaseModel):
+    clock_out: Optional[datetime] = None
+    break_duration_minutes: Optional[int] = None
+    entry_type: Optional[TimeEntryType] = None
+    status: Optional[TimeEntryStatus] = None
+    notes: Optional[str] = None
+
+# PTO (Paid Time Off) Models
+class PTOType(str, Enum):
+    VACATION = "vacation"
+    SICK = "sick"
+    PERSONAL = "personal"
+    UNPAID = "unpaid"
+    BEREAVEMENT = "bereavement"
+    JURY_DUTY = "jury_duty"
+    OTHER = "other"
+
+class PTOStatus(str, Enum):
+    PENDING = "pending"
+    APPROVED = "approved"
+    DENIED = "denied"
+    CANCELLED = "cancelled"
+
+class PTORequest(BaseModel):
+    id: Optional[str] = None
+    employee_id: str
+    employee_name: Optional[str] = None
+    pto_type: PTOType
+    start_date: datetime
+    end_date: datetime
+    total_days: float
+    reason: Optional[str] = None
+    status: PTOStatus = PTOStatus.PENDING
+    reviewed_by: Optional[str] = None
+    reviewed_at: Optional[datetime] = None
+    review_notes: Optional[str] = None
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    updated_at: datetime = Field(default_factory=datetime.utcnow)
+
+class PTORequestCreate(BaseModel):
+    employee_id: str
+    pto_type: PTOType
+    start_date: datetime
+    end_date: datetime
+    total_days: float
+    reason: Optional[str] = None
+
+class PTORequestUpdate(BaseModel):
+    status: Optional[PTOStatus] = None
+    review_notes: Optional[str] = None
+
+class PTOBalance(BaseModel):
+    id: Optional[str] = None
+    employee_id: str
+    year: int
+    vacation_balance: float = 0.0
+    sick_balance: float = 0.0
+    personal_balance: float = 0.0
+    vacation_accrued: float = 0.0
+    sick_accrued: float = 0.0
+    personal_accrued: float = 0.0
+    updated_at: datetime = Field(default_factory=datetime.utcnow)
+
+# Training & Certifications Models
+class TrainingStatus(str, Enum):
+    SCHEDULED = "scheduled"
+    IN_PROGRESS = "in_progress"
+    COMPLETED = "completed"
+    FAILED = "failed"
+    CANCELLED = "cancelled"
+
+class Training(BaseModel):
+    id: Optional[str] = None
+    name: str
+    description: Optional[str] = None
+    category: str  # safety, equipment, compliance, etc.
+    duration_hours: Optional[float] = None
+    expiration_months: Optional[int] = None  # For certifications that expire
+    is_required: bool = False
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+
+class TrainingCreate(BaseModel):
+    name: str
+    description: Optional[str] = None
+    category: str
+    duration_hours: Optional[float] = None
+    expiration_months: Optional[int] = None
+    is_required: bool = False
+
+class EmployeeTraining(BaseModel):
+    id: Optional[str] = None
+    employee_id: str
+    employee_name: Optional[str] = None
+    training_id: str
+    training_name: Optional[str] = None
+    status: TrainingStatus
+    assigned_date: datetime = Field(default_factory=datetime.utcnow)
+    start_date: Optional[datetime] = None
+    completion_date: Optional[datetime] = None
+    expiration_date: Optional[datetime] = None
+    score: Optional[float] = None
+    certificate_url: Optional[str] = None
+    notes: Optional[str] = None
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+
+class EmployeeTrainingCreate(BaseModel):
+    employee_id: str
+    training_id: str
+    assigned_date: Optional[datetime] = None
+    notes: Optional[str] = None
+
+class EmployeeTrainingUpdate(BaseModel):
+    status: Optional[TrainingStatus] = None
+    start_date: Optional[datetime] = None
+    completion_date: Optional[datetime] = None
+    score: Optional[float] = None
+    certificate_url: Optional[str] = None
+    notes: Optional[str] = None
+
+# Performance Management Models
+class ReviewType(str, Enum):
+    ANNUAL = "annual"
+    QUARTERLY = "quarterly"
+    PROBATIONARY = "probationary"
+    PROJECT = "project"
+
+class ReviewStatus(str, Enum):
+    SCHEDULED = "scheduled"
+    IN_PROGRESS = "in_progress"
+    COMPLETED = "completed"
+    CANCELLED = "cancelled"
+
+class PerformanceReview(BaseModel):
+    id: Optional[str] = None
+    employee_id: str
+    employee_name: Optional[str] = None
+    reviewer_id: str
+    reviewer_name: Optional[str] = None
+    review_type: ReviewType
+    review_period_start: datetime
+    review_period_end: datetime
+    scheduled_date: datetime
+    completed_date: Optional[datetime] = None
+    status: ReviewStatus = ReviewStatus.SCHEDULED
+    overall_rating: Optional[float] = None  # 1-5 scale
+    strengths: Optional[str] = None
+    areas_for_improvement: Optional[str] = None
+    goals: Optional[str] = None
+    notes: Optional[str] = None
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    updated_at: datetime = Field(default_factory=datetime.utcnow)
+
+class PerformanceReviewCreate(BaseModel):
+    employee_id: str
+    reviewer_id: str
+    review_type: ReviewType
+    review_period_start: datetime
+    review_period_end: datetime
+    scheduled_date: datetime
+
+class PerformanceReviewUpdate(BaseModel):
+    status: Optional[ReviewStatus] = None
+    completed_date: Optional[datetime] = None
+    overall_rating: Optional[float] = None
+    strengths: Optional[str] = None
+    areas_for_improvement: Optional[str] = None
+    goals: Optional[str] = None
+    notes: Optional[str] = None
+
+# Payroll Configuration Models
+class PayFrequency(str, Enum):
+    WEEKLY = "weekly"
+    BI_WEEKLY = "bi_weekly"
+    SEMI_MONTHLY = "semi_monthly"
+    MONTHLY = "monthly"
+
+class PayrollSettings(BaseModel):
+    id: Optional[str] = None
+    company_name: str
+    tax_id: Optional[str] = None
+    pay_frequency: PayFrequency
+    overtime_threshold_hours: float = 40.0
+    overtime_multiplier: float = 1.5
+    double_time_multiplier: float = 2.0
+    next_payroll_date: Optional[datetime] = None
+    updated_at: datetime = Field(default_factory=datetime.utcnow)
+
+# ==================== INTEGRATION HUB MODELS ====================
+
+class IntegrationStatus(str, Enum):
+    CONNECTED = "connected"
+    DISCONNECTED = "disconnected"
+    ERROR = "error"
+    PENDING = "pending"
+
+class IntegrationType(str, Enum):
+    QUICKBOOKS = "quickbooks"
+    MICROSOFT_365 = "microsoft_365"
+    GOOGLE_WORKSPACE = "google_workspace"
+    OTHER = "other"
+
+class Integration(BaseModel):
+    id: Optional[str] = None
+    integration_type: IntegrationType
+    name: str
+    description: Optional[str] = None
+    status: IntegrationStatus = IntegrationStatus.DISCONNECTED
+    credentials: dict = {}  # Encrypted credentials
+    settings: dict = {}  # Integration-specific settings
+    last_sync: Optional[datetime] = None
+    sync_frequency: Optional[str] = None  # hourly, daily, manual
+    error_message: Optional[str] = None
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    updated_at: datetime = Field(default_factory=datetime.utcnow)
+
+class IntegrationCreate(BaseModel):
+    integration_type: IntegrationType
+    name: str
+    description: Optional[str] = None
+    credentials: dict
+    settings: Optional[dict] = {}
+    sync_frequency: Optional[str] = "manual"
+
+class IntegrationUpdate(BaseModel):
+    status: Optional[IntegrationStatus] = None
+    credentials: Optional[dict] = None
+    settings: Optional[dict] = None
+    sync_frequency: Optional[str] = None
+    error_message: Optional[str] = None
+
+class SyncLog(BaseModel):
+    id: Optional[str] = None
+    integration_id: str
+    integration_name: str
+    sync_type: str  # full, incremental
+    started_at: datetime = Field(default_factory=datetime.utcnow)
+    completed_at: Optional[datetime] = None
+    status: str  # success, failed, in_progress
+    records_synced: int = 0
+    errors: List[str] = []
+    details: Optional[dict] = None
