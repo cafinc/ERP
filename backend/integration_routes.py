@@ -71,6 +71,32 @@ async def get_integrations(integration_type: Optional[str] = None):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+@router.get("/sync-logs", response_model=dict)
+async def get_sync_logs(
+    integration_id: Optional[str] = None,
+    status: Optional[str] = None,
+    skip: int = 0,
+    limit: int = 50
+):
+    """Get sync logs"""
+    try:
+        query = {}
+        if integration_id:
+            query["integration_id"] = integration_id
+        if status:
+            query["status"] = status
+        
+        logs = await sync_logs_collection.find(query).sort("started_at", -1).skip(skip).limit(limit).to_list(limit)
+        for log in logs:
+            log["id"] = str(log["_id"])
+            del log["_id"]
+        
+        total = await sync_logs_collection.count_documents(query)
+        
+        return {"success": True, "logs": logs, "total": total}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
 @router.get("/{integration_id}", response_model=dict)
 async def get_integration(integration_id: str):
     """Get integration by ID"""
