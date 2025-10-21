@@ -52,7 +52,7 @@ async def create_employee(employee: EmployeeCreate):
     """Create a new employee"""
     try:
         # Generate unique employee number
-        count = employees_collection.count_documents({})
+        count = await employees_collection.count_documents({})
         employee_number = f"EMP{str(count + 1).zfill(5)}"
         
         employee_dict = employee.dict()
@@ -61,7 +61,7 @@ async def create_employee(employee: EmployeeCreate):
         employee_dict["created_at"] = datetime.utcnow()
         employee_dict["updated_at"] = datetime.utcnow()
         
-        result = employees_collection.insert_one(employee_dict)
+        result = await employees_collection.insert_one(employee_dict)
         employee_dict["id"] = str(result.inserted_id)
         
         # Initialize PTO balance for the employee
@@ -77,7 +77,7 @@ async def create_employee(employee: EmployeeCreate):
             "personal_accrued": 0.0,
             "updated_at": datetime.utcnow()
         }
-        pto_balances_collection.insert_one(pto_balance)
+        await pto_balances_collection.insert_one(pto_balance)
         
         return {"success": True, "employee": employee_dict}
     except Exception as e:
