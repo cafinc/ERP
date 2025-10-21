@@ -29,21 +29,21 @@ interface CompactHeaderProps {
 }
 
 const badgeColors = {
-  green: 'bg-green-100 text-green-700',
-  blue: 'bg-blue-100 text-blue-700',
-  gray: 'bg-gray-100 text-gray-700',
-  red: 'bg-red-100 text-red-700',
-  yellow: 'bg-yellow-100 text-yellow-700',
-  purple: 'bg-purple-100 text-purple-700',
-  orange: 'bg-orange-100 text-orange-700',
+  green: 'bg-green-100 text-green-800 border border-green-200',
+  blue: 'bg-blue-100 text-blue-800 border border-blue-200',
+  gray: 'bg-gray-100 text-gray-800 border border-gray-200',
+  red: 'bg-red-100 text-red-800 border border-red-200',
+  yellow: 'bg-yellow-100 text-yellow-800 border border-yellow-200',
+  purple: 'bg-purple-100 text-purple-800 border border-purple-200',
+  orange: 'bg-orange-100 text-orange-800 border border-orange-200',
 };
 
 const buttonVariants = {
-  primary: 'bg-[#3f72af] hover:bg-[#3f72af]/90 text-white',
-  secondary: 'bg-gray-100 hover:bg-gray-200 text-gray-700 border border-gray-300',
-  success: 'bg-green-600 hover:bg-green-700 text-white',
-  danger: 'bg-red-600 hover:bg-red-700 text-white',
-  purple: 'bg-purple-600 hover:bg-purple-700 text-white',
+  primary: 'bg-blue-600 hover:bg-blue-700 text-white shadow-md hover:shadow-lg',
+  secondary: 'bg-white hover:bg-gray-50 text-gray-700 border-2 border-gray-300 hover:border-gray-400 shadow-sm',
+  success: 'bg-green-600 hover:bg-green-700 text-white shadow-md hover:shadow-lg',
+  danger: 'bg-red-600 hover:bg-red-700 text-white shadow-md hover:shadow-lg',
+  purple: 'bg-purple-600 hover:bg-purple-700 text-white shadow-md hover:shadow-lg',
 };
 
 export default function CompactHeader({
