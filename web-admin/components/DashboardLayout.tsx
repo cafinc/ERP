@@ -340,6 +340,31 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     { icon: BarChart3, label: 'Analytics', href: '/analytics' },
     { icon: TrendingUp, label: 'Reports', href: '/reports' },
     {
+      icon: Users,
+      label: 'HR Module',
+      key: 'hr',
+      dashboardHref: '/hr',
+      submenu: [
+        { icon: Users, label: 'Employees', href: '/hr/employees' },
+        { icon: Clock, label: 'Time & Attendance', href: '/hr/time-attendance' },
+        { icon: Calendar, label: 'PTO Management', href: '/hr/pto' },
+        { icon: BookOpen, label: 'Training', href: '/hr/training' },
+        { icon: TrendingUp, label: 'Performance', href: '/hr/performance' },
+        { icon: DollarSign, label: 'Payroll Settings', href: '/hr/payroll' },
+      ],
+    },
+    {
+      icon: Link2,
+      label: 'Integrations',
+      key: 'integrations',
+      dashboardHref: '/integrations',
+      submenu: [
+        { icon: Link2, label: 'Integration Hub', href: '/integrations' },
+        { icon: DollarSign, label: 'QuickBooks', href: '/settings/quickbooks' },
+        { icon: Cloud, label: 'Microsoft 365', href: '/integrations?type=microsoft_365' },
+      ],
+    },
+    {
       icon: Settings,
       label: 'Settings',
       key: 'settings',
