@@ -8,20 +8,20 @@ import AvatarPicker from '@/components/AvatarPicker';
 import { User, Mail, Phone, MapPin, Calendar, Building, Camera } from 'lucide-react';
 
 export default function AccountSettingsPage() {
-  const { user, refreshUser } = useAuth();
+  const { user } = useAuth();
   const [showAvatarPicker, setShowAvatarPicker] = useState(false);
   const [formData, setFormData] = useState({
-    firstName: user?.name?.split(' ')[0] || 'Admin',
-    lastName: user?.name?.split(' ')[1] || 'User',
+    firstName: user?.full_name?.split(' ')[0] || 'Admin',
+    lastName: user?.full_name?.split(' ')[1] || 'User',
     email: user?.email || 'admin@example.com',
-    phone: user?.phone || '+1 (555) 123-4567',
+    phone: '+1 (555) 123-4567',
     company: 'CAF Property Services',
     address: '123 Main Street',
     city: 'Toronto',
     province: 'Ontario',
     postalCode: 'M5V 1A1',
     timezone: 'America/Toronto',
-    avatar: user?.avatar || '',
+    avatar: '',
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -33,8 +33,9 @@ export default function AccountSettingsPage() {
         phone: formData.phone,
         avatar: formData.avatar,
       });
-      await refreshUser();
       alert('Account settings updated successfully!');
+      // Reload page to refresh user data
+      window.location.reload();
     } catch (error) {
       console.error('Error updating account:', error);
       alert('Failed to update account settings');
@@ -56,9 +57,12 @@ export default function AccountSettingsPage() {
     // Auto-save avatar
     try {
       await api.patch('/users/me', { avatar: avatarUrl });
-      await refreshUser();
+      alert('Avatar updated successfully!');
+      // Reload page to see the updated avatar
+      window.location.reload();
     } catch (error) {
       console.error('Error updating avatar:', error);
+      alert('Failed to update avatar');
     }
   };
 
