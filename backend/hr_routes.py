@@ -520,7 +520,7 @@ async def get_employee_trainings(employee_id: Optional[str] = None, status: Opti
         if status:
             query["status"] = status
         
-        trainings = list(employee_trainings_collection.find(query).sort("assigned_date", -1))
+        trainings = await employee_trainings_collection.find(query).sort("assigned_date", -1).to_list(1000)
         for training in trainings:
             training["id"] = str(training["_id"])
             del training["_id"]
