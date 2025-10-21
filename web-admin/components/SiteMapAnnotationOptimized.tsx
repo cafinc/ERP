@@ -638,9 +638,394 @@ export default function SiteMapAnnotationOptimized({
   }, [addToHistory]);
 
   return (
-    <div className="flex flex-col h-full bg-white rounded-lg shadow-sm border border-gray-200">
-      {/* Toolbar - Same as before but with memoized callbacks */}
-      <div className="flex items-center gap-2 p-3 border-b border-gray-200 flex-wrap bg-gray-50">
+    <div className="flex flex-col h-full bg-gradient-to-br from-gray-50 to-gray-100">
+      {/* Modern Header Bar */}
+      <div className="bg-white border-b border-gray-200 shadow-sm">
+        <div className="flex items-center justify-between px-6 py-4">
+          <div>
+            <h2 className="text-xl font-bold text-gray-900">Site Map Editor</h2>
+            <p className="text-sm text-gray-500 mt-0.5">Create and annotate site layout maps</p>
+          </div>
+          {lastSaved && (
+            <div className="flex items-center gap-2 px-4 py-2 bg-green-50 rounded-lg border border-green-200">
+              <CheckCircle className="w-4 h-4 text-green-600" />
+              <span className="text-sm text-green-700 font-medium">Saved {lastSaved.toLocaleTimeString()}</span>
+            </div>
+          )}
+        </div>
+
+        {/* Enhanced Toolbar */}
+        <div className="flex items-center gap-3 px-6 py-3 bg-gray-50 border-t border-gray-200">
+          {/* File Operations */}
+          <div className="flex items-center gap-2">
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload}
+              className="hidden"
+            />
+            <button
+              onClick={() => fileInputRef.current?.click()}
+              className="flex items-center gap-2 px-3 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 hover:border-gray-400 transition-all shadow-sm"
+              title="Upload Base Image"
+            >
+              <Upload className="w-4 h-4 text-gray-600" />
+              <span className="text-sm font-medium text-gray-700">Upload</span>
+            </button>
+            <button
+              onClick={() => handleSave(false)}
+              className="flex items-center gap-2 px-3 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all shadow-sm"
+              title="Save Map (Ctrl+S)"
+            >
+              <Save className="w-4 h-4" />
+              <span className="text-sm font-medium">Save</span>
+            </button>
+            <label className="flex items-center gap-2 px-3 py-2 bg-white border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition-all">
+              <input
+                type="checkbox"
+                checked={autoSaveEnabled}
+                onChange={(e) => setAutoSaveEnabled(e.target.checked)}
+                className="w-4 h-4 text-green-600 rounded"
+              />
+              <span className="text-sm text-gray-700">Auto-save</span>
+            </label>
+          </div>
+
+          <div className="w-px h-8 bg-gray-300"></div>
+
+          {/* History */}
+          <div className="flex items-center gap-1">
+            <button onClick={handleUndo} disabled={historyStep <= 0} className="p-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-all" title="Undo (Ctrl+Z)">
+              <Undo className="w-4 h-4 text-gray-600" />
+            </button>
+            <button onClick={handleRedo} disabled={historyStep >= history.length - 1} className="p-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-all" title="Redo (Ctrl+Y)">
+              <Redo className="w-4 h-4 text-gray-600" />
+            </button>
+          </div>
+
+          <div className="w-px h-8 bg-gray-300"></div>
+
+          {/* Drawing Tools */}
+          <div className="flex items-center gap-1">
+            <button onClick={() => setTool('pen')} className={`p-2 rounded-lg transition-all ${tool === 'pen' ? 'bg-blue-600 text-white shadow-md' : 'bg-white border border-gray-300 text-gray-600 hover:bg-gray-50'}`} title="Freehand Draw">
+              <Pen className="w-4 h-4" />
+            </button>
+            <button onClick={() => setTool('text')} className={`p-2 rounded-lg transition-all ${tool === 'text' ? 'bg-blue-600 text-white shadow-md' : 'bg-white border border-gray-300 text-gray-600 hover:bg-gray-50'}`} title="Add Text">
+              <Type className="w-4 h-4" />
+            </button>
+            <button onClick={() => setTool('circle')} className={`p-2 rounded-lg transition-all ${tool === 'circle' ? 'bg-blue-600 text-white shadow-md' : 'bg-white border border-gray-300 text-gray-600 hover:bg-gray-50'}`} title="Circle">
+              <CircleIcon className="w-4 h-4" />
+            </button>
+            <button onClick={() => setTool('rectangle')} className={`p-2 rounded-lg transition-all ${tool === 'rectangle' ? 'bg-blue-600 text-white shadow-md' : 'bg-white border border-gray-300 text-gray-600 hover:bg-gray-50'}`} title="Rectangle">
+              <Square className="w-4 h-4" />
+            </button>
+          </div>
+
+          <div className="w-px h-8 bg-gray-300"></div>
+
+          {/* View Controls */}
+          <div className="flex items-center gap-2">
+            <button onClick={handleZoomOut} className="p-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-all" title="Zoom Out">
+              <ZoomOut className="w-4 h-4 text-gray-600" />
+            </button>
+            <div className="px-3 py-1.5 bg-white border border-gray-300 rounded-lg min-w-[60px] text-center">
+              <span className="text-sm font-semibold text-gray-700">{Math.round(zoom * 100)}%</span>
+            </div>
+            <button onClick={handleZoomIn} className="p-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-all" title="Zoom In">
+              <ZoomIn className="w-4 h-4 text-gray-600" />
+            </button>
+            <button onClick={handleResetView} className="p-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-all" title="Reset View">
+              <Maximize2 className="w-4 h-4 text-gray-600" />
+            </button>
+          </div>
+
+          <div className="w-px h-8 bg-gray-300"></div>
+
+          {/* Utilities */}
+          <div className="flex items-center gap-2">
+            <button onClick={() => setShowGrid(!showGrid)} className={`p-2 rounded-lg transition-all ${showGrid ? 'bg-blue-600 text-white shadow-md' : 'bg-white border border-gray-300 text-gray-600 hover:bg-gray-50'}`} title="Toggle Grid">
+              <Grid className="w-4 h-4" />
+            </button>
+            <label className="flex items-center gap-2 px-3 py-2 bg-white border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition-all">
+              <Palette className="w-4 h-4 text-gray-600" />
+              <input type="color" value={selectedColor} onChange={(e) => setSelectedColor(e.target.value)} className="w-6 h-6 rounded cursor-pointer border border-gray-300" />
+            </label>
+          </div>
+
+          <div className="flex-1"></div>
+
+          {/* Action Buttons */}
+          <div className="flex items-center gap-2">
+            <button onClick={clearCanvas} className="p-2 bg-white border border-red-300 text-red-600 rounded-lg hover:bg-red-50 transition-all" title="Clear All">
+              <Trash2 className="w-4 h-4" />
+            </button>
+            <button onClick={exportAsPNG} className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all shadow-sm font-medium text-sm">
+              Export PNG
+            </button>
+            <button onClick={exportAsPDF} className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-all shadow-sm font-medium text-sm">
+              Export PDF
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Polygon Drawing Status Bar */}
+      {drawingPolygon && (
+        <div className="px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 border-b border-blue-700">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3 text-white">
+              <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+              <span className="font-semibold">Drawing: {AREA_TYPES.find(a => a.id === currentAreaType)?.label}</span>
+              {polygonPoints.length >= 2 && (
+                <span className="px-2 py-1 bg-white/20 rounded text-sm font-medium">
+                  {polygonPoints.length / 2} points
+                </span>
+              )}
+            </div>
+            <div className="flex items-center gap-4 text-white text-sm">
+              <span>Click to add points</span>
+              <span>•</span>
+              <span>Double-click to complete</span>
+              <span>•</span>
+              <span className="font-medium">Press Esc to cancel</span>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Main Content Area */}
+      <div className="flex flex-1 overflow-hidden">
+        {/* Canvas Area */}
+        <div className="flex-1 p-6">
+          <div className="h-full bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden relative">
+            {imageLoading && (
+              <div className="absolute inset-0 flex items-center justify-center bg-white/95 backdrop-blur-sm z-10">
+                <div className="text-center">
+                  <div className="relative">
+                    <div className="animate-spin rounded-full h-16 w-16 border-4 border-gray-200 border-t-blue-600 mx-auto"></div>
+                    <MapPin className="w-6 h-6 text-blue-600 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
+                  </div>
+                  <p className="mt-4 text-gray-700 font-medium">Loading satellite view...</p>
+                  <p className="mt-1 text-sm text-gray-500">Fetching high-resolution imagery</p>
+                </div>
+              </div>
+            )}
+            
+            <div className="h-full flex items-center justify-center bg-gray-50">
+              <Stage
+                width={1000}
+                height={700}
+                ref={stageRef}
+                scaleX={zoom}
+                scaleY={zoom}
+                x={stagePos.x}
+                y={stagePos.y}
+                onMouseDown={handleMouseDown}
+                onMousemove={handleStageMouseMove}
+                onMouseup={handleMouseUp}
+                onDblClick={handleDoubleClick}
+                onWheel={handleWheel}
+                draggable={tool === 'select' && !drawingPolygon}
+                className="shadow-inner"
+              >
+                <Layer>
+                  {baseImage && <KonvaImage image={baseImage} width={1000} height={700} listening={false} />}
+                  {gridLines}
+                  
+                  {annotations.map((ann) => {
+                    if (ann.type === 'line') {
+                      return <Line key={ann.id} points={ann.points} stroke={ann.color} strokeWidth={3} tension={0.5} lineCap="round" lineJoin="round" onClick={() => setSelectedAnnotation(ann.id)} />;
+                    } else if (ann.type === 'circle') {
+                      return <Circle key={ann.id} x={ann.x} y={ann.y} radius={ann.radius} stroke={ann.color} strokeWidth={selectedAnnotation === ann.id ? 5 : 3} draggable onClick={() => setSelectedAnnotation(ann.id)} />;
+                    } else if (ann.type === 'rectangle') {
+                      return <Rect key={ann.id} x={ann.x} y={ann.y} width={ann.width} height={ann.height} stroke={ann.color} strokeWidth={selectedAnnotation === ann.id ? 5 : 3} fill={ann.category ? ann.color + '40' : undefined} draggable onClick={() => setSelectedAnnotation(ann.id)} />;
+                    } else if (ann.type === 'polygon') {
+                      return <Line key={ann.id} points={ann.points} stroke={ann.color} strokeWidth={3} fill={ann.color + '60'} closed onClick={() => setSelectedAnnotation(ann.id)} />;
+                    } else if (ann.type === 'feature-icon') {
+                      const feature = FEATURE_ICONS.find(f => f.id === ann.category);
+                      return (
+                        <Group key={ann.id} draggable onClick={() => setSelectedAnnotation(ann.id)}>
+                          <FeatureIconShape shape={feature?.shape || 'circle'} color={ann.color} x={ann.x} y={ann.y} selected={selectedAnnotation === ann.id} />
+                          <KonvaText x={(ann.x || 0) - 60} y={(ann.y || 0) + 30} text={ann.text} fontSize={12} fill={ann.color} fontStyle="bold" align="center" width={120} />
+                        </Group>
+                      );
+                    } else if (ann.type === 'text') {
+                      return <KonvaText key={ann.id} x={ann.x} y={ann.y} text={ann.text} fontSize={16} fill={ann.color} draggable onClick={() => setSelectedAnnotation(ann.id)} />;
+                    }
+                    return null;
+                  })}
+
+                  {drawingPolygon && polygonPoints.length >= 2 && (
+                    <>
+                      <Line points={polygonPoints} stroke={AREA_TYPES.find(a => a.id === currentAreaType)?.color || '#3B82F6'} strokeWidth={2} listening={false} />
+                      {tempPolygonLineRef.current.length === 4 && <Line points={tempPolygonLineRef.current} stroke={AREA_TYPES.find(a => a.id === currentAreaType)?.color || '#3B82F6'} strokeWidth={2} dash={[5, 5]} listening={false} />}
+                      {Array.from({ length: polygonPoints.length / 2 }).map((_, i) => (
+                        <Circle key={`point-${i}`} x={polygonPoints[i * 2]} y={polygonPoints[i * 2 + 1]} radius={5} fill={AREA_TYPES.find(a => a.id === currentAreaType)?.color || '#3B82F6'} listening={false} />
+                      ))}
+                    </>
+                  )}
+                </Layer>
+              </Stage>
+            </div>
+          </div>
+        </div>
+
+        {/* Enhanced Sidebar */}
+        <div className="w-80 bg-white border-l border-gray-200 overflow-y-auto">
+          {/* Search Section */}
+          <div className="p-4 bg-gradient-to-r from-blue-50 to-indigo-50 border-b border-blue-100">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-blue-400" />
+              <input
+                type="text"
+                placeholder="Search icons..."
+                value={iconSearch}
+                onChange={(e) => setIconSearch(e.target.value)}
+                className="w-full pl-10 pr-4 py-3 border-2 border-blue-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white shadow-sm"
+              />
+            </div>
+          </div>
+
+          <div className="p-5">
+            {/* Feature Icons Section */}
+            <div className="mb-6">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="font-bold text-gray-900 flex items-center gap-2">
+                  <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center">
+                    <MapPin className="w-4 h-4 text-white" />
+                  </div>
+                  Feature Icons
+                </h3>
+                <span className="px-2.5 py-1 bg-blue-100 text-blue-700 text-xs font-semibold rounded-full">
+                  {filteredIcons.length}
+                </span>
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                {filteredIcons.map((feature) => {
+                  const Icon = feature.icon;
+                  return (
+                    <button
+                      key={feature.id}
+                      onClick={() => addFeatureIcon(feature.id)}
+                      className="group flex flex-col items-center gap-2 p-4 bg-gradient-to-br from-white to-gray-50 border-2 border-gray-200 rounded-xl hover:border-blue-400 hover:shadow-lg transition-all duration-200 hover:scale-105"
+                      style={{ borderColor: feature.color + '30' }}
+                    >
+                      <div className="w-10 h-10 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform" style={{ backgroundColor: feature.color + '20' }}>
+                        <Icon className="w-5 h-5" style={{ color: feature.color }} />
+                      </div>
+                      <span className="text-xs text-gray-700 font-medium text-center">{feature.label}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Area Types Section */}
+            <div className="mb-6">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="font-bold text-gray-900 flex items-center gap-2">
+                  <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center">
+                    <Layers className="w-4 h-4 text-white" />
+                  </div>
+                  Area Types
+                </h3>
+              </div>
+              <p className="text-xs text-gray-500 mb-3 italic">Click to start drawing polygon</p>
+              <div className="space-y-2">
+                {AREA_TYPES.map((area) => (
+                  <button
+                    key={area.id}
+                    onClick={() => addAreaMarker(area.id)}
+                    className={`w-full flex items-center gap-3 p-4 border-2 rounded-xl transition-all duration-200 hover:scale-102 ${
+                      drawingPolygon && currentAreaType === area.id
+                        ? 'border-blue-500 bg-blue-50 shadow-lg'
+                        : 'border-gray-200 bg-gradient-to-br from-white to-gray-50 hover:border-gray-300 hover:shadow-md'
+                    }`}
+                  >
+                    <div
+                      className="w-8 h-8 rounded-lg border-2 border-white shadow-md flex-shrink-0"
+                      style={{ backgroundColor: area.color }}
+                    />
+                    <span className="text-sm text-gray-800 font-semibold">{area.label}</span>
+                    {drawingPolygon && currentAreaType === area.id && (
+                      <div className="ml-auto">
+                        <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+                      </div>
+                    )}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Map Info Card */}
+            <div className="p-5 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl border-2 border-gray-200 shadow-sm">
+              <h4 className="text-sm font-bold text-gray-900 mb-3 flex items-center gap-2">
+                <CheckCircle className="w-4 h-4 text-green-600" />
+                Map Information
+              </h4>
+              <div className="space-y-2 text-xs">
+                <div className="p-2 bg-white rounded-lg">
+                  <p className="text-gray-500 text-xs mb-1">Site Name</p>
+                  <p className="font-semibold text-gray-900">{siteName}</p>
+                </div>
+                <div className="p-2 bg-white rounded-lg">
+                  <p className="text-gray-500 text-xs mb-1">Address</p>
+                  <p className="text-gray-700 text-xs">{siteAddress}</p>
+                </div>
+                <div className="flex gap-2">
+                  <div className="flex-1 p-2 bg-white rounded-lg text-center">
+                    <p className="text-gray-500 text-xs">Annotations</p>
+                    <p className="font-bold text-blue-600 text-lg">{annotations.length}</p>
+                  </div>
+                  <div className="flex-1 p-2 bg-white rounded-lg text-center">
+                    <p className="text-gray-500 text-xs">Zoom</p>
+                    <p className="font-bold text-purple-600 text-lg">{Math.round(zoom * 100)}%</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Keyboard Shortcuts */}
+            <div className="mt-5 p-4 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border-2 border-blue-100">
+              <p className="font-bold text-gray-900 mb-3 flex items-center gap-2">
+                <span className="text-lg">⌨️</span>
+                Keyboard Shortcuts
+              </p>
+              <div className="space-y-1.5 text-xs">
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-600">Undo</span>
+                  <kbd className="px-2 py-1 bg-white border border-blue-200 rounded font-mono text-blue-700">Ctrl+Z</kbd>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-600">Redo</span>
+                  <kbd className="px-2 py-1 bg-white border border-blue-200 rounded font-mono text-blue-700">Ctrl+Y</kbd>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-600">Save</span>
+                  <kbd className="px-2 py-1 bg-white border border-blue-200 rounded font-mono text-blue-700">Ctrl+S</kbd>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-600">Delete</span>
+                  <kbd className="px-2 py-1 bg-white border border-blue-200 rounded font-mono text-blue-700">Del</kbd>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-600">Cancel</span>
+                  <kbd className="px-2 py-1 bg-white border border-blue-200 rounded font-mono text-blue-700">Esc</kbd>
+                </div>
+              </div>
+              <div className="mt-3 pt-3 border-t border-blue-200">
+                <p className="text-xs text-blue-700 flex items-center gap-1">
+                  <span>💡</span>
+                  <span className="font-medium">Tip: Drag icons to reposition them</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
         <div className="flex items-center gap-1 pr-3 border-r border-gray-300">
           <input
             ref={fileInputRef}
