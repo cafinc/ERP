@@ -125,7 +125,7 @@ export default function SitesPage() {
     return (
       <DashboardLayout>
         <div className="flex items-center justify-center h-full">
-          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
+          <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
         </div>
       </DashboardLayout>
     );
@@ -133,7 +133,7 @@ export default function SitesPage() {
 
   return (
     <DashboardLayout>
-      <div className="p-4">
+      <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         {/* Compact Header */}
         <CompactHeader
           title="Sites"
@@ -161,7 +161,7 @@ export default function SitesPage() {
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                 filterActive === 'active'
                   ? 'bg-green-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
               }`}
             >
               Active ({sites.filter(s => s.active).length})
@@ -171,7 +171,7 @@ export default function SitesPage() {
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                 filterActive === 'archived'
                   ? 'bg-gray-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
               }`}
             >
               Archived ({sites.filter(s => !s.active).length})
@@ -180,8 +180,8 @@ export default function SitesPage() {
               onClick={() => setFilterActive('all')}
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                 filterActive === 'all'
-                  ? 'bg-[#3f72af] text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  ? 'bg-blue-600 text-white shadow-md'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
               }`}
             >
               All ({sites.length})
@@ -190,7 +190,7 @@ export default function SitesPage() {
         </div>
 
         {/* Search Bar with Filters */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-3 mb-4 mx-6 mt-6">
+        <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-3 mb-4 mx-6 mt-6">
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1 relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -199,13 +199,13 @@ export default function SitesPage() {
                 placeholder="Search sites..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent text-sm"
+                className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
               />
             </div>
             <select
               value={filterType}
               onChange={(e) => setFilterType(e.target.value)}
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+              className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             >
               <option value="all">All Types</option>
               <option value="parking_lot">Parking Lot</option>
@@ -217,7 +217,7 @@ export default function SitesPage() {
             </select>
             <button
               onClick={loadData}
-              className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors flex items-center space-x-2"
+              className="px-4 py-2 bg-gray-100 hover:bg-gray-100 transition-all text-gray-700 rounded-lg transition-colors flex items-center space-x-2"
             >
               <RefreshCw className="w-4 h-4" />
               <span>Refresh</span>
@@ -302,7 +302,7 @@ export default function SitesPage() {
 
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <div className="bg-white rounded-lg border border-gray-200 p-4">
+          <div className="bg-white rounded-xl shadow-md border border-gray-200 p-4">
             <div className="flex items-center gap-3">
               <div className="bg-blue-100 rounded-lg p-3">
                 <MapPin className="w-6 h-6 text-blue-600" />
@@ -316,7 +316,7 @@ export default function SitesPage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg border border-gray-200 p-4">
+          <div className="bg-white rounded-xl shadow-md border border-gray-200 p-4">
             <div className="flex items-center gap-3">
               <div className="bg-green-100 rounded-lg p-3">
                 <MapPin className="w-6 h-6 text-green-600" />
@@ -330,7 +330,7 @@ export default function SitesPage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg border border-gray-200 p-4">
+          <div className="bg-white rounded-xl shadow-md border border-gray-200 p-4">
             <div className="flex items-center gap-3">
               <div className="bg-purple-100 rounded-lg p-3">
                 <Building className="w-6 h-6 text-purple-600" />
@@ -344,7 +344,7 @@ export default function SitesPage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg border border-gray-200 p-4">
+          <div className="bg-white rounded-xl shadow-md border border-gray-200 p-4">
             <div className="flex items-center gap-3">
               <div className="bg-orange-100 rounded-lg p-3">
                 <Archive className="w-6 h-6 text-orange-600" />
@@ -360,7 +360,7 @@ export default function SitesPage() {
         </div>
 
         {/* Sites Table */}
-        <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+        <div className="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden">
           <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">

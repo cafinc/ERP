@@ -140,7 +140,7 @@ export default function ContractsPage() {
 
   return (
     <DashboardLayout>
-      <div className="p-4">
+      <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         {/* Compact Header */}
         <CompactHeader
           title="Agreements"
@@ -167,8 +167,8 @@ export default function ContractsPage() {
               onClick={() => setFilterStatus('all')}
               className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-colors ${
                 filterStatus === 'all'
-                  ? 'bg-[#3f72af] text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  ? 'bg-blue-600 text-white shadow-md'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
               }`}
             >
               All ({contracts.length})
@@ -178,7 +178,7 @@ export default function ContractsPage() {
               className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-colors ${
                 filterStatus === 'draft'
                   ? 'bg-gray-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
               }`}
             >
               Draft ({contracts.filter(c => c.status?.toLowerCase() === 'draft').length})
@@ -188,7 +188,7 @@ export default function ContractsPage() {
               className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-colors ${
                 filterStatus === 'sent'
                   ? 'bg-blue-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
               }`}
             >
               Sent ({contracts.filter(c => c.status?.toLowerCase() === 'sent').length})
@@ -198,7 +198,7 @@ export default function ContractsPage() {
               className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-colors ${
                 filterStatus === 'signed'
                   ? 'bg-yellow-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
               }`}
             >
               Signed ({contracts.filter(c => c.status?.toLowerCase() === 'signed').length})
@@ -208,7 +208,7 @@ export default function ContractsPage() {
               className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-colors ${
                 filterStatus === 'active'
                   ? 'bg-green-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
               }`}
             >
               Active ({contracts.filter(c => c.status?.toLowerCase() === 'active').length})
@@ -218,7 +218,7 @@ export default function ContractsPage() {
               className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-colors ${
                 filterStatus === 'expired'
                   ? 'bg-orange-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
               }`}
             >
               Expired ({contracts.filter(c => c.status?.toLowerCase() === 'expired').length})
@@ -228,16 +228,16 @@ export default function ContractsPage() {
               className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-colors ${
                 filterStatus === 'terminated'
                   ? 'bg-red-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
               }`}
             >
               Terminated ({contracts.filter(c => c.status?.toLowerCase() === 'terminated').length})
             </button>
             <div className="flex-1"></div>
             <div className="bg-white border border-gray-200 rounded-lg px-3 py-1.5 flex items-center space-x-2">
-              <DollarSign className="w-4 h-4 text-[#3f72af]" />
+              <DollarSign className="w-4 h-4 text-blue-600" />
               <span className="text-xs font-medium text-gray-700">Total Value:</span>
-              <span className="text-sm font-bold text-[#3f72af]">
+              <span className="text-sm font-bold text-blue-600">
                 ${statsData.totalValue.toLocaleString()}
               </span>
             </div>
@@ -245,7 +245,7 @@ export default function ContractsPage() {
         </div>
 
         {/* Search Bar */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-3 mb-4 mx-6 mt-6">
+        <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-3 mb-4 mx-6 mt-6">
           <div className="relative">
             <Search className="absolute left-2.5 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
             <input
@@ -260,7 +260,7 @@ export default function ContractsPage() {
 
         {/* Agreements List */}
         <div className="mx-6">
-          <div className="bg-white rounded-lg border border-gray-200 p-4">
+          <div className="bg-white rounded-xl shadow-md border border-gray-200 p-4">
             <div className="flex items-center gap-3">
               <div className="bg-blue-100 rounded-lg p-3">
                 <FileText className="w-6 h-6 text-blue-600" />
@@ -274,7 +274,7 @@ export default function ContractsPage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg border border-gray-200 p-4">
+          <div className="bg-white rounded-xl shadow-md border border-gray-200 p-4">
             <div className="flex items-center gap-3">
               <div className="bg-emerald-100 rounded-lg p-3">
                 <CheckCircle className="w-6 h-6 text-emerald-600" />
@@ -288,7 +288,7 @@ export default function ContractsPage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg border border-gray-200 p-4">
+          <div className="bg-white rounded-xl shadow-md border border-gray-200 p-4">
             <div className="flex items-center gap-3">
               <div className="bg-green-100 rounded-lg p-3">
                 <FileSignature className="w-6 h-6 text-green-600" />
@@ -302,7 +302,7 @@ export default function ContractsPage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg border border-gray-200 p-4">
+          <div className="bg-white rounded-xl shadow-md border border-gray-200 p-4">
             <div className="flex items-center gap-3">
               <div className="bg-yellow-100 rounded-lg p-3">
                 <Send className="w-6 h-6 text-yellow-600" />
@@ -318,7 +318,7 @@ export default function ContractsPage() {
         </div>
 
         {/* Contracts Table */}
-        <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+        <div className="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden">
           <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">

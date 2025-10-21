@@ -117,7 +117,7 @@ export default function DispatchesPage() {
     return (
       <DashboardLayout>
         <div className="flex items-center justify-center h-full">
-          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
+          <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
         </div>
       </DashboardLayout>
     );
@@ -190,8 +190,8 @@ export default function DispatchesPage() {
             onClick={() => setView('list')}
             className={`px-4 py-2 rounded-lg font-medium transition-colors text-sm ${
               view === 'list'
-                ? 'bg-[#3f72af] text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                ? 'bg-blue-600 text-white shadow-md'
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
             }`}
           >
             <List className="w-4 h-4 inline-block mr-2" />
@@ -201,8 +201,8 @@ export default function DispatchesPage() {
             onClick={() => setView('map')}
             className={`px-4 py-2 rounded-lg font-medium transition-colors text-sm ${
               view === 'map'
-                ? 'bg-[#3f72af] text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                ? 'bg-blue-600 text-white shadow-md'
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
             }`}
           >
             <MapIcon className="w-4 h-4 inline-block mr-2" />
@@ -221,13 +221,13 @@ export default function DispatchesPage() {
                   placeholder="Search by route name..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent text-sm"
+                  className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                 />
               </div>
               <select
                 value={filterStatus}
                 onChange={(e) => setFilterStatus(e.target.value)}
-                className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               >
                 <option value="all">All Status</option>
                 <option value="scheduled">Scheduled</option>
@@ -238,7 +238,7 @@ export default function DispatchesPage() {
               <select
                 value={filterDate}
                 onChange={(e) => setFilterDate(e.target.value)}
-                className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               >
                 <option value="all">All Dates</option>
                 <option value="today">Today</option>

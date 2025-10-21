@@ -89,7 +89,7 @@ export default function CustomersPage() {
     return (
       <DashboardLayout>
         <div className="flex items-center justify-center h-full">
-          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
+          <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
         </div>
       </DashboardLayout>
     );
@@ -97,7 +97,7 @@ export default function CustomersPage() {
 
   return (
     <DashboardLayout>
-      <div className="p-4">
+      <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         {/* Compact Header */}
         <CompactHeader
           title="Customers"
@@ -124,8 +124,8 @@ export default function CustomersPage() {
                 onClick={() => setFilterActive('all')}
                 className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-colors ${
                   filterActive === 'all'
-                    ? 'bg-[#3f72af] text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    ? 'bg-blue-600 text-white shadow-md'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
                 }`}
               >
                 All ({customers.length})
@@ -135,7 +135,7 @@ export default function CustomersPage() {
                 className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-colors ${
                   filterActive === 'active'
                     ? 'bg-green-600 text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
                 }`}
               >
                 Active ({customers.filter(c => c.active).length})
@@ -145,7 +145,7 @@ export default function CustomersPage() {
                 className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-colors ${
                   filterActive === 'inactive'
                     ? 'bg-red-600 text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
                 }`}
               >
                 Inactive ({customers.filter(c => !c.active).length})
@@ -155,8 +155,8 @@ export default function CustomersPage() {
                 onClick={() => setFilterType('all')}
                 className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-colors ${
                   filterType === 'all'
-                    ? 'bg-[#3f72af] text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    ? 'bg-blue-600 text-white shadow-md'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
                 }`}
               >
                 All Types
@@ -166,7 +166,7 @@ export default function CustomersPage() {
                 className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-colors ${
                   filterType === 'individual'
                     ? 'bg-purple-600 text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
                 }`}
               >
                 Individual ({customers.filter(c => c.customer_type === 'individual').length})
@@ -176,7 +176,7 @@ export default function CustomersPage() {
                 className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-colors ${
                   filterType === 'company'
                     ? 'bg-blue-600 text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
                 }`}
               >
                 Company ({customers.filter(c => c.customer_type === 'company').length})
@@ -218,7 +218,7 @@ export default function CustomersPage() {
         {/* Stats - Removed, moved to header badges */}
 
         {/* Filters */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-3 mb-4 mx-6 mt-6">
+        <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-3 mb-4 mx-6 mt-6">
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1 relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -227,12 +227,12 @@ export default function CustomersPage() {
                 placeholder="Search by name, email, phone, address, or company..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent text-sm"
+                className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
               />
             </div>
             <button
               onClick={loadCustomers}
-              className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors flex items-center space-x-2"
+              className="px-4 py-2 bg-gray-100 hover:bg-gray-100 transition-all text-gray-700 rounded-lg transition-colors flex items-center space-x-2"
             >
               <RefreshCw className="w-4 h-4" />
               <span>Refresh</span>
@@ -375,7 +375,7 @@ export default function CustomersPage() {
                           e.stopPropagation();
                           router.push(`/customers/${customerId}/edit`);
                         }}
-                        className="flex-1 px-3 py-1.5 bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs rounded-lg transition-colors flex items-center justify-center gap-1"
+                        className="flex-1 px-3 py-1.5 bg-gray-100 hover:bg-gray-100 transition-all text-gray-700 text-xs rounded-lg transition-colors flex items-center justify-center gap-1"
                       >
                         <Edit className="w-3 h-3" />
                         Edit
@@ -483,7 +483,7 @@ export default function CustomersPage() {
                           e.stopPropagation();
                           router.push(`/customers/${customerId}/edit`);
                         }}
-                        className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm rounded-lg transition-colors flex items-center gap-1"
+                        className="px-4 py-2 bg-gray-100 hover:bg-gray-100 transition-all text-gray-700 text-sm rounded-lg transition-colors flex items-center gap-1"
                       >
                         <Edit className="w-4 h-4" />
                         Edit

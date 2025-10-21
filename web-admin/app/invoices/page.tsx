@@ -139,7 +139,7 @@ export default function InvoicesPage() {
     return (
       <DashboardLayout>
         <div className="flex items-center justify-center h-full">
-          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
+          <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
         </div>
       </DashboardLayout>
     );
@@ -147,7 +147,7 @@ export default function InvoicesPage() {
 
   return (
     <DashboardLayout>
-      <div className="p-4">
+      <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         {/* Compact Header */}
         <CompactHeader
           title="Invoices"
@@ -174,8 +174,8 @@ export default function InvoicesPage() {
               onClick={() => setFilterStatus('all')}
               className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-colors ${
                 filterStatus === 'all'
-                  ? 'bg-[#3f72af] text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  ? 'bg-blue-600 text-white shadow-md'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
               }`}
             >
               All ({invoices.length})
@@ -185,7 +185,7 @@ export default function InvoicesPage() {
               className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-colors ${
                 filterStatus === 'unpaid'
                   ? 'bg-yellow-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
               }`}
             >
               Unpaid ({invoices.filter(i => i.status?.toLowerCase() === 'unpaid').length})
@@ -195,7 +195,7 @@ export default function InvoicesPage() {
               className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-colors ${
                 filterStatus === 'partially_paid'
                   ? 'bg-blue-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
               }`}
             >
               Partially Paid ({invoices.filter(i => i.status?.toLowerCase() === 'partially_paid').length})
@@ -205,7 +205,7 @@ export default function InvoicesPage() {
               className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-colors ${
                 filterStatus === 'paid'
                   ? 'bg-green-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
               }`}
             >
               Paid ({invoices.filter(i => i.status?.toLowerCase() === 'paid').length})
@@ -215,7 +215,7 @@ export default function InvoicesPage() {
               className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-colors ${
                 filterStatus === 'overdue'
                   ? 'bg-red-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
               }`}
             >
               Overdue ({invoices.filter(i => i.status?.toLowerCase() === 'overdue').length})
@@ -239,7 +239,7 @@ export default function InvoicesPage() {
         </div>
 
         {/* Search Bar */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-3 mb-4 mx-6 mt-6">
+        <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-3 mb-4 mx-6 mt-6">
           <div className="flex flex-col md:flex-row gap-4">
             {/* Search */}
             <div className="flex-1 relative">
@@ -249,7 +249,7 @@ export default function InvoicesPage() {
                 placeholder="Search by invoice number or customer..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent text-sm"
+                className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
               />
             </div>
 
@@ -273,7 +273,7 @@ export default function InvoicesPage() {
 
             <button
               onClick={loadInvoices}
-              className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors flex items-center space-x-2"
+              className="px-4 py-2 bg-gray-100 hover:bg-gray-100 transition-all text-gray-700 rounded-lg transition-colors flex items-center space-x-2"
             >
               <RefreshCw className="w-4 h-4" />
               <span>Refresh</span>

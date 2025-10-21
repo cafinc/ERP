@@ -117,7 +117,7 @@ export default function TeamPage() {
     return (
       <DashboardLayout>
         <div className="flex items-center justify-center h-full">
-          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
+          <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
         </div>
       </DashboardLayout>
     );
@@ -125,7 +125,7 @@ export default function TeamPage() {
 
   return (
     <DashboardLayout>
-      <div className="p-4">
+      <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         {/* Compact Header */}
         <CompactHeader
           title="Team Members"
@@ -152,8 +152,8 @@ export default function TeamPage() {
               onClick={() => setFilterRole('all')}
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                 filterRole === 'all'
-                  ? 'bg-[#3f72af] text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  ? 'bg-blue-600 text-white shadow-md'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
               }`}
             >
               All Roles ({users.length})
@@ -163,7 +163,7 @@ export default function TeamPage() {
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                 filterRole === 'admin'
                   ? 'bg-purple-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
               }`}
             >
               Admin ({users.filter(u => u.role === 'admin').length})
@@ -173,7 +173,7 @@ export default function TeamPage() {
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                 filterRole === 'crew'
                   ? 'bg-blue-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
               }`}
             >
               Crew ({users.filter(u => u.role === 'crew').length})
@@ -183,7 +183,7 @@ export default function TeamPage() {
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                 filterRole === 'subcontractor'
                   ? 'bg-orange-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
               }`}
             >
               Subcontractor ({users.filter(u => u.role === 'subcontractor').length})
@@ -194,7 +194,7 @@ export default function TeamPage() {
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                 filterStatus === 'all'
                   ? 'bg-gray-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
               }`}
             >
               All Status
@@ -204,7 +204,7 @@ export default function TeamPage() {
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                 filterStatus === 'active'
                   ? 'bg-green-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
               }`}
             >
               Active ({users.filter(u => u.active).length})
@@ -214,7 +214,7 @@ export default function TeamPage() {
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                 filterStatus === 'inactive'
                   ? 'bg-red-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
               }`}
             >
               Inactive ({users.filter(u => !u.active).length})
@@ -223,7 +223,7 @@ export default function TeamPage() {
         </div>
 
         {/* Search Bar */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-3 mb-4 mx-6 mt-6">
+        <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-3 mb-4 mx-6 mt-6">
           <div className="flex items-center gap-4">
             <div className="flex-1 relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -232,12 +232,12 @@ export default function TeamPage() {
                 placeholder="Search team members..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent text-sm"
+                className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
               />
             </div>
             <button
               onClick={loadUsers}
-              className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors flex items-center space-x-2"
+              className="px-4 py-2 bg-gray-100 hover:bg-gray-100 transition-all text-gray-700 rounded-lg transition-colors flex items-center space-x-2"
             >
               <RefreshCw className="w-4 h-4" />
               <span>Refresh</span>
@@ -270,7 +270,7 @@ export default function TeamPage() {
             {filteredUsers.map((user, index) => (
               <div
                 key={user.id}
-                className="bg-white rounded-lg border border-gray-200 p-6 hover:shadow-md transition-shadow cursor-pointer"
+                className="bg-white rounded-xl shadow-md border border-gray-200 p-6 hover:shadow-md transition-shadow cursor-pointer"
                 onClick={() => router.push(`/team/${user.id}`)}
               >
                 {/* Header */}

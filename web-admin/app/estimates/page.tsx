@@ -111,7 +111,7 @@ export default function EstimatesPage() {
     return (
       <DashboardLayout>
         <div className="flex items-center justify-center h-full">
-          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
+          <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
         </div>
       </DashboardLayout>
     );
@@ -119,7 +119,7 @@ export default function EstimatesPage() {
 
   return (
     <DashboardLayout>
-      <div className="p-4">
+      <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         {/* Compact Header */}
         <CompactHeader
           title="Estimates"
@@ -146,8 +146,8 @@ export default function EstimatesPage() {
               onClick={() => setFilterStatus('all')}
               className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-colors ${
                 filterStatus === 'all'
-                  ? 'bg-[#3f72af] text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  ? 'bg-blue-600 text-white shadow-md'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
               }`}
             >
               All ({estimates.length})
@@ -157,7 +157,7 @@ export default function EstimatesPage() {
               className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-colors ${
                 filterStatus === 'draft'
                   ? 'bg-gray-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
               }`}
             >
               Draft ({estimates.filter(e => e.status?.toLowerCase() === 'draft').length})
@@ -167,7 +167,7 @@ export default function EstimatesPage() {
               className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-colors ${
                 filterStatus === 'sent'
                   ? 'bg-blue-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
               }`}
             >
               Pending ({estimates.filter(e => e.status?.toLowerCase() === 'sent').length})
@@ -177,7 +177,7 @@ export default function EstimatesPage() {
               className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-colors ${
                 filterStatus === 'approved'
                   ? 'bg-green-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
               }`}
             >
               Approved ({estimates.filter(e => e.status?.toLowerCase() === 'approved').length})
@@ -187,7 +187,7 @@ export default function EstimatesPage() {
               className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-colors ${
                 filterStatus === 'declined'
                   ? 'bg-red-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
               }`}
             >
               Declined ({estimates.filter(e => e.status?.toLowerCase() === 'declined').length})
@@ -197,16 +197,16 @@ export default function EstimatesPage() {
               className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-colors ${
                 filterStatus === 'converted'
                   ? 'bg-purple-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
               }`}
             >
               Converted ({estimates.filter(e => e.status?.toLowerCase() === 'converted').length})
             </button>
             <div className="flex-1"></div>
             <div className="bg-white border border-gray-200 rounded-lg px-3 py-1.5 flex items-center space-x-2">
-              <DollarSign className="w-4 h-4 text-[#3f72af]" />
+              <DollarSign className="w-4 h-4 text-blue-600" />
               <span className="text-xs font-medium text-gray-700">Total Value:</span>
-              <span className="text-sm font-bold text-[#3f72af]">
+              <span className="text-sm font-bold text-blue-600">
                 ${estimates.reduce((sum, e) => sum + (e.total_amount || 0), 0).toLocaleString()}
               </span>
             </div>
@@ -214,7 +214,7 @@ export default function EstimatesPage() {
         </div>
 
         {/* Search Bar */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-3 mb-4 mx-6 mt-6">
+        <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-3 mb-4 mx-6 mt-6">
           <div className="flex flex-col md:flex-row gap-4">
             {/* Search */}
             <div className="flex-1 relative">
@@ -224,13 +224,13 @@ export default function EstimatesPage() {
                 placeholder="Search by estimate number or customer..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent text-sm"
+                className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
               />
             </div>
 
             <button
               onClick={loadEstimates}
-              className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors flex items-center space-x-2"
+              className="px-4 py-2 bg-gray-100 hover:bg-gray-100 transition-all text-gray-700 rounded-lg transition-colors flex items-center space-x-2"
             >
               <RefreshCw className="w-4 h-4" />
               <span>Refresh</span>
@@ -286,7 +286,7 @@ export default function EstimatesPage() {
                 {/* Amount */}
                 <div className="mb-4 p-3 bg-gray-50 rounded-lg">
                   <div className="text-sm text-gray-600 mb-1">Total Amount</div>
-                  <div className="text-2xl font-bold text-[#3f72af]">
+                  <div className="text-2xl font-bold text-blue-600">
                     ${estimate.total_amount?.toLocaleString() || '0.00'}
                   </div>
                 </div>
