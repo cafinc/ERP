@@ -471,7 +471,7 @@ export default function CustomerFormPage() {
             {/* Individual Form */}
             {customerForm.customer_type === 'individual' && (
               <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
-                <h2 className="text-xl font-semibold text-[#112d4e] mb-6 flex items-center space-x-2">
+                <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center space-x-2">
                   <User className="w-5 h-5 text-[#3f72af]" />
                   <span>Individual Information</span>
                 </h2>
@@ -583,7 +583,7 @@ export default function CustomerFormPage() {
             {customerForm.customer_type === 'company' && (
               <>
                 <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
-                  <h2 className="text-xl font-semibold text-[#112d4e] mb-6 flex items-center space-x-2">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center space-x-2">
                     <Building className="w-5 h-5 text-[#3f72af]" />
                     <span>Company Information</span>
                   </h2>
@@ -645,7 +645,7 @@ export default function CustomerFormPage() {
 
                 {/* Main Contact for Company */}
                 <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
-                  <h2 className="text-xl font-semibold text-[#112d4e] mb-6 flex items-center space-x-2">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center space-x-2">
                     <User className="w-5 h-5 text-[#3f72af]" />
                     <span>Main Contact *</span>
                   </h2>
@@ -767,7 +767,7 @@ export default function CustomerFormPage() {
 
                 {/* Company Accounting */}
                 <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
-                  <h2 className="text-xl font-semibold text-[#112d4e] mb-6 flex items-center space-x-2">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center space-x-2">
                     <CreditCard className="w-5 h-5 text-[#3f72af]" />
                     <span>Accounting Information</span>
                   </h2>
@@ -890,7 +890,7 @@ export default function CustomerFormPage() {
                 {isEdit && (
                   <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
                     <div className="flex items-center justify-between mb-6">
-                      <h2 className="text-xl font-semibold text-[#112d4e] flex items-center space-x-2">
+                      <h2 className="text-2xl font-bold text-gray-900 flex items-center space-x-2">
                         <MapPin className="w-5 h-5 text-[#3f72af]" />
                         <span>Sites</span>
                       </h2>
@@ -913,7 +913,7 @@ export default function CustomerFormPage() {
 
             {/* Address Section (Common for both) */}
             <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
-              <h2 className="text-xl font-semibold text-[#112d4e] mb-6 flex items-center space-x-2">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center space-x-2">
                 <MapPin className="w-5 h-5 text-[#3f72af]" />
                 <span>Address *</span>
               </h2>
@@ -1002,7 +1002,7 @@ export default function CustomerFormPage() {
 
             {/* Additional Notes */}
             <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
-              <h2 className="text-xl font-semibold text-[#112d4e] mb-6 flex items-center space-x-2">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center space-x-2">
                 <FileText className="w-5 h-5 text-[#3f72af]" />
                 <span>Additional Information</span>
               </h2>
