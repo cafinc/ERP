@@ -14,6 +14,7 @@ export default function NotificationsPage() {
       <CompactHeader
         title="Notification Settings"
         subtitle="Manage your notification preferences"
+        backUrl="/settings"
       />
 
       <div style={{ marginTop: '24px', display: 'grid', gap: '24px' }}>
