@@ -12299,5 +12299,10 @@ from hr_routes import router as hr_router
 api_router.include_router(hr_router)
 logger.info("HR Module endpoints registered successfully")
 
+# Include Integration Hub router
+from integration_routes import router as integration_router
+api_router.include_router(integration_router)
+logger.info("Integration Hub endpoints registered successfully")
+
 # Include the router with all endpoints
 app.include_router(api_router)
