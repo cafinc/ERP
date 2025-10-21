@@ -14,6 +14,7 @@ export default function WebhooksPage() {
       <CompactHeader
         title="Webhooks"
         subtitle="Configure webhook endpoints for real-time event notifications"
+        backUrl="/settings"
         action={{
           label: '+ Add Webhook',
           onClick: () => alert('Add new webhook')
