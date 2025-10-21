@@ -489,7 +489,7 @@ export default function SiteMapAnnotationOptimized({
     setShowTemplates(false);
   }, [templates, addToHistory]);
 
-  // Optimized auto-save with proper cleanup (RELIABILITY FIX)
+  // Optimized auto-save with proper cleanup (RELIABILITY FIX) - Every 30 seconds
   useEffect(() => {
     if (autoSaveEnabled && annotations.length > 0) {
       if (autoSaveTimerRef.current) {
@@ -498,7 +498,7 @@ export default function SiteMapAnnotationOptimized({
       
       autoSaveTimerRef.current = setTimeout(() => {
         handleSave(true);
-      }, 5000);
+      }, 30000); // 30 seconds
     }
 
     return () => {
