@@ -340,6 +340,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       submenu: [
         { icon: UserCog, label: 'Account', href: '/settings/account' },
         { icon: Lock, label: 'Security', href: '/settings/security' },
+        { icon: Palette, label: 'Branding', href: '/settings/branding' },
         { icon: Bell, label: 'Notifications', href: '/settings/notifications' },
         { icon: Zap, label: 'App Integration', href: '/settings/app-integration' },
         { icon: Mail, label: 'Email Templates', href: '/settings/email-templates' },
