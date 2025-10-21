@@ -12294,5 +12294,10 @@ async def delete_avatar(current_user: dict = Depends(get_current_user)):
 from quickbooks_routes import router as quickbooks_router
 api_router.include_router(quickbooks_router)
 
+# Include HR Module router
+from hr_routes import router as hr_router
+api_router.include_router(hr_router)
+logger.info("HR Module endpoints registered successfully")
+
 # Include the router with all endpoints
 app.include_router(api_router)
