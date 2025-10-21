@@ -119,7 +119,7 @@ export default function CompactHeader({
                   key={index}
                   onClick={action.onClick}
                   disabled={action.disabled}
-                  className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
+                  className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed ${
                     buttonVariants[action.variant || 'primary']
                   }`}
                 >
