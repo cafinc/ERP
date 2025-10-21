@@ -414,11 +414,24 @@ export default function SiteMapAnnotationOptimized({
     }
   }, [tool, annotations, drawingPolygon, polygonPoints]);
 
+  // Helper function to get correctly transformed pointer position
+  const getTransformedPointerPosition = useCallback((stage: any) => {
+    const pointerPosition = stage.getPointerPosition();
+    if (!pointerPosition) return { x: 0, y: 0 };
+    
+    // Get the stage's absolute transform and invert it to get canvas coordinates
+    const transform = stage.getAbsoluteTransform().copy();
+    transform.invert();
+    const pos = transform.point(pointerPosition);
+    
+    return pos;
+  }, []);
+
   const handleMouseDown = useCallback((e: any) => {
     if (tool === 'select') return;
     
     const stage = e.target.getStage();
-    const pos = stage.getPointerPosition();
+    const pos = getTransformedPointerPosition(stage);
 
     if (drawingPolygon) {
       setPolygonPoints(prev => [...prev, pos.x, pos.y]);
@@ -475,7 +488,7 @@ export default function SiteMapAnnotationOptimized({
       };
       setAnnotations(prev => [...prev, newAnnotation]);
     }
-  }, [tool, selectedColor, drawingPolygon, addToHistory]);
+  }, [tool, selectedColor, drawingPolygon, addToHistory, getTransformedPointerPosition]);
 
   const handleMouseUp = useCallback(() => {
     if (isDrawingRef.current) {
