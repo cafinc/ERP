@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '@/lib/auth';
 import api from '@/lib/api';
 import CompactHeader from '@/components/CompactHeader';
+import UserFormModal from '@/components/UserFormModal';
 import { Crown, Plus, Edit, Trash2, Shield, AlertCircle, CheckCircle, XCircle } from 'lucide-react';
 
 interface MasterUser {
@@ -21,7 +22,9 @@ export default function MasterUsersPage() {
   const { user } = useAuth();
   const [masterUsers, setMasterUsers] = useState<MasterUser[]>([]);
   const [loading, setLoading] = useState(true);
-  const [showAddModal, setShowAddModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedUser, setSelectedUser] = useState<MasterUser | undefined>();
+  const [modalMode, setModalMode] = useState<'add' | 'edit'>('add');
 
   useEffect(() => {
     fetchMasterUsers();
@@ -48,6 +51,61 @@ export default function MasterUsersPage() {
       ]);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleAddUser = () => {
+    setModalMode('add');
+    setSelectedUser(undefined);
+    setShowModal(true);
+  };
+
+  const handleEditUser = (user: MasterUser) => {
+    setModalMode('edit');
+    setSelectedUser(user);
+    setShowModal(true);
+  };
+
+  const handleSaveUser = async (userData: any) => {
+    try {
+      if (modalMode === 'add') {
+        // Add new user
+        const newUser: MasterUser = {
+          id: Date.now().toString(),
+          name: userData.name,
+          email: userData.email,
+          phone: userData.phone,
+          role: 'master',
+          active: userData.active,
+          created_at: new Date().toISOString().split('T')[0],
+          last_login: 'Never'
+        };
+        setMasterUsers([...masterUsers, newUser]);
+        alert('Master user added successfully!');
+      } else {
+        // Edit existing user
+        setMasterUsers(masterUsers.map(u => 
+          u.id === selectedUser?.id 
+            ? { ...u, name: userData.name, email: userData.email, phone: userData.phone, active: userData.active }
+            : u
+        ));
+        alert('Master user updated successfully!');
+      }
+    } catch (error) {
+      console.error('Error saving user:', error);
+      alert('Failed to save user');
+    }
+  };
+
+  const handleDeleteUser = (userId: string) => {
+    if (masterUsers.length <= 1) {
+      alert('Cannot delete the last master user!');
+      return;
+    }
+    
+    if (confirm('Are you sure you want to remove this master user? This action cannot be undone.')) {
+      setMasterUsers(masterUsers.filter(u => u.id !== userId));
+      alert('Master user removed successfully');
     }
   };
 
