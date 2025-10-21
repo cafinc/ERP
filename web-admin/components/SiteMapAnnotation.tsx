@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { fabric } from 'fabric/dist/fabric.min.js';
+import * as fabric from 'fabric';
 import {
   Download,
   Upload,
