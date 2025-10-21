@@ -109,10 +109,12 @@ class SiteMapsTestSuite:
         site_data = {
             "customer_id": self.test_customer_id,
             "name": "Test Site for Maps",
-            "address": "456 Site Avenue, Test City, TC 12345",
-            "site_type": "commercial",
-            "priority": "high",
-            "service_frequency": "weekly"
+            "location": {
+                "latitude": 43.6532,
+                "longitude": -79.3832,
+                "address": "456 Site Avenue, Test City, TC 12345"
+            },
+            "site_type": "commercial"
         }
         
         success, response, status = await self.make_request("POST", "/sites", site_data)
