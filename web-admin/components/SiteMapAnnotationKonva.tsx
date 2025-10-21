@@ -527,6 +527,32 @@ export default function SiteMapAnnotation({
                       draggable
                     />
                   );
+                } else if (ann.type === 'feature-icon') {
+                  // Render feature icon as a circle with text label
+                  return (
+                    <React.Fragment key={ann.id}>
+                      <Circle
+                        x={ann.x}
+                        y={ann.y}
+                        radius={20}
+                        fill={ann.color}
+                        stroke="white"
+                        strokeWidth={3}
+                        draggable
+                      />
+                      <KonvaText
+                        x={(ann.x || 0) - 60}
+                        y={(ann.y || 0) + 25}
+                        text={ann.text}
+                        fontSize={14}
+                        fill={ann.color}
+                        fontStyle="bold"
+                        align="center"
+                        width={120}
+                        draggable
+                      />
+                    </React.Fragment>
+                  );
                 } else if (ann.type === 'text') {
                   return (
                     <KonvaText
