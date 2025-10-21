@@ -162,8 +162,16 @@ export default function EmployeesPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <CompactHeader title="Employee Management" backUrl="/hr" />
+    <DashboardLayout>
+      <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
+        <CompactHeader
+          title="Employee Management"
+          icon={User}
+          badges={[
+            { label: `${employees.length} Total`, color: "blue" },
+            { label: `${employees.filter((e: any) => e.employment_status === "active").length} Active`, color: "green" },
+          ]}
+        />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Stats Cards */}
