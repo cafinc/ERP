@@ -43,7 +43,7 @@ employee_trainings_collection = db["employee_trainings"]
 performance_reviews_collection = db["performance_reviews"]
 payroll_settings_collection = db["payroll_settings"]
 
-router = APIRouter(prefix="/api/hr", tags=["HR Module"])
+router = APIRouter(prefix="/hr", tags=["HR Module"])
 
 # ==================== EMPLOYEE MANAGEMENT ====================
 
