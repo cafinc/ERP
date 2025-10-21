@@ -487,7 +487,7 @@ export default function CustomerFormPage() {
                       onChange={e =>
                         setCustomerForm({ ...customerForm, first_name: e.target.value })
                       }
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       placeholder="John"
                       required
                     />
@@ -503,7 +503,7 @@ export default function CustomerFormPage() {
                       onChange={e =>
                         setCustomerForm({ ...customerForm, last_name: e.target.value })
                       }
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       placeholder="Smith"
                       required
                     />
@@ -517,7 +517,7 @@ export default function CustomerFormPage() {
                         type="email"
                         value={customerForm.email}
                         onChange={e => setCustomerForm({ ...customerForm, email: e.target.value })}
-                        className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent text-sm"
+                        className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                         placeholder="john@example.com"
                         required
                       />
@@ -532,7 +532,7 @@ export default function CustomerFormPage() {
                         type="tel"
                         value={customerForm.phone}
                         onChange={e => handlePhoneChange('phone', e.target.value)}
-                        className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent text-sm"
+                        className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                         placeholder="555-123-4567"
                         required
                       />
@@ -549,7 +549,7 @@ export default function CustomerFormPage() {
                         type="tel"
                         value={customerForm.mobile}
                         onChange={e => handlePhoneChange('mobile', e.target.value)}
-                        className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent text-sm"
+                        className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                         placeholder="555-987-6543"
                       />
                     </div>
@@ -562,7 +562,7 @@ export default function CustomerFormPage() {
                     <select
                       value={customerForm.company_id}
                       onChange={e => setCustomerForm({ ...customerForm, company_id: e.target.value })}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     >
                       <option value="">No company affiliation</option>
                       {companies.map(company => (
@@ -599,7 +599,7 @@ export default function CustomerFormPage() {
                         onChange={e =>
                           setCustomerForm({ ...customerForm, company_name: e.target.value })
                         }
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         placeholder="ABC Corporation"
                         required
                       />
@@ -617,7 +617,7 @@ export default function CustomerFormPage() {
                           onChange={e =>
                             setCustomerForm({ ...customerForm, email: e.target.value })
                           }
-                          className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent text-sm"
+                          className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                           placeholder="info@company.com"
                           required
                         />
@@ -634,7 +634,7 @@ export default function CustomerFormPage() {
                           type="tel"
                           value={customerForm.phone}
                           onChange={e => handlePhoneChange('phone', e.target.value)}
-                          className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent text-sm"
+                          className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                           placeholder="555-123-4567"
                           required
                         />
@@ -667,7 +667,7 @@ export default function CustomerFormPage() {
                             },
                           })
                         }
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         placeholder="John"
                         required
                       />
@@ -689,7 +689,7 @@ export default function CustomerFormPage() {
                             },
                           })
                         }
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         placeholder="Doe"
                         required
                       />
@@ -705,7 +705,7 @@ export default function CustomerFormPage() {
                           type="tel"
                           value={customerForm.main_contact.phone}
                           onChange={e => handlePhoneChange('main_contact_phone', e.target.value)}
-                          className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent text-sm"
+                          className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                           placeholder="555-123-4567"
                           required
                         />
@@ -730,7 +730,7 @@ export default function CustomerFormPage() {
                               },
                             })
                           }
-                          className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent text-sm"
+                          className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                           placeholder="john@company.com"
                           required
                         />
@@ -752,7 +752,7 @@ export default function CustomerFormPage() {
                             },
                           })
                         }
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         required
                       >
                         {POSITION_OPTIONS.map(pos => (
@@ -786,7 +786,7 @@ export default function CustomerFormPage() {
                             accounting: { ...customerForm.accounting, tax_id: e.target.value },
                           })
                         }
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         placeholder="12-3456789"
                       />
                     </div>
@@ -806,7 +806,7 @@ export default function CustomerFormPage() {
                             },
                           })
                         }
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       >
                         <option value="due_on_receipt">Due on Receipt</option>
                         <option value="net_15">Net 15</option>
@@ -832,7 +832,7 @@ export default function CustomerFormPage() {
                             },
                           })
                         }
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         placeholder="0.00"
                       />
                     </div>
@@ -852,7 +852,7 @@ export default function CustomerFormPage() {
                             },
                           })
                         }
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       >
                         <option value="">Select method</option>
                         <option value="check">Check</option>
@@ -876,7 +876,7 @@ export default function CustomerFormPage() {
                               },
                             })
                           }
-                          className="w-5 h-5 text-blue-600 rounded focus:ring-[#3f72af]"
+                          className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500"
                         />
                         <span className="text-sm font-medium text-gray-700">
                           Purchase Order Required
@@ -930,7 +930,7 @@ export default function CustomerFormPage() {
                     onChange={e =>
                       setCustomerForm({ ...customerForm, street_address: e.target.value })
                     }
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="123 Main Street"
                     required
                   />
@@ -945,7 +945,7 @@ export default function CustomerFormPage() {
                     type="text"
                     value={customerForm.city}
                     onChange={e => setCustomerForm({ ...customerForm, city: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="Calgary"
                     required
                   />
@@ -958,7 +958,7 @@ export default function CustomerFormPage() {
                   <select
                     value={customerForm.province}
                     onChange={e => setCustomerForm({ ...customerForm, province: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     required
                   >
                     {CANADIAN_PROVINCES.map(prov => (
@@ -979,7 +979,7 @@ export default function CustomerFormPage() {
                     onChange={e =>
                       setCustomerForm({ ...customerForm, postal_code: e.target.value })
                     }
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="T2P 1J9"
                     required
                   />
@@ -991,7 +991,7 @@ export default function CustomerFormPage() {
                     type="text"
                     value={customerForm.country}
                     onChange={e => setCustomerForm({ ...customerForm, country: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent bg-gray-50"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50"
                     placeholder="Canada"
                     readOnly
                     required
@@ -1014,7 +1014,7 @@ export default function CustomerFormPage() {
                     value={customerForm.notes}
                     onChange={e => setCustomerForm({ ...customerForm, notes: e.target.value })}
                     rows={4}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="Additional notes or special instructions..."
                   />
                 </div>
@@ -1027,7 +1027,7 @@ export default function CustomerFormPage() {
                       onChange={e =>
                         setCustomerForm({ ...customerForm, active: e.target.checked })
                       }
-                      className="w-5 h-5 text-blue-600 rounded focus:ring-[#3f72af]"
+                      className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500"
                     />
                     <span className="text-sm font-medium text-gray-700">Active Customer</span>
                   </label>
