@@ -396,8 +396,8 @@ export default function CustomerFormPage() {
 
   return (
     <DashboardLayout>
-      <div className="p-4">
-        <div className="max-w-4xl mx-auto">
+      <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto">
+        <div className="max-w-4xl mx-auto p-6">
           {/* Compact Header */}
           <CompactHeader
             title={isEdit ? 'Edit Customer' : 'Create Customer'}
