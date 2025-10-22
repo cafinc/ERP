@@ -1518,7 +1518,6 @@ export default function CustomerDetailPage() {
           )}
         </div>
       </div>
-      </div>
 
       {/* Modals */}
       {/* Service Request Modal */}
