@@ -352,7 +352,7 @@ export default function CustomersPage() {
               {visibleColumns.phone && <div className="col-span-2">Phone</div>}
               {visibleColumns.email && <div className="col-span-2">Email</div>}
               {visibleColumns.type && <div className="col-span-1">Type</div>}
-              <div className="col-span-2">Actions</div>
+              <div className="col-span-2">Action</div>
             </div>
           </div>
         )}
