@@ -16,6 +16,12 @@ import {
   Link2,
   Briefcase,
   ChevronRight,
+  TrendingUp,
+  Wrench,
+  MessageSquare,
+  Shield,
+  Camera,
+  BarChart3,
 } from 'lucide-react';
 
 interface MenuItem {
