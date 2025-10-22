@@ -320,6 +320,29 @@ export default function EnhancedHeader() {
                 )}
               </div>
 
+              {/* Unified Communications Center */}
+              <div className="relative">
+                <button
+                  onClick={() => setShowUnifiedComms(!showUnifiedComms)}
+                  className="p-2 hover:bg-white hover:bg-opacity-10 rounded-lg transition-colors relative cursor-pointer"
+                  title="All Communications"
+                >
+                  <MessageSquare className="w-5 h-5" />
+                  {totalUnreadComms > 0 && (
+                    <span className="absolute top-0 right-0 flex items-center justify-center">
+                      <span className="absolute inline-flex h-3 w-3 rounded-full bg-blue-500 opacity-75 animate-ping"></span>
+                      <span className="relative inline-flex items-center justify-center h-3 w-3 rounded-full bg-blue-500 text-white text-[8px] font-bold">
+                        {totalUnreadComms > 9 ? '9+' : totalUnreadComms}
+                      </span>
+                    </span>
+                  )}
+                </button>
+                <UnifiedCommunicationsDropdown 
+                  isOpen={showUnifiedComms}
+                  onClose={() => setShowUnifiedComms(false)}
+                />
+              </div>
+
               {/* Notifications with NotificationCenter */}
               <div ref={notificationRef} className="relative">
                 <button
