@@ -777,6 +777,12 @@ class TemplateSystemTester:
         print("=" * 60)
         
         try:
+            # Authenticate first
+            print("\n🔐 Authenticating...")
+            if not self.authenticate():
+                print("❌ Authentication failed. Cannot proceed with tests.")
+                return False
+            
             # Run all test suites
             self.test_suite_1_template_crud()
             self.test_suite_2_template_application()
