@@ -1123,6 +1123,15 @@ export default function CreateEstimatePage() {
           </div>
         )}
       </div>
+
+      {/* Template Selector Modal */}
+      {showTemplateSelector && (
+        <TemplateSelector
+          templateType="estimate"
+          onSelect={handleTemplateSelect}
+          onClose={() => setShowTemplateSelector(false)}
+        />
+      )}
     </HybridNavigationTopBar>
   );
 }
