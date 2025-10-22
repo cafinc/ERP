@@ -342,21 +342,6 @@ async def get_template_placeholders(
         logger.error(f"Error fetching placeholders: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
 
-            data=request.data
-        )
-        
-        return {
-            "success": True,
-            "message": "Template applied successfully",
-            "result": result
-        }
-    
-    except ValueError as e:
-        raise HTTPException(status_code=400, detail=str(e))
-    except Exception as e:
-        logger.error(f"Error applying template: {str(e)}")
-        raise HTTPException(status_code=500, detail=str(e))
-
 
 # ========== Utility Endpoints ==========
 
