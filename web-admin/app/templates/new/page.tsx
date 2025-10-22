@@ -278,18 +278,29 @@ export default function CreateTemplatePage() {
               <label className="block text-sm font-medium text-gray-700">
                 Template Content (JSON) *
               </label>
-              <button
-                type="button"
-                onClick={insertExample}
-                className="text-sm text-blue-600 hover:text-blue-700"
-              >
-                Insert Example
-              </button>
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={() => setShowPlaceholderBrowser(true)}
+                  className="flex items-center gap-2 px-3 py-1.5 text-sm bg-purple-50 text-purple-700 hover:bg-purple-100 rounded-lg transition-colors"
+                >
+                  <SparklesIcon className="w-4 h-4" />
+                  Browse Placeholders
+                </button>
+                <button
+                  type="button"
+                  onClick={insertExample}
+                  className="text-sm text-blue-600 hover:text-blue-700 px-3 py-1.5"
+                >
+                  Insert Example
+                </button>
+              </div>
             </div>
             <p className="text-xs text-gray-500 mb-2">
-              Use {`{{variable_name}}`} for placeholders. Example: {`{{customer_name}}`}, {`{{total}}`}
+              Use {`{{variable_name}}`} for placeholders. Click "Browse Placeholders" to see 70+ system variables.
             </p>
             <textarea
+              ref={textareaRef}
               value={formData.content}
               onChange={(e) => handleContentChange(e.target.value)}
               placeholder='{"title": "{{title}}", "content": "{{content}}"}'
