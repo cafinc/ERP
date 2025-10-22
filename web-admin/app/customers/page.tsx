@@ -143,16 +143,16 @@ export default function CustomersPage() {
           { label: "All", value: "all", count: customers.length },
           { label: "Active", value: "active", count: customers.filter(c => c.active).length },
           { label: "Inactive", value: "inactive", count: customers.filter(c => !c.active).length },
-          { label: "Individual", value: "individual", count: customers.filter(c => c.customer_type === 'individual').length },
+          { label: "Individual", value: "individual", count: customers.filter(c => !c.customer_type || c.customer_type === 'individual').length },
           { label: "Company", value: "company", count: customers.filter(c => c.customer_type === 'company').length },
         ]}
-        activeTab={filterActive}
+        activeTab={filterType === 'individual' || filterType === 'company' ? filterType : filterActive}
         onTabChange={(value) => {
-          setFilterActive(value);
-          // Reset type filter when switching to type-specific tabs
           if (value === 'individual' || value === 'company') {
             setFilterType(value);
+            setFilterActive('all');
           } else {
+            setFilterActive(value);
             setFilterType('all');
           }
         }}
