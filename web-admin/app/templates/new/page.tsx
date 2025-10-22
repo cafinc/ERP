@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { ArrowLeftIcon, CheckIcon, SparklesIcon } from '@heroicons/react/24/outline';
+import PlaceholderBrowser from '@/components/PlaceholderBrowser';
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || '';
 
