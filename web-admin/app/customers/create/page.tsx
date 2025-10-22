@@ -1036,7 +1036,6 @@ export default function CustomerFormPage() {
             </div>
           </form>
         </div>
-      </div>
-    </>
-  );
-}
+      </>
+    );
+  }
