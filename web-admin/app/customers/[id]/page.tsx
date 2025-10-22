@@ -1518,8 +1518,6 @@ export default function CustomerDetailPage() {
         {activeTab === 'communications' && (
           <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6 mt-6">
             {(() => {
-              const [commSubTab, setCommSubTab] = React.useState('all');
-              
               const typeConfig = {
                 'inapp': { icon: MessageCircle, color: 'bg-orange-100 text-orange-600', label: 'In-App' },
                 'sms': { icon: MessageSquare, color: 'bg-green-100 text-green-600', label: 'SMS' },
