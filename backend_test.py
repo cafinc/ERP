@@ -1,20 +1,19 @@
 #!/usr/bin/env python3
 """
-Communication Center Backend API Testing
-Tests all Communication Center endpoints as requested in the review.
+Comprehensive Template System Backend API Testing
+Tests all template endpoints and functionality as requested
 """
 
 import requests
 import json
-import os
-import tempfile
+import sys
 from datetime import datetime
 import uuid
 
-# Backend URL from environment
-BACKEND_URL = "https://snowconnect.preview.emergentagent.com/api"
+# Backend URL from frontend environment
+BASE_URL = "https://snowconnect.preview.emergentagent.com/api"
 
-class CommunicationCenterTester:
+class TemplateSystemTester:
     def __init__(self):
         self.base_url = BACKEND_URL
         self.session = requests.Session()
