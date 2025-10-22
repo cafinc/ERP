@@ -600,11 +600,16 @@ export default function CustomerFormPage() {
                             type="tel"
                             value={customerForm.phone}
                             onChange={e => handlePhoneChange('phone', e.target.value)}
-                            className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
-                            placeholder="555-123-4567"
+                            className={`w-full pl-10 pr-4 py-1.5 border rounded-lg focus:ring-2 focus:border-transparent text-sm ${
+                              fieldErrors['phone'] ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'
+                            }`}
+                            placeholder="(555) 123-4567"
                             required
                           />
                         </div>
+                        {fieldErrors['phone'] && (
+                          <p className="text-red-500 text-xs mt-1">{fieldErrors['phone']}</p>
+                        )}
                       </div>
 
                       <div className="md:col-span-2">
