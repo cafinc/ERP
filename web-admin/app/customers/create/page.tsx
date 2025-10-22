@@ -914,7 +914,7 @@ export default function CustomerFormPage() {
             )}
 
             {/* Address Section (Common for both) */}
-            <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
+            <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-8 backdrop-blur-sm">
               <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center space-x-2">
                 <MapPin className="w-5 h-5 text-[#3f72af]" />
                 <span>Address *</span>
