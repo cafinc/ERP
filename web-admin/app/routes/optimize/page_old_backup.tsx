@@ -241,7 +241,7 @@ export default function RouteOptimizationPage() {
                   <button
                     onClick={handleOptimize}
                     disabled={selectedSiteIds.length < 2 || optimizing}
-                    className="w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 text-white rounded-lg font-medium transition-colors flex items-center justify-center space-x-2"
+                    className="w-full px-6 py-3 bg-[#3f72af] hover:bg-blue-700 disabled:bg-gray-300 text-white rounded-lg font-medium transition-colors flex items-center justify-center space-x-2"
                   >
                     {optimizing ? (
                       <>
@@ -387,7 +387,7 @@ export default function RouteOptimizationPage() {
                         >
                           <div className="flex items-center space-x-3">
                             <GripVertical className="w-5 h-5 text-gray-400" />
-                            <div className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">
+                            <div className="w-8 h-8 bg-[#3f72af] text-white rounded-full flex items-center justify-center font-bold">
                               {index + 1}
                             </div>
                           </div>

@@ -893,7 +893,7 @@ export default function CustomerFormPage() {
                               </div>
                               {isSelected && (
                                 <div className="ml-4">
-                                  <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center">
+                                  <div className="w-6 h-6 bg-[#3f72af] rounded-full flex items-center justify-center">
                                     <FileText className="w-4 h-4 text-white" />
                                   </div>
                                 </div>

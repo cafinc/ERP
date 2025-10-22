@@ -372,7 +372,7 @@ export default function AnalyticsPage() {
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2">
                   <div 
-                    className="bg-blue-600 h-2 rounded-full" 
+                    className="bg-[#3f72af] h-2 rounded-full" 
                     style={{ width: `${(data.team.onShift / data.team.total) * 100}%` }}
                   />
                 </div>

@@ -103,7 +103,7 @@ export default function TasksPage() {
                     onClick={() => setFilterStatus(status)}
                     className={`px-4 py-2 rounded-lg font-medium text-sm transition-all ${
                       filterStatus === status
-                        ? 'bg-blue-600 text-white shadow-md'
+                        ? 'bg-[#3f72af] text-white shadow-md'
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     }`}
                   >
@@ -121,7 +121,7 @@ export default function TasksPage() {
             </div>
             <h3 className="text-2xl font-bold text-gray-900 mb-2">No Tasks Yet</h3>
             <p className="text-gray-600 mb-6">Create your first task to start managing your team's work</p>
-            <button className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all shadow-md hover:shadow-lg font-semibold">
+            <button className="px-6 py-3 bg-[#3f72af] text-white rounded-lg hover:bg-blue-700 transition-all shadow-md hover:shadow-lg font-semibold">
               Create First Task
             </button>
           </div>

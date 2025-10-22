@@ -470,7 +470,7 @@ export default function RecurringServicesPage() {
                     resetForm();
                     setShowModal(true);
                   }}
-                  className="px-6 py-2 bg-blue-600 hover:bg-[#2c5282] text-white rounded-lg font-medium transition-colors inline-flex items-center gap-2"
+                  className="px-6 py-2 bg-[#3f72af] hover:bg-[#2c5282] text-white rounded-lg font-medium transition-colors inline-flex items-center gap-2"
                 >
                   <Plus className="w-4 h-4" />
                   Add First Service
@@ -639,7 +639,7 @@ export default function RecurringServicesPage() {
               <button
                 onClick={handleCreateOrUpdate}
                 disabled={saving}
-                className="px-6 py-2 bg-blue-600 hover:bg-[#2c5282] disabled:bg-gray-300 text-white rounded-lg font-medium transition-colors"
+                className="px-6 py-2 bg-[#3f72af] hover:bg-[#2c5282] disabled:bg-gray-300 text-white rounded-lg font-medium transition-colors"
               >
                 {saving ? 'Saving...' : editingService ? 'Update' : 'Create'}
               </button>

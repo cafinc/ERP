@@ -190,7 +190,7 @@ export default function ConsumablesAnalyticsPage() {
                         <div className="flex items-center gap-2">
                           <div className="flex-1 bg-gray-200 rounded-full h-2 max-w-[100px]">
                             <div
-                              className="bg-blue-600 h-2 rounded-full"
+                              className="bg-[#3f72af] h-2 rounded-full"
                               style={{ width: `${(item.total_cost / totalCost) * 100}%` }}
                             />
                           </div>

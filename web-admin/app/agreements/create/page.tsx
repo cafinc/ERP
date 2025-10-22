@@ -181,21 +181,21 @@ export default function CreateAgreementPage() {
           <div className="flex items-center justify-center space-x-4">
             <div className={`flex items-center space-x-2 ${step === 'select' ? 'text-blue-600' : 'text-gray-400'}`}>
               <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                step === 'select' ? 'bg-blue-600 text-white' : 'bg-gray-200'
+                step === 'select' ? 'bg-[#3f72af] text-white' : 'bg-gray-200'
               }`}>1</div>
               <span className="font-medium">Select Method</span>
             </div>
             <div className="w-16 h-0.5 bg-gray-300" />
             <div className={`flex items-center space-x-2 ${step === 'details' ? 'text-blue-600' : 'text-gray-400'}`}>
               <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                step === 'details' ? 'bg-blue-600 text-white' : 'bg-gray-200'
+                step === 'details' ? 'bg-[#3f72af] text-white' : 'bg-gray-200'
               }`}>2</div>
               <span className="font-medium">Agreement Details</span>
             </div>
             <div className="w-16 h-0.5 bg-gray-300" />
             <div className={`flex items-center space-x-2 ${step === 'review' ? 'text-blue-600' : 'text-gray-400'}`}>
               <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                step === 'review' ? 'bg-blue-600 text-white' : 'bg-gray-200'
+                step === 'review' ? 'bg-[#3f72af] text-white' : 'bg-gray-200'
               }`}>3</div>
               <span className="font-medium">Review & Save</span>
             </div>
@@ -214,7 +214,7 @@ export default function CreateAgreementPage() {
                 onClick={() => setCreationMethod('template')}
                 className={`p-6 border-2 rounded-lg cursor-pointer transition-all ${
                   creationMethod === 'template'
-                    ? 'border-blue-500 bg-blue-600/5'
+                    ? 'border-blue-500 bg-[#3f72af]/5'
                     : 'border-gray-200 hover:border-blue-500/50'
                 }`}
               >
@@ -250,7 +250,7 @@ export default function CreateAgreementPage() {
                 onClick={() => setCreationMethod('estimate')}
                 className={`p-6 border-2 rounded-lg cursor-pointer transition-all ${
                   creationMethod === 'estimate'
-                    ? 'border-blue-500 bg-blue-600/5'
+                    ? 'border-blue-500 bg-[#3f72af]/5'
                     : 'border-gray-200 hover:border-blue-500/50'
                 }`}
               >
@@ -289,7 +289,7 @@ export default function CreateAgreementPage() {
                 }}
                 className={`p-6 border-2 rounded-lg cursor-pointer transition-all ${
                   creationMethod === 'scratch'
-                    ? 'border-blue-500 bg-blue-600/5'
+                    ? 'border-blue-500 bg-[#3f72af]/5'
                     : 'border-gray-200 hover:border-blue-500/50'
                 }`}
               >
@@ -492,7 +492,7 @@ export default function CreateAgreementPage() {
                 <button
                   onClick={() => setStep('review')}
                   disabled={!agreement.customer_id || !agreement.start_date || !agreement.agreement_value}
-                  className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-600/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="px-6 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#3f72af]/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Continue to Review
                 </button>
@@ -568,7 +568,7 @@ export default function CreateAgreementPage() {
                 <button
                   onClick={handleSave}
                   disabled={saving}
-                  className="flex items-center space-x-2 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-600/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex items-center space-x-2 px-6 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#3f72af]/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Save className="w-5 h-5" />
                   <span>{saving ? 'Creating...' : 'Create Agreement'}</span>

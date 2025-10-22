@@ -153,7 +153,7 @@ export default function LiveTrackingPage() {
         el.className = 'crew-marker';
         el.innerHTML = `
           <div class="relative">
-            <div class="w-10 h-10 bg-blue-600 rounded-full border-4 border-white shadow-lg flex items-center justify-center">
+            <div class="w-10 h-10 bg-[#3f72af] rounded-full border-4 border-white shadow-lg flex items-center justify-center">
               <span class="text-white text-xs font-bold">${location.crew_name.charAt(0)}</span>
             </div>
             ${location.dispatch_id ? '<div class="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-white"></div>' : ''}
@@ -357,7 +357,7 @@ export default function LiveTrackingPage() {
           {/* Manual Refresh */}
           <button
             onClick={loadAllData}
-            className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-[#2c5282] transition-colors"
+            className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-colors"
           >
             <RefreshCw className="w-4 h-4" />
             Refresh Now
@@ -369,7 +369,7 @@ export default function LiveTrackingPage() {
           <p className="text-xs font-medium text-gray-600 mb-2">Legend:</p>
           <div className="space-y-1">
             <div className="flex items-center gap-2 text-xs">
-              <div className="w-4 h-4 bg-blue-600 rounded-full"></div>
+              <div className="w-4 h-4 bg-[#3f72af] rounded-full"></div>
               <span>Active Crew</span>
             </div>
             <div className="flex items-center gap-2 text-xs">

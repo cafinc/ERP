@@ -54,7 +54,7 @@ export default function CustomerPortalLoginPage() {
       <div className="max-w-md w-full">
         {/* Logo/Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-full mb-4">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-[#3f72af] rounded-full mb-4">
             <Home className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Customer Portal</h1>
@@ -111,7 +111,7 @@ export default function CustomerPortalLoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-blue-600 hover:bg-blue-600/90 text-white font-medium py-3 rounded-lg transition-colors disabled:opacity-50"
+              className="w-full bg-[#3f72af] hover:bg-[#3f72af]/90 text-white font-medium py-3 rounded-lg transition-colors disabled:opacity-50"
             >
               {loading ? 'Signing in...' : 'Sign In'}
             </button>

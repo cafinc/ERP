@@ -185,7 +185,7 @@ export default function EstimateDetailPage() {
           <p className="text-gray-600 mb-6">The estimate you're looking for doesn't exist</p>
           <button
             onClick={() => router.push('/estimates')}
-            className="flex items-center space-x-2 px-6 py-3 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium"
+            className="flex items-center space-x-2 px-6 py-3 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium"
           >
             <ArrowLeft className="w-5 h-5" />
             <span>Back to Estimates</span>
@@ -224,7 +224,7 @@ export default function EstimateDetailPage() {
         <div className="mb-6 flex flex-wrap gap-3">
           <button
             onClick={() => router.push(`/estimates/${estimateId}/edit`)}
-            className="flex items-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors"
+            className="flex items-center space-x-2 px-4 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
             disabled={actionLoading}
           >
             <Edit className="w-5 h-5" />
@@ -234,7 +234,7 @@ export default function EstimateDetailPage() {
           {estimate.status?.toLowerCase() !== 'sent' && estimate.status?.toLowerCase() !== 'approved' && (
             <button
               onClick={handleSendEstimate}
-              className="flex items-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
+              className="flex items-center space-x-2 px-4 py-2 bg-[#3f72af] hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
               disabled={actionLoading}
             >
               <Send className="w-5 h-5" />

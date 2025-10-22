@@ -295,7 +295,7 @@ export default function ContractDetailPage() {
                 </button>
                 <button
                   onClick={handleSendContract}
-                  className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                  className="flex items-center gap-2 px-4 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-blue-700"
                   disabled={actionLoading}
                 >
                   <Send className="w-4 h-4" />

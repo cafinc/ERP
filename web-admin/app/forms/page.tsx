@@ -220,7 +220,7 @@ export default function FormsPage() {
               onClick={() => setActiveTab('templates')}
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                 activeTab === 'templates'
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-[#3f72af] text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
@@ -230,7 +230,7 @@ export default function FormsPage() {
               onClick={() => setActiveTab('responses')}
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                 activeTab === 'responses'
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-[#3f72af] text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >

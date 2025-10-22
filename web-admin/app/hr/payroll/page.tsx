@@ -448,7 +448,7 @@ export default function PayrollSettingsPage() {
             <button
               type="submit"
               disabled={saving}
-              className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors disabled:bg-blue-300 flex items-center gap-2"
+              className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-[#3f72af] transition-colors disabled:bg-blue-300 flex items-center gap-2"
             >
               {saving ? (
                 <>

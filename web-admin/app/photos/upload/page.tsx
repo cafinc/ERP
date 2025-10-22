@@ -177,7 +177,7 @@ export default function PhotoUploadPage() {
           className={`w-full flex items-center justify-center gap-2 py-4 rounded-lg font-semibold transition-colors ${
             uploading || files.length === 0
               ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-              : 'bg-blue-600 text-white hover:bg-[#2c5282]'
+              : 'bg-[#3f72af] text-white hover:bg-[#2c5282]'
           }`}
         >
           {uploading ? (

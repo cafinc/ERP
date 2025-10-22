@@ -65,7 +65,7 @@ export default function RingCentralHub() {
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center space-x-3 mb-3">
-            <div className="p-3 bg-blue-600 rounded-lg">
+            <div className="p-3 bg-[#3f72af] rounded-lg">
               <Phone className="w-8 h-8 text-white" />
             </div>
             <div>
@@ -168,7 +168,7 @@ export default function RingCentralHub() {
             </div>
             <Link
               href="/settings/ringcentral"
-              className="flex items-center space-x-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
+              className="flex items-center space-x-2 px-6 py-3 bg-[#3f72af] hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
             >
               <span>Settings</span>
               <ArrowRight className="w-4 h-4" />

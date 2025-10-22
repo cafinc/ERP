@@ -174,7 +174,7 @@ export default function InvoicesPage() {
               onClick={() => setFilterStatus('all')}
               className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-colors ${
                 filterStatus === 'all'
-                  ? 'bg-blue-600 text-white shadow-md'
+                  ? 'bg-[#3f72af] text-white shadow-md'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
               }`}
             >
@@ -194,7 +194,7 @@ export default function InvoicesPage() {
               onClick={() => setFilterStatus('partially_paid')}
               className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-colors ${
                 filterStatus === 'partially_paid'
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-[#3f72af] text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
               }`}
             >
@@ -294,7 +294,7 @@ export default function InvoicesPage() {
             {!searchQuery && filterStatus === 'all' && (
               <button
                 onClick={() => router.push('/invoices/create')}
-                className="inline-flex items-center space-x-2 px-6 py-3 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors"
+                className="inline-flex items-center space-x-2 px-6 py-3 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
               >
                 <Plus className="w-5 h-5" />
                 <span>Create First Invoice</span>
@@ -362,7 +362,7 @@ export default function InvoicesPage() {
                       <td className="px-6 py-4">
                         <button
                           onClick={() => router.push(`/invoices/${invoice._id}`)}
-                          className="flex items-center space-x-1 px-3 py-1.5 text-sm bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors"
+                          className="flex items-center space-x-1 px-3 py-1.5 text-sm bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
                         >
                           <Eye className="w-4 h-4" />
                           <span>View</span>

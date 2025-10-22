@@ -220,7 +220,7 @@ export default function EquipmentFormsPage() {
                         <button
                           onClick={() => handleSave(eq.id)}
                           disabled={saving}
-                          className="flex items-center gap-1 px-3 py-1 bg-blue-600 text-white rounded hover:bg-[#2c5282] disabled:opacity-50"
+                          className="flex items-center gap-1 px-3 py-1 bg-[#3f72af] text-white rounded hover:bg-[#2c5282] disabled:opacity-50"
                         >
                           <Save className="w-4 h-4" />
                           Save

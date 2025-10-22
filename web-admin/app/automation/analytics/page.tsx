@@ -301,7 +301,7 @@ export default function AutomationAnalyticsPage() {
                 
                 <button
                   onClick={() => router.push(`/automation/workflows/${metric.workflow_id}/history`)}
-                  className="mt-2 w-full px-4 py-2 bg-blue-600 hover:bg-[#2c5282] text-white rounded-lg transition-colors text-sm font-medium flex items-center justify-center gap-2"
+                  className="mt-2 w-full px-4 py-2 bg-[#3f72af] hover:bg-[#2c5282] text-white rounded-lg transition-colors text-sm font-medium flex items-center justify-center gap-2"
                 >
                   <Activity className="w-4 h-4" />
                   Execution History

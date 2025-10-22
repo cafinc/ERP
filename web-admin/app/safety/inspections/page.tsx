@@ -197,7 +197,7 @@ export default function SafetyInspectionsPage() {
                     e.stopPropagation();
                     router.push(`/safety/inspections/${inspection.id}`);
                   }}
-                  className="flex-1 flex items-center justify-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors text-sm"
+                  className="flex-1 flex items-center justify-center space-x-2 px-4 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors text-sm"
                 >
                   <Eye className="w-4 h-4" />
                   <span>View</span>

@@ -310,7 +310,7 @@ export default function PerformancePage() {
 
             <button
               onClick={() => setShowCreateModal(true)}
-              className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+              className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-[#3f72af]"
             >
               <Plus className="h-4 w-4" />
               Schedule Review
@@ -444,7 +444,7 @@ export default function PerformancePage() {
                       {review.status === "scheduled" && (
                         <button
                           onClick={() => handleStartReview(review.id)}
-                          className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 text-sm"
+                          className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-[#3f72af] text-sm"
                         >
                           Start Review
                         </button>
@@ -627,7 +627,7 @@ export default function PerformancePage() {
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+                  className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-[#3f72af]"
                 >
                   Schedule Review
                 </button>

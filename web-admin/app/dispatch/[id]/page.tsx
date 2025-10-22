@@ -107,7 +107,7 @@ export default function DispatchDetailPage() {
             <h3 className="text-xl font-semibold text-gray-900 mb-2">Dispatch Not Found</h3>
             <button
               onClick={() => router.push('/dispatch')}
-              className="inline-flex items-center space-x-2 px-6 py-3 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors"
+              className="inline-flex items-center space-x-2 px-6 py-3 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
             >
               <ArrowLeft className="w-5 h-5" />
               <span>Back to Dispatch</span>

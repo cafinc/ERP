@@ -158,7 +158,7 @@ export default function SupportPage() {
                   </p>
                   <button
                     onClick={() => setSubmitted(false)}
-                    className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-[#2c5282] transition-colors"
+                    className="px-6 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-colors"
                   >
                     Send Another Message
                   </button>
@@ -241,7 +241,7 @@ export default function SupportPage() {
                     <button
                       type="submit"
                       disabled={sending}
-                      className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-[#2c5282] transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                      className="px-6 py-3 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
                     >
                       {sending ? (
                         <>

@@ -153,7 +153,7 @@ export default function InvoiceDetailPage() {
             <p className="text-gray-600 mb-6">The invoice you're looking for doesn't exist.</p>
             <button
               onClick={() => router.push('/invoices')}
-              className="inline-flex items-center space-x-2 px-6 py-3 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors"
+              className="inline-flex items-center space-x-2 px-6 py-3 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
             >
               <ArrowLeft className="w-5 h-5" />
               <span>Back to Invoices</span>
@@ -483,7 +483,7 @@ export default function InvoiceDetailPage() {
                 <button
                   onClick={handleAddPayment}
                   disabled={submitting}
-                  className="flex-1 flex items-center justify-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors disabled:opacity-50"
+                  className="flex-1 flex items-center justify-center space-x-2 px-4 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors disabled:opacity-50"
                 >
                   {submitting ? <RefreshCw className="w-4 h-4 animate-spin" /> : <CheckCircle className="w-4 h-4" />}
                   <span>Record Payment</span>

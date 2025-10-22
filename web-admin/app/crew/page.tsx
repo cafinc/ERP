@@ -171,7 +171,7 @@ export default function CrewPage() {
               onClick={() => setFilterStatus('all')}
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                 filterStatus === 'all'
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-[#3f72af] text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
@@ -216,7 +216,7 @@ export default function CrewPage() {
             {!searchQuery && filterStatus === 'active' && (
               <button
                 onClick={() => router.push('/team/create')}
-                className="inline-flex items-center space-x-2 px-6 py-3 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors"
+                className="inline-flex items-center space-x-2 px-6 py-3 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
               >
                 <Plus className="w-5 h-5" />
                 <span>Add First Crew Member</span>
@@ -294,7 +294,7 @@ export default function CrewPage() {
                       e.stopPropagation();
                       router.push(`/team/${user.id}`);
                     }}
-                    className="flex-1 flex items-center justify-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors text-sm"
+                    className="flex-1 flex items-center justify-center space-x-2 px-4 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors text-sm"
                   >
                     <Eye className="w-4 h-4" />
                     <span>View</span>

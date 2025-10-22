@@ -408,7 +408,7 @@ export default function CustomerDetailPage() {
           <h2 className="text-2xl font-bold text-gray-900 mb-2">Customer Not Found</h2>
           <button
             onClick={() => router.push('/customers')}
-            className="mt-4 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+            className="mt-4 px-6 py-3 bg-[#3f72af] text-white rounded-lg hover:bg-blue-700"
           >
             Back to Customers
           </button>
@@ -537,7 +537,7 @@ export default function CustomerDetailPage() {
                           onClick={() => setActiveTab(tab.id)}
                           className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                             isActive
-                              ? 'bg-blue-600 text-white'
+                              ? 'bg-[#3f72af] text-white'
                               : 'text-gray-700 hover:bg-gray-100'
                           }`}
                         >
@@ -711,7 +711,7 @@ export default function CustomerDetailPage() {
                   <h2 className="text-xl font-semibold text-gray-900">Sites</h2>
                   <button
                     onClick={() => router.push(`/sites/create?customer_id=${customerId}`)}
-                    className="flex items-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors text-sm"
+                    className="flex items-center space-x-2 px-4 py-2 bg-[#3f72af] hover:bg-blue-700 text-white rounded-lg font-medium transition-colors text-sm"
                   >
                     <Plus className="w-4 h-4" />
                     <span>Add Site</span>
@@ -743,7 +743,7 @@ export default function CustomerDetailPage() {
                 <h2 className="text-xl font-semibold text-gray-900">Estimates</h2>
                 <button
                   onClick={() => router.push(`/estimates/create?customer_id=${customerId}`)}
-                  className="flex items-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors"
+                  className="flex items-center space-x-2 px-4 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
                 >
                   <Plus className="w-4 h-4" />
                   <span>New Estimate</span>
@@ -758,7 +758,7 @@ export default function CustomerDetailPage() {
                   </p>
                   <button
                     onClick={() => router.push(`/estimates/create?customer_id=${customerId}`)}
-                    className="inline-flex items-center space-x-2 px-6 py-3 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors"
+                    className="inline-flex items-center space-x-2 px-6 py-3 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
                   >
                     <Plus className="w-5 h-5" />
                     <span>Create Estimate</span>
@@ -821,7 +821,7 @@ export default function CustomerDetailPage() {
                 <h2 className="text-xl font-semibold text-gray-900">Projects</h2>
                 <button
                   onClick={() => router.push(`/projects/create?customer_id=${customerId}`)}
-                  className="flex items-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors"
+                  className="flex items-center space-x-2 px-4 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
                 >
                   <Plus className="w-4 h-4" />
                   <span>New Project</span>
@@ -836,7 +836,7 @@ export default function CustomerDetailPage() {
                   </p>
                   <button
                     onClick={() => router.push(`/projects/create?customer_id=${customerId}`)}
-                    className="inline-flex items-center space-x-2 px-6 py-3 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors"
+                    className="inline-flex items-center space-x-2 px-6 py-3 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
                   >
                     <Plus className="w-5 h-5" />
                     <span>Create Project</span>
@@ -895,7 +895,7 @@ export default function CustomerDetailPage() {
                         <div className="mt-3">
                           <div className="w-full bg-gray-200 rounded-full h-2">
                             <div
-                              className="bg-blue-600 h-2 rounded-full transition-all"
+                              className="bg-[#3f72af] h-2 rounded-full transition-all"
                               style={{ width: `${project.completion_percentage}%` }}
                             />
                           </div>
@@ -925,7 +925,7 @@ export default function CustomerDetailPage() {
                     </button>
                     <button
                       onClick={() => router.push(`/agreements/create?customer_id=${customerId}`)}
-                      className="flex items-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors"
+                      className="flex items-center space-x-2 px-4 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
                     >
                       <Plus className="w-4 h-4" />
                       <span>New Agreement</span>
@@ -1010,7 +1010,7 @@ export default function CustomerDetailPage() {
                     </p>
                     <button
                       onClick={() => router.push(`/agreements/create?customer_id=${customerId}`)}
-                      className="inline-flex items-center space-x-2 px-6 py-3 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors"
+                      className="inline-flex items-center space-x-2 px-6 py-3 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
                     >
                       <Plus className="w-5 h-5" />
                       <span>Create Agreement</span>
@@ -1082,7 +1082,7 @@ export default function CustomerDetailPage() {
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-xl font-semibold text-gray-900">Tasks</h2>
                 <button
-                  className="flex items-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors"
+                  className="flex items-center space-x-2 px-4 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
                   onClick={() => alert('Task creation coming soon!')}
                 >
                   <Plus className="w-4 h-4" />
@@ -1097,7 +1097,7 @@ export default function CustomerDetailPage() {
                     Create tasks and assign them to team members for {customer?.name}
                   </p>
                   <button 
-                    className="inline-flex items-center space-x-2 px-6 py-3 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors"
+                    className="inline-flex items-center space-x-2 px-6 py-3 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
                     onClick={() => alert('Task creation coming soon!')}
                   >
                     <Plus className="w-5 h-5" />
@@ -1219,7 +1219,7 @@ export default function CustomerDetailPage() {
                 <div className="flex space-x-2">
                   <button 
                     onClick={() => router.push(`/gmail?to=${customer?.email}`)}
-                    className="flex items-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors"
+                    className="flex items-center space-x-2 px-4 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
                   >
                     <Mail className="w-4 h-4" />
                     <span>Send Email</span>
@@ -1243,7 +1243,7 @@ export default function CustomerDetailPage() {
                   <div className="flex items-center justify-center space-x-3">
                     <button 
                       onClick={() => router.push(`/gmail?to=${customer?.email}`)}
-                      className="inline-flex items-center space-x-2 px-6 py-3 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors"
+                      className="inline-flex items-center space-x-2 px-6 py-3 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
                     >
                       <Mail className="w-5 h-5" />
                       <span>Send Email</span>
@@ -1274,7 +1274,7 @@ export default function CustomerDetailPage() {
                             )}
                             <h3 className="font-semibold text-gray-900">{comm.subject || 'SMS Message'}</h3>
                             {!comm.read && (
-                              <span className="w-2 h-2 bg-blue-600 rounded-full"></span>
+                              <span className="w-2 h-2 bg-[#3f72af] rounded-full"></span>
                             )}
                           </div>
                           <p className="text-sm text-gray-600 mb-2 line-clamp-2">{comm.snippet}</p>
@@ -1345,7 +1345,7 @@ export default function CustomerDetailPage() {
                   <h2 className="text-xl font-semibold text-gray-900">Contacts</h2>
                   <button
                     onClick={() => setShowLinkContactModal(true)}
-                    className="flex items-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors text-sm"
+                    className="flex items-center space-x-2 px-4 py-2 bg-[#3f72af] hover:bg-blue-700 text-white rounded-lg font-medium transition-colors text-sm"
                   >
                     <Plus className="w-4 h-4" />
                     <span>Link Contact</span>
@@ -1620,7 +1620,7 @@ export default function CustomerDetailPage() {
                   />
                   <button
                     onClick={handleSearchIndividuals}
-                    className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
+                    className="px-6 py-2 bg-[#3f72af] hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
                   >
                     <Search className="w-5 h-5" />
                   </button>

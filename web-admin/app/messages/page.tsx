@@ -282,7 +282,7 @@ export default function MessagesPage() {
               <h1 className="text-2xl font-bold text-gray-900">Messages</h1>
               <button
                 onClick={() => setShowNewConversation(true)}
-                className="p-2 bg-blue-600 text-white rounded-lg hover:bg-blue-600/90 transition-colors"
+                className="p-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#3f72af]/90 transition-colors"
                 title="New Conversation"
               >
                 <Plus className="w-5 h-5" />
@@ -325,7 +325,7 @@ export default function MessagesPage() {
                   onClick={() => handleSelectConversation(conv)}
                   className={`p-4 border-b border-gray-100 cursor-pointer transition-colors ${
                     selectedConversation?._id === conv._id
-                      ? 'bg-blue-600/10'
+                      ? 'bg-[#3f72af]/10'
                       : 'hover:bg-gray-50'
                   }`}
                 >
@@ -336,7 +336,7 @@ export default function MessagesPage() {
                           {conv.title || conv.participants?.map((p: any) => p.user_name).join(', ')}
                         </h3>
                         {conv.unread_count > 0 && (
-                          <span className="px-2 py-0.5 bg-blue-600 text-white rounded-full text-xs font-medium">
+                          <span className="px-2 py-0.5 bg-[#3f72af] text-white rounded-full text-xs font-medium">
                             {conv.unread_count}
                           </span>
                         )}
@@ -399,7 +399,7 @@ export default function MessagesPage() {
                         <div
                           className={`rounded-lg px-4 py-2 ${
                             isOwnMessage
-                              ? 'bg-blue-600 text-white'
+                              ? 'bg-[#3f72af] text-white'
                               : 'bg-white text-gray-900 border border-gray-200'
                           }`}
                         >
@@ -509,7 +509,7 @@ export default function MessagesPage() {
                   <button
                     onClick={handleSendMessage}
                     disabled={sending || (!newMessage.trim() && attachments.length === 0)}
-                    className="p-2 bg-blue-600 text-white rounded-lg hover:bg-blue-600/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="p-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#3f72af]/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <Send className="w-5 h-5" />
                   </button>
@@ -552,7 +552,7 @@ export default function MessagesPage() {
                     onClick={() => setConversationType('direct')}
                     className={`flex-1 py-2 px-4 rounded-lg border ${
                       conversationType === 'direct'
-                        ? 'bg-blue-600 text-white border-blue-500'
+                        ? 'bg-[#3f72af] text-white border-blue-500'
                         : 'bg-white text-gray-700 border-gray-300'
                     }`}
                   >
@@ -563,7 +563,7 @@ export default function MessagesPage() {
                     onClick={() => setConversationType('group')}
                     className={`flex-1 py-2 px-4 rounded-lg border ${
                       conversationType === 'group'
-                        ? 'bg-blue-600 text-white border-blue-500'
+                        ? 'bg-[#3f72af] text-white border-blue-500'
                         : 'bg-white text-gray-700 border-gray-300'
                     }`}
                   >
@@ -639,7 +639,7 @@ export default function MessagesPage() {
                 <button
                   onClick={handleCreateConversation}
                   disabled={selectedUsers.length === 0}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-600/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="px-4 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#3f72af]/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Create Conversation
                 </button>

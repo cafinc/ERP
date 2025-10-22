@@ -366,7 +366,7 @@ export default function PTOManagementPage() {
                           );
                           if (employee) handleViewBalance(employee);
                         }}
-                        className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm"
+                        className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-[#3f72af] transition-colors text-sm"
                       >
                         <TrendingUp className="h-4 w-4" />
                         View Balance

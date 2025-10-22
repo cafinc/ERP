@@ -119,7 +119,7 @@ export default function ActiveCallsPage() {
             </label>
             <button
               onClick={fetchActiveCalls}
-              className="flex items-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
+              className="flex items-center space-x-2 px-4 py-2 bg-[#3f72af] hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
             >
               <RefreshCw className="w-4 h-4" />
               <span>Refresh</span>

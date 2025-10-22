@@ -132,7 +132,7 @@ export default function ConversationDetailPage() {
             <p className="text-gray-500 text-lg">Conversation not found</p>
             <button
               onClick={() => router.push('/communication')}
-              className="mt-4 px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
+              className="mt-4 px-6 py-2 bg-[#3f72af] hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
             >
               Back to Communication Center
             </button>
@@ -202,7 +202,7 @@ export default function ConversationDetailPage() {
                   <div
                     className={`max-w-[70%] rounded-lg px-4 py-3 ${
                       message.is_own
-                        ? 'bg-blue-600 text-white'
+                        ? 'bg-[#3f72af] text-white'
                         : 'bg-white text-gray-900 border border-gray-200'
                     }`}
                   >
@@ -245,7 +245,7 @@ export default function ConversationDetailPage() {
               <button
                 type="submit"
                 disabled={sending || !messageText.trim()}
-                className="p-3 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white rounded-lg transition-colors"
+                className="p-3 bg-[#3f72af] hover:bg-blue-700 disabled:bg-gray-400 text-white rounded-lg transition-colors"
               >
                 {sending ? (
                   <RefreshCw className="w-6 h-6 animate-spin" />

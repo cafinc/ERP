@@ -47,7 +47,7 @@ export default function SiteMapsListPage() {
             <p className="text-gray-600 mb-6">Create a site first to add map annotations</p>
             <button
               onClick={() => router.push("/sites/create")}
-              className="inline-flex items-center gap-2 px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-[#3f72af] transition-colors"
             >
               <Plus className="h-5 w-5" />
               Create Site

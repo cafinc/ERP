@@ -151,7 +151,7 @@ export default function InspectionSchedulesPage() {
           </div>
           <button
             onClick={() => router.push('/equipment/inspections/schedules/create')}
-            className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-[#2c5282]"
+            className="flex items-center gap-2 bg-[#3f72af] text-white px-4 py-2 rounded-lg hover:bg-[#2c5282]"
           >
             <Plus className="w-5 h-5" />
             Create Schedule
@@ -204,7 +204,7 @@ export default function InspectionSchedulesPage() {
               <p className="text-sm text-gray-600 mb-4">Create your first inspection schedule to get started</p>
               <button
                 onClick={() => router.push('/equipment/inspections/schedules/create')}
-                className="inline-flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-[#2c5282]"
+                className="inline-flex items-center gap-2 bg-[#3f72af] text-white px-4 py-2 rounded-lg hover:bg-[#2c5282]"
               >
                 <Plus className="w-4 h-4" />
                 Create Schedule

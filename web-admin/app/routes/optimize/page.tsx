@@ -312,7 +312,7 @@ export default function RouteOptimizationPage() {
               onClick={() => setView('optimizer')}
               className={`px-4 py-2 rounded-lg font-medium transition-colors text-sm ${
                 view === 'optimizer'
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-[#3f72af] text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
@@ -323,7 +323,7 @@ export default function RouteOptimizationPage() {
               onClick={() => setView('templates')}
               className={`px-4 py-2 rounded-lg font-medium transition-colors text-sm ${
                 view === 'templates'
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-[#3f72af] text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
@@ -334,7 +334,7 @@ export default function RouteOptimizationPage() {
               onClick={() => setView('analytics')}
               className={`px-4 py-2 rounded-lg font-medium transition-colors text-sm ${
                 view === 'analytics'
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-[#3f72af] text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
@@ -441,7 +441,7 @@ export default function RouteOptimizationPage() {
                     <button
                       onClick={handleOptimize}
                       disabled={selectedSiteIds.length < 2 || optimizing}
-                      className="w-full px-4 py-2 bg-blue-600 hover:bg-[#2c5282] disabled:bg-gray-300 text-white rounded-lg font-medium transition-colors flex items-center justify-center gap-2 text-sm"
+                      className="w-full px-4 py-2 bg-[#3f72af] hover:bg-[#2c5282] disabled:bg-gray-300 text-white rounded-lg font-medium transition-colors flex items-center justify-center gap-2 text-sm"
                     >
                       {optimizing ? (
                         <>
@@ -578,7 +578,7 @@ export default function RouteOptimizationPage() {
                           >
                             <div className="flex items-center gap-2">
                               <GripVertical className="w-4 h-4 text-gray-400" />
-                              <div className="w-7 h-7 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-sm">
+                              <div className="w-7 h-7 bg-[#3f72af] text-white rounded-full flex items-center justify-center font-bold text-sm">
                                 {index + 1}
                               </div>
                             </div>
@@ -658,7 +658,7 @@ export default function RouteOptimizationPage() {
                         <div className="flex items-center gap-2">
                           <button
                             onClick={() => handleLoadTemplate(route)}
-                            className="px-3 py-1.5 bg-blue-600 hover:bg-[#2c5282] text-white rounded-lg font-medium transition-colors text-sm flex items-center gap-1"
+                            className="px-3 py-1.5 bg-[#3f72af] hover:bg-[#2c5282] text-white rounded-lg font-medium transition-colors text-sm flex items-center gap-1"
                           >
                             <Copy className="w-4 h-4" />
                             Load

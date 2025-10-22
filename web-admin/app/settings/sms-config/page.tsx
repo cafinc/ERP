@@ -163,7 +163,7 @@ export default function SMSConfigPage() {
           <button
             onClick={handleSave}
             disabled={saving}
-            className="flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-[#2c5282] disabled:opacity-50"
+            className="flex items-center gap-2 bg-[#3f72af] text-white px-6 py-3 rounded-lg hover:bg-[#2c5282] disabled:opacity-50"
           >
             <Save className="w-5 h-5" />
             {saving ? 'Saving...' : 'Save Configuration'}

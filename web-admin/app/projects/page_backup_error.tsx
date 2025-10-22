@@ -150,7 +150,7 @@ export default function ProjectsPage() {
                 onClick={() => setFilterStatus('planning')}
                 className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-colors ${
                   filterStatus === 'planning'
-                    ? 'bg-blue-600 text-white'
+                    ? 'bg-[#3f72af] text-white'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >

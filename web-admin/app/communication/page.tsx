@@ -188,7 +188,7 @@ export default function CommunicationCenterPage() {
               </div>
               <div className="ml-4 flex flex-col items-end space-y-2">
                 {conversation.unread_count > 0 && (
-                  <div className="px-2 py-1 bg-blue-600 text-white text-xs font-bold rounded-full min-w-[24px] text-center">
+                  <div className="px-2 py-1 bg-[#3f72af] text-white text-xs font-bold rounded-full min-w-[24px] text-center">
                     {conversation.unread_count}
                   </div>
                 )}
@@ -215,7 +215,7 @@ export default function CommunicationCenterPage() {
               onClick={() => setFeedbackFilter('all')}
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                 feedbackFilter === 'all'
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-[#3f72af] text-white'
                   : 'bg-white text-gray-700 hover:bg-gray-100'
               }`}
             >
@@ -225,7 +225,7 @@ export default function CommunicationCenterPage() {
               onClick={() => setFeedbackFilter('pending')}
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                 feedbackFilter === 'pending'
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-[#3f72af] text-white'
                   : 'bg-white text-gray-700 hover:bg-gray-100'
               }`}
             >
@@ -235,7 +235,7 @@ export default function CommunicationCenterPage() {
               onClick={() => setFeedbackFilter('in_progress')}
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                 feedbackFilter === 'in_progress'
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-[#3f72af] text-white'
                   : 'bg-white text-gray-700 hover:bg-gray-100'
               }`}
             >
@@ -245,7 +245,7 @@ export default function CommunicationCenterPage() {
               onClick={() => setFeedbackFilter('resolved')}
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                 feedbackFilter === 'resolved'
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-[#3f72af] text-white'
                   : 'bg-white text-gray-700 hover:bg-gray-100'
               }`}
             >
@@ -301,7 +301,7 @@ export default function CommunicationCenterPage() {
           </div>
           <button
             onClick={fetchData}
-            className="flex items-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
+            className="flex items-center space-x-2 px-4 py-2 bg-[#3f72af] hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
           >
             <RefreshCw className="w-5 h-5" />
             <span>Refresh</span>
@@ -315,7 +315,7 @@ export default function CommunicationCenterPage() {
               onClick={() => setActiveTab('all')}
               className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium whitespace-nowrap transition-colors ${
                 activeTab === 'all'
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-[#3f72af] text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
@@ -326,7 +326,7 @@ export default function CommunicationCenterPage() {
               onClick={() => setActiveTab('direct')}
               className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium whitespace-nowrap transition-colors ${
                 activeTab === 'direct'
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-[#3f72af] text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
@@ -337,7 +337,7 @@ export default function CommunicationCenterPage() {
               onClick={() => setActiveTab('sms')}
               className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium whitespace-nowrap transition-colors ${
                 activeTab === 'sms'
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-[#3f72af] text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
@@ -348,7 +348,7 @@ export default function CommunicationCenterPage() {
               onClick={() => setActiveTab('email')}
               className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium whitespace-nowrap transition-colors ${
                 activeTab === 'email'
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-[#3f72af] text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
@@ -359,7 +359,7 @@ export default function CommunicationCenterPage() {
               onClick={() => setActiveTab('feedback')}
               className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium whitespace-nowrap transition-colors ${
                 activeTab === 'feedback'
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-[#3f72af] text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >

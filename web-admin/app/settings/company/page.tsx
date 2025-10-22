@@ -194,7 +194,7 @@ export default function CompanySettingsPage() {
               </button>
               <button
                 type="submit"
-                className="flex-1 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all shadow-md hover:shadow-lg font-semibold"
+                className="flex-1 px-6 py-3 bg-[#3f72af] text-white rounded-lg hover:bg-blue-700 transition-all shadow-md hover:shadow-lg font-semibold"
               >
                 Save Changes
               </button>

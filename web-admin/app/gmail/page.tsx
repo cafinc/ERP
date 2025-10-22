@@ -533,7 +533,7 @@ export default function GmailPage() {
             </p>
             <button
               onClick={connectGmail}
-              className="w-full bg-blue-600 hover:bg-blue-600/90 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+              className="w-full bg-[#3f72af] hover:bg-[#3f72af]/90 text-white px-6 py-3 rounded-lg font-medium transition-colors"
             >
               Connect Gmail Account
             </button>
@@ -556,7 +556,7 @@ export default function GmailPage() {
           <div className="p-3 border-b border-gray-200 flex-shrink-0 space-y-2">
             <button
               onClick={() => setShowCompose(true)}
-              className="w-full bg-blue-600 hover:bg-blue-600/90 text-white px-4 py-2 rounded-lg font-medium flex items-center justify-center space-x-2 text-sm"
+              className="w-full bg-[#3f72af] hover:bg-[#3f72af]/90 text-white px-4 py-2 rounded-lg font-medium flex items-center justify-center space-x-2 text-sm"
             >
               <Plus className="w-4 h-4" />
               <span>Compose</span>
@@ -994,7 +994,7 @@ export default function GmailPage() {
                 </button>
                 <button
                   onClick={sendEmail}
-                  className="px-6 py-2 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium"
+                  className="px-6 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium"
                 >
                   Send
                 </button>
@@ -1131,7 +1131,7 @@ export default function GmailPage() {
 
                       <button
                         onClick={editingTemplate ? updateTemplate : createTemplate}
-                        className="w-full px-4 py-2 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium"
+                        className="w-full px-4 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium"
                       >
                         {editingTemplate ? 'Update Template' : 'Create Template'}
                       </button>

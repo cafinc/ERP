@@ -193,7 +193,7 @@ export default function GeofenceManagementPage() {
               onClick={() => setView('geofences')}
               className={`px-6 py-3 rounded-lg font-medium transition-colors ${
                 view === 'geofences'
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-[#3f72af] text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
@@ -204,7 +204,7 @@ export default function GeofenceManagementPage() {
               onClick={() => setView('logs')}
               className={`px-6 py-3 rounded-lg font-medium transition-colors ${
                 view === 'logs'
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-[#3f72af] text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
@@ -278,7 +278,7 @@ export default function GeofenceManagementPage() {
                           <button
                             onClick={() => handleSaveGeofence(geofence)}
                             disabled={saving === geofence.site_id}
-                            className="px-6 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 text-white rounded-lg font-medium transition-colors flex items-center space-x-2"
+                            className="px-6 py-2 bg-[#3f72af] hover:bg-blue-700 disabled:bg-gray-300 text-white rounded-lg font-medium transition-colors flex items-center space-x-2"
                           >
                             <Save className="w-4 h-4" />
                             <span>{saving === geofence.site_id ? 'Saving...' : 'Save'}</span>

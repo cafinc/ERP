@@ -952,7 +952,7 @@ export default function CreateEstimatePage() {
               <div className="p-6 border-t border-gray-200 flex justify-end">
                 <button
                   onClick={() => setShowContactModal(false)}
-                  className="px-4 py-2 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium"
+                  className="px-4 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium"
                 >
                   Done
                 </button>
@@ -1007,7 +1007,7 @@ export default function CreateEstimatePage() {
               <div className="p-6 border-t border-gray-200 flex justify-end">
                 <button
                   onClick={() => setShowFormModal(false)}
-                  className="px-4 py-2 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium"
+                  className="px-4 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium"
                 >
                   Done
                 </button>

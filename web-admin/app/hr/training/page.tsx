@@ -313,7 +313,7 @@ export default function TrainingPage() {
                   </h3>
                   <button
                     onClick={() => setShowProgramModal(true)}
-                    className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+                    className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-[#3f72af]"
                   >
                     <Plus className="h-4 w-4" />
                     Add Program
@@ -385,7 +385,7 @@ export default function TrainingPage() {
                               setAssignForm({ ...assignForm, training_id: training.id });
                               setShowAssignModal(true);
                             }}
-                            className="w-full px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 text-sm"
+                            className="w-full px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-[#3f72af] text-sm"
                           >
                             Assign to Employee
                           </button>
@@ -403,7 +403,7 @@ export default function TrainingPage() {
                   </h3>
                   <button
                     onClick={() => setShowAssignModal(true)}
-                    className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+                    className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-[#3f72af]"
                   >
                     <Plus className="h-4 w-4" />
                     Assign Training
@@ -494,7 +494,7 @@ export default function TrainingPage() {
                                 onClick={() =>
                                   handleUpdateStatus(assignment.id, "in_progress")
                                 }
-                                className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 text-sm"
+                                className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-[#3f72af] text-sm"
                               >
                                 Start Training
                               </button>
@@ -649,7 +649,7 @@ export default function TrainingPage() {
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+                  className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-[#3f72af]"
                 >
                   Create Program
                 </button>
@@ -750,7 +750,7 @@ export default function TrainingPage() {
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+                  className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-[#3f72af]"
                 >
                   Assign Training
                 </button>

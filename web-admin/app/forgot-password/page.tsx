@@ -46,7 +46,7 @@ export default function ForgotPasswordPage() {
           </p>
           <button
             onClick={() => router.push('/login')}
-            className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-[#2c5282]"
+            className="w-full bg-[#3f72af] text-white py-3 rounded-lg font-semibold hover:bg-[#2c5282]"
           >
             Back to Login
           </button>
@@ -95,7 +95,7 @@ export default function ForgotPasswordPage() {
           <button
             type="submit"
             disabled={submitting}
-            className="w-full flex items-center justify-center gap-2 bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-[#2c5282] disabled:opacity-50"
+            className="w-full flex items-center justify-center gap-2 bg-[#3f72af] text-white py-3 rounded-lg font-semibold hover:bg-[#2c5282] disabled:opacity-50"
           >
             {submitting ? (
               'Sending...'

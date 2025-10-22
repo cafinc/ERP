@@ -305,7 +305,7 @@ export default function InvoiceCreatePage() {
                   <button
                     type="button"
                     onClick={addLineItem}
-                    className="flex items-center space-x-1 px-3 py-1.5 text-sm bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors"
+                    className="flex items-center space-x-1 px-3 py-1.5 text-sm bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
                   >
                     <Plus className="w-4 h-4" />
                     <span>Add Item</span>
@@ -427,7 +427,7 @@ export default function InvoiceCreatePage() {
                 <button
                   type="submit"
                   disabled={saving}
-                  className="w-full mt-6 flex items-center justify-center space-x-2 px-6 py-3 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors disabled:opacity-50"
+                  className="w-full mt-6 flex items-center justify-center space-x-2 px-6 py-3 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors disabled:opacity-50"
                 >
                   {saving ? (
                     <>

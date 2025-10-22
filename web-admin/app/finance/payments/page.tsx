@@ -143,7 +143,7 @@ export default function PaymentsPage() {
             onClick={() => setSelectedStatus('all')}
             className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-colors ${
               selectedStatus === 'all'
-                ? 'bg-blue-600 text-white'
+                ? 'bg-[#3f72af] text-white'
                 : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
             }`}
           >

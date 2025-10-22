@@ -134,7 +134,7 @@ export default function DispatchesPage() {
           </div>
           <button
             onClick={() => router.push('/dispatch/create')}
-            className="flex items-center space-x-2 px-6 py-3 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors"
+            className="flex items-center space-x-2 px-6 py-3 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
           >
             <Plus className="w-5 h-5" />
             <span>New Dispatch</span>
@@ -190,7 +190,7 @@ export default function DispatchesPage() {
             onClick={() => setView('list')}
             className={`px-4 py-2 rounded-lg font-medium transition-colors text-sm ${
               view === 'list'
-                ? 'bg-blue-600 text-white shadow-md'
+                ? 'bg-[#3f72af] text-white shadow-md'
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
             }`}
           >
@@ -201,7 +201,7 @@ export default function DispatchesPage() {
             onClick={() => setView('map')}
             className={`px-4 py-2 rounded-lg font-medium transition-colors text-sm ${
               view === 'map'
-                ? 'bg-blue-600 text-white shadow-md'
+                ? 'bg-[#3f72af] text-white shadow-md'
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
             }`}
           >
@@ -268,7 +268,7 @@ export default function DispatchesPage() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl mx-auto text-left">
                 <div className="p-4 bg-blue-50 rounded-lg">
                   <div className="flex items-center gap-3 mb-2">
-                    <div className="w-3 h-3 bg-blue-600 rounded-full"></div>
+                    <div className="w-3 h-3 bg-[#3f72af] rounded-full"></div>
                     <h4 className="font-semibold text-gray-900">Crew Locations</h4>
                   </div>
                   <p className="text-sm text-gray-600">Real-time GPS tracking of all active crews</p>
@@ -308,7 +308,7 @@ export default function DispatchesPage() {
             {!searchQuery && filterStatus === 'all' && filterDate === 'all' && (
               <button
                 onClick={() => router.push('/dispatch/create')}
-                className="inline-flex items-center space-x-2 px-6 py-3 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors"
+                className="inline-flex items-center space-x-2 px-6 py-3 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
               >
                 <Plus className="w-5 h-5" />
                 <span>Create First Dispatch</span>
@@ -392,7 +392,7 @@ export default function DispatchesPage() {
                     e.stopPropagation();
                     router.push(`/dispatch/${dispatch._id}`);
                   }}
-                  className="w-full mt-4 flex items-center justify-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors text-sm"
+                  className="w-full mt-4 flex items-center justify-center space-x-2 px-4 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors text-sm"
                 >
                   <Eye className="w-4 h-4" />
                   <span>View Details</span>

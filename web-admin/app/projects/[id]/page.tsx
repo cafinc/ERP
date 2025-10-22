@@ -222,7 +222,7 @@ export default function ProjectDetailPage() {
             <p className="text-gray-600 mb-6">The project you're looking for doesn't exist.</p>
             <button
               onClick={() => router.push('/projects')}
-              className="inline-flex items-center space-x-2 px-6 py-3 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors"
+              className="inline-flex items-center space-x-2 px-6 py-3 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
             >
               <ArrowLeft className="w-5 h-5" />
               <span>Back to Projects</span>
@@ -376,7 +376,7 @@ export default function ProjectDetailPage() {
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-3">
                   <div
-                    className="bg-blue-600 h-3 rounded-full transition-all"
+                    className="bg-[#3f72af] h-3 rounded-full transition-all"
                     style={{ width: `${calculateProgress()}%` }}
                   />
                 </div>
@@ -389,7 +389,7 @@ export default function ProjectDetailPage() {
                 <h2 className="text-xl font-semibold text-gray-900">Tasks</h2>
                 <button
                   onClick={() => setShowTaskModal(true)}
-                  className="flex items-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors text-sm"
+                  className="flex items-center space-x-2 px-4 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors text-sm"
                 >
                   <Plus className="w-4 h-4" />
                   <span>Add Task</span>
@@ -589,7 +589,7 @@ export default function ProjectDetailPage() {
                 <button
                   onClick={handleCreateTask}
                   disabled={actionLoading}
-                  className="flex-1 flex items-center justify-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors disabled:opacity-50"
+                  className="flex-1 flex items-center justify-center space-x-2 px-4 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors disabled:opacity-50"
                 >
                   {actionLoading ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Plus className="w-4 h-4" />}
                   <span>Add Task</span>

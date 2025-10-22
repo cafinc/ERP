@@ -108,7 +108,7 @@ export default function RoutesPage() {
             </div>
             <h3 className="text-2xl font-bold text-gray-900 mb-2">No Routes Yet</h3>
             <p className="text-gray-600 mb-6">Create your first route to start optimizing your service delivery</p>
-            <button className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all shadow-md hover:shadow-lg font-semibold">
+            <button className="px-6 py-3 bg-[#3f72af] text-white rounded-lg hover:bg-blue-700 transition-all shadow-md hover:shadow-lg font-semibold">
               Create First Route
             </button>
           </div>

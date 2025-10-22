@@ -147,7 +147,7 @@ export default function ContactsPage() {
             </button>
             <button
               onClick={() => setShowCreateModal(true)}
-              className="flex items-center space-x-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
+              className="flex items-center space-x-2 px-6 py-3 bg-[#3f72af] hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
             >
               <UserPlus className="w-5 h-5" />
               <span>Add Contact</span>
@@ -354,7 +354,7 @@ export default function ContactsPage() {
                 <div className="flex items-center space-x-3 mt-6">
                   <button
                     type="submit"
-                    className="flex-1 px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
+                    className="flex-1 px-6 py-2 bg-[#3f72af] hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
                   >
                     Create Contact
                   </button>

@@ -229,7 +229,7 @@ export default function ReportsPage() {
                   <button
                     onClick={() => handleGenerateReport(report.id)}
                     disabled={loading}
-                    className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 hover:bg-[#2c5282] text-white rounded-lg font-medium transition-colors text-sm disabled:opacity-50"
+                    className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-[#3f72af] hover:bg-[#2c5282] text-white rounded-lg font-medium transition-colors text-sm disabled:opacity-50"
                   >
                     <Download className="w-4 h-4" />
                     Generate

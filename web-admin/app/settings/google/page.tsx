@@ -281,7 +281,7 @@ export default function GoogleWorkspaceSettings() {
                       {integration.settingsRoute && (
                         <button
                           onClick={() => (window.location.href = integration.settingsRoute!)}
-                          className="flex-1 flex items-center justify-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors"
+                          className="flex-1 flex items-center justify-center space-x-2 px-4 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
                         >
                           <SettingsIcon className="w-4 h-4" />
                           <span>Open</span>
@@ -298,7 +298,7 @@ export default function GoogleWorkspaceSettings() {
                   ) : (
                     <button
                       onClick={() => handleConnect(integration.service)}
-                      className="w-full flex items-center justify-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors"
+                      className="w-full flex items-center justify-center space-x-2 px-4 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
                     >
                       <ExternalLink className="w-4 h-4" />
                       <span>Connect {integration.name}</span>

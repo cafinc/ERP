@@ -388,7 +388,7 @@ export default function LeadsPage() {
               onClick={() => setView('pipeline')}
               className={`px-4 py-2 rounded-lg font-medium transition-colors text-sm ${
                 view === 'pipeline'
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-[#3f72af] text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
@@ -399,7 +399,7 @@ export default function LeadsPage() {
               onClick={() => setView('list')}
               className={`px-4 py-2 rounded-lg font-medium transition-colors text-sm ${
                 view === 'list'
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-[#3f72af] text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
@@ -410,7 +410,7 @@ export default function LeadsPage() {
               onClick={() => setView('analytics')}
               className={`px-4 py-2 rounded-lg font-medium transition-colors text-sm ${
                 view === 'analytics'
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-[#3f72af] text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
@@ -708,7 +708,7 @@ export default function LeadsPage() {
                             <div className="flex items-center gap-2">
                               <div className="w-32 bg-gray-200 rounded-full h-2">
                                 <div
-                                  className="bg-blue-600 h-2 rounded-full"
+                                  className="bg-[#3f72af] h-2 rounded-full"
                                   style={{ width: `${percentage}%` }}
                                 />
                               </div>
@@ -876,7 +876,7 @@ export default function LeadsPage() {
               <button
                 onClick={handleCreateOrUpdate}
                 disabled={saving}
-                className="px-6 py-2 bg-blue-600 hover:bg-[#2c5282] disabled:bg-gray-300 text-white rounded-lg font-medium transition-colors"
+                className="px-6 py-2 bg-[#3f72af] hover:bg-[#2c5282] disabled:bg-gray-300 text-white rounded-lg font-medium transition-colors"
               >
                 {saving ? 'Saving...' : editingLead ? 'Update' : 'Create'}
               </button>

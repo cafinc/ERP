@@ -215,7 +215,7 @@ export default function CreateAgreementTemplatePage() {
             <h3 className="text-lg font-semibold text-gray-900">Agreement Sections</h3>
             <button
               onClick={handleAddCustomSection}
-              className="flex items-center space-x-2 px-3 py-2 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg text-sm font-medium transition-colors"
+              className="flex items-center space-x-2 px-3 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg text-sm font-medium transition-colors"
             >
               <Plus className="w-4 h-4" />
               <span>Add Section</span>
@@ -231,7 +231,7 @@ export default function CreateAgreementTemplatePage() {
                   onClick={() => setActiveTab(section.id)}
                   className={`w-full flex items-center justify-between px-4 py-3 text-left border-b border-gray-100 transition-colors ${
                     activeTab === section.id
-                      ? 'bg-blue-600 text-white'
+                      ? 'bg-[#3f72af] text-white'
                       : 'hover:bg-gray-50 text-gray-700'
                   }`}
                 >

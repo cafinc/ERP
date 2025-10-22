@@ -167,7 +167,7 @@ export default function ContractsPage() {
               onClick={() => setFilterStatus('all')}
               className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-colors ${
                 filterStatus === 'all'
-                  ? 'bg-blue-600 text-white shadow-md'
+                  ? 'bg-[#3f72af] text-white shadow-md'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
               }`}
             >
@@ -187,7 +187,7 @@ export default function ContractsPage() {
               onClick={() => setFilterStatus('sent')}
               className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-colors ${
                 filterStatus === 'sent'
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-[#3f72af] text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
               }`}
             >

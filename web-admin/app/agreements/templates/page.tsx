@@ -138,7 +138,7 @@ export default function AgreementTemplatesPage() {
               onClick={() => setFilter('active')}
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                 filter === 'active'
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-[#3f72af] text-white'
                   : 'text-gray-600 hover:bg-gray-100'
               }`}
             >
@@ -148,7 +148,7 @@ export default function AgreementTemplatesPage() {
               onClick={() => setFilter('archived')}
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                 filter === 'archived'
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-[#3f72af] text-white'
                   : 'text-gray-600 hover:bg-gray-100'
               }`}
             >
@@ -158,7 +158,7 @@ export default function AgreementTemplatesPage() {
               onClick={() => setFilter('all')}
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                 filter === 'all'
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-[#3f72af] text-white'
                   : 'text-gray-600 hover:bg-gray-100'
               }`}
             >
@@ -187,7 +187,7 @@ export default function AgreementTemplatesPage() {
             {filter !== 'archived' && (
               <button
                 onClick={() => router.push('/agreements/templates/create')}
-                className="inline-flex items-center space-x-2 px-6 py-3 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors"
+                className="inline-flex items-center space-x-2 px-6 py-3 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
               >
                 <Plus className="w-5 h-5" />
                 <span>Create First Template</span>
@@ -260,7 +260,7 @@ export default function AgreementTemplatesPage() {
                         <div className="flex items-center space-x-2">
                           <button
                             onClick={() => router.push(`/agreements/templates/${template._id}`)}
-                            className="flex-1 flex items-center justify-center space-x-1 px-3 py-2 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg text-sm font-medium transition-colors"
+                            className="flex-1 flex items-center justify-center space-x-1 px-3 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg text-sm font-medium transition-colors"
                           >
                             <Eye className="w-4 h-4" />
                             <span>View</span>

@@ -404,7 +404,7 @@ export default function QuickBooksSettings() {
               </div>
               <button
                 onClick={handleConnect}
-                className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-[#2c5282] transition-colors flex items-center gap-2"
+                className="px-6 py-3 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-colors flex items-center gap-2"
               >
                 <ExternalLink className="w-5 h-5" />
                 Connect to QuickBooks
@@ -434,7 +434,7 @@ export default function QuickBooksSettings() {
                     onChange={(e) => setSyncSettings({ ...syncSettings, sync_enabled: e.target.checked })}
                     className="sr-only peer"
                   />
-                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#3f72af]"></div>
                 </label>
               </div>
 
@@ -471,7 +471,7 @@ export default function QuickBooksSettings() {
                       <button
                         onClick={() => handleSyncEntity(entityType)}
                         disabled={syncingEntity === entityType}
-                        className="flex items-center gap-1 px-3 py-1 text-sm bg-blue-600 text-white rounded-lg hover:bg-[#2c5282] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="flex items-center gap-1 px-3 py-1 text-sm bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                         title={`Sync all ${label.toLowerCase()} to QuickBooks`}
                       >
                         {syncingEntity === entityType ? (
@@ -493,7 +493,7 @@ export default function QuickBooksSettings() {
                           onChange={(e) => setSyncSettings({ ...syncSettings, [key]: e.target.checked })}
                           className="sr-only peer"
                         />
-                        <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                        <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#3f72af]"></div>
                       </label>
                     </div>
                   </div>
@@ -504,7 +504,7 @@ export default function QuickBooksSettings() {
                 <button
                   onClick={handleUpdateSyncSettings}
                   disabled={savingSettings}
-                  className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-[#2c5282] transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                  className="px-6 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
                 >
                   {savingSettings ? (
                     <>
@@ -620,7 +620,7 @@ export default function QuickBooksSettings() {
                 key={index}
                 className="flex items-start gap-3 p-4 bg-gray-50 rounded-lg"
               >
-                <div className="p-2 bg-blue-600 bg-opacity-10 rounded-lg">
+                <div className="p-2 bg-[#3f72af] bg-opacity-10 rounded-lg">
                   <feature.icon className="w-5 h-5 text-blue-600" />
                 </div>
                 <div>

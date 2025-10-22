@@ -408,7 +408,7 @@ export default function WorkflowEditorPage() {
               <h3 className="text-lg font-semibold text-gray-900">Actions</h3>
               <button
                 onClick={() => setShowActionSelector(true)}
-                className="flex items-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors"
+                className="flex items-center space-x-2 px-4 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
               >
                 <Plus className="w-4 h-4" />
                 <span>Add Action</span>

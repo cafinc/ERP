@@ -51,7 +51,7 @@ function CustomerPortalLayout({ children }: CustomerPortalLayoutProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+              <div className="w-10 h-10 bg-[#3f72af] rounded-lg flex items-center justify-center">
                 <Home className="w-6 h-6 text-white" />
               </div>
               <div>
@@ -407,7 +407,7 @@ export default function CustomerDashboardPage() {
                     </div>
                     <div className="text-right">
                       <p className="text-xl font-bold text-gray-900">${invoice.amount}</p>
-                      <button className="mt-2 px-4 py-1 bg-blue-600 hover:bg-blue-600/90 text-white text-sm rounded-lg transition-colors">
+                      <button className="mt-2 px-4 py-1 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white text-sm rounded-lg transition-colors">
                         Pay Now
                       </button>
                     </div>
@@ -444,7 +444,7 @@ export default function CustomerDashboardPage() {
                     <Paperclip className="w-4 h-4" />
                     <span className="text-sm">Attach File</span>
                   </button>
-                  <button className="flex items-center gap-2 px-6 py-2 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg transition-colors">
+                  <button className="flex items-center gap-2 px-6 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg transition-colors">
                     <Send className="w-4 h-4" />
                     <span>Send Message</span>
                   </button>

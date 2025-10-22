@@ -329,7 +329,7 @@ export default function AddInventoryItemPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="px-6 py-2 bg-blue-600 hover:bg-[#2c5282] text-white rounded-lg font-medium transition-colors disabled:opacity-50 flex items-center gap-2"
+                className="px-6 py-2 bg-[#3f72af] hover:bg-[#2c5282] text-white rounded-lg font-medium transition-colors disabled:opacity-50 flex items-center gap-2"
               >
                 <Save className="w-4 h-4" />
                 {loading ? 'Adding...' : 'Add Item'}

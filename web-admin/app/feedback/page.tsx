@@ -202,7 +202,7 @@ export default function FeedbackFormPage() {
             className={`w-full flex items-center justify-center gap-2 py-4 rounded-lg font-semibold transition-colors ${
               submitting || !feedback.trim()
                 ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                : 'bg-blue-600 text-white hover:bg-[#2c5282]'
+                : 'bg-[#3f72af] text-white hover:bg-[#2c5282]'
             }`}
           >
             {submitting ? (
@@ -238,7 +238,7 @@ export default function FeedbackFormPage() {
                 </p>
                 <button
                   onClick={() => router.back()}
-                  className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-[#2c5282]"
+                  className="w-full bg-[#3f72af] text-white py-3 rounded-lg font-semibold hover:bg-[#2c5282]"
                 >
                   Close
                 </button>

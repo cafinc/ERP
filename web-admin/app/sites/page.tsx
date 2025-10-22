@@ -180,7 +180,7 @@ export default function SitesPage() {
               onClick={() => setFilterActive('all')}
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                 filterActive === 'all'
-                  ? 'bg-blue-600 text-white shadow-md'
+                  ? 'bg-[#3f72af] text-white shadow-md'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
               }`}
             >
@@ -238,7 +238,7 @@ export default function SitesPage() {
             {!searchQuery && filterType === 'all' && filterActive === 'active' && (
               <button
                 onClick={handleCreateSite}
-                className="inline-flex items-center space-x-2 px-6 py-3 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors"
+                className="inline-flex items-center space-x-2 px-6 py-3 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
               >
                 <Plus className="w-5 h-5" />
                 <span>Add First Site</span>
@@ -284,7 +284,7 @@ export default function SitesPage() {
                 <div className="flex gap-2 pt-3 border-t border-gray-100">
                   <button 
                     onClick={() => router.push(`/sites/${site.id}`)}
-                    className="flex-1 px-3 py-1.5 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                    className="flex-1 px-3 py-1.5 text-sm bg-[#3f72af] text-white rounded-lg hover:bg-blue-700"
                   >
                     View
                   </button>

@@ -286,7 +286,7 @@ export default function ProjectCreatePage() {
               <button
                 type="submit"
                 disabled={saving || !projectForm.customer_id || !projectForm.estimate_id}
-                className="flex-1 flex items-center justify-center space-x-2 px-6 py-3 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex-1 flex items-center justify-center space-x-2 px-6 py-3 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {saving ? (
                   <>

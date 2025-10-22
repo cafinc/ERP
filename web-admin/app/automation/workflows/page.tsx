@@ -226,7 +226,7 @@ export default function WorkflowBuilderPage() {
                   </div>
                   <button
                     onClick={() => handleUseTemplate(template)}
-                    className="w-full px-3 py-2 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg text-sm font-medium transition-colors"
+                    className="w-full px-3 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg text-sm font-medium transition-colors"
                   >
                     Use Template
                   </button>
@@ -247,7 +247,7 @@ export default function WorkflowBuilderPage() {
               <p className="text-gray-600 mb-4">Create your first workflow to automate your operations</p>
               <button
                 onClick={handleCreateWorkflow}
-                className="px-4 py-2 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg font-medium transition-colors"
+                className="px-4 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
               >
                 Create Workflow
               </button>
@@ -319,7 +319,7 @@ export default function WorkflowBuilderPage() {
                     <div className="flex items-center space-x-2">
                       <button
                         onClick={() => handleExecuteWorkflow(workflow.id)}
-                        className="flex-1 flex items-center justify-center space-x-1 px-3 py-2 bg-blue-600 hover:bg-blue-600/90 text-white rounded-lg text-sm font-medium transition-colors"
+                        className="flex-1 flex items-center justify-center space-x-1 px-3 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg text-sm font-medium transition-colors"
                         disabled={!workflow.enabled}
                       >
                         <Play className="w-4 h-4" />

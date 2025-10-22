@@ -53,7 +53,7 @@ export default function ResetPasswordPage() {
           </p>
           <button
             onClick={() => router.push('/forgot-password')}
-            className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-[#2c5282]"
+            className="w-full bg-[#3f72af] text-white py-3 rounded-lg font-semibold hover:bg-[#2c5282]"
           >
             Request New Link
           </button>
@@ -73,7 +73,7 @@ export default function ResetPasswordPage() {
           </p>
           <button
             onClick={() => router.push('/login')}
-            className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-[#2c5282]"
+            className="w-full bg-[#3f72af] text-white py-3 rounded-lg font-semibold hover:bg-[#2c5282]"
           >
             Go to Login
           </button>
@@ -147,7 +147,7 @@ export default function ResetPasswordPage() {
           <button
             type="submit"
             disabled={submitting}
-            className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-[#2c5282] disabled:opacity-50"
+            className="w-full bg-[#3f72af] text-white py-3 rounded-lg font-semibold hover:bg-[#2c5282] disabled:opacity-50"
           >
             {submitting ? 'Resetting Password...' : 'Reset Password'}
           </button>
