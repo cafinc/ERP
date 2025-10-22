@@ -16,23 +16,14 @@ BACKEND_URL = "https://snowconnect.preview.emergentagent.com/api"
 
 class CommunicationCenterTester:
     def __init__(self):
+        self.base_url = BACKEND_URL
         self.session = requests.Session()
-        self.test_results = {
-            "hr_module": {},
-            "integration_hub": {},
-            "total_tests": 0,
-            "passed_tests": 0,
-            "failed_tests": 0
-        }
-        self.created_resources = {
-            "employees": [],
-            "time_entries": [],
-            "pto_requests": [],
-            "trainings": [],
-            "employee_trainings": [],
-            "performance_reviews": [],
-            "integrations": []
-        }
+        self.test_results = []
+        self.test_customer_id = None
+        self.test_user_id = None
+        self.test_project_id = None
+        self.test_communication_id = None
+        self.test_template_id = None
 
     def log_test(self, test_name, success, details="", response_data=None):
         """Log test results"""
