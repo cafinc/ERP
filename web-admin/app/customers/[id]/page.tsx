@@ -391,17 +391,14 @@ export default function CustomerDetailPage() {
 
   if (loading) {
     return (
-      <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-full">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#3f72af]"></div>
         </div>
-      </HybridNavigationTopBar>
-    );
+      );
   }
 
   if (!customer) {
     return (
-      <HybridNavigationTopBar>
         <div className="p-8 text-center">
           <AlertCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
           <h2 className="text-2xl font-bold text-gray-900 mb-2">Customer Not Found</h2>
@@ -412,8 +409,7 @@ export default function CustomerDetailPage() {
             Back to Customers
           </button>
         </div>
-      </HybridNavigationTopBar>
-    );
+      );
   }
 
   const isCompany = customer.customer_type === 'company';
@@ -477,7 +473,6 @@ export default function CustomerDetailPage() {
   ];
 
   return (
-    <HybridNavigationTopBar>
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         {/* Compact Header */}
         <CompactHeader
@@ -1709,6 +1704,5 @@ export default function CustomerDetailPage() {
         </div>
       )}
     </div>
-    </HybridNavigationTopBar>
-  );
+    );
 }
