@@ -267,7 +267,7 @@ export default function PageHeader({
                   onClick={() => onTabChange && onTabChange(tab.value)}
                   className={`pb-3 text-sm font-medium transition-colors ${
                     activeTab === tab.value
-                      ? 'text-blue-600 border-b-2 border-blue-600'
+                      ? 'text-[#3f72af] border-b-2 border-[#3f72af]'
                       : 'text-gray-600 hover:text-gray-900'
                   }`}
                 >
