@@ -1036,10 +1036,8 @@ export default function CustomerFormPage() {
                   </label>
                 </div>
               </div>
-            </div>
-            {/* Close frosted glass card */}
+            </form>
           </div>
-          {/* Close modal background */}
         </div>
       </>
     );
