@@ -185,6 +185,6 @@ export default function SafetyDashboardPage() {
           </div>
         </div>
       </div>
-    </HybridNavigationTopBar>
+    </div>
   );
 }
