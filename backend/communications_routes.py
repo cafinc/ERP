@@ -15,9 +15,15 @@ from motor.motor_asyncio import AsyncIOMotorClient
 from ringcentral_service import ringcentral_service
 from gmail_service import gmail_service
 from auth_endpoints import get_current_user_endpoint
+from fastapi import Request
 
 logger = logging.getLogger(__name__)
 router = APIRouter()
+
+# Dependency function for getting current user
+async def get_current_user(request: Request):
+    """Dependency to get current authenticated user"""
+    return await get_current_user_endpoint(db, request)
 
 # MongoDB connection (same as server.py)
 mongo_url = os.getenv("MONGO_URL", "mongodb://localhost:27017")
