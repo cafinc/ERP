@@ -202,6 +202,51 @@ export default function CreateEstimatePage() {
     setSections(sections.filter(s => s.id !== sectionId));
   };
 
+  const handleTemplateSelect = async (template: any) => {
+    try {
+      // Fetch the full template with content
+      const response = await fetch(`${BACKEND_URL}/api/templates/${template.type}/${template._id}`);
+      const data = await response.json();
+      
+      if (data.success && data.template.content) {
+        const content = data.template.content;
+        
+        // Auto-fill form fields from template
+        if (content.line_items && Array.isArray(content.line_items)) {
+          const newItems: LineItem[] = content.line_items.map((item: any, index: number) => ({
+            id: `template-${Date.now()}-${index}`,
+            description: item.description || '',
+            service_type: '',
+            quantity: item.quantity || 1,
+            unit_price: parseFloat(item.unit_price) || 0,
+            total: (item.quantity || 1) * (parseFloat(item.unit_price) || 0)
+          }));
+          
+          setSections([{
+            id: Date.now().toString(),
+            name: content.service_description || 'Services',
+            items: newItems,
+            show_subtotal: true
+          }]);
+        }
+        
+        // Set notes and terms
+        if (content.notes) {
+          setNotes(content.notes);
+        }
+        if (content.terms) {
+          setTerms(content.terms);
+        }
+        
+        setShowTemplateSelector(false);
+        alert('Template applied successfully! Review and adjust the details as needed.');
+      }
+    } catch (error) {
+      console.error('Error applying template:', error);
+      alert('Failed to apply template');
+    }
+  };
+
   const updateSection = (sectionId: string, field: string, value: any) => {
     setSections(sections.map(s => 
       s.id === sectionId ? { ...s, [field]: value } : s
