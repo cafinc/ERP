@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/lib/auth';
 import api from '@/lib/api';
 import NotificationCenter from './NotificationCenter';
+import UnifiedCommunicationsDropdown from './UnifiedCommunicationsDropdown';
 import {
   Calendar,
   Clock,
