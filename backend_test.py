@@ -19,6 +19,8 @@ class TemplateSystemTester:
         self.session = requests.Session()
         self.test_results = []
         self.created_templates = []
+        self.session_token = None
+        self.authenticated = False
         
     def log_test(self, test_name, success, details="", response_data=None):
         """Log test results"""
