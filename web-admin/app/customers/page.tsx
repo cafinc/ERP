@@ -468,7 +468,7 @@ export default function CustomersPage() {
                       </div>
                       <div className="flex items-center text-xs text-gray-600">
                         <Phone className="w-3 h-3 mr-2 flex-shrink-0 text-gray-400" />
-                        <span>{customer.phone}</span>
+                        <span>{formatPhoneNumber(customer.phone)}</span>
                       </div>
                       <div className="flex items-start text-xs text-gray-600">
                         <MapPin className="w-3 h-3 mr-2 mt-0.5 flex-shrink-0 text-gray-400" />
