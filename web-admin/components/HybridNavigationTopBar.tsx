@@ -128,7 +128,7 @@ export default function HybridNavigationTopBar({ children }: { children: React.R
     },
     {
       label: 'Safety',
-      icon: UserCog,
+      icon: Shield,
       href: '/safety/dashboard',
       submenu: [
         { label: 'Safety Dashboard', href: '/safety/dashboard', icon: LayoutDashboard },
