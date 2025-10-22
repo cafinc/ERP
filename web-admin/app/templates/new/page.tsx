@@ -309,7 +309,7 @@ export default function CreateTemplatePage() {
                 </>
               ) : (
                 <>
-                  <SaveIcon className="w-5 h-5" />
+                  <CheckIcon className="w-5 h-5" />
                   Create Template
                 </>
               )}
