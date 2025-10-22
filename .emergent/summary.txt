@@ -1,86 +1,70 @@
 <analysis>
-The AI engineer's work trajectory chronicles a highly iterative, user-driven development process focused on refining the application's UI/UX and expanding its communication capabilities. The initial phase involved standardizing page headers with the  component, addressing various layout inconsistencies, and resolving JSX parsing and React Hooks errors in the  and  pages. A significant portion of the conversation was dedicated to debugging persistent JSX errors in  during an attempt to implement a frosted glass modal effect, which was eventually simplified to a full-screen  integration due to complexity.
-
-Subsequent user requests led to the removal of the Revenue Overview section from the CRM dashboard and a major overhaul of the Communication Center on the customer detail page. This involved transforming navigation to tabs, introducing interactive colored communication type buttons on the Overview tab, and building a comprehensive Communications tab with sub-tabs, messaging interfaces (InApp, SMS, Email, Phone), and integration points for RingCentral and Gmail. The AI also implemented system-wide phone number auto-formatting, email validation, and real-time field validation with visual error indicators.
-
-The final phase shifted towards backend integration, with the AI successfully implementing FastAPI routes for RingCentral and Gmail communication (sending messages) and developing real-time webhook listeners for both services. The trajectory concludes with the AI embarking on an ambitious autonomous build plan to deliver advanced Communication Center features, including file attachments and read receipts for the customer portal, but was cut short before full completion due to token limits, pivoting to a continuation package for foundational elements like file storage.
+The AI engineer's trajectory shows extensive, iterative development across a full-stack Next.js/FastAPI/MongoDB application. Initially, it focused on UI/UX fixes and building a comprehensive Communication Center, including real-time messaging, file attachments, and external integrations (RingCentral, Gmail) with webhooks. A key correction involved pivoting from an accidental Expo mobile app development to the intended web-admin application. Subsequently, a robust Template System was built, supporting various document types, placeholders with auto-population, and integrated into estimates, invoices, and the settings menu. The process involved meticulous backend and frontend testing, bug fixes (e.g., missing imports, icon names, syntax errors), and continuous user feedback. The most recent activity transitioned to a broader Platform Enhancement Master Plan, commencing with Weather Integration, where the AI is currently tasked with implementing all associated weather functions.
 </analysis>
 
 <product_requirements>
-The application is a full-stack admin dashboard (Next.js, FastAPI, MongoDB) for snow removal services, with an Expo mobile app. Core features include CRM, operational pages (Customers, Estimates, Projects, Invoices, Sites), and an Access Dashboard. Recent enhancements covered Site Map Annotation, UI/UX Modernization, a comprehensive Settings submenu, Navigation Enhancements, Avatar Emoji System, White-Label Branding, and Advanced User Roles & Permissions.
-
-Current development focuses on:
-*   **HR Module**: Establishing its foundation, navigation, employee management (CRUD, profiles, documents, emergency contacts), time & attendance, PTO, training/certifications, payroll, and performance management.
-*   **Integration Hub**: Developing its dashboard and mock flows for QuickBooks (Payroll, Time Tracking, Employee sync) and Microsoft 365 (Azure AD SSO, Teams, Outlook, OneDrive, Power BI).
-*   **Site Maps Tab Enhancements**: Integrating under Dispatch, resolving drawing inaccuracies, enabling drag-and-drop for feature icons, adding page scrollability, and implementing 15 additional map editor functionalities.
-*   **UI/UX Refinements**: Consistent header designs (), flexible tabbed navigation, interactive list/grid views.
-*   ** Page**: Update header, initially frosted glass modal (later simplified to full-screen with ).
-*   ** Page**: Remove Revenue Overview section.
-*   ** (Customer Detail) Page**: Implement tab-based navigation.
-*   **Communication Center**:
-    *   Add to  (both Overview and Communications tab).
-    *   Overview tab: view-only, with colored clickable buttons showing recent communications per type (InApp, SMS, Email, Phone).
-    *   Communications tab: full interface with sub-tabs for each type (InApp, SMS, Email, Phone), show all types regardless of activity, display No comms if empty, include reply box for messaging, integrate with RingCentral (phone/SMS) and Gmail (email).
-    *   Implement backend integrations for RingCentral (SMS send/receive) and Gmail (email send/receive).
-    *   Implement real-time webhook listeners for incoming RingCentral and Gmail messages.
-    *   Extend to customer portal, crew, and subcontractor access.
-    *   Add document/photo sending/receiving, read receipt functionality.
-    *   Further features: real-time messaging, multiple file uploads, file preview, basic search, message templates, analytics, AI chatbot, video calls.
-*   **Platform-Wide Validation**: Auto-format phone numbers to  and validate email structure system-wide. Implement real-time red border/error message validation for invalid/required fields on forms.
+The application is a full-stack admin dashboard for snow removal services, featuring CRM, operational pages (Customers, Estimates, Projects, Invoices, Sites), and an Access Dashboard. Recent focus included HR Module, Integration Hub (QuickBooks, Microsoft 365), Site Maps enhancements, and general UI/UX refinements.
+The core problem is to provide a comprehensive and intuitive platform for managing snow removal operations. Key implementations include:
+-   Standardized headers () and flexible tabbed navigation.
+-    page: Full-screen form with real-time validation, phone number auto-formatting, email validation.
+-   : Removal of Revenue Overview.
+-    (Customer Detail) page: Tab-based navigation, comprehensive Communication Center (InApp, SMS, Email, Phone) with reply box, RingCentral/Gmail integration, real-time webhooks, file attachments, read receipts.
+-   Platform-wide validation for phone numbers and emails.
+-   Communication Center: Extended to customer portal, crew, subcontractor access; document/photo sending/receiving, read receipts; future features like real-time messaging, file uploads, search, templates, analytics, AI chatbot, video calls.
+-   Template System: Creation, editing, pre-built templates for estimates/invoices, placeholder support, integration into forms and settings.
+-   Platform Enhancements: A master plan for further features, starting with Weather Integration.
 </product_requirements>
 
 <key_technical_concepts>
--   **Full-stack Monorepo**: Next.js (frontend), FastAPI (backend), MongoDB.
--   **Component-based UI**: , , .
+-   **Full-stack Monorepo**: Next.js (web-admin), FastAPI (backend), MongoDB.
+-   **Component-based UI**: , , , .
 -   **File-based Routing**: Next.js  directory.
--   **State Management**: React , , .
--   **Styling**: Tailwind CSS for utility-first styling.
--   **Backend Integrations**: RingCentral (SMS/calls), Gmail (email), Webhooks.
--   **Error Handling**: JSX parsing, React Hooks rules, Hydration issues.
+-   **State Management**: React , .
+-   **Backend Integrations**: RingCentral, Gmail, Webhooks, WebSockets.
+-   **Form Handling**: Real-time validation, auto-formatting.
+-   **Error Handling**: Runtime, Build, Syntax/Indentation errors.
 </key_technical_concepts>
 
 <code_architecture>
 
-
-
--   ****: Wraps content with  for consistent global navigation.
--   ****: Updated menu items and ensured proper submenu behavior.
--   ****: Adjusted to prevent overlap and resolved date hydration errors.
--   ** (NEW)**: Provides customizable, standardized page headers with branding, actions, and tab support.
--   ****: Integrated , added tabs for Individual/Company, column customization, filter dropdown, and phone number formatting using .
--   ****: Integrated ,  and  utilities, added real-time validation (red borders, error messages) for required fields (First/Last Name, Company Name), phone, and email. Phone numbers auto-format on input. Removed the frosted glass modal implementation after extensive debugging, reverting to a full-screen form.
--   ****: Refactored to use  with tabs for navigation. Implemented a comprehensive Communication Center:
-    *   **Overview Tab**: Displays interactive, colored buttons for communication types (InApp, SMS, Email, Phone), showing recent messages per type on click.
-    *   **Communications Tab**: Full interface with sub-tabs for each communication type, including a reply box.
-    *   Integrated  component for consistent phone number formatting.
-    *   Moved  hooks to the top level to resolve Rules of Hooks errors.
-    *   Removed an old, duplicate communications tab section.
--   ****: Replaced  with  and removed the Revenue Overview section per user request.
--   ** (NEW)**: Contains  for  style formatting and  utility.
--   ** (NEW)**: A reusable component for input fields with integrated validation logic and error display.
--   ** (NEW)**: FastAPI routes for sending SMS (via RingCentral) and Email (via Gmail), and fetching communication logs.
--   ****: Modified to include  and .
--   ****: Existing service, verified  method for integration.
--   ****: Existing service, verified  method for integration.
--   ** (NEW)**: FastAPI endpoints for receiving incoming webhooks from RingCentral and Gmail to enable real-time message reception.
--   ** (NEW)**: File created, implementation for file storage system initiated.
+-   ****: Updated to include database schemas for attachments and enhanced communications.
+-   ****: Modified to include new routes (, , ) and WebSocket service.
+-   ****: New routes for sending SMS/Email with attachment support, communication logs, search, templates, and WebSocket endpoints.
+-   ****: Initialized and completed for handling file uploads, including image compression.
+-   ****: New service for real-time messaging via WebSockets.
+-   ****: New service for managing template logic.
+-   ****: New FastAPI endpoints for template CRUD operations, search, and placeholder retrieval.
+-   ****: New file to pre-populate the database with example templates.
+-   ****: New file containing definitions for system-wide placeholders.
+-   ****: Existing service, currently being enhanced.
+-   ****: Integrated , validation, phone formatting.
+-   ****: Refactored for , tab-based Communication Center.
+-   ****: New page for customer-facing communication interface.
+-   ****: New page for crew-facing communication interface.
+-   ****: Modified to integrate  for applying pre-built estimate templates. Also fixed import errors (,  icon).
+-   ****: Mentioned for template integration (expected similar changes to estimates).
+-   ****: Modified to include a Document Templates card for easy access to template management.
+-   ****: New page for displaying the template library.
+-   ****: New page for creating new templates, integrating . Fixed icon import.
+-   ****: New page for viewing specific templates.
+-   ****: New page for editing existing templates, integrating .
+-   ****: Modified to include Document Templates in the settings submenu.
+-   ****: New reusable header component.
+-   ****: New reusable modal component for selecting templates.
+-   ****: New reusable modal component for browsing and inserting placeholders.
+-   ****: New utility for phone number formatting and email validation.
 </code_architecture>
 
 <pending_tasks>
--   **Frontend HR Module/Integration Hub UI completion**: Implement detailed UI.
--   **Roll out Full Featured Header**: Apply  to remaining main menu pages/dashboards.
--   **Communication Center - File Storage & Attachments**: Complete the file upload endpoints and wiring, implement document/photo sending/receiving.
--   **Communication Center - Read Receipts**: Implement read receipt functionality.
--   **Communication Center - Real-time Messaging**: Complete the foundational real-time messaging system.
--   **Communication Center - Advanced Features (Phases 2-5)**: Multiple file uploads, file preview, basic search, message templates, database schemas, API scaffolding, Analytics, AI chatbot, Video Calls.
--   **Communication Center - Cross-Portal Integration**: Extend to Crew and Subcontractor portals.
--   **External Service Integrations**: Integrate with AWS, Firebase, OpenAI for advanced features (requires user credentials).
+-   **ChatGPT Integration**: Implement AI chatbot functionality (initial request made).
+-   **Platform Enhancement Master Plan**: All blocks after Weather Integration (e.g., Advanced Reporting, Automation Engine, etc.).
+-   **Weather Integration**: Fully implement all requested weather functions.
 </pending_tasks>
 
 <current_work>
-Immediately before this summary request, the AI engineer was engaged in the autonomous build plan for the Communication Center. Specifically, it had just initiated BLOCK 1 - File Storage System by creating the file . The last instruction received and acknowledged was to continue the autonomous build and complete the file upload endpoints and wire everything together. This indicates the current work is focused on implementing the backend logic for file storage and upload, which is a foundational step for enabling document and photo attachments within the Communication Center, aligning with Phase 1 of the autonomous build plan.
+Immediately before this summary request, the AI engineer had just started working on the Platform Enhancement Master Plan. Specifically, it initiated Phase 1, Block 1.1: Weather Integration. The AI had viewed the existing  file and was waiting for the user's input on which functions to add. The user then explicitly instructed to implement all weather functions. Therefore, the current work involves enhancing the  to include comprehensive weather functionalities as part of the initial phase of the broader platform enhancement. The system is in a state where new weather functions need to be defined and implemented in the backend service.
 </current_work>
 
 <optional_next_step>
-Continue implementing the file upload endpoints and wiring for the file storage service ().
+Implement all identified weather functions in  as requested by the user.
 </optional_next_step>
