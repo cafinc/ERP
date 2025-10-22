@@ -403,9 +403,9 @@ export default function CustomerFormPage() {
   }
 
   return (
-      <>
-        {/* Page Header */}
-        <PageHeader
+    <>
+      {/* Page Header */}
+      <PageHeader
           title={isEdit ? 'Edit Customer' : 'New Customer'}
           breadcrumbs={[
             { label: 'Customers', href: '/customers' },
