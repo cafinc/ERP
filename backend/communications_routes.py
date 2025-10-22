@@ -44,12 +44,14 @@ class SendInAppMessageRequest(BaseModel):
     customer_id: str
     message: str
     type: str = "inapp"
+    attachments: Optional[List[str]] = []  # List of file_ids
 
 
 class SendSMSRequest(BaseModel):
     to: str
     message: str
     customer_id: str
+    attachments: Optional[List[str]] = []  # List of file_ids
 
 
 class SendEmailRequest(BaseModel):
@@ -57,6 +59,7 @@ class SendEmailRequest(BaseModel):
     subject: str
     body: str
     customer_id: str
+    attachments: Optional[List[str]] = []  # List of file_ids
 
 
 class LogCallRequest(BaseModel):
@@ -65,6 +68,21 @@ class LogCallRequest(BaseModel):
     customer_id: str
     duration: Optional[int] = None
     direction: str = "outbound"  # outbound or inbound
+
+
+class SearchMessagesRequest(BaseModel):
+    query: str
+    customer_id: Optional[str] = None
+    type: Optional[str] = None
+    start_date: Optional[datetime] = None
+    end_date: Optional[datetime] = None
+
+
+class MessageTemplateRequest(BaseModel):
+    name: str
+    content: str
+    type: str  # inapp, sms, email
+    category: Optional[str] = None
 
 
 # ========== In-App Messaging ==========
