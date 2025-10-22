@@ -73,7 +73,7 @@ async def send_inapp_message(request: SendInAppMessageRequest):
             "status": "sent"
         }
         
-        result = communications_collection.insert_one(communication)
+        result = await db.communications.insert_one(communication)
         communication["_id"] = str(result.inserted_id)
         
         logger.info(f"In-app message sent to customer {request.customer_id}")
@@ -130,7 +130,7 @@ async def send_sms_via_ringcentral(request: SendSMSRequest):
             "external_id": result.get("id")
         }
         
-        result = communications_collection.insert_one(communication)
+        result = await db.communications.insert_one(communication)
         
         logger.info(f"SMS sent to {request.to} via RingCentral")
         
@@ -189,7 +189,7 @@ async def send_email_via_gmail(request: SendEmailRequest):
             "external_id": result.get("id")
         }
         
-        result = communications_collection.insert_one(communication)
+        result = await db.communications.insert_one(communication)
         
         logger.info(f"Email sent to {request.to} via Gmail")
         
@@ -229,7 +229,7 @@ async def log_phone_call(request: LogCallRequest):
             "integration": "ringcentral"
         }
         
-        result = communications_collection.insert_one(communication)
+        result = await db.communications.insert_one(communication)
         
         logger.info(f"Phone call logged for {request.phone}")
         
