@@ -156,7 +156,7 @@ export default function ContactsPage() {
         </div>
 
         {/* Filters */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-6">
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-4">
           <div className="flex items-center space-x-4">
             <div className="flex-1">
               <div className="relative">

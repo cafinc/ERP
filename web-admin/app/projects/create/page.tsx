@@ -165,7 +165,7 @@ export default function ProjectCreatePage() {
         <div className="max-w-3xl">
           <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
             {/* Customer Selection */}
-            <div className="mb-6">
+            <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Customer *
               </label>
@@ -188,7 +188,7 @@ export default function ProjectCreatePage() {
             </div>
 
             {/* Estimate Selection */}
-            <div className="mb-6">
+            <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Estimate *
               </label>
@@ -219,7 +219,7 @@ export default function ProjectCreatePage() {
             </div>
 
             {/* Project Name */}
-            <div className="mb-6">
+            <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Project Name *
               </label>
@@ -237,7 +237,7 @@ export default function ProjectCreatePage() {
             </div>
 
             {/* Description */}
-            <div className="mb-6">
+            <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Description
               </label>
@@ -251,7 +251,7 @@ export default function ProjectCreatePage() {
             </div>
 
             {/* Start Date */}
-            <div className="mb-6">
+            <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Start Date
               </label>
@@ -267,7 +267,7 @@ export default function ProjectCreatePage() {
             </div>
 
             {/* Status */}
-            <div className="mb-6">
+            <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Initial Status
               </label>

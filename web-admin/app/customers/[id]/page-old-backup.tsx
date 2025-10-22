@@ -194,7 +194,7 @@ export default function CustomerDetailPage() {
     <DashboardLayout>
       <div className="p-8">
         {/* Header */}
-        <div className="mb-6 flex items-center justify-between">
+        <div className="mb-4 flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <button
               onClick={() => router.push('/customers')}
@@ -229,7 +229,7 @@ export default function CustomerDetailPage() {
 
         {/* Stats Cards */}
         {stats && (
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -273,7 +273,7 @@ export default function CustomerDetailPage() {
         )}
 
         {/* Tabs */}
-        <div className="border-b border-gray-200 mb-6">
+        <div className="border-b border-gray-200 mb-4">
           <div className="flex space-x-8">
             <button
               onClick={() => setActiveTab('overview')}
@@ -295,7 +295,7 @@ export default function CustomerDetailPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             {/* Contact Information */}
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-6">Contact Information</h2>
+              <h2 className="text-xl font-semibold text-gray-900 mb-4">Contact Information</h2>
               
               <div className="space-y-4">
                 <div className="flex items-start">
@@ -413,7 +413,7 @@ export default function CustomerDetailPage() {
         ) : (
           /* Activity Timeline */
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <h2 className="text-xl font-semibold text-gray-900 mb-6">Activity Timeline</h2>
+            <h2 className="text-xl font-semibold text-gray-900 mb-4">Activity Timeline</h2>
             
             {activity.length > 0 ? (
               <div className="space-y-4">

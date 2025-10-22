@@ -23,8 +23,8 @@ export default function BillingPage() {
           />
 
           {/* Current Plan */}
-          <div className="bg-white rounded-xl shadow-lg p-8 border border-gray-200 mb-6">
-            <div className="flex items-center justify-between mb-6">
+          <div className="bg-white rounded-xl shadow-lg p-8 border border-gray-200 mb-4">
+            <div className="flex items-center justify-between mb-4">
               <div>
                 <h2 className="text-2xl font-bold text-gray-900">Current Plan</h2>
                 <p className="text-sm text-gray-500">Your subscription details</p>
@@ -48,8 +48,8 @@ export default function BillingPage() {
           </div>
 
           {/* Payment Method */}
-          <div className="bg-white rounded-xl shadow-lg p-8 border border-gray-200 mb-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Payment Method</h2>
+          <div className="bg-white rounded-xl shadow-lg p-8 border border-gray-200 mb-4">
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">Payment Method</h2>
             <div className="flex items-center justify-between p-4 border-2 border-gray-200 rounded-lg">
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
@@ -68,7 +68,7 @@ export default function BillingPage() {
 
           {/* Billing History */}
           <div className="bg-white rounded-xl shadow-lg p-8 border border-gray-200">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Billing History</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">Billing History</h2>
             <div className="space-y-3">
               {invoices.map((invoice) => (
                 <div key={invoice.id} className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">

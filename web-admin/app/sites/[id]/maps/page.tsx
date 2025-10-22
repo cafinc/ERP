@@ -147,7 +147,7 @@ export default function SiteMapsPage() {
     <HybridNavigationTopBar>
       <div className="h-full flex flex-col p-6">
         {/* Header */}
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-4">
             <button
               onClick={() => router.push(`/sites/${siteId}`)}
@@ -226,7 +226,7 @@ export default function SiteMapsPage() {
               <h3 className="text-xl font-semibold text-gray-900 mb-2">
                 {siteMaps.length === 0 ? 'No Site Maps Yet' : 'Select a Map Version'}
               </h3>
-              <p className="text-gray-600 mb-6">
+              <p className="text-gray-600 mb-4">
                 {siteMaps.length === 0
                   ? 'Create your first annotated site map to document layout, features, and work areas'
                   : 'Select a map version above or create a new one'}

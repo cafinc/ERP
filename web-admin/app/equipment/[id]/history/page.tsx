@@ -124,7 +124,7 @@ export default function EquipmentHistoryPage() {
         {/* Equipment Info Card */}
         {equipment && (
           <div className="bg-white rounded-lg border border-gray-200 p-6">
-            <div className="flex items-start justify-between mb-6">
+            <div className="flex items-start justify-between mb-4">
               <div>
                 <h2 className="text-2xl font-bold text-gray-900">{equipment.name || equipment.unit_number}</h2>
                 <p className="text-gray-600 capitalize">{equipment.equipment_type?.replace('_', ' ')}</p>

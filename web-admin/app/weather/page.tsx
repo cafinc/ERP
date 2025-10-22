@@ -260,7 +260,7 @@ export default function WeatherPlanningPage() {
                 <MapPin className="w-5 h-5 " />
                 <h2 className="text-2xl font-semibold">{weather.location}</h2>
               </div>
-              <div className="flex items-center gap-4 mb-6">
+              <div className="flex items-center gap-4 mb-4">
                 <div className="flex items-center gap-2">
                   {getConditionIcon(weather.current.conditions)}
                   <span className="text-lg">{weather.current.conditions}</span>
@@ -308,7 +308,7 @@ export default function WeatherPlanningPage() {
 
         {/* 5-Day Forecast */}
         <div className="bg-white rounded-lg border border-gray-200 p-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-6">5-Day Forecast</h2>
+          <h2 className="text-xl font-semibold text-gray-900 mb-4">5-Day Forecast</h2>
           <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
             {weather.forecast.map((day, index) => (
               <div key={index} className="bg-gray-50 rounded-lg p-4 text-center">

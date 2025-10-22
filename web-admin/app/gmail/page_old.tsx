@@ -283,7 +283,7 @@ export default function GmailPage() {
           <div className="bg-white p-8 rounded-2xl shadow-2xl max-w-md text-center">
             <Mail className="w-16 h-16 text-[#3f72af] mx-auto mb-4" />
             <h1 className="text-2xl font-bold text-gray-900 mb-2">Connect Gmail</h1>
-            <p className="text-gray-600 mb-6">
+            <p className="text-gray-600 mb-4">
               Connect your Gmail account to manage emails, send messages, and integrate with your CRM.
             </p>
             <button

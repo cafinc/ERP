@@ -182,7 +182,7 @@ export default function EstimateDetailPage() {
         <div className="flex flex-col items-center justify-center h-full">
           <FileText className="w-16 h-16 text-gray-300 mb-4" />
           <h2 className="text-2xl font-bold text-gray-900 mb-2">Estimate Not Found</h2>
-          <p className="text-gray-600 mb-6">The estimate you're looking for doesn't exist</p>
+          <p className="text-gray-600 mb-4">The estimate you're looking for doesn't exist</p>
           <button
             onClick={() => router.push('/estimates')}
             className="flex items-center space-x-2 px-6 py-3 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium"
@@ -199,7 +199,7 @@ export default function EstimateDetailPage() {
     <HybridNavigationTopBar>
       <div className="p-8">
         {/* Header */}
-        <div className="mb-6 flex items-center justify-between">
+        <div className="mb-4 flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <button
               onClick={() => router.push('/estimates')}
@@ -221,7 +221,7 @@ export default function EstimateDetailPage() {
         </div>
 
         {/* Action Buttons */}
-        <div className="mb-6 flex flex-wrap gap-3">
+        <div className="mb-4 flex flex-wrap gap-3">
           <button
             onClick={() => router.push(`/estimates/${estimateId}/edit`)}
             className="flex items-center space-x-2 px-4 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"

@@ -335,7 +335,7 @@ export default function QuickBooksSettings() {
     <HybridNavigationTopBar>
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         {/* Header */}
-        <div className="mb-6">
+        <div className="mb-4">
           <h1 className="text-3xl font-bold text-[#112d4e]">QuickBooks Online Integration</h1>
           <p className="text-gray-600 mt-2">
             Connect your QuickBooks Online account to automatically sync customers, invoices, payments, and estimates.
@@ -343,7 +343,7 @@ export default function QuickBooksSettings() {
         </div>
 
         {/* Connection Status Card */}
-        <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-4 mb-6">
+        <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-4 mb-4">
           <div className="flex items-center justify-between mb-4">
             <div>
               <h2 className="text-xl font-semibold text-[#112d4e]">Connection Status</h2>
@@ -415,7 +415,7 @@ export default function QuickBooksSettings() {
 
         {/* Sync Settings (only show when connected) */}
         {connection?.connected && (
-          <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-4 mb-6">
+          <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-4 mb-4">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-xl font-semibold text-[#112d4e]">Sync Settings</h2>
               <SettingsIcon className="w-5 h-5 text-gray-400" />

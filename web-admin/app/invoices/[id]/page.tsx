@@ -150,7 +150,7 @@ export default function InvoiceDetailPage() {
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-12 text-center">
             <FileText className="w-16 h-16 text-red-300 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-gray-900 mb-2">Invoice Not Found</h3>
-            <p className="text-gray-600 mb-6">The invoice you're looking for doesn't exist.</p>
+            <p className="text-gray-600 mb-4">The invoice you're looking for doesn't exist.</p>
             <button
               onClick={() => router.push('/invoices')}
               className="inline-flex items-center space-x-2 px-6 py-3 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
@@ -168,7 +168,7 @@ export default function InvoiceDetailPage() {
     <HybridNavigationTopBar>
       <div className="p-8">
         {/* Header */}
-        <div className="mb-6 flex items-center justify-between">
+        <div className="mb-4 flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <button
               onClick={() => router.push('/invoices')}
@@ -203,7 +203,7 @@ export default function InvoiceDetailPage() {
           <div className="lg:col-span-2 space-y-6">
             {/* Invoice Info */}
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-              <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center justify-between mb-4">
                 <h2 className="text-xl font-semibold text-gray-900">Invoice Information</h2>
                 <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(invoice.status)}`}>
                   {invoice.status?.replace('_', ' ')}
@@ -253,7 +253,7 @@ export default function InvoiceDetailPage() {
 
             {/* Line Items */}
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-6">Line Items</h2>
+              <h2 className="text-xl font-semibold text-gray-900 mb-4">Line Items</h2>
               
               <div className="overflow-x-auto">
                 <table className="w-full">
@@ -304,7 +304,7 @@ export default function InvoiceDetailPage() {
             {/* Payment History */}
             {invoice.payments && invoice.payments.length > 0 && (
               <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                <h2 className="text-xl font-semibold text-gray-900 mb-6">Payment History</h2>
+                <h2 className="text-xl font-semibold text-gray-900 mb-4">Payment History</h2>
                 
                 <div className="space-y-4">
                   {invoice.payments.map((payment) => (

@@ -568,7 +568,7 @@ export default function CustomerDetailPage() {
           {/* Overview Tab */}
           {activeTab === 'overview' && (
             <div>
-              <h2 className="text-xl font-semibold text-gray-900 mb-6">Overview</h2>
+              <h2 className="text-xl font-semibold text-gray-900 mb-4">Overview</h2>
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
               {/* Left Column - Contact Info */}
               <div className="space-y-6">
@@ -707,7 +707,7 @@ export default function CustomerDetailPage() {
           {/* Sites Tab */}
           {activeTab === 'sites' && (
             <div>
-              <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center justify-between mb-4">
                   <h2 className="text-xl font-semibold text-gray-900">Sites</h2>
                   <button
                     onClick={() => router.push(`/sites/create?customer_id=${customerId}`)}
@@ -739,7 +739,7 @@ export default function CustomerDetailPage() {
           {/* Estimates Tab */}
           {activeTab === 'estimates' && (
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-              <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center justify-between mb-4">
                 <h2 className="text-xl font-semibold text-gray-900">Estimates</h2>
                 <button
                   onClick={() => router.push(`/estimates/create?customer_id=${customerId}`)}
@@ -753,7 +753,7 @@ export default function CustomerDetailPage() {
                 <div className="text-center py-12">
                   <FileText className="w-16 h-16 text-gray-300 mx-auto mb-4" />
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">No Estimates Yet</h3>
-                  <p className="text-gray-600 mb-6">
+                  <p className="text-gray-600 mb-4">
                     Create an estimate to start a project with {customer?.name}
                   </p>
                   <button
@@ -817,7 +817,7 @@ export default function CustomerDetailPage() {
           {/* Projects Tab */}
           {activeTab === 'projects' && (
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-              <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center justify-between mb-4">
                 <h2 className="text-xl font-semibold text-gray-900">Projects</h2>
                 <button
                   onClick={() => router.push(`/projects/create?customer_id=${customerId}`)}
@@ -831,7 +831,7 @@ export default function CustomerDetailPage() {
                 <div className="text-center py-12">
                   <FolderOpen className="w-16 h-16 text-gray-300 mx-auto mb-4" />
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">No Projects Yet</h3>
-                  <p className="text-gray-600 mb-6">
+                  <p className="text-gray-600 mb-4">
                     Start a new project for {customer?.name}
                   </p>
                   <button
@@ -1005,7 +1005,7 @@ export default function CustomerDetailPage() {
                   <div className="text-center py-12">
                     <FileSignature className="w-16 h-16 text-gray-300 mx-auto mb-4" />
                     <h3 className="text-lg font-semibold text-gray-900 mb-2">No Agreements Yet</h3>
-                    <p className="text-gray-600 mb-6">
+                    <p className="text-gray-600 mb-4">
                       Create a service agreement with {customer?.name}
                     </p>
                     <button
@@ -1079,7 +1079,7 @@ export default function CustomerDetailPage() {
           {/* Tasks Tab */}
           {activeTab === 'tasks' && (
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-              <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center justify-between mb-4">
                 <h2 className="text-xl font-semibold text-gray-900">Tasks</h2>
                 <button
                   className="flex items-center space-x-2 px-4 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
@@ -1093,7 +1093,7 @@ export default function CustomerDetailPage() {
                 <div className="text-center py-12">
                   <CheckCircle className="w-16 h-16 text-gray-300 mx-auto mb-4" />
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">No Tasks Yet</h3>
-                  <p className="text-gray-600 mb-6">
+                  <p className="text-gray-600 mb-4">
                     Create tasks and assign them to team members for {customer?.name}
                   </p>
                   <button 
@@ -1156,7 +1156,7 @@ export default function CustomerDetailPage() {
           {/* Service Requests Tab */}
           {activeTab === 'service-requests' && (
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-              <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center justify-between mb-4">
                 <h2 className="text-xl font-semibold text-gray-900">Service Requests</h2>
                 {serviceRequests.length === 0 ? (
                   <p className="text-gray-600 text-center py-8">No service requests yet</p>
@@ -1214,7 +1214,7 @@ export default function CustomerDetailPage() {
           {/* Communications Tab */}
           {activeTab === 'communications' && (
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-              <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center justify-between mb-4">
                 <h2 className="text-xl font-semibold text-gray-900">Communications</h2>
                 <div className="flex space-x-2">
                   <button 
@@ -1237,7 +1237,7 @@ export default function CustomerDetailPage() {
                 <div className="text-center py-12">
                   <Mail className="w-16 h-16 text-gray-300 mx-auto mb-4" />
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">No Communications Yet</h3>
-                  <p className="text-gray-600 mb-6">
+                  <p className="text-gray-600 mb-4">
                     All emails and SMS messages to {customer?.name} will appear here
                   </p>
                   <div className="flex items-center justify-center space-x-3">

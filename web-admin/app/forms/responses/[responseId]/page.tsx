@@ -264,7 +264,7 @@ export default function ViewResponsePage() {
           </div>
 
           {/* Response Info */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-6">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-4">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="flex items-center space-x-3">
                 <div className="p-3 bg-blue-100 rounded-lg">
@@ -300,7 +300,7 @@ export default function ViewResponsePage() {
 
           {/* Form Data */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
-            <h2 className="text-xl font-semibold text-gray-900 mb-6">Form Data</h2>
+            <h2 className="text-xl font-semibold text-gray-900 mb-4">Form Data</h2>
             <div className="space-y-6">
               {template.fields.map((field: any) => (
                 <div key={field.id} className="border-b border-gray-200 pb-6 last:border-b-0 last:pb-0">

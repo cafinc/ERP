@@ -109,7 +109,7 @@ export default function CustomerEditPage() {
         <div className="max-w-3xl">
           <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             {/* Customer Name */}
-            <div className="mb-6">
+            <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Customer Name *
               </label>
@@ -127,7 +127,7 @@ export default function CustomerEditPage() {
             </div>
 
             {/* Email */}
-            <div className="mb-6">
+            <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Email Address *
               </label>
@@ -145,7 +145,7 @@ export default function CustomerEditPage() {
             </div>
 
             {/* Phone */}
-            <div className="mb-6">
+            <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Phone Number *
               </label>
@@ -163,7 +163,7 @@ export default function CustomerEditPage() {
             </div>
 
             {/* Address */}
-            <div className="mb-6">
+            <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Address *
               </label>
@@ -181,7 +181,7 @@ export default function CustomerEditPage() {
             </div>
 
             {/* Notes */}
-            <div className="mb-6">
+            <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Notes (Optional)
               </label>
@@ -198,7 +198,7 @@ export default function CustomerEditPage() {
             </div>
 
             {/* Active Status */}
-            <div className="mb-6">
+            <div className="mb-4">
               <label className="flex items-center space-x-2">
                 <input
                   type="checkbox"

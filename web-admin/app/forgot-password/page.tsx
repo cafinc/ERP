@@ -38,10 +38,10 @@ export default function ForgotPasswordPage() {
         <div className="bg-white rounded-lg shadow-xl max-w-md w-full p-8 text-center">
           <CheckCircle className="w-16 h-16 text-green-600 mx-auto mb-4" />
           <h2 className="text-2xl font-bold text-gray-900 mb-2">Check Your Email</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-gray-600 mb-4">
             We've sent password reset instructions to <strong>{email}</strong>
           </p>
-          <p className="text-sm text-gray-500 mb-6">
+          <p className="text-sm text-gray-500 mb-4">
             Didn't receive the email? Check your spam folder or try again.
           </p>
           <button
@@ -59,7 +59,7 @@ export default function ForgotPasswordPage() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center p-4">
       <div className="bg-white rounded-lg shadow-xl max-w-md w-full p-8">
         {/* Header */}
-        <div className="mb-6">
+        <div className="mb-4">
           <button
             onClick={() => router.push('/login')}
             className="text-gray-600 hover:text-gray-900 mb-4 inline-flex items-center gap-2"

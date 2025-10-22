@@ -215,7 +215,7 @@ export default function PTOManagementPage() {
         </div>
 
         {/* Filters */}
-        <div className="bg-white rounded-lg shadow p-4 mb-6">
+        <div className="bg-white rounded-lg shadow p-4 mb-4">
           <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
             <div className="flex gap-4 flex-1 w-full md:w-auto">
               <select

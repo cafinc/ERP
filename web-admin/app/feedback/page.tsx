@@ -98,7 +98,7 @@ export default function FeedbackFormPage() {
         <form onSubmit={handleSubmitFeedback} className="space-y-6">
           {/* Rating Section */}
           <div className="bg-white rounded-lg border border-gray-200 p-8">
-            <h2 className="text-xl font-semibold text-gray-900 mb-6 text-center">
+            <h2 className="text-xl font-semibold text-gray-900 mb-4 text-center">
               How would you rate our service?
             </h2>
             
@@ -233,7 +233,7 @@ export default function FeedbackFormPage() {
               <div className="text-center">
                 <CheckCircle className="w-16 h-16 text-green-600 mx-auto mb-4" />
                 <h2 className="text-2xl font-bold text-gray-900 mb-2">Thank You!</h2>
-                <p className="text-gray-600 mb-6">
+                <p className="text-gray-600 mb-4">
                   Your feedback has been submitted successfully. We appreciate you taking the time to share your experience with us.
                 </p>
                 <button

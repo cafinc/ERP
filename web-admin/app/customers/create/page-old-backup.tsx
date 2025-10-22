@@ -144,7 +144,7 @@ export default function CustomerFormPage() {
         <div className="max-w-3xl">
           <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             {/* Customer Name */}
-            <div className="mb-6">
+            <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Customer Name *
               </label>
@@ -162,7 +162,7 @@ export default function CustomerFormPage() {
             </div>
 
             {/* Email */}
-            <div className="mb-6">
+            <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Email Address *
               </label>
@@ -180,7 +180,7 @@ export default function CustomerFormPage() {
             </div>
 
             {/* Phone */}
-            <div className="mb-6">
+            <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Phone Number *
               </label>
@@ -199,7 +199,7 @@ export default function CustomerFormPage() {
 
             {/* Company Name (Commercial Only) */}
             {customerType === 'commercial' && (
-              <div className="mb-6">
+              <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Company Name {customerType === 'commercial' && '*'}
                 </label>
@@ -218,7 +218,7 @@ export default function CustomerFormPage() {
             )}
 
             {/* Address */}
-            <div className="mb-6">
+            <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Address *
               </label>
@@ -236,7 +236,7 @@ export default function CustomerFormPage() {
             </div>
 
             {/* Notes */}
-            <div className="mb-6">
+            <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Notes (Optional)
               </label>
@@ -254,7 +254,7 @@ export default function CustomerFormPage() {
 
             {/* Active Status */}
             {isEdit && (
-              <div className="mb-6">
+              <div className="mb-4">
                 <label className="flex items-center space-x-2">
                   <input
                     type="checkbox"

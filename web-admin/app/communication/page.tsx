@@ -309,7 +309,7 @@ export default function CommunicationCenterPage() {
         </div>
 
         {/* Tabs */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 mb-6">
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 mb-4">
           <div className="flex items-center space-x-2 p-4 border-b border-gray-200 overflow-x-auto">
             <button
               onClick={() => setActiveTab('all')}

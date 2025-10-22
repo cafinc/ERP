@@ -278,7 +278,7 @@ export default function TrainingPage() {
         </div>
 
         {/* Tabs */}
-        <div className="bg-white rounded-lg shadow mb-6">
+        <div className="bg-white rounded-lg shadow mb-4">
           <div className="border-b border-gray-200">
             <div className="flex">
               <button
@@ -307,7 +307,7 @@ export default function TrainingPage() {
           <div className="p-6">
             {activeTab === "programs" ? (
               <>
-                <div className="flex justify-between items-center mb-6">
+                <div className="flex justify-between items-center mb-4">
                   <h3 className="text-lg font-semibold text-gray-900">
                     Training Programs
                   </h3>
@@ -397,7 +397,7 @@ export default function TrainingPage() {
               </>
             ) : (
               <>
-                <div className="flex justify-between items-center mb-6">
+                <div className="flex justify-between items-center mb-4">
                   <h3 className="text-lg font-semibold text-gray-900">
                     Employee Assignments
                   </h3>

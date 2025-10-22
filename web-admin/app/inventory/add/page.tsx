@@ -105,7 +105,7 @@ export default function AddInventoryItemPage() {
         <div className="max-w-4xl mx-auto mt-6">
           <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             {/* Basic Information */}
-            <div className="mb-6">
+            <div className="mb-4">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Basic Information</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* Name */}
@@ -163,7 +163,7 @@ export default function AddInventoryItemPage() {
             </div>
 
             {/* Quantity Information */}
-            <div className="mb-6">
+            <div className="mb-4">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Quantity Information</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {/* Quantity */}
@@ -226,7 +226,7 @@ export default function AddInventoryItemPage() {
             </div>
 
             {/* Supplier Information */}
-            <div className="mb-6">
+            <div className="mb-4">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Supplier Information</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* Supplier */}
@@ -262,7 +262,7 @@ export default function AddInventoryItemPage() {
             </div>
 
             {/* Cost Information */}
-            <div className="mb-6">
+            <div className="mb-4">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Cost Information</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* Cost per Unit */}
@@ -299,7 +299,7 @@ export default function AddInventoryItemPage() {
             </div>
 
             {/* Notes */}
-            <div className="mb-6">
+            <div className="mb-4">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Additional Information</h3>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">

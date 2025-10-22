@@ -294,7 +294,7 @@ export default function PerformancePage() {
         </div>
 
         {/* Filters */}
-        <div className="bg-white rounded-lg shadow p-4 mb-6">
+        <div className="bg-white rounded-lg shadow p-4 mb-4">
           <div className="flex justify-between items-center">
             <select
               value={filterStatus}

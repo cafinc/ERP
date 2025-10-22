@@ -32,7 +32,7 @@ export default function TasksPage() {
           />
 
           {/* Quick Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
             <div className="bg-white rounded-xl shadow-lg p-4 border border-gray-200">
               <div className="flex items-center justify-between">
                 <div>
@@ -83,7 +83,7 @@ export default function TasksPage() {
           </div>
 
           {/* Search and Filter */}
-          <div className="bg-white rounded-xl shadow-lg p-4 border border-gray-200 mb-6">
+          <div className="bg-white rounded-xl shadow-lg p-4 border border-gray-200 mb-4">
             <div className="flex items-center gap-4 flex-wrap">
               <div className="flex-1 min-w-[250px] relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -116,11 +116,11 @@ export default function TasksPage() {
 
           {/* Empty State */}
           <div className="bg-white rounded-xl shadow-lg p-12 border border-gray-200 text-center">
-            <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center mx-auto mb-6">
+            <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4">
               <CheckSquare className="w-10 h-10 text-white" />
             </div>
             <h3 className="text-2xl font-bold text-gray-900 mb-2">No Tasks Yet</h3>
-            <p className="text-gray-600 mb-6">Create your first task to start managing your team's work</p>
+            <p className="text-gray-600 mb-4">Create your first task to start managing your team's work</p>
             <button className="px-6 py-3 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-all shadow-md hover:shadow-lg font-semibold">
               Create First Task
             </button>

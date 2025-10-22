@@ -44,7 +44,7 @@ export default function SiteMapsListPage() {
           <div className="bg-white rounded-lg shadow p-12 text-center">
             <MapPin className="h-16 w-16 text-gray-400 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-gray-900 mb-2">No Sites Yet</h3>
-            <p className="text-gray-600 mb-6">Create a site first to add map annotations</p>
+            <p className="text-gray-600 mb-4">Create a site first to add map annotations</p>
             <button
               onClick={() => router.push("/sites/create")}
               className="inline-flex items-center gap-2 px-6 py-3 bg-[#5b8ec4] text-white rounded-lg hover:bg-[#3f72af] transition-colors"

@@ -178,7 +178,7 @@ export default function AgreementTemplatesPage() {
             <h3 className="text-lg font-semibold text-gray-900 mb-2">
               {filter === 'archived' ? 'No Archived Templates' : 'No Templates Yet'}
             </h3>
-            <p className="text-gray-600 mb-6">
+            <p className="text-gray-600 mb-4">
               {filter === 'archived' 
                 ? 'Archived templates will appear here'
                 : 'Create your first agreement template to streamline your service agreements'

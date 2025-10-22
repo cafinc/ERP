@@ -142,7 +142,7 @@ export default function DispatchesPage() {
         </div>
 
         {/* Summary Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <div className="flex items-center justify-between">
               <div>
@@ -185,7 +185,7 @@ export default function DispatchesPage() {
         </div>
 
         {/* View Toggle */}
-        <div className="mb-6 flex space-x-2">
+        <div className="mb-4 flex space-x-2">
           <button
             onClick={() => setView('list')}
             className={`px-4 py-2 rounded-lg font-medium transition-colors text-sm ${
@@ -212,7 +212,7 @@ export default function DispatchesPage() {
 
         {/* Filters - Show in list view only */}
         {view === 'list' && (
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-6">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-4">
             <div className="flex flex-col md:flex-row gap-4">
               <div className="flex-1 relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -258,11 +258,11 @@ export default function DispatchesPage() {
 
         {/* Map View */}
         {view === 'map' && (
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-6">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-4">
             <div className="text-center py-16">
-              <MapIcon className="w-24 h-24 text-gray-300 mx-auto mb-6" />
+              <MapIcon className="w-24 h-24 text-gray-300 mx-auto mb-4" />
               <h3 className="text-2xl font-semibold text-gray-900 mb-3">Live Dispatch Map</h3>
-              <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+              <p className="text-gray-600 mb-4 max-w-2xl mx-auto">
                 Interactive map showing real-time crew locations, active dispatch routes, and service sites.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl mx-auto text-left">
@@ -300,7 +300,7 @@ export default function DispatchesPage() {
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-12 text-center">
             <Calendar className="w-16 h-16 text-gray-300 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-gray-900 mb-2">No Dispatches Found</h3>
-            <p className="text-gray-600 mb-6">
+            <p className="text-gray-600 mb-4">
               {searchQuery || filterStatus !== 'all' || filterDate !== 'all'
                 ? 'Try adjusting your search or filters' 
                 : 'Get started by creating your first dispatch'}

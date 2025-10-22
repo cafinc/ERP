@@ -53,7 +53,7 @@ export default function SupportPage() {
     <HybridNavigationTopBar>
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         {/* Header */}
-        <div className="mb-6">
+        <div className="mb-4">
           <h1 className="text-3xl font-bold text-[#112d4e]">Help & Support</h1>
           <p className="text-gray-600 mt-2">
             Get help with your account, features, or technical issues
@@ -63,7 +63,7 @@ export default function SupportPage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           {/* Contact Information */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-4 mb-6">
+            <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-4 mb-4">
               <h2 className="text-xl font-semibold text-[#112d4e] mb-4">Contact Us</h2>
 
               <div className="space-y-4">
@@ -153,7 +153,7 @@ export default function SupportPage() {
                 <div className="text-center py-12">
                   <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
                   <h3 className="text-xl font-semibold text-gray-900 mb-2">Message Sent!</h3>
-                  <p className="text-gray-600 mb-6">
+                  <p className="text-gray-600 mb-4">
                     Your email client has been opened. Please send the email to complete your support request.
                   </p>
                   <button

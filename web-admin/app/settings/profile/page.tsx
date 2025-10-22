@@ -254,21 +254,21 @@ export default function ProfileSettings() {
         <div className="max-w-3xl">
           {/* Success/Error Messages */}
           {successMessage && (
-            <div className="mb-6 bg-green-50 border border-green-200 rounded-lg p-4 flex items-center space-x-3">
+            <div className="mb-4 bg-green-50 border border-green-200 rounded-lg p-4 flex items-center space-x-3">
               <Check className="w-5 h-5 text-green-600 flex-shrink-0" />
               <p className="text-green-800">{successMessage}</p>
             </div>
           )}
 
           {errorMessage && (
-            <div className="mb-6 bg-red-50 border border-red-200 rounded-lg p-4">
+            <div className="mb-4 bg-red-50 border border-red-200 rounded-lg p-4">
               <p className="text-red-800">{errorMessage}</p>
             </div>
           )}
 
           {/* Avatar/Profile Photo Card */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-6">
-            <h2 className="text-xl font-semibold text-gray-900 mb-6 flex items-center space-x-2">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-4">
+            <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center space-x-2">
               <Camera className="w-5 h-5" />
               <span>Profile Photo</span>
             </h2>
@@ -337,8 +337,8 @@ export default function ProfileSettings() {
           </div>
 
           {/* Profile Information Card */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-6">
-            <h2 className="text-xl font-semibold text-gray-900 mb-6 flex items-center space-x-2">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-4">
+            <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center space-x-2">
               <User className="w-5 h-5" />
               <span>Profile Information</span>
             </h2>
@@ -423,8 +423,8 @@ export default function ProfileSettings() {
           </div>
 
           {/* Change Password Card */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-6">
-            <h2 className="text-xl font-semibold text-gray-900 mb-6 flex items-center space-x-2">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-4">
+            <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center space-x-2">
               <Lock className="w-5 h-5" />
               <span>Change Password</span>
             </h2>

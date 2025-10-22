@@ -122,7 +122,7 @@ export default function DispatchDetailPage() {
     <HybridNavigationTopBar>
       <div className="p-8">
         {/* Header */}
-        <div className="mb-6 flex items-center justify-between">
+        <div className="mb-4 flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <button
               onClick={() => router.push('/dispatch')}
@@ -151,7 +151,7 @@ export default function DispatchDetailPage() {
           <div className="lg:col-span-2 space-y-6">
             {/* Dispatch Info */}
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-              <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center justify-between mb-4">
                 <h2 className="text-xl font-semibold text-gray-900">Dispatch Information</h2>
                 <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(dispatch.status)}`}>
                   {dispatch.status.replace('_', ' ')}

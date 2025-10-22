@@ -313,7 +313,7 @@ export default function CustomerFormPage() {
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Basic Information */}
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-6 flex items-center space-x-2">
+              <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center space-x-2">
                 <User className="w-5 h-5 text-[#3f72af]" />
                 <span>Basic Information</span>
               </h2>
@@ -480,7 +480,7 @@ export default function CustomerFormPage() {
             {/* Company Accounting (for companies only) */}
             {customerForm.customer_type === 'company' && (
               <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                <h2 className="text-xl font-semibold text-gray-900 mb-6 flex items-center space-x-2">
+                <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center space-x-2">
                   <CreditCard className="w-5 h-5 text-green-600" />
                   <span>Accounting Information</span>
                 </h2>
@@ -626,14 +626,14 @@ export default function CustomerFormPage() {
 
             {/* Custom Fields */}
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-6 flex items-center space-x-2">
+              <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center space-x-2">
                 <ClipboardList className="w-5 h-5 text-purple-600" />
                 <span>Custom Fields</span>
               </h2>
 
               {/* Existing Custom Fields */}
               {customFields.length > 0 && (
-                <div className="space-y-4 mb-6">
+                <div className="space-y-4 mb-4">
                   {customFields.map((field, index) => (
                     <div key={index} className="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg">
                       <div className="flex-1">

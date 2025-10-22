@@ -283,7 +283,7 @@ export default function GeofenceManagementPage() {
           />
 
           {/* Stats Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -338,7 +338,7 @@ export default function GeofenceManagementPage() {
           </div>
 
           {/* View Toggle */}
-          <div className="mb-6 flex space-x-2">
+          <div className="mb-4 flex space-x-2">
             <button
               onClick={() => setView('list')}
               className={`px-4 py-2 rounded-lg font-medium transition-colors text-sm ${

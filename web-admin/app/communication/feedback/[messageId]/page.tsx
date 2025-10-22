@@ -215,7 +215,7 @@ export default function FeedbackDetailPage() {
           </div>
 
           {/* Message Info Card */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-6">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-4">
             <div className="flex items-start justify-between mb-4">
               <div className="flex items-start space-x-4">
                 <div className={`p-3 rounded-lg ${getPriorityColor(message.priority)}`}>
@@ -248,7 +248,7 @@ export default function FeedbackDetailPage() {
 
           {/* Admin Response Section */}
           {isAdmin && (
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-6">
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-4">
               <h3 className="text-xl font-semibold text-gray-900 mb-4">Admin Response</h3>
               <div className="space-y-4">
                 <div>

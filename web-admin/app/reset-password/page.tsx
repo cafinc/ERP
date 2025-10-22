@@ -48,7 +48,7 @@ export default function ResetPasswordPage() {
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center p-4">
         <div className="bg-white rounded-lg shadow-xl max-w-md w-full p-8 text-center">
           <h2 className="text-2xl font-bold text-gray-900 mb-2">Invalid Link</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-gray-600 mb-4">
             This password reset link is invalid or has expired.
           </p>
           <button
@@ -68,7 +68,7 @@ export default function ResetPasswordPage() {
         <div className="bg-white rounded-lg shadow-xl max-w-md w-full p-8 text-center">
           <CheckCircle className="w-16 h-16 text-green-600 mx-auto mb-4" />
           <h2 className="text-2xl font-bold text-gray-900 mb-2">Password Reset Successful!</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-gray-600 mb-4">
             Your password has been successfully reset. You can now sign in with your new password.
           </p>
           <button
@@ -86,7 +86,7 @@ export default function ResetPasswordPage() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center p-4">
       <div className="bg-white rounded-lg shadow-xl max-w-md w-full p-8">
         {/* Header */}
-        <div className="mb-6">
+        <div className="mb-4">
           <button
             onClick={() => router.push('/login')}
             className="text-gray-600 hover:text-gray-900 mb-4 inline-flex items-center gap-2"

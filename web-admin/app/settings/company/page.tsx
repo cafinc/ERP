@@ -37,8 +37,8 @@ export default function CompanySettingsPage() {
 
           <form onSubmit={handleSubmit}>
             {/* Basic Information */}
-            <div className="bg-white rounded-xl shadow-lg p-8 border border-gray-200 mb-6">
-              <div className="flex items-center gap-3 mb-6">
+            <div className="bg-white rounded-xl shadow-lg p-8 border border-gray-200 mb-4">
+              <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center">
                   <Building className="w-5 h-5 text-white" />
                 </div>
@@ -114,8 +114,8 @@ export default function CompanySettingsPage() {
             </div>
 
             {/* Address */}
-            <div className="bg-white rounded-xl shadow-lg p-8 border border-gray-200 mb-6">
-              <div className="flex items-center gap-3 mb-6">
+            <div className="bg-white rounded-xl shadow-lg p-8 border border-gray-200 mb-4">
+              <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center">
                   <MapPin className="w-5 h-5 text-white" />
                 </div>

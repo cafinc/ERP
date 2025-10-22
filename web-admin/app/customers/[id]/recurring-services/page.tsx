@@ -245,7 +245,7 @@ export default function RecurringServicesPage() {
           />
 
           {/* Stats Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -462,7 +462,7 @@ export default function RecurringServicesPage() {
               <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-12 text-center">
                 <RefreshCw className="w-16 h-16 text-gray-300 mx-auto mb-4" />
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">No Recurring Services</h3>
-                <p className="text-gray-600 mb-6">
+                <p className="text-gray-600 mb-4">
                   Set up recurring services to automate scheduling and invoicing
                 </p>
                 <button

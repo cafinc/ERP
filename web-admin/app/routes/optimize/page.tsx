@@ -307,7 +307,7 @@ export default function RouteOptimizationPage() {
           />
 
           {/* View Toggle */}
-          <div className="mb-6 flex space-x-2">
+          <div className="mb-4 flex space-x-2">
             <button
               onClick={() => setView('optimizer')}
               className={`px-4 py-2 rounded-lg font-medium transition-colors text-sm ${

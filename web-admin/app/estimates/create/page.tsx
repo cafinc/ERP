@@ -508,7 +508,7 @@ export default function CreateEstimatePage() {
             </div>
 
             {sections.map((section, sectionIndex) => (
-              <div key={section.id} className="mb-6 border-2 border-gray-200 rounded-lg p-4">
+              <div key={section.id} className="mb-4 border-2 border-gray-200 rounded-lg p-4">
                 {/* Section Header */}
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex-1 flex items-center space-x-3">

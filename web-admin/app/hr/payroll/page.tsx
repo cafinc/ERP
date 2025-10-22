@@ -157,7 +157,7 @@ export default function PayrollSettingsPage() {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Success Message */}
         {saved && (
-          <div className="mb-6 bg-green-50 border border-green-200 rounded-lg p-4 flex items-center gap-3">
+          <div className="mb-4 bg-green-50 border border-green-200 rounded-lg p-4 flex items-center gap-3">
             <CheckCircle className="h-5 w-5 text-green-600" />
             <p className="text-sm text-green-800 font-medium">
               Payroll settings saved successfully!
@@ -166,7 +166,7 @@ export default function PayrollSettingsPage() {
         )}
 
         {/* Info Banner */}
-        <div className="mb-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
+        <div className="mb-4 bg-blue-50 border border-blue-200 rounded-lg p-4">
           <div className="flex items-start gap-3">
             <AlertCircle className="h-5 w-5 text-[#3f72af] flex-shrink-0 mt-0.5" />
             <div className="text-sm text-blue-800">

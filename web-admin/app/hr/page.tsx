@@ -76,7 +76,7 @@ export default function HRModulePage() {
         />
 
         {/* Overview Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 mt-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4 mt-6">
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <div className="flex items-center justify-between">
               <div>

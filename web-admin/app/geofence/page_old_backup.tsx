@@ -188,7 +188,7 @@ export default function GeofenceManagementPage() {
           </div>
 
           {/* View Toggle */}
-          <div className="mb-6 flex space-x-4">
+          <div className="mb-4 flex space-x-4">
             <button
               onClick={() => setView('geofences')}
               className={`px-6 py-3 rounded-lg font-medium transition-colors ${

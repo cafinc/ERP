@@ -210,7 +210,7 @@ export default function IncidentReportingPage() {
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-12 text-center mx-6">
             <AlertTriangle className="w-16 h-16 text-gray-300 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-gray-900 mb-2">No Incidents Found</h3>
-            <p className="text-gray-600 mb-6">
+            <p className="text-gray-600 mb-4">
               {searchQuery || filterStatus !== 'all' || filterType !== 'all'
                 ? 'Try adjusting your search or filters'
                 : 'No incidents reported yet'}

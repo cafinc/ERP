@@ -219,7 +219,7 @@ export default function ProjectDetailPage() {
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-12 text-center">
             <AlertCircle className="w-16 h-16 text-red-300 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-gray-900 mb-2">Project Not Found</h3>
-            <p className="text-gray-600 mb-6">The project you're looking for doesn't exist.</p>
+            <p className="text-gray-600 mb-4">The project you're looking for doesn't exist.</p>
             <button
               onClick={() => router.push('/projects')}
               className="inline-flex items-center space-x-2 px-6 py-3 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
@@ -237,7 +237,7 @@ export default function ProjectDetailPage() {
     <HybridNavigationTopBar>
       <div className="p-8">
         {/* Header */}
-        <div className="mb-6 flex items-center justify-between">
+        <div className="mb-4 flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <button
               onClick={() => router.push('/projects')}
@@ -319,7 +319,7 @@ export default function ProjectDetailPage() {
 
             {/* Project Info */}
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-              <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center justify-between mb-4">
                 <h2 className="text-xl font-semibold text-gray-900">Project Information</h2>
                 <span className={`flex items-center space-x-2 px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(project.status)}`}>
                   {getStatusIcon(project.status)}
@@ -385,7 +385,7 @@ export default function ProjectDetailPage() {
 
             {/* Tasks Section */}
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-              <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center justify-between mb-4">
                 <h2 className="text-xl font-semibold text-gray-900">Tasks</h2>
                 <button
                   onClick={() => setShowTaskModal(true)}
