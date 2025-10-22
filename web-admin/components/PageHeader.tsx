@@ -36,6 +36,9 @@ interface PageHeaderProps {
   onSearch?: (query: string) => void;
   showFilter?: boolean;
   onFilterClick?: () => void;
+  showViewToggle?: boolean;
+  viewMode?: 'list' | 'grid';
+  onViewChange?: (mode: 'list' | 'grid') => void;
   variant?: 'default' | 'simple' | 'compact';
 }
 
