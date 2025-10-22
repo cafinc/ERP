@@ -143,16 +143,6 @@ export default function CustomersPage() {
       />
 
       <div className="p-6">
-            <button
-              onClick={loadCustomers}
-              className="px-4 py-2 bg-gray-100 hover:bg-gray-100 transition-all text-gray-700 rounded-lg transition-colors flex items-center space-x-2"
-            >
-              <RefreshCw className="w-4 h-4" />
-              <span>Refresh</span>
-            </button>
-          </div>
-        </div>
-
         {/* Customers Display */}
         {filteredCustomers.length === 0 ? (
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-12 text-center mx-6">
