@@ -38,6 +38,39 @@ class TemplateSystemTester:
             "response": response_data
         })
         
+    def authenticate(self):
+        """Authenticate with the API"""
+        try:
+            auth_data = {
+                "email": "template.test@example.com",
+                "password": "TestPassword123!"
+            }
+            
+            response = self.session.post(f"{self.base_url}/auth/login-email", json=auth_data, timeout=30)
+            if response.status_code == 200:
+                result = response.json()
+                self.session_token = result.get("session_token")
+                if self.session_token:
+                    # Set authorization header for all future requests
+                    self.session.headers.update({"Authorization": f"Bearer {self.session_token}"})
+                    self.authenticated = True
+                    print(f"✅ Authenticated successfully")
+                    return True
+                else:
+                    print(f"❌ No session token in response")
+                    return False
+            else:
+                print(f"❌ Authentication failed: {response.status_code}")
+                try:
+                    error_data = response.json()
+                    print(f"    Error: {error_data}")
+                except:
+                    print(f"    Text: {response.text}")
+                return False
+        except Exception as e:
+            print(f"❌ Authentication error: {str(e)}")
+            return False
+        
     def make_request(self, method, endpoint, data=None, params=None):
         """Make HTTP request with error handling"""
         try:
