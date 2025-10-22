@@ -12304,5 +12304,9 @@ from integration_routes import router as integration_router
 api_router.include_router(integration_router)
 logger.info("Integration Hub endpoints registered successfully")
 
+# Include Communications router
+from communications_routes import router as communications_router
+api_router.include_router(communications_router)
+
 # Include the router with all endpoints
 app.include_router(api_router)
