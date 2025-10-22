@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import api from '@/lib/api';
-import HybridNavigationTopBar from '@/components/HybridNavigationTopBar';
 import {
   Mail,
   Inbox,

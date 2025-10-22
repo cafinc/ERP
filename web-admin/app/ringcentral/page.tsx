@@ -1,6 +1,5 @@
 'use client';
 
-import HybridNavigationTopBar from '@/components/HybridNavigationTopBar';
 import Link from 'next/link';
 import {
   MessageSquare,

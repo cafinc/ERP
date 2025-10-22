@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import HybridNavigationTopBar from '@/components/HybridNavigationTopBar';
 import api from '@/lib/api';
 import {
   Star,

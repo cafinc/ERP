@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import HybridNavigationTopBar from '@/components/HybridNavigationTopBar';
 import CompactHeader from '@/components/CompactHeader';
 import api from '@/lib/api';
 import {

@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import HybridNavigationTopBar from '@/components/HybridNavigationTopBar';
 import Link from 'next/link';
 import { useAuth } from '@/lib/auth';
 import api from '@/lib/api';

@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import HybridNavigationTopBar from '@/components/HybridNavigationTopBar';
 import api from '@/lib/api';
 import maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
