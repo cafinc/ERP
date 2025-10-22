@@ -545,9 +545,16 @@ export default function NavigationBuilder() {
                                     </button>
                                   </div>
                                 ))}
-                                <div className="text-xs text-gray-500 mt-2">
-                                  Drag pages from left panel to add submenu items
-                                </div>
+                                <button
+                                  onClick={() => setSelectedSection(section.id)}
+                                  className={`mt-2 px-3 py-1 text-xs rounded transition-colors ${
+                                    selectedSection === section.id
+                                      ? 'bg-[#3f72af] text-white'
+                                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                                  }`}
+                                >
+                                  {selectedSection === section.id ? '✓ Selected - Click pages on left to add' : 'Add pages to this section'}
+                                </button>
                               </div>
                             )}
                           </div>
