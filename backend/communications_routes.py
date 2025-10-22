@@ -718,3 +718,104 @@ async def delete_message_template(
     except Exception as e:
         logger.error(f"Error deleting message template: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
+
+
+
+# ========== WebSocket Real-Time Communication ==========
+
+@router.websocket("/ws/{user_id}")
+async def websocket_endpoint(websocket: WebSocket, user_id: str):
+    """WebSocket endpoint for real-time communication"""
+    await connection_manager.connect(websocket, user_id)
+    
+    try:
+        while True:
+            # Receive messages from client
+            data = await websocket.receive_text()
+            message_data = json.loads(data)
+            
+            # Handle different message types
+            message_type = message_data.get("type")
+            
+            if message_type == "ping":
+                # Respond to ping with pong
+                await websocket.send_json({"type": "pong", "timestamp": datetime.utcnow().isoformat()})
+            
+            elif message_type == "typing":
+                # Broadcast typing indicator
+                customer_id = message_data.get("customer_id")
+                await connection_manager.send_personal_message(
+                    {
+                        "type": "user_typing",
+                        "user_id": user_id,
+                        "customer_id": customer_id,
+                        "timestamp": datetime.utcnow().isoformat()
+                    },
+                    user_id
+                )
+            
+            elif message_type == "mark_read":
+                # Mark message as read
+                communication_id = message_data.get("communication_id")
+                if communication_id:
+                    await db.communications.update_one(
+                        {"_id": ObjectId(communication_id)},
+                        {
+                            "$set": {
+                                "read": True,
+                                "read_at": datetime.utcnow(),
+                                "read_by": user_id
+                            }
+                        }
+                    )
+                    # Notify sender
+                    await connection_manager.notify_message_read(communication_id, user_id)
+            
+            else:
+                # Echo message back (for testing)
+                await websocket.send_json({
+                    "type": "echo",
+                    "data": message_data,
+                    "timestamp": datetime.utcnow().isoformat()
+                })
+    
+    except WebSocketDisconnect:
+        connection_manager.disconnect(websocket, user_id)
+        logger.info(f"User {user_id} disconnected")
+    except Exception as e:
+        logger.error(f"WebSocket error for user {user_id}: {e}")
+        connection_manager.disconnect(websocket, user_id)
+
+
+@router.get("/communications/online-users")
+async def get_online_users():
+    """Get list of currently online users"""
+    try:
+        online_users = connection_manager.get_online_users()
+        
+        return {
+            "success": True,
+            "count": len(online_users),
+            "users": online_users
+        }
+    
+    except Exception as e:
+        logger.error(f"Error fetching online users: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/communications/user/{user_id}/status")
+async def check_user_online_status(user_id: str):
+    """Check if a specific user is online"""
+    try:
+        is_online = connection_manager.is_user_online(user_id)
+        
+        return {
+            "user_id": user_id,
+            "online": is_online,
+            "status": "online" if is_online else "offline"
+        }
+    
+    except Exception as e:
+        logger.error(f"Error checking user status: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
