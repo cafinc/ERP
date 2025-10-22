@@ -1035,9 +1035,11 @@ export default function CustomerFormPage() {
                     <span className="text-sm font-medium text-gray-700">Active Customer</span>
                   </label>
                 </div>
-              </form>
+              </div>
             </div>
+            {/* Close frosted glass card */}
           </div>
+          {/* Close modal background */}
         </div>
       </>
     );
