@@ -29,6 +29,7 @@ interface MenuItem {
   icon: any;
   href?: string;
   submenu?: { label: string; href: string; icon?: any }[];
+  displayAsTabs?: boolean; // New flag for tab-style navigation
 }
 
 export default function HybridNavigationTopBar({ children }: { children: React.ReactNode }) {
