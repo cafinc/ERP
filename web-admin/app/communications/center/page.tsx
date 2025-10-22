@@ -1,0 +1,443 @@
+'use client';
+
+import React, { useState, useEffect, useRef } from 'react';
+import { 
+  MessageSquare, 
+  Mail, 
+  Phone, 
+  Smartphone,
+  Search,
+  Filter,
+  User,
+  Calendar,
+  Download,
+  RefreshCw,
+  X,
+  ChevronDown,
+  FileText,
+  Image as ImageIcon,
+  CheckCircle,
+  Clock
+} from 'lucide-react';
+
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || '';
+
+interface Communication {
+  _id: string;
+  type: 'inapp' | 'sms' | 'email' | 'phone';
+  direction: 'inbound' | 'outbound';
+  customer_id?: string;
+  customer_name?: string;
+  content?: string;
+  message?: string;
+  subject?: string;
+  body?: string;
+  from?: string;
+  to?: string;
+  phone?: string;
+  timestamp: string;
+  created_at?: string;
+  read: boolean;
+  status?: string;
+  attachments?: any[];
+}
+
+export default function UnifiedCommunicationsCenter() {
+  const [activeTab, setActiveTab] = useState<'all' | 'inapp' | 'sms' | 'email' | 'phone'>('all');
+  const [communications, setCommunications] = useState<Communication[]>([]);
+  const [filteredComms, setFilteredComms] = useState<Communication[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filterDirection, setFilterDirection] = useState<'all' | 'inbound' | 'outbound'>('all');
+  const [showFilters, setShowFilters] = useState(false);
+  
+  const [stats, setStats] = useState({
+    total: 0,
+    inapp: 0,
+    sms: 0,
+    email: 0,
+    phone: 0,
+    unread: 0
+  });
+
+  useEffect(() => {
+    fetchAllCommunications();
+  }, []);
+
+  useEffect(() => {
+    filterCommunications();
+  }, [activeTab, searchQuery, filterDirection, communications]);
+
+  const fetchAllCommunications = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(`${BACKEND_URL}/api/communications/all`);
+      if (response.ok) {
+        const data = await response.json();
+        setCommunications(data);
+        calculateStats(data);
+      }
+    } catch (error) {
+      console.error('Error fetching communications:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const calculateStats = (data: Communication[]) => {
+    setStats({
+      total: data.length,
+      inapp: data.filter(c => c.type === 'inapp').length,
+      sms: data.filter(c => c.type === 'sms').length,
+      email: data.filter(c => c.type === 'email').length,
+      phone: data.filter(c => c.type === 'phone').length,
+      unread: data.filter(c => !c.read).length
+    });
+  };
+
+  const filterCommunications = () => {
+    let filtered = [...communications];
+
+    // Filter by type
+    if (activeTab !== 'all') {
+      filtered = filtered.filter(c => c.type === activeTab);
+    }
+
+    // Filter by direction
+    if (filterDirection !== 'all') {
+      filtered = filtered.filter(c => c.direction === filterDirection);
+    }
+
+    // Filter by search
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase();
+      filtered = filtered.filter(c => 
+        c.customer_name?.toLowerCase().includes(query) ||
+        c.content?.toLowerCase().includes(query) ||
+        c.message?.toLowerCase().includes(query) ||
+        c.subject?.toLowerCase().includes(query) ||
+        c.body?.toLowerCase().includes(query) ||
+        c.from?.toLowerCase().includes(query) ||
+        c.to?.toLowerCase().includes(query)
+      );
+    }
+
+    // Sort by timestamp (newest first)
+    filtered.sort((a, b) => 
+      new Date(b.timestamp || b.created_at || 0).getTime() - 
+      new Date(a.timestamp || a.created_at || 0).getTime()
+    );
+
+    setFilteredComms(filtered);
+  };
+
+  const getTypeIcon = (type: string) => {
+    switch (type) {
+      case 'inapp':
+        return <MessageSquare className="w-5 h-5" />;
+      case 'sms':
+        return <Smartphone className="w-5 h-5" />;
+      case 'email':
+        return <Mail className="w-5 h-5" />;
+      case 'phone':
+        return <Phone className="w-5 h-5" />;
+      default:
+        return <MessageSquare className="w-5 h-5" />;
+    }
+  };
+
+  const getTypeColor = (type: string) => {
+    switch (type) {
+      case 'inapp':
+        return 'bg-orange-500';
+      case 'sms':
+        return 'bg-green-500';
+      case 'email':
+        return 'bg-blue-500';
+      case 'phone':
+        return 'bg-purple-500';
+      default:
+        return 'bg-gray-500';
+    }
+  };
+
+  const formatTimestamp = (timestamp: string) => {
+    const date = new Date(timestamp);
+    const now = new Date();
+    const diffMs = now.getTime() - date.getTime();
+    const diffMins = Math.floor(diffMs / 60000);
+    const diffHours = Math.floor(diffMs / 3600000);
+    const diffDays = Math.floor(diffMs / 86400000);
+
+    if (diffMins < 1) return 'Just now';
+    if (diffMins < 60) return `${diffMins} minutes ago`;
+    if (diffHours < 24) return `${diffHours} hours ago`;
+    if (diffDays === 1) return 'Yesterday';
+    if (diffDays < 7) return `${diffDays} days ago`;
+    
+    return date.toLocaleDateString('en-US', { 
+      month: 'short', 
+      day: 'numeric', 
+      year: date.getFullYear() !== now.getFullYear() ? 'numeric' : undefined 
+    });
+  };
+
+  const getMessagePreview = (comm: Communication) => {
+    if (comm.type === 'email') {
+      return comm.body || comm.content || comm.subject || 'No content';
+    }
+    return comm.message || comm.content || 'No message';
+  };
+
+  const exportData = () => {
+    const csv = [
+      ['Type', 'Direction', 'Customer', 'Message', 'Timestamp', 'Status'].join(','),
+      ...filteredComms.map(c => [
+        c.type,
+        c.direction,
+        c.customer_name || c.from || c.to || 'Unknown',
+        `"${getMessagePreview(c).replace(/"/g, '""')}"`,
+        new Date(c.timestamp || c.created_at || '').toISOString(),
+        c.read ? 'Read' : 'Unread'
+      ].join(','))
+    ].join('\n');
+
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `communications_${new Date().toISOString()}.csv`;
+    a.click();
+  };
+
+  return (
+    <div className="flex flex-col h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+      {/* Header */}
+      <div className="bg-white border-b border-gray-200 shadow-sm">
+        <div className="px-6 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl">
+                <MessageSquare className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <h1 className="text-2xl font-bold text-gray-900">Unified Communications Center</h1>
+                <p className="text-sm text-gray-500 mt-1">All messages, emails, SMS, and calls in one place</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <button
+                onClick={fetchAllCommunications}
+                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                title="Refresh"
+              >
+                <RefreshCw className="w-5 h-5 text-gray-600" />
+              </button>
+              <button
+                onClick={exportData}
+                className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors flex items-center gap-2"
+              >
+                <Download className="w-4 h-4" />
+                Export
+              </button>
+            </div>
+          </div>
+
+          {/* Stats */}
+          <div className="grid grid-cols-6 gap-4 mt-4">
+            <div className="bg-gradient-to-br from-gray-50 to-white p-4 rounded-lg border border-gray-200">
+              <div className="text-2xl font-bold text-gray-900">{stats.total}</div>
+              <div className="text-xs text-gray-500 mt-1">Total</div>
+            </div>
+            <div className="bg-gradient-to-br from-orange-50 to-white p-4 rounded-lg border border-orange-200">
+              <div className="text-2xl font-bold text-orange-700">{stats.inapp}</div>
+              <div className="text-xs text-orange-600 mt-1">InApp</div>
+            </div>
+            <div className="bg-gradient-to-br from-green-50 to-white p-4 rounded-lg border border-green-200">
+              <div className="text-2xl font-bold text-green-700">{stats.sms}</div>
+              <div className="text-xs text-green-600 mt-1">SMS</div>
+            </div>
+            <div className="bg-gradient-to-br from-blue-50 to-white p-4 rounded-lg border border-blue-200">
+              <div className="text-2xl font-bold text-blue-700">{stats.email}</div>
+              <div className="text-xs text-blue-600 mt-1">Email</div>
+            </div>
+            <div className="bg-gradient-to-br from-purple-50 to-white p-4 rounded-lg border border-purple-200">
+              <div className="text-2xl font-bold text-purple-700">{stats.phone}</div>
+              <div className="text-xs text-purple-600 mt-1">Phone</div>
+            </div>
+            <div className="bg-gradient-to-br from-red-50 to-white p-4 rounded-lg border border-red-200">
+              <div className="text-2xl font-bold text-red-700">{stats.unread}</div>
+              <div className="text-xs text-red-600 mt-1">Unread</div>
+            </div>
+          </div>
+
+          {/* Search & Filters */}
+          <div className="flex items-center gap-3 mt-4">
+            <div className="flex-1 relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search messages, customers, or content..."
+                className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <button
+              onClick={() => setShowFilters(!showFilters)}
+              className={`px-4 py-2.5 border rounded-lg flex items-center gap-2 transition-colors ${
+                showFilters ? 'bg-blue-50 border-blue-300 text-blue-700' : 'border-gray-300 hover:bg-gray-50'
+              }`}
+            >
+              <Filter className="w-4 h-4" />
+              Filters
+            </button>
+          </div>
+
+          {/* Filter Options */}
+          {showFilters && (
+            <div className="mt-3 p-4 bg-gray-50 rounded-lg border border-gray-200">
+              <div className="flex items-center gap-4">
+                <span className="text-sm font-medium text-gray-700">Direction:</span>
+                <div className="flex gap-2">
+                  {(['all', 'inbound', 'outbound'] as const).map((dir) => (
+                    <button
+                      key={dir}
+                      onClick={() => setFilterDirection(dir)}
+                      className={`px-3 py-1.5 text-sm rounded-lg transition-colors ${
+                        filterDirection === dir
+                          ? 'bg-blue-500 text-white'
+                          : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
+                      }`}
+                    >
+                      {dir.charAt(0).toUpperCase() + dir.slice(1)}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Tabs */}
+        <div className="flex items-center gap-1 px-6 border-t border-gray-200 bg-gray-50">
+          {[
+            { id: 'all' as const, label: 'All Messages', count: stats.total },
+            { id: 'inapp' as const, label: 'InApp', count: stats.inapp, color: 'orange' },
+            { id: 'sms' as const, label: 'SMS', count: stats.sms, color: 'green' },
+            { id: 'email' as const, label: 'Email', count: stats.email, color: 'blue' },
+            { id: 'phone' as const, label: 'Phone', count: stats.phone, color: 'purple' },
+          ].map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`px-4 py-3 text-sm font-medium border-b-2 transition-colors relative ${
+                activeTab === tab.id
+                  ? `border-${tab.color || 'blue'}-500 text-${tab.color || 'blue'}-600 bg-white`
+                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-100'
+              }`}
+            >
+              {tab.label}
+              <span className={`ml-2 px-2 py-0.5 text-xs rounded-full ${
+                activeTab === tab.id
+                  ? `bg-${tab.color || 'blue'}-100 text-${tab.color || 'blue'}-700`
+                  : 'bg-gray-200 text-gray-600'
+              }`}>
+                {tab.count}
+              </span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Communications List */}
+      <div className="flex-1 overflow-y-auto p-6">
+        {loading ? (
+          <div className="flex items-center justify-center h-full">
+            <div className="text-center">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4" />
+              <p className="text-gray-600">Loading communications...</p>
+            </div>
+          </div>
+        ) : filteredComms.length === 0 ? (
+          <div className="flex flex-col items-center justify-center h-full text-gray-400">
+            <MessageSquare className="w-20 h-20 mb-4 opacity-50" />
+            <p className="text-lg font-medium">No communications found</p>
+            <p className="text-sm mt-2">
+              {searchQuery ? 'Try adjusting your search or filters' : 'Communications will appear here'}
+            </p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 gap-3">
+            {filteredComms.map((comm) => (
+              <div
+                key={comm._id}
+                className={`bg-white rounded-lg border shadow-sm hover:shadow-md transition-shadow p-4 ${
+                  !comm.read ? 'border-l-4 border-l-blue-500 bg-blue-50' : 'border-gray-200'
+                }`}
+              >
+                <div className="flex items-start gap-4">
+                  {/* Type Icon */}
+                  <div className={`p-3 rounded-lg ${getTypeColor(comm.type)} text-white`}>
+                    {getTypeIcon(comm.type)}
+                  </div>
+
+                  {/* Content */}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between gap-2 mb-2">
+                      <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-2">
+                          <User className="w-4 h-4 text-gray-400" />
+                          <span className="font-semibold text-gray-900">
+                            {comm.customer_name || comm.from || comm.to || 'Unknown'}
+                          </span>
+                        </div>
+                        <span className={`px-2 py-1 text-xs rounded-full ${
+                          comm.direction === 'inbound'
+                            ? 'bg-green-100 text-green-700'
+                            : 'bg-gray-100 text-gray-600'
+                        }`}>
+                          {comm.direction === 'inbound' ? '← Received' : '→ Sent'}
+                        </span>
+                        {comm.type === 'email' && comm.subject && (
+                          <span className="px-2 py-1 text-xs bg-blue-100 text-blue-700 rounded-full">
+                            {comm.subject}
+                          </span>
+                        )}
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Clock className="w-4 h-4 text-gray-400" />
+                        <span className="text-sm text-gray-500">
+                          {formatTimestamp(comm.timestamp || comm.created_at || '')}
+                        </span>
+                        {comm.read ? (
+                          <CheckCircle className="w-4 h-4 text-green-500" title="Read" />
+                        ) : (
+                          <div className="w-2 h-2 bg-blue-500 rounded-full" title="Unread" />
+                        )}
+                      </div>
+                    </div>
+
+                    <p className="text-gray-700 text-sm line-clamp-2">
+                      {getMessagePreview(comm)}
+                    </p>
+
+                    {/* Attachments */}
+                    {comm.attachments && comm.attachments.length > 0 && (
+                      <div className="flex items-center gap-2 mt-2">
+                        <FileText className="w-4 h-4 text-gray-400" />
+                        <span className="text-xs text-gray-500">
+                          {comm.attachments.length} attachment{comm.attachments.length > 1 ? 's' : ''}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
