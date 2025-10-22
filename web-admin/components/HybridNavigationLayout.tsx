@@ -95,9 +95,9 @@ export default function HybridNavigationLayout({ children }: { children: React.R
       {/* Enhanced Header */}
       <EnhancedHeader />
 
-      <div className="flex flex-1 overflow-hidden">
+      <div className="flex flex-1 overflow-hidden relative">
         {/* Collapsed Sidebar */}
-        <div className="w-16 bg-[#2c3e50] flex flex-col items-center py-4 gap-2 shadow-lg">
+        <div className="w-16 bg-[#2c3e50] flex flex-col items-center py-4 gap-2 shadow-lg z-30">
           {menuItems.map((item) => {
             const Icon = item.icon;
             const active = item.href ? isActive(item.href) : item.submenu?.some(sub => isActive(sub.href));
