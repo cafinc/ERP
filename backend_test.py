@@ -1,53 +1,96 @@
 #!/usr/bin/env python3
 """
-Comprehensive Template System Backend API Testing
-Tests all template endpoints and functionality as requested
+Comprehensive Template System Backend Testing
+Tests all template CRUD operations, placeholder system, and variable replacement
 """
 
 import requests
 import json
-import sys
+import time
 from datetime import datetime
-import uuid
+from typing import Dict, List, Any
 
-# Backend URL from frontend environment
-BASE_URL = "https://snowconnect.preview.emergentagent.com/api"
+# Backend URL from frontend/.env
+BACKEND_URL = "https://snowconnect.preview.emergentagent.com/api"
 
 class TemplateSystemTester:
     def __init__(self):
-        self.base_url = BASE_URL
         self.session = requests.Session()
         self.test_results = []
-        self.created_templates = []
-        self.session_token = None
-        self.authenticated = False
+        self.created_templates = []  # Track created templates for cleanup
         
-    def log_test(self, test_name, success, details="", response_data=None):
-        """Log test results"""
-        status = "✅ PASS" if success else "❌ FAIL"
-        print(f"{status} - {test_name}")
-        if details:
-            print(f"    Details: {details}")
-        if response_data and not success:
-            print(f"    Response: {response_data}")
-        
-        self.test_results.append({
+    def log_test(self, test_name: str, success: bool, details: str = "", response_data: Any = None):
+        """Log test result"""
+        result = {
             "test": test_name,
             "success": success,
             "details": details,
-            "response": response_data
-        })
+            "timestamp": datetime.now().isoformat(),
+            "response_data": response_data
+        }
+        self.test_results.append(result)
+        status = "✅ PASS" if success else "❌ FAIL"
+        print(f"{status}: {test_name}")
+        if details:
+            print(f"    Details: {details}")
+        if not success and response_data:
+            print(f"    Response: {response_data}")
+        print()
+
+    def test_suite_1_template_crud(self):
+        """TEST SUITE 1: Template CRUD (Full Cycle)"""
+        print("=" * 60)
+        print("TEST SUITE 1: Template CRUD (Full Cycle)")
+        print("=" * 60)
         
-    def authenticate(self):
-        """Authenticate with the API"""
+        # Test 1: POST /api/templates - Create new custom template
         try:
-            auth_data = {
-                "email": "template.test@example.com",
-                "password": "TestPassword123!"
+            template_data = {
+                "type": "estimate",
+                "name": "Test Custom Estimate Template",
+                "description": "Test template for comprehensive testing",
+                "category": "test",
+                "tags": ["test", "custom", "estimate"],
+                "content": {
+                    "title": "Custom Estimate",
+                    "customer_name": "{{customer_name}}",
+                    "customer_email": "{{customer_email}}",
+                    "estimate_number": "{{estimate_number}}",
+                    "date": "{{today_date}}",
+                    "line_items": [
+                        {
+                            "description": "{{service_description}}",
+                            "quantity": "{{quantity}}",
+                            "unit_price": "{{unit_price}}",
+                            "total": "{{total_amount}}"
+                        }
+                    ],
+                    "subtotal": "{{subtotal}}",
+                    "tax_amount": "{{tax_amount}}",
+                    "total": "{{total}}",
+                    "notes": "{{notes}}"
+                },
+                "is_public": False,
+                "is_default": False
             }
             
-            response = self.session.post(f"{self.base_url}/auth/login-email", json=auth_data, timeout=30)
+            response = self.session.post(f"{BACKEND_URL}/templates", json=template_data)
+            
             if response.status_code == 200:
+                data = response.json()
+                if data.get("success") and data.get("template"):
+                    template_id = data["template"]["_id"]
+                    self.created_templates.append({"type": "estimate", "id": template_id})
+                    self.log_test("1. POST /api/templates - Create new custom template", True, 
+                                f"Template created with ID: {template_id}", data)
+                else:
+                    self.log_test("1. POST /api/templates - Create new custom template", False, 
+                                "Response missing success or template data", data)
+            else:
+                self.log_test("1. POST /api/templates - Create new custom template", False, 
+                            f"HTTP {response.status_code}", response.text)
+        except Exception as e:
+            self.log_test("1. POST /api/templates - Create new custom template", False, str(e))
                 result = response.json()
                 self.session_token = result.get("session_token")
                 if self.session_token:
