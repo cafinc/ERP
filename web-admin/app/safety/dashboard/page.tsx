@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import CompactHeader from '@/components/CompactHeader';
+import PageHeader from '@/components/PageHeader';
 import {
   Shield,
   AlertTriangle,
@@ -25,14 +25,17 @@ export default function SafetyDashboardPage() {
   });
 
   return (
-    <HybridNavigationTopBar>
-      <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
-        {/* Compact Header */}
-        <CompactHeader
-          title="Safety Dashboard"
-          icon={Shield}
-          badges={[
-            { label: 'COR Compliant', color: 'green' },
+    <div className="min-h-screen bg-gray-50">
+      <PageHeader
+        title="Safety Dashboard"
+        subtitle="Workplace safety monitoring, incident tracking, and compliance management"
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "Safety Dashboard" },
+        ]}
+      />
+      
+      <div className="p-6 space-y-6">
             { label: `${stats.incidents.thisMonth} Incidents This Month`, color: stats.incidents.thisMonth > 0 ? 'orange' : 'green' },
           ]}
         />
