@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import DashboardLayout from '@/components/DashboardLayout';
+import HybridNavigationTopBar from '@/components/HybridNavigationTopBar';
 import { useAuth } from '@/lib/auth';
 import api from '@/lib/api';
 import {

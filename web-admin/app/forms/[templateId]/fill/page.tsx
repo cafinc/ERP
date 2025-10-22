@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useSearchParams, useRouter } from 'next/navigation';
-import DashboardLayout from '@/components/DashboardLayout';
+import HybridNavigationTopBar from '@/components/HybridNavigationTopBar';
 import SignaturePad from '@/components/SignaturePad';
 import api from '@/lib/api';
 import { useAuth } from '@/lib/auth';

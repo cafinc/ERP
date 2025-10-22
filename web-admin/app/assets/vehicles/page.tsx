@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Truck, Plus, Search, Filter, Download, ChevronDown } from 'lucide-react';
-import DashboardLayout from '@/components/DashboardLayout';
+import HybridNavigationTopBar from '@/components/HybridNavigationTopBar';
 import CompactHeader from '@/components/CompactHeader';
 
 // Mock data

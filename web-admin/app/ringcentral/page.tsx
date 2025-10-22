@@ -1,6 +1,6 @@
 'use client';
 
-import DashboardLayout from '@/components/DashboardLayout';
+import HybridNavigationTopBar from '@/components/HybridNavigationTopBar';
 import Link from 'next/link';
 import {
   MessageSquare,
