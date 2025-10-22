@@ -149,6 +149,28 @@ export default function CreateTemplatePage() {
     setFormData({ ...formData, content: JSON.stringify(example, null, 2) });
   };
 
+  const handlePlaceholderInsert = (placeholder: string) => {
+    const textarea = textareaRef.current;
+    if (!textarea) return;
+
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const text = formData.content;
+    const before = text.substring(0, start);
+    const after = text.substring(end, text.length);
+    
+    const newContent = before + placeholder + after;
+    setFormData({ ...formData, content: newContent });
+    
+    // Set cursor position after inserted placeholder
+    setTimeout(() => {
+      textarea.selectionStart = textarea.selectionEnd = start + placeholder.length;
+      textarea.focus();
+    }, 0);
+    
+    setShowPlaceholderBrowser(false);
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 p-6">
       {/* Header */}
