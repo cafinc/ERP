@@ -338,7 +338,7 @@ async def upload_file(
     customer_id: Optional[str] = None,
     current_user: dict = Depends(get_current_user)
 ):
-    """Upload file attachment for communication"""
+    """Upload single file attachment for communication"""
     try:
         # Read file data
         file_data = await file.read()
@@ -379,6 +379,70 @@ async def upload_file(
     except Exception as e:
         logger.error(f"Error uploading file: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Failed to upload file: {str(e)}")
+
+
+@router.post("/communications/upload-batch")
+async def upload_files_batch(
+    files: List[UploadFile] = File(...),
+    customer_id: Optional[str] = None,
+    current_user: dict = Depends(get_current_user)
+):
+    """Upload multiple files at once"""
+    try:
+        uploaded_files = []
+        failed_files = []
+        
+        for file in files:
+            try:
+                # Read file data
+                file_data = await file.read()
+                
+                # Save file using storage service
+                file_metadata = file_storage_service.save_file(file_data, file.filename)
+                
+                # Store file metadata in database
+                file_record = {
+                    "file_id": file_metadata["file_id"],
+                    "filename": file_metadata["filename"],
+                    "unique_filename": file_metadata["unique_filename"],
+                    "file_type": file_metadata["file_type"],
+                    "file_category": file_metadata["file_category"],
+                    "file_size": file_metadata["file_size"],
+                    "file_hash": file_metadata["file_hash"],
+                    "url": file_metadata["url"],
+                    "thumbnail_url": file_metadata.get("thumbnail_url"),
+                    "storage_type": file_metadata["storage_type"],
+                    "uploaded_by": current_user["id"],
+                    "customer_id": customer_id,
+                    "created_at": datetime.utcnow()
+                }
+                
+                result = await db.file_attachments.insert_one(file_record)
+                file_record["_id"] = str(result.inserted_id)
+                
+                uploaded_files.append(file_record)
+                logger.info(f"File uploaded in batch: {file.filename}")
+                
+            except Exception as e:
+                logger.error(f"Error uploading file {file.filename}: {str(e)}")
+                failed_files.append({
+                    "filename": file.filename,
+                    "error": str(e)
+                })
+        
+        return {
+            "success": len(failed_files) == 0,
+            "message": f"Uploaded {len(uploaded_files)}/{len(files)} files successfully",
+            "uploaded": uploaded_files,
+            "failed": failed_files,
+            "total": len(files),
+            "succeeded": len(uploaded_files),
+            "failed_count": len(failed_files)
+        }
+    
+    except Exception as e:
+        logger.error(f"Error in batch upload: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to upload files: {str(e)}")
 
 
 @router.get("/communications/file/{filename}")
