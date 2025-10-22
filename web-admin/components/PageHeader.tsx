@@ -57,6 +57,7 @@ export default function PageHeader({
   onSearch,
   showFilter = false,
   onFilterClick,
+  filterDropdown,
   showViewToggle = false,
   viewMode = 'list',
   onViewChange,
