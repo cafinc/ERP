@@ -114,7 +114,7 @@ export default function HybridNavigationTopBar({ children }: { children: React.R
     },
     {
       label: 'Comms',
-      icon: Users,
+      icon: MessageSquare,
       href: '/communication/dashboard',
       submenu: [
         { label: 'Comms Dashboard', href: '/communication/dashboard', icon: LayoutDashboard },
