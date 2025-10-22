@@ -29,6 +29,10 @@ import {
   DollarSign,
   FolderOpen,
   ExternalLink,
+  MessageSquare,
+  MessageCircle,
+  PhoneCall,
+  Send,
 } from 'lucide-react';
 
 export default function CustomerDetailPage() {
