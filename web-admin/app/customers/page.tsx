@@ -140,7 +140,7 @@ export default function CustomersPage() {
             label: "New Customer",
             icon: <Plus className="w-4 h-4 mr-2" />,
             variant: "secondary",
-            onClick: () => router.push('/customers/create'),
+            href: '/customers/create',
           },
         ]}
         tabs={[
