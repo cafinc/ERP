@@ -12315,5 +12315,8 @@ from template_routes import router as template_router
 api_router.include_router(webhook_router)
 logger.info("Webhook endpoints registered successfully")
 
+api_router.include_router(template_router)
+logger.info("Template system endpoints registered successfully")
+
 # Include the router with all endpoints
 app.include_router(api_router)
