@@ -369,6 +369,6 @@ export default function ExpensesPage() {
           </div>
         )}
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

@@ -145,7 +145,7 @@ export default function TeamMemberDetailPage() {
         <div className="flex items-center justify-center h-64">
           <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
         </div>
-      </DashboardLayout>
+      </HybridNavigationTopBar>
     );
   }
 
@@ -162,7 +162,7 @@ export default function TeamMemberDetailPage() {
             Return to Team
           </button>
         </div>
-      </DashboardLayout>
+      </HybridNavigationTopBar>
     );
   }
 
@@ -382,6 +382,6 @@ export default function TeamMemberDetailPage() {
           </div>
         )}
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

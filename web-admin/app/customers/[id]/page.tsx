@@ -396,7 +396,7 @@ export default function CustomerDetailPage() {
         <div className="flex items-center justify-center h-full">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
         </div>
-      </DashboardLayout>
+      </HybridNavigationTopBar>
     );
   }
 
@@ -413,7 +413,7 @@ export default function CustomerDetailPage() {
             Back to Customers
           </button>
         </div>
-      </DashboardLayout>
+      </HybridNavigationTopBar>
     );
   }
 
@@ -1710,6 +1710,6 @@ export default function CustomerDetailPage() {
         </div>
       )}
     </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

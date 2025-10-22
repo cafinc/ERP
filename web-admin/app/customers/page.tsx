@@ -91,7 +91,7 @@ export default function CustomersPage() {
         <div className="flex items-center justify-center h-full">
           <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
         </div>
-      </DashboardLayout>
+      </HybridNavigationTopBar>
     );
   }
 
@@ -496,6 +496,6 @@ export default function CustomersPage() {
           </div>
         )}
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

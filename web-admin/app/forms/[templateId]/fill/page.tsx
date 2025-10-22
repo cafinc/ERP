@@ -469,7 +469,7 @@ export default function FillFormPage() {
             <p className="mt-4 text-gray-600">Loading form...</p>
           </div>
         </div>
-      </DashboardLayout>
+      </HybridNavigationTopBar>
     );
   }
 
@@ -479,7 +479,7 @@ export default function FillFormPage() {
         <div className="text-center py-12">
           <p className="text-red-600">Form template not found</p>
         </div>
-      </DashboardLayout>
+      </HybridNavigationTopBar>
     );
   }
 
@@ -550,6 +550,6 @@ export default function FillFormPage() {
           </div>
         </div>
       )}
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

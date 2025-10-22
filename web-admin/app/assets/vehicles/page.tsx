@@ -243,6 +243,6 @@ export default function VehiclesPage() {
           </div>
         )}
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

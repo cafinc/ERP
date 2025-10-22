@@ -300,6 +300,6 @@ export default function IncidentReportingPage() {
           </div>
         )}
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

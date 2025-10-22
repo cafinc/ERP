@@ -299,6 +299,6 @@ export default function RecordingsPage() {
           )}
         </div>
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

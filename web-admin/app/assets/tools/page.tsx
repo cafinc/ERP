@@ -267,6 +267,6 @@ export default function ToolsPage() {
           </div>
         )}
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

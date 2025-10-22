@@ -349,6 +349,6 @@ export default function FinanceDashboardPage() {
           </div>
         </div>
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

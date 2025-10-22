@@ -216,6 +216,6 @@ export default function SettingsPage() {
           ))}
         </div>
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

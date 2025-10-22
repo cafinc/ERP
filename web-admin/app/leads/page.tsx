@@ -290,7 +290,7 @@ export default function LeadsPage() {
             <p className="mt-4 text-gray-600">Loading leads...</p>
           </div>
         </div>
-      </DashboardLayout>
+      </HybridNavigationTopBar>
     );
   }
 
@@ -884,6 +884,6 @@ export default function LeadsPage() {
           </div>
         </div>
       )}
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

@@ -212,6 +212,6 @@ export default function SMSConfigPage() {
           )}
         </div>
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

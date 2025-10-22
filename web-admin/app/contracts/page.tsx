@@ -134,7 +134,7 @@ export default function ContractsPage() {
         <div className="flex items-center justify-center h-64">
           <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
         </div>
-      </DashboardLayout>
+      </HybridNavigationTopBar>
     );
   }
 
@@ -423,6 +423,6 @@ export default function ContractsPage() {
           </div>
         </div>
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

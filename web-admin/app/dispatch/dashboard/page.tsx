@@ -179,6 +179,6 @@ export default function DispatchDashboardPage() {
           </div>
         </div>
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

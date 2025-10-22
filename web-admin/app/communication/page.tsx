@@ -398,6 +398,6 @@ export default function CommunicationCenterPage() {
           )}
         </div>
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

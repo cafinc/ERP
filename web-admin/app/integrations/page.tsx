@@ -365,6 +365,6 @@ export default function IntegrationsPage() {
           </div>
         </div>
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

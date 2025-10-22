@@ -299,6 +299,6 @@ export default function CreateAgreementTemplatePage() {
           </div>
         </div>
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

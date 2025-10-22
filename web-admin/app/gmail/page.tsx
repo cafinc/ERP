@@ -516,7 +516,7 @@ export default function GmailPage() {
         <div className="flex items-center justify-center h-full">
           <div className="text-xl text-gray-600">Loading Gmail...</div>
         </div>
-      </DashboardLayout>
+      </HybridNavigationTopBar>
     );
   }
 
@@ -539,7 +539,7 @@ export default function GmailPage() {
             </button>
           </div>
         </div>
-      </DashboardLayout>
+      </HybridNavigationTopBar>
     );
   }
 
@@ -1191,6 +1191,6 @@ export default function GmailPage() {
           </div>
         )}
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

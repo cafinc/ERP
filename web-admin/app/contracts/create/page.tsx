@@ -495,6 +495,6 @@ export default function CreateContractPage() {
           </button>
         </div>
       </form>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

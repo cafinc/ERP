@@ -578,6 +578,6 @@ export default function CreateAgreementPage() {
           </div>
         )}
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

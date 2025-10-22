@@ -114,6 +114,6 @@ export default function RoutesPage() {
           </div>
         </div>
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

@@ -234,7 +234,7 @@ export default function WorkflowEditorPage() {
             <p className="text-gray-600">Loading workflow...</p>
           </div>
         </div>
-      </DashboardLayout>
+      </HybridNavigationTopBar>
     );
   }
 
@@ -603,6 +603,6 @@ export default function WorkflowEditorPage() {
           </div>
         </div>
       )}
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

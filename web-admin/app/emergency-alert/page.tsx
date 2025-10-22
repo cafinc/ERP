@@ -264,6 +264,6 @@ export default function EmergencyAlertPage() {
           </div>
         )}
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

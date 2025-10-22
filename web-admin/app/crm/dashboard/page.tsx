@@ -196,6 +196,6 @@ export default function CRMDashboardPage() {
           </div>
         </div>
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

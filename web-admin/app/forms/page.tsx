@@ -383,6 +383,6 @@ export default function FormsPage() {
           </div>
         )}
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

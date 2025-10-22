@@ -454,6 +454,6 @@ export default function InvoiceCreatePage() {
           </div>
         </form>
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

@@ -263,6 +263,6 @@ export default function EmailConfigPage() {
           )}
         </div>
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

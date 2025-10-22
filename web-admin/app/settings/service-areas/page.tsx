@@ -58,6 +58,6 @@ export default function ServiceAreasPage() {
           </div>
         </div>
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

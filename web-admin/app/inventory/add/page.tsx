@@ -338,6 +338,6 @@ export default function AddInventoryItemPage() {
           </form>
         </div>
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

@@ -217,7 +217,7 @@ export default function RecurringServicesPage() {
             <p className="mt-4 text-gray-600">Loading recurring services...</p>
           </div>
         </div>
-      </DashboardLayout>
+      </HybridNavigationTopBar>
     );
   }
 
@@ -647,6 +647,6 @@ export default function RecurringServicesPage() {
           </div>
         </div>
       )}
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

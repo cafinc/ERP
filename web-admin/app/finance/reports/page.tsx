@@ -198,6 +198,6 @@ export default function ReportsPage() {
           </div>
         </div>
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

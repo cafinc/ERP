@@ -254,7 +254,7 @@ export default function GeofenceManagementPage() {
             <p className="mt-4 text-gray-600">Loading geofence data...</p>
           </div>
         </div>
-      </DashboardLayout>
+      </HybridNavigationTopBar>
     );
   }
 
@@ -711,6 +711,6 @@ export default function GeofenceManagementPage() {
           )}
         </div>
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

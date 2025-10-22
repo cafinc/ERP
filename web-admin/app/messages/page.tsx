@@ -648,6 +648,6 @@ export default function MessagesPage() {
           </div>
         )}
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

@@ -225,6 +225,6 @@ export default function PPEManagementPage() {
           ))}
         </div>
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

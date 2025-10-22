@@ -255,6 +255,6 @@ export default function SafetyPoliciesPage() {
           })}
         </div>
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

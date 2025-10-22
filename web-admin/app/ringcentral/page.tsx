@@ -176,6 +176,6 @@ export default function RingCentralHub() {
           </div>
         </div>
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

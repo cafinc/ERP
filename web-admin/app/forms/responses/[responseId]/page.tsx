@@ -220,7 +220,7 @@ export default function ViewResponsePage() {
             <p className="mt-4 text-gray-600">Loading response...</p>
           </div>
         </div>
-      </DashboardLayout>
+      </HybridNavigationTopBar>
     );
   }
 
@@ -230,7 +230,7 @@ export default function ViewResponsePage() {
         <div className="text-center py-12">
           <p className="text-red-600">Response not found</p>
         </div>
-      </DashboardLayout>
+      </HybridNavigationTopBar>
     );
   }
 
@@ -317,6 +317,6 @@ export default function ViewResponsePage() {
           </div>
         </div>
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

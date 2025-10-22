@@ -273,7 +273,7 @@ export default function LiveTrackingPage() {
         <div className="flex items-center justify-center h-screen">
           <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
         </div>
-      </DashboardLayout>
+      </HybridNavigationTopBar>
     );
   }
 
@@ -401,6 +401,6 @@ export default function LiveTrackingPage() {
           transform: scale(1.1);
         }
       `}</style>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

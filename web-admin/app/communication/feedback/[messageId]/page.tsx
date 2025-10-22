@@ -173,7 +173,7 @@ export default function FeedbackDetailPage() {
             <p className="text-gray-600">Loading feedback...</p>
           </div>
         </div>
-      </DashboardLayout>
+      </HybridNavigationTopBar>
     );
   }
 
@@ -192,7 +192,7 @@ export default function FeedbackDetailPage() {
             </button>
           </div>
         </div>
-      </DashboardLayout>
+      </HybridNavigationTopBar>
     );
   }
 
@@ -387,6 +387,6 @@ export default function FeedbackDetailPage() {
           )}
         </div>
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

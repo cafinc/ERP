@@ -135,7 +135,7 @@ export default function EquipmentDetailPage() {
         <div className="flex items-center justify-center h-64">
           <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
         </div>
-      </DashboardLayout>
+      </HybridNavigationTopBar>
     );
   }
 
@@ -152,7 +152,7 @@ export default function EquipmentDetailPage() {
             Return to Equipment
           </button>
         </div>
-      </DashboardLayout>
+      </HybridNavigationTopBar>
     );
   }
 
@@ -338,6 +338,6 @@ export default function EquipmentDetailPage() {
           </div>
         )}
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

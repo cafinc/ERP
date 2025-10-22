@@ -180,7 +180,7 @@ export default function WeatherPlanningPage() {
         <div className="flex items-center justify-center h-64">
           <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
         </div>
-      </DashboardLayout>
+      </HybridNavigationTopBar>
     );
   }
 
@@ -190,7 +190,7 @@ export default function WeatherPlanningPage() {
         <div className="text-center py-12">
           <p className="text-gray-600">Failed to load weather data</p>
         </div>
-      </DashboardLayout>
+      </HybridNavigationTopBar>
     );
   }
 
@@ -366,6 +366,6 @@ export default function WeatherPlanningPage() {
           </div>
         )}
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

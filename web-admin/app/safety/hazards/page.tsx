@@ -226,6 +226,6 @@ export default function HazardAssessmentsPage() {
           ))}
         </div>
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

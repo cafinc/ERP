@@ -1053,6 +1053,6 @@ export default function CreateEstimatePage() {
           </div>
         )}
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

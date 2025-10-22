@@ -564,6 +564,6 @@ export default function EmployeesPage() {
         </div>
       )}
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

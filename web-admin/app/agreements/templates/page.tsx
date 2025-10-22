@@ -315,6 +315,6 @@ export default function AgreementTemplatesPage() {
           </div>
         )}
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

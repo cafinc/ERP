@@ -150,6 +150,6 @@ export default function SafetyTrainingPage() {
           </div>
         </div>
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

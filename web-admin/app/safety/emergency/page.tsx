@@ -228,6 +228,6 @@ export default function EmergencyPlansPage() {
           ))}
         </div>
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

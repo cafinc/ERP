@@ -317,6 +317,6 @@ export default function SMSPage() {
           )}
         </div>
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

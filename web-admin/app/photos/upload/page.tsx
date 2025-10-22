@@ -204,6 +204,6 @@ export default function PhotoUploadPage() {
           </div>
         )}
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

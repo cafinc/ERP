@@ -385,6 +385,6 @@ export default function CreateSitePage() {
           </button>
         </div>
       </form>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

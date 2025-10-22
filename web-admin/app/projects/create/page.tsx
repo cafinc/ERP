@@ -322,6 +322,6 @@ export default function ProjectCreatePage() {
           </div>
         </div>
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

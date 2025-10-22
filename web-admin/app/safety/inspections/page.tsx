@@ -217,6 +217,6 @@ export default function SafetyInspectionsPage() {
           ))}
         </div>
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

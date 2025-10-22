@@ -206,6 +206,6 @@ export default function SafetyMeetingsPage() {
           ))}
         </div>
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

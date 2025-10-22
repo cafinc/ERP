@@ -172,7 +172,7 @@ export default function EstimateDetailPage() {
         <div className="flex items-center justify-center h-full">
           <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
         </div>
-      </DashboardLayout>
+      </HybridNavigationTopBar>
     );
   }
 
@@ -191,7 +191,7 @@ export default function EstimateDetailPage() {
             <span>Back to Estimates</span>
           </button>
         </div>
-      </DashboardLayout>
+      </HybridNavigationTopBar>
     );
   }
 
@@ -492,6 +492,6 @@ export default function EstimateDetailPage() {
           />
         )}
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

@@ -177,6 +177,6 @@ export default function EquipmentDashboardPage() {
           </div>
         </div>
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

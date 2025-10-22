@@ -371,6 +371,6 @@ export default function ContactsPage() {
           </div>
         )}
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

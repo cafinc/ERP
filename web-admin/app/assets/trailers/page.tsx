@@ -248,6 +248,6 @@ export default function TrailersPage() {
           </div>
         )}
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

@@ -427,6 +427,6 @@ export default function InventoryPage() {
           </div>
         )}
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

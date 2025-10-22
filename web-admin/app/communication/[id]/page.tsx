@@ -119,7 +119,7 @@ export default function ConversationDetailPage() {
             <p className="text-gray-600">Loading conversation...</p>
           </div>
         </div>
-      </DashboardLayout>
+      </HybridNavigationTopBar>
     );
   }
 
@@ -138,7 +138,7 @@ export default function ConversationDetailPage() {
             </button>
           </div>
         </div>
-      </DashboardLayout>
+      </HybridNavigationTopBar>
     );
   }
 
@@ -258,6 +258,6 @@ export default function ConversationDetailPage() {
           </form>
         </div>
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

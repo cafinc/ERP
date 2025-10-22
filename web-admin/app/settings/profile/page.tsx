@@ -533,6 +533,6 @@ export default function ProfileSettings() {
           </div>
         </div>
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

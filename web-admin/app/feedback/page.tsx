@@ -247,6 +247,6 @@ export default function FeedbackFormPage() {
           </div>
         )}
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

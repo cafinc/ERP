@@ -161,6 +161,6 @@ export default function HRModulePage() {
           </div>
         </div>
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

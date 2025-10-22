@@ -477,6 +477,6 @@ export default function FormBuilderPage() {
           </div>
         </div>
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

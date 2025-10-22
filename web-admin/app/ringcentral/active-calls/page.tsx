@@ -254,6 +254,6 @@ export default function ActiveCallsPage() {
           )}
         </div>
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }

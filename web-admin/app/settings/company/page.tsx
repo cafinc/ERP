@@ -202,6 +202,6 @@ export default function CompanySettingsPage() {
           </form>
         </div>
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }
