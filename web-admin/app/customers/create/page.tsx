@@ -912,6 +912,7 @@ export default function CustomerFormPage() {
                 )}
               </>
             )}
+            </>
 
             {/* Address Section (Common for both) */}
             <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-8 backdrop-blur-sm">
