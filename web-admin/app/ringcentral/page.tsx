@@ -59,7 +59,6 @@ export default function RingCentralHub() {
   ];
 
   return (
-    <HybridNavigationTopBar>
       <div className="p-8">
         {/* Header */}
         <div className="mb-8">
@@ -175,6 +174,5 @@ export default function RingCentralHub() {
           </div>
         </div>
       </div>
-    </HybridNavigationTopBar>
-  );
+    );
 }

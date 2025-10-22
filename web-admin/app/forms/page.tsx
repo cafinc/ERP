@@ -172,7 +172,6 @@ export default function FormsPage() {
     : templates.filter(t => t.form_type?.startsWith(filterType));
 
   return (
-    <HybridNavigationTopBar>
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         {/* Compact Header */}
         <CompactHeader
@@ -382,6 +381,5 @@ export default function FormsPage() {
           </div>
         )}
       </div>
-    </HybridNavigationTopBar>
-  );
+    );
 }

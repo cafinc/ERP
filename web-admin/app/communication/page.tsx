@@ -290,7 +290,6 @@ export default function CommunicationCenterPage() {
   };
 
   return (
-    <HybridNavigationTopBar>
       <div className="p-8">
         {/* Header */}
         <div className="mb-8 flex items-center justify-between">
@@ -397,6 +396,5 @@ export default function CommunicationCenterPage() {
           )}
         </div>
       </div>
-    </HybridNavigationTopBar>
-  );
+    );
 }

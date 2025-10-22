@@ -268,16 +268,13 @@ export default function LiveTrackingPage() {
 
   if (loading) {
     return (
-      <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-screen">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
-      </HybridNavigationTopBar>
-    );
+      );
   }
 
   return (
-    <HybridNavigationTopBar>
       <div className="relative h-[calc(100vh-4rem)]">
         {/* Map Container */}
         <div ref={mapContainer} className="absolute inset-0" />
@@ -400,6 +397,5 @@ export default function LiveTrackingPage() {
           transform: scale(1.1);
         }
       `}</style>
-    </HybridNavigationTopBar>
-  );
+    );
 }

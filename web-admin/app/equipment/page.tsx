@@ -114,16 +114,13 @@ export default function EquipmentPage() {
 
   if (loading) {
     return (
-      <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-full">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
-      </HybridNavigationTopBar>
-    );
+      );
   }
 
   return (
-    <HybridNavigationTopBar>
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         {/* Compact Header */}
         <CompactHeader
@@ -358,6 +355,5 @@ export default function EquipmentPage() {
           </div>
         )}
       </div>
-    </HybridNavigationTopBar>
-  );
+    );
 }

@@ -176,26 +176,21 @@ export default function AnalyticsPage() {
 
   if (loading) {
     return (
-      <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-full">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
-      </HybridNavigationTopBar>
-    );
+      );
   }
 
   if (!data) {
     return (
-      <HybridNavigationTopBar>
         <div className="text-center py-12">
           <p className="text-gray-600">Failed to load analytics data</p>
         </div>
-      </HybridNavigationTopBar>
-    );
+      );
   }
 
   return (
-    <HybridNavigationTopBar>
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
         {/* Compact Header */}
         <CompactHeader
@@ -391,6 +386,5 @@ export default function AnalyticsPage() {
         </div>
         </div>
       </div>
-    </HybridNavigationTopBar>
-  );
+    );
 }

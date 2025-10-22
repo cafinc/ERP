@@ -114,16 +114,13 @@ export default function DispatchesPage() {
 
   if (loading) {
     return (
-      <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-full">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
-      </HybridNavigationTopBar>
-    );
+      );
   }
 
   return (
-    <HybridNavigationTopBar>
       <div className="p-8">
         {/* Header */}
         <div className="mb-8 flex items-center justify-between">
@@ -401,6 +398,5 @@ export default function DispatchesPage() {
           </div>
         ))}
       </div>
-    </HybridNavigationTopBar>
-  );
+    );
 }

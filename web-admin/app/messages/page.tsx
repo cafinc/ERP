@@ -271,7 +271,6 @@ export default function MessagesPage() {
   ];
 
   return (
-    <HybridNavigationTopBar>
       <div className="h-[calc(100vh-4rem)] flex">
         {/* Sidebar - Conversations List */}
         <div className="w-80 border-r border-gray-200 bg-white flex flex-col">
@@ -647,6 +646,5 @@ export default function MessagesPage() {
           </div>
         )}
       </div>
-    </HybridNavigationTopBar>
-  );
+    );
 }

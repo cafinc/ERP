@@ -63,7 +63,6 @@ export default function HRModulePage() {
   ];
 
   return (
-    <HybridNavigationTopBar>
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         <CompactHeader
           title="HR Module"
@@ -161,6 +160,5 @@ export default function HRModulePage() {
           </div>
         </div>
       </div>
-    </HybridNavigationTopBar>
-  );
+    );
 }

@@ -175,26 +175,21 @@ export default function WeatherPlanningPage() {
 
   if (loading) {
     return (
-      <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-64">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
-      </HybridNavigationTopBar>
-    );
+      );
   }
 
   if (!weather) {
     return (
-      <HybridNavigationTopBar>
         <div className="text-center py-12">
           <p className="text-gray-600">Failed to load weather data</p>
         </div>
-      </HybridNavigationTopBar>
-    );
+      );
   }
 
   return (
-    <HybridNavigationTopBar>
       <div className="space-y-6">
         {/* Header */}
         <div className="flex justify-between items-center">
@@ -365,6 +360,5 @@ export default function WeatherPlanningPage() {
           </div>
         )}
       </div>
-    </HybridNavigationTopBar>
-  );
+    );
 }
