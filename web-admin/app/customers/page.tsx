@@ -248,7 +248,7 @@ export default function CustomersPage() {
               {visibleColumns.phone && <div className="col-span-2">Phone</div>}
               {visibleColumns.email && <div className="col-span-3">Email</div>}
               {visibleColumns.type && <div className="col-span-1">Type</div>}
-              {visibleColumns.status && <div className="col-span-1">Status</div>}
+              <div className="col-span-2">Status / Actions</div>
             </div>
           </div>
         )}
