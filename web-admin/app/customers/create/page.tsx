@@ -565,8 +565,8 @@ export default function CustomerFormPage() {
                           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         >
                           <option key="none" value="">No company affiliation</option>
-                          {companies.map(company => (
-                            <option key={company._id} value={company._id}>
+                          {companies.map((company, index) => (
+                            <option key={company._id || company.id || `company-${index}`} value={company._id || company.id}>
                               {company.name}
                             </option>
                           ))}
