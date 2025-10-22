@@ -39,6 +39,7 @@ interface PageHeaderProps {
   showViewToggle?: boolean;
   viewMode?: 'list' | 'grid';
   onViewChange?: (mode: 'list' | 'grid') => void;
+  customTabsRight?: React.ReactNode;
   variant?: 'default' | 'simple' | 'compact';
 }
 
