@@ -509,9 +509,8 @@ export default function CustomerDetailPage() {
           },
         ]}
       />
-        />
 
-        {/* New Layout: Sidebar + Content */}
+      {/* New Layout: Sidebar + Content */}
         <div className="flex gap-4">
           {/* Left Sidebar Navigation */}
           <div className="w-64 flex-shrink-0">
