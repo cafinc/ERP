@@ -187,41 +187,6 @@ export default function CRMDashboardPage() {
             </div>
           </div>
         </div>
-
-        {/* Quick Actions */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            <button
-              onClick={() => router.push('/customers/create')}
-              className="flex flex-col items-center justify-center p-4 border-2 border-dashed border-gray-300 rounded-lg hover:border-blue-400 hover:bg-blue-50 transition-colors"
-            >
-              <Users className="w-8 h-8 text-gray-400 mb-2" />
-              <span className="text-sm font-medium text-gray-700">New Customer</span>
-            </button>
-            <button
-              onClick={() => router.push('/estimates/create')}
-              className="flex flex-col items-center justify-center p-4 border-2 border-dashed border-gray-300 rounded-lg hover:border-purple-400 hover:bg-purple-50 transition-colors"
-            >
-              <FileText className="w-8 h-8 text-gray-400 mb-2" />
-              <span className="text-sm font-medium text-gray-700">New Estimate</span>
-            </button>
-            <button
-              onClick={() => router.push('/projects/create')}
-              className="flex flex-col items-center justify-center p-4 border-2 border-dashed border-gray-300 rounded-lg hover:border-green-400 hover:bg-green-50 transition-colors"
-            >
-              <FolderOpen className="w-8 h-8 text-gray-400 mb-2" />
-              <span className="text-sm font-medium text-gray-700">New Project</span>
-            </button>
-            <button
-              onClick={() => router.push('/invoices/create')}
-              className="flex flex-col items-center justify-center p-4 border-2 border-dashed border-gray-300 rounded-lg hover:border-orange-400 hover:bg-orange-50 transition-colors"
-            >
-              <Receipt className="w-8 h-8 text-gray-400 mb-2" />
-              <span className="text-sm font-medium text-gray-700">New Invoice</span>
-            </button>
-          </div>
-        </div>
       </div>
     </div>
   );
