@@ -213,13 +213,7 @@ export default function HybridNavigationTopBar({ children }: { children: React.R
   ];
 
   const handleMenuClick = (item: MenuItem) => {
-    if (item.displayAsTabs && item.submenu) {
-      // For tab-style navigation, navigate to main href and always keep tabs open
-      if (item.href) {
-        router.push(item.href);
-      }
-      setExpandedMenu(item.label);
-    } else if (item.submenu) {
+    if (item.submenu) {
       // If it has submenu, just toggle the submenu - don't navigate
       setExpandedMenu(expandedMenu === item.label ? null : item.label);
     } else if (item.href) {
