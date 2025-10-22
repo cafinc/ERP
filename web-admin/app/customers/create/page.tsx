@@ -467,12 +467,12 @@ export default function CustomerFormPage() {
                         <p className="text-sm text-gray-600 mt-2">Business or organization</p>
                       </button>
                     </div>
-                  </div>
-                )}
+                </div>
+              )}
 
-                {/* Individual Form */}
-                {customerForm.customer_type === 'individual' && (
-                  <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-8 backdrop-blur-sm">
+              {/* Individual Form */}
+              {customerForm.customer_type === 'individual' && (
+                <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-8 backdrop-blur-sm">
                     <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center space-x-2">
                       <User className="w-5 h-5 text-[#3f72af]" />
                       <span>Individual Information</span>
