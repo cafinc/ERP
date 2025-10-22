@@ -55,6 +55,9 @@ export default function PageHeader({
   onSearch,
   showFilter = false,
   onFilterClick,
+  showViewToggle = false,
+  viewMode = 'list',
+  onViewChange,
   variant = 'default'
 }: PageHeaderProps) {
   const [searchQuery, setSearchQuery] = React.useState('');
