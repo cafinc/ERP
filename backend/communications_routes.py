@@ -1107,37 +1107,6 @@ async def get_project_communications(project_id: str):
         logger.error(f"Error fetching customer stats: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
 
-                # Mark message as read
-                communication_id = message_data.get("communication_id")
-                if communication_id:
-                    await db.communications.update_one(
-                        {"_id": ObjectId(communication_id)},
-                        {
-                            "$set": {
-                                "read": True,
-                                "read_at": datetime.utcnow(),
-                                "read_by": user_id
-                            }
-                        }
-                    )
-                    # Notify sender
-                    await connection_manager.notify_message_read(communication_id, user_id)
-            
-            else:
-                # Echo message back (for testing)
-                await websocket.send_json({
-                    "type": "echo",
-                    "data": message_data,
-                    "timestamp": datetime.utcnow().isoformat()
-                })
-    
-    except WebSocketDisconnect:
-        connection_manager.disconnect(websocket, user_id)
-        logger.info(f"User {user_id} disconnected")
-    except Exception as e:
-        logger.error(f"WebSocket error for user {user_id}: {e}")
-        connection_manager.disconnect(websocket, user_id)
-
 
 @router.get("/communications/online-users")
 async def get_online_users():
