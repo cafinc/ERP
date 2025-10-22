@@ -125,25 +125,31 @@ export default function HybridNavigationTopBar({ children }: { children: React.R
         {expandedMenu && (
           <div className="absolute top-0 left-16 right-0 bg-white border-b border-gray-200 shadow-md z-40">
             <div className="px-6 py-3">
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-3 flex-wrap">
                 {menuItems
                   .find(item => item.label === expandedMenu)
-                  ?.submenu?.map((subItem) => (
-                    <button
-                      key={subItem.href}
-                      onClick={() => {
-                        router.push(subItem.href);
-                        setExpandedMenu(null);
-                      }}
-                      className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                        isActive(subItem.href)
-                          ? 'bg-[#3f72af] text-white'
-                          : 'text-gray-700 hover:bg-gray-100'
-                      }`}
-                    >
-                      {subItem.label}
-                    </button>
-                  ))}
+                  ?.submenu?.map((subItem) => {
+                    const SubIcon = subItem.icon || ChevronRight;
+                    return (
+                      <button
+                        key={subItem.href}
+                        onClick={() => {
+                          router.push(subItem.href);
+                          setExpandedMenu(null);
+                        }}
+                        className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                          isActive(subItem.href)
+                            ? 'bg-[#3f72af] text-white shadow-md'
+                            : 'text-gray-700 hover:bg-gray-100'
+                        }`}
+                      >
+                        <SubIcon className={`w-4 h-4 ${
+                          isActive(subItem.href) ? 'text-white' : 'text-[#3f72af]'
+                        }`} />
+                        {subItem.label}
+                      </button>
+                    );
+                  })}
               </div>
             </div>
           </div>
