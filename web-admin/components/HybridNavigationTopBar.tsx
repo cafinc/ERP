@@ -145,8 +145,8 @@ export default function HybridNavigationTopBar({ children }: { children: React.R
     { label: 'Automation', icon: LayoutDashboard, href: '/automation' },
     { label: 'Tasks', icon: FileText, href: '/tasks' },
     { label: 'Forms', icon: FileText, href: '/forms' },
-    { label: 'Photos', icon: FileText, href: '/photos' },
-    { label: 'Analytics', icon: LayoutDashboard, href: '/analytics' },
+    { label: 'Photos', icon: Camera, href: '/photos' },
+    { label: 'Analytics', icon: BarChart3, href: '/analytics' },
     { label: 'Reports', icon: FileText, href: '/reports' },
     {
       label: 'HR Module',
