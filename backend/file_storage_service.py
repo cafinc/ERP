@@ -185,7 +185,50 @@ class FileStorageService:
             # Fallback to local storage
             return self.save_file_local(file_data, filename)
     
-    def save_file(self, file_data: bytes, filename: str) -> dict:
+    def compress_image(self, file_data: bytes, filename: str, max_size_mb: float = 2.0) -> bytes:
+        """Compress image if larger than max_size_mb"""
+        try:
+            # Check if already small enough
+            if len(file_data) <= max_size_mb * 1024 * 1024:
+                return file_data
+            
+            # Open image
+            img = Image.open(io.BytesIO(file_data))
+            
+            # Convert RGBA to RGB if needed
+            if img.mode in ('RGBA', 'LA', 'P'):
+                background = Image.new('RGB', img.size, (255, 255, 255))
+                if img.mode == 'P':
+                    img = img.convert('RGBA')
+                background.paste(img, mask=img.split()[-1] if img.mode in ('RGBA', 'LA') else None)
+                img = background
+            elif img.mode != 'RGB':
+                img = img.convert('RGB')
+            
+            # Compress with progressive quality reduction
+            output = io.BytesIO()
+            quality = 85
+            
+            while quality > 20:
+                output.seek(0)
+                output.truncate()
+                img.save(output, format='JPEG', quality=quality, optimize=True)
+                
+                if output.tell() <= max_size_mb * 1024 * 1024:
+                    break
+                
+                quality -= 5
+            
+            compressed_data = output.getvalue()
+            logger.info(f"Image compressed: {len(file_data)} -> {len(compressed_data)} bytes (quality={quality})")
+            
+            return compressed_data
+        
+        except Exception as e:
+            logger.error(f"Error compressing image: {e}")
+            return file_data  # Return original if compression fails
+
+    def save_file(self, file_data: bytes, filename: str, compress: bool = True) -> dict:
         """
         Save file to storage (S3 or local)
         Returns file metadata dict
@@ -194,6 +237,15 @@ class FileStorageService:
         is_valid, message = self.validate_file(filename, len(file_data))
         if not is_valid:
             raise ValueError(message)
+        
+        # Compress images if enabled
+        original_size = len(file_data)
+        category = self.get_file_category(filename)
+        
+        if compress and category == 'images':
+            file_data = self.compress_image(file_data, filename)
+            if len(file_data) < original_size:
+                logger.info(f"Image compressed: {original_size} -> {len(file_data)} bytes")
         
         # Save file
         if self.use_s3:
@@ -208,7 +260,6 @@ class FileStorageService:
         file_hash = self.calculate_file_hash(file_data)
         
         # Get file info
-        category = self.get_file_category(filename)
         mime_type = mimetypes.guess_type(filename)[0] or 'application/octet-stream'
         
         return {
@@ -218,6 +269,8 @@ class FileStorageService:
             'file_type': mime_type,
             'file_category': category,
             'file_size': len(file_data),
+            'original_size': original_size,
+            'compressed': len(file_data) < original_size,
             'file_hash': file_hash,
             'url': file_url,
             'thumbnail_url': thumbnail_url,
