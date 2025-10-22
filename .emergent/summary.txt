@@ -1,82 +1,86 @@
 <analysis>
-The trajectory details an extensive design system overhaul and navigation refinement for the application. Initially, the AI addressed user feedback regarding design inconsistencies across the HR Module and Integration Hub, applying a standard  and consistent styling. Following a high-level comparison to ServiceTitan, the user guided the AI through an iterative design process, exploring multiple visual themes, navigation layouts (settling on a Hybrid Navigation with a top bar and icons), button styles, and font choices. The AI proactively built interactive selector pages (, , , ) to facilitate user decisions. Critical issues like a hydration error from date formatting and the Enhanced Header blocking the top navigation were identified and fixed. The final focus shifted to meticulously aligning navigation structure, ensuring all pages are accessible, optimizing menu entries, and correcting menu icons to match their respective pages. The process highlights a highly collaborative, user-driven design iteration loop.
+The AI engineer's work trajectory chronicles a highly iterative, user-driven development process focused on refining the application's UI/UX and expanding its communication capabilities. The initial phase involved standardizing page headers with the  component, addressing various layout inconsistencies, and resolving JSX parsing and React Hooks errors in the  and  pages. A significant portion of the conversation was dedicated to debugging persistent JSX errors in  during an attempt to implement a frosted glass modal effect, which was eventually simplified to a full-screen  integration due to complexity.
+
+Subsequent user requests led to the removal of the Revenue Overview section from the CRM dashboard and a major overhaul of the Communication Center on the customer detail page. This involved transforming navigation to tabs, introducing interactive colored communication type buttons on the Overview tab, and building a comprehensive Communications tab with sub-tabs, messaging interfaces (InApp, SMS, Email, Phone), and integration points for RingCentral and Gmail. The AI also implemented system-wide phone number auto-formatting, email validation, and real-time field validation with visual error indicators.
+
+The final phase shifted towards backend integration, with the AI successfully implementing FastAPI routes for RingCentral and Gmail communication (sending messages) and developing real-time webhook listeners for both services. The trajectory concludes with the AI embarking on an ambitious autonomous build plan to deliver advanced Communication Center features, including file attachments and read receipts for the customer portal, but was cut short before full completion due to token limits, pivoting to a continuation package for foundational elements like file storage.
 </analysis>
 
 <product_requirements>
-The application is a full-stack admin dashboard (Next.js, FastAPI, MongoDB) for snow removal, with an Expo mobile app. Initial features included QuickBooks integration, customer forms, dashboard, operational pages (Customers, Estimates, Projects, Invoices, Sites), and Access Dashboard. Recently, Site Map Annotation (Google Maps with drawing/measurement), UI/UX Modernization, a comprehensive Settings submenu, Navigation Enhancements, Avatar Emoji System, White-Label Branding, and Advanced User Roles & Permissions were implemented.
+The application is a full-stack admin dashboard (Next.js, FastAPI, MongoDB) for snow removal services, with an Expo mobile app. Core features include CRM, operational pages (Customers, Estimates, Projects, Invoices, Sites), and an Access Dashboard. Recent enhancements covered Site Map Annotation, UI/UX Modernization, a comprehensive Settings submenu, Navigation Enhancements, Avatar Emoji System, White-Label Branding, and Advanced User Roles & Permissions.
 
-The current focus involves:
-- **HR Module**: Foundation, navigation, employee management (CRUD, profiles, documents, emergency contacts), time & attendance (tracking, timesheets, clock in/out, GPS), PTO management, training/certifications, payroll setup, performance management.
-- **Integration Hub**: Dashboard, QuickBooks (Payroll, Time Tracking, Employee sync), Microsoft 365 (Azure AD SSO, Teams, Outlook, OneDrive, Power BI), all with mock flows.
-- **Site Maps Tab Enhancements**: Integration under Dispatch, fix drawing inaccuracies, enable drag-and-drop for feature icons, add page scrollability, implement 15 additional map editor features (e.g., snap-to-grid, undo/redo).
+Current development focuses on:
+*   **HR Module**: Establishing its foundation, navigation, employee management (CRUD, profiles, documents, emergency contacts), time & attendance, PTO, training/certifications, payroll, and performance management.
+*   **Integration Hub**: Developing its dashboard and mock flows for QuickBooks (Payroll, Time Tracking, Employee sync) and Microsoft 365 (Azure AD SSO, Teams, Outlook, OneDrive, Power BI).
+*   **Site Maps Tab Enhancements**: Integrating under Dispatch, resolving drawing inaccuracies, enabling drag-and-drop for feature icons, adding page scrollability, and implementing 15 additional map editor functionalities.
+*   **UI/UX Refinements**: Consistent header designs (), flexible tabbed navigation, interactive list/grid views.
+*   ** Page**: Update header, initially frosted glass modal (later simplified to full-screen with ).
+*   ** Page**: Remove Revenue Overview section.
+*   ** (Customer Detail) Page**: Implement tab-based navigation.
+*   **Communication Center**:
+    *   Add to  (both Overview and Communications tab).
+    *   Overview tab: view-only, with colored clickable buttons showing recent communications per type (InApp, SMS, Email, Phone).
+    *   Communications tab: full interface with sub-tabs for each type (InApp, SMS, Email, Phone), show all types regardless of activity, display No comms if empty, include reply box for messaging, integrate with RingCentral (phone/SMS) and Gmail (email).
+    *   Implement backend integrations for RingCentral (SMS send/receive) and Gmail (email send/receive).
+    *   Implement real-time webhook listeners for incoming RingCentral and Gmail messages.
+    *   Extend to customer portal, crew, and subcontractor access.
+    *   Add document/photo sending/receiving, read receipt functionality.
+    *   Further features: real-time messaging, multiple file uploads, file preview, basic search, message templates, analytics, AI chatbot, video calls.
+*   **Platform-Wide Validation**: Auto-format phone numbers to  and validate email structure system-wide. Implement real-time red border/error message validation for invalid/required fields on forms.
 </product_requirements>
 
 <key_technical_concepts>
 -   **Full-stack Monorepo**: Next.js (frontend), FastAPI (backend), MongoDB.
--   **Data Modeling**: Pydantic for API validation.
--   **Frontend State Management**: React Context,  or .
--   **UI/UX**: Component-based design, responsive layouts, hybrid navigation, .
--   **Mapping/Annotation**: Konva.js for canvas-based drawing (Site Map).
--   **Asynchronous Programming**: Python  for backend API routes.
--   **File-based Routing**: Next.js  directory (web-admin).
+-   **Component-based UI**: , , .
+-   **File-based Routing**: Next.js  directory.
+-   **State Management**: React , , .
+-   **Styling**: Tailwind CSS for utility-first styling.
+-   **Backend Integrations**: RingCentral (SMS/calls), Gmail (email), Webhooks.
+-   **Error Handling**: JSX parsing, React Hooks rules, Hydration issues.
 </key_technical_concepts>
 
 <code_architecture>
 
 
--   ****: Defines Pydantic data models for the FastAPI backend, including new HR Module models.
--   ** (NEW)**: API routes for the HR Module, with database interaction functions converted to .
--   ** (NEW)**: API routes for the Integration Hub, with database operation functions converted to .
--   ****: Main FastAPI app, includes  and .
--   ****: Manages main navigation. Modified to incorporate new HR and Integration Hub items and Site Maps under Dispatch.
--   ****: Site map annotation component. Extensive modifications to fix JSX errors, improve drawing, enable drag-and-drop, scrollability, and add 15 map editor enhancements.
--   ** and sub-pages**: New frontend pages for HR module features. Initial pages were created without a consistent layout, then updated to use  and standard styling.
--   ****: New frontend landing for Integration Hub. Initially created, then updated for consistent design.
--   ****: Frontend page for Site Maps, created to resolve navigation issues.
--   ****: Tracks progress of HR/Integration build.
--   ** (NEW)**: Created to implement a hybrid navigation structure chosen by the user, combining top and sidebar elements.
--   ** (NEW)**: Created as part of the hybrid navigation, specifically for the top bar elements, and extensively modified to match original navigation structure and include icons.
--   ** (MODIFIED)**: Adjusted to prevent it from obscuring the top navigation bar and to handle date rendering on the client-side to prevent hydration errors.
--   **, ,  (NEW)**: Temporary pages created to demo different design variations for the HR module.
--   ** (NEW)**: Created to allow the user to select and preview color palettes, navigation types, and button variations.
--   ** (NEW)**: Created to preview the chosen design system (Header Inspired colors, Hybrid Navigation, selected button styles).
--   ** (NEW)**: Created to demonstrate various submenu display options.
--   ** (NEW),  (NEW)**: Components created to showcase specific submenu animations.
--   ** (NEW)**: A comprehensive page allowing the user to select all design elements (header, font, spacing, card style, page layouts).
--   ** (NEW)**: An interactive page to map specific layouts to different page types.
--   ** (NEW)**: An interactive page allowing the user to organize the navigation structure, later modified to use click-to-add instead of drag-and-drop.
--   ** (MODIFIED)**: Updated to import and apply the Inter font, reflecting a user-chosen design system element.
+
+-   ****: Wraps content with  for consistent global navigation.
+-   ****: Updated menu items and ensured proper submenu behavior.
+-   ****: Adjusted to prevent overlap and resolved date hydration errors.
+-   ** (NEW)**: Provides customizable, standardized page headers with branding, actions, and tab support.
+-   ****: Integrated , added tabs for Individual/Company, column customization, filter dropdown, and phone number formatting using .
+-   ****: Integrated ,  and  utilities, added real-time validation (red borders, error messages) for required fields (First/Last Name, Company Name), phone, and email. Phone numbers auto-format on input. Removed the frosted glass modal implementation after extensive debugging, reverting to a full-screen form.
+-   ****: Refactored to use  with tabs for navigation. Implemented a comprehensive Communication Center:
+    *   **Overview Tab**: Displays interactive, colored buttons for communication types (InApp, SMS, Email, Phone), showing recent messages per type on click.
+    *   **Communications Tab**: Full interface with sub-tabs for each communication type, including a reply box.
+    *   Integrated  component for consistent phone number formatting.
+    *   Moved  hooks to the top level to resolve Rules of Hooks errors.
+    *   Removed an old, duplicate communications tab section.
+-   ****: Replaced  with  and removed the Revenue Overview section per user request.
+-   ** (NEW)**: Contains  for  style formatting and  utility.
+-   ** (NEW)**: A reusable component for input fields with integrated validation logic and error display.
+-   ** (NEW)**: FastAPI routes for sending SMS (via RingCentral) and Email (via Gmail), and fetching communication logs.
+-   ****: Modified to include  and .
+-   ****: Existing service, verified  method for integration.
+-   ****: Existing service, verified  method for integration.
+-   ** (NEW)**: FastAPI endpoints for receiving incoming webhooks from RingCentral and Gmail to enable real-time message reception.
+-   ** (NEW)**: File created, implementation for file storage system initiated.
 </code_architecture>
 
 <pending_tasks>
--   **Frontend HR Module/Integration Hub UI completion**: Implement detailed UI for the newly created HR module and Integration Hub pages, integrating with the backend APIs.
--   **Design Consistency Rollout**: Apply the finalized design system (colors, button styles, cards, forms, inputs, modals) across the entire  application. This is pending the final confirmation of all design choices.
+-   **Frontend HR Module/Integration Hub UI completion**: Implement detailed UI.
+-   **Roll out Full Featured Header**: Apply  to remaining main menu pages/dashboards.
+-   **Communication Center - File Storage & Attachments**: Complete the file upload endpoints and wiring, implement document/photo sending/receiving.
+-   **Communication Center - Read Receipts**: Implement read receipt functionality.
+-   **Communication Center - Real-time Messaging**: Complete the foundational real-time messaging system.
+-   **Communication Center - Advanced Features (Phases 2-5)**: Multiple file uploads, file preview, basic search, message templates, database schemas, API scaffolding, Analytics, AI chatbot, Video Calls.
+-   **Communication Center - Cross-Portal Integration**: Extend to Crew and Subcontractor portals.
+-   **External Service Integrations**: Integrate with AWS, Firebase, OpenAI for advanced features (requires user credentials).
 </pending_tasks>
 
 <current_work>
-The AI engineer has been meticulously working on refining the application's design system and navigation based on explicit user feedback. Initially, the AI addressed widespread design inconsistencies across the newly built HR and Integration Hub modules, standardizing their layout and styling by ensuring they use  and consistent card structures.
-
-A significant portion of the recent work involved creating a highly customizable design system. This included:
-1.  **Design Variations**: Creating , ,  to present different aesthetic choices.
-2.  **Design System Demo**: Developing  to showcase color palettes, navigation types, and button variations for user selection.
-3.  **Custom Palette**: Creating a Header Inspired color palette based on the 's blue ().
-4.  **Navigation**: Implementing a Hybrid Navigation (, ) with selected button styles.
-5.  **Layout Selectors**: Creating  and  for comprehensive design element and page layout selection.
-6.  **Navigation Builder**: Creating  (later changed to click-to-add functionality) to allow the user to define their navigation structure.
-
-Several issues were resolved:
--   **Header Overlap**: Fixed the  to prevent it from blocking the top navigation.
--   **Hydration Error**: Resolved a client/server mismatch in  caused by dynamic date rendering.
--   **Submenu Display**: Explored various submenu options (e.g., ).
--   **Icons in Top Bar**: Integrated icons into the chosen top bar navigation.
-
-Most recently, the AI focused on the  to:
--   Match the navigation structure exactly to the user's original , placing missing pages under Settings.
--   Optimize navigation by combining/removing duplicate pages as per AI recommendations, which were approved by the user.
--   Ensure the top menu bar remains open when clicking a dashboard icon to view submenu items.
--   Update menu icons to accurately reflect the content of their respective pages, which was the very last action performed via multiple  calls to .
+Immediately before this summary request, the AI engineer was engaged in the autonomous build plan for the Communication Center. Specifically, it had just initiated BLOCK 1 - File Storage System by creating the file . The last instruction received and acknowledged was to continue the autonomous build and complete the file upload endpoints and wire everything together. This indicates the current work is focused on implementing the backend logic for file storage and upload, which is a foundational step for enabling document and photo attachments within the Communication Center, aligning with Phase 1 of the autonomous build plan.
 </current_work>
 
 <optional_next_step>
-Verify the updated navigation icons in  visually, then ask the user if they want to roll out the complete design system across all pages.
+Continue implementing the file upload endpoints and wiring for the file storage service ().
 </optional_next_step>

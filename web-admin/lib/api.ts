@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://frostview-admin.preview.emergentagent.com/api';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://snowconnect.preview.emergentagent.com/api';
 
 const api = axios.create({
   baseURL: API_URL,

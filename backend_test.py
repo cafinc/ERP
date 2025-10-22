@@ -12,7 +12,7 @@ import sys
 import os
 
 # Backend URL from environment
-BACKEND_URL = "https://frostview-admin.preview.emergentagent.com/api"
+BACKEND_URL = "https://snowconnect.preview.emergentagent.com/api"
 
 class BackendTester:
     def __init__(self):
