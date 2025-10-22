@@ -523,7 +523,7 @@ export default function CustomersPage() {
 
                     {/* Phone */}
                     {visibleColumns.phone && (
-                      <div className="col-span-2 text-gray-600">{customer.phone}</div>
+                      <div className="col-span-2 text-gray-600">{formatPhoneNumber(customer.phone)}</div>
                     )}
 
                     {/* Email */}
