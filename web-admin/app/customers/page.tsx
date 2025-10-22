@@ -164,13 +164,9 @@ export default function CustomersPage() {
         showViewToggle={true}
         viewMode={viewMode}
         onViewChange={setViewMode}
-      />
-
-      <div className="p-6">
-        {/* Column Selector for List View */}
-        {viewMode === 'list' && (
-          <div className="mb-4 flex justify-end">
-            <div className="relative">
+        customTabsRight={
+          viewMode === 'list' ? (
+            <div className="relative ml-auto">
               <button
                 onClick={() => setShowColumnSelector(!showColumnSelector)}
                 className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 inline-flex items-center"
@@ -237,6 +233,22 @@ export default function CustomersPage() {
                   </div>
                 </div>
               )}
+            </div>
+          ) : undefined
+        }
+      />
+
+      <div className="p-6">
+        {/* List View Header/Legend */}
+        {viewMode === 'list' && filteredCustomers.length > 0 && (
+          <div className="bg-gray-50 border border-gray-200 rounded-t-lg px-6 py-3">
+            <div className="grid grid-cols-12 gap-4 text-xs font-semibold text-gray-600 uppercase tracking-wider">
+              {visibleColumns.name && <div className="col-span-2">Name</div>}
+              {visibleColumns.address && <div className="col-span-3">Address</div>}
+              {visibleColumns.phone && <div className="col-span-2">Phone</div>}
+              {visibleColumns.email && <div className="col-span-3">Email</div>}
+              {visibleColumns.type && <div className="col-span-1">Type</div>}
+              {visibleColumns.status && <div className="col-span-1">Status</div>}
             </div>
           </div>
         )}
