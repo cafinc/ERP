@@ -1575,7 +1575,8 @@ export default function CustomerDetailPage() {
               })()}
             </>
           )}
-        </div>
+          </div>
+        )}
       </div>
 
       {/* Modals */}
