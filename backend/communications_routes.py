@@ -170,7 +170,7 @@ async def send_email_via_gmail(request: SendEmailRequest, current_user: dict = D
             raise HTTPException(status_code=400, detail="Gmail integration not configured. Please set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET")
         
         # Get user's Gmail token
-        user = users_collection.find_one({"_id": ObjectId(current_user["id"])})
+        user = await users_collection.find_one({"_id": ObjectId(current_user["id"])})
         if not user or not user.get("gmail_token"):
             raise HTTPException(status_code=400, detail="Gmail not connected. Please connect your Gmail account first")
         
