@@ -1105,27 +1105,6 @@ async def get_project_communications(project_id: str):
         logger.error(f"Error fetching project communications: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
 
-            days_since_first = (datetime.utcnow() - first_message["timestamp"]).days + 1
-            engagement_score = total_messages / days_since_first
-        else:
-            engagement_score = 0
-        
-        return {
-            "success": True,
-            "customer_id": customer_id,
-            "total_messages": total_messages,
-            "last_message_at": last_message["timestamp"].isoformat() if last_message else None,
-            "first_message_at": first_message["timestamp"].isoformat() if first_message else None,
-            "conversation_status": conv_metadata.get("status", "open") if conv_metadata else "open",
-            "unread_count": unread_count,
-            "engagement_score": round(engagement_score, 2),
-            "days_active": (datetime.utcnow() - first_message["timestamp"]).days if first_message else 0
-        }
-    
-    except Exception as e:
-        logger.error(f"Error fetching customer stats: {str(e)}")
-        raise HTTPException(status_code=500, detail=str(e))
-
 
 @router.get("/communications/online-users")
 async def get_online_users():
