@@ -506,3 +506,213 @@ async def get_communication_status(communication_id: str):
     except Exception as e:
         logger.error(f"Error fetching communication status: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
+
+
+
+# ========== Search & Organization ==========
+
+@router.post("/communications/search")
+async def search_messages(request: SearchMessagesRequest):
+    """Search messages by content, customer, type, and date range"""
+    try:
+        query = {}
+        
+        # Text search
+        if request.query:
+            query["$or"] = [
+                {"content": {"$regex": request.query, "$options": "i"}},
+                {"message": {"$regex": request.query, "$options": "i"}},
+                {"subject": {"$regex": request.query, "$options": "i"}}
+            ]
+        
+        # Filter by customer
+        if request.customer_id:
+            query["customer_id"] = request.customer_id
+        
+        # Filter by type
+        if request.type:
+            query["type"] = request.type
+        
+        # Date range filter
+        if request.start_date or request.end_date:
+            query["timestamp"] = {}
+            if request.start_date:
+                query["timestamp"]["$gte"] = request.start_date
+            if request.end_date:
+                query["timestamp"]["$lte"] = request.end_date
+        
+        # Execute search
+        results = await db.communications.find(query).sort("timestamp", -1).limit(100).to_list(100)
+        
+        # Convert ObjectId to string
+        for result in results:
+            result["_id"] = str(result["_id"])
+            if "created_at" in result:
+                result["created_at"] = result["created_at"].isoformat() if isinstance(result["created_at"], datetime) else result["created_at"]
+            if "timestamp" in result:
+                result["timestamp"] = result["timestamp"].isoformat() if isinstance(result["timestamp"], datetime) else result["timestamp"]
+        
+        logger.info(f"Search completed: {len(results)} results found")
+        
+        return {
+            "success": True,
+            "count": len(results),
+            "results": results
+        }
+    
+    except Exception as e:
+        logger.error(f"Error searching messages: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.post("/communications/conversation/{customer_id}/status")
+async def update_conversation_status(
+    customer_id: str,
+    status: str,  # open, closed, archived
+    current_user: dict = Depends(get_current_user)
+):
+    """Update conversation status for a customer"""
+    try:
+        # Update or create conversation metadata
+        result = await db.conversation_metadata.update_one(
+            {"customer_id": customer_id},
+            {
+                "$set": {
+                    "status": status,
+                    "updated_by": current_user["id"],
+                    "updated_at": datetime.utcnow()
+                },
+                "$setOnInsert": {
+                    "created_at": datetime.utcnow()
+                }
+            },
+            upsert=True
+        )
+        
+        logger.info(f"Conversation status updated: {customer_id} -> {status}")
+        
+        return {
+            "success": True,
+            "message": f"Conversation marked as {status}"
+        }
+    
+    except Exception as e:
+        logger.error(f"Error updating conversation status: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/communications/conversation/{customer_id}/status")
+async def get_conversation_status(customer_id: str):
+    """Get conversation status for a customer"""
+    try:
+        metadata = await db.conversation_metadata.find_one({"customer_id": customer_id})
+        
+        if not metadata:
+            return {
+                "customer_id": customer_id,
+                "status": "open",  # Default status
+                "updated_at": None
+            }
+        
+        return {
+            "customer_id": customer_id,
+            "status": metadata.get("status", "open"),
+            "updated_at": metadata.get("updated_at"),
+            "updated_by": metadata.get("updated_by")
+        }
+    
+    except Exception as e:
+        logger.error(f"Error fetching conversation status: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# ========== Message Templates ==========
+
+@router.post("/communications/templates")
+async def create_message_template(
+    request: MessageTemplateRequest,
+    current_user: dict = Depends(get_current_user)
+):
+    """Create a message template"""
+    try:
+        template = {
+            "name": request.name,
+            "content": request.content,
+            "type": request.type,
+            "category": request.category,
+            "created_by": current_user["id"],
+            "created_at": datetime.utcnow(),
+            "active": True
+        }
+        
+        result = await db.message_templates.insert_one(template)
+        template["_id"] = str(result.inserted_id)
+        
+        logger.info(f"Message template created: {request.name}")
+        
+        return {
+            "success": True,
+            "message": "Template created successfully",
+            "template": template
+        }
+    
+    except Exception as e:
+        logger.error(f"Error creating message template: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/communications/templates")
+async def get_message_templates(
+    type: Optional[str] = None,
+    category: Optional[str] = None
+):
+    """Get message templates"""
+    try:
+        query = {"active": True}
+        
+        if type:
+            query["type"] = type
+        
+        if category:
+            query["category"] = category
+        
+        templates = await db.message_templates.find(query).to_list(100)
+        
+        # Convert ObjectId to string
+        for template in templates:
+            template["_id"] = str(template["_id"])
+        
+        return templates
+    
+    except Exception as e:
+        logger.error(f"Error fetching message templates: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.delete("/communications/templates/{template_id}")
+async def delete_message_template(
+    template_id: str,
+    current_user: dict = Depends(get_current_user)
+):
+    """Delete (deactivate) a message template"""
+    try:
+        result = await db.message_templates.update_one(
+            {"_id": ObjectId(template_id)},
+            {"$set": {"active": False}}
+        )
+        
+        if result.matched_count == 0:
+            raise HTTPException(status_code=404, detail="Template not found")
+        
+        logger.info(f"Message template deleted: {template_id}")
+        
+        return {
+            "success": True,
+            "message": "Template deleted successfully"
+        }
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error deleting message template: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
