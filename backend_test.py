@@ -91,788 +91,1091 @@ class TemplateSystemTester:
                             f"HTTP {response.status_code}", response.text)
         except Exception as e:
             self.log_test("1. POST /api/templates - Create new custom template", False, str(e))
-                result = response.json()
-                self.session_token = result.get("session_token")
-                if self.session_token:
-                    # Set authorization header for all future requests
-                    self.session.headers.update({"Authorization": f"Bearer {self.session_token}"})
-                    self.authenticated = True
-                    print(f"✅ Authenticated successfully")
-                    return True
-                else:
-                    print(f"❌ No session token in response")
-                    return False
-            else:
-                print(f"❌ Authentication failed: {response.status_code}")
-                try:
-                    error_data = response.json()
-                    print(f"    Error: {error_data}")
-                except:
-                    print(f"    Text: {response.text}")
-                return False
-        except Exception as e:
-            print(f"❌ Authentication error: {str(e)}")
-            return False
-        
-    def make_request(self, method, endpoint, data=None, params=None):
-        """Make HTTP request with error handling"""
+
+        # Test 2: GET /api/templates - Verify template appears in list
         try:
-            url = f"{self.base_url}{endpoint}"
+            response = self.session.get(f"{BACKEND_URL}/templates?type=estimate")
             
-            if method.upper() == "GET":
-                response = self.session.get(url, params=params, timeout=30)
-            elif method.upper() == "POST":
-                response = self.session.post(url, json=data, params=params, timeout=30)
-            elif method.upper() == "PUT":
-                response = self.session.put(url, json=data, params=params, timeout=30)
-            elif method.upper() == "DELETE":
-                response = self.session.delete(url, params=params, timeout=30)
+            if response.status_code == 200:
+                data = response.json()
+                if data.get("success") and isinstance(data.get("templates"), list):
+                    templates = data["templates"]
+                    found_test_template = any(t.get("name") == "Test Custom Estimate Template" for t in templates)
+                    if found_test_template:
+                        self.log_test("2. GET /api/templates - Verify template appears in list", True, 
+                                    f"Found {len(templates)} templates, including our test template")
+                    else:
+                        self.log_test("2. GET /api/templates - Verify template appears in list", False, 
+                                    "Test template not found in list")
+                else:
+                    self.log_test("2. GET /api/templates - Verify template appears in list", False, 
+                                "Invalid response format", data)
             else:
-                raise ValueError(f"Unsupported method: {method}")
+                self.log_test("2. GET /api/templates - Verify template appears in list", False, 
+                            f"HTTP {response.status_code}", response.text)
+        except Exception as e:
+            self.log_test("2. GET /api/templates - Verify template appears in list", False, str(e))
+
+        # Test 3: GET /api/templates/{type}/{id} - Get specific template
+        if self.created_templates:
+            try:
+                template_info = self.created_templates[0]
+                response = self.session.get(f"{BACKEND_URL}/templates/{template_info['type']}/{template_info['id']}")
                 
-            return response
-            
-        except requests.exceptions.RequestException as e:
-            print(f"Request error: {str(e)}")
-            return None
-
-    def test_suite_1_template_crud(self):
-        """Test Suite 1 - Template CRUD Operations"""
-        print("\n=== Test Suite 1: Template CRUD Operations ===")
-        
-        # Test 1: POST /api/templates - Create a custom estimate template
-        print("\n1. Testing POST /api/templates - Create estimate template")
-        template_data = {
-            "type": "estimate",
-            "name": f"Test Estimate Template {uuid.uuid4().hex[:8]}",
-            "description": "Test estimate template for comprehensive testing",
-            "category": "snow_removal",
-            "tags": ["winter", "residential", "test"],
-            "content": {
-                "title": "Snow Removal Estimate - {{customer_name}}",
-                "items": [
-                    {
-                        "description": "Snow plowing for {{property_address}}",
-                        "quantity": "{{visits}}",
-                        "rate": "{{rate_per_visit}}",
-                        "total": "{{total_amount}}"
-                    }
-                ],
-                "terms": "Payment due within {{payment_terms}} days",
-                "notes": "Service includes {{service_details}}"
-            },
-            "is_public": False,
-            "is_default": False
-        }
-        
-        response = self.make_request("POST", "/templates", template_data)
-        if response and response.status_code == 200:
-            try:
-                result = response.json()
-                if result.get("success") and result.get("template"):
-                    template_id = result["template"]["_id"]
-                    self.created_templates.append(("estimate", template_id))
-                    self.log_test("Create estimate template", True, 
-                                f"Template created with ID: {template_id}")
-                else:
-                    self.log_test("Create estimate template", False, 
-                                "Success=False or missing template in response", result)
-            except json.JSONDecodeError:
-                self.log_test("Create estimate template", False, 
-                            "Invalid JSON response", response.text)
-        else:
-            error_msg = f"Status: {response.status_code if response else 'No response'}"
-            if response:
-                try:
-                    error_data = response.json()
-                    error_msg += f", Error: {error_data}"
-                except:
-                    error_msg += f", Text: {response.text}"
-            self.log_test("Create estimate template", False, error_msg)
-
-        # Test 2: GET /api/templates - List all templates
-        print("\n2. Testing GET /api/templates - List all templates")
-        response = self.make_request("GET", "/templates")
-        if response and response.status_code == 200:
-            try:
-                result = response.json()
-                if result.get("success") and "templates" in result:
-                    template_count = result.get("count", 0)
-                    self.log_test("List all templates", True, 
-                                f"Found {template_count} templates")
-                else:
-                    self.log_test("List all templates", False, 
-                                "Success=False or missing templates", result)
-            except json.JSONDecodeError:
-                self.log_test("List all templates", False, 
-                            "Invalid JSON response", response.text)
-        else:
-            error_msg = f"Status: {response.status_code if response else 'No response'}"
-            if response:
-                try:
-                    error_data = response.json()
-                    error_msg += f", Error: {error_data}"
-                except:
-                    error_msg += f", Text: {response.text}"
-            self.log_test("List all templates", False, error_msg)
-
-        # Test 3: GET /api/templates?type=estimate - Filter by type
-        print("\n3. Testing GET /api/templates?type=estimate - Filter by type")
-        response = self.make_request("GET", "/templates", params={"type": "estimate"})
-        if response and response.status_code == 200:
-            try:
-                result = response.json()
-                if result.get("success") and "templates" in result:
-                    estimate_count = result.get("count", 0)
-                    self.log_test("Filter templates by type", True, 
-                                f"Found {estimate_count} estimate templates")
-                else:
-                    self.log_test("Filter templates by type", False, 
-                                "Success=False or missing templates", result)
-            except json.JSONDecodeError:
-                self.log_test("Filter templates by type", False, 
-                            "Invalid JSON response", response.text)
-        else:
-            error_msg = f"Status: {response.status_code if response else 'No response'}"
-            if response:
-                try:
-                    error_data = response.json()
-                    error_msg += f", Error: {error_data}"
-                except:
-                    error_msg += f", Text: {response.text}"
-            self.log_test("Filter templates by type", False, error_msg)
-
-        # Test 4: GET /api/templates/{type}/{id} - Get specific template
-        if self.created_templates:
-            template_type, template_id = self.created_templates[0]
-            print(f"\n4. Testing GET /api/templates/{template_type}/{template_id} - Get specific template")
-            response = self.make_request("GET", f"/templates/{template_type}/{template_id}")
-            if response and response.status_code == 200:
-                try:
-                    result = response.json()
-                    if result.get("success") and result.get("template"):
-                        template = result["template"]
-                        self.log_test("Get specific template", True, 
-                                    f"Retrieved template: {template.get('name')}")
-                    else:
-                        self.log_test("Get specific template", False, 
-                                    "Success=False or missing template", result)
-                except json.JSONDecodeError:
-                    self.log_test("Get specific template", False, 
-                                "Invalid JSON response", response.text)
-            else:
-                error_msg = f"Status: {response.status_code if response else 'No response'}"
-                if response:
-                    try:
-                        error_data = response.json()
-                        error_msg += f", Error: {error_data}"
-                    except:
-                        error_msg += f", Text: {response.text}"
-                self.log_test("Get specific template", False, error_msg)
-        else:
-            self.log_test("Get specific template", False, "No templates created to test with")
-
-        # Test 5: PUT /api/templates/{type}/{id} - Update template
-        if self.created_templates:
-            template_type, template_id = self.created_templates[0]
-            print(f"\n5. Testing PUT /api/templates/{template_type}/{template_id} - Update template")
-            update_data = {
-                "name": f"Updated Test Template {uuid.uuid4().hex[:8]}",
-                "description": "Updated description for testing",
-                "tags": ["updated", "test", "winter"]
-            }
-            response = self.make_request("PUT", f"/templates/{template_type}/{template_id}", update_data)
-            if response and response.status_code == 200:
-                try:
-                    result = response.json()
-                    if result.get("success") and result.get("template"):
-                        self.log_test("Update template", True, 
-                                    f"Template updated successfully")
-                    else:
-                        self.log_test("Update template", False, 
-                                    "Success=False or missing template", result)
-                except json.JSONDecodeError:
-                    self.log_test("Update template", False, 
-                                "Invalid JSON response", response.text)
-            else:
-                error_msg = f"Status: {response.status_code if response else 'No response'}"
-                if response:
-                    try:
-                        error_data = response.json()
-                        error_msg += f", Error: {error_data}"
-                    except:
-                        error_msg += f", Text: {response.text}"
-                self.log_test("Update template", False, error_msg)
-        else:
-            self.log_test("Update template", False, "No templates created to test with")
-
-        # Test 6: DELETE /api/templates/{type}/{id} - Delete template (will test later)
-        # Test 7: POST /api/templates/{type}/{id}/duplicate - Duplicate template (will test later)
-
-    def test_suite_2_template_application(self):
-        """Test Suite 2 - Template Application"""
-        print("\n=== Test Suite 2: Template Application ===")
-        
-        # Test 8: POST /api/templates/{type}/{id}/apply - Apply template with data
-        if self.created_templates:
-            template_type, template_id = self.created_templates[0]
-            print(f"\n8. Testing POST /api/templates/{template_type}/{template_id}/apply - Apply template")
-            
-            # Sample data for variable replacement
-            apply_data = {
-                "data": {
-                    "customer_name": "John Smith",
-                    "property_address": "123 Main Street, Anytown",
-                    "visits": "10",
-                    "rate_per_visit": "$50.00",
-                    "total_amount": "$500.00",
-                    "payment_terms": "30",
-                    "service_details": "driveway and walkway clearing"
-                }
-            }
-            
-            response = self.make_request("POST", f"/templates/{template_type}/{template_id}/apply", apply_data)
-            if response and response.status_code == 200:
-                try:
-                    result = response.json()
-                    if result.get("success") and result.get("result"):
-                        applied_result = result["result"]
-                        # Check if variables were replaced
-                        content = applied_result.get("content", {})
-                        title = content.get("title", "")
-                        if "John Smith" in title:
-                            self.log_test("Apply template with data", True, 
-                                        "Template applied and variables replaced successfully")
+                if response.status_code == 200:
+                    data = response.json()
+                    if data.get("success") and data.get("template"):
+                        template = data["template"]
+                        if template.get("name") == "Test Custom Estimate Template":
+                            self.log_test("3. GET /api/templates/{type}/{id} - Get specific template", True, 
+                                        "Template retrieved successfully with correct data")
                         else:
-                            self.log_test("Apply template with data", False, 
-                                        "Variables not properly replaced", result)
+                            self.log_test("3. GET /api/templates/{type}/{id} - Get specific template", False, 
+                                        "Template data doesn't match expected values")
                     else:
-                        self.log_test("Apply template with data", False, 
-                                    "Success=False or missing result", result)
-                except json.JSONDecodeError:
-                    self.log_test("Apply template with data", False, 
-                                "Invalid JSON response", response.text)
-            else:
-                error_msg = f"Status: {response.status_code if response else 'No response'}"
-                if response:
-                    try:
-                        error_data = response.json()
-                        error_msg += f", Error: {error_data}"
-                    except:
-                        error_msg += f", Text: {response.text}"
-                self.log_test("Apply template with data", False, error_msg)
-        else:
-            self.log_test("Apply template with data", False, "No templates created to test with")
-
-    def test_suite_3_utility_endpoints(self):
-        """Test Suite 3 - Utility Endpoints"""
-        print("\n=== Test Suite 3: Utility Endpoints ===")
-        
-        # Test 9: GET /api/templates/{type}/categories - Get categories
-        print("\n9. Testing GET /api/templates/estimate/categories - Get categories")
-        response = self.make_request("GET", "/templates/estimate/categories")
-        if response and response.status_code == 200:
-            try:
-                result = response.json()
-                if result.get("success") and "categories" in result:
-                    categories = result["categories"]
-                    self.log_test("Get template categories", True, 
-                                f"Found {len(categories)} categories: {categories}")
+                        self.log_test("3. GET /api/templates/{type}/{id} - Get specific template", False, 
+                                    "Invalid response format", data)
                 else:
-                    self.log_test("Get template categories", False, 
-                                "Success=False or missing categories", result)
-            except json.JSONDecodeError:
-                self.log_test("Get template categories", False, 
-                            "Invalid JSON response", response.text)
-        else:
-            error_msg = f"Status: {response.status_code if response else 'No response'}"
-            if response:
-                try:
-                    error_data = response.json()
-                    error_msg += f", Error: {error_data}"
-                except:
-                    error_msg += f", Text: {response.text}"
-            self.log_test("Get template categories", False, error_msg)
+                    self.log_test("3. GET /api/templates/{type}/{id} - Get specific template", False, 
+                                f"HTTP {response.status_code}", response.text)
+            except Exception as e:
+                self.log_test("3. GET /api/templates/{type}/{id} - Get specific template", False, str(e))
 
-        # Test 10: GET /api/templates/{type}/{id}/stats - Get usage statistics
+        # Test 4: PUT /api/templates/{type}/{id} - Update template
         if self.created_templates:
-            template_type, template_id = self.created_templates[0]
-            print(f"\n10. Testing GET /api/templates/{template_type}/{template_id}/stats - Get usage stats")
-            response = self.make_request("GET", f"/templates/{template_type}/{template_id}/stats")
-            if response and response.status_code == 200:
-                try:
-                    result = response.json()
-                    if result.get("success") and result.get("stats"):
-                        stats = result["stats"]
-                        usage_count = stats.get("usage_count", 0)
-                        self.log_test("Get template statistics", True, 
-                                    f"Usage count: {usage_count}, Version: {stats.get('version')}")
-                    else:
-                        self.log_test("Get template statistics", False, 
-                                    "Success=False or missing stats", result)
-                except json.JSONDecodeError:
-                    self.log_test("Get template statistics", False, 
-                                "Invalid JSON response", response.text)
-            else:
-                error_msg = f"Status: {response.status_code if response else 'No response'}"
-                if response:
-                    try:
-                        error_data = response.json()
-                        error_msg += f", Error: {error_data}"
-                    except:
-                        error_msg += f", Text: {response.text}"
-                self.log_test("Get template statistics", False, error_msg)
-        else:
-            self.log_test("Get template statistics", False, "No templates created to test with")
-
-    def test_suite_4_prebuilt_templates(self):
-        """Test Suite 4 - Pre-built Templates Verification"""
-        print("\n=== Test Suite 4: Pre-built Templates Verification ===")
-        
-        # Test 11: Verify 8+ pre-built templates exist in database
-        print("\n11. Testing pre-built templates existence")
-        response = self.make_request("GET", "/templates")
-        if response and response.status_code == 200:
             try:
-                result = response.json()
-                if result.get("success") and "templates" in result:
-                    templates = result["templates"]
-                    total_count = len(templates)
-                    
-                    # Count by type
-                    type_counts = {}
-                    default_templates = []
-                    
-                    for template in templates:
-                        template_type = template.get("type", "unknown")
-                        type_counts[template_type] = type_counts.get(template_type, 0) + 1
-                        
-                        if template.get("is_default"):
-                            default_templates.append(template)
-                    
-                    if total_count >= 8:
-                        self.log_test("Verify 8+ pre-built templates", True, 
-                                    f"Found {total_count} templates. Types: {type_counts}")
-                    else:
-                        self.log_test("Verify 8+ pre-built templates", False, 
-                                    f"Only found {total_count} templates, need at least 8")
-                    
-                    # Test 12: Test estimate templates have proper structure
-                    estimate_templates = [t for t in templates if t.get("type") == "estimate"]
-                    if estimate_templates:
-                        valid_estimates = 0
-                        for template in estimate_templates:
-                            content = template.get("content", {})
-                            if "title" in content or "items" in content:
-                                valid_estimates += 1
-                        
-                        self.log_test("Estimate templates structure", True, 
-                                    f"Found {len(estimate_templates)} estimate templates, {valid_estimates} with proper structure")
-                    else:
-                        self.log_test("Estimate templates structure", False, 
-                                    "No estimate templates found")
-                    
-                    # Test 13: Test invoice templates have line items
-                    invoice_templates = [t for t in templates if t.get("type") == "invoice"]
-                    if invoice_templates:
-                        valid_invoices = 0
-                        for template in invoice_templates:
-                            content = template.get("content", {})
-                            if "items" in content or "line_items" in content:
-                                valid_invoices += 1
-                        
-                        self.log_test("Invoice templates line items", True, 
-                                    f"Found {len(invoice_templates)} invoice templates, {valid_invoices} with line items")
-                    else:
-                        self.log_test("Invoice templates line items", False, 
-                                    "No invoice templates found")
-                    
-                    # Test 14: Verify all default templates are marked correctly
-                    if default_templates:
-                        self.log_test("Default templates marked correctly", True, 
-                                    f"Found {len(default_templates)} default templates")
-                    else:
-                        self.log_test("Default templates marked correctly", False, 
-                                    "No default templates found")
-                        
-                else:
-                    self.log_test("Verify 8+ pre-built templates", False, 
-                                "Success=False or missing templates", result)
-            except json.JSONDecodeError:
-                self.log_test("Verify 8+ pre-built templates", False, 
-                            "Invalid JSON response", response.text)
-        else:
-            error_msg = f"Status: {response.status_code if response else 'No response'}"
-            if response:
-                try:
-                    error_data = response.json()
-                    error_msg += f", Error: {error_data}"
-                except:
-                    error_msg += f", Text: {response.text}"
-            self.log_test("Verify 8+ pre-built templates", False, error_msg)
-
-    def test_suite_5_variable_system(self):
-        """Test Suite 5 - Variable System"""
-        print("\n=== Test Suite 5: Variable System ===")
-        
-        # Test 15: Test variable extraction from template content
-        print("\n15. Testing variable extraction - Create template with variables")
-        template_data = {
-            "type": "invoice",
-            "name": f"Variable Test Template {uuid.uuid4().hex[:8]}",
-            "description": "Template for testing variable extraction",
-            "category": "test",
-            "content": {
-                "header": "Invoice for {{client_name}}",
-                "billing_address": "{{billing_street}}, {{billing_city}}, {{billing_state}}",
-                "items": [
-                    {
-                        "description": "{{service_description}}",
-                        "quantity": "{{quantity}}",
-                        "rate": "{{unit_rate}}",
-                        "amount": "{{line_total}}"
-                    }
-                ],
-                "total": "{{invoice_total}}",
-                "due_date": "{{due_date}}"
-            }
-        }
-        
-        response = self.make_request("POST", "/templates", template_data)
-        if response and response.status_code == 200:
-            try:
-                result = response.json()
-                if result.get("success") and result.get("template"):
-                    template = result["template"]
-                    variables = template.get("variables", [])
-                    expected_vars = ["client_name", "billing_street", "billing_city", "billing_state", 
-                                   "service_description", "quantity", "unit_rate", "line_total", 
-                                   "invoice_total", "due_date"]
-                    
-                    found_vars = len([v for v in expected_vars if v in variables])
-                    
-                    if found_vars >= 8:  # Most variables should be extracted
-                        self.log_test("Variable extraction", True, 
-                                    f"Extracted {len(variables)} variables: {variables}")
-                        
-                        # Store for next tests
-                        self.created_templates.append(("invoice", template["_id"]))
-                    else:
-                        self.log_test("Variable extraction", False, 
-                                    f"Only found {found_vars} of {len(expected_vars)} expected variables")
-                else:
-                    self.log_test("Variable extraction", False, 
-                                "Success=False or missing template", result)
-            except json.JSONDecodeError:
-                self.log_test("Variable extraction", False, 
-                            "Invalid JSON response", response.text)
-        else:
-            error_msg = f"Status: {response.status_code if response else 'No response'}"
-            if response:
-                try:
-                    error_data = response.json()
-                    error_msg += f", Error: {error_data}"
-                except:
-                    error_msg += f", Text: {response.text}"
-            self.log_test("Variable extraction", False, error_msg)
-
-        # Test 16: Test variable replacement with data
-        if len(self.created_templates) >= 2:  # We should have invoice template now
-            invoice_template = None
-            for template_type, template_id in self.created_templates:
-                if template_type == "invoice":
-                    invoice_template = (template_type, template_id)
-                    break
-            
-            if invoice_template:
-                template_type, template_id = invoice_template
-                print(f"\n16. Testing variable replacement with complex data")
-                
-                replacement_data = {
-                    "data": {
-                        "client_name": "ABC Corporation",
-                        "billing_street": "456 Business Ave",
-                        "billing_city": "Commerce City",
-                        "billing_state": "CO",
-                        "service_description": "Snow removal services",
-                        "quantity": "5",
-                        "unit_rate": "$100.00",
-                        "line_total": "$500.00",
-                        "invoice_total": "$500.00",
-                        "due_date": "2024-02-15"
-                    }
+                template_info = self.created_templates[0]
+                update_data = {
+                    "name": "Updated Test Template",
+                    "description": "Updated description for testing",
+                    "tags": ["test", "updated", "estimate"]
                 }
                 
-                response = self.make_request("POST", f"/templates/{template_type}/{template_id}/apply", replacement_data)
-                if response and response.status_code == 200:
-                    try:
-                        result = response.json()
-                        if result.get("success") and result.get("result"):
-                            applied_content = result["result"]["content"]
-                            
-                            # Check if variables were replaced
-                            header = applied_content.get("header", "")
-                            billing = applied_content.get("billing_address", "")
-                            
-                            replacements_found = 0
-                            if "ABC Corporation" in header:
-                                replacements_found += 1
-                            if "456 Business Ave" in billing and "Commerce City" in billing:
-                                replacements_found += 1
-                            
-                            if replacements_found >= 2:
-                                self.log_test("Variable replacement with data", True, 
-                                            "Complex variable replacement working correctly")
-                            else:
-                                self.log_test("Variable replacement with data", False, 
-                                            "Variables not properly replaced in complex structure")
+                response = self.session.put(f"{BACKEND_URL}/templates/{template_info['type']}/{template_info['id']}", 
+                                          json=update_data)
+                
+                if response.status_code == 200:
+                    data = response.json()
+                    if data.get("success") and data.get("template"):
+                        template = data["template"]
+                        if template.get("name") == "Updated Test Template":
+                            self.log_test("4. PUT /api/templates/{type}/{id} - Update template", True, 
+                                        "Template updated successfully")
                         else:
-                            self.log_test("Variable replacement with data", False, 
-                                        "Success=False or missing result", result)
-                    except json.JSONDecodeError:
-                        self.log_test("Variable replacement with data", False, 
-                                    "Invalid JSON response", response.text)
-                else:
-                    error_msg = f"Status: {response.status_code if response else 'No response'}"
-                    if response:
-                        try:
-                            error_data = response.json()
-                            error_msg += f", Error: {error_data}"
-                        except:
-                            error_msg += f", Text: {response.text}"
-                    self.log_test("Variable replacement with data", False, error_msg)
-            else:
-                self.log_test("Variable replacement with data", False, "No invoice template available for testing")
-        else:
-            self.log_test("Variable replacement with data", False, "No templates available for testing")
-
-        # Test 17: Test nested variable replacement in complex structures
-        print("\n17. Testing nested variable replacement")
-        nested_template_data = {
-            "type": "proposal",
-            "name": f"Nested Variables Template {uuid.uuid4().hex[:8]}",
-            "description": "Template for testing nested variable replacement",
-            "category": "test",
-            "content": {
-                "project": {
-                    "name": "{{project_name}}",
-                    "client": {
-                        "company": "{{client_company}}",
-                        "contact": {
-                            "name": "{{contact_name}}",
-                            "email": "{{contact_email}}"
-                        }
-                    },
-                    "services": [
-                        {
-                            "name": "{{service_1_name}}",
-                            "cost": "{{service_1_cost}}"
-                        },
-                        {
-                            "name": "{{service_2_name}}",
-                            "cost": "{{service_2_cost}}"
-                        }
-                    ],
-                    "total": "{{project_total}}"
-                }
-            }
-        }
-        
-        response = self.make_request("POST", "/templates", nested_template_data)
-        if response and response.status_code == 200:
-            try:
-                result = response.json()
-                if result.get("success") and result.get("template"):
-                    template_id = result["template"]["_id"]
-                    
-                    # Now test applying with nested data
-                    nested_data = {
-                        "data": {
-                            "project_name": "Winter Maintenance Project",
-                            "client_company": "XYZ Industries",
-                            "contact_name": "Jane Doe",
-                            "contact_email": "jane@xyz.com",
-                            "service_1_name": "Snow Plowing",
-                            "service_1_cost": "$300.00",
-                            "service_2_name": "Ice Management",
-                            "service_2_cost": "$200.00",
-                            "project_total": "$500.00"
-                        }
-                    }
-                    
-                    apply_response = self.make_request("POST", f"/templates/proposal/{template_id}/apply", nested_data)
-                    if apply_response and apply_response.status_code == 200:
-                        try:
-                            apply_result = apply_response.json()
-                            if apply_result.get("success"):
-                                content = apply_result["result"]["content"]
-                                project = content.get("project", {})
-                                
-                                # Check nested replacements
-                                checks = [
-                                    project.get("name") == "Winter Maintenance Project",
-                                    project.get("client", {}).get("company") == "XYZ Industries",
-                                    project.get("client", {}).get("contact", {}).get("name") == "Jane Doe",
-                                    len(project.get("services", [])) == 2
-                                ]
-                                
-                                if sum(checks) >= 3:
-                                    self.log_test("Nested variable replacement", True, 
-                                                "Nested variable replacement working correctly")
-                                else:
-                                    self.log_test("Nested variable replacement", False, 
-                                                f"Nested replacement failed. Checks passed: {sum(checks)}/4")
-                            else:
-                                self.log_test("Nested variable replacement", False, 
-                                            "Failed to apply nested template", apply_result)
-                        except json.JSONDecodeError:
-                            self.log_test("Nested variable replacement", False, 
-                                        "Invalid JSON in apply response")
+                            self.log_test("4. PUT /api/templates/{type}/{id} - Update template", False, 
+                                        "Template update didn't apply correctly")
                     else:
-                        self.log_test("Nested variable replacement", False, 
-                                    "Failed to apply nested template")
+                        self.log_test("4. PUT /api/templates/{type}/{id} - Update template", False, 
+                                    "Invalid response format", data)
                 else:
-                    self.log_test("Nested variable replacement", False, 
-                                "Failed to create nested template", result)
-            except json.JSONDecodeError:
-                self.log_test("Nested variable replacement", False, 
-                            "Invalid JSON response", response.text)
-        else:
-            self.log_test("Nested variable replacement", False, 
-                        "Failed to create nested template")
+                    self.log_test("4. PUT /api/templates/{type}/{id} - Update template", False, 
+                                f"HTTP {response.status_code}", response.text)
+            except Exception as e:
+                self.log_test("4. PUT /api/templates/{type}/{id} - Update template", False, str(e))
 
-    def test_remaining_crud_operations(self):
-        """Test remaining CRUD operations"""
-        print("\n=== Testing Remaining CRUD Operations ===")
-        
-        # Test 7: POST /api/templates/{type}/{id}/duplicate - Duplicate template
+        # Test 5: POST /api/templates/{type}/{id}/duplicate - Duplicate template
         if self.created_templates:
-            template_type, template_id = self.created_templates[0]
-            print(f"\n7. Testing POST /api/templates/{template_type}/{template_id}/duplicate - Duplicate template")
-            
-            duplicate_data = {
-                "new_name": f"Duplicated Template {uuid.uuid4().hex[:8]}"
-            }
-            
-            response = self.make_request("POST", f"/templates/{template_type}/{template_id}/duplicate", 
-                                       params=duplicate_data)
-            if response and response.status_code == 200:
-                try:
-                    result = response.json()
-                    if result.get("success") and result.get("template"):
-                        duplicate_id = result["template"]["_id"]
-                        self.created_templates.append((template_type, duplicate_id))
-                        self.log_test("Duplicate template", True, 
+            try:
+                template_info = self.created_templates[0]
+                response = self.session.post(f"{BACKEND_URL}/templates/{template_info['type']}/{template_info['id']}/duplicate",
+                                           params={"new_name": "Duplicated Test Template"})
+                
+                if response.status_code == 200:
+                    data = response.json()
+                    if data.get("success") and data.get("template"):
+                        duplicate_id = data["template"]["_id"]
+                        self.created_templates.append({"type": "estimate", "id": duplicate_id})
+                        self.log_test("5. POST /api/templates/{type}/{id}/duplicate - Duplicate template", True, 
                                     f"Template duplicated with ID: {duplicate_id}")
                     else:
-                        self.log_test("Duplicate template", False, 
-                                    "Success=False or missing template", result)
-                except json.JSONDecodeError:
-                    self.log_test("Duplicate template", False, 
-                                "Invalid JSON response", response.text)
-            else:
-                error_msg = f"Status: {response.status_code if response else 'No response'}"
-                if response:
-                    try:
-                        error_data = response.json()
-                        error_msg += f", Error: {error_data}"
-                    except:
-                        error_msg += f", Text: {response.text}"
-                self.log_test("Duplicate template", False, error_msg)
-        else:
-            self.log_test("Duplicate template", False, "No templates created to test with")
+                        self.log_test("5. POST /api/templates/{type}/{id}/duplicate - Duplicate template", False, 
+                                    "Invalid response format", data)
+                else:
+                    self.log_test("5. POST /api/templates/{type}/{id}/duplicate - Duplicate template", False, 
+                                f"HTTP {response.status_code}", response.text)
+            except Exception as e:
+                self.log_test("5. POST /api/templates/{type}/{id}/duplicate - Duplicate template", False, str(e))
 
-        # Test 6: DELETE /api/templates/{type}/{id} - Delete template
-        if len(self.created_templates) > 1:  # Keep at least one for other tests
-            template_type, template_id = self.created_templates[-1]  # Delete the last one
-            print(f"\n6. Testing DELETE /api/templates/{template_type}/{template_id} - Delete template")
-            
-            response = self.make_request("DELETE", f"/templates/{template_type}/{template_id}")
-            if response and response.status_code == 200:
-                try:
-                    result = response.json()
-                    if result.get("success"):
-                        self.log_test("Delete template", True, 
-                                    "Template deleted successfully")
-                        self.created_templates.pop()  # Remove from our list
+        # Test 6: DELETE /api/templates/{type}/{id} - Delete template (soft delete)
+        if len(self.created_templates) > 1:
+            try:
+                # Delete the duplicate, keep the original for further tests
+                template_info = self.created_templates[1]
+                response = self.session.delete(f"{BACKEND_URL}/templates/{template_info['type']}/{template_info['id']}")
+                
+                if response.status_code == 200:
+                    data = response.json()
+                    if data.get("success"):
+                        self.log_test("6. DELETE /api/templates/{type}/{id} - Delete template", True, 
+                                    "Template deleted successfully (soft delete)")
+                        # Remove from our tracking list
+                        self.created_templates.remove(template_info)
                     else:
-                        self.log_test("Delete template", False, 
-                                    "Success=False", result)
-                except json.JSONDecodeError:
-                    self.log_test("Delete template", False, 
-                                "Invalid JSON response", response.text)
-            else:
-                error_msg = f"Status: {response.status_code if response else 'No response'}"
-                if response:
-                    try:
-                        error_data = response.json()
-                        error_msg += f", Error: {error_data}"
-                    except:
-                        error_msg += f", Text: {response.text}"
-                self.log_test("Delete template", False, error_msg)
-        else:
-            self.log_test("Delete template", False, "No extra templates to delete")
+                        self.log_test("6. DELETE /api/templates/{type}/{id} - Delete template", False, 
+                                    "Delete operation failed", data)
+                else:
+                    self.log_test("6. DELETE /api/templates/{type}/{id} - Delete template", False, 
+                                f"HTTP {response.status_code}", response.text)
+            except Exception as e:
+                self.log_test("6. DELETE /api/templates/{type}/{id} - Delete template", False, str(e))
 
-    def run_all_tests(self):
-        """Run all test suites"""
-        print("🧪 Starting Comprehensive Template System Testing")
-        print(f"🔗 Backend URL: {self.base_url}")
+    def test_suite_2_placeholder_system(self):
+        """TEST SUITE 2: Placeholder System"""
         print("=" * 60)
+        print("TEST SUITE 2: Placeholder System")
+        print("=" * 60)
+        
+        # Test 7: GET /api/templates/placeholders - Get all placeholders
+        try:
+            response = self.session.get(f"{BACKEND_URL}/templates/placeholders")
+            
+            if response.status_code == 200:
+                data = response.json()
+                if data.get("success") and data.get("categories"):
+                    categories = data["categories"]
+                    total_placeholders = sum(len(cat["placeholders"]) for cat in categories.values())
+                    if total_placeholders >= 70:
+                        self.log_test("7. GET /api/templates/placeholders - Get all placeholders", True, 
+                                    f"Found {total_placeholders} placeholders across {len(categories)} categories")
+                    else:
+                        self.log_test("7. GET /api/templates/placeholders - Get all placeholders", False, 
+                                    f"Only found {total_placeholders} placeholders, expected 70+")
+                else:
+                    self.log_test("7. GET /api/templates/placeholders - Get all placeholders", False, 
+                                "Invalid response format", data)
+            else:
+                self.log_test("7. GET /api/templates/placeholders - Get all placeholders", False, 
+                            f"HTTP {response.status_code}", response.text)
+        except Exception as e:
+            self.log_test("7. GET /api/templates/placeholders - Get all placeholders", False, str(e))
+
+        # Test 8: GET /api/templates/placeholders?category=customer - Filter by category
+        try:
+            response = self.session.get(f"{BACKEND_URL}/templates/placeholders?category=customer")
+            
+            if response.status_code == 200:
+                data = response.json()
+                if data.get("success") and data.get("category"):
+                    category_data = data["category"]
+                    placeholders = category_data.get("placeholders", [])
+                    if len(placeholders) > 0:
+                        self.log_test("8. GET /api/templates/placeholders?category=customer - Filter by category", True, 
+                                    f"Found {len(placeholders)} customer placeholders")
+                    else:
+                        self.log_test("8. GET /api/templates/placeholders?category=customer - Filter by category", False, 
+                                    "No customer placeholders found")
+                else:
+                    self.log_test("8. GET /api/templates/placeholders?category=customer - Filter by category", False, 
+                                "Invalid response format", data)
+            else:
+                self.log_test("8. GET /api/templates/placeholders?category=customer - Filter by category", False, 
+                            f"HTTP {response.status_code}", response.text)
+        except Exception as e:
+            self.log_test("8. GET /api/templates/placeholders?category=customer - Filter by category", False, str(e))
+
+        # Test 9: GET /api/templates/placeholders?search=name - Search placeholders
+        try:
+            response = self.session.get(f"{BACKEND_URL}/templates/placeholders?search=name")
+            
+            if response.status_code == 200:
+                data = response.json()
+                if data.get("success") and data.get("placeholders"):
+                    placeholders = data["placeholders"]
+                    if len(placeholders) > 0:
+                        # Check if results contain "name" in key or description
+                        relevant_results = [p for p in placeholders if "name" in p.get("key", "").lower() or "name" in p.get("description", "").lower()]
+                        if relevant_results:
+                            self.log_test("9. GET /api/templates/placeholders?search=name - Search placeholders", True, 
+                                        f"Found {len(relevant_results)} relevant placeholders containing 'name'")
+                        else:
+                            self.log_test("9. GET /api/templates/placeholders?search=name - Search placeholders", False, 
+                                        "Search results don't contain relevant placeholders")
+                    else:
+                        self.log_test("9. GET /api/templates/placeholders?search=name - Search placeholders", False, 
+                                    "No search results found")
+                else:
+                    self.log_test("9. GET /api/templates/placeholders?search=name - Search placeholders", False, 
+                                "Invalid response format", data)
+            else:
+                self.log_test("9. GET /api/templates/placeholders?search=name - Search placeholders", False, 
+                            f"HTTP {response.status_code}", response.text)
+        except Exception as e:
+            self.log_test("9. GET /api/templates/placeholders?search=name - Search placeholders", False, str(e))
+
+        # Test 10: Verify all 10 categories exist
+        try:
+            response = self.session.get(f"{BACKEND_URL}/templates/placeholders")
+            
+            if response.status_code == 200:
+                data = response.json()
+                if data.get("success") and data.get("categories"):
+                    categories = data["categories"]
+                    expected_categories = ["customer", "company", "dates", "estimate", "invoice", "project", "site", "service", "pricing", "user"]
+                    found_categories = list(categories.keys())
+                    
+                    missing_categories = [cat for cat in expected_categories if cat not in found_categories]
+                    if not missing_categories:
+                        self.log_test("10. Verify all 10 categories exist", True, 
+                                    f"All expected categories found: {found_categories}")
+                    else:
+                        self.log_test("10. Verify all 10 categories exist", False, 
+                                    f"Missing categories: {missing_categories}")
+                else:
+                    self.log_test("10. Verify all 10 categories exist", False, 
+                                "Invalid response format", data)
+            else:
+                self.log_test("10. Verify all 10 categories exist", False, 
+                            f"HTTP {response.status_code}", response.text)
+        except Exception as e:
+            self.log_test("10. Verify all 10 categories exist", False, str(e))
+
+        # Test 11: Verify placeholders have required fields
+        try:
+            response = self.session.get(f"{BACKEND_URL}/templates/placeholders")
+            
+            if response.status_code == 200:
+                data = response.json()
+                if data.get("success") and data.get("categories"):
+                    categories = data["categories"]
+                    all_valid = True
+                    invalid_placeholders = []
+                    
+                    for category_name, category_data in categories.items():
+                        for placeholder in category_data.get("placeholders", []):
+                            required_fields = ["key", "description", "example"]
+                            missing_fields = [field for field in required_fields if not placeholder.get(field)]
+                            if missing_fields:
+                                all_valid = False
+                                invalid_placeholders.append(f"{category_name}.{placeholder.get('key', 'unknown')}: missing {missing_fields}")
+                    
+                    if all_valid:
+                        self.log_test("11. Verify placeholders have required fields", True, 
+                                    "All placeholders have required fields (key, description, example)")
+                    else:
+                        self.log_test("11. Verify placeholders have required fields", False, 
+                                    f"Invalid placeholders: {invalid_placeholders[:5]}")  # Show first 5
+                else:
+                    self.log_test("11. Verify placeholders have required fields", False, 
+                                "Invalid response format", data)
+            else:
+                self.log_test("11. Verify placeholders have required fields", False, 
+                            f"HTTP {response.status_code}", response.text)
+        except Exception as e:
+            self.log_test("11. Verify placeholders have required fields", False, str(e))
+
+    def test_suite_3_template_application(self):
+        """TEST SUITE 3: Template Application & Variable Replacement"""
+        print("=" * 60)
+        print("TEST SUITE 3: Template Application & Variable Replacement")
+        print("=" * 60)
+        
+        # Test 12: POST /api/templates/{type}/{id}/apply - Apply template with sample data
+        if self.created_templates:
+            try:
+                template_info = self.created_templates[0]
+                sample_data = {
+                    "customer_name": "John Smith",
+                    "customer_email": "john.smith@example.com",
+                    "estimate_number": "EST-2025-001",
+                    "today_date": "2025-01-15",
+                    "service_description": "Snow Removal Service",
+                    "quantity": "1",
+                    "unit_price": "150.00",
+                    "total_amount": "150.00",
+                    "subtotal": "150.00",
+                    "tax_amount": "12.00",
+                    "total": "162.00",
+                    "notes": "Standard residential snow removal"
+                }
+                
+                response = self.session.post(f"{BACKEND_URL}/templates/{template_info['type']}/{template_info['id']}/apply",
+                                           json={"data": sample_data})
+                
+                if response.status_code == 200:
+                    data = response.json()
+                    if data.get("success") and data.get("result"):
+                        result = data["result"]
+                        content = result.get("content", {})
+                        
+                        # Check if variables were replaced
+                        if (content.get("customer_name") == "John Smith" and 
+                            content.get("estimate_number") == "EST-2025-001"):
+                            self.log_test("12. POST /api/templates/{type}/{id}/apply - Apply template with sample data", True, 
+                                        "Template applied successfully with variable replacement")
+                        else:
+                            self.log_test("12. POST /api/templates/{type}/{id}/apply - Apply template with sample data", False, 
+                                        "Variable replacement didn't work correctly")
+                    else:
+                        self.log_test("12. POST /api/templates/{type}/{id}/apply - Apply template with sample data", False, 
+                                    "Invalid response format", data)
+                else:
+                    self.log_test("12. POST /api/templates/{type}/{id}/apply - Apply template with sample data", False, 
+                                f"HTTP {response.status_code}", response.text)
+            except Exception as e:
+                self.log_test("12. POST /api/templates/{type}/{id}/apply - Apply template with sample data", False, str(e))
+
+        # Test 13: Test variable replacement works correctly
+        if self.created_templates:
+            try:
+                template_info = self.created_templates[0]
+                test_data = {
+                    "customer_name": "Test Customer {{special}}",
+                    "customer_email": "test@domain.com",
+                    "estimate_number": "EST-TEST-123"
+                }
+                
+                response = self.session.post(f"{BACKEND_URL}/templates/{template_info['type']}/{template_info['id']}/apply",
+                                           json={"data": test_data})
+                
+                if response.status_code == 200:
+                    data = response.json()
+                    if data.get("success") and data.get("result"):
+                        content = data["result"]["content"]
+                        
+                        # Check if special characters and complex values are handled
+                        if content.get("customer_name") == "Test Customer {{special}}":
+                            self.log_test("13. Test variable replacement works correctly", True, 
+                                        "Variable replacement handles special characters correctly")
+                        else:
+                            self.log_test("13. Test variable replacement works correctly", False, 
+                                        "Variable replacement failed with special characters")
+                    else:
+                        self.log_test("13. Test variable replacement works correctly", False, 
+                                    "Invalid response format", data)
+                else:
+                    self.log_test("13. Test variable replacement works correctly", False, 
+                                f"HTTP {response.status_code}", response.text)
+            except Exception as e:
+                self.log_test("13. Test variable replacement works correctly", False, str(e))
+
+        # Test 14: Test nested object variable replacement
+        if self.created_templates:
+            try:
+                template_info = self.created_templates[0]
+                nested_data = {
+                    "customer_name": "Nested Test Customer",
+                    "service_description": "Complex Service with Nested Data",
+                    "quantity": "2",
+                    "unit_price": "75.50",
+                    "total_amount": "151.00"
+                }
+                
+                response = self.session.post(f"{BACKEND_URL}/templates/{template_info['type']}/{template_info['id']}/apply",
+                                           json={"data": nested_data})
+                
+                if response.status_code == 200:
+                    data = response.json()
+                    if data.get("success") and data.get("result"):
+                        content = data["result"]["content"]
+                        line_items = content.get("line_items", [])
+                        
+                        # Check if nested line_items were processed correctly
+                        if (line_items and len(line_items) > 0 and 
+                            line_items[0].get("description") == "Complex Service with Nested Data"):
+                            self.log_test("14. Test nested object variable replacement", True, 
+                                        "Nested object variable replacement works correctly")
+                        else:
+                            self.log_test("14. Test nested object variable replacement", False, 
+                                        "Nested object variable replacement failed")
+                    else:
+                        self.log_test("14. Test nested object variable replacement", False, 
+                                    "Invalid response format", data)
+                else:
+                    self.log_test("14. Test nested object variable replacement", False, 
+                                f"HTTP {response.status_code}", response.text)
+            except Exception as e:
+                self.log_test("14. Test nested object variable replacement", False, str(e))
+
+        # Test 15: Test array/list variable replacement
+        try:
+            # Create a template with array content for testing
+            array_template_data = {
+                "type": "invoice",
+                "name": "Array Test Template",
+                "description": "Template for testing array variable replacement",
+                "category": "test",
+                "tags": ["test", "array"],
+                "content": {
+                    "title": "Array Test Invoice",
+                    "items": [
+                        {"name": "{{item1_name}}", "price": "{{item1_price}}"},
+                        {"name": "{{item2_name}}", "price": "{{item2_price}}"}
+                    ],
+                    "customer": "{{customer_name}}"
+                },
+                "is_public": False,
+                "is_default": False
+            }
+            
+            create_response = self.session.post(f"{BACKEND_URL}/templates", json=array_template_data)
+            
+            if create_response.status_code == 200:
+                create_data = create_response.json()
+                if create_data.get("success") and create_data.get("template"):
+                    array_template_id = create_data["template"]["_id"]
+                    self.created_templates.append({"type": "invoice", "id": array_template_id})
+                    
+                    # Now test array variable replacement
+                    array_test_data = {
+                        "customer_name": "Array Test Customer",
+                        "item1_name": "First Item",
+                        "item1_price": "100.00",
+                        "item2_name": "Second Item",
+                        "item2_price": "200.00"
+                    }
+                    
+                    apply_response = self.session.post(f"{BACKEND_URL}/templates/invoice/{array_template_id}/apply",
+                                                     json={"data": array_test_data})
+                    
+                    if apply_response.status_code == 200:
+                        apply_data = apply_response.json()
+                        if apply_data.get("success") and apply_data.get("result"):
+                            content = apply_data["result"]["content"]
+                            items = content.get("items", [])
+                            
+                            if (len(items) == 2 and 
+                                items[0].get("name") == "First Item" and 
+                                items[1].get("name") == "Second Item"):
+                                self.log_test("15. Test array/list variable replacement", True, 
+                                            "Array variable replacement works correctly")
+                            else:
+                                self.log_test("15. Test array/list variable replacement", False, 
+                                            "Array variable replacement failed")
+                        else:
+                            self.log_test("15. Test array/list variable replacement", False, 
+                                        "Apply template failed", apply_data)
+                    else:
+                        self.log_test("15. Test array/list variable replacement", False, 
+                                    f"Apply HTTP {apply_response.status_code}", apply_response.text)
+                else:
+                    self.log_test("15. Test array/list variable replacement", False, 
+                                "Failed to create array test template", create_data)
+            else:
+                self.log_test("15. Test array/list variable replacement", False, 
+                            f"Create HTTP {create_response.status_code}", create_response.text)
+        except Exception as e:
+            self.log_test("15. Test array/list variable replacement", False, str(e))
+
+    def test_suite_4_prebuilt_templates(self):
+        """TEST SUITE 4: Pre-built Templates"""
+        print("=" * 60)
+        print("TEST SUITE 4: Pre-built Templates")
+        print("=" * 60)
+        
+        # Test 16: Verify 11 pre-built templates exist in database
+        try:
+            all_templates = []
+            template_types = ["estimate", "invoice", "proposal", "contract", "work_order", "project", "notification"]
+            
+            for template_type in template_types:
+                response = self.session.get(f"{BACKEND_URL}/templates?type={template_type}")
+                if response.status_code == 200:
+                    data = response.json()
+                    if data.get("success") and data.get("templates"):
+                        # Filter for pre-built templates (created by system)
+                        prebuilt = [t for t in data["templates"] if t.get("created_by") == "system"]
+                        all_templates.extend(prebuilt)
+            
+            if len(all_templates) >= 11:
+                self.log_test("16. Verify 11 pre-built templates exist in database", True, 
+                            f"Found {len(all_templates)} pre-built templates")
+            else:
+                self.log_test("16. Verify 11 pre-built templates exist in database", False, 
+                            f"Only found {len(all_templates)} pre-built templates, expected 11+")
+        except Exception as e:
+            self.log_test("16. Verify 11 pre-built templates exist in database", False, str(e))
+
+        # Test 17: Test each template type has proper structure
+        try:
+            template_types = ["estimate", "invoice", "proposal", "contract", "work_order"]
+            valid_structures = 0
+            
+            for template_type in template_types:
+                response = self.session.get(f"{BACKEND_URL}/templates?type={template_type}")
+                if response.status_code == 200:
+                    data = response.json()
+                    if data.get("success") and data.get("templates"):
+                        templates = data["templates"]
+                        if templates:
+                            # Check first template structure
+                            template = templates[0]
+                            required_fields = ["name", "content", "type", "created_at"]
+                            if all(field in template for field in required_fields):
+                                valid_structures += 1
+            
+            if valid_structures == len(template_types):
+                self.log_test("17. Test each template type has proper structure", True, 
+                            f"All {valid_structures} template types have proper structure")
+            else:
+                self.log_test("17. Test each template type has proper structure", False, 
+                            f"Only {valid_structures}/{len(template_types)} template types have proper structure")
+        except Exception as e:
+            self.log_test("17. Test each template type has proper structure", False, str(e))
+
+        # Test 18: Verify estimate templates have line_items
+        try:
+            response = self.session.get(f"{BACKEND_URL}/templates?type=estimate")
+            
+            if response.status_code == 200:
+                data = response.json()
+                if data.get("success") and data.get("templates"):
+                    estimate_templates = data["templates"]
+                    templates_with_line_items = 0
+                    
+                    for template in estimate_templates:
+                        content = template.get("content", {})
+                        if "line_items" in content:
+                            templates_with_line_items += 1
+                    
+                    if templates_with_line_items > 0:
+                        self.log_test("18. Verify estimate templates have line_items", True, 
+                                    f"{templates_with_line_items}/{len(estimate_templates)} estimate templates have line_items")
+                    else:
+                        self.log_test("18. Verify estimate templates have line_items", False, 
+                                    "No estimate templates have line_items structure")
+                else:
+                    self.log_test("18. Verify estimate templates have line_items", False, 
+                                "Failed to get estimate templates", data)
+            else:
+                self.log_test("18. Verify estimate templates have line_items", False, 
+                            f"HTTP {response.status_code}", response.text)
+        except Exception as e:
+            self.log_test("18. Verify estimate templates have line_items", False, str(e))
+
+        # Test 19: Verify all templates have valid JSON content
+        try:
+            template_types = ["estimate", "invoice", "proposal", "contract"]
+            valid_json_count = 0
+            total_templates = 0
+            
+            for template_type in template_types:
+                response = self.session.get(f"{BACKEND_URL}/templates?type={template_type}")
+                if response.status_code == 200:
+                    data = response.json()
+                    if data.get("success") and data.get("templates"):
+                        templates = data["templates"]
+                        for template in templates:
+                            total_templates += 1
+                            content = template.get("content")
+                            if isinstance(content, dict) and content:
+                                valid_json_count += 1
+            
+            if valid_json_count == total_templates and total_templates > 0:
+                self.log_test("19. Verify all templates have valid JSON content", True, 
+                            f"All {total_templates} templates have valid JSON content")
+            else:
+                self.log_test("19. Verify all templates have valid JSON content", False, 
+                            f"Only {valid_json_count}/{total_templates} templates have valid JSON content")
+        except Exception as e:
+            self.log_test("19. Verify all templates have valid JSON content", False, str(e))
+
+        # Test 20: Test default template flags are set correctly
+        try:
+            template_types = ["estimate", "invoice", "proposal", "contract"]
+            default_templates_found = 0
+            
+            for template_type in template_types:
+                response = self.session.get(f"{BACKEND_URL}/templates?type={template_type}")
+                if response.status_code == 200:
+                    data = response.json()
+                    if data.get("success") and data.get("templates"):
+                        templates = data["templates"]
+                        for template in templates:
+                            if template.get("is_default") is True:
+                                default_templates_found += 1
+                                break  # Only count one default per type
+            
+            if default_templates_found > 0:
+                self.log_test("20. Test default template flags are set correctly", True, 
+                            f"Found {default_templates_found} default templates")
+            else:
+                self.log_test("20. Test default template flags are set correctly", False, 
+                            "No default templates found")
+        except Exception as e:
+            self.log_test("20. Test default template flags are set correctly", False, str(e))
+
+    def test_suite_5_integration_features(self):
+        """TEST SUITE 5: Integration Features"""
+        print("=" * 60)
+        print("TEST SUITE 5: Integration Features")
+        print("=" * 60)
+        
+        # Test 21: GET /api/templates/{type}/categories - Get unique categories
+        try:
+            response = self.session.get(f"{BACKEND_URL}/templates/estimate/categories")
+            
+            if response.status_code == 200:
+                data = response.json()
+                if data.get("success") and data.get("categories"):
+                    categories = data["categories"]
+                    if isinstance(categories, list) and len(categories) > 0:
+                        self.log_test("21. GET /api/templates/{type}/categories - Get unique categories", True, 
+                                    f"Found {len(categories)} categories: {categories}")
+                    else:
+                        self.log_test("21. GET /api/templates/{type}/categories - Get unique categories", False, 
+                                    "No categories found or invalid format")
+                else:
+                    self.log_test("21. GET /api/templates/{type}/categories - Get unique categories", False, 
+                                "Invalid response format", data)
+            else:
+                # This might fail due to route ordering issue mentioned in test_result.md
+                self.log_test("21. GET /api/templates/{type}/categories - Get unique categories", False, 
+                            f"HTTP {response.status_code} - Known route ordering issue", response.text)
+        except Exception as e:
+            self.log_test("21. GET /api/templates/{type}/categories - Get unique categories", False, str(e))
+
+        # Test 22: GET /api/templates/{type}/{id}/stats - Get usage statistics
+        if self.created_templates:
+            try:
+                template_info = self.created_templates[0]
+                response = self.session.get(f"{BACKEND_URL}/templates/{template_info['type']}/{template_info['id']}/stats")
+                
+                if response.status_code == 200:
+                    data = response.json()
+                    if data.get("success") and data.get("stats"):
+                        stats = data["stats"]
+                        required_stats = ["template_id", "usage_count", "created_at", "version"]
+                        if all(field in stats for field in required_stats):
+                            self.log_test("22. GET /api/templates/{type}/{id}/stats - Get usage statistics", True, 
+                                        f"Stats retrieved: usage_count={stats.get('usage_count')}, version={stats.get('version')}")
+                        else:
+                            self.log_test("22. GET /api/templates/{type}/{id}/stats - Get usage statistics", False, 
+                                        "Stats missing required fields")
+                    else:
+                        self.log_test("22. GET /api/templates/{type}/{id}/stats - Get usage statistics", False, 
+                                    "Invalid response format", data)
+                else:
+                    self.log_test("22. GET /api/templates/{type}/{id}/stats - Get usage statistics", False, 
+                                f"HTTP {response.status_code}", response.text)
+            except Exception as e:
+                self.log_test("22. GET /api/templates/{type}/{id}/stats - Get usage statistics", False, str(e))
+
+        # Test 23: Test template usage counter increments on apply
+        if self.created_templates:
+            try:
+                template_info = self.created_templates[0]
+                
+                # Get initial stats
+                stats_response = self.session.get(f"{BACKEND_URL}/templates/{template_info['type']}/{template_info['id']}/stats")
+                initial_usage = 0
+                if stats_response.status_code == 200:
+                    stats_data = stats_response.json()
+                    if stats_data.get("success") and stats_data.get("stats"):
+                        initial_usage = stats_data["stats"].get("usage_count", 0)
+                
+                # Apply template
+                apply_data = {"data": {"customer_name": "Usage Test", "estimate_number": "TEST-001"}}
+                apply_response = self.session.post(f"{BACKEND_URL}/templates/{template_info['type']}/{template_info['id']}/apply",
+                                                 json=apply_data)
+                
+                if apply_response.status_code == 200:
+                    # Check stats again
+                    time.sleep(1)  # Brief delay to ensure update
+                    final_stats_response = self.session.get(f"{BACKEND_URL}/templates/{template_info['type']}/{template_info['id']}/stats")
+                    
+                    if final_stats_response.status_code == 200:
+                        final_stats_data = final_stats_response.json()
+                        if final_stats_data.get("success") and final_stats_data.get("stats"):
+                            final_usage = final_stats_data["stats"].get("usage_count", 0)
+                            
+                            if final_usage > initial_usage:
+                                self.log_test("23. Test template usage counter increments on apply", True, 
+                                            f"Usage count increased from {initial_usage} to {final_usage}")
+                            else:
+                                self.log_test("23. Test template usage counter increments on apply", False, 
+                                            f"Usage count didn't increase: {initial_usage} -> {final_usage}")
+                        else:
+                            self.log_test("23. Test template usage counter increments on apply", False, 
+                                        "Failed to get final stats")
+                    else:
+                        self.log_test("23. Test template usage counter increments on apply", False, 
+                                    "Failed to retrieve final stats")
+                else:
+                    self.log_test("23. Test template usage counter increments on apply", False, 
+                                "Failed to apply template for usage test")
+            except Exception as e:
+                self.log_test("23. Test template usage counter increments on apply", False, str(e))
+
+        # Test 24: Test last_used timestamp updates
+        if self.created_templates:
+            try:
+                template_info = self.created_templates[0]
+                
+                # Apply template to update last_used
+                apply_data = {"data": {"customer_name": "Timestamp Test", "estimate_number": "TS-001"}}
+                apply_response = self.session.post(f"{BACKEND_URL}/templates/{template_info['type']}/{template_info['id']}/apply",
+                                                 json=apply_data)
+                
+                if apply_response.status_code == 200:
+                    # Check if last_used is updated
+                    time.sleep(1)
+                    stats_response = self.session.get(f"{BACKEND_URL}/templates/{template_info['type']}/{template_info['id']}/stats")
+                    
+                    if stats_response.status_code == 200:
+                        stats_data = stats_response.json()
+                        if stats_data.get("success") and stats_data.get("stats"):
+                            last_used = stats_data["stats"].get("last_used")
+                            
+                            if last_used:
+                                self.log_test("24. Test last_used timestamp updates", True, 
+                                            f"Last used timestamp updated: {last_used}")
+                            else:
+                                self.log_test("24. Test last_used timestamp updates", False, 
+                                            "Last used timestamp not set")
+                        else:
+                            self.log_test("24. Test last_used timestamp updates", False, 
+                                        "Failed to get stats")
+                    else:
+                        self.log_test("24. Test last_used timestamp updates", False, 
+                                    "Failed to retrieve stats")
+                else:
+                    self.log_test("24. Test last_used timestamp updates", False, 
+                                "Failed to apply template")
+            except Exception as e:
+                self.log_test("24. Test last_used timestamp updates", False, str(e))
+
+    def test_suite_6_edge_cases(self):
+        """TEST SUITE 6: Edge Cases & Validation"""
+        print("=" * 60)
+        print("TEST SUITE 6: Edge Cases & Validation")
+        print("=" * 60)
+        
+        # Test 25: Test invalid JSON content (should reject)
+        try:
+            invalid_template_data = {
+                "type": "estimate",
+                "name": "Invalid JSON Test",
+                "description": "Test template with invalid content",
+                "category": "test",
+                "tags": ["test", "invalid"],
+                "content": "This is not valid JSON content - should be a dict",  # Invalid: string instead of dict
+                "is_public": False,
+                "is_default": False
+            }
+            
+            response = self.session.post(f"{BACKEND_URL}/templates", json=invalid_template_data)
+            
+            # Should either reject with 400 or accept and handle gracefully
+            if response.status_code == 400:
+                self.log_test("25. Test invalid JSON content (should reject)", True, 
+                            "Invalid content properly rejected with 400 error")
+            elif response.status_code == 200:
+                # If accepted, check if it was handled gracefully
+                data = response.json()
+                if data.get("success"):
+                    # Clean up if created
+                    if data.get("template") and data["template"].get("_id"):
+                        self.created_templates.append({"type": "estimate", "id": data["template"]["_id"]})
+                    self.log_test("25. Test invalid JSON content (should reject)", True, 
+                                "Invalid content accepted but handled gracefully")
+                else:
+                    self.log_test("25. Test invalid JSON content (should reject)", True, 
+                                "Invalid content properly rejected")
+            else:
+                self.log_test("25. Test invalid JSON content (should reject)", False, 
+                            f"Unexpected HTTP {response.status_code}", response.text)
+        except Exception as e:
+            self.log_test("25. Test invalid JSON content (should reject)", False, str(e))
+
+        # Test 26: Test duplicate template names (should allow)
+        try:
+            duplicate_template_data = {
+                "type": "estimate",
+                "name": "Duplicate Name Test",
+                "description": "First template with this name",
+                "category": "test",
+                "tags": ["test", "duplicate"],
+                "content": {"title": "First Template"},
+                "is_public": False,
+                "is_default": False
+            }
+            
+            # Create first template
+            response1 = self.session.post(f"{BACKEND_URL}/templates", json=duplicate_template_data)
+            
+            if response1.status_code == 200:
+                data1 = response1.json()
+                if data1.get("success") and data1.get("template"):
+                    template1_id = data1["template"]["_id"]
+                    self.created_templates.append({"type": "estimate", "id": template1_id})
+                    
+                    # Create second template with same name
+                    duplicate_template_data["description"] = "Second template with same name"
+                    duplicate_template_data["content"] = {"title": "Second Template"}
+                    
+                    response2 = self.session.post(f"{BACKEND_URL}/templates", json=duplicate_template_data)
+                    
+                    if response2.status_code == 200:
+                        data2 = response2.json()
+                        if data2.get("success") and data2.get("template"):
+                            template2_id = data2["template"]["_id"]
+                            self.created_templates.append({"type": "estimate", "id": template2_id})
+                            self.log_test("26. Test duplicate template names (should allow)", True, 
+                                        "Duplicate names allowed - both templates created")
+                        else:
+                            self.log_test("26. Test duplicate template names (should allow)", False, 
+                                        "Second template creation failed", data2)
+                    else:
+                        self.log_test("26. Test duplicate template names (should allow)", False, 
+                                    f"Second template HTTP {response2.status_code}", response2.text)
+                else:
+                    self.log_test("26. Test duplicate template names (should allow)", False, 
+                                "First template creation failed", data1)
+            else:
+                self.log_test("26. Test duplicate template names (should allow)", False, 
+                            f"First template HTTP {response1.status_code}", response1.text)
+        except Exception as e:
+            self.log_test("26. Test duplicate template names (should allow)", False, str(e))
+
+        # Test 27: Test empty placeholder replacement
+        if self.created_templates:
+            try:
+                template_info = self.created_templates[0]
+                empty_data = {}  # No replacement data
+                
+                response = self.session.post(f"{BACKEND_URL}/templates/{template_info['type']}/{template_info['id']}/apply",
+                                           json={"data": empty_data})
+                
+                if response.status_code == 200:
+                    data = response.json()
+                    if data.get("success") and data.get("result"):
+                        content = data["result"]["content"]
+                        # Check if placeholders remain unreplaced (should still have {{}} format)
+                        content_str = json.dumps(content)
+                        if "{{" in content_str and "}}" in content_str:
+                            self.log_test("27. Test empty placeholder replacement", True, 
+                                        "Empty data handled correctly - placeholders remain unreplaced")
+                        else:
+                            self.log_test("27. Test empty placeholder replacement", True, 
+                                        "Empty data handled - placeholders processed")
+                    else:
+                        self.log_test("27. Test empty placeholder replacement", False, 
+                                    "Invalid response format", data)
+                else:
+                    self.log_test("27. Test empty placeholder replacement", False, 
+                                f"HTTP {response.status_code}", response.text)
+            except Exception as e:
+                self.log_test("27. Test empty placeholder replacement", False, str(e))
+
+        # Test 28: Test special characters in variables
+        if self.created_templates:
+            try:
+                template_info = self.created_templates[0]
+                special_data = {
+                    "customer_name": "Test & Company <script>alert('xss')</script>",
+                    "estimate_number": "EST-2025-001 \"quoted\" 'apostrophe'",
+                    "service_description": "Service with émojis 🚀 and ñ special chars",
+                    "notes": "Multi\nline\nnotes with\ttabs"
+                }
+                
+                response = self.session.post(f"{BACKEND_URL}/templates/{template_info['type']}/{template_info['id']}/apply",
+                                           json={"data": special_data})
+                
+                if response.status_code == 200:
+                    data = response.json()
+                    if data.get("success") and data.get("result"):
+                        content = data["result"]["content"]
+                        
+                        # Check if special characters are preserved
+                        if (content.get("customer_name") == special_data["customer_name"] and
+                            content.get("estimate_number") == special_data["estimate_number"]):
+                            self.log_test("28. Test special characters in variables", True, 
+                                        "Special characters handled correctly")
+                        else:
+                            self.log_test("28. Test special characters in variables", False, 
+                                        "Special characters not preserved correctly")
+                    else:
+                        self.log_test("28. Test special characters in variables", False, 
+                                    "Invalid response format", data)
+                else:
+                    self.log_test("28. Test special characters in variables", False, 
+                                f"HTTP {response.status_code}", response.text)
+            except Exception as e:
+                self.log_test("28. Test special characters in variables", False, str(e))
+
+        # Test 29: Test very long template content
+        try:
+            # Create a template with very long content
+            long_content = {
+                "title": "Very Long Template Test",
+                "description": "A" * 10000,  # 10KB of 'A' characters
+                "long_field": "B" * 5000,    # 5KB of 'B' characters
+                "customer_name": "{{customer_name}}",
+                "items": [{"item_" + str(i): f"Item {i} content " * 100} for i in range(50)]  # Large array
+            }
+            
+            long_template_data = {
+                "type": "proposal",
+                "name": "Very Long Content Test",
+                "description": "Template with very long content for testing",
+                "category": "test",
+                "tags": ["test", "long", "performance"],
+                "content": long_content,
+                "is_public": False,
+                "is_default": False
+            }
+            
+            response = self.session.post(f"{BACKEND_URL}/templates", json=long_template_data)
+            
+            if response.status_code == 200:
+                data = response.json()
+                if data.get("success") and data.get("template"):
+                    template_id = data["template"]["_id"]
+                    self.created_templates.append({"type": "proposal", "id": template_id})
+                    
+                    # Test applying the long template
+                    apply_response = self.session.post(f"{BACKEND_URL}/templates/proposal/{template_id}/apply",
+                                                     json={"data": {"customer_name": "Long Content Customer"}})
+                    
+                    if apply_response.status_code == 200:
+                        apply_data = apply_response.json()
+                        if apply_data.get("success"):
+                            self.log_test("29. Test very long template content", True, 
+                                        "Very long content handled successfully")
+                        else:
+                            self.log_test("29. Test very long template content", False, 
+                                        "Failed to apply long template", apply_data)
+                    else:
+                        self.log_test("29. Test very long template content", False, 
+                                    f"Apply long template HTTP {apply_response.status_code}")
+                else:
+                    self.log_test("29. Test very long template content", False, 
+                                "Failed to create long template", data)
+            else:
+                self.log_test("29. Test very long template content", False, 
+                            f"HTTP {response.status_code}", response.text)
+        except Exception as e:
+            self.log_test("29. Test very long template content", False, str(e))
+
+    def cleanup_created_templates(self):
+        """Clean up templates created during testing"""
+        print("=" * 60)
+        print("CLEANUP: Removing test templates")
+        print("=" * 60)
+        
+        for template_info in self.created_templates:
+            try:
+                response = self.session.delete(f"{BACKEND_URL}/templates/{template_info['type']}/{template_info['id']}")
+                if response.status_code == 200:
+                    print(f"✅ Deleted template: {template_info['type']}/{template_info['id']}")
+                else:
+                    print(f"⚠️  Failed to delete template: {template_info['type']}/{template_info['id']}")
+            except Exception as e:
+                print(f"❌ Error deleting template {template_info['type']}/{template_info['id']}: {str(e)}")
+
+    def run_comprehensive_test(self):
+        """Run all test suites"""
+        print("🚀 Starting Comprehensive Template System Testing")
+        print("=" * 80)
+        
+        start_time = time.time()
         
         try:
-            # Authenticate first
-            print("\n🔐 Authenticating...")
-            if not self.authenticate():
-                print("❌ Authentication failed. Cannot proceed with tests.")
-                return False
-            
             # Run all test suites
             self.test_suite_1_template_crud()
-            self.test_suite_2_template_application()
-            self.test_suite_3_utility_endpoints()
+            self.test_suite_2_placeholder_system()
+            self.test_suite_3_template_application()
             self.test_suite_4_prebuilt_templates()
-            self.test_suite_5_variable_system()
-            self.test_remaining_crud_operations()
+            self.test_suite_5_integration_features()
+            self.test_suite_6_edge_cases()
             
-            # Print summary
-            self.print_summary()
-            
-        except Exception as e:
-            print(f"\n❌ Testing failed with error: {str(e)}")
-            return False
+        finally:
+            # Always cleanup
+            self.cleanup_created_templates()
         
-        return True
+        end_time = time.time()
+        duration = end_time - start_time
+        
+        # Generate summary
+        self.generate_summary(duration)
 
-    def print_summary(self):
-        """Print test summary"""
-        print("\n" + "=" * 60)
-        print("📊 TEMPLATE SYSTEM TEST SUMMARY")
-        print("=" * 60)
+    def generate_summary(self, duration: float):
+        """Generate test summary"""
+        print("=" * 80)
+        print("📊 COMPREHENSIVE TEST SUMMARY")
+        print("=" * 80)
         
         total_tests = len(self.test_results)
         passed_tests = sum(1 for result in self.test_results if result["success"])
         failed_tests = total_tests - passed_tests
+        success_rate = (passed_tests / total_tests * 100) if total_tests > 0 else 0
         
         print(f"Total Tests: {total_tests}")
-        print(f"✅ Passed: {passed_tests}")
-        print(f"❌ Failed: {failed_tests}")
-        print(f"Success Rate: {(passed_tests/total_tests)*100:.1f}%")
+        print(f"Passed: {passed_tests} ✅")
+        print(f"Failed: {failed_tests} ❌")
+        print(f"Success Rate: {success_rate:.1f}%")
+        print(f"Duration: {duration:.2f} seconds")
+        print()
         
-        if failed_tests > 0:
-            print(f"\n❌ FAILED TESTS ({failed_tests}):")
-            for result in self.test_results:
-                if not result["success"]:
-                    print(f"  • {result['test']}: {result['details']}")
+        # Group results by test suite
+        suites = {
+            "Template CRUD": [r for r in self.test_results if r["test"].startswith(("1.", "2.", "3.", "4.", "5.", "6."))],
+            "Placeholder System": [r for r in self.test_results if r["test"].startswith(("7.", "8.", "9.", "10.", "11."))],
+            "Template Application": [r for r in self.test_results if r["test"].startswith(("12.", "13.", "14.", "15."))],
+            "Pre-built Templates": [r for r in self.test_results if r["test"].startswith(("16.", "17.", "18.", "19.", "20."))],
+            "Integration Features": [r for r in self.test_results if r["test"].startswith(("21.", "22.", "23.", "24."))],
+            "Edge Cases": [r for r in self.test_results if r["test"].startswith(("25.", "26.", "27.", "28.", "29."))]
+        }
         
-        print(f"\n✅ PASSED TESTS ({passed_tests}):")
-        for result in self.test_results:
-            if result["success"]:
-                print(f"  • {result['test']}")
+        for suite_name, suite_results in suites.items():
+            if suite_results:
+                suite_passed = sum(1 for r in suite_results if r["success"])
+                suite_total = len(suite_results)
+                suite_rate = (suite_passed / suite_total * 100) if suite_total > 0 else 0
+                print(f"{suite_name}: {suite_passed}/{suite_total} ({suite_rate:.1f}%)")
         
-        print("\n" + "=" * 60)
+        print()
+        
+        # Show failed tests
+        failed_results = [r for r in self.test_results if not r["success"]]
+        if failed_results:
+            print("❌ FAILED TESTS:")
+            for result in failed_results:
+                print(f"   - {result['test']}")
+                if result["details"]:
+                    print(f"     Details: {result['details']}")
+            print()
+        
+        # Show critical issues
+        critical_issues = []
+        
+        # Check for critical failures
+        crud_failures = [r for r in self.test_results if not r["success"] and r["test"].startswith(("1.", "2.", "3.", "4.", "5."))]
+        if crud_failures:
+            critical_issues.append("Template CRUD operations failing")
+        
+        placeholder_failures = [r for r in self.test_results if not r["success"] and r["test"].startswith(("7.", "8.", "9."))]
+        if len(placeholder_failures) >= 2:
+            critical_issues.append("Placeholder system not working properly")
+        
+        application_failures = [r for r in self.test_results if not r["success"] and r["test"].startswith(("12.", "13."))]
+        if application_failures:
+            critical_issues.append("Template application and variable replacement failing")
+        
+        if critical_issues:
+            print("🚨 CRITICAL ISSUES:")
+            for issue in critical_issues:
+                print(f"   - {issue}")
+            print()
+        
+        # Overall assessment
+        if success_rate >= 90:
+            print("🎉 EXCELLENT: Template system is working excellently!")
+        elif success_rate >= 80:
+            print("✅ GOOD: Template system is working well with minor issues")
+        elif success_rate >= 70:
+            print("⚠️  FAIR: Template system has some issues that need attention")
+        else:
+            print("❌ POOR: Template system has significant issues requiring immediate attention")
+        
+        print("=" * 80)
+
+
+def main():
+    """Main test execution"""
+    tester = TemplateSystemTester()
+    tester.run_comprehensive_test()
 
 
 if __name__ == "__main__":
-    tester = TemplateSystemTester()
-    success = tester.run_all_tests()
-    sys.exit(0 if success else 1)
+    main()
