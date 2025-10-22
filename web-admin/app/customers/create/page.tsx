@@ -403,41 +403,37 @@ export default function CustomerFormPage() {
   }
 
   return (
-      <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto">
-        <div className="max-w-4xl mx-auto p-6">
-          {/* Compact Header */}
-          <CompactHeader
-            title={isEdit ? 'Edit Customer' : 'Create Customer'}
-            backUrl="/customers"
-            icon={User}
-            badges={
-              customerForm.customer_type
-                ? [
-                    {
-                      label: customerForm.customer_type === 'company' ? 'Company' : 'Individual',
-                      color: customerForm.customer_type === 'company' ? 'blue' : 'gray',
-                    },
-                  ]
-                : []
-            }
-            actions={[
-              {
-                label: 'Cancel',
-                onClick: () => router.push('/customers'),
-                variant: 'secondary' as const,
+      <>
+        {/* Page Header */}
+        <PageHeader
+          title={isEdit ? 'Edit Customer' : 'New Customer'}
+          breadcrumbs={[
+            { label: 'Customers', href: '/customers' },
+            { label: isEdit ? 'Edit' : 'New' }
+          ]}
+          actions={[
+            {
+              label: 'Cancel',
+              onClick: () => router.push('/customers'),
+              variant: 'secondary' as const,
+            },
+            {
+              label: saving ? 'Saving...' : isEdit ? 'Update Customer' : 'Create Customer',
+              icon: <Save className="w-4 h-4 mr-2" />,
+              onClick: () => {
+                const form = document.querySelector('form') as HTMLFormElement;
+                if (form) form.requestSubmit();
               },
-              {
-                label: saving ? 'Saving...' : isEdit ? 'Update' : 'Create',
-                icon: Save,
-                onClick: () => {
-                  const form = document.querySelector('form') as HTMLFormElement;
-                  if (form) form.requestSubmit();
-                },
-                variant: 'primary',
-                disabled: saving,
-              },
-            ]}
-          />
+              variant: 'primary',
+            },
+          ]}
+        />
+
+        {/* Frosted Glass Modal Background */}
+        <div className="fixed inset-0 bg-gradient-to-br from-blue-50/90 via-purple-50/80 to-pink-50/70 backdrop-blur-sm overflow-auto pt-8 pb-16" style={{ top: '0px' }}>
+          <div className="max-w-5xl mx-auto px-6">
+            {/* Frosted Glass Card */}
+            <div className="bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/50 p-8 mb-8" style={{ boxShadow: '0 20px 60px rgba(0, 0, 0, 0.15)' }}>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Customer Type Selection */}
