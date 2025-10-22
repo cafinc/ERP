@@ -440,40 +440,40 @@ export default function CustomerFormPage() {
                 {!isEdit && (
                   <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-8 backdrop-blur-sm">
                     <h2 className="text-2xl font-bold text-gray-900 mb-4">Customer Type *</h2>
-                <div className="grid grid-cols-2 gap-4">
-                  <button
-                    type="button"
-                    onClick={() => handleTypeSelection('individual')}
-                    className={`p-8 border-2 rounded-xl transition-all hover:scale-105 ${
-                      customerForm.customer_type === 'individual'
-                        ? 'border-blue-500 bg-blue-50 shadow-lg'
-                        : 'border-gray-300 hover:border-gray-400 hover:shadow-md'
-                    }`}
-                  >
-                    <Users className="w-12 h-12 mx-auto mb-4 text-[#3f72af]" />
-                    <p className="font-bold text-gray-900 text-xl">Individual</p>
-                    <p className="text-sm text-gray-600 mt-2">Person or homeowner</p>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => handleTypeSelection('company')}
-                    className={`p-8 border-2 rounded-xl transition-all hover:scale-105 ${
-                      customerForm.customer_type === 'company'
-                        ? 'border-blue-500 bg-blue-50 shadow-lg'
-                        : 'border-gray-300 hover:border-gray-400 hover:shadow-md'
-                    }`}
-                  >
-                    <Building className="w-12 h-12 mx-auto mb-4 text-[#3f72af]" />
-                    <p className="font-bold text-gray-900 text-xl">Company</p>
-                    <p className="text-sm text-gray-600 mt-2">Business or organization</p>
-                  </button>
-                </div>
-              </div>
-            )}
+                    <div className="grid grid-cols-2 gap-4">
+                      <button
+                        type="button"
+                        onClick={() => handleTypeSelection('individual')}
+                        className={`p-8 border-2 rounded-xl transition-all hover:scale-105 ${
+                          customerForm.customer_type === 'individual'
+                            ? 'border-[#3f72af] bg-blue-50 shadow-lg'
+                            : 'border-gray-300 hover:border-gray-400 hover:shadow-md bg-white'
+                        }`}
+                      >
+                        <Users className="w-12 h-12 mx-auto mb-4 text-[#3f72af]" />
+                        <p className="font-bold text-gray-900 text-xl">Individual</p>
+                        <p className="text-sm text-gray-600 mt-2">Person or homeowner</p>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleTypeSelection('company')}
+                        className={`p-8 border-2 rounded-xl transition-all hover:scale-105 ${
+                          customerForm.customer_type === 'company'
+                            ? 'border-[#3f72af] bg-blue-50 shadow-lg'
+                            : 'border-gray-300 hover:border-gray-400 hover:shadow-md bg-white'
+                        }`}
+                      >
+                        <Building className="w-12 h-12 mx-auto mb-4 text-[#3f72af]" />
+                        <p className="font-bold text-gray-900 text-xl">Company</p>
+                        <p className="text-sm text-gray-600 mt-2">Business or organization</p>
+                      </button>
+                    </div>
+                  </div>
+                )}
 
-            {/* Individual Form */}
-            {customerForm.customer_type === 'individual' && (
-              <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
+                {/* Individual Form */}
+                {customerForm.customer_type === 'individual' && (
+                  <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-8 backdrop-blur-sm">
                 <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center space-x-2">
                   <User className="w-5 h-5 text-[#3f72af]" />
                   <span>Individual Information</span>
