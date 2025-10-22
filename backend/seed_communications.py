@@ -10,10 +10,17 @@ from motor.motor_asyncio import AsyncIOMotorClient
 from bson import ObjectId
 import random
 
+# Load environment variables
+from dotenv import load_dotenv
+load_dotenv()
+
 # MongoDB connection
 mongo_url = os.getenv("MONGO_URL", "mongodb://localhost:27017")
+db_name = os.getenv("DB_NAME", "test_database")
+print(f"📦 Connecting to MongoDB: {mongo_url}")
+print(f"📦 Database: {db_name}")
 client = AsyncIOMotorClient(mongo_url)
-db = client[os.getenv("DB_NAME", "snow_removal_db")]
+db = client[db_name]
 
 # Collections
 communications_collection = db["communications"]
