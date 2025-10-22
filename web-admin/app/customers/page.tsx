@@ -43,6 +43,17 @@ export default function CustomersPage() {
   const [filterActive, setFilterActive] = useState('all');
   const [filterType, setFilterType] = useState('all'); // 'all', 'individual', 'company'
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid'); // View toggle - default to grid
+  const [showColumnSelector, setShowColumnSelector] = useState(false);
+  const [visibleColumns, setVisibleColumns] = useState({
+    name: true,
+    email: true,
+    phone: true,
+    address: true,
+    type: true,
+    status: true,
+    created: true,
+    actions: true,
+  });
 
   useEffect(() => {
     loadCustomers();
