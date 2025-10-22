@@ -1011,6 +1011,81 @@ async def get_customer_communication_stats(customer_id: str):
         
         # Calculate engagement score (messages per day since first contact)
         if first_message:
+
+
+
+# ========== Crew Communication ==========
+
+class CrewMessageRequest(BaseModel):
+    project_id: str
+    message: str
+    crew_id: str
+    location: Optional[Dict[str, float]] = None  # {lat: float, lng: float}
+
+
+@router.post("/communications/crew/send")
+async def send_crew_message(request: CrewMessageRequest):
+    """Send message from crew member (project-linked)"""
+    try:
+        # Create communication record linked to project
+        communication = {
+            "project_id": request.project_id,
+            "crew_id": request.crew_id,
+            "type": "inapp",
+            "direction": "inbound",  # From crew to dispatch
+            "content": request.message,
+            "message": request.message,
+            "timestamp": datetime.utcnow(),
+            "created_at": datetime.utcnow(),
+            "read": False,
+            "status": "sent"
+        }
+        
+        # Add location if provided
+        if request.location:
+            communication["location"] = request.location
+        
+        result = await db.communications.insert_one(communication)
+        communication["_id"] = str(result.inserted_id)
+        
+        logger.info(f"Crew message sent from {request.crew_id} for project {request.project_id}")
+        
+        # Notify via WebSocket (simplified)
+        # In production, find project manager/dispatch and notify them
+        
+        return {
+            "success": True,
+            "message": "Message sent to dispatch",
+            "communication_id": str(result.inserted_id)
+        }
+    
+    except Exception as e:
+        logger.error(f"Error sending crew message: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/communications/crew/project/{project_id}")
+async def get_project_communications(project_id: str):
+    """Get all communications for a specific project"""
+    try:
+        communications = await db.communications.find({
+            "project_id": project_id
+        }).sort("timestamp", 1).to_list(1000)
+        
+        # Convert ObjectId to string
+        for comm in communications:
+            comm["_id"] = str(comm["_id"])
+            if "created_at" in comm:
+                comm["created_at"] = comm["created_at"].isoformat() if isinstance(comm["created_at"], datetime) else comm["created_at"]
+            if "timestamp" in comm:
+                comm["timestamp"] = comm["timestamp"].isoformat() if isinstance(comm["timestamp"], datetime) else comm["timestamp"]
+        
+        return communications
+    
+    except Exception as e:
+        logger.error(f"Error fetching project communications: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
             days_since_first = (datetime.utcnow() - first_message["timestamp"]).days + 1
             engagement_score = total_messages / days_since_first
         else:
