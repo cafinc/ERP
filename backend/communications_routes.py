@@ -221,7 +221,7 @@ async def send_email_via_gmail(request: SendEmailRequest, current_user: dict = D
 # ========== Phone Call Logging ==========
 
 @router.post("/integrations/ringcentral/call-log")
-async def log_phone_call(request: LogCallRequest):
+async def log_phone_call(request: LogCallRequest, current_user: dict = Depends(get_current_user)):
     """Log a phone call"""
     try:
         # Log communication
