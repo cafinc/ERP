@@ -247,71 +247,38 @@ export default function HybridNavigationTopBar({ children }: { children: React.R
         </div>
 
         {/* Top Navigation Bar for Submenus */}
-        {expandedMenu && (() => {
-          const currentMenu = menuItems.find(item => item.label === expandedMenu);
-          const isTabStyle = currentMenu?.displayAsTabs;
-          
-          return (
-            <div className={`absolute top-0 left-16 right-0 z-40 ${
-              isTabStyle 
-                ? 'bg-gradient-to-r from-blue-50 to-blue-100 border-b-2 border-blue-300' 
-                : 'bg-white border-b border-gray-200 shadow-md'
-            }`}>
-              <div className="px-6 py-3">
-                <div className={`flex items-center ${isTabStyle ? 'gap-1' : 'gap-3'} flex-wrap`}>
-                  {currentMenu?.submenu?.map((subItem) => {
+        {expandedMenu && (
+          <div className="absolute top-0 left-16 right-0 bg-white border-b border-gray-200 shadow-md z-40">
+            <div className="px-6 py-3">
+              <div className="flex items-center gap-3 flex-wrap">
+                {menuItems
+                  .find(item => item.label === expandedMenu)
+                  ?.submenu?.map((subItem) => {
                     const SubIcon = subItem.icon || ChevronRight;
-                    const active = isActive(subItem.href);
-                    
-                    if (isTabStyle) {
-                      // Tab-style rendering
-                      return (
-                        <button
-                          key={subItem.href}
-                          onClick={() => {
-                            router.push(subItem.href);
-                            // Keep tabs open for tab-style menus
-                          }}
-                          className={`relative px-6 py-2.5 text-sm font-medium transition-all ${
-                            active
-                              ? 'text-blue-700 bg-white border-b-3 border-blue-600 shadow-sm'
-                              : 'text-gray-600 hover:text-blue-700 hover:bg-white/50'
-                          }`}
-                        >
-                          {subItem.label}
-                          {active && (
-                            <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600"></div>
-                          )}
-                        </button>
-                      );
-                    } else {
-                      // Button-style rendering (original)
-                      return (
-                        <button
-                          key={subItem.href}
-                          onClick={() => {
-                            router.push(subItem.href);
-                            setExpandedMenu(null);
-                          }}
-                          className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                            active
-                              ? 'bg-[#3f72af] text-white shadow-md'
-                              : 'text-gray-700 hover:bg-gray-100'
-                          }`}
-                        >
-                          <SubIcon className={`w-4 h-4 ${
-                            active ? 'text-white' : 'text-[#3f72af]'
-                          }`} />
-                          {subItem.label}
-                        </button>
-                      );
-                    }
+                    return (
+                      <button
+                        key={subItem.href}
+                        onClick={() => {
+                          router.push(subItem.href);
+                          setExpandedMenu(null);
+                        }}
+                        className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                          isActive(subItem.href)
+                            ? 'bg-[#3f72af] text-white shadow-md'
+                            : 'text-gray-700 hover:bg-gray-100'
+                        }`}
+                      >
+                        <SubIcon className={`w-4 h-4 ${
+                          isActive(subItem.href) ? 'text-white' : 'text-[#3f72af]'
+                        }`} />
+                        {subItem.label}
+                      </button>
+                    );
                   })}
-                </div>
               </div>
             </div>
-          );
-        })()}
+          </div>
+        )}
 
         {/* Main Content Area */}
         <div className={`flex-1 overflow-auto transition-all ${expandedMenu ? 'pt-14' : ''}`}>
