@@ -36,10 +36,6 @@ export default function SafetyDashboardPage() {
       />
       
       <div className="p-6 space-y-6">
-            { label: `${stats.incidents.thisMonth} Incidents This Month`, color: stats.incidents.thisMonth > 0 ? 'orange' : 'green' },
-          ]}
-        />
-
         {/* Key Metrics Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mx-6 mt-6">
           {/* Incidents */}
