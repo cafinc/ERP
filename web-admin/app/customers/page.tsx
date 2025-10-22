@@ -124,7 +124,7 @@ export default function CustomersPage() {
           {
             label: "New Customer",
             icon: <Plus className="w-4 h-4 mr-2" />,
-            variant: "primary",
+            variant: "secondary",
             onClick: () => router.push('/customers/create'),
           },
         ]}
@@ -140,6 +140,9 @@ export default function CustomersPage() {
         onSearch={setSearchQuery}
         showFilter={true}
         onFilterClick={() => alert("Filter options")}
+        showViewToggle={true}
+        viewMode={viewMode}
+        onViewChange={setViewMode}
       />
 
       <div className="p-6">
