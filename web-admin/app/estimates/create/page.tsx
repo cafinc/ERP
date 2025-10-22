@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import CompactHeader from '@/components/CompactHeader';
+import TemplateSelector from '@/components/TemplateSelector';
 import api from '@/lib/api';
 import {
   Plus,
@@ -20,7 +21,10 @@ import {
   ChevronDown,
   ChevronUp,
   DollarSign,
+  Sparkles,
 } from 'lucide-react';
+
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || '';
 
 interface Customer {
   _id: string;
