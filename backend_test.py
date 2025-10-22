@@ -1,20 +1,20 @@
 #!/usr/bin/env python3
 """
-Backend API Testing for HR Module and Integration Hub
-Tests all HR and Integration endpoints with comprehensive CRUD operations
+Communication Center Backend API Testing
+Tests all Communication Center endpoints as requested in the review.
 """
 
 import requests
 import json
-from datetime import datetime, timedelta
-import uuid
-import sys
 import os
+import tempfile
+from datetime import datetime
+import uuid
 
 # Backend URL from environment
 BACKEND_URL = "https://snowconnect.preview.emergentagent.com/api"
 
-class BackendTester:
+class CommunicationCenterTester:
     def __init__(self):
         self.session = requests.Session()
         self.test_results = {
