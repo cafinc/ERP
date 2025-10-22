@@ -546,7 +546,7 @@ export default function CustomerDetailPage() {
                       <Phone className="w-5 h-5 text-gray-400 mt-0.5" />
                       <div>
                         <p className="text-sm text-gray-600">Phone</p>
-                        <p className="text-gray-900">{customer.phone}</p>
+                        <p className="text-gray-900">{formatPhoneNumber(customer.phone)}</p>
                       </div>
                     </div>
                     <div className="flex items-start space-x-3">
