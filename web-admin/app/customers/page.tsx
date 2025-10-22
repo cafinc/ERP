@@ -87,36 +87,63 @@ export default function CustomersPage() {
 
   if (loading) {
     return (
-      <HybridNavigationTopBar>
-        <div className="flex items-center justify-center h-full">
+      <div className="min-h-screen bg-gray-50">
+        <PageHeader
+          title="Customers"
+          subtitle="Manage your customer database"
+          breadcrumbs={[
+            { label: "Home", href: "/" },
+            { label: "CRM", href: "/crm/dashboard" },
+            { label: "Customers" },
+          ]}
+        />
+        <div className="flex items-center justify-center h-96">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
-      </HybridNavigationTopBar>
+      </div>
     );
   }
 
   return (
-    <HybridNavigationTopBar>
-      <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
-        {/* Compact Header */}
-        <CompactHeader
-          title="Customers"
-          icon={Users}
-          badges={[
-            { label: `${customers.length} Total`, color: 'blue' },
-            { label: `${customers.filter(c => c.active).length} Active`, color: 'green' },
-          ]}
-          actions={[
-            {
-              label: 'New Customer',
-              icon: Plus,
-              onClick: () => router.push('/customers/create'),
-              variant: 'primary',
-            },
-          ]}
-        />
+    <div className="min-h-screen bg-gray-50">
+      <PageHeader
+        title="Customers"
+        subtitle="Manage your customer database and contacts"
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "CRM", href: "/crm/dashboard" },
+          { label: "Customers" },
+        ]}
+        actions={[
+          {
+            label: "Export",
+            icon: <Download className="w-4 h-4 mr-2" />,
+            variant: "secondary",
+            onClick: () => alert("Export functionality"),
+          },
+          {
+            label: "New Customer",
+            icon: <Plus className="w-4 h-4 mr-2" />,
+            variant: "primary",
+            onClick: () => router.push('/customers/create'),
+          },
+        ]}
+        tabs={[
+          { label: "All", value: "all", count: customers.length },
+          { label: "Active", value: "active", count: customers.filter(c => c.active).length },
+          { label: "Inactive", value: "inactive", count: customers.filter(c => !c.active).length },
+        ]}
+        activeTab={filterActive}
+        onTabChange={setFilterActive}
+        showSearch={true}
+        searchPlaceholder="Search customers..."
+        onSearch={setSearchQuery}
+        showFilter={true}
+        onFilterClick={() => alert("Filter options")}
+      />
 
-        {/* Filter Buttons */}
+      <div className="p-6">
+        {/* Filter Buttons - Now integrated in header */}
         <div className="px-6 py-4 bg-white border-b border-gray-200">
           <div className="flex items-center justify-between">
             <div className="flex items-center flex-wrap gap-2">
