@@ -353,6 +353,15 @@ export default function CreateTemplatePage() {
           </div>
         </div>
       </form>
+
+      {/* Placeholder Browser Modal */}
+      {showPlaceholderBrowser && (
+        <PlaceholderBrowser
+          templateType={formData.type}
+          onSelect={handlePlaceholderInsert}
+          onClose={() => setShowPlaceholderBrowser(false)}
+        />
+      )}
     </div>
   );
 }
