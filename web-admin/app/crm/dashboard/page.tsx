@@ -114,15 +114,17 @@ export default function CRMDashboardPage() {
   ];
 
   return (
-    <div className="p-4 space-y-6">
-        <CompactHeader
-          title="CRM Dashboard"
-          icon={LayoutDashboard}
-          badges={[
-            { label: `${stats.customers} Customers`, color: 'blue' },
-            { label: `${stats.projects} Projects`, color: 'green' },
-          ]}
-        />
+    <div className="min-h-screen bg-gray-50">
+      <PageHeader
+        title="CRM Dashboard"
+        subtitle="Manage customers, leads, estimates, projects, and revenue"
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "CRM Dashboard" },
+        ]}
+      />
+      
+      <div className="p-6 space-y-6">
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
