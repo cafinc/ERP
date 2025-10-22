@@ -162,17 +162,48 @@ export default function EmployeesPage() {
   };
 
   return (
-    <HybridNavigationTopBar>
-      <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
-        <CompactHeader
-          title="Employee Management"
-          icon={User}
-          badges={[
-            { label: `${employees.length} Total`, color: "blue" },
-            { label: `${employees.filter((e: any) => e.employment_status === "active").length} Active`, color: "green" },
-          ]}
-        />
+    <div className="min-h-screen bg-gray-50">
+      <PageHeader
+        title="Employee Management"
+        subtitle="Manage your team members, roles, and access permissions"
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "HR Module", href: "/hr" },
+          { label: "Employees" },
+        ]}
+        actions={[
+          {
+            label: "Export",
+            icon: <Download className="w-4 h-4 mr-2" />,
+            variant: "secondary",
+            onClick: () => alert("Export functionality"),
+          },
+          {
+            label: "Add Employee",
+            icon: <Plus className="w-4 h-4 mr-2" />,
+            variant: "primary",
+            onClick: () => {
+              resetForm();
+              setShowModal(true);
+            },
+          },
+        ]}
+        tabs={[
+          { label: "Active", value: "active", count: employees.filter((e: any) => e.employment_status === "active").length },
+          { label: "On Leave", value: "on_leave", count: employees.filter((e: any) => e.employment_status === "on_leave").length },
+          { label: "Terminated", value: "terminated", count: employees.filter((e: any) => e.employment_status === "terminated").length },
+          { label: "All", value: "all", count: employees.length },
+        ]}
+        activeTab={statusFilter}
+        onTabChange={setStatusFilter}
+        showSearch={true}
+        searchPlaceholder="Search employees..."
+        onSearch={setSearchQuery}
+        showFilter={true}
+        onFilterClick={() => alert("Filter functionality")}
+      />
 
+      <div className="p-6">
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4 mt-6">
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
