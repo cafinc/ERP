@@ -403,7 +403,7 @@ export default function CustomerFormPage() {
   }
 
   return (
-    <div>
+    <>
       {/* Page Header */}
       <PageHeader
         title={isEdit ? 'Edit Customer' : 'New Customer'}
