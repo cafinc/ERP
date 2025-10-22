@@ -474,30 +474,6 @@ export default function CustomersPage() {
                         <span className="line-clamp-1">{customer.address}</span>
                       </div>
                     </div>
-
-                    {/* Quick Actions */}
-                    <div className="mt-3 pt-3 border-t border-gray-100 flex gap-2">
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          router.push(`/customers/${customerId}`);
-                        }}
-                        className="flex-1 px-3 py-1.5 bg-[#3f72af] hover:bg-[#2c5282] text-white text-xs rounded-lg transition-colors flex items-center justify-center gap-1"
-                      >
-                        <Eye className="w-3 h-3" />
-                        View
-                      </button>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          router.push(`/customers/${customerId}/edit`);
-                        }}
-                        className="flex-1 px-3 py-1.5 bg-gray-100 hover:bg-gray-100 transition-all text-gray-700 text-xs rounded-lg transition-colors flex items-center justify-center gap-1"
-                      >
-                        <Edit className="w-3 h-3" />
-                        Edit
-                      </button>
-                    </div>
                   </div>
                 </div>
               );
