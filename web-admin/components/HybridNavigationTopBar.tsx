@@ -191,10 +191,17 @@ export default function HybridNavigationTopBar({ children }: { children: React.R
   ];
 
   const handleMenuClick = (item: MenuItem) => {
-    if (item.href) {
+    if (item.href && item.submenu) {
+      // If it has both href and submenu (dashboard sections)
+      router.push(item.href);
+      // Keep menu expanded or toggle it
+      setExpandedMenu(expandedMenu === item.label ? item.label : item.label);
+    } else if (item.href) {
+      // Single page without submenu
       router.push(item.href);
       setExpandedMenu(null);
     } else if (item.submenu) {
+      // Has submenu but no href (shouldn't happen now)
       setExpandedMenu(expandedMenu === item.label ? null : item.label);
     }
   };
