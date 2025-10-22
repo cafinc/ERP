@@ -411,14 +411,38 @@ class CommunicationCenterTester:
     def test_mark_delivered(self):
         """Test POST /api/communications/{id}/mark-delivered - Mark as delivered"""
         try:
+            # If we don't have a test communication ID, try to get an existing one
             if not self.test_communication_id:
-                self.log_result(
-                    "POST /api/communications/{id}/mark-delivered",
-                    False,
-                    "No test communication ID available",
-                    "medium"
-                )
-                return
+                try:
+                    response = self.session.get(f"{self.base_url}/communications?limit=1")
+                    if response.status_code == 200:
+                        communications = response.json()
+                        if communications and len(communications) > 0:
+                            self.test_communication_id = communications[0]["_id"]
+                        else:
+                            self.log_result(
+                                "POST /api/communications/{id}/mark-delivered",
+                                False,
+                                "No communications available for testing",
+                                "medium"
+                            )
+                            return
+                    else:
+                        self.log_result(
+                            "POST /api/communications/{id}/mark-delivered",
+                            False,
+                            "Could not fetch existing communications",
+                            "medium"
+                        )
+                        return
+                except:
+                    self.log_result(
+                        "POST /api/communications/{id}/mark-delivered",
+                        False,
+                        "Error fetching existing communications",
+                        "medium"
+                    )
+                    return
             
             response = self.session.post(f"{self.base_url}/communications/{self.test_communication_id}/mark-delivered")
             
