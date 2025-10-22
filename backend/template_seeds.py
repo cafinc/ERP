@@ -361,6 +361,75 @@ CONTRACT_TEMPLATES = [
 
 # ========== WORK ORDER TEMPLATES ==========
 
+# ========== PROJECT TEMPLATES ==========
+
+PROJECT_TEMPLATES = [
+    {
+        "name": "Residential Snow Removal Project",
+        "description": "Standard residential snow removal project workflow",
+        "category": "snow_removal",
+        "tags": ["project", "residential", "workflow"],
+        "content": {
+            "title": "{{project_name}}",
+            "customer": "{{customer_name}}",
+            "property": "{{property_address}}",
+            "project_type": "Residential Snow Removal",
+            "phases": [
+                {
+                    "name": "Initial Assessment",
+                    "tasks": ["Site inspection", "Measure driveway", "Identify obstacles", "Document conditions"],
+                    "duration_days": 1
+                },
+                {
+                    "name": "Service Setup",
+                    "tasks": ["Generate estimate", "Get approval", "Schedule crew", "Assign equipment"],
+                    "duration_days": 2
+                },
+                {
+                    "name": "Service Delivery",
+                    "tasks": ["Monitor weather", "Deploy crew", "Complete service", "Document work"],
+                    "duration_days": 0
+                },
+                {
+                    "name": "Follow-up",
+                    "tasks": ["Customer notification", "Quality check", "Invoice generation", "Payment collection"],
+                    "duration_days": 3
+                }
+            ]
+        },
+        "is_public": True,
+        "is_default": True
+    }
+]
+
+# ========== NOTIFICATION TEMPLATES ==========
+
+NOTIFICATION_TEMPLATES = [
+    {
+        "name": "Service Completion Notification",
+        "description": "Automated email notification when service is completed",
+        "category": "service",
+        "tags": ["email", "automation", "completion"],
+        "content": {
+            "subject": "Service Completed - {{property_address}}",
+            "body": "Dear {{customer_name}},\n\nYour snow removal service at {{property_address}} has been completed.\n\nService Details:\n- Date: {{service_date}}\n- Time Completed: {{completion_time}}\n- Services Performed: {{services_list}}\n\nOur crew has:\n- Cleared all snow from designated areas\n- Applied ice melt/salt as needed\n- Ensured safe access to your property\n\nPhotos of the completed work are attached for your records.\n\nThank you for choosing our services!\n\nBest regards,\n{{company_name}}"
+        },
+        "is_public": True,
+        "is_default": True
+    },
+    {
+        "name": "Weather Alert - Upcoming Storm",
+        "description": "SMS notification for incoming winter storms",
+        "category": "weather",
+        "tags": ["sms", "alert", "weather"],
+        "content": {
+            "message": "WEATHER ALERT: Snow expected {{forecast_date}}. Estimated accumulation: {{snowfall_amount}} inches. We'll be monitoring and will service your property per our agreement. Reply STOP to unsubscribe."
+        },
+        "is_public": True,
+        "is_default": True
+    }
+]
+
 WORK_ORDER_TEMPLATES = [
     {
         "name": "Snow Plowing Checklist",
