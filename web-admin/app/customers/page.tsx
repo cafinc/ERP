@@ -452,18 +452,9 @@ export default function CustomersPage() {
                       </div>
                     )}
 
-                    {/* Status */}
-                    {visibleColumns.status && (
-                      <div className="col-span-1">
-                      <div className="flex items-center gap-2 mb-1">
-                        <h3 className="text-base font-semibold text-gray-900 truncate">
-                          {customer.name}
-                        </h3>
-                        {customer.customer_type === 'company' ? (
-                          <Briefcase className="w-4 h-4 text-[#3f72af] flex-shrink-0" />
-                        ) : (
-                          <Users className="w-4 h-4 text-gray-400 flex-shrink-0" />
-                        )}
+                    {/* Status + View/Edit Actions */}
+                    <div className="col-span-2 flex items-center justify-between">
+                      {visibleColumns.status && (
                         <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
                           customer.active 
                             ? 'bg-green-100 text-green-700' 
@@ -471,53 +462,31 @@ export default function CustomersPage() {
                         }`}>
                           {customer.active ? 'Active' : 'Inactive'}
                         </span>
-                      </div>
-
-                      <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600">
-                        <div className="flex items-center gap-1">
-                          <Mail className="w-4 h-4 text-gray-400" />
-                          <span className="truncate">{customer.email}</span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <Phone className="w-4 h-4 text-gray-400" />
-                          <span>{customer.phone}</span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <MapPin className="w-4 h-4 text-gray-400" />
-                          <span className="truncate">{customer.address}</span>
-                        </div>
-                      </div>
-
-                      {customer.company_name && customer.customer_type !== 'company' && (
-                        <div className="mt-2 inline-flex items-center text-xs text-[#3f72af] bg-blue-50 px-2 py-1 rounded">
-                          <Briefcase className="w-3 h-3 mr-1" />
-                          {customer.company_name}
-                        </div>
                       )}
-                    </div>
-
-                    {/* Quick Actions */}
-                    <div className="flex items-center gap-2 flex-shrink-0">
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          router.push(`/customers/${customerId}`);
-                        }}
-                        className="px-4 py-2 bg-[#3f72af] hover:bg-[#2c5282] text-white text-sm rounded-lg transition-colors flex items-center gap-1"
-                      >
-                        <Eye className="w-4 h-4" />
-                        View
-                      </button>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          router.push(`/customers/${customerId}/edit`);
-                        }}
-                        className="px-4 py-2 bg-gray-100 hover:bg-gray-100 transition-all text-gray-700 text-sm rounded-lg transition-colors flex items-center gap-1"
-                      >
-                        <Edit className="w-4 h-4" />
-                        Edit
-                      </button>
+                      
+                      {/* View/Edit Buttons */}
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            router.push(`/customers/${customerId}`);
+                          }}
+                          className="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs rounded-lg transition-colors flex items-center gap-1"
+                        >
+                          <Eye className="w-3 h-3" />
+                          View
+                        </button>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            router.push(`/customers/${customerId}/edit`);
+                          }}
+                          className="px-3 py-1.5 bg-gray-200 hover:bg-gray-300 text-gray-700 text-xs rounded-lg transition-colors flex items-center gap-1"
+                        >
+                          <Edit className="w-3 h-3" />
+                          Edit
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
