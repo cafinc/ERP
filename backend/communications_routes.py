@@ -91,6 +91,21 @@ class MessageTemplateRequest(BaseModel):
 async def send_inapp_message(request: SendInAppMessageRequest, current_user: dict = Depends(get_current_user)):
     """Send an in-app message to a customer"""
     try:
+        # Get attachment details if provided
+        attachments_data = []
+        if request.attachments:
+            for file_id in request.attachments:
+                file_record = await db.file_attachments.find_one({"file_id": file_id})
+                if file_record:
+                    attachments_data.append({
+                        "file_id": file_id,
+                        "filename": file_record.get("filename"),
+                        "url": file_record.get("url"),
+                        "thumbnail_url": file_record.get("thumbnail_url"),
+                        "file_type": file_record.get("file_type"),
+                        "file_size": file_record.get("file_size")
+                    })
+        
         # Create communication record
         communication = {
             "customer_id": request.customer_id,
@@ -99,6 +114,7 @@ async def send_inapp_message(request: SendInAppMessageRequest, current_user: dic
             "direction": "outbound",
             "content": request.message,
             "message": request.message,
+            "attachments": attachments_data,
             "timestamp": datetime.utcnow(),
             "created_at": datetime.utcnow(),
             "read": False,
@@ -108,12 +124,13 @@ async def send_inapp_message(request: SendInAppMessageRequest, current_user: dic
         result = await db.communications.insert_one(communication)
         communication["_id"] = str(result.inserted_id)
         
-        logger.info(f"In-app message sent to customer {request.customer_id}")
+        logger.info(f"In-app message sent to customer {request.customer_id} with {len(attachments_data)} attachments")
         
         return {
             "success": True,
             "message": "Message sent successfully",
-            "communication_id": str(result.inserted_id)
+            "communication_id": str(result.inserted_id),
+            "attachments": attachments_data
         }
     
     except Exception as e:
