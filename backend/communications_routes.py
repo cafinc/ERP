@@ -1138,3 +1138,77 @@ async def check_user_online_status(user_id: str):
     except Exception as e:
         logger.error(f"Error checking user status: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
+
+
+
+@router.get("/communications/recent")
+async def get_recent_communications(limit: int = 10):
+    """Get recent communications across all types"""
+    try:
+        # Fetch recent communications from all types
+        communications = await communications_collection.find().sort(
+            "timestamp", -1
+        ).limit(limit).to_list(limit)
+        
+        # Enrich with customer names
+        for comm in communications:
+            comm["_id"] = str(comm["_id"])
+            
+            # Get customer name if customer_id exists
+            if "customer_id" in comm and comm["customer_id"]:
+                try:
+                    customer = await customers_collection.find_one({"_id": ObjectId(comm["customer_id"])})
+                    if customer:
+                        comm["customer_name"] = customer.get("name", "Unknown")
+                except:
+                    comm["customer_name"] = "Unknown"
+            
+            # Convert timestamp to string
+            if "timestamp" in comm:
+                comm["timestamp"] = comm["timestamp"].isoformat() if isinstance(comm["timestamp"], datetime) else comm["timestamp"]
+            if "created_at" in comm:
+                comm["created_at"] = comm["created_at"].isoformat() if isinstance(comm["created_at"], datetime) else comm["created_at"]
+        
+        return communications
+    
+    except Exception as e:
+        logger.error(f"Error fetching recent communications: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/communications/all")
+async def get_all_communications():
+    """Get all communications for unified communications center"""
+    try:
+        # Fetch all communications
+        communications = await communications_collection.find().sort(
+            "timestamp", -1
+        ).to_list(None)
+        
+        # Enrich with customer names and clean data
+        for comm in communications:
+            comm["_id"] = str(comm["_id"])
+            
+            # Get customer name
+            if "customer_id" in comm and comm["customer_id"]:
+                try:
+                    customer = await customers_collection.find_one({"_id": ObjectId(comm["customer_id"])})
+                    if customer:
+                        comm["customer_name"] = customer.get("name", "Unknown")
+                except:
+                    comm["customer_name"] = "Unknown"
+            else:
+                # Try to extract name from from/to fields
+                comm["customer_name"] = comm.get("from") or comm.get("to") or "Unknown"
+            
+            # Convert timestamps
+            if "timestamp" in comm:
+                comm["timestamp"] = comm["timestamp"].isoformat() if isinstance(comm["timestamp"], datetime) else comm["timestamp"]
+            if "created_at" in comm:
+                comm["created_at"] = comm["created_at"].isoformat() if isinstance(comm["created_at"], datetime) else comm["created_at"]
+        
+        return communications
+    
+    except Exception as e:
+        logger.error(f"Error fetching all communications: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
