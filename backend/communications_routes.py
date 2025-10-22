@@ -14,7 +14,7 @@ import os
 from motor.motor_asyncio import AsyncIOMotorClient
 from ringcentral_service import ringcentral_service
 from gmail_service import gmail_service
-from auth import get_current_user
+from auth_endpoints import get_current_user_endpoint
 
 logger = logging.getLogger(__name__)
 router = APIRouter()
