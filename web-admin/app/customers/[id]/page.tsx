@@ -481,7 +481,7 @@ export default function CustomerDetailPage() {
     <div className="min-h-screen bg-gray-50">
       <PageHeader
         title={customer.name}
-        subtitle={`${isCompany ? 'Company' : 'Individual'} • ${customer.active ? 'Active' : 'Inactive'} • ${customer.email} • ${customer.phone}`}
+        subtitle={`${isCompany ? 'Company' : 'Individual'} • ${customer.active ? 'Active' : 'Inactive'} • ${customer.email} • ${formatPhoneNumber(customer.phone)}`}
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "Customers", href: "/customers" },
