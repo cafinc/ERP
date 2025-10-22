@@ -12309,5 +12309,10 @@ from communications_routes import router as communications_router
 api_router.include_router(communications_router)
 logger.info("Communications endpoints registered successfully")
 
+# Include Webhook router
+from webhook_routes import router as webhook_router
+api_router.include_router(webhook_router)
+logger.info("Webhook endpoints registered successfully")
+
 # Include the router with all endpoints
 app.include_router(api_router)
