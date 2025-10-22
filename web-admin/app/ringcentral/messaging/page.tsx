@@ -86,7 +86,7 @@ export default function TeamMessagingPage() {
   };
 
   return (
-    <DashboardLayout>
+    <HybridNavigationTopBar>
       <div className="p-8">
         {/* Header */}
         <div className="mb-8">

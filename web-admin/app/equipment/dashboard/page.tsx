@@ -79,7 +79,7 @@ export default function EquipmentDashboardPage() {
   ];
 
   return (
-    <DashboardLayout>
+    <HybridNavigationTopBar>
       <div className="p-4 space-y-6">
         <CompactHeader
           title="Equipment Dashboard"

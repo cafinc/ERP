@@ -204,7 +204,7 @@ export default function ProjectDetailPage() {
 
   if (loading) {
     return (
-      <DashboardLayout>
+      <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-full">
           <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
         </div>
@@ -214,7 +214,7 @@ export default function ProjectDetailPage() {
 
   if (!project) {
     return (
-      <DashboardLayout>
+      <HybridNavigationTopBar>
         <div className="p-8">
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-12 text-center">
             <AlertCircle className="w-16 h-16 text-red-300 mx-auto mb-4" />
@@ -234,7 +234,7 @@ export default function ProjectDetailPage() {
   }
 
   return (
-    <DashboardLayout>
+    <HybridNavigationTopBar>
       <div className="p-8">
         {/* Header */}
         <div className="mb-6 flex items-center justify-between">

@@ -167,7 +167,7 @@ export default function CreateAgreementPage() {
   const selectedCustomer = customers.find(c => c._id === agreement.customer_id);
 
   return (
-    <DashboardLayout>
+    <HybridNavigationTopBar>
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         <CompactHeader
           title="Create Service Agreement"

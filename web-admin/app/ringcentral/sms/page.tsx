@@ -117,7 +117,7 @@ export default function SMSPage() {
   };
 
   return (
-    <DashboardLayout>
+    <HybridNavigationTopBar>
       <div className="p-8">
         {/* Header */}
         <div className="mb-8 flex items-center justify-between">

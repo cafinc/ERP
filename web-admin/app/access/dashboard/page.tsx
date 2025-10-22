@@ -78,7 +78,7 @@ export default function AccessDashboardPage() {
   ];
 
   return (
-    <DashboardLayout>
+    <HybridNavigationTopBar>
       <div className="p-4 space-y-6">
         <CompactHeader
           title="Access Dashboard"

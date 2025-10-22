@@ -168,7 +168,7 @@ export default function EstimateDetailPage() {
 
   if (loading) {
     return (
-      <DashboardLayout>
+      <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-full">
           <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
         </div>
@@ -178,7 +178,7 @@ export default function EstimateDetailPage() {
 
   if (!estimate) {
     return (
-      <DashboardLayout>
+      <HybridNavigationTopBar>
         <div className="flex flex-col items-center justify-center h-full">
           <FileText className="w-16 h-16 text-gray-300 mb-4" />
           <h2 className="text-2xl font-bold text-gray-900 mb-2">Estimate Not Found</h2>
@@ -196,7 +196,7 @@ export default function EstimateDetailPage() {
   }
 
   return (
-    <DashboardLayout>
+    <HybridNavigationTopBar>
       <div className="p-8">
         {/* Header */}
         <div className="mb-6 flex items-center justify-between">

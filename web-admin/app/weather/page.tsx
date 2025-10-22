@@ -176,7 +176,7 @@ export default function WeatherPlanningPage() {
 
   if (loading) {
     return (
-      <DashboardLayout>
+      <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-64">
           <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
         </div>
@@ -186,7 +186,7 @@ export default function WeatherPlanningPage() {
 
   if (!weather) {
     return (
-      <DashboardLayout>
+      <HybridNavigationTopBar>
         <div className="text-center py-12">
           <p className="text-gray-600">Failed to load weather data</p>
         </div>
@@ -195,7 +195,7 @@ export default function WeatherPlanningPage() {
   }
 
   return (
-    <DashboardLayout>
+    <HybridNavigationTopBar>
       <div className="space-y-6">
         {/* Header */}
         <div className="flex justify-between items-center">

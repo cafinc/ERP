@@ -133,7 +133,7 @@ export default function ExpensesPage() {
   };
 
   return (
-    <DashboardLayout>
+    <HybridNavigationTopBar>
       <CompactHeader
         title="Expenses"
         subtitle={`${filteredExpenses.length} expense${filteredExpenses.length !== 1 ? 's' : ''} • Total: $${totalExpenses.toLocaleString()}`}

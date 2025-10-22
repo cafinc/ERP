@@ -512,7 +512,7 @@ export default function GmailPage() {
   // Loading state
   if (initialLoading) {
     return (
-      <DashboardLayout>
+      <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-full">
           <div className="text-xl text-gray-600">Loading Gmail...</div>
         </div>
@@ -523,7 +523,7 @@ export default function GmailPage() {
   // Not connected state
   if (!isConnected) {
     return (
-      <DashboardLayout>
+      <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-full bg-gradient-to-br from-blue-50 to-indigo-100">
           <div className="bg-white p-8 rounded-2xl shadow-2xl max-w-md text-center">
             <Mail className="w-16 h-16 text-blue-600 mx-auto mb-4" />
@@ -549,7 +549,7 @@ export default function GmailPage() {
   );
 
   return (
-    <DashboardLayout>
+    <HybridNavigationTopBar>
       <div className="flex h-[calc(100vh-64px)] bg-gray-50 overflow-hidden">
         {/* Sidebar - Labels */}
         <div className="w-56 bg-white border-r border-gray-200 flex flex-col overflow-hidden">

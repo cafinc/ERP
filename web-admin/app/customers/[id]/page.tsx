@@ -392,7 +392,7 @@ export default function CustomerDetailPage() {
 
   if (loading) {
     return (
-      <DashboardLayout>
+      <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-full">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
         </div>
@@ -402,7 +402,7 @@ export default function CustomerDetailPage() {
 
   if (!customer) {
     return (
-      <DashboardLayout>
+      <HybridNavigationTopBar>
         <div className="p-8 text-center">
           <AlertCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
           <h2 className="text-2xl font-bold text-gray-900 mb-2">Customer Not Found</h2>
@@ -478,7 +478,7 @@ export default function CustomerDetailPage() {
   ];
 
   return (
-    <DashboardLayout>
+    <HybridNavigationTopBar>
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         {/* Compact Header */}
         <CompactHeader

@@ -111,7 +111,7 @@ export default function AutomationDashboardPage() {
 
   if (loading) {
     return (
-      <DashboardLayout>
+      <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-full">
           <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
         </div>
@@ -123,7 +123,7 @@ export default function AutomationDashboardPage() {
   const avgSuccessRate = workflowStats.reduce((sum, w) => sum + w.success_rate, 0) / workflowStats.length;
 
   return (
-    <DashboardLayout>
+    <HybridNavigationTopBar>
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
         <CompactHeader
           title="Automation Dashboard"

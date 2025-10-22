@@ -232,7 +232,7 @@ export default function FormBuilderPage() {
   };
 
   return (
-    <DashboardLayout>
+    <HybridNavigationTopBar>
       <div className="p-8">
         <div className="mb-8 flex items-center justify-between">
           <div className="flex items-center space-x-4">

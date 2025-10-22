@@ -150,7 +150,7 @@ export default function PhotoGalleryPage() {
 
   if (loading) {
     return (
-      <DashboardLayout>
+      <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-64">
           <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
         </div>
@@ -159,7 +159,7 @@ export default function PhotoGalleryPage() {
   }
 
   return (
-    <DashboardLayout>
+    <HybridNavigationTopBar>
       <div className="space-y-6">
         {/* Header */}
         <div className="flex justify-between items-center">

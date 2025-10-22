@@ -462,7 +462,7 @@ export default function FillFormPage() {
 
   if (loading) {
     return (
-      <DashboardLayout>
+      <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-full">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
@@ -475,7 +475,7 @@ export default function FillFormPage() {
 
   if (!template) {
     return (
-      <DashboardLayout>
+      <HybridNavigationTopBar>
         <div className="text-center py-12">
           <p className="text-red-600">Form template not found</p>
         </div>
@@ -484,7 +484,7 @@ export default function FillFormPage() {
   }
 
   return (
-    <DashboardLayout>
+    <HybridNavigationTopBar>
       <div className="p-8">
         <div className="max-w-3xl mx-auto">
           {/* Header */}

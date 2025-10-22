@@ -272,7 +272,7 @@ export default function MessagesPage() {
   ];
 
   return (
-    <DashboardLayout>
+    <HybridNavigationTopBar>
       <div className="h-[calc(100vh-4rem)] flex">
         {/* Sidebar - Conversations List */}
         <div className="w-80 border-r border-gray-200 bg-white flex flex-col">

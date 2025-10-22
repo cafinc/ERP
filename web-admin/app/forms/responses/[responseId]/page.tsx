@@ -213,7 +213,7 @@ export default function ViewResponsePage() {
 
   if (loading) {
     return (
-      <DashboardLayout>
+      <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-full">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
@@ -226,7 +226,7 @@ export default function ViewResponsePage() {
 
   if (!response || !template) {
     return (
-      <DashboardLayout>
+      <HybridNavigationTopBar>
         <div className="text-center py-12">
           <p className="text-red-600">Response not found</p>
         </div>
@@ -235,7 +235,7 @@ export default function ViewResponsePage() {
   }
 
   return (
-    <DashboardLayout>
+    <HybridNavigationTopBar>
       <div className="p-8">
         <div className="max-w-4xl mx-auto">
           {/* Header */}

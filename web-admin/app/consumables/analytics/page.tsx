@@ -65,7 +65,7 @@ export default function ConsumablesAnalyticsPage() {
 
   if (loading) {
     return (
-      <DashboardLayout>
+      <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-64">
           <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
         </div>
@@ -74,7 +74,7 @@ export default function ConsumablesAnalyticsPage() {
   }
 
   return (
-    <DashboardLayout>
+    <HybridNavigationTopBar>
       <div className="space-y-6">
         {/* Header */}
         <div className="flex items-center gap-4">

@@ -14,7 +14,7 @@ export default function TasksPage() {
   const statuses = ['all', 'pending', 'in-progress', 'completed'];
 
   return (
-    <DashboardLayout>
+    <HybridNavigationTopBar>
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         <div className="max-w-7xl mx-auto">
           <CompactHeader

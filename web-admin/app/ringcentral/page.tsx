@@ -60,7 +60,7 @@ export default function RingCentralHub() {
   ];
 
   return (
-    <DashboardLayout>
+    <HybridNavigationTopBar>
       <div className="p-8">
         {/* Header */}
         <div className="mb-8">

@@ -169,7 +169,7 @@ export default function WorkflowBuilderPage() {
 
   if (loading) {
     return (
-      <DashboardLayout>
+      <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-full">
           <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
         </div>
@@ -178,7 +178,7 @@ export default function WorkflowBuilderPage() {
   }
 
   return (
-    <DashboardLayout>
+    <HybridNavigationTopBar>
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         <CompactHeader
           title="Workflow Builder"

@@ -376,7 +376,7 @@ export default function CreateEstimatePage() {
   const isCompany = selectedCustomer?.customer_type === 'company';
 
   return (
-    <DashboardLayout>
+    <HybridNavigationTopBar>
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto">
         <CompactHeader
           title="Create Estimate"

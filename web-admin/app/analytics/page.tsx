@@ -177,7 +177,7 @@ export default function AnalyticsPage() {
 
   if (loading) {
     return (
-      <DashboardLayout>
+      <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-full">
           <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
         </div>
@@ -187,7 +187,7 @@ export default function AnalyticsPage() {
 
   if (!data) {
     return (
-      <DashboardLayout>
+      <HybridNavigationTopBar>
         <div className="text-center py-12">
           <p className="text-gray-600">Failed to load analytics data</p>
         </div>
@@ -196,7 +196,7 @@ export default function AnalyticsPage() {
   }
 
   return (
-    <DashboardLayout>
+    <HybridNavigationTopBar>
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
         {/* Compact Header */}
         <CompactHeader

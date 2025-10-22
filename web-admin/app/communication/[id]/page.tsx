@@ -112,7 +112,7 @@ export default function ConversationDetailPage() {
 
   if (loading) {
     return (
-      <DashboardLayout>
+      <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-full">
           <div className="text-center">
             <RefreshCw className="w-12 h-12 animate-spin text-blue-600 mx-auto mb-4" />
@@ -125,7 +125,7 @@ export default function ConversationDetailPage() {
 
   if (!conversation) {
     return (
-      <DashboardLayout>
+      <HybridNavigationTopBar>
         <div className="p-8">
           <div className="text-center py-12">
             <MessageSquare className="w-16 h-16 text-gray-300 mx-auto mb-4" />
@@ -143,7 +143,7 @@ export default function ConversationDetailPage() {
   }
 
   return (
-    <DashboardLayout>
+    <HybridNavigationTopBar>
       <div className="h-screen flex flex-col">
         {/* Header */}
         <div className="bg-white border-b border-gray-200 px-6 py-4">

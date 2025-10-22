@@ -269,7 +269,7 @@ export default function LiveTrackingPage() {
 
   if (loading) {
     return (
-      <DashboardLayout>
+      <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-screen">
           <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
         </div>
@@ -278,7 +278,7 @@ export default function LiveTrackingPage() {
   }
 
   return (
-    <DashboardLayout>
+    <HybridNavigationTopBar>
       <div className="relative h-[calc(100vh-4rem)]">
         {/* Map Container */}
         <div ref={mapContainer} className="absolute inset-0" />

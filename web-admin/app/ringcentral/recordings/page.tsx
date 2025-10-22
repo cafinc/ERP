@@ -124,7 +124,7 @@ export default function RecordingsPage() {
   };
 
   return (
-    <DashboardLayout>
+    <HybridNavigationTopBar>
       <div className="p-8">
         {/* Header */}
         <div className="mb-8">

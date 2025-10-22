@@ -107,7 +107,7 @@ export default function PaymentsPage() {
   const totalPayments = filteredPayments.reduce((sum, payment) => sum + payment.amount, 0);
 
   return (
-    <DashboardLayout>
+    <HybridNavigationTopBar>
       <CompactHeader
         title="Payments"
         subtitle={`${filteredPayments.length} payment${filteredPayments.length !== 1 ? 's' : ''} • Total: $${totalPayments.toLocaleString()}`}

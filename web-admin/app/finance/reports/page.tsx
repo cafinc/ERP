@@ -97,7 +97,7 @@ export default function ReportsPage() {
   ];
 
   return (
-    <DashboardLayout>
+    <HybridNavigationTopBar>
       <CompactHeader
         title="Financial Reports"
         subtitle="Generate and download comprehensive financial reports"

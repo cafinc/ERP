@@ -45,7 +45,7 @@ export default function LearningDashboardPage() {
   ];
 
   return (
-    <DashboardLayout>
+    <HybridNavigationTopBar>
       <div className="p-4 space-y-6">
         <CompactHeader
           title="Learning Centre Dashboard"

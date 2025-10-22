@@ -118,7 +118,7 @@ export default function SiteMapsPage() {
 
   if (loading) {
     return (
-      <DashboardLayout>
+      <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-64">
           <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
         </div>
@@ -128,7 +128,7 @@ export default function SiteMapsPage() {
 
   if (!site) {
     return (
-      <DashboardLayout>
+      <HybridNavigationTopBar>
         <div className="text-center py-12">
           <AlertCircle className="w-12 h-12 text-gray-400 mx-auto mb-4" />
           <h2 className="text-xl font-semibold text-gray-900">Site not found</h2>
@@ -144,7 +144,7 @@ export default function SiteMapsPage() {
   }
 
   return (
-    <DashboardLayout>
+    <HybridNavigationTopBar>
       <div className="h-full flex flex-col p-6">
         {/* Header */}
         <div className="flex items-center justify-between mb-6">

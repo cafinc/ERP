@@ -81,7 +81,7 @@ export default function DispatchDashboardPage() {
   ];
 
   return (
-    <DashboardLayout>
+    <HybridNavigationTopBar>
       <div className="p-4 space-y-6">
         <CompactHeader
           title="Dispatch Dashboard"

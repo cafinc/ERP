@@ -62,7 +62,7 @@ export default function AnalyticsPage() {
   const COLORS = ['#3B82F6', '#10B981', '#F59E0B', '#EF4444'];
 
   return (
-    <DashboardLayout>
+    <HybridNavigationTopBar>
       <div className="p-8">
         {/* Header */}
         <div className="mb-8 flex items-center justify-between">
