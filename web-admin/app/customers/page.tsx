@@ -2,8 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import HybridNavigationTopBar from '@/components/HybridNavigationTopBar';
-import CompactHeader from '@/components/CompactHeader';
+import PageHeader from '@/components/PageHeader';
 import api from '@/lib/api';
 import {
   Plus,
@@ -18,6 +17,7 @@ import {
   FileText,
   DollarSign,
   Briefcase,
+  Download,
 } from 'lucide-react';
 
 interface Customer {
