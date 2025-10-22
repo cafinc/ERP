@@ -87,7 +87,7 @@ export default function CustomersPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 flex flex-col">
         <PageHeader
           title="Customers"
           subtitle="Manage your customer database"
@@ -105,7 +105,7 @@ export default function CustomersPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
       <PageHeader
         title="Customers"
         subtitle="Manage your customer database and contacts"
