@@ -28,9 +28,11 @@ export default function EnhancedHeader() {
   const [showMessagesDropdown, setShowMessagesDropdown] = useState(false);
   const [showEmailsDropdown, setShowEmailsDropdown] = useState(false);
   const [showCallsDropdown, setShowCallsDropdown] = useState(false);
+  const [showUnifiedComms, setShowUnifiedComms] = useState(false);
   const [unreadMessageCount, setUnreadMessageCount] = useState(0);
   const [unreadEmailCount, setUnreadEmailCount] = useState(0);
   const [unreadNotificationCount, setUnreadNotificationCount] = useState(0);
+  const [totalUnreadComms, setTotalUnreadComms] = useState(0);
   
   // Branding state
   const [headerColor, setHeaderColor] = useState('#3f72af');
