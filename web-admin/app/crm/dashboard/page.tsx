@@ -173,21 +173,6 @@ export default function CRMDashboardPage() {
           ))}
         </div>
 
-        {/* Revenue Overview */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Revenue Overview</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <p className="text-sm text-gray-600 mb-2">Total Revenue</p>
-              <p className="text-3xl font-bold text-green-600">${stats.revenue.toLocaleString()}</p>
-            </div>
-            <div>
-              <p className="text-sm text-gray-600 mb-2">Outstanding</p>
-              <p className="text-3xl font-bold text-orange-600">${stats.outstanding.toLocaleString()}</p>
-            </div>
-          </div>
-        </div>
-
         {/* Three Column Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Recent Activity Feed */}
