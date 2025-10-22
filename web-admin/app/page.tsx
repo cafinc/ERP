@@ -155,7 +155,7 @@ export default function HomePage() {
         <div className="flex items-center justify-center h-64">
           <div className="text-xl text-gray-600">Loading dashboard...</div>
         </div>
-      </DashboardLayout>
+      </HybridNavigationTopBar>
     );
   }
 
@@ -277,6 +277,6 @@ export default function HomePage() {
           </div>
         </div>
       </div>
-    </DashboardLayout>
+    </HybridNavigationTopBar>
   );
 }
