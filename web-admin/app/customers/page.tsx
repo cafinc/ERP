@@ -523,6 +523,6 @@ export default function CustomersPage() {
           </div>
         )}
       </div>
-    </HybridNavigationTopBar>
+    </div>
   );
 }
