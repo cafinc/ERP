@@ -67,19 +67,7 @@ export default function HybridNavigationTopBar({ children }: { children: React.R
         { label: 'Estimates', href: '/estimates', icon: FileText },
         { label: 'Agreements', href: '/contracts', icon: FileText },
         { label: 'Agreement Templates', href: '/agreements/templates', icon: FileText },
-      ],
-    },
-    {
-      label: 'Projects',
-      icon: FolderOpen,
-      href: '/projects',
-      displayAsTabs: true,
-      submenu: [
-        { label: 'All Projects', href: '/projects', icon: FolderOpen },
-        { label: 'Active', href: '/projects?status=active', icon: FolderOpen },
-        { label: 'Completed', href: '/projects?status=completed', icon: FolderOpen },
-        { label: 'On Hold', href: '/projects?status=on_hold', icon: FolderOpen },
-        { label: 'Cancelled', href: '/projects?status=cancelled', icon: FolderOpen },
+        { label: 'Projects', href: '/projects', icon: FolderOpen },
       ],
     },
     {
