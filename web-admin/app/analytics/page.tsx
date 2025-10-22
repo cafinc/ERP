@@ -228,7 +228,7 @@ export default function AnalyticsPage() {
 
         <div className="mx-6 mt-6 space-y-6">{/* Revenue Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg p-6 text-white">
+          <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg p-4 text-white">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-semibold">Total Revenue</h3>
               <DollarSign className="w-8 h-8 opacity-80" />

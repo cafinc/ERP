@@ -183,7 +183,7 @@ export default function AccessDashboardPage() {
         />
 
         {/* Access Groups Overview */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mx-6 mt-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mx-6 mt-6">
           {accessGroups.map((group) => (
             <div
               key={group.name}
@@ -191,7 +191,7 @@ export default function AccessDashboardPage() {
                 group.color === 'blue' 
                   ? 'from-blue-500 to-blue-600' 
                   : 'from-orange-500 to-orange-600'
-              } rounded-xl shadow-sm p-6 text-white`}
+              } rounded-xl shadow-sm p-4 text-white`}
             >
               <div className="flex items-start justify-between mb-4">
                 <div className="flex items-center gap-3">

@@ -216,7 +216,7 @@ export default function GeofenceManagementPage() {
           {view === 'geofences' ? (
             /* Geofence Configuration View */
             <div className="bg-white rounded-xl shadow-sm border border-gray-200">
-              <div className="p-6 border-b border-gray-200">
+              <div className="p-4 border-b border-gray-200">
                 <h2 className="text-xl font-semibold text-gray-900">Site Geofences</h2>
                 <p className="text-sm text-gray-600 mt-1">
                   Set the radius for automatic entry/exit detection at each site
@@ -229,7 +229,7 @@ export default function GeofenceManagementPage() {
                   const hasChanges = editingRadius[geofence.site_id] !== undefined;
                   
                   return (
-                    <div key={geofence.site_id} className="p-6 hover:bg-gray-50 transition-colors">
+                    <div key={geofence.site_id} className="p-4 hover:bg-gray-50 transition-colors">
                       <div className="flex items-center justify-between">
                         <div className="flex-1">
                           <div className="flex items-center space-x-3 mb-2">
@@ -302,7 +302,7 @@ export default function GeofenceManagementPage() {
           ) : (
             /* Event Logs View */
             <div className="bg-white rounded-xl shadow-sm border border-gray-200">
-              <div className="p-6 border-b border-gray-200">
+              <div className="p-4 border-b border-gray-200">
                 <div className="flex items-center justify-between">
                   <div>
                     <h2 className="text-xl font-semibold text-gray-900">Geofence Event Logs</h2>
@@ -334,7 +334,7 @@ export default function GeofenceManagementPage() {
               ) : (
                 <div className="divide-y divide-gray-200">
                   {logs.map((log) => (
-                    <div key={log.id} className="p-6 hover:bg-gray-50 transition-colors">
+                    <div key={log.id} className="p-4 hover:bg-gray-50 transition-colors">
                       <div className="flex items-start space-x-4">
                         <div
                           className={`p-3 rounded-lg ${

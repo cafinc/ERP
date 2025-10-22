@@ -63,7 +63,7 @@ export default function SupportPage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Contact Information */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6 mb-6">
+            <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-4 mb-6">
               <h2 className="text-xl font-semibold text-[#112d4e] mb-4">Contact Us</h2>
 
               <div className="space-y-4">
@@ -261,7 +261,7 @@ export default function SupportPage() {
             </div>
 
             {/* FAQs */}
-            <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6 mt-6">
+            <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-4 mt-6">
               <h2 className="text-xl font-semibold text-[#112d4e] mb-4">Frequently Asked Questions</h2>
 
               <div className="space-y-4">

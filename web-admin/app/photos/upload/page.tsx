@@ -138,7 +138,7 @@ export default function PhotoUploadPage() {
         )}
 
         {/* Metadata */}
-        <div className="bg-white rounded-lg border border-gray-200 p-6 space-y-4">
+        <div className="bg-white rounded-lg border border-gray-200 p-4 space-y-4">
           <h2 className="text-lg font-semibold text-gray-900">Photo Details</h2>
           
           <div>
@@ -196,7 +196,7 @@ export default function PhotoUploadPage() {
         {/* Success Modal */}
         {success && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-            <div className="bg-white rounded-lg max-w-md w-full p-6 text-center">
+            <div className="bg-white rounded-lg max-w-md w-full p-4 text-center">
               <CheckCircle className="w-16 h-16 text-green-600 mx-auto mb-4" />
               <h2 className="text-2xl font-bold text-gray-900 mb-2">Photos Uploaded!</h2>
               <p className="text-gray-600">{files.length} photo{files.length !== 1 ? 's' : ''} uploaded successfully</p>

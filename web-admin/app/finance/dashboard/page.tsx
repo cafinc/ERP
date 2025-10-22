@@ -136,7 +136,7 @@ export default function FinanceDashboardPage() {
         />
 
         {/* Key Metrics */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mx-6 mt-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mx-6 mt-6">
           {/* Revenue */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <div className="flex items-center justify-between mb-4">
@@ -202,7 +202,7 @@ export default function FinanceDashboardPage() {
         </div>
 
         {/* Quick Actions & Stats */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mx-6 mt-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mx-6 mt-6">
           {/* Quick Actions */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>

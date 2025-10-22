@@ -168,7 +168,7 @@ export default function PrivacyPolicy() {
           <p className="text-gray-700 mb-4">
             If you have questions or concerns about this Privacy Policy or our data practices, please contact us:
           </p>
-          <div className="bg-gray-50 p-6 rounded-lg mb-4">
+          <div className="bg-gray-50 p-4 rounded-lg mb-4">
             <p className="text-gray-800 font-semibold mb-2">F Property Services</p>
             <p className="text-gray-700">Email: privacy@cafinc.ca</p>
             <p className="text-gray-700">Phone: +1 (587) 877-0293</p>

@@ -167,7 +167,7 @@ export default function EquipmentFormsPage() {
 
         {/* Assignments Table */}
         <div className="bg-white rounded-lg border border-gray-200">
-          <div className="p-6 border-b border-gray-200">
+          <div className="p-4 border-b border-gray-200">
             <h2 className="text-xl font-semibold text-gray-900">Form Assignments</h2>
           </div>
 

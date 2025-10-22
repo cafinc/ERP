@@ -78,7 +78,7 @@ export default function RingCentralHub() {
         </div>
 
         {/* Quick Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <div className="flex items-center space-x-4">
               <div className="p-3 bg-blue-100 rounded-lg">
@@ -133,7 +133,7 @@ export default function RingCentralHub() {
               <Link
                 key={feature.href}
                 href={feature.href}
-                className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-lg transition-all hover:scale-105"
+                className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-lg transition-all hover:scale-105"
               >
                 <div className="flex items-start justify-between mb-4">
                   <div className={`p-3 ${feature.color} rounded-lg`}>

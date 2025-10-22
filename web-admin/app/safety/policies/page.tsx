@@ -182,7 +182,7 @@ export default function SafetyPoliciesPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mx-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mx-6">
           {filteredPolicies.map((policy, index) => {
             const CategoryIcon = getCategoryIcon(policy.category);
             const categoryGradient = getCategoryGradient(policy.category);
@@ -190,7 +190,7 @@ export default function SafetyPoliciesPage() {
             return (
               <div
                 key={policy.id || `policy-${index}`}
-                className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow cursor-pointer"
+                className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow cursor-pointer"
                 onClick={() => router.push(`/safety/policies/${policy.id}`)}
               >
                 <div className="flex items-start justify-between mb-4">

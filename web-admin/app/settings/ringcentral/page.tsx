@@ -168,7 +168,7 @@ export default function RingCentralSettings() {
         </div>
 
         {/* Connection Status Card */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-8">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <div className={`p-4 rounded-lg ${connected ? 'bg-green-100' : 'bg-gray-100'}`}>
@@ -230,7 +230,7 @@ export default function RingCentralSettings() {
               return (
                 <div
                   key={feature.id}
-                  className={`bg-white rounded-xl shadow-sm border border-gray-200 p-6 ${
+                  className={`bg-white rounded-xl shadow-sm border border-gray-200 p-4 ${
                     feature.status === 'coming_soon' ? 'opacity-60' : ''
                   }`}
                 >

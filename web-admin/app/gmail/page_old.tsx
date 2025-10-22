@@ -502,7 +502,7 @@ export default function GmailPage() {
       <div className="flex-1 bg-white flex flex-col">
         {selectedEmail ? (
           <>
-            <div className="p-6 border-b border-gray-200">
+            <div className="p-4 border-b border-gray-200">
               <div className="flex items-start justify-between mb-4">
                 <h2 className="text-2xl font-bold text-gray-900">{selectedEmail.subject}</h2>
                 <div className="flex items-center space-x-2">

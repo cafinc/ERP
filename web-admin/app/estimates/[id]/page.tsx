@@ -369,7 +369,7 @@ export default function EstimateDetailPage() {
 
             {/* Notes & Terms */}
             {(estimate.notes || estimate.terms) && (
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 space-y-4">
+              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 space-y-4">
                 {estimate.notes && (
                   <div>
                     <h3 className="text-sm font-semibold text-gray-900 mb-2">Notes</h3>
@@ -436,7 +436,7 @@ export default function EstimateDetailPage() {
             </div>
 
             {/* Summary */}
-            <div className="bg-gradient-to-br from-[#3f72af] to-[#3f72af]/80 rounded-xl shadow-sm p-6 text-white">
+            <div className="bg-gradient-to-br from-[#3f72af] to-[#3f72af]/80 rounded-xl shadow-sm p-4 text-white">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm opacity-90">Total Amount</span>
                 <DollarSign className="w-5 h-5 opacity-75" />

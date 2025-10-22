@@ -105,7 +105,7 @@ export default function SMSConfigPage() {
         </div>
 
         {/* Configuration Form */}
-        <div className="bg-white rounded-lg border border-gray-200 p-6 space-y-6">
+        <div className="bg-white rounded-lg border border-gray-200 p-4 space-y-6">
           <h2 className="text-xl font-semibold text-gray-900">Twilio Settings</h2>
 
           {/* Enable/Disable */}
@@ -171,7 +171,7 @@ export default function SMSConfigPage() {
         </div>
 
         {/* Test SMS */}
-        <div className="bg-white rounded-lg border border-gray-200 p-6 space-y-4">
+        <div className="bg-white rounded-lg border border-gray-200 p-4 space-y-4">
           <h2 className="text-xl font-semibold text-gray-900">Test SMS</h2>
           
           <div>

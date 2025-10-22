@@ -249,7 +249,7 @@ export default function PerformancePage() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
           <div className="bg-white rounded-lg shadow p-6">
             <div className="flex items-center justify-between">
               <div>
@@ -294,7 +294,7 @@ export default function PerformancePage() {
         </div>
 
         {/* Filters */}
-        <div className="bg-white rounded-lg shadow p-6 mb-6">
+        <div className="bg-white rounded-lg shadow p-4 mb-6">
           <div className="flex justify-between items-center">
             <select
               value={filterStatus}
@@ -344,7 +344,7 @@ export default function PerformancePage() {
           ) : (
             <div className="divide-y divide-gray-200">
               {reviews.map((review: any) => (
-                <div key={review.id} className="p-6 hover:bg-gray-50">
+                <div key={review.id} className="p-4 hover:bg-gray-50">
                   <div className="flex items-start justify-between">
                     <div className="flex items-start gap-4 flex-1">
                       <div className="flex-shrink-0">

@@ -175,7 +175,7 @@ export default function EmployeesPage() {
         />
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6 mt-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6 mt-6">
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <p className="text-sm text-gray-600">Total Employees</p>
             <p className="text-3xl font-bold text-gray-900">{employees.length}</p>
@@ -201,7 +201,7 @@ export default function EmployeesPage() {
         </div>
 
         {/* Filters and Actions */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-6">
           <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
             <div className="flex gap-4 flex-1 w-full md:w-auto">
               <div className="relative flex-1">

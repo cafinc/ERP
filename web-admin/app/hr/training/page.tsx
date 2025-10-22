@@ -212,7 +212,7 @@ export default function TrainingPage() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-8">
           <div className="bg-white rounded-lg shadow p-6">
             <div className="flex items-center justify-between">
               <div>
@@ -340,7 +340,7 @@ export default function TrainingPage() {
                     {trainings.map((training: any) => (
                       <div
                         key={training.id}
-                        className="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow"
+                        className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
                       >
                         <div className="flex items-start justify-between mb-4">
                           <div className="flex-1">
@@ -426,7 +426,7 @@ export default function TrainingPage() {
                     {employeeTrainings.map((assignment: any) => (
                       <div
                         key={assignment.id}
-                        className="border border-gray-200 rounded-lg p-6 hover:bg-gray-50"
+                        className="border border-gray-200 rounded-lg p-4 hover:bg-gray-50"
                       >
                         <div className="flex items-start justify-between">
                           <div className="flex items-start gap-4 flex-1">

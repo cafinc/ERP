@@ -485,13 +485,13 @@ export default function RecurringServicesPage() {
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="p-6 border-b border-gray-200">
+            <div className="p-4 border-b border-gray-200">
               <h2 className="text-xl font-semibold text-gray-900">
                 {editingService ? 'Edit' : 'Create'} Recurring Service
               </h2>
             </div>
 
-            <div className="p-6 space-y-4">
+            <div className="p-4 space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Site *
@@ -626,7 +626,7 @@ export default function RecurringServicesPage() {
               </div>
             </div>
 
-            <div className="p-6 border-t border-gray-200 flex justify-end gap-3">
+            <div className="p-4 border-t border-gray-200 flex justify-end gap-3">
               <button
                 onClick={() => {
                   setShowModal(false);

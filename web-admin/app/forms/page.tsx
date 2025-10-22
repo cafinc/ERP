@@ -252,7 +252,7 @@ export default function FormsPage() {
                   {filteredTemplates.map((template) => (
                     <div
                       key={template.id}
-                      className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow"
+                      className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow"
                     >
                       <div className="flex items-start justify-between mb-4">
                         <div className="flex items-center space-x-3">
@@ -335,7 +335,7 @@ export default function FormsPage() {
                         return (
                           <div
                             key={response.id}
-                            className="p-6 hover:bg-gray-50 transition-colors"
+                            className="p-4 hover:bg-gray-50 transition-colors"
                           >
                             <div className="flex items-center justify-between">
                               <div className="flex items-center space-x-4">

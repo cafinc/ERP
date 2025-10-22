@@ -189,7 +189,7 @@ export default function ContactsPage() {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <div className="flex items-center space-x-4">
               <div className="p-3 bg-blue-100 rounded-lg">
@@ -275,7 +275,7 @@ export default function ContactsPage() {
         {/* Create Contact Modal */}
         {showCreateModal && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white rounded-xl shadow-xl p-6 w-full max-w-md">
+            <div className="bg-white rounded-xl shadow-xl p-4 w-full max-w-md">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">Add New Contact</h2>
               <form onSubmit={handleCreateContact}>
                 <div className="space-y-4">

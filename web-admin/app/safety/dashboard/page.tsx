@@ -39,10 +39,10 @@ export default function SafetyDashboardPage() {
         />
 
         {/* Key Metrics Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mx-6 mt-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mx-6 mt-6">
           {/* Incidents */}
           <div 
-            className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow cursor-pointer"
+            className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow cursor-pointer"
             onClick={() => router.push('/safety/incidents')}
           >
             <div className="flex items-center gap-3 mb-4">
@@ -68,7 +68,7 @@ export default function SafetyDashboardPage() {
 
           {/* Inspections */}
           <div 
-            className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow cursor-pointer"
+            className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow cursor-pointer"
             onClick={() => router.push('/safety/inspections')}
           >
             <div className="flex items-center gap-3 mb-4">
@@ -94,7 +94,7 @@ export default function SafetyDashboardPage() {
 
           {/* Training */}
           <div 
-            className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow cursor-pointer"
+            className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow cursor-pointer"
             onClick={() => router.push('/safety/training')}
           >
             <div className="flex items-center gap-3 mb-4">
@@ -120,7 +120,7 @@ export default function SafetyDashboardPage() {
 
           {/* Safety Meetings */}
           <div 
-            className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow cursor-pointer"
+            className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow cursor-pointer"
             onClick={() => router.push('/safety/meetings')}
           >
             <div className="flex items-center gap-3 mb-4">

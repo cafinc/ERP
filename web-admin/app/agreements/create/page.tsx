@@ -212,7 +212,7 @@ export default function CreateAgreementPage() {
               {/* From Template */}
               <div
                 onClick={() => setCreationMethod('template')}
-                className={`p-6 border-2 rounded-lg cursor-pointer transition-all ${
+                className={`p-4 border-2 rounded-lg cursor-pointer transition-all ${
                   creationMethod === 'template'
                     ? 'border-blue-500 bg-[#3f72af]/5'
                     : 'border-gray-200 hover:border-blue-500/50'
@@ -248,7 +248,7 @@ export default function CreateAgreementPage() {
               {/* From Accepted Estimate */}
               <div
                 onClick={() => setCreationMethod('estimate')}
-                className={`p-6 border-2 rounded-lg cursor-pointer transition-all ${
+                className={`p-4 border-2 rounded-lg cursor-pointer transition-all ${
                   creationMethod === 'estimate'
                     ? 'border-blue-500 bg-[#3f72af]/5'
                     : 'border-gray-200 hover:border-blue-500/50'
@@ -287,7 +287,7 @@ export default function CreateAgreementPage() {
                   setCreationMethod('scratch');
                   setStep('details');
                 }}
-                className={`p-6 border-2 rounded-lg cursor-pointer transition-all ${
+                className={`p-4 border-2 rounded-lg cursor-pointer transition-all ${
                   creationMethod === 'scratch'
                     ? 'border-blue-500 bg-[#3f72af]/5'
                     : 'border-gray-200 hover:border-blue-500/50'

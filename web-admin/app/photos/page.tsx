@@ -436,7 +436,7 @@ export default function PhotoGalleryPage() {
       {/* Upload Modal Placeholder */}
       {showUploadModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-lg p-6 max-w-md w-full">
+          <div className="bg-white rounded-lg p-4 max-w-md w-full">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-2xl font-bold text-gray-900">Upload Photos</h2>
               <button onClick={() => setShowUploadModal(false)}>

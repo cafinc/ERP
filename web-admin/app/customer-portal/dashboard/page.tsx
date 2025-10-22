@@ -313,7 +313,7 @@ export default function CustomerDashboardPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                   <button
                     onClick={() => router.push('/customer-portal/requests')}
-                    className="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-lg p-6 hover:shadow-md transition-shadow text-left"
+                    className="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-lg p-4 hover:shadow-md transition-shadow text-left"
                   >
                     <ClipboardList className="w-8 h-8 text-[#3f72af] mb-3" />
                     <h3 className="font-semibold text-gray-900 mb-1">Request Service</h3>
@@ -322,7 +322,7 @@ export default function CustomerDashboardPage() {
 
                   <button
                     onClick={() => router.push('/customer-portal/invoices')}
-                    className="bg-gradient-to-br from-orange-50 to-orange-100 border border-orange-200 rounded-lg p-6 hover:shadow-md transition-shadow text-left"
+                    className="bg-gradient-to-br from-orange-50 to-orange-100 border border-orange-200 rounded-lg p-4 hover:shadow-md transition-shadow text-left"
                   >
                     <Receipt className="w-8 h-8 text-orange-600 mb-3" />
                     <h3 className="font-semibold text-gray-900 mb-1">Pay Invoice</h3>
@@ -331,7 +331,7 @@ export default function CustomerDashboardPage() {
 
                   <button
                     onClick={() => router.push('/customer-portal/messages')}
-                    className="bg-gradient-to-br from-green-50 to-green-100 border border-green-200 rounded-lg p-6 hover:shadow-md transition-shadow text-left"
+                    className="bg-gradient-to-br from-green-50 to-green-100 border border-green-200 rounded-lg p-4 hover:shadow-md transition-shadow text-left"
                   >
                     <MessageSquare className="w-8 h-8 text-green-600 mb-3" />
                     <h3 className="font-semibold text-gray-900 mb-1">Contact Us</h3>
@@ -340,7 +340,7 @@ export default function CustomerDashboardPage() {
 
                   <button
                     onClick={() => router.push('/customer-portal/feedback')}
-                    className="bg-gradient-to-br from-purple-50 to-purple-100 border border-purple-200 rounded-lg p-6 hover:shadow-md transition-shadow text-left"
+                    className="bg-gradient-to-br from-purple-50 to-purple-100 border border-purple-200 rounded-lg p-4 hover:shadow-md transition-shadow text-left"
                   >
                     <Star className="w-8 h-8 text-purple-600 mb-3" />
                     <h3 className="font-semibold text-gray-900 mb-1">Give Feedback</h3>
@@ -423,7 +423,7 @@ export default function CustomerDashboardPage() {
           {/* Communication Center (2/3 width) */}
           <div className="lg:col-span-2">
             <div className="bg-white rounded-xl shadow-lg border border-gray-200">
-              <div className="p-6 border-b border-gray-200">
+              <div className="p-4 border-b border-gray-200">
                 <h3 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
                   <MessageSquare className="w-5 h-5" />
                   Communication Center
@@ -456,7 +456,7 @@ export default function CustomerDashboardPage() {
           {/* Recent Activity (1/3 width) */}
           <div className="lg:col-span-1">
             <div className="bg-white rounded-xl shadow-lg border border-gray-200">
-              <div className="p-6 border-b border-gray-200">
+              <div className="p-4 border-b border-gray-200">
                 <h3 className="text-lg font-semibold text-gray-900">Recent Activity</h3>
               </div>
               <div className="divide-y divide-gray-200 max-h-[600px] overflow-y-auto">

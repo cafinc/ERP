@@ -264,7 +264,7 @@ export default function ViewResponsePage() {
           </div>
 
           {/* Response Info */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="flex items-center space-x-3">
                 <div className="p-3 bg-blue-100 rounded-lg">

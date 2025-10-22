@@ -848,7 +848,7 @@ export default function CustomerFormPage() {
           {showFormSelector && (
             <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
               <div className="bg-white rounded-xl shadow-xl max-w-2xl w-full max-h-[80vh] overflow-y-auto">
-                <div className="p-6 border-b border-gray-200 flex items-center justify-between sticky top-0 bg-white">
+                <div className="p-4 border-b border-gray-200 flex items-center justify-between sticky top-0 bg-white">
                   <h3 className="text-xl font-semibold text-gray-900">Select Forms</h3>
                   <button
                     onClick={() => setShowFormSelector(false)}
@@ -905,7 +905,7 @@ export default function CustomerFormPage() {
                     </div>
                   )}
                 </div>
-                <div className="p-6 border-t border-gray-200 bg-gray-50 sticky bottom-0 flex justify-end space-x-3">
+                <div className="p-4 border-t border-gray-200 bg-gray-50 sticky bottom-0 flex justify-end space-x-3">
                   <button
                     onClick={() => setShowFormSelector(false)}
                     className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-white transition-colors font-medium"
@@ -921,13 +921,13 @@ export default function CustomerFormPage() {
           {showSendLinkModal && (
             <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
               <div className="bg-white rounded-xl shadow-xl max-w-md w-full">
-                <div className="p-6 border-b border-gray-200">
+                <div className="p-4 border-b border-gray-200">
                   <h3 className="text-xl font-semibold text-gray-900">Send Customer Registration Link</h3>
                   <p className="text-sm text-gray-600 mt-1">
                     Send a link to the customer to fill out their information
                   </p>
                 </div>
-                <div className="p-6 space-y-4">
+                <div className="p-4 space-y-4">
                   {/* Method Selection */}
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -995,7 +995,7 @@ export default function CustomerFormPage() {
                     </p>
                   </div>
                 </div>
-                <div className="p-6 border-t border-gray-200 bg-gray-50 flex justify-end space-x-3">
+                <div className="p-4 border-t border-gray-200 bg-gray-50 flex justify-end space-x-3">
                   <button
                     onClick={() => {
                       setShowSendLinkModal(false);

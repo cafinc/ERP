@@ -136,7 +136,7 @@ export default function SMSPage() {
 
         {/* Compose Panel */}
         {showCompose && (
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">New Message</h3>
             <form onSubmit={handleSendMessage}>
               <div className="space-y-4">

@@ -267,7 +267,7 @@ export default function ProfileSettings() {
           )}
 
           {/* Avatar/Profile Photo Card */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-6">
             <h2 className="text-xl font-semibold text-gray-900 mb-6 flex items-center space-x-2">
               <Camera className="w-5 h-5" />
               <span>Profile Photo</span>
@@ -337,7 +337,7 @@ export default function ProfileSettings() {
           </div>
 
           {/* Profile Information Card */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-6">
             <h2 className="text-xl font-semibold text-gray-900 mb-6 flex items-center space-x-2">
               <User className="w-5 h-5" />
               <span>Profile Information</span>
@@ -423,7 +423,7 @@ export default function ProfileSettings() {
           </div>
 
           {/* Change Password Card */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-6">
             <h2 className="text-xl font-semibold text-gray-900 mb-6 flex items-center space-x-2">
               <Lock className="w-5 h-5" />
               <span>Change Password</span>

@@ -140,7 +140,7 @@ export default function ReportsPage() {
           {reports.map((report) => (
             <div
               key={report.id}
-              className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow cursor-pointer group"
+              className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow cursor-pointer group"
             >
               <div className={`w-12 h-12 bg-gradient-to-br ${report.color} rounded-lg flex items-center justify-center mb-4`}>
                 <report.icon className="w-6 h-6 text-white" />
@@ -170,7 +170,7 @@ export default function ReportsPage() {
 
         {/* Quick Stats */}
         <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl shadow-sm p-6 text-white">
+          <div className="bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl shadow-sm p-4 text-white">
             <div className="flex items-center justify-between mb-2">
               <h3 className="text-sm font-medium opacity-90">Total Revenue</h3>
               <TrendingUp className="w-5 h-5 opacity-75" />
@@ -179,7 +179,7 @@ export default function ReportsPage() {
             <p className="text-sm opacity-75 mt-1">This Month</p>
           </div>
 
-          <div className="bg-gradient-to-br from-red-500 to-orange-600 rounded-xl shadow-sm p-6 text-white">
+          <div className="bg-gradient-to-br from-red-500 to-orange-600 rounded-xl shadow-sm p-4 text-white">
             <div className="flex items-center justify-between mb-2">
               <h3 className="text-sm font-medium opacity-90">Total Expenses</h3>
               <BarChart3 className="w-5 h-5 opacity-75" />
@@ -188,7 +188,7 @@ export default function ReportsPage() {
             <p className="text-sm opacity-75 mt-1">This Month</p>
           </div>
 
-          <div className="bg-gradient-to-br from-blue-500 to-cyan-600 rounded-xl shadow-sm p-6 text-white">
+          <div className="bg-gradient-to-br from-blue-500 to-cyan-600 rounded-xl shadow-sm p-4 text-white">
             <div className="flex items-center justify-between mb-2">
               <h3 className="text-sm font-medium opacity-90">Net Profit</h3>
               <DollarSign className="w-5 h-5 opacity-75" />

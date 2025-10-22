@@ -821,7 +821,7 @@ export default function CreateEstimatePage() {
         {showCustomerSearch && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
             <div className="bg-white rounded-xl shadow-xl max-w-2xl w-full max-h-[80vh] overflow-y-auto">
-              <div className="p-6 border-b border-gray-200 sticky top-0 bg-white">
+              <div className="p-4 border-b border-gray-200 sticky top-0 bg-white">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-xl font-semibold text-gray-900">Select Customer</h3>
                   <button
@@ -873,7 +873,7 @@ export default function CreateEstimatePage() {
         {showSiteModal && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
             <div className="bg-white rounded-xl shadow-xl max-w-2xl w-full">
-              <div className="p-6 border-b border-gray-200">
+              <div className="p-4 border-b border-gray-200">
                 <div className="flex items-center justify-between">
                   <h3 className="text-xl font-semibold text-gray-900">Select Site</h3>
                   <button onClick={() => setShowSiteModal(false)} className="p-2 hover:bg-gray-100 rounded-lg">
@@ -881,7 +881,7 @@ export default function CreateEstimatePage() {
                   </button>
                 </div>
               </div>
-              <div className="p-6 max-h-96 overflow-y-auto">
+              <div className="p-4 max-h-96 overflow-y-auto">
                 {sites.length === 0 ? (
                   <p className="text-center text-gray-600 py-8">No sites found for this customer</p>
                 ) : (
@@ -910,7 +910,7 @@ export default function CreateEstimatePage() {
         {showContactModal && selectedCustomer && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
             <div className="bg-white rounded-xl shadow-xl max-w-2xl w-full">
-              <div className="p-6 border-b border-gray-200">
+              <div className="p-4 border-b border-gray-200">
                 <div className="flex items-center justify-between">
                   <h3 className="text-xl font-semibold text-gray-900">Select Contacts</h3>
                   <button onClick={() => setShowContactModal(false)} className="p-2 hover:bg-gray-100 rounded-lg">
@@ -918,7 +918,7 @@ export default function CreateEstimatePage() {
                   </button>
                 </div>
               </div>
-              <div className="p-6 max-h-96 overflow-y-auto">
+              <div className="p-4 max-h-96 overflow-y-auto">
                 <div className="space-y-2">
                   {selectedCustomer.contacts?.map((contact, index) => (
                     <label
@@ -949,7 +949,7 @@ export default function CreateEstimatePage() {
                   ))}
                 </div>
               </div>
-              <div className="p-6 border-t border-gray-200 flex justify-end">
+              <div className="p-4 border-t border-gray-200 flex justify-end">
                 <button
                   onClick={() => setShowContactModal(false)}
                   className="px-4 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium"
@@ -965,7 +965,7 @@ export default function CreateEstimatePage() {
         {showFormModal && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
             <div className="bg-white rounded-xl shadow-xl max-w-2xl w-full">
-              <div className="p-6 border-b border-gray-200">
+              <div className="p-4 border-b border-gray-200">
                 <div className="flex items-center justify-between">
                   <h3 className="text-xl font-semibold text-gray-900">Attach Forms</h3>
                   <button onClick={() => setShowFormModal(false)} className="p-2 hover:bg-gray-100 rounded-lg">
@@ -973,7 +973,7 @@ export default function CreateEstimatePage() {
                   </button>
                 </div>
               </div>
-              <div className="p-6 max-h-96 overflow-y-auto">
+              <div className="p-4 max-h-96 overflow-y-auto">
                 {forms.length === 0 ? (
                   <p className="text-center text-gray-600 py-8">No forms available</p>
                 ) : (
@@ -1004,7 +1004,7 @@ export default function CreateEstimatePage() {
                   </div>
                 )}
               </div>
-              <div className="p-6 border-t border-gray-200 flex justify-end">
+              <div className="p-4 border-t border-gray-200 flex justify-end">
                 <button
                   onClick={() => setShowFormModal(false)}
                   className="px-4 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium"
@@ -1020,7 +1020,7 @@ export default function CreateEstimatePage() {
         {showAgreementModal && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
             <div className="bg-white rounded-xl shadow-xl max-w-2xl w-full">
-              <div className="p-6 border-b border-gray-200">
+              <div className="p-4 border-b border-gray-200">
                 <div className="flex items-center justify-between">
                   <h3 className="text-xl font-semibold text-gray-900">Select Agreement Template</h3>
                   <button onClick={() => setShowAgreementModal(false)} className="p-2 hover:bg-gray-100 rounded-lg">
@@ -1028,7 +1028,7 @@ export default function CreateEstimatePage() {
                   </button>
                 </div>
               </div>
-              <div className="p-6 max-h-96 overflow-y-auto">
+              <div className="p-4 max-h-96 overflow-y-auto">
                 {agreements.length === 0 ? (
                   <p className="text-center text-gray-600 py-8">No agreement templates available</p>
                 ) : (
