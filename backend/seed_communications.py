@@ -31,6 +31,18 @@ async def seed_communications():
     
     if not customers:
         print("❌ No customers found. Please add customers first!")
+        print("   Trying to fetch from API to debug...")
+        import aiohttp
+        try:
+            async with aiohttp.ClientSession() as session:
+                async with session.get("http://localhost:8001/api/customers") as resp:
+                    if resp.status == 200:
+                        api_customers = await resp.json()
+                        print(f"   API returned {len(api_customers)} customers")
+                        if api_customers:
+                            print(f"   First customer: {api_customers[0].get('name')}")
+        except Exception as e:
+            print(f"   Debug fetch error: {e}")
         return
     
     print(f"✅ Found {len(customers)} customers")
