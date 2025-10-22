@@ -435,11 +435,11 @@ export default function CustomerFormPage() {
             {/* Frosted Glass Card */}
             <div className="bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/50 p-8 mb-8" style={{ boxShadow: '0 20px 60px rgba(0, 0, 0, 0.15)' }}>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Customer Type Selection */}
-            {!isEdit && (
-              <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">Customer Type *</h2>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Customer Type Selection */}
+                {!isEdit && (
+                  <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-8 backdrop-blur-sm">
+                    <h2 className="text-2xl font-bold text-gray-900 mb-4">Customer Type *</h2>
                 <div className="grid grid-cols-2 gap-4">
                   <button
                     type="button"
