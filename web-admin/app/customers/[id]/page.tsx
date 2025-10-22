@@ -482,6 +482,12 @@ export default function CustomerDetailPage() {
           { label: "Customers", href: "/customers" },
           { label: customer.name },
         ]}
+        tabs={tabs.map(tab => ({
+          label: tab.name + (tab.count !== undefined ? ` (${tab.count})` : ''),
+          value: tab.id,
+        }))}
+        activeTab={activeTab}
+        onTabChange={setActiveTab}
         actions={[
           {
             label: 'Portal View',
@@ -510,54 +516,10 @@ export default function CustomerDetailPage() {
         ]}
       />
 
-      {/* New Layout: Sidebar + Content */}
-        <div className="flex gap-4">
-          {/* Left Sidebar Navigation */}
-          <div className="w-64 flex-shrink-0">
-            <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-3 sticky top-4">
-              {tabGroups.map((group, groupIndex) => (
-                <div key={groupIndex} className={groupIndex > 0 ? 'mt-4' : ''}>
-                  <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2 px-2">
-                    {group.label}
-                  </h3>
-                  <div className="space-y-1">
-                    {group.tabs.map((tab) => {
-                      const Icon = tab.icon;
-                      const isActive = activeTab === tab.id;
-                      return (
-                        <button
-                          key={tab.id}
-                          onClick={() => setActiveTab(tab.id)}
-                          className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                            isActive
-                              ? 'bg-[#3f72af] text-white'
-                              : 'text-gray-700 hover:bg-gray-100'
-                          }`}
-                        >
-                          <div className="flex items-center space-x-2">
-                            <Icon className="w-4 h-4" />
-                            <span>{tab.name}</span>
-                          </div>
-                          {tab.count !== undefined && (
-                            <span className={`text-xs px-2 py-0.5 rounded-full ${
-                              isActive ? 'bg-white/20' : 'bg-gray-200'
-                            }`}>
-                              {tab.count}
-                            </span>
-                          )}
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Right Content Area */}
-          <div className="flex-1 min-w-0">
-            {/* Tab Content */}
-            <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto px-6 py-6">
+        {/* Tab Content */}
+        <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6 mb-6">
           {/* Overview Tab */}
           {activeTab === 'overview' && (
             <div>
