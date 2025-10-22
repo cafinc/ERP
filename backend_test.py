@@ -202,6 +202,13 @@ class CommunicationCenterTester:
                         f"Success=False in response: {data}",
                         "high"
                     )
+            elif response.status_code == 401:
+                self.log_result(
+                    "POST /api/messages/send - InApp message",
+                    False,
+                    "Authentication required - endpoint exists but needs auth",
+                    "high"
+                )
             else:
                 self.log_result(
                     "POST /api/messages/send - InApp message",
