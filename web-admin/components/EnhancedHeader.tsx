@@ -195,11 +195,11 @@ export default function EnhancedHeader() {
             <div className="hidden md:flex items-center space-x-6 mr-4">
               <div className="flex items-center space-x-2">
                 <Calendar className="w-4 h-4" />
-                <span className="text-sm font-medium">{formatDate()}</span>
+                <span className="text-sm font-medium" suppressHydrationWarning>{formatDate()}</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Clock className="w-4 h-4" />
-                <span className="text-sm font-medium">{formatTime()}</span>
+                <span className="text-sm font-medium" suppressHydrationWarning>{formatTime()}</span>
               </div>
             </div>
 
