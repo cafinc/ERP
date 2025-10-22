@@ -469,20 +469,14 @@ export default function CustomersPage() {
                     {/* View/Edit Actions */}
                     <div className="col-span-2 flex items-center gap-2">
                       <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          router.push(`/customers/${customerId}`);
-                        }}
+                        onClick={() => router.push(`/customers/${customerId}`)}
                         className="px-3 py-1.5 bg-[#3f72af] hover:bg-[#2c5282] text-white text-xs rounded-lg transition-colors flex items-center gap-1"
                       >
                         <Eye className="w-3 h-3" />
                         View
                       </button>
                       <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          router.push(`/customers/${customerId}/edit`);
-                        }}
+                        onClick={() => router.push(`/customers/${customerId}/edit`)}
                         className="px-3 py-1.5 bg-gray-200 hover:bg-gray-300 text-gray-700 text-xs rounded-lg transition-colors flex items-center gap-1"
                       >
                         <Edit className="w-3 h-3" />
