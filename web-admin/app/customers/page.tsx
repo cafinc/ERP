@@ -167,6 +167,80 @@ export default function CustomersPage() {
       />
 
       <div className="p-6">
+        {/* Column Selector for List View */}
+        {viewMode === 'list' && (
+          <div className="mb-4 flex justify-end">
+            <div className="relative">
+              <button
+                onClick={() => setShowColumnSelector(!showColumnSelector)}
+                className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 inline-flex items-center"
+              >
+                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2" />
+                </svg>
+                Columns
+              </button>
+              
+              {showColumnSelector && (
+                <div className="absolute right-0 mt-2 w-64 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+                  <div className="p-3">
+                    <div className="text-sm font-semibold text-gray-900 mb-3">Show/Hide Columns</div>
+                    <div className="space-y-2">
+                      {Object.entries({
+                        name: 'Name',
+                        email: 'Email',
+                        phone: 'Phone',
+                        address: 'Address',
+                        type: 'Type',
+                        status: 'Status',
+                        created: 'Created Date',
+                      }).map(([key, label]) => (
+                        <label key={key} className="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded">
+                          <input
+                            type="checkbox"
+                            checked={visibleColumns[key as keyof typeof visibleColumns]}
+                            onChange={(e) => setVisibleColumns({
+                              ...visibleColumns,
+                              [key]: e.target.checked
+                            })}
+                            className="rounded border-gray-300"
+                          />
+                          <span className="text-sm text-gray-700">{label}</span>
+                        </label>
+                      ))}
+                    </div>
+                    <div className="mt-3 pt-3 border-t border-gray-200 flex gap-2">
+                      <button
+                        onClick={() => {
+                          setVisibleColumns({
+                            name: true,
+                            email: true,
+                            phone: true,
+                            address: true,
+                            type: true,
+                            status: true,
+                            created: true,
+                            actions: true,
+                          });
+                        }}
+                        className="flex-1 px-3 py-1.5 text-xs font-medium text-gray-700 bg-gray-100 rounded hover:bg-gray-200"
+                      >
+                        Show All
+                      </button>
+                      <button
+                        onClick={() => setShowColumnSelector(false)}
+                        className="flex-1 px-3 py-1.5 text-xs font-medium text-white bg-blue-600 rounded hover:bg-blue-700"
+                      >
+                        Done
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+        
         {/* Customers Display */}
         {filteredCustomers.length === 0 ? (
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-12 text-center mx-6">
