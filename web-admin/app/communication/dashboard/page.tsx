@@ -54,17 +54,17 @@ export default function CommunicationDashboardPage() {
   ];
 
   return (
-    <HybridNavigationTopBar>
-      <div className="p-4 space-y-6">
-        <CompactHeader
-          title="Communication Dashboard"
-          icon={LayoutDashboard}
-          badges={[
-            { label: `${stats.totalCalls} Calls`, color: 'blue' },
-            { label: `${stats.totalEmails} Emails`, color: 'green' },
-          ]}
-        />
-
+    <div className="min-h-screen bg-gray-50">
+      <PageHeader
+        title="Communication Dashboard"
+        subtitle="Manage messages, calls, emails, and emergency alerts"
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "Communication Dashboard" },
+        ]}
+      />
+      
+      <div className="p-6 space-y-6">
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {statCards.map((stat) => (
