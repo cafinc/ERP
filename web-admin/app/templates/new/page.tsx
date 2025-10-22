@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { ArrowLeftIcon, SaveIcon, SparklesIcon } from '@heroicons/react/24/outline';
+import { ArrowLeftIcon, CheckIcon, SparklesIcon } from '@heroicons/react/24/outline';
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || '';
 
