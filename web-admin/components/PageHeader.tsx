@@ -59,6 +59,7 @@ export default function PageHeader({
   showViewToggle = false,
   viewMode = 'list',
   onViewChange,
+  customTabsRight,
   variant = 'default'
 }: PageHeaderProps) {
   const [searchQuery, setSearchQuery] = React.useState('');
