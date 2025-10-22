@@ -10,6 +10,7 @@ from datetime import datetime
 import logging
 
 from template_service import template_service
+from template_placeholders import get_placeholders_by_category, get_all_placeholders, search_placeholders
 from auth_endpoints import get_current_user_endpoint
 from fastapi import Request
 
