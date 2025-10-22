@@ -481,102 +481,103 @@ export default function CustomerFormPage() {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      First Name *
-                    </label>
-                    <input
-                      type="text"
-                      value={customerForm.first_name}
-                      onChange={e =>
-                        setCustomerForm({ ...customerForm, first_name: e.target.value })
-                      }
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      placeholder="John"
-                      required
-                    />
-                  </div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          First Name *
+                        </label>
+                        <input
+                          type="text"
+                          value={customerForm.first_name}
+                          onChange={e =>
+                            setCustomerForm({ ...customerForm, first_name: e.target.value })
+                          }
+                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          placeholder="John"
+                          required
+                        />
+                      </div>
 
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Last Name *
-                    </label>
-                    <input
-                      type="text"
-                      value={customerForm.last_name}
-                      onChange={e =>
-                        setCustomerForm({ ...customerForm, last_name: e.target.value })
-                      }
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      placeholder="Smith"
-                      required
-                    />
-                  </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Last Name *
+                        </label>
+                        <input
+                          type="text"
+                          value={customerForm.last_name}
+                          onChange={e =>
+                            setCustomerForm({ ...customerForm, last_name: e.target.value })
+                          }
+                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          placeholder="Smith"
+                          required
+                        />
+                      </div>
 
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Email *</label>
-                    <div className="relative">
-                      <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-                      <input
-                        type="email"
-                        value={customerForm.email}
-                        onChange={e => setCustomerForm({ ...customerForm, email: e.target.value })}
-                        className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
-                        placeholder="john@example.com"
-                        required
-                      />
-                    </div>
-                  </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Email *</label>
+                        <div className="relative">
+                          <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                          <input
+                            type="email"
+                            value={customerForm.email}
+                            onChange={e => setCustomerForm({ ...customerForm, email: e.target.value })}
+                            className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                            placeholder="john@example.com"
+                            required
+                          />
+                        </div>
+                      </div>
 
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Phone *</label>
-                    <div className="relative">
-                      <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-                      <input
-                        type="tel"
-                        value={customerForm.phone}
-                        onChange={e => handlePhoneChange('phone', e.target.value)}
-                        className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
-                        placeholder="555-123-4567"
-                        required
-                      />
-                    </div>
-                  </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Phone *</label>
+                        <div className="relative">
+                          <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                          <input
+                            type="tel"
+                            value={customerForm.phone}
+                            onChange={e => handlePhoneChange('phone', e.target.value)}
+                            className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                            placeholder="555-123-4567"
+                            required
+                          />
+                        </div>
+                      </div>
 
-                  <div className="md:col-span-2">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Mobile Number (Optional)
-                    </label>
-                    <div className="relative">
-                      <Smartphone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-                      <input
-                        type="tel"
-                        value={customerForm.mobile}
-                        onChange={e => handlePhoneChange('mobile', e.target.value)}
-                        className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
-                        placeholder="555-987-6543"
-                      />
-                    </div>
-                  </div>
+                      <div className="md:col-span-2">
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Mobile Number (Optional)
+                        </label>
+                        <div className="relative">
+                          <Smartphone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                          <input
+                            type="tel"
+                            value={customerForm.mobile}
+                            onChange={e => handlePhoneChange('mobile', e.target.value)}
+                            className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                            placeholder="555-987-6543"
+                          />
+                        </div>
+                      </div>
 
-                  <div className="md:col-span-2">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Link to Company (Optional)
-                    </label>
-                    <select
-                      value={customerForm.company_id}
-                      onChange={e => setCustomerForm({ ...customerForm, company_id: e.target.value })}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    >
-                      <option key="none" value="">No company affiliation</option>
-                      {companies.map(company => (
-                        <option key={company._id} value={company._id}>
-                          {company.name}
-                        </option>
-                      ))}
-                    </select>
-                    <p className="text-xs text-gray-500 mt-1">
-                      Select if this person is a contact for a company
-                    </p>
+                      <div className="md:col-span-2">
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Link to Company (Optional)
+                        </label>
+                        <select
+                          value={customerForm.company_id}
+                          onChange={e => setCustomerForm({ ...customerForm, company_id: e.target.value })}
+                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        >
+                          <option key="none" value="">No company affiliation</option>
+                          {companies.map(company => (
+                            <option key={company._id} value={company._id}>
+                              {company.name}
+                            </option>
+                          ))}
+                        </select>
+                        <p className="text-xs text-gray-500 mt-1">
+                          Select if this person is a contact for a company
+                        </p>
+                      </div>
                     </div>
                   </div>
                 )}
