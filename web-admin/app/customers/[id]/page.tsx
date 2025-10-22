@@ -1582,9 +1582,6 @@ export default function CustomerDetailPage() {
         {activeTab === 'communications' && (
           <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6 mt-6">
             {(() => {
-              const [messageInput, setMessageInput] = React.useState('');
-              const [sendingMessage, setSendingMessage] = React.useState(false);
-
               const typeConfig = {
                 'inapp': { 
                   icon: MessageCircle, 
