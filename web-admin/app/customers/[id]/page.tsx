@@ -473,31 +473,30 @@ export default function CustomerDetailPage() {
   ];
 
   return (
-      <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
-        {/* Compact Header */}
-        <CompactHeader
-          title={customer.name}
-          backUrl="/customers"
-          icon={isCompany ? Briefcase : Users}
-          badges={[
-            { label: customer.active ? 'Active' : 'Inactive', color: customer.active ? 'green' : 'gray' },
-            { label: isCompany ? 'Company' : 'Individual', color: isCompany ? 'blue' : 'gray' },
-          ]}
-          actions={[
-            {
-              label: 'Portal View',
-              icon: ExternalLink,
-              onClick: () => window.open('/customer-portal/dashboard', '_blank'),
-              variant: 'secondary',
-            },
-            {
-              label: 'Request',
-              icon: Plus,
-              onClick: () => setShowServiceRequestModal(true),
-              variant: 'success',
-            },
-            {
-              label: 'Form',
+    <div className="min-h-screen bg-gray-50">
+      <PageHeader
+        title={customer.name}
+        subtitle={`${isCompany ? 'Company' : 'Individual'} • ${customer.active ? 'Active' : 'Inactive'} • ${customer.email} • ${customer.phone}`}
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "Customers", href: "/customers" },
+          { label: customer.name },
+        ]}
+        actions={[
+          {
+            label: 'Portal View',
+            icon: <ExternalLink className="w-4 h-4 mr-2" />,
+            onClick: () => window.open('/customer-portal/dashboard', '_blank'),
+            variant: 'secondary',
+          },
+          {
+            label: 'Request',
+            icon: <Plus className="w-4 h-4 mr-2" />,
+            onClick: () => setShowServiceRequestModal(true),
+            variant: 'secondary',
+          },
+          {
+            label: 'Form',
               icon: FileText,
               onClick: () => setShowAttachFormModal(true),
               variant: 'purple',
