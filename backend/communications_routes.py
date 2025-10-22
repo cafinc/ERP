@@ -19,9 +19,9 @@ logger = logging.getLogger(__name__)
 router = APIRouter()
 
 # MongoDB connection (same as server.py)
-mongo_url = os.environ['MONGO_URL']
+mongo_url = os.getenv("MONGO_URL", "mongodb://localhost:27017")
 client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ['DB_NAME']]
+db = client[os.getenv("DB_NAME", "snow_removal_db")]
 
 
 # ========== Request Models ==========
