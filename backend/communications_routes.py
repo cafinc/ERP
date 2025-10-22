@@ -262,11 +262,7 @@ async def get_communications(
         if type:
             query["type"] = type
         
-        communications = list(
-            communications_collection.find(query)
-            .sort("timestamp", -1)
-            .limit(limit)
-        )
+        communications = await db.communications.find(query).sort("timestamp", -1).limit(limit).to_list(limit)
         
         # Convert ObjectId to string
         for comm in communications:
