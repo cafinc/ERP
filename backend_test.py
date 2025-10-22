@@ -481,14 +481,38 @@ class CommunicationCenterTester:
     def test_get_status(self):
         """Test GET /api/communications/{id}/status - Get message status"""
         try:
+            # If we don't have a test communication ID, try to get an existing one
             if not self.test_communication_id:
-                self.log_result(
-                    "GET /api/communications/{id}/status",
-                    False,
-                    "No test communication ID available",
-                    "medium"
-                )
-                return
+                try:
+                    response = self.session.get(f"{self.base_url}/communications?limit=1")
+                    if response.status_code == 200:
+                        communications = response.json()
+                        if communications and len(communications) > 0:
+                            self.test_communication_id = communications[0]["_id"]
+                        else:
+                            self.log_result(
+                                "GET /api/communications/{id}/status",
+                                False,
+                                "No communications available for testing",
+                                "medium"
+                            )
+                            return
+                    else:
+                        self.log_result(
+                            "GET /api/communications/{id}/status",
+                            False,
+                            "Could not fetch existing communications",
+                            "medium"
+                        )
+                        return
+                except:
+                    self.log_result(
+                        "GET /api/communications/{id}/status",
+                        False,
+                        "Error fetching existing communications",
+                        "medium"
+                    )
+                    return
             
             response = self.session.get(f"{self.base_url}/communications/{self.test_communication_id}/status")
             
