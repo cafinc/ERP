@@ -210,7 +210,7 @@ export default function PageHeader({
             {showFilter && (
               <button
                 onClick={onFilterClick}
-                className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 shadow-sm inline-flex items-center"
+                className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 inline-flex items-center"
               >
                 <Filter className="w-4 h-4 mr-2" />
                 Filters
@@ -221,7 +221,7 @@ export default function PageHeader({
 
         {/* Tabs */}
         {tabs && tabs.length > 0 && (
-          <div className="flex gap-6 border-b border-blue-200 -mb-5 pb-0">
+          <div className="flex gap-6 border-b border-gray-200 -mb-5 pb-0">
             {tabs.map((tab) => (
               <button
                 key={tab.value}
