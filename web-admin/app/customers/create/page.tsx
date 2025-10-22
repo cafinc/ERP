@@ -583,11 +583,12 @@ export default function CustomerFormPage() {
 
               {/* Company Form */}
               {customerForm.customer_type === 'company' && (
-                <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-8 backdrop-blur-sm">
-                  <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center space-x-2">
-                    <Building className="w-5 h-5 text-[#3f72af]" />
-                    <span>Company Information</span>
-                  </h2>
+                <div>
+                  <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-8 backdrop-blur-sm">
+                    <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center space-x-2">
+                      <Building className="w-5 h-5 text-[#3f72af]" />
+                      <span>Company Information</span>
+                    </h2>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="md:col-span-2">
