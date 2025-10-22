@@ -76,6 +76,7 @@ export default function CustomersPage() {
   };
 
   const filteredCustomers = customers.filter(customer => {
+    // Search filter
     const matchesSearch = 
       customer.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
       customer.email?.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -83,17 +84,19 @@ export default function CustomersPage() {
       customer.address?.toLowerCase().includes(searchQuery.toLowerCase()) ||
       customer.company_name?.toLowerCase().includes(searchQuery.toLowerCase());
     
-    const matchesFilter = 
+    // Status filter (Active/Inactive)
+    const matchesStatus = 
       filterActive === 'all' || 
       (filterActive === 'active' && customer.active) ||
       (filterActive === 'inactive' && !customer.active);
     
+    // Type filter (Individual/Company)
     const matchesType =
       filterType === 'all' ||
       (filterType === 'individual' && (!customer.customer_type || customer.customer_type === 'individual')) ||
       (filterType === 'company' && customer.customer_type === 'company');
     
-    return matchesSearch && matchesFilter && matchesType;
+    return matchesSearch && matchesStatus && matchesType;
   });
 
   if (loading) {
