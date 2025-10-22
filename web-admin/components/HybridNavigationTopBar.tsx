@@ -191,7 +191,6 @@ export default function HybridNavigationTopBar({ children }: { children: React.R
         { label: 'Support', href: '/settings/support', icon: Settings },
         { label: 'Team', href: '/team', icon: Users },
         { label: 'Crew', href: '/crew', icon: Users },
-        { label: 'Shifts', href: '/shifts', icon: FileText },
       ],
     },
   ];
