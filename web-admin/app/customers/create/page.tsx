@@ -909,7 +909,7 @@ export default function CustomerFormPage() {
                     </p>
                   </div>
                 )}
-              </>
+              </div>
             )}
 
             {/* Address Section (Common for both) */}
