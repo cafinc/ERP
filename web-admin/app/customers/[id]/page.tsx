@@ -1441,6 +1441,82 @@ export default function CustomerDetailPage() {
             </div>
           )}
         </div>
+
+        {/* Communication Center */}
+        <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6 mt-6">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-xl font-semibold text-gray-900">Communication Center</h2>
+            <span className="text-sm text-gray-500">All interactions with {customer.name}</span>
+          </div>
+
+          <div className="space-y-3">
+            {communications.length === 0 ? (
+              <p className="text-center text-gray-500 py-8">No communications recorded yet</p>
+            ) : (
+              communications.map((comm, index) => {
+                const typeConfig = {
+                  'email': { icon: Mail, color: 'bg-blue-100 text-blue-600', label: 'Email' },
+                  'sms': { icon: MessageSquare, color: 'bg-green-100 text-green-600', label: 'SMS' },
+                  'phone': { icon: PhoneCall, color: 'bg-purple-100 text-purple-600', label: 'Phone' },
+                  'inapp': { icon: MessageCircle, color: 'bg-orange-100 text-orange-600', label: 'In-App' },
+                  'message_center': { icon: Send, color: 'bg-pink-100 text-pink-600', label: 'Message Center' },
+                };
+                
+                const config = typeConfig[comm.type as keyof typeof typeConfig] || typeConfig.inapp;
+                const Icon = config.icon;
+
+                return (
+                  <div
+                    key={index}
+                    className="flex items-start space-x-4 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer border border-gray-200"
+                    onClick={() => {
+                      // Navigate to communication detail or open modal
+                      if (comm.type === 'email') {
+                        router.push(`/communication/emails/${comm.id}`);
+                      } else if (comm.type === 'sms') {
+                        router.push(`/communication/sms/${comm.id}`);
+                      } else if (comm.type === 'message_center') {
+                        router.push(`/communication/messages/${comm.id}`);
+                      }
+                    }}
+                  >
+                    <div className={`p-3 rounded-lg ${config.color} flex-shrink-0`}>
+                      <Icon className="w-5 h-5" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="text-sm font-medium text-gray-900">{config.label}</span>
+                        <span className="text-xs text-gray-500">
+                          {new Date(comm.timestamp).toLocaleDateString()} at {new Date(comm.timestamp).toLocaleTimeString()}
+                        </span>
+                      </div>
+                      <p className="text-sm text-gray-700 mb-1 font-medium">{comm.subject || 'No subject'}</p>
+                      <p className="text-sm text-gray-600 truncate">{comm.content || comm.message}</p>
+                      {comm.direction && (
+                        <span className={`text-xs px-2 py-0.5 rounded-full mt-2 inline-block ${
+                          comm.direction === 'outbound' ? 'bg-blue-100 text-blue-700' : 'bg-green-100 text-green-700'
+                        }`}>
+                          {comm.direction === 'outbound' ? 'Sent' : 'Received'}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                );
+              })
+            )}
+          </div>
+
+          {communications.length > 0 && (
+            <div className="mt-4 text-center">
+              <button
+                onClick={() => setActiveTab('communications')}
+                className="text-sm text-[#3f72af] hover:text-[#2d5480] font-medium"
+              >
+                View All Communications →
+              </button>
+            </div>
+          )}
+        </div>
       </div>
       </div>
 
