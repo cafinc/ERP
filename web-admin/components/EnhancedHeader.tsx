@@ -74,17 +74,20 @@ export default function EnhancedHeader() {
     
     const fetchUnreadCounts = async () => {
       try {
+        let totalUnread = 0;
+        let unreadEmails = 0;
+
         // Messages
         const res = await api.get('/messages/conversations');
         const conversations = res.data.conversations || [];
-        const totalUnread = conversations.reduce((sum: number, conv: any) => sum + (conv.unread_count || 0), 0);
+        totalUnread = conversations.reduce((sum: number, conv: any) => sum + (conv.unread_count || 0), 0);
         setUnreadMessageCount(totalUnread);
 
         // Emails
         try {
           const emailsRes = await api.get('/gmail/emails?limit=50');
           const emails = emailsRes.data.emails || emailsRes.data || [];
-          const unreadEmails = emails.filter((e: any) => !e.read).length;
+          unreadEmails = emails.filter((e: any) => !e.read).length;
           setUnreadEmailCount(unreadEmails);
         } catch (error) {
           console.error('Error fetching emails:', error);
