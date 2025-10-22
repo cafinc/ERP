@@ -577,12 +577,12 @@ export default function CustomerFormPage() {
                     <p className="text-xs text-gray-500 mt-1">
                       Select if this person is a contact for a company
                     </p>
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
 
-              {/* Company Form */}
-              {customerForm.customer_type === 'company' && (
+                {/* Company Form */}
+                {customerForm.customer_type === 'company' && (
                 <>
                   <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-8 backdrop-blur-sm">
                   <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center space-x-2">
