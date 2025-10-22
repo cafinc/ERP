@@ -12311,6 +12311,7 @@ logger.info("Communications endpoints registered successfully")
 
 # Include Webhook router
 from webhook_routes import router as webhook_router
+from template_routes import router as template_router
 api_router.include_router(webhook_router)
 logger.info("Webhook endpoints registered successfully")
 
