@@ -357,6 +357,8 @@ export default function NavigationBuilder() {
     setNavigation(navigation.map(s => s.id === id ? { ...s, ...updates } : s));
   };
 
+  const [selectedSection, setSelectedSection] = useState<string | null>(null);
+
   const addSubmenuItem = (sectionId: string, page: NavPage) => {
     setNavigation(navigation.map(s => {
       if (s.id === sectionId) {
@@ -368,6 +370,19 @@ export default function NavigationBuilder() {
       }
       return s;
     }));
+  };
+
+  const handlePageClick = (page: any, isArray: boolean = false) => {
+    if (!selectedSection) {
+      alert('Please select a section first by clicking "Add to this section" button');
+      return;
+    }
+    
+    if (isArray) {
+      addSubmenuItem(selectedSection, page);
+    } else {
+      addSubmenuItem(selectedSection, { name: page.name, path: page.path });
+    }
   };
 
   const removeSubmenuItem = (sectionId: string, path: string) => {
