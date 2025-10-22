@@ -564,6 +564,36 @@ async def seed_templates():
             )
             logger.info(f"Created work order template: {template_data['name']}")
         
+        # Seed projects
+        for template_data in PROJECT_TEMPLATES:
+            await template_service.create_template(
+                template_type="project",
+                name=template_data["name"],
+                content=template_data["content"],
+                user_id=SYSTEM_USER,
+                description=template_data["description"],
+                category=template_data["category"],
+                tags=template_data["tags"],
+                is_public=template_data["is_public"],
+                is_default=template_data["is_default"]
+            )
+            logger.info(f"Created project template: {template_data['name']}")
+        
+        # Seed notifications
+        for template_data in NOTIFICATION_TEMPLATES:
+            await template_service.create_template(
+                template_type="notification",
+                name=template_data["name"],
+                content=template_data["content"],
+                user_id=SYSTEM_USER,
+                description=template_data["description"],
+                category=template_data["category"],
+                tags=template_data["tags"],
+                is_public=template_data["is_public"],
+                is_default=template_data["is_default"]
+            )
+            logger.info(f"Created notification template: {template_data['name']}")
+        
         logger.info("Template seeding completed successfully!")
         print("\n✅ Successfully seeded templates:")
         print(f"   - {len(ESTIMATE_TEMPLATES)} Estimate templates")
@@ -571,7 +601,10 @@ async def seed_templates():
         print(f"   - {len(PROPOSAL_TEMPLATES)} Proposal templates")
         print(f"   - {len(CONTRACT_TEMPLATES)} Contract templates")
         print(f"   - {len(WORK_ORDER_TEMPLATES)} Work Order templates")
-        print(f"\nTotal: {len(ESTIMATE_TEMPLATES) + len(INVOICE_TEMPLATES) + len(PROPOSAL_TEMPLATES) + len(CONTRACT_TEMPLATES) + len(WORK_ORDER_TEMPLATES)} templates created\n")
+        print(f"   - {len(PROJECT_TEMPLATES)} Project templates")
+        print(f"   - {len(NOTIFICATION_TEMPLATES)} Notification templates")
+        total = len(ESTIMATE_TEMPLATES) + len(INVOICE_TEMPLATES) + len(PROPOSAL_TEMPLATES) + len(CONTRACT_TEMPLATES) + len(WORK_ORDER_TEMPLATES) + len(PROJECT_TEMPLATES) + len(NOTIFICATION_TEMPLATES)
+        print(f"\nTotal: {total} templates created\n")
         
     except Exception as e:
         logger.error(f"Error seeding templates: {str(e)}")
