@@ -413,6 +413,19 @@ export default function CustomersPage() {
                   className="px-6 py-4 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-b-0"
                 >
                   <div className="grid grid-cols-12 gap-4 items-center text-sm">
+                    {/* Status */}
+                    {visibleColumns.status && (
+                      <div className="col-span-1">
+                        <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
+                          customer.active 
+                            ? 'bg-green-100 text-green-700' 
+                            : 'bg-gray-100 text-gray-700'
+                        }`}>
+                          {customer.active ? 'Active' : 'Inactive'}
+                        </span>
+                      </div>
+                    )}
+
                     {/* Name */}
                     {visibleColumns.name && (
                       <div className="col-span-2">
@@ -425,7 +438,7 @@ export default function CustomersPage() {
 
                     {/* Address */}
                     {visibleColumns.address && (
-                      <div className="col-span-3 text-gray-600 truncate">{customer.address}</div>
+                      <div className="col-span-2 text-gray-600 truncate">{customer.address}</div>
                     )}
 
                     {/* Phone */}
@@ -435,14 +448,14 @@ export default function CustomersPage() {
 
                     {/* Email */}
                     {visibleColumns.email && (
-                      <div className="col-span-3 text-gray-600 truncate">{customer.email}</div>
+                      <div className="col-span-2 text-gray-600 truncate">{customer.email}</div>
                     )}
 
                     {/* Type */}
                     {visibleColumns.type && (
                       <div className="col-span-1">
                         {customer.customer_type === 'company' ? (
-                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-700">
+                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-[#3f72af]/10 text-[#3f72af]">
                             Company
                           </span>
                         ) : (
@@ -453,41 +466,28 @@ export default function CustomersPage() {
                       </div>
                     )}
 
-                    {/* Status + View/Edit Actions */}
-                    <div className="col-span-2 flex items-center justify-between">
-                      {visibleColumns.status && (
-                        <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
-                          customer.active 
-                            ? 'bg-green-100 text-green-700' 
-                            : 'bg-gray-100 text-gray-700'
-                        }`}>
-                          {customer.active ? 'Active' : 'Inactive'}
-                        </span>
-                      )}
-                      
-                      {/* View/Edit Buttons */}
-                      <div className="flex items-center gap-2">
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            router.push(`/customers/${customerId}`);
-                          }}
-                          className="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs rounded-lg transition-colors flex items-center gap-1"
-                        >
-                          <Eye className="w-3 h-3" />
-                          View
-                        </button>
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            router.push(`/customers/${customerId}/edit`);
-                          }}
-                          className="px-3 py-1.5 bg-gray-200 hover:bg-gray-300 text-gray-700 text-xs rounded-lg transition-colors flex items-center gap-1"
-                        >
-                          <Edit className="w-3 h-3" />
-                          Edit
-                        </button>
-                      </div>
+                    {/* View/Edit Actions */}
+                    <div className="col-span-2 flex items-center gap-2">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          router.push(`/customers/${customerId}`);
+                        }}
+                        className="px-3 py-1.5 bg-[#3f72af] hover:bg-[#2c5282] text-white text-xs rounded-lg transition-colors flex items-center gap-1"
+                      >
+                        <Eye className="w-3 h-3" />
+                        View
+                      </button>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          router.push(`/customers/${customerId}/edit`);
+                        }}
+                        className="px-3 py-1.5 bg-gray-200 hover:bg-gray-300 text-gray-700 text-xs rounded-lg transition-colors flex items-center gap-1"
+                      >
+                        <Edit className="w-3 h-3" />
+                        Edit
+                      </button>
                     </div>
                   </div>
                 </div>
