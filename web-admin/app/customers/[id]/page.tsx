@@ -497,17 +497,18 @@ export default function CustomerDetailPage() {
           },
           {
             label: 'Form',
-              icon: FileText,
-              onClick: () => setShowAttachFormModal(true),
-              variant: 'purple',
-            },
-            {
-              label: 'Edit',
-              icon: Edit,
-              onClick: () => router.push(`/customers/${customerId}/edit`),
-              variant: 'primary',
-            },
-          ]}
+            icon: <FileText className="w-4 h-4 mr-2" />,
+            onClick: () => setShowAttachFormModal(true),
+            variant: 'secondary',
+          },
+          {
+            label: 'Edit',
+            icon: <Edit className="w-4 h-4 mr-2" />,
+            onClick: () => router.push(`/customers/${customerId}/edit`),
+            variant: 'secondary',
+          },
+        ]}
+      />
         />
 
         {/* New Layout: Sidebar + Content */}
