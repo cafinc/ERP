@@ -124,14 +124,16 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Site Maps API - Create site map with annotations"
-    - "Site Maps API - Get site maps by site"
-    - "Site Maps API - Get specific site map"
-    - "Site Maps API - Update site map"
-    - "Site Maps API - Set current map version"
-    - "Site Maps API - Delete site map"
+    - "Communication Center - Core Messaging APIs"
+    - "Communication Center - File Upload APIs"
+    - "Communication Center - Message Sending APIs"
+    - "Communication Center - Read Receipts & Status APIs"
+    - "Communication Center - Search & Templates APIs"
+    - "Communication Center - Analytics APIs"
+    - "Communication Center - WebSocket & Online Status APIs"
+    - "Communication Center - Crew Communication APIs"
   stuck_tasks:
-    - "Site Maps API - Error handling for invalid ObjectIds"
+    - "Communication Center - Crew Communication APIs"
   test_all: false
   test_priority: "high_first"
 
