@@ -3,7 +3,7 @@ Communications Routes - Unified Communication Center
 Handles InApp messages, SMS (RingCentral), Email (Gmail), and Phone logs
 """
 
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import Optional, List, Dict
 from datetime import datetime
