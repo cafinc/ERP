@@ -24,6 +24,15 @@ class WeatherService:
         self.default_lat = 52.2681
         self.default_lon = -113.8111
         self.location_name = "Red Deer, AB"
+        
+        # Initialize database connection for history
+        from motor.motor_asyncio import AsyncIOMotorClient
+        mongo_url = os.getenv("MONGO_URL", "mongodb://localhost:27017")
+        client = AsyncIOMotorClient(mongo_url)
+        self.db = client[os.getenv("DB_NAME", "snow_removal_db")]
+        
+        # Tracked locations
+        self.locations = []
 
     async def get_current_weather(self, lat: float = None, lon: float = None) -> Dict:
         """Get current weather conditions"""
