@@ -1034,10 +1034,10 @@ export default function CustomerFormPage() {
                     <span className="text-sm font-medium text-gray-700">Active Customer</span>
                   </label>
                 </div>
-              </div>
+              </form>
             </div>
-          </form>
+          </div>
         </div>
-      </div>
+      </>
     );
 }
