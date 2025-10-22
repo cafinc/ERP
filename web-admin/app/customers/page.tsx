@@ -401,43 +401,60 @@ export default function CustomersPage() {
           </div>
         ) : (
           /* List View */
-          <div className="mx-6 space-y-3">
+          <div className="bg-white border border-gray-200 rounded-b-lg">
             {filteredCustomers.map((customer, index) => {
               const customerId = customer._id || customer.id;
               if (!customerId) return null;
               
-              // Generate avatar from initials
-              const initials = customer.name
-                .split(' ')
-                .map(n => n[0])
-                .join('')
-                .substring(0, 2)
-                .toUpperCase();
-              
-              const avatarColors = [
-                'bg-[#5b8ec4]',
-                'bg-green-500',
-                'bg-purple-500',
-                'bg-orange-500',
-                'bg-pink-500',
-                'bg-indigo-500',
-              ];
-              const avatarColor = avatarColors[index % avatarColors.length];
-              
               return (
                 <div
                   key={customerId}
-                  className="bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-md hover:border-blue-500 transition-all cursor-pointer p-4"
-                  onClick={() => router.push(`/customers/${customerId}`)}
+                  className="px-6 py-4 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-b-0"
                 >
-                  <div className="flex items-center gap-4">
-                    {/* Avatar */}
-                    <div className={`${avatarColor} w-14 h-14 rounded-full flex items-center justify-center text-white text-lg font-bold flex-shrink-0`}>
-                      {initials}
-                    </div>
+                  <div className="grid grid-cols-12 gap-4 items-center text-sm">
+                    {/* Name */}
+                    {visibleColumns.name && (
+                      <div className="col-span-2">
+                        <div className="font-medium text-gray-900 truncate">{customer.name}</div>
+                        {customer.customer_type === 'company' && customer.company_name && (
+                          <div className="text-xs text-gray-500 truncate">{customer.company_name}</div>
+                        )}
+                      </div>
+                    )}
 
-                    {/* Customer Info */}
-                    <div className="flex-1 min-w-0">
+                    {/* Address */}
+                    {visibleColumns.address && (
+                      <div className="col-span-3 text-gray-600 truncate">{customer.address}</div>
+                    )}
+
+                    {/* Phone */}
+                    {visibleColumns.phone && (
+                      <div className="col-span-2 text-gray-600">{customer.phone}</div>
+                    )}
+
+                    {/* Email */}
+                    {visibleColumns.email && (
+                      <div className="col-span-3 text-gray-600 truncate">{customer.email}</div>
+                    )}
+
+                    {/* Type */}
+                    {visibleColumns.type && (
+                      <div className="col-span-1">
+                        {customer.customer_type === 'company' ? (
+                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-700">
+                            Company
+                          </span>
+                        ) : (
+                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-700">
+                            Individual
+                          </span>
+                        )}
+                      </div>
+                    )}
+
+                    {/* Status */}
+                    {visibleColumns.status && (
+                      <div className="col-span-1">
                       <div className="flex items-center gap-2 mb-1">
                         <h3 className="text-base font-semibold text-gray-900 truncate">
                           {customer.name}
