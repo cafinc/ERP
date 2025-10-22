@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import CompactHeader from '@/components/CompactHeader';
+import PageHeader from '@/components/PageHeader';
 import api from '@/lib/api';
 import {
   Users,
@@ -14,6 +14,7 @@ import {
   DollarSign,
   Calendar,
   LayoutDashboard,
+  Plus,
 } from 'lucide-react';
 
 export default function CRMDashboardPage() {
