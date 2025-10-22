@@ -151,7 +151,7 @@ export default function HomePage() {
 
   if (loading) {
     return (
-      <DashboardLayout>
+      <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-64">
           <div className="text-xl text-gray-600">Loading dashboard...</div>
         </div>
@@ -160,7 +160,7 @@ export default function HomePage() {
   }
 
   return (
-    <DashboardLayout>
+    <HybridNavigationTopBar>
       <div className="p-4 space-y-6">
         {/* Compact Header */}
         <CompactHeader
