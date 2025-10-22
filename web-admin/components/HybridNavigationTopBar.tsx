@@ -22,7 +22,7 @@ interface MenuItem {
   label: string;
   icon: any;
   href?: string;
-  submenu?: { label: string; href: string }[];
+  submenu?: { label: string; href: string; icon?: any }[];
 }
 
 export default function HybridNavigationTopBar({ children }: { children: React.ReactNode }) {
