@@ -122,6 +122,32 @@ export default function CRMDashboardPage() {
           { label: "Home", href: "/" },
           { label: "CRM Dashboard" },
         ]}
+        actions={[
+          {
+            label: "Customer",
+            icon: <Users className="w-4 h-4 mr-2" />,
+            variant: "secondary",
+            onClick: () => router.push('/customers/create'),
+          },
+          {
+            label: "Lead",
+            icon: <Users className="w-4 h-4 mr-2" />,
+            variant: "secondary",
+            onClick: () => router.push('/leads/create'),
+          },
+          {
+            label: "Estimate",
+            icon: <FileText className="w-4 h-4 mr-2" />,
+            variant: "secondary",
+            onClick: () => router.push('/estimates/create'),
+          },
+          {
+            label: "Project",
+            icon: <FolderOpen className="w-4 h-4 mr-2" />,
+            variant: "primary",
+            onClick: () => router.push('/projects/create'),
+          },
+        ]}
       />
       
       <div className="p-6 space-y-6">
