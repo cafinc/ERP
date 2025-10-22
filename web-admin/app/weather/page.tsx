@@ -270,7 +270,7 @@ export default function WeatherPlanningPage() {
               <p className="text-lg opacity-90">Feels like {weather.current.feels_like}°F</p>
             </div>
 
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-2 gap-4">
               <div className="bg-white/10 rounded-lg p-4">
                 <div className="flex items-center gap-2 mb-2">
                   <Droplets className="w-5 h-5 " />

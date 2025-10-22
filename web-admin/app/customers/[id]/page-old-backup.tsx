@@ -292,7 +292,7 @@ export default function CustomerDetailPage() {
 
         {/* Content */}
         {activeTab === 'overview' ? (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             {/* Contact Information */}
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
               <h2 className="text-xl font-semibold text-gray-900 mb-6">Contact Information</h2>

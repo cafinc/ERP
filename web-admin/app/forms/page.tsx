@@ -248,7 +248,7 @@ export default function FormsPage() {
             {activeTab === 'templates' ? (
               <>
                 {/* Templates Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {filteredTemplates.map((template) => (
                     <div
                       key={template.id}

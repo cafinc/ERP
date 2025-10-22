@@ -419,7 +419,7 @@ export default function CustomerDashboardPage() {
         </div>
 
         {/* Two Column Layout: Communication Center (Left) and Recent Activity (Right) */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           {/* Communication Center (2/3 width) */}
           <div className="lg:col-span-2">
             <div className="bg-white rounded-xl shadow-lg border border-gray-200">

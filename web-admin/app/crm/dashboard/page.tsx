@@ -149,7 +149,7 @@ export default function CRMDashboardPage() {
         {/* Revenue Overview */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
           <h2 className="text-lg font-semibold text-gray-900 mb-4">Revenue Overview</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <p className="text-sm text-gray-600 mb-2">Total Revenue</p>
               <p className="text-3xl font-bold text-green-600">${stats.revenue.toLocaleString()}</p>

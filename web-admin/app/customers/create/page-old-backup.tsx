@@ -318,7 +318,7 @@ export default function CustomerFormPage() {
               <h2 className="text-2xl font-bold text-gray-900 mb-2 text-center">Select Customer Type</h2>
               <p className="text-gray-600 mb-8 text-center">Choose the type of customer you're adding</p>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* Residential Option */}
                 <button
                   onClick={() => handleTypeSelection('residential')}

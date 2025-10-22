@@ -227,7 +227,7 @@ export default function AnalyticsPage() {
         </div>
 
         <div className="mx-6 mt-6 space-y-6">{/* Revenue Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg p-4 text-white">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-semibold">Total Revenue</h3>
@@ -325,7 +325,7 @@ export default function AnalyticsPage() {
         </div>
 
         {/* Performance Metrics */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="bg-white rounded-lg border border-gray-200 p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Estimate Performance</h3>
             <div className="space-y-4">

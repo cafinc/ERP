@@ -213,7 +213,7 @@ export default function HomePage() {
         </div>
 
         {/* Recent Activity */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {/* Activity Feed */}
           <div>
             <h2 className="text-lg font-bold text-gray-900 mb-3">Recent Activity</h2>

@@ -244,7 +244,7 @@ export default function SiteDetailPage() {
         </div>
 
         {/* Site Details Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Customer Information */}
           {customer && (
             <div className="bg-white rounded-lg border border-gray-200 p-6">

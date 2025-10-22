@@ -208,7 +208,7 @@ export default function CreateAgreementPage() {
             <h2 className="text-2xl font-bold text-gray-900 mb-2 text-center">How would you like to create this agreement?</h2>
             <p className="text-gray-600 mb-8 text-center">Choose a method to get started</p>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {/* From Template */}
               <div
                 onClick={() => setCreationMethod('template')}

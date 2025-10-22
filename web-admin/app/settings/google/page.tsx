@@ -226,7 +226,7 @@ export default function GoogleWorkspaceSettings() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {integrations.map((integration) => {
             const IconComponent = integration.icon;
             

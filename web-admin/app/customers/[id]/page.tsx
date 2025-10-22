@@ -569,7 +569,7 @@ export default function CustomerDetailPage() {
           {activeTab === 'overview' && (
             <div>
               <h2 className="text-xl font-semibold text-gray-900 mb-6">Overview</h2>
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
               {/* Left Column - Contact Info */}
               <div className="space-y-6">
                 <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
@@ -1390,7 +1390,7 @@ export default function CustomerDetailPage() {
               <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
                 <h2 className="text-xl font-semibold text-gray-900 mb-4">Accounting Information</h2>
                 {customer.accounting ? (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {customer.accounting.tax_id && (
                       <div>
                         <p className="text-sm text-gray-600">Tax ID</p>

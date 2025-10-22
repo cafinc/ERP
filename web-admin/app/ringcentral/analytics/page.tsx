@@ -184,7 +184,7 @@ export default function AnalyticsPage() {
             {/* Performance Indicators */}
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Performance Indicators</h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="border-l-4 border-green-500 pl-4">
                   <p className="text-sm text-gray-600 mb-1">Answer Rate</p>
                   <p className="text-2xl font-bold text-gray-900">0%</p>

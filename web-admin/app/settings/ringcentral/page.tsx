@@ -223,7 +223,7 @@ export default function RingCentralSettings() {
         {/* Features Grid */}
         <div>
           <h3 className="text-xl font-semibold text-gray-900 mb-4">Features & Services</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {features.map((feature) => {
               const IconComponent = feature.icon;
               

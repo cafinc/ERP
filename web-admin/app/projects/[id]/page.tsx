@@ -263,7 +263,7 @@ export default function ProjectDetailPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
             {/* Relationship Map Card */}
@@ -327,7 +327,7 @@ export default function ProjectDetailPage() {
                 </span>
               </div>
 
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="text-sm text-gray-600">Customer</label>
                   <p className="text-base font-medium text-gray-900 mt-1 flex items-center">
