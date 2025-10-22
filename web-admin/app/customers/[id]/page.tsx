@@ -80,6 +80,8 @@ export default function CustomerDetailPage() {
 
   // Communication Center sub-tab (default to first available type)
   const [commSubTab, setCommSubTab] = useState('inapp');
+  const [messageInput, setMessageInput] = useState('');
+  const [sendingMessage, setSendingMessage] = useState(false);
 
   const serviceTypes = {
     snow: {
