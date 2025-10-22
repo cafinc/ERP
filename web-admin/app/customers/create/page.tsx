@@ -569,11 +569,17 @@ export default function CustomerFormPage() {
                             type="email"
                             value={customerForm.email}
                             onChange={e => setCustomerForm({ ...customerForm, email: e.target.value })}
-                            className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                            onBlur={e => validateField('email', e.target.value)}
+                            className={`w-full pl-10 pr-4 py-1.5 border rounded-lg focus:ring-2 focus:border-transparent text-sm ${
+                              fieldErrors['email'] ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'
+                            }`}
                             placeholder="john@example.com"
                             required
                           />
                         </div>
+                        {fieldErrors['email'] && (
+                          <p className="text-red-500 text-xs mt-1">{fieldErrors['email']}</p>
+                        )}
                       </div>
 
                       <div>
