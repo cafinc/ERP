@@ -82,7 +82,7 @@ export default function HybridNavigationTopBar({ children }: { children: React.R
     },
     {
       label: 'Assets',
-      icon: Settings,
+      icon: Wrench,
       href: '/equipment/dashboard',
       submenu: [
         { label: 'Assets Dashboard', href: '/equipment/dashboard', icon: LayoutDashboard },
