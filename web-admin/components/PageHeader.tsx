@@ -36,6 +36,7 @@ interface PageHeaderProps {
   onSearch?: (query: string) => void;
   showFilter?: boolean;
   onFilterClick?: () => void;
+  filterDropdown?: React.ReactNode;
   showViewToggle?: boolean;
   viewMode?: 'list' | 'grid';
   onViewChange?: (mode: 'list' | 'grid') => void;
