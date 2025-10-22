@@ -121,6 +121,6 @@ export default function CommunicationDashboardPage() {
           </div>
         </div>
       </div>
-    </HybridNavigationTopBar>
+    </div>
   );
 }
