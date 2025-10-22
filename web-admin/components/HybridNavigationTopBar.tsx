@@ -180,6 +180,7 @@ export default function HybridNavigationTopBar({ children }: { children: React.R
         { label: 'Notifications', href: '/settings/notifications', icon: Settings },
         { label: 'Email Settings', href: '/settings/email-templates', icon: FileText },
         { label: 'SMS Config', href: '/settings/sms-config', icon: Settings },
+        { label: 'Document Templates', href: '/templates', icon: FileText },
         { label: 'Roles & Permissions', href: '/settings/roles-permissions', icon: UserCog },
         { label: 'API Settings', href: '/settings/api', icon: Link2 },
         { label: 'Webhooks', href: '/settings/webhooks', icon: Link2 },
