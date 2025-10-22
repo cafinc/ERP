@@ -231,11 +231,12 @@ export default function CreateEstimatePage() {
         }
         
         // Set notes and terms
-        if (content.notes) {
-          setFormData(prev => ({ ...prev, notes: content.notes }));
-        }
-        if (content.payment_terms) {
-          setFormData(prev => ({ ...prev, payment_terms: content.payment_terms }));
+        if (content.notes || content.terms) {
+          setFormData(prev => ({
+            ...prev,
+            notes: content.notes || prev.notes,
+            payment_terms: content.terms || prev.payment_terms
+          }));
         }
         
         setShowTemplateSelector(false);
