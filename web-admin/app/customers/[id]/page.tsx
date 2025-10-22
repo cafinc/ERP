@@ -1443,16 +1443,17 @@ export default function CustomerDetailPage() {
           )}
         </div>
 
-        {/* Communication Center */}
-        <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6 mt-6">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-semibold text-gray-900">Communication Center</h2>
-            <span className="text-sm text-gray-500">All interactions with {customer.name}</span>
-          </div>
+        {/* Communication Center - Only show on Overview and Communications tabs */}
+        {(activeTab === 'overview' || activeTab === 'communications') && (
+          <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6 mt-6">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-xl font-semibold text-gray-900">Communication Center</h2>
+              <span className="text-sm text-gray-500">All interactions with {customer.name}</span>
+            </div>
 
-          {communications.length === 0 ? (
-            <p className="text-center text-gray-500 py-8">No communications recorded yet</p>
-          ) : (
+            {communications.length === 0 ? (
+              <p className="text-center text-gray-500 py-8">No communications recorded yet</p>
+            ) : (
             <>
               {/* Group communications by type and only show types that exist */}
               {(() => {
