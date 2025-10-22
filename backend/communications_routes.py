@@ -3,7 +3,7 @@ Communications Routes - Unified Communication Center
 Handles InApp messages, SMS (RingCentral), Email (Gmail), and Phone logs
 """
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
 from pydantic import BaseModel
 from typing import Optional, List, Dict
 from datetime import datetime
@@ -14,6 +14,7 @@ import os
 from motor.motor_asyncio import AsyncIOMotorClient
 from ringcentral_service import ringcentral_service
 from gmail_service import gmail_service
+from auth import get_current_user
 
 logger = logging.getLogger(__name__)
 router = APIRouter()
