@@ -1443,138 +1443,227 @@ export default function CustomerDetailPage() {
           )}
         </div>
 
-        {/* Communication Center - Only show on Overview and Communications tabs */}
-        {(activeTab === 'overview' || activeTab === 'communications') && (
+        {/* Communication Center - Overview (View Only) */}
+        {activeTab === 'overview' && (
           <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6 mt-6">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-xl font-semibold text-gray-900">Communication Center</h2>
-              <span className="text-sm text-gray-500">All interactions with {customer.name}</span>
+              <button
+                onClick={() => setActiveTab('communications')}
+                className="text-sm text-[#3f72af] hover:text-[#2d5480] font-medium flex items-center space-x-1"
+              >
+                <span>View All</span>
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
             </div>
 
             {communications.length === 0 ? (
               <p className="text-center text-gray-500 py-8">No communications recorded yet</p>
             ) : (
-            <>
-              {/* Group communications by type and only show types that exist */}
-              {(() => {
-                const typeConfig = {
-                  'inapp': { icon: MessageCircle, color: 'bg-orange-100 text-orange-600', label: 'In-App', route: null },
-                  'sms': { icon: MessageSquare, color: 'bg-green-100 text-green-600', label: 'SMS', route: '/communication/sms' },
-                  'email': { icon: Mail, color: 'bg-blue-100 text-blue-600', label: 'Email', route: '/communication/emails' },
-                  'phone': { icon: PhoneCall, color: 'bg-purple-100 text-purple-600', label: 'Phone', route: null },
-                };
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {(() => {
+                  const typeConfig = {
+                    'inapp': { icon: MessageCircle, color: 'bg-orange-100 text-orange-600', label: 'In-App' },
+                    'sms': { icon: MessageSquare, color: 'bg-green-100 text-green-600', label: 'SMS' },
+                    'email': { icon: Mail, color: 'bg-blue-100 text-blue-600', label: 'Email' },
+                    'phone': { icon: PhoneCall, color: 'bg-purple-100 text-purple-600', label: 'Phone' },
+                  };
 
-                // Group communications by type
-                const groupedComms = communications.reduce((acc: any, comm: any) => {
-                  const type = comm.type || 'inapp';
-                  if (!acc[type]) acc[type] = [];
-                  acc[type].push(comm);
-                  return acc;
-                }, {});
+                  // Group communications by type
+                  const groupedComms = communications.reduce((acc: any, comm: any) => {
+                    const type = comm.type || 'inapp';
+                    if (!acc[type]) acc[type] = [];
+                    acc[type].push(comm);
+                    return acc;
+                  }, {});
 
-                // Get available types (only those with communications)
-                const availableTypes = Object.keys(groupedComms).filter(type => 
-                  ['inapp', 'sms', 'email', 'phone'].includes(type)
-                );
+                  // Get available types
+                  const availableTypes = Object.keys(groupedComms).filter(type => 
+                    ['inapp', 'sms', 'email', 'phone'].includes(type)
+                  );
 
-                return (
-                  <div className="space-y-6">
-                    {availableTypes.map((type) => {
+                  return availableTypes.map((type) => {
+                    const config = typeConfig[type as keyof typeof typeConfig];
+                    if (!config) return null;
+                    const Icon = config.icon;
+                    const count = groupedComms[type].length;
+
+                    return (
+                      <div
+                        key={type}
+                        onClick={() => setActiveTab('communications')}
+                        className="p-6 border border-gray-200 rounded-lg hover:border-[#3f72af] cursor-pointer transition-all hover:shadow-md"
+                      >
+                        <div className={`p-3 rounded-lg ${config.color} w-fit mb-3`}>
+                          <Icon className="w-6 h-6" />
+                        </div>
+                        <h3 className="text-lg font-semibold text-gray-900">{config.label}</h3>
+                        <p className="text-2xl font-bold text-[#3f72af] mt-1">{count}</p>
+                        <p className="text-xs text-gray-500 mt-1">{count === 1 ? 'message' : 'messages'}</p>
+                      </div>
+                    );
+                  });
+                })()}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Communication Center - Full View with Tabs */}
+        {activeTab === 'communications' && (
+          <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6 mt-6">
+            {(() => {
+              const [commSubTab, setCommSubTab] = React.useState('all');
+              
+              const typeConfig = {
+                'inapp': { icon: MessageCircle, color: 'bg-orange-100 text-orange-600', label: 'In-App' },
+                'sms': { icon: MessageSquare, color: 'bg-green-100 text-green-600', label: 'SMS' },
+                'email': { icon: Mail, color: 'bg-blue-100 text-blue-600', label: 'Email' },
+                'phone': { icon: PhoneCall, color: 'bg-purple-100 text-purple-600', label: 'Phone' },
+              };
+
+              // Group communications by type
+              const groupedComms = communications.reduce((acc: any, comm: any) => {
+                const type = comm.type || 'inapp';
+                if (!acc[type]) acc[type] = [];
+                acc[type].push(comm);
+                return acc;
+              }, {});
+
+              const availableTypes = ['all', ...Object.keys(groupedComms).filter(type => 
+                ['inapp', 'sms', 'email', 'phone'].includes(type)
+              )];
+
+              const displayComms = commSubTab === 'all' 
+                ? communications 
+                : groupedComms[commSubTab] || [];
+
+              return (
+                <>
+                  {/* Sub-tabs for communication types */}
+                  <div className="flex items-center space-x-2 mb-6 border-b border-gray-200 pb-4">
+                    <button
+                      onClick={() => setCommSubTab('all')}
+                      className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                        commSubTab === 'all' 
+                          ? 'bg-[#3f72af] text-white' 
+                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      }`}
+                    >
+                      All ({communications.length})
+                    </button>
+                    {availableTypes.filter(t => t !== 'all').map((type) => {
                       const config = typeConfig[type as keyof typeof typeConfig];
                       if (!config) return null;
-
                       const Icon = config.icon;
-                      const comms = groupedComms[type];
-                      const count = comms.length;
+                      const count = groupedComms[type]?.length || 0;
 
                       return (
-                        <div key={type} className="border border-gray-200 rounded-lg p-4">
-                          {/* Type Header */}
-                          <div className="flex items-center justify-between mb-4">
-                            <div className="flex items-center space-x-3">
-                              <div className={`p-2 rounded-lg ${config.color}`}>
-                                <Icon className="w-5 h-5" />
-                              </div>
-                              <div>
-                                <h3 className="text-lg font-semibold text-gray-900">{config.label}</h3>
-                                <p className="text-sm text-gray-500">{count} {count === 1 ? 'message' : 'messages'}</p>
-                              </div>
-                            </div>
-                            {config.route && (
-                              <button
-                                onClick={() => router.push(config.route!)}
-                                className="text-sm text-[#3f72af] hover:text-[#2d5480] font-medium"
-                              >
-                                View All →
-                              </button>
-                            )}
-                          </div>
-
-                          {/* Recent Communications (max 3) */}
-                          <div className="space-y-2">
-                            {comms.slice(0, 3).map((comm: any, idx: number) => (
-                              <div
-                                key={idx}
-                                className="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer"
-                                onClick={() => {
-                                  if (config.route && comm.id) {
-                                    router.push(`${config.route}/${comm.id}`);
-                                  }
-                                }}
-                              >
-                                <div className="flex-1 min-w-0">
-                                  <div className="flex items-center justify-between mb-1">
-                                    <span className="text-sm font-medium text-gray-900">
-                                      {comm.subject || comm.title || 'No subject'}
-                                    </span>
-                                    <span className="text-xs text-gray-500">
-                                      {new Date(comm.timestamp || comm.created_at).toLocaleDateString()}
-                                    </span>
-                                  </div>
-                                  <p className="text-sm text-gray-600 truncate">
-                                    {comm.content || comm.message || comm.body || 'No content'}
-                                  </p>
-                                  {comm.direction && (
-                                    <span className={`text-xs px-2 py-0.5 rounded-full mt-1 inline-block ${
-                                      comm.direction === 'outbound' ? 'bg-blue-100 text-blue-700' : 'bg-green-100 text-green-700'
-                                    }`}>
-                                      {comm.direction === 'outbound' ? 'Sent' : 'Received'}
-                                    </span>
-                                  )}
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-
-                          {/* Show more indicator if there are more than 3 */}
-                          {comms.length > 3 && (
-                            <div className="mt-2 text-center">
-                              <button
-                                onClick={() => setActiveTab('communications')}
-                                className="text-xs text-gray-500 hover:text-gray-700"
-                              >
-                                + {comms.length - 3} more
-                              </button>
-                            </div>
-                          )}
-                        </div>
+                        <button
+                          key={type}
+                          onClick={() => setCommSubTab(type)}
+                          className={`px-4 py-2 rounded-lg font-medium transition-colors flex items-center space-x-2 ${
+                            commSubTab === type 
+                              ? 'bg-[#3f72af] text-white' 
+                              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                          }`}
+                        >
+                          <Icon className="w-4 h-4" />
+                          <span>{config.label} ({count})</span>
+                        </button>
                       );
                     })}
-
-                    {/* View All Communications Button */}
-                    <div className="text-center pt-4">
-                      <button
-                        onClick={() => setActiveTab('communications')}
-                        className="text-sm text-[#3f72af] hover:text-[#2d5480] font-medium"
-                      >
-                        View All Communications →
-                      </button>
-                    </div>
                   </div>
-                );
-              })()}
-            </>
-          )}
+
+                  {/* Message Interface for InApp and SMS */}
+                  {(commSubTab === 'inapp' || commSubTab === 'sms') && (
+                    <div className="border border-gray-200 rounded-lg h-[600px] flex flex-col">
+                      {/* Messages Area */}
+                      <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
+                        {displayComms.length === 0 ? (
+                          <p className="text-center text-gray-500 py-8">No messages yet</p>
+                        ) : (
+                          displayComms.map((comm: any, idx: number) => {
+                            const isOutbound = comm.direction === 'outbound';
+                            return (
+                              <div key={idx} className={`flex ${isOutbound ? 'justify-end' : 'justify-start'}`}>
+                                <div className={`max-w-[70%] ${isOutbound ? 'bg-[#3f72af] text-white' : 'bg-white text-gray-900'} rounded-lg p-3 shadow-sm`}>
+                                  <p className="text-sm">{comm.content || comm.message || comm.body}</p>
+                                  <p className={`text-xs mt-1 ${isOutbound ? 'text-blue-100' : 'text-gray-500'}`}>
+                                    {new Date(comm.timestamp || comm.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                  </p>
+                                </div>
+                              </div>
+                            );
+                          })
+                        )}
+                      </div>
+
+                      {/* Message Input */}
+                      <div className="p-4 border-t border-gray-200 bg-white">
+                        <div className="flex space-x-2">
+                          <input
+                            type="text"
+                            placeholder={`Send ${commSubTab === 'inapp' ? 'message' : 'SMS'}...`}
+                            className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                          />
+                          <button className="px-6 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#2d5480] font-medium">
+                            Send
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* List View for Email and Phone */}
+                  {(commSubTab === 'email' || commSubTab === 'phone' || commSubTab === 'all') && (
+                    <div className="space-y-3">
+                      {displayComms.length === 0 ? (
+                        <p className="text-center text-gray-500 py-8">No communications found</p>
+                      ) : (
+                        displayComms.map((comm: any, idx: number) => {
+                          const config = typeConfig[comm.type as keyof typeof typeConfig] || typeConfig.inapp;
+                          const Icon = config.icon;
+
+                          return (
+                            <div key={idx} className="flex items-start space-x-4 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors border border-gray-200">
+                              <div className={`p-3 rounded-lg ${config.color} flex-shrink-0`}>
+                                <Icon className="w-5 h-5" />
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <div className="flex items-center justify-between mb-1">
+                                  <div className="flex items-center space-x-2">
+                                    <span className="text-sm font-medium text-gray-900">{config.label}</span>
+                                    {comm.direction && (
+                                      <span className={`text-xs px-2 py-0.5 rounded-full ${
+                                        comm.direction === 'outbound' ? 'bg-blue-100 text-blue-700' : 'bg-green-100 text-green-700'
+                                      }`}>
+                                        {comm.direction === 'outbound' ? 'Sent' : 'Received'}
+                                      </span>
+                                    )}
+                                  </div>
+                                  <span className="text-xs text-gray-500">
+                                    {new Date(comm.timestamp || comm.created_at).toLocaleString()}
+                                  </span>
+                                </div>
+                                <p className="text-sm font-medium text-gray-900 mb-1">
+                                  {comm.subject || comm.title || 'No subject'}
+                                </p>
+                                <p className="text-sm text-gray-600 line-clamp-2">
+                                  {comm.content || comm.message || comm.body || 'No content'}
+                                </p>
+                              </div>
+                            </div>
+                          );
+                        })
+                      )}
+                    </div>
+                  )}
+                </>
+              );
+            })()}
           </div>
         )}
       </div>
