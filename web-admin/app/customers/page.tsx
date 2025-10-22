@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import PageHeader from '@/components/PageHeader';
 import api from '@/lib/api';
+import { formatPhoneNumber } from '@/lib/utils/formatters';
 import {
   Plus,
   Search,
