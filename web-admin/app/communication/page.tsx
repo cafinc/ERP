@@ -301,7 +301,7 @@ export default function CommunicationCenterPage() {
           </div>
           <button
             onClick={fetchData}
-            className="flex items-center space-x-2 px-4 py-2 bg-[#3f72af] hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
+            className="flex items-center space-x-2 px-4 py-2 bg-[#3f72af] hover:bg-[#2c5282] text-white rounded-lg font-medium transition-colors"
           >
             <RefreshCw className="w-5 h-5" />
             <span>Refresh</span>

@@ -186,7 +186,7 @@ export default function FeedbackDetailPage() {
             <p className="text-gray-500 text-lg">Feedback not found</p>
             <button
               onClick={() => router.push('/communication')}
-              className="mt-4 px-6 py-2 bg-[#3f72af] hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
+              className="mt-4 px-6 py-2 bg-[#3f72af] hover:bg-[#2c5282] text-white rounded-lg font-medium transition-colors"
             >
               Back to Communication Center
             </button>
@@ -313,7 +313,7 @@ export default function FeedbackDetailPage() {
                 <button
                   onClick={handleAdminUpdate}
                   disabled={submitting}
-                  className="flex items-center space-x-2 px-6 py-3 bg-[#3f72af] hover:bg-blue-700 disabled:bg-gray-400 text-white rounded-lg font-medium transition-colors"
+                  className="flex items-center space-x-2 px-6 py-3 bg-[#3f72af] hover:bg-[#2c5282] disabled:bg-gray-400 text-white rounded-lg font-medium transition-colors"
                 >
                   <Save className="w-5 h-5" />
                   <span>{submitting ? 'Saving...' : 'Save Response'}</span>

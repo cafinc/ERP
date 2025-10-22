@@ -168,7 +168,7 @@ export default function RingCentralHub() {
             </div>
             <Link
               href="/settings/ringcentral"
-              className="flex items-center space-x-2 px-6 py-3 bg-[#3f72af] hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
+              className="flex items-center space-x-2 px-6 py-3 bg-[#3f72af] hover:bg-[#2c5282] text-white rounded-lg font-medium transition-colors"
             >
               <span>Settings</span>
               <ArrowRight className="w-4 h-4" />

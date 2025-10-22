@@ -408,7 +408,7 @@ export default function CustomerDetailPage() {
           <h2 className="text-2xl font-bold text-gray-900 mb-2">Customer Not Found</h2>
           <button
             onClick={() => router.push('/customers')}
-            className="mt-4 px-6 py-3 bg-[#3f72af] text-white rounded-lg hover:bg-blue-700"
+            className="mt-4 px-6 py-3 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282]"
           >
             Back to Customers
           </button>
@@ -711,7 +711,7 @@ export default function CustomerDetailPage() {
                   <h2 className="text-xl font-semibold text-gray-900">Sites</h2>
                   <button
                     onClick={() => router.push(`/sites/create?customer_id=${customerId}`)}
-                    className="flex items-center space-x-2 px-4 py-2 bg-[#3f72af] hover:bg-blue-700 text-white rounded-lg font-medium transition-colors text-sm"
+                    className="flex items-center space-x-2 px-4 py-2 bg-[#3f72af] hover:bg-[#2c5282] text-white rounded-lg font-medium transition-colors text-sm"
                   >
                     <Plus className="w-4 h-4" />
                     <span>Add Site</span>
@@ -1345,7 +1345,7 @@ export default function CustomerDetailPage() {
                   <h2 className="text-xl font-semibold text-gray-900">Contacts</h2>
                   <button
                     onClick={() => setShowLinkContactModal(true)}
-                    className="flex items-center space-x-2 px-4 py-2 bg-[#3f72af] hover:bg-blue-700 text-white rounded-lg font-medium transition-colors text-sm"
+                    className="flex items-center space-x-2 px-4 py-2 bg-[#3f72af] hover:bg-[#2c5282] text-white rounded-lg font-medium transition-colors text-sm"
                   >
                     <Plus className="w-4 h-4" />
                     <span>Link Contact</span>
@@ -1620,7 +1620,7 @@ export default function CustomerDetailPage() {
                   />
                   <button
                     onClick={handleSearchIndividuals}
-                    className="px-6 py-2 bg-[#3f72af] hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
+                    className="px-6 py-2 bg-[#3f72af] hover:bg-[#2c5282] text-white rounded-lg font-medium transition-colors"
                   >
                     <Search className="w-5 h-5" />
                   </button>

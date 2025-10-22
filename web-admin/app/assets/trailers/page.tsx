@@ -229,7 +229,7 @@ export default function TrailersPage() {
               </div>
 
               <div className="flex gap-2 pt-3 border-t border-gray-100">
-                <button className="flex-1 px-3 py-1.5 text-sm bg-[#3f72af] text-white rounded-lg hover:bg-blue-700">
+                <button className="flex-1 px-3 py-1.5 text-sm bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282]">
                   View
                 </button>
                 <button className="flex-1 px-3 py-1.5 text-sm bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50">

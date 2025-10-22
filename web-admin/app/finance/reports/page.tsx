@@ -153,7 +153,7 @@ export default function ReportsPage() {
               
               <div className="flex gap-2">
                 <button 
-                  className="flex-1 px-3 py-1.5 text-sm bg-[#3f72af] text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
+                  className="flex-1 px-3 py-1.5 text-sm bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-colors flex items-center justify-center gap-2"
                 >
                   <FileText className="w-4 h-4" />
                   View

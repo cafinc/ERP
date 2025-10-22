@@ -139,7 +139,7 @@ export default function HRModulePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <button
               onClick={() => router.push("/hr/employees")}
-              className="flex items-center justify-center gap-2 px-4 py-3 bg-[#3f72af] text-white rounded-lg hover:bg-blue-700 transition-colors"
+              className="flex items-center justify-center gap-2 px-4 py-3 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-colors"
             >
               <Users className="h-5 w-5" />
               Add Employee

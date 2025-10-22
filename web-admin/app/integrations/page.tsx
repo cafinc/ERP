@@ -219,7 +219,7 @@ export default function IntegrationsPage() {
               <button
                 key={action.endpoint}
                 onClick={() => handleQuickSync(action.endpoint)}
-                className="flex items-center justify-center gap-2 px-4 py-3 bg-[#3f72af] text-white rounded-lg hover:bg-blue-700 transition-colors"
+                className="flex items-center justify-center gap-2 px-4 py-3 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-colors"
               >
                 <span className="text-2xl">{action.icon}</span>
                 <span className="text-sm font-medium">{action.name}</span>
@@ -234,7 +234,7 @@ export default function IntegrationsPage() {
             <h3 className="text-lg font-semibold text-gray-900">
               Available Integrations
             </h3>
-            <button className="flex items-center gap-2 px-4 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-blue-700 transition-colors">
+            <button className="flex items-center gap-2 px-4 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-colors">
               <Plus className="h-4 w-4" />
               Add Integration
             </button>
@@ -290,7 +290,7 @@ export default function IntegrationsPage() {
                       {integration.status === "connected" ? (
                         <button
                           onClick={() => handleSync(integration.id)}
-                          className="px-4 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
+                          className="px-4 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-colors flex items-center gap-2"
                         >
                           <RefreshCw className="h-4 w-4" />
                           Sync Now

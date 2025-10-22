@@ -124,7 +124,7 @@ export default function TeamMessagingPage() {
                   <p className="text-gray-600 text-sm">{error}</p>
                   <button
                     onClick={fetchChats}
-                    className="mt-4 px-4 py-2 bg-[#3f72af] hover:bg-blue-700 text-white rounded-lg text-sm transition-colors"
+                    className="mt-4 px-4 py-2 bg-[#3f72af] hover:bg-[#2c5282] text-white rounded-lg text-sm transition-colors"
                   >
                     Retry
                   </button>
@@ -219,7 +219,7 @@ export default function TeamMessagingPage() {
                       <button
                         type="submit"
                         disabled={sending || !messageText.trim()}
-                        className="flex items-center space-x-2 px-6 py-2 bg-[#3f72af] hover:bg-blue-700 disabled:bg-gray-400 text-white rounded-lg font-medium transition-colors"
+                        className="flex items-center space-x-2 px-6 py-2 bg-[#3f72af] hover:bg-[#2c5282] disabled:bg-gray-400 text-white rounded-lg font-medium transition-colors"
                       >
                         {sending ? (
                           <RefreshCw className="w-5 h-5 animate-spin" />

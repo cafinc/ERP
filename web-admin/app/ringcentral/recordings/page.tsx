@@ -176,7 +176,7 @@ export default function RecordingsPage() {
           <div className="mt-4 flex items-center justify-end">
             <button
               onClick={fetchRecordings}
-              className="flex items-center space-x-2 px-4 py-2 bg-[#3f72af] hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
+              className="flex items-center space-x-2 px-4 py-2 bg-[#3f72af] hover:bg-[#2c5282] text-white rounded-lg font-medium transition-colors"
             >
               <RefreshCw className="w-4 h-4" />
               <span>Search</span>
@@ -261,7 +261,7 @@ export default function RecordingsPage() {
                     <div className="flex items-center space-x-2">
                       <button
                         onClick={() => handleDownload(recording.recording.id, recording.sessionId)}
-                        className="flex items-center space-x-2 px-4 py-2 bg-[#3f72af] hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
+                        className="flex items-center space-x-2 px-4 py-2 bg-[#3f72af] hover:bg-[#2c5282] text-white rounded-lg font-medium transition-colors"
                       >
                         <Download className="w-4 h-4" />
                         <span>Download</span>

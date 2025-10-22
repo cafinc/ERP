@@ -241,7 +241,7 @@ export default function RouteOptimizationPage() {
                   <button
                     onClick={handleOptimize}
                     disabled={selectedSiteIds.length < 2 || optimizing}
-                    className="w-full px-6 py-3 bg-[#3f72af] hover:bg-blue-700 disabled:bg-gray-300 text-white rounded-lg font-medium transition-colors flex items-center justify-center space-x-2"
+                    className="w-full px-6 py-3 bg-[#3f72af] hover:bg-[#2c5282] disabled:bg-gray-300 text-white rounded-lg font-medium transition-colors flex items-center justify-center space-x-2"
                   >
                     {optimizing ? (
                       <>

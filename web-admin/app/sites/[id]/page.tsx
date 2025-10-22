@@ -197,7 +197,7 @@ export default function SiteDetailPage() {
           <div className="flex gap-2">
             <button
               onClick={() => router.push(`/sites/${siteId}/maps`)}
-              className="flex items-center gap-2 px-4 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-blue-700"
+              className="flex items-center gap-2 px-4 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282]"
             >
               <MapPin className="w-4 h-4" />
               Site Maps
