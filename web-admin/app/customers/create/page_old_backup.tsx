@@ -267,7 +267,7 @@ export default function CustomerFormPage() {
     return (
       <DashboardLayout>
         <div className="flex items-center justify-center h-full">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#3f72af]"></div>
         </div>
       </DashboardLayout>
     );
@@ -330,7 +330,7 @@ export default function CustomerFormPage() {
                       disabled={isEdit}
                       className={`p-4 border-2 rounded-lg transition-all ${
                         customerForm.customer_type === 'individual'
-                          ? 'border-blue-600 bg-blue-50'
+                          ? 'border-[#3f72af] bg-blue-50'
                           : 'border-gray-300 hover:border-gray-400'
                       } ${isEdit ? 'cursor-not-allowed opacity-60' : 'cursor-pointer'}`}
                     >
@@ -344,7 +344,7 @@ export default function CustomerFormPage() {
                       disabled={isEdit}
                       className={`p-4 border-2 rounded-lg transition-all ${
                         customerForm.customer_type === 'company'
-                          ? 'border-blue-600 bg-blue-50'
+                          ? 'border-[#3f72af] bg-blue-50'
                           : 'border-gray-300 hover:border-gray-400'
                       } ${isEdit ? 'cursor-not-allowed opacity-60' : 'cursor-pointer'}`}
                     >
@@ -876,7 +876,7 @@ export default function CustomerFormPage() {
                             }}
                             className={`p-4 border-2 rounded-lg cursor-pointer transition-all ${
                               isSelected 
-                                ? 'border-blue-600 bg-blue-50' 
+                                ? 'border-[#3f72af] bg-blue-50' 
                                 : 'border-gray-200 hover:border-gray-300 bg-white'
                             }`}
                           >
@@ -938,7 +938,7 @@ export default function CustomerFormPage() {
                         onClick={() => setSendLinkMethod('email')}
                         className={`flex-1 flex items-center justify-center space-x-2 px-4 py-3 rounded-lg border-2 transition-all ${
                           sendLinkMethod === 'email'
-                            ? 'border-blue-600 bg-blue-50 text-blue-700'
+                            ? 'border-[#3f72af] bg-blue-50 text-blue-700'
                             : 'border-gray-200 hover:border-gray-300'
                         }`}
                       >
@@ -949,7 +949,7 @@ export default function CustomerFormPage() {
                         onClick={() => setSendLinkMethod('sms')}
                         className={`flex-1 flex items-center justify-center space-x-2 px-4 py-3 rounded-lg border-2 transition-all ${
                           sendLinkMethod === 'sms'
-                            ? 'border-blue-600 bg-blue-50 text-blue-700'
+                            ? 'border-[#3f72af] bg-blue-50 text-blue-700'
                             : 'border-gray-200 hover:border-gray-300'
                         }`}
                       >

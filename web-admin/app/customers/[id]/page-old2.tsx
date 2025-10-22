@@ -211,7 +211,7 @@ export default function CustomerDetailPage() {
     return (
       <DashboardLayout>
         <div className="flex items-center justify-center h-full">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#3f72af]"></div>
         </div>
       </DashboardLayout>
     );

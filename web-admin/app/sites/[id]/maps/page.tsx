@@ -184,7 +184,7 @@ export default function SiteMapsPage() {
                   onClick={() => handleViewMap(map)}
                   className={`p-4 border-2 rounded-lg text-left transition-all ${
                     currentMap?.id === map.id
-                      ? 'border-blue-600 bg-blue-50'
+                      ? 'border-[#3f72af] bg-blue-50'
                       : 'border-gray-200 hover:border-gray-300'
                   }`}
                 >
