@@ -819,6 +819,190 @@ async def websocket_endpoint(websocket: WebSocket, user_id: str):
                 )
             
             elif message_type == "mark_read":
+
+
+
+# ========== Analytics & Metrics ==========
+
+@router.get("/communications/analytics/overview")
+async def get_communications_analytics(
+    customer_id: Optional[str] = None,
+    start_date: Optional[str] = None,
+    end_date: Optional[str] = None
+):
+    """Get communication analytics and metrics"""
+    try:
+        # Build date filter
+        date_filter = {}
+        if start_date:
+            date_filter["$gte"] = datetime.fromisoformat(start_date)
+        if end_date:
+            date_filter["$lte"] = datetime.fromisoformat(end_date)
+        
+        # Build base query
+        query = {}
+        if customer_id:
+            query["customer_id"] = customer_id
+        if date_filter:
+            query["timestamp"] = date_filter
+        
+        # Get total messages
+        total_messages = await db.communications.count_documents(query)
+        
+        # Get messages by type
+        pipeline = [
+            {"$match": query},
+            {"$group": {
+                "_id": "$type",
+                "count": {"$sum": 1}
+            }}
+        ]
+        messages_by_type = await db.communications.aggregate(pipeline).to_list(100)
+        
+        # Get messages by direction
+        pipeline = [
+            {"$match": query},
+            {"$group": {
+                "_id": "$direction",
+                "count": {"$sum": 1}
+            }}
+        ]
+        messages_by_direction = await db.communications.aggregate(pipeline).to_list(100)
+        
+        # Get messages by status
+        pipeline = [
+            {"$match": query},
+            {"$group": {
+                "_id": "$status",
+                "count": {"$sum": 1}
+            }}
+        ]
+        messages_by_status = await db.communications.aggregate(pipeline).to_list(100)
+        
+        # Calculate read rate
+        read_messages = await db.communications.count_documents({**query, "read": True, "direction": "outbound"})
+        outbound_messages = await db.communications.count_documents({**query, "direction": "outbound"})
+        read_rate = (read_messages / outbound_messages * 100) if outbound_messages > 0 else 0
+        
+        # Get average response time (simplified - time between inbound and next outbound)
+        pipeline = [
+            {"$match": {**query, "direction": "inbound"}},
+            {"$sort": {"timestamp": 1}},
+            {"$limit": 100}
+        ]
+        inbound_messages = await db.communications.aggregate(pipeline).to_list(100)
+        
+        response_times = []
+        for inbound in inbound_messages:
+            # Find next outbound message after this inbound
+            next_outbound = await db.communications.find_one({
+                "customer_id": inbound.get("customer_id"),
+                "direction": "outbound",
+                "timestamp": {"$gt": inbound["timestamp"]}
+            }, sort=[("timestamp", 1)])
+            
+            if next_outbound:
+                response_time = (next_outbound["timestamp"] - inbound["timestamp"]).total_seconds() / 60  # in minutes
+                response_times.append(response_time)
+        
+        avg_response_time = sum(response_times) / len(response_times) if response_times else 0
+        
+        # Messages with attachments
+        messages_with_attachments = await db.communications.count_documents({
+            **query,
+            "attachments": {"$exists": True, "$ne": []}
+        })
+        
+        # Daily message volume (last 30 days)
+        thirty_days_ago = datetime.utcnow() - timedelta(days=30)
+        pipeline = [
+            {"$match": {
+                **query,
+                "timestamp": {"$gte": thirty_days_ago}
+            }},
+            {"$group": {
+                "_id": {
+                    "$dateToString": {
+                        "format": "%Y-%m-%d",
+                        "date": "$timestamp"
+                    }
+                },
+                "count": {"$sum": 1}
+            }},
+            {"$sort": {"_id": 1}}
+        ]
+        daily_volume = await db.communications.aggregate(pipeline).to_list(100)
+        
+        return {
+            "success": True,
+            "total_messages": total_messages,
+            "messages_by_type": {item["_id"]: item["count"] for item in messages_by_type},
+            "messages_by_direction": {item["_id"]: item["count"] for item in messages_by_direction},
+            "messages_by_status": {item["_id"]: item["count"] for item in messages_by_status},
+            "read_rate_percentage": round(read_rate, 2),
+            "avg_response_time_minutes": round(avg_response_time, 2),
+            "messages_with_attachments": messages_with_attachments,
+            "attachment_rate_percentage": round((messages_with_attachments / total_messages * 100) if total_messages > 0 else 0, 2),
+            "daily_volume": [{"date": item["_id"], "count": item["count"]} for item in daily_volume]
+        }
+    
+    except Exception as e:
+        logger.error(f"Error fetching analytics: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/communications/analytics/customer/{customer_id}")
+async def get_customer_communication_stats(customer_id: str):
+    """Get detailed communication stats for a specific customer"""
+    try:
+        # Total conversations
+        total_messages = await db.communications.count_documents({"customer_id": customer_id})
+        
+        # Last message time
+        last_message = await db.communications.find_one(
+            {"customer_id": customer_id},
+            sort=[("timestamp", -1)]
+        )
+        
+        # Conversation status
+        conv_metadata = await db.conversation_metadata.find_one({"customer_id": customer_id})
+        
+        # Unread count (from customer's perspective - inbound messages not read)
+        unread_count = await db.communications.count_documents({
+            "customer_id": customer_id,
+            "direction": "inbound",
+            "read": {"$ne": True}
+        })
+        
+        # First message time
+        first_message = await db.communications.find_one(
+            {"customer_id": customer_id},
+            sort=[("timestamp", 1)]
+        )
+        
+        # Calculate engagement score (messages per day since first contact)
+        if first_message:
+            days_since_first = (datetime.utcnow() - first_message["timestamp"]).days + 1
+            engagement_score = total_messages / days_since_first
+        else:
+            engagement_score = 0
+        
+        return {
+            "success": True,
+            "customer_id": customer_id,
+            "total_messages": total_messages,
+            "last_message_at": last_message["timestamp"].isoformat() if last_message else None,
+            "first_message_at": first_message["timestamp"].isoformat() if first_message else None,
+            "conversation_status": conv_metadata.get("status", "open") if conv_metadata else "open",
+            "unread_count": unread_count,
+            "engagement_score": round(engagement_score, 2),
+            "days_active": (datetime.utcnow() - first_message["timestamp"]).days if first_message else 0
+        }
+    
+    except Exception as e:
+        logger.error(f"Error fetching customer stats: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
                 # Mark message as read
                 communication_id = message_data.get("communication_id")
                 if communication_id:
