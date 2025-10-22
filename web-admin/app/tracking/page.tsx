@@ -271,7 +271,7 @@ export default function LiveTrackingPage() {
     return (
       <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-screen">
-          <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
+          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
       </HybridNavigationTopBar>
     );
@@ -349,7 +349,7 @@ export default function LiveTrackingPage() {
               type="checkbox"
               checked={autoRefresh}
               onChange={(e) => setAutoRefresh(e.target.checked)}
-              className="w-4 h-4 text-blue-600 rounded focus:ring-2 focus:ring-blue-500"
+              className="w-4 h-4 text-[#3f72af] rounded focus:ring-2 focus:ring-blue-500"
             />
             <span className="text-sm text-gray-700">Auto-refresh (15s)</span>
           </label>

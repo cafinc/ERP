@@ -170,7 +170,7 @@ export default function EstimateDetailPage() {
     return (
       <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-full">
-          <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
+          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
       </HybridNavigationTopBar>
     );
@@ -299,7 +299,7 @@ export default function EstimateDetailPage() {
                 {estimate.customer_email && (
                   <div className="flex items-center space-x-3">
                     <Mail className="w-5 h-5 text-gray-400" />
-                    <a href={`mailto:${estimate.customer_email}`} className="text-blue-600 hover:underline">
+                    <a href={`mailto:${estimate.customer_email}`} className="text-[#3f72af] hover:underline">
                       {estimate.customer_email}
                     </a>
                   </div>
@@ -307,7 +307,7 @@ export default function EstimateDetailPage() {
                 {estimate.customer_phone && (
                   <div className="flex items-center space-x-3">
                     <Phone className="w-5 h-5 text-gray-400" />
-                    <a href={`tel:${estimate.customer_phone}`} className="text-blue-600 hover:underline">
+                    <a href={`tel:${estimate.customer_phone}`} className="text-[#3f72af] hover:underline">
                       {estimate.customer_phone}
                     </a>
                   </div>
@@ -362,7 +362,7 @@ export default function EstimateDetailPage() {
                 </div>
                 <div className="flex justify-between text-lg font-bold pt-2 border-t border-gray-200">
                   <span className="text-gray-900">Total</span>
-                  <span className="text-blue-600">${estimate.total_amount?.toFixed(2) || '0.00'}</span>
+                  <span className="text-[#3f72af]">${estimate.total_amount?.toFixed(2) || '0.00'}</span>
                 </div>
               </div>
             </div>

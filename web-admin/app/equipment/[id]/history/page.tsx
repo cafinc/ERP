@@ -98,7 +98,7 @@ export default function EquipmentHistoryPage() {
     return (
       <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-64">
-          <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
+          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
       </HybridNavigationTopBar>
     );
@@ -141,7 +141,7 @@ export default function EquipmentHistoryPage() {
             {/* Statistics */}
             <div className="grid grid-cols-3 gap-4">
               <div className="bg-blue-50 rounded-lg p-4 text-center">
-                <FileText className="w-8 h-8 mx-auto mb-2 text-blue-600" />
+                <FileText className="w-8 h-8 mx-auto mb-2 text-[#3f72af]" />
                 <p className="text-3xl font-bold text-blue-900">{formResponses.length}</p>
                 <p className="text-sm text-blue-700 mt-1">Total Inspections</p>
               </div>
@@ -213,7 +213,7 @@ export default function EquipmentHistoryPage() {
                       </span>
                     </div>
 
-                    <div className="flex items-center justify-end text-sm text-blue-600 hover:text-blue-700 font-medium">
+                    <div className="flex items-center justify-end text-sm text-[#3f72af] hover:text-blue-700 font-medium">
                       View Details →
                     </div>
                   </div>

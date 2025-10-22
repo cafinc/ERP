@@ -95,7 +95,7 @@ export default function SMSConfigPage() {
 
         {/* Info Card */}
         <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 flex items-start gap-3">
-          <MessageSquare className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+          <MessageSquare className="w-5 h-5 text-[#3f72af] flex-shrink-0 mt-0.5" />
           <div>
             <p className="text-sm text-blue-900">
               Configure your Twilio account to enable SMS notifications for emergency alerts, shift reminders, and customer communications.
@@ -114,7 +114,7 @@ export default function SMSConfigPage() {
               type="checkbox"
               checked={config.enabled}
               onChange={(e) => setConfig({ ...config, enabled: e.target.checked })}
-              className="w-5 h-5 text-blue-600 rounded focus:ring-2 focus:ring-blue-500"
+              className="w-5 h-5 text-[#3f72af] rounded focus:ring-2 focus:ring-blue-500"
             />
             <div>
               <span className="font-medium text-gray-900">Enable SMS Notifications</span>

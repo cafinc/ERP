@@ -113,7 +113,7 @@ export default function ActiveCallsPage() {
                 type="checkbox"
                 checked={autoRefresh}
                 onChange={(e) => setAutoRefresh(e.target.checked)}
-                className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
+                className="w-4 h-4 text-[#3f72af] rounded focus:ring-blue-500"
               />
               <span className="text-sm text-gray-700">Auto-refresh</span>
             </label>
@@ -143,7 +143,7 @@ export default function ActiveCallsPage() {
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <div className="flex items-center space-x-4">
               <div className="p-3 bg-blue-100 rounded-lg">
-                <Radio className="w-6 h-6 text-blue-600 animate-pulse" />
+                <Radio className="w-6 h-6 text-[#3f72af] animate-pulse" />
               </div>
               <div>
                 <p className="text-sm text-gray-600">Live Monitoring</p>
@@ -157,7 +157,7 @@ export default function ActiveCallsPage() {
         <div className="bg-white rounded-xl shadow-sm border border-gray-200">
           {loading ? (
             <div className="flex items-center justify-center py-12">
-              <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
+              <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
             </div>
           ) : activeCalls.length === 0 ? (
             <div className="text-center py-12">

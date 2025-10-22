@@ -188,7 +188,7 @@ export default function InventoryPage() {
                 <p className="text-sm text-gray-500 mt-1">In inventory</p>
               </div>
               <div className="bg-blue-100 p-4 rounded-xl">
-                <BarChart3 className="w-6 h-6 text-blue-600" />
+                <BarChart3 className="w-6 h-6 text-[#3f72af]" />
               </div>
             </div>
           </div>
@@ -370,7 +370,7 @@ export default function InventoryPage() {
                         <div className="flex items-center gap-2">
                           <button
                             onClick={() => router.push(`/inventory/${item.id}/edit`)}
-                            className="text-blue-600 hover:text-blue-900"
+                            className="text-[#3f72af] hover:text-blue-900"
                             title="Edit"
                           >
                             <Edit className="w-4 h-4" />

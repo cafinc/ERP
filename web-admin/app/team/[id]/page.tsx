@@ -143,7 +143,7 @@ export default function TeamMemberDetailPage() {
     return (
       <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-64">
-          <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
+          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
       </HybridNavigationTopBar>
     );
@@ -157,7 +157,7 @@ export default function TeamMemberDetailPage() {
           <h2 className="text-xl font-semibold text-gray-900">Team member not found</h2>
           <button
             onClick={() => router.push('/team')}
-            className="mt-4 text-blue-600 hover:text-blue-800"
+            className="mt-4 text-[#3f72af] hover:text-blue-800"
           >
             Return to Team
           </button>
@@ -336,7 +336,7 @@ export default function TeamMemberDetailPage() {
         {user.is_driver && user.driver_license_photo && (
           <div className="bg-white rounded-lg border border-gray-200 p-6">
             <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-              <Truck className="w-5 h-5 text-blue-600" />
+              <Truck className="w-5 h-5 text-[#3f72af]" />
               Driver's License
             </h2>
             <div className="border border-gray-300 rounded-lg p-4 bg-gray-50">
@@ -372,7 +372,7 @@ export default function TeamMemberDetailPage() {
                     href={doc.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-blue-600 hover:text-blue-800"
+                    className="text-[#3f72af] hover:text-blue-800"
                   >
                     <Download className="w-5 h-5" />
                   </a>

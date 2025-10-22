@@ -79,7 +79,7 @@ export default function BillingPage() {
                       <p className="text-sm text-gray-600">{invoice.date}</p>
                     </div>
                   </div>
-                  <button className="flex items-center gap-2 px-3 py-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-all">
+                  <button className="flex items-center gap-2 px-3 py-2 text-[#3f72af] hover:bg-blue-50 rounded-lg transition-all">
                     <Download className="w-4 h-4" />
                     <span className="text-sm font-medium">Download</span>
                   </button>

@@ -89,7 +89,7 @@ export default function CustomersPage() {
     return (
       <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-full">
-          <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
+          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
       </HybridNavigationTopBar>
     );
@@ -430,7 +430,7 @@ export default function CustomersPage() {
                           {customer.name}
                         </h3>
                         {customer.customer_type === 'company' ? (
-                          <Briefcase className="w-4 h-4 text-blue-600 flex-shrink-0" />
+                          <Briefcase className="w-4 h-4 text-[#3f72af] flex-shrink-0" />
                         ) : (
                           <Users className="w-4 h-4 text-gray-400 flex-shrink-0" />
                         )}
@@ -459,7 +459,7 @@ export default function CustomersPage() {
                       </div>
 
                       {customer.company_name && customer.customer_type !== 'company' && (
-                        <div className="mt-2 inline-flex items-center text-xs text-blue-600 bg-blue-50 px-2 py-1 rounded">
+                        <div className="mt-2 inline-flex items-center text-xs text-[#3f72af] bg-blue-50 px-2 py-1 rounded">
                           <Briefcase className="w-3 h-3 mr-1" />
                           {customer.company_name}
                         </div>

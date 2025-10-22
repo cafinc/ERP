@@ -71,7 +71,7 @@ export default function SupportPage() {
                   href="mailto:support@cafinc.ca"
                   className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
                 >
-                  <Mail className="w-5 h-5 text-blue-600 mt-0.5" />
+                  <Mail className="w-5 h-5 text-[#3f72af] mt-0.5" />
                   <div>
                     <p className="font-medium text-gray-900">Email Support</p>
                     <p className="text-sm text-gray-600">support@cafinc.ca</p>
@@ -83,7 +83,7 @@ export default function SupportPage() {
                   href="tel:+15878770293"
                   className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
                 >
-                  <Phone className="w-5 h-5 text-blue-600 mt-0.5" />
+                  <Phone className="w-5 h-5 text-[#3f72af] mt-0.5" />
                   <div>
                     <p className="font-medium text-gray-900">Phone Support</p>
                     <p className="text-sm text-gray-600">+1 (587) 877-0293</p>
@@ -92,7 +92,7 @@ export default function SupportPage() {
                 </a>
 
                 <div className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
-                  <MessageCircle className="w-5 h-5 text-blue-600 mt-0.5" />
+                  <MessageCircle className="w-5 h-5 text-[#3f72af] mt-0.5" />
                   <div>
                     <p className="font-medium text-gray-900">Live Chat</p>
                     <p className="text-sm text-gray-600">Coming soon</p>

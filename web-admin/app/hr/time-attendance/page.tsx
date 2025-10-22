@@ -166,7 +166,7 @@ export default function TimeAttendancePage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-600">Total Hours</p>
-                <p className="text-3xl font-bold text-blue-600">
+                <p className="text-3xl font-bold text-[#3f72af]">
                   {stats.totalHours.toFixed(1)}
                 </p>
               </div>
@@ -411,7 +411,7 @@ export default function TimeAttendancePage() {
           <div className="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <Clock className="h-5 w-5 text-blue-600" />
+                <Clock className="h-5 w-5 text-[#3f72af]" />
                 <p className="text-sm text-blue-800">
                   <span className="font-semibold">{stats.pending}</span> time entries
                   pending approval

@@ -236,7 +236,7 @@ export default function InvoiceCreatePage() {
                       type="checkbox"
                       checked={invoiceForm.deposit_required}
                       onChange={(e) => setInvoiceForm({ ...invoiceForm, deposit_required: e.target.checked })}
-                      className="rounded text-blue-600 focus:ring-blue-500"
+                      className="rounded text-[#3f72af] focus:ring-blue-500"
                     />
                     <span className="text-sm font-medium text-gray-700">Require Deposit</span>
                   </label>
@@ -270,7 +270,7 @@ export default function InvoiceCreatePage() {
                       type="checkbox"
                       checked={invoiceForm.late_fee_enabled}
                       onChange={(e) => setInvoiceForm({ ...invoiceForm, late_fee_enabled: e.target.checked })}
-                      className="rounded text-blue-600 focus:ring-blue-500"
+                      className="rounded text-[#3f72af] focus:ring-blue-500"
                     />
                     <span className="text-sm font-medium text-gray-700">Enable Late Fees</span>
                   </label>
@@ -409,7 +409,7 @@ export default function InvoiceCreatePage() {
                   
                   <div className="flex items-center justify-between text-lg font-bold pt-3 border-t border-gray-200">
                     <span className="text-gray-900">Total</span>
-                    <span className="text-blue-600">${totals.total.toFixed(2)}</span>
+                    <span className="text-[#3f72af]">${totals.total.toFixed(2)}</span>
                   </div>
 
                   {invoiceForm.deposit_required && (

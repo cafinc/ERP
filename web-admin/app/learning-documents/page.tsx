@@ -94,7 +94,7 @@ export default function LearningDocumentsPage() {
     return (
       <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-64">
-          <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
+          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
       </HybridNavigationTopBar>
     );
@@ -123,7 +123,7 @@ export default function LearningDocumentsPage() {
           <div className="bg-white rounded-lg border border-gray-200 p-6">
             <div className="flex items-center gap-3">
               <div className="bg-blue-100 rounded-lg p-3">
-                <BookOpen className="w-6 h-6 text-blue-600" />
+                <BookOpen className="w-6 h-6 text-[#3f72af]" />
               </div>
               <div>
                 <p className="text-2xl font-bold text-gray-900">{documents.length}</p>
@@ -211,7 +211,7 @@ export default function LearningDocumentsPage() {
                     <div className="flex gap-1">
                       <button
                         onClick={() => alert('Edit feature coming soon')}
-                        className="p-1 text-blue-600 hover:bg-blue-50 rounded"
+                        className="p-1 text-[#3f72af] hover:bg-blue-50 rounded"
                       >
                         <Edit className="w-4 h-4" />
                       </button>
@@ -234,7 +234,7 @@ export default function LearningDocumentsPage() {
                     {doc.file_url && (
                       <button
                         onClick={() => window.open(doc.file_url, '_blank')}
-                        className="flex items-center gap-1 text-blue-600 hover:text-blue-700"
+                        className="flex items-center gap-1 text-[#3f72af] hover:text-blue-700"
                       >
                         <Download className="w-3 h-3" />
                         Download

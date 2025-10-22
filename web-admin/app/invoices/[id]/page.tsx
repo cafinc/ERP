@@ -137,7 +137,7 @@ export default function InvoiceDetailPage() {
     return (
       <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-full">
-          <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
+          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
       </HybridNavigationTopBar>
     );
@@ -296,7 +296,7 @@ export default function InvoiceDetailPage() {
                 </div>
                 <div className="flex items-center justify-between text-lg font-bold pt-2 border-t border-gray-200">
                   <span className="text-gray-900">Total</span>
-                  <span className="text-blue-600">${invoice.total_amount.toFixed(2)}</span>
+                  <span className="text-[#3f72af]">${invoice.total_amount.toFixed(2)}</span>
                 </div>
               </div>
             </div>
@@ -356,7 +356,7 @@ export default function InvoiceDetailPage() {
                 </div>
                 <div className="flex items-center justify-between pt-3 border-t border-gray-200">
                   <span className="text-sm font-semibold text-gray-900">Amount Due</span>
-                  <span className="text-xl font-bold text-blue-600">${invoice.amount_due.toFixed(2)}</span>
+                  <span className="text-xl font-bold text-[#3f72af]">${invoice.amount_due.toFixed(2)}</span>
                 </div>
               </div>
 

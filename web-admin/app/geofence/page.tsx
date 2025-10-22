@@ -291,7 +291,7 @@ export default function GeofenceManagementPage() {
                   <p className="text-3xl font-bold text-gray-900 mt-2">{stats.total_geofences}</p>
                 </div>
                 <div className="p-3 bg-blue-100 rounded-lg">
-                  <MapIcon className="w-6 h-6 text-blue-600" />
+                  <MapIcon className="w-6 h-6 text-[#3f72af]" />
                 </div>
               </div>
             </div>
@@ -312,13 +312,13 @@ export default function GeofenceManagementPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-gray-600">Events Today</p>
-                  <p className="text-3xl font-bold text-blue-600 mt-2">{stats.total_events_today}</p>
+                  <p className="text-3xl font-bold text-[#3f72af] mt-2">{stats.total_events_today}</p>
                   <p className="text-xs text-gray-500 mt-1">
                     {stats.entry_events_today} entries • {stats.exit_events_today} exits
                   </p>
                 </div>
                 <div className="p-3 bg-blue-100 rounded-lg">
-                  <Activity className="w-6 h-6 text-blue-600" />
+                  <Activity className="w-6 h-6 text-[#3f72af]" />
                 </div>
               </div>
             </div>
@@ -436,7 +436,7 @@ export default function GeofenceManagementPage() {
                         <div className="flex items-start justify-between gap-4">
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-3 mb-2">
-                              <MapPin className="w-5 h-5 text-blue-600 flex-shrink-0" />
+                              <MapPin className="w-5 h-5 text-[#3f72af] flex-shrink-0" />
                               <h3 className="font-semibold text-gray-900 truncate">{geofence.site_name}</h3>
                               <div className="flex items-center gap-2 flex-shrink-0">
                                 {geofence.exists === false ? (
@@ -500,7 +500,7 @@ export default function GeofenceManagementPage() {
                                         );
                                         setGeofences(updated);
                                       }}
-                                      className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
+                                      className="w-4 h-4 text-[#3f72af] rounded focus:ring-blue-500"
                                     />
                                     <Bell className="w-4 h-4 text-gray-600" />
                                     <span className="text-sm text-gray-700">Alert on Entry</span>
@@ -518,7 +518,7 @@ export default function GeofenceManagementPage() {
                                         );
                                         setGeofences(updated);
                                       }}
-                                      className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
+                                      className="w-4 h-4 text-[#3f72af] rounded focus:ring-blue-500"
                                     />
                                     <Bell className="w-4 h-4 text-gray-600" />
                                     <span className="text-sm text-gray-700">Alert on Exit</span>

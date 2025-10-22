@@ -313,7 +313,7 @@ export default function MessagesPage() {
                 <p>No conversations yet</p>
                 <button
                   onClick={() => setShowNewConversation(true)}
-                  className="mt-4 text-blue-600 hover:underline"
+                  className="mt-4 text-[#3f72af] hover:underline"
                 >
                   Start a new conversation
                 </button>
@@ -612,7 +612,7 @@ export default function MessagesPage() {
                             setSelectedUsers(selectedUsers.filter(id => id !== contact._id));
                           }
                         }}
-                        className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                        className="w-4 h-4 text-[#3f72af] border-gray-300 rounded focus:ring-blue-500"
                       />
                       <div className="flex-1">
                         <p className="font-medium text-gray-900">{contact.display_name}</p>

@@ -93,7 +93,7 @@ export default function AnalyticsPage() {
 
         {loading ? (
           <div className="flex items-center justify-center py-12">
-            <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
+            <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
           </div>
         ) : (
           <>
@@ -102,7 +102,7 @@ export default function AnalyticsPage() {
               <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
                 <div className="flex items-center justify-between mb-4">
                   <div className="p-3 bg-blue-100 rounded-lg">
-                    <Phone className="w-6 h-6 text-blue-600" />
+                    <Phone className="w-6 h-6 text-[#3f72af]" />
                   </div>
                   <TrendingUp className="w-5 h-5 text-green-600" />
                 </div>

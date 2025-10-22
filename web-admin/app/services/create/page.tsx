@@ -120,7 +120,7 @@ export default function ServiceFormPage() {
     return (
       <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-64">
-          <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
+          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
       </HybridNavigationTopBar>
     );
@@ -194,7 +194,7 @@ export default function ServiceFormPage() {
                   type="checkbox"
                   checked={formData.active}
                   onChange={(e) => setFormData({ ...formData, active: e.target.checked })}
-                  className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                  className="w-4 h-4 text-[#3f72af] border-gray-300 rounded focus:ring-blue-500"
                 />
                 <span className="ml-2 text-sm text-gray-700">Active Service</span>
               </label>
@@ -222,7 +222,7 @@ export default function ServiceFormPage() {
             <button
               type="button"
               onClick={addPricingEntry}
-              className="flex items-center gap-2 text-sm text-blue-600 hover:text-blue-800"
+              className="flex items-center gap-2 text-sm text-[#3f72af] hover:text-blue-800"
             >
               <Plus className="w-4 h-4" />
               Add Pricing Tier

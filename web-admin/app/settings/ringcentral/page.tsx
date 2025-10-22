@@ -150,7 +150,7 @@ export default function RingCentralSettings() {
     return (
       <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-full">
-          <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
+          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
       </HybridNavigationTopBar>
     );
@@ -243,7 +243,7 @@ export default function RingCentralSettings() {
                       }`}>
                         <IconComponent className={`w-6 h-6 ${
                           feature.enabled && feature.status === 'active'
-                            ? 'text-blue-600'
+                            ? 'text-[#3f72af]'
                             : 'text-gray-600'
                         }`} />
                       </div>
@@ -275,7 +275,7 @@ export default function RingCentralSettings() {
                   {feature.route && feature.enabled && feature.status === 'active' && (
                     <button
                       onClick={() => (window.location.href = feature.route!)}
-                      className="w-full flex items-center justify-center space-x-2 px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-lg font-medium transition-colors"
+                      className="w-full flex items-center justify-center space-x-2 px-4 py-2 bg-blue-50 hover:bg-blue-100 text-[#3f72af] rounded-lg font-medium transition-colors"
                     >
                       <SettingsIcon className="w-4 h-4" />
                       <span>Open Feature</span>

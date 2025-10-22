@@ -416,7 +416,7 @@ export default function CreateEstimatePage() {
               {selectedCustomer ? (
                 <div className="flex items-center justify-between p-4 bg-blue-50 rounded-lg border border-blue-200">
                   <div className="flex items-center space-x-3">
-                    <User className="w-5 h-5 text-blue-600" />
+                    <User className="w-5 h-5 text-[#3f72af]" />
                     <div>
                       <p className="font-semibold text-gray-900">{selectedCustomer.name}</p>
                       <p className="text-sm text-gray-600">{selectedCustomer.email}</p>
@@ -692,7 +692,7 @@ export default function CreateEstimatePage() {
                 <FileText className="w-8 h-8 text-gray-400 mb-2" />
                 <span className="text-sm text-gray-600 text-center">Attach Forms</span>
                 {attachedForms.length > 0 && (
-                  <span className="text-xs text-blue-600 mt-1">{attachedForms.length} attached</span>
+                  <span className="text-xs text-[#3f72af] mt-1">{attachedForms.length} attached</span>
                 )}
               </button>
 

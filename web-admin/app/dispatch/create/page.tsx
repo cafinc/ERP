@@ -142,7 +142,7 @@ export default function DispatchCreatePage() {
     return (
       <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-full">
-          <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
+          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
       </HybridNavigationTopBar>
     );
@@ -239,7 +239,7 @@ export default function DispatchCreatePage() {
                   >
                     <span className="text-sm font-medium">{service.label}</span>
                     {dispatchForm.services.includes(service.value) ? (
-                      <CheckSquare className="w-5 h-5 text-blue-600" />
+                      <CheckSquare className="w-5 h-5 text-[#3f72af]" />
                     ) : (
                       <Square className="w-5 h-5 text-gray-400" />
                     )}
@@ -282,7 +282,7 @@ export default function DispatchCreatePage() {
                         </div>
                       </div>
                       {dispatchForm.crew_ids.includes(user._id) ? (
-                        <CheckSquare className="w-5 h-5 text-blue-600" />
+                        <CheckSquare className="w-5 h-5 text-[#3f72af]" />
                       ) : (
                         <Square className="w-5 h-5 text-gray-400" />
                       )}
@@ -328,7 +328,7 @@ export default function DispatchCreatePage() {
                         </div>
                       </div>
                       {dispatchForm.equipment_ids.includes(equip._id) ? (
-                        <CheckSquare className="w-5 h-5 text-blue-600" />
+                        <CheckSquare className="w-5 h-5 text-[#3f72af]" />
                       ) : (
                         <Square className="w-5 h-5 text-gray-400" />
                       )}
@@ -374,7 +374,7 @@ export default function DispatchCreatePage() {
                         </div>
                       </div>
                       {dispatchForm.site_ids.includes(site._id) ? (
-                        <CheckSquare className="w-5 h-5 text-blue-600" />
+                        <CheckSquare className="w-5 h-5 text-[#3f72af]" />
                       ) : (
                         <Square className="w-5 h-5 text-gray-400" />
                       )}

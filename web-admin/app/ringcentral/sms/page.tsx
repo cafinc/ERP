@@ -232,7 +232,7 @@ export default function SMSPage() {
         <div className="bg-white rounded-xl shadow-sm border border-gray-200">
           {loading ? (
             <div className="flex items-center justify-center py-12">
-              <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
+              <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
             </div>
           ) : filteredMessages.length === 0 ? (
             <div className="text-center py-12">
@@ -253,7 +253,7 @@ export default function SMSPage() {
                           message.direction === 'Inbound' ? 'bg-green-100' : 'bg-blue-100'
                         }`}>
                           <Phone className={`w-4 h-4 ${
-                            message.direction === 'Inbound' ? 'text-green-600' : 'text-blue-600'
+                            message.direction === 'Inbound' ? 'text-green-600' : 'text-[#3f72af]'
                           }`} />
                         </div>
                         <div>

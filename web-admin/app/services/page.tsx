@@ -103,7 +103,7 @@ export default function ServicesPage() {
     return (
       <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-full">
-          <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
+          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
       </HybridNavigationTopBar>
     );
@@ -282,7 +282,7 @@ export default function ServicesPage() {
           <div className="bg-white rounded-xl shadow-md border border-gray-200 p-4">
             <div className="flex items-center gap-3">
               <div className="bg-blue-100 rounded-lg p-3">
-                <Package className="w-6 h-6 text-blue-600" />
+                <Package className="w-6 h-6 text-[#3f72af]" />
               </div>
               <div>
                 <p className="text-2xl font-bold text-gray-900">{services.length}</p>
@@ -391,7 +391,7 @@ export default function ServicesPage() {
                         <div className="flex items-center gap-2">
                           <button
                             onClick={() => router.push(`/services/${service.id}/edit`)}
-                            className="text-blue-600 hover:text-blue-800"
+                            className="text-[#3f72af] hover:text-blue-800"
                           >
                             <Edit className="w-4 h-4" />
                           </button>

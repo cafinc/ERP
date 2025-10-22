@@ -223,7 +223,7 @@ export default function RouteOptimizationPage() {
                         type="checkbox"
                         checked={selectedSiteIds.includes(site.id)}
                         onChange={() => handleSiteToggle(site.id)}
-                        className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500 mt-0.5"
+                        className="w-5 h-5 text-[#3f72af] rounded focus:ring-blue-500 mt-0.5"
                       />
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-medium text-gray-900 truncate">
@@ -268,7 +268,7 @@ export default function RouteOptimizationPage() {
 
                 <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
                   <div className="flex items-start space-x-2">
-                    <AlertCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                    <AlertCircle className="w-5 h-5 text-[#3f72af] flex-shrink-0 mt-0.5" />
                     <div className="text-sm text-blue-700">
                       <p className="font-medium">Manual Reordering</p>
                       <p className="text-xs mt-1">
@@ -288,7 +288,7 @@ export default function RouteOptimizationPage() {
                   <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
                     <div className="flex items-center space-x-3">
                       <div className="p-3 bg-blue-100 rounded-lg">
-                        <Navigation className="w-6 h-6 text-blue-600" />
+                        <Navigation className="w-6 h-6 text-[#3f72af]" />
                       </div>
                       <div>
                         <p className="text-sm text-gray-600">Distance</p>
@@ -397,7 +397,7 @@ export default function RouteOptimizationPage() {
                             <p className="text-sm text-gray-600">{site?.address}</p>
                             {routeDetail?.distance_from_previous_km !== undefined &&
                               routeDetail.distance_from_previous_km > 0 && (
-                                <p className="text-xs text-blue-600 mt-1">
+                                <p className="text-xs text-[#3f72af] mt-1">
                                   {routeDetail.distance_from_previous_km.toFixed(2)} km from
                                   previous
                                 </p>

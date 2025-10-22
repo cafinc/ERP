@@ -118,7 +118,7 @@ export default function AutomationAnalyticsPage() {
     return (
       <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-full">
-          <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
+          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
       </HybridNavigationTopBar>
     );
@@ -148,7 +148,7 @@ export default function AutomationAnalyticsPage() {
                 <p className="text-sm text-gray-500 mt-1">Last 7 days</p>
               </div>
               <div className="bg-blue-100 p-4 rounded-xl">
-                <Zap className="w-6 h-6 text-blue-600" />
+                <Zap className="w-6 h-6 text-[#3f72af]" />
               </div>
             </div>
           </div>

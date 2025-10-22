@@ -314,7 +314,7 @@ export default function CustomerFormPage() {
             {/* Basic Information */}
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
               <h2 className="text-xl font-semibold text-gray-900 mb-6 flex items-center space-x-2">
-                <User className="w-5 h-5 text-blue-600" />
+                <User className="w-5 h-5 text-[#3f72af]" />
                 <span>Basic Information</span>
               </h2>
 
@@ -469,7 +469,7 @@ export default function CustomerFormPage() {
                       type="checkbox"
                       checked={customerForm.active}
                       onChange={(e) => setCustomerForm({ ...customerForm, active: e.target.checked })}
-                      className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500"
+                      className="w-5 h-5 text-[#3f72af] rounded focus:ring-blue-500"
                     />
                     <span className="text-sm font-medium text-gray-700">Active Customer</span>
                   </label>
@@ -615,7 +615,7 @@ export default function CustomerFormPage() {
                           ...customerForm,
                           accounting: { ...customerForm.accounting, po_required: e.target.checked }
                         })}
-                        className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500"
+                        className="w-5 h-5 text-[#3f72af] rounded focus:ring-blue-500"
                       />
                       <span className="text-sm font-medium text-gray-700">Purchase Order Required</span>
                     </label>
@@ -797,7 +797,7 @@ export default function CustomerFormPage() {
             {/* Attach Forms Section */}
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
               <h2 className="text-xl font-semibold text-gray-900 mb-2 flex items-center space-x-2">
-                <FileText className="w-5 h-5 text-blue-600" />
+                <FileText className="w-5 h-5 text-[#3f72af]" />
                 <span>Attach Forms</span>
               </h2>
               <p className="text-sm text-gray-600 mb-4">
@@ -813,7 +813,7 @@ export default function CustomerFormPage() {
                     return (
                       <div key={formId} className="flex items-center justify-between p-3 bg-blue-50 rounded-lg border border-blue-200">
                         <div className="flex items-center space-x-2">
-                          <FileText className="w-4 h-4 text-blue-600" />
+                          <FileText className="w-4 h-4 text-[#3f72af]" />
                           <span className="text-sm font-medium text-gray-900">{form.name}</span>
                           <span className="text-xs text-gray-500">({form.fields?.length || 0} fields)</span>
                         </div>

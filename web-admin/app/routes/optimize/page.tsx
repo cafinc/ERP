@@ -364,7 +364,7 @@ export default function RouteOptimizationPage() {
                           type="checkbox"
                           checked={selectedSiteIds.includes(site.id)}
                           onChange={() => handleSiteToggle(site.id)}
-                          className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500 mt-0.5"
+                          className="w-4 h-4 text-[#3f72af] rounded focus:ring-blue-500 mt-0.5"
                         />
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-2">
@@ -383,7 +383,7 @@ export default function RouteOptimizationPage() {
 
                   <button
                     onClick={() => setSelectedSiteIds(sites.map(s => s.id))}
-                    className="text-sm text-blue-600 hover:underline mb-4"
+                    className="text-sm text-[#3f72af] hover:underline mb-4"
                   >
                     Select All
                   </button>
@@ -417,7 +417,7 @@ export default function RouteOptimizationPage() {
                         type="checkbox"
                         checked={considerWeather}
                         onChange={(e) => setConsiderWeather(e.target.checked)}
-                        className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
+                        className="w-4 h-4 text-[#3f72af] rounded focus:ring-blue-500"
                       />
                       <CloudSnow className="w-4 h-4 text-gray-600" />
                       <span className="text-sm text-gray-700">Consider Weather Conditions</span>
@@ -476,7 +476,7 @@ export default function RouteOptimizationPage() {
                     <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
                       <div className="flex items-center gap-3">
                         <div className="p-2 bg-blue-100 rounded-lg">
-                          <Navigation className="w-5 h-5 text-blue-600" />
+                          <Navigation className="w-5 h-5 text-[#3f72af]" />
                         </div>
                         <div>
                           <p className="text-xs text-gray-600">Distance</p>
@@ -593,7 +593,7 @@ export default function RouteOptimizationPage() {
                               <p className="text-xs text-gray-600">{site?.address}</p>
                               {routeDetail?.distance_from_previous_km !== undefined &&
                                 routeDetail.distance_from_previous_km > 0 && (
-                                  <p className="text-xs text-blue-600 mt-1">
+                                  <p className="text-xs text-[#3f72af] mt-1">
                                     {routeDetail.distance_from_previous_km.toFixed(2)} km from previous
                                   </p>
                                 )}

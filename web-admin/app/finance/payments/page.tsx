@@ -204,7 +204,7 @@ export default function PaymentsPage() {
                       {new Date(payment.date).toLocaleDateString()}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{payment.id}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-blue-600 hover:text-blue-800 cursor-pointer"
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-[#3f72af] hover:text-blue-800 cursor-pointer"
                         onClick={() => router.push(`/invoices/${payment.invoice}`)}>
                       {payment.invoice}
                     </td>
@@ -226,7 +226,7 @@ export default function PaymentsPage() {
                       ${payment.amount.toLocaleString()}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                      <button className="text-blue-600 hover:text-blue-900">View</button>
+                      <button className="text-[#3f72af] hover:text-blue-900">View</button>
                     </td>
                   </tr>
                 ))}

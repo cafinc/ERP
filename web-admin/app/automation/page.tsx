@@ -104,7 +104,7 @@ export default function AutomationDashboardPage() {
     switch (status) {
       case 'success': return 'text-green-600 bg-green-100';
       case 'error': return 'text-red-600 bg-red-100';
-      case 'running': return 'text-blue-600 bg-blue-100';
+      case 'running': return 'text-[#3f72af] bg-blue-100';
       default: return 'text-gray-600 bg-gray-100';
     }
   };
@@ -113,7 +113,7 @@ export default function AutomationDashboardPage() {
     return (
       <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-full">
-          <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
+          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
       </HybridNavigationTopBar>
     );
@@ -166,7 +166,7 @@ export default function AutomationDashboardPage() {
                 <p className="text-2xl font-bold text-gray-900">{automationStatus?.workflows_registered || 0}</p>
               </div>
               <div className="p-3 bg-blue-100 rounded-lg">
-                <Zap className="w-6 h-6 text-blue-600" />
+                <Zap className="w-6 h-6 text-[#3f72af]" />
               </div>
             </div>
           </div>
@@ -219,7 +219,7 @@ export default function AutomationDashboardPage() {
                 <div className="flex items-start justify-between mb-3">
                   <div className="flex items-start space-x-3">
                     <div className="p-2 bg-blue-100 rounded-lg">
-                      <Icon className="w-5 h-5 text-blue-600" />
+                      <Icon className="w-5 h-5 text-[#3f72af]" />
                     </div>
                     <div>
                       <h3 className="font-semibold text-gray-900">{workflow.name}</h3>
@@ -258,7 +258,7 @@ export default function AutomationDashboardPage() {
                           <li key={idx} className="text-xs">• {step}</li>
                         ))}
                         {workflow.steps.length > 3 && (
-                          <li className="text-xs text-blue-600">+ {workflow.steps.length - 3} more...</li>
+                          <li className="text-xs text-[#3f72af]">+ {workflow.steps.length - 3} more...</li>
                         )}
                       </ul>
                     </div>

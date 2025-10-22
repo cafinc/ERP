@@ -268,7 +268,7 @@ export default function ViewResponsePage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="flex items-center space-x-3">
                 <div className="p-3 bg-blue-100 rounded-lg">
-                  <User className="w-6 h-6 text-blue-600" />
+                  <User className="w-6 h-6 text-[#3f72af]" />
                 </div>
                 <div>
                   <p className="text-sm text-gray-600">Submitted By</p>

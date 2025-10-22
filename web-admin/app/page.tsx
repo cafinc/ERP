@@ -69,7 +69,7 @@ export default function HomePage() {
     // Mock recent activity
     setRecentActivity([
       { type: 'invoice', message: 'Invoice #1234 paid', time: '2 mins ago', icon: CheckCircle, color: 'text-green-600' },
-      { type: 'project', message: 'Project "Main St Plowing" updated', time: '15 mins ago', icon: FileText, color: 'text-blue-600' },
+      { type: 'project', message: 'Project "Main St Plowing" updated', time: '15 mins ago', icon: FileText, color: 'text-[#3f72af]' },
       { type: 'alert', message: 'Low stock alert: Rock Salt', time: '1 hour ago', icon: AlertTriangle, color: 'text-yellow-600' },
       { type: 'customer', message: 'New customer added', time: '3 hours ago', icon: Users, color: 'text-purple-600' },
     ]);
@@ -205,7 +205,7 @@ export default function HomePage() {
                 href={action.href}
                 className="bg-white rounded-xl shadow-sm border border-gray-200 p-5 hover:shadow-md hover:border-blue-300 transition-all flex flex-col items-center justify-center text-center gap-3"
               >
-                <action.icon className="w-8 h-8 text-blue-600" />
+                <action.icon className="w-8 h-8 text-[#3f72af]" />
                 <span className="font-medium text-gray-900">{action.label}</span>
               </a>
             ))}
@@ -253,7 +253,7 @@ export default function HomePage() {
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <BarChart3 className="w-5 h-5 text-blue-600" />
+                    <BarChart3 className="w-5 h-5 text-[#3f72af]" />
                     <span className="font-medium text-gray-900">API Response Time</span>
                   </div>
                   <span className="text-gray-600 font-medium">125ms</span>

@@ -152,7 +152,7 @@ export default function PhotoGalleryPage() {
     return (
       <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-64">
-          <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
+          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
       </HybridNavigationTopBar>
     );
@@ -233,7 +233,7 @@ export default function PhotoGalleryPage() {
           <div className="bg-white rounded-lg border border-gray-200 p-4">
             <div className="flex items-center gap-3">
               <div className="bg-blue-100 rounded-lg p-3">
-                <ImageIcon className="w-6 h-6 text-blue-600" />
+                <ImageIcon className="w-6 h-6 text-[#3f72af]" />
               </div>
               <div>
                 <p className="text-2xl font-bold text-gray-900">{photos.length}</p>
@@ -359,7 +359,7 @@ export default function PhotoGalleryPage() {
                       <div className="flex items-center gap-2">
                         <button
                           onClick={() => setSelectedPhoto(photo)}
-                          className="text-blue-600 hover:text-blue-800"
+                          className="text-[#3f72af] hover:text-blue-800"
                         >
                           <Eye className="w-4 h-4" />
                         </button>

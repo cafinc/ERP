@@ -252,7 +252,7 @@ export default function CustomerDetailPage() {
               <div className="flex items-center space-x-3">
                 <h1 className="text-3xl font-bold text-gray-900">{customer.name}</h1>
                 {isCompany ? (
-                  <Briefcase className="w-6 h-6 text-blue-600" />
+                  <Briefcase className="w-6 h-6 text-[#3f72af]" />
                 ) : (
                   <Users className="w-6 h-6 text-gray-600" />
                 )}
@@ -325,12 +325,12 @@ export default function CustomerDetailPage() {
               <div className="bg-blue-50 rounded-xl border border-blue-200 p-6">
                 <div className="flex items-center justify-between mb-2">
                   <h3 className="text-lg font-semibold text-blue-900">Linked Company</h3>
-                  <Briefcase className="w-5 h-5 text-blue-600" />
+                  <Briefcase className="w-5 h-5 text-[#3f72af]" />
                 </div>
                 <p className="text-blue-700 font-medium">{customer.company_name}</p>
                 <button
                   onClick={() => router.push(`/customers/${customer.company_id}`)}
-                  className="mt-3 text-sm text-blue-600 hover:text-blue-800 font-medium"
+                  className="mt-3 text-sm text-[#3f72af] hover:text-blue-800 font-medium"
                 >
                   View Company →
                 </button>
@@ -396,7 +396,7 @@ export default function CustomerDetailPage() {
                         <div className="flex items-center space-x-2">
                           <button
                             onClick={() => router.push(`/customers/${contact._id}`)}
-                            className="px-3 py-1 text-sm text-blue-600 hover:bg-blue-50 rounded"
+                            className="px-3 py-1 text-sm text-[#3f72af] hover:bg-blue-50 rounded"
                           >
                             View
                           </button>
@@ -481,7 +481,7 @@ export default function CustomerDetailPage() {
                       </div>
                       <button
                         onClick={() => router.push(`/sites/${site.id}`)}
-                        className="px-3 py-1 text-sm text-blue-600 hover:bg-blue-50 rounded"
+                        className="px-3 py-1 text-sm text-[#3f72af] hover:bg-blue-50 rounded"
                       >
                         View
                       </button>
@@ -542,7 +542,7 @@ export default function CustomerDetailPage() {
                           type="checkbox"
                           checked={serviceRequestForm.sub_services.some(s => s.name === service)}
                           onChange={() => handleSubServiceToggle(service)}
-                          className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500"
+                          className="w-5 h-5 text-[#3f72af] rounded focus:ring-blue-500"
                         />
                         <span className="text-gray-900">{service}</span>
                       </label>

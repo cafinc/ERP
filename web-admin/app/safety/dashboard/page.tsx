@@ -83,7 +83,7 @@ export default function SafetyDashboardPage() {
             <div className="space-y-1">
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600">Pending:</span>
-                <span className="font-semibold text-blue-600">{stats.inspections.pending}</span>
+                <span className="font-semibold text-[#3f72af]">{stats.inspections.pending}</span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600">Overdue:</span>
@@ -167,7 +167,7 @@ export default function SafetyDashboardPage() {
               onClick={() => router.push('/safety/policies')}
               className="bg-white rounded-xl shadow-lg border border-gray-200 p-4 hover:shadow-md transition-shadow text-left"
             >
-              <FileText className="w-8 h-8 text-blue-600 mb-2" />
+              <FileText className="w-8 h-8 text-[#3f72af] mb-2" />
               <h3 className="font-semibold text-gray-900">Safety Policies</h3>
               <p className="text-sm text-gray-600 mt-1">View policies & procedures</p>
             </button>

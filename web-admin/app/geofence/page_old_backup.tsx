@@ -233,7 +233,7 @@ export default function GeofenceManagementPage() {
                       <div className="flex items-center justify-between">
                         <div className="flex-1">
                           <div className="flex items-center space-x-3 mb-2">
-                            <MapPin className="w-5 h-5 text-blue-600" />
+                            <MapPin className="w-5 h-5 text-[#3f72af]" />
                             <h3 className="font-semibold text-gray-900">{geofence.site_name}</h3>
                             {geofence.exists === false && (
                               <span className="px-2 py-1 bg-yellow-100 text-yellow-700 text-xs font-medium rounded">

@@ -84,7 +84,7 @@ export default function ShiftHistoryPage() {
     return (
       <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-64">
-          <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
+          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
       </HybridNavigationTopBar>
     );
@@ -113,7 +113,7 @@ export default function ShiftHistoryPage() {
           <div className="bg-white rounded-lg border border-gray-200 p-6">
             <div className="flex items-center gap-3">
               <div className="bg-blue-100 rounded-lg p-3">
-                <Calendar className="w-6 h-6 text-blue-600" />
+                <Calendar className="w-6 h-6 text-[#3f72af]" />
               </div>
               <div>
                 <p className="text-2xl font-bold text-gray-900">{shifts.length}</p>

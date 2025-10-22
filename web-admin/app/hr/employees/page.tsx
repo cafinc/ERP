@@ -194,7 +194,7 @@ export default function EmployeesPage() {
           </div>
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <p className="text-sm text-gray-600">Departments</p>
-            <p className="text-3xl font-bold text-blue-600">
+            <p className="text-3xl font-bold text-[#3f72af]">
               {new Set(employees.map((e: any) => e.department)).size}
             </p>
           </div>
@@ -255,7 +255,7 @@ export default function EmployeesPage() {
               <p className="text-gray-500 mb-4">No employees found</p>
               <button
                 onClick={() => setShowModal(true)}
-                className="text-blue-500 hover:text-blue-600"
+                className="text-blue-500 hover:text-[#3f72af]"
               >
                 Add your first employee
               </button>
@@ -325,7 +325,7 @@ export default function EmployeesPage() {
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         <button
                           onClick={() => handleEdit(employee)}
-                          className="text-blue-600 hover:text-blue-900 mr-4"
+                          className="text-[#3f72af] hover:text-blue-900 mr-4"
                         >
                           <Edit className="h-5 w-5" />
                         </button>

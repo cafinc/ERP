@@ -150,7 +150,7 @@ export default function CreateInspectionSchedulePage() {
     return (
       <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-64">
-          <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
+          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
       </HybridNavigationTopBar>
     );
@@ -295,7 +295,7 @@ export default function CreateInspectionSchedulePage() {
                   type="checkbox"
                   checked={formData.auto_create}
                   onChange={(e) => setFormData({ ...formData, auto_create: e.target.checked })}
-                  className="w-5 h-5 text-blue-600 rounded focus:ring-2 focus:ring-blue-500"
+                  className="w-5 h-5 text-[#3f72af] rounded focus:ring-2 focus:ring-blue-500"
                 />
                 <div>
                   <span className="font-medium text-gray-900">Auto-Create Inspections</span>
@@ -308,7 +308,7 @@ export default function CreateInspectionSchedulePage() {
                   type="checkbox"
                   checked={formData.send_reminders}
                   onChange={(e) => setFormData({ ...formData, send_reminders: e.target.checked })}
-                  className="w-5 h-5 text-blue-600 rounded focus:ring-2 focus:ring-blue-500"
+                  className="w-5 h-5 text-[#3f72af] rounded focus:ring-2 focus:ring-blue-500"
                 />
                 <div>
                   <span className="font-medium text-gray-900">Send Reminders</span>
@@ -366,7 +366,7 @@ export default function CreateInspectionSchedulePage() {
                           type="checkbox"
                           checked={rule.enabled}
                           onChange={(e) => updateComplianceRule(index, 'enabled', e.target.checked)}
-                          className="w-4 h-4 text-blue-600 rounded focus:ring-2 focus:ring-blue-500"
+                          className="w-4 h-4 text-[#3f72af] rounded focus:ring-2 focus:ring-blue-500"
                         />
                         <span className="text-sm font-medium text-gray-900">Enabled</span>
                       </label>

@@ -100,10 +100,10 @@ export default function CustomerPortalLoginPage() {
 
             <div className="flex items-center justify-between">
               <label className="flex items-center">
-                <input type="checkbox" className="rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
+                <input type="checkbox" className="rounded border-gray-300 text-[#3f72af] focus:ring-blue-500" />
                 <span className="ml-2 text-sm text-gray-600">Remember me</span>
               </label>
-              <a href="#" className="text-sm text-blue-600 hover:underline">
+              <a href="#" className="text-sm text-[#3f72af] hover:underline">
                 Forgot password?
               </a>
             </div>
@@ -120,7 +120,7 @@ export default function CustomerPortalLoginPage() {
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
               New customer?{' '}
-              <a href="#" className="text-blue-600 hover:underline font-medium">
+              <a href="#" className="text-[#3f72af] hover:underline font-medium">
                 Contact us for access
               </a>
             </p>
@@ -131,25 +131,25 @@ export default function CustomerPortalLoginPage() {
         <div className="mt-8 grid grid-cols-2 gap-4">
           <div className="text-center">
             <div className="bg-white rounded-lg p-4 shadow-sm">
-              <MapPin className="w-6 h-6 text-blue-600 mx-auto mb-2" />
+              <MapPin className="w-6 h-6 text-[#3f72af] mx-auto mb-2" />
               <p className="text-xs text-gray-600">View Sites</p>
             </div>
           </div>
           <div className="text-center">
             <div className="bg-white rounded-lg p-4 shadow-sm">
-              <FileText className="w-6 h-6 text-blue-600 mx-auto mb-2" />
+              <FileText className="w-6 h-6 text-[#3f72af] mx-auto mb-2" />
               <p className="text-xs text-gray-600">Track Services</p>
             </div>
           </div>
           <div className="text-center">
             <div className="bg-white rounded-lg p-4 shadow-sm">
-              <Receipt className="w-6 h-6 text-blue-600 mx-auto mb-2" />
+              <Receipt className="w-6 h-6 text-[#3f72af] mx-auto mb-2" />
               <p className="text-xs text-gray-600">View Invoices</p>
             </div>
           </div>
           <div className="text-center">
             <div className="bg-white rounded-lg p-4 shadow-sm">
-              <MessageSquare className="w-6 h-6 text-blue-600 mx-auto mb-2" />
+              <MessageSquare className="w-6 h-6 text-[#3f72af] mx-auto mb-2" />
               <p className="text-xs text-gray-600">Message Us</p>
             </div>
           </div>

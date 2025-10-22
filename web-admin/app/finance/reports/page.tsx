@@ -146,7 +146,7 @@ export default function ReportsPage() {
                 <report.icon className="w-6 h-6 text-white" />
               </div>
               
-              <h3 className="text-base font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+              <h3 className="text-base font-semibold text-gray-900 mb-2 group-hover:text-[#3f72af] transition-colors">
                 {report.title}
               </h3>
               <p className="text-sm text-gray-600 mb-4">{report.description}</p>

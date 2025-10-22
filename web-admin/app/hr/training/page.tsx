@@ -241,7 +241,7 @@ export default function TrainingPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-600">In Progress</p>
-                <p className="text-3xl font-bold text-blue-600">
+                <p className="text-3xl font-bold text-[#3f72af]">
                   {stats.inProgress}
                 </p>
               </div>
@@ -285,7 +285,7 @@ export default function TrainingPage() {
                 onClick={() => setActiveTab("programs")}
                 className={`px-6 py-3 text-sm font-medium border-b-2 ${
                   activeTab === "programs"
-                    ? "border-blue-500 text-blue-600"
+                    ? "border-blue-500 text-[#3f72af]"
                     : "border-transparent text-gray-500 hover:text-gray-700"
                 }`}
               >
@@ -295,7 +295,7 @@ export default function TrainingPage() {
                 onClick={() => setActiveTab("assignments")}
                 className={`px-6 py-3 text-sm font-medium border-b-2 ${
                   activeTab === "assignments"
-                    ? "border-blue-500 text-blue-600"
+                    ? "border-blue-500 text-[#3f72af]"
                     : "border-transparent text-gray-500 hover:text-gray-700"
                 }`}
               >
@@ -330,7 +330,7 @@ export default function TrainingPage() {
                     <p className="text-gray-500 mb-2">No training programs yet</p>
                     <button
                       onClick={() => setShowProgramModal(true)}
-                      className="text-blue-500 hover:text-blue-600"
+                      className="text-blue-500 hover:text-[#3f72af]"
                     >
                       Create your first training program
                     </button>
@@ -416,7 +416,7 @@ export default function TrainingPage() {
                     <p className="text-gray-500 mb-2">No training assignments yet</p>
                     <button
                       onClick={() => setShowAssignModal(true)}
-                      className="text-blue-500 hover:text-blue-600"
+                      className="text-blue-500 hover:text-[#3f72af]"
                     >
                       Assign training to an employee
                     </button>
@@ -628,7 +628,7 @@ export default function TrainingPage() {
                     onChange={(e) =>
                       setProgramForm({ ...programForm, is_required: e.target.checked })
                     }
-                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                    className="h-4 w-4 text-[#3f72af] focus:ring-blue-500 border-gray-300 rounded"
                   />
                   <label htmlFor="is_required" className="ml-2 text-sm text-gray-700">
                     Required Training

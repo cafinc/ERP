@@ -127,7 +127,7 @@ export default function EmergencyAlertPage() {
         <div className="bg-white rounded-lg border border-gray-200 p-6">
           <div className="flex items-center gap-4">
             <div className="bg-blue-100 rounded-lg p-4">
-              <Users className="w-8 h-8 text-blue-600" />
+              <Users className="w-8 h-8 text-[#3f72af]" />
             </div>
             <div>
               <p className="text-sm text-gray-600">Team Members On Shift</p>
@@ -230,7 +230,7 @@ export default function EmergencyAlertPage() {
 
         {/* Info Card */}
         <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 flex items-start gap-3">
-          <Info className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+          <Info className="w-5 h-5 text-[#3f72af] flex-shrink-0 mt-0.5" />
           <p className="text-sm text-blue-900">
             Alerts are sent via Email and SMS to all team members with active shifts. Recipients can manage their notification preferences in settings.
           </p>

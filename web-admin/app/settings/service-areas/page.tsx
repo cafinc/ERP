@@ -36,7 +36,7 @@ export default function ServiceAreasPage() {
                 <div key={area.id} className="flex items-center justify-between p-4 border-2 border-gray-200 rounded-lg hover:border-gray-300 transition-all">
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                      <MapPin className="w-6 h-6 text-blue-600" />
+                      <MapPin className="w-6 h-6 text-[#3f72af]" />
                     </div>
                     <div>
                       <p className="font-semibold text-gray-900">{area.name}</p>

@@ -171,7 +171,7 @@ export default function WorkflowBuilderPage() {
     return (
       <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-full">
-          <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
+          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
       </HybridNavigationTopBar>
     );
@@ -199,7 +199,7 @@ export default function WorkflowBuilderPage() {
 
         {/* Info Banner */}
         <div className="mx-6 mb-6 bg-blue-50 border border-blue-200 rounded-lg p-4 flex items-start space-x-3">
-          <AlertCircle className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
+          <AlertCircle className="w-5 h-5 text-[#3f72af] mt-0.5 flex-shrink-0" />
           <div>
             <p className="text-sm font-medium text-blue-900">Custom Workflow Builder</p>
             <p className="text-xs text-blue-700 mt-1">
@@ -217,7 +217,7 @@ export default function WorkflowBuilderPage() {
                 <div key={idx} className="bg-white rounded-xl shadow-lg border border-gray-200 p-4">
                   <div className="flex items-start justify-between mb-2">
                     <h4 className="font-semibold text-gray-900">{template.name}</h4>
-                    <Zap className="w-5 h-5 text-blue-600" />
+                    <Zap className="w-5 h-5 text-[#3f72af]" />
                   </div>
                   <p className="text-sm text-gray-600 mb-3">{template.description}</p>
                   <div className="flex items-center justify-between text-xs text-gray-500 mb-3">
@@ -280,7 +280,7 @@ export default function WorkflowBuilderPage() {
 
                     {/* Trigger Info */}
                     <div className="flex items-center space-x-2 mb-3 p-2 bg-blue-50 rounded-lg">
-                      <TriggerIcon className="w-4 h-4 text-blue-600" />
+                      <TriggerIcon className="w-4 h-4 text-[#3f72af]" />
                       <span className="text-sm font-medium text-blue-900 capitalize">
                         {workflow.trigger?.trigger_type || 'manual'} Trigger
                       </span>

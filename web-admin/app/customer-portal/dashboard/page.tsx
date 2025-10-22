@@ -188,7 +188,7 @@ export default function CustomerDashboardPage() {
           <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-4">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                <MapPin className="w-5 h-5 text-blue-600" />
+                <MapPin className="w-5 h-5 text-[#3f72af]" />
               </div>
               <div>
                 <p className="text-2xl font-bold text-gray-900">{stats.activeSites}</p>
@@ -266,7 +266,7 @@ export default function CustomerDashboardPage() {
                 onClick={() => setActiveTab('overview')}
                 className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
                   activeTab === 'overview'
-                    ? 'border-blue-500 text-blue-600'
+                    ? 'border-blue-500 text-[#3f72af]'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                 }`}
               >
@@ -276,7 +276,7 @@ export default function CustomerDashboardPage() {
                 onClick={() => setActiveTab('sites')}
                 className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
                   activeTab === 'sites'
-                    ? 'border-blue-500 text-blue-600'
+                    ? 'border-blue-500 text-[#3f72af]'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                 }`}
               >
@@ -286,7 +286,7 @@ export default function CustomerDashboardPage() {
                 onClick={() => setActiveTab('upcoming')}
                 className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
                   activeTab === 'upcoming'
-                    ? 'border-blue-500 text-blue-600'
+                    ? 'border-blue-500 text-[#3f72af]'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                 }`}
               >
@@ -296,7 +296,7 @@ export default function CustomerDashboardPage() {
                 onClick={() => setActiveTab('invoices')}
                 className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
                   activeTab === 'invoices'
-                    ? 'border-blue-500 text-blue-600'
+                    ? 'border-blue-500 text-[#3f72af]'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                 }`}
               >
@@ -315,7 +315,7 @@ export default function CustomerDashboardPage() {
                     onClick={() => router.push('/customer-portal/requests')}
                     className="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-lg p-6 hover:shadow-md transition-shadow text-left"
                   >
-                    <ClipboardList className="w-8 h-8 text-blue-600 mb-3" />
+                    <ClipboardList className="w-8 h-8 text-[#3f72af] mb-3" />
                     <h3 className="font-semibold text-gray-900 mb-1">Request Service</h3>
                     <p className="text-sm text-gray-600">Submit a new service request</p>
                   </button>
@@ -356,7 +356,7 @@ export default function CustomerDashboardPage() {
                   <div key={site.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
                     <div className="flex items-center space-x-4">
                       <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                        <MapPin className="w-5 h-5 text-blue-600" />
+                        <MapPin className="w-5 h-5 text-[#3f72af]" />
                       </div>
                       <div>
                         <h4 className="font-semibold text-gray-900">{site.name}</h4>
@@ -470,7 +470,7 @@ export default function CustomerDashboardPage() {
                       }`}>
                         {activity.status === 'completed' ? <CheckCircle className="w-4 h-4 text-green-600" /> :
                          activity.status === 'pending' ? <Clock className="w-4 h-4 text-yellow-600" /> :
-                         <AlertCircle className="w-4 h-4 text-blue-600" />}
+                         <AlertCircle className="w-4 h-4 text-[#3f72af]" />}
                       </div>
                       <div className="flex-1 min-w-0">
                         <h4 className="font-medium text-gray-900 text-sm">{activity.title}</h4>

@@ -82,7 +82,7 @@ export default function RingCentralHub() {
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <div className="flex items-center space-x-4">
               <div className="p-3 bg-blue-100 rounded-lg">
-                <MessageSquare className="w-6 h-6 text-blue-600" />
+                <MessageSquare className="w-6 h-6 text-[#3f72af]" />
               </div>
               <div>
                 <p className="text-sm text-gray-600">SMS Messages</p>
@@ -155,7 +155,7 @@ export default function RingCentralHub() {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <div className="p-3 bg-blue-100 rounded-lg">
-                <Settings className="w-6 h-6 text-blue-600" />
+                <Settings className="w-6 h-6 text-[#3f72af]" />
               </div>
               <div>
                 <h3 className="text-lg font-semibold text-gray-900">

@@ -110,7 +110,7 @@ export default function TeamMemberFormPage() {
     return (
       <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-64">
-          <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
+          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
       </HybridNavigationTopBar>
     );
@@ -241,7 +241,7 @@ export default function TeamMemberFormPage() {
                   type="checkbox"
                   checked={formData.active}
                   onChange={(e) => setFormData({ ...formData, active: e.target.checked })}
-                  className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                  className="w-4 h-4 text-[#3f72af] border-gray-300 rounded focus:ring-blue-500"
                 />
                 <span className="ml-2 text-sm text-gray-700">Active Account</span>
               </label>
@@ -251,7 +251,7 @@ export default function TeamMemberFormPage() {
                   type="checkbox"
                   checked={formData.messaging_enabled}
                   onChange={(e) => setFormData({ ...formData, messaging_enabled: e.target.checked })}
-                  className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                  className="w-4 h-4 text-[#3f72af] border-gray-300 rounded focus:ring-blue-500"
                 />
                 <span className="ml-2 text-sm text-gray-700">Enable SMS/Messaging</span>
               </label>
@@ -261,7 +261,7 @@ export default function TeamMemberFormPage() {
                   type="checkbox"
                   checked={formData.is_driver}
                   onChange={(e) => setFormData({ ...formData, is_driver: e.target.checked })}
-                  className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                  className="w-4 h-4 text-[#3f72af] border-gray-300 rounded focus:ring-blue-500"
                 />
                 <span className="ml-2 text-sm text-gray-700">Certified Driver</span>
               </label>

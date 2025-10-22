@@ -168,7 +168,7 @@ export default function PayrollSettingsPage() {
         {/* Info Banner */}
         <div className="mb-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
           <div className="flex items-start gap-3">
-            <AlertCircle className="h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" />
+            <AlertCircle className="h-5 w-5 text-[#3f72af] flex-shrink-0 mt-0.5" />
             <div className="text-sm text-blue-800">
               <p className="font-medium mb-1">Payroll Configuration</p>
               <p>
@@ -286,7 +286,7 @@ export default function PayrollSettingsPage() {
               {/* Pay Schedule Info */}
               <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="bg-blue-50 rounded-lg p-4">
-                  <p className="text-xs text-blue-600 font-medium mb-1">
+                  <p className="text-xs text-[#3f72af] font-medium mb-1">
                     Current Frequency
                   </p>
                   <p className="text-sm text-blue-900 font-semibold">

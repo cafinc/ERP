@@ -203,7 +203,7 @@ export default function RecordingsPage() {
         <div className="bg-white rounded-xl shadow-sm border border-gray-200">
           {loading ? (
             <div className="flex items-center justify-center py-12">
-              <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
+              <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
             </div>
           ) : filteredRecordings.length === 0 ? (
             <div className="text-center py-12">

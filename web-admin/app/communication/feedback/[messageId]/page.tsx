@@ -366,7 +366,7 @@ export default function FeedbackDetailPage() {
                 </div>
                 {message.admin_responded_at && (
                   <div className="flex items-start space-x-3">
-                    <CheckCircle className="w-5 h-5 text-blue-600 mt-1" />
+                    <CheckCircle className="w-5 h-5 text-[#3f72af] mt-1" />
                     <div>
                       <p className="font-medium text-gray-900">Admin Responded</p>
                       <p className="text-sm text-gray-600">{new Date(message.admin_responded_at).toLocaleString()}</p>

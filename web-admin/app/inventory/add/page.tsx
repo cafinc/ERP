@@ -32,7 +32,7 @@ export default function AddInventoryItemPage() {
   });
 
   const categories = [
-    { value: 'equipment', label: 'Equipment', icon: Truck, color: 'text-blue-600' },
+    { value: 'equipment', label: 'Equipment', icon: Truck, color: 'text-[#3f72af]' },
     { value: 'parts', label: 'Parts', icon: Wrench, color: 'text-purple-600' },
     { value: 'materials', label: 'Materials', icon: Package, color: 'text-green-600' },
     { value: 'consumables', label: 'Consumables', icon: ShoppingCart, color: 'text-orange-600' },

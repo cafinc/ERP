@@ -214,7 +214,7 @@ export default function CreateContractPage() {
                     setSelectedEstimate(null);
                     setFormData({ ...formData, customer_id: '', estimate_id: '' });
                   }}
-                  className="text-sm text-blue-600 hover:text-blue-800"
+                  className="text-sm text-[#3f72af] hover:text-blue-800"
                 >
                   Change
                 </button>
@@ -443,7 +443,7 @@ export default function CreateContractPage() {
                   type="checkbox"
                   checked={formData.auto_renew}
                   onChange={(e) => setFormData({ ...formData, auto_renew: e.target.checked })}
-                  className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                  className="w-4 h-4 text-[#3f72af] border-gray-300 rounded focus:ring-blue-500"
                 />
                 <span className="text-sm font-medium text-gray-700">Enable Auto-Renewal</span>
               </label>

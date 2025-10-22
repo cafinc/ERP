@@ -201,7 +201,7 @@ export default function CreateAgreementTemplatePage() {
                   type="checkbox"
                   checked={template.auto_renew}
                   onChange={(e) => setTemplate({ ...template, auto_renew: e.target.checked })}
-                  className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                  className="w-4 h-4 text-[#3f72af] border-gray-300 rounded focus:ring-blue-500"
                 />
                 <span className="text-sm font-medium text-gray-700">Auto-renew agreement</span>
               </label>

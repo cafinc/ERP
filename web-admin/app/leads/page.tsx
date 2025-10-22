@@ -333,7 +333,7 @@ export default function LeadsPage() {
                   <p className="text-xs text-gray-500 mt-1">{stats.active} active</p>
                 </div>
                 <div className="p-3 bg-blue-100 rounded-lg">
-                  <Users className="w-6 h-6 text-blue-600" />
+                  <Users className="w-6 h-6 text-[#3f72af]" />
                 </div>
               </div>
             </div>
@@ -355,13 +355,13 @@ export default function LeadsPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-gray-600">Pipeline Value</p>
-                  <p className="text-3xl font-bold text-blue-600 mt-2">
+                  <p className="text-3xl font-bold text-[#3f72af] mt-2">
                     ${(stats.totalValue / 1000).toFixed(1)}k
                   </p>
                   <p className="text-xs text-gray-500 mt-1">Total potential</p>
                 </div>
                 <div className="p-3 bg-blue-100 rounded-lg">
-                  <DollarSign className="w-6 h-6 text-blue-600" />
+                  <DollarSign className="w-6 h-6 text-[#3f72af]" />
                 </div>
               </div>
             </div>
@@ -644,7 +644,7 @@ export default function LeadsPage() {
                             )}
                             <button
                               onClick={() => handleEdit(lead)}
-                              className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                              className="p-2 text-[#3f72af] hover:bg-blue-50 rounded-lg transition-colors"
                             >
                               <Edit className="w-4 h-4" />
                             </button>

@@ -93,7 +93,7 @@ export default function EquipmentFormsPage() {
     return (
       <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-64">
-          <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
+          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
       </HybridNavigationTopBar>
     );
@@ -118,7 +118,7 @@ export default function EquipmentFormsPage() {
 
         {/* Info Card */}
         <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 flex items-start gap-3">
-          <LinkIcon className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+          <LinkIcon className="w-5 h-5 text-[#3f72af] flex-shrink-0 mt-0.5" />
           <div>
             <p className="text-sm text-blue-900">
               Assign specific inspection form templates to equipment. This will automatically use the assigned form when creating inspections for this equipment.
@@ -131,7 +131,7 @@ export default function EquipmentFormsPage() {
           <div className="bg-white rounded-lg border border-gray-200 p-6">
             <div className="flex items-center gap-3">
               <div className="bg-blue-100 rounded-lg p-3">
-                <Truck className="w-6 h-6 text-blue-600" />
+                <Truck className="w-6 h-6 text-[#3f72af]" />
               </div>
               <div>
                 <p className="text-2xl font-bold text-gray-900">{equipment.length}</p>

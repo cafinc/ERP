@@ -206,7 +206,7 @@ export default function ProjectDetailPage() {
     return (
       <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-full">
-          <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
+          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
       </HybridNavigationTopBar>
     );
@@ -416,7 +416,7 @@ export default function ProjectDetailPage() {
                               {task.status === 'done' ? (
                                 <CheckSquare className="w-5 h-5 text-green-600" />
                               ) : task.status === 'in_progress' ? (
-                                <Loader className="w-5 h-5 text-blue-600" />
+                                <Loader className="w-5 h-5 text-[#3f72af]" />
                               ) : (
                                 <Square className="w-5 h-5 text-gray-400" />
                               )}
@@ -524,7 +524,7 @@ export default function ProjectDetailPage() {
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-gray-600">In Progress</span>
-                  <span className="text-lg font-bold text-blue-600">
+                  <span className="text-lg font-bold text-[#3f72af]">
                     {project.tasks?.filter(t => t.status === 'in_progress').length || 0}
                   </span>
                 </div>

@@ -603,12 +603,12 @@ export default function CustomerDetailPage() {
                   <div className="bg-blue-50 rounded-xl border border-blue-200 p-6">
                     <div className="flex items-center justify-between mb-2">
                       <h3 className="text-lg font-semibold text-blue-900">Linked Company</h3>
-                      <Briefcase className="w-5 h-5 text-blue-600" />
+                      <Briefcase className="w-5 h-5 text-[#3f72af]" />
                     </div>
                     <p className="text-blue-700 font-medium">{customer.company_name}</p>
                     <button
                       onClick={() => router.push(`/customers/${customer.company_id}`)}
-                      className="mt-3 text-sm text-blue-600 hover:text-blue-800 font-medium"
+                      className="mt-3 text-sm text-[#3f72af] hover:text-blue-800 font-medium"
                     >
                       View Company →
                     </button>
@@ -636,7 +636,7 @@ export default function CustomerDetailPage() {
                   <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
                     <div className="flex items-center space-x-3">
                       <div className="p-3 bg-blue-100 rounded-lg">
-                        <MapPinned className="w-6 h-6 text-blue-600" />
+                        <MapPinned className="w-6 h-6 text-[#3f72af]" />
                       </div>
                       <div>
                         <p className="text-sm text-gray-600">Sites</p>
@@ -877,7 +877,7 @@ export default function CustomerDetailPage() {
                             {project.completion_percentage !== undefined && (
                               <span className="flex items-center space-x-1">
                                 <span>Progress:</span>
-                                <span className="font-medium text-blue-600">{project.completion_percentage}%</span>
+                                <span className="font-medium text-[#3f72af]">{project.completion_percentage}%</span>
                               </span>
                             )}
                           </div>
@@ -986,7 +986,7 @@ export default function CustomerDetailPage() {
                                 e.stopPropagation();
                                 alert('Send reminder functionality coming soon!');
                               }}
-                              className="mt-2 text-xs text-blue-600 hover:text-blue-600/80 font-medium"
+                              className="mt-2 text-xs text-[#3f72af] hover:text-[#3f72af]/80 font-medium"
                             >
                               Send Reminder →
                             </button>
@@ -1029,7 +1029,7 @@ export default function CustomerDetailPage() {
                         <div className="flex items-center justify-between">
                           <div className="flex-1">
                             <div className="flex items-center space-x-3 mb-2">
-                              <FileSignature className="w-5 h-5 text-blue-600" />
+                              <FileSignature className="w-5 h-5 text-[#3f72af]" />
                               <h4 className="font-semibold text-gray-900">
                                 {agreement.agreement_number || agreement.contract_number || `AGR-${agreement._id?.slice(-6)}`}
                               </h4>
@@ -1052,7 +1052,7 @@ export default function CustomerDetailPage() {
                                 <span>End: {new Date(agreement.end_date).toLocaleDateString()}</span>
                               )}
                               {agreement.auto_renew && (
-                                <span className="flex items-center space-x-1 text-blue-600">
+                                <span className="flex items-center space-x-1 text-[#3f72af]">
                                   <span>🔄</span>
                                   <span>Auto-Renew</span>
                                 </span>
@@ -1268,7 +1268,7 @@ export default function CustomerDetailPage() {
                         <div className="flex-1">
                           <div className="flex items-center space-x-3 mb-2">
                             {comm.type === 'email' ? (
-                              <Mail className="w-5 h-5 text-blue-600" />
+                              <Mail className="w-5 h-5 text-[#3f72af]" />
                             ) : (
                               <Phone className="w-5 h-5 text-green-600" />
                             )}
@@ -1365,7 +1365,7 @@ export default function CustomerDetailPage() {
                         <div className="flex items-center space-x-2">
                           <button
                             onClick={() => router.push(`/customers/${contact._id}`)}
-                            className="px-3 py-1 text-sm text-blue-600 hover:bg-blue-50 rounded"
+                            className="px-3 py-1 text-sm text-[#3f72af] hover:bg-blue-50 rounded"
                           >
                             View
                           </button>
@@ -1532,7 +1532,7 @@ export default function CustomerDetailPage() {
                           type="checkbox"
                           checked={serviceRequestForm.sub_services.some(s => s.name === service)}
                           onChange={() => handleSubServiceToggle(service)}
-                          className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500"
+                          className="w-5 h-5 text-[#3f72af] rounded focus:ring-blue-500"
                         />
                         <span className="text-gray-900">{service}</span>
                       </label>

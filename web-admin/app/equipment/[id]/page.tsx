@@ -133,7 +133,7 @@ export default function EquipmentDetailPage() {
     return (
       <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-64">
-          <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
+          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
       </HybridNavigationTopBar>
     );
@@ -147,7 +147,7 @@ export default function EquipmentDetailPage() {
           <h2 className="text-xl font-semibold text-gray-900">Equipment not found</h2>
           <button
             onClick={() => router.push('/equipment')}
-            className="mt-4 text-blue-600 hover:text-blue-800"
+            className="mt-4 text-[#3f72af] hover:text-blue-800"
           >
             Return to Equipment
           </button>

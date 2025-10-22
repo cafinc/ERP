@@ -269,7 +269,7 @@ export default function FormBuilderPage() {
                   <button
                     key={fieldType.type}
                     onClick={() => addField(fieldType.type)}
-                    className="w-full flex items-center space-x-3 p-3 bg-gray-50 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors text-left"
+                    className="w-full flex items-center space-x-3 p-3 bg-gray-50 hover:bg-blue-50 hover:text-[#3f72af] rounded-lg transition-colors text-left"
                   >
                     <Icon className="w-5 h-5" />
                     <span className="font-medium">{fieldType.label}</span>
@@ -432,14 +432,14 @@ export default function FormBuilderPage() {
                                   type="checkbox"
                                   checked={field.required}
                                   onChange={(e) => updateField(field.id, { required: e.target.checked })}
-                                  className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
+                                  className="w-4 h-4 text-[#3f72af] rounded focus:ring-blue-500"
                                 />
                                 <span className="text-sm text-gray-700">Required field</span>
                               </label>
 
                               <button
                                 onClick={() => setEditingField(null)}
-                                className="text-sm text-blue-600 hover:text-blue-700 font-medium"
+                                className="text-sm text-[#3f72af] hover:text-blue-700 font-medium"
                               >
                                 Done Editing
                               </button>

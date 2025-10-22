@@ -200,7 +200,7 @@ export default function AgreementTemplatesPage() {
               <div key={category} className="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
                 <div className="bg-gray-50 px-6 py-3 border-b border-gray-200">
                   <div className="flex items-center space-x-2">
-                    <Folder className="w-5 h-5 text-blue-600" />
+                    <Folder className="w-5 h-5 text-[#3f72af]" />
                     <h3 className="text-lg font-semibold text-gray-900">{category}</h3>
                     <span className="px-2 py-1 bg-gray-200 text-gray-700 rounded-full text-xs font-medium">
                       {categoryTemplates.length}

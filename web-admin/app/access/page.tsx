@@ -328,7 +328,7 @@ export default function AccessDashboardPage() {
                       <td className="px-6 py-4 text-sm text-gray-900">
                         <button
                           onClick={() => alert(`Permissions:\n${user.permissions.join('\n')}`)}
-                          className="text-blue-600 hover:text-[#2c5282] flex items-center gap-1"
+                          className="text-[#3f72af] hover:text-[#2c5282] flex items-center gap-1"
                         >
                           <Eye className="w-4 h-4" />
                           View ({user.permissions.length})
@@ -349,7 +349,7 @@ export default function AccessDashboardPage() {
                           </button>
                           <button
                             onClick={() => router.push(`/access/users/${user.id}/edit`)}
-                            className="text-blue-600 hover:text-blue-900"
+                            className="text-[#3f72af] hover:text-blue-900"
                             title="Edit"
                           >
                             <Edit className="w-4 h-4" />
@@ -381,7 +381,7 @@ export default function AccessDashboardPage() {
         {/* Audit Log Notice */}
         <div className="mx-6 mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
           <div className="flex items-start gap-3">
-            <Shield className="w-5 h-5 text-blue-600 mt-0.5" />
+            <Shield className="w-5 h-5 text-[#3f72af] mt-0.5" />
             <div>
               <h3 className="text-sm font-semibold text-blue-900 mb-1">Audit Logging Enabled</h3>
               <p className="text-sm text-blue-700">

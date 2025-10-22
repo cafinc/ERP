@@ -92,7 +92,7 @@ export default function DispatchDetailPage() {
     return (
       <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-full">
-          <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
+          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
       </HybridNavigationTopBar>
     );
@@ -203,7 +203,7 @@ export default function DispatchDetailPage() {
                   <Users className="w-5 h-5 text-gray-400" />
                   <h3 className="text-lg font-semibold text-gray-900">Crew Members</h3>
                 </div>
-                <p className="text-3xl font-bold text-blue-600">{dispatch.crew_ids.length}</p>
+                <p className="text-3xl font-bold text-[#3f72af]">{dispatch.crew_ids.length}</p>
               </div>
 
               <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
@@ -211,7 +211,7 @@ export default function DispatchDetailPage() {
                   <Truck className="w-5 h-5 text-gray-400" />
                   <h3 className="text-lg font-semibold text-gray-900">Equipment</h3>
                 </div>
-                <p className="text-3xl font-bold text-blue-600">{dispatch.equipment_ids.length}</p>
+                <p className="text-3xl font-bold text-[#3f72af]">{dispatch.equipment_ids.length}</p>
               </div>
             </div>
           </div>
@@ -261,7 +261,7 @@ export default function DispatchDetailPage() {
                 <MapPin className="w-5 h-5 text-gray-400" />
                 <h3 className="text-lg font-semibold text-gray-900">Sites</h3>
               </div>
-              <p className="text-3xl font-bold text-blue-600">{dispatch.site_ids.length}</p>
+              <p className="text-3xl font-bold text-[#3f72af]">{dispatch.site_ids.length}</p>
             </div>
           </div>
         </div>

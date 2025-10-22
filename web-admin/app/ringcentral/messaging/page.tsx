@@ -115,7 +115,7 @@ export default function TeamMessagingPage() {
 
               {loading ? (
                 <div className="flex items-center justify-center py-12">
-                  <RefreshCw className="w-6 h-6 animate-spin text-blue-600" />
+                  <RefreshCw className="w-6 h-6 animate-spin text-[#3f72af]" />
                 </div>
               ) : error ? (
                 <div className="text-center py-12 px-4">
@@ -146,7 +146,7 @@ export default function TeamMessagingPage() {
                     >
                       <div className="flex items-center space-x-3">
                         <div className="p-2 bg-blue-100 rounded-full">
-                          <MessageCircle className="w-5 h-5 text-blue-600" />
+                          <MessageCircle className="w-5 h-5 text-[#3f72af]" />
                         </div>
                         <div className="flex-1 min-w-0">
                           <p className="font-medium text-gray-900 truncate">

@@ -94,7 +94,7 @@ export default function EquipmentFormPage() {
     return (
       <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-64">
-          <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
+          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
       </HybridNavigationTopBar>
     );
@@ -211,7 +211,7 @@ export default function EquipmentFormPage() {
                   type="checkbox"
                   checked={formData.license_required}
                   onChange={(e) => setFormData({ ...formData, license_required: e.target.checked })}
-                  className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                  className="w-4 h-4 text-[#3f72af] border-gray-300 rounded focus:ring-blue-500"
                 />
                 <span className="text-sm font-medium text-gray-700">Requires Driver's License</span>
               </label>

@@ -179,21 +179,21 @@ export default function CreateAgreementPage() {
         {/* Step Indicator */}
         <div className="mt-6 mb-8">
           <div className="flex items-center justify-center space-x-4">
-            <div className={`flex items-center space-x-2 ${step === 'select' ? 'text-blue-600' : 'text-gray-400'}`}>
+            <div className={`flex items-center space-x-2 ${step === 'select' ? 'text-[#3f72af]' : 'text-gray-400'}`}>
               <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
                 step === 'select' ? 'bg-[#3f72af] text-white' : 'bg-gray-200'
               }`}>1</div>
               <span className="font-medium">Select Method</span>
             </div>
             <div className="w-16 h-0.5 bg-gray-300" />
-            <div className={`flex items-center space-x-2 ${step === 'details' ? 'text-blue-600' : 'text-gray-400'}`}>
+            <div className={`flex items-center space-x-2 ${step === 'details' ? 'text-[#3f72af]' : 'text-gray-400'}`}>
               <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
                 step === 'details' ? 'bg-[#3f72af] text-white' : 'bg-gray-200'
               }`}>2</div>
               <span className="font-medium">Agreement Details</span>
             </div>
             <div className="w-16 h-0.5 bg-gray-300" />
-            <div className={`flex items-center space-x-2 ${step === 'review' ? 'text-blue-600' : 'text-gray-400'}`}>
+            <div className={`flex items-center space-x-2 ${step === 'review' ? 'text-[#3f72af]' : 'text-gray-400'}`}>
               <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
                 step === 'review' ? 'bg-[#3f72af] text-white' : 'bg-gray-200'
               }`}>3</div>
@@ -218,7 +218,7 @@ export default function CreateAgreementPage() {
                     : 'border-gray-200 hover:border-blue-500/50'
                 }`}
               >
-                <FileText className="w-12 h-12 text-blue-600 mb-4" />
+                <FileText className="w-12 h-12 text-[#3f72af] mb-4" />
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">From Template</h3>
                 <p className="text-sm text-gray-600 mb-4">
                   Use a pre-configured agreement template with standard terms and sections
@@ -254,7 +254,7 @@ export default function CreateAgreementPage() {
                     : 'border-gray-200 hover:border-blue-500/50'
                 }`}
               >
-                <FileSignature className="w-12 h-12 text-blue-600 mb-4" />
+                <FileSignature className="w-12 h-12 text-[#3f72af] mb-4" />
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">From Accepted Estimate</h3>
                 <p className="text-sm text-gray-600 mb-4">
                   Convert an accepted estimate into a service agreement automatically
@@ -293,7 +293,7 @@ export default function CreateAgreementPage() {
                     : 'border-gray-200 hover:border-blue-500/50'
                 }`}
               >
-                <Plus className="w-12 h-12 text-blue-600 mb-4" />
+                <Plus className="w-12 h-12 text-[#3f72af] mb-4" />
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">From Scratch</h3>
                 <p className="text-sm text-gray-600 mb-4">
                   Create a custom agreement from the ground up with your own terms
@@ -424,7 +424,7 @@ export default function CreateAgreementPage() {
                       type="checkbox"
                       checked={agreement.auto_renew}
                       onChange={(e) => setAgreement({ ...agreement, auto_renew: e.target.checked })}
-                      className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                      className="w-4 h-4 text-[#3f72af] border-gray-300 rounded focus:ring-blue-500"
                     />
                     <span className="text-sm font-medium text-gray-700">Auto-renew agreement</span>
                   </label>

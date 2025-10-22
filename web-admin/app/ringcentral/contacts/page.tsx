@@ -193,7 +193,7 @@ export default function ContactsPage() {
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <div className="flex items-center space-x-4">
               <div className="p-3 bg-blue-100 rounded-lg">
-                <Users className="w-6 h-6 text-blue-600" />
+                <Users className="w-6 h-6 text-[#3f72af]" />
               </div>
               <div>
                 <p className="text-sm text-gray-600">Total Contacts</p>
@@ -207,7 +207,7 @@ export default function ContactsPage() {
         <div className="bg-white rounded-xl shadow-sm border border-gray-200">
           {loading ? (
             <div className="flex items-center justify-center py-12">
-              <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
+              <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
             </div>
           ) : filteredContacts.length === 0 ? (
             <div className="text-center py-12">
@@ -224,7 +224,7 @@ export default function ContactsPage() {
                   <div className="flex items-start justify-between mb-3">
                     <div className="flex items-center space-x-3">
                       <div className="p-2 bg-blue-100 rounded-full">
-                        <Users className="w-5 h-5 text-blue-600" />
+                        <Users className="w-5 h-5 text-[#3f72af]" />
                       </div>
                       <div>
                         <h3 className="font-semibold text-gray-900">

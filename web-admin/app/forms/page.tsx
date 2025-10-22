@@ -241,7 +241,7 @@ export default function FormsPage() {
 
         {loading ? (
           <div className="flex items-center justify-center py-12">
-            <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
+            <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
           </div>
         ) : (
           <div className="mx-6 mt-6">
@@ -257,7 +257,7 @@ export default function FormsPage() {
                       <div className="flex items-start justify-between mb-4">
                         <div className="flex items-center space-x-3">
                           <div className="p-3 bg-blue-100 rounded-lg">
-                            <FileText className="w-6 h-6 text-blue-600" />
+                            <FileText className="w-6 h-6 text-[#3f72af]" />
                           </div>
                           <div>
                             <h3 className="font-semibold text-gray-900">{template.name}</h3>
@@ -284,7 +284,7 @@ export default function FormsPage() {
                       <div className="flex items-center space-x-2">
                         <Link
                           href={`/forms/${template.id}/fill`}
-                          className="flex-1 flex items-center justify-center space-x-2 px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-lg font-medium transition-colors"
+                          className="flex-1 flex items-center justify-center space-x-2 px-4 py-2 bg-blue-50 hover:bg-blue-100 text-[#3f72af] rounded-lg font-medium transition-colors"
                         >
                           <FileText className="w-4 h-4" />
                           <span>Fill</span>
@@ -357,7 +357,7 @@ export default function FormsPage() {
                               <div className="flex items-center space-x-2">
                                 <Link
                                   href={`/forms/responses/${response.id}`}
-                                  className="flex items-center space-x-2 px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-lg font-medium transition-colors"
+                                  className="flex items-center space-x-2 px-4 py-2 bg-blue-50 hover:bg-blue-100 text-[#3f72af] rounded-lg font-medium transition-colors"
                                 >
                                   <Eye className="w-4 h-4" />
                                   <span>View</span>

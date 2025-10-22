@@ -178,7 +178,7 @@ export default function WeatherPlanningPage() {
     return (
       <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-64">
-          <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
+          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
       </HybridNavigationTopBar>
     );
@@ -323,7 +323,7 @@ export default function WeatherPlanningPage() {
                     <span className="font-semibold">{day.high}°</span>
                   </div>
                   <span className="text-gray-400">/</span>
-                  <div className="flex items-center gap-1 text-blue-600">
+                  <div className="flex items-center gap-1 text-[#3f72af]">
                     <TrendingDown className="w-4 h-4" />
                     <span className="font-semibold">{day.low}°</span>
                   </div>

@@ -526,7 +526,7 @@ export default function GmailPage() {
       <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-full bg-gradient-to-br from-blue-50 to-indigo-100">
           <div className="bg-white p-8 rounded-2xl shadow-2xl max-w-md text-center">
-            <Mail className="w-16 h-16 text-blue-600 mx-auto mb-4" />
+            <Mail className="w-16 h-16 text-[#3f72af] mx-auto mb-4" />
             <h1 className="text-2xl font-bold text-gray-900 mb-2">Connect Gmail</h1>
             <p className="text-gray-600 mb-6">
               Connect your Gmail account to manage emails, send messages, and integrate with your CRM.
@@ -582,7 +582,7 @@ export default function GmailPage() {
             <div
               onClick={() => handleLabelChange('INBOX')}
               className={`flex items-center space-x-3 px-4 py-2 rounded-lg cursor-pointer ${
-                selectedLabel === 'INBOX' ? 'bg-blue-50 text-blue-600' : 'hover:bg-gray-100 text-gray-700'
+                selectedLabel === 'INBOX' ? 'bg-blue-50 text-[#3f72af]' : 'hover:bg-gray-100 text-gray-700'
               }`}
             >
               <Inbox className="w-5 h-5" />
@@ -592,7 +592,7 @@ export default function GmailPage() {
             <div
               onClick={() => handleLabelChange('STARRED')}
               className={`flex items-center space-x-3 px-4 py-2 rounded-lg cursor-pointer ${
-                selectedLabel === 'STARRED' ? 'bg-blue-50 text-blue-600' : 'hover:bg-gray-100 text-gray-700'
+                selectedLabel === 'STARRED' ? 'bg-blue-50 text-[#3f72af]' : 'hover:bg-gray-100 text-gray-700'
               }`}
             >
               <Star className="w-5 h-5" />
@@ -602,7 +602,7 @@ export default function GmailPage() {
             <div
               onClick={() => handleLabelChange('SENT')}
               className={`flex items-center space-x-3 px-4 py-2 rounded-lg cursor-pointer ${
-                selectedLabel === 'SENT' ? 'bg-blue-50 text-blue-600' : 'hover:bg-gray-100 text-gray-700'
+                selectedLabel === 'SENT' ? 'bg-blue-50 text-[#3f72af]' : 'hover:bg-gray-100 text-gray-700'
               }`}
             >
               <Send className="w-5 h-5" />
@@ -612,7 +612,7 @@ export default function GmailPage() {
             <div
               onClick={() => handleLabelChange('TRASH')}
               className={`flex items-center space-x-3 px-4 py-2 rounded-lg cursor-pointer ${
-                selectedLabel === 'TRASH' ? 'bg-blue-50 text-blue-600' : 'hover:bg-gray-100 text-gray-700'
+                selectedLabel === 'TRASH' ? 'bg-blue-50 text-[#3f72af]' : 'hover:bg-gray-100 text-gray-700'
               }`}
             >
               <Trash2 className="w-5 h-5" />
@@ -624,7 +624,7 @@ export default function GmailPage() {
                 key={label.id}
                 onClick={() => handleLabelChange(label.id)}
                 className={`flex items-center space-x-3 px-4 py-2 rounded-lg cursor-pointer ${
-                  selectedLabel === label.id ? 'bg-blue-50 text-blue-600' : 'hover:bg-gray-100 text-gray-700'
+                  selectedLabel === label.id ? 'bg-blue-50 text-[#3f72af]' : 'hover:bg-gray-100 text-gray-700'
                 }`}
               >
                 <Tag className="w-5 h-5" />
@@ -790,7 +790,7 @@ export default function GmailPage() {
                       className="p-2 hover:bg-gray-100 rounded-lg"
                       title="Link to Customer"
                     >
-                      <LinkIcon className="w-5 h-5 text-blue-600" />
+                      <LinkIcon className="w-5 h-5 text-[#3f72af]" />
                     </button>
                     <button
                       onClick={() => archiveEmail(selectedEmail.id)}

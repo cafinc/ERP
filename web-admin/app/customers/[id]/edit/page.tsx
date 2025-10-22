@@ -83,7 +83,7 @@ export default function CustomerEditPage() {
     return (
       <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-full">
-          <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
+          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
       </HybridNavigationTopBar>
     );
@@ -204,7 +204,7 @@ export default function CustomerEditPage() {
                   type="checkbox"
                   checked={customerForm.active}
                   onChange={(e) => setCustomerForm({ ...customerForm, active: e.target.checked })}
-                  className="rounded text-blue-600 focus:ring-blue-500"
+                  className="rounded text-[#3f72af] focus:ring-blue-500"
                 />
                 <span className="text-sm font-medium text-gray-700">Active Customer</span>
               </label>

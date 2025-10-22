@@ -138,7 +138,7 @@ export default function CreateSitePage() {
                     setSelectedCustomer(null);
                     setFormData({ ...formData, customer_id: '' });
                   }}
-                  className="text-sm text-blue-600 hover:text-blue-800"
+                  className="text-sm text-[#3f72af] hover:text-blue-800"
                 >
                   Change
                 </button>

@@ -111,7 +111,7 @@ export default function EstimatesPage() {
     return (
       <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-full">
-          <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
+          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
       </HybridNavigationTopBar>
     );
@@ -204,9 +204,9 @@ export default function EstimatesPage() {
             </button>
             <div className="flex-1"></div>
             <div className="bg-white border border-gray-200 rounded-lg px-3 py-1.5 flex items-center space-x-2">
-              <DollarSign className="w-4 h-4 text-blue-600" />
+              <DollarSign className="w-4 h-4 text-[#3f72af]" />
               <span className="text-xs font-medium text-gray-700">Total Value:</span>
-              <span className="text-sm font-bold text-blue-600">
+              <span className="text-sm font-bold text-[#3f72af]">
                 ${estimates.reduce((sum, e) => sum + (e.total_amount || 0), 0).toLocaleString()}
               </span>
             </div>
@@ -286,7 +286,7 @@ export default function EstimatesPage() {
                 {/* Amount */}
                 <div className="mb-4 p-3 bg-gray-50 rounded-lg">
                   <div className="text-sm text-gray-600 mb-1">Total Amount</div>
-                  <div className="text-2xl font-bold text-blue-600">
+                  <div className="text-2xl font-bold text-[#3f72af]">
                     ${estimate.total_amount?.toLocaleString() || '0.00'}
                   </div>
                 </div>

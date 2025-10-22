@@ -239,7 +239,7 @@ export default function ContractDetailPage() {
     return (
       <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-64">
-          <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
+          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
       </HybridNavigationTopBar>
     );
@@ -253,7 +253,7 @@ export default function ContractDetailPage() {
           <h2 className="text-xl font-semibold text-gray-900">Contract not found</h2>
           <button
             onClick={() => router.push('/contracts')}
-            className="mt-4 text-blue-600 hover:text-blue-800"
+            className="mt-4 text-[#3f72af] hover:text-blue-800"
           >
             Return to Contracts
           </button>
@@ -482,7 +482,7 @@ export default function ContractDetailPage() {
                       setSignatureType('customer');
                       setShowSignaturePad(true);
                     }}
-                    className="mt-4 text-blue-600 hover:text-blue-800 text-sm font-medium"
+                    className="mt-4 text-[#3f72af] hover:text-blue-800 text-sm font-medium"
                   >
                     Sign Now
                   </button>
@@ -517,7 +517,7 @@ export default function ContractDetailPage() {
                     setSignatureType('company');
                     setShowSignaturePad(true);
                   }}
-                  className="mt-4 text-blue-600 hover:text-blue-800 text-sm font-medium"
+                  className="mt-4 text-[#3f72af] hover:text-blue-800 text-sm font-medium"
                 >
                   Add Company Signature
                 </button>

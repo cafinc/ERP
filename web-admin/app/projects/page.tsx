@@ -104,7 +104,7 @@ export default function ProjectsPage() {
     return (
       <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-full">
-          <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
+          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
       </HybridNavigationTopBar>
     );
@@ -233,9 +233,9 @@ export default function ProjectsPage() {
         <div className="px-6 py-4 bg-white border-b border-gray-200">
           <div className="flex items-center justify-between">
             <div className="bg-white border border-gray-200 rounded-lg px-3 py-1.5 flex items-center space-x-2">
-              <DollarSign className="w-4 h-4 text-blue-600" />
+              <DollarSign className="w-4 h-4 text-[#3f72af]" />
               <span className="text-xs font-medium text-gray-700">Total Value:</span>
-              <span className="text-lg font-bold text-blue-600">
+              <span className="text-lg font-bold text-[#3f72af]">
                 ${projects.reduce((sum, p) => sum + (p.total_amount || 0), 0).toLocaleString()}
               </span>
             </div>
@@ -359,7 +359,7 @@ export default function ProjectsPage() {
                     {/* Amount */}
                     <div className="flex items-center justify-between pt-3 border-t border-gray-100">
                       <span className="text-xs text-gray-600">Total Value</span>
-                      <span className="text-lg font-bold text-blue-600">
+                      <span className="text-lg font-bold text-[#3f72af]">
                         ${project.total_amount?.toLocaleString() || '0'}
                       </span>
                     </div>

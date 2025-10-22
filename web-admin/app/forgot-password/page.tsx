@@ -114,7 +114,7 @@ export default function ForgotPasswordPage() {
             Remember your password?{' '}
             <button
               onClick={() => router.push('/login')}
-              className="text-blue-600 hover:text-blue-700 font-medium"
+              className="text-[#3f72af] hover:text-blue-700 font-medium"
             >
               Sign in
             </button>

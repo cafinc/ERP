@@ -158,7 +158,7 @@ export default function CommunicationCenterPage() {
             <div className="flex items-start justify-between">
               <div className="flex items-start space-x-4 flex-1">
                 <div className="p-3 bg-blue-100 rounded-full">
-                  <User className="w-6 h-6 text-blue-600" />
+                  <User className="w-6 h-6 text-[#3f72af]" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center space-x-2 mb-1">
@@ -389,7 +389,7 @@ export default function CommunicationCenterPage() {
         <div className="bg-white rounded-xl shadow-sm border border-gray-200">
           {loading ? (
             <div className="flex items-center justify-center py-12">
-              <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
+              <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
             </div>
           ) : activeTab === 'feedback' ? (
             renderFeedbackBoard()

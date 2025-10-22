@@ -298,7 +298,7 @@ export default function WorkflowEditorPage() {
                   id="enabled"
                   checked={enabled}
                   onChange={(e) => setEnabled(e.target.checked)}
-                  className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
+                  className="w-4 h-4 text-[#3f72af] rounded focus:ring-blue-500"
                 />
                 <label htmlFor="enabled" className="text-sm font-medium text-gray-700">
                   Enable workflow immediately
@@ -356,7 +356,7 @@ export default function WorkflowEditorPage() {
                         : 'border-gray-200 hover:border-gray-300'
                     }`}
                   >
-                    <Icon className={`w-6 h-6 mx-auto mb-2 ${triggerType === type.value ? 'text-blue-600' : 'text-gray-400'}`} />
+                    <Icon className={`w-6 h-6 mx-auto mb-2 ${triggerType === type.value ? 'text-[#3f72af]' : 'text-gray-400'}`} />
                     <div className="text-sm font-medium text-gray-900">{type.label}</div>
                     <div className="text-xs text-gray-500 mt-1">{type.description}</div>
                   </button>
@@ -559,7 +559,7 @@ export default function WorkflowEditorPage() {
 
           {/* Info */}
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 flex items-start space-x-3">
-            <AlertCircle className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
+            <AlertCircle className="w-5 h-5 text-[#3f72af] mt-0.5 flex-shrink-0" />
             <div className="text-sm text-blue-900">
               <p className="font-medium mb-1">Variable Syntax</p>
               <p>Use <code className="bg-blue-100 px-1 rounded">{`{{variable_name}}`}</code> in any text field to insert dynamic values like customer names, dispatch IDs, etc.</p>

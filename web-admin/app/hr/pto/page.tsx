@@ -207,7 +207,7 @@ export default function PTOManagementPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-600">Total Days Off</p>
-                <p className="text-3xl font-bold text-blue-600">{stats.totalDays}</p>
+                <p className="text-3xl font-bold text-[#3f72af]">{stats.totalDays}</p>
               </div>
               <Calendar className="h-12 w-12 text-blue-500" />
             </div>
@@ -419,7 +419,7 @@ export default function PTOManagementPage() {
                   <div className="bg-blue-50 rounded-lg p-4">
                     <div className="flex items-center justify-between mb-2">
                       <span className="text-sm font-medium text-blue-900">Vacation</span>
-                      <Calendar className="h-5 w-5 text-blue-600" />
+                      <Calendar className="h-5 w-5 text-[#3f72af]" />
                     </div>
                     <p className="text-2xl font-bold text-blue-900">
                       {employeeBalance.vacation_balance} days

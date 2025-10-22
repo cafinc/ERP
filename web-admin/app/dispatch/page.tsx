@@ -117,7 +117,7 @@ export default function DispatchesPage() {
     return (
       <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-full">
-          <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
+          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
       </HybridNavigationTopBar>
     );
@@ -157,7 +157,7 @@ export default function DispatchesPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-600 mb-1">Scheduled</p>
-                <p className="text-2xl font-bold text-blue-600">{stats.scheduled}</p>
+                <p className="text-2xl font-bold text-[#3f72af]">{stats.scheduled}</p>
               </div>
               <Clock className="w-10 h-10 text-blue-300" />
             </div>

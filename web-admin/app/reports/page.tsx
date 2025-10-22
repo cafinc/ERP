@@ -187,7 +187,7 @@ export default function ReportsPage() {
         {/* Info Banner */}
         <div className="mx-6 mt-4 bg-blue-50 border border-blue-200 rounded-lg p-4">
           <div className="flex items-start gap-3">
-            <Clock className="w-5 h-5 text-blue-600 mt-0.5" />
+            <Clock className="w-5 h-5 text-[#3f72af] mt-0.5" />
             <div>
               <h3 className="text-sm font-semibold text-blue-900 mb-1">Automated Report Scheduling</h3>
               <p className="text-sm text-blue-700">

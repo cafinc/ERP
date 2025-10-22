@@ -115,7 +115,7 @@ export default function ConversationDetailPage() {
       <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-full">
           <div className="text-center">
-            <RefreshCw className="w-12 h-12 animate-spin text-blue-600 mx-auto mb-4" />
+            <RefreshCw className="w-12 h-12 animate-spin text-[#3f72af] mx-auto mb-4" />
             <p className="text-gray-600">Loading conversation...</p>
           </div>
         </div>
@@ -157,7 +157,7 @@ export default function ConversationDetailPage() {
               </button>
               <div className="flex items-center space-x-3">
                 <div className="p-3 bg-blue-100 rounded-full">
-                  <User className="w-6 h-6 text-blue-600" />
+                  <User className="w-6 h-6 text-[#3f72af]" />
                 </div>
                 <div>
                   <h1 className="text-xl font-bold text-gray-900">

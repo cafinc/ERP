@@ -264,7 +264,7 @@ export default function PerformancePage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-600">In Progress</p>
-                <p className="text-3xl font-bold text-blue-600">{stats.inProgress}</p>
+                <p className="text-3xl font-bold text-[#3f72af]">{stats.inProgress}</p>
               </div>
               <FileText className="h-12 w-12 text-blue-500" />
             </div>
@@ -336,7 +336,7 @@ export default function PerformancePage() {
               <p className="text-gray-500 mb-2">No performance reviews yet</p>
               <button
                 onClick={() => setShowCreateModal(true)}
-                className="text-blue-500 hover:text-blue-600"
+                className="text-blue-500 hover:text-[#3f72af]"
               >
                 Schedule your first performance review
               </button>

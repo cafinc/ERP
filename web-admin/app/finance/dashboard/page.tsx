@@ -211,7 +211,7 @@ export default function FinanceDashboardPage() {
                 onClick={() => router.push('/invoices')}
                 className="w-full flex items-center gap-3 p-3 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors text-left"
               >
-                <Receipt className="w-5 h-5 text-blue-600" />
+                <Receipt className="w-5 h-5 text-[#3f72af]" />
                 <span className="text-sm font-medium text-gray-900">View All Invoices</span>
               </button>
               <button
@@ -256,7 +256,7 @@ export default function FinanceDashboardPage() {
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                    <Clock className="w-5 h-5 text-blue-600" />
+                    <Clock className="w-5 h-5 text-[#3f72af]" />
                   </div>
                   <div>
                     <p className="text-2xl font-bold text-gray-900">{stats.invoices.pending}</p>
@@ -310,7 +310,7 @@ export default function FinanceDashboardPage() {
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 mx-6 mt-6">
           <div className="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
             <h3 className="text-lg font-semibold text-gray-900">Recent Transactions</h3>
-            <button className="text-sm text-blue-600 hover:text-blue-700 font-medium">
+            <button className="text-sm text-[#3f72af] hover:text-blue-700 font-medium">
               View All
             </button>
           </div>

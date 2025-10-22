@@ -355,7 +355,7 @@ export default function IntegrationsPage() {
                     </span>
                   </div>
                   {log.details?.mock && (
-                    <p className="text-xs text-blue-600 mt-2">
+                    <p className="text-xs text-[#3f72af] mt-2">
                       🔵 Mock: {log.details.message}
                     </p>
                   )}

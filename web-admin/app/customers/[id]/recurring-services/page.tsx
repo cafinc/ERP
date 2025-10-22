@@ -274,7 +274,7 @@ export default function RecurringServicesPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-gray-600">Monthly Revenue</p>
-                  <p className="text-3xl font-bold text-blue-600 mt-2">
+                  <p className="text-3xl font-bold text-[#3f72af] mt-2">
                     ${activeServices.reduce((sum, s) => {
                       const monthly = s.frequency === 'monthly' ? s.price_per_service :
                                     s.frequency === 'weekly' ? s.price_per_service * 4 :
@@ -285,7 +285,7 @@ export default function RecurringServicesPage() {
                   </p>
                 </div>
                 <div className="p-3 bg-blue-100 rounded-lg">
-                  <DollarSign className="w-6 h-6 text-blue-600" />
+                  <DollarSign className="w-6 h-6 text-[#3f72af]" />
                 </div>
               </div>
             </div>
@@ -322,7 +322,7 @@ export default function RecurringServicesPage() {
                       <div className="flex items-start justify-between gap-4">
                         <div className="flex-1">
                           <div className="flex items-center gap-3 mb-2">
-                            <Snowflake className="w-5 h-5 text-blue-600" />
+                            <Snowflake className="w-5 h-5 text-[#3f72af]" />
                             <h3 className="font-semibold text-gray-900">
                               {getServiceTypeLabel(service.service_type)}
                             </h3>
@@ -375,7 +375,7 @@ export default function RecurringServicesPage() {
                           </button>
                           <button
                             onClick={() => handleEdit(service)}
-                            className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                            className="p-2 text-[#3f72af] hover:bg-blue-50 rounded-lg transition-colors"
                           >
                             <Edit className="w-4 h-4" />
                           </button>
@@ -439,7 +439,7 @@ export default function RecurringServicesPage() {
                           </button>
                           <button
                             onClick={() => handleEdit(service)}
-                            className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                            className="p-2 text-[#3f72af] hover:bg-blue-50 rounded-lg transition-colors"
                           >
                             <Edit className="w-4 h-4" />
                           </button>
@@ -596,7 +596,7 @@ export default function RecurringServicesPage() {
                     type="checkbox"
                     checked={formData.auto_invoice}
                     onChange={(e) => setFormData({ ...formData, auto_invoice: e.target.checked })}
-                    className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
+                    className="w-4 h-4 text-[#3f72af] rounded focus:ring-blue-500"
                   />
                   <span className="text-sm text-gray-700">Automatically create invoices</span>
                 </label>
@@ -606,7 +606,7 @@ export default function RecurringServicesPage() {
                     type="checkbox"
                     checked={formData.auto_dispatch}
                     onChange={(e) => setFormData({ ...formData, auto_dispatch: e.target.checked })}
-                    className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
+                    className="w-4 h-4 text-[#3f72af] rounded focus:ring-blue-500"
                   />
                   <span className="text-sm text-gray-700">Automatically create dispatch jobs</span>
                 </label>

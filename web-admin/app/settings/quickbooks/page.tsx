@@ -325,7 +325,7 @@ export default function QuickBooksSettings() {
     return (
       <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-64">
-          <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
+          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
       </HybridNavigationTopBar>
     );
@@ -530,7 +530,7 @@ export default function QuickBooksSettings() {
               <h2 className="text-xl font-semibold text-[#112d4e]">Recent Sync Activity</h2>
               <button
                 onClick={fetchSyncLogs}
-                className="text-sm text-blue-600 hover:text-[#2c5282] flex items-center gap-1"
+                className="text-sm text-[#3f72af] hover:text-[#2c5282] flex items-center gap-1"
               >
                 <RefreshCw className="w-4 h-4" />
                 Refresh
@@ -621,7 +621,7 @@ export default function QuickBooksSettings() {
                 className="flex items-start gap-3 p-4 bg-gray-50 rounded-lg"
               >
                 <div className="p-2 bg-[#3f72af] bg-opacity-10 rounded-lg">
-                  <feature.icon className="w-5 h-5 text-blue-600" />
+                  <feature.icon className="w-5 h-5 text-[#3f72af]" />
                 </div>
                 <div>
                   <h3 className="font-medium text-[#112d4e]">{feature.title}</h3>

@@ -200,7 +200,7 @@ export default function FillFormPage() {
               type="checkbox"
               checked={value === true}
               onChange={(e) => handleInputChange(field.id, e.target.checked)}
-              className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
+              className="w-4 h-4 text-[#3f72af] rounded focus:ring-blue-500"
             />
             <span className="text-gray-700">{field.placeholder || 'Check this box'}</span>
           </label>
@@ -217,7 +217,7 @@ export default function FillFormPage() {
                   value={option}
                   checked={value === option}
                   onChange={(e) => handleInputChange(field.id, e.target.value)}
-                  className="w-4 h-4 text-blue-600 focus:ring-blue-500"
+                  className="w-4 h-4 text-[#3f72af] focus:ring-blue-500"
                 />
                 <span className="text-gray-700">{option}</span>
               </label>
@@ -263,7 +263,7 @@ export default function FillFormPage() {
               <button
                 type="button"
                 onClick={() => openSignaturePad(field.id)}
-                className="w-full px-4 py-8 border-2 border-dashed border-gray-300 rounded-lg hover:border-blue-400 hover:bg-blue-50 transition-colors text-gray-600 hover:text-blue-600 font-medium"
+                className="w-full px-4 py-8 border-2 border-dashed border-gray-300 rounded-lg hover:border-blue-400 hover:bg-blue-50 transition-colors text-gray-600 hover:text-[#3f72af] font-medium"
               >
                 Click to Sign
               </button>
@@ -287,7 +287,7 @@ export default function FillFormPage() {
               </div>
             ) : (
               <label className="block w-full px-4 py-8 border-2 border-dashed border-gray-300 rounded-lg hover:border-blue-400 hover:bg-blue-50 transition-colors cursor-pointer">
-                <div className="flex flex-col items-center space-y-2 text-gray-600 hover:text-blue-600">
+                <div className="flex flex-col items-center space-y-2 text-gray-600 hover:text-[#3f72af]">
                   <Upload className="w-8 h-8" />
                   <span className="font-medium">Click to upload photo</span>
                 </div>
