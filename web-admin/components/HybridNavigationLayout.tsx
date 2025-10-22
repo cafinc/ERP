@@ -153,7 +153,7 @@ export default function HybridNavigationLayout({ children }: { children: React.R
         )}
 
         {/* Main Content Area */}
-        <div className="flex-1 overflow-auto">
+        <div className={`flex-1 overflow-auto transition-all ${expandedMenu ? 'pt-14' : ''}`}>
           {children}
         </div>
       </div>
