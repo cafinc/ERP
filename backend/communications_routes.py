@@ -104,7 +104,7 @@ async def send_inapp_message(request: SendInAppMessageRequest, current_user: dic
 # ========== RingCentral SMS ==========
 
 @router.post("/integrations/ringcentral/sms")
-async def send_sms_via_ringcentral(request: SendSMSRequest):
+async def send_sms_via_ringcentral(request: SendSMSRequest, current_user: dict = Depends(get_current_user)):
     """Send SMS via RingCentral"""
     try:
         # Check if RingCentral is enabled
