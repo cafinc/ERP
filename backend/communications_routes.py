@@ -250,8 +250,7 @@ async def log_phone_call(request: LogCallRequest):
 async def get_communications(
     customer_id: Optional[str] = None,
     type: Optional[str] = None,
-    limit: int = 100,
-    current_user: dict = Depends(get_current_user)
+    limit: int = 100
 ):
     """Get communications for a customer"""
     try:
