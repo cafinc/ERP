@@ -292,26 +292,39 @@ export default function CustomerFormPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Validation
+    const errors: Record<string, string> = {};
+
+    // Validation for required fields
     if (customerForm.customer_type === 'individual') {
-      if (!customerForm.first_name || !customerForm.last_name) {
-        alert('Please enter both first and last name');
-        return;
-      }
+      if (!customerForm.first_name) errors['first_name'] = 'First name is required';
+      if (!customerForm.last_name) errors['last_name'] = 'Last name is required';
     } else {
-      if (!customerForm.company_name) {
-        alert('Please enter company name');
-        return;
-      }
-      if (!customerForm.main_contact.first_name || !customerForm.main_contact.last_name) {
-        alert('Please enter main contact information');
-        return;
+      if (!customerForm.company_name) errors['company_name'] = 'Company name is required';
+      if (!customerForm.main_contact.first_name) errors['main_contact_first_name'] = 'First name is required';
+      if (!customerForm.main_contact.last_name) errors['main_contact_last_name'] = 'Last name is required';
+    }
+
+    // Email validation (required)
+    if (!customerForm.email) {
+      errors['email'] = 'Email is required';
+    } else if (!isValidEmail(customerForm.email)) {
+      errors['email'] = 'Invalid email format';
+    }
+
+    // Phone validation (required)
+    if (!customerForm.phone) {
+      errors['phone'] = 'Phone is required';
+    } else {
+      const cleaned = customerForm.phone.replace(/\D/g, '');
+      if (cleaned.length !== 10) {
+        errors['phone'] = 'Phone must be 10 digits';
       }
     }
 
-    // Email validation
-    if (!isValidEmail(customerForm.email)) {
-      alert('Please enter a valid email address with proper format (example@domain.com)');
+    // Set all errors at once
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors);
+      alert('Please fix the errors in the form before submitting');
       return;
     }
 
