@@ -97,6 +97,7 @@ export default function CreateEstimatePage() {
   const [showContactModal, setShowContactModal] = useState(false);
   const [showFormModal, setShowFormModal] = useState(false);
   const [showAgreementModal, setShowAgreementModal] = useState(false);
+  const [showTemplateSelector, setShowTemplateSelector] = useState(false);
   const [customerSearchQuery, setCustomerSearchQuery] = useState('');
 
   // Form data
