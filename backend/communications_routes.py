@@ -162,7 +162,7 @@ async def send_sms_via_ringcentral(request: SendSMSRequest, current_user: dict =
 # ========== Gmail Email ==========
 
 @router.post("/integrations/gmail/send")
-async def send_email_via_gmail(request: SendEmailRequest):
+async def send_email_via_gmail(request: SendEmailRequest, current_user: dict = Depends(get_current_user)):
     """Send email via Gmail"""
     try:
         # Check if Gmail is enabled
