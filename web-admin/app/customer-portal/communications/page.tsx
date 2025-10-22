@@ -8,14 +8,18 @@ import {
   DocumentIcon,
   CheckIcon,
   CheckCircleIcon,
-  XMarkIcon
+  XMarkIcon,
+  MagnifyingGlassIcon,
+  ChatBubbleLeftRightIcon,
+  ClockIcon,
+  DocumentTextIcon
 } from '@heroicons/react/24/outline';
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || '';
 
 interface Message {
   _id: string;
-  type: 'inapp' | 'sms' | 'email' | 'phone';
+  type: 'inapp';
   direction: 'inbound' | 'outbound';
   content: string;
   message: string;
@@ -32,14 +36,23 @@ interface Message {
   }>;
 }
 
+interface MessageTemplate {
+  _id: string;
+  name: string;
+  content: string;
+  type: string;
+}
+
 export default function CustomerCommunicationsPage() {
-  const [activeTab, setActiveTab] = useState<'inapp' | 'sms' | 'email' | 'phone'>('inapp');
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(true);
   const [sending, setSending] = useState(false);
   const [messageText, setMessageText] = useState('');
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [wsConnected, setWsConnected] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [showTemplates, setShowTemplates] = useState(false);
+  const [templates, setTemplates] = useState<MessageTemplate[]>([]);
   
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
