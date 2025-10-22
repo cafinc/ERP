@@ -291,3 +291,183 @@ async def get_communications(
     except Exception as e:
         logger.error(f"Error fetching communications: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
+
+
+# ========== File Upload & Download ==========
+
+@router.post("/communications/upload")
+async def upload_file(
+    file: UploadFile = File(...),
+    customer_id: Optional[str] = None,
+    current_user: dict = Depends(get_current_user)
+):
+    """Upload file attachment for communication"""
+    try:
+        # Read file data
+        file_data = await file.read()
+        
+        # Save file using storage service
+        file_metadata = file_storage_service.save_file(file_data, file.filename)
+        
+        # Store file metadata in database
+        file_record = {
+            "file_id": file_metadata["file_id"],
+            "filename": file_metadata["filename"],
+            "unique_filename": file_metadata["unique_filename"],
+            "file_type": file_metadata["file_type"],
+            "file_category": file_metadata["file_category"],
+            "file_size": file_metadata["file_size"],
+            "file_hash": file_metadata["file_hash"],
+            "url": file_metadata["url"],
+            "thumbnail_url": file_metadata.get("thumbnail_url"),
+            "storage_type": file_metadata["storage_type"],
+            "uploaded_by": current_user["id"],
+            "customer_id": customer_id,
+            "created_at": datetime.utcnow()
+        }
+        
+        result = await db.file_attachments.insert_one(file_record)
+        file_record["_id"] = str(result.inserted_id)
+        
+        logger.info(f"File uploaded: {file.filename} by user {current_user['id']}")
+        
+        return {
+            "success": True,
+            "message": "File uploaded successfully",
+            "file": file_record
+        }
+    
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        logger.error(f"Error uploading file: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to upload file: {str(e)}")
+
+
+@router.get("/communications/file/{filename}")
+async def download_file(filename: str):
+    """Download file attachment"""
+    try:
+        file_path = file_storage_service.get_file_path(filename)
+        
+        if not file_storage_service.file_exists(filename):
+            raise HTTPException(status_code=404, detail="File not found")
+        
+        return FileResponse(file_path)
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error downloading file: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to download file: {str(e)}")
+
+
+@router.get("/communications/file/thumbnails/{filename}")
+async def download_thumbnail(filename: str):
+    """Download thumbnail"""
+    try:
+        thumbnail_path = os.path.join(file_storage_service.upload_dir, "thumbnails", filename)
+        
+        if not os.path.exists(thumbnail_path):
+            raise HTTPException(status_code=404, detail="Thumbnail not found")
+        
+        return FileResponse(thumbnail_path)
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error downloading thumbnail: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to download thumbnail: {str(e)}")
+
+
+# ========== Read Receipts ==========
+
+@router.post("/communications/{communication_id}/mark-read")
+async def mark_communication_read(
+    communication_id: str,
+    current_user: dict = Depends(get_current_user)
+):
+    """Mark a communication as read"""
+    try:
+        result = await db.communications.update_one(
+            {"_id": ObjectId(communication_id)},
+            {
+                "$set": {
+                    "read": True,
+                    "read_at": datetime.utcnow(),
+                    "read_by": current_user["id"]
+                }
+            }
+        )
+        
+        if result.matched_count == 0:
+            raise HTTPException(status_code=404, detail="Communication not found")
+        
+        logger.info(f"Communication {communication_id} marked as read by {current_user['id']}")
+        
+        return {
+            "success": True,
+            "message": "Communication marked as read"
+        }
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error marking communication as read: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.post("/communications/{communication_id}/mark-delivered")
+async def mark_communication_delivered(communication_id: str):
+    """Mark a communication as delivered"""
+    try:
+        result = await db.communications.update_one(
+            {"_id": ObjectId(communication_id)},
+            {
+                "$set": {
+                    "status": "delivered",
+                    "delivered_at": datetime.utcnow()
+                }
+            }
+        )
+        
+        if result.matched_count == 0:
+            raise HTTPException(status_code=404, detail="Communication not found")
+        
+        logger.info(f"Communication {communication_id} marked as delivered")
+        
+        return {
+            "success": True,
+            "message": "Communication marked as delivered"
+        }
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error marking communication as delivered: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/communications/{communication_id}/status")
+async def get_communication_status(communication_id: str):
+    """Get read/delivery status of a communication"""
+    try:
+        communication = await db.communications.find_one({"_id": ObjectId(communication_id)})
+        
+        if not communication:
+            raise HTTPException(status_code=404, detail="Communication not found")
+        
+        return {
+            "communication_id": str(communication["_id"]),
+            "status": communication.get("status", "sent"),
+            "read": communication.get("read", False),
+            "delivered_at": communication.get("delivered_at"),
+            "read_at": communication.get("read_at"),
+            "read_by": communication.get("read_by")
+        }
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error fetching communication status: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
