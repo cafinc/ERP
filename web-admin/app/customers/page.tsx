@@ -276,7 +276,7 @@ export default function CustomersPage() {
                 .toUpperCase();
               
               const avatarColors = [
-                'bg-blue-500',
+                'bg-[#5b8ec4]',
                 'bg-green-500',
                 'bg-purple-500',
                 'bg-orange-500',
@@ -402,7 +402,7 @@ export default function CustomersPage() {
                 .toUpperCase();
               
               const avatarColors = [
-                'bg-blue-500',
+                'bg-[#5b8ec4]',
                 'bg-green-500',
                 'bg-purple-500',
                 'bg-orange-500',

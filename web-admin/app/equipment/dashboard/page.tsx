@@ -52,7 +52,7 @@ export default function EquipmentDashboardPage() {
       label: 'Total Equipment',
       value: stats.totalEquipment,
       icon: Truck,
-      color: 'bg-blue-500',
+      color: 'bg-[#5b8ec4]',
       href: '/equipment',
     },
     {

@@ -54,7 +54,7 @@ export default function DispatchDashboardPage() {
       label: 'Total Sites',
       value: stats.totalSites,
       icon: MapPin,
-      color: 'bg-blue-500',
+      color: 'bg-[#5b8ec4]',
       href: '/sites',
     },
     {

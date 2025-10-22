@@ -73,7 +73,7 @@ export default function CRMDashboardPage() {
       label: 'Total Customers',
       value: stats.customers,
       icon: Users,
-      color: 'bg-blue-500',
+      color: 'bg-[#5b8ec4]',
       href: '/customers',
     },
     {

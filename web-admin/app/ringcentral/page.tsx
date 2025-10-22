@@ -20,7 +20,7 @@ export default function RingCentralHub() {
       description: 'Send and manage SMS messages with customers and team',
       icon: MessageSquare,
       href: '/ringcentral/sms',
-      color: 'bg-blue-500',
+      color: 'bg-[#5b8ec4]',
     },
     {
       title: 'Active Calls',

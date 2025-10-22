@@ -28,7 +28,7 @@ export default function CommunicationDashboardPage() {
       label: 'RingCentral Calls',
       value: stats.totalCalls,
       icon: Phone,
-      color: 'bg-blue-500',
+      color: 'bg-[#5b8ec4]',
       href: '/ringcentral',
     },
     {

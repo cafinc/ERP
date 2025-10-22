@@ -80,7 +80,7 @@ export default function HomePage() {
       label: 'Total Customers',
       value: stats.customers,
       icon: Users,
-      color: 'bg-blue-500',
+      color: 'bg-[#5b8ec4]',
       change: '+12%',
       href: '/customers',
     },

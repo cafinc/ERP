@@ -44,7 +44,7 @@ export default function ReportsPage() {
       description: 'Daily dispatch activities, services completed, crew performance',
       type: 'daily',
       icon: Activity,
-      color: 'bg-blue-500',
+      color: 'bg-[#5b8ec4]',
     },
     {
       id: 'weekly_financial',

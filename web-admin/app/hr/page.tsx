@@ -23,7 +23,7 @@ export default function HRModulePage() {
       description: "Manage employee profiles, documents, and information",
       icon: Users,
       href: "/hr/employees",
-      color: "bg-blue-500",
+      color: "bg-[#5b8ec4]",
     },
     {
       title: "Time & Attendance",

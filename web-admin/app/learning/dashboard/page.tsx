@@ -25,7 +25,7 @@ export default function LearningDashboardPage() {
       label: 'Total Documents',
       value: stats.totalDocuments,
       icon: FileText,
-      color: 'bg-blue-500',
+      color: 'bg-[#5b8ec4]',
       href: '/learning-documents',
     },
     {
