@@ -11,8 +11,8 @@ import {
   XMarkIcon,
   MagnifyingGlassIcon,
   ChatBubbleLeftRightIcon,
-  DocumentTextIcon,
-  ArrowDownTrayIcon
+  ClockIcon,
+  DocumentTextIcon
 } from '@heroicons/react/24/outline';
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || '';
@@ -41,12 +41,10 @@ interface MessageTemplate {
   name: string;
   content: string;
   type: string;
-  category?: string;
 }
 
 export default function CustomerCommunicationsPage() {
   const [messages, setMessages] = useState<Message[]>([]);
-  const [filteredMessages, setFilteredMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(true);
   const [sending, setSending] = useState(false);
   const [messageText, setMessageText] = useState('');
@@ -55,13 +53,12 @@ export default function CustomerCommunicationsPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [showTemplates, setShowTemplates] = useState(false);
   const [templates, setTemplates] = useState<MessageTemplate[]>([]);
-  const [uploadProgress, setUploadProgress] = useState<number>(0);
   
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const wsRef = useRef<WebSocket | null>(null);
 
-  // Get customer ID from session/auth (mock for now - replace with actual auth)
+  // Get customer ID from session/auth (mock for now)
   const customerId = 'customer-123';
 
   // Scroll to bottom
@@ -74,33 +71,16 @@ export default function CustomerCommunicationsPage() {
     try {
       setLoading(true);
       const response = await fetch(
-        `${BACKEND_URL}/api/communications?customer_id=${customerId}&type=inapp`
+        `${BACKEND_URL}/api/communications?customer_id=${customerId}&type=${activeTab}`
       );
-      if (response.ok) {
-        const data = await response.json();
-        const sorted = data.sort((a: Message, b: Message) => 
-          new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
-        );
-        setMessages(sorted);
-        setFilteredMessages(sorted);
-      }
+      const data = await response.json();
+      setMessages(data.sort((a: Message, b: Message) => 
+        new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
+      ));
     } catch (error) {
       console.error('Error fetching messages:', error);
     } finally {
       setLoading(false);
-    }
-  };
-
-  // Fetch templates
-  const fetchTemplates = async () => {
-    try {
-      const response = await fetch(`${BACKEND_URL}/api/communications/templates?type=inapp`);
-      if (response.ok) {
-        const data = await response.json();
-        setTemplates(data);
-      }
-    } catch (error) {
-      console.error('Error fetching templates:', error);
     }
   };
 
@@ -154,7 +134,6 @@ export default function CustomerCommunicationsPage() {
 
   useEffect(() => {
     fetchMessages();
-    fetchTemplates();
     connectWebSocket();
     
     return () => {
@@ -162,24 +141,11 @@ export default function CustomerCommunicationsPage() {
         wsRef.current.close();
       }
     };
-  }, []);
+  }, [activeTab]);
 
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
-
-  // Search messages
-  useEffect(() => {
-    if (searchQuery.trim()) {
-      const filtered = messages.filter(msg => 
-        msg.content?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        msg.message?.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-      setFilteredMessages(filtered);
-    } else {
-      setFilteredMessages(messages);
-    }
-  }, [searchQuery, messages]);
 
   // File upload
   const uploadFile = async (file: File) => {
@@ -203,20 +169,13 @@ export default function CustomerCommunicationsPage() {
   // Handle file selection
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      const newFiles = Array.from(e.target.files);
-      setSelectedFiles([...selectedFiles, ...newFiles]);
+      setSelectedFiles([...selectedFiles, ...Array.from(e.target.files)]);
     }
   };
 
   // Remove selected file
   const removeFile = (index: number) => {
     setSelectedFiles(selectedFiles.filter((_, i) => i !== index));
-  };
-
-  // Use template
-  const useTemplate = (template: MessageTemplate) => {
-    setMessageText(template.content);
-    setShowTemplates(false);
   };
 
   // Send message
@@ -226,15 +185,12 @@ export default function CustomerCommunicationsPage() {
     }
 
     setSending(true);
-    setUploadProgress(0);
-    
     try {
       // Upload files first
       const uploadedFileIds = [];
-      for (let i = 0; i < selectedFiles.length; i++) {
-        const fileId = await uploadFile(selectedFiles[i]);
+      for (const file of selectedFiles) {
+        const fileId = await uploadFile(file);
         uploadedFileIds.push(fileId);
-        setUploadProgress(((i + 1) / selectedFiles.length) * 100);
       }
 
       // Send message
@@ -246,7 +202,7 @@ export default function CustomerCommunicationsPage() {
         body: JSON.stringify({
           customer_id: customerId,
           message: messageText,
-          type: 'inapp',
+          type: activeTab,
           attachments: uploadedFileIds,
         }),
       });
@@ -254,7 +210,6 @@ export default function CustomerCommunicationsPage() {
       if (response.ok) {
         setMessageText('');
         setSelectedFiles([]);
-        setUploadProgress(0);
         fetchMessages();
       } else {
         const error = await response.json();
@@ -284,47 +239,47 @@ export default function CustomerCommunicationsPage() {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-gradient-to-br from-orange-50 via-white to-orange-50">
+    <div className="flex flex-col h-screen bg-gray-50">
       {/* Header */}
-      <div className="bg-white border-b border-gray-200 shadow-sm px-6 py-4">
+      <div className="bg-white border-b border-gray-200 px-6 py-4">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-orange-500 rounded-lg">
-              <ChatBubbleLeftRightIcon className="w-6 h-6 text-white" />
-            </div>
-            <div>
-              <h1 className="text-2xl font-bold text-gray-900">Messages</h1>
-              <p className="text-sm text-gray-500 mt-1">
-                Chat with your service provider
-              </p>
-            </div>
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900">Communications</h1>
+            <p className="text-sm text-gray-500 mt-1">
+              Chat with your service provider
+            </p>
           </div>
-          <div className="flex items-center gap-4">
-            {/* Connection Status */}
-            <div className="flex items-center gap-2">
-              <div className={`w-2 h-2 rounded-full ${wsConnected ? 'bg-green-500 animate-pulse' : 'bg-gray-400'}`} />
-              <span className="text-sm text-gray-600">
-                {wsConnected ? 'Connected' : 'Offline'}
-              </span>
-            </div>
-            
-            {/* Message Count */}
-            <div className="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm font-medium">
-              {filteredMessages.length} messages
-            </div>
+          <div className="flex items-center gap-2">
+            <div className={`w-2 h-2 rounded-full ${wsConnected ? 'bg-green-500' : 'bg-gray-400'}`} />
+            <span className="text-sm text-gray-600">
+              {wsConnected ? 'Connected' : 'Offline'}
+            </span>
           </div>
         </div>
+      </div>
 
-        {/* Search Bar */}
-        <div className="mt-4 relative">
-          <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search messages..."
-            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-          />
+      {/* Tabs */}
+      <div className="bg-white border-b border-gray-200">
+        <div className="flex space-x-1 px-6">
+          {[
+            { id: 'inapp', label: 'Messages', icon: '💬' },
+            { id: 'sms', label: 'SMS', icon: '📱' },
+            { id: 'email', label: 'Email', icon: '✉️' },
+            { id: 'phone', label: 'Calls', icon: '📞' },
+          ].map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id as any)}
+              className={`px-4 py-3 text-sm font-medium border-b-2 transition-colors ${
+                activeTab === tab.id
+                  ? 'border-blue-500 text-blue-600'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+              }`}
+            >
+              <span className="mr-2">{tab.icon}</span>
+              {tab.label}
+            </button>
+          ))}
         </div>
       </div>
 
@@ -332,34 +287,27 @@ export default function CustomerCommunicationsPage() {
       <div className="flex-1 overflow-y-auto px-6 py-4">
         {loading ? (
           <div className="flex items-center justify-center h-full">
-            <div className="text-center">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500 mx-auto mb-4" />
-              <p className="text-gray-600">Loading messages...</p>
-            </div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500" />
           </div>
-        ) : filteredMessages.length === 0 ? (
+        ) : messages.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full text-gray-400">
-            <ChatBubbleLeftRightIcon className="w-20 h-20 mb-4 opacity-50" />
-            <p className="text-lg font-medium">
-              {searchQuery ? 'No messages found' : 'No messages yet'}
-            </p>
-            <p className="text-sm">
-              {searchQuery ? 'Try a different search term' : 'Start a conversation with your service provider'}
-            </p>
+            <div className="text-6xl mb-4">💬</div>
+            <p className="text-lg font-medium">No messages yet</p>
+            <p className="text-sm">Start a conversation with your service provider</p>
           </div>
         ) : (
           <div className="space-y-4">
-            {filteredMessages.map((message) => {
+            {messages.map((message) => {
               const isOutbound = message.direction === 'outbound';
               return (
                 <div
                   key={message._id}
-                  className={`flex ${isOutbound ? 'justify-end' : 'justify-start'} animate-fade-in`}
+                  className={`flex ${isOutbound ? 'justify-end' : 'justify-start'}`}
                 >
                   <div
-                    className={`max-w-lg rounded-2xl px-4 py-3 shadow-md ${
+                    className={`max-w-lg rounded-2xl px-4 py-3 ${
                       isOutbound
-                        ? 'bg-orange-500 text-white'
+                        ? 'bg-blue-500 text-white'
                         : 'bg-white border border-gray-200 text-gray-900'
                     }`}
                   >
@@ -377,8 +325,8 @@ export default function CustomerCommunicationsPage() {
                             target="_blank"
                             rel="noopener noreferrer"
                             className={`flex items-center gap-2 p-2 rounded-lg ${
-                              isOutbound ? 'bg-orange-600 hover:bg-orange-700' : 'bg-gray-50 hover:bg-gray-100'
-                            } transition-colors`}
+                              isOutbound ? 'bg-blue-600' : 'bg-gray-50'
+                            } hover:opacity-80 transition-opacity`}
                           >
                             {att.thumbnail_url ? (
                               <img
@@ -393,7 +341,6 @@ export default function CustomerCommunicationsPage() {
                               <p className="text-xs font-medium truncate">{att.filename}</p>
                               <p className="text-xs opacity-75">{formatFileSize(att.file_size)}</p>
                             </div>
-                            <ArrowDownTrayIcon className="w-4 h-4" />
                           </a>
                         ))}
                       </div>
@@ -409,9 +356,9 @@ export default function CustomerCommunicationsPage() {
                       </span>
                       {isOutbound && (
                         message.read ? (
-                          <CheckCircleIcon className="w-4 h-4 text-green-300" title="Read" />
+                          <CheckCircleIcon className="w-4 h-4 text-green-300" />
                         ) : (
-                          <CheckIcon className="w-4 h-4 opacity-75" title="Delivered" />
+                          <CheckIcon className="w-4 h-4 opacity-75" />
                         )
                       )}
                     </div>
@@ -426,80 +373,36 @@ export default function CustomerCommunicationsPage() {
 
       {/* Selected Files Preview */}
       {selectedFiles.length > 0 && (
-        <div className="px-6 py-3 bg-orange-50 border-t border-orange-100">
-          <div className="flex gap-2 overflow-x-auto pb-2">
+        <div className="px-6 py-2 bg-gray-100 border-t border-gray-200">
+          <div className="flex gap-2 overflow-x-auto">
             {selectedFiles.map((file, idx) => (
               <div key={idx} className="relative flex-shrink-0">
                 {file.type.startsWith('image/') ? (
                   <img
                     src={URL.createObjectURL(file)}
                     alt={file.name}
-                    className="w-20 h-20 object-cover rounded-lg border-2 border-orange-200"
+                    className="w-20 h-20 object-cover rounded-lg"
                   />
                 ) : (
-                  <div className="w-20 h-20 bg-white rounded-lg flex flex-col items-center justify-center border-2 border-orange-200">
-                    <DocumentIcon className="w-8 h-8 text-orange-500" />
-                    <p className="text-xs text-gray-600 mt-1 px-1 truncate w-full text-center">
-                      {file.name.substring(0, 8)}...
-                    </p>
+                  <div className="w-20 h-20 bg-white rounded-lg flex items-center justify-center border border-gray-300">
+                    <DocumentIcon className="w-8 h-8 text-gray-400" />
                   </div>
                 )}
                 <button
                   onClick={() => removeFile(idx)}
-                  className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 shadow-md"
+                  className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600"
                 >
                   <XMarkIcon className="w-4 h-4" />
                 </button>
+                <p className="text-xs text-center mt-1 truncate w-20">{file.name}</p>
               </div>
             ))}
-          </div>
-          {uploadProgress > 0 && uploadProgress < 100 && (
-            <div className="mt-2">
-              <div className="w-full bg-gray-200 rounded-full h-2">
-                <div
-                  className="bg-orange-500 h-2 rounded-full transition-all"
-                  style={{ width: `${uploadProgress}%` }}
-                />
-              </div>
-              <p className="text-xs text-gray-600 mt-1">Uploading... {uploadProgress.toFixed(0)}%</p>
-            </div>
-          )}
-        </div>
-      )}
-
-      {/* Templates Dropdown */}
-      {showTemplates && (
-        <div className="px-6 py-3 bg-white border-t border-gray-200 shadow-lg">
-          <div className="flex items-center justify-between mb-2">
-            <h3 className="text-sm font-semibold text-gray-900">Quick Templates</h3>
-            <button
-              onClick={() => setShowTemplates(false)}
-              className="text-gray-400 hover:text-gray-600"
-            >
-              <XMarkIcon className="w-5 h-5" />
-            </button>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 max-h-60 overflow-y-auto">
-            {templates.length === 0 ? (
-              <p className="text-sm text-gray-500 col-span-2">No templates available</p>
-            ) : (
-              templates.map((template) => (
-                <button
-                  key={template._id}
-                  onClick={() => useTemplate(template)}
-                  className="text-left p-3 bg-orange-50 hover:bg-orange-100 rounded-lg border border-orange-200 transition-colors"
-                >
-                  <p className="text-sm font-medium text-gray-900">{template.name}</p>
-                  <p className="text-xs text-gray-600 mt-1 line-clamp-2">{template.content}</p>
-                </button>
-              ))
-            )}
           </div>
         </div>
       )}
 
       {/* Input */}
-      <div className="bg-white border-t border-gray-200 px-6 py-4 shadow-lg">
+      <div className="bg-white border-t border-gray-200 px-6 py-4">
         <div className="flex items-end gap-3">
           <input
             ref={fileInputRef}
@@ -508,17 +411,13 @@ export default function CustomerCommunicationsPage() {
             onChange={handleFileSelect}
             className="hidden"
           />
-          
-          {/* Attach File */}
           <button
             onClick={() => fileInputRef.current?.click()}
-            className="p-2 text-gray-400 hover:text-orange-600 hover:bg-orange-50 rounded-lg transition-colors"
+            className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
             title="Attach file"
           >
             <PaperClipIcon className="w-6 h-6" />
           </button>
-          
-          {/* Attach Image */}
           <button
             onClick={() => {
               if (fileInputRef.current) {
@@ -526,37 +425,24 @@ export default function CustomerCommunicationsPage() {
                 fileInputRef.current.click();
               }
             }}
-            className="p-2 text-gray-400 hover:text-orange-600 hover:bg-orange-50 rounded-lg transition-colors"
+            className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
             title="Attach image"
           >
             <PhotoIcon className="w-6 h-6" />
           </button>
-          
-          {/* Templates */}
-          <button
-            onClick={() => setShowTemplates(!showTemplates)}
-            className={`p-2 ${showTemplates ? 'text-orange-600 bg-orange-50' : 'text-gray-400 hover:text-orange-600 hover:bg-orange-50'} rounded-lg transition-colors`}
-            title="Use template"
-          >
-            <DocumentTextIcon className="w-6 h-6" />
-          </button>
-          
-          {/* Message Input */}
           <textarea
             value={messageText}
             onChange={(e) => setMessageText(e.target.value)}
             onKeyPress={handleKeyPress}
-            placeholder="Type a message... (Press Enter to send)"
+            placeholder="Type a message..."
             rows={1}
-            className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent resize-none"
+            className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
             style={{ minHeight: '44px', maxHeight: '120px' }}
           />
-          
-          {/* Send Button */}
           <button
             onClick={sendMessage}
             disabled={sending || (!messageText.trim() && selectedFiles.length === 0)}
-            className="p-3 bg-orange-500 text-white rounded-lg hover:bg-orange-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors shadow-md"
+            className="p-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
           >
             {sending ? (
               <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white" />
@@ -565,9 +451,6 @@ export default function CustomerCommunicationsPage() {
             )}
           </button>
         </div>
-        <p className="text-xs text-gray-500 mt-2">
-          📱 InApp Messages • Real-time delivery • File attachments supported
-        </p>
       </div>
     </div>
   );
