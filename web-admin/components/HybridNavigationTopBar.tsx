@@ -41,7 +41,7 @@ export default function HybridNavigationTopBar({ children }: { children: React.R
     { label: 'Dashboard', icon: LayoutDashboard, href: '/' },
     {
       label: 'CRM',
-      icon: Users,
+      icon: TrendingUp,
       href: '/crm/dashboard',
       submenu: [
         { label: 'CRM Dashboard', href: '/crm/dashboard', icon: LayoutDashboard },
