@@ -946,16 +946,16 @@ export default function SiteMapAnnotationOptimized({
 
           {/* Drawing Tools */}
           <div className="flex items-center gap-1 flex-shrink-0">
-            <button onClick={() => setTool('pen')} className={`p-2 rounded-lg transition-all ${tool === 'pen' ? 'bg-blue-600 text-white shadow-md' : 'bg-white border border-gray-300 text-gray-600 hover:bg-gray-50'}`} title="Freehand Draw">
+            <button onClick={() => setTool('pen')} className={`p-2 rounded-lg transition-all ${tool === 'pen' ? 'bg-[#3f72af] text-white shadow-md' : 'bg-white border border-gray-300 text-gray-600 hover:bg-gray-50'}`} title="Freehand Draw">
               <Pen className="w-4 h-4" />
             </button>
-            <button onClick={() => setTool('text')} className={`p-2 rounded-lg transition-all ${tool === 'text' ? 'bg-blue-600 text-white shadow-md' : 'bg-white border border-gray-300 text-gray-600 hover:bg-gray-50'}`} title="Add Text">
+            <button onClick={() => setTool('text')} className={`p-2 rounded-lg transition-all ${tool === 'text' ? 'bg-[#3f72af] text-white shadow-md' : 'bg-white border border-gray-300 text-gray-600 hover:bg-gray-50'}`} title="Add Text">
               <Type className="w-4 h-4" />
             </button>
-            <button onClick={() => setTool('circle')} className={`p-2 rounded-lg transition-all ${tool === 'circle' ? 'bg-blue-600 text-white shadow-md' : 'bg-white border border-gray-300 text-gray-600 hover:bg-gray-50'}`} title="Circle">
+            <button onClick={() => setTool('circle')} className={`p-2 rounded-lg transition-all ${tool === 'circle' ? 'bg-[#3f72af] text-white shadow-md' : 'bg-white border border-gray-300 text-gray-600 hover:bg-gray-50'}`} title="Circle">
               <CircleIcon className="w-4 h-4" />
             </button>
-            <button onClick={() => setTool('rectangle')} className={`p-2 rounded-lg transition-all ${tool === 'rectangle' ? 'bg-blue-600 text-white shadow-md' : 'bg-white border border-gray-300 text-gray-600 hover:bg-gray-50'}`} title="Rectangle">
+            <button onClick={() => setTool('rectangle')} className={`p-2 rounded-lg transition-all ${tool === 'rectangle' ? 'bg-[#3f72af] text-white shadow-md' : 'bg-white border border-gray-300 text-gray-600 hover:bg-gray-50'}`} title="Rectangle">
               <Square className="w-4 h-4" />
             </button>
           </div>
@@ -982,7 +982,7 @@ export default function SiteMapAnnotationOptimized({
 
           {/* Utilities */}
           <div className="flex items-center gap-2 flex-shrink-0">
-            <button onClick={() => setShowGrid(!showGrid)} className={`p-2 rounded-lg transition-all ${showGrid ? 'bg-blue-600 text-white shadow-md' : 'bg-white border border-gray-300 text-gray-600 hover:bg-gray-50'}`} title="Toggle Grid">
+            <button onClick={() => setShowGrid(!showGrid)} className={`p-2 rounded-lg transition-all ${showGrid ? 'bg-[#3f72af] text-white shadow-md' : 'bg-white border border-gray-300 text-gray-600 hover:bg-gray-50'}`} title="Toggle Grid">
               <Grid className="w-4 h-4" />
             </button>
             <label className="flex items-center gap-2 px-3 py-2 bg-white border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition-all">
@@ -998,7 +998,7 @@ export default function SiteMapAnnotationOptimized({
             <button onClick={clearCanvas} className="p-2 bg-white border border-red-300 text-red-600 rounded-lg hover:bg-red-50 transition-all" title="Clear All">
               <Trash2 className="w-4 h-4" />
             </button>
-            <button onClick={exportAsPNG} className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all shadow-sm font-medium text-sm whitespace-nowrap">
+            <button onClick={exportAsPNG} className="px-4 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-blue-700 transition-all shadow-sm font-medium text-sm whitespace-nowrap">
               Export PNG
             </button>
             <button onClick={exportAsPDF} className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-all shadow-sm font-medium text-sm whitespace-nowrap">

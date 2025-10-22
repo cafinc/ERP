@@ -39,7 +39,7 @@ const badgeColors = {
 };
 
 const buttonVariants = {
-  primary: 'bg-blue-600 hover:bg-blue-700 text-white shadow-md hover:shadow-lg',
+  primary: 'bg-[#3f72af] hover:bg-blue-700 text-white shadow-md hover:shadow-lg',
   secondary: 'bg-white hover:bg-gray-50 text-gray-700 border-2 border-gray-300 hover:border-gray-400 shadow-sm',
   success: 'bg-green-600 hover:bg-green-700 text-white shadow-md hover:shadow-lg',
   danger: 'bg-red-600 hover:bg-red-700 text-white shadow-md hover:shadow-lg',
