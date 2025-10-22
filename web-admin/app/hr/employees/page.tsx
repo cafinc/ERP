@@ -547,7 +547,6 @@ export default function EmployeesPage() {
           </div>
         </div>
       )}
-      </div>
-    </HybridNavigationTopBar>
+    </div>
   );
 }
