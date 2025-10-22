@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import PageHeader from '@/components/PageHeader';
 import api from '@/lib/api';
+import { formatPhoneNumber, validateEmail, isValidEmail } from '@/lib/utils/formatters';
 import {
   ArrowLeft,
   Save,
@@ -21,14 +22,6 @@ import {
   X,
   Smartphone,
 } from 'lucide-react';
-
-// Phone formatting utility
-const formatPhoneNumber = (value: string) => {
-  const cleaned = value.replace(/\D/g, '');
-  if (cleaned.length <= 3) return cleaned;
-  if (cleaned.length <= 6) return `${cleaned.slice(0, 3)}-${cleaned.slice(3)}`;
-  return `${cleaned.slice(0, 3)}-${cleaned.slice(3, 6)}-${cleaned.slice(6, 10)}`;
-};
 
 // Canadian provinces
 const CANADIAN_PROVINCES = [
