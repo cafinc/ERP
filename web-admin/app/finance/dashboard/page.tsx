@@ -288,7 +288,7 @@ export default function FinanceDashboardPage() {
                     <p className="text-xs text-gray-600">{payment.invoice}</p>
                     <p className="text-xs text-gray-500 flex items-center gap-1 mt-1">
                       <Calendar className="w-3 h-3" />
-                      Due: {new Date(payment.dueDate).toLocaleDateString()}
+                      Due: {typeof window !== 'undefined' ? new Date(payment.dueDate).toLocaleDateString() : payment.dueDate}
                     </p>
                   </div>
                   <div className="text-right ml-3">
