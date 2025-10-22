@@ -23,9 +23,19 @@ export default function DesignSystemDemo() {
 
   const colorPalettes = [
     {
+      id: 'header-inspired',
+      name: 'Header Inspired ⭐',
+      description: 'Matches your Enhanced Header (#3f72af)',
+      primary: '#3f72af',
+      secondary: '#2c5282',
+      accent: '#5b8ec4',
+      gradient: 'from-[#3f72af] to-[#2c5282]',
+      sample: 'bg-gradient-to-r from-[#3f72af] to-[#2c5282]',
+    },
+    {
       id: 'professional-blue',
       name: 'Professional Blue',
-      description: 'Trust & Innovation (Current)',
+      description: 'Trust & Innovation',
       primary: '#2563eb',
       secondary: '#0d9488',
       accent: '#3b82f6',
