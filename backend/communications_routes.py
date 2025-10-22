@@ -10,22 +10,18 @@ from datetime import datetime
 from bson import ObjectId
 import logging
 
-from auth import get_current_user
-from database import db
-from ringcentral_service import RingCentralService
-from gmail_service import GmailService
+import os
+from motor.motor_asyncio import AsyncIOMotorClient
+from ringcentral_service import ringcentral_service
+from gmail_service import gmail_service
 
 logger = logging.getLogger(__name__)
 router = APIRouter()
 
-# Initialize services
-ringcentral_service = RingCentralService()
-gmail_service = GmailService()
-
-# Collections
-communications_collection = db["communications"]
-customers_collection = db["customers"]
-users_collection = db["users"]
+# MongoDB connection (same as server.py)
+mongo_url = os.environ['MONGO_URL']
+client = AsyncIOMotorClient(mongo_url)
+db = client[os.environ['DB_NAME']]
 
 
 # ========== Request Models ==========
