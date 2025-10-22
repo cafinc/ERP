@@ -164,7 +164,106 @@ export default function CustomersPage() {
         searchPlaceholder="Search customers..."
         onSearch={setSearchQuery}
         showFilter={true}
-        onFilterClick={() => alert("Filter options")}
+        onFilterClick={() => setShowFilterDropdown(!showFilterDropdown)}
+        filterDropdown={showFilterDropdown ? (
+          <div className="absolute right-0 mt-2 w-72 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+            <div className="p-4">
+              <div className="text-sm font-semibold text-gray-900 mb-3">Advanced Filters</div>
+              
+              {/* Status Filter */}
+              <div className="mb-4">
+                <label className="text-xs font-medium text-gray-700 mb-2 block">Status</label>
+                <div className="space-y-2">
+                  <label className="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded">
+                    <input
+                      type="radio"
+                      name="status"
+                      checked={filterActive === 'all'}
+                      onChange={() => setFilterActive('all')}
+                      className="text-[#3f72af] focus:ring-[#3f72af]"
+                    />
+                    <span className="text-sm text-gray-700">All</span>
+                  </label>
+                  <label className="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded">
+                    <input
+                      type="radio"
+                      name="status"
+                      checked={filterActive === 'active'}
+                      onChange={() => setFilterActive('active')}
+                      className="text-[#3f72af] focus:ring-[#3f72af]"
+                    />
+                    <span className="text-sm text-gray-700">Active Only</span>
+                  </label>
+                  <label className="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded">
+                    <input
+                      type="radio"
+                      name="status"
+                      checked={filterActive === 'inactive'}
+                      onChange={() => setFilterActive('inactive')}
+                      className="text-[#3f72af] focus:ring-[#3f72af]"
+                    />
+                    <span className="text-sm text-gray-700">Inactive Only</span>
+                  </label>
+                </div>
+              </div>
+
+              {/* Type Filter */}
+              <div className="mb-4">
+                <label className="text-xs font-medium text-gray-700 mb-2 block">Type</label>
+                <div className="space-y-2">
+                  <label className="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded">
+                    <input
+                      type="radio"
+                      name="type"
+                      checked={filterType === 'all'}
+                      onChange={() => setFilterType('all')}
+                      className="text-[#3f72af] focus:ring-[#3f72af]"
+                    />
+                    <span className="text-sm text-gray-700">All Types</span>
+                  </label>
+                  <label className="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded">
+                    <input
+                      type="radio"
+                      name="type"
+                      checked={filterType === 'individual'}
+                      onChange={() => setFilterType('individual')}
+                      className="text-[#3f72af] focus:ring-[#3f72af]"
+                    />
+                    <span className="text-sm text-gray-700">Individual</span>
+                  </label>
+                  <label className="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded">
+                    <input
+                      type="radio"
+                      name="type"
+                      checked={filterType === 'company'}
+                      onChange={() => setFilterType('company')}
+                      className="text-[#3f72af] focus:ring-[#3f72af]"
+                    />
+                    <span className="text-sm text-gray-700">Company</span>
+                  </label>
+                </div>
+              </div>
+
+              <div className="pt-3 border-t border-gray-200 flex gap-2">
+                <button
+                  onClick={() => {
+                    setFilterActive('all');
+                    setFilterType('all');
+                  }}
+                  className="flex-1 px-3 py-1.5 text-xs font-medium text-gray-700 bg-gray-100 rounded hover:bg-gray-200"
+                >
+                  Clear All
+                </button>
+                <button
+                  onClick={() => setShowFilterDropdown(false)}
+                  className="flex-1 px-3 py-1.5 text-xs font-medium text-white bg-[#3f72af] rounded hover:bg-[#2c5282]"
+                >
+                  Apply
+                </button>
+              </div>
+            </div>
+          </div>
+        ) : undefined}
         showViewToggle={true}
         viewMode={viewMode}
         onViewChange={setViewMode}
