@@ -92,6 +92,9 @@ export default function EnhancedHeader() {
 
         // Notifications (mock for now)
         setUnreadNotificationCount(3);
+        
+        // Calculate total unread communications
+        setTotalUnreadComms(totalUnread + unreadEmails);
       } catch (error) {
         console.error('Error fetching unread counts:', error);
       }
