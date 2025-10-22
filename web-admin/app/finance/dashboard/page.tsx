@@ -348,6 +348,6 @@ export default function FinanceDashboardPage() {
           </div>
         </div>
       </div>
-    </HybridNavigationTopBar>
+    </div>
   );
 }
