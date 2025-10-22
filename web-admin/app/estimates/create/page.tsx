@@ -456,6 +456,26 @@ export default function CreateEstimatePage() {
         />
 
         <div className="max-w-6xl mx-auto space-y-4">
+          {/* Use Template Button */}
+          <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg border-2 border-dashed border-blue-300 p-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-3">
+                <Sparkles className="w-6 h-6 text-blue-600" />
+                <div>
+                  <h3 className="font-semibold text-gray-900">Quick Start with Templates</h3>
+                  <p className="text-sm text-gray-600">Auto-fill this estimate using a pre-built template</p>
+                </div>
+              </div>
+              <button
+                onClick={() => setShowTemplateSelector(true)}
+                className="flex items-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors font-medium"
+              >
+                <FileText className="w-4 h-4" />
+                <span>Use Template</span>
+              </button>
+            </div>
+          </div>
+
           {/* Customer Selection */}
           <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-8">
             <h2 className="text-lg font-semibold text-gray-900 mb-4">Customer & Site Information</h2>
