@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
-import HybridNavigationTopBar from '@/components/HybridNavigationTopBar';
 import api from '@/lib/api';
 import {
   DollarSign,

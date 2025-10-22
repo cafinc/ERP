@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useRouter, useParams } from 'next/navigation';
-import HybridNavigationTopBar from '@/components/HybridNavigationTopBar';
 import CompactHeader from '@/components/CompactHeader';
 import api from '@/lib/api';
 import {

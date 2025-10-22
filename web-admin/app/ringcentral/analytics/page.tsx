@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import HybridNavigationTopBar from '@/components/HybridNavigationTopBar';
 import api from '@/lib/api';
 import {
   BarChart3,

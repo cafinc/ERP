@@ -1,7 +1,6 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import HybridNavigationTopBar from "@/components/HybridNavigationTopBar";
 import { Users, LayoutDashboard, ArrowRight, Zap } from "lucide-react";
 
 export default function TestTopBar() {

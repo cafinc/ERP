@@ -1,6 +1,5 @@
 'use client';
 
-import HybridNavigationTopBar from '@/components/HybridNavigationTopBar';
 import CompactHeader from '@/components/CompactHeader';
 import { 
   Users, FileText, DollarSign, TrendingUp, Calendar, Phone, Mail, CheckSquare, Home,

@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
-import HybridNavigationTopBar from '@/components/HybridNavigationTopBar';
 import SiteMapAnnotation from '@/components/SiteMapAnnotationOptimized';
 import api from '@/lib/api';
 import {
