@@ -112,7 +112,7 @@ async def send_sms_via_ringcentral(request: SendSMSRequest, current_user: dict =
             raise HTTPException(status_code=400, detail="RingCentral integration not configured. Please set RINGCENTRAL_CLIENT_ID and RINGCENTRAL_CLIENT_SECRET")
         
         # Get user's RingCentral token
-        user = users_collection.find_one({"_id": ObjectId(current_user["id"])})
+        user = await users_collection.find_one({"_id": ObjectId(current_user["id"])})
         if not user or not user.get("ringcentral_token"):
             raise HTTPException(status_code=400, detail="RingCentral not connected. Please connect your RingCentral account first")
         
