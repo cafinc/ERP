@@ -746,7 +746,7 @@ export default function SiteMapAnnotationFinal({
           </button>
           <button
             onClick={exportAsPNG}
-            className="px-3 py-1.5 bg-[#3f72af] text-white rounded-lg hover:bg-blue-700 transition-colors text-sm shadow-sm"
+            className="px-3 py-1.5 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-colors text-sm shadow-sm"
           >
             PNG
           </button>
@@ -776,7 +776,7 @@ export default function SiteMapAnnotationFinal({
             Click to add points • Double-click to complete • Esc to cancel
           </span>
           {polygonPoints.length >= 2 && (
-            <span className="text-blue-600 ml-4">
+            <span className="text-[#3f72af] ml-4">
               Points: {polygonPoints.length / 2}
             </span>
           )}

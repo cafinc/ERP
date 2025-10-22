@@ -86,7 +86,7 @@ export default function CallerPopup() {
               <div className="mt-2">
                 <a
                   href={`/customers/${call.customer_id}`}
-                  className="text-xs text-blue-600 hover:underline"
+                  className="text-xs text-[#3f72af] hover:underline"
                 >
                   View Customer Profile →
                 </a>

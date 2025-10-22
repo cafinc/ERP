@@ -998,7 +998,7 @@ export default function SiteMapAnnotationOptimized({
             <button onClick={clearCanvas} className="p-2 bg-white border border-red-300 text-red-600 rounded-lg hover:bg-red-50 transition-all" title="Clear All">
               <Trash2 className="w-4 h-4" />
             </button>
-            <button onClick={exportAsPNG} className="px-4 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-blue-700 transition-all shadow-sm font-medium text-sm whitespace-nowrap">
+            <button onClick={exportAsPNG} className="px-4 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-all shadow-sm font-medium text-sm whitespace-nowrap">
               Export PNG
             </button>
             <button onClick={exportAsPDF} className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-all shadow-sm font-medium text-sm whitespace-nowrap">
@@ -1042,7 +1042,7 @@ export default function SiteMapAnnotationOptimized({
                 <div className="text-center">
                   <div className="relative">
                     <div className="animate-spin rounded-full h-16 w-16 border-4 border-gray-200 border-t-blue-600 mx-auto"></div>
-                    <MapPin className="w-6 h-6 text-blue-600 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
+                    <MapPin className="w-6 h-6 text-[#3f72af] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
                   </div>
                   <p className="mt-4 text-gray-700 font-medium">Loading satellite view...</p>
                   <p className="mt-1 text-sm text-gray-500">Fetching high-resolution imagery</p>
@@ -1219,7 +1219,7 @@ export default function SiteMapAnnotationOptimized({
                 <div className="flex gap-2">
                   <div className="flex-1 p-2 bg-white rounded-lg text-center">
                     <p className="text-gray-500 text-xs">Annotations</p>
-                    <p className="font-bold text-blue-600 text-lg">{annotations.length}</p>
+                    <p className="font-bold text-[#3f72af] text-lg">{annotations.length}</p>
                   </div>
                   <div className="flex-1 p-2 bg-white rounded-lg text-center">
                     <p className="text-gray-500 text-xs">Zoom</p>

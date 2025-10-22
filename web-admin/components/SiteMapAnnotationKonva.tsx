@@ -403,28 +403,28 @@ export default function SiteMapAnnotation({
         <div className="flex items-center gap-2 pr-4 border-r border-gray-300">
           <button
             onClick={() => setTool('pen')}
-            className={`p-2 rounded-lg transition-colors ${tool === 'pen' ? 'bg-blue-100 text-blue-600' : 'hover:bg-gray-100'}`}
+            className={`p-2 rounded-lg transition-colors ${tool === 'pen' ? 'bg-blue-100 text-[#3f72af]' : 'hover:bg-gray-100'}`}
             title="Freehand Draw"
           >
             <Pen className="w-5 h-5" />
           </button>
           <button
             onClick={() => setTool('text')}
-            className={`p-2 rounded-lg transition-colors ${tool === 'text' ? 'bg-blue-100 text-blue-600' : 'hover:bg-gray-100'}`}
+            className={`p-2 rounded-lg transition-colors ${tool === 'text' ? 'bg-blue-100 text-[#3f72af]' : 'hover:bg-gray-100'}`}
             title="Add Text"
           >
             <Type className="w-5 h-5" />
           </button>
           <button
             onClick={() => setTool('circle')}
-            className={`p-2 rounded-lg transition-colors ${tool === 'circle' ? 'bg-blue-100 text-blue-600' : 'hover:bg-gray-100'}`}
+            className={`p-2 rounded-lg transition-colors ${tool === 'circle' ? 'bg-blue-100 text-[#3f72af]' : 'hover:bg-gray-100'}`}
             title="Add Circle"
           >
             <CircleIcon className="w-5 h-5" />
           </button>
           <button
             onClick={() => setTool('rectangle')}
-            className={`p-2 rounded-lg transition-colors ${tool === 'rectangle' ? 'bg-blue-100 text-blue-600' : 'hover:bg-gray-100'}`}
+            className={`p-2 rounded-lg transition-colors ${tool === 'rectangle' ? 'bg-blue-100 text-[#3f72af]' : 'hover:bg-gray-100'}`}
             title="Add Rectangle"
           >
             <Square className="w-5 h-5" />
@@ -453,7 +453,7 @@ export default function SiteMapAnnotation({
           </button>
           <button
             onClick={exportAsPNG}
-            className="px-3 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-blue-700 transition-colors text-sm"
+            className="px-3 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-colors text-sm"
           >
             Export PNG
           </button>

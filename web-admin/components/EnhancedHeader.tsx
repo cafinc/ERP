@@ -394,7 +394,7 @@ export default function EnhancedHeader() {
                         {user?.full_name || user?.name || 'User'}
                       </p>
                       <p className="text-xs text-gray-500">{user?.email}</p>
-                      <p className="text-xs text-blue-600 capitalize mt-1">{user?.role}</p>
+                      <p className="text-xs text-[#3f72af] capitalize mt-1">{user?.role}</p>
                     </div>
 
                     <button

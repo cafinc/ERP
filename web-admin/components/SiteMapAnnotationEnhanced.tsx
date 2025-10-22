@@ -680,7 +680,7 @@ export default function SiteMapAnnotationEnhanced({
           </button>
           <button
             onClick={exportAsPNG}
-            className="px-3 py-1.5 bg-[#3f72af] text-white rounded-lg hover:bg-blue-700 transition-colors text-sm shadow-sm"
+            className="px-3 py-1.5 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-colors text-sm shadow-sm"
           >
             PNG
           </button>
