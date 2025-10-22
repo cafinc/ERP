@@ -232,10 +232,10 @@ export default function CreateEstimatePage() {
         
         // Set notes and terms
         if (content.notes) {
-          setNotes(content.notes);
+          setFormData(prev => ({ ...prev, notes: content.notes }));
         }
-        if (content.terms) {
-          setTerms(content.terms);
+        if (content.payment_terms) {
+          setFormData(prev => ({ ...prev, payment_terms: content.payment_terms }));
         }
         
         setShowTemplateSelector(false);
