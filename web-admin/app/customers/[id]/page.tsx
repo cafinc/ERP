@@ -78,6 +78,9 @@ export default function CustomerDetailPage() {
   const [selectedFormId, setSelectedFormId] = useState('');
   const [attachingForm, setAttachingForm] = useState(false);
 
+  // Communication Center sub-tab
+  const [commSubTab, setCommSubTab] = useState('all');
+
   const serviceTypes = {
     snow: {
       name: 'Snow Services',
