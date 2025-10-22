@@ -24,6 +24,11 @@ mongo_url = os.getenv("MONGO_URL", "mongodb://localhost:27017")
 client = AsyncIOMotorClient(mongo_url)
 db = client[os.getenv("DB_NAME", "snow_removal_db")]
 
+# Collections
+communications_collection = db["communications"]
+customers_collection = db["customers"]
+users_collection = db["users"]
+
 
 # ========== Request Models ==========
 
