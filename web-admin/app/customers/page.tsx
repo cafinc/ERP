@@ -44,6 +44,7 @@ export default function CustomersPage() {
   const [filterType, setFilterType] = useState('all'); // 'all', 'individual', 'company'
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid'); // View toggle - default to grid
   const [showColumnSelector, setShowColumnSelector] = useState(false);
+  const [showFilterDropdown, setShowFilterDropdown] = useState(false);
   const [visibleColumns, setVisibleColumns] = useState({
     name: true,
     email: true,
