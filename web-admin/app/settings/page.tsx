@@ -135,6 +135,13 @@ export default function SettingsPage() {
       category: 'System',
       items: [
         {
+          icon: FileText,
+          title: 'Document Templates',
+          description: 'Manage estimate, invoice, and document templates',
+          href: '/templates',
+          color: 'blue'
+        },
+        {
           icon: Clock,
           title: 'Business Hours',
           description: 'Operating hours and schedule settings',
