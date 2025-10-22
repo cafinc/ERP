@@ -247,17 +247,45 @@ export default function CustomerFormPage() {
     setCustomerForm({ ...customerForm, customer_type: type });
   };
 
+  const validateField = (fieldName: string, value: string) => {
+    const errors = { ...fieldErrors };
+    
+    // Email validation
+    if (fieldName === 'email' || fieldName === 'main_contact_email') {
+      if (value && !isValidEmail(value)) {
+        errors[fieldName] = 'Invalid email format';
+      } else {
+        delete errors[fieldName];
+      }
+    }
+    
+    // Phone validation (check if it's 10 digits when cleaned)
+    if (fieldName.includes('phone')) {
+      const cleaned = value.replace(/\D/g, '');
+      if (value && cleaned.length > 0 && cleaned.length !== 10) {
+        errors[fieldName] = 'Phone must be 10 digits';
+      } else {
+        delete errors[fieldName];
+      }
+    }
+    
+    setFieldErrors(errors);
+  };
+
   const handlePhoneChange = (field: 'phone' | 'mobile' | 'main_contact_phone', value: string) => {
     const formatted = formatPhoneNumber(value);
     if (field === 'phone') {
       setCustomerForm({ ...customerForm, phone: formatted });
+      validateField('phone', formatted);
     } else if (field === 'mobile') {
       setCustomerForm({ ...customerForm, mobile: formatted });
+      validateField('mobile', formatted);
     } else {
       setCustomerForm({
         ...customerForm,
         main_contact: { ...customerForm.main_contact, phone: formatted },
       });
+      validateField('main_contact_phone', formatted);
     }
   };
 
