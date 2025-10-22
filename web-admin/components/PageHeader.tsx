@@ -124,21 +124,21 @@ export default function PageHeader({
     );
   }
 
-  // Default variant with colored background
+  // Default variant - Full Featured Header (white background)
   return (
-    <div className="bg-gradient-to-r from-blue-50 to-blue-100 border-b border-blue-200">
+    <div className="bg-white border-b border-gray-200">
       <div className="px-6 py-5">
         {/* Breadcrumbs */}
         {breadcrumbs && breadcrumbs.length > 0 && (
-          <nav className="flex items-center text-sm text-blue-700 mb-3">
+          <nav className="flex items-center text-sm text-gray-500 mb-3">
             {breadcrumbs.map((crumb, index) => (
               <React.Fragment key={index}>
                 {crumb.href ? (
-                  <Link href={crumb.href} className="hover:text-blue-900">
+                  <Link href={crumb.href} className="hover:text-gray-700">
                     {crumb.label}
                   </Link>
                 ) : (
-                  <span className="text-blue-900 font-medium">{crumb.label}</span>
+                  <span className="text-gray-900 font-medium">{crumb.label}</span>
                 )}
                 {index < breadcrumbs.length - 1 && (
                   <ChevronRight className="w-4 h-4 mx-2" />
