@@ -22,7 +22,7 @@ export default function CreateTemplatePage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [showPlaceholderBrowser, setShowPlaceholderBrowser] = useState(false);
-  const [placeholders, setPlaceholders] = useState<any>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [formData, setFormData] = useState({
     type: 'estimate',
     name: '',
