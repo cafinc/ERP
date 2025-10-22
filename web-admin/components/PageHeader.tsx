@@ -162,7 +162,7 @@ export default function PageHeader({
                     <Link
                       key={index}
                       href={action.href}
-                      className={`px-4 py-2 text-sm font-medium rounded-lg shadow-sm inline-flex items-center ${
+                      className={`px-4 py-2 text-sm font-medium rounded-lg inline-flex items-center ${
                         action.variant === 'primary'
                           ? 'text-white bg-blue-600 hover:bg-blue-700'
                           : 'text-gray-700 bg-white border border-gray-300 hover:bg-gray-50'
