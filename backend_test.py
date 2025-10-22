@@ -24,880 +24,947 @@ class CommunicationCenterTester:
         self.test_project_id = None
         self.test_communication_id = None
         self.test_template_id = None
-
-    def log_test(self, test_name, success, details="", response_data=None):
-        """Log test results"""
-        self.test_results["total_tests"] += 1
-        if success:
-            self.test_results["passed_tests"] += 1
-            status = "✅ PASS"
-        else:
-            self.test_results["failed_tests"] += 1
-            status = "❌ FAIL"
         
-        print(f"{status}: {test_name}")
-        if details:
-            print(f"   Details: {details}")
-        if response_data and not success:
-            print(f"   Response: {response_data}")
-        print()
-
-    def make_request(self, method, endpoint, data=None, params=None):
-        """Make HTTP request with error handling"""
-        url = f"{BACKEND_URL}{endpoint}"
+    def log_result(self, test_name, success, details="", priority="medium"):
+        """Log test result"""
+        status = "✅ PASS" if success else "❌ FAIL"
+        self.test_results.append({
+            "test": test_name,
+            "status": status,
+            "success": success,
+            "details": details,
+            "priority": priority
+        })
+        print(f"{status} - {test_name}: {details}")
+    
+    def setup_test_data(self):
+        """Create test customer and user for testing"""
         try:
-            if method.upper() == "GET":
-                response = self.session.get(url, params=params, timeout=30)
-            elif method.upper() == "POST":
-                response = self.session.post(url, json=data, timeout=30)
-            elif method.upper() == "PUT":
-                response = self.session.put(url, json=data, timeout=30)
-            elif method.upper() == "DELETE":
-                response = self.session.delete(url, timeout=30)
-            else:
-                raise ValueError(f"Unsupported method: {method}")
-            
-            return response
-        except requests.exceptions.RequestException as e:
-            print(f"Request failed: {e}")
-            return None
-
-    # ==================== HR MODULE TESTS ====================
-
-    def test_hr_employee_management(self):
-        """Test Employee Management APIs"""
-        print("=== Testing HR Employee Management ===")
-        
-        # Test 1: Create Employee
-        employee_data = {
-            "first_name": "Sarah",
-            "last_name": "Johnson",
-            "email": "sarah.johnson@company.com",
-            "phone": "+1-555-0123",
-            "department": "Operations",
-            "position": "Snow Removal Specialist",
-            "hire_date": "2024-01-15",
-            "hourly_rate": 25.50,
-            "is_active": True
-        }
-        
-        response = self.make_request("POST", "/hr/employees", employee_data)
-        if response and response.status_code == 200:
-            data = response.json()
-            if data.get("success") and "employee" in data:
-                employee_id = data["employee"]["id"]
-                self.created_resources["employees"].append(employee_id)
-                self.log_test("Create Employee", True, f"Employee ID: {employee_id}")
-            else:
-                self.log_test("Create Employee", False, "Invalid response structure", data)
-        else:
-            self.log_test("Create Employee", False, f"Status: {response.status_code if response else 'No response'}")
-
-        # Test 2: Get All Employees
-        response = self.make_request("GET", "/hr/employees")
-        if response and response.status_code == 200:
-            data = response.json()
-            if data.get("success") and "employees" in data:
-                self.log_test("Get All Employees", True, f"Found {len(data['employees'])} employees")
-            else:
-                self.log_test("Get All Employees", False, "Invalid response structure", data)
-        else:
-            self.log_test("Get All Employees", False, f"Status: {response.status_code if response else 'No response'}")
-
-        # Test 3: Get Specific Employee
-        if self.created_resources["employees"]:
-            employee_id = self.created_resources["employees"][0]
-            response = self.make_request("GET", f"/hr/employees/{employee_id}")
-            if response and response.status_code == 200:
-                data = response.json()
-                if data.get("success") and "employee" in data:
-                    self.log_test("Get Specific Employee", True, f"Retrieved employee: {data['employee']['first_name']} {data['employee']['last_name']}")
-                else:
-                    self.log_test("Get Specific Employee", False, "Invalid response structure", data)
-            else:
-                self.log_test("Get Specific Employee", False, f"Status: {response.status_code if response else 'No response'}")
-
-        # Test 4: Update Employee
-        if self.created_resources["employees"]:
-            employee_id = self.created_resources["employees"][0]
-            update_data = {
-                "hourly_rate": 27.00,
-                "department": "Senior Operations"
-            }
-            response = self.make_request("PUT", f"/hr/employees/{employee_id}", update_data)
-            if response and response.status_code == 200:
-                data = response.json()
-                if data.get("success"):
-                    self.log_test("Update Employee", True, "Employee updated successfully")
-                else:
-                    self.log_test("Update Employee", False, "Update failed", data)
-            else:
-                self.log_test("Update Employee", False, f"Status: {response.status_code if response else 'No response'}")
-
-        # Test 5: Delete Employee (Soft Delete)
-        if self.created_resources["employees"]:
-            employee_id = self.created_resources["employees"][0]
-            response = self.make_request("DELETE", f"/hr/employees/{employee_id}")
-            if response and response.status_code == 200:
-                data = response.json()
-                if data.get("success"):
-                    self.log_test("Delete Employee (Soft Delete)", True, "Employee terminated successfully")
-                else:
-                    self.log_test("Delete Employee (Soft Delete)", False, "Delete failed", data)
-            else:
-                self.log_test("Delete Employee (Soft Delete)", False, f"Status: {response.status_code if response else 'No response'}")
-
-    def test_hr_time_attendance(self):
-        """Test Time & Attendance APIs"""
-        print("=== Testing HR Time & Attendance ===")
-        
-        # First create an employee for time tracking
-        employee_data = {
-            "first_name": "Mike",
-            "last_name": "Wilson",
-            "email": "mike.wilson@company.com",
-            "phone": "+1-555-0124",
-            "department": "Operations",
-            "position": "Equipment Operator",
-            "hire_date": "2024-01-20",
-            "hourly_rate": 28.00,
-            "is_active": True
-        }
-        
-        response = self.make_request("POST", "/hr/employees", employee_data)
-        employee_id = None
-        if response and response.status_code == 200:
-            data = response.json()
-            if data.get("success"):
-                employee_id = data["employee"]["id"]
-                self.created_resources["employees"].append(employee_id)
-
-        if not employee_id:
-            self.log_test("Time & Attendance Setup", False, "Could not create employee for time tracking")
-            return
-
-        # Test 1: Clock In (Create Time Entry)
-        time_entry_data = {
-            "employee_id": employee_id,
-            "clock_in": datetime.utcnow().isoformat(),
-            "location": "Main Office",
-            "notes": "Starting morning shift"
-        }
-        
-        response = self.make_request("POST", "/hr/time-entries", time_entry_data)
-        time_entry_id = None
-        if response and response.status_code == 200:
-            data = response.json()
-            if data.get("success") and "time_entry" in data:
-                time_entry_id = data["time_entry"]["id"]
-                self.created_resources["time_entries"].append(time_entry_id)
-                self.log_test("Clock In (Create Time Entry)", True, f"Time Entry ID: {time_entry_id}")
-            else:
-                self.log_test("Clock In (Create Time Entry)", False, "Invalid response structure", data)
-        else:
-            self.log_test("Clock In (Create Time Entry)", False, f"Status: {response.status_code if response else 'No response'}")
-
-        # Test 2: Clock Out
-        if time_entry_id:
-            clock_out_time = (datetime.utcnow() + timedelta(hours=8)).isoformat()
-            response = self.make_request("PUT", f"/hr/time-entries/{time_entry_id}/clock-out", {"clock_out_time": clock_out_time})
-            if response and response.status_code == 200:
-                data = response.json()
-                if data.get("success"):
-                    self.log_test("Clock Out", True, "Successfully clocked out")
-                else:
-                    self.log_test("Clock Out", False, "Clock out failed", data)
-            else:
-                self.log_test("Clock Out", False, f"Status: {response.status_code if response else 'No response'}")
-
-        # Test 3: Get Time Entries
-        response = self.make_request("GET", "/hr/time-entries", params={"employee_id": employee_id})
-        if response and response.status_code == 200:
-            data = response.json()
-            if data.get("success") and "time_entries" in data:
-                self.log_test("Get Time Entries", True, f"Found {len(data['time_entries'])} time entries")
-            else:
-                self.log_test("Get Time Entries", False, "Invalid response structure", data)
-        else:
-            self.log_test("Get Time Entries", False, f"Status: {response.status_code if response else 'No response'}")
-
-        # Test 4: Approve Time Entry
-        if time_entry_id:
-            response = self.make_request("PUT", f"/hr/time-entries/{time_entry_id}/approve", {"approved_by": "manager_001"})
-            if response and response.status_code == 200:
-                data = response.json()
-                if data.get("success"):
-                    self.log_test("Approve Time Entry", True, "Time entry approved")
-                else:
-                    self.log_test("Approve Time Entry", False, "Approval failed", data)
-            else:
-                self.log_test("Approve Time Entry", False, f"Status: {response.status_code if response else 'No response'}")
-
-        # Test 5: Reject Time Entry (create another entry first)
-        time_entry_data2 = {
-            "employee_id": employee_id,
-            "clock_in": (datetime.utcnow() - timedelta(days=1)).isoformat(),
-            "location": "Remote",
-            "notes": "Working from home"
-        }
-        
-        response = self.make_request("POST", "/hr/time-entries", time_entry_data2)
-        time_entry_id2 = None
-        if response and response.status_code == 200:
-            data = response.json()
-            if data.get("success"):
-                time_entry_id2 = data["time_entry"]["id"]
-                self.created_resources["time_entries"].append(time_entry_id2)
-
-        if time_entry_id2:
-            response = self.make_request("PUT", f"/hr/time-entries/{time_entry_id2}/reject", {"approved_by": "manager_001"})
-            if response and response.status_code == 200:
-                data = response.json()
-                if data.get("success"):
-                    self.log_test("Reject Time Entry", True, "Time entry rejected")
-                else:
-                    self.log_test("Reject Time Entry", False, "Rejection failed", data)
-            else:
-                self.log_test("Reject Time Entry", False, f"Status: {response.status_code if response else 'No response'}")
-
-    def test_hr_pto_management(self):
-        """Test PTO Management APIs"""
-        print("=== Testing HR PTO Management ===")
-        
-        # Use existing employee or create one
-        employee_id = None
-        if self.created_resources["employees"]:
-            employee_id = self.created_resources["employees"][0]
-        else:
-            # Create employee for PTO testing
-            employee_data = {
-                "first_name": "Lisa",
-                "last_name": "Chen",
-                "email": "lisa.chen@company.com",
-                "phone": "+1-555-0125",
-                "department": "Administration",
-                "position": "HR Coordinator",
-                "hire_date": "2024-01-10",
-                "hourly_rate": 30.00,
-                "is_active": True
+            # Create test customer
+            customer_data = {
+                "name": "Communication Test Customer",
+                "email": "test.customer@example.com",
+                "phone": "+1234567890",
+                "address": "123 Test Street, Test City, TC 12345"
             }
             
-            response = self.make_request("POST", "/hr/employees", employee_data)
-            if response and response.status_code == 200:
-                data = response.json()
-                if data.get("success"):
-                    employee_id = data["employee"]["id"]
-                    self.created_resources["employees"].append(employee_id)
-
-        if not employee_id:
-            self.log_test("PTO Management Setup", False, "Could not get employee for PTO testing")
-            return
-
-        # Test 1: Create PTO Request
-        pto_data = {
-            "employee_id": employee_id,
-            "pto_type": "vacation",
-            "start_date": (datetime.utcnow() + timedelta(days=30)).isoformat(),
-            "end_date": (datetime.utcnow() + timedelta(days=32)).isoformat(),
-            "total_days": 3,
-            "reason": "Family vacation",
-            "notes": "Pre-planned vacation to Hawaii"
-        }
-        
-        response = self.make_request("POST", "/hr/pto-requests", pto_data)
-        pto_request_id = None
-        if response and response.status_code == 200:
-            data = response.json()
-            if data.get("success") and "pto_request" in data:
-                pto_request_id = data["pto_request"]["id"]
-                self.created_resources["pto_requests"].append(pto_request_id)
-                self.log_test("Create PTO Request", True, f"PTO Request ID: {pto_request_id}")
+            response = self.session.post(f"{self.base_url}/customers", json=customer_data)
+            if response.status_code == 200:
+                self.test_customer_id = response.json()["id"]
+                print(f"✅ Created test customer: {self.test_customer_id}")
             else:
-                self.log_test("Create PTO Request", False, "Invalid response structure", data)
-        else:
-            self.log_test("Create PTO Request", False, f"Status: {response.status_code if response else 'No response'}")
-
-        # Test 2: Get PTO Requests
-        response = self.make_request("GET", "/hr/pto-requests", params={"employee_id": employee_id})
-        if response and response.status_code == 200:
-            data = response.json()
-            if data.get("success") and "pto_requests" in data:
-                self.log_test("Get PTO Requests", True, f"Found {len(data['pto_requests'])} PTO requests")
-            else:
-                self.log_test("Get PTO Requests", False, "Invalid response structure", data)
-        else:
-            self.log_test("Get PTO Requests", False, f"Status: {response.status_code if response else 'No response'}")
-
-        # Test 3: Approve PTO Request
-        if pto_request_id:
-            response = self.make_request("PUT", f"/hr/pto-requests/{pto_request_id}/approve", {
-                "reviewed_by": "hr_manager",
-                "review_notes": "Approved - adequate coverage arranged"
-            })
-            if response and response.status_code == 200:
-                data = response.json()
-                if data.get("success"):
-                    self.log_test("Approve PTO Request", True, "PTO request approved")
-                else:
-                    self.log_test("Approve PTO Request", False, "Approval failed", data)
-            else:
-                self.log_test("Approve PTO Request", False, f"Status: {response.status_code if response else 'No response'}")
-
-        # Test 4: Create and Deny PTO Request
-        pto_data2 = {
-            "employee_id": employee_id,
-            "pto_type": "personal",
-            "start_date": (datetime.utcnow() + timedelta(days=7)).isoformat(),
-            "end_date": (datetime.utcnow() + timedelta(days=7)).isoformat(),
-            "total_days": 1,
-            "reason": "Personal appointment",
-            "notes": "Doctor appointment"
-        }
-        
-        response = self.make_request("POST", "/hr/pto-requests", pto_data2)
-        pto_request_id2 = None
-        if response and response.status_code == 200:
-            data = response.json()
-            if data.get("success"):
-                pto_request_id2 = data["pto_request"]["id"]
-                self.created_resources["pto_requests"].append(pto_request_id2)
-
-        if pto_request_id2:
-            response = self.make_request("PUT", f"/hr/pto-requests/{pto_request_id2}/deny", {
-                "reviewed_by": "hr_manager",
-                "review_notes": "Denied - insufficient notice"
-            })
-            if response and response.status_code == 200:
-                data = response.json()
-                if data.get("success"):
-                    self.log_test("Deny PTO Request", True, "PTO request denied")
-                else:
-                    self.log_test("Deny PTO Request", False, "Denial failed", data)
-            else:
-                self.log_test("Deny PTO Request", False, f"Status: {response.status_code if response else 'No response'}")
-
-        # Test 5: Get PTO Balance
-        response = self.make_request("GET", f"/hr/pto-balance/{employee_id}")
-        if response and response.status_code == 200:
-            data = response.json()
-            if data.get("success") and "pto_balance" in data:
-                balance = data["pto_balance"]
-                self.log_test("Get PTO Balance", True, f"Vacation: {balance.get('vacation_balance', 0)}, Sick: {balance.get('sick_balance', 0)}")
-            else:
-                self.log_test("Get PTO Balance", False, "Invalid response structure", data)
-        else:
-            self.log_test("Get PTO Balance", False, f"Status: {response.status_code if response else 'No response'}")
-
-    def test_hr_training_certifications(self):
-        """Test Training & Certifications APIs"""
-        print("=== Testing HR Training & Certifications ===")
-        
-        # Test 1: Create Training Program
-        training_data = {
-            "name": "Safety Training 2024",
-            "description": "Annual safety training for all field personnel",
-            "duration_hours": 8,
-            "expiration_months": 12,
-            "is_mandatory": True,
-            "category": "Safety"
-        }
-        
-        response = self.make_request("POST", "/hr/trainings", training_data)
-        training_id = None
-        if response and response.status_code == 200:
-            data = response.json()
-            if data.get("success") and "training" in data:
-                training_id = data["training"]["id"]
-                self.created_resources["trainings"].append(training_id)
-                self.log_test("Create Training Program", True, f"Training ID: {training_id}")
-            else:
-                self.log_test("Create Training Program", False, "Invalid response structure", data)
-        else:
-            self.log_test("Create Training Program", False, f"Status: {response.status_code if response else 'No response'}")
-
-        # Test 2: Get All Trainings
-        response = self.make_request("GET", "/hr/trainings")
-        if response and response.status_code == 200:
-            data = response.json()
-            if data.get("success") and "trainings" in data:
-                self.log_test("Get All Trainings", True, f"Found {len(data['trainings'])} training programs")
-            else:
-                self.log_test("Get All Trainings", False, "Invalid response structure", data)
-        else:
-            self.log_test("Get All Trainings", False, f"Status: {response.status_code if response else 'No response'}")
-
-        # Test 3: Assign Training to Employee
-        employee_id = None
-        if self.created_resources["employees"]:
-            employee_id = self.created_resources["employees"][0]
-        
-        if training_id and employee_id:
-            assignment_data = {
-                "employee_id": employee_id,
-                "training_id": training_id,
-                "assigned_date": datetime.utcnow().isoformat(),
-                "due_date": (datetime.utcnow() + timedelta(days=30)).isoformat()
+                print(f"❌ Failed to create test customer: {response.status_code}")
+                return False
+            
+            # Create test user
+            user_data = {
+                "name": "Test Communication User",
+                "email": "test.user@example.com",
+                "phone": "+1987654321",
+                "role": "admin"
             }
             
-            response = self.make_request("POST", "/hr/employee-trainings", assignment_data)
-            employee_training_id = None
-            if response and response.status_code == 200:
-                data = response.json()
-                if data.get("success") and "employee_training" in data:
-                    employee_training_id = data["employee_training"]["id"]
-                    self.created_resources["employee_trainings"].append(employee_training_id)
-                    self.log_test("Assign Training to Employee", True, f"Assignment ID: {employee_training_id}")
-                else:
-                    self.log_test("Assign Training to Employee", False, "Invalid response structure", data)
+            response = self.session.post(f"{self.base_url}/users", json=user_data)
+            if response.status_code == 200:
+                self.test_user_id = response.json()["id"]
+                print(f"✅ Created test user: {self.test_user_id}")
             else:
-                self.log_test("Assign Training to Employee", False, f"Status: {response.status_code if response else 'No response'}")
-
-        # Test 4: Get Employee Trainings
-        response = self.make_request("GET", "/hr/employee-trainings", params={"employee_id": employee_id} if employee_id else None)
-        if response and response.status_code == 200:
-            data = response.json()
-            if data.get("success") and "employee_trainings" in data:
-                self.log_test("Get Employee Trainings", True, f"Found {len(data['employee_trainings'])} training assignments")
-            else:
-                self.log_test("Get Employee Trainings", False, "Invalid response structure", data)
-        else:
-            self.log_test("Get Employee Trainings", False, f"Status: {response.status_code if response else 'No response'}")
-
-        # Test 5: Update Training Status
-        if self.created_resources["employee_trainings"]:
-            employee_training_id = self.created_resources["employee_trainings"][0]
-            update_data = {
-                "status": "completed",
-                "completion_date": datetime.utcnow().isoformat(),
-                "score": 95,
-                "notes": "Excellent performance on safety assessment"
+                print(f"❌ Failed to create test user: {response.status_code}")
+                return False
+            
+            # Create test project for crew communication
+            project_data = {
+                "name": "Test Communication Project",
+                "customer_id": self.test_customer_id,
+                "project_number": f"PROJ-{uuid.uuid4().hex[:8].upper()}",
+                "status": "active"
             }
             
-            response = self.make_request("PUT", f"/hr/employee-trainings/{employee_training_id}", update_data)
-            if response and response.status_code == 200:
-                data = response.json()
-                if data.get("success"):
-                    self.log_test("Update Training Status", True, "Training status updated to completed")
-                else:
-                    self.log_test("Update Training Status", False, "Update failed", data)
+            response = self.session.post(f"{self.base_url}/projects", json=project_data)
+            if response.status_code == 200:
+                self.test_project_id = response.json()["id"]
+                print(f"✅ Created test project: {self.test_project_id}")
             else:
-                self.log_test("Update Training Status", False, f"Status: {response.status_code if response else 'No response'}")
-
-    def test_hr_performance_management(self):
-        """Test Performance Management APIs"""
-        print("=== Testing HR Performance Management ===")
-        
-        # Need at least 2 employees (employee and reviewer)
-        employee_id = None
-        reviewer_id = None
-        
-        if len(self.created_resources["employees"]) >= 2:
-            employee_id = self.created_resources["employees"][0]
-            reviewer_id = self.created_resources["employees"][1]
-        elif len(self.created_resources["employees"]) == 1:
-            employee_id = self.created_resources["employees"][0]
-            # Create a reviewer
-            reviewer_data = {
-                "first_name": "David",
-                "last_name": "Manager",
-                "email": "david.manager@company.com",
-                "phone": "+1-555-0126",
-                "department": "Management",
-                "position": "Operations Manager",
-                "hire_date": "2023-01-01",
-                "hourly_rate": 45.00,
-                "is_active": True
-            }
-            
-            response = self.make_request("POST", "/hr/employees", reviewer_data)
-            if response and response.status_code == 200:
-                data = response.json()
-                if data.get("success"):
-                    reviewer_id = data["employee"]["id"]
-                    self.created_resources["employees"].append(reviewer_id)
-        else:
-            # Create both employee and reviewer
-            for i, (first_name, position, rate) in enumerate([("John", "Technician", 25.00), ("Jane", "Supervisor", 35.00)]):
-                emp_data = {
-                    "first_name": first_name,
-                    "last_name": "TestEmployee" + str(i),
-                    "email": f"{first_name.lower()}.testemployee{i}@company.com",
-                    "phone": f"+1-555-012{7+i}",
-                    "department": "Operations",
-                    "position": position,
-                    "hire_date": "2024-01-01",
-                    "hourly_rate": rate,
-                    "is_active": True
-                }
+                print(f"❌ Failed to create test project: {response.status_code}")
+                # Continue without project for other tests
                 
-                response = self.make_request("POST", "/hr/employees", emp_data)
-                if response and response.status_code == 200:
+            return True
+            
+        except Exception as e:
+            print(f"❌ Error setting up test data: {str(e)}")
+            return False
+    
+    def test_get_communications(self):
+        """Test GET /api/communications - Fetch messages with filters"""
+        try:
+            # Test basic fetch
+            response = self.session.get(f"{self.base_url}/communications")
+            
+            if response.status_code == 200:
+                data = response.json()
+                self.log_result(
+                    "GET /api/communications - Basic fetch",
+                    True,
+                    f"Retrieved {len(data)} communications",
+                    "high"
+                )
+            else:
+                self.log_result(
+                    "GET /api/communications - Basic fetch",
+                    False,
+                    f"Status: {response.status_code}, Response: {response.text}",
+                    "high"
+                )
+                return
+            
+            # Test with customer_id filter
+            if self.test_customer_id:
+                response = self.session.get(f"{self.base_url}/communications?customer_id={self.test_customer_id}")
+                
+                if response.status_code == 200:
+                    data = response.json()
+                    self.log_result(
+                        "GET /api/communications - Customer filter",
+                        True,
+                        f"Retrieved {len(data)} communications for customer",
+                        "high"
+                    )
+                else:
+                    self.log_result(
+                        "GET /api/communications - Customer filter",
+                        False,
+                        f"Status: {response.status_code}",
+                        "high"
+                    )
+            
+            # Test with type filter
+            response = self.session.get(f"{self.base_url}/communications?type=inapp")
+            
+            if response.status_code == 200:
+                data = response.json()
+                self.log_result(
+                    "GET /api/communications - Type filter",
+                    True,
+                    f"Retrieved {len(data)} inapp communications",
+                    "high"
+                )
+            else:
+                self.log_result(
+                    "GET /api/communications - Type filter",
+                    False,
+                    f"Status: {response.status_code}",
+                    "high"
+                )
+                
+        except Exception as e:
+            self.log_result(
+                "GET /api/communications",
+                False,
+                f"Exception: {str(e)}",
+                "high"
+            )
+    
+    def test_send_inapp_message(self):
+        """Test POST /api/messages/send - Send InApp message"""
+        try:
+            if not self.test_customer_id:
+                self.log_result(
+                    "POST /api/messages/send",
+                    False,
+                    "No test customer available",
+                    "high"
+                )
+                return
+            
+            message_data = {
+                "customer_id": self.test_customer_id,
+                "message": "This is a test in-app message from the Communication Center testing suite.",
+                "type": "inapp",
+                "attachments": []
+            }
+            
+            response = self.session.post(f"{self.base_url}/messages/send", json=message_data)
+            
+            if response.status_code == 200:
+                data = response.json()
+                if data.get("success"):
+                    self.test_communication_id = data.get("communication_id")
+                    self.log_result(
+                        "POST /api/messages/send - InApp message",
+                        True,
+                        f"Message sent successfully, ID: {self.test_communication_id}",
+                        "high"
+                    )
+                else:
+                    self.log_result(
+                        "POST /api/messages/send - InApp message",
+                        False,
+                        f"Success=False in response: {data}",
+                        "high"
+                    )
+            else:
+                self.log_result(
+                    "POST /api/messages/send - InApp message",
+                    False,
+                    f"Status: {response.status_code}, Response: {response.text}",
+                    "high"
+                )
+                
+        except Exception as e:
+            self.log_result(
+                "POST /api/messages/send",
+                False,
+                f"Exception: {str(e)}",
+                "high"
+            )
+    
+    def test_upload_file(self):
+        """Test POST /api/communications/upload - Upload a test file"""
+        try:
+            # Create a temporary test file
+            with tempfile.NamedTemporaryFile(mode='w', suffix='.txt', delete=False) as temp_file:
+                temp_file.write("This is a test file for communication center upload testing.")
+                temp_file_path = temp_file.name
+            
+            try:
+                with open(temp_file_path, 'rb') as file:
+                    files = {'file': ('test_communication.txt', file, 'text/plain')}
+                    data = {'customer_id': self.test_customer_id} if self.test_customer_id else {}
+                    
+                    response = self.session.post(f"{self.base_url}/communications/upload", files=files, data=data)
+                
+                if response.status_code == 200:
                     data = response.json()
                     if data.get("success"):
-                        emp_id = data["employee"]["id"]
-                        self.created_resources["employees"].append(emp_id)
-                        if i == 0:
-                            employee_id = emp_id
-                        else:
-                            reviewer_id = emp_id
-
-        if not employee_id or not reviewer_id:
-            self.log_test("Performance Management Setup", False, "Could not create employees for performance review testing")
-            return
-
-        # Test 1: Create Performance Review
-        review_data = {
-            "employee_id": employee_id,
-            "reviewer_id": reviewer_id,
-            "review_period_start": (datetime.utcnow() - timedelta(days=90)).isoformat(),
-            "review_period_end": datetime.utcnow().isoformat(),
-            "scheduled_date": (datetime.utcnow() + timedelta(days=7)).isoformat(),
-            "review_type": "quarterly"
-        }
-        
-        response = self.make_request("POST", "/hr/performance-reviews", review_data)
-        review_id = None
-        if response and response.status_code == 200:
-            data = response.json()
-            if data.get("success") and "review" in data:
-                review_id = data["review"]["id"]
-                self.created_resources["performance_reviews"].append(review_id)
-                self.log_test("Create Performance Review", True, f"Review ID: {review_id}")
+                        self.log_result(
+                            "POST /api/communications/upload - Single file",
+                            True,
+                            f"File uploaded successfully: {data.get('file', {}).get('filename')}",
+                            "high"
+                        )
+                    else:
+                        self.log_result(
+                            "POST /api/communications/upload - Single file",
+                            False,
+                            f"Success=False in response: {data}",
+                            "high"
+                        )
+                else:
+                    self.log_result(
+                        "POST /api/communications/upload - Single file",
+                        False,
+                        f"Status: {response.status_code}, Response: {response.text}",
+                        "high"
+                    )
+            finally:
+                # Clean up temp file
+                os.unlink(temp_file_path)
+                
+        except Exception as e:
+            self.log_result(
+                "POST /api/communications/upload",
+                False,
+                f"Exception: {str(e)}",
+                "high"
+            )
+    
+    def test_upload_batch_files(self):
+        """Test POST /api/communications/upload-batch - Batch upload multiple files"""
+        try:
+            # Create multiple temporary test files
+            temp_files = []
+            file_paths = []
+            
+            for i in range(3):
+                temp_file = tempfile.NamedTemporaryFile(mode='w', suffix=f'_batch_{i}.txt', delete=False)
+                temp_file.write(f"This is test file {i+1} for batch upload testing.")
+                temp_file.close()
+                temp_files.append(temp_file)
+                file_paths.append(temp_file.name)
+            
+            try:
+                files = []
+                for i, file_path in enumerate(file_paths):
+                    with open(file_path, 'rb') as file:
+                        files.append(('files', (f'test_batch_{i+1}.txt', file.read(), 'text/plain')))
+                
+                data = {'customer_id': self.test_customer_id} if self.test_customer_id else {}
+                
+                response = self.session.post(f"{self.base_url}/communications/upload-batch", files=files, data=data)
+                
+                if response.status_code == 200:
+                    data = response.json()
+                    if data.get("success"):
+                        self.log_result(
+                            "POST /api/communications/upload-batch - Multiple files",
+                            True,
+                            f"Batch upload successful: {data.get('succeeded')}/{data.get('total')} files",
+                            "high"
+                        )
+                    else:
+                        self.log_result(
+                            "POST /api/communications/upload-batch - Multiple files",
+                            False,
+                            f"Success=False: {data.get('failed_count')} failed uploads",
+                            "high"
+                        )
+                else:
+                    self.log_result(
+                        "POST /api/communications/upload-batch - Multiple files",
+                        False,
+                        f"Status: {response.status_code}, Response: {response.text}",
+                        "high"
+                    )
+            finally:
+                # Clean up temp files
+                for file_path in file_paths:
+                    try:
+                        os.unlink(file_path)
+                    except:
+                        pass
+                        
+        except Exception as e:
+            self.log_result(
+                "POST /api/communications/upload-batch",
+                False,
+                f"Exception: {str(e)}",
+                "high"
+            )
+    
+    def test_mark_read(self):
+        """Test POST /api/communications/{id}/mark-read - Mark message as read"""
+        try:
+            if not self.test_communication_id:
+                self.log_result(
+                    "POST /api/communications/{id}/mark-read",
+                    False,
+                    "No test communication ID available",
+                    "medium"
+                )
+                return
+            
+            response = self.session.post(f"{self.base_url}/communications/{self.test_communication_id}/mark-read")
+            
+            if response.status_code == 200:
+                data = response.json()
+                if data.get("success"):
+                    self.log_result(
+                        "POST /api/communications/{id}/mark-read",
+                        True,
+                        "Communication marked as read successfully",
+                        "medium"
+                    )
+                else:
+                    self.log_result(
+                        "POST /api/communications/{id}/mark-read",
+                        False,
+                        f"Success=False in response: {data}",
+                        "medium"
+                    )
             else:
-                self.log_test("Create Performance Review", False, "Invalid response structure", data)
-        else:
-            self.log_test("Create Performance Review", False, f"Status: {response.status_code if response else 'No response'}")
-
-        # Test 2: Get Performance Reviews
-        response = self.make_request("GET", "/hr/performance-reviews", params={"employee_id": employee_id})
-        if response and response.status_code == 200:
-            data = response.json()
-            if data.get("success") and "reviews" in data:
-                self.log_test("Get Performance Reviews", True, f"Found {len(data['reviews'])} performance reviews")
+                self.log_result(
+                    "POST /api/communications/{id}/mark-read",
+                    False,
+                    f"Status: {response.status_code}, Response: {response.text}",
+                    "medium"
+                )
+                
+        except Exception as e:
+            self.log_result(
+                "POST /api/communications/{id}/mark-read",
+                False,
+                f"Exception: {str(e)}",
+                "medium"
+            )
+    
+    def test_mark_delivered(self):
+        """Test POST /api/communications/{id}/mark-delivered - Mark as delivered"""
+        try:
+            if not self.test_communication_id:
+                self.log_result(
+                    "POST /api/communications/{id}/mark-delivered",
+                    False,
+                    "No test communication ID available",
+                    "medium"
+                )
+                return
+            
+            response = self.session.post(f"{self.base_url}/communications/{self.test_communication_id}/mark-delivered")
+            
+            if response.status_code == 200:
+                data = response.json()
+                if data.get("success"):
+                    self.log_result(
+                        "POST /api/communications/{id}/mark-delivered",
+                        True,
+                        "Communication marked as delivered successfully",
+                        "medium"
+                    )
+                else:
+                    self.log_result(
+                        "POST /api/communications/{id}/mark-delivered",
+                        False,
+                        f"Success=False in response: {data}",
+                        "medium"
+                    )
             else:
-                self.log_test("Get Performance Reviews", False, "Invalid response structure", data)
-        else:
-            self.log_test("Get Performance Reviews", False, f"Status: {response.status_code if response else 'No response'}")
-
-        # Test 3: Update Performance Review
-        if review_id:
-            update_data = {
-                "status": "completed",
-                "overall_rating": 4,
-                "goals": ["Improve time management", "Complete safety certification"],
-                "feedback": "Strong performance with room for growth in leadership skills",
-                "completed_date": datetime.utcnow().isoformat()
+                self.log_result(
+                    "POST /api/communications/{id}/mark-delivered",
+                    False,
+                    f"Status: {response.status_code}, Response: {response.text}",
+                    "medium"
+                )
+                
+        except Exception as e:
+            self.log_result(
+                "POST /api/communications/{id}/mark-delivered",
+                False,
+                f"Exception: {str(e)}",
+                "medium"
+            )
+    
+    def test_get_status(self):
+        """Test GET /api/communications/{id}/status - Get message status"""
+        try:
+            if not self.test_communication_id:
+                self.log_result(
+                    "GET /api/communications/{id}/status",
+                    False,
+                    "No test communication ID available",
+                    "medium"
+                )
+                return
+            
+            response = self.session.get(f"{self.base_url}/communications/{self.test_communication_id}/status")
+            
+            if response.status_code == 200:
+                data = response.json()
+                if "communication_id" in data and "status" in data:
+                    self.log_result(
+                        "GET /api/communications/{id}/status",
+                        True,
+                        f"Status retrieved: {data.get('status')}, Read: {data.get('read')}",
+                        "medium"
+                    )
+                else:
+                    self.log_result(
+                        "GET /api/communications/{id}/status",
+                        False,
+                        f"Missing expected fields in response: {data}",
+                        "medium"
+                    )
+            else:
+                self.log_result(
+                    "GET /api/communications/{id}/status",
+                    False,
+                    f"Status: {response.status_code}, Response: {response.text}",
+                    "medium"
+                )
+                
+        except Exception as e:
+            self.log_result(
+                "GET /api/communications/{id}/status",
+                False,
+                f"Exception: {str(e)}",
+                "medium"
+            )
+    
+    def test_search_messages(self):
+        """Test POST /api/communications/search - Search messages with query"""
+        try:
+            search_data = {
+                "query": "test",
+                "customer_id": self.test_customer_id,
+                "type": "inapp"
             }
             
-            response = self.make_request("PUT", f"/hr/performance-reviews/{review_id}", update_data)
-            if response and response.status_code == 200:
+            response = self.session.post(f"{self.base_url}/communications/search", json=search_data)
+            
+            if response.status_code == 200:
                 data = response.json()
                 if data.get("success"):
-                    self.log_test("Update Performance Review", True, "Performance review updated successfully")
+                    self.log_result(
+                        "POST /api/communications/search",
+                        True,
+                        f"Search completed: {data.get('count')} results found",
+                        "medium"
+                    )
                 else:
-                    self.log_test("Update Performance Review", False, "Update failed", data)
+                    self.log_result(
+                        "POST /api/communications/search",
+                        False,
+                        f"Success=False in response: {data}",
+                        "medium"
+                    )
             else:
-                self.log_test("Update Performance Review", False, f"Status: {response.status_code if response else 'No response'}")
-
-    def test_hr_payroll_settings(self):
-        """Test Payroll Settings APIs"""
-        print("=== Testing HR Payroll Settings ===")
-        
-        # Test 1: Get Payroll Settings
-        response = self.make_request("GET", "/hr/payroll-settings")
-        if response and response.status_code == 200:
-            data = response.json()
-            if data.get("success") and "settings" in data:
-                self.log_test("Get Payroll Settings", True, f"Company: {data['settings'].get('company_name', 'N/A')}")
-            else:
-                self.log_test("Get Payroll Settings", False, "Invalid response structure", data)
-        else:
-            self.log_test("Get Payroll Settings", False, f"Status: {response.status_code if response else 'No response'}")
-
-        # Test 2: Update Payroll Settings
-        settings_data = {
-            "company_name": "Snow Removal Services Inc.",
-            "pay_frequency": "bi_weekly",
-            "overtime_threshold_hours": 40.0,
-            "overtime_multiplier": 1.5,
-            "double_time_multiplier": 2.0
-        }
-        
-        response = self.make_request("PUT", "/hr/payroll-settings", settings_data)
-        if response and response.status_code == 200:
-            data = response.json()
-            if data.get("success"):
-                self.log_test("Update Payroll Settings", True, "Payroll settings updated successfully")
-            else:
-                self.log_test("Update Payroll Settings", False, "Update failed", data)
-        else:
-            self.log_test("Update Payroll Settings", False, f"Status: {response.status_code if response else 'No response'}")
-
-    # ==================== INTEGRATION HUB TESTS ====================
-
-    def test_integration_management(self):
-        """Test Integration Management APIs"""
-        print("=== Testing Integration Management ===")
-        
-        # Test 1: Create Integration
-        integration_data = {
-            "integration_type": "quickbooks",
-            "name": "QuickBooks Online",
-            "description": "Accounting and payroll integration",
-            "settings": {
-                "sync_payroll": True,
-                "sync_time_tracking": True,
-                "auto_sync": False
-            }
-        }
-        
-        response = self.make_request("POST", "/integrations", integration_data)
-        integration_id = None
-        if response and response.status_code == 200:
-            data = response.json()
-            if data.get("success") and "integration" in data:
-                integration_id = data["integration"]["id"]
-                self.created_resources["integrations"].append(integration_id)
-                self.log_test("Create Integration", True, f"Integration ID: {integration_id}")
-            else:
-                self.log_test("Create Integration", False, "Invalid response structure", data)
-        else:
-            self.log_test("Create Integration", False, f"Status: {response.status_code if response else 'No response'}")
-
-        # Test 2: Get All Integrations
-        response = self.make_request("GET", "/integrations")
-        if response and response.status_code == 200:
-            data = response.json()
-            if data.get("success") and "integrations" in data:
-                self.log_test("Get All Integrations", True, f"Found {len(data['integrations'])} integrations")
-            else:
-                self.log_test("Get All Integrations", False, "Invalid response structure", data)
-        else:
-            self.log_test("Get All Integrations", False, f"Status: {response.status_code if response else 'No response'}")
-
-        # Test 3: Get Specific Integration
-        if integration_id:
-            response = self.make_request("GET", f"/integrations/{integration_id}")
-            if response and response.status_code == 200:
-                data = response.json()
-                if data.get("success") and "integration" in data:
-                    self.log_test("Get Specific Integration", True, f"Retrieved integration: {data['integration']['name']}")
-                else:
-                    self.log_test("Get Specific Integration", False, "Invalid response structure", data)
-            else:
-                self.log_test("Get Specific Integration", False, f"Status: {response.status_code if response else 'No response'}")
-
-        # Test 4: Update Integration
-        if integration_id:
-            update_data = {
-                "name": "QuickBooks Online Pro",
-                "settings": {
-                    "sync_payroll": True,
-                    "sync_time_tracking": True,
-                    "auto_sync": True
-                }
+                self.log_result(
+                    "POST /api/communications/search",
+                    False,
+                    f"Status: {response.status_code}, Response: {response.text}",
+                    "medium"
+                )
+                
+        except Exception as e:
+            self.log_result(
+                "POST /api/communications/search",
+                False,
+                f"Exception: {str(e)}",
+                "medium"
+            )
+    
+    def test_create_template(self):
+        """Test POST /api/communications/templates - Create message template"""
+        try:
+            template_data = {
+                "name": "Test Communication Template",
+                "content": "Hello {customer_name}, this is a test template message.",
+                "type": "inapp",
+                "category": "general"
             }
             
-            response = self.make_request("PUT", f"/integrations/{integration_id}", update_data)
-            if response and response.status_code == 200:
+            response = self.session.post(f"{self.base_url}/communications/templates", json=template_data)
+            
+            if response.status_code == 200:
                 data = response.json()
                 if data.get("success"):
-                    self.log_test("Update Integration", True, "Integration updated successfully")
+                    self.test_template_id = data.get("template", {}).get("_id")
+                    self.log_result(
+                        "POST /api/communications/templates",
+                        True,
+                        f"Template created successfully: {template_data['name']}",
+                        "medium"
+                    )
                 else:
-                    self.log_test("Update Integration", False, "Update failed", data)
+                    self.log_result(
+                        "POST /api/communications/templates",
+                        False,
+                        f"Success=False in response: {data}",
+                        "medium"
+                    )
             else:
-                self.log_test("Update Integration", False, f"Status: {response.status_code if response else 'No response'}")
-
-        # Test 5: Connect Integration (Mock)
-        if integration_id:
-            response = self.make_request("POST", f"/integrations/{integration_id}/connect")
-            if response and response.status_code == 200:
+                self.log_result(
+                    "POST /api/communications/templates",
+                    False,
+                    f"Status: {response.status_code}, Response: {response.text}",
+                    "medium"
+                )
+                
+        except Exception as e:
+            self.log_result(
+                "POST /api/communications/templates",
+                False,
+                f"Exception: {str(e)}",
+                "medium"
+            )
+    
+    def test_get_templates(self):
+        """Test GET /api/communications/templates - Get templates"""
+        try:
+            response = self.session.get(f"{self.base_url}/communications/templates")
+            
+            if response.status_code == 200:
+                data = response.json()
+                if isinstance(data, list):
+                    self.log_result(
+                        "GET /api/communications/templates",
+                        True,
+                        f"Retrieved {len(data)} templates",
+                        "medium"
+                    )
+                else:
+                    self.log_result(
+                        "GET /api/communications/templates",
+                        False,
+                        f"Expected list, got: {type(data)}",
+                        "medium"
+                    )
+            else:
+                self.log_result(
+                    "GET /api/communications/templates",
+                    False,
+                    f"Status: {response.status_code}, Response: {response.text}",
+                    "medium"
+                )
+                
+        except Exception as e:
+            self.log_result(
+                "GET /api/communications/templates",
+                False,
+                f"Exception: {str(e)}",
+                "medium"
+            )
+    
+    def test_analytics_overview(self):
+        """Test GET /api/communications/analytics/overview - Get analytics overview"""
+        try:
+            response = self.session.get(f"{self.base_url}/communications/analytics/overview")
+            
+            if response.status_code == 200:
+                data = response.json()
+                if data.get("success") and "total_messages" in data:
+                    self.log_result(
+                        "GET /api/communications/analytics/overview",
+                        True,
+                        f"Analytics retrieved: {data.get('total_messages')} total messages",
+                        "low"
+                    )
+                else:
+                    self.log_result(
+                        "GET /api/communications/analytics/overview",
+                        False,
+                        f"Missing expected fields in response: {data}",
+                        "low"
+                    )
+            else:
+                self.log_result(
+                    "GET /api/communications/analytics/overview",
+                    False,
+                    f"Status: {response.status_code}, Response: {response.text}",
+                    "low"
+                )
+                
+        except Exception as e:
+            self.log_result(
+                "GET /api/communications/analytics/overview",
+                False,
+                f"Exception: {str(e)}",
+                "low"
+            )
+    
+    def test_customer_analytics(self):
+        """Test GET /api/communications/analytics/customer/{customer_id} - Get customer stats"""
+        try:
+            if not self.test_customer_id:
+                self.log_result(
+                    "GET /api/communications/analytics/customer/{customer_id}",
+                    False,
+                    "No test customer ID available",
+                    "low"
+                )
+                return
+            
+            response = self.session.get(f"{self.base_url}/communications/analytics/customer/{self.test_customer_id}")
+            
+            if response.status_code == 200:
+                data = response.json()
+                if data.get("success") and "customer_id" in data:
+                    self.log_result(
+                        "GET /api/communications/analytics/customer/{customer_id}",
+                        True,
+                        f"Customer analytics retrieved: {data.get('total_messages')} messages",
+                        "low"
+                    )
+                else:
+                    self.log_result(
+                        "GET /api/communications/analytics/customer/{customer_id}",
+                        False,
+                        f"Missing expected fields in response: {data}",
+                        "low"
+                    )
+            else:
+                self.log_result(
+                    "GET /api/communications/analytics/customer/{customer_id}",
+                    False,
+                    f"Status: {response.status_code}, Response: {response.text}",
+                    "low"
+                )
+                
+        except Exception as e:
+            self.log_result(
+                "GET /api/communications/analytics/customer/{customer_id}",
+                False,
+                f"Exception: {str(e)}",
+                "low"
+            )
+    
+    def test_crew_send_message(self):
+        """Test POST /api/communications/crew/send - Send crew message with project_id"""
+        try:
+            if not self.test_project_id:
+                self.log_result(
+                    "POST /api/communications/crew/send",
+                    False,
+                    "No test project ID available",
+                    "low"
+                )
+                return
+            
+            crew_message_data = {
+                "project_id": self.test_project_id,
+                "message": "This is a test crew message from the field.",
+                "crew_id": self.test_user_id or "test_crew_001",
+                "location": {"lat": 43.6532, "lng": -79.3832}
+            }
+            
+            response = self.session.post(f"{self.base_url}/communications/crew/send", json=crew_message_data)
+            
+            if response.status_code == 200:
                 data = response.json()
                 if data.get("success"):
-                    self.log_test("Connect Integration (Mock)", True, f"Connected: {data.get('message', 'Success')}")
+                    self.log_result(
+                        "POST /api/communications/crew/send",
+                        True,
+                        f"Crew message sent successfully for project {self.test_project_id}",
+                        "low"
+                    )
                 else:
-                    self.log_test("Connect Integration (Mock)", False, "Connection failed", data)
+                    self.log_result(
+                        "POST /api/communications/crew/send",
+                        False,
+                        f"Success=False in response: {data}",
+                        "low"
+                    )
             else:
-                self.log_test("Connect Integration (Mock)", False, f"Status: {response.status_code if response else 'No response'}")
-
-        # Test 6: Trigger Sync (Mock)
-        if integration_id:
-            response = self.make_request("POST", f"/integrations/{integration_id}/sync", {"sync_type": "incremental"})
-            if response and response.status_code == 200:
+                self.log_result(
+                    "POST /api/communications/crew/send",
+                    False,
+                    f"Status: {response.status_code}, Response: {response.text}",
+                    "low"
+                )
+                
+        except Exception as e:
+            self.log_result(
+                "POST /api/communications/crew/send",
+                False,
+                f"Exception: {str(e)}",
+                "low"
+            )
+    
+    def test_get_project_messages(self):
+        """Test GET /api/communications/crew/project/{project_id} - Get project messages"""
+        try:
+            if not self.test_project_id:
+                self.log_result(
+                    "GET /api/communications/crew/project/{project_id}",
+                    False,
+                    "No test project ID available",
+                    "low"
+                )
+                return
+            
+            response = self.session.get(f"{self.base_url}/communications/crew/project/{self.test_project_id}")
+            
+            if response.status_code == 200:
                 data = response.json()
-                if data.get("success"):
-                    self.log_test("Trigger Sync (Mock)", True, f"Sync completed: {data.get('message', 'Success')}")
+                if isinstance(data, list):
+                    self.log_result(
+                        "GET /api/communications/crew/project/{project_id}",
+                        True,
+                        f"Retrieved {len(data)} project messages",
+                        "low"
+                    )
                 else:
-                    self.log_test("Trigger Sync (Mock)", False, "Sync failed", data)
+                    self.log_result(
+                        "GET /api/communications/crew/project/{project_id}",
+                        False,
+                        f"Expected list, got: {type(data)}",
+                        "low"
+                    )
             else:
-                self.log_test("Trigger Sync (Mock)", False, f"Status: {response.status_code if response else 'No response'}")
-
-        # Test 7: Disconnect Integration
-        if integration_id:
-            response = self.make_request("POST", f"/integrations/{integration_id}/disconnect")
-            if response and response.status_code == 200:
+                self.log_result(
+                    "GET /api/communications/crew/project/{project_id}",
+                    False,
+                    f"Status: {response.status_code}, Response: {response.text}",
+                    "low"
+                )
+                
+        except Exception as e:
+            self.log_result(
+                "GET /api/communications/crew/project/{project_id}",
+                False,
+                f"Exception: {str(e)}",
+                "low"
+            )
+    
+    def test_get_online_users(self):
+        """Test GET /api/communications/online-users - Get online users list"""
+        try:
+            response = self.session.get(f"{self.base_url}/communications/online-users")
+            
+            if response.status_code == 200:
                 data = response.json()
-                if data.get("success"):
-                    self.log_test("Disconnect Integration", True, "Integration disconnected successfully")
+                if data.get("success") and "count" in data and "users" in data:
+                    self.log_result(
+                        "GET /api/communications/online-users",
+                        True,
+                        f"Online users retrieved: {data.get('count')} users online",
+                        "low"
+                    )
                 else:
-                    self.log_test("Disconnect Integration", False, "Disconnection failed", data)
+                    self.log_result(
+                        "GET /api/communications/online-users",
+                        False,
+                        f"Missing expected fields in response: {data}",
+                        "low"
+                    )
             else:
-                self.log_test("Disconnect Integration", False, f"Status: {response.status_code if response else 'No response'}")
-
-        # Test 8: Delete Integration
-        if integration_id:
-            response = self.make_request("DELETE", f"/integrations/{integration_id}")
-            if response and response.status_code == 200:
+                self.log_result(
+                    "GET /api/communications/online-users",
+                    False,
+                    f"Status: {response.status_code}, Response: {response.text}",
+                    "low"
+                )
+                
+        except Exception as e:
+            self.log_result(
+                "GET /api/communications/online-users",
+                False,
+                f"Exception: {str(e)}",
+                "low"
+            )
+    
+    def test_check_user_status(self):
+        """Test GET /api/communications/user/{user_id}/status - Check user online status"""
+        try:
+            test_user_id = self.test_user_id or "test_user_001"
+            
+            response = self.session.get(f"{self.base_url}/communications/user/{test_user_id}/status")
+            
+            if response.status_code == 200:
                 data = response.json()
-                if data.get("success"):
-                    self.log_test("Delete Integration", True, "Integration deleted successfully")
-                    self.created_resources["integrations"].remove(integration_id)
+                if "user_id" in data and "online" in data and "status" in data:
+                    self.log_result(
+                        "GET /api/communications/user/{user_id}/status",
+                        True,
+                        f"User status retrieved: {data.get('status')} for user {test_user_id}",
+                        "low"
+                    )
                 else:
-                    self.log_test("Delete Integration", False, "Deletion failed", data)
+                    self.log_result(
+                        "GET /api/communications/user/{user_id}/status",
+                        False,
+                        f"Missing expected fields in response: {data}",
+                        "low"
+                    )
             else:
-                self.log_test("Delete Integration", False, f"Status: {response.status_code if response else 'No response'}")
-
-    def test_quickbooks_integration(self):
-        """Test QuickBooks Integration APIs"""
-        print("=== Testing QuickBooks Integration ===")
-        
-        # Test 1: Sync QuickBooks Payroll (Mock)
-        response = self.make_request("POST", "/integrations/quickbooks/payroll/sync")
-        if response and response.status_code == 200:
-            data = response.json()
-            if data.get("success"):
-                self.log_test("Sync QuickBooks Payroll (Mock)", True, f"Payroll sync: {data.get('message', 'Success')}")
-            else:
-                self.log_test("Sync QuickBooks Payroll (Mock)", False, "Payroll sync failed", data)
-        else:
-            self.log_test("Sync QuickBooks Payroll (Mock)", False, f"Status: {response.status_code if response else 'No response'}")
-
-        # Test 2: Sync QuickBooks Time Tracking (Mock)
-        response = self.make_request("POST", "/integrations/quickbooks/time-tracking/sync")
-        if response and response.status_code == 200:
-            data = response.json()
-            if data.get("success"):
-                self.log_test("Sync QuickBooks Time Tracking (Mock)", True, f"Time tracking sync: {data.get('message', 'Success')}")
-            else:
-                self.log_test("Sync QuickBooks Time Tracking (Mock)", False, "Time tracking sync failed", data)
-        else:
-            self.log_test("Sync QuickBooks Time Tracking (Mock)", False, f"Status: {response.status_code if response else 'No response'}")
-
-    def test_microsoft365_integration(self):
-        """Test Microsoft 365 Integration APIs"""
-        print("=== Testing Microsoft 365 Integration ===")
-        
-        # Test 1: Setup Microsoft 365 SSO (Mock)
-        response = self.make_request("POST", "/integrations/microsoft365/sso/setup")
-        if response and response.status_code == 200:
-            data = response.json()
-            if data.get("success"):
-                self.log_test("Setup Microsoft 365 SSO (Mock)", True, f"SSO setup: {data.get('message', 'Success')}")
-            else:
-                self.log_test("Setup Microsoft 365 SSO (Mock)", False, "SSO setup failed", data)
-        else:
-            self.log_test("Setup Microsoft 365 SSO (Mock)", False, f"Status: {response.status_code if response else 'No response'}")
-
-        # Test 2: Sync Microsoft Teams (Mock)
-        response = self.make_request("POST", "/integrations/microsoft365/teams/sync")
-        if response and response.status_code == 200:
-            data = response.json()
-            if data.get("success"):
-                self.log_test("Sync Microsoft Teams (Mock)", True, f"Teams sync: {data.get('message', 'Success')}")
-            else:
-                self.log_test("Sync Microsoft Teams (Mock)", False, "Teams sync failed", data)
-        else:
-            self.log_test("Sync Microsoft Teams (Mock)", False, f"Status: {response.status_code if response else 'No response'}")
-
-        # Test 3: Sync Outlook Calendar (Mock)
-        response = self.make_request("POST", "/integrations/microsoft365/outlook/sync")
-        if response and response.status_code == 200:
-            data = response.json()
-            if data.get("success"):
-                self.log_test("Sync Outlook Calendar (Mock)", True, f"Outlook sync: {data.get('message', 'Success')}")
-            else:
-                self.log_test("Sync Outlook Calendar (Mock)", False, "Outlook sync failed", data)
-        else:
-            self.log_test("Sync Outlook Calendar (Mock)", False, f"Status: {response.status_code if response else 'No response'}")
-
-        # Test 4: Sync OneDrive (Mock)
-        response = self.make_request("POST", "/integrations/microsoft365/onedrive/sync")
-        if response and response.status_code == 200:
-            data = response.json()
-            if data.get("success"):
-                self.log_test("Sync OneDrive (Mock)", True, f"OneDrive sync: {data.get('message', 'Success')}")
-            else:
-                self.log_test("Sync OneDrive (Mock)", False, "OneDrive sync failed", data)
-        else:
-            self.log_test("Sync OneDrive (Mock)", False, f"Status: {response.status_code if response else 'No response'}")
-
-        # Test 5: Sync Power BI (Mock)
-        response = self.make_request("POST", "/integrations/microsoft365/powerbi/sync")
-        if response and response.status_code == 200:
-            data = response.json()
-            if data.get("success"):
-                self.log_test("Sync Power BI (Mock)", True, f"Power BI sync: {data.get('message', 'Success')}")
-            else:
-                self.log_test("Sync Power BI (Mock)", False, "Power BI sync failed", data)
-        else:
-            self.log_test("Sync Power BI (Mock)", False, f"Status: {response.status_code if response else 'No response'}")
-
-    def test_sync_logs(self):
-        """Test Sync Logs APIs"""
-        print("=== Testing Sync Logs ===")
-        
-        # Test 1: Get Sync Logs
-        response = self.make_request("GET", "/integrations/sync-logs")
-        if response and response.status_code == 200:
-            data = response.json()
-            if data.get("success") and "logs" in data:
-                self.log_test("Get Sync Logs", True, f"Found {len(data['logs'])} sync logs")
-            else:
-                self.log_test("Get Sync Logs", False, "Invalid response structure", data)
-        else:
-            self.log_test("Get Sync Logs", False, f"Status: {response.status_code if response else 'No response'}")
-
+                self.log_result(
+                    "GET /api/communications/user/{user_id}/status",
+                    False,
+                    f"Status: {response.status_code}, Response: {response.text}",
+                    "low"
+                )
+                
+        except Exception as e:
+            self.log_result(
+                "GET /api/communications/user/{user_id}/status",
+                False,
+                f"Exception: {str(e)}",
+                "low"
+            )
+    
     def run_all_tests(self):
-        """Run all backend tests"""
-        print("🚀 Starting HR Module and Integration Hub Backend API Tests")
-        print(f"Backend URL: {BACKEND_URL}")
+        """Run all Communication Center tests in priority order"""
+        print("=" * 80)
+        print("COMMUNICATION CENTER BACKEND API TESTING")
+        print("=" * 80)
+        print(f"Backend URL: {self.base_url}")
+        print(f"Test started at: {datetime.now().isoformat()}")
+        print()
+        
+        # Setup test data
+        print("Setting up test data...")
+        if not self.setup_test_data():
+            print("❌ Failed to setup test data. Some tests may fail.")
+        print()
+        
+        # Priority 1 - Core Messaging
+        print("🔥 PRIORITY 1 - CORE MESSAGING")
+        print("-" * 40)
+        self.test_get_communications()
+        self.test_send_inapp_message()
+        self.test_upload_file()
+        self.test_upload_batch_files()
+        print()
+        
+        # Priority 2 - Read Receipts & Status
+        print("📋 PRIORITY 2 - READ RECEIPTS & STATUS")
+        print("-" * 40)
+        self.test_mark_read()
+        self.test_mark_delivered()
+        self.test_get_status()
+        print()
+        
+        # Priority 3 - Search & Templates
+        print("🔍 PRIORITY 3 - SEARCH & TEMPLATES")
+        print("-" * 40)
+        self.test_search_messages()
+        self.test_create_template()
+        self.test_get_templates()
+        print()
+        
+        # Priority 4 - Analytics
+        print("📊 PRIORITY 4 - ANALYTICS")
+        print("-" * 40)
+        self.test_analytics_overview()
+        self.test_customer_analytics()
+        print()
+        
+        # Priority 5 - Crew Communication
+        print("👷 PRIORITY 5 - CREW COMMUNICATION")
+        print("-" * 40)
+        self.test_crew_send_message()
+        self.test_get_project_messages()
+        print()
+        
+        # Priority 6 - WebSocket & Online Status
+        print("🌐 PRIORITY 6 - WEBSOCKET & ONLINE STATUS")
+        print("-" * 40)
+        self.test_get_online_users()
+        self.test_check_user_status()
+        print()
+        
+        # Summary
+        self.print_summary()
+    
+    def print_summary(self):
+        """Print test summary"""
+        print("=" * 80)
+        print("TEST SUMMARY")
         print("=" * 80)
         
-        # HR Module Tests
-        self.test_hr_employee_management()
-        self.test_hr_time_attendance()
-        self.test_hr_pto_management()
-        self.test_hr_training_certifications()
-        self.test_hr_performance_management()
-        self.test_hr_payroll_settings()
+        total_tests = len(self.test_results)
+        passed_tests = len([r for r in self.test_results if r["success"]])
+        failed_tests = total_tests - passed_tests
         
-        # Integration Hub Tests
-        self.test_integration_management()
-        self.test_quickbooks_integration()
-        self.test_microsoft365_integration()
-        self.test_sync_logs()
+        print(f"Total Tests: {total_tests}")
+        print(f"Passed: {passed_tests}")
+        print(f"Failed: {failed_tests}")
+        print(f"Success Rate: {(passed_tests/total_tests*100):.1f}%")
+        print()
         
-        # Print final results
+        # Group by priority
+        high_priority = [r for r in self.test_results if r["priority"] == "high"]
+        medium_priority = [r for r in self.test_results if r["priority"] == "medium"]
+        low_priority = [r for r in self.test_results if r["priority"] == "low"]
+        
+        print("HIGH PRIORITY TESTS:")
+        for result in high_priority:
+            print(f"  {result['status']} {result['test']}")
+        print()
+        
+        print("MEDIUM PRIORITY TESTS:")
+        for result in medium_priority:
+            print(f"  {result['status']} {result['test']}")
+        print()
+        
+        print("LOW PRIORITY TESTS:")
+        for result in low_priority:
+            print(f"  {result['status']} {result['test']}")
+        print()
+        
+        # Failed tests details
+        failed_results = [r for r in self.test_results if not r["success"]]
+        if failed_results:
+            print("FAILED TESTS DETAILS:")
+            for result in failed_results:
+                print(f"❌ {result['test']}")
+                print(f"   Details: {result['details']}")
+                print()
+        
+        print(f"Test completed at: {datetime.now().isoformat()}")
         print("=" * 80)
-        print("🏁 TEST RESULTS SUMMARY")
-        print("=" * 80)
-        print(f"Total Tests: {self.test_results['total_tests']}")
-        print(f"✅ Passed: {self.test_results['passed_tests']}")
-        print(f"❌ Failed: {self.test_results['failed_tests']}")
-        
-        success_rate = (self.test_results['passed_tests'] / self.test_results['total_tests']) * 100 if self.test_results['total_tests'] > 0 else 0
-        print(f"📊 Success Rate: {success_rate:.1f}%")
-        
-        if self.test_results['failed_tests'] > 0:
-            print("\n⚠️  Some tests failed. Check the detailed output above for specific issues.")
-        else:
-            print("\n🎉 All tests passed successfully!")
-        
-        return self.test_results
+
 
 if __name__ == "__main__":
-    tester = BackendTester()
-    results = tester.run_all_tests()
-    
-    # Exit with appropriate code
-    sys.exit(0 if results['failed_tests'] == 0 else 1)
+    tester = CommunicationCenterTester()
+    tester.run_all_tests()
