@@ -38,22 +38,6 @@ export default function HybridNavigationTopBar({ children }: { children: React.R
   const router = useRouter();
   const [expandedMenu, setExpandedMenu] = useState<string | null>(null);
 
-  // Auto-expand tabs for pages with displayAsTabs when on those pages
-  useEffect(() => {
-    menuItems.forEach(item => {
-      if (item.displayAsTabs && item.submenu) {
-        const isOnThisSection = item.submenu.some(sub => {
-          // Check if current path matches the submenu href (ignoring query params)
-          const subPath = sub.href.split('?')[0];
-          return pathname === subPath || pathname.startsWith(subPath + '/');
-        });
-        if (isOnThisSection) {
-          setExpandedMenu(item.label);
-        }
-      }
-    });
-  }, [pathname]);
-
   const menuItems: MenuItem[] = [
     { label: 'Dashboard', icon: LayoutDashboard, href: '/' },
     {
