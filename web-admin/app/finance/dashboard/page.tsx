@@ -122,17 +122,17 @@ export default function FinanceDashboardPage() {
   ];
 
   return (
-    <HybridNavigationTopBar>
-      <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
-        <CompactHeader
-          title="Finance Dashboard"
-          subtitle="Financial overview and performance metrics"
-          icon={DollarSign}
-          badges={[
-            { label: `$${(stats.profit.thisMonth / 1000).toFixed(1)}k Profit This Month`, color: 'green' },
-            { label: `${stats.invoices.pending} Pending Invoices`, color: 'blue' },
-          ]}
-        />
+    <div className="min-h-screen bg-gray-50">
+      <PageHeader
+        title="Finance Dashboard"
+        subtitle="Financial overview, revenue tracking, and expense management"
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "Finance Dashboard" },
+        ]}
+      />
+      
+      <div className="p-6 space-y-6">
 
         {/* Key Metrics */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mx-6 mt-6">
