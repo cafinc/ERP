@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import CompactHeader from '@/components/CompactHeader';
 import TemplateSelector from '@/components/TemplateSelector';
+import HybridNavigationTopBar from '@/components/HybridNavigationTopBar';
 import api from '@/lib/api';
 import {
   Plus,
