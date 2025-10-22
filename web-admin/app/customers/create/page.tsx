@@ -539,10 +539,15 @@ export default function CustomerFormPage() {
                           onChange={e =>
                             setCustomerForm({ ...customerForm, first_name: e.target.value })
                           }
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:border-transparent ${
+                            fieldErrors['first_name'] ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'
+                          }`}
                           placeholder="John"
                           required
                         />
+                        {fieldErrors['first_name'] && (
+                          <p className="text-red-500 text-xs mt-1">{fieldErrors['first_name']}</p>
+                        )}
                       </div>
 
                       <div>
@@ -555,10 +560,15 @@ export default function CustomerFormPage() {
                           onChange={e =>
                             setCustomerForm({ ...customerForm, last_name: e.target.value })
                           }
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:border-transparent ${
+                            fieldErrors['last_name'] ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'
+                          }`}
                           placeholder="Smith"
                           required
                         />
+                        {fieldErrors['last_name'] && (
+                          <p className="text-red-500 text-xs mt-1">{fieldErrors['last_name']}</p>
+                        )}
                       </div>
 
                       <div>
