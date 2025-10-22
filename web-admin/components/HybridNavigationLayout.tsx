@@ -126,7 +126,7 @@ export default function HybridNavigationLayout({ children }: { children: React.R
 
         {/* Top Navigation Bar for Submenus */}
         {expandedMenu && (
-          <div className="absolute top-20 left-16 right-0 bg-white border-b border-gray-200 shadow-md z-40">
+          <div className="absolute top-0 left-16 right-0 bg-white border-b border-gray-200 shadow-md z-40">
             <div className="px-6 py-3">
               <div className="flex items-center gap-4">
                 {menuItems
