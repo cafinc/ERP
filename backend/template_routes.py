@@ -289,7 +289,20 @@ async def apply_template(
         result = await template_service.apply_template(
             template_type=template_type,
             template_id=template_id,
-
+            data=request.data
+        )
+        
+        return {
+            "success": True,
+            "message": "Template applied successfully",
+            "result": result
+        }
+    
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        logger.error(f"Error applying template: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 # ========== Placeholder Library ==========
