@@ -68,7 +68,7 @@ class LogCallRequest(BaseModel):
 # ========== In-App Messaging ==========
 
 @router.post("/messages/send")
-async def send_inapp_message(request: SendInAppMessageRequest):
+async def send_inapp_message(request: SendInAppMessageRequest, current_user: dict = Depends(get_current_user)):
     """Send an in-app message to a customer"""
     try:
         # Create communication record
