@@ -622,10 +622,15 @@ export default function CustomerFormPage() {
                             type="tel"
                             value={customerForm.mobile}
                             onChange={e => handlePhoneChange('mobile', e.target.value)}
-                            className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
-                            placeholder="555-987-6543"
+                            className={`w-full pl-10 pr-4 py-1.5 border rounded-lg focus:ring-2 focus:border-transparent text-sm ${
+                              fieldErrors['mobile'] ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'
+                            }`}
+                            placeholder="(555) 987-6543"
                           />
                         </div>
+                        {fieldErrors['mobile'] && (
+                          <p className="text-red-500 text-xs mt-1">{fieldErrors['mobile']}</p>
+                        )}
                       </div>
 
                       <div className="md:col-span-2">
