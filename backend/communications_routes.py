@@ -819,7 +819,36 @@ async def websocket_endpoint(websocket: WebSocket, user_id: str):
                 )
             
             elif message_type == "mark_read":
-
+                # Mark message as read
+                communication_id = message_data.get("communication_id")
+                if communication_id:
+                    await db.communications.update_one(
+                        {"_id": ObjectId(communication_id)},
+                        {
+                            "$set": {
+                                "read": True,
+                                "read_at": datetime.utcnow(),
+                                "read_by": user_id
+                            }
+                        }
+                    )
+                    # Notify sender
+                    await connection_manager.notify_message_read(communication_id, user_id)
+            
+            else:
+                # Echo message back (for testing)
+                await websocket.send_json({
+                    "type": "echo",
+                    "data": message_data,
+                    "timestamp": datetime.utcnow().isoformat()
+                })
+    
+    except WebSocketDisconnect:
+        connection_manager.disconnect(websocket, user_id)
+        logger.info(f"User {user_id} disconnected")
+    except Exception as e:
+        logger.error(f"WebSocket error for user {user_id}: {e}")
+        connection_manager.disconnect(websocket, user_id)
 
 
 # ========== Analytics & Metrics ==========
