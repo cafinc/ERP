@@ -280,6 +280,23 @@ export default function CustomerFormPage() {
       }
     }
 
+    // Email validation
+    if (!isValidEmail(customerForm.email)) {
+      alert('Please enter a valid email address with proper format (example@domain.com)');
+      return;
+    }
+
+    // Phone validation and auto-format
+    if (customerForm.phone) {
+      customerForm.phone = formatPhoneNumber(customerForm.phone);
+    }
+    if (customerForm.mobile) {
+      customerForm.mobile = formatPhoneNumber(customerForm.mobile);
+    }
+    if (customerForm.main_contact?.phone) {
+      customerForm.main_contact.phone = formatPhoneNumber(customerForm.main_contact.phone);
+    }
+
     if (!customerForm.email || !customerForm.phone || !customerForm.street_address) {
       alert('Please fill in all required fields');
       return;
