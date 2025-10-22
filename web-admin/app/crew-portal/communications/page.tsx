@@ -1,7 +1,21 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { ChatBubbleLeftRightIcon, BriefcaseIcon, MapPinIcon } from '@heroicons/react/24/outline';
+import React, { useState, useEffect, useRef } from 'react';
+import { 
+  PaperAirplaneIcon, 
+  PaperClipIcon, 
+  PhotoIcon,
+  DocumentIcon,
+  CheckIcon,
+  CheckCircleIcon,
+  XMarkIcon,
+  ChatBubbleLeftRightIcon,
+  BriefcaseIcon,
+  MapPinIcon,
+  MagnifyingGlassIcon,
+  DocumentTextIcon,
+  ArrowDownTrayIcon
+} from '@heroicons/react/24/outline';
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || '';
 
@@ -12,19 +26,59 @@ interface Project {
   status: string;
 }
 
+interface Message {
+  _id: string;
+  type: 'inapp';
+  direction: 'inbound' | 'outbound';
+  content: string;
+  message: string;
+  timestamp: string;
+  crew_id?: string;
+  location?: { lat: number; lng: number };
+  attachments?: Array<{
+    file_id: string;
+    filename: string;
+    url: string;
+    thumbnail_url?: string;
+    file_type: string;
+    file_size: number;
+  }>;
+}
+
+interface MessageTemplate {
+  _id: string;
+  name: string;
+  content: string;
+}
+
 export default function CrewCommunicationsPage() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
-  const [messages, setMessages] = useState<any[]>([]);
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [filteredMessages, setFilteredMessages] = useState<Message[]>([]);
   const [messageText, setMessageText] = useState('');
   const [currentLocation, setCurrentLocation] = useState<{ lat: number; lng: number } | null>(null);
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+  const [sending, setSending] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [showTemplates, setShowTemplates] = useState(false);
+  const [templates, setTemplates] = useState<MessageTemplate[]>([]);
+  const [uploadProgress, setUploadProgress] = useState<number>(0);
 
-  // Get crew ID from auth (mock for now)
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Get crew ID from auth (mock for now - replace with actual auth)
   const crewId = 'crew-user-123';
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   // Fetch assigned projects
   useEffect(() => {
     fetchProjects();
+    fetchTemplates();
     
     // Get current location
     if (navigator.geolocation) {
@@ -37,11 +91,30 @@ export default function CrewCommunicationsPage() {
     }
   }, []);
 
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
+  // Search messages
+  useEffect(() => {
+    if (searchQuery.trim()) {
+      const filtered = messages.filter(msg => 
+        msg.content?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        msg.message?.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setFilteredMessages(filtered);
+    } else {
+      setFilteredMessages(messages);
+    }
+  }, [searchQuery, messages]);
+
   const fetchProjects = async () => {
     try {
       const response = await fetch(`${BACKEND_URL}/api/projects?crew_id=${crewId}`);
-      const data = await response.json();
-      setProjects(data);
+      if (response.ok) {
+        const data = await response.json();
+        setProjects(data);
+      }
     } catch (error) {
       console.error('Error fetching projects:', error);
     }
@@ -50,24 +123,87 @@ export default function CrewCommunicationsPage() {
   const fetchMessages = async (projectId: string) => {
     try {
       const response = await fetch(
-        `${BACKEND_URL}/api/communications?project_id=${projectId}&type=inapp`
+        `${BACKEND_URL}/api/communications/crew/project/${projectId}`
       );
-      const data = await response.json();
-      setMessages(data);
+      if (response.ok) {
+        const data = await response.json();
+        const sorted = data.sort((a: Message, b: Message) => 
+          new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
+        );
+        setMessages(sorted);
+        setFilteredMessages(sorted);
+      }
     } catch (error) {
       console.error('Error fetching messages:', error);
     }
   };
 
+  const fetchTemplates = async () => {
+    try {
+      const response = await fetch(`${BACKEND_URL}/api/communications/templates?type=inapp`);
+      if (response.ok) {
+        const data = await response.json();
+        setTemplates(data);
+      }
+    } catch (error) {
+      console.error('Error fetching templates:', error);
+    }
+  };
+
+  const uploadFile = async (file: File) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('crew_id', crewId);
+
+    const response = await fetch(`${BACKEND_URL}/api/communications/upload`, {
+      method: 'POST',
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to upload file');
+    }
+
+    const data = await response.json();
+    return data.file.file_id;
+  };
+
+  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const newFiles = Array.from(e.target.files);
+      setSelectedFiles([...selectedFiles, ...newFiles]);
+    }
+  };
+
+  const removeFile = (index: number) => {
+    setSelectedFiles(selectedFiles.filter((_, i) => i !== index));
+  };
+
+  const useTemplate = (template: MessageTemplate) => {
+    setMessageText(template.content);
+    setShowTemplates(false);
+  };
+
   const sendMessage = async () => {
-    if (!messageText.trim() || !selectedProject) return;
+    if ((!messageText.trim() && selectedFiles.length === 0) || !selectedProject) return;
+
+    setSending(true);
+    setUploadProgress(0);
 
     try {
+      // Upload files first
+      const uploadedFileIds = [];
+      for (let i = 0; i < selectedFiles.length; i++) {
+        const fileId = await uploadFile(selectedFiles[i]);
+        uploadedFileIds.push(fileId);
+        setUploadProgress(((i + 1) / selectedFiles.length) * 100);
+      }
+
       const payload: any = {
         project_id: selectedProject,
         message: messageText,
-        type: 'inapp',
-        crew_id: crewId
+        crew_id: crewId,
+        attachments: uploadedFileIds
       };
 
       // Include location if available
@@ -83,20 +219,38 @@ export default function CrewCommunicationsPage() {
 
       if (response.ok) {
         setMessageText('');
+        setSelectedFiles([]);
+        setUploadProgress(0);
         fetchMessages(selectedProject);
       }
     } catch (error) {
       console.error('Error sending message:', error);
+      alert('Failed to send message');
+    } finally {
+      setSending(false);
     }
   };
 
+  const formatFileSize = (bytes: number) => {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+    return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+  };
+
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50">
       {/* Project Sidebar */}
-      <div className="w-80 bg-white border-r border-gray-200 flex flex-col">
-        <div className="p-6 border-b border-gray-200">
-          <h2 className="text-xl font-bold text-gray-900">My Projects</h2>
-          <p className="text-sm text-gray-500 mt-1">Select a project to communicate</p>
+      <div className="w-80 bg-white border-r border-gray-200 flex flex-col shadow-lg">
+        <div className="p-6 border-b border-gray-200 bg-gradient-to-r from-blue-500 to-blue-600">
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-white rounded-lg">
+              <BriefcaseIcon className="w-6 h-6 text-blue-600" />
+            </div>
+            <div>
+              <h2 className="text-xl font-bold text-white">My Projects</h2>
+              <p className="text-sm text-blue-100 mt-1">Select project to chat</p>
+            </div>
+          </div>
         </div>
         
         <div className="flex-1 overflow-y-auto">
@@ -114,7 +268,7 @@ export default function CrewCommunicationsPage() {
                     setSelectedProject(project._id);
                     fetchMessages(project._id);
                   }}
-                  className={`w-full p-4 text-left hover:bg-gray-50 transition-colors ${
+                  className={`w-full p-4 text-left hover:bg-blue-50 transition-colors ${
                     selectedProject === project._id ? 'bg-blue-50 border-l-4 border-blue-500' : ''
                   }`}
                 >
@@ -137,7 +291,7 @@ export default function CrewCommunicationsPage() {
           <div className="p-4 bg-blue-50 border-t border-blue-100">
             <div className="flex items-center gap-2 text-sm text-blue-700">
               <MapPinIcon className="w-4 h-4" />
-              <span>Location tracking enabled</span>
+              <span>Location tracking active</span>
             </div>
           </div>
         )}
@@ -148,75 +302,243 @@ export default function CrewCommunicationsPage() {
         {selectedProject ? (
           <>
             {/* Header */}
-            <div className="bg-white border-b border-gray-200 px-6 py-4">
+            <div className="bg-white border-b border-gray-200 shadow-sm px-6 py-4">
               <div className="flex items-center justify-between">
-                <div>
-                  <h1 className="text-xl font-bold text-gray-900">
-                    {projects.find(p => p._id === selectedProject)?.name}
-                  </h1>
-                  <p className="text-sm text-gray-500 mt-1">Project Communication</p>
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-blue-500 rounded-lg">
+                    <ChatBubbleLeftRightIcon className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h1 className="text-xl font-bold text-gray-900">
+                      {projects.find(p => p._id === selectedProject)?.name}
+                    </h1>
+                    <p className="text-sm text-gray-500 mt-1">Project Communication</p>
+                  </div>
                 </div>
+                <div className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
+                  {filteredMessages.length} messages
+                </div>
+              </div>
+
+              {/* Search Bar */}
+              <div className="mt-4 relative">
+                <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search messages..."
+                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
               </div>
             </div>
 
             {/* Messages */}
             <div className="flex-1 overflow-y-auto p-6">
-              {messages.length === 0 ? (
+              {filteredMessages.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full text-gray-400">
                   <ChatBubbleLeftRightIcon className="w-16 h-16 mb-4" />
-                  <p className="text-lg font-medium">No messages yet</p>
-                  <p className="text-sm">Start communicating with dispatch</p>
+                  <p className="text-lg font-medium">
+                    {searchQuery ? 'No messages found' : 'No messages yet'}
+                  </p>
+                  <p className="text-sm">
+                    {searchQuery ? 'Try a different search' : 'Start communicating with dispatch'}
+                  </p>
                 </div>
               ) : (
                 <div className="space-y-4">
-                  {messages.map((msg) => (
-                    <div
-                      key={msg._id}
-                      className={`flex ${msg.crew_id === crewId ? 'justify-end' : 'justify-start'}`}
-                    >
+                  {filteredMessages.map((msg) => {
+                    const isMyCrew = msg.crew_id === crewId;
+                    return (
                       <div
-                        className={`max-w-lg rounded-2xl px-4 py-3 ${
-                          msg.crew_id === crewId
-                            ? 'bg-blue-500 text-white'
-                            : 'bg-white border border-gray-200 text-gray-900'
-                        }`}
+                        key={msg._id}
+                        className={`flex ${isMyCrew ? 'justify-end' : 'justify-start'} animate-fade-in`}
                       >
-                        <p className="text-sm">{msg.message}</p>
-                        {msg.location && (
-                          <div className="text-xs opacity-75 mt-2 flex items-center gap-1">
-                            <MapPinIcon className="w-3 h-3" />
-                            Location shared
-                          </div>
-                        )}
-                        <span className="text-xs opacity-75 mt-1 block">
-                          {new Date(msg.timestamp).toLocaleTimeString()}
-                        </span>
+                        <div
+                          className={`max-w-lg rounded-2xl px-4 py-3 shadow-md ${
+                            isMyCrew
+                              ? 'bg-blue-500 text-white'
+                              : 'bg-white border border-gray-200 text-gray-900'
+                          }`}
+                        >
+                          <p className="text-sm whitespace-pre-wrap break-words">{msg.message || msg.content}</p>
+                          
+                          {/* Attachments */}
+                          {msg.attachments && msg.attachments.length > 0 && (
+                            <div className="mt-2 space-y-2">
+                              {msg.attachments.map((att, idx) => (
+                                <a
+                                  key={idx}
+                                  href={att.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className={`flex items-center gap-2 p-2 rounded-lg ${
+                                    isMyCrew ? 'bg-blue-600 hover:bg-blue-700' : 'bg-gray-50 hover:bg-gray-100'
+                                  } transition-colors`}
+                                >
+                                  {att.thumbnail_url ? (
+                                    <img src={att.thumbnail_url} alt={att.filename} className="w-12 h-12 object-cover rounded" />
+                                  ) : (
+                                    <DocumentIcon className="w-6 h-6" />
+                                  )}
+                                  <div className="flex-1 min-w-0">
+                                    <p className="text-xs font-medium truncate">{att.filename}</p>
+                                    <p className="text-xs opacity-75">{formatFileSize(att.file_size)}</p>
+                                  </div>
+                                  <ArrowDownTrayIcon className="w-4 h-4" />
+                                </a>
+                              ))}
+                            </div>
+                          )}
+
+                          {msg.location && (
+                            <div className="text-xs opacity-75 mt-2 flex items-center gap-1">
+                              <MapPinIcon className="w-3 h-3" />
+                              Location shared
+                            </div>
+                          )}
+                          <span className="text-xs opacity-75 mt-1 block">
+                            {new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
+                  <div ref={messagesEndRef} />
                 </div>
               )}
             </div>
 
+            {/* Selected Files Preview */}
+            {selectedFiles.length > 0 && (
+              <div className="px-6 py-3 bg-blue-50 border-t border-blue-100">
+                <div className="flex gap-2 overflow-x-auto pb-2">
+                  {selectedFiles.map((file, idx) => (
+                    <div key={idx} className="relative flex-shrink-0">
+                      {file.type.startsWith('image/') ? (
+                        <img
+                          src={URL.createObjectURL(file)}
+                          alt={file.name}
+                          className="w-20 h-20 object-cover rounded-lg border-2 border-blue-200"
+                        />
+                      ) : (
+                        <div className="w-20 h-20 bg-white rounded-lg flex flex-col items-center justify-center border-2 border-blue-200">
+                          <DocumentIcon className="w-8 h-8 text-blue-500" />
+                          <p className="text-xs text-gray-600 mt-1 px-1 truncate w-full text-center">
+                            {file.name.substring(0, 8)}...
+                          </p>
+                        </div>
+                      )}
+                      <button
+                        onClick={() => removeFile(idx)}
+                        className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 shadow-md"
+                      >
+                        <XMarkIcon className="w-4 h-4" />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+                {uploadProgress > 0 && uploadProgress < 100 && (
+                  <div className="mt-2">
+                    <div className="w-full bg-gray-200 rounded-full h-2">
+                      <div
+                        className="bg-blue-500 h-2 rounded-full transition-all"
+                        style={{ width: `${uploadProgress}%` }}
+                      />
+                    </div>
+                    <p className="text-xs text-gray-600 mt-1">Uploading... {uploadProgress.toFixed(0)}%</p>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Templates Dropdown */}
+            {showTemplates && (
+              <div className="px-6 py-3 bg-white border-t border-gray-200 shadow-lg">
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className="text-sm font-semibold text-gray-900">Quick Templates</h3>
+                  <button onClick={() => setShowTemplates(false)} className="text-gray-400 hover:text-gray-600">
+                    <XMarkIcon className="w-5 h-5" />
+                  </button>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2 max-h-60 overflow-y-auto">
+                  {templates.length === 0 ? (
+                    <p className="text-sm text-gray-500 col-span-2">No templates available</p>
+                  ) : (
+                    templates.map((template) => (
+                      <button
+                        key={template._id}
+                        onClick={() => useTemplate(template)}
+                        className="text-left p-3 bg-blue-50 hover:bg-blue-100 rounded-lg border border-blue-200 transition-colors"
+                      >
+                        <p className="text-sm font-medium text-gray-900">{template.name}</p>
+                        <p className="text-xs text-gray-600 mt-1 line-clamp-2">{template.content}</p>
+                      </button>
+                    ))
+                  )}
+                </div>
+              </div>
+            )}
+
             {/* Input */}
-            <div className="bg-white border-t border-gray-200 px-6 py-4">
+            <div className="bg-white border-t border-gray-200 px-6 py-4 shadow-lg">
               <div className="flex items-center gap-3">
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  multiple
+                  onChange={handleFileSelect}
+                  className="hidden"
+                />
+                <button
+                  onClick={() => fileInputRef.current?.click()}
+                  className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                  title="Attach file"
+                >
+                  <PaperClipIcon className="w-6 h-6" />
+                </button>
+                <button
+                  onClick={() => {
+                    if (fileInputRef.current) {
+                      fileInputRef.current.accept = 'image/*';
+                      fileInputRef.current.click();
+                    }
+                  }}
+                  className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                  title="Attach image"
+                >
+                  <PhotoIcon className="w-6 h-6" />
+                </button>
+                <button
+                  onClick={() => setShowTemplates(!showTemplates)}
+                  className={`p-2 ${showTemplates ? 'text-blue-600 bg-blue-50' : 'text-gray-400 hover:text-blue-600 hover:bg-blue-50'} rounded-lg transition-colors`}
+                  title="Use template"
+                >
+                  <DocumentTextIcon className="w-6 h-6" />
+                </button>
                 <input
                   type="text"
                   value={messageText}
                   onChange={(e) => setMessageText(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
-                  placeholder="Type a message..."
+                  onKeyPress={(e) => e.key === 'Enter' && !e.shiftKey && sendMessage()}
+                  placeholder="Type a message... (Press Enter to send)"
                   className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <button
                   onClick={sendMessage}
-                  disabled={!messageText.trim()}
-                  className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:bg-gray-300 transition-colors"
+                  disabled={sending || (!messageText.trim() && selectedFiles.length === 0)}
+                  className="p-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:bg-gray-300 transition-colors shadow-md"
                 >
-                  Send
+                  {sending ? (
+                    <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white" />
+                  ) : (
+                    <PaperAirplaneIcon className="w-6 h-6" />
+                  )}
                 </button>
               </div>
+              <p className="text-xs text-gray-500 mt-2">
+                💼 Crew Portal • Real-time • Location sharing enabled
+              </p>
             </div>
           </>
         ) : (
