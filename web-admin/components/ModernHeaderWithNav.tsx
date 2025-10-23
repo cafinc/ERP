@@ -416,13 +416,9 @@ export default function ModernHeaderWithNav() {
             <div ref={quickAddRef} className="relative flex-shrink-0">
               <button
                 onClick={() => setShowQuickAdd(!showQuickAdd)}
-                className={`p-2 rounded-lg transition-colors cursor-pointer ${
-                  showQuickAdd 
-                    ? 'text-gray-600' 
-                    : 'text-white hover:text-gray-600'
-                }`}
+                className="p-2 rounded-lg transition-colors cursor-pointer"
                 style={{
-                  backgroundColor: showQuickAdd ? '#e0e0e0' : 'transparent'
+                  backgroundColor: showQuickAdd ? '#e0e0e0' : '#607d8b'
                 }}
                 onMouseEnter={(e) => {
                   if (!showQuickAdd) {
@@ -434,7 +430,7 @@ export default function ModernHeaderWithNav() {
                 }}
                 onMouseLeave={(e) => {
                   if (!showQuickAdd) {
-                    e.currentTarget.style.backgroundColor = 'transparent';
+                    e.currentTarget.style.backgroundColor = '#607d8b';
                     const icon = e.currentTarget.querySelector('svg');
                     if (icon) icon.classList.remove('text-gray-600');
                     if (icon) icon.classList.add('text-white');
