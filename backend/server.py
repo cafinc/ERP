@@ -12333,5 +12333,10 @@ from work_order_routes import router as work_order_router
 api_router.include_router(work_order_router)
 logger.info("Work order endpoints registered successfully")
 
+# Include WebSocket router
+from websocket_routes import router as websocket_router
+api_router.include_router(websocket_router)
+logger.info("WebSocket endpoints registered successfully")
+
 # Include the router with all endpoints
 app.include_router(api_router)
