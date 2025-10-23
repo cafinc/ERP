@@ -1,20 +1,20 @@
 #!/usr/bin/env python3
 """
-Comprehensive Backend API Testing for Phase 1 Validation
-Tests all critical modules after fixes as requested in the review.
+Backend API Testing for Unified Communications System
+Tests all unified communications endpoints
 """
 
 import requests
 import json
-import uuid
-from datetime import datetime, timedelta
-import sys
 import os
+from datetime import datetime
+import time
 
-# Get backend URL from frontend .env
-BACKEND_URL = "https://snowtrack-admin-3.preview.emergentagent.com/api"
+# Get backend URL from environment
+BACKEND_URL = os.getenv('REACT_APP_BACKEND_URL', 'https://snowtrack-admin-3.preview.emergentagent.com')
+BASE_URL = f"{BACKEND_URL}/api"
 
-class BackendTester:
+def test_unified_communications():
     def __init__(self):
         self.base_url = BACKEND_URL
         self.session = requests.Session()
