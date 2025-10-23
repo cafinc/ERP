@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import api from '@/lib/api';
+import { loadGoogleMapsScript, isGoogleMapsLoaded } from '@/lib/googleMapsLoader';
 import {
   ArrowLeft,
   MapPin,
