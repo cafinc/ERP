@@ -208,6 +208,9 @@ test_plan:
       - working: false
         agent: "testing"
         comment: "❌ Cannot test due to employee creation dependency. Same async/sync mismatch issue as Employee Management."
+      - working: false
+        agent: "testing"
+        comment: "❌ POST /api/hr/performance-reviews fails with HTTP 500 BSON ObjectId serialization error. GET endpoints working (found 1 performance review). Performance review creation blocked by serialization issue."
 
   - task: "HR Module - Payroll Settings APIs"
     implemented: true
