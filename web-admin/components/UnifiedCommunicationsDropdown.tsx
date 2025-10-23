@@ -66,6 +66,11 @@ const UnifiedCommunicationsDropdown = forwardRef<
     };
   }, [isOpen, onClose]);
 
+  // Expose prefetch method to parent component
+  useImperativeHandle(ref, () => ({
+    prefetchCommunications: fetchRecentCommunications
+  }), []);
+
   const fetchRecentCommunications = async () => {
     // Don't fetch if we already have recent data (within last 30 seconds)
     if (recentComms.length > 0 && !loading) {
