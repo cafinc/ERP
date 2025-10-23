@@ -221,21 +221,24 @@ export default function EnhancedHeader() {
               {/* Unified Communications Center */}
               <div className="relative">
                 <button
-                  onClick={(e) => {
-                    e.currentTarget.classList.remove('hovered');
-                    setShowUnifiedComms(!showUnifiedComms);
+                  onClick={() => setShowUnifiedComms(!showUnifiedComms)}
+                  className="p-2 rounded-lg transition-all duration-200 ease-in-out relative cursor-pointer"
+                  style={{
+                    backgroundColor: showUnifiedComms ? 'white' : 'transparent',
+                    color: showUnifiedComms ? '#3f72af' : 'white',
                   }}
                   onMouseEnter={(e) => {
                     if (!showUnifiedComms) {
-                      e.currentTarget.classList.add('hovered');
+                      e.currentTarget.style.backgroundColor = 'white';
+                      e.currentTarget.style.color = '#3f72af';
                     }
                   }}
-                  onMouseLeave={(e) => e.currentTarget.classList.remove('hovered')}
-                  className={`p-2 rounded-lg transition-all duration-200 ease-in-out relative cursor-pointer ${
-                    showUnifiedComms 
-                      ? 'bg-white text-[#3f72af]' 
-                      : 'text-white [&.hovered]:bg-white [&.hovered]:text-[#3f72af]'
-                  }`}
+                  onMouseLeave={(e) => {
+                    if (!showUnifiedComms) {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                      e.currentTarget.style.color = 'white';
+                    }
+                  }}
                   title="All Communications"
                 >
                   <MessageSquare className="w-5 h-5" />
