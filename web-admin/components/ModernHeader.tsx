@@ -242,6 +242,25 @@ export default function ModernHeader() {
           {/* Divider */}
           <div className="w-px h-8 bg-white bg-opacity-20" />
 
+          {/* Activity Icon */}
+          <div ref={activityRef} className="relative flex-shrink-0">
+            <button
+              onClick={() => setShowActivity(!showActivity)}
+              className={`p-2 rounded-lg relative cursor-pointer ${
+                showActivity 
+                  ? 'bg-white text-[#3f72af]' 
+                  : 'bg-transparent text-white hover:bg-white hover:text-[#3f72af] transition-colors duration-200'
+              }`}
+              title="Activity"
+            >
+              <Activity className="w-6 h-6" />
+            </button>
+            <ActivityDropdown
+              isOpen={showActivity}
+              onClose={() => setShowActivity(false)}
+            />
+          </div>
+
           {/* Avatar */}
           <div ref={profileRef} className="relative flex-shrink-0">
             <button
