@@ -26,7 +26,7 @@ import {
   Sparkles,
 } from 'lucide-react';
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || '';
+const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || '';
 
 interface Customer {
   _id: string;

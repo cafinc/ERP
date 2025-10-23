@@ -5,7 +5,7 @@ import { useRouter, useParams } from 'next/navigation';
 import { ArrowLeftIcon, CheckIcon, SparklesIcon, TrashIcon } from '@heroicons/react/24/outline';
 import PlaceholderBrowser from '@/components/PlaceholderBrowser';
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || '';
+const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || '';
 
 export default function EditTemplatePage() {
   const router = useRouter();

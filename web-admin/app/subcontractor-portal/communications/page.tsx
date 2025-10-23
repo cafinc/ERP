@@ -16,7 +16,7 @@ import {
   BuildingOfficeIcon
 } from '@heroicons/react/24/outline';
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || '';
+const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || '';
 
 interface Message {
   _id: string;
