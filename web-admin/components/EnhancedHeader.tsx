@@ -221,8 +221,15 @@ export default function EnhancedHeader() {
               {/* Unified Communications Center */}
               <div className="relative">
                 <button
-                  onClick={() => setShowUnifiedComms(!showUnifiedComms)}
-                  onMouseEnter={(e) => !showUnifiedComms && e.currentTarget.classList.add('hovered')}
+                  onClick={(e) => {
+                    e.currentTarget.classList.remove('hovered');
+                    setShowUnifiedComms(!showUnifiedComms);
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!showUnifiedComms) {
+                      e.currentTarget.classList.add('hovered');
+                    }
+                  }}
                   onMouseLeave={(e) => e.currentTarget.classList.remove('hovered')}
                   className={`p-2 rounded-lg transition-all duration-200 ease-in-out relative cursor-pointer ${
                     showUnifiedComms 
