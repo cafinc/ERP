@@ -57,11 +57,15 @@ const UnifiedCommunicationsDropdown = forwardRef<
     
     setLoading(true);
     try {
-      // Fetch only recent 10 with backend sorting
-      const response = await fetch(`${BACKEND_URL}/communications/recent?limit=10`);
+      // Fetch all communications and take the 10 most recent
+      const response = await fetch(`${BACKEND_URL}/communications/list-all`);
       if (response.ok) {
         const data = await response.json();
-        setRecentComms(data);
+        // Sort by timestamp desc and take first 10
+        const sorted = data.sort((a: Communication, b: Communication) => 
+          new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+        );
+        setRecentComms(sorted.slice(0, 10));
       }
     } catch (error) {
       console.error('Error fetching recent communications:', error);
