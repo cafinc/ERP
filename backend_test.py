@@ -511,7 +511,6 @@ def main():
 
 if __name__ == "__main__":
     main()
-        try:
             template_data = {
                 "type": "estimate",
                 "name": "Test Custom Estimate Template",
