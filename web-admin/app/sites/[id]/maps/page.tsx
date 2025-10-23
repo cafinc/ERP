@@ -109,42 +109,57 @@ export default function SiteMapsGeofencingPage() {
   };
 
   const initializeMap = () => {
-    if (!site || !mapRef.current || googleMapRef.current || !window.google) return;
+    if (!site || !mapRef.current || googleMapRef.current || !window.google) {
+      console.log('Map initialization skipped:', { 
+        hasSite: !!site, 
+        hasMapRef: !!mapRef.current, 
+        hasGoogleMapRef: !!googleMapRef.current, 
+        hasGoogle: !!window.google 
+      });
+      return;
+    }
 
-    const map = new window.google.maps.Map(mapRef.current, {
-      center: { lat: site.location.latitude, lng: site.location.longitude },
-      zoom: 19,
-      mapTypeId: 'satellite',
-      tilt: 0,
-      mapTypeControl: true,
-      mapTypeControlOptions: {
-        style: window.google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-        position: window.google.maps.ControlPosition.TOP_RIGHT,
-        mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain']
-      },
-      fullscreenControl: true,
-      streetViewControl: true,
-    });
+    console.log('Initializing map at coordinates:', site.location);
 
-    googleMapRef.current = map;
+    try {
+      const map = new window.google.maps.Map(mapRef.current, {
+        center: { lat: site.location.latitude, lng: site.location.longitude },
+        zoom: 19,
+        mapTypeId: 'satellite',
+        tilt: 0,
+        mapTypeControl: true,
+        mapTypeControlOptions: {
+          style: window.google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+          position: window.google.maps.ControlPosition.TOP_RIGHT,
+          mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain']
+        },
+        fullscreenControl: true,
+        streetViewControl: true,
+      });
 
-    // Add marker for site location
-    new window.google.maps.Marker({
-      position: { lat: site.location.latitude, lng: site.location.longitude },
-      map: map,
-      title: site.name,
-      icon: {
-        path: window.google.maps.SymbolPath.CIRCLE,
-        scale: 8,
-        fillColor: '#EF4444',
-        fillOpacity: 1,
-        strokeColor: '#ffffff',
-        strokeWeight: 2,
-      },
-    });
+      googleMapRef.current = map;
+      console.log('Map initialized successfully');
 
-    if (geofence) {
-      displayGeofence(geofence);
+      // Add marker for site location
+      new window.google.maps.Marker({
+        position: { lat: site.location.latitude, lng: site.location.longitude },
+        map: map,
+        title: site.name,
+        icon: {
+          path: window.google.maps.SymbolPath.CIRCLE,
+          scale: 8,
+          fillColor: '#EF4444',
+          fillOpacity: 1,
+          strokeColor: '#ffffff',
+          strokeWeight: 2,
+        },
+      });
+
+      if (geofence) {
+        displayGeofence(geofence);
+      }
+    } catch (error) {
+      console.error('Error initializing map:', error);
     }
   };
 
