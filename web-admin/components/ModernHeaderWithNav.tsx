@@ -416,11 +416,33 @@ export default function ModernHeaderWithNav() {
             <div ref={quickAddRef} className="relative flex-shrink-0">
               <button
                 onClick={() => setShowQuickAdd(!showQuickAdd)}
-                className="p-2 rounded-lg transition-colors cursor-pointer"
-                style={{ backgroundColor: '#607d8b' }}
+                className={`p-2 rounded-lg transition-colors cursor-pointer ${
+                  showQuickAdd 
+                    ? 'text-gray-600' 
+                    : 'text-white hover:text-gray-600'
+                }`}
+                style={{
+                  backgroundColor: showQuickAdd ? '#e0e0e0' : 'transparent'
+                }}
+                onMouseEnter={(e) => {
+                  if (!showQuickAdd) {
+                    e.currentTarget.style.backgroundColor = '#e0e0e0';
+                    const icon = e.currentTarget.querySelector('svg');
+                    if (icon) icon.classList.add('text-gray-600');
+                    if (icon) icon.classList.remove('text-white');
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!showQuickAdd) {
+                    e.currentTarget.style.backgroundColor = 'transparent';
+                    const icon = e.currentTarget.querySelector('svg');
+                    if (icon) icon.classList.remove('text-gray-600');
+                    if (icon) icon.classList.add('text-white');
+                  }
+                }}
                 title="Quick Add"
               >
-                <Plus className="w-5 h-5 text-white" />
+                <Plus className={`w-5 h-5 ${showQuickAdd ? 'text-gray-600' : 'text-white'}`} />
               </button>
 
               {/* Quick Add Dropdown */}
