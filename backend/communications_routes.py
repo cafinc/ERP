@@ -1176,7 +1176,7 @@ async def get_recent_communications(limit: int = 10):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@router.get("/communications/all")
+@router.get("/communications/all", response_model=None)
 async def get_all_communications():
     """Get all communications for unified communications center"""
     try:
