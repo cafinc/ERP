@@ -510,11 +510,11 @@ export default function ModernHeaderWithNav() {
                 <img 
                   src={logoUrl}
                   alt="Company Logo" 
-                  className="h-10 w-auto max-w-[200px] object-contain"
+                  className="h-8 sm:h-10 w-auto max-w-[120px] sm:max-w-[200px] object-contain"
                 />
               ) : (
-                <div className="text-2xl font-semibold tracking-wide" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif', letterSpacing: '0.5px' }}>
-                  {companyName || 'CAF Group Of Companies'}
+                <div className="text-lg sm:text-xl md:text-2xl font-semibold tracking-wide truncate max-w-[150px] sm:max-w-none" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif', letterSpacing: '0.5px' }}>
+                  {companyName || 'CAF Group'}
                 </div>
               )}
             </div>
