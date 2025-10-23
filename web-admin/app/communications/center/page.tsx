@@ -43,10 +43,6 @@ interface Communication {
   attachments?: any[];
 }
 
-'use client';
-
-import { useSearchParams } from 'next/navigation';
-
 export default function UnifiedCommunicationsCenter() {
   const searchParams = useSearchParams();
   const tabParam = searchParams.get('tab') as 'inapp' | 'sms' | 'email' | 'phone' | null;
