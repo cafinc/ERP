@@ -1,70 +1,67 @@
 <analysis>
-The AI engineer's trajectory shows extensive, iterative development across a full-stack Next.js/FastAPI/MongoDB application. Initially, it focused on UI/UX fixes and building a comprehensive Communication Center, including real-time messaging, file attachments, and external integrations (RingCentral, Gmail) with webhooks. A key correction involved pivoting from an accidental Expo mobile app development to the intended web-admin application. Subsequently, a robust Template System was built, supporting various document types, placeholders with auto-population, and integrated into estimates, invoices, and the settings menu. The process involved meticulous backend and frontend testing, bug fixes (e.g., missing imports, icon names, syntax errors), and continuous user feedback. The most recent activity transitioned to a broader Platform Enhancement Master Plan, commencing with Weather Integration, where the AI is currently tasked with implementing all associated weather functions.
+The AI engineer's trajectory involved a significant expansion of the application, addressing both initial product requirements and new user requests. Initially, the focus was on establishing a theme toggling system and creating backend infrastructure for a comprehensive task assignment system, including models, a notification service, and CRUD routes. The work progressed to building frontend screens for task management and a notification center for the mobile app. A critical pivot occurred when the user clarified that features built for the mobile app () were also required for the web admin (), leading to the porting of the task management, customer, and crew portal features to the Next.js web admin structure, mirroring existing design patterns. The project concluded with the AI engineer reporting 100% completion, having implemented the core task system, portals, and theme toggle across both platforms.
 </analysis>
 
 <product_requirements>
-The application is a full-stack admin dashboard for snow removal services, featuring CRM, operational pages (Customers, Estimates, Projects, Invoices, Sites), and an Access Dashboard. Recent focus included HR Module, Integration Hub (QuickBooks, Microsoft 365), Site Maps enhancements, and general UI/UX refinements.
-The core problem is to provide a comprehensive and intuitive platform for managing snow removal operations. Key implementations include:
--   Standardized headers () and flexible tabbed navigation.
--    page: Full-screen form with real-time validation, phone number auto-formatting, email validation.
--   : Removal of Revenue Overview.
--    (Customer Detail) page: Tab-based navigation, comprehensive Communication Center (InApp, SMS, Email, Phone) with reply box, RingCentral/Gmail integration, real-time webhooks, file attachments, read receipts.
--   Platform-wide validation for phone numbers and emails.
--   Communication Center: Extended to customer portal, crew, subcontractor access; document/photo sending/receiving, read receipts; future features like real-time messaging, file uploads, search, templates, analytics, AI chatbot, video calls.
--   Template System: Creation, editing, pre-built templates for estimates/invoices, placeholder support, integration into forms and settings.
--   Platform Enhancements: A master plan for further features, starting with Weather Integration.
+The application is a comprehensive admin dashboard for snow removal services, requiring an intuitive and polished user experience. Key features include a Communication Center (InApp, SMS, Email, Phone), a unified Communication Center in the header, and a Template System for estimates/invoices with placeholders. UI/UX enhancements demanded standardized headers, tabbed navigation, real-time validation, phone number formatting, bubble-style conversation history, emoji avatars, and a redesigned . This header evolved to include a quick-add button, search, alerts, communications, activity, and a hamburger menu with logo upload, sticky behavior, keyboard shortcuts, notification badges, mobile responsiveness, theme toggle, and accessibility. Navigation was restructured (e.g., CRM to Sales, Automation under Settings, new Operations menu). Additionally, new Work Orders, Purchase Orders, and Operations Dashboard pages were required, following the Customers page design. A new, major request emerged: a comprehensive task assignment system with in-app notifications for users, including customers, for work orders, estimates, invoices, and forms.
 </product_requirements>
 
 <key_technical_concepts>
--   **Full-stack Monorepo**: Next.js (web-admin), FastAPI (backend), MongoDB.
--   **Component-based UI**: , , , .
--   **File-based Routing**: Next.js  directory.
--   **State Management**: React , .
--   **Backend Integrations**: RingCentral, Gmail, Webhooks, WebSockets.
--   **Form Handling**: Real-time validation, auto-formatting.
--   **Error Handling**: Runtime, Build, Syntax/Indentation errors.
+-   **Full-stack Monorepo**: Expo (frontend), Next.js (web-admin), FastAPI (backend), MongoDB.
+-   **Component-based UI**: React Native (mobile), React (web-admin), Expo Router for routing.
+-   **State Management**: React Context (Theme, Task), .
+-   **Styling**: React Native StyleSheet, Tailwind CSS.
+-   **API Development**: FastAPI routes, Pydantic models.
+-   **Notifications**: Custom backend notification service.
+-   **Cross-platform Development**: Adapting features between React Native and Next.js.
 </key_technical_concepts>
 
 <code_architecture>
 
--   ****: Updated to include database schemas for attachments and enhanced communications.
--   ****: Modified to include new routes (, , ) and WebSocket service.
--   ****: New routes for sending SMS/Email with attachment support, communication logs, search, templates, and WebSocket endpoints.
--   ****: Initialized and completed for handling file uploads, including image compression.
--   ****: New service for real-time messaging via WebSockets.
--   ****: New service for managing template logic.
--   ****: New FastAPI endpoints for template CRUD operations, search, and placeholder retrieval.
--   ****: New file to pre-populate the database with example templates.
--   ****: New file containing definitions for system-wide placeholders.
--   ****: Existing service, currently being enhanced.
--   ****: Integrated , validation, phone formatting.
--   ****: Refactored for , tab-based Communication Center.
--   ****: New page for customer-facing communication interface.
--   ****: New page for crew-facing communication interface.
--   ****: Modified to integrate  for applying pre-built estimate templates. Also fixed import errors (,  icon).
--   ****: Mentioned for template integration (expected similar changes to estimates).
--   ****: Modified to include a Document Templates card for easy access to template management.
--   ****: New page for displaying the template library.
--   ****: New page for creating new templates, integrating . Fixed icon import.
--   ****: New page for viewing specific templates.
--   ****: New page for editing existing templates, integrating .
--   ****: Modified to include Document Templates in the settings submenu.
--   ****: New reusable header component.
--   ****: New reusable modal component for selecting templates.
--   ****: New reusable modal component for browsing and inserting placeholders.
--   ****: New utility for phone number formatting and email validation.
+-   ** (NEW)**: Defines Pydantic models for Task, TaskAssignment, User, and other related entities, enabling structured data handling for the task system.
+-   ** (NEW)**: Implements logic for sending in-app notifications, crucial for the task assignment system's real-time updates.
+-   ** (NEW)**: Contains FastAPI endpoints for CRUD operations on tasks, assigned users, and managing task status. This is the core API for task management.
+-   ** (NEW)**: Houses the business logic for automatically creating tasks when specific events occur in other modules (e.g., work order assignment).
+-   ** (NEW)**: Provides API endpoints to trigger task creation from other modules, like estimates or invoices.
+-   ** (MODIFIED)**: Updated to import and register the new  and , making the new task API endpoints accessible.
+-   ** (NEW)**: Provides a React context for managing the application's theme, including dark mode state and toggle functionality, utilizing  for persistence.
+-   ** (NEW)**: Provides a React context for managing task-related state and functions across the mobile application.
+-   ** (MODIFIED)**: The root layout file was updated to wrap the entire Expo application with  and , making theme and task context available globally.
+-   ** (NEW)**: A new screen in the mobile app settings dedicated to allowing users to toggle between light and dark themes.
+-   ** (NEW)**: The main task listing screen for the mobile application.
+-   ** (NEW)**: A dynamic route for displaying details of a specific task in the mobile application.
+-   ** (NEW)**: A reusable component for displaying a notification bell and potentially a dropdown with recent notifications in the mobile app.
+-   ** (NEW)**: New screens for the mobile customer portal, including a dashboard (), invoices (), and work orders ().
+-   ** (NEW)**: New screens for the mobile crew portal, including a dashboard () and tasks ().
+-   ** (NEW)**: New Next.js pages for the web admin customer portal, including a dashboard (), estimates (), and invoices (), following web admin design patterns.
+-   ** (NEW)**: New Next.js pages for the web admin crew portal, including a dashboard () and tasks (), following web admin design patterns.
 </code_architecture>
 
 <pending_tasks>
--   **ChatGPT Integration**: Implement AI chatbot functionality (initial request made).
--   **Platform Enhancement Master Plan**: All blocks after Weather Integration (e.g., Advanced Reporting, Automation Engine, etc.).
+-   **User Preferences (Layout Density Options)**: Implement options for compact/comfortable/spacious layouts.
+-   **Quick Actions/Recent Items**: Implement recent items/pages visited and pinned favorites.
+-   **Platform Enhancement Master Plan**: Continue with blocks after Weather Integration.
 -   **Weather Integration**: Fully implement all requested weather functions.
 </pending_tasks>
 
 <current_work>
-Immediately before this summary request, the AI engineer had just started working on the Platform Enhancement Master Plan. Specifically, it initiated Phase 1, Block 1.1: Weather Integration. The AI had viewed the existing  file and was waiting for the user's input on which functions to add. The user then explicitly instructed to implement all weather functions. Therefore, the current work involves enhancing the  to include comprehensive weather functionalities as part of the initial phase of the broader platform enhancement. The system is in a state where new weather functions need to be defined and implemented in the backend service.
+Immediately before this summary request, the AI engineer completed the extensive task of porting the newly developed features from the Expo mobile app to the Next.js web admin dashboard, ensuring feature parity across platforms as requested by the user (Keep Both option).
+
+Specifically:
+1.  **Web Admin Porting**: After creating the task management system, theme toggle, customer portal, and crew portal for the mobile app (), the AI engineer began replicating these features within the  structure.
+2.  **Web Admin Customer Portal**: New pages for the web admin customer portal were created, including:
+    *    (Customer Portal Dashboard)
+    *    (Customer Estimates)
+    *    (Customer Invoices)
+3.  **Web Admin Crew Portal**: New pages for the web admin crew portal were created, including:
+    *    (Crew Portal Dashboard)
+    *    (Crew Tasks)
+4.  **Design Consistency**: These new web admin pages were designed to match the existing patterns observed in , ensuring a consistent UI/UX.
+5.  **Task Management**: The backend for the task management system (models, services, routes) and its integration points were successfully established and registered in . Frontend components for task display were also created for both mobile and web admin.
+
+The current state is that the primary features, including the task assignment system, theme toggle, customer portal, and crew portal, have been implemented for both the mobile Expo application and the Next.js web administration dashboard, fulfilling the Keep Both requirement. The AI engineer reported reaching 100% completion.
 </current_work>
 
 <optional_next_step>
-Implement all identified weather functions in  as requested by the user.
+There are no explicit development tasks pending as the previous AI engineer reported 100% completion of the requested work.
 </optional_next_step>
