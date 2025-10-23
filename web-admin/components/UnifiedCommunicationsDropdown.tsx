@@ -190,7 +190,12 @@ export default function UnifiedCommunicationsDropdown({
                 }`}
               >
                 <div className="flex items-center gap-2 mb-1">
-                  {/* Direction badge - First */}
+                  {/* Type Icon - First */}
+                  <div className={`p-1 rounded ${getTypeColor(comm.type)}`}>
+                    {getIcon(comm.type)}
+                  </div>
+                  
+                  {/* Direction badge - Second */}
                   <span className={`text-[10px] px-1.5 py-0.5 rounded ${
                     comm.direction === 'inbound' 
                       ? 'bg-green-100 text-green-700' 
@@ -199,12 +204,10 @@ export default function UnifiedCommunicationsDropdown({
                     {comm.direction === 'inbound' ? '←' : '→'}
                   </span>
                   
-                  {/* Type Icon - Second */}
-                  <div className={`p-1 rounded ${getTypeColor(comm.type)}`}>
-                    {getIcon(comm.type)}
-                  </div>
+                  {/* Person Icon - Third */}
+                  <User className="w-3 h-3 text-gray-400 flex-shrink-0" />
                   
-                  {/* Customer Name - Third */}
+                  {/* Customer Name - Fourth */}
                   <span className="text-sm font-medium text-gray-900 truncate flex-1">
                     {comm.customer_name || comm.from || comm.to || 'Unknown'}
                   </span>
@@ -221,7 +224,7 @@ export default function UnifiedCommunicationsDropdown({
                 </div>
                 
                 {/* Message preview */}
-                <p className="text-xs text-gray-600 line-clamp-1 ml-8">
+                <p className="text-xs text-gray-600 line-clamp-1 ml-10">
                   {getMessagePreview(comm)}
                 </p>
               </div>
