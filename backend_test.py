@@ -511,8 +511,6 @@ def main():
 
 if __name__ == "__main__":
     main()
-        
-        # Test 1: POST /api/templates - Create new custom template
         try:
             template_data = {
                 "type": "estimate",
