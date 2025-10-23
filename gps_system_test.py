@@ -12,7 +12,7 @@ from datetime import datetime, timedelta
 from typing import Dict, List, Any
 
 # Configuration
-BASE_URL = "https://snowmsg-hub.preview.emergentagent.com/api"
+BASE_URL = "https://header-refresh-4.preview.emergentagent.com/api"
 HEADERS = {"Content-Type": "application/json"}
 TORONTO_LAT = 43.6532
 TORONTO_LON = -79.3832
