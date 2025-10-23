@@ -1231,8 +1231,10 @@ async def list_all_communications_raw():
         
         async for doc in cursor:
             doc["_id"] = str(doc["_id"])
-            if "timestamp" in doc and hasattr(doc["timestamp"], "isoformat"):
-                doc["timestamp"] = doc["timestamp"].isoformat()
+            # Convert all datetime fields to ISO format
+            for key, value in list(doc.items()):
+                if hasattr(value, "isoformat"):
+                    doc[key] = value.isoformat()
             result.append(doc)
         
         logger.info(f"Returning {len(result)} communications")
