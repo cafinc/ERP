@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import PageHeader from '@/components/PageHeader';
-import HybridNavigationTopBar from '@/components/HybridNavigationTopBar';
+import SimpleNavigationTopBar from '@/components/SimpleNavigationTopBar';
 import {
   Plus,
   Search,
@@ -164,7 +164,7 @@ export default function PurchaseOrdersPage() {
 
   if (loading) {
     return (
-      <HybridNavigationTopBar>
+      <SimpleNavigationTopBar>
         <div className="min-h-screen bg-gray-50 flex flex-col">
           <PageHeader
             title="Purchase Orders"
@@ -179,12 +179,12 @@ export default function PurchaseOrdersPage() {
             <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
           </div>
         </div>
-      </HybridNavigationTopBar>
+      </SimpleNavigationTopBar>
     );
   }
 
   return (
-    <HybridNavigationTopBar>
+    <SimpleNavigationTopBar>
       <div className="min-h-screen bg-gray-50 flex flex-col">
         <PageHeader
           title="Purchase Orders"
@@ -365,6 +365,6 @@ export default function PurchaseOrdersPage() {
           )}
         </div>
       </div>
-    </HybridNavigationTopBar>
+    </SimpleNavigationTopBar>
   );
 }
