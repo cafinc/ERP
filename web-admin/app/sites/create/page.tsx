@@ -583,6 +583,27 @@ export default function CreateSitePage() {
                 </div>
               </div>
             </div>
+
+            {/* Bottom Action Buttons */}
+            <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-6 backdrop-blur-sm">
+              <div className="flex gap-4 justify-end">
+                <button
+                  type="button"
+                  onClick={() => router.push('/sites')}
+                  className="px-8 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors font-medium"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  disabled={saving}
+                  className="flex items-center gap-2 px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors font-medium"
+                >
+                  <Save className="w-5 h-5" />
+                  {saving ? 'Creating...' : 'Create Site'}
+                </button>
+              </div>
+            </div>
           </form>
         </div>
       </div>
