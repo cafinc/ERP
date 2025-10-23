@@ -267,11 +267,39 @@ export default function UnifiedCommunicationsCenter() {
     }
   };
 
+  const markAsRead = async (commId: string) => {
+    try {
+      const response = await fetch(`${BACKEND_URL}/communications/${commId}/read`, {
+        method: 'PATCH',
+      });
+      
+      if (response.ok) {
+        // Update local state
+        setCommunications(prev => 
+          prev.map(c => c._id === commId ? { ...c, read: true } : c)
+        );
+        
+        // Recalculate stats
+        const updatedComms = communications.map(c => 
+          c._id === commId ? { ...c, read: true } : c
+        );
+        calculateStats(updatedComms);
+      }
+    } catch (error) {
+      console.error('Error marking message as read:', error);
+    }
+  };
+
   const handleMessageClick = async (comm: Communication) => {
     setSelectedComm(comm);
     setShowReplyModal(true);
     setReplyText('');
     setShowEmojiPicker(false);
+    
+    // Mark as read if unread
+    if (!comm.read) {
+      await markAsRead(comm._id);
+    }
     
     // Pre-populate subject for email replies
     if (comm.type === 'email' && comm.subject) {
