@@ -34,6 +34,10 @@ import {
   ChevronRight,
   ChevronDown,
   RefreshCw,
+  Sun,
+  Moon,
+  Monitor,
+  Clock,
 } from 'lucide-react';
 
 interface MenuItem {
