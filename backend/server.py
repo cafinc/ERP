@@ -12378,5 +12378,10 @@ from smart_equipment_routes import router as smart_equipment_router
 api_router.include_router(smart_equipment_router)
 logger.info("Smart equipment endpoints registered successfully")
 
+# Include Site Geofencing router
+from site_geofence_routes import router as site_geofence_router
+api_router.include_router(site_geofence_router)
+logger.info("Site geofencing endpoints registered successfully")
+
 # Include the router with all endpoints
 app.include_router(api_router)
