@@ -294,11 +294,18 @@ export default function EnhancedHeader() {
                 className="flex items-center space-x-3 hover:bg-white hover:bg-opacity-10 rounded-lg px-3 py-2 transition-colors cursor-pointer"
               >
                 {user?.avatar ? (
-                  <img
-                    src={user.avatar}
-                    alt="Profile"
-                    className="w-10 h-10 rounded-full border-2 border-white border-opacity-30 object-cover"
-                  />
+                  // Check if avatar is an emoji (single character) or image URL
+                  user.avatar.length <= 4 ? (
+                    <div className="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center border-2 border-white border-opacity-30">
+                      <span className="text-2xl">{user.avatar}</span>
+                    </div>
+                  ) : (
+                    <img
+                      src={user.avatar}
+                      alt="Profile"
+                      className="w-10 h-10 rounded-full border-2 border-white border-opacity-30 object-cover"
+                    />
+                  )
                 ) : (
                   <div className="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center border-2 border-white border-opacity-30">
                     <span className="text-sm font-bold">{getInitials()}</span>
