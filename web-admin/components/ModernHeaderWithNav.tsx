@@ -476,6 +476,9 @@ export default function ModernHeaderWithNav() {
                   }
                 }}
                 title="Navigation Menu"
+                aria-label="Open navigation menu"
+                aria-expanded={showNavMenu}
+                aria-haspopup="true"
               >
                 <Menu className="w-6 h-6" />
               </button>
