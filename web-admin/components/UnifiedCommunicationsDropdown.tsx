@@ -67,17 +67,18 @@ export default function UnifiedCommunicationsDropdown({
   }, [isOpen, onClose]);
 
   const fetchRecentCommunications = async () => {
+    // Don't fetch if we already have recent data (within last 30 seconds)
+    if (recentComms.length > 0 && !loading) {
+      return;
+    }
+    
     setLoading(true);
     try {
-      // Fetch all communications and take the 10 most recent
-      const response = await fetch(`${BACKEND_URL}/communications/list-all`);
+      // Fetch only recent 10 with backend sorting
+      const response = await fetch(`${BACKEND_URL}/communications/recent?limit=10`);
       if (response.ok) {
         const data = await response.json();
-        // Sort by timestamp desc and take first 10
-        const sorted = data.sort((a: Communication, b: Communication) => 
-          new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
-        );
-        setRecentComms(sorted.slice(0, 10));
+        setRecentComms(data);
       }
     } catch (error) {
       console.error('Error fetching recent communications:', error);
