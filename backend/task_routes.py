@@ -24,6 +24,7 @@ from task_models import (
     TaskStatus, TaskPriority, TaskType, NotificationType
 )
 from notification_service import notification_service
+from realtime_service import realtime_service, EventType
 
 load_dotenv()
 
