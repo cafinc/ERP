@@ -242,4 +242,8 @@ const UnifiedCommunicationsDropdown = forwardRef<
       </div>
     </div>
   );
-}
+});
+
+UnifiedCommunicationsDropdown.displayName = 'UnifiedCommunicationsDropdown';
+
+export default UnifiedCommunicationsDropdown;
