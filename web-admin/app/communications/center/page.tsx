@@ -59,6 +59,8 @@ export default function UnifiedCommunicationsCenter() {
   const [filterDirection, setFilterDirection] = useState<'all' | 'inbound' | 'outbound'>('all');
   const [showFilters, setShowFilters] = useState(false);
   const [selectedComm, setSelectedComm] = useState<Communication | null>(null);
+  const [conversationHistory, setConversationHistory] = useState<Communication[]>([]);
+  const [loadingConversation, setLoadingConversation] = useState(false);
   const [showReplyModal, setShowReplyModal] = useState(false);
   const [replyText, setReplyText] = useState('');
   const [replySubject, setReplySubject] = useState('');
@@ -66,7 +68,9 @@ export default function UnifiedCommunicationsCenter() {
   const [quickComposeText, setQuickComposeText] = useState('');
   const [quickComposeType, setQuickComposeType] = useState<'inapp' | 'sms' | 'email' | 'phone'>('inapp');
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const emojiPickerRef = useRef<HTMLDivElement>(null);
   
   const [stats, setStats] = useState({
     total: 0,
