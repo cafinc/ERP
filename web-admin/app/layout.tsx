@@ -15,14 +15,15 @@ export default function RootLayout({
 }>) {
   const pathname = usePathname();
   
-  // Pages that should NOT have the navigation/header (login, etc.)
+  // Pages that should NOT have the navigation/header (login, communications center popup, etc.)
   const isAuthPage = pathname === '/login' || pathname === '/forgot-password' || pathname === '/reset-password';
+  const isStandalonePage = pathname === '/communications/center';
 
   return (
     <html lang="en">
       <body className={`${inter.className} antialiased`}>
         <AuthProvider>
-          {isAuthPage ? (
+          {(isAuthPage || isStandalonePage) ? (
             children
           ) : (
             <HybridNavigationTopBar>{children}</HybridNavigationTopBar>
