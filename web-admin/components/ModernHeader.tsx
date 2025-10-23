@@ -196,94 +196,94 @@ export default function ModernHeader() {
               </div>
             </form>
 
-          {/* Alerts Icon */}
-          <div ref={notificationRef} className="relative flex-shrink-0">
-            <button
-              onClick={() => setShowNotifications(!showNotifications)}
-              className={`p-2 rounded-lg relative cursor-pointer ${
-                showNotifications 
-                  ? 'bg-white text-[#3f72af]' 
-                  : 'bg-transparent text-white hover:bg-white hover:text-[#3f72af] transition-colors duration-200'
-              }`}
-              title="Notifications"
-            >
-              <Bell className="w-6 h-6" />
-            </button>
-            <AlertsDropdown
-              isOpen={showNotifications}
-              onClose={() => setShowNotifications(false)}
-            />
-          </div>
+            {/* Alerts Icon */}
+            <div ref={notificationRef} className="relative flex-shrink-0">
+              <button
+                onClick={() => setShowNotifications(!showNotifications)}
+                className={`p-2 rounded-lg relative cursor-pointer ${
+                  showNotifications 
+                    ? 'bg-white text-[#3f72af]' 
+                    : 'bg-transparent text-white hover:bg-white hover:text-[#3f72af] transition-colors duration-200'
+                }`}
+                title="Notifications"
+              >
+                <Bell className="w-5 h-5" />
+              </button>
+              <AlertsDropdown
+                isOpen={showNotifications}
+                onClose={() => setShowNotifications(false)}
+              />
+            </div>
 
-          {/* Communications Icon */}
-          <div className="relative flex-shrink-0">
-            <button
-              onClick={() => setShowUnifiedComms(!showUnifiedComms)}
-              className={`p-2 rounded-lg relative cursor-pointer ${
-                showUnifiedComms 
-                  ? 'bg-white text-[#3f72af]' 
-                  : 'bg-transparent text-white hover:bg-white hover:text-[#3f72af] transition-colors duration-200'
-              }`}
-              title="All Communications"
-            >
-              <MessageSquare className="w-6 h-6" />
-              {totalUnreadComms > 0 && (
-                <span className="absolute top-0 right-0 flex items-center justify-center">
-                  <span className="absolute inline-flex h-4 w-4 rounded-full bg-blue-500 opacity-75 animate-ping"></span>
-                  <span className="relative inline-flex items-center justify-center h-4 w-4 rounded-full bg-blue-500 text-white text-[10px] font-bold">
-                    {totalUnreadComms > 9 ? '9+' : totalUnreadComms}
+            {/* Communications Icon */}
+            <div className="relative flex-shrink-0">
+              <button
+                onClick={() => setShowUnifiedComms(!showUnifiedComms)}
+                className={`p-2 rounded-lg relative cursor-pointer ${
+                  showUnifiedComms 
+                    ? 'bg-white text-[#3f72af]' 
+                    : 'bg-transparent text-white hover:bg-white hover:text-[#3f72af] transition-colors duration-200'
+                }`}
+                title="All Communications"
+              >
+                <MessageSquare className="w-5 h-5" />
+                {totalUnreadComms > 0 && (
+                  <span className="absolute top-0 right-0 flex items-center justify-center">
+                    <span className="absolute inline-flex h-4 w-4 rounded-full bg-blue-500 opacity-75 animate-ping"></span>
+                    <span className="relative inline-flex items-center justify-center h-4 w-4 rounded-full bg-blue-500 text-white text-[10px] font-bold">
+                      {totalUnreadComms > 9 ? '9+' : totalUnreadComms}
+                    </span>
                   </span>
-                </span>
-              )}
-            </button>
-            <UnifiedCommunicationsDropdown 
-              isOpen={showUnifiedComms}
-              onClose={() => setShowUnifiedComms(false)}
-            />
-          </div>
+                )}
+              </button>
+              <UnifiedCommunicationsDropdown 
+                isOpen={showUnifiedComms}
+                onClose={() => setShowUnifiedComms(false)}
+              />
+            </div>
 
-          {/* Divider */}
-          <div className="w-px h-8 bg-white bg-opacity-20" />
+            {/* Divider */}
+            <div className="w-px h-8 bg-white bg-opacity-20" />
 
-          {/* Activity Icon */}
-          <div ref={activityRef} className="relative flex-shrink-0">
-            <button
-              onClick={() => setShowActivity(!showActivity)}
-              className={`p-2 rounded-lg relative cursor-pointer ${
-                showActivity 
-                  ? 'bg-white text-[#3f72af]' 
-                  : 'bg-transparent text-white hover:bg-white hover:text-[#3f72af] transition-colors duration-200'
-              }`}
-              title="Activity"
-            >
-              <Activity className="w-6 h-6" />
-            </button>
-            <ActivityDropdown
-              isOpen={showActivity}
-              onClose={() => setShowActivity(false)}
-            />
-          </div>
+            {/* Activity Icon */}
+            <div ref={activityRef} className="relative flex-shrink-0">
+              <button
+                onClick={() => setShowActivity(!showActivity)}
+                className={`p-2 rounded-lg relative cursor-pointer ${
+                  showActivity 
+                    ? 'bg-white text-[#3f72af]' 
+                    : 'bg-transparent text-white hover:bg-white hover:text-[#3f72af] transition-colors duration-200'
+                }`}
+                title="Activity"
+              >
+                <Activity className="w-5 h-5" />
+              </button>
+              <ActivityDropdown
+                isOpen={showActivity}
+                onClose={() => setShowActivity(false)}
+              />
+            </div>
 
-          {/* Avatar */}
-          <div ref={profileRef} className="relative flex-shrink-0">
-            <button
-              onClick={() => setShowProfileMenu(!showProfileMenu)}
-              className="w-10 h-10 rounded-full flex items-center justify-center bg-white bg-opacity-20 hover:bg-opacity-30 transition-all border-2 border-white border-opacity-30 cursor-pointer"
-            >
-              {user?.avatar ? (
-                user.avatar.length <= 4 ? (
-                  <span className="text-xl">{user.avatar}</span>
+            {/* Avatar */}
+            <div ref={profileRef} className="relative flex-shrink-0">
+              <button
+                onClick={() => setShowProfileMenu(!showProfileMenu)}
+                className="w-10 h-10 rounded-full flex items-center justify-center bg-white bg-opacity-20 hover:bg-opacity-30 transition-all border-2 border-white border-opacity-30 cursor-pointer"
+              >
+                {user?.avatar ? (
+                  user.avatar.length <= 4 ? (
+                    <span className="text-xl">{user.avatar}</span>
+                  ) : (
+                    <img
+                      src={user.avatar}
+                      alt="Profile"
+                      className="w-full h-full rounded-full object-cover"
+                    />
+                  )
                 ) : (
-                  <img
-                    src={user.avatar}
-                    alt="Profile"
-                    className="w-full h-full rounded-full object-cover"
-                  />
-                )
-              ) : (
-                <span className="text-sm font-bold">{getInitials()}</span>
-              )}
-            </button>
+                  <span className="text-sm font-bold">{getInitials()}</span>
+                )}
+              </button>
 
             {/* Profile Dropdown */}
             {showProfileMenu && (
