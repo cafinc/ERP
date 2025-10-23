@@ -181,7 +181,7 @@ class ServiceLifecycleAutomation:
     async def approve_estimate(estimate_id: str, approved_by: str) -> Dict:
         """
         Step 3: Customer approves estimate
-        Triggers automatic work order creation
+        Triggers automatic PROJECT creation, then work order
         """
         try:
             estimate = await estimates_collection.find_one({"_id": ObjectId(estimate_id)})
@@ -204,8 +204,11 @@ class ServiceLifecycleAutomation:
             
             logger.info(f"Estimate approved: {estimate_id}")
             
-            # Auto-create work order
-            work_order = await ServiceLifecycleAutomation._create_work_order_from_estimate(estimate)
+            # Auto-create PROJECT from estimate
+            project = await ServiceLifecycleAutomation._create_project_from_estimate(estimate)
+            
+            # Auto-create work order linked to project
+            work_order = await ServiceLifecycleAutomation._create_work_order_from_project(estimate, project)
             
             # Create task for crew assignment
             await ServiceLifecycleAutomation._create_crew_assignment_task(work_order)
@@ -215,14 +218,15 @@ class ServiceLifecycleAutomation:
             if customer and customer.get("email"):
                 await ServiceLifecycleAutomation._send_email(
                     to=customer["email"],
-                    subject="Work Order Created",
-                    body=f"Your service has been scheduled. Work order #{work_order['_id']} created."
+                    subject="Project Created - Work Order Scheduled",
+                    body=f"Your service has been approved! Project #{project['_id']} created. Work order #{work_order['_id']} scheduled."
                 )
             
             return {
                 "success": True,
+                "project_id": str(project["_id"]),
                 "work_order_id": str(work_order["_id"]),
-                "message": "Estimate approved and work order created"
+                "message": "Estimate approved, project and work order created"
             }
             
         except Exception as e:
