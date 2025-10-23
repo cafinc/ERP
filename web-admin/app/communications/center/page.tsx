@@ -284,9 +284,8 @@ export default function UnifiedCommunicationsCenter() {
     await fetchConversationHistory(comm);
   };
   
-  const addEmoji = (emoji: any) => {
-    setReplyText(replyText + emoji.native);
-    setShowEmojiPicker(false);
+  const addEmoji = (emoji: string) => {
+    setReplyText(replyText + emoji);
   };
   
   // Close emoji picker when clicking outside
