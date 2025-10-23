@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef, forwardRef, useImperativeHandle } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   MessageSquare, 
   Mail, 
