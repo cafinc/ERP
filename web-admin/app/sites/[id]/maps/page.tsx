@@ -82,31 +82,6 @@ export default function SiteMapsGeofencingPage() {
     }
   }, [googleMapsLoaded, site, activeTab]);
 
-  const loadGoogleMapsScript = () => {
-    if (typeof window !== 'undefined') {
-      if (window.google) {
-        setGoogleMapsLoaded(true);
-        return;
-      }
-
-      const script = document.createElement('script');
-      const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
-      if (!apiKey) {
-        console.error('Google Maps API key not found');
-        return;
-      }
-      script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=drawing,geometry`;
-      script.async = true;
-      script.defer = true;
-      script.onload = () => setGoogleMapsLoaded(true);
-      script.onerror = () => {
-        console.error('Failed to load Google Maps');
-        alert('Failed to load Google Maps. Please check your API key.');
-      };
-      document.head.appendChild(script);
-    }
-  };
-
   const fetchSiteDetails = async () => {
     try {
       const siteResponse = await api.get(`/sites/${siteId}`);
