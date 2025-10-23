@@ -14,29 +14,50 @@ import os
 # Get backend URL from frontend .env
 BACKEND_URL = "https://winterwork-hub.preview.emergentagent.com/api"
 
-class TemplateSystemTester:
+class BackendTester:
     def __init__(self):
+        self.base_url = BACKEND_URL
         self.session = requests.Session()
-        self.test_results = []
-        self.created_templates = []  # Track created templates for cleanup
-        
-    def log_test(self, test_name: str, success: bool, details: str = "", response_data: Any = None):
-        """Log test result"""
-        result = {
-            "test": test_name,
-            "success": success,
-            "details": details,
-            "timestamp": datetime.now().isoformat(),
-            "response_data": response_data
+        self.test_results = {
+            "hr_module": {"total": 0, "passed": 0, "failed": 0, "errors": []},
+            "template_system": {"total": 0, "passed": 0, "failed": 0, "errors": []},
+            "customer_management": {"total": 0, "passed": 0, "failed": 0, "errors": []},
+            "work_orders": {"total": 0, "passed": 0, "failed": 0, "errors": []},
+            "task_system": {"total": 0, "passed": 0, "failed": 0, "errors": []}
         }
-        self.test_results.append(result)
-        status = "✅ PASS" if success else "❌ FAIL"
-        print(f"{status}: {test_name}")
-        if details:
-            print(f"    Details: {details}")
-        if not success and response_data:
-            print(f"    Response: {response_data}")
-        print()
+        
+    def log_result(self, module, test_name, success, error_msg=None, response=None):
+        """Log test result"""
+        self.test_results[module]["total"] += 1
+        if success:
+            self.test_results[module]["passed"] += 1
+            print(f"✅ {test_name}")
+        else:
+            self.test_results[module]["failed"] += 1
+            error_detail = f"{test_name}: {error_msg}"
+            if response:
+                error_detail += f" (Status: {response.status_code}, Response: {response.text[:200]})"
+            self.test_results[module]["errors"].append(error_detail)
+            print(f"❌ {test_name}: {error_msg}")
+            
+    def make_request(self, method, endpoint, data=None, params=None):
+        """Make HTTP request with error handling"""
+        try:
+            url = f"{self.base_url}{endpoint}"
+            if method.upper() == "GET":
+                response = self.session.get(url, params=params)
+            elif method.upper() == "POST":
+                response = self.session.post(url, json=data, params=params)
+            elif method.upper() == "PUT":
+                response = self.session.put(url, json=data, params=params)
+            elif method.upper() == "DELETE":
+                response = self.session.delete(url, params=params)
+            else:
+                raise ValueError(f"Unsupported method: {method}")
+            return response
+        except Exception as e:
+            print(f"Request error for {method} {endpoint}: {str(e)}")
+            return None
 
     def test_suite_1_template_crud(self):
         """TEST SUITE 1: Template CRUD (Full Cycle)"""
