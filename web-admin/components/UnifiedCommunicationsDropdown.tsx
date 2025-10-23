@@ -237,8 +237,4 @@ export default function UnifiedCommunicationsDropdown({
       </div>
     </div>
   );
-});
-
-UnifiedCommunicationsDropdown.displayName = 'UnifiedCommunicationsDropdown';
-
-export default UnifiedCommunicationsDropdown;
+}
