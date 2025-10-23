@@ -20,8 +20,11 @@ import {
   CheckCircle,
   Clock,
   Paperclip as PaperClipIcon,
-  Send as PaperAirplaneIcon
+  Send as PaperAirplaneIcon,
+  Smile
 } from 'lucide-react';
+import data from '@emoji-mart/data';
+import Picker from '@emoji-mart/react';
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || '';
 
