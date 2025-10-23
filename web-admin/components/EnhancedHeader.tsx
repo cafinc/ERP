@@ -191,9 +191,10 @@ export default function EnhancedHeader() {
               </div>
             ) : (
               <img 
-                src="https://customer-assets.emergentagent.com/job_snow-ops-hub/artifacts/cj7hlxxz_noBgWhite.png" 
-                alt="Default Logo" 
+                src="https://customer-assets.emergentagent.com/job_snowmsg-hub/artifacts/qz23wi1m_White%20logo%20-%20no%20background.png" 
+                alt="Logo" 
                 className="h-16 w-auto"
+                style={{ maxWidth: '240px', objectFit: 'contain' }}
               />
             )}
           </div>
