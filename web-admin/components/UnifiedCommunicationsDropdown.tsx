@@ -81,9 +81,14 @@ export default function UnifiedCommunicationsDropdown({
     }
   };
 
-  const openFullCommunicationsCenter = () => {
-    window.open('/communications/center', '_blank', 'width=1200,height=800');
+  const openFullCommunicationsCenter = (type?: string) => {
+    const url = type ? `/communications/center?tab=${type}` : '/communications/center';
+    window.open(url, '_blank', 'width=1200,height=800');
     onClose();
+  };
+
+  const handleMessageClick = (comm: Communication) => {
+    openFullCommunicationsCenter(comm.type);
   };
 
   const getIcon = (type: string) => {
