@@ -33,6 +33,7 @@ export default function ModernHeader() {
   const profileRef = useRef<HTMLDivElement>(null);
   const notificationRef = useRef<HTMLDivElement>(null);
   const quickAddRef = useRef<HTMLDivElement>(null);
+  const activityRef = useRef<HTMLDivElement>(null);
 
   // Branding
   const [logoUrl, setLogoUrl] = useState<string>('');
