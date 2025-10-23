@@ -236,10 +236,35 @@ export default function UnifiedCommunicationsCenter() {
     a.click();
   };
 
-  const handleReply = (comm: Communication) => {
+  const fetchConversationHistory = async (comm: Communication) => {
+    setLoadingConversation(true);
+    try {
+      // Fetch conversation history based on customer_id and type
+      const response = await fetch(
+        `${BACKEND_URL}/communications?customer_id=${comm.customer_id}&type=${comm.type}&sort=timestamp:asc`
+      );
+      
+      if (response.ok) {
+        const data = await response.json();
+        setConversationHistory(data);
+      } else {
+        // If API fails, just show the single message
+        setConversationHistory([comm]);
+      }
+    } catch (error) {
+      console.error('Error fetching conversation:', error);
+      // Fallback to single message
+      setConversationHistory([comm]);
+    } finally {
+      setLoadingConversation(false);
+    }
+  };
+
+  const handleMessageClick = async (comm: Communication) => {
     setSelectedComm(comm);
     setShowReplyModal(true);
     setReplyText('');
+    setShowEmojiPicker(false);
     
     // Pre-populate subject for email replies
     if (comm.type === 'email' && comm.subject) {
@@ -247,7 +272,32 @@ export default function UnifiedCommunicationsCenter() {
     } else {
       setReplySubject('');
     }
+    
+    // Fetch conversation history
+    await fetchConversationHistory(comm);
   };
+  
+  const addEmoji = (emoji: any) => {
+    setReplyText(replyText + emoji.native);
+    setShowEmojiPicker(false);
+  };
+  
+  // Close emoji picker when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (emojiPickerRef.current && !emojiPickerRef.current.contains(event.target as Node)) {
+        setShowEmojiPicker(false);
+      }
+    };
+    
+    if (showEmojiPicker) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showEmojiPicker]);
 
   const sendReply = async () => {
     if (!selectedComm) return;
