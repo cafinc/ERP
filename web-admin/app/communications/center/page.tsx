@@ -559,6 +559,123 @@ export default function UnifiedCommunicationsCenter() {
           </div>
         )}
       </div>
+
+      {/* Reply Modal */}
+      {showReplyModal && selectedComm && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            {/* Modal Header */}
+            <div className={`p-6 border-b border-gray-200 ${getTypeColor(selectedComm.type)} bg-opacity-10`}>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className={`p-3 rounded-lg ${getTypeColor(selectedComm.type)} text-white`}>
+                    {getTypeIcon(selectedComm.type)}
+                  </div>
+                  <div>
+                    <h2 className="text-xl font-bold text-gray-900">
+                      {selectedComm.type === 'phone' ? 'Add Call Notes' : `Reply via ${selectedComm.type.toUpperCase()}`}
+                    </h2>
+                    <p className="text-sm text-gray-600 mt-1">
+                      To: {selectedComm.customer_name || selectedComm.from || selectedComm.to || 'Unknown'}
+                    </p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => {
+                    setShowReplyModal(false);
+                    setSelectedComm(null);
+                    setReplyText('');
+                    setReplySubject('');
+                  }}
+                  className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                >
+                  <X className="w-5 h-5 text-gray-600" />
+                </button>
+              </div>
+            </div>
+
+            {/* Original Message */}
+            <div className="p-6 bg-gray-50 border-b border-gray-200">
+              <h3 className="text-sm font-semibold text-gray-700 mb-2">Original Message:</h3>
+              <div className="bg-white p-4 rounded-lg border border-gray-200">
+                {selectedComm.type === 'email' && selectedComm.subject && (
+                  <p className="text-sm font-semibold text-gray-900 mb-2">
+                    Subject: {selectedComm.subject}
+                  </p>
+                )}
+                <p className="text-sm text-gray-700 whitespace-pre-wrap">
+                  {getMessagePreview(selectedComm)}
+                </p>
+                <p className="text-xs text-gray-500 mt-2">
+                  {formatTimestamp(selectedComm.timestamp || selectedComm.created_at || '')}
+                </p>
+              </div>
+            </div>
+
+            {/* Reply Form */}
+            <div className="p-6">
+              {selectedComm.type === 'email' && (
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Subject
+                  </label>
+                  <input
+                    type="text"
+                    value={replySubject}
+                    onChange={(e) => setReplySubject(e.target.value)}
+                    placeholder="Email subject..."
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+              )}
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  {selectedComm.type === 'phone' ? 'Call Notes' : 'Message'}
+                </label>
+                <textarea
+                  value={replyText}
+                  onChange={(e) => setReplyText(e.target.value)}
+                  placeholder={getReplyPlaceholder()}
+                  rows={8}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                />
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex items-center justify-end gap-3 mt-6">
+                <button
+                  onClick={() => {
+                    setShowReplyModal(false);
+                    setSelectedComm(null);
+                    setReplyText('');
+                    setReplySubject('');
+                  }}
+                  className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={sendReply}
+                  disabled={sending || !replyText.trim() || (selectedComm.type === 'email' && !replySubject.trim())}
+                  className={`px-6 py-2 text-white rounded-lg transition-colors ${getTypeColor(selectedComm.type)} hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2`}
+                >
+                  {sending ? (
+                    <>
+                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white" />
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      {selectedComm.type === 'phone' ? 'Save Note' : 'Send Reply'}
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
