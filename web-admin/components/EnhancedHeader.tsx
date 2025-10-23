@@ -31,10 +31,9 @@ export default function EnhancedHeader() {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
-  const [showMessagesDropdown, setShowMessagesDropdown] = useState(false);
-  const [showEmailsDropdown, setShowEmailsDropdown] = useState(false);
-  const [showCallsDropdown, setShowCallsDropdown] = useState(false);
   const [showUnifiedComms, setShowUnifiedComms] = useState(false);
+  const [showQuickAdd, setShowQuickAdd] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   const [unreadMessageCount, setUnreadMessageCount] = useState(0);
   const [unreadEmailCount, setUnreadEmailCount] = useState(0);
   const [unreadNotificationCount, setUnreadNotificationCount] = useState(0);
