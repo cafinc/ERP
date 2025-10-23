@@ -378,8 +378,10 @@ export default function ProfileSettings() {
                               setAvatarPreview(emoji);
                               setShowEmojiPicker(false);
                               setSuccessMessage('Avatar updated successfully!');
-                              await refreshUser();
-                              setTimeout(() => setSuccessMessage(''), 3000);
+                              // Reload page to refresh user context
+                              setTimeout(() => {
+                                window.location.reload();
+                              }, 1000);
                             } catch (error) {
                               console.error('Error updating avatar:', error);
                               setErrorMessage('Failed to update avatar');
