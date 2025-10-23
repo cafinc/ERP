@@ -586,9 +586,9 @@ async def create_performance_review(review: PerformanceReviewCreate):
         review_dict["updated_at"] = datetime.utcnow()
         
         result = await performance_reviews_collection.insert_one(review_dict)
-        review_dict["id"] = str(result.inserted_id)
+        review_dict["_id"] = result.inserted_id
         
-        return {"success": True, "review": review_dict}
+        return {"success": True, "review": serialize_doc(review_dict)}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
