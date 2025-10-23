@@ -232,8 +232,8 @@ export default function EnhancedHeader() {
                   <MessageSquare className="w-6 h-6" />
                   {totalUnreadComms > 0 && (
                     <span className="absolute top-0 right-0 flex items-center justify-center">
-                      <span className="absolute inline-flex h-3 w-3 rounded-full bg-blue-500 opacity-75 animate-ping"></span>
-                      <span className="relative inline-flex items-center justify-center h-3 w-3 rounded-full bg-blue-500 text-white text-[8px] font-bold">
+                      <span className="absolute inline-flex h-4 w-4 rounded-full bg-blue-500 opacity-75 animate-ping"></span>
+                      <span className="relative inline-flex items-center justify-center h-4 w-4 rounded-full bg-blue-500 text-white text-[10px] font-bold">
                         {totalUnreadComms > 9 ? '9+' : totalUnreadComms}
                       </span>
                     </span>
