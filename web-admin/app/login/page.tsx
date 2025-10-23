@@ -47,7 +47,14 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
       <div className="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">❄️ SnowTrack Admin</h1>
+          <div className="flex justify-center mb-4">
+            <img 
+              src="https://customer-assets.emergentagent.com/job_snowmsg-hub/artifacts/4h69gasr_Color%20logo%20-%20no%20background.png" 
+              alt="Logo" 
+              className="h-20 w-auto"
+              style={{ maxWidth: '280px', objectFit: 'contain' }}
+            />
+          </div>
           <p className="text-gray-600 mt-2">Sign in to your account</p>
         </div>
 
