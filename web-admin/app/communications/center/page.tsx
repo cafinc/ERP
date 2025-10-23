@@ -525,11 +525,23 @@ export default function UnifiedCommunicationsCenter() {
                           </span>
                         )}
                       </div>
-                      <div className="flex items-center gap-2">
-                        <Clock className="w-4 h-4 text-gray-400" />
-                        <span className="text-sm text-gray-500">
-                          {formatTimestamp(comm.timestamp || comm.created_at || '')}
-                        </span>
+                      <div className="flex items-center gap-2 flex-shrink-0">
+                        <div className="flex flex-col items-end">
+                          <div className="flex items-center gap-1">
+                            <Clock className="w-3.5 h-3.5 text-gray-400" />
+                            <span className="text-xs font-medium text-gray-700">
+                              {formatTimestamp(comm.timestamp || comm.created_at || '')}
+                            </span>
+                          </div>
+                          <span className="text-xs text-gray-500">
+                            {new Date(comm.timestamp || comm.created_at || '').toLocaleString('en-US', {
+                              month: 'short',
+                              day: 'numeric',
+                              hour: '2-digit',
+                              minute: '2-digit'
+                            })}
+                          </span>
+                        </div>
                         {comm.read ? (
                           <CheckCircle className="w-4 h-4 text-green-500" title="Read" />
                         ) : (
