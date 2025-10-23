@@ -19,6 +19,20 @@ import {
   Briefcase,
   TrendingUp,
   Activity,
+  Menu,
+  LayoutDashboard,
+  Users,
+  FolderOpen,
+  DollarSign,
+  MapPin,
+  UserCog,
+  Link2,
+  Wrench,
+  Shield,
+  Camera,
+  BarChart3,
+  ChevronRight,
+  ChevronDown,
 } from 'lucide-react';
 
 export default function ModernHeader() {
