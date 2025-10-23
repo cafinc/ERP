@@ -163,6 +163,9 @@ test_plan:
       - working: false
         agent: "testing"
         comment: "❌ Cannot test due to employee creation dependency. Same async/sync mismatch issue as Employee Management."
+      - working: false
+        agent: "testing"
+        comment: "❌ POST /api/hr/time-entries fails with HTTP 500 BSON ObjectId serialization error. GET endpoints working (found 1 time entry). Clock in/out functionality blocked by serialization issue."
 
   - task: "HR Module - PTO Management APIs"
     implemented: true
