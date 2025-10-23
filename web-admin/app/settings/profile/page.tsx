@@ -363,10 +363,10 @@ export default function ProfileSettings() {
                   )}
                 </div>
                 
-                {/* Emoji Picker */}
+                {/* Avatar Picker */}
                 {showEmojiPicker && (
                   <div className="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
-                    <h4 className="text-sm font-semibold text-gray-700 mb-3">Choose Your Emoji Avatar</h4>
+                    <h4 className="text-sm font-semibold text-gray-700 mb-3">Choose Your Avatar</h4>
                     <div className="grid grid-cols-10 gap-2 max-h-64 overflow-y-auto">
                       {AVATAR_EMOJIS.map((emoji, idx) => (
                         <button
