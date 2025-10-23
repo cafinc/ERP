@@ -113,24 +113,6 @@ export default function CreateSitePage() {
     }
   };
 
-  const loadGoogleMapsScript = () => {
-    if (typeof window !== 'undefined' && !(window as any).google) {
-      const script = document.createElement('script');
-      const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
-      if (!apiKey) {
-        console.warn('Google Maps API key not configured - address autocomplete will be disabled');
-        return;
-      }
-      script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`;
-      script.async = true;
-      script.defer = true;
-      script.onload = initializeAutocomplete;
-      document.head.appendChild(script);
-    } else if ((window as any).google) {
-      initializeAutocomplete();
-    }
-  };
-
   const initializeAutocomplete = () => {
     if (!addressInputRef.current || !(window as any).google) return;
 
