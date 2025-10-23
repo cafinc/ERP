@@ -574,7 +574,7 @@ export default function ModernHeaderWithNav() {
             </div>
 
             {/* Search Bar */}
-            <div ref={searchRef} className="relative" style={{ width: '320px' }}>
+            <div ref={searchRef} className="relative hidden md:block" style={{ width: '320px' }}>
               <form onSubmit={handleSearch}>
                 <div className="relative">
                   <div className="absolute left-2.5 top-1/2 transform -translate-y-1/2">
