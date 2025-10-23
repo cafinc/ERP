@@ -1,0 +1,1434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snow Removal Platform - Requirements Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #4682B4 0%, #3a6d94 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .form-content {
+            padding: 40px 30px;
+        }
+        
+        .prompt-section {
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+        
+        .prompt-section:last-child {
+            border-bottom: none;
+        }
+        
+        .prompt-title {
+            font-size: 1.8em;
+            color: #4682B4;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .prompt-number {
+            background: #4682B4;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+        
+        .question {
+            margin-bottom: 25px;
+        }
+        
+        .question-label {
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 12px;
+            display: block;
+            font-size: 1.1em;
+        }
+        
+        .option {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+        
+        .option:hover {
+            background: #f3f4f6;
+        }
+        
+        .option input[type="checkbox"],
+        .option input[type="radio"] {
+            margin-right: 12px;
+            margin-top: 4px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        
+        .option label {
+            cursor: pointer;
+            flex: 1;
+        }
+        
+        input[type="text"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 6px;
+            font-size: 1em;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+        
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #4682B4;
+        }
+        
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .ranking-input {
+            display: inline-block;
+            width: 60px;
+            margin-left: 10px;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #4682B4 0%, #3a6d94 100%);
+            color: white;
+            border: none;
+            padding: 18px 50px;
+            font-size: 1.2em;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            margin-top: 30px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(70, 130, 180, 0.4);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+        
+        .result-container {
+            display: none;
+            padding: 40px 30px;
+            background: #f9fafb;
+        }
+        
+        .result-container.show {
+            display: block;
+        }
+        
+        .result-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .result-header h2 {
+            color: #4682B4;
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .result-actions {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .action-btn {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .copy-btn {
+            background: #10b981;
+            color: white;
+        }
+        
+        .download-btn {
+            background: #3b82f6;
+            color: white;
+        }
+        
+        .edit-btn {
+            background: #6b7280;
+            color: white;
+        }
+        
+        .output-box {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 25px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            white-space: pre-wrap;
+            max-height: 600px;
+            overflow-y: auto;
+            line-height: 1.8;
+        }
+        
+        .success-message {
+            background: #d1fae5;
+            color: #065f46;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+            display: none;
+        }
+        
+        .success-message.show {
+            display: block;
+        }
+        
+        .progress-bar {
+            height: 6px;
+            background: #e5e7eb;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4682B4 0%, #3a6d94 100%);
+            width: 0%;
+            transition: width 0.3s;
+        }
+        
+        .helper-text {
+            font-size: 0.9em;
+            color: #6b7280;
+            margin-top: 8px;
+            font-style: italic;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .form-content {
+                padding: 20px 15px;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .result-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌨️ Snow Removal Platform</h1>
+            <p>Project Requirements Form</p>
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        
+        <form id="requirementsForm" class="form-content">
+            
+            <!-- Prompt 1: API Keys -->
+            <div class="prompt-section">
+                <div class="prompt-title">
+                    <span class="prompt-number">1</span>
+                    API Keys & External Integrations
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">a) OpenWeather API (for weather integration)</label>
+                    <div class="option">
+                        <input type="radio" name="openweather" id="openweather_key" value="have_key">
+                        <label for="openweather_key">I have a real API key</label>
+                    </div>
+                    <input type="text" name="openweather_key_value" placeholder="Enter API key here (if selected above)" style="margin-left: 30px; margin-top: 10px;">
+                    <div class="option">
+                        <input type="radio" name="openweather" id="openweather_mock" value="use_mock" checked>
+                        <label for="openweather_mock">Use mock data for now</label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">b) QuickBooks Online (for accounting integration)</label>
+                    <div class="option">
+                        <input type="radio" name="quickbooks" id="quickbooks_key" value="have_credentials">
+                        <label for="quickbooks_key">I have OAuth credentials (Client ID, Client Secret)</label>
+                    </div>
+                    <input type="text" name="quickbooks_client_id" placeholder="Client ID (if selected above)" style="margin-left: 30px; margin-top: 10px;">
+                    <input type="text" name="quickbooks_client_secret" placeholder="Client Secret (if selected above)" style="margin-left: 30px; margin-top: 10px;">
+                    <div class="option">
+                        <input type="radio" name="quickbooks" id="quickbooks_mock" value="keep_mock" checked>
+                        <label for="quickbooks_mock">Keep as mock/placeholder for now</label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">c) Microsoft 365 (for Azure AD/Teams/Outlook)</label>
+                    <div class="option">
+                        <input type="radio" name="microsoft365" id="m365_key" value="have_credentials">
+                        <label for="m365_key">I have Azure app credentials</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="microsoft365" id="m365_mock" value="keep_mock" checked>
+                        <label for="m365_mock">Keep as mock/placeholder for now</label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">d) Google Services (Maps, Tasks, Gmail, Calendar)</label>
+                    <div class="option">
+                        <input type="radio" name="google" id="google_new" value="have_new_keys">
+                        <label for="google_new">I have API keys (will provide separately)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="google" id="google_existing" value="use_existing" checked>
+                        <label for="google_existing">Use existing keys in .env</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="google" id="google_mock" value="keep_mock">
+                        <label for="google_mock">Keep as mock/placeholder for now</label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">e) Twilio (for SMS - already configured)</label>
+                    <div class="option">
+                        <input type="radio" name="twilio" id="twilio_ready" value="production_ready" checked>
+                        <label for="twilio_ready">Current credentials are production-ready</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="twilio" id="twilio_new" value="need_new">
+                        <label for="twilio_new">Need new credentials</label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">f) Email Service (SMTP/Gmail)</label>
+                    <div class="option">
+                        <input type="radio" name="email" id="email_ready" value="production_ready" checked>
+                        <label for="email_ready">Current setup is production-ready</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="email" id="email_changes" value="need_changes">
+                        <label for="email_changes">Need configuration changes</label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Prompt 2: Priority & Scope -->
+            <div class="prompt-section">
+                <div class="prompt-title">
+                    <span class="prompt-number">2</span>
+                    Priority & Scope
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">a) Execution Strategy:</label>
+                    <div class="option">
+                        <input type="radio" name="execution_strategy" id="strategy_recommended" value="option_a" checked>
+                        <label for="strategy_recommended"><strong>Option A (Recommended):</strong> Fix critical bugs first (HR module, auth), then complete half-finished features (tasks, weather), then build integrations</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="execution_strategy" id="strategy_integration" value="option_b">
+                        <label for="strategy_integration"><strong>Option B:</strong> Focus on one integration end-to-end (Service Lifecycle Loop) and make it perfect</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="execution_strategy" id="strategy_quickwins" value="option_c">
+                        <label for="strategy_quickwins"><strong>Option C:</strong> Build all quick wins first for immediate polish, then tackle big features</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="execution_strategy" id="strategy_custom" value="option_d">
+                        <label for="strategy_custom"><strong>Option D:</strong> Custom priority</label>
+                    </div>
+                    <input type="text" name="custom_strategy" placeholder="Specify your custom strategy (if Option D selected)" style="margin-left: 30px; margin-top: 10px;">
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">b) Which integration is MOST important to your business?</label>
+                    <div class="option">
+                        <input type="radio" name="most_important_integration" id="int_lifecycle" value="service_lifecycle" checked>
+                        <label for="int_lifecycle">Service Lifecycle Loop (automated workflow from request to payment)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="most_important_integration" id="int_weather" value="weather_dispatch">
+                        <label for="int_weather">Weather-Driven Dispatch (proactive crew assignment)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="most_important_integration" id="int_financial" value="financial_intelligence">
+                        <label for="int_financial">Financial Intelligence (real-time profitability tracking)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="most_important_integration" id="int_communication" value="communication_unification">
+                        <label for="int_communication">Communication Unification (single timeline across all channels)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="most_important_integration" id="int_equipment" value="equipment_ecosystem">
+                        <label for="int_equipment">Smart Equipment Ecosystem (IoT, predictive maintenance)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="most_important_integration" id="int_fleet" value="fleet_tracking">
+                        <label for="int_fleet">Real-time Fleet Tracking (live map + dispatch board)</label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Prompt 3: User Type Priority -->
+            <div class="prompt-section">
+                <div class="prompt-title">
+                    <span class="prompt-number">3</span>
+                    User Type Priority
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">a) Primary User:</label>
+                    <div class="option">
+                        <input type="radio" name="primary_user" id="user_admin" value="admin" checked>
+                        <label for="user_admin">Admin/Office Staff (needs efficient operations tools)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="primary_user" id="user_crew" value="crew">
+                        <label for="user_crew">Crew Members (needs mobile app with offline capability)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="primary_user" id="user_customer" value="customer">
+                        <label for="user_customer">Customers (needs self-service portal)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="primary_user" id="user_all" value="all">
+                        <label for="user_all">All equally (balanced approach)</label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">b) Platform Priority:</label>
+                    <div class="option">
+                        <input type="radio" name="platform_priority" id="platform_web" value="web_first">
+                        <label for="platform_web">Web Admin first, then mobile</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="platform_priority" id="platform_mobile" value="mobile_first">
+                        <label for="platform_mobile">Mobile App first, then web admin</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="platform_priority" id="platform_both" value="both" checked>
+                        <label for="platform_both">Both simultaneously (balanced)</label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Prompt 4: Business Context -->
+            <div class="prompt-section">
+                <div class="prompt-title">
+                    <span class="prompt-number">4</span>
+                    Business Context
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">a) Company Size:</label>
+                    <div class="option">
+                        <input type="radio" name="company_size" id="size_solo" value="solo">
+                        <label for="size_solo">Solo operator (1-2 people)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="company_size" id="size_small" value="small" checked>
+                        <label for="size_small">Small crew (3-10 people)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="company_size" id="size_medium" value="medium">
+                        <label for="size_medium">Medium operation (11-50 people)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="company_size" id="size_large" value="large">
+                        <label for="size_large">Large operation (50+ people)</label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">b) Current Pain Points (rank 1-3, 1 being most painful):</label>
+                    <p class="helper-text">Enter a number (1, 2, or 3) for each pain point</p>
+                    
+                    <div style="margin-top: 15px;">
+                        <label>Manual dispatch and crew assignment: <input type="number" name="pain_dispatch" class="ranking-input" min="1" max="3" placeholder="1-3"></label>
+                    </div>
+                    <div style="margin-top: 10px;">
+                        <label>Invoicing and payment collection: <input type="number" name="pain_invoicing" class="ranking-input" min="1" max="3" placeholder="1-3"></label>
+                    </div>
+                    <div style="margin-top: 10px;">
+                        <label>Customer communication and retention: <input type="number" name="pain_communication" class="ranking-input" min="1" max="3" placeholder="1-3"></label>
+                    </div>
+                    <div style="margin-top: 10px;">
+                        <label>Equipment maintenance and tracking: <input type="number" name="pain_equipment" class="ranking-input" min="1" max="3" placeholder="1-3"></label>
+                    </div>
+                    <div style="margin-top: 10px;">
+                        <label>Financial visibility and profitability: <input type="number" name="pain_financial" class="ranking-input" min="1" max="3" placeholder="1-3"></label>
+                    </div>
+                    <div style="margin-top: 10px;">
+                        <label>Crew productivity and accountability: <input type="number" name="pain_crew" class="ranking-input" min="1" max="3" placeholder="1-3"></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">c) Business Goal Priority:</label>
+                    <div class="option">
+                        <input type="radio" name="business_goal" id="goal_scale" value="scale" checked>
+                        <label for="goal_scale">Scale operations (handle more customers with same resources)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="business_goal" id="goal_margins" value="margins">
+                        <label for="goal_margins">Improve margins (reduce costs, optimize pricing)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="business_goal" id="goal_retention" value="retention">
+                        <label for="goal_retention">Customer retention (better experience, reduce churn)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="business_goal" id="goal_efficiency" value="efficiency">
+                        <label for="goal_efficiency">Operational efficiency (reduce admin time)</label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Prompt 5: Technical Constraints -->
+            <div class="prompt-section">
+                <div class="prompt-title">
+                    <span class="prompt-number">5</span>
+                    Technical Constraints
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">a) Database:</label>
+                    <div class="option">
+                        <input type="radio" name="database" id="db_current" value="current_mongodb" checked>
+                        <label for="db_current">Current MongoDB setup is fine, keep using it</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="database" id="db_optimize" value="optimize">
+                        <label for="db_optimize">Need to optimize for scale (add indexes, queries)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="database" id="db_migrate" value="migrate">
+                        <label for="db_migrate">Planning to migrate to different database</label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">b) Hosting/Deployment:</label>
+                    <div class="option">
+                        <input type="radio" name="hosting" id="host_emergent" value="emergent" checked>
+                        <label for="host_emergent">Currently on Emergent platform (Kubernetes)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="hosting" id="host_self" value="self_host">
+                        <label for="host_self">Planning to self-host</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="hosting" id="host_other" value="other">
+                        <label for="host_other">Moving to different platform</label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">c) Mobile App Distribution:</label>
+                    <div class="option">
+                        <input type="radio" name="mobile_distribution" id="mobile_internal" value="internal" checked>
+                        <label for="mobile_internal">Internal use only (Expo Go is fine)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="mobile_distribution" id="mobile_production" value="production_build">
+                        <label for="mobile_production">Need production build (iOS App Store / Google Play)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="mobile_distribution" id="mobile_pwa" value="pwa">
+                        <label for="mobile_pwa">Progressive Web App is acceptable</label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">d) Performance Requirements:</label>
+                    <div class="option">
+                        <input type="radio" name="performance" id="perf_standard" value="standard" checked>
+                        <label for="perf_standard">Standard (current performance is acceptable)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="performance" id="perf_high" value="high">
+                        <label for="perf_high">High performance needed (real-time updates critical)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="performance" id="perf_enterprise" value="enterprise">
+                        <label for="perf_enterprise">Enterprise scale (thousands of concurrent users)</label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Prompt 6: Feature Preferences -->
+            <div class="prompt-section">
+                <div class="prompt-title">
+                    <span class="prompt-number">6</span>
+                    Feature Preferences
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">a) Authentication:</label>
+                    <div class="option">
+                        <input type="checkbox" name="auth_current" id="auth_current" checked>
+                        <label for="auth_current">Keep current email/password system</label>
+                    </div>
+                    <div class="option">
+                        <input type="checkbox" name="auth_social" id="auth_social">
+                        <label for="auth_social">Add social login (Google, Microsoft)</label>
+                    </div>
+                    <div class="option">
+                        <input type="checkbox" name="auth_sso" id="auth_sso">
+                        <label for="auth_sso">Add SSO for enterprise (Azure AD, Okta)</label>
+                    </div>
+                    <div class="option">
+                        <input type="checkbox" name="auth_2fa" id="auth_2fa">
+                        <label for="auth_2fa">Add multi-factor authentication (2FA)</label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">b) Communication Channels:</label>
+                    <div class="option">
+                        <input type="radio" name="comm_channels" id="comm_inapp" value="focus_inapp">
+                        <label for="comm_inapp">Focus on in-app messaging (reduce SMS/email costs)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="comm_channels" id="comm_all" value="keep_all" checked>
+                        <label for="comm_all">Keep all channels (SMS, email, in-app, phone logs)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="comm_channels" id="comm_add" value="add_new">
+                        <label for="comm_add">Add new channels (WhatsApp, Teams, Slack)</label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">c) Mobile App Experience:</label>
+                    <div class="option">
+                        <input type="radio" name="mobile_experience" id="mobile_offline" value="offline_first" checked>
+                        <label for="mobile_offline">Offline-first (works without internet, syncs later)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="mobile_experience" id="mobile_online" value="online_required">
+                        <label for="mobile_online">Online-required (simpler but needs connection)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="mobile_experience" id="mobile_hybrid" value="hybrid">
+                        <label for="mobile_hybrid">Hybrid (core features offline, advanced features online)</label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">d) Automation Level:</label>
+                    <div class="option">
+                        <input type="radio" name="automation" id="auto_max" value="maximum" checked>
+                        <label for="auto_max">Maximum automation (AI makes decisions, humans approve exceptions)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="automation" id="auto_moderate" value="moderate">
+                        <label for="auto_moderate">Moderate automation (AI suggests, humans decide)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="automation" id="auto_minimal" value="minimal">
+                        <label for="auto_minimal">Minimal automation (tools that assist, humans control)</label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Prompt 7: Testing & Quality -->
+            <div class="prompt-section">
+                <div class="prompt-title">
+                    <span class="prompt-number">7</span>
+                    Testing & Quality
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">a) Testing Approach:</label>
+                    <div class="option">
+                        <input type="radio" name="testing_approach" id="test_incremental" value="option_a" checked>
+                        <label for="test_incremental"><strong>Option A (Recommended):</strong> Test each major feature with backend testing agent before moving to next feature</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="testing_approach" id="test_end" value="option_b">
+                        <label for="test_end"><strong>Option B:</strong> Build everything first, then comprehensive testing at the end</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="testing_approach" id="test_minimal" value="option_c">
+                        <label for="test_minimal"><strong>Option C:</strong> Minimal testing, you'll test manually in production</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="testing_approach" id="test_maximum" value="option_d">
+                        <label for="test_maximum"><strong>Option D:</strong> Maximum testing (backend + frontend + E2E for everything)</label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">b) When to Stop and Ask for Feedback:</label>
+                    <div class="option">
+                        <input type="radio" name="feedback_timing" id="feedback_phase" value="after_phases" checked>
+                        <label for="feedback_phase">After completing each major phase (Critical Fixes → Complete Features → Integrations)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="feedback_timing" id="feedback_feature" value="after_feature">
+                        <label for="feedback_feature">After each feature is complete</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="feedback_timing" id="feedback_blocked" value="when_blocked">
+                        <label for="feedback_blocked">Only when blocked or need clarification</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="feedback_timing" id="feedback_end" value="at_end">
+                        <label for="feedback_end">Complete everything autonomously, then show final result</label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Prompt 8: Data & Sample Content -->
+            <div class="prompt-section">
+                <div class="prompt-title">
+                    <span class="prompt-number">8</span>
+                    Data & Sample Content
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">a) Customer Data:</label>
+                    <div class="option">
+                        <input type="radio" name="customer_data" id="data_existing" value="use_existing" checked>
+                        <label for="data_existing">Use existing data in database</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="customer_data" id="data_sample" value="create_sample">
+                        <label for="data_sample">Create realistic sample data (Canadian addresses, snow removal specific)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="customer_data" id="data_import" value="import">
+                        <label for="data_import">Import from file (will provide separately)</label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">b) Equipment & Inventory:</label>
+                    <div class="option">
+                        <input type="radio" name="equipment_data" id="equip_existing" value="use_existing" checked>
+                        <label for="equip_existing">Use existing equipment in database</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="equipment_data" id="equip_sample" value="create_sample">
+                        <label for="equip_sample">Create sample snow removal equipment (plows, trucks, salters)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="equipment_data" id="equip_specific" value="specific_list">
+                        <label for="equip_specific">Specific equipment list (will provide separately)</label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">c) Crew/Employee Data:</label>
+                    <div class="option">
+                        <input type="radio" name="crew_data" id="crew_existing" value="use_existing" checked>
+                        <label for="crew_existing">Use existing users in database</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="crew_data" id="crew_sample" value="create_sample">
+                        <label for="crew_sample">Create sample crew members</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="crew_data" id="crew_real" value="real_roster">
+                        <label for="crew_real">Real crew roster (will provide separately)</label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Prompt 9: Branding & UI -->
+            <div class="prompt-section">
+                <div class="prompt-title">
+                    <span class="prompt-number">9</span>
+                    Branding & UI Preferences
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">a) Color Scheme:</label>
+                    <div class="option">
+                        <input type="radio" name="color_scheme" id="color_current" value="current_blue" checked>
+                        <label for="color_current">Current blue/steel blue theme is perfect</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="color_scheme" id="color_different" value="different">
+                        <label for="color_different">Different colors</label>
+                    </div>
+                    <input type="text" name="custom_colors" placeholder="Specify colors or hex codes (if different selected)" style="margin-left: 30px; margin-top: 10px;">
+                    <div class="option">
+                        <input type="radio" name="color_scheme" id="color_branding" value="company_branding">
+                        <label for="color_branding">Match company branding</label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">b) Logo/Branding:</label>
+                    <div class="option">
+                        <input type="radio" name="logo" id="logo_none" value="no_logo" checked>
+                        <label for="logo_none">No logo needed yet</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="logo" id="logo_have" value="have_logo">
+                        <label for="logo_have">I have a logo (will provide image file)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="logo" id="logo_generic" value="generic">
+                        <label for="logo_generic">Generic snow removal branding is fine</label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">c) UI Density:</label>
+                    <div class="option">
+                        <input type="radio" name="ui_density" id="density_comfortable" value="comfortable" checked>
+                        <label for="density_comfortable">Comfortable (current spacing is good)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="ui_density" id="density_compact" value="compact">
+                        <label for="density_compact">Compact (fit more information on screen)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="ui_density" id="density_spacious" value="spacious">
+                        <label for="density_spacious">Spacious (more breathing room)</label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Prompt 10: Budget & Timeline -->
+            <div class="prompt-section">
+                <div class="prompt-title">
+                    <span class="prompt-number">10</span>
+                    Budget & Timeline
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">a) Timeline Expectations:</label>
+                    <div class="option">
+                        <input type="radio" name="timeline" id="timeline_asap" value="asap">
+                        <label for="timeline_asap"><strong>ASAP</strong> - Get to production as fast as possible (I'll prioritize speed over perfection)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="timeline" id="timeline_balanced" value="balanced" checked>
+                        <label for="timeline_balanced"><strong>Balanced</strong> - 2-3 weeks for solid MVP (recommended approach)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="timeline" id="timeline_thorough" value="thorough">
+                        <label for="timeline_thorough"><strong>Thorough</strong> - 4-6 weeks for polished, production-ready platform</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="timeline" id="timeline_norush" value="no_rush">
+                        <label for="timeline_norush"><strong>No rush</strong> - Build it right, take whatever time needed</label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">b) Scope for Initial Autonomous Work:</label>
+                    <div class="option">
+                        <input type="radio" name="scope" id="scope_phase1" value="phase1">
+                        <label for="scope_phase1"><strong>Phase 1 Only</strong> - Critical fixes + complete existing features (~40 hours)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="scope" id="scope_phase3" value="phase1_3" checked>
+                        <label for="scope_phase3"><strong>Phases 1-3</strong> - Fixes + features + core integrations (~100 hours)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="scope" id="scope_all" value="all_phases">
+                        <label for="scope_all"><strong>All Phases</strong> - Complete roadmap to production-ready (~200+ hours)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="scope" id="scope_unlimited" value="keep_building">
+                        <label for="scope_unlimited"><strong>Keep building until I say stop</strong></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">c) When should I pause for your review?</label>
+                    <div class="option">
+                        <input type="radio" name="review_timing" id="review_phase1" value="after_phase1">
+                        <label for="review_phase1">After Phase 1 (critical fixes complete)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="review_timing" id="review_phase2" value="after_phase2">
+                        <label for="review_phase2">After Phase 2 (existing features complete)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="review_timing" id="review_phase3" value="after_phase3" checked>
+                        <label for="review_phase3">After Phase 3 (core integrations complete)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="review_timing" id="review_phase5" value="after_phase5">
+                        <label for="review_phase5">After Phase 5 (analytics & intelligence complete)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="review_timing" id="review_done" value="when_done">
+                        <label for="review_done">Only when completely done</label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Prompt 11: Specific Requests -->
+            <div class="prompt-section">
+                <div class="prompt-title">
+                    <span class="prompt-number">11</span>
+                    Specific Requests
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">a) Must-Have Features (not in roadmap):</label>
+                    <textarea name="must_have_features" placeholder="List any specific features you absolutely need that weren't mentioned in the roadmap..."></textarea>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">b) Nice-to-Have Features:</label>
+                    <textarea name="nice_to_have" placeholder="List any wishlist items or features that would be nice but aren't critical..."></textarea>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">c) Features to Skip/Deprioritize:</label>
+                    <textarea name="skip_features" placeholder="List anything from the roadmap you don't need or want to deprioritize..."></textarea>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">d) Industry-Specific Requirements:</label>
+                    <div class="option">
+                        <input type="checkbox" name="industry_canadian" id="industry_canadian">
+                        <label for="industry_canadian">Canadian regulations/compliance (tax, labor laws)</label>
+                    </div>
+                    <div class="option">
+                        <input type="checkbox" name="industry_insurance" id="industry_insurance">
+                        <label for="industry_insurance">Insurance tracking and compliance</label>
+                    </div>
+                    <div class="option">
+                        <input type="checkbox" name="industry_safety" id="industry_safety">
+                        <label for="industry_safety">Safety certifications and training</label>
+                    </div>
+                    <div class="option">
+                        <input type="checkbox" name="industry_environmental" id="industry_environmental">
+                        <label for="industry_environmental">Environmental regulations (salt usage, runoff)</label>
+                    </div>
+                    <div class="option">
+                        <input type="checkbox" name="industry_none" id="industry_none" checked>
+                        <label for="industry_none">None, standard features are fine</label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Prompt 12: Decision-Making Authority -->
+            <div class="prompt-section">
+                <div class="prompt-title">
+                    <span class="prompt-number">12</span>
+                    Decision-Making Authority
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">a) For technical decisions (architecture, libraries, approaches):</label>
+                    <div class="option">
+                        <input type="radio" name="tech_decisions" id="tech_auto" value="autonomous" checked>
+                        <label for="tech_auto">You decide, use best practices and your judgment</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="tech_decisions" id="tech_major" value="major_only">
+                        <label for="tech_major">Ask me for major decisions only</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="tech_decisions" id="tech_all" value="ask_all">
+                        <label for="tech_all">Ask me for every decision</label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">b) For UX/design decisions (layouts, workflows, interactions):</label>
+                    <div class="option">
+                        <input type="radio" name="ux_decisions" id="ux_auto" value="autonomous" checked>
+                        <label for="ux_auto">You decide, create intuitive experiences</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="ux_decisions" id="ux_major" value="major_only">
+                        <label for="ux_major">Ask me for major decisions only</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="ux_decisions" id="ux_all" value="ask_all">
+                        <label for="ux_all">Ask me for every decision</label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">c) For business logic decisions (pricing models, workflow rules, calculations):</label>
+                    <div class="option">
+                        <input type="radio" name="business_decisions" id="business_standards" value="industry_standards" checked>
+                        <label for="business_standards">You decide based on snow removal industry standards</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="business_decisions" id="business_ask" value="ask_each">
+                        <label for="business_ask">Ask me for each business rule</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="business_decisions" id="business_detailed" value="detailed_rules">
+                        <label for="business_detailed">I'll provide detailed business rules separately</label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Additional Information -->
+            <div class="prompt-section">
+                <div class="prompt-title">
+                    <span class="prompt-number">📝</span>
+                    Additional Information
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">Any additional context, requirements, or constraints:</label>
+                    <textarea name="additional_info" placeholder="Share any other information that will help me build the perfect platform for your needs..."></textarea>
+                </div>
+            </div>
+            
+            <button type="submit" class="submit-btn">Generate Requirements Document</button>
+        </form>
+        
+        <div class="result-container" id="resultContainer">
+            <div class="result-header">
+                <h2>✅ Requirements Document Generated!</h2>
+                <p>Copy and paste this into the chat to begin autonomous implementation</p>
+            </div>
+            
+            <div class="success-message" id="successMessage">
+                ✓ Copied to clipboard!
+            </div>
+            
+            <div class="result-actions">
+                <button class="action-btn copy-btn" onclick="copyToClipboard()">📋 Copy to Clipboard</button>
+                <button class="action-btn download-btn" onclick="downloadDocument()">💾 Download as TXT</button>
+                <button class="action-btn edit-btn" onclick="editForm()">✏️ Edit Responses</button>
+            </div>
+            
+            <div class="output-box" id="outputBox"></div>
+        </div>
+    </div>
+    
+    <script>
+        const form = document.getElementById('requirementsForm');
+        const resultContainer = document.getElementById('resultContainer');
+        const outputBox = document.getElementById('outputBox');
+        const successMessage = document.getElementById('successMessage');
+        const progressFill = document.getElementById('progressFill');
+        
+        // Track progress
+        form.addEventListener('input', updateProgress);
+        
+        function updateProgress() {
+            const inputs = form.querySelectorAll('input, textarea, select');
+            let filled = 0;
+            let total = 0;
+            
+            inputs.forEach(input => {
+                if (input.type === 'radio') {
+                    const name = input.name;
+                    if (!form.querySelector(`input[name="${name}"][data-counted]`)) {
+                        total++;
+                        const checked = form.querySelector(`input[name="${name}"]:checked`);
+                        if (checked) {
+                            filled++;
+                            checked.setAttribute('data-counted', 'true');
+                        }
+                    }
+                } else if (input.type === 'checkbox') {
+                    // Count checkbox groups that have at least one checked
+                    const name = input.name;
+                    if (!input.hasAttribute('data-counted')) {
+                        total++;
+                        if (input.checked) {
+                            filled++;
+                            input.setAttribute('data-counted', 'true');
+                        }
+                    }
+                } else if (input.value.trim() !== '') {
+                    filled++;
+                    total++;
+                } else {
+                    total++;
+                }
+            });
+            
+            // Clean up data-counted attributes for next calculation
+            setTimeout(() => {
+                form.querySelectorAll('[data-counted]').forEach(el => el.removeAttribute('data-counted'));
+            }, 0);
+            
+            const percentage = (filled / total) * 100;
+            progressFill.style.width = percentage + '%';
+        }
+        
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            generateDocument();
+        });
+        
+        function generateDocument() {
+            const formData = new FormData(form);
+            let output = `# SNOW REMOVAL PLATFORM - PROJECT REQUIREMENTS
+# Generated: ${new Date().toLocaleString()}
+
+========================================
+AUTONOMOUS EXECUTION - REQUIREMENTS FORM
+========================================
+
+`;
+            
+            // Prompt 1: API Keys
+            output += `
+1. API KEYS & EXTERNAL INTEGRATIONS
+=====================================
+
+a) OpenWeather API:
+   - ${formData.get('openweather') === 'have_key' ? '✓ Has API key' : '○ Use mock data'}
+   ${formData.get('openweather_key_value') ? `   Key: ${formData.get('openweather_key_value')}` : ''}
+
+b) QuickBooks Online:
+   - ${formData.get('quickbooks') === 'have_credentials' ? '✓ Has OAuth credentials' : '○ Keep as mock'}
+   ${formData.get('quickbooks_client_id') ? `   Client ID: ${formData.get('quickbooks_client_id')}` : ''}
+   ${formData.get('quickbooks_client_secret') ? `   Client Secret: ${formData.get('quickbooks_client_secret')}` : ''}
+
+c) Microsoft 365:
+   - ${formData.get('microsoft365') === 'have_credentials' ? '✓ Has Azure credentials' : '○ Keep as mock'}
+
+d) Google Services:
+   - ${formData.get('google') === 'have_new_keys' ? '✓ Will provide new keys' : formData.get('google') === 'use_existing' ? '✓ Use existing .env keys' : '○ Keep as mock'}
+
+e) Twilio (SMS):
+   - ${formData.get('twilio') === 'production_ready' ? '✓ Production ready' : '○ Need new credentials'}
+
+f) Email Service:
+   - ${formData.get('email') === 'production_ready' ? '✓ Production ready' : '○ Need configuration changes'}
+
+`;
+            
+            // Prompt 2: Priority & Scope
+            output += `
+2. PRIORITY & SCOPE
+====================
+
+a) Execution Strategy: ${getRadioLabel(formData, 'execution_strategy')}
+   ${formData.get('custom_strategy') ? `Custom Strategy: ${formData.get('custom_strategy')}` : ''}
+
+b) Most Important Integration: ${getRadioLabel(formData, 'most_important_integration')}
+
+`;
+            
+            // Prompt 3: User Type Priority
+            output += `
+3. USER TYPE PRIORITY
+======================
+
+a) Primary User: ${getRadioLabel(formData, 'primary_user')}
+
+b) Platform Priority: ${getRadioLabel(formData, 'platform_priority')}
+
+`;
+            
+            // Prompt 4: Business Context
+            output += `
+4. BUSINESS CONTEXT
+====================
+
+a) Company Size: ${getRadioLabel(formData, 'company_size')}
+
+b) Current Pain Points (ranked 1-3):
+   - Manual dispatch: ${formData.get('pain_dispatch') || 'not ranked'}
+   - Invoicing: ${formData.get('pain_invoicing') || 'not ranked'}
+   - Communication: ${formData.get('pain_communication') || 'not ranked'}
+   - Equipment: ${formData.get('pain_equipment') || 'not ranked'}
+   - Financial: ${formData.get('pain_financial') || 'not ranked'}
+   - Crew productivity: ${formData.get('pain_crew') || 'not ranked'}
+
+c) Business Goal Priority: ${getRadioLabel(formData, 'business_goal')}
+
+`;
+            
+            // Prompt 5: Technical Constraints
+            output += `
+5. TECHNICAL CONSTRAINTS
+=========================
+
+a) Database: ${getRadioLabel(formData, 'database')}
+
+b) Hosting/Deployment: ${getRadioLabel(formData, 'hosting')}
+
+c) Mobile App Distribution: ${getRadioLabel(formData, 'mobile_distribution')}
+
+d) Performance Requirements: ${getRadioLabel(formData, 'performance')}
+
+`;
+            
+            // Prompt 6: Feature Preferences
+            const authFeatures = [];
+            if (formData.get('auth_current')) authFeatures.push('Current email/password');
+            if (formData.get('auth_social')) authFeatures.push('Social login');
+            if (formData.get('auth_sso')) authFeatures.push('SSO');
+            if (formData.get('auth_2fa')) authFeatures.push('2FA');
+            
+            output += `
+6. FEATURE PREFERENCES
+=======================
+
+a) Authentication: ${authFeatures.join(', ')}
+
+b) Communication Channels: ${getRadioLabel(formData, 'comm_channels')}
+
+c) Mobile App Experience: ${getRadioLabel(formData, 'mobile_experience')}
+
+d) Automation Level: ${getRadioLabel(formData, 'automation')}
+
+`;
+            
+            // Prompt 7: Testing & Quality
+            output += `
+7. TESTING & QUALITY
+=====================
+
+a) Testing Approach: ${getRadioLabel(formData, 'testing_approach')}
+
+b) Feedback Timing: ${getRadioLabel(formData, 'feedback_timing')}
+
+`;
+            
+            // Prompt 8: Data & Sample Content
+            output += `
+8. DATA & SAMPLE CONTENT
+=========================
+
+a) Customer Data: ${getRadioLabel(formData, 'customer_data')}
+
+b) Equipment & Inventory: ${getRadioLabel(formData, 'equipment_data')}
+
+c) Crew/Employee Data: ${getRadioLabel(formData, 'crew_data')}
+
+`;
+            
+            // Prompt 9: Branding & UI
+            output += `
+9. BRANDING & UI PREFERENCES
+=============================
+
+a) Color Scheme: ${getRadioLabel(formData, 'color_scheme')}
+   ${formData.get('custom_colors') ? `Custom Colors: ${formData.get('custom_colors')}` : ''}
+
+b) Logo/Branding: ${getRadioLabel(formData, 'logo')}
+
+c) UI Density: ${getRadioLabel(formData, 'ui_density')}
+
+`;
+            
+            // Prompt 10: Budget & Timeline
+            output += `
+10. BUDGET & TIMELINE
+======================
+
+a) Timeline Expectations: ${getRadioLabel(formData, 'timeline')}
+
+b) Scope: ${getRadioLabel(formData, 'scope')}
+
+c) Review Timing: ${getRadioLabel(formData, 'review_timing')}
+
+`;
+            
+            // Prompt 11: Specific Requests
+            const industryRequirements = [];
+            if (formData.get('industry_canadian')) industryRequirements.push('Canadian regulations');
+            if (formData.get('industry_insurance')) industryRequirements.push('Insurance tracking');
+            if (formData.get('industry_safety')) industryRequirements.push('Safety certifications');
+            if (formData.get('industry_environmental')) industryRequirements.push('Environmental regulations');
+            if (formData.get('industry_none')) industryRequirements.push('None - standard features');
+            
+            output += `
+11. SPECIFIC REQUESTS
+======================
+
+a) Must-Have Features:
+${formData.get('must_have_features') ? formData.get('must_have_features') : '   (None specified)'}
+
+b) Nice-to-Have Features:
+${formData.get('nice_to_have') ? formData.get('nice_to_have') : '   (None specified)'}
+
+c) Features to Skip/Deprioritize:
+${formData.get('skip_features') ? formData.get('skip_features') : '   (None specified)'}
+
+d) Industry-Specific Requirements: ${industryRequirements.join(', ')}
+
+`;
+            
+            // Prompt 12: Decision-Making Authority
+            output += `
+12. DECISION-MAKING AUTHORITY
+===============================
+
+a) Technical Decisions: ${getRadioLabel(formData, 'tech_decisions')}
+
+b) UX/Design Decisions: ${getRadioLabel(formData, 'ux_decisions')}
+
+c) Business Logic Decisions: ${getRadioLabel(formData, 'business_decisions')}
+
+`;
+            
+            // Additional Information
+            output += `
+ADDITIONAL INFORMATION
+=======================
+
+${formData.get('additional_info') ? formData.get('additional_info') : '(None provided)'}
+
+`;
+            
+            output += `
+========================================
+END OF REQUIREMENTS DOCUMENT
+========================================
+
+READY FOR AUTONOMOUS EXECUTION!
+
+Please proceed with implementation based on these requirements.
+Use testing and troubleshooting agents as needed.
+Provide progress updates at the specified checkpoints.
+`;
+            
+            outputBox.textContent = output;
+            form.style.display = 'none';
+            resultContainer.classList.add('show');
+            
+            // Scroll to result
+            resultContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function getRadioLabel(formData, name) {
+            const value = formData.get(name);
+            const radio = document.querySelector(`input[name="${name}"][value="${value}"]`);
+            if (radio) {
+                const label = radio.nextElementSibling;
+                return label ? label.textContent.trim() : value;
+            }
+            return value || '(Not selected)';
+        }
+        
+        function copyToClipboard() {
+            const text = outputBox.textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                successMessage.classList.add('show');
+                setTimeout(() => {
+                    successMessage.classList.remove('show');
+                }, 3000);
+            });
+        }
+        
+        function downloadDocument() {
+            const text = outputBox.textContent;
+            const blob = new Blob([text], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `snow-removal-requirements-${Date.now()}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+        
+        function editForm() {
+            form.style.display = 'block';
+            resultContainer.classList.remove('show');
+            form.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Initialize progress
+        updateProgress();
+    </script>
+</body>
+</html>
