@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useAuth } from '@/lib/auth';
-import ModernHeader from './ModernHeader';
+import ModernHeaderWithNav from './ModernHeaderWithNav';
 import {
   LayoutDashboard,
   Users,
