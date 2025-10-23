@@ -222,23 +222,11 @@ export default function EnhancedHeader() {
               <div className="relative">
                 <button
                   onClick={() => setShowUnifiedComms(!showUnifiedComms)}
-                  className="p-2 rounded-lg transition-all duration-200 ease-in-out relative cursor-pointer"
-                  style={{
-                    backgroundColor: showUnifiedComms ? 'white' : 'transparent',
-                    color: showUnifiedComms ? '#3f72af' : 'white',
-                  }}
-                  onMouseEnter={(e) => {
-                    if (!showUnifiedComms) {
-                      e.currentTarget.style.backgroundColor = 'white';
-                      e.currentTarget.style.color = '#3f72af';
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (!showUnifiedComms) {
-                      e.currentTarget.style.backgroundColor = 'transparent';
-                      e.currentTarget.style.color = 'white';
-                    }
-                  }}
+                  className={`p-2 rounded-lg relative cursor-pointer ${
+                    showUnifiedComms 
+                      ? 'bg-white text-[#3f72af]' 
+                      : 'bg-transparent text-white hover:bg-white hover:text-[#3f72af] transition-colors duration-200'
+                  }`}
                   title="All Communications"
                 >
                   <MessageSquare className="w-5 h-5" />
