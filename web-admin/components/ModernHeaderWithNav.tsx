@@ -95,7 +95,27 @@ export default function ModernHeaderWithNav() {
       if (branding.primary_color) setHeaderColor(branding.primary_color);
       if (branding.header_color) setHeaderColor(branding.header_color); // Backwards compatibility
     }
+    
+    // Load theme preference
+    const savedTheme = localStorage.getItem('theme_preference');
+    if (savedTheme === 'dark') {
+      setIsDarkMode(true);
+      document.documentElement.classList.add('dark');
+    }
   }, []);
+  
+  const toggleTheme = (theme: 'light' | 'dark' | 'auto') => {
+    if (theme === 'dark') {
+      setIsDarkMode(true);
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme_preference', 'dark');
+    } else {
+      setIsDarkMode(false);
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme_preference', 'light');
+    }
+    setShowThemeMenu(false);
+  };
 
   // Navigation menu items
   const menuItems: MenuItem[] = [
