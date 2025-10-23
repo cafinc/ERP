@@ -286,7 +286,9 @@ export default function EnhancedHeader() {
               {/* Settings */}
               <button
                 onClick={() => router.push('/settings')}
-                className="p-2 rounded-lg transition-all duration-150 ease-in-out cursor-pointer text-white hover:bg-white hover:text-[#3f72af]"
+                onMouseEnter={(e) => e.currentTarget.classList.add('hovered')}
+                onMouseLeave={(e) => e.currentTarget.classList.remove('hovered')}
+                className="p-2 rounded-lg transition-all duration-200 ease-in-out cursor-pointer text-white [&.hovered]:bg-white [&.hovered]:text-[#3f72af]"
                 title="Settings"
               >
                 <Settings className="w-5 h-5" />
