@@ -18,7 +18,9 @@ import {
   FileText,
   Image as ImageIcon,
   CheckCircle,
-  Clock
+  Clock,
+  Paperclip as PaperClipIcon,
+  Send as PaperAirplaneIcon
 } from 'lucide-react';
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || '';
