@@ -156,26 +156,17 @@ export default function UnifiedCommunicationsDropdown({
       className="absolute right-0 top-full mt-2 w-96 bg-white rounded-lg shadow-2xl border border-gray-200 z-50 animate-fade-in"
     >
       {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b border-gray-200 bg-gradient-to-r from-blue-500 to-blue-600">
-        <div className="flex items-center gap-2">
-          <MessageSquare className="w-5 h-5 text-white" />
-          <h3 className="font-semibold text-white">Recent Messages</h3>
-        </div>
-        <div className="flex items-center gap-2">
-          <button
-            onClick={openFullCommunicationsCenter}
-            className="p-1.5 hover:bg-blue-700 rounded-lg transition-colors group"
-            title="Open in new window"
-          >
-            <Maximize2 className="w-4 h-4 text-white" />
-          </button>
-          <button
-            onClick={onClose}
-            className="p-1.5 hover:bg-blue-700 rounded-lg transition-colors"
-          >
-            <X className="w-4 h-4 text-white" />
-          </button>
-        </div>
+      <div className="p-4 border-b border-gray-200 flex items-center justify-between">
+        <h3 className="font-semibold text-gray-900">All Communications</h3>
+        <button
+          onClick={() => {
+            window.open('/communications/center', '_blank', 'width=1200,height=800');
+            onClose();
+          }}
+          className="text-xs text-[#3f72af] hover:underline cursor-pointer"
+        >
+          View All
+        </button>
       </div>
 
       {/* Content */}
