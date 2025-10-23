@@ -292,7 +292,7 @@ export default function UnifiedCommunicationsCenter() {
           break;
       }
 
-      const response = await fetch(`${BACKEND_URL}/api${endpoint}`, {
+      const response = await fetch(`${BACKEND_URL}${endpoint}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
