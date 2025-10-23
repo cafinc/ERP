@@ -115,8 +115,16 @@ async def create_task(task_data: TaskCreate):
                 task_priority=task_data.priority
             )
         
+        # Emit real-time event
         task_dict["id"] = task_id
-        return Task(**serialize_task(task_dict))
+        serialized_task = serialize_task(task_dict.copy())
+        await realtime_service.emit_task_event(
+            EventType.TASK_CREATED,
+            serialized_task,
+            affected_users=task_data.assigned_to
+        )
+        
+        return Task(**serialized_task)
         
     except Exception as e:
         logger.error(f"Error creating task: {e}")
