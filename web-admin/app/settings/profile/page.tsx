@@ -34,7 +34,7 @@ const AVATAR_EMOJIS = [
 ];
 
 export default function ProfileSettings() {
-  const { user, refreshUser } = useAuth();
+  const { user } = useAuth();
   
   const [formData, setFormData] = useState({
     name: '',
