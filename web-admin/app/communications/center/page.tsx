@@ -50,6 +50,11 @@ export default function UnifiedCommunicationsCenter() {
   const [searchQuery, setSearchQuery] = useState('');
   const [filterDirection, setFilterDirection] = useState<'all' | 'inbound' | 'outbound'>('all');
   const [showFilters, setShowFilters] = useState(false);
+  const [selectedComm, setSelectedComm] = useState<Communication | null>(null);
+  const [showReplyModal, setShowReplyModal] = useState(false);
+  const [replyText, setReplyText] = useState('');
+  const [replySubject, setReplySubject] = useState('');
+  const [sending, setSending] = useState(false);
   
   const [stats, setStats] = useState({
     total: 0,
