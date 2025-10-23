@@ -89,8 +89,11 @@ export default function SiteMapsGeofencingPage() {
       }
 
       const script = document.createElement('script');
-      // Get API key from environment or use placeholder
-      const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || 'AIzaSyBw3K_2iKB9OvxhXvZmNrU2TF9BQnQoYjM';
+      const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
+      if (!apiKey) {
+        console.error('Google Maps API key not found');
+        return;
+      }
       script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=drawing,geometry`;
       script.async = true;
       script.defer = true;
