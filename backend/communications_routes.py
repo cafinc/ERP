@@ -1179,40 +1179,38 @@ async def get_recent_communications(limit: int = 10):
 
 @router.get("/communications/all")
 async def get_all_communications():
-    """Get all communications for unified communications center"""
-    from fastapi.responses import JSONResponse
+    """Get all communications for unified communications center - returns raw JSON"""
+    from fastapi.responses import Response
+    import json
     try:
-        # Fetch all communications
-        communications = list(await communications_collection.find().sort(
-            "timestamp", -1
-        ).to_list(None))
+        # Fetch all communications as raw dicts
+        cursor = communications_collection.find().sort("timestamp", -1)
+        communications = []
         
-        # Enrich with customer names and clean data
-        for comm in communications:
+        async for comm in cursor:
+            # Convert ObjectId to string
             comm["_id"] = str(comm["_id"])
             
-            # Get customer name
-            if "customer_id" in comm and comm["customer_id"]:
+            # Get customer name if exists
+            if comm.get("customer_id"):
                 try:
                     customer = await customers_collection.find_one({"_id": ObjectId(comm["customer_id"])})
-                    if customer:
-                        comm["customer_name"] = customer.get("name", "Unknown")
+                    comm["customer_name"] = customer.get("name", "Unknown") if customer else "Unknown"
                 except:
                     comm["customer_name"] = "Unknown"
-            else:
-                # Try to extract name from from/to fields
-                comm["customer_name"] = comm.get("from") or comm.get("to") or "Unknown"
             
-            # Convert timestamps
-            if "timestamp" in comm and isinstance(comm["timestamp"], datetime):
-                comm["timestamp"] = comm["timestamp"].isoformat()
-            if "created_at" in comm and isinstance(comm["created_at"], datetime):
-                comm["created_at"] = comm["created_at"].isoformat()
+            # Convert datetime objects to strings
+            for field in ["timestamp", "created_at"]:
+                if field in comm and isinstance(comm[field], datetime):
+                    comm[field] = comm[field].isoformat()
+            
+            communications.append(comm)
         
-        return JSONResponse(content=communications)
+        # Return as raw JSON response to avoid any pydantic validation
+        return Response(content=json.dumps(communications), media_type="application/json")
     
     except Exception as e:
         logger.error(f"Error fetching all communications: {str(e)}")
         import traceback
         logger.error(f"Traceback: {traceback.format_exc()}")
-        raise HTTPException(status_code=500, detail="Failed to fetch communications")
+        return Response(content=json.dumps({"detail": "Failed to fetch communications"}), status_code=500, media_type="application/json")
