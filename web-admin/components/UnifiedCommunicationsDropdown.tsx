@@ -50,8 +50,6 @@ export default function UnifiedCommunicationsDropdown({
   }, [isOpen]);
 
   const fetchRecentCommunications = async () => {
-    if (loading) return; // Prevent double fetching
-    
     setLoading(true);
     try {
       const response = await fetch(`${BACKEND_URL}/communications/list-all`);
