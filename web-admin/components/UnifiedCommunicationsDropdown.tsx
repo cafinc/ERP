@@ -185,49 +185,45 @@ export default function UnifiedCommunicationsDropdown({
               <div
                 key={comm._id}
                 onClick={() => handleMessageClick(comm)}
-                className={`p-3 hover:bg-gray-50 cursor-pointer transition-colors ${
+                className={`p-2.5 hover:bg-gray-50 cursor-pointer transition-colors ${
                   !comm.read ? 'bg-blue-50' : ''
                 }`}
               >
-                <div className="flex items-start gap-3">
-                  {/* Type Icon */}
-                  <div className={`p-2 rounded-lg ${getTypeColor(comm.type)}`}>
+                <div className="flex items-center gap-2 mb-1">
+                  {/* Direction badge - First */}
+                  <span className={`text-[10px] px-1.5 py-0.5 rounded ${
+                    comm.direction === 'inbound' 
+                      ? 'bg-green-100 text-green-700' 
+                      : 'bg-gray-100 text-gray-600'
+                  }`}>
+                    {comm.direction === 'inbound' ? '←' : '→'}
+                  </span>
+                  
+                  {/* Type Icon - Second */}
+                  <div className={`p-1 rounded ${getTypeColor(comm.type)}`}>
                     {getIcon(comm.type)}
                   </div>
-
-                  {/* Content */}
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center justify-between gap-2 mb-1">
-                      <div className="flex items-center gap-2 min-w-0">
-                        <User className="w-3 h-3 text-gray-400 flex-shrink-0" />
-                        <span className="text-sm font-medium text-gray-900 truncate">
-                          {comm.customer_name || comm.from || comm.to || 'Unknown'}
-                        </span>
-                      </div>
-                      <span className="text-xs text-gray-500 flex-shrink-0">
-                        {formatTime(comm.timestamp)}
-                      </span>
-                    </div>
-                    
-                    <p className="text-xs text-gray-600 line-clamp-2">
-                      {getMessagePreview(comm)}
-                    </p>
-
-                    {/* Direction indicator */}
-                    <div className="flex items-center gap-2 mt-1">
-                      <span className={`text-xs px-2 py-0.5 rounded-full ${
-                        comm.direction === 'inbound' 
-                          ? 'bg-green-100 text-green-700' 
-                          : 'bg-gray-100 text-gray-600'
-                      }`}>
-                        {comm.direction === 'inbound' ? '← Received' : '→ Sent'}
-                      </span>
-                      {!comm.read && (
-                        <span className="w-2 h-2 bg-blue-500 rounded-full" title="Unread" />
-                      )}
-                    </div>
-                  </div>
+                  
+                  {/* Customer Name - Third */}
+                  <span className="text-sm font-medium text-gray-900 truncate flex-1">
+                    {comm.customer_name || comm.from || comm.to || 'Unknown'}
+                  </span>
+                  
+                  {/* Time - Right side */}
+                  <span className="text-xs text-gray-500 flex-shrink-0">
+                    {formatTime(comm.timestamp)}
+                  </span>
+                  
+                  {/* Unread indicator */}
+                  {!comm.read && (
+                    <span className="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0" title="Unread" />
+                  )}
                 </div>
+                
+                {/* Message preview */}
+                <p className="text-xs text-gray-600 line-clamp-1 ml-8">
+                  {getMessagePreview(comm)}
+                </p>
               </div>
             ))}
           </div>
