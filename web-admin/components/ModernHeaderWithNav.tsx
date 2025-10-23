@@ -318,8 +318,25 @@ export default function ModernHeaderWithNav() {
     return pathname.startsWith(href);
   };
 
+  // Scroll detection for shadow
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <header className="bg-[#3f72af] text-white shadow-lg" style={{ backgroundColor: headerColor }}>
+    <header 
+      className={`bg-[#3f72af] text-white sticky top-0 z-40 transition-shadow duration-300 ${
+        isScrolled ? 'shadow-2xl' : 'shadow-lg'
+      }`} 
+      style={{ backgroundColor: headerColor }}
+    >
       <div className="px-6 py-3">
         <div className="flex items-center justify-between gap-4">
           {/* Left Side - Hamburger Menu and Company Name */}
