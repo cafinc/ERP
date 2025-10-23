@@ -449,7 +449,7 @@ export default function ModernHeaderWithNav() {
             <form onSubmit={handleSearch} style={{ width: '320px' }}>
               <div className="relative">
                 <div className="absolute left-2.5 top-1/2 transform -translate-y-1/2">
-                  <Search className="w-4 h-4 text-gray-500" />
+                  <Search className="w-4 h-4 text-gray-400" />
                 </div>
                 <input
                   id="global-search"
@@ -457,10 +457,11 @@ export default function ModernHeaderWithNav() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search..."
-                  className="w-full pl-9 pr-16 py-2 bg-gray-100 text-gray-800 placeholder-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all text-sm"
+                  className="w-full pl-9 pr-16 py-2 text-gray-800 placeholder-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all text-sm"
+                  style={{ backgroundColor: '#f5f5f5' }}
                 />
                 <div className="absolute right-2.5 top-1/2 transform -translate-y-1/2">
-                  <kbd className="px-1.5 py-0.5 text-xs font-semibold text-gray-600 bg-gray-200 rounded">
+                  <kbd className="px-1.5 py-0.5 text-xs font-semibold text-gray-500 bg-gray-300 rounded">
                     ⌘K
                   </kbd>
                 </div>
