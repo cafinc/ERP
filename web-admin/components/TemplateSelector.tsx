@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { X, FileText, Search, Star } from 'lucide-react';
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || '';
+const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || '';
 
 interface Template {
   _id: string;
