@@ -12368,5 +12368,10 @@ from push_notification_routes import router as push_notification_router
 api_router.include_router(push_notification_router)
 logger.info("Push notification endpoints registered successfully")
 
+# Include Dispatch Board router
+from dispatch_board_routes import router as dispatch_board_router
+api_router.include_router(dispatch_board_router)
+logger.info("Dispatch board endpoints registered successfully")
+
 # Include the router with all endpoints
 app.include_router(api_router)
