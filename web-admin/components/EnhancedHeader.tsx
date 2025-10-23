@@ -256,7 +256,7 @@ export default function EnhancedHeader() {
                   }`}
                   title="Notifications"
                 >
-                  <Bell className="w-5 h-5" />
+                  <Bell className="w-6 h-6" />
                   {(unreadMessageCount + unreadEmailCount + unreadNotificationCount) > 0 && (
                     <span className="absolute top-0 right-0 flex items-center justify-center">
                       <span className="absolute inline-flex h-3 w-3 rounded-full bg-red-500 opacity-75 animate-ping"></span>
