@@ -231,7 +231,11 @@ export default function ProfileSettings() {
         updateData.new_password = formData.newPassword;
       }
 
-      const response = await api.put('/users/profile', updateData);
+      if (!user?.id) {
+        throw new Error('User not found');
+      }
+
+      const response = await api.put(`/users/${user.id}/profile`, updateData);
 
       setSuccessMessage('Profile updated successfully!');
       
