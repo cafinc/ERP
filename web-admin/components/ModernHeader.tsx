@@ -285,53 +285,54 @@ export default function ModernHeader() {
                 )}
               </button>
 
-            {/* Profile Dropdown */}
-            {showProfileMenu && (
-              <div className="absolute top-full right-0 mt-2 w-56 bg-white rounded-lg shadow-2xl border border-gray-200 z-50 overflow-hidden">
-                <div className="p-4 bg-gray-50 border-b border-gray-200">
-                  <p className="font-semibold text-gray-900">{user?.name || 'User'}</p>
-                  <p className="text-sm text-gray-600">{user?.email}</p>
-                  <p className="text-xs text-gray-500 mt-1 capitalize">{user?.role}</p>
+              {/* Profile Dropdown */}
+              {showProfileMenu && (
+                <div className="absolute top-full right-0 mt-2 w-56 bg-white rounded-lg shadow-2xl border border-gray-200 z-50 overflow-hidden">
+                  <div className="p-4 bg-gray-50 border-b border-gray-200">
+                    <p className="font-semibold text-gray-900">{user?.name || 'User'}</p>
+                    <p className="text-sm text-gray-600">{user?.email}</p>
+                    <p className="text-xs text-gray-500 mt-1 capitalize">{user?.role}</p>
+                  </div>
+
+                  <div className="py-2">
+                    <button
+                      onClick={() => {
+                        setShowProfileMenu(false);
+                        router.push('/settings/profile');
+                      }}
+                      className="w-full flex items-center space-x-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors cursor-pointer"
+                    >
+                      <User className="w-4 h-4" />
+                      <span>My Profile</span>
+                    </button>
+
+                    <button
+                      onClick={() => {
+                        setShowProfileMenu(false);
+                        router.push('/settings');
+                      }}
+                      className="w-full flex items-center space-x-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors cursor-pointer"
+                    >
+                      <Settings className="w-4 h-4" />
+                      <span>Settings</span>
+                    </button>
+
+                    <div className="border-t border-gray-200 my-2" />
+
+                    <button
+                      onClick={() => {
+                        logout();
+                        router.push('/login');
+                      }}
+                      className="w-full flex items-center space-x-3 px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors cursor-pointer"
+                    >
+                      <LogOut className="w-4 h-4" />
+                      <span>Logout</span>
+                    </button>
+                  </div>
                 </div>
-
-                <div className="py-2">
-                  <button
-                    onClick={() => {
-                      setShowProfileMenu(false);
-                      router.push('/settings/profile');
-                    }}
-                    className="w-full flex items-center space-x-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors cursor-pointer"
-                  >
-                    <User className="w-4 h-4" />
-                    <span>My Profile</span>
-                  </button>
-
-                  <button
-                    onClick={() => {
-                      setShowProfileMenu(false);
-                      router.push('/settings');
-                    }}
-                    className="w-full flex items-center space-x-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors cursor-pointer"
-                  >
-                    <Settings className="w-4 h-4" />
-                    <span>Settings</span>
-                  </button>
-
-                  <div className="border-t border-gray-200 my-2" />
-
-                  <button
-                    onClick={() => {
-                      logout();
-                      router.push('/login');
-                    }}
-                    className="w-full flex items-center space-x-3 px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors cursor-pointer"
-                  >
-                    <LogOut className="w-4 h-4" />
-                    <span>Logout</span>
-                  </button>
-                </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
       </div>
