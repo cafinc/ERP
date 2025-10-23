@@ -176,7 +176,7 @@ export default function WorkOrdersPage() {
   }
 
   return (
-    <HybridNavigationTopBar>
+    <SimpleNavigationTopBar>
       <div className="min-h-screen bg-gray-50 flex flex-col">
         <PageHeader
           title="Work Orders"
