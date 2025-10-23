@@ -23,8 +23,10 @@ import {
   Send as PaperAirplaneIcon,
   Smile
 } from 'lucide-react';
-import data from '@emoji-mart/data';
-import Picker from '@emoji-mart/react';
+import dynamic from 'next/dynamic';
+
+// Dynamically import emoji picker to avoid SSR issues
+const Picker = dynamic(() => import('@emoji-mart/react'), { ssr: false });
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || '';
 
