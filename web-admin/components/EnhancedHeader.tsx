@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/lib/auth';
 import api from '@/lib/api';
-import NotificationCenter from './NotificationCenter';
+import AlertsDropdown from './AlertsDropdown';
 import UnifiedCommunicationsDropdown from './UnifiedCommunicationsDropdown';
 import {
   Calendar,
