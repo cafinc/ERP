@@ -872,21 +872,20 @@ export default function UnifiedCommunicationsCenter() {
                               
                               {/* Phone Recording */}
                               {msg.type === 'phone' && msg.recording_url && (
-                                <div className="mt-2 pt-2 border-t border-gray-200">
-                                  <button
-                                    onClick={() => {
-                                      const audio = new Audio(msg.recording_url);
-                                      audio.play();
+                                <div className={`mt-2 pt-2 ${isInbound ? 'border-t border-gray-200' : 'border-t border-blue-400'}`}>
+                                  <audio 
+                                    controls 
+                                    className="w-full max-w-xs"
+                                    style={{ 
+                                      height: '36px',
+                                      filter: isInbound ? 'none' : 'invert(1) hue-rotate(180deg)'
                                     }}
-                                    className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-colors ${
-                                      isInbound 
-                                        ? 'bg-gray-100 hover:bg-gray-200 text-gray-700' 
-                                        : 'bg-blue-600 hover:bg-blue-700 text-white'
-                                    }`}
                                   >
-                                    <span className="text-xl">📞</span>
-                                    <span className="text-xs font-medium">Play Recording</span>
-                                  </button>
+                                    <source src={msg.recording_url} type="audio/mpeg" />
+                                    <source src={msg.recording_url} type="audio/wav" />
+                                    <source src={msg.recording_url} type="audio/ogg" />
+                                    Your browser does not support the audio element.
+                                  </audio>
                                 </div>
                               )}
                               
