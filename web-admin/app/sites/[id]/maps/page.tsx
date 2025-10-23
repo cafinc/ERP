@@ -72,12 +72,21 @@ export default function SiteMapsGeofencingPage() {
   useEffect(() => {
     if (siteId && siteId !== 'undefined') {
       fetchSiteDetails();
-      loadGoogleMapsScript().then(() => setGoogleMapsLoaded(true));
+      loadGoogleMapsScript()
+        .then(() => {
+          console.log('Google Maps loaded successfully');
+          setGoogleMapsLoaded(true);
+        })
+        .catch((error) => {
+          console.error('Failed to load Google Maps:', error);
+          alert('Failed to load Google Maps. Please refresh the page.');
+        });
     }
   }, [siteId]);
 
   useEffect(() => {
-    if (googleMapsLoaded && site && mapRef.current && activeTab === 'geofence') {
+    if (googleMapsLoaded && site && mapRef.current && activeTab === 'geofence' && !googleMapRef.current) {
+      console.log('Initializing map with:', site);
       initializeMap();
     }
   }, [googleMapsLoaded, site, activeTab]);
