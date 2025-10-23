@@ -12343,6 +12343,11 @@ from fleet_routes import router as fleet_router
 api_router.include_router(fleet_router)
 logger.info("Fleet tracking endpoints registered successfully")
 
+# Include Analytics router
+from analytics_routes import router as analytics_router
+api_router.include_router(analytics_router)
+logger.info("Analytics endpoints registered successfully")
+
 # Include WebSocket router
 from websocket_routes import router as websocket_router
 api_router.include_router(websocket_router)
