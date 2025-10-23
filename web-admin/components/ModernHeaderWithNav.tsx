@@ -333,7 +333,7 @@ export default function ModernHeaderWithNav() {
 
               {/* Navigation Dropdown */}
               {showNavMenu && (
-                <div className="absolute top-full left-0 mt-2 w-80 bg-white rounded-lg shadow-2xl border border-gray-200 z-50 max-h-[80vh] overflow-y-auto">
+                <div className="absolute top-full left-0 mt-2 w-80 rounded-lg shadow-2xl border border-gray-300 z-50 max-h-[80vh] overflow-y-auto" style={{ backgroundColor: '#607d8b' }}>
                   <div className="py-2">
                     {menuItems.map((item) => {
                       const Icon = item.icon;
@@ -344,8 +344,8 @@ export default function ModernHeaderWithNav() {
                         <div key={item.label}>
                           <button
                             onClick={() => handleNavItemClick(item)}
-                            className={`w-full flex items-center justify-between px-4 py-3 text-sm hover:bg-gray-100 transition-colors cursor-pointer ${
-                              active ? 'bg-blue-50 text-blue-600' : 'text-gray-700'
+                            className={`w-full flex items-center justify-between px-4 py-3 text-sm transition-colors cursor-pointer ${
+                              active ? 'bg-white bg-opacity-20 text-white font-semibold' : 'text-white hover:bg-white hover:bg-opacity-10'
                             }`}
                           >
                             <div className="flex items-center gap-3">
@@ -359,7 +359,7 @@ export default function ModernHeaderWithNav() {
 
                           {/* Submenu */}
                           {item.submenu && isExpanded && (
-                            <div className="bg-gray-50 border-t border-b border-gray-200">
+                            <div className="bg-black bg-opacity-20 border-t border-b border-gray-500">
                               {item.submenu.map((subItem) => {
                                 const SubIcon = subItem.icon || FileText;
                                 const subActive = isActive(subItem.href);
@@ -368,8 +368,8 @@ export default function ModernHeaderWithNav() {
                                   <button
                                     key={subItem.href}
                                     onClick={() => handleSubMenuClick(subItem.href)}
-                                    className={`w-full flex items-center gap-3 px-12 py-2 text-sm hover:bg-gray-100 transition-colors cursor-pointer ${
-                                      subActive ? 'text-blue-600 font-medium' : 'text-gray-600'
+                                    className={`w-full flex items-center gap-3 px-12 py-2 text-sm transition-colors cursor-pointer ${
+                                      subActive ? 'text-white font-semibold bg-white bg-opacity-10' : 'text-gray-200 hover:bg-white hover:bg-opacity-10'
                                     }`}
                                   >
                                     <SubIcon className="w-4 h-4" />
