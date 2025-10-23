@@ -12358,5 +12358,10 @@ from unified_communications_routes import router as unified_comms_router
 api_router.include_router(unified_comms_router)
 logger.info("Unified communications endpoints registered successfully")
 
+# Include Weather Alerts router
+from weather_alerts_routes import router as weather_alerts_router
+api_router.include_router(weather_alerts_router)
+logger.info("Weather alerts endpoints registered successfully")
+
 # Include the router with all endpoints
 app.include_router(api_router)
