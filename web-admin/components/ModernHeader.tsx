@@ -146,7 +146,7 @@ export default function ModernHeader() {
               <button
                 onClick={() => setShowQuickAdd(!showQuickAdd)}
                 className="p-2 rounded-lg transition-colors cursor-pointer"
-                style={{ backgroundColor: '#78909c' }}
+                style={{ backgroundColor: '#607d8b' }}
                 title="Quick Add"
               >
                 <Plus className="w-5 h-5 text-white" />
@@ -173,39 +173,6 @@ export default function ModernHeader() {
                 </div>
               )}
             </div>
-
-            {/* Navigation Buttons */}
-            <button
-              onClick={() => router.push('/leads')}
-              className="px-4 py-2 rounded-lg transition-colors cursor-pointer text-white text-sm font-medium hover:opacity-90"
-              style={{ backgroundColor: '#78909c' }}
-            >
-              Leads
-            </button>
-
-            <button
-              onClick={() => router.push('/customers')}
-              className="px-4 py-2 rounded-lg transition-colors cursor-pointer text-white text-sm font-medium hover:opacity-90"
-              style={{ backgroundColor: '#78909c' }}
-            >
-              Contacts
-            </button>
-
-            <button
-              onClick={() => router.push('/estimates')}
-              className="px-4 py-2 rounded-lg transition-colors cursor-pointer text-white text-sm font-medium hover:opacity-90"
-              style={{ backgroundColor: '#78909c' }}
-            >
-              Estimates
-            </button>
-
-            <button
-              onClick={() => router.push('/projects')}
-              className="px-4 py-2 rounded-lg transition-colors cursor-pointer text-white text-sm font-medium hover:opacity-90"
-              style={{ backgroundColor: '#78909c' }}
-            >
-              Projects
-            </button>
 
             {/* Search Bar */}
             <form onSubmit={handleSearch} style={{ width: '320px' }}>
