@@ -143,6 +143,44 @@ async def list_all_templates(
         raise HTTPException(status_code=500, detail=str(e))
 
 
+# ========== Placeholder Library (must come before parameterized routes) ==========
+
+@router.get("/templates/placeholders")
+async def get_template_placeholders(
+    category: Optional[str] = None,
+    search: Optional[str] = None
+):
+    """Get available template placeholders"""
+    try:
+        if search:
+            placeholders = search_placeholders(search)
+            return {
+                "success": True,
+                "placeholders": placeholders
+            }
+        elif category:
+            all_categories = get_placeholders_by_category()
+            if category in all_categories:
+                return {
+                    "success": True,
+                    "category": all_categories[category]
+                }
+            else:
+                raise HTTPException(status_code=404, detail="Category not found")
+        else:
+            # Return all by category
+            return {
+                "success": True,
+                "categories": get_placeholders_by_category()
+            }
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error fetching placeholders: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 @router.get("/templates/{template_type}/{template_id}")
 async def get_template(
     template_type: str,
