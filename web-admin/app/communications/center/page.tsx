@@ -269,21 +269,23 @@ export default function UnifiedCommunicationsCenter() {
 
   const markAsRead = async (commId: string) => {
     try {
-      const response = await fetch(`${BACKEND_URL}/communications/${commId}/read`, {
-        method: 'PATCH',
+      const response = await fetch(`${BACKEND_URL}/communications/${commId}/mark-read`, {
+        method: 'POST',
       });
       
       if (response.ok) {
-        // Update local state
+        // Update local state immediately
         setCommunications(prev => 
           prev.map(c => c._id === commId ? { ...c, read: true } : c)
         );
         
-        // Recalculate stats
+        // Recalculate stats with updated data
         const updatedComms = communications.map(c => 
           c._id === commId ? { ...c, read: true } : c
         );
         calculateStats(updatedComms);
+        
+        console.log(`Marked message ${commId} as read`);
       }
     } catch (error) {
       console.error('Error marking message as read:', error);
