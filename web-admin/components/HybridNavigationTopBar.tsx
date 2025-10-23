@@ -215,38 +215,10 @@ export default function HybridNavigationTopBar({ children }: { children: React.R
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
-      {/* Enhanced Header */}
-      <ModernHeader />
+      {/* Enhanced Header with Navigation */}
+      <ModernHeaderWithNav />
 
       <div className="flex flex-1 overflow-hidden relative">
-        {/* Collapsed Sidebar */}
-        <div className="w-16 bg-[#2c3e50] flex flex-col items-center py-4 gap-2 shadow-lg z-30">
-          {menuItems.map((item) => {
-            const Icon = item.icon;
-            const active = item.href ? isActive(item.href) : item.submenu?.some(sub => isActive(sub.href));
-            
-            return (
-              <button
-                key={item.label}
-                onClick={() => handleMenuClick(item)}
-                className={`relative p-3 rounded-lg transition-all group ${
-                  active
-                    ? 'bg-[#3f72af] text-white'
-                    : 'text-gray-400 hover:bg-[#34495e] hover:text-white'
-                }`}
-                title={item.label}
-              >
-                <Icon className="w-5 h-5" />
-                
-                {/* Tooltip on hover */}
-                <div className="absolute left-full ml-2 px-3 py-2 bg-gray-900 text-white text-sm rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all whitespace-nowrap z-50">
-                  {item.label}
-                </div>
-              </button>
-            );
-          })}
-        </div>
-
         {/* Top Navigation Bar for Submenus */}
         {expandedMenu && (
           <div className="absolute top-0 left-16 right-0 bg-white border-b border-gray-200 shadow-md z-40">
