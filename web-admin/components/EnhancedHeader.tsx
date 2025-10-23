@@ -260,21 +260,24 @@ export default function EnhancedHeader() {
               {/* Notifications with NotificationCenter */}
               <div ref={notificationRef} className="relative">
                 <button
-                  onClick={(e) => {
-                    e.currentTarget.classList.remove('hovered');
-                    setShowNotifications(!showNotifications);
+                  onClick={() => setShowNotifications(!showNotifications)}
+                  className="p-2 rounded-lg transition-all duration-200 ease-in-out relative cursor-pointer"
+                  style={{
+                    backgroundColor: showNotifications ? 'white' : 'transparent',
+                    color: showNotifications ? '#3f72af' : 'white',
                   }}
                   onMouseEnter={(e) => {
                     if (!showNotifications) {
-                      e.currentTarget.classList.add('hovered');
+                      e.currentTarget.style.backgroundColor = 'white';
+                      e.currentTarget.style.color = '#3f72af';
                     }
                   }}
-                  onMouseLeave={(e) => e.currentTarget.classList.remove('hovered')}
-                  className={`p-2 rounded-lg transition-all duration-200 ease-in-out relative cursor-pointer ${
-                    showNotifications 
-                      ? 'bg-white text-[#3f72af]' 
-                      : 'text-white [&.hovered]:bg-white [&.hovered]:text-[#3f72af]'
-                  }`}
+                  onMouseLeave={(e) => {
+                    if (!showNotifications) {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                      e.currentTarget.style.color = 'white';
+                    }
+                  }}
                   title="Notifications"
                 >
                   <Bell className="w-5 h-5" />
