@@ -542,6 +542,16 @@ export default function UnifiedCommunicationsCenter() {
                         </span>
                       </div>
                     )}
+
+                    {/* Reply Button */}
+                    <div className="mt-3 flex justify-end">
+                      <button
+                        onClick={() => handleReply(comm)}
+                        className={`px-4 py-2 text-sm font-medium text-white rounded-lg transition-colors ${getTypeColor(comm.type)} hover:opacity-90`}
+                      >
+                        {comm.type === 'phone' ? 'Add Note' : 'Reply'}
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
