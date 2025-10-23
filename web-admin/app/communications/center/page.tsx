@@ -904,7 +904,6 @@ export default function UnifiedCommunicationsCenter() {
                 {showEmojiPicker && (
                   <div ref={emojiPickerRef} className="absolute bottom-full right-0 mb-2 z-50 shadow-2xl">
                     <Picker
-                      data={data}
                       onEmojiSelect={addEmoji}
                       theme="light"
                       previewPosition="none"
