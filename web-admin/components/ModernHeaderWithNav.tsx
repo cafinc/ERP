@@ -131,8 +131,17 @@ export default function ModernHeaderWithNav() {
         { label: 'Estimates', href: '/estimates', icon: FileText },
         { label: 'Agreements', href: '/contracts', icon: FileText },
         { label: 'Agreement Templates', href: '/agreements/templates', icon: FileText },
+      ],
+    },
+    {
+      label: 'Operations',
+      icon: Settings,
+      href: '/operations',
+      submenu: [
         { label: 'Projects', href: '/projects', icon: FolderOpen },
-        { label: 'Operations', href: '/operations', icon: Settings },
+        { label: 'Work Orders', href: '/work-orders', icon: FileText },
+        { label: 'Purchase Orders', href: '/purchase-orders', icon: DollarSign },
+        { label: 'Inventory', href: '/inventory', icon: FolderOpen },
       ],
     },
     {
