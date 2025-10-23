@@ -148,6 +148,9 @@ test_plan:
       - working: false
         agent: "testing"
         comment: "❌ POST endpoints failing due to async/sync mismatch and BSON ObjectId serialization issues. GET endpoints working (found employees). Core issue: HR routes use synchronous MongoDB operations but FastAPI expects async operations."
+      - working: false
+        agent: "testing"
+        comment: "❌ Comprehensive testing confirms BSON ObjectId serialization issue. POST /api/hr/employees returns HTTP 500 'Unable to serialize unknown type: <class 'bson.objectid.ObjectId'>'. GET endpoints working correctly (found 3 employees). Employee retrieval by ID functional."
 
   - task: "HR Module - Time & Attendance APIs"
     implemented: true
