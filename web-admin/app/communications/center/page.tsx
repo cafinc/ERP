@@ -904,15 +904,29 @@ export default function UnifiedCommunicationsCenter() {
                   </button>
                 </div>
                 
-                {/* Emoji Picker */}
+                {/* Custom Emoji Picker */}
                 {showEmojiPicker && (
-                  <div ref={emojiPickerRef} className="absolute bottom-full right-0 mb-2 z-50 shadow-2xl">
-                    <Picker
-                      onEmojiSelect={addEmoji}
-                      theme="light"
-                      previewPosition="none"
-                      skinTonePosition="none"
-                    />
+                  <div 
+                    ref={emojiPickerRef} 
+                    className="absolute bottom-full right-0 mb-2 z-50 bg-white rounded-lg shadow-2xl border border-gray-200 p-3 w-80 max-h-96 overflow-y-auto"
+                  >
+                    {Object.entries(EMOJI_CATEGORIES).map(([category, emojis]) => (
+                      <div key={category} className="mb-3">
+                        <h4 className="text-xs font-semibold text-gray-600 mb-2">{category}</h4>
+                        <div className="grid grid-cols-10 gap-1">
+                          {emojis.map((emoji, idx) => (
+                            <button
+                              key={idx}
+                              onClick={() => addEmoji(emoji)}
+                              className="text-2xl hover:bg-gray-100 rounded p-1 transition-colors"
+                              title={emoji}
+                            >
+                              {emoji}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 )}
               </div>
