@@ -474,9 +474,9 @@ async def create_training(training: TrainingCreate):
         training_dict["created_at"] = datetime.utcnow()
         
         result = await trainings_collection.insert_one(training_dict)
-        training_dict["id"] = str(result.inserted_id)
+        training_dict["_id"] = result.inserted_id
         
-        return {"success": True, "training": training_dict}
+        return {"success": True, "training": serialize_doc(training_dict)}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
