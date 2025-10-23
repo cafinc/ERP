@@ -11,7 +11,7 @@ from datetime import datetime, timedelta
 from typing import Dict, Any, Optional
 
 # Configuration
-BASE_URL = "https://winterwork-hub.preview.emergentagent.com/api"
+BASE_URL = "https://snowtrack-admin-3.preview.emergentagent.com/api"
 HEADERS = {"Content-Type": "application/json"}
 
 class FocusedAPITester:

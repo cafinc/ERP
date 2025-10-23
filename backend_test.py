@@ -12,7 +12,7 @@ import sys
 import os
 
 # Get backend URL from frontend .env
-BACKEND_URL = "https://winterwork-hub.preview.emergentagent.com/api"
+BACKEND_URL = "https://snowtrack-admin-3.preview.emergentagent.com/api"
 
 class BackendTester:
     def __init__(self):

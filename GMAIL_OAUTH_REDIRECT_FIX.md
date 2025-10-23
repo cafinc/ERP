@@ -12,7 +12,7 @@ The redirect URI configured in the backend doesn't match what's registered in Go
 
 **Backend Redirect URI (in .env):**
 ```
-GOOGLE_REDIRECT_URI=https://winterwork-hub.preview.emergentagent.com/api/gmail/oauth/callback
+GOOGLE_REDIRECT_URI=https://snowtrack-admin-3.preview.emergentagent.com/api/gmail/oauth/callback
 ```
 
 **This URI must be registered in Google Cloud Console**
@@ -26,7 +26,7 @@ GOOGLE_REDIRECT_URI=https://winterwork-hub.preview.emergentagent.com/api/gmail/o
 3. Click "Edit"
 4. Under "Authorized redirect URIs", add:
    ```
-   https://winterwork-hub.preview.emergentagent.com/api/gmail/oauth/callback
+   https://snowtrack-admin-3.preview.emergentagent.com/api/gmail/oauth/callback
    ```
 5. Click "Save"
 6. Wait 5 minutes for changes to propagate
@@ -48,7 +48,7 @@ If you already have a redirect URI registered (like `http://localhost:8001/...`)
 Check if any of these are registered:
 - `http://localhost:8001/api/gmail/oauth/callback`
 - `http://localhost:3000/api/gmail/oauth/callback`
-- `https://winterwork-hub.preview.emergentagent.com/api/gmail/oauth/callback`
+- `https://snowtrack-admin-3.preview.emergentagent.com/api/gmail/oauth/callback`
 - `https://yourdomain.com/api/gmail/oauth/callback`
 
 ## VERIFICATION:
