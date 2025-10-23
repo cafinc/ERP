@@ -17,6 +17,7 @@ import {
   FileText,
   Briefcase,
   TrendingUp,
+  Activity,
 } from 'lucide-react';
 
 export default function ModernHeader() {
