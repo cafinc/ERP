@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useAuth } from '@/lib/auth';
 import api from '@/lib/api';
+import HybridNavigationTopBar from '@/components/HybridNavigationTopBar';
 import {
   User,
   Mail,
