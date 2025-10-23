@@ -217,44 +217,6 @@ export default function EnhancedHeader() {
 
             {/* Quick Actions with Dropdowns */}
             <div className="flex items-center space-x-2">
-              {/* Gmail */}
-              <div ref={emailsRef} className="relative">
-                <button
-                  onClick={() => setShowEmailsDropdown(!showEmailsDropdown)}
-                  className="p-2 hover:bg-white hover:bg-opacity-10 rounded-lg transition-colors relative cursor-pointer"
-                  title="Gmail"
-                >
-                  <Mail className="w-5 h-5" />
-                  {unreadEmailCount > 0 && (
-                    <span className="absolute top-0 right-0 flex items-center justify-center">
-                      <span className="absolute inline-flex h-3 w-3 rounded-full bg-red-500 opacity-75 animate-ping"></span>
-                      <span className="relative inline-flex items-center justify-center h-3 w-3 rounded-full bg-red-500 text-white text-[8px] font-bold">
-                        {unreadEmailCount > 9 ? '9+' : unreadEmailCount}
-                      </span>
-                    </span>
-                  )}
-                </button>
-                {showEmailsDropdown && (
-                  <div className="absolute top-full right-0 mt-2 w-80 bg-white rounded-lg shadow-2xl border border-gray-200 z-50 max-h-96 overflow-y-auto">
-                    <div className="p-4 border-b border-gray-200 flex items-center justify-between">
-                      <h3 className="font-semibold text-gray-900">Recent Emails</h3>
-                      <button
-                        onClick={() => {
-                          router.push('/gmail');
-                          setShowEmailsDropdown(false);
-                        }}
-                        className="text-xs text-[#3f72af] hover:underline cursor-pointer"
-                      >
-                        View All
-                      </button>
-                    </div>
-                    <div className="p-4 text-center text-gray-600 text-sm">
-                      Click "View All" to access Gmail
-                    </div>
-                  </div>
-                )}
-              </div>
-
               {/* Unified Communications Center */}
               <div className="relative">
                 <button
