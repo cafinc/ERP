@@ -663,6 +663,14 @@ export default function ModernHeaderWithNav() {
                 title="Notifications"
               >
                 <Bell className="w-6 h-6" />
+                {alertsCount > 0 && (
+                  <span className="absolute top-0 right-0 flex items-center justify-center">
+                    <span className="absolute inline-flex h-4 w-4 rounded-full bg-red-500 opacity-75 animate-ping"></span>
+                    <span className="relative inline-flex items-center justify-center h-4 w-4 rounded-full bg-red-500 text-white text-[10px] font-bold">
+                      {alertsCount > 9 ? '9+' : alertsCount}
+                    </span>
+                  </span>
+                )}
               </button>
               <AlertsDropdown
                 isOpen={showNotifications}
