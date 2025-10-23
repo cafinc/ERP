@@ -216,7 +216,7 @@ export default function HybridNavigationTopBar({ children }: { children: React.R
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       {/* Enhanced Header */}
-      <EnhancedHeader />
+      <ModernHeader />
 
       <div className="flex flex-1 overflow-hidden relative">
         {/* Collapsed Sidebar */}
