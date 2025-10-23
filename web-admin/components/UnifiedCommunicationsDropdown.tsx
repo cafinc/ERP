@@ -49,30 +49,8 @@ const UnifiedCommunicationsDropdown = forwardRef<
     }
   }, [isOpen]);
 
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        onClose();
-      }
-    };
-
-    if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [isOpen, onClose]);
-
-  // Expose prefetch method to parent component
-  useImperativeHandle(ref, () => ({
-    prefetchCommunications: fetchRecentCommunications
-  }), []);
-
   const fetchRecentCommunications = async () => {
-    // Don't fetch if we already have recent data (within last 30 seconds)
+    // Don't fetch if we already have recent data
     if (recentComms.length > 0 && !loading) {
       return;
     }
@@ -91,6 +69,28 @@ const UnifiedCommunicationsDropdown = forwardRef<
       setLoading(false);
     }
   };
+
+  // Expose prefetch method to parent component
+  useImperativeHandle(ref, () => ({
+    prefetchData: fetchRecentCommunications
+  }));
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen, onClose]);
 
   const openFullCommunicationsCenter = (type?: string) => {
     const url = type ? `/communications/center?tab=${type}` : '/communications/center';
