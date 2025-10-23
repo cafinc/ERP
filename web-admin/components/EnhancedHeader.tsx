@@ -249,7 +249,7 @@ export default function EnhancedHeader() {
               <div ref={notificationRef} className="relative">
                 <button
                   onClick={() => setShowNotifications(!showNotifications)}
-                  className={`p-2 rounded-lg transition-colors relative cursor-pointer ${
+                  className={`p-2 rounded-lg transition-all duration-150 ease-in-out relative cursor-pointer ${
                     showNotifications 
                       ? 'bg-white text-[#3f72af]' 
                       : 'text-white hover:bg-white hover:text-[#3f72af]'
