@@ -129,14 +129,14 @@ async def get_employees(
 async def get_employee(employee_id: str):
     """Get employee by ID"""
     try:
-        employee = await employees_collection.find_one({"_id": ObjectId(employee_id)})
+        object_id = validate_object_id(employee_id, "Employee")
+        employee = await employees_collection.find_one({"_id": object_id})
         if not employee:
             raise HTTPException(status_code=404, detail="Employee not found")
         
-        employee["id"] = str(employee["_id"])
-        del employee["_id"]
-        
-        return {"success": True, "employee": employee}
+        return {"success": True, "employee": serialize_doc(employee)}
+    except HTTPException:
+        raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
