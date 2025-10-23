@@ -417,8 +417,8 @@ export default function ModernHeaderWithNav() {
       }`} 
       style={{ backgroundColor: headerColor }}
     >
-      <div className="px-6 py-3">
-        <div className="flex items-center justify-between gap-4">
+      <div className="px-3 sm:px-4 md:px-6 py-2 sm:py-3">
+        <div className="flex items-center justify-between gap-2 sm:gap-3 md:gap-4">
           {/* Left Side - Hamburger Menu and Company Name */}
           <div className="flex items-center gap-4">
             {/* Hamburger Menu */}
