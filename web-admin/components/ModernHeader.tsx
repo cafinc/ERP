@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/lib/auth';
 import AlertsDropdown from './AlertsDropdown';
 import UnifiedCommunicationsDropdown from './UnifiedCommunicationsDropdown';
+import ActivityDropdown from './ActivityDropdown';
 import {
   MessageSquare,
   Bell,
