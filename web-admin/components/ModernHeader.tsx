@@ -115,8 +115,8 @@ export default function ModernHeader() {
   return (
     <header className="bg-[#3f72af] text-white shadow-lg" style={{ backgroundColor: headerColor }}>
       <div className="px-6 py-3">
-        <div className="flex items-center gap-4">
-          {/* Logo */}
+        <div className="flex items-center justify-between gap-4">
+          {/* Logo - Left Side */}
           <div className="flex items-center flex-shrink-0">
             {logoUrl ? (
               <img 
@@ -139,59 +139,62 @@ export default function ModernHeader() {
             )}
           </div>
 
-          {/* Quick Add Button */}
-          <div ref={quickAddRef} className="relative flex-shrink-0">
-            <button
-              onClick={() => setShowQuickAdd(!showQuickAdd)}
-              className="p-2 rounded-lg bg-white bg-opacity-10 hover:bg-opacity-20 transition-colors cursor-pointer"
-              title="Quick Add"
-            >
-              <Plus className="w-6 h-6" />
-            </button>
+          {/* Right Side - All other elements */}
+          <div className="flex items-center gap-3">
+            {/* Quick Add Button */}
+            <div ref={quickAddRef} className="relative flex-shrink-0">
+              <button
+                onClick={() => setShowQuickAdd(!showQuickAdd)}
+                className="p-2 rounded-lg transition-colors cursor-pointer"
+                style={{ backgroundColor: '#607d8b' }}
+                title="Quick Add"
+              >
+                <Plus className="w-5 h-5 text-white" />
+              </button>
 
-            {/* Quick Add Dropdown */}
-            {showQuickAdd && (
-              <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-2xl border border-gray-200 z-50 overflow-hidden">
-                <div className="py-2">
-                  {quickAddItems.map((item, index) => (
-                    <button
-                      key={index}
-                      onClick={() => {
-                        setShowQuickAdd(false);
-                        router.push(item.path);
-                      }}
-                      className="w-full flex items-center space-x-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors cursor-pointer"
-                    >
-                      {item.icon}
-                      <span>Add {item.label}</span>
-                    </button>
-                  ))}
+              {/* Quick Add Dropdown */}
+              {showQuickAdd && (
+                <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-2xl border border-gray-200 z-50 overflow-hidden">
+                  <div className="py-2">
+                    {quickAddItems.map((item, index) => (
+                      <button
+                        key={index}
+                        onClick={() => {
+                          setShowQuickAdd(false);
+                          router.push(item.path);
+                        }}
+                        className="w-full flex items-center space-x-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors cursor-pointer"
+                      >
+                        {item.icon}
+                        <span>Add {item.label}</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Search Bar */}
+            <form onSubmit={handleSearch} style={{ width: '320px' }}>
+              <div className="relative">
+                <div className="absolute left-2.5 top-1/2 transform -translate-y-1/2">
+                  <Search className="w-4 h-4 text-gray-500" />
+                </div>
+                <input
+                  id="global-search"
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search..."
+                  className="w-full pl-9 pr-16 py-2 bg-gray-100 text-gray-800 placeholder-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all text-sm"
+                />
+                <div className="absolute right-2.5 top-1/2 transform -translate-y-1/2">
+                  <kbd className="px-1.5 py-0.5 text-xs font-semibold text-gray-600 bg-gray-200 rounded">
+                    ⌘K
+                  </kbd>
                 </div>
               </div>
-            )}
-          </div>
-
-          {/* Search Bar */}
-          <form onSubmit={handleSearch} className="flex-1 max-w-2xl">
-            <div className="relative">
-              <div className="absolute left-3 top-1/2 transform -translate-y-1/2">
-                <Search className="w-5 h-5 text-gray-400" />
-              </div>
-              <input
-                id="global-search"
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search for a customer, lead, estimate, or project..."
-                className="w-full pl-11 pr-20 py-2.5 bg-white bg-opacity-10 text-white placeholder-white placeholder-opacity-60 rounded-lg focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 transition-all"
-              />
-              <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
-                <kbd className="px-2 py-1 text-xs font-semibold text-white bg-white bg-opacity-20 rounded">
-                  Ctrl K
-                </kbd>
-              </div>
-            </div>
-          </form>
+            </form>
 
           {/* Alerts Icon */}
           <div ref={notificationRef} className="relative flex-shrink-0">
