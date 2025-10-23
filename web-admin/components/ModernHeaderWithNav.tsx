@@ -306,18 +306,49 @@ export default function ModernHeaderWithNav() {
     return () => clearTimeout(debounceTimer);
   }, [searchQuery]);
 
-  // Keyboard shortcut for search (Ctrl+K)
+  // Enhanced Keyboard Shortcuts
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      // Ctrl/Cmd + K: Focus search
       if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
         e.preventDefault();
         document.getElementById('global-search')?.focus();
+      }
+      
+      // Ctrl/Cmd + N: Open Quick Add menu
+      if ((e.ctrlKey || e.metaKey) && e.key === 'n') {
+        e.preventDefault();
+        setShowQuickAdd(!showQuickAdd);
+      }
+      
+      // Ctrl/Cmd + M: Open Communications
+      if ((e.ctrlKey || e.metaKey) && e.key === 'm') {
+        e.preventDefault();
+        setShowUnifiedComms(!showUnifiedComms);
+      }
+      
+      // Ctrl/Cmd + B: Open Navigation Menu
+      if ((e.ctrlKey || e.metaKey) && e.key === 'b') {
+        e.preventDefault();
+        setShowNavMenu(!showNavMenu);
+      }
+      
+      // Escape: Close all dropdowns
+      if (e.key === 'Escape') {
+        setShowProfileMenu(false);
+        setShowNotifications(false);
+        setShowQuickAdd(false);
+        setShowActivity(false);
+        setShowNavMenu(false);
+        setShowUnifiedComms(false);
+        setShowSearchResults(false);
+        setExpandedNavItem(null);
       }
     };
 
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [showQuickAdd, showUnifiedComms, showNavMenu]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
