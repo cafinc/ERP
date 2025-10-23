@@ -753,8 +753,11 @@ export default function UnifiedCommunicationsCenter() {
                 />
               </div>
 
-              {/* Action Buttons */}
-              <div className="flex items-center justify-end gap-3 mt-6">
+            </div>
+
+            {/* Action Buttons - Fixed at bottom */}
+            <div className="p-6 border-t border-gray-200 bg-gray-50 flex-shrink-0">
+              <div className="flex items-center justify-end gap-3">
                 <button
                   onClick={() => {
                     setShowReplyModal(false);
