@@ -53,6 +53,14 @@ def serialize_doc(doc):
         del doc["_id"]
     return doc
 
+# Helper function to validate ObjectId
+def validate_object_id(id_string: str, resource_name: str = "Resource") -> ObjectId:
+    """Validate and convert string to ObjectId, raise 404 if invalid"""
+    try:
+        return ObjectId(id_string)
+    except Exception:
+        raise HTTPException(status_code=404, detail=f"{resource_name} not found")
+
 # ==================== EMPLOYEE MANAGEMENT ====================
 
 @router.post("/employees", response_model=dict)
