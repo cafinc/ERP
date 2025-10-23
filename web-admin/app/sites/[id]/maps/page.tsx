@@ -72,7 +72,7 @@ export default function SiteMapsGeofencingPage() {
   useEffect(() => {
     if (siteId && siteId !== 'undefined') {
       fetchSiteDetails();
-      loadGoogleMapsScript();
+      loadGoogleMapsScript().then(() => setGoogleMapsLoaded(true));
     }
   }, [siteId]);
 
