@@ -178,7 +178,7 @@ export default function UnifiedCommunicationsDropdown({
         ) : recentComms.length === 0 ? (
           <div className="p-8 text-center text-gray-500">
             <MessageSquare className="w-12 h-12 mx-auto mb-2 opacity-50" />
-            <p className="text-sm">No recent messages</p>
+            <p className="text-sm">No recent communications</p>
           </div>
         ) : (
           <div className="divide-y divide-gray-100">
@@ -233,17 +233,6 @@ export default function UnifiedCommunicationsDropdown({
             ))}
           </div>
         )}
-      </div>
-
-      {/* Footer */}
-      <div className="p-3 border-t border-gray-200 bg-gray-50">
-        <button
-          onClick={openFullCommunicationsCenter}
-          className="w-full py-2 px-4 bg-blue-500 text-white text-sm font-medium rounded-lg hover:bg-blue-600 transition-colors flex items-center justify-center gap-2"
-        >
-          <Maximize2 className="w-4 h-4" />
-          Open Full Communications Center
-        </button>
       </div>
     </div>
   );
