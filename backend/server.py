@@ -12353,5 +12353,10 @@ from websocket_routes import router as websocket_router
 api_router.include_router(websocket_router)
 logger.info("WebSocket endpoints registered successfully")
 
+# Include Unified Communications router
+from unified_communications_routes import router as unified_comms_router
+api_router.include_router(unified_comms_router)
+logger.info("Unified communications endpoints registered successfully")
+
 # Include the router with all endpoints
 app.include_router(api_router)
