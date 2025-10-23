@@ -374,7 +374,7 @@ export default function ProfileSettings() {
                           onClick={async () => {
                             try {
                               setUploadingAvatar(true);
-                              const response = await api.put('/users/avatar', { avatar: emoji });
+                              const response = await api.post('/users/upload-avatar', { avatar: emoji });
                               setAvatarPreview(emoji);
                               setShowEmojiPicker(false);
                               setSuccessMessage('Avatar updated successfully!');
