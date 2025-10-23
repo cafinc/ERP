@@ -12,7 +12,7 @@ import {
   Smartphone
 } from 'lucide-react';
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || '';
+const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || '';
 
 interface Communication {
   _id: string;
