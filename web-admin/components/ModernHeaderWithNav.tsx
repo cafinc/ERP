@@ -407,9 +407,19 @@ export default function ModernHeaderWithNav() {
               )}
             </div>
 
-            {/* Company Name */}
-            <div className="text-2xl font-semibold tracking-wide" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif', letterSpacing: '0.5px' }}>
-              {companyName || 'CAF Group Of Companies'}
+            {/* Company Logo / Name */}
+            <div className="flex items-center">
+              {logoUrl ? (
+                <img 
+                  src={logoUrl}
+                  alt="Company Logo" 
+                  className="h-10 w-auto max-w-[200px] object-contain"
+                />
+              ) : (
+                <div className="text-2xl font-semibold tracking-wide" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif', letterSpacing: '0.5px' }}>
+                  {companyName || 'CAF Group Of Companies'}
+                </div>
+              )}
             </div>
           </div>
 
