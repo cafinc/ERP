@@ -496,7 +496,7 @@ export default function ModernHeaderWithNav() {
                 }`}
                 title="Notifications"
               >
-                <Bell className="w-5 h-5" />
+                <Bell className="w-6 h-6" />
               </button>
               <AlertsDropdown
                 isOpen={showNotifications}
@@ -515,7 +515,7 @@ export default function ModernHeaderWithNav() {
                 }`}
                 title="All Communications"
               >
-                <MessageSquare className="w-5 h-5" />
+                <MessageSquare className="w-6 h-6" />
                 {totalUnreadComms > 0 && (
                   <span className="absolute top-0 right-0 flex items-center justify-center">
                     <span className="absolute inline-flex h-4 w-4 rounded-full bg-blue-500 opacity-75 animate-ping"></span>
@@ -545,7 +545,7 @@ export default function ModernHeaderWithNav() {
                 }`}
                 title="Activity"
               >
-                <Activity className="w-5 h-5" />
+                <Activity className="w-6 h-6" />
               </button>
               <ActivityDropdown
                 isOpen={showActivity}
