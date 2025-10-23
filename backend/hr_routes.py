@@ -45,6 +45,14 @@ payroll_settings_collection = db["payroll_settings"]
 
 router = APIRouter(prefix="/hr", tags=["HR Module"])
 
+# Helper function to serialize MongoDB documents
+def serialize_doc(doc):
+    """Convert MongoDB document to JSON-serializable dict"""
+    if doc and "_id" in doc:
+        doc["id"] = str(doc["_id"])
+        del doc["_id"]
+    return doc
+
 # ==================== EMPLOYEE MANAGEMENT ====================
 
 @router.post("/employees", response_model=dict)
