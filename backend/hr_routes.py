@@ -70,12 +70,12 @@ async def create_employee(employee: EmployeeCreate):
         employee_dict["updated_at"] = datetime.utcnow()
         
         result = await employees_collection.insert_one(employee_dict)
-        employee_dict["id"] = str(result.inserted_id)
+        employee_dict["_id"] = result.inserted_id  # Add _id for serialization
         
         # Initialize PTO balance for the employee
         current_year = datetime.utcnow().year
         pto_balance = {
-            "employee_id": employee_dict["id"],
+            "employee_id": str(result.inserted_id),
             "year": current_year,
             "vacation_balance": 0.0,
             "sick_balance": 0.0,
@@ -87,7 +87,7 @@ async def create_employee(employee: EmployeeCreate):
         }
         await pto_balances_collection.insert_one(pto_balance)
         
-        return {"success": True, "employee": employee_dict}
+        return {"success": True, "employee": serialize_doc(employee_dict)}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
