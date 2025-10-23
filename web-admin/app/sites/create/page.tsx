@@ -188,12 +188,23 @@ export default function CreateSitePage() {
 
     if (Object.keys(errors).length > 0) {
       setFieldErrors(errors);
-      alert('Please fix the errors in the form before submitting');
+      
+      // Scroll to first error
+      const firstErrorField = Object.keys(errors)[0];
+      const errorElement = document.querySelector(`[name="${firstErrorField}"]`) || 
+                          document.querySelector(`[data-error="${firstErrorField}"]`);
+      if (errorElement) {
+        errorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      
+      // Show error notification
+      alert(`Please fix ${Object.keys(errors).length} error(s) in the form before submitting`);
       return;
     }
 
     try {
       setSaving(true);
+      setFieldErrors({}); // Clear any previous errors
 
       const fullAddress = `${siteForm.street_address}, ${siteForm.city}, ${siteForm.province} ${siteForm.postal_code}, ${siteForm.country}`;
 
