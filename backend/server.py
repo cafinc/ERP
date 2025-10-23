@@ -12328,5 +12328,10 @@ from task_integration_routes import integration_router
 api_router.include_router(integration_router)
 logger.info("Task integration endpoints registered successfully")
 
+# Include Work Order router
+from work_order_routes import router as work_order_router
+api_router.include_router(work_order_router)
+logger.info("Work order endpoints registered successfully")
+
 # Include the router with all endpoints
 app.include_router(api_router)
