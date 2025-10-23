@@ -50,14 +50,10 @@ const UnifiedCommunicationsDropdown = forwardRef<
   }, [isOpen]);
 
   const fetchRecentCommunications = async () => {
-    // Don't fetch if we already have recent data
-    if (recentComms.length > 0 && !loading) {
-      return;
-    }
+    if (loading) return; // Prevent double fetching
     
     setLoading(true);
     try {
-      // Fetch all communications and take the 10 most recent
       const response = await fetch(`${BACKEND_URL}/communications/list-all`);
       if (response.ok) {
         const data = await response.json();
