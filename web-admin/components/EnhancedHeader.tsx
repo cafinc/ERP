@@ -229,7 +229,7 @@ export default function EnhancedHeader() {
                   }`}
                   title="All Communications"
                 >
-                  <MessageSquare className="w-5 h-5" />
+                  <MessageSquare className="w-6 h-6" />
                   {totalUnreadComms > 0 && (
                     <span className="absolute top-0 right-0 flex items-center justify-center">
                       <span className="absolute inline-flex h-3 w-3 rounded-full bg-blue-500 opacity-75 animate-ping"></span>
