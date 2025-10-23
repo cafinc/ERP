@@ -12338,6 +12338,11 @@ from project_routes import router as project_router
 api_router.include_router(project_router)
 logger.info("Project endpoints registered successfully")
 
+# Include Fleet Tracking router
+from fleet_routes import router as fleet_router
+api_router.include_router(fleet_router)
+logger.info("Fleet tracking endpoints registered successfully")
+
 # Include WebSocket router
 from websocket_routes import router as websocket_router
 api_router.include_router(websocket_router)
