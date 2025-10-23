@@ -33,6 +33,7 @@ import {
   BarChart3,
   ChevronRight,
   ChevronDown,
+  RefreshCw,
 } from 'lucide-react';
 
 interface MenuItem {
