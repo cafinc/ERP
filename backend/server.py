@@ -12318,5 +12318,10 @@ logger.info("Webhook endpoints registered successfully")
 api_router.include_router(template_router)
 logger.info("Template system endpoints registered successfully")
 
+# Include Task System router
+from task_routes import task_router
+api_router.include_router(task_router)
+logger.info("Task system endpoints registered successfully")
+
 # Include the router with all endpoints
 app.include_router(api_router)
