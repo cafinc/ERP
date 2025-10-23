@@ -704,7 +704,7 @@ export default function UnifiedCommunicationsCenter() {
             </div>
 
             {/* Original Message */}
-            <div className="p-6 bg-gray-50 border-b border-gray-200">
+            <div className="p-6 bg-gray-50 border-b border-gray-200 flex-shrink-0">
               <h3 className="text-sm font-semibold text-gray-700 mb-2">Original Message:</h3>
               <div className="bg-white p-4 rounded-lg border border-gray-200">
                 {selectedComm.type === 'email' && selectedComm.subject && (
@@ -722,7 +722,7 @@ export default function UnifiedCommunicationsCenter() {
             </div>
 
             {/* Reply Form */}
-            <div className="p-6">
+            <div className="flex-1 overflow-y-auto p-6">
               {selectedComm.type === 'email' && (
                 <div className="mb-4">
                   <label className="block text-sm font-medium text-gray-700 mb-2">
