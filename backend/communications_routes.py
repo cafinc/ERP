@@ -1144,11 +1144,12 @@ async def check_user_online_status(user_id: str):
 @router.get("/communications/recent")
 async def get_recent_communications(limit: int = 10):
     """Get recent communications across all types"""
+    from fastapi.responses import JSONResponse
     try:
         # Fetch recent communications from all types
-        communications = await communications_collection.find().sort(
+        communications = list(await communications_collection.find().sort(
             "timestamp", -1
-        ).limit(limit).to_list(limit)
+        ).limit(limit).to_list(limit))
         
         # Enrich with customer names
         for comm in communications:
@@ -1164,12 +1165,12 @@ async def get_recent_communications(limit: int = 10):
                     comm["customer_name"] = "Unknown"
             
             # Convert timestamp to string
-            if "timestamp" in comm:
-                comm["timestamp"] = comm["timestamp"].isoformat() if isinstance(comm["timestamp"], datetime) else comm["timestamp"]
-            if "created_at" in comm:
-                comm["created_at"] = comm["created_at"].isoformat() if isinstance(comm["created_at"], datetime) else comm["created_at"]
+            if "timestamp" in comm and isinstance(comm["timestamp"], datetime):
+                comm["timestamp"] = comm["timestamp"].isoformat()
+            if "created_at" in comm and isinstance(comm["created_at"], datetime):
+                comm["created_at"] = comm["created_at"].isoformat()
         
-        return communications
+        return JSONResponse(content=communications)
     
     except Exception as e:
         logger.error(f"Error fetching recent communications: {str(e)}")
