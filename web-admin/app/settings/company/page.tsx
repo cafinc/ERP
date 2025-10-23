@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import CompactHeader from '@/components/CompactHeader';
+import HybridNavigationTopBar from '@/components/HybridNavigationTopBar';
 import { Building, Mail, Phone, MapPin, Globe, FileText } from 'lucide-react';
 
 export default function CompanySettingsPage() {
