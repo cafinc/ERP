@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import api from '@/lib/api';
+import HybridNavigationTopBar from '@/components/HybridNavigationTopBar';
 import {
   ArrowLeft,
   Edit,
