@@ -66,6 +66,9 @@ export default function ModernHeader() {
       if (quickAddRef.current && !quickAddRef.current.contains(event.target as Node)) {
         setShowQuickAdd(false);
       }
+      if (activityRef.current && !activityRef.current.contains(event.target as Node)) {
+        setShowActivity(false);
+      }
     };
 
     document.addEventListener('mousedown', handleClickOutside);
