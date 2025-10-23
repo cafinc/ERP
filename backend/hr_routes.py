@@ -189,9 +189,9 @@ async def create_time_entry(time_entry: TimeEntryCreate):
         time_entry_dict["updated_at"] = datetime.utcnow()
         
         result = await time_entries_collection.insert_one(time_entry_dict)
-        time_entry_dict["id"] = str(result.inserted_id)
+        time_entry_dict["_id"] = result.inserted_id
         
-        return {"success": True, "time_entry": time_entry_dict}
+        return {"success": True, "time_entry": serialize_doc(time_entry_dict)}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
