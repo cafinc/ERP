@@ -64,6 +64,7 @@ export default function ModernHeaderWithNav() {
 
   // Branding
   const [companyName, setCompanyName] = useState<string>('');
+  const [logoUrl, setLogoUrl] = useState<string>('');
   const [headerColor, setHeaderColor] = useState<string>('#3f72af');
 
   // Communications count
@@ -74,7 +75,9 @@ export default function ModernHeaderWithNav() {
     if (savedBranding) {
       const branding = JSON.parse(savedBranding);
       if (branding.company_name) setCompanyName(branding.company_name);
+      if (branding.logo_url) setLogoUrl(branding.logo_url);
       if (branding.primary_color) setHeaderColor(branding.primary_color);
+      if (branding.header_color) setHeaderColor(branding.header_color); // Backwards compatibility
     }
   }, []);
 
