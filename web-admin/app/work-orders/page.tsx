@@ -372,6 +372,6 @@ export default function WorkOrdersPage() {
           )}
         </div>
       </div>
-    </HybridNavigationTopBar>
+    </SimpleNavigationTopBar>
   );
 }
