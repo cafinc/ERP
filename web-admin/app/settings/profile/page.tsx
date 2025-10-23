@@ -290,11 +290,18 @@ export default function ProfileSettings() {
               {/* Avatar Display */}
               <div className="relative">
                 {avatarPreview ? (
-                  <img
-                    src={avatarPreview}
-                    alt="Profile"
-                    className="w-32 h-32 rounded-full object-cover border-4 border-gray-200"
-                  />
+                  // Check if avatar is emoji or image
+                  avatarPreview.length <= 4 ? (
+                    <div className="w-32 h-32 rounded-full bg-gradient-to-br from-[#3f72af] to-blue-600 flex items-center justify-center border-4 border-gray-200">
+                      <span className="text-6xl">{avatarPreview}</span>
+                    </div>
+                  ) : (
+                    <img
+                      src={avatarPreview}
+                      alt="Profile"
+                      className="w-32 h-32 rounded-full object-cover border-4 border-gray-200"
+                    />
+                  )
                 ) : (
                   <div className="w-32 h-32 rounded-full bg-gradient-to-br from-[#3f72af] to-blue-600 flex items-center justify-center border-4 border-gray-200">
                     <span className="text-4xl font-bold text-white">{getInitials()}</span>
@@ -310,13 +317,13 @@ export default function ProfileSettings() {
               {/* Upload Controls */}
               <div className="flex-1">
                 <h3 className="font-semibold text-gray-900 mb-2">
-                  {avatarPreview ? 'Update your photo' : 'Add a profile photo'}
+                  {avatarPreview ? 'Update your avatar' : 'Add an avatar'}
                 </h3>
                 <p className="text-sm text-gray-600 mb-4">
-                  Upload a photo to help people recognize you. Max size: 5MB
+                  Choose an emoji or upload a photo. Photos max size: 5MB
                 </p>
                 
-                <div className="flex items-center space-x-3">
+                <div className="flex items-center space-x-3 mb-3">
                   <input
                     ref={fileInputRef}
                     type="file"
@@ -331,7 +338,16 @@ export default function ProfileSettings() {
                     className="flex items-center space-x-2 px-4 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <Upload className="w-4 h-4" />
-                    <span>{avatarPreview ? 'Change Photo' : 'Upload Photo'}</span>
+                    <span>Upload Photo</span>
+                  </button>
+                  
+                  <button
+                    onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+                    disabled={uploadingAvatar}
+                    className="flex items-center space-x-2 px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    <Smile className="w-4 h-4" />
+                    <span>Choose Emoji</span>
                   </button>
 
                   {avatarPreview && (
