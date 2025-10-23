@@ -858,7 +858,7 @@ export default function UnifiedCommunicationsCenter() {
             </div>
 
             {/* Reply Form */}
-            <div className="flex-1 overflow-y-auto p-6">
+            <div className="p-6 bg-white border-t border-gray-200">
               {selectedComm.type === 'email' && (
                 <div className="mb-4">
                   <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -875,20 +875,42 @@ export default function UnifiedCommunicationsCenter() {
                 </div>
               )}
 
-              <div>
+              <div className="relative">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   {selectedComm.type === 'phone' ? 'Call Notes' : 'Message'}
                 </label>
-                <textarea
-                  value={replyText}
-                  onChange={(e) => setReplyText(e.target.value)}
-                  placeholder={getReplyPlaceholder()}
-                  rows={8}
-                  autoFocus={selectedComm.type !== 'email'}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
-                />
+                <div className="relative">
+                  <textarea
+                    value={replyText}
+                    onChange={(e) => setReplyText(e.target.value)}
+                    placeholder={getReplyPlaceholder()}
+                    rows={6}
+                    autoFocus={selectedComm.type !== 'email'}
+                    className="w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+                    className="absolute bottom-3 right-3 p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+                    title="Add emoji"
+                  >
+                    <Smile className="w-5 h-5" />
+                  </button>
+                </div>
+                
+                {/* Emoji Picker */}
+                {showEmojiPicker && (
+                  <div ref={emojiPickerRef} className="absolute bottom-full right-0 mb-2 z-50 shadow-2xl">
+                    <Picker
+                      data={data}
+                      onEmojiSelect={addEmoji}
+                      theme="light"
+                      previewPosition="none"
+                      skinTonePosition="none"
+                    />
+                  </div>
+                )}
               </div>
-
             </div>
 
             {/* Action Buttons - Fixed at bottom */}
