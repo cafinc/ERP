@@ -257,8 +257,15 @@ export default function EnhancedHeader() {
               {/* Notifications with NotificationCenter */}
               <div ref={notificationRef} className="relative">
                 <button
-                  onClick={() => setShowNotifications(!showNotifications)}
-                  onMouseEnter={(e) => !showNotifications && e.currentTarget.classList.add('hovered')}
+                  onClick={(e) => {
+                    e.currentTarget.classList.remove('hovered');
+                    setShowNotifications(!showNotifications);
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!showNotifications) {
+                      e.currentTarget.classList.add('hovered');
+                    }
+                  }}
                   onMouseLeave={(e) => e.currentTarget.classList.remove('hovered')}
                   className={`p-2 rounded-lg transition-all duration-200 ease-in-out relative cursor-pointer ${
                     showNotifications 
