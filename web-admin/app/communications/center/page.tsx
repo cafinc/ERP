@@ -892,23 +892,61 @@ export default function UnifiedCommunicationsCenter() {
                     placeholder={getReplyPlaceholder()}
                     rows={6}
                     autoFocus={selectedComm.type !== 'email'}
-                    className="w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                    className="w-full px-4 py-3 pr-40 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
                   />
-                  <button
-                    type="button"
-                    onClick={() => setShowEmojiPicker(!showEmojiPicker)}
-                    className="absolute bottom-3 right-3 p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
-                    title="Add emoji"
-                  >
-                    <Smile className="w-5 h-5" />
-                  </button>
+                  
+                  {/* Action Buttons Row */}
+                  <div className="absolute bottom-3 right-3 flex items-center gap-2">
+                    {/* Photo/Image Upload Button */}
+                    <button
+                      type="button"
+                      onClick={() => fileInputRef.current?.click()}
+                      className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                      title="Add photo"
+                    >
+                      <ImageIcon className="w-5 h-5" />
+                    </button>
+                    
+                    {/* Attachment Button */}
+                    <button
+                      type="button"
+                      onClick={() => fileInputRef.current?.click()}
+                      className="p-2 text-gray-400 hover:text-green-600 hover:bg-green-50 rounded-lg transition-colors"
+                      title="Add attachment"
+                    >
+                      <PaperClipIcon className="w-5 h-5" />
+                    </button>
+                    
+                    {/* Emoji Button */}
+                    <button
+                      type="button"
+                      onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+                      className="p-2 text-gray-400 hover:text-yellow-600 hover:bg-yellow-50 rounded-lg transition-colors"
+                      title="Add emoji"
+                    >
+                      <Smile className="w-5 h-5" />
+                    </button>
+                  </div>
+                  
+                  {/* Hidden file input */}
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    multiple
+                    accept="image/*,.pdf,.doc,.docx,.txt"
+                    onChange={(e) => {
+                      const files = Array.from(e.target.files || []);
+                      setSelectedFiles([...selectedFiles, ...files]);
+                    }}
+                    className="hidden"
+                  />
                 </div>
                 
-                {/* Custom Emoji Picker - Compact Bubble */}
+                {/* Custom Emoji Picker - Compact Bubble (comes from bottom) */}
                 {showEmojiPicker && (
                   <div 
                     ref={emojiPickerRef} 
-                    className="absolute bottom-full right-0 mb-2 z-50 bg-white rounded-2xl shadow-xl border border-gray-200 p-2.5 w-64 max-h-72 overflow-y-auto"
+                    className="absolute top-full left-auto right-0 mt-2 z-50 bg-white rounded-2xl shadow-xl border border-gray-200 p-2.5 w-64 max-h-72 overflow-y-auto"
                     style={{
                       boxShadow: '0 10px 40px rgba(0, 0, 0, 0.15)',
                     }}
@@ -928,6 +966,31 @@ export default function UnifiedCommunicationsCenter() {
                             </button>
                           ))}
                         </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                
+                {/* Selected Files Display */}
+                {selectedFiles.length > 0 && (
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {selectedFiles.map((file, idx) => (
+                      <div
+                        key={idx}
+                        className="flex items-center gap-2 px-3 py-1.5 bg-gray-100 border border-gray-200 rounded-lg text-sm"
+                      >
+                        {file.type.startsWith('image/') ? (
+                          <ImageIcon className="w-4 h-4 text-blue-500" />
+                        ) : (
+                          <FileText className="w-4 h-4 text-gray-500" />
+                        )}
+                        <span className="max-w-[150px] truncate">{file.name}</span>
+                        <button
+                          onClick={() => setSelectedFiles(selectedFiles.filter((_, i) => i !== idx))}
+                          className="text-gray-400 hover:text-red-500"
+                        >
+                          <X className="w-4 h-4" />
+                        </button>
                       </div>
                     ))}
                   </div>
