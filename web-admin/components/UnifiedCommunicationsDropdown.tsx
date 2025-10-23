@@ -189,6 +189,7 @@ export default function UnifiedCommunicationsDropdown({
             {recentComms.map((comm) => (
               <div
                 key={comm._id}
+                onClick={() => handleMessageClick(comm)}
                 className={`p-3 hover:bg-gray-50 cursor-pointer transition-colors ${
                   !comm.read ? 'bg-blue-50' : ''
                 }`}
