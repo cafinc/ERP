@@ -70,11 +70,6 @@ export default function UnifiedCommunicationsDropdown({
     }
   };
 
-  // Expose prefetch method to parent component
-  useImperativeHandle(ref, () => ({
-    prefetchData: fetchRecentCommunications
-  }));
-
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
