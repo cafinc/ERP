@@ -42,8 +42,14 @@ interface Communication {
   attachments?: any[];
 }
 
+'use client';
+
+import { useSearchParams } from 'next/navigation';
+
 export default function UnifiedCommunicationsCenter() {
-  const [activeTab, setActiveTab] = useState<'all' | 'inapp' | 'sms' | 'email' | 'phone'>('all');
+  const searchParams = useSearchParams();
+  const tabParam = searchParams.get('tab') as 'inapp' | 'sms' | 'email' | 'phone' | null;
+  const [activeTab, setActiveTab] = useState<'all' | 'inapp' | 'sms' | 'email' | 'phone'>(tabParam || 'all');
   const [communications, setCommunications] = useState<Communication[]>([]);
   const [filteredComms, setFilteredComms] = useState<Communication[]>([]);
   const [loading, setLoading] = useState(true);
