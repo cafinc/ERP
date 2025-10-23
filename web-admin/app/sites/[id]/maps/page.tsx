@@ -444,7 +444,7 @@ export default function SiteMapsGeofencingPage() {
         {activeTab === 'geofence' ? (
           <>
             {/* Map */}
-            <div ref={mapRef} className="w-full h-full" />
+            <div ref={mapRef} className="w-full h-full" style={{ minHeight: '600px' }} />
 
             {/* Measurements Panel */}
             {measurements && mapMode === 'edit' && (
