@@ -12373,5 +12373,10 @@ from dispatch_board_routes import router as dispatch_board_router
 api_router.include_router(dispatch_board_router)
 logger.info("Dispatch board endpoints registered successfully")
 
+# Include Smart Equipment router
+from smart_equipment_routes import router as smart_equipment_router
+api_router.include_router(smart_equipment_router)
+logger.info("Smart equipment endpoints registered successfully")
+
 # Include the router with all endpoints
 app.include_router(api_router)
