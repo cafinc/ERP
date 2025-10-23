@@ -768,57 +768,93 @@ export default function UnifiedCommunicationsCenter() {
               </div>
             </div>
 
-            {/* Original Message */}
-            <div className="p-6 bg-gray-50 border-b border-gray-200 flex-shrink-0">
-              <h3 className="text-sm font-semibold text-gray-700 mb-2">Original Message:</h3>
-              <div className="bg-white p-4 rounded-lg border border-gray-200">
-                {selectedComm.type === 'email' && selectedComm.subject && (
-                  <p className="text-sm font-semibold text-gray-900 mb-2">
-                    Subject: {selectedComm.subject}
-                  </p>
-                )}
-                <p className="text-sm text-gray-700 whitespace-pre-wrap">
-                  {getMessagePreview(selectedComm)}
-                </p>
-                
-                {/* Attachments Display */}
-                {selectedComm.attachments && selectedComm.attachments.length > 0 && (
-                  <div className="mt-3 pt-3 border-t border-gray-200">
-                    <div className="flex items-center gap-2 mb-2">
-                      <PaperClipIcon className="w-4 h-4 text-gray-500" />
-                      <span className="text-xs font-medium text-gray-700">
-                        {selectedComm.attachments.length} Attachment{selectedComm.attachments.length > 1 ? 's' : ''}
-                      </span>
-                    </div>
-                    <div className="flex flex-wrap gap-2">
-                      {selectedComm.attachments.map((attachment: any, idx: number) => (
-                        <div
-                          key={idx}
-                          className="flex items-center gap-2 px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg hover:bg-gray-100 transition-colors"
-                        >
-                          {attachment.type?.startsWith('image/') ? (
-                            <ImageIcon className="w-4 h-4 text-blue-500" />
-                          ) : (
-                            <FileText className="w-4 h-4 text-gray-500" />
-                          )}
-                          <span className="text-xs text-gray-700 max-w-[200px] truncate">
-                            {attachment.filename || attachment.name || `Attachment ${idx + 1}`}
+            {/* Conversation History */}
+            <div className="flex-1 overflow-y-auto p-6 bg-gray-50">
+              <h3 className="text-sm font-semibold text-gray-700 mb-3 sticky top-0 bg-gray-50 pb-2">Conversation History ({conversationHistory.length} messages)</h3>
+              
+              {loadingConversation ? (
+                <div className="flex items-center justify-center py-8">
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500" />
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  {conversationHistory.map((msg) => (
+                    <div
+                      key={msg._id}
+                      className={`p-4 rounded-lg border ${
+                        msg.direction === 'inbound'
+                          ? 'bg-white border-gray-200 ml-0 mr-8'
+                          : 'bg-blue-50 border-blue-200 ml-8 mr-0'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center gap-2">
+                          <div className={`p-1.5 rounded ${getTypeColor(msg.type)} text-white`}>
+                            {getTypeIcon(msg.type)}
+                          </div>
+                          <span className="text-xs font-medium text-gray-700">
+                            {msg.direction === 'inbound' ? (msg.from || msg.customer_name || 'Customer') : 'You'}
                           </span>
-                          {attachment.size && (
-                            <span className="text-xs text-gray-400">
-                              ({(attachment.size / 1024).toFixed(1)} KB)
-                            </span>
-                          )}
+                          <span className={`px-1.5 py-0.5 text-xs rounded ${
+                            msg.direction === 'inbound'
+                              ? 'bg-green-100 text-green-700'
+                              : 'bg-blue-100 text-blue-700'
+                          }`}>
+                            {msg.direction === 'inbound' ? 'Received' : 'Sent'}
+                          </span>
                         </div>
-                      ))}
+                        <span className="text-xs text-gray-500">
+                          {new Date(msg.timestamp || msg.created_at || '').toLocaleString('en-US', {
+                            month: 'short',
+                            day: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit'
+                          })}
+                        </span>
+                      </div>
+                      
+                      {msg.type === 'email' && msg.subject && (
+                        <p className="text-xs font-semibold text-gray-900 mb-1">
+                          Subject: {msg.subject}
+                        </p>
+                      )}
+                      
+                      <p className="text-sm text-gray-700 whitespace-pre-wrap">
+                        {getMessagePreview(msg)}
+                      </p>
+                      
+                      {/* Attachments */}
+                      {msg.attachments && msg.attachments.length > 0 && (
+                        <div className="mt-2 pt-2 border-t border-gray-200">
+                          <div className="flex items-center gap-2 mb-1">
+                            <PaperClipIcon className="w-3 h-3 text-gray-500" />
+                            <span className="text-xs font-medium text-gray-600">
+                              {msg.attachments.length} Attachment{msg.attachments.length > 1 ? 's' : ''}
+                            </span>
+                          </div>
+                          <div className="flex flex-wrap gap-1.5">
+                            {msg.attachments.map((attachment: any, idx: number) => (
+                              <div
+                                key={idx}
+                                className="flex items-center gap-1.5 px-2 py-1 bg-gray-100 border border-gray-200 rounded text-xs"
+                              >
+                                {attachment.type?.startsWith('image/') ? (
+                                  <ImageIcon className="w-3 h-3 text-blue-500" />
+                                ) : (
+                                  <FileText className="w-3 h-3 text-gray-500" />
+                                )}
+                                <span className="max-w-[150px] truncate">
+                                  {attachment.filename || attachment.name || `File ${idx + 1}`}
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </div>
-                  </div>
-                )}
-                
-                <p className="text-xs text-gray-500 mt-2">
-                  {formatTimestamp(selectedComm.timestamp || selectedComm.created_at || '')}
-                </p>
-              </div>
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* Reply Form */}
