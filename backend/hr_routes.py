@@ -325,9 +325,9 @@ async def create_pto_request(pto_request: PTORequestCreate):
         pto_dict["updated_at"] = datetime.utcnow()
         
         result = await pto_requests_collection.insert_one(pto_dict)
-        pto_dict["id"] = str(result.inserted_id)
+        pto_dict["_id"] = result.inserted_id
         
-        return {"success": True, "pto_request": pto_dict}
+        return {"success": True, "pto_request": serialize_doc(pto_dict)}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
