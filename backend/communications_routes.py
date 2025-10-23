@@ -1211,4 +1211,4 @@ async def get_all_communications():
     
     except Exception as e:
         logger.error(f"Error fetching all communications: {str(e)}")
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail="Failed to fetch communications")
