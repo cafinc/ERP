@@ -269,8 +269,15 @@ export default function UnifiedCommunicationsCenter() {
 
   const markAsRead = async (commId: string) => {
     try {
+      // Get auth token from localStorage
+      const token = localStorage.getItem('session_token');
+      
       const response = await fetch(`${BACKEND_URL}/communications/${commId}/mark-read`, {
         method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
       });
       
       if (response.ok) {
@@ -285,7 +292,9 @@ export default function UnifiedCommunicationsCenter() {
         );
         calculateStats(updatedComms);
         
-        console.log(`Marked message ${commId} as read`);
+        console.log(`✅ Marked message ${commId} as read`);
+      } else {
+        console.error(`❌ Failed to mark as read: ${response.status}`);
       }
     } catch (error) {
       console.error('Error marking message as read:', error);
