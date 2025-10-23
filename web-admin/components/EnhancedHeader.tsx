@@ -249,23 +249,11 @@ export default function EnhancedHeader() {
               <div ref={notificationRef} className="relative">
                 <button
                   onClick={() => setShowNotifications(!showNotifications)}
-                  className="p-2 rounded-lg transition-all duration-200 ease-in-out relative cursor-pointer"
-                  style={{
-                    backgroundColor: showNotifications ? 'white' : 'transparent',
-                    color: showNotifications ? '#3f72af' : 'white',
-                  }}
-                  onMouseEnter={(e) => {
-                    if (!showNotifications) {
-                      e.currentTarget.style.backgroundColor = 'white';
-                      e.currentTarget.style.color = '#3f72af';
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (!showNotifications) {
-                      e.currentTarget.style.backgroundColor = 'transparent';
-                      e.currentTarget.style.color = 'white';
-                    }
-                  }}
+                  className={`p-2 rounded-lg relative cursor-pointer ${
+                    showNotifications 
+                      ? 'bg-white text-[#3f72af]' 
+                      : 'bg-transparent text-white hover:bg-white hover:text-[#3f72af] transition-colors duration-200'
+                  }`}
                   title="Notifications"
                 >
                   <Bell className="w-5 h-5" />
