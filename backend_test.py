@@ -82,9 +82,10 @@ class BackendTester:
             "last_name": "Smith",
             "email": "john.smith@company.com",
             "phone": "+1-555-0123",
-            "position": "Snow Plow Operator",
+            "job_title": "Snow Plow Operator",
             "department": "Operations",
             "hire_date": datetime.now().isoformat(),
+            "employment_type": "full_time",
             "hourly_rate": 25.50,
             "emergency_contact_name": "Jane Smith",
             "emergency_contact_phone": "+1-555-0124"
