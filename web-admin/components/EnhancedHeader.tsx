@@ -266,8 +266,9 @@ export default function EnhancedHeader() {
                     </span>
                   )}
                 </button>
-                {showNotifications && (
-                  <NotificationCenter
+                <AlertsDropdown
+                  isOpen={showNotifications}
+                  onClose={() => setShowNotifications(false)}
                     onClose={() => setShowNotifications(false)}
                     onExpand={(type) => {
                       setShowNotifications(false);
