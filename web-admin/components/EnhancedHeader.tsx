@@ -219,7 +219,15 @@ export default function EnhancedHeader() {
             {/* Quick Actions with Dropdowns */}
             <div className="flex items-center space-x-2">
               {/* Unified Communications Center */}
-              <div className="relative">
+              <div 
+                className="relative"
+                onMouseEnter={() => {
+                  // Prefetch data on hover for instant dropdown
+                  if (!showUnifiedComms && unifiedCommsDropdownRef.current) {
+                    unifiedCommsDropdownRef.current.prefetchData();
+                  }
+                }}
+              >
                 <button
                   onClick={() => setShowUnifiedComms(!showUnifiedComms)}
                   className={`p-2 rounded-lg relative cursor-pointer ${
