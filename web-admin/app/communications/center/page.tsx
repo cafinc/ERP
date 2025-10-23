@@ -85,7 +85,7 @@ export default function UnifiedCommunicationsCenter() {
   const fetchAllCommunications = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`${BACKEND_URL}/api/communications/all`);
+      const response = await fetch(`${BACKEND_URL}/api/communications/list-all`);
       if (response.ok) {
         const data = await response.json();
         setCommunications(data);
