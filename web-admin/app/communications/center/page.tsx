@@ -215,6 +215,112 @@ export default function UnifiedCommunicationsCenter() {
     a.click();
   };
 
+  const handleReply = (comm: Communication) => {
+    setSelectedComm(comm);
+    setShowReplyModal(true);
+    setReplyText('');
+    
+    // Pre-populate subject for email replies
+    if (comm.type === 'email' && comm.subject) {
+      setReplySubject(comm.subject.startsWith('Re:') ? comm.subject : `Re: ${comm.subject}`);
+    } else {
+      setReplySubject('');
+    }
+  };
+
+  const sendReply = async () => {
+    if (!selectedComm) return;
+    
+    setSending(true);
+    
+    try {
+      let endpoint = '';
+      let payload: any = {};
+
+      switch (selectedComm.type) {
+        case 'inapp':
+          endpoint = '/messages/send';
+          payload = {
+            customer_id: selectedComm.customer_id,
+            message: replyText,
+            type: 'inapp'
+          };
+          break;
+        
+        case 'sms':
+          endpoint = '/communications/sms/send';
+          payload = {
+            to: selectedComm.from || selectedComm.to || selectedComm.phone,
+            message: replyText,
+            customer_id: selectedComm.customer_id
+          };
+          break;
+        
+        case 'email':
+          endpoint = '/gmail/send';
+          payload = {
+            to: selectedComm.from || selectedComm.to,
+            subject: replySubject,
+            body: replyText,
+            customer_id: selectedComm.customer_id
+          };
+          break;
+        
+        case 'phone':
+          endpoint = '/communications/phone/log';
+          payload = {
+            customer_id: selectedComm.customer_id,
+            phone: selectedComm.phone || selectedComm.from || selectedComm.to,
+            notes: replyText,
+            direction: 'outbound',
+            duration: 0
+          };
+          break;
+      }
+
+      const response = await fetch(`${BACKEND_URL}/api${endpoint}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (response.ok) {
+        setShowReplyModal(false);
+        setReplyText('');
+        setReplySubject('');
+        setSelectedComm(null);
+        fetchAllCommunications(); // Refresh the list
+      } else {
+        const error = await response.json();
+        alert(error.detail || 'Failed to send reply');
+      }
+    } catch (error) {
+      console.error('Error sending reply:', error);
+      alert('Failed to send reply');
+    } finally {
+      setSending(false);
+    }
+  };
+
+  const getReplyPlaceholder = () => {
+    if (!selectedComm) return 'Type your reply...';
+    
+    switch (selectedComm.type) {
+      case 'inapp':
+        return 'Type your InApp message...';
+      case 'sms':
+        return 'Type your SMS message...';
+      case 'email':
+        return 'Type your email message...';
+      case 'phone':
+        return 'Enter call notes or summary...';
+      default:
+        return 'Type your reply...';
+    }
+  };
+
   return (
     <div className="flex flex-col h-screen bg-gradient-to-br from-slate-50 to-slate-100">
       {/* Header */}
