@@ -72,8 +72,10 @@ export default function ModernHeaderWithNav() {
   const [logoUrl, setLogoUrl] = useState<string>('');
   const [headerColor, setHeaderColor] = useState<string>('#3f72af');
 
-  // Communications count
+  // Notifications counts
   const [totalUnreadComms, setTotalUnreadComms] = useState(0);
+  const [alertsCount, setAlertsCount] = useState(3);
+  const [activityCount, setActivityCount] = useState(5);
 
   useEffect(() => {
     const savedBranding = localStorage.getItem('branding_settings');
