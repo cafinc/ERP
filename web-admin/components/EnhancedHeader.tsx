@@ -222,10 +222,12 @@ export default function EnhancedHeader() {
               <div className="relative">
                 <button
                   onClick={() => setShowUnifiedComms(!showUnifiedComms)}
-                  className={`p-2 rounded-lg transition-all duration-150 ease-in-out relative cursor-pointer ${
+                  onMouseEnter={(e) => !showUnifiedComms && e.currentTarget.classList.add('hovered')}
+                  onMouseLeave={(e) => e.currentTarget.classList.remove('hovered')}
+                  className={`p-2 rounded-lg transition-all duration-200 ease-in-out relative cursor-pointer ${
                     showUnifiedComms 
                       ? 'bg-white text-[#3f72af]' 
-                      : 'text-white hover:bg-white hover:text-[#3f72af]'
+                      : 'text-white [&.hovered]:bg-white [&.hovered]:text-[#3f72af]'
                   }`}
                   title="All Communications"
                 >
