@@ -12323,5 +12323,10 @@ from task_routes import task_router
 api_router.include_router(task_router)
 logger.info("Task system endpoints registered successfully")
 
+# Include Task Integration router
+from task_integration_routes import integration_router
+api_router.include_router(integration_router)
+logger.info("Task integration endpoints registered successfully")
+
 # Include the router with all endpoints
 app.include_router(api_router)
