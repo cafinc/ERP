@@ -258,11 +258,53 @@ export default function ModernHeaderWithNav() {
         setShowNavMenu(false);
         setExpandedNavItem(null);
       }
+      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+        setShowSearchResults(false);
+      }
     };
 
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+  // Debounced search
+  useEffect(() => {
+    const performSearch = async () => {
+      if (searchQuery.trim().length < 2) {
+        setSearchResults([]);
+        setShowSearchResults(false);
+        return;
+      }
+
+      setSearchLoading(true);
+      setShowSearchResults(true);
+
+      try {
+        // Simulate search - replace with actual API call
+        const mockResults = [
+          { id: '1', type: 'customer', title: 'ABC Corporation', subtitle: 'customer@abc.com', href: '/customers/1' },
+          { id: '2', type: 'lead', title: 'XYZ Industries Lead', subtitle: 'Contact: John Doe', href: '/leads/2' },
+          { id: '3', type: 'estimate', title: 'Estimate #EST-2024-001', subtitle: '$12,500.00', href: '/estimates/3' },
+          { id: '4', type: 'project', title: 'Winter Maintenance 2024', subtitle: 'In Progress', href: '/projects/4' },
+          { id: '5', type: 'invoice', title: 'Invoice #INV-2024-123', subtitle: 'Paid - $5,240.00', href: '/invoices/5' },
+        ].filter(item => 
+          item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          item.subtitle.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+
+        setTimeout(() => {
+          setSearchResults(mockResults);
+          setSearchLoading(false);
+        }, 300);
+      } catch (error) {
+        console.error('Search error:', error);
+        setSearchLoading(false);
+      }
+    };
+
+    const debounceTimer = setTimeout(performSearch, 300);
+    return () => clearTimeout(debounceTimer);
+  }, [searchQuery]);
 
   // Keyboard shortcut for search (Ctrl+K)
   useEffect(() => {
