@@ -1182,6 +1182,7 @@ async def get_all_communications():
     """Get all communications for unified communications center - returns raw JSON"""
     from fastapi.responses import Response
     import json
+    logger.info("=== GETTING ALL COMMUNICATIONS V2 ===")
     try:
         # Fetch all communications as raw dicts
         cursor = communications_collection.find().sort("timestamp", -1)
