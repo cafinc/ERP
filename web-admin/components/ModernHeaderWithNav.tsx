@@ -76,6 +76,11 @@ export default function ModernHeaderWithNav() {
   const [totalUnreadComms, setTotalUnreadComms] = useState(0);
   const [alertsCount, setAlertsCount] = useState(3);
   const [activityCount, setActivityCount] = useState(5);
+  
+  // Theme preferences
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [showThemeMenu, setShowThemeMenu] = useState(false);
+  const themeMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const savedBranding = localStorage.getItem('branding_settings');
