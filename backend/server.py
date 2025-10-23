@@ -12363,5 +12363,10 @@ from weather_alerts_routes import router as weather_alerts_router
 api_router.include_router(weather_alerts_router)
 logger.info("Weather alerts endpoints registered successfully")
 
+# Include Push Notification router
+from push_notification_routes import router as push_notification_router
+api_router.include_router(push_notification_router)
+logger.info("Push notification endpoints registered successfully")
+
 # Include the router with all endpoints
 app.include_router(api_router)
