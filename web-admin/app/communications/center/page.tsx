@@ -732,6 +732,41 @@ export default function UnifiedCommunicationsCenter() {
                 <p className="text-sm text-gray-700 whitespace-pre-wrap">
                   {getMessagePreview(selectedComm)}
                 </p>
+                
+                {/* Attachments Display */}
+                {selectedComm.attachments && selectedComm.attachments.length > 0 && (
+                  <div className="mt-3 pt-3 border-t border-gray-200">
+                    <div className="flex items-center gap-2 mb-2">
+                      <PaperClipIcon className="w-4 h-4 text-gray-500" />
+                      <span className="text-xs font-medium text-gray-700">
+                        {selectedComm.attachments.length} Attachment{selectedComm.attachments.length > 1 ? 's' : ''}
+                      </span>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {selectedComm.attachments.map((attachment: any, idx: number) => (
+                        <div
+                          key={idx}
+                          className="flex items-center gap-2 px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg hover:bg-gray-100 transition-colors"
+                        >
+                          {attachment.type?.startsWith('image/') ? (
+                            <ImageIcon className="w-4 h-4 text-blue-500" />
+                          ) : (
+                            <FileText className="w-4 h-4 text-gray-500" />
+                          )}
+                          <span className="text-xs text-gray-700 max-w-[200px] truncate">
+                            {attachment.filename || attachment.name || `Attachment ${idx + 1}`}
+                          </span>
+                          {attachment.size && (
+                            <span className="text-xs text-gray-400">
+                              ({(attachment.size / 1024).toFixed(1)} KB)
+                            </span>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                
                 <p className="text-xs text-gray-500 mt-2">
                   {formatTimestamp(selectedComm.timestamp || selectedComm.created_at || '')}
                 </p>
