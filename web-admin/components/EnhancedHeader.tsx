@@ -269,15 +269,7 @@ export default function EnhancedHeader() {
                 <AlertsDropdown
                   isOpen={showNotifications}
                   onClose={() => setShowNotifications(false)}
-                    onClose={() => setShowNotifications(false)}
-                    onExpand={(type) => {
-                      setShowNotifications(false);
-                      if (type === 'messages') router.push('/messages');
-                      else if (type === 'emails') router.push('/gmail');
-                      else if (type === 'notifications') router.push('/notifications');
-                    }}
-                  />
-                )}
+                />
               </div>
 
               {/* Settings */}
