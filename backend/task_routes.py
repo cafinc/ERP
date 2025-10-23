@@ -30,7 +30,7 @@ load_dotenv()
 logger = logging.getLogger(__name__)
 
 # Initialize router
-task_router = APIRouter(prefix="/api/tasks", tags=["tasks"])
+task_router = APIRouter(prefix="/tasks", tags=["tasks"])
 
 # Database connection
 mongo_url = os.getenv("MONGO_URL", "mongodb://localhost:27017")
