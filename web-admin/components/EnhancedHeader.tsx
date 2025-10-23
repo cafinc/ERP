@@ -240,7 +240,6 @@ export default function EnhancedHeader() {
                   )}
                 </button>
                 <UnifiedCommunicationsDropdown 
-                  ref={unifiedCommsDropdownRef}
                   isOpen={showUnifiedComms}
                   onClose={() => setShowUnifiedComms(false)}
                 />
