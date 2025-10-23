@@ -44,7 +44,6 @@ export default function EnhancedHeader() {
   const emailsRef = useRef<HTMLDivElement>(null);
   const callsRef = useRef<HTMLDivElement>(null);
   const profileRef = useRef<HTMLDivElement>(null);
-  const unifiedCommsDropdownRef = useRef<any>(null);
 
   // Load branding settings
   useEffect(() => {
