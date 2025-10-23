@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import PageHeader from '@/components/PageHeader';
-import HybridNavigationTopBar from '@/components/HybridNavigationTopBar';
+import SimpleNavigationTopBar from '@/components/SimpleNavigationTopBar';
 import {
   Plus,
   Search,
