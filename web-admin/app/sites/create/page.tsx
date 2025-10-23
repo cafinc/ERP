@@ -303,22 +303,28 @@ export default function CreateSitePage() {
                   </button>
                 </div>
               ) : (
-                <div>
+                <div data-error="customer_id">
                   <div className="relative">
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                     <input
                       type="text"
+                      name="customer_id"
                       placeholder="Search for a customer..."
                       value={customerSearchQuery}
                       onChange={(e) => setCustomerSearchQuery(e.target.value)}
                       onFocus={() => setShowCustomerSearch(true)}
-                      className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:border-transparent ${
-                        fieldErrors['customer_id'] ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'
+                      className={`w-full pl-10 pr-4 py-3 border-2 rounded-lg focus:ring-2 focus:border-transparent transition-all ${
+                        fieldErrors['customer_id'] 
+                          ? 'border-red-500 focus:ring-red-500 bg-red-50' 
+                          : 'border-gray-300 focus:ring-blue-500'
                       }`}
                     />
                   </div>
                   {fieldErrors['customer_id'] && (
-                    <p className="text-red-500 text-xs mt-1">{fieldErrors['customer_id']}</p>
+                    <div className="flex items-center gap-2 mt-2 text-red-600">
+                      <AlertCircle className="w-4 h-4" />
+                      <p className="text-sm font-medium">{fieldErrors['customer_id']}</p>
+                    </div>
                   )}
 
                   {showCustomerSearch && (
