@@ -26,6 +26,7 @@ db = client[db_name]
 # Collections
 service_requests_collection = db["service_requests"]
 estimates_collection = db["estimates"]
+projects_collection = db["projects"]
 work_orders_collection = db["work_orders"]
 invoices_collection = db["invoices"]
 customers_collection = db["customers"]
