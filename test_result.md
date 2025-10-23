@@ -184,7 +184,7 @@ test_plan:
 
   - task: "HR Module - Training & Certifications APIs"
     implemented: true
-    working: true
+    working: false
     file: "/app/backend/hr_routes.py"
     stuck_count: 0
     priority: "high"
@@ -193,6 +193,9 @@ test_plan:
       - working: true
         agent: "testing"
         comment: "✅ GET endpoints working correctly (found 2 training programs). POST endpoints failing due to async/sync mismatch. Minor: Training creation fails but retrieval works."
+      - working: false
+        agent: "testing"
+        comment: "❌ POST /api/hr/trainings fails with HTTP 500 BSON ObjectId serialization error. GET endpoints working correctly (found 7 training programs). Training creation blocked by serialization issue."
 
   - task: "HR Module - Performance Management APIs"
     implemented: true
