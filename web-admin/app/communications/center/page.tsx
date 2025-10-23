@@ -471,7 +471,7 @@ export default function UnifiedCommunicationsCenter() {
       </div>
 
       {/* Communications List */}
-      <div className="flex-1 overflow-y-auto p-6">
+      <div className="flex-1 overflow-y-auto p-6 pb-32">
         {loading ? (
           <div className="flex items-center justify-center h-full">
             <div className="text-center">
