@@ -1148,10 +1148,14 @@ class CommunicationType(str, Enum):
     EMAIL = "email"
     SMS = "sms"
     APP_MESSAGE = "app_message"
+    INAPP = "inapp"  # Added for compatibility
+    PHONE = "phone"  # Added for phone calls
 
 class CommunicationDirection(str, Enum):
     SENT = "sent"
     RECEIVED = "received"
+    OUTBOUND = "outbound"  # Added for compatibility
+    INBOUND = "inbound"    # Added for compatibility
 
 class Communication(BaseModel):
     id: Optional[str] = None
