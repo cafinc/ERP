@@ -1207,6 +1207,32 @@ async def get_all_communications():
             
             communications.append(comm)
         
+
+
+@router.get("/communications/list-all")
+async def list_all_communications_raw():
+    """Raw list of all communications without validation"""
+    from fastapi.responses import JSONResponse
+    import json
+    
+    logger.info("=== LIST ALL COMMUNICATIONS RAW V3 ===")
+    
+    try:
+        cursor = communications_collection.find().sort("timestamp", -1).limit(50)
+        result = []
+        
+        async for doc in cursor:
+            doc["_id"] = str(doc["_id"])
+            if "timestamp" in doc and hasattr(doc["timestamp"], "isoformat"):
+                doc["timestamp"] = doc["timestamp"].isoformat()
+            result.append(doc)
+        
+        logger.info(f"Returning {len(result)} communications")
+        return JSONResponse(content=result)
+    except Exception as e:
+        logger.error(f"Error in list-all: {e}")
+        return JSONResponse(content={"error": str(e)}, status_code=500)
+
         # Return as raw JSON response to avoid any pydantic validation
         return Response(content=json.dumps(communications), media_type="application/json")
     
