@@ -251,8 +251,8 @@ export default function EnhancedHeader() {
                   onClick={() => setShowNotifications(!showNotifications)}
                   className={`p-2 rounded-lg transition-colors relative cursor-pointer ${
                     showNotifications 
-                      ? 'bg-white bg-opacity-100 text-[#3f72af]' 
-                      : 'hover:bg-white hover:bg-opacity-20 text-white hover:text-white'
+                      ? 'bg-white text-[#3f72af]' 
+                      : 'text-white hover:bg-white hover:text-[#3f72af]'
                   }`}
                   title="Notifications"
                 >
