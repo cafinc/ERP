@@ -475,7 +475,7 @@ export default function ModernHeaderWithNav() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search..."
-                  className="w-full pl-9 pr-16 py-2 bg-white text-gray-700 placeholder-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all text-sm font-medium border border-gray-200"
+                  className="w-full pl-9 pr-16 py-1.5 bg-white text-gray-700 placeholder-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all text-sm font-medium border border-gray-200"
                 />
                 <div className="absolute right-2.5 top-1/2 transform -translate-y-1/2">
                   <kbd className="px-1.5 py-0.5 text-xs font-semibold text-gray-600 bg-gray-100 rounded border border-gray-200">
