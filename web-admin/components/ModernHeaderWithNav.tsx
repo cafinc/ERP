@@ -293,6 +293,9 @@ export default function ModernHeaderWithNav() {
       if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
         setShowSearchResults(false);
       }
+      if (themeMenuRef.current && !themeMenuRef.current.contains(event.target as Node)) {
+        setShowThemeMenu(false);
+      }
     };
 
     document.addEventListener('mousedown', handleClickOutside);
