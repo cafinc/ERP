@@ -335,6 +335,17 @@ export default function EnhancedHeader() {
                       <span>My Profile</span>
                     </button>
 
+                    <button
+                      onClick={() => {
+                        setShowProfileMenu(false);
+                        router.push('/settings');
+                      }}
+                      className="w-full flex items-center space-x-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors cursor-pointer"
+                    >
+                      <Settings className="w-4 h-4" />
+                      <span>Settings</span>
+                    </button>
+
                     <div className="border-t border-gray-200 my-2" />
 
                     <button
