@@ -282,7 +282,7 @@ export default function EnhancedHeader() {
               {/* Settings */}
               <button
                 onClick={() => router.push('/settings')}
-                className="p-2 hover:bg-white hover:bg-opacity-20 rounded-lg transition-colors cursor-pointer text-white hover:text-white"
+                className="p-2 rounded-lg transition-colors cursor-pointer text-white hover:bg-white hover:text-[#3f72af]"
                 title="Settings"
               >
                 <Settings className="w-5 h-5" />
