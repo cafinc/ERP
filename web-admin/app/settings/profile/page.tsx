@@ -361,6 +361,40 @@ export default function ProfileSettings() {
                     </button>
                   )}
                 </div>
+                
+                {/* Emoji Picker */}
+                {showEmojiPicker && (
+                  <div className="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                    <h4 className="text-sm font-semibold text-gray-700 mb-3">Choose Your Emoji Avatar</h4>
+                    <div className="grid grid-cols-10 gap-2 max-h-64 overflow-y-auto">
+                      {AVATAR_EMOJIS.map((emoji, idx) => (
+                        <button
+                          key={idx}
+                          onClick={async () => {
+                            try {
+                              setUploadingAvatar(true);
+                              const response = await api.put('/users/avatar', { avatar: emoji });
+                              setAvatarPreview(emoji);
+                              setShowEmojiPicker(false);
+                              setSuccessMessage('Avatar updated successfully!');
+                              await refreshUser();
+                              setTimeout(() => setSuccessMessage(''), 3000);
+                            } catch (error) {
+                              console.error('Error updating avatar:', error);
+                              setErrorMessage('Failed to update avatar');
+                            } finally {
+                              setUploadingAvatar(false);
+                            }
+                          }}
+                          className="text-4xl hover:bg-white rounded-lg p-2 transition-all hover:scale-110"
+                          title={emoji}
+                        >
+                          {emoji}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
