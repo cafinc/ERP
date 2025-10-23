@@ -1207,6 +1207,14 @@ async def get_all_communications():
             
             communications.append(comm)
         
+        # Return as raw JSON response to avoid any pydantic validation
+        return Response(content=json.dumps(communications), media_type="application/json")
+    
+    except Exception as e:
+        logger.error(f"Error fetching all communications: {str(e)}")
+        import traceback
+        logger.error(f"Traceback: {traceback.format_exc()}")
+        return Response(content=json.dumps({"detail": "Failed to fetch communications"}), status_code=500, media_type="application/json")
 
 
 @router.get("/communications/list-all")
