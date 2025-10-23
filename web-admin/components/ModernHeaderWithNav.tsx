@@ -540,26 +540,82 @@ export default function ModernHeaderWithNav() {
             </div>
 
             {/* Search Bar */}
-            <form onSubmit={handleSearch} style={{ width: '320px' }}>
-              <div className="relative">
-                <div className="absolute left-2.5 top-1/2 transform -translate-y-1/2">
-                  <Search className="w-4 h-4 text-gray-500" />
+            <div ref={searchRef} className="relative" style={{ width: '320px' }}>
+              <form onSubmit={handleSearch}>
+                <div className="relative">
+                  <div className="absolute left-2.5 top-1/2 transform -translate-y-1/2">
+                    <Search className="w-4 h-4 text-gray-500" />
+                  </div>
+                  <input
+                    id="global-search"
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onFocus={() => searchQuery.length >= 2 && setShowSearchResults(true)}
+                    placeholder="Search..."
+                    className="w-full pl-9 pr-16 py-1.5 bg-white text-gray-700 placeholder-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all text-sm font-medium border border-gray-200"
+                  />
+                  <div className="absolute right-2.5 top-1/2 transform -translate-y-1/2">
+                    <kbd className="px-1.5 py-0.5 text-xs font-semibold text-gray-600 bg-gray-100 rounded border border-gray-200">
+                      ⌘K
+                    </kbd>
+                  </div>
                 </div>
-                <input
-                  id="global-search"
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search..."
-                  className="w-full pl-9 pr-16 py-1.5 bg-white text-gray-700 placeholder-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all text-sm font-medium border border-gray-200"
-                />
-                <div className="absolute right-2.5 top-1/2 transform -translate-y-1/2">
-                  <kbd className="px-1.5 py-0.5 text-xs font-semibold text-gray-600 bg-gray-100 rounded border border-gray-200">
-                    ⌘K
-                  </kbd>
+              </form>
+
+              {/* Search Results Dropdown */}
+              {showSearchResults && (
+                <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-lg shadow-2xl border border-gray-200 z-50 max-h-96 overflow-y-auto">
+                  {searchLoading ? (
+                    <div className="p-4 text-center text-gray-500">
+                      <RefreshCw className="w-5 h-5 animate-spin mx-auto mb-2" />
+                      <p className="text-sm">Searching...</p>
+                    </div>
+                  ) : searchResults.length > 0 ? (
+                    <div className="py-2">
+                      {searchResults.map((result) => (
+                        <button
+                          key={result.id}
+                          onClick={() => {
+                            router.push(result.href);
+                            setShowSearchResults(false);
+                            setSearchQuery('');
+                          }}
+                          className="w-full flex items-center gap-3 px-4 py-3 hover:bg-gray-50 transition-colors text-left"
+                        >
+                          <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
+                            result.type === 'customer' ? 'bg-blue-100' :
+                            result.type === 'lead' ? 'bg-green-100' :
+                            result.type === 'estimate' ? 'bg-purple-100' :
+                            result.type === 'project' ? 'bg-orange-100' :
+                            'bg-gray-100'
+                          }`}>
+                            {result.type === 'customer' && <Users className="w-5 h-5 text-blue-600" />}
+                            {result.type === 'lead' && <TrendingUp className="w-5 h-5 text-green-600" />}
+                            {result.type === 'estimate' && <FileText className="w-5 h-5 text-purple-600" />}
+                            {result.type === 'project' && <Briefcase className="w-5 h-5 text-orange-600" />}
+                            {result.type === 'invoice' && <DollarSign className="w-5 h-5 text-gray-600" />}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="font-medium text-gray-900 truncate">{result.title}</p>
+                            <p className="text-xs text-gray-500 truncate">{result.subtitle}</p>
+                          </div>
+                          <ChevronRight className="w-4 h-4 text-gray-400" />
+                        </button>
+                      ))}
+                    </div>
+                  ) : searchQuery.length >= 2 ? (
+                    <div className="p-4 text-center text-gray-500">
+                      <p className="text-sm">No results found for "{searchQuery}"</p>
+                    </div>
+                  ) : (
+                    <div className="p-4 text-center text-gray-500">
+                      <p className="text-sm">Type at least 2 characters to search</p>
+                    </div>
+                  )}
                 </div>
-              </div>
-            </form>
+              )}
+            </div>
 
             {/* Alerts Icon */}
             <div ref={notificationRef} className="relative flex-shrink-0">
