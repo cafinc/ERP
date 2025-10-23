@@ -13,6 +13,14 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+# Import weather dispatch automation
+try:
+    from weather_dispatch import weather_dispatch
+    WEATHER_DISPATCH_ENABLED = True
+except ImportError:
+    print("Weather dispatch automation not available")
+    WEATHER_DISPATCH_ENABLED = False
+
 class WeatherService:
     def __init__(self):
         # Using OpenWeatherMap API (free tier available)
