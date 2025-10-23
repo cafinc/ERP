@@ -35,10 +35,10 @@ interface UnifiedCommunicationsDropdownProps {
   onClose: () => void;
 }
 
-export default function UnifiedCommunicationsDropdown({ 
-  isOpen, 
-  onClose 
-}: UnifiedCommunicationsDropdownProps) {
+const UnifiedCommunicationsDropdown = forwardRef<
+  { prefetchCommunications: () => void },
+  UnifiedCommunicationsDropdownProps
+>(({ isOpen, onClose }, ref) => {
   const [recentComms, setRecentComms] = useState<Communication[]>([]);
   const [loading, setLoading] = useState(true);
   const dropdownRef = useRef<HTMLDivElement>(null);
