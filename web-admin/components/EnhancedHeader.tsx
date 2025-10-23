@@ -17,6 +17,12 @@ import {
   LogOut,
   Phone,
   ChevronDown,
+  Search,
+  Plus,
+  UserPlus,
+  FileText,
+  Briefcase,
+  TrendingUp,
 } from 'lucide-react';
 
 export default function EnhancedHeader() {
