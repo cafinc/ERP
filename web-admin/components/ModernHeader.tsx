@@ -27,6 +27,7 @@ export default function ModernHeader() {
   const [showNotifications, setShowNotifications] = useState(false);
   const [showUnifiedComms, setShowUnifiedComms] = useState(false);
   const [showQuickAdd, setShowQuickAdd] = useState(false);
+  const [showActivity, setShowActivity] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   
   const profileRef = useRef<HTMLDivElement>(null);
