@@ -121,17 +121,18 @@ export default function ModernHeaderWithNav() {
   const menuItems: MenuItem[] = [
     { label: 'Dashboard', icon: LayoutDashboard, href: '/' },
     {
-      label: 'CRM',
+      label: 'Sales',
       icon: TrendingUp,
       href: '/crm/dashboard',
       submenu: [
-        { label: 'CRM Dashboard', href: '/crm/dashboard', icon: LayoutDashboard },
+        { label: 'Sales Dashboard', href: '/crm/dashboard', icon: LayoutDashboard },
         { label: 'Customers', href: '/customers', icon: Users },
         { label: 'Leads', href: '/leads', icon: Users },
         { label: 'Estimates', href: '/estimates', icon: FileText },
         { label: 'Agreements', href: '/contracts', icon: FileText },
         { label: 'Agreement Templates', href: '/agreements/templates', icon: FileText },
         { label: 'Projects', href: '/projects', icon: FolderOpen },
+        { label: 'Operations', href: '/operations', icon: Settings },
       ],
     },
     {
