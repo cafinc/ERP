@@ -224,8 +224,8 @@ export default function EnhancedHeader() {
                   onClick={() => setShowUnifiedComms(!showUnifiedComms)}
                   className={`p-2 rounded-lg transition-colors relative cursor-pointer ${
                     showUnifiedComms 
-                      ? 'bg-white bg-opacity-100 text-[#3f72af]' 
-                      : 'hover:bg-white hover:bg-opacity-10 text-white'
+                      ? 'bg-white text-[#3f72af]' 
+                      : 'text-white hover:bg-white hover:text-[#3f72af]'
                   }`}
                   title="All Communications"
                 >
