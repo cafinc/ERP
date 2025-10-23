@@ -1176,14 +1176,15 @@ async def get_recent_communications(limit: int = 10):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@router.get("/communications/all", response_model=None)
+@router.get("/communications/all")
 async def get_all_communications():
     """Get all communications for unified communications center"""
+    from fastapi.responses import JSONResponse
     try:
         # Fetch all communications
-        communications = await communications_collection.find().sort(
+        communications = list(await communications_collection.find().sort(
             "timestamp", -1
-        ).to_list(None)
+        ).to_list(None))
         
         # Enrich with customer names and clean data
         for comm in communications:
@@ -1202,13 +1203,15 @@ async def get_all_communications():
                 comm["customer_name"] = comm.get("from") or comm.get("to") or "Unknown"
             
             # Convert timestamps
-            if "timestamp" in comm:
-                comm["timestamp"] = comm["timestamp"].isoformat() if isinstance(comm["timestamp"], datetime) else comm["timestamp"]
-            if "created_at" in comm:
-                comm["created_at"] = comm["created_at"].isoformat() if isinstance(comm["created_at"], datetime) else comm["created_at"]
+            if "timestamp" in comm and isinstance(comm["timestamp"], datetime):
+                comm["timestamp"] = comm["timestamp"].isoformat()
+            if "created_at" in comm and isinstance(comm["created_at"], datetime):
+                comm["created_at"] = comm["created_at"].isoformat()
         
-        return communications
+        return JSONResponse(content=communications)
     
     except Exception as e:
         logger.error(f"Error fetching all communications: {str(e)}")
+        import traceback
+        logger.error(f"Traceback: {traceback.format_exc()}")
         raise HTTPException(status_code=500, detail="Failed to fetch communications")
