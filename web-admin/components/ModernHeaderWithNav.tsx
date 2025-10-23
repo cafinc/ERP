@@ -325,7 +325,24 @@ export default function ModernHeaderWithNav() {
             <div ref={navMenuRef} className="relative">
               <button
                 onClick={() => setShowNavMenu(!showNavMenu)}
-                className="p-2 rounded-lg hover:bg-white hover:bg-opacity-20 transition-colors cursor-pointer"
+                className={`p-2 rounded-lg transition-colors cursor-pointer ${
+                  showNavMenu 
+                    ? 'text-white' 
+                    : 'text-white hover:text-white'
+                }`}
+                style={{
+                  backgroundColor: showNavMenu ? '#607d8b' : 'transparent'
+                }}
+                onMouseEnter={(e) => {
+                  if (!showNavMenu) {
+                    e.currentTarget.style.backgroundColor = '#607d8b';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!showNavMenu) {
+                    e.currentTarget.style.backgroundColor = 'transparent';
+                  }
+                }}
                 title="Navigation Menu"
               >
                 <Menu className="w-6 h-6" />
