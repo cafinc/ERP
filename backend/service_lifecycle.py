@@ -234,12 +234,45 @@ class ServiceLifecycleAutomation:
             raise
     
     @staticmethod
-    async def _create_work_order_from_estimate(estimate: Dict) -> Dict:
-        """Create work order from approved estimate"""
+    async def _create_project_from_estimate(estimate: Dict) -> Dict:
+        """Create project from approved estimate"""
+        project = {
+            "customer_id": estimate["customer_id"],
+            "customer_name": estimate.get("customer_name", "Unknown"),
+            "estimate_id": str(estimate["_id"]),
+            "name": f"{estimate['service_type'].replace('_', ' ').title()} - {estimate.get('property_address', 'Project')}",
+            "description": estimate.get("description", ""),
+            "project_type": "one_time",  # Could be seasonal_contract, recurring, etc.
+            "service_types": [estimate["service_type"]],
+            "start_date": datetime.utcnow().isoformat(),
+            "budget": estimate["total_amount"],
+            "status": "active",
+            "priority": "medium",
+            "properties": [estimate.get("property_address", "")],
+            "work_orders": [],
+            "total_spent": 0.0,
+            "work_orders_count": 0,
+            "completed_work_orders": 0,
+            "created_at": datetime.utcnow(),
+            "updated_at": datetime.utcnow()
+        }
+        
+        result = await projects_collection.insert_one(project)
+        project["_id"] = result.inserted_id
+        
+        logger.info(f"Project created: {result.inserted_id}")
+        
+        return project
+    
+    @staticmethod
+    async def _create_work_order_from_project(estimate: Dict, project: Dict) -> Dict:
+        """Create work order linked to project"""
         work_order = {
             "customer_id": estimate["customer_id"],
             "customer_name": estimate.get("customer_name", "Unknown"),
             "estimate_id": str(estimate["_id"]),
+            "project_id": str(project["_id"]),
+            "project_name": project["name"],
             "service_type": estimate["service_type"],
             "property_address": estimate.get("property_address", ""),
             "description": estimate.get("description", ""),
@@ -254,7 +287,16 @@ class ServiceLifecycleAutomation:
         result = await work_orders_collection.insert_one(work_order)
         work_order["_id"] = result.inserted_id
         
-        logger.info(f"Work order created: {result.inserted_id}")
+        # Update project with work order reference
+        await projects_collection.update_one(
+            {"_id": project["_id"]},
+            {
+                "$push": {"work_orders": str(result.inserted_id)},
+                "$inc": {"work_orders_count": 1}
+            }
+        )
+        
+        logger.info(f"Work order created: {result.inserted_id} linked to project: {project['_id']}")
         
         # Broadcast real-time event
         await realtime_service.emit_work_order_event(
@@ -263,6 +305,7 @@ class ServiceLifecycleAutomation:
                 "id": str(result.inserted_id),
                 "customer_name": work_order["customer_name"],
                 "service_type": work_order["service_type"],
+                "project_id": str(project["_id"]),
                 "status": "pending"
             }
         )
