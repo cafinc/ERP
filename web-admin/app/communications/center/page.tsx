@@ -631,6 +631,7 @@ export default function UnifiedCommunicationsCenter() {
                     value={replySubject}
                     onChange={(e) => setReplySubject(e.target.value)}
                     placeholder="Email subject..."
+                    autoFocus
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
@@ -645,6 +646,7 @@ export default function UnifiedCommunicationsCenter() {
                   onChange={(e) => setReplyText(e.target.value)}
                   placeholder={getReplyPlaceholder()}
                   rows={8}
+                  autoFocus={selectedComm.type !== 'email'}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
                 />
               </div>
