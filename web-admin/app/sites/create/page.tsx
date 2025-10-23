@@ -85,7 +85,7 @@ export default function CreateSitePage() {
 
   useEffect(() => {
     loadCustomers();
-    loadGoogleMapsScript();
+    loadGoogleMapsScript(initializeAutocomplete);
   }, []);
 
   useEffect(() => {
