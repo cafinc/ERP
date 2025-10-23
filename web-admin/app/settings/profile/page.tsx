@@ -321,7 +321,7 @@ export default function ProfileSettings() {
                   {avatarPreview ? 'Update your avatar' : 'Add an avatar'}
                 </h3>
                 <p className="text-sm text-gray-600 mb-4">
-                  Choose an emoji or upload a photo. Photos max size: 5MB
+                  Choose an avatar or upload a photo. Photos max size: 5MB
                 </p>
                 
                 <div className="flex items-center space-x-3 mb-3">
@@ -348,7 +348,7 @@ export default function ProfileSettings() {
                     className="flex items-center space-x-2 px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <Smile className="w-4 h-4" />
-                    <span>Choose Emoji</span>
+                    <span>Choose Avatar</span>
                   </button>
 
                   {avatarPreview && (
