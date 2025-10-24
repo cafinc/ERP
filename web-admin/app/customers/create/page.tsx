@@ -473,6 +473,11 @@ export default function CustomerFormPage() {
           { name: 'mobile', value: customerForm.mobile, type: 'text' },
         ];
       }
+      
+      // Add uploaded files if any
+      if (uploadedFiles.length > 0) {
+        submitData.attachments = uploadedFiles;
+      }
 
       // For individuals with company link
       if (customerForm.customer_type === 'individual' && customerForm.company_id) {
