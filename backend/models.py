@@ -292,6 +292,7 @@ class CustomerUpdate(BaseModel):
     notes: Optional[str] = None
     tags: Optional[List[str]] = None
     custom_fields: Optional[List[CustomField]] = None
+    attachments: Optional[List[dict]] = None  # Uploaded documents and photos
     active: Optional[bool] = None
     accounting: Optional[CommercialAccounting] = None  # Accounting details for companies
 
