@@ -709,13 +709,13 @@ export default function CustomerFormPage() {
       
       // Provide more specific error messages
       if (error.response?.status === 502) {
-        alert('Failed to save customer: Request too large. Please try with fewer or smaller files (max 500KB each).');
+        showModalMessage('error', 'Request Too Large', 'Failed to save customer: Request too large. Please try with fewer or smaller files (max 500KB each).');
       } else if (error.response?.status === 413) {
-        alert('Failed to save customer: Request payload too large. Please reduce the number of files or use smaller files.');
+        showModalMessage('error', 'Payload Too Large', 'Failed to save customer: Request payload too large. Please reduce the number of files or use smaller files.');
       } else if (error.message) {
-        alert(`Failed to save customer: ${error.message}`);
+        showModalMessage('error', 'Error Saving Customer', `Failed to save customer: ${error.message}`);
       } else {
-        alert('Failed to save customer. Please try again.');
+        showModalMessage('error', 'Error', 'Failed to save customer. Please try again.');
       }
     } finally {
       setSaving(false);
