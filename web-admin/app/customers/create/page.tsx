@@ -449,8 +449,44 @@ export default function CustomerFormPage() {
         alert('Customer updated successfully!');
         router.push(`/customers/${customerId}`);
       } else {
-        const response = await api.post('/customers', submitData);
-        companyId = response.data._id || response.data.id;
+        // Validate access requirements if enabled
+        if (requireAccess && !accessWeb && !accessInApp) {
+          alert('Please select at least one access type (Web or In-App)');
+          return;
+        }
+
+        let response;
+        
+        // Use special endpoint if user access is required
+        if (requireAccess && (accessWeb || accessInApp)) {
+          const accessData = {
+            customer: submitData,
+            require_access: true,
+            access_web: accessWeb,
+            access_inapp: accessInApp,
+            user_role: userRole
+          };
+          
+          response = await api.post('/customers/with-access', accessData);
+          companyId = response.data.customer._id || response.data.customer.id;
+          
+          // Show user credentials if account was created
+          if (response.data.user_account) {
+            const user = response.data.user_account;
+            alert(
+              `Customer created successfully with user access!\n\n` +
+              `Username: ${user.username}\n` +
+              `Password: ${user.password}\n` +
+              `Role: ${user.role}\n` +
+              `Access: ${accessWeb ? 'Web' : ''} ${accessWeb && accessInApp ? '&' : ''} ${accessInApp ? 'In-App' : ''}\n\n` +
+              `${user.email_sent ? 'Credentials email sent to ' + user.email : 'Note: Email not configured'}`
+            );
+          }
+        } else {
+          // Normal customer creation without access
+          response = await api.post('/customers', submitData);
+          companyId = response.data._id || response.data.id;
+        }
 
         // If company with main contact, create the contact as individual
         if (customerForm.customer_type === 'company' && customerForm.main_contact.first_name) {
@@ -470,7 +506,9 @@ export default function CustomerFormPage() {
           await api.post('/customers', contactData);
         }
 
-        alert('Customer created successfully!');
+        if (!requireAccess) {
+          alert('Customer created successfully!');
+        }
         router.push(`/customers/${companyId}`);
       }
     } catch (error) {
