@@ -1356,30 +1356,6 @@ export default function CustomerFormPage() {
               </div>
             )}
 
-            {/* Site Name Field - appears above Address when Create Site is ON */}
-            {createSite && (
-              <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="md:col-span-2">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Site Name *
-                    </label>
-                    <input
-                      type="text"
-                      value={siteName}
-                      onChange={e => setSiteName(e.target.value)}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
-                      placeholder="Main Office, Warehouse, Home, etc."
-                      required={createSite}
-                    />
-                    <p className="text-xs text-gray-500 mt-1">
-                      Site will be created with the address information below
-                    </p>
-                  </div>
-                </div>
-              </div>
-            )}
-
             {/* Address Section (Common for both) */}
             <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
               <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center justify-between">
@@ -1412,6 +1388,26 @@ export default function CustomerFormPage() {
                   </button>
                 </div>
               </h2>
+              
+              {/* Site Name Field - appears below header when Create Site is ON */}
+              {createSite && (
+                <div className="mb-4 pb-4 border-b border-gray-200">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Site Name *
+                  </label>
+                  <input
+                    type="text"
+                    value={siteName}
+                    onChange={e => setSiteName(e.target.value)}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                    placeholder="Main Office, Warehouse, Home, etc."
+                    required={createSite}
+                  />
+                  <p className="text-xs text-gray-500 mt-1">
+                    Site will be created with the address information below
+                  </p>
+                </div>
+              )}
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="md:col-span-2">
