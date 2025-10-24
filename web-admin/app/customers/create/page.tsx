@@ -870,18 +870,39 @@ export default function CustomerFormPage() {
                         <label className="block text-sm font-medium text-gray-700 mb-2">
                           Mobile Number {customerForm.communication_preference === 'sms' ? <span className="text-red-500">*</span> : <span className="text-gray-400 text-xs">(Optional)</span>}
                         </label>
-                        <div className="relative">
-                          <Smartphone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-                          <input
-                            type="tel"
-                            value={customerForm.mobile}
-                            onChange={e => handlePhoneChange('mobile', e.target.value)}
-                            className={`w-full pl-10 pr-4 py-1.5 border rounded-lg focus:ring-2 focus:border-transparent text-sm ${
-                              fieldErrors['mobile'] ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'
-                            }`}
-                            placeholder="(555) 987-6543"
-                            required={customerForm.communication_preference === 'sms'}
-                          />
+                        <div className="flex gap-2">
+                          <div className="relative flex-1">
+                            <Smartphone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                            <input
+                              type="tel"
+                              value={customerForm.mobile}
+                              onChange={e => handlePhoneChange('mobile', e.target.value)}
+                              className={`w-full pl-10 pr-4 py-1.5 border rounded-lg focus:ring-2 focus:border-transparent text-sm ${
+                                fieldErrors['mobile'] ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'
+                              }`}
+                              placeholder="(555) 987-6543"
+                              required={customerForm.communication_preference === 'sms'}
+                            />
+                          </div>
+                          {customerForm.phone && (
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setCustomerForm({ ...customerForm, mobile: customerForm.phone });
+                                // Clear any mobile field errors
+                                setFieldErrors(prev => {
+                                  const newErrors = { ...prev };
+                                  delete newErrors['mobile'];
+                                  return newErrors;
+                                });
+                              }}
+                              className="px-3 py-1.5 text-xs font-medium text-[#3f72af] bg-blue-50 border border-[#3f72af] rounded-lg hover:bg-blue-100 transition-colors whitespace-nowrap flex items-center gap-1"
+                              title="Copy phone number to mobile"
+                            >
+                              <Phone className="w-3 h-3" />
+                              Copy from Phone
+                            </button>
+                          )}
                         </div>
                         {fieldErrors['mobile'] && (
                           <p className="text-red-500 text-xs mt-1">{fieldErrors['mobile']}</p>
