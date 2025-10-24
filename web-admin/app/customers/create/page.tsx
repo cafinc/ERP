@@ -1358,9 +1358,48 @@ export default function CustomerFormPage() {
 
             {/* Address Section (Common for both) */}
             <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center space-x-2">
-                <MapPin className="w-5 h-5 text-[#3f72af]" />
-                <span>Address *</span>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center justify-between">
+                <div className="flex items-center space-x-2">
+                  <MapPin className="w-5 h-5 text-[#3f72af]" />
+                  <span>Address *</span>
+                </div>
+                {/* Create Site Toggle */}
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setCreateSite(!createSite);
+                      if (createSite) {
+                        setSiteName('');
+                      }
+                    }}
+                    className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#3f72af] focus:ring-offset-2 flex-shrink-0 ${
+                      createSite ? 'bg-[#3f72af]' : 'bg-gray-200'
+                    }`}
+                  >
+                    <span
+                      className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                        createSite ? 'translate-x-6' : 'translate-x-1'
+                      }`}
+                    />
+                  </button>
+                  <label className="text-sm font-medium text-gray-700">
+                    Create Site
+                  </label>
+                  {/* Site Name - appears inline when Create Site is ON */}
+                  {createSite && (
+                    <div className="w-64 ml-3">
+                      <input
+                        type="text"
+                        value={siteName}
+                        onChange={e => setSiteName(e.target.value)}
+                        className="w-full px-4 py-1 h-6 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                        placeholder="Site Name"
+                        required={createSite}
+                      />
+                    </div>
+                  )}
+                </div>
               </h2>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
