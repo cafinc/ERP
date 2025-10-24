@@ -149,12 +149,22 @@ export default function CustomerFormPage() {
 
   useEffect(() => {
     loadCompanies();
+    loadCustomers();
     if (isEdit) {
       loadCustomer();
     }
     // Initialize Google Places Autocomplete
     initGooglePlaces();
   }, [customerId]);
+  
+  const loadCustomers = async () => {
+    try {
+      const response = await api.get('/customers');
+      setCustomers(response.data || []);
+    } catch (error) {
+      console.error('Error loading customers:', error);
+    }
+  };
 
   const initGooglePlaces = () => {
     if (typeof window === 'undefined') return;
