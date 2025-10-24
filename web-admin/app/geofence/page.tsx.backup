@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import PageHeader from '@/components/PageHeader';
+import CompactHeader from '@/components/CompactHeader';
 import api from '@/lib/api';
 import {
   MapPin,
@@ -259,7 +259,7 @@ export default function GeofenceManagementPage() {
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         <div className="max-w-7xl mx-auto">
           {/* Compact Header */}
-          <PageHeader
+          <CompactHeader
             title="Geofence Management"
             subtitle="Configure automatic site entry/exit detection zones"
             backUrl="/sites"

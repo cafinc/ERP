@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import PageHeader from '@/components/PageHeader';
+import CompactHeader from '@/components/CompactHeader';
 import { Map, Plus, Search, Navigation, MapPin, Clock, TrendingUp } from 'lucide-react';
 
 export default function RoutesPage() {
@@ -12,7 +12,7 @@ export default function RoutesPage() {
   return (
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         <div className="max-w-7xl mx-auto">
-          <PageHeader
+          <CompactHeader
             title="Routes"
             subtitle="Manage and optimize your service routes"
             icon={Map}
