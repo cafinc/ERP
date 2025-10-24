@@ -14,13 +14,14 @@ import {
   Calendar,
   DollarSign,
   User,
+  Building,
   CheckCircle,
   Clock,
   XCircle,
   AlertCircle,
+  Settings,
   RefreshCw,
   Download,
-  Settings,
 } from 'lucide-react';
 
 interface Agreement {
@@ -42,6 +43,7 @@ interface Template {
   template_name: string;
   category: string;
   description?: string;
+  usage_count?: number;
 }
 
 export default function AgreementsPage() {
@@ -76,6 +78,7 @@ export default function AgreementsPage() {
     try {
       const res = await api.get('/agreement-templates');
       const templatesData = Array.isArray(res.data) ? res.data : (res.data?.templates || []);
+      // Filter out archived templates
       const activeTemplates = templatesData.filter((t: any) => !t.is_archived);
       setTemplates(activeTemplates);
     } catch (error) {
@@ -94,6 +97,18 @@ export default function AgreementsPage() {
       console.error('Error deleting agreement:', error);
       alert('Failed to delete agreement');
     }
+  };
+
+  const handleTemplateSelect = (templateId: string) => {
+    if (templateId === 'manage') {
+      router.push('/agreements/templates');
+    } else if (templateId === 'new') {
+      router.push('/agreements/templates/create');
+    } else if (templateId) {
+      // Navigate to create agreement with selected template
+      router.push(`/agreements/create?template_id=${templateId}`);
+    }
+    setShowTemplateDropdown(false);
   };
 
   const getStatusBadge = (status: string) => {
@@ -171,49 +186,117 @@ export default function AgreementsPage() {
         ]}
         actions={[
           {
-            label: 'Templates',
-            icon: <Settings className="w-4 h-4 mr-2" />,
-            variant: 'secondary',
-            onClick: () => router.push('/agreements/templates'),
+            label: (
+              <div className="flex items-center space-x-2">
+                <FileText className="w-4 h-4" />
+                <span>Templates</span>
+              </div>
+            ),
+            onClick: () => {},
+            variant: 'secondary' as const,
+            dropdown: (
+              <select
+                value={selectedTemplate}
+                onChange={(e) => {
+                  setSelectedTemplate(e.target.value);
+                  handleTemplateSelect(e.target.value);
+                }}
+                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+              >
+                <option value="">Select Template...</option>
+                <optgroup label="Quick Actions">
+                  <option value="new">+ Create New Template</option>
+                  <option value="manage">⚙ Manage Templates</option>
+                </optgroup>
+                {templates.length > 0 && (
+                  <optgroup label="Use Template">
+                    {templates.map((template) => (
+                      <option key={template._id} value={template._id}>
+                        {template.template_name}
+                      </option>
+                    ))}
+                  </optgroup>
+                )}
+              </select>
+            ),
           },
           {
             label: 'New Agreement',
             icon: <Plus className="w-4 h-4 mr-2" />,
-            variant: 'secondary',
-            href: '/agreements/create',
+            onClick: () => router.push('/agreements/create'),
+            variant: 'primary',
           },
         ]}
-        tabs={[
-          { label: 'All', value: 'all', count: agreements.length },
-          { label: 'Active', value: 'active', count: agreements.filter(a => a.status === 'active').length },
-          { label: 'Draft', value: 'draft', count: agreements.filter(a => a.status === 'draft').length },
-          { label: 'Expired', value: 'expired', count: agreements.filter(a => a.status === 'expired').length },
-        ]}
-        activeTab={activeTab}
-        onTabChange={setActiveTab}
-        showSearch={true}
-        searchPlaceholder="Search agreements..."
-        onSearch={setSearchQuery}
       />
 
       {/* Main Content */}
-      <div className="flex-1 overflow-auto p-6">
-        <div className="max-w-7xl mx-auto">
-          {filteredAgreements.length === 0 ? (
-            <div className="bg-white rounded-lg shadow border border-gray-200 p-12 text-center">
+      <div className="h-full bg-gray-50 overflow-auto">
+        <div className="max-w-7xl mx-auto p-6">
+          {/* Filter Tabs */}
+          <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-4 backdrop-blur-sm mb-6">
+            <div className="flex items-center space-x-4">
+              <button
+                onClick={() => setFilter('all')}
+                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                  filter === 'all'
+                    ? 'bg-[#3f72af] text-white'
+                    : 'text-gray-600 hover:bg-gray-100'
+                }`}
+              >
+                All Agreements ({agreements.length})
+              </button>
+              <button
+                onClick={() => setFilter('active')}
+                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                  filter === 'active'
+                    ? 'bg-[#3f72af] text-white'
+                    : 'text-gray-600 hover:bg-gray-100'
+                }`}
+              >
+                Active
+              </button>
+              <button
+                onClick={() => setFilter('draft')}
+                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                  filter === 'draft'
+                    ? 'bg-[#3f72af] text-white'
+                    : 'text-gray-600 hover:bg-gray-100'
+                }`}
+              >
+                Draft
+              </button>
+              <button
+                onClick={() => setFilter('expired')}
+                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                  filter === 'expired'
+                    ? 'bg-[#3f72af] text-white'
+                    : 'text-gray-600 hover:bg-gray-100'
+                }`}
+              >
+                Expired
+              </button>
+            </div>
+          </div>
+
+          {/* Agreements List */}
+          {loading ? (
+            <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-12 backdrop-blur-sm text-center">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#3f72af] mx-auto"></div>
+              <p className="text-gray-600 mt-4">Loading agreements...</p>
+            </div>
+          ) : agreements.length === 0 ? (
+            <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-12 backdrop-blur-sm text-center">
               <FileSignature className="w-16 h-16 text-gray-300 mx-auto mb-4" />
               <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                {searchQuery ? 'No agreements found' : activeTab === 'all' ? 'No Agreements Yet' : `No ${activeTab} Agreements`}
+                {filter === 'all' ? 'No Agreements Yet' : `No ${filter} Agreements`}
               </h3>
               <p className="text-gray-600 mb-4">
-                {searchQuery 
-                  ? 'Try adjusting your search terms'
-                  : activeTab === 'all'
+                {filter === 'all'
                   ? 'Create your first service agreement to manage contracts with customers'
-                  : `There are no ${activeTab} agreements at the moment`
+                  : `There are no ${filter} agreements at the moment`
                 }
               </p>
-              {!searchQuery && activeTab === 'all' && (
+              {filter === 'all' && (
                 <button
                   onClick={() => router.push('/agreements/create')}
                   className="inline-flex items-center space-x-2 px-6 py-3 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
@@ -225,10 +308,10 @@ export default function AgreementsPage() {
             </div>
           ) : (
             <div className="space-y-4">
-              {filteredAgreements.map((agreement) => (
+              {agreements.map((agreement) => (
                 <div
                   key={agreement._id}
-                  className="bg-white rounded-lg shadow border border-gray-200 p-6 hover:shadow-md transition-shadow"
+                  className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-6 backdrop-blur-sm hover:shadow-xl transition-shadow"
                 >
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
@@ -314,6 +397,6 @@ export default function AgreementsPage() {
           )}
         </div>
       </div>
-    </div>
+    </>
   );
 }
