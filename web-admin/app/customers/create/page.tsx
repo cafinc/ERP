@@ -1517,30 +1517,6 @@ export default function CustomerFormPage() {
                     />
                   </div>
                 </div>
-
-                {/* Active Customer Toggle */}
-                <div>
-                  <div className="bg-white shadow-sm rounded-lg p-6 border border-gray-200">
-                    <div className="flex items-center gap-3">
-                      <button
-                        type="button"
-                        onClick={() => setCustomerForm({ ...customerForm, active: !customerForm.active })}
-                        className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#3f72af] focus:ring-offset-2 flex-shrink-0 ${
-                          customerForm.active ? 'bg-[#3f72af]' : 'bg-gray-200'
-                        }`}
-                      >
-                        <span
-                          className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                            customerForm.active ? 'translate-x-6' : 'translate-x-1'
-                          }`}
-                        />
-                      </button>
-                      <label className="text-sm font-medium text-gray-700">
-                        Active Customer
-                      </label>
-                    </div>
-                  </div>
-                </div>
               </div>
               
               {/* Action Buttons */}
