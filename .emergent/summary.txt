@@ -1,27 +1,31 @@
 <analysis>
-The AI engineer successfully navigated a complex, iterative development process focused on standardizing the web-admin UI and integrating new backend features. Key phases included: initially addressing Agreements page branding and template integration, which led to significant refactoring to ensure consistency with a customer page golden standard. This involved fixing navigation, resolving backend API 404/500 errors by creating  and , and correcting  component prop issues. A major effort was the bulk standardization of over 140 pages, involving multiple script-driven updates to apply a consistent header style, breadcrumbs, subtitles, and modern layouts, as well as the complete removal of the left sidebar navigation. The final phase involved debugging persistent UI errors related to header component usage and page structure, culminating in a reported 100% standardization. The current task involves modifying the  page to replace a dropdown with a toggle and search bar for company linking. The process highlighted iterative refinement based on user feedback and persistent debugging of caching and component usage issues.
+The AI engineer systematically developed a comprehensive customer creation page, responding to numerous iterative user requests. Initially, the task involved refining an existing Link to Company toggle and search functionality, including debugging UI rendering issues and backend service conflicts. Subsequently, major features were added: a Communication Preference section (SMS/InApp) influencing mobile number validation, a robust Require Access system with user role assignment and email credentials (involving new backend services and model updates), and a Create Site toggle for automatic site generation. Each feature involved significant UI/UX adjustments, layout reordering for optimal presentation (e.g., inline search bars, toggles aligned with headers), and integration with both frontend state and backend APIs/models. The engineer consistently addressed UI positioning, styling, validation, and backend data persistence. The work also included fixing an unrelated critical build error in  and enhancing the email template system. The current focus is on adding file upload capabilities to the Additional Information section.
 </analysis>
 
 <product_requirements>
-The application serves as an admin dashboard for snow removal services, emphasizing intuitive UI/UX. Core features include a Communication Center, unified headers, and a Template System. UI/UX guidelines demanded standardized headers, tabbed navigation, real-time validation, and responsive design, with a  incorporating quick-add, search, and activity features. Key functional areas like Work Orders, Purchase Orders, and Operations Dashboard were required, alongside a comprehensive task assignment and in-app notification system for various user roles. Autonomous execution targets included backend bug fixes, and integrating Service Lifecycle Automation (Projects), Real-Time Fleet Tracking, Weather-Driven Dispatch, Advanced Analytics, and Unified Communications. Further features included Weather Alerts, WebSocket Real-Time Sync (web-admin), Offline Mode (mobile), a full Notification System, Dispatch Planning Board, Smart Equipment Ecosystem with UI, Site Maps with geo-fencing and property measurement, and consistent  layout.
-
-Recent explicit requests from the user included:
-- Updating the Agreements page with branding ( blue) and an agreement template in its header, including a dropdown for template management, matching the customer page's style.
-- All new pages must be automatically added to the navigation.
-- Standardizing all dropdown pages to match the customer page header style and branding, removing duplicate pages, and adding missing ones.
-- Restructuring navigation: removing duplicate Estimates and Invoices from CRM/Finance, adding an Operations tab with Work Orders, Purchase Orders, and Operations Dashboard.
-- Completing a modern update across all pages, reviewing and enhancing layouts with cards, shadows, rounded corners, and better spacing, and confirming the removal of the old sidebar navigation.
-- On the  page, changing the Link to Company field from a dropdown to a toggle, which, when active, reveals a search bar connected to backend company data.
+The application, an admin dashboard for snow removal, requires a highly intuitive UI/UX with standardized headers, tabbed navigation, and responsive design. Core features include a Communication Center, a robust Template System, Work Orders, Purchase Orders, and Operations Dashboard, along with advanced automations (Service Lifecycle, Fleet Tracking, Weather-Driven Dispatch, Analytics). Recent development has focused on enhancing the  page. This involves:
+1.  Replacing a Link to Company dropdown with a toggle-controlled search bar.
+2.  Adding Communication Preference (SMS/InApp) options that conditionally make the mobile number required.
+3.  Implementing a Require Access toggle that, when active, reveals Web/InApp access options and a user role dropdown, triggering user account creation with email credentials.
+4.  Adding a Create Site toggle with a conditional Site Name field, to automatically create a site upon customer saving.
+5.  Extensive UI/UX refinements for all new elements, including layout adjustments, alignment, and sizing.
+6.  Changing Individual to Contact across relevant sections.
+7.  Enhancing the address input with a Google logo and robust city population.
+8.  Adding a Create Customer and Cancel button at the form's bottom, replacing a header action.
+9.  Converting Active Customer checkbox to a toggle, moving it to the Contact Information header.
+10. Moving the Create Site toggle to the Address header.
+11. Adding document/photo upload functionality under Additional Information.
 </product_requirements>
 
 <key_technical_concepts>
-- **Full-stack Architecture**: Monorepo with Expo (mobile frontend), Next.js (web-admin), FastAPI (backend), MongoDB.
-- **UI Frameworks**: React Native (mobile), React (web-admin) with file-based routing (Expo Router, Next.js App Router).
-- **Real-time**: WebSockets for live data synchronization.
-- **API Development**: FastAPI, Pydantic for data models, BSON ObjectId handling, robust route registration and database interaction patterns.
-- **Mapping/GIS**: Google Maps API with drawing tools for geo-fencing.
-- **State Management**: React Context, AsyncStorage (offline support).
-- **UI Components**:  (standardized across web-admin), , .
+-   **Full-stack Architecture**: Monorepo with Next.js (web-admin), FastAPI (backend), MongoDB.
+-   **UI Frameworks**: React with Next.js App Router for web-admin, leveraging React hooks for state.
+-   **API Development**: FastAPI for CRUD operations and custom endpoints.
+-   **Data Models**: Pydantic for API data validation and MongoDB for persistence.
+-   **Email Service**: SMTP for sending emails, integrated with database templates.
+-   **User Management**: Basic user creation, role assignment, and credential notification.
+-   **Google Places API**: For robust address auto-completion and data extraction.
+-   **UI Components**:  for consistent layout, custom toggles, search bars, and forms.
 </key_technical_concepts>
 
 <code_architecture>
@@ -30,42 +34,37 @@ The application is structured as a monorepo in the  directory, containing  (Fast
 
 
 **Key Files and Changes:**
--   ** (NEW):** Provides full CRUD API endpoints () for managing agreement templates. Essential for the Agreements page functionality.
--   ** (NEW):** Provides full CRUD API endpoints () for managing leads. Addressed a 404 API error on the frontend leads page.
--   ** (MODIFIED):** The main FastAPI application entry point. It was modified to import and register the new  and . Crucially, database import patterns were standardized to avoid .
--   ** (MODIFIED):** This component manages the primary navigation and overall layout of the web-admin. It underwent significant changes to:
-    -   Restructure the navigation menu (removed duplicates like Estimates from CRM, Invoices from Finance, and /agreements).
-    -   Added a new Operations section with Work Orders, Purchase Orders, and Operations Dashboard.
-    -   Removed the entire left sidebar navigation structure, including associated state and layout logic, to achieve a full-width, modernized layout.
-    -   Added imports for new navigation icons (, ).
--   ** (NEW then MODIFIED):** Initially created as the main agreements page. It was then completely rewritten to match the exact styling and prop usage of  from the  page, including tabs, search, breadcrumbs, and branding.
--   ** (MODIFIED):** Identified as the original Agreements page. It was extensively modified to adopt the standardized  style, branding, and template integration, becoming the canonical Agreements page that the navigation now points to.
--   ** (REFERENCED):** This page's header style and structure served as the golden standard for the  component's usage and overall layout across the entire web-admin application.
--   ** (CURRENTLY MODIFIED):** This page is currently being updated to transform the Link to Company input from a dropdown into a toggle-controlled search bar for company linking.
--   ** (MODIFIED):** The main dashboard page. Its  component usage was fixed to remove invalid  and  props and ensure proper structural integration, resolving runtime errors.
--   ** (MODIFIED):** Fixed a syntax/parsing error caused by incorrect  integration leading to mismatched  tags.
--   **Numerous other  pages (MODIFIED via scripts):** Over 140 pages were systematically updated to:
-    -   Replace old header components (, , ) with the  component.
-    -   Correctly configure  props (e.g., converting / to JSX elements for ).
-    -   Apply consistent branding ().
-    -   Add proper breadcrumbs and subtitles.
-    -   Implement modern layout enhancements (cards, shadows, rounded corners, improved spacing).
--   ** (NEW):** A Python script developed to automate the auditing, analysis, and bulk modification of  pages, significantly expediting the standardization process.
+-   ** (Heavily MODIFIED):** This is the primary file under active development.
+    -   **Importance:** Handles the creation/editing of customer records, including complex forms and dynamic UI elements.
+    -   **Changes:** Implemented Link to Company toggle with search, Communication Preference radio buttons, Require Access toggle with user roles, Create Site toggle with site name input. Numerous layout adjustments for all these features, including dynamic positioning and sizing. Integrated Google Places API for address auto-completion. Added file upload state and handler functions. Updated form submission logic to integrate with backend services for user and site creation. Replaced  with  throughout.
+-   ** (MODIFIED):** Defines Pydantic models for database entities.
+    -   **Importance:** Centralized data schema for the backend.
+    -   **Changes:** Added , , , ,  fields to the  model. Added a  field with . Added  model and associated fields for dynamic email content.
+-   ** (MODIFIED):** Manages email sending functionality.
+    -   **Importance:** Handles all outbound email communication.
+    -   **Changes:** Added a  method to send login details to newly created users, fetching templates from the database.
+-   ** (NEW):** Provides business logic for user account creation.
+    -   **Importance:** Encapsulates the process of creating user accounts and assigning roles.
+    -   **Changes:** Created to contain the logic for hashing passwords, creating user entries in the database, and managing user-specific access details.
+-   ** (MODIFIED):** The main FastAPI application entry point.
+    -   **Importance:** Orchestrates API routes and integrates backend services.
+    -   **Changes:** Imported  and . Modified the  POST endpoint () to conditionally call user creation and email services based on frontend input ().
+-   ** (NEW):** Script to populate the database with an email template.
+    -   **Importance:** Ensures essential email templates are available in the database for dynamic use.
+    -   **Changes:** Created to insert a default login credentials email template into the MongoDB.
+-   ** (MODIFIED):** An existing page for site mapping functionality.
+    -   **Importance:** Displays site-related geographical data.
+    -   **Changes:** Fixed a critical build error related to the  directive placement and a duplicate HTML wrapping element.
 </code_architecture>
 
 <pending_tasks>
-- Implement the toggle and search bar functionality for Link to Company on the  page.
-- Integrate the search bar with backend company data.
-- Ensure proper state management for the new toggle and search elements.
+-   Add the UI for the file upload functionality to the Additional Notes section in .
 </pending_tasks>
 
 <current_work>
-The AI engineer is currently implementing a user request on the  file. The goal is to transform the Link to Company input field. Instead of a standard dropdown or direct input, it needs to be a toggle. When this toggle is activated, a search bar should appear, allowing the user to dynamically search for and connect the customer (being created/edited) to an existing company in the system via a backend API.
-
-The engineer has already identified the relevant section in the  file and has successfully applied an initial edit (Chat Message 493) to replace the existing structure with a toggle and the framework for a search bar. The immediate next step (Chat Message 494) is to define and add the necessary React state variables within the component to manage the visual and functional aspects of this new toggle and search feature (e.g.,  boolean,  string). This task is in progress, focusing on the frontend UI logic before backend integration.
+The AI engineer is currently implementing a user request on the  file to add document and photo upload functionality under the Additional Information section. Before the trajectory ended, the engineer had completed the backend logic and state management necessary for this feature on the frontend. Specifically, the following states were added to the  component:  (to store an array of files),  (for tracking upload status), and  (for handling any issues). Additionally, necessary icons (, , ) were imported, and the core handler functions for file selection (), initiating upload (), and removing files () have been defined. The immediate next step is to integrate these functions with the actual JSX elements in the Additional Notes section to provide the visual interface for users to interact with the file upload feature.
 </current_work>
 
 <optional_next_step>
-Add the state variables for the toggle and search functionality within .
+Add the file upload UI to the Additional Notes section of .
 </optional_next_step>
-

@@ -98,7 +98,7 @@
 
 **Option 2: Public Access** (requires routing configuration)
 The web-admin needs to be configured to serve on the main domain:
-`https://snow-dash-1.preview.emergentagent.com`
+`https://snowops-admin.preview.emergentagent.com`
 
 ---
 

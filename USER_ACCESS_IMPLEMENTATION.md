@@ -237,7 +237,7 @@ const [userRole, setUserRole] = useState('customer');
 
 **Create Customer with Access:**
 ```bash
-curl -X POST https://snow-dash-1.preview.emergentagent.com/api/customers/with-access \
+curl -X POST https://snowops-admin.preview.emergentagent.com/api/customers/with-access \
   -H "Content-Type: application/json" \
   -d '{
     "customer": {
