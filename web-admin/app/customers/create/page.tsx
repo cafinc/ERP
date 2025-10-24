@@ -1486,47 +1486,73 @@ export default function CustomerFormPage() {
                 <span>Additional Information</span>
               </h2>
 
-              <div className="space-y-4">
+              <div className="space-y-6">
+                {/* Notes Section */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Notes</label>
-                  <textarea
-                    value={customerForm.notes}
-                    onChange={e => setCustomerForm({ ...customerForm, notes: e.target.value })}
-                    rows={4}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    placeholder="Additional notes or special instructions..."
-                  />
+                  <div className="bg-white shadow-sm rounded-lg p-6 border border-gray-200">
+                    <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                      <FileText className="w-5 h-5 mr-2 text-[#3f72af]" />
+                      <span>Additional Notes</span>
+                    </h3>
+                    <textarea
+                      value={customerForm.notes}
+                      onChange={e => setCustomerForm({ ...customerForm, notes: e.target.value })}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      rows={4}
+                      placeholder="Any additional information about this customer..."
+                    />
+                  </div>
                 </div>
 
+                {/* Active Customer Toggle */}
                 <div>
-                  <label className="flex items-center space-x-2 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={customerForm.active}
-                      onChange={e =>
-                        setCustomerForm({ ...customerForm, active: e.target.checked })
-                      }
-                      className="w-5 h-5 text-[#3f72af] rounded focus:ring-blue-500"
-                    />
-                    <span className="text-sm font-medium text-gray-700">Active Customer</span>
-                  </label>
+                  <div className="bg-white shadow-sm rounded-lg p-6 border border-gray-200">
+                    <div className="flex items-center gap-3">
+                      <button
+                        type="button"
+                        onClick={() => setCustomerForm({ ...customerForm, active: !customerForm.active })}
+                        className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#3f72af] focus:ring-offset-2 flex-shrink-0 ${
+                          customerForm.active ? 'bg-[#3f72af]' : 'bg-gray-200'
+                        }`}
+                      >
+                        <span
+                          className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                            customerForm.active ? 'translate-x-6' : 'translate-x-1'
+                          }`}
+                        />
+                      </button>
+                      <label className="text-sm font-medium text-gray-700">
+                        Active Customer
+                      </label>
+                    </div>
+                  </div>
                 </div>
               </div>
               
-              {/* Create Customer Button */}
-              <div className="flex justify-end pt-6 border-t">
+              {/* Action Buttons */}
+              <div className="flex justify-between items-center pt-6 border-t">
+                <button
+                  type="button"
+                  onClick={() => router.push('/customers')}
+                  className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors"
+                >
+                  Cancel
+                </button>
                 <button
                   type="submit"
                   disabled={saving}
-                  className="px-6 py-3 bg-[#3f72af] text-white font-medium rounded-lg hover:bg-[#2f5a8f] focus:outline-none focus:ring-2 focus:ring-[#3f72af] focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  className="px-4 py-2 text-sm font-medium bg-[#3f72af] text-white rounded-lg hover:bg-[#2f5a8f] focus:outline-none focus:ring-2 focus:ring-[#3f72af] focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
                 >
                   {saving ? (
-                    <span className="flex items-center gap-2">
-                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
-                      Creating Customer...
-                    </span>
+                    <>
+                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                      Creating...
+                    </>
                   ) : (
-                    'Create Customer'
+                    <>
+                      <UserPlus className="w-4 h-4" />
+                      Create Customer
+                    </>
                   )}
                 </button>
               </div>
