@@ -322,11 +322,16 @@ export default function QuickBooksSettings() {
 
   if (loading) {
     return (
-      <PageHeader>
+      <PageHeader
+        title="Quickbooks"
+        subtitle="Manage quickbooks"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Settings", href: "/settings" }, { label: "Quickbooks" }]}
+      />
+      <div className="flex-1 overflow-auto p-6">
         <div className="flex items-center justify-center h-64">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
-      </PageHeader>
+      </div>
     );
   }
 
@@ -631,6 +636,6 @@ export default function QuickBooksSettings() {
           </div>
         </div>
       </div>
-    </PageHeader>
+    </div>
   );
 }

@@ -231,7 +231,12 @@ export default function FormBuilderPage() {
   };
 
   return (
-    <PageHeader>
+    <PageHeader
+        title="Builder"
+        subtitle="Manage builder"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Forms", href: "/forms" }, { label: "Builder" }]}
+      />
+      <div className="flex-1 overflow-auto p-6">
       <div className="p-8">
         <div className="mb-8 flex items-center justify-between">
           <div className="flex items-center space-x-4">
@@ -476,6 +481,6 @@ export default function FormBuilderPage() {
           </div>
         </div>
       </div>
-    </PageHeader>
+    </div>
   );
 }

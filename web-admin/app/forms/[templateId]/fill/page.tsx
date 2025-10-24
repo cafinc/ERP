@@ -461,14 +461,19 @@ export default function FillFormPage() {
 
   if (loading) {
     return (
-      <PageHeader>
+      <PageHeader
+        title="Fill"
+        subtitle="Manage fill"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Forms", href: "/forms" }, { label: "Details" }]}
+      />
+      <div className="flex-1 overflow-auto p-6">
         <div className="flex items-center justify-center h-full">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#3f72af] mx-auto"></div>
             <p className="mt-4 text-gray-600">Loading form...</p>
           </div>
         </div>
-      </PageHeader>
+      </div>
     );
   }
 
@@ -478,7 +483,7 @@ export default function FillFormPage() {
         <div className="text-center py-12">
           <p className="text-red-600">Form template not found</p>
         </div>
-      </PageHeader>
+      </div>
     );
   }
 
@@ -549,6 +554,6 @@ export default function FillFormPage() {
           </div>
         </div>
       )}
-    </PageHeader>
+    </div>
   );
 }

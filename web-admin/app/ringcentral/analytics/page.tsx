@@ -61,7 +61,12 @@ export default function AnalyticsPage() {
   const COLORS = ['#3B82F6', '#10B981', '#F59E0B', '#EF4444'];
 
   return (
-    <PageHeader>
+    <PageHeader
+        title="Analytics"
+        subtitle="Manage analytics"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Ringcentral", href: "/ringcentral" }, { label: "Analytics" }]}
+      />
+      <div className="flex-1 overflow-auto p-6">
       <div className="p-8">
         {/* Header */}
         <div className="mb-8 flex items-center justify-between">
@@ -204,6 +209,6 @@ export default function AnalyticsPage() {
           </>
         )}
       </div>
-    </PageHeader>
+    </div>
   );
 }

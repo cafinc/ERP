@@ -147,11 +147,16 @@ export default function CreateInspectionSchedulePage() {
 
   if (loadingData) {
     return (
-      <PageHeader>
+      <PageHeader
+        title="Create Schedules"
+        subtitle="Add new schedules"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Equipment", href: "/equipment" }, { label: "Inspections", href: "/equipment/inspections" }, { label: "Schedules", href: "/equipment/inspections/schedules" }, { label: "Create" }]}
+      />
+      <div className="flex-1 overflow-auto p-6">
         <div className="flex items-center justify-center h-64">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
-      </PageHeader>
+      </div>
     );
   }
 
@@ -469,6 +474,6 @@ export default function CreateInspectionSchedulePage() {
           </div>
         </form>
       </div>
-    </PageHeader>
+    </div>
   );
 }

@@ -111,14 +111,19 @@ export default function ConversationDetailPage() {
 
   if (loading) {
     return (
-      <PageHeader>
+      <PageHeader
+        title="Communication Details"
+        subtitle="View and manage details"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Communication", href: "/communication" }, { label: "Details" }]}
+      />
+      <div className="flex-1 overflow-auto p-6">
         <div className="flex items-center justify-center h-full">
           <div className="text-center">
             <RefreshCw className="w-12 h-12 animate-spin text-[#3f72af] mx-auto mb-4" />
             <p className="text-gray-600">Loading conversation...</p>
           </div>
         </div>
-      </PageHeader>
+      </div>
     );
   }
 
@@ -137,7 +142,7 @@ export default function ConversationDetailPage() {
             </button>
           </div>
         </div>
-      </PageHeader>
+      </div>
     );
   }
 
@@ -257,6 +262,6 @@ export default function ConversationDetailPage() {
           </form>
         </div>
       </div>
-    </PageHeader>
+    </div>
   );
 }

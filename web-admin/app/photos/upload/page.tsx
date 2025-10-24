@@ -74,7 +74,12 @@ export default function PhotoUploadPage() {
   };
 
   return (
-    <PageHeader>
+    <PageHeader
+        title="Upload"
+        subtitle="Manage upload"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Photos", href: "/photos" }, { label: "Upload" }]}
+      />
+      <div className="flex-1 overflow-auto p-6">
       <div className="max-w-4xl mx-auto space-y-6">
         {/* Header */}
         <div className="flex items-center gap-4">
@@ -203,6 +208,6 @@ export default function PhotoUploadPage() {
           </div>
         )}
       </div>
-    </PageHeader>
+    </div>
   );
 }

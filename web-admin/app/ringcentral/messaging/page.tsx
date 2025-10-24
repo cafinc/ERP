@@ -85,7 +85,12 @@ export default function TeamMessagingPage() {
   };
 
   return (
-    <PageHeader>
+    <PageHeader
+        title="Messaging"
+        subtitle="Manage messaging"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Ringcentral", href: "/ringcentral" }, { label: "Messaging" }]}
+      />
+      <div className="flex-1 overflow-auto p-6">
       <div className="p-8">
         {/* Header */}
         <div className="mb-8">
@@ -245,6 +250,6 @@ export default function TeamMessagingPage() {
           </div>
         </div>
       </div>
-    </PageHeader>
+    </div>
   );
 }

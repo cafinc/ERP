@@ -134,11 +134,16 @@ export default function InvoiceDetailPage() {
 
   if (loading) {
     return (
-      <PageHeader>
+      <PageHeader
+        title="Invoices Details"
+        subtitle="View and manage details"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Invoices", href: "/invoices" }, { label: "Details" }]}
+      />
+      <div className="flex-1 overflow-auto p-6">
         <div className="flex items-center justify-center h-full">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
-      </PageHeader>
+      </div>
     );
   }
 
@@ -159,7 +164,7 @@ export default function InvoiceDetailPage() {
             </button>
           </div>
         </div>
-      </PageHeader>
+      </div>
     );
   }
 
@@ -498,6 +503,6 @@ export default function InvoiceDetailPage() {
           </div>
         )}
       </div>
-    </PageHeader>
+    </div>
   );
 }

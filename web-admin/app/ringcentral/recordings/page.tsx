@@ -123,7 +123,12 @@ export default function RecordingsPage() {
   };
 
   return (
-    <PageHeader>
+    <PageHeader
+        title="Recordings"
+        subtitle="Manage recordings"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Ringcentral", href: "/ringcentral" }, { label: "Recordings" }]}
+      />
+      <div className="flex-1 overflow-auto p-6">
       <div className="p-8">
         {/* Header */}
         <div className="mb-8">
@@ -298,6 +303,6 @@ export default function RecordingsPage() {
           )}
         </div>
       </div>
-    </PageHeader>
+    </div>
   );
 }

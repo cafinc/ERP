@@ -123,7 +123,12 @@ export default function ContactsPage() {
   });
 
   return (
-    <PageHeader>
+    <PageHeader
+        title="Contacts"
+        subtitle="Manage contacts"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Ringcentral", href: "/ringcentral" }, { label: "Contacts" }]}
+      />
+      <div className="flex-1 overflow-auto p-6">
       <div className="p-8">
         {/* Header */}
         <div className="mb-8 flex items-center justify-between">
@@ -370,6 +375,6 @@ export default function ContactsPage() {
           </div>
         )}
       </div>
-    </PageHeader>
+    </div>
   );
 }

@@ -262,7 +262,12 @@ export default function ProfileSettings() {
   };
 
   return (
-    <PageHeader>
+    <PageHeader
+        title="Profile"
+        subtitle="Manage profile"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Settings", href: "/settings" }, { label: "Profile" }]}
+      />
+      <div className="flex-1 overflow-auto p-6">
       <div className="p-8">
         {/* Header */}
         <div className="mb-8">
@@ -604,6 +609,6 @@ export default function ProfileSettings() {
           </div>
         </div>
       </div>
-    </PageHeader>
+    </div>
   );
 }

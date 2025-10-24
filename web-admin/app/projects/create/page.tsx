@@ -145,7 +145,12 @@ export default function ProjectCreatePage() {
   };
 
   return (
-    <PageHeader>
+    <PageHeader
+        title="Create Projects"
+        subtitle="Add new projects"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Projects", href: "/projects" }, { label: "Create" }]}
+      />
+      <div className="flex-1 overflow-auto p-6">
       <div className="p-8">
         {/* Header */}
         <div className="mb-8 flex items-center space-x-4">
@@ -321,6 +326,6 @@ export default function ProjectCreatePage() {
           </div>
         </div>
       </div>
-    </PageHeader>
+    </div>
   );
 }

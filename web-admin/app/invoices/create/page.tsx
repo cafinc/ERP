@@ -148,7 +148,12 @@ export default function InvoiceCreatePage() {
   const totals = calculateTotals();
 
   return (
-    <PageHeader>
+    <PageHeader
+        title="Create Invoices"
+        subtitle="Add new invoices"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Invoices", href: "/invoices" }, { label: "Create" }]}
+      />
+      <div className="flex-1 overflow-auto p-6">
       <div className="p-8">
         {/* Header */}
         <div className="mb-8 flex items-center space-x-4">
@@ -453,6 +458,6 @@ export default function InvoiceCreatePage() {
           </div>
         </form>
       </div>
-    </PageHeader>
+    </div>
   );
 }

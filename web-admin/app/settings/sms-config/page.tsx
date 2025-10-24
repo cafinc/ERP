@@ -76,7 +76,12 @@ export default function SMSConfigPage() {
   };
 
   return (
-    <PageHeader>
+    <PageHeader
+        title="Sms Config"
+        subtitle="Manage sms config"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Settings", href: "/settings" }, { label: "Sms Config" }]}
+      />
+      <div className="flex-1 overflow-auto p-6">
       <div className="max-w-4xl mx-auto space-y-6">
         {/* Header */}
         <div className="flex items-center gap-4">
@@ -211,6 +216,6 @@ export default function SMSConfigPage() {
           )}
         </div>
       </div>
-    </PageHeader>
+    </div>
   );
 }

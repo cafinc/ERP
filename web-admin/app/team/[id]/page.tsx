@@ -140,11 +140,16 @@ export default function TeamMemberDetailPage() {
 
   if (loading) {
     return (
-      <PageHeader>
+      <PageHeader
+        title="Team Details"
+        subtitle="View and manage details"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Team", href: "/team" }, { label: "Details" }]}
+      />
+      <div className="flex-1 overflow-auto p-6">
         <div className="flex items-center justify-center h-64">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
-      </PageHeader>
+      </div>
     );
   }
 
@@ -161,7 +166,7 @@ export default function TeamMemberDetailPage() {
             Return to Team
           </button>
         </div>
-      </PageHeader>
+      </div>
     );
   }
 
@@ -381,6 +386,6 @@ export default function TeamMemberDetailPage() {
           </div>
         )}
       </div>
-    </PageHeader>
+    </div>
   );
 }

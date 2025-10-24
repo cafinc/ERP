@@ -149,11 +149,16 @@ export default function SiteDetailPage() {
 
   if (loading) {
     return (
-      <PageHeader>
+      <PageHeader
+        title="Sites Details"
+        subtitle="View and manage details"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Sites", href: "/sites" }, { label: "Details" }]}
+      />
+      <div className="flex-1 overflow-auto p-6">
         <div className="flex items-center justify-center h-64">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
-      </PageHeader>
+      </div>
     );
   }
 
@@ -170,7 +175,7 @@ export default function SiteDetailPage() {
             Return to Sites
           </button>
         </div>
-      </PageHeader>
+      </div>
     );
   }
 
@@ -428,6 +433,6 @@ export default function SiteDetailPage() {
           </div>
         )}
       </div>
-    </PageHeader>
+    </div>
   );
 }

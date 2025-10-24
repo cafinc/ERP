@@ -116,7 +116,12 @@ export default function SMSPage() {
   };
 
   return (
-    <PageHeader>
+    <PageHeader
+        title="Sms"
+        subtitle="Manage sms"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Ringcentral", href: "/ringcentral" }, { label: "Sms" }]}
+      />
+      <div className="flex-1 overflow-auto p-6">
       <div className="p-8">
         {/* Header */}
         <div className="mb-8 flex items-center justify-between">
@@ -316,6 +321,6 @@ export default function SMSPage() {
           )}
         </div>
       </div>
-    </PageHeader>
+    </div>
   );
 }

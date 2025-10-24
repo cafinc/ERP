@@ -78,7 +78,12 @@ export default function EmailConfigPage() {
   };
 
   return (
-    <PageHeader>
+    <PageHeader
+        title="Email Config"
+        subtitle="Manage email config"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Settings", href: "/settings" }, { label: "Email Config" }]}
+      />
+      <div className="flex-1 overflow-auto p-6">
       <div className="max-w-4xl mx-auto space-y-6">
         {/* Header */}
         <div className="flex items-center gap-4">
@@ -262,6 +267,6 @@ export default function EmailConfigPage() {
           )}
         </div>
       </div>
-    </PageHeader>
+    </div>
   );
 }

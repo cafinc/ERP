@@ -96,7 +96,12 @@ export default function ActiveCallsPage() {
   };
 
   return (
-    <PageHeader>
+    <PageHeader
+        title="Active Calls"
+        subtitle="Manage active calls"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Ringcentral", href: "/ringcentral" }, { label: "Active Calls" }]}
+      />
+      <div className="flex-1 overflow-auto p-6">
       <div className="p-8">
         {/* Header */}
         <div className="mb-8 flex items-center justify-between">
@@ -253,6 +258,6 @@ export default function ActiveCallsPage() {
           )}
         </div>
       </div>
-    </PageHeader>
+    </div>
   );
 }

@@ -172,7 +172,12 @@ export default function CreateContractPage() {
   };
 
   return (
-    <PageHeader>
+    <PageHeader
+        title="Create Contracts"
+        subtitle="Add new contracts"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Contracts", href: "/contracts" }, { label: "Create" }]}
+      />
+      <div className="flex-1 overflow-auto p-6">
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Header */}
         <div className="flex items-center gap-4">
@@ -494,6 +499,6 @@ export default function CreateContractPage() {
           </button>
         </div>
       </form>
-    </PageHeader>
+    </div>
   );
 }

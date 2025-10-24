@@ -212,14 +212,19 @@ export default function ViewResponsePage() {
 
   if (loading) {
     return (
-      <PageHeader>
+      <PageHeader
+        title="Responses Details"
+        subtitle="View and manage details"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Forms", href: "/forms" }, { label: "Responses", href: "/forms/responses" }, { label: "Details" }]}
+      />
+      <div className="flex-1 overflow-auto p-6">
         <div className="flex items-center justify-center h-full">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#3f72af] mx-auto"></div>
             <p className="mt-4 text-gray-600">Loading response...</p>
           </div>
         </div>
-      </PageHeader>
+      </div>
     );
   }
 
@@ -229,7 +234,7 @@ export default function ViewResponsePage() {
         <div className="text-center py-12">
           <p className="text-red-600">Response not found</p>
         </div>
-      </PageHeader>
+      </div>
     );
   }
 
@@ -316,6 +321,6 @@ export default function ViewResponsePage() {
           </div>
         </div>
       </div>
-    </PageHeader>
+    </div>
   );
 }

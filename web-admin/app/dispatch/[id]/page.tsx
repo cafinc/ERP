@@ -89,11 +89,16 @@ export default function DispatchDetailPage() {
 
   if (loading) {
     return (
-      <PageHeader>
+      <PageHeader
+        title="Dispatch Details"
+        subtitle="View and manage details"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Dispatch", href: "/dispatch" }, { label: "Details" }]}
+      />
+      <div className="flex-1 overflow-auto p-6">
         <div className="flex items-center justify-center h-full">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
-      </PageHeader>
+      </div>
     );
   }
 
@@ -113,7 +118,7 @@ export default function DispatchDetailPage() {
             </button>
           </div>
         </div>
-      </PageHeader>
+      </div>
     );
   }
 
@@ -265,6 +270,6 @@ export default function DispatchDetailPage() {
           </div>
         </div>
       </div>
-    </PageHeader>
+    </div>
   );
 }

@@ -49,7 +49,12 @@ export default function SupportPage() {
   };
 
   return (
-    <PageHeader>
+    <PageHeader
+        title="Support"
+        subtitle="Manage support"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Settings", href: "/settings" }, { label: "Support" }]}
+      />
+      <div className="flex-1 overflow-auto p-6">
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         {/* Header */}
         <div className="mb-4">
@@ -300,6 +305,6 @@ export default function SupportPage() {
           </div>
         </div>
       </div>
-    </PageHeader>
+    </div>
   );
 }
