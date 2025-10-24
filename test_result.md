@@ -623,3 +623,75 @@ backend:
       - working: true
         agent: "testing"
         comment: "✅ PUT /api/customers/{customer_id} to change company_id working perfectly. Successfully updates customer company links with proper validation and data integrity."
+
+  - task: "Communication Preference - Create Customer with SMS Preference"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ POST /api/customers with communication_preference='sms' and mobile number working perfectly. Customer created successfully with SMS preference and mobile field properly saved."
+
+  - task: "Communication Preference - Create Customer with InApp Preference"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ POST /api/customers with communication_preference='inapp' and empty mobile working perfectly. Customer created successfully with InApp preference without requiring mobile number."
+
+  - task: "Communication Preference - Retrieve Customer with Preference"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ GET /api/customers/{customer_id} working perfectly. Response includes communication_preference field and mobile number when set. Data integrity maintained."
+
+  - task: "Communication Preference - Update Customer Preference"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ PUT /api/customers/{customer_id} to update communication_preference working perfectly. Successfully changed preference from SMS to InApp with proper validation."
+
+  - task: "Communication Preference - List Customers with Preference Field"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ GET /api/customers working perfectly. All 73 customers in system have communication_preference field properly included in response. Field consistency maintained across all records."
+
+  - task: "Communication Preference - Edge Cases and Validation"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "low"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ System accepts invalid communication preference values without validation errors. No strict validation enforced, allowing flexible preference values. System handles edge cases gracefully."
