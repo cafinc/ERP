@@ -1,133 +1,124 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Container, Plus, Search, Filter, Download } from 'lucide-react';
-import PageHeader from '@/components/PageHeader';
+import { Truck, Plus, Search, Filter, Download, ChevronDown } from 'lucide-react';
+import CompactHeader from '@/components/CompactHeader';
 
 // Mock data
-const mockTrailers = [
+const mockVehicles = [
   {
     id: 1,
-    trailerNumber: 'TRL-001',
-    type: 'Salt Spreader',
-    make: 'SnowEx',
-    model: 'SP-575',
-    year: 2021,
-    capacity: '575 lbs',
+    vehicleNumber: 'VEH-001',
+    type: 'Pickup Truck',
+    make: 'Ford',
+    model: 'F-250',
+    year: 2022,
+    licensePlate: 'ABC-1234',
     status: 'Active',
-    assignedTo: 'VEH-001',
-    lastService: '2024-05-10',
-    nextService: '2024-08-10'
+    assignedTo: 'John Smith',
+    mileage: 45230,
+    lastService: '2024-05-15',
+    nextService: '2024-08-15'
   },
   {
     id: 2,
-    trailerNumber: 'TRL-002',
-    type: 'Equipment Trailer',
-    make: 'PJ Trailers',
-    model: 'CE202',
-    year: 2022,
-    capacity: '20 ft',
+    vehicleNumber: 'VEH-002',
+    type: 'Plow Truck',
+    make: 'Chevrolet',
+    model: 'Silverado 3500',
+    year: 2021,
+    licensePlate: 'XYZ-5678',
     status: 'Active',
-    assignedTo: 'VEH-002',
-    lastService: '2024-04-15',
-    nextService: '2024-07-15'
+    assignedTo: 'Mike Johnson',
+    mileage: 62100,
+    lastService: '2024-04-20',
+    nextService: '2024-07-20'
   },
   {
     id: 3,
-    trailerNumber: 'TRL-003',
-    type: 'Plow Attachment',
-    make: 'Boss',
-    model: 'HTX V-Plow',
+    vehicleNumber: 'VEH-003',
+    type: 'Salt Truck',
+    make: 'GMC',
+    model: 'Sierra 3500HD',
     year: 2020,
-    capacity: '9 ft',
+    licensePlate: 'DEF-9012',
     status: 'Maintenance',
     assignedTo: null,
-    lastService: '2024-05-30',
-    nextService: '2024-06-05'
+    mileage: 78450,
+    lastService: '2024-06-01',
+    nextService: '2024-06-10'
   },
   {
     id: 4,
-    trailerNumber: 'TRL-004',
-    type: 'Salt Spreader',
-    make: 'Western',
-    model: 'FLEET FLEX',
+    vehicleNumber: 'VEH-004',
+    type: 'Pickup Truck',
+    make: 'Ram',
+    model: '2500',
     year: 2023,
-    capacity: '1000 lbs',
+    licensePlate: 'GHI-3456',
     status: 'Active',
-    assignedTo: 'VEH-004',
-    lastService: '2024-05-25',
-    nextService: '2024-08-25'
-  },
-  {
-    id: 5,
-    trailerNumber: 'TRL-005',
-    type: 'Utility Trailer',
-    make: 'Big Tex',
-    model: '70PI-16',
-    year: 2021,
-    capacity: '16 ft',
-    status: 'Active',
-    assignedTo: null,
-    lastService: '2024-05-05',
-    nextService: '2024-08-05'
+    assignedTo: 'Sarah Williams',
+    mileage: 23100,
+    lastService: '2024-05-28',
+    nextService: '2024-08-28'
   }
 ];
 
-export default function TrailersPage() {
+export default function VehiclesPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedStatus, setSelectedStatus] = useState('all');
 
   const statusCounts = {
-    all: mockTrailers.length,
-    active: mockTrailers.filter(t => t.status === 'Active').length,
-    maintenance: mockTrailers.filter(t => t.status === 'Maintenance').length,
-    inactive: mockTrailers.filter(t => t.status === 'Inactive').length
+    all: mockVehicles.length,
+    active: mockVehicles.filter(v => v.status === 'Active').length,
+    maintenance: mockVehicles.filter(v => v.status === 'Maintenance').length,
+    inactive: mockVehicles.filter(v => v.status === 'Inactive').length
   };
 
-  const filteredTrailers = mockTrailers.filter(trailer => {
+  const filteredVehicles = mockVehicles.filter(vehicle => {
     const matchesSearch = 
-      trailer.trailerNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      trailer.type.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      trailer.make.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      trailer.model.toLowerCase().includes(searchTerm.toLowerCase());
+      vehicle.vehicleNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      vehicle.make.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      vehicle.model.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      vehicle.licensePlate.toLowerCase().includes(searchTerm.toLowerCase());
     
     const matchesStatus = selectedStatus === 'all' || 
-      trailer.status.toLowerCase() === selectedStatus.toLowerCase();
+      vehicle.status.toLowerCase() === selectedStatus.toLowerCase();
     
     return matchesSearch && matchesStatus;
   });
 
   return (
-    <PageHeader>
+    <HybridNavigationTopBar>
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
-        <PageHeader
-          title="Trailers"
-          subtitle={`${filteredTrailers.length} trailer${filteredTrailers.length !== 1 ? 's' : ''}`}
-          icon={Container}
+        <CompactHeader
+          title="Vehicles"
+          subtitle={`${filteredVehicles.length} vehicle${filteredVehicles.length !== 1 ? 's' : ''}`}
+          icon={Truck}
           actions={[
             {
               label: 'Export',
               icon: Download,
-              onClick: () => console.log('Export trailers'),
+              onClick: () => console.log('Export vehicles'),
               variant: 'secondary',
             },
             {
-              label: 'Add Trailer',
+              label: 'Add Vehicle',
               icon: Plus,
-              onClick: () => console.log('Add trailer'),
+              onClick: () => console.log('Add vehicle'),
               variant: 'primary',
             },
           ]}
         />
 
         {/* Compact Search and Filters */}
-        <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-3 mb-4 mx-6 mt-6">
+        <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-3 mb-4">
           <div className="flex items-center gap-3">
             <div className="flex-1 relative">
               <Search className="absolute left-2.5 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
               <input
                 type="text"
-                placeholder="Search trailers..."
+                placeholder="Search vehicles..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-9 pr-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -184,46 +175,50 @@ export default function TrailersPage() {
           </button>
         </div>
 
-        {/* Trailers Grid */}
+        {/* Vehicles Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 mx-6">
-          {filteredTrailers.map((trailer) => (
-            <div key={trailer.id} className="bg-white rounded-xl shadow-lg border border-gray-200 p-4 hover:shadow-md transition-shadow">
+          {filteredVehicles.map((vehicle) => (
+            <div key={vehicle.id} className="bg-white rounded-xl shadow-lg border border-gray-200 p-4 hover:shadow-md transition-shadow">
               <div className="flex items-start justify-between mb-3">
                 <div>
-                  <h3 className="text-base font-semibold text-gray-900">{trailer.trailerNumber}</h3>
-                  <p className="text-sm text-gray-600">{trailer.year} {trailer.make} {trailer.model}</p>
+                  <h3 className="text-base font-semibold text-gray-900">{vehicle.vehicleNumber}</h3>
+                  <p className="text-sm text-gray-600">{vehicle.year} {vehicle.make} {vehicle.model}</p>
                 </div>
                 <span className={`px-2 py-1 text-xs font-medium rounded-full ${
-                  trailer.status === 'Active' 
+                  vehicle.status === 'Active' 
                     ? 'bg-green-100 text-green-800'
-                    : trailer.status === 'Maintenance'
+                    : vehicle.status === 'Maintenance'
                     ? 'bg-yellow-100 text-yellow-800'
                     : 'bg-gray-100 text-gray-800'
                 }`}>
-                  {trailer.status}
+                  {vehicle.status}
                 </span>
               </div>
 
               <div className="space-y-2 mb-4">
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-500">Type:</span>
-                  <span className="text-gray-900 font-medium">{trailer.type}</span>
+                  <span className="text-gray-900 font-medium">{vehicle.type}</span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-500">Capacity:</span>
-                  <span className="text-gray-900 font-medium">{trailer.capacity}</span>
+                  <span className="text-gray-500">License Plate:</span>
+                  <span className="text-gray-900 font-medium">{vehicle.licensePlate}</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-500">Assigned To:</span>
-                  <span className="text-gray-900 font-medium">{trailer.assignedTo || 'Unassigned'}</span>
+                  <span className="text-gray-900 font-medium">{vehicle.assignedTo || 'Unassigned'}</span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-500">Mileage:</span>
+                  <span className="text-gray-900 font-medium">{vehicle.mileage.toLocaleString()} mi</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-500">Last Service:</span>
-                  <span className="text-gray-900 font-medium">{trailer.lastService}</span>
+                  <span className="text-gray-900 font-medium">{vehicle.lastService}</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-500">Next Service:</span>
-                  <span className="text-gray-900 font-medium">{trailer.nextService}</span>
+                  <span className="text-gray-900 font-medium">{vehicle.nextService}</span>
                 </div>
               </div>
 
@@ -239,14 +234,14 @@ export default function TrailersPage() {
           ))}
         </div>
 
-        {filteredTrailers.length === 0 && (
+        {filteredVehicles.length === 0 && (
           <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-12 text-center mx-6">
             <Truck className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">No trailers found</h3>
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">No vehicles found</h3>
             <p className="text-gray-500">Try adjusting your search or filters</p>
           </div>
         )}
       </div>
-    </PageHeader>
+    </HybridNavigationTopBar>
   );
 }

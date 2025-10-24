@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Truck, Plus, Search, Filter, Download, ChevronDown } from 'lucide-react';
-import CompactHeader from '@/components/CompactHeader';
+import PageHeader from '@/components/PageHeader';
 
 // Mock data
 const mockVehicles = [
@@ -89,9 +89,9 @@ export default function VehiclesPage() {
   });
 
   return (
-    <HybridNavigationTopBar>
+    <PageHeader>
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
-        <CompactHeader
+        <PageHeader
           title="Vehicles"
           subtitle={`${filteredVehicles.length} vehicle${filteredVehicles.length !== 1 ? 's' : ''}`}
           icon={Truck}
@@ -242,6 +242,6 @@ export default function VehiclesPage() {
           </div>
         )}
       </div>
-    </HybridNavigationTopBar>
+    </PageHeader>
   );
 }

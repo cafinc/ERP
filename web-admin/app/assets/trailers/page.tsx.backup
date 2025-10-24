@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Container, Plus, Search, Filter, Download } from 'lucide-react';
-import PageHeader from '@/components/PageHeader';
+import CompactHeader from '@/components/CompactHeader';
 
 // Mock data
 const mockTrailers = [
@@ -98,9 +98,9 @@ export default function TrailersPage() {
   });
 
   return (
-    <PageHeader>
+    <HybridNavigationTopBar>
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
-        <PageHeader
+        <CompactHeader
           title="Trailers"
           subtitle={`${filteredTrailers.length} trailer${filteredTrailers.length !== 1 ? 's' : ''}`}
           icon={Container}
@@ -247,6 +247,6 @@ export default function TrailersPage() {
           </div>
         )}
       </div>
-    </PageHeader>
+    </HybridNavigationTopBar>
   );
 }

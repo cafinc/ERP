@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Wrench, Plus, Search, Filter, Download } from 'lucide-react';
-import PageHeader from '@/components/PageHeader';
+import CompactHeader from '@/components/CompactHeader';
 
 // Mock data
 const mockTools = [
@@ -140,9 +140,9 @@ export default function ToolsPage() {
   });
 
   return (
-    <PageHeader>
+    <HybridNavigationTopBar>
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
-        <PageHeader
+        <CompactHeader
           title="Tools"
           subtitle={`${filteredTools.length} tool${filteredTools.length !== 1 ? 's' : ''}`}
           icon={Wrench}
@@ -266,6 +266,6 @@ export default function ToolsPage() {
           </div>
         )}
       </div>
-    </PageHeader>
+    </HybridNavigationTopBar>
   );
 }

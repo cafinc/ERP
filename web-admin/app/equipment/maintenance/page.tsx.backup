@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import PageHeader from '@/components/PageHeader';
+import CompactHeader from '@/components/CompactHeader';
 import api from '@/lib/api';
 import {
   Plus,
@@ -158,19 +158,19 @@ export default function MaintenancePage() {
 
   if (loading) {
     return (
-      <PageHeader>
+      <HybridNavigationTopBar>
         <div className="flex items-center justify-center h-full">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
-      </PageHeader>
+      </HybridNavigationTopBar>
     );
   }
 
   return (
-    <PageHeader>
+    <HybridNavigationTopBar>
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         {/* Compact Header */}
-        <PageHeader
+        <CompactHeader
           title="Equipment Maintenance"
           icon={Wrench}
           badges={[
@@ -386,6 +386,6 @@ export default function MaintenancePage() {
           </div>
         )}
       </div>
-    </PageHeader>
+    </HybridNavigationTopBar>
   );
 }

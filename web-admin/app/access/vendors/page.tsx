@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import CompactHeader from '@/components/CompactHeader';
+import PageHeader from '@/components/PageHeader';
 import { Package, Plus, Edit, Shield, CheckCircle, XCircle, TrendingUp } from 'lucide-react';
 
 export default function VendorsPage() {
@@ -17,7 +17,7 @@ export default function VendorsPage() {
 
   return (
     <div style={{ padding: '24px', backgroundColor: '#f8fafc', minHeight: '100vh' }}>
-      <CompactHeader
+      <PageHeader
         title="Vendors"
         subtitle="Suppliers and service providers"
         backUrl="/access"
