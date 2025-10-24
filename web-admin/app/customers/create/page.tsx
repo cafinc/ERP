@@ -874,7 +874,7 @@ export default function CustomerFormPage() {
                       {/* Mobile Number - On the right */}
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Mobile Number {customerForm.communication_preference === 'sms' ? '(Required)' : '(Optional)'}
+                          Mobile Number {customerForm.communication_preference === 'sms' ? <span className="text-red-500">*</span> : <span className="text-gray-400 text-xs">(Optional)</span>}
                         </label>
                         <div className="relative">
                           <Smartphone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
