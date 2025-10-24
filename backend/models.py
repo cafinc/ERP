@@ -254,6 +254,7 @@ class Customer(BaseModel):
     notes: Optional[str] = None
     tags: List[str] = []  # Tag names like 'VIP', 'Seasonal', 'Problematic'
     custom_fields: List[CustomField] = []  # Custom fields like property_size, gate_code
+    attachments: Optional[List[dict]] = []  # Uploaded documents and photos
     total_revenue: Optional[float] = 0.0
     active: bool = True
     # Company-specific fields
