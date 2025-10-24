@@ -69,6 +69,7 @@ export default function CustomerFormPage() {
     email: '',
     phone: '',
     mobile: '',
+    communication_preference: 'sms', // 'sms' or 'inapp'
     // Address broken out
     street_address: '',
     city: '',
