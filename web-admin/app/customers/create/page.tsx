@@ -500,7 +500,7 @@ export default function CustomerFormPage() {
       // Add mobile to custom_fields if provided
       if (customerForm.mobile) {
         submitData.custom_fields = [
-          { name: 'mobile', value: customerForm.mobile, type: 'text' },
+          { field_name: 'mobile', field_value: customerForm.mobile, field_type: 'text' },
         ];
       }
       
