@@ -224,6 +224,50 @@ export default function CustomerFormPage() {
       setLoadingCompanies(false);
     }
   };
+  
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    if (!files) return;
+    
+    Array.from(files).forEach(file => {
+      // Limit file size to 10MB
+      if (file.size > 10 * 1024 * 1024) {
+        alert(`File ${file.name} is too large. Maximum size is 10MB.`);
+        return;
+      }
+      
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const result = e.target?.result as string;
+        setUploadedFiles(prev => [...prev, {
+          name: file.name,
+          type: file.type,
+          size: file.size,
+          data: result
+        }]);
+      };
+      reader.readAsDataURL(file);
+    });
+    
+    // Reset input
+    event.target.value = '';
+  };
+  
+  const removeFile = (index: number) => {
+    setUploadedFiles(prev => prev.filter((_, i) => i !== index));
+  };
+  
+  const formatFileSize = (bytes: number) => {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+    return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+  };
+  
+  const getFileIcon = (type: string) => {
+    if (type.startsWith('image/')) return <ImageIcon className="w-5 h-5 text-blue-500" />;
+    if (type.includes('pdf')) return <File className="w-5 h-5 text-red-500" />;
+    return <Paperclip className="w-5 h-5 text-gray-500" />;
+  };
 
   const loadCustomer = async () => {
     try {
