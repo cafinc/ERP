@@ -638,7 +638,47 @@ export default function CustomerFormPage() {
                         )}
                       </div>
 
+                      {/* Communication Preference - Moved Before Mobile */}
                       <div className="md:col-span-2">
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Communication Preference
+                        </label>
+                        <div className="flex items-center gap-6">
+                          <label className="flex items-center gap-2 cursor-pointer">
+                            <input
+                              type="radio"
+                              name="communication_preference"
+                              value="sms"
+                              checked={customerForm.communication_preference === 'sms'}
+                              onChange={(e) => setCustomerForm({ ...customerForm, communication_preference: e.target.value })}
+                              className="w-4 h-4 text-[#3f72af] border-gray-300 focus:ring-[#3f72af]"
+                            />
+                            <MessageSquare className="w-4 h-4 text-[#3f72af]" />
+                            <span className="text-sm text-gray-700">SMS</span>
+                          </label>
+                          
+                          <label className="flex items-center gap-2 cursor-pointer">
+                            <input
+                              type="radio"
+                              name="communication_preference"
+                              value="inapp"
+                              checked={customerForm.communication_preference === 'inapp'}
+                              onChange={(e) => setCustomerForm({ ...customerForm, communication_preference: e.target.value })}
+                              className="w-4 h-4 text-[#3f72af] border-gray-300 focus:ring-[#3f72af]"
+                            />
+                            <Bell className="w-4 h-4 text-[#3f72af]" />
+                            <span className="text-sm text-gray-700">In-App</span>
+                          </label>
+                        </div>
+                        <p className="text-xs text-gray-500 mt-2">
+                          {customerForm.communication_preference === 'sms' 
+                            ? 'Contact will receive SMS notifications (mobile number required)'
+                            : 'Contact will receive in-app notifications only'}
+                        </p>
+                      </div>
+
+                      {/* Mobile Number - Reduced width */}
+                      <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
                           Mobile Number {customerForm.communication_preference === 'sms' ? '(Required)' : '(Optional)'}
                         </label>
@@ -658,31 +698,7 @@ export default function CustomerFormPage() {
                         {fieldErrors['mobile'] && (
                           <p className="text-red-500 text-xs mt-1">{fieldErrors['mobile']}</p>
                         )}
-                        
-                        {/* Communication Preference */}
-                        <div className="mt-3">
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
-                            Communication Preference
-                          </label>
-                          <div className="flex items-center gap-6">
-                            <label className="flex items-center gap-2 cursor-pointer">
-                              <input
-                                type="radio"
-                                name="communication_preference"
-                                value="sms"
-                                checked={customerForm.communication_preference === 'sms'}
-                                onChange={(e) => setCustomerForm({ ...customerForm, communication_preference: e.target.value })}
-                                className="w-4 h-4 text-[#3f72af] border-gray-300 focus:ring-[#3f72af]"
-                              />
-                              <MessageSquare className="w-4 h-4 text-[#3f72af]" />
-                              <span className="text-sm text-gray-700">SMS</span>
-                            </label>
-                            
-                            <label className="flex items-center gap-2 cursor-pointer">
-                              <input
-                                type="radio"
-                                name="communication_preference"
-                                value="inapp"
+                      </div>
                                 checked={customerForm.communication_preference === 'inapp'}
                                 onChange={(e) => setCustomerForm({ ...customerForm, communication_preference: e.target.value })}
                                 className="w-4 h-4 text-[#3f72af] border-gray-300 focus:ring-[#3f72af]"
