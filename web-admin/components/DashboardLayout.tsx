@@ -75,91 +75,11 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const { user, loading, logout, isAdmin } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
-  const [expandedMenus, setExpandedMenus] = useState<string[]>([]);
-  const [isSidebarMinimized, setIsSidebarMinimized] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('sidebarMinimized') === 'true';
-    }
     return false;
   });
 
   // Auto-expand menu based on current pathname
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      // Get saved expanded menus from localStorage
-      const savedExpandedMenus = localStorage.getItem('expandedMenus');
-      if (savedExpandedMenus) {
-        try {
-          setExpandedMenus(JSON.parse(savedExpandedMenus));
-        } catch (e) {
-          setExpandedMenus([]);
-        }
-      }
-    }
-  }, []);
-
-  // Auto-expand parent menu when on a submenu page
-  useEffect(() => {
-    // Map of pathname prefixes to menu keys
-    const pathToMenuMap: { [key: string]: string } = {
-      '/customers': 'crm',
-      '/leads': 'crm',
-      '/estimates': 'crm',
-      '/contracts': 'crm',
-      '/agreements': 'crm',
-      '/projects': 'crm',
-      '/invoices': 'crm',
-      '/finance': 'finance',
-      '/access': 'access',
-      '/team': 'access',
-      '/crew': 'access',
-      '/shifts': 'access',
-      '/equipment': 'equipment',
-      '/assets': 'equipment',
-      '/inventory': 'equipment',
-      '/dispatch': 'dispatch',
-      '/sites': 'dispatch',
-      '/routes': 'dispatch',
-      '/geofence': 'dispatch',
-      '/tracking': 'dispatch',
-      '/consumables': 'dispatch',
-      '/services': 'dispatch',
-      '/weather': 'dispatch',
-      '/messages': 'communication',
-      '/ringcentral': 'communication',
-      '/gmail': 'communication',
-      '/emergency-alert': 'communication',
-      '/feedback': 'communication',
-      '/learning-documents': 'communication',
-      '/safety': 'safety',
-      '/settings': 'settings',
-    };
-
-    // Find which menu should be expanded based on current path
-    for (const [path, menuKey] of Object.entries(pathToMenuMap)) {
-      if (pathname.startsWith(path)) {
-        setExpandedMenus((prev) => {
-          if (!prev.includes(menuKey)) {
-            const newExpanded = [...prev, menuKey];
-            localStorage.setItem('expandedMenus', JSON.stringify(newExpanded));
-            return newExpanded;
-          }
-          return prev;
-        });
-        break;
-      }
-    }
-  }, [pathname]);
-
-  // Auto-minimize sidebar only when viewing a customer profile
-  useEffect(() => {
-    // Check if viewing a specific customer profile (e.g., /customers/[id])
-    const isViewingCustomerProfile = /^\/customers\/[^/]+$/.test(pathname);
-    
-    if (isViewingCustomerProfile && !isSidebarMinimized) {
-      setIsSidebarMinimized(true);
-      localStorage.setItem('sidebarMinimized', 'true');
-    }
   }, [pathname]);
 
   useEffect(() => {
@@ -180,51 +100,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     return null;
   }
 
-  const toggleMenu = (menu: string) => {
-    setExpandedMenus((prev) => {
-      const newExpanded = prev.includes(menu) 
-        ? prev.filter((m) => m !== menu) 
-        : [...prev, menu];
-      localStorage.setItem('expandedMenus', JSON.stringify(newExpanded));
-      return newExpanded;
-    });
-  };
-
-  const handleMenuLabelClick = (item: any) => {
-    // If item has a dashboard, navigate to it
-    if (item.dashboardHref) {
-      router.push(item.dashboardHref);
-    }
-    
-    // If item has submenu, toggle it
-    if (item.submenu && item.key) {
-      toggleMenu(item.key);
-    }
-  };
-
   // Check if any submenu item is active
-  const isMenuActive = (item: any) => {
-    if (item.href && pathname === item.href) return true;
-    if (item.submenu) {
-      return item.submenu.some((subItem: any) => pathname === subItem.href || pathname.startsWith(subItem.href + '/'));
-    }
-    return false;
-  };
-
-  const toggleSidebar = () => {
-    const newState = !isSidebarMinimized;
-    setIsSidebarMinimized(newState);
-    
-    // Collapse all menus when minimizing to prevent flash
-    if (newState) {
-      setExpandedMenus([]);
-    }
-    
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('sidebarMinimized', String(newState));
-    }
-  };
-
   const menuItems = [
     { icon: LayoutDashboard, label: 'Dashboard', href: '/' },
     {
