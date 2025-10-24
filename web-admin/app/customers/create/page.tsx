@@ -645,10 +645,7 @@ export default function CustomerFormPage() {
                       </div>
 
                       <div className="md:col-span-2">
-                        <div className="flex items-center justify-between mb-3">
-                          <label className="block text-sm font-medium text-gray-700">
-                            Link to Company
-                          </label>
+                        <div className="flex items-center gap-3 mb-3">
                           <button
                             type="button"
                             onClick={() => {
@@ -670,6 +667,9 @@ export default function CustomerFormPage() {
                               }`}
                             />
                           </button>
+                          <label className="text-sm font-medium text-gray-700">
+                            Link to Company
+                          </label>
                         </div>
                         
                         {linkToCompany && (
