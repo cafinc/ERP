@@ -1490,52 +1490,6 @@ export default function CustomerFormPage() {
                     required
                   />
                 </div>
-                
-                {/* Create Site Toggle and Site Name - Inline */}
-                <div className="md:col-span-2">
-                  <div className="flex items-center gap-3">
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setCreateSite(!createSite);
-                        if (createSite) {
-                          setSiteName('');
-                        }
-                      }}
-                      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#3f72af] focus:ring-offset-2 flex-shrink-0 ${
-                        createSite ? 'bg-[#3f72af]' : 'bg-gray-200'
-                      }`}
-                    >
-                      <span
-                        className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                          createSite ? 'translate-x-6' : 'translate-x-1'
-                        }`}
-                      />
-                    </button>
-                    <label className="text-sm font-medium text-gray-700 whitespace-nowrap">
-                      Create Site
-                    </label>
-                    
-                    {/* Site Name - appears inline when Create Site is ON */}
-                    {createSite && (
-                      <div className="w-64 ml-3">
-                        <input
-                          type="text"
-                          value={siteName}
-                          onChange={e => setSiteName(e.target.value)}
-                          className="w-full px-4 py-1 h-6 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
-                          placeholder="Site Name"
-                          required={createSite}
-                        />
-                      </div>
-                    )}
-                  </div>
-                  {createSite && (
-                    <p className="text-xs text-gray-500 mt-1">
-                      Site will be created with contact's address
-                    </p>
-                  )}
-                </div>
               </div>
             </div>
 
