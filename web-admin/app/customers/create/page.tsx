@@ -63,6 +63,12 @@ export default function CustomerFormPage() {
   const [loadingCompanies, setLoadingCompanies] = useState(false);
   const [showSearchResults, setShowSearchResults] = useState(false);
   
+  // User access states
+  const [requireAccess, setRequireAccess] = useState(false);
+  const [accessWeb, setAccessWeb] = useState(false);
+  const [accessInApp, setAccessInApp] = useState(false);
+  const [userRole, setUserRole] = useState('customer');
+  
   const [customerForm, setCustomerForm] = useState({
     // For individuals
     first_name: '',
