@@ -135,6 +135,9 @@ export default function ExpensesPage() {
     <PageHeader>
       <PageHeader
         title="Expenses"
+        subtitle="Track and categorize business expenses"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Finance", href: "/finance/dashboard" }, { label: "Expenses" }]}
+        title="Expenses"
         subtitle={`${filteredExpenses.length} expense${filteredExpenses.length !== 1 ? 's' : ''} • Total: $${totalExpenses.toLocaleString()}`}
           actions={
           <>

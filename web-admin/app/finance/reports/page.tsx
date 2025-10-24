@@ -99,6 +99,9 @@ export default function ReportsPage() {
     <PageHeader>
       <PageHeader
         title="Financial Reports"
+        subtitle="View financial analytics and reports"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Finance", href: "/finance/dashboard" }, { label: "Reports" }]}
+        title="Financial Reports"
         subtitle="Generate and download comprehensive financial reports"
           />
 

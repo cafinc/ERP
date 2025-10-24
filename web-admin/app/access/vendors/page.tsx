@@ -19,6 +19,9 @@ export default function VendorsPage() {
     <div style={{ padding: '24px', backgroundColor: '#f8fafc', minHeight: '100vh' }}>
       <PageHeader
         title="Vendors"
+        subtitle="Manage vendor accounts and permissions"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Access", href: "/access" }, { label: "Vendors" }]}
+        title="Vendors"
         subtitle="Suppliers and service providers"
         backUrl="/access"
         action={{

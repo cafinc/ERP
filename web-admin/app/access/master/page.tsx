@@ -113,6 +113,9 @@ export default function MasterUsersPage() {
     <div style={{ padding: '24px', backgroundColor: '#f8fafc', minHeight: '100vh' }}>
       <PageHeader
         title="Master Users"
+        subtitle="Manage master administrator accounts"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Access", href: "/access" }, { label: "Master Users" }]}
+        title="Master Users"
         subtitle="Platform owners with full system control"
         backUrl="/access"
         action={{

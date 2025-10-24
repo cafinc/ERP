@@ -19,6 +19,9 @@ export default function SubcontractorsPage() {
     <div style={{ padding: '24px', backgroundColor: '#f8fafc', minHeight: '100vh' }}>
       <PageHeader
         title="Subcontractors"
+        subtitle="Manage subcontractor accounts and access"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Access", href: "/access" }, { label: "Subcontractors" }]}
+        title="Subcontractors"
         subtitle="External contractors and service providers"
         backUrl="/access"
         action={{

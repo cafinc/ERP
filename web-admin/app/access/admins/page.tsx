@@ -63,6 +63,9 @@ export default function AdminsPage() {
   return (
     <div style={{ padding: '24px', backgroundColor: '#f8fafc', minHeight: '100vh' }}>
       <PageHeader
+        title="Administrators"
+        subtitle="Manage admin users and their roles"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Access", href: "/access" }, { label: "Administrators" }]}
         title="Admin Users"
         subtitle="Administrative users with management access"
         backUrl="/access"

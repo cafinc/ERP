@@ -109,6 +109,9 @@ export default function PaymentsPage() {
     <PageHeader>
       <PageHeader
         title="Payments"
+        subtitle="Monitor payment transactions and receipts"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Finance", href: "/finance/dashboard" }, { label: "Payments" }]}
+        title="Payments"
         subtitle={`${filteredPayments.length} payment${filteredPayments.length !== 1 ? 's' : ''} • Total: $${totalPayments.toLocaleString()}`}
           actions={
           <button className="px-3 py-1.5 text-sm bg-white border border-gray-300 rounded-lg hover:bg-gray-50 flex items-center gap-2">

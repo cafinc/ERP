@@ -19,6 +19,9 @@ export default function CrewPage() {
     <div style={{ padding: '24px', backgroundColor: '#f8fafc', minHeight: '100vh' }}>
       <PageHeader
         title="Crew Members"
+        subtitle="Manage field crew and operators"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Access", href: "/access" }, { label: "Crew" }]}
+        title="Crew Members"
         subtitle="Field workers and operational staff"
         backUrl="/access"
         action={{

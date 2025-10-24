@@ -18,6 +18,9 @@ export default function CustomersPage() {
   return (
     <div style={{ padding: '24px', backgroundColor: '#f8fafc', minHeight: '100vh' }}>
       <PageHeader
+        title="Customer Access"
+        subtitle="Manage customer portal access"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Access", href: "/access" }, { label: "Customers" }]}
         title="Customers"
         subtitle="Client accounts and customer portal access"
         backUrl="/access"
