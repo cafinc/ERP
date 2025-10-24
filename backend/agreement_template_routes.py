@@ -8,10 +8,17 @@ from typing import List, Optional
 from pydantic import BaseModel, Field
 from datetime import datetime
 from bson import ObjectId
-from database import get_database
+from motor.motor_asyncio import AsyncIOMotorClient
+import os
 import logging
 
 logger = logging.getLogger(__name__)
+
+# MongoDB connection
+mongo_url = os.environ['MONGO_URL']
+client = AsyncIOMotorClient(mongo_url)
+db_name = os.getenv("DB_NAME", "snow_removal_db")
+db = client[db_name]
 
 router = APIRouter(prefix="/agreement-templates", tags=["agreement-templates"])
 
