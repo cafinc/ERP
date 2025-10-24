@@ -27,6 +27,10 @@ import {
   Monitor,
   Check,
   UserPlus,
+  Upload,
+  File,
+  Image as ImageIcon,
+  Paperclip,
 } from 'lucide-react';
 
 // Canadian provinces
