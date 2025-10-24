@@ -1169,7 +1169,8 @@ export default function CustomerFormPage() {
                     </h2>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="md:col-span-2">
+                    {/* Legal Business Name & Operating As on same line */}
+                    <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
                         Legal Business Name *
                       </label>
@@ -1185,7 +1186,7 @@ export default function CustomerFormPage() {
                       />
                     </div>
 
-                    <div className="md:col-span-2">
+                    <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
                         Operating As
                       </label>
@@ -1238,7 +1239,7 @@ export default function CustomerFormPage() {
                     </div>
                   </div>
 
-                  {/* Company Address */}
+                  {/* Company Address with Google Autocomplete */}
                   <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
                     <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center space-x-2">
                       <MapPin className="w-5 h-5 text-[#3f72af]" />
@@ -1247,17 +1248,24 @@ export default function CustomerFormPage() {
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="md:col-span-2">
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Address *</label>
-                      <input
-                        type="text"
-                        value={customerForm.street_address}
-                        onChange={e =>
-                          setCustomerForm({ ...customerForm, street_address: e.target.value })
-                        }
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="123 Main Street"
-                        required
-                      />
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Street Address *</label>
+                      <div className="relative">
+                        <input
+                          id="company-address-autocomplete"
+                          type="text"
+                          value={customerForm.street_address}
+                          onChange={e =>
+                            setCustomerForm({ ...customerForm, street_address: e.target.value })
+                          }
+                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          placeholder="123 Main Street"
+                          required
+                        />
+                        <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center">
+                          <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" alt="Powered by Google" className="h-4" />
+                        </div>
+                      </div>
+                      <p className="text-xs text-gray-500 mt-1">Start typing to use Google address autocomplete</p>
                     </div>
 
                     <div>
@@ -1328,7 +1336,7 @@ export default function CustomerFormPage() {
                       </div>
                     </div>
                     
-                    {/* Billing Address Fields */}
+                    {/* Billing Address Fields with Google Autocomplete */}
                     {!customerForm.billing_address_same && (
                       <>
                         <div className="md:col-span-2 mt-4">
@@ -1336,20 +1344,27 @@ export default function CustomerFormPage() {
                         </div>
                         
                         <div className="md:col-span-2">
-                          <label className="block text-sm font-medium text-gray-700 mb-2">Address *</label>
-                          <input
-                            type="text"
-                            value={customerForm.billing_address.street_address}
-                            onChange={e =>
-                              setCustomerForm({
-                                ...customerForm,
-                                billing_address: { ...customerForm.billing_address, street_address: e.target.value }
-                              })
-                            }
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                            placeholder="456 Billing Street"
-                            required
-                          />
+                          <label className="block text-sm font-medium text-gray-700 mb-2">Street Address *</label>
+                          <div className="relative">
+                            <input
+                              id="billing-address-autocomplete"
+                              type="text"
+                              value={customerForm.billing_address.street_address}
+                              onChange={e =>
+                                setCustomerForm({
+                                  ...customerForm,
+                                  billing_address: { ...customerForm.billing_address, street_address: e.target.value }
+                                })
+                              }
+                              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                              placeholder="456 Billing Street"
+                              required
+                            />
+                            <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center">
+                              <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" alt="Powered by Google" className="h-4" />
+                            </div>
+                          </div>
+                          <p className="text-xs text-gray-500 mt-1">Start typing to use Google address autocomplete</p>
                         </div>
 
                         <div>
@@ -1411,11 +1426,11 @@ export default function CustomerFormPage() {
                     </div>
                   </div>
 
-                  {/* Contact Persons */}
+                  {/* Contact Persons - Compact Version */}
                   <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
                     <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center space-x-2">
                       <Users className="w-5 h-5 text-[#3f72af]" />
-                      <span>Contact Persons *</span>
+                      <span>Contact Persons</span>
                     </h2>
 
                     {/* Same Person Toggle */}
@@ -1440,93 +1455,142 @@ export default function CustomerFormPage() {
                       </div>
                     </div>
 
-                    <div className="space-y-6">
-                      {customerForm.contacts.map((contact, index) => (
-                        <div key={index} className="bg-white shadow-sm rounded-lg p-6 border border-gray-200">
-                          <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                            <User className="w-5 h-5 mr-2 text-[#3f72af]" />
-                            <span>{contact.position}</span>
-                          </h3>
+                    {customerForm.same_person_all_contacts ? (
+                      /* Single Contact Form when toggle is ON */
+                      <div className="bg-white shadow-sm rounded-lg p-6 border border-gray-200">
+                        <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                          <User className="w-5 h-5 mr-2 text-[#3f72af]" />
+                          <span>Primary Contact (Manager, Accounting & Supervisor)</span>
+                        </h3>
 
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div className="md:col-span-2">
-                              <label className="block text-sm font-medium text-gray-700 mb-2">
-                                Name {index === 0 || !customerForm.same_person_all_contacts ? '*' : ''}
-                              </label>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">Name *</label>
+                            <input
+                              type="text"
+                              value={customerForm.contacts[0].name}
+                              onChange={e => {
+                                const newContacts = [...customerForm.contacts];
+                                newContacts[0].name = e.target.value;
+                                newContacts[1].name = e.target.value;
+                                newContacts[2].name = e.target.value;
+                                setCustomerForm({ ...customerForm, contacts: newContacts });
+                              }}
+                              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                              placeholder="John Doe"
+                              required
+                            />
+                          </div>
+
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">Email *</label>
+                            <div className="relative">
+                              <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
                               <input
-                                type="text"
-                                value={contact.name}
+                                type="email"
+                                value={customerForm.contacts[0].email}
                                 onChange={e => {
                                   const newContacts = [...customerForm.contacts];
-                                  newContacts[index].name = e.target.value;
-                                  if (customerForm.same_person_all_contacts && index === 0) {
-                                    newContacts[1].name = e.target.value;
-                                    newContacts[2].name = e.target.value;
-                                  }
+                                  newContacts[0].email = e.target.value;
+                                  newContacts[1].email = e.target.value;
+                                  newContacts[2].email = e.target.value;
                                   setCustomerForm({ ...customerForm, contacts: newContacts });
                                 }}
-                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                placeholder="John Doe"
-                                required={index === 0 || !customerForm.same_person_all_contacts}
-                                disabled={customerForm.same_person_all_contacts && index !== 0}
+                                className="w-full pl-9 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                                placeholder="john@company.com"
+                                required
                               />
                             </div>
+                          </div>
 
-                            <div>
-                              <label className="block text-sm font-medium text-gray-700 mb-2">
-                                Email {index === 0 || !customerForm.same_person_all_contacts ? '*' : ''}
-                              </label>
-                              <div className="relative">
-                                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">Phone *</label>
+                            <div className="relative">
+                              <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                              <input
+                                type="tel"
+                                value={customerForm.contacts[0].phone}
+                                onChange={e => {
+                                  const newContacts = [...customerForm.contacts];
+                                  newContacts[0].phone = e.target.value;
+                                  newContacts[1].phone = e.target.value;
+                                  newContacts[2].phone = e.target.value;
+                                  setCustomerForm({ ...customerForm, contacts: newContacts });
+                                }}
+                                className="w-full pl-9 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                                placeholder="(555) 123-4567"
+                                required
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      /* Compact Multiple Contacts Layout */
+                      <div className="space-y-4">
+                        {customerForm.contacts.map((contact, index) => (
+                          <div key={index} className="bg-white shadow-sm rounded-lg p-4 border border-gray-200">
+                            <div className="grid grid-cols-1 md:grid-cols-4 gap-3 items-center">
+                              <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                  {contact.position} {index === 0 ? '*' : ''}
+                                </label>
+                                <input
+                                  type="text"
+                                  value={contact.name}
+                                  onChange={e => {
+                                    const newContacts = [...customerForm.contacts];
+                                    newContacts[index].name = e.target.value;
+                                    setCustomerForm({ ...customerForm, contacts: newContacts });
+                                  }}
+                                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                                  placeholder="Name"
+                                  required={index === 0}
+                                />
+                              </div>
+
+                              <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
                                 <input
                                   type="email"
                                   value={contact.email}
                                   onChange={e => {
                                     const newContacts = [...customerForm.contacts];
                                     newContacts[index].email = e.target.value;
-                                    if (customerForm.same_person_all_contacts && index === 0) {
-                                      newContacts[1].email = e.target.value;
-                                      newContacts[2].email = e.target.value;
-                                    }
                                     setCustomerForm({ ...customerForm, contacts: newContacts });
                                   }}
-                                  className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
-                                  placeholder="john@company.com"
-                                  required={index === 0 || !customerForm.same_person_all_contacts}
-                                  disabled={customerForm.same_person_all_contacts && index !== 0}
+                                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                                  placeholder="email@company.com"
+                                  required={index === 0}
                                 />
                               </div>
-                            </div>
 
-                            <div>
-                              <label className="block text-sm font-medium text-gray-700 mb-2">
-                                Phone {index === 0 || !customerForm.same_person_all_contacts ? '*' : ''}
-                              </label>
-                              <div className="relative">
-                                <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                              <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
                                 <input
                                   type="tel"
                                   value={contact.phone}
                                   onChange={e => {
                                     const newContacts = [...customerForm.contacts];
                                     newContacts[index].phone = e.target.value;
-                                    if (customerForm.same_person_all_contacts && index === 0) {
-                                      newContacts[1].phone = e.target.value;
-                                      newContacts[2].phone = e.target.value;
-                                    }
                                     setCustomerForm({ ...customerForm, contacts: newContacts });
                                   }}
-                                  className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                                   placeholder="(555) 123-4567"
-                                  required={index === 0 || !customerForm.same_person_all_contacts}
-                                  disabled={customerForm.same_person_all_contacts && index !== 0}
+                                  required={index === 0}
                                 />
+                              </div>
+
+                              <div className="flex items-end">
+                                <span className="inline-flex items-center px-3 py-2 rounded-md text-xs font-medium bg-blue-100 text-blue-800">
+                                  {contact.position}
+                                </span>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      ))}
-                    </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
 
                 {/* Company Accounting */}
