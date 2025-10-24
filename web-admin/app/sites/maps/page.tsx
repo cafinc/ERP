@@ -1,9 +1,9 @@
-import PageHeader from '@/components/PageHeader';
 "use client";
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { MapPin, Plus } from "lucide-react";
+import PageHeader from '@/components/PageHeader';
 
 export default function SiteMapsListPage() {
   const router = useRouter();
@@ -29,7 +29,7 @@ export default function SiteMapsListPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <>
       <PageHeader
         title="Maps"
         subtitle="Manage maps"
