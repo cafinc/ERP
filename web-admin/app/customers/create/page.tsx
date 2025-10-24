@@ -625,8 +625,11 @@ export default function CustomerFormPage() {
                         <User className="w-5 h-5 text-[#3f72af]" />
                         <span>Contact Information</span>
                       </div>
-                      {/* Active Customer Toggle */}
+                      {/* Active Customer Toggle - label first, then toggle */}
                       <div className="flex items-center gap-2">
+                        <label className="text-sm font-medium text-gray-700">
+                          Active
+                        </label>
                         <button
                           type="button"
                           onClick={() => setCustomerForm({ ...customerForm, active: !customerForm.active })}
@@ -640,9 +643,6 @@ export default function CustomerFormPage() {
                             }`}
                           />
                         </button>
-                        <label className="text-sm font-medium text-gray-700">
-                          Active
-                        </label>
                       </div>
                     </h2>
 
