@@ -13,6 +13,9 @@ export default function WebhooksPage() {
     <div style={{ padding: '24px', backgroundColor: '#f8fafc', minHeight: '100vh' }}>
       <PageHeader
         title="Webhooks"
+        subtitle="Manage webhook endpoints"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Settings", href: "/settings" }, { label: "Webhooks" }]}
+        title="Webhooks"
         subtitle="Configure webhook endpoints for real-time event notifications"
         backUrl="/settings"
         action={{

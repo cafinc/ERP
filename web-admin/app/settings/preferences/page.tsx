@@ -14,6 +14,9 @@ export default function PreferencesPage() {
     <div style={{ padding: '24px', backgroundColor: '#f8fafc', minHeight: '100vh' }}>
       <PageHeader
         title="Preferences"
+        subtitle="Set application preferences"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Settings", href: "/settings" }, { label: "Preferences" }]}
+        title="Preferences"
         subtitle="Configure your timezone and regional settings"
         backUrl="/settings"
       />

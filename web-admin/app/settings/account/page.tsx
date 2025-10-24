@@ -70,6 +70,9 @@ export default function AccountSettingsPage() {
     <div style={{ padding: '24px', backgroundColor: '#f8fafc', minHeight: '100vh' }}>
       <PageHeader
         title="Account Settings"
+        subtitle="Manage account preferences"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Settings", href: "/settings" }, { label: "Account Settings" }]}
+        title="Account Settings"
         subtitle="Manage your personal information and preferences"
         backUrl="/settings"
       />

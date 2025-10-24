@@ -15,7 +15,10 @@ export default function BillingPage() {
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         <div className="max-w-4xl mx-auto">
           <PageHeader
-            title="Billing & Subscription"
+        title="Billing"
+        subtitle="View invoices and payment methods"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Settings", href: "/settings" }, { label: "Billing" }]}
+        title="Billing & Subscription"
             subtitle="Manage your subscription and billing information"
             icon={CreditCard}
             backUrl="/settings"

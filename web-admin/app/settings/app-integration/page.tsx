@@ -15,6 +15,9 @@ export default function AppIntegrationPage() {
     <div style={{ padding: '24px', backgroundColor: '#f8fafc', minHeight: '100vh' }}>
       <PageHeader
         title="App Integrations"
+        subtitle="Manage third-party app connections"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Settings", href: "/settings" }, { label: "App Integrations" }]}
+        title="App Integrations"
         subtitle="Connect and manage third-party integrations"
         backUrl="/settings"
       />

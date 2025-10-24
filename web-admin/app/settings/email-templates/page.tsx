@@ -15,6 +15,9 @@ export default function EmailTemplatesPage() {
     <div style={{ padding: '24px', backgroundColor: '#f8fafc', minHeight: '100vh' }}>
       <PageHeader
         title="Email Templates"
+        subtitle="Customize email templates"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Settings", href: "/settings" }, { label: "Email Templates" }]}
+        title="Email Templates"
         subtitle="Manage your email templates for automated communications"
         backUrl="/settings"
         action={{

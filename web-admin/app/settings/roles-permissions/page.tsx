@@ -15,6 +15,9 @@ export default function RolesPermissionsPage() {
     <div style={{ padding: '24px', backgroundColor: '#f8fafc', minHeight: '100vh' }}>
       <PageHeader
         title="Roles & Permissions"
+        subtitle="Configure user access levels"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Settings", href: "/settings" }, { label: "Roles & Permissions" }]}
+        title="Roles & Permissions"
         subtitle="Manage user roles and access permissions"
         backUrl="/settings"
         action={{

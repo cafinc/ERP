@@ -13,6 +13,9 @@ export default function ApiSettingsPage() {
     <div style={{ padding: '24px', backgroundColor: '#f8fafc', minHeight: '100vh' }}>
       <PageHeader
         title="API Settings"
+        subtitle="Manage API keys and access"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Settings", href: "/settings" }, { label: "API Settings" }]}
+        title="API Settings"
         subtitle="Manage your API keys and access tokens"
         backUrl="/settings"
         action={{
