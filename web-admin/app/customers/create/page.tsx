@@ -575,22 +575,6 @@ export default function CustomerFormPage() {
           { label: 'Customers', href: '/customers' },
           { label: isEdit ? 'Edit' : 'New' }
         ]}
-        actions={[
-          {
-            label: 'Cancel',
-            onClick: () => router.push('/customers'),
-            variant: 'secondary' as const,
-          },
-          {
-            label: saving ? 'Saving...' : isEdit ? 'Update Customer' : 'Create Customer',
-            icon: <Save className="w-4 h-4 mr-2" />,
-            onClick: () => {
-              const form = document.querySelector('form') as HTMLFormElement;
-              if (form) form.requestSubmit();
-            },
-            variant: 'primary',
-          },
-        ]}
       />
 
       {/* Main Content */}
