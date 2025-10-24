@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import PageHeader from '@/components/PageHeader';
+import CompactHeader from "@/components/CompactHeader";
 import {
   DollarSign,
   Save,
@@ -139,7 +139,7 @@ export default function PayrollSettingsPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50">
-        <PageHeader title="Payroll Settings" backUrl="/hr" />
+        <CompactHeader title="Payroll Settings" backUrl="/hr" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="bg-white rounded-lg shadow p-8 text-center">
             <RefreshCw className="h-12 w-12 text-gray-400 mx-auto mb-4 animate-spin" />
@@ -152,7 +152,7 @@ export default function PayrollSettingsPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <PageHeader title="Payroll Settings" backUrl="/hr" />
+      <CompactHeader title="Payroll Settings" backUrl="/hr" />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Success Message */}
