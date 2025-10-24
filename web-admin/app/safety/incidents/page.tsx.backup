@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import PageHeader from '@/components/PageHeader';
+import CompactHeader from '@/components/CompactHeader';
 import {
   Plus,
   Search,
@@ -123,10 +123,10 @@ export default function IncidentReportingPage() {
   });
 
   return (
-    <PageHeader>
+    <HybridNavigationTopBar>
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         {/* Compact Header */}
-        <PageHeader
+        <CompactHeader
           title="Incident Reporting"
           icon={AlertTriangle}
           badges={[
@@ -299,6 +299,6 @@ export default function IncidentReportingPage() {
           </div>
         )}
       </div>
-    </PageHeader>
+    </HybridNavigationTopBar>
   );
 }
