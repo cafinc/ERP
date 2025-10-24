@@ -172,16 +172,11 @@ export default function MaintenancePage() {
         {/* Compact Header */}
         <PageHeader
           title="Equipment Maintenance"
-          icon={Wrench}
-          badges={[
-            { label: `${records.length} Total`, color: 'blue' },
-            { label: `${records.filter((r) => r.status === 'pending').length} Pending`, color: 'yellow' },
-            { label: `${records.filter((r) => r.status === 'in_progress').length} In Progress`, color: 'cyan' },
-          ]}
+          
           actions={[
             {
               label: 'Schedule Maintenance',
-              icon: Plus,
+              icon: <Plus className="w-4 h-4 mr-2" />,
               onClick: () => router.push('/equipment/maintenance/create'),
               variant: 'primary',
             },

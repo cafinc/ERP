@@ -93,8 +93,7 @@ export default function CrewTimeTrackingPage() {
       <PageHeader
         title="Time Clock"
         description="Manage your work hours"
-        icon={Clock}
-      />
+          />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Current Status Card */}

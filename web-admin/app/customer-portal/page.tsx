@@ -74,7 +74,7 @@ export default function CustomerPortalPage() {
   };
 
   const quickActions = [
-    { icon: FileText, label: 'View Estimates', route: '/customer-portal/estimates', color: 'blue' },
+    { icon: <FileText className="w-4 h-4 mr-2" />, label: 'View Estimates', route: '/customer-portal/estimates', color: 'blue' },
     { icon: Receipt, label: 'View Invoices', route: '/customer-portal/invoices', color: 'green' },
     { icon: Briefcase, label: 'Work Orders', route: '/customer-portal/work-orders', color: 'orange' },
     { icon: MessageSquare, label: 'Messages', route: '/communications/center', color: 'purple' },
@@ -95,8 +95,7 @@ export default function CustomerPortalPage() {
       <PageHeader
         title="Customer Portal"
         description="Welcome to your customer dashboard"
-        icon={Briefcase}
-      />
+          />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Stats Grid */}

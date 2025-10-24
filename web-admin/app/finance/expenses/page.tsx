@@ -136,8 +136,7 @@ export default function ExpensesPage() {
       <PageHeader
         title="Expenses"
         subtitle={`${filteredExpenses.length} expense${filteredExpenses.length !== 1 ? 's' : ''} • Total: $${totalExpenses.toLocaleString()}`}
-        icon={TrendingDown}
-        actions={
+          actions={
           <>
             <button className="px-3 py-1.5 text-sm bg-white border border-gray-300 rounded-lg hover:bg-gray-50 flex items-center gap-2">
               <Download className="w-4 h-4" />

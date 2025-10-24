@@ -61,8 +61,7 @@ export default function CustomerWorkOrdersPage() {
       <PageHeader
         title="My Work Orders"
         description="Track your service work orders"
-        icon={Briefcase}
-      />
+          />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Filters */}

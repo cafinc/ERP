@@ -94,17 +94,16 @@ export default function VehiclesPage() {
         <PageHeader
           title="Vehicles"
           subtitle={`${filteredVehicles.length} vehicle${filteredVehicles.length !== 1 ? 's' : ''}`}
-          icon={Truck}
           actions={[
             {
               label: 'Export',
-              icon: Download,
+              icon: <Download className="w-4 h-4 mr-2" />,
               onClick: () => console.log('Export vehicles'),
               variant: 'secondary',
             },
             {
               label: 'Add Vehicle',
-              icon: Plus,
+              icon: <Plus className="w-4 h-4 mr-2" />,
               onClick: () => console.log('Add vehicle'),
               variant: 'primary',
             },

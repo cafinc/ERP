@@ -145,17 +145,16 @@ export default function ToolsPage() {
         <PageHeader
           title="Tools"
           subtitle={`${filteredTools.length} tool${filteredTools.length !== 1 ? 's' : ''}`}
-          icon={Wrench}
           actions={[
             {
               label: 'Export',
-              icon: Download,
+              icon: <Download className="w-4 h-4 mr-2" />,
               onClick: () => console.log('Export tools'),
               variant: 'secondary',
             },
             {
               label: 'Add Tool',
-              icon: Plus,
+              icon: <Plus className="w-4 h-4 mr-2" />,
               onClick: () => console.log('Add tool'),
               variant: 'primary',
             },

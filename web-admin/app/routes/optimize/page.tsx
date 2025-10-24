@@ -293,11 +293,10 @@ export default function RouteOptimizationPage() {
             title="Route Optimization"
             subtitle="Optimize routes for efficiency and save time & fuel"
             backUrl="/dispatch"
-            icon={Navigation}
-            actions={[
+          actions={[
               {
                 label: 'Export',
-                icon: Download,
+                icon: <Download className="w-4 h-4 mr-2" />,
                 onClick: handleExportRoute,
                 variant: 'secondary',
                 disabled: selectedSiteIds.length === 0,

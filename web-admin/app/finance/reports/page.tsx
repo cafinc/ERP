@@ -39,7 +39,7 @@ export default function ReportsPage() {
       id: 3,
       title: 'Balance Sheet',
       description: 'Summary of assets, liabilities, and equity at a specific point in time',
-      icon: FileText,
+      icon: <FileText className="w-4 h-4 mr-2" />,
       color: 'from-purple-500 to-pink-600',
       available: true,
     },
@@ -63,7 +63,7 @@ export default function ReportsPage() {
       id: 6,
       title: 'Tax Summary Report',
       description: 'Summary of taxable income, deductions, and estimated tax liability',
-      icon: FileText,
+      icon: <FileText className="w-4 h-4 mr-2" />,
       color: 'from-indigo-500 to-purple-600',
       available: true,
     },
@@ -100,8 +100,7 @@ export default function ReportsPage() {
       <PageHeader
         title="Financial Reports"
         subtitle="Generate and download comprehensive financial reports"
-        icon={BarChart3}
-      />
+          />
 
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         {/* Period Selector */}

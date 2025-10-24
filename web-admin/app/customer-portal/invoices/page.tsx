@@ -55,8 +55,7 @@ export default function CustomerInvoicesPage() {
       <PageHeader
         title="My Invoices"
         description="View and pay your invoices"
-        icon={Receipt}
-      />
+          />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Filters */}

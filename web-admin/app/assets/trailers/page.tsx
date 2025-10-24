@@ -103,17 +103,16 @@ export default function TrailersPage() {
         <PageHeader
           title="Trailers"
           subtitle={`${filteredTrailers.length} trailer${filteredTrailers.length !== 1 ? 's' : ''}`}
-          icon={Container}
           actions={[
             {
               label: 'Export',
-              icon: Download,
+              icon: <Download className="w-4 h-4 mr-2" />,
               onClick: () => console.log('Export trailers'),
               variant: 'secondary',
             },
             {
               label: 'Add Trailer',
-              icon: Plus,
+              icon: <Plus className="w-4 h-4 mr-2" />,
               onClick: () => console.log('Add trailer'),
               variant: 'primary',
             },

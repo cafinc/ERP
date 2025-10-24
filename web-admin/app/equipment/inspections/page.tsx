@@ -124,12 +124,7 @@ export default function InspectionsDashboardPage() {
         {/* Compact Header */}
         <PageHeader
           title="Equipment Inspections"
-          icon={ClipboardCheck}
-          badges={[
-            { label: `${summary.total_scheduled} Scheduled`, color: 'blue' },
-            { label: `${summary.due_today} Due Today`, color: 'orange' },
-            { label: `${summary.overdue} Overdue`, color: 'red' },
-          ]}
+          
           actions={[
             {
               label: 'Manage Schedules',
@@ -139,7 +134,7 @@ export default function InspectionsDashboardPage() {
             },
             {
               label: 'New Inspection',
-              icon: Plus,
+              icon: <Plus className="w-4 h-4 mr-2" />,
               onClick: () => router.push('/equipment/inspections/create'),
               variant: 'primary',
             },

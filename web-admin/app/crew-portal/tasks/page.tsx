@@ -63,8 +63,7 @@ export default function CrewTasksPage() {
       <PageHeader
         title="My Tasks"
         description="View and manage your assigned tasks"
-        icon={CheckSquare}
-      />
+          />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Filters */}
