@@ -245,6 +245,8 @@ class Customer(BaseModel):
     name: str
     email: EmailStr
     phone: str
+    mobile: Optional[str] = None
+    communication_preference: Optional[str] = 'sms'  # 'sms' or 'inapp'
     address: str
     customer_type: Optional[str] = 'individual'  # 'individual' or 'company'
     company_id: Optional[str] = None  # For individuals linked to a company
@@ -264,6 +266,8 @@ class CustomerCreate(BaseModel):
     name: str
     email: EmailStr
     phone: str
+    mobile: Optional[str] = None
+    communication_preference: Optional[str] = 'sms'  # 'sms' or 'inapp'
     address: str
     customer_type: Optional[str] = 'individual'
     company_id: Optional[str] = None  # Link individual to company
@@ -277,6 +281,8 @@ class CustomerUpdate(BaseModel):
     name: Optional[str] = None
     email: Optional[EmailStr] = None
     phone: Optional[str] = None
+    mobile: Optional[str] = None
+    communication_preference: Optional[str] = None
     address: Optional[str] = None
     customer_type: Optional[str] = None
     company_id: Optional[str] = None
