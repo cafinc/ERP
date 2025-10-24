@@ -699,21 +699,6 @@ export default function CustomerFormPage() {
                           <p className="text-red-500 text-xs mt-1">{fieldErrors['mobile']}</p>
                         )}
                       </div>
-                                checked={customerForm.communication_preference === 'inapp'}
-                                onChange={(e) => setCustomerForm({ ...customerForm, communication_preference: e.target.value })}
-                                className="w-4 h-4 text-[#3f72af] border-gray-300 focus:ring-[#3f72af]"
-                              />
-                              <Bell className="w-4 h-4 text-[#3f72af]" />
-                              <span className="text-sm text-gray-700">In-App</span>
-                            </label>
-                          </div>
-                          <p className="text-xs text-gray-500 mt-2">
-                            {customerForm.communication_preference === 'sms' 
-                              ? 'Contact will receive SMS notifications (mobile number required)'
-                              : 'Contact will receive in-app notifications only'}
-                          </p>
-                        </div>
-                      </div>
 
                       <div className="md:col-span-2">
                         <div className="flex items-center gap-3">
