@@ -631,12 +631,11 @@ export default function CustomerFormPage() {
           const message = createSite && siteName 
             ? `Customer created successfully! Site "${siteName}" has been created.`
             : 'Customer created successfully!';
-          showModalMessage('success', 'Success!', message, () => router.push(`/customers/${companyId}`));
+          alert(message);
         } else if (createSite && siteName) {
-          showModalMessage('success', 'Success!', `Customer and site "${siteName}" created successfully!`, () => router.push(`/customers/${companyId}`));
-        } else {
-          router.push(`/customers/${companyId}`);
+          alert(`Customer and site "${siteName}" created successfully!`);
         }
+        router.push(`/customers/${companyId}`);
       }
     } catch (error: any) {
       console.error('Error saving customer:', error);
