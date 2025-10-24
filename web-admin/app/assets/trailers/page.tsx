@@ -101,7 +101,10 @@ export default function TrailersPage() {
     <PageHeader>
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         <PageHeader
-          title="Trailers"
+        title="Trailers"
+        subtitle="Manage trailer inventory and assignments"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Assets", href: "/equipment/dashboard" }, { label: "Trailers" }]}
+        title="Trailers"
           subtitle={`${filteredTrailers.length} trailer${filteredTrailers.length !== 1 ? 's' : ''}`}
           actions={[
             {

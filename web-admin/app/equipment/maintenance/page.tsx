@@ -171,7 +171,10 @@ export default function MaintenancePage() {
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         {/* Compact Header */}
         <PageHeader
-          title="Equipment Maintenance"
+        title="Maintenance"
+        subtitle="Track equipment maintenance and repairs"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Assets", href: "/equipment/dashboard" }, { label: "Maintenance" }]}
+        title="Equipment Maintenance"
           
           actions={[
             {

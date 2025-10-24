@@ -143,7 +143,10 @@ export default function ToolsPage() {
     <PageHeader>
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         <PageHeader
-          title="Tools"
+        title="Tools"
+        subtitle="Track tools and small equipment"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Assets", href: "/equipment/dashboard" }, { label: "Tools" }]}
+        title="Tools"
           subtitle={`${filteredTools.length} tool${filteredTools.length !== 1 ? 's' : ''}`}
           actions={[
             {

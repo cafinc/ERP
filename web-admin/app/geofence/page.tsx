@@ -260,7 +260,10 @@ export default function GeofenceManagementPage() {
         <div className="max-w-7xl mx-auto">
           {/* Compact Header */}
           <PageHeader
-            title="Geofence Management"
+        title="Geofencing"
+        subtitle="Manage location-based boundaries"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Dispatch", href: "/dispatch" }, { label: "Geofence" }]}
+        title="Geofence Management"
             subtitle="Configure automatic site entry/exit detection zones"
             backUrl="/sites"
           actions={[

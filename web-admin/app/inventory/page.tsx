@@ -153,7 +153,10 @@ export default function InventoryPage() {
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
         {/* Header */}
         <PageHeader
-          title="Inventory & Assets"
+        title="Inventory"
+        subtitle="Manage parts and supplies inventory"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Assets", href: "/equipment/dashboard" }, { label: "Inventory" }]}
+        title="Inventory & Assets"
           
           actions={[
             {

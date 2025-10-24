@@ -290,7 +290,10 @@ export default function RouteOptimizationPage() {
         <div className="max-w-7xl mx-auto">
           {/* Compact Header */}
           <PageHeader
-            title="Route Optimization"
+        title="Route Optimization"
+        subtitle="Optimize routes for efficiency"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Dispatch", href: "/dispatch" }, { label: "Route Optimization" }]}
+        title="Route Optimization"
             subtitle="Optimize routes for efficiency and save time & fuel"
             backUrl="/dispatch"
           actions={[

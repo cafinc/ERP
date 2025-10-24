@@ -92,7 +92,10 @@ export default function VehiclesPage() {
     <PageHeader>
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         <PageHeader
-          title="Vehicles"
+        title="Vehicles"
+        subtitle="Track and manage your vehicle fleet"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Assets", href: "/equipment/dashboard" }, { label: "Vehicles" }]}
+        title="Vehicles"
           subtitle={`${filteredVehicles.length} vehicle${filteredVehicles.length !== 1 ? 's' : ''}`}
           actions={[
             {
