@@ -1,17 +1,18 @@
 #!/usr/bin/env python3
 """
-Backend API Testing for Communication Preference Feature
-Tests comprehensive scenarios for customer communication preferences
+Comprehensive Backend API Testing for Customer Creation and Management
+Tests all customer CRUD operations, file attachments, communication preferences, and company linking
 """
 
 import requests
 import json
-import sys
-import os
+import base64
+import time
 from datetime import datetime
+from typing import Dict, List, Any
 
-# Get backend URL from environment
-BACKEND_URL = "https://snowops-admin.preview.emergentagent.com/api"
+# Backend URL from frontend/.env
+BASE_URL = "https://snowops-admin.preview.emergentagent.com/api"
 
 class CommunicationPreferenceTests:
     def __init__(self):
