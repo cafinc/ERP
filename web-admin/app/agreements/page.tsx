@@ -225,9 +225,9 @@ export default function AgreementsPage() {
             </div>
           ) : (
             <div className="space-y-4">
-              {filteredAgreements.map((agreement) => (
+              {filteredAgreements.map((agreement, index) => (
                 <div
-                  key={agreement._id}
+                  key={agreement._id || `agreement-${index}`}
                   className="bg-white rounded-lg shadow border border-gray-200 p-6 hover:shadow-md transition-shadow"
                 >
                   <div className="flex items-start justify-between">
