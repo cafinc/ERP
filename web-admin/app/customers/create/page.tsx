@@ -72,6 +72,10 @@ export default function CustomerFormPage() {
   const [accessInApp, setAccessInApp] = useState(false);
   const [userRole, setUserRole] = useState('customer');
   
+  // Create site states
+  const [createSite, setCreateSite] = useState(false);
+  const [siteName, setSiteName] = useState('');
+  
   const [customerForm, setCustomerForm] = useState({
     // For individuals
     first_name: '',
