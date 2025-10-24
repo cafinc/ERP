@@ -31,16 +31,11 @@ export default function SafetyTrainingPage() {
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         <PageHeader
           title="Safety Training"
-          icon={BookOpen}
-          badges={[
-            { label: `${trainings.length} Certifications`, color: 'blue' },
-            { label: `${trainings.filter(t => t.status === 'active').length} Active`, color: 'green' },
-            { label: `${trainings.filter(t => t.status === 'expired').length} Expired`, color: 'red' },
-          ]}
+          
           actions={[
             {
               label: 'Add Training',
-              icon: Plus,
+              icon: <Plus className="w-4 h-4 mr-2" />,
               onClick: () => router.push('/safety/training/create'),
               variant: 'primary',
             },

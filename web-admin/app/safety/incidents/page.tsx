@@ -128,16 +128,11 @@ export default function IncidentReportingPage() {
         {/* Compact Header */}
         <PageHeader
           title="Incident Reporting"
-          icon={AlertTriangle}
-          badges={[
-            { label: `${incidents.length} Total`, color: 'blue' },
-            { label: `${incidents.filter(i => i.status === 'investigating').length} Under Investigation`, color: 'yellow' },
-            { label: `${incidents.filter(i => i.type === 'injury').length} Injuries`, color: 'red' },
-          ]}
+          
           actions={[
             {
               label: 'Report Incident',
-              icon: Plus,
+              icon: <Plus className="w-4 h-4 mr-2" />,
               onClick: () => router.push('/safety/incidents/create'),
               variant: 'primary',
             },

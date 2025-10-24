@@ -133,16 +133,11 @@ export default function SitesPage() {
         {/* Compact Header */}
         <PageHeader
           title="Sites"
-          icon={MapPin}
-          badges={[
-            { label: `${sites.length} Total`, color: 'blue' },
-            { label: `${sites.filter(s => s.active).length} Active`, color: 'green' },
-            { label: `${sites.filter(s => !s.active).length} Archived`, color: 'gray' },
-          ]}
+          
           actions={[
             {
               label: 'Add Site',
-              icon: Plus,
+              icon: <Plus className="w-4 h-4 mr-2" />,
               onClick: handleCreateSite,
               variant: 'primary',
             },

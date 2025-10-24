@@ -80,15 +80,11 @@ export default function EmergencyPlansPage() {
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         <PageHeader
           title="Emergency Response Plans"
-          icon={AlertTriangle}
-          badges={[
-            { label: `${plans.length} Plans`, color: 'blue' },
-            { label: `${plans.filter(p => p.status === 'active').length} Active`, color: 'green' },
-          ]}
+          
           actions={[
             {
               label: 'New Plan',
-              icon: Plus,
+              icon: <Plus className="w-4 h-4 mr-2" />,
               onClick: () => router.push('/safety/emergency/create'),
               variant: 'primary',
             },

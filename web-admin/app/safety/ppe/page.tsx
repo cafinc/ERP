@@ -76,15 +76,11 @@ export default function PPEManagementPage() {
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         <PageHeader
           title="PPE Management"
-          icon={HardHat}
-          badges={[
-            { label: `${ppeItems.length} Items Tracked`, color: 'blue' },
-            { label: `${ppeItems.filter(p => p.condition === 'good' || p.condition === 'excellent').length} Good Condition`, color: 'green' },
-          ]}
+          
           actions={[
             {
               label: 'Issue PPE',
-              icon: Plus,
+              icon: <Plus className="w-4 h-4 mr-2" />,
               onClick: () => router.push('/safety/ppe/create'),
               variant: 'primary',
             },

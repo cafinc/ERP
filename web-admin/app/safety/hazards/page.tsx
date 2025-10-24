@@ -70,15 +70,11 @@ export default function HazardAssessmentsPage() {
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         <PageHeader
           title="Hazard Assessments"
-          icon={FileText}
-          badges={[
-            { label: `${hazards.length} Assessments`, color: 'blue' },
-            { label: `${hazards.filter(h => h.risk_level === 'high' || h.risk_level === 'critical').length} High Risk`, color: 'red' },
-          ]}
+          
           actions={[
             {
               label: 'New Assessment',
-              icon: Plus,
+              icon: <Plus className="w-4 h-4 mr-2" />,
               onClick: () => router.push('/safety/hazards/create'),
               variant: 'primary',
             },

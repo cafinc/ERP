@@ -18,12 +18,11 @@ export default function TasksPage() {
           <PageHeader
             title="Tasks"
             subtitle="Manage your team's tasks and assignments"
-            icon={CheckSquare}
-            actions={[
+          actions={[
               {
                 label: 'Create Task',
                 onClick: () => {},
-                icon: Plus,
+                icon: <Plus className="w-4 h-4 mr-2" />,
                 variant: 'primary' as const,
               },
             ]}

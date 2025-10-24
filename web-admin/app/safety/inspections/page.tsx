@@ -68,15 +68,11 @@ export default function SafetyInspectionsPage() {
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         <PageHeader
           title="Safety Inspections"
-          icon={ClipboardCheck}
-          badges={[
-            { label: `${inspections.length} Total`, color: 'blue' },
-            { label: `${inspections.filter(i => i.status === 'completed').length} Completed`, color: 'green' },
-          ]}
+          
           actions={[
             {
               label: 'New Inspection',
-              icon: Plus,
+              icon: <Plus className="w-4 h-4 mr-2" />,
               onClick: () => router.push('/safety/inspections/create'),
               variant: 'primary',
             },

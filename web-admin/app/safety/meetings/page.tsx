@@ -68,15 +68,11 @@ export default function SafetyMeetingsPage() {
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         <PageHeader
           title="Safety Meetings"
-          icon={Users}
-          badges={[
-            { label: `${meetings.length} Meetings`, color: 'blue' },
-            { label: `${meetings.reduce((sum, m) => sum + m.attendees, 0)} Total Attendees`, color: 'green' },
-          ]}
+          
           actions={[
             {
               label: 'Schedule Meeting',
-              icon: Plus,
+              icon: <Plus className="w-4 h-4 mr-2" />,
               onClick: () => router.push('/safety/meetings/create'),
               variant: 'primary',
             },

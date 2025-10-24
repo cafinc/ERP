@@ -104,15 +104,11 @@ export default function SafetyPoliciesPage() {
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         <PageHeader
           title="Safety Policies"
-          icon={Clipboard}
-          badges={[
-            { label: `${policies.length} Policies`, color: 'blue' },
-            { label: `${policies.filter(p => p.status === 'active').length} Active`, color: 'green' },
-          ]}
+          
           actions={[
             {
               label: 'Add Policy',
-              icon: Plus,
+              icon: <Plus className="w-4 h-4 mr-2" />,
               onClick: () => router.push('/safety/policies/create'),
               variant: 'primary',
             },
