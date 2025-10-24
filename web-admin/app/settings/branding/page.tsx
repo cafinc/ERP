@@ -104,6 +104,9 @@ export default function BrandingSettingsPage() {
   return (
     <div style={{ padding: '24px', backgroundColor: '#f8fafc', minHeight: '100vh' }}>
       <PageHeader
+        title="Branding"
+        subtitle="Customize your company branding"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Settings", href: "/settings" }, { label: "Branding" }]}
         title="Branding Settings"
         subtitle="Customize your platform's appearance and branding"
         backUrl="/settings"

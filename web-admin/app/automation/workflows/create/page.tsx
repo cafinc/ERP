@@ -241,7 +241,10 @@ export default function WorkflowEditorPage() {
     <PageHeader>
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto">
         <PageHeader
-          title={isEdit ? 'Edit Workflow' : 'Create Workflow'}
+        title="Create Workflow"
+        subtitle="Build a new automated workflow"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Automation", href: "/automation" }, { label: "Workflows", href: "/automation/workflows" }, { label: "Create" }]}
+        title={isEdit ? 'Edit Workflow' : 'Create Workflow'}
           icon={Zap}
           actions={[
             {

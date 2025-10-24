@@ -128,7 +128,10 @@ export default function AutomationAnalyticsPage() {
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
         {/* Compact Header */}
         <PageHeader
-          title="Automation Analytics"
+        title="Automation Analytics"
+        subtitle="Monitor workflow performance"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Automation", href: "/automation" }, { label: "Analytics" }]}
+        title="Automation Analytics"
           icon={Activity}
           badges={[
             { label: `${totalExecutions} Total Runs`, color: 'blue' },

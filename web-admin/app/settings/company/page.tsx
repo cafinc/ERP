@@ -29,7 +29,10 @@ export default function CompanySettingsPage() {
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         <div className="max-w-4xl mx-auto">
           <PageHeader
-            title="Company Information"
+        title="Company Settings"
+        subtitle="Manage company information"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Settings", href: "/settings" }, { label: "Company" }]}
+        title="Company Information"
             subtitle="Manage your business details and contact information"
             icon={Building}
             backUrl="/settings"

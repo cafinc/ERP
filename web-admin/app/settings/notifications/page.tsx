@@ -12,6 +12,9 @@ export default function NotificationsPage() {
   return (
     <div style={{ padding: '24px', backgroundColor: '#f8fafc', minHeight: '100vh' }}>
       <PageHeader
+        title="Notifications"
+        subtitle="Manage notification preferences"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Settings", href: "/settings" }, { label: "Notifications" }]}
         title="Notification Settings"
         subtitle="Manage your notification preferences"
         backUrl="/settings"

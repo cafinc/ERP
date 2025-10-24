@@ -22,6 +22,9 @@ export default function SecuritySettingsPage() {
   return (
     <div style={{ padding: '24px', backgroundColor: '#f8fafc', minHeight: '100vh' }}>
       <PageHeader
+        title="Security"
+        subtitle="Configure security settings"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Settings", href: "/settings" }, { label: "Security" }]}
         title="Security Settings"
         subtitle="Manage your password, 2FA, and active sessions"
         backUrl="/settings"
