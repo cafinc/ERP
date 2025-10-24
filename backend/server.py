@@ -366,7 +366,7 @@ async def update_user(user_id: str, user_update: UserUpdate):
     # Send notifications if user is newly marked as driver and doesn't have license yet
     if is_now_driver and not was_driver and not user.get("driver_license_photo"):
         user_id_str = user.get("id") or str(user.get("_id"))
-        upload_link = f"https://snowtrack-admin-3.preview.emergentagent.com/upload-license/{user_id_str}"
+        upload_link = f"https://serviceflow-hub-1.preview.emergentagent.com/upload-license/{user_id_str}"
         
         # Send email notification
         try:
@@ -666,7 +666,7 @@ def sync_customer_to_quickbooks(customer_data: dict):
                     response = await loop.run_in_executor(
                         None,
                         lambda: requests.post(
-                            f"https://snowtrack-admin-3.preview.emergentagent.com/api/quickbooks/customers?user_id={user_id}",
+                            f"https://serviceflow-hub-1.preview.emergentagent.com/api/quickbooks/customers?user_id={user_id}",
                             json=qb_customer_data,
                             timeout=10
                         )
@@ -7886,12 +7886,12 @@ async def gmail_oauth_callback(code: str, state: str):
         await db.gmail_oauth_states.delete_one({"_id": state_doc["_id"]})
         
         # Redirect to Gmail page
-        redirect_base = "https://snowtrack-admin-3.preview.emergentagent.com"
+        redirect_base = "https://serviceflow-hub-1.preview.emergentagent.com"
         return RedirectResponse(url=f"{redirect_base}/gmail?connected=true")
         
     except Exception as e:
         print(f"Error in Gmail OAuth callback: {e}")
-        redirect_base = "https://snowtrack-admin-3.preview.emergentagent.com"
+        redirect_base = "https://serviceflow-hub-1.preview.emergentagent.com"
         return RedirectResponse(url=f"{redirect_base}/gmail?error=connection_failed")
 
 
@@ -9209,7 +9209,7 @@ app.add_middleware(
     allow_credentials=True,
     allow_origins=[
         "http://localhost:3000",
-        "https://snowtrack-admin-3.preview.emergentagent.com",
+        "https://serviceflow-hub-1.preview.emergentagent.com",
         "exp://localhost:8081",
         "exp://127.0.0.1:8081"
     ],
@@ -10045,12 +10045,12 @@ async def google_tasks_oauth_callback(code: str, state: str):
         await db.google_tasks_oauth_states.delete_one({"_id": state_doc["_id"]})
         
         # Redirect to settings page
-        redirect_base = "https://snowtrack-admin-3.preview.emergentagent.com"
+        redirect_base = "https://serviceflow-hub-1.preview.emergentagent.com"
         return RedirectResponse(url=f"{redirect_base}/settings?google_tasks_connected=true")
         
     except Exception as e:
         logger.error(f"Error in Google Tasks OAuth callback: {e}")
-        redirect_base = "https://snowtrack-admin-3.preview.emergentagent.com"
+        redirect_base = "https://serviceflow-hub-1.preview.emergentagent.com"
         return RedirectResponse(url=f"{redirect_base}/settings?error=google_tasks_connection_failed")
 
 

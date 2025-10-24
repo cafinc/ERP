@@ -124,7 +124,7 @@ This document provides complete documentation for the QuickBooks Online integrat
 2. Note your **Client ID** and **Client Secret**
 3. Under **Redirect URIs**, add:
    ```
-   https://snowtrack-admin-3.preview.emergentagent.com/api/quickbooks/auth/callback
+   https://serviceflow-hub-1.preview.emergentagent.com/api/quickbooks/auth/callback
    ```
 4. Click **"Save"**
 
@@ -136,7 +136,7 @@ Edit `/app/backend/.env` and add your credentials:
 # QuickBooks Online Integration
 QUICKBOOKS_CLIENT_ID=your_client_id_here
 QUICKBOOKS_CLIENT_SECRET=your_client_secret_here
-QUICKBOOKS_REDIRECT_URI=https://snowtrack-admin-3.preview.emergentagent.com/api/quickbooks/auth/callback
+QUICKBOOKS_REDIRECT_URI=https://serviceflow-hub-1.preview.emergentagent.com/api/quickbooks/auth/callback
 QUICKBOOKS_ENVIRONMENT=sandbox    # Use "sandbox" for testing, "production" for live
 ```
 
@@ -482,13 +482,13 @@ Click **Refresh** to update the activity log.
 
 ```bash
 # Check connection status
-curl -X GET "https://snowtrack-admin-3.preview.emergentagent.com/api/quickbooks/connection/status?user_id=YOUR_USER_ID"
+curl -X GET "https://serviceflow-hub-1.preview.emergentagent.com/api/quickbooks/connection/status?user_id=YOUR_USER_ID"
 ```
 
 ### Step 2: Test Customer Creation
 
 ```bash
-curl -X POST "https://snowtrack-admin-3.preview.emergentagent.com/api/quickbooks/customers?user_id=YOUR_USER_ID" \
+curl -X POST "https://serviceflow-hub-1.preview.emergentagent.com/api/quickbooks/customers?user_id=YOUR_USER_ID" \
   -H "Content-Type: application/json" \
   -d '{
     "DisplayName": "Test Customer",
@@ -503,7 +503,7 @@ curl -X POST "https://snowtrack-admin-3.preview.emergentagent.com/api/quickbooks
 ### Step 3: Test Invoice Creation
 
 ```bash
-curl -X POST "https://snowtrack-admin-3.preview.emergentagent.com/api/quickbooks/invoices?user_id=YOUR_USER_ID" \
+curl -X POST "https://serviceflow-hub-1.preview.emergentagent.com/api/quickbooks/invoices?user_id=YOUR_USER_ID" \
   -H "Content-Type: application/json" \
   -d '{
     "CustomerRef": {
@@ -549,7 +549,7 @@ curl -X POST "https://snowtrack-admin-3.preview.emergentagent.com/api/quickbooks
 1. Go to QuickBooks Developer Dashboard → Your App → Keys & OAuth
 2. Verify redirect URI exactly matches:
    ```
-   https://snowtrack-admin-3.preview.emergentagent.com/api/quickbooks/auth/callback
+   https://serviceflow-hub-1.preview.emergentagent.com/api/quickbooks/auth/callback
    ```
 3. No trailing slashes, http vs https matters
 

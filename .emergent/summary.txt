@@ -1,56 +1,53 @@
 <analysis>
-The AI engineer's work involved a comprehensive platform review, followed by autonomous execution of a multi-phase development plan. Initial tasks focused on critical backend fixes, particularly resolving BSON ObjectId serialization errors in HR module POST endpoints and rectifying template route ordering issues. Subsequently, the engineer moved to enhance existing features, including completing work order CRUD operations, establishing a real-time WebSocket communication system, and setting up its frontend integration. The project then transitioned to core integrations, encompassing Service Lifecycle Automation, which was dynamically updated to include a Projects layer as per user request. Further integrations involved Real-Time Fleet Tracking, Weather-Driven Dispatch, Advanced Analytics, and initiating a Unified Communications System. The trajectory demonstrates a systematic approach, robust debugging, and successful implementation of complex features across the full stack.
+The AI engineer's work involved a comprehensive, multi-phase development plan. Initial efforts focused on critical backend fixes (BSON ObjectId serialization, template route ordering) and enhancing existing features like work order CRUD and a real-time WebSocket system. Subsequently, the engineer built core integrations: Service Lifecycle Automation with a Projects layer, Real-Time Fleet Tracking, Weather-Driven Dispatch, and Advanced Analytics. Autonomous execution continued with the completion of the Unified Communications System, Weather Alerts, WebSocket Real-Time Sync (web-admin), Offline Mode (mobile), and a full Notification System. Further, the Dispatch Planning Board and Smart Equipment Ecosystem were implemented, including their basic web-admin UI. The project then shifted to site maps, adding geo-fencing, property measurement, and resolving Google Maps API key/loading issues. Recent work involved refining form error highlighting and layout consistency for the Create Site page. The latest task initiated is updating the Agreements page with branding and a header template.
 </analysis>
 
 <product_requirements>
-The application is an admin dashboard for snow removal services, built for an intuitive user experience. Initial requirements included a Communication Center (InApp, SMS, Email, Phone), unified header communications, and a Template System with placeholders. UI/UX demanded standardized headers, tabbed navigation, real-time validation, phone number formatting, bubble-style conversation history, emoji avatars, and a redesigned  with quick-add, search, alerts, activity, hamburger menu, theme toggle, and accessibility. Navigation was restructured (e.g., CRM to Sales, Automation under Settings, Operations menu). New Work Orders, Purchase Orders, and Operations Dashboard pages were required. A major addition was a comprehensive task assignment system with in-app notifications for various users (customers, crew) for work orders, estimates, invoices, and forms. Autonomous execution was requested for fixing critical bugs, completing existing features, and building core integrations like a Service Lifecycle Loop, with a priority on a balanced 2-3 week timeline.
+The application is an admin dashboard for snow removal services, prioritizing intuitive UX. Initial features included a Communication Center, unified header communications, and a Template System with placeholders. UI/UX demanded standardized headers, tabbed navigation, real-time validation, phone formatting, bubble conversations, emoji avatars, and a redesigned  with quick-add, search, alerts, activity, hamburger menu, theme toggle, and accessibility. Navigation was restructured, and new pages for Work Orders, Purchase Orders, and Operations Dashboard were required. A comprehensive task assignment system with in-app notifications for various users (customers, crew) for work orders, estimates, invoices, and forms was critical. Autonomous execution was requested for bug fixes and core integrations: Service Lifecycle Loop (including Projects), Real-Time Fleet Tracking, Weather-Driven Dispatch, Advanced Analytics, and Unified Communications. Further tasks included: Weather Integration with Alerts, WebSocket Real-Time Sync (web-admin), Offline Mode (mobile), full Notification System, Dispatch Planning Board, Smart Equipment Ecosystem, frontend UI for Dispatch Board/Equipment Monitoring, Site Maps with geo-fencing, map creation, property measurement,  layout matching , form error highlighting, and Agreements branding with a header template.
 </product_requirements>
 
 <key_technical_concepts>
--   **Full-stack Monorepo**: Expo (frontend), Next.js (web-admin), FastAPI (backend), MongoDB.
--   **Component-based UI**: React Native (mobile), React (web-admin), Expo Router for routing.
--   **State Management**: React Context (Theme, Task, WebSocket), .
--   **API Development**: FastAPI routes, Pydantic models, BSON serialization.
--   **Real-time Communication**: WebSockets for event emission and client-side consumption.
--   **Service Automation**: Automated workflows and dispatch logic.
--   **Cross-platform Development**: Feature parity between mobile and web-admin.
+-   **Full-stack Architecture**: Monorepo with Expo (mobile frontend), Next.js (web-admin), FastAPI (backend), MongoDB.
+-   **UI Frameworks**: React Native (mobile), React (web-admin) with file-based routing (Expo Router, Next.js App Router).
+-   **Real-time**: WebSockets for live data synchronization.
+-   **API Development**: FastAPI, Pydantic for data models, BSON ObjectId handling.
+-   **Mapping/GIS**: Google Maps API with drawing tools for geo-fencing (polygon overlay).
+-   **State Management**: React Context, AsyncStorage (offline support).
 </key_technical_concepts>
 
 <code_architecture>
 
-**Core Backend Architecture:** FastAPI backend with MongoDB, structured into modular route and service files.
-**Core Frontend Architecture:** Expo for mobile (React Native) and Next.js for web admin (React), both leveraging file-based routing and a component-based approach.
-
--   ****: Handles HR-related API endpoints. Modified to include a  helper function and  for proper BSON ObjectId serialization and validation.
--   ****: Manages template API endpoints. Modified to fix a routing order issue, ensuring specific routes like  are matched correctly before parameterized routes.
--   ****: Core API for task management. Modified to remove a duplicate  prefix in its  definition and to emit real-time events via  upon task creation/updates.
--   ** (NEW)**: Provides CRUD functionality for work orders. This was implemented to address a missing feature identified during testing.
--   ** (NEW)**: Implements the core logic for WebSocket communication, allowing for real-time updates across the application.
--   ** (NEW)**: Defines the WebSocket endpoints to allow clients to connect and receive real-time messages.
--   ** (NEW/MODIFIED)**: Orchestrates the automated workflow of a service request. It was newly created and then modified to insert a Project creation step between estimates and work orders.
--   ** (NEW)**: Implements CRUD API endpoints for projects, integrated into the service lifecycle.
--   ** (NEW)**: Contains the logic for real-time tracking of crew locations and vehicle statuses.
--   ** (NEW)**: Provides API endpoints for interacting with the fleet tracking system.
--   ** (NEW)**: Implements the business logic for dispatching crews based on weather conditions.
--   ** (MODIFIED)**: Integrated the new  logic.
--   ** (NEW)**: Handles the aggregation and processing of data for business intelligence.
--   ** (NEW)**: Defines API endpoints for retrieving various analytics reports.
--   ** (NEW)**: Initiated for creating a consolidated view of all customer communication threads.
--   ** (MODIFIED)**: The main FastAPI application entry point, updated to import and register all newly created backend routes (, , , , , etc.).
--   ** (NEW)**: A React Context provider to manage WebSocket connections and event handling across the Expo mobile application.
--   ** (NEW)**: A custom React Native hook to simplify WebSocket client integration within components.
+-   ** (NEW)**: Defines API endpoints for the Unified Communications System.
+-   ** (NEW)**: Defines API endpoints for Weather Alerts.
+-   ** (NEW)**: Defines API endpoints for managing push notifications.
+-   ** (NEW)**: Defines API endpoints for the Dispatch Planning Board.
+-   ** (NEW)**: Defines API endpoints for the Smart Equipment Ecosystem.
+-   ** (NEW)**: Defines API endpoints for site geo-fences with polygon support.
+-   ** (MODIFIED)**: Main FastAPI app; registers all new backend route modules.
+-   ** (NEW)**: Manages offline data for mobile app.
+-   ** (NEW)**: Displays mobile app's offline status.
+-   ** (NEW)**: Mobile screen for notification settings.
+-   ** (NEW)**: React Context for web-admin WebSocket communication.
+-   ** (NEW)**: Web-admin component for real-time notifications.
+-   ** (NEW)**: Web-admin UI for dispatch management.
+-   ** (NEW)**: Web-admin UI for equipment monitoring.
+-   ** (MODIFIED)**: Create site page; updated layout, Google Maps loader, error highlighting, save button; fixed  import.
+-   ** (MODIFIED)**: Site details page; fixed  import.
+-   ** (MODIFIED/RENAMED)**: Site maps page; enhanced with geofencing tabs, Google Maps loader, map height styling, and debug logging.
+-   ** (NEW)**: Centralized Google Maps script loader.
+-   ** (MODIFIED)**: Added .
 </code_architecture>
 
 <pending_tasks>
--   Complete remaining aspects of Phase 2: Weather Integration with Alerts, WebSocket real-time sync (client-side in web-admin), Offline Mode for mobile app, and full Notification System.
--   Continue Phase 3: Finish Unified Communication Thread, and potentially other integrations like Dispatch Planning Board or Smart Equipment Ecosystem.
+-   Update Agreements page with branding.
+-   Add an agreement template in the header of the Agreements page.
 -   Address any further refinements or enhancements based on the comprehensive platform review and roadmap.
 </pending_tasks>
 
 <current_work>
-Immediately prior to this summary, the AI engineer was actively working on Phase 3 of the autonomous execution plan, specifically on integrating the Unified Communications Thread. The current state involves the initial creation of the backend service file: . This service is intended to create a single timeline for all customer communications across various channels. The trajectory ended as the engineer was about to create the API routes for this service and then proceed to complete its full implementation. This follows successful implementations of other major integrations in Phase 3, including Real-Time Fleet Tracking, Weather-Driven Dispatch Automation, and Advanced Analytics & Business Intelligence. The  will likely contain functions for ingesting, standardizing, and presenting communication data from various sources.
+Immediately prior to this summary, the AI engineer was addressing a user request to enhance the Agreements section. The explicit requirement is to apply specific branding to the Agreements page and integrate an agreement template into its header. The engineer's last action in the trajectory was to check the existing agreements page (). This indicates the current state is at the very beginning of this task, focused on understanding the current structure of the Agreements page to plan the implementation of branding and template integration. This follows extensive work on site maps, including geo-fencing, fixing Google Maps API errors, improving form error handling, and standardizing page layouts.
 </current_work>
 
 <optional_next_step>
-Complete the implementation of the Unified Communications System by creating its API routes and integrating it.
+Inspect the existing Agreements page structure ( or similar) to plan branding and header template integration.
 </optional_next_step>
