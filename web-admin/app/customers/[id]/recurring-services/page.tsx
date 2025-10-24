@@ -226,7 +226,10 @@ export default function RecurringServicesPage() {
         <div className="max-w-7xl mx-auto">
           {/* Compact Header */}
           <PageHeader
-            title="Recurring Services"
+        title="Recurring Services"
+        subtitle="Manage recurring services"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Customers", href: "/customers" }, { label: "Details" }]}
+        title="Recurring Services"
             subtitle={`Manage recurring services for ${customer?.name}`}
             backUrl={`/customers/${customerId}`}
             icon={RefreshCw}

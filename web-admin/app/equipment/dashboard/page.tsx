@@ -81,7 +81,10 @@ export default function EquipmentDashboardPage() {
     <PageHeader>
       <div className="p-4 space-y-6">
         <PageHeader
-          title="Equipment Dashboard"
+        title="Dashboard"
+        subtitle="Manage dashboard"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Equipment", href: "/equipment" }, { label: "Dashboard" }]}
+        title="Equipment Dashboard"
           icon={LayoutDashboard}
           badges={[
             { label: `${stats.totalEquipment} Total`, color: 'blue' },

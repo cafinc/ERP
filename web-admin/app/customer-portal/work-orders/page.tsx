@@ -59,6 +59,9 @@ export default function CustomerWorkOrdersPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <PageHeader
+        title="Work Orders"
+        subtitle="Manage work orders"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Customer Portal", href: "/customer-portal" }, { label: "Work Orders" }]}
         title="My Work Orders"
         description="Track your service work orders"
           />

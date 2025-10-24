@@ -80,7 +80,10 @@ export default function AccessDashboardPage() {
     <PageHeader>
       <div className="p-4 space-y-6">
         <PageHeader
-          title="Access Dashboard"
+        title="Dashboard"
+        subtitle="Manage dashboard"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Access", href: "/access" }, { label: "Dashboard" }]}
+        title="Access Dashboard"
           icon={LayoutDashboard}
           badges={[
             { label: `${stats.totalTeam} Team`, color: 'blue' },

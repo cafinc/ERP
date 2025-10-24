@@ -94,6 +94,9 @@ export default function CustomerPortalPage() {
     <div className="min-h-screen bg-gray-50">
       <PageHeader
         title="Customer Portal"
+        subtitle="Manage customer portal"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Customer Portal" }]}
+        title="Customer Portal"
         description="Welcome to your customer dashboard"
           />
 

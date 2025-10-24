@@ -65,7 +65,10 @@ export default function HRModulePage() {
   return (
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         <PageHeader
-          title="HR Module"
+        title="Hr"
+        subtitle="Manage hr"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Hr" }]}
+        title="HR Module"
           icon={Users}
           badges={[
             { label: "24 Employees", color: "blue" },

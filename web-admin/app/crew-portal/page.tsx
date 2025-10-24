@@ -134,6 +134,9 @@ export default function CrewPortalPage() {
     <div className="min-h-screen bg-gray-50">
       <PageHeader
         title="Crew Portal"
+        subtitle="Manage crew portal"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Crew Portal" }]}
+        title="Crew Portal"
         description="Welcome to your crew dashboard"
           />
 

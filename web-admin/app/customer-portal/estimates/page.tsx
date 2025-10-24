@@ -57,6 +57,9 @@ export default function CustomerEstimatesPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <PageHeader
+        title="Estimates"
+        subtitle="Manage estimates"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Customer Portal", href: "/customer-portal" }, { label: "Estimates" }]}
         title="My Estimates"
         description="View and manage your estimates"
           />

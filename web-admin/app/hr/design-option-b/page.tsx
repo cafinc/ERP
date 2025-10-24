@@ -89,7 +89,10 @@ export default function HRModuleDesignB() {
         </div>
 
         <PageHeader
-          title="HR Module"
+        title="Design Option B"
+        subtitle="Manage design option b"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Hr", href: "/hr" }, { label: "Design Option B" }]}
+        title="HR Module"
           icon={Users}
           badges={[
             { label: "24 Employees", color: "blue" },

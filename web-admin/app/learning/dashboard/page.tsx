@@ -47,7 +47,10 @@ export default function LearningDashboardPage() {
     <PageHeader>
       <div className="p-4 space-y-6">
         <PageHeader
-          title="Learning Centre Dashboard"
+        title="Dashboard"
+        subtitle="Manage dashboard"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Learning", href: "/learning" }, { label: "Dashboard" }]}
+        title="Learning Centre Dashboard"
           icon={LayoutDashboard}
           badges={[
             { label: `${stats.totalDocuments} Documents`, color: 'blue' },

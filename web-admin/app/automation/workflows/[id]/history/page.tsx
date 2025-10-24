@@ -133,7 +133,10 @@ export default function WorkflowHistoryPage() {
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         {/* Header */}
         <PageHeader
-          title={`${workflowName} - Execution History`}
+        title="History"
+        subtitle="Manage history"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Automation", href: "/automation" }, { label: "Workflows", href: "/automation/workflows" }, { label: "Details" }]}
+        title={`${workflowName} - Execution History`}
           icon={Activity}
           badges={[
             { label: `${executions.length} Executions`, color: 'blue' },

@@ -91,6 +91,9 @@ export default function CrewTimeTrackingPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <PageHeader
+        title="Time Tracking"
+        subtitle="Manage time tracking"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Crew Portal", href: "/crew-portal" }, { label: "Time Tracking" }]}
         title="Time Clock"
         description="Manage your work hours"
           />

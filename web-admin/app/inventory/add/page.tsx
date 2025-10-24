@@ -88,7 +88,10 @@ export default function AddInventoryItemPage() {
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         {/* Header */}
         <PageHeader
-          title="Add Inventory Item"
+        title="Add"
+        subtitle="Manage add"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Inventory", href: "/inventory" }, { label: "Add" }]}
+        title="Add Inventory Item"
           icon={Package}
           actions={[
             {

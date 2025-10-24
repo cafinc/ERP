@@ -174,7 +174,10 @@ export default function CustomerDashboardPage() {
       <div className="space-y-6">
         {/* Compact Header */}
         <PageHeader
-          title="My Dashboard"
+        title="Dashboard"
+        subtitle="Manage dashboard"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Customer Portal", href: "/customer-portal" }, { label: "Dashboard" }]}
+        title="My Dashboard"
           subtitle="Welcome back! Here's your snow removal service overview"
           icon={Home}
           badges={[

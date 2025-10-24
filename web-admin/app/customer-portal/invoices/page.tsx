@@ -53,6 +53,9 @@ export default function CustomerInvoicesPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <PageHeader
+        title="Invoices"
+        subtitle="Manage invoices"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Customer Portal", href: "/customer-portal" }, { label: "Invoices" }]}
         title="My Invoices"
         description="View and pay your invoices"
           />

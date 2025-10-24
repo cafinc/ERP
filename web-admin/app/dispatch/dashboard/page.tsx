@@ -83,7 +83,10 @@ export default function DispatchDashboardPage() {
     <PageHeader>
       <div className="p-4 space-y-6">
         <PageHeader
-          title="Dispatch Dashboard"
+        title="Dashboard"
+        subtitle="Manage dashboard"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Dispatch", href: "/dispatch" }, { label: "Dashboard" }]}
+        title="Dispatch Dashboard"
           icon={LayoutDashboard}
           badges={[
             { label: `${stats.totalSites} Sites`, color: 'blue' },

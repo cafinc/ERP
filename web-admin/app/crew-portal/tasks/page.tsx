@@ -61,6 +61,9 @@ export default function CrewTasksPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <PageHeader
+        title="Tasks"
+        subtitle="Manage tasks"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Crew Portal", href: "/crew-portal" }, { label: "Tasks" }]}
         title="My Tasks"
         description="View and manage your assigned tasks"
           />
