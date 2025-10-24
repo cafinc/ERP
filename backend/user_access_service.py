@@ -7,14 +7,20 @@ import logging
 from typing import Dict, Optional
 from datetime import datetime
 from bson import ObjectId
-from database import sessions_collection, get_database
+from motor.motor_asyncio import AsyncIOMotorClient
+import os
+from dotenv import load_dotenv
 from email_service import EmailService
+
+load_dotenv()
 
 logger = logging.getLogger(__name__)
 email_service = EmailService()
 
-# Get users collection
-db = get_database()
+# Get database connection
+mongo_url = os.getenv('MONGO_URL', 'mongodb://localhost:27017')
+client = AsyncIOMotorClient(mongo_url)
+db = client[os.getenv('DB_NAME', 'snow_removal')]
 users_collection = db['users']
 
 def generate_username(email: str, first_name: str, last_name: str) -> str:
