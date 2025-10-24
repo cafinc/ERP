@@ -92,6 +92,6 @@ export default function SiteMapsListPage() {
           </div>
         )}
       </div>
-    </div>
+    </>
   );
 }
