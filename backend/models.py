@@ -276,6 +276,7 @@ class CustomerCreate(BaseModel):
     notes: Optional[str] = None
     tags: Optional[List[str]] = []
     custom_fields: Optional[List[CustomField]] = []
+    attachments: Optional[List[dict]] = []  # Uploaded documents and photos
     accounting: Optional[CommercialAccounting] = None  # Accounting details for companies
 
 class CustomerUpdate(BaseModel):
