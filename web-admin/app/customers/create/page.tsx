@@ -26,6 +26,7 @@ import {
   Key,
   Monitor,
   Check,
+  UserPlus,
 } from 'lucide-react';
 
 // Canadian provinces
