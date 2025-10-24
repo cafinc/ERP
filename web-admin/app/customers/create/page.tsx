@@ -84,6 +84,26 @@ export default function CustomerFormPage() {
   // File upload states
   const [uploadedFiles, setUploadedFiles] = useState<Array<{name: string, type: string, size: number, data: string}>>([]);
   
+  // Modal states
+  const [showModal, setShowModal] = useState(false);
+  const [modalConfig, setModalConfig] = useState<{
+    type: 'success' | 'error' | 'warning';
+    title: string;
+    message: string;
+    onConfirm?: () => void;
+  }>({
+    type: 'success',
+    title: '',
+    message: '',
+  });
+  
+  const [customers, setCustomers] = useState<any[]>([]);
+  
+  const showModalMessage = (type: 'success' | 'error' | 'warning', title: string, message: string, onConfirm?: () => void) => {
+    setModalConfig({ type, title, message, onConfirm });
+    setShowModal(true);
+  };
+  
   const [customerForm, setCustomerForm] = useState({
     // For individuals
     first_name: '',
