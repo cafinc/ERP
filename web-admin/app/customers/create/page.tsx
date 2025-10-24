@@ -101,6 +101,22 @@ export default function CustomerFormPage() {
     country: 'Canada',
     // Company fields
     company_name: '',
+    operating_as: '',
+    office_number: '',
+    billing_address_same: true,
+    billing_address: {
+      street_address: '',
+      city: '',
+      province: 'AB',
+      postal_code: '',
+    },
+    // Contact persons (3 positions)
+    contacts: [
+      { name: '', email: '', phone: '', position: 'Manager' },
+      { name: '', email: '', phone: '', position: 'Accounting' },
+      { name: '', email: '', phone: '', position: 'Supervisor' },
+    ],
+    same_person_all_contacts: false,
     customer_type: 'individual',
     company_id: '',
     // Main contact for companies
