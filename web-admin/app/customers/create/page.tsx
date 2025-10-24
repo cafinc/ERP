@@ -680,8 +680,10 @@ export default function CustomerFormPage() {
                                 type="text"
                                 value={companySearch}
                                 onChange={(e) => {
-                                  setCompanySearch(e.target.value);
-                                  const query = e.target.value.toLowerCase();
+                                  const value = e.target.value;
+                                  setCompanySearch(value);
+                                  setShowSearchResults(true);
+                                  const query = value.toLowerCase();
                                   if (query.length > 0) {
                                     const filtered = companies.filter(company =>
                                       company.name?.toLowerCase().includes(query)
@@ -692,6 +694,7 @@ export default function CustomerFormPage() {
                                   }
                                 }}
                                 onFocus={() => {
+                                  setShowSearchResults(true);
                                   if (companySearch.length > 0) {
                                     const query = companySearch.toLowerCase();
                                     const filtered = companies.filter(company =>
@@ -700,35 +703,70 @@ export default function CustomerFormPage() {
                                     setFilteredCompanies(filtered);
                                   }
                                 }}
-                                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
-                                placeholder="Search for a company..."
+                                onBlur={() => {
+                                  // Delay to allow click on search results
+                                  setTimeout(() => setShowSearchResults(false), 200);
+                                }}
+                                disabled={loadingCompanies}
+                                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
+                                placeholder={loadingCompanies ? "Loading companies..." : "Search for a company..."}
                               />
+                              {loadingCompanies && (
+                                <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-[#3f72af]"></div>
+                                </div>
+                              )}
                             </div>
                             
                             {/* Search Results Dropdown */}
-                            {filteredCompanies.length > 0 && (
+                            {showSearchResults && companySearch.length > 0 && !loadingCompanies && (
                               <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto">
-                                {filteredCompanies.map((company, index) => (
-                                  <button
-                                    key={company._id || company.id || `company-${index}`}
-                                    type="button"
-                                    onClick={() => {
-                                      setCustomerForm({ ...customerForm, company_id: company._id || company.id });
-                                      setCompanySearch(company.name);
-                                      setFilteredCompanies([]);
-                                    }}
-                                    className="w-full text-left px-4 py-2 hover:bg-gray-100 transition-colors flex items-center space-x-2"
-                                  >
-                                    <Building className="w-4 h-4 text-[#3f72af]" />
-                                    <span>{company.name}</span>
-                                  </button>
-                                ))}
+                                {filteredCompanies.length > 0 ? (
+                                  filteredCompanies.map((company, index) => (
+                                    <button
+                                      key={company._id || company.id || `company-${index}`}
+                                      type="button"
+                                      onClick={() => {
+                                        setCustomerForm({ ...customerForm, company_id: company._id || company.id });
+                                        setCompanySearch(company.name);
+                                        setFilteredCompanies([]);
+                                        setShowSearchResults(false);
+                                      }}
+                                      className="w-full text-left px-4 py-3 hover:bg-blue-50 transition-colors flex items-center space-x-3 border-b last:border-b-0"
+                                    >
+                                      <Building className="w-5 h-5 text-[#3f72af] flex-shrink-0" />
+                                      <div className="flex-1 min-w-0">
+                                        <p className="font-medium text-gray-900 truncate">{company.name}</p>
+                                        {company.email && (
+                                          <p className="text-xs text-gray-500 truncate">{company.email}</p>
+                                        )}
+                                      </div>
+                                    </button>
+                                  ))
+                                ) : (
+                                  <div className="px-4 py-6 text-center">
+                                    <AlertCircle className="w-8 h-8 text-gray-400 mx-auto mb-2" />
+                                    <p className="text-sm text-gray-600 font-medium">No companies found</p>
+                                    <p className="text-xs text-gray-500 mt-1">
+                                      Try a different search term or create a new company first
+                                    </p>
+                                  </div>
+                                )}
                               </div>
+                            )}
+                            
+                            {/* Initial state - Show available companies count */}
+                            {!companySearch && !customerForm.company_id && !loadingCompanies && (
+                              <p className="text-xs text-gray-500 mt-2">
+                                {companies.length > 0 
+                                  ? `${companies.length} ${companies.length === 1 ? 'company' : 'companies'} available`
+                                  : 'No companies available yet. Create a company customer first.'}
+                              </p>
                             )}
                             
                             {/* Selected Company Display */}
                             {customerForm.company_id && companySearch && (
-                              <div className="mt-2 flex items-center justify-between bg-blue-50 border border-blue-200 rounded-lg px-3 py-2">
+                              <div className="mt-2 flex items-center justify-between bg-blue-50 border border-blue-200 rounded-lg px-3 py-2 animate-in fade-in duration-200">
                                 <div className="flex items-center space-x-2">
                                   <Building className="w-4 h-4 text-[#3f72af]" />
                                   <span className="text-sm font-medium text-gray-700">{companySearch}</span>
@@ -740,6 +778,7 @@ export default function CustomerFormPage() {
                                     setCompanySearch('');
                                   }}
                                   className="text-gray-500 hover:text-red-500 transition-colors"
+                                  title="Remove company link"
                                 >
                                   <X className="w-4 h-4" />
                                 </button>
