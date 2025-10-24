@@ -160,16 +160,9 @@ export default function HomePage() {
       <div className="p-4 space-y-6">
         {/* Compact Header */}
         <PageHeader
-        title="Dashboard"
-        subtitle="Overview of your snow removal operations"
-        breadcrumbs={[{ label: "Home" }]}
-        title="Dashboard"
-          icon={Home}
-          badges={[
-            { label: `${stats.customers} Customers`, color: 'blue' },
-            { label: `${stats.activeProjects} Active`, color: 'green' },
-            { label: `$${stats.revenue.toLocaleString()} Revenue`, color: 'purple' },
-          ]}
+          title="Dashboard"
+          subtitle="Overview of your snow removal operations"
+          breadcrumbs={[{ label: "Home" }]}
         />
 
         {/* Stats Grid - More Compact - Now Clickable */}
