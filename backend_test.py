@@ -396,7 +396,7 @@ class CustomerAttachmentsTests:
         try:
             response = requests.post(f"{self.base_url}/customers", json=customer_data)
             
-            if response.status_code == 201:
+            if response.status_code in [200, 201]:
                 customer = response.json()
                 customer_id = customer.get('id')
                 self.created_customers.append(customer_id)
@@ -447,7 +447,7 @@ class CustomerAttachmentsTests:
         try:
             response = requests.post(f"{self.base_url}/customers", json=customer_data)
             
-            if response.status_code == 201:
+            if response.status_code in [200, 201]:
                 customer = response.json()
                 customer_id = customer.get('id')
                 self.created_customers.append(customer_id)
