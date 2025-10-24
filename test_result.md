@@ -697,3 +697,51 @@ backend:
       - working: true
         agent: "testing"
         comment: "✅ System accepts invalid communication preference values without validation errors. No strict validation enforced, allowing flexible preference values. System handles edge cases gracefully."
+
+  - task: "Customer Attachments - Create Customer with Attachments"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ POST /api/customers with attachments field working perfectly. Successfully creates customers with file attachments (name, type, size, data as base64). Attachments field properly stored and returned in response."
+
+  - task: "Customer Attachments - Create Customer without Attachments"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ POST /api/customers without attachments field working perfectly. Successfully creates customers with empty attachments array as default. No errors when attachments field is omitted."
+
+  - task: "Customer Attachments - Get Customer with Attachments"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ GET /api/customers/{id} working perfectly. Successfully retrieves customers with attachments field included in response. All attachment metadata (name, type, size, data) properly returned."
+
+  - task: "Customer Attachments - Database Storage Verification"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ Database storage verification successful. All attachments properly stored with valid base64 encoding. Data integrity maintained across create/retrieve operations."
