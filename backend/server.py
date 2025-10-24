@@ -12388,5 +12388,10 @@ from agreement_template_routes import router as agreement_template_router
 api_router.include_router(agreement_template_router)
 logger.info("Agreement template endpoints registered successfully")
 
+# Include Leads router
+from leads_routes import router as leads_router
+api_router.include_router(leads_router)
+logger.info("Leads endpoints registered successfully")
+
 # Include the router with all endpoints
 app.include_router(api_router)
