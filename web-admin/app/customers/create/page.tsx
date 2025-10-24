@@ -1363,8 +1363,11 @@ export default function CustomerFormPage() {
                   <MapPin className="w-5 h-5 text-[#3f72af]" />
                   <span>Address *</span>
                 </div>
-                {/* Create Site Toggle */}
+                {/* Create Site Toggle - label first, then toggle */}
                 <div className="flex items-center gap-2">
+                  <label className="text-sm font-medium text-gray-700">
+                    Create Site
+                  </label>
                   <button
                     type="button"
                     onClick={() => {
@@ -1383,9 +1386,6 @@ export default function CustomerFormPage() {
                       }`}
                     />
                   </button>
-                  <label className="text-sm font-medium text-gray-700">
-                    Create Site
-                  </label>
                   {/* Site Name - appears inline when Create Site is ON */}
                   {createSite && (
                     <div className="w-64 ml-3">
