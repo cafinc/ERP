@@ -1,5 +1,6 @@
 'use client';
 
+import PageHeader from '@/components/PageHeader';
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import api from '@/lib/api';
