@@ -307,6 +307,98 @@ For support, contact your supervisor or use the contact information above.
         except Exception as e:
             logger.error(f"Failed to send email to {recipient}: {str(e)}")
             return False
+    
+    def send_credentials_email(self, to_email: str, name: str, username: str, password: str, 
+                               access_web: bool, access_inapp: bool, role: str) -> bool:
+        """Send welcome email with login credentials"""
+        
+        # For development without SMTP configured
+        if not self.enabled:
+            logger.info(f"[EMAIL MOCK] Sending credentials to {to_email}")
+            logger.info(f"[EMAIL MOCK] Username: {username}, Password: {password}, Role: {role}")
+            logger.info(f"[EMAIL MOCK] Access - Web: {access_web}, InApp: {access_inapp}")
+            return True
+        
+        access_types = []
+        if access_web:
+            access_types.append("Web Dashboard")
+        if access_inapp:
+            access_types.append("Mobile App")
+        
+        access_text = " and ".join(access_types) if access_types else "No access configured"
+        
+        subject = "Welcome to Snow Dash - Your Account Credentials"
+        
+        html_content = f"""
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {{ font-family: Arial, sans-serif; line-height: 1.6; color: #333; }}
+        .container {{ max-width: 600px; margin: 0 auto; padding: 20px; }}
+        .header {{ background-color: #3f72af; color: white; padding: 20px; text-align: center; border-radius: 5px 5px 0 0; }}
+        .content {{ background-color: #f9f9f9; padding: 30px; border: 1px solid #ddd; }}
+        .credentials {{ background-color: white; padding: 20px; border-left: 4px solid #3f72af; margin: 20px 0; }}
+        .button {{ display: inline-block; padding: 12px 24px; background-color: #3f72af; color: white; text-decoration: none; border-radius: 5px; margin: 10px 5px; }}
+        .footer {{ text-align: center; padding: 20px; color: #666; font-size: 12px; }}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Welcome to Snow Dash!</h1>
+        </div>
+        <div class="content">
+            <p>Hello {name},</p>
+            <p>Your Snow Dash account has been successfully created. You now have access to our platform!</p>
+            
+            <div class="credentials">
+                <h3>Your Login Credentials</h3>
+                <p><strong>Username:</strong> {username}</p>
+                <p><strong>Password:</strong> {password}</p>
+                <p><strong>Role:</strong> {role.title()}</p>
+                <p><strong>Access:</strong> {access_text}</p>
+            </div>
+            
+            <p><strong>Important:</strong> Please change your password after your first login for security.</p>
+            
+            <div style="text-align: center; margin: 30px 0;">
+                {"<a href='https://snow-dash-1.preview.emergentagent.com/login' class='button'>Login to Web Dashboard</a>" if access_web else ""}
+            </div>
+            
+            <p>If you have any questions or need assistance, please don't hesitate to contact our support team.</p>
+        </div>
+        <div class="footer">
+            <p>&copy; 2025 Snow Dash. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>
+        """
+        
+        try:
+            msg = MIMEMultipart('alternative')
+            msg['From'] = self.sender_email
+            msg['To'] = to_email
+            msg['Subject'] = subject
+            
+            part = MIMEText(html_content, 'html')
+            msg.attach(part)
+            
+            server = smtplib.SMTP(self.smtp_server, self.smtp_port)
+            server.starttls()
+            server.login(self.sender_email, self.sender_password)
+            
+            text = msg.as_string()
+            server.sendmail(self.sender_email, to_email, text)
+            server.quit()
+            
+            logger.info(f"Credentials email sent successfully to {to_email}")
+            return True
+            
+        except Exception as e:
+            logger.error(f"Failed to send credentials email to {to_email}: {str(e)}")
+            return False
 
 # Global email service instance
 email_service = EmailService()
