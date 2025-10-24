@@ -776,7 +776,7 @@ export default function CustomerFormPage() {
                         
                         {/* Search bar opens here when Link to Company is ON */}
                         {linkToCompany && (
-                          <div className="relative flex-1 mx-3">
+                          <div className="relative w-64 mx-3">
                             <div className="relative">
                               <Building className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                               <input
