@@ -495,8 +495,44 @@ export default function CustomerFormPage() {
     }
 
     if (!customerForm.email || !customerForm.phone || !customerForm.street_address) {
-      alert('Please fill in all required fields');
+      showModalMessage('error', 'Missing Required Fields', 'Please fill in all required fields before submitting.');
       return;
+    }
+    
+    // Check for duplicate customers (only for new customers, not edits)
+    if (!isEdit) {
+      const duplicateByEmail = customers.find(c => 
+        c.email?.toLowerCase() === customerForm.email.toLowerCase() && c._id !== customerId
+      );
+      
+      const cleanPhone = customerForm.phone.replace(/\D/g, '');
+      const duplicateByPhone = customers.find(c => {
+        const existingPhone = c.phone?.replace(/\D/g, '');
+        return existingPhone === cleanPhone && c._id !== customerId;
+      });
+      
+      if (duplicateByEmail && duplicateByPhone) {
+        showModalMessage(
+          'error',
+          'Duplicate Customer Detected',
+          `A customer with this email (${customerForm.email}) and phone number already exists. Please check your records.`
+        );
+        return;
+      } else if (duplicateByEmail) {
+        showModalMessage(
+          'error',
+          'Duplicate Email Detected',
+          `A customer with email ${customerForm.email} already exists. Please use a different email address.`
+        );
+        return;
+      } else if (duplicateByPhone) {
+        showModalMessage(
+          'error',
+          'Duplicate Phone Number Detected',
+          `A customer with phone number ${customerForm.phone} already exists. Please use a different phone number.`
+        );
+        return;
+      }
     }
 
     try {
