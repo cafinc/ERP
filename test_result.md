@@ -549,3 +549,75 @@ backend:
       - working: true
         agent: "testing"
         comment: "✅ GET /api/unified-communications/analytics/summary endpoint working perfectly. Analytics aggregation functional with channel breakdown (email: 2, SMS: 1), direction analysis (sent: 24, outbound: 41, inbound: 16), 7-day metrics (21 messages), and top 10 customers. Comprehensive analytics ready."
+
+  - task: "Customer Company Linking - Company Customer Creation"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ POST /api/customers with customer_type='company' working perfectly. Successfully creates company customers with proper name, email, phone, address, and accounting fields. Response includes proper ID field."
+
+  - task: "Customer Company Linking - Individual Customer Creation (No Company)"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ POST /api/customers with customer_type='individual' (no company_id) working perfectly. Successfully creates individual customers without company links. Proper validation of no company_id/company_name fields."
+
+  - task: "Customer Company Linking - Individual Customer Creation (With Company Link)"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ POST /api/customers with customer_type='individual' AND company_id working perfectly. Successfully creates individual customers linked to companies. Company_id and company_name properly saved in customer record."
+
+  - task: "Customer Company Linking - Retrieve Customer with Company Link"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ GET /api/customers/{customer_id} for individuals linked to companies working perfectly. Response includes company_id and company_name fields with proper data integrity."
+
+  - task: "Customer Company Linking - List Customers Filter by Type"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ GET /api/customers working perfectly. Successfully retrieves all customers with proper type filtering. Found 12 companies and 51 individuals. Type-based filtering functional for search functionality."
+
+  - task: "Customer Company Linking - Update Customer Company Link"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ PUT /api/customers/{customer_id} to change company_id working perfectly. Successfully updates customer company links with proper validation and data integrity."
