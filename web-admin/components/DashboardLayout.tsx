@@ -493,32 +493,12 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           ))}
         </nav>
 
-        {/* Collapse/Expand Toggle */}
-        <div className="p-4 border-t border-gray-200">
-          <button
-            onClick={toggleSidebar}
-            className={`w-full flex items-center justify-center py-3 bg-gray-50 hover:bg-[#3f72af]/20 rounded-lg transition-colors ${
-              isSidebarMinimized ? 'px-0' : 'px-4'
-            }`}
-            title={isSidebarMinimized ? 'Expand sidebar' : 'Minimize sidebar'}
-            aria-label={isSidebarMinimized ? 'Expand sidebar' : 'Minimize sidebar'}
-          >
-            {isSidebarMinimized ? (
-              <ChevronRight className="w-7 h-7 text-[#3f72af]" strokeWidth={2.5} />
-            ) : (
-              <ChevronLeft className="w-7 h-7 text-[#3f72af]" strokeWidth={2.5} />
-            )}
-          </button>
+          {/* Main Content - Full Width */}
+          <main className="flex-1 overflow-auto bg-gray-50">
+            {children}
+          </main>
         </div>
-      </aside>
-
-      {/* Main Content */}
-      <main className="flex-1 overflow-y-auto">
-        {/* Page Content */}
-        {children}
-      </main>
       </div>
-    </div>
     </ChatProvider>
   );
 }
