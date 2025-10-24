@@ -1446,8 +1446,8 @@ export default function CustomerFormPage() {
                   />
                 </div>
                 
-                {/* Create Site Toggle */}
-                <div>
+                {/* Create Site Toggle and Site Name - Inline */}
+                <div className="md:col-span-2">
                   <div className="flex items-center gap-3">
                     <button
                       type="button"
@@ -1470,28 +1470,27 @@ export default function CustomerFormPage() {
                     <label className="text-sm font-medium text-gray-700 whitespace-nowrap">
                       Create Site
                     </label>
+                    
+                    {/* Site Name - appears inline when Create Site is ON */}
+                    {createSite && (
+                      <div className="flex-1 ml-3">
+                        <input
+                          type="text"
+                          value={siteName}
+                          onChange={e => setSiteName(e.target.value)}
+                          className="w-full px-4 py-1 h-6 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                          placeholder="Site Name"
+                          required={createSite}
+                        />
+                      </div>
+                    )}
                   </div>
-                </div>
-                
-                {/* Site Name - appears when Create Site is ON */}
-                {createSite && (
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Site Name *
-                    </label>
-                    <input
-                      type="text"
-                      value={siteName}
-                      onChange={e => setSiteName(e.target.value)}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
-                      placeholder="Main Office"
-                      required={createSite}
-                    />
+                  {createSite && (
                     <p className="text-xs text-gray-500 mt-1">
-                      Site will be created with customer's address
+                      Site will be created with contact's address
                     </p>
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
             </div>
 
