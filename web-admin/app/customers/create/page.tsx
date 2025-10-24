@@ -185,11 +185,15 @@ export default function CustomerFormPage() {
 
   const loadCompanies = async () => {
     try {
+      setLoadingCompanies(true);
       const response = await api.get('/customers');
       const companyList = response.data.filter((c: any) => c.customer_type === 'company');
       setCompanies(companyList);
     } catch (error) {
       console.error('Error loading companies:', error);
+      alert('Failed to load companies. Please refresh the page.');
+    } finally {
+      setLoadingCompanies(false);
     }
   };
 
