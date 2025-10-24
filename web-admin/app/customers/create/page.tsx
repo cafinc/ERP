@@ -638,8 +638,8 @@ export default function CustomerFormPage() {
                         )}
                       </div>
 
-                      {/* Communication Preference - Moved Before Mobile */}
-                      <div className="md:col-span-2">
+                      {/* Communication Preference (Left) and Mobile Number (Right) - Side by Side */}
+                      <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
                           Communication Preference
                         </label>
@@ -677,7 +677,7 @@ export default function CustomerFormPage() {
                         </p>
                       </div>
 
-                      {/* Mobile Number - Reduced width */}
+                      {/* Mobile Number - On the right */}
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
                           Mobile Number {customerForm.communication_preference === 'sms' ? '(Required)' : '(Optional)'}
