@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import PageHeader from '@/components/PageHeader';
+import CompactHeader from '@/components/CompactHeader';
 import {
   Plus,
   Search,
@@ -66,9 +66,9 @@ export default function HazardAssessmentsPage() {
   });
 
   return (
-    <PageHeader>
+    <HybridNavigationTopBar>
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
-        <PageHeader
+        <CompactHeader
           title="Hazard Assessments"
           icon={FileText}
           badges={[
@@ -225,6 +225,6 @@ export default function HazardAssessmentsPage() {
           ))}
         </div>
       </div>
-    </PageHeader>
+    </HybridNavigationTopBar>
   );
 }

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import PageHeader from '@/components/PageHeader';
+import CompactHeader from '@/components/CompactHeader';
 import {
   Plus,
   Search,
@@ -100,9 +100,9 @@ export default function SafetyPoliciesPage() {
   });
 
   return (
-    <PageHeader>
+    <HybridNavigationTopBar>
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
-        <PageHeader
+        <CompactHeader
           title="Safety Policies"
           icon={Clipboard}
           badges={[
@@ -254,6 +254,6 @@ export default function SafetyPoliciesPage() {
           })}
         </div>
       </div>
-    </PageHeader>
+    </HybridNavigationTopBar>
   );
 }

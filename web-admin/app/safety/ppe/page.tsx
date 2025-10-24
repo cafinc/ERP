@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import CompactHeader from '@/components/CompactHeader';
+import PageHeader from '@/components/PageHeader';
 import {
   Plus,
   Search,
@@ -72,9 +72,9 @@ export default function PPEManagementPage() {
   });
 
   return (
-    <HybridNavigationTopBar>
+    <PageHeader>
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
-        <CompactHeader
+        <PageHeader
           title="PPE Management"
           icon={HardHat}
           badges={[
@@ -224,6 +224,6 @@ export default function PPEManagementPage() {
           ))}
         </div>
       </div>
-    </HybridNavigationTopBar>
+    </PageHeader>
   );
 }
