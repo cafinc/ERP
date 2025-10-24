@@ -297,7 +297,10 @@ export default function LeadsPage() {
         <div className="max-w-7xl mx-auto">
           {/* Compact Header */}
           <PageHeader
-            title="Lead Management"
+        title="Leads"
+        subtitle="Track and convert potential customers"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "CRM", href: "/crm/dashboard" }, { label: "Leads" }]}
+        title="Lead Management"
             subtitle="Track and convert potential customers"
             backUrl="/customers"
           actions={[

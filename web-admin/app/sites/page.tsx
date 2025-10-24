@@ -132,7 +132,10 @@ export default function SitesPage() {
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         {/* Compact Header */}
         <PageHeader
-          title="Sites"
+        title="Sites"
+        subtitle="Manage service locations and properties"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Dispatch", href: "/dispatch" }, { label: "Sites" }]}
+        title="Sites"
           
           actions={[
             {

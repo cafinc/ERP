@@ -160,7 +160,10 @@ export default function HomePage() {
       <div className="p-4 space-y-6">
         {/* Compact Header */}
         <PageHeader
-          title="Dashboard"
+        title="Dashboard"
+        subtitle="Overview of your snow removal operations"
+        breadcrumbs={[{ label: "Home" }]}
+        title="Dashboard"
           icon={Home}
           badges={[
             { label: `${stats.customers} Customers`, color: 'blue' },
