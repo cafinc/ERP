@@ -754,15 +754,6 @@ export default function CustomerFormPage() {
                               </div>
                             )}
                             
-                            {/* Initial state - Show available companies count */}
-                            {!companySearch && !customerForm.company_id && !loadingCompanies && (
-                              <p className="text-xs text-gray-500 mt-2">
-                                {companies.length > 0 
-                                  ? `${companies.length} ${companies.length === 1 ? 'company' : 'companies'} available`
-                                  : 'No companies available yet. Create a company customer first.'}
-                              </p>
-                            )}
-                            
                             {/* Selected Company Display */}
                             {customerForm.company_id && companySearch && (
                               <div className="mt-2 flex items-center justify-between bg-blue-50 border border-blue-200 rounded-lg px-3 py-2 animate-in fade-in duration-200">
@@ -785,6 +776,7 @@ export default function CustomerFormPage() {
                             )}
                           </div>
                         )}
+                        </div>
                       </div>
                     </div>
                   </div>
