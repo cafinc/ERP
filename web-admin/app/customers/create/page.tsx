@@ -513,9 +513,40 @@ export default function CustomerFormPage() {
 
           await api.post('/customers', contactData);
         }
+        
+        // Create site if toggle is ON
+        if (createSite && siteName) {
+          const siteData = {
+            name: siteName,
+            customer_id: companyId,
+            address: address,
+            street_address: customerForm.street_address,
+            city: customerForm.city,
+            province: customerForm.province,
+            postal_code: customerForm.postal_code,
+            country: customerForm.country,
+            status: 'active',
+            type: 'residential', // Default type
+            notes: `Site created automatically with customer ${customerForm.first_name ? customerForm.first_name + ' ' + customerForm.last_name : customerForm.company_name}`,
+          };
+          
+          try {
+            await api.post('/sites', siteData);
+            console.log('Site created successfully:', siteName);
+          } catch (siteError) {
+            console.error('Error creating site:', siteError);
+            // Don't fail the whole operation if site creation fails
+            alert(`Customer created, but site creation failed: ${siteError}`);
+          }
+        }
 
         if (!requireAccess) {
-          alert('Customer created successfully!');
+          const message = createSite && siteName 
+            ? `Customer created successfully! Site "${siteName}" has been created.`
+            : 'Customer created successfully!';
+          alert(message);
+        } else if (createSite && siteName) {
+          alert(`Customer and site "${siteName}" created successfully!`);
         }
         router.push(`/customers/${companyId}`);
       }
