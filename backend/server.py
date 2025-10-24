@@ -12383,5 +12383,10 @@ from site_geofence_routes import router as site_geofence_router
 api_router.include_router(site_geofence_router)
 logger.info("Site geofencing endpoints registered successfully")
 
+# Include Agreement Template router
+from agreement_template_routes import router as agreement_template_router
+api_router.include_router(agreement_template_router)
+logger.info("Agreement template endpoints registered successfully")
+
 # Include the router with all endpoints
 app.include_router(api_router)
