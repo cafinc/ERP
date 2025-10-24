@@ -645,7 +645,7 @@ export default function CustomerFormPage() {
                       </div>
 
                       <div className="md:col-span-2">
-                        <div className="flex items-center gap-3 mb-3">
+                        <div className="flex items-center gap-3">
                           <button
                             type="button"
                             onClick={() => {
@@ -657,7 +657,7 @@ export default function CustomerFormPage() {
                                 setFilteredCompanies([]);
                               }
                             }}
-                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#3f72af] focus:ring-offset-2 ${
+                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#3f72af] focus:ring-offset-2 flex-shrink-0 ${
                               linkToCompany ? 'bg-[#3f72af]' : 'bg-gray-200'
                             }`}
                           >
@@ -667,13 +667,12 @@ export default function CustomerFormPage() {
                               }`}
                             />
                           </button>
-                          <label className="text-sm font-medium text-gray-700">
+                          <label className="text-sm font-medium text-gray-700 whitespace-nowrap">
                             Link to Company
                           </label>
-                        </div>
                         
                         {linkToCompany && (
-                          <div className="relative">
+                          <div className="relative flex-1">
                             <div className="relative">
                               <Building className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                               <input
