@@ -1527,6 +1527,24 @@ export default function CustomerFormPage() {
                   </label>
                 </div>
               </div>
+              
+              {/* Create Customer Button */}
+              <div className="flex justify-end pt-6 border-t">
+                <button
+                  type="submit"
+                  disabled={saving}
+                  className="px-6 py-3 bg-[#3f72af] text-white font-medium rounded-lg hover:bg-[#2f5a8f] focus:outline-none focus:ring-2 focus:ring-[#3f72af] focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                >
+                  {saving ? (
+                    <span className="flex items-center gap-2">
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                      Creating Customer...
+                    </span>
+                  ) : (
+                    'Create Customer'
+                  )}
+                </button>
+              </div>
             </div>
           </form>
         </div>
