@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import PageHeader from '@/components/PageHeader';
+import CompactHeader from '@/components/CompactHeader';
 import api from '@/lib/api';
 import {
   Plus,
@@ -131,7 +131,7 @@ export default function SitesPage() {
   return (
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         {/* Compact Header */}
-        <PageHeader
+        <CompactHeader
           title="Sites"
           icon={MapPin}
           badges={[
