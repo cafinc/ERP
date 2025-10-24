@@ -23,6 +23,9 @@ import {
   Smartphone,
   MessageSquare,
   Bell,
+  Key,
+  Monitor,
+  Check,
 } from 'lucide-react';
 
 // Canadian provinces
