@@ -58,6 +58,8 @@ export default function CustomerFormPage() {
   const [linkToCompany, setLinkToCompany] = useState(false);
   const [companySearch, setCompanySearch] = useState('');
   const [filteredCompanies, setFilteredCompanies] = useState<any[]>([]);
+  const [loadingCompanies, setLoadingCompanies] = useState(false);
+  const [showSearchResults, setShowSearchResults] = useState(false);
   
   const [customerForm, setCustomerForm] = useState({
     // For individuals
