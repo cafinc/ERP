@@ -1,22 +1,14 @@
 ---
 user_problem_statement: |
-  Build complete HR Module and Integration Hub overnight autonomously.
+  Current Task: Implement toggle and search bar functionality for "Link to Company" on the /customers/create page.
   
-  HR Module includes:
-  - Employee Management (CRUD, profiles, documents, emergency contacts)
-  - Time & Attendance (clock in/out, timesheets, approvals, GPS tracking)
-  - PTO Management (requests, approvals, balance tracking, calendar)
-  - Training & Certifications (programs, assignments, tracking, expirations)
-  - Performance Management (reviews, goals, ratings)
-  - Payroll Settings & Configuration
+  Requirements:
+  - Replace dropdown with a toggle switch
+  - When toggle is ON, show a search bar to find companies
+  - Search bar should connect to backend company data
+  - Link customer to company profile for projects, emails, SMS, and in-app messaging
   
-  Integration Hub includes:
-  - Integration Management (CRUD operations)
-  - QuickBooks Integration (Payroll, Time Tracking sync - mock/placeholder)
-  - Microsoft 365 Integration (Azure AD SSO, Teams, Outlook, OneDrive, Power BI - mock/placeholder)
-  - Sync Logs tracking
-  
-  All integrations use mock/placeholder flows until API credentials are provided.
+  Previous Context: HR Module and Integration Hub overnight build completed.
 
 backend:
   - task: "Site Maps API - Create site map with annotations"
