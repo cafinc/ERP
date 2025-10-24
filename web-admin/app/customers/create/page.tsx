@@ -749,6 +749,32 @@ export default function CustomerFormPage() {
 
                       <div className="md:col-span-2">
                         <div className="flex items-center gap-3">
+                          {/* Require Access Toggle - Moved to the left */}
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const newRequireAccess = !requireAccess;
+                              setRequireAccess(newRequireAccess);
+                              if (!newRequireAccess) {
+                                setAccessWeb(false);
+                                setAccessInApp(false);
+                                setUserRole('customer');
+                              }
+                            }}
+                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#3f72af] focus:ring-offset-2 flex-shrink-0 ${
+                              requireAccess ? 'bg-[#3f72af]' : 'bg-gray-200'
+                            }`}
+                          >
+                            <span
+                              className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                                requireAccess ? 'translate-x-6' : 'translate-x-1'
+                              }`}
+                            />
+                          </button>
+                          <label className="text-sm font-medium text-gray-700 whitespace-nowrap">
+                            Require Access
+                          </label>
+                          
                           <button
                             type="button"
                             onClick={() => {
@@ -760,7 +786,7 @@ export default function CustomerFormPage() {
                                 setFilteredCompanies([]);
                               }
                             }}
-                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#3f72af] focus:ring-offset-2 flex-shrink-0 ${
+                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#3f72af] focus:ring-offset-2 flex-shrink-0 ml-6 ${
                               linkToCompany ? 'bg-[#3f72af]' : 'bg-gray-200'
                             }`}
                           >
