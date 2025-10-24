@@ -310,7 +310,7 @@ For support, contact your supervisor or use the contact information above.
     
     def send_credentials_email(self, to_email: str, name: str, username: str, password: str, 
                                access_web: bool, access_inapp: bool, role: str) -> bool:
-        """Send welcome email with login credentials"""
+        """Send welcome email with login credentials using database template"""
         
         # For development without SMTP configured
         if not self.enabled:
@@ -319,17 +319,95 @@ For support, contact your supervisor or use the contact information above.
             logger.info(f"[EMAIL MOCK] Access - Web: {access_web}, InApp: {access_inapp}")
             return True
         
+        # Build access text
         access_types = []
         if access_web:
             access_types.append("Web Dashboard")
         if access_inapp:
             access_types.append("Mobile App")
-        
         access_text = " and ".join(access_types) if access_types else "No access configured"
+        
+        # Build login button HTML
+        login_button = ""
+        if access_web:
+            login_button = '<a href="https://snow-dash-1.preview.emergentagent.com/login" class="button">Login to Web Dashboard</a>'
         
         subject = "Welcome to Snow Dash - Your Account Credentials"
         
-        html_content = f"""
+        # Try to get template from database, fallback to hardcoded if not found
+        try:
+            from motor.motor_asyncio import AsyncIOMotorClient
+            import os
+            import asyncio
+            
+            async def get_template():
+                mongo_url = os.getenv('MONGO_URL', 'mongodb://localhost:27017')
+                db_name = os.getenv('DB_NAME', 'snow_removal')
+                client = AsyncIOMotorClient(mongo_url)
+                db = client[db_name]
+                template = await db.email_templates.find_one({"name": "User Login Credentials"})
+                return template
+            
+            # Get template from database
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+            template = loop.run_until_complete(get_template())
+            loop.close()
+            
+            if template:
+                # Use template from database
+                html_content = template['body']
+                subject = template['subject']
+                
+                # Replace placeholders
+                html_content = html_content.replace('{{name}}', name)
+                html_content = html_content.replace('{{username}}', username)
+                html_content = html_content.replace('{{password}}', password)
+                html_content = html_content.replace('{{role}}', role.title())
+                html_content = html_content.replace('{{access}}', access_text)
+                html_content = html_content.replace('{{login_button}}', login_button)
+                
+                logger.info("Using database template for credentials email")
+            else:
+                # Fallback to hardcoded template
+                html_content = self._get_fallback_credentials_template(
+                    name, username, password, role, access_text, login_button
+                )
+                logger.info("Using fallback template for credentials email")
+        except Exception as e:
+            logger.warning(f"Could not load template from database: {e}, using fallback")
+            html_content = self._get_fallback_credentials_template(
+                name, username, password, role, access_text, login_button
+            )
+        
+        try:
+            msg = MIMEMultipart('alternative')
+            msg['From'] = self.sender_email
+            msg['To'] = to_email
+            msg['Subject'] = subject
+            
+            part = MIMEText(html_content, 'html')
+            msg.attach(part)
+            
+            server = smtplib.SMTP(self.smtp_server, self.smtp_port)
+            server.starttls()
+            server.login(self.sender_email, self.sender_password)
+            
+            text = msg.as_string()
+            server.sendmail(self.sender_email, to_email, text)
+            server.quit()
+            
+            logger.info(f"Credentials email sent successfully to {to_email}")
+            return True
+            
+        except Exception as e:
+            logger.error(f"Failed to send credentials email to {to_email}: {str(e)}")
+            return False
+    
+    def _get_fallback_credentials_template(self, name: str, username: str, password: str, 
+                                           role: str, access_text: str, login_button: str) -> str:
+        """Fallback template if database template not available"""
+        return f"""
 <!DOCTYPE html>
 <html>
 <head>
@@ -363,7 +441,7 @@ For support, contact your supervisor or use the contact information above.
             <p><strong>Important:</strong> Please change your password after your first login for security.</p>
             
             <div style="text-align: center; margin: 30px 0;">
-                {"<a href='https://snow-dash-1.preview.emergentagent.com/login' class='button'>Login to Web Dashboard</a>" if access_web else ""}
+                {login_button}
             </div>
             
             <p>If you have any questions or need assistance, please don't hesitate to contact our support team.</p>
@@ -375,30 +453,6 @@ For support, contact your supervisor or use the contact information above.
 </body>
 </html>
         """
-        
-        try:
-            msg = MIMEMultipart('alternative')
-            msg['From'] = self.sender_email
-            msg['To'] = to_email
-            msg['Subject'] = subject
-            
-            part = MIMEText(html_content, 'html')
-            msg.attach(part)
-            
-            server = smtplib.SMTP(self.smtp_server, self.smtp_port)
-            server.starttls()
-            server.login(self.sender_email, self.sender_password)
-            
-            text = msg.as_string()
-            server.sendmail(self.sender_email, to_email, text)
-            server.quit()
-            
-            logger.info(f"Credentials email sent successfully to {to_email}")
-            return True
-            
-        except Exception as e:
-            logger.error(f"Failed to send credentials email to {to_email}: {str(e)}")
-            return False
 
 # Global email service instance
 email_service = EmailService()
