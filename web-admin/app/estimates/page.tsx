@@ -123,7 +123,7 @@ export default function EstimatesPage() {
           actions={[
             {
               label: 'New Estimate',
-              icon: Plus,
+              icon: <Plus className="w-4 h-4 mr-2" />,
               onClick: handleCreateEstimate,
               variant: 'primary',
             },

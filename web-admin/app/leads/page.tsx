@@ -303,13 +303,13 @@ export default function LeadsPage() {
           actions={[
               {
                 label: 'Export',
-                icon: Download,
+                icon: <Download className="w-4 h-4 mr-2" />,
                 onClick: () => alert('Export functionality'),
                 variant: 'secondary',
               },
               {
                 label: 'Add Lead',
-                icon: Plus,
+                icon: <Plus className="w-4 h-4 mr-2" />,
                 onClick: () => {
                   resetForm();
                   setShowModal(true);

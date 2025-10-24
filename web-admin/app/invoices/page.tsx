@@ -151,7 +151,7 @@ export default function InvoicesPage() {
           actions={[
             {
               label: 'New Invoice',
-              icon: Plus,
+              icon: <Plus className="w-4 h-4 mr-2" />,
               onClick: () => router.push('/invoices/create'),
               variant: 'primary',
             },

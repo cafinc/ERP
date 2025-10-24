@@ -116,7 +116,7 @@ export default function ProjectsPage() {
           actions={[
             {
               label: 'New Project',
-              icon: Plus,
+              icon: <Plus className="w-4 h-4 mr-2" />,
               onClick: () => router.push('/projects/create'),
               variant: 'primary',
             },
