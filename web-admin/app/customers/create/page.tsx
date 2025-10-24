@@ -1622,19 +1622,19 @@ export default function CustomerFormPage() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Tax ID / EIN
+                        Business Number
                       </label>
                       <input
                         type="text"
-                        value={customerForm.accounting.tax_id}
+                        value={customerForm.accounting.business_number}
                         onChange={e =>
                           setCustomerForm({
                             ...customerForm,
-                            accounting: { ...customerForm.accounting, tax_id: e.target.value },
+                            accounting: { ...customerForm.accounting, business_number: e.target.value },
                           })
                         }
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="12-3456789"
+                        placeholder="123456789RC0001"
                       />
                     </div>
 
@@ -1663,26 +1663,59 @@ export default function CustomerFormPage() {
                       </select>
                     </div>
 
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Credit Limit
-                      </label>
-                      <input
-                        type="number"
-                        value={customerForm.accounting.credit_limit}
-                        onChange={e =>
-                          setCustomerForm({
+                    {/* Credit Limit Toggle */}
+                    <div className="md:col-span-2">
+                      <div className="flex items-center gap-3 mb-2">
+                        <button
+                          type="button"
+                          onClick={() => setCustomerForm({
                             ...customerForm,
                             accounting: {
                               ...customerForm.accounting,
-                              credit_limit: e.target.value,
-                            },
-                          })
-                        }
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="0.00"
-                      />
+                              credit_limit_enabled: !customerForm.accounting.credit_limit_enabled
+                            }
+                          })}
+                          className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#3f72af] focus:ring-offset-2 flex-shrink-0 ${
+                            customerForm.accounting.credit_limit_enabled ? 'bg-[#3f72af]' : 'bg-gray-200'
+                          }`}
+                        >
+                          <span
+                            className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                              customerForm.accounting.credit_limit_enabled ? 'translate-x-6' : 'translate-x-1'
+                            }`}
+                          />
+                        </button>
+                        <label className="text-sm font-medium text-gray-700">
+                          Set Credit Limit
+                        </label>
+                      </div>
                     </div>
+
+                    {customerForm.accounting.credit_limit_enabled && (
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Credit Limit Amount
+                        </label>
+                        <div className="relative">
+                          <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">$</span>
+                          <input
+                            type="number"
+                            value={customerForm.accounting.credit_limit}
+                            onChange={e =>
+                              setCustomerForm({
+                                ...customerForm,
+                                accounting: {
+                                  ...customerForm.accounting,
+                                  credit_limit: e.target.value,
+                                },
+                              })
+                            }
+                            className="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="10000.00"
+                          />
+                        </div>
+                      </div>
+                    )}
 
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -1701,11 +1734,11 @@ export default function CustomerFormPage() {
                         }
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       >
-                        <option value="">Select method</option>
+                        <option value="e_transfer">E-Transfer</option>
+                        <option value="direct_debit">Direct Debit</option>
                         <option value="check">Check</option>
                         <option value="credit_card">Credit Card</option>
                         <option value="bank_transfer">Bank Transfer</option>
-                        <option value="cash">Cash</option>
                       </select>
                     </div>
 
