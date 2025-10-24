@@ -431,7 +431,10 @@ export default function CreateEstimatePage() {
     <PageHeader>
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto">
         <PageHeader
-          title="Create Estimate"
+        title="Create Estimate"
+        subtitle="Generate a new service estimate"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "CRM", href: "/crm/dashboard" }, { label: "Estimates", href: "/estimates" }, { label: "Create" }]}
+        title="Create Estimate"
           backUrl="/estimates"
           icon={FileText}
           actions={[

@@ -117,7 +117,10 @@ export default function CrewPage() {
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         {/* Compact Header */}
         <PageHeader
-          title="Crew Members"
+        title="Crew Management"
+        subtitle="Manage field crew and assignments"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Crew" }]}
+        title="Crew Members"
           icon={Users}
           badges={[
             { label: `${users.length} Total`, color: 'blue' },
