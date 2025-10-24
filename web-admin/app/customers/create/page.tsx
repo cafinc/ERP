@@ -527,7 +527,7 @@ export default function CustomerFormPage() {
             country: customerForm.country,
             status: 'active',
             type: 'residential', // Default type
-            notes: `Site created automatically with customer ${customerForm.first_name ? customerForm.first_name + ' ' + customerForm.last_name : customerForm.company_name}`,
+            notes: `Site created automatically with contact ${customerForm.first_name ? customerForm.first_name + ' ' + customerForm.last_name : customerForm.company_name}`,
           };
           
           try {
