@@ -30,7 +30,10 @@ export default function SafetyTrainingPage() {
     <PageHeader>
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         <PageHeader
-          title="Safety Training"
+        title="Safety Training"
+        subtitle="Manage safety training programs"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Safety", href: "/safety/dashboard" }, { label: "Training" }]}
+        title="Safety Training"
           
           actions={[
             {

@@ -140,7 +140,10 @@ export default function ReportsPage() {
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
         {/* Compact Header */}
         <PageHeader
-          title="Automated Reports"
+        title="Reports"
+        subtitle="Generate and view business reports"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Reports" }]}
+        title="Automated Reports"
           
         />
 

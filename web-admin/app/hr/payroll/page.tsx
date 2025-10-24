@@ -139,7 +139,11 @@ export default function PayrollSettingsPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50">
-        <PageHeader title="Payroll Settings" backUrl="/hr" />
+        <PageHeader
+        title="Payroll Settings"
+        subtitle="Configure payroll and compensation"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "HR", href: "/hr" }, { label: "Payroll" }]}
+        title="Payroll Settings" backUrl="/hr" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="bg-white rounded-lg shadow p-8 text-center">
             <RefreshCw className="h-12 w-12 text-gray-400 mx-auto mb-4 animate-spin" />

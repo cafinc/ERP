@@ -208,7 +208,11 @@ export default function TrainingPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <PageHeader title="Training & Certifications" backUrl="/hr" />
+      <PageHeader
+        title="Training"
+        subtitle="Employee training and development"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "HR", href: "/hr" }, { label: "Training" }]}
+        title="Training & Certifications" backUrl="/hr" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Stats Cards */}

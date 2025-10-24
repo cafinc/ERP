@@ -103,7 +103,10 @@ export default function SafetyPoliciesPage() {
     <PageHeader>
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         <PageHeader
-          title="Safety Policies"
+        title="Safety Policies"
+        subtitle="Maintain safety policy documentation"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Safety", href: "/safety/dashboard" }, { label: "Policies" }]}
+        title="Safety Policies"
           
           actions={[
             {

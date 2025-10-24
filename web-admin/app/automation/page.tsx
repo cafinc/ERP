@@ -122,7 +122,10 @@ export default function AutomationDashboardPage() {
   return (
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
         <PageHeader
-          title="Automation Dashboard"
+        title="Automation"
+        subtitle="Configure automated workflows and triggers"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Automation" }]}
+        title="Automation Dashboard"
           
           actions={[
             {

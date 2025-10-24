@@ -168,7 +168,11 @@ export default function PTOManagementPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <PageHeader title="PTO Management" backUrl="/hr" />
+      <PageHeader
+        title="PTO Management"
+        subtitle="Manage paid time off requests"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "HR", href: "/hr" }, { label: "PTO" }]}
+        title="PTO Management" backUrl="/hr" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Stats Cards */}

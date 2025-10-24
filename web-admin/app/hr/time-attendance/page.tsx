@@ -137,7 +137,11 @@ export default function TimeAttendancePage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <PageHeader title="Time & Attendance" backUrl="/hr" />
+      <PageHeader
+        title="Time & Attendance"
+        subtitle="Track employee hours and attendance"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "HR", href: "/hr" }, { label: "Time & Attendance" }]}
+        title="Time & Attendance" backUrl="/hr" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Stats Cards */}

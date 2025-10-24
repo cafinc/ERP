@@ -67,7 +67,10 @@ export default function SafetyMeetingsPage() {
     <PageHeader>
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         <PageHeader
-          title="Safety Meetings"
+        title="Safety Meetings"
+        subtitle="Schedule and document safety meetings"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Safety", href: "/safety/dashboard" }, { label: "Meetings" }]}
+        title="Safety Meetings"
           
           actions={[
             {

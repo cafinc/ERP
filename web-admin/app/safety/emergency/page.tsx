@@ -79,7 +79,10 @@ export default function EmergencyPlansPage() {
     <PageHeader>
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         <PageHeader
-          title="Emergency Response Plans"
+        title="Emergency Plans"
+        subtitle="Manage emergency response procedures"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Safety", href: "/safety/dashboard" }, { label: "Emergency Plans" }]}
+        title="Emergency Response Plans"
           
           actions={[
             {

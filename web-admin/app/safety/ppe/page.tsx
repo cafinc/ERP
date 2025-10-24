@@ -75,7 +75,10 @@ export default function PPEManagementPage() {
     <PageHeader>
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         <PageHeader
-          title="PPE Management"
+        title="PPE Management"
+        subtitle="Track personal protective equipment"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Safety", href: "/safety/dashboard" }, { label: "PPE" }]}
+        title="PPE Management"
           
           actions={[
             {

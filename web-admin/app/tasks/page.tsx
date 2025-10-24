@@ -16,7 +16,10 @@ export default function TasksPage() {
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         <div className="max-w-7xl mx-auto">
           <PageHeader
-            title="Tasks"
+        title="Tasks"
+        subtitle="Manage and assign tasks to team members"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Tasks" }]}
+        title="Tasks"
             subtitle="Manage your team's tasks and assignments"
           actions={[
               {

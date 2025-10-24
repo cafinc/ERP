@@ -245,7 +245,11 @@ export default function PerformancePage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <PageHeader title="Performance Management" backUrl="/hr" />
+      <PageHeader
+        title="Performance"
+        subtitle="Employee performance reviews and goals"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "HR", href: "/hr" }, { label: "Performance" }]}
+        title="Performance Management" backUrl="/hr" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Stats Cards */}
