@@ -20,6 +20,8 @@ import {
   XCircle,
   AlertCircle,
   Settings,
+  RefreshCw,
+  Download,
 } from 'lucide-react';
 
 interface Agreement {
@@ -49,25 +51,20 @@ export default function AgreementsPage() {
   const [agreements, setAgreements] = useState<Agreement[]>([]);
   const [templates, setTemplates] = useState<Template[]>([]);
   const [loading, setLoading] = useState(true);
-  const [filter, setFilter] = useState<'all' | 'draft' | 'active' | 'expired'>('all');
-  const [selectedTemplate, setSelectedTemplate] = useState<string>('');
+  const [activeTab, setActiveTab] = useState('all');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [showTemplateDropdown, setShowTemplateDropdown] = useState(false);
 
   useEffect(() => {
     loadAgreements();
     loadTemplates();
-  }, [filter]);
+  }, []);
 
   const loadAgreements = async () => {
     try {
       setLoading(true);
       const res = await api.get('/contracts');
       let agreementsData = Array.isArray(res.data) ? res.data : (res.data?.contracts || []);
-      
-      // Filter based on status
-      if (filter !== 'all') {
-        agreementsData = agreementsData.filter((a: Agreement) => a.status === filter);
-      }
-      
       setAgreements(agreementsData);
     } catch (error) {
       console.error('Error loading agreements:', error);
@@ -111,6 +108,7 @@ export default function AgreementsPage() {
       // Navigate to create agreement with selected template
       router.push(`/agreements/create?template_id=${templateId}`);
     }
+    setShowTemplateDropdown(false);
   };
 
   const getStatusBadge = (status: string) => {
@@ -146,13 +144,44 @@ export default function AgreementsPage() {
     }
   };
 
+  // Filter agreements based on active tab and search
+  const filteredAgreements = agreements.filter(agreement => {
+    const matchesTab = activeTab === 'all' || agreement.status === activeTab;
+    const matchesSearch = searchQuery === '' || 
+      agreement.agreement_number?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      agreement.customer_name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      agreement.agreement_type?.toLowerCase().includes(searchQuery.toLowerCase());
+    
+    return matchesTab && matchesSearch;
+  });
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex flex-col">
+        <PageHeader
+          title="Agreements"
+          subtitle="Manage your service agreements and contracts"
+          breadcrumbs={[
+            { label: 'Home', href: '/' },
+            { label: 'CRM', href: '/crm/dashboard' },
+            { label: 'Agreements' }
+          ]}
+        />
+        <div className="flex items-center justify-center h-96">
+          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <>
-      {/* Page Header */}
+    <div className="min-h-screen bg-gray-50 flex flex-col">
       <PageHeader
         title="Agreements"
+        subtitle="Manage your service agreements and contracts"
         breadcrumbs={[
-          { label: 'Contracts', href: '/contracts' },
+          { label: 'Home', href: '/' },
+          { label: 'CRM', href: '/crm/dashboard' },
           { label: 'Agreements' }
         ]}
         actions={[
