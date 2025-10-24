@@ -612,7 +612,7 @@ export default function CustomerFormPage() {
                         }`}
                       >
                         <Users className="w-12 h-12 mx-auto mb-4 text-[#3f72af]" />
-                        <p className="font-bold text-gray-900 text-xl">Individual</p>
+                        <p className="font-bold text-gray-900 text-xl">Contact</p>
                         <p className="text-sm text-gray-600 mt-2">Person or homeowner</p>
                       </button>
                       <button
