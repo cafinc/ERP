@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import CompactHeader from '@/components/CompactHeader';
-import HybridNavigationTopBar from '@/components/HybridNavigationTopBar';
+import PageHeader from '@/components/PageHeader';
+import PageHeader from '@/components/PageHeader';
 import { Building, Mail, Phone, MapPin, Globe, FileText } from 'lucide-react';
 
 export default function CompanySettingsPage() {
@@ -25,10 +25,10 @@ export default function CompanySettingsPage() {
   };
 
   return (
-    <HybridNavigationTopBar>
+    <PageHeader>
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         <div className="max-w-4xl mx-auto">
-          <CompactHeader
+          <PageHeader
             title="Company Information"
             subtitle="Manage your business details and contact information"
             icon={Building}
@@ -202,6 +202,6 @@ export default function CompanySettingsPage() {
           </form>
         </div>
       </div>
-    </HybridNavigationTopBar>
+    </PageHeader>
   );
 }

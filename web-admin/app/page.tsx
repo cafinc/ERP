@@ -1,6 +1,6 @@
 'use client';
 
-import CompactHeader from '@/components/CompactHeader';
+import PageHeader from '@/components/PageHeader';
 import { 
   Users, FileText, DollarSign, TrendingUp, Calendar, Phone, Mail, CheckSquare, Home,
   Package, Shield, BarChart3, Activity, AlertTriangle, TrendingDown, CheckCircle,
@@ -159,7 +159,7 @@ export default function HomePage() {
   return (
       <div className="p-4 space-y-6">
         {/* Compact Header */}
-        <CompactHeader
+        <PageHeader
           title="Dashboard"
           icon={Home}
           badges={[

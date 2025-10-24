@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import CompactHeader from '@/components/CompactHeader';
+import PageHeader from '@/components/PageHeader';
 
 export default function WebhooksPage() {
   const [webhooks] = useState([
@@ -11,7 +11,7 @@ export default function WebhooksPage() {
 
   return (
     <div style={{ padding: '24px', backgroundColor: '#f8fafc', minHeight: '100vh' }}>
-      <CompactHeader
+      <PageHeader
         title="Webhooks"
         subtitle="Configure webhook endpoints for real-time event notifications"
         backUrl="/settings"

@@ -224,7 +224,7 @@ export default function OperationsDashboard() {
 
   if (loading) {
     return (
-      <HybridNavigationTopBar>
+      <PageHeader>
         <div className="min-h-screen bg-gray-50 flex flex-col">
           <PageHeader
             title="Operations Dashboard"
@@ -238,12 +238,12 @@ export default function OperationsDashboard() {
             <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
           </div>
         </div>
-      </HybridNavigationTopBar>
+      </PageHeader>
     );
   }
 
   return (
-    <HybridNavigationTopBar>
+    <PageHeader>
       <div className="min-h-screen bg-gray-50 flex flex-col">
         <PageHeader
           title="Operations Dashboard"
@@ -400,6 +400,6 @@ export default function OperationsDashboard() {
           </div>
         </div>
       </div>
-    </HybridNavigationTopBar>
+    </PageHeader>
   );
 }

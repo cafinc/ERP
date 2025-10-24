@@ -147,16 +147,16 @@ export default function RingCentralSettings() {
 
   if (loading) {
     return (
-      <HybridNavigationTopBar>
+      <PageHeader>
         <div className="flex items-center justify-center h-full">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
-      </HybridNavigationTopBar>
+      </PageHeader>
     );
   }
 
   return (
-    <HybridNavigationTopBar>
+    <PageHeader>
       <div className="p-8">
         {/* Header */}
         <div className="mb-8">
@@ -308,6 +308,6 @@ export default function RingCentralSettings() {
           </p>
         </div>
       </div>
-    </HybridNavigationTopBar>
+    </PageHeader>
   );
 }

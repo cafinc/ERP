@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import CompactHeader from '@/components/CompactHeader';
+import PageHeader from '@/components/PageHeader';
 import { Shield, CheckCircle, XCircle, Save, RotateCcw } from 'lucide-react';
 
 const PERMISSION_CATEGORIES = {
@@ -135,7 +135,7 @@ export default function PermissionsMatrixPage() {
 
   return (
     <div style={{ padding: '24px', backgroundColor: '#f8fafc', minHeight: '100vh' }}>
-      <CompactHeader
+      <PageHeader
         title=\"Permissions Matrix\"
         subtitle=\"Configure role-based access control\"\n        backUrl=\"/settings/roles-permissions\"
       />

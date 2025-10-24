@@ -147,16 +147,16 @@ export default function CreateInspectionSchedulePage() {
 
   if (loadingData) {
     return (
-      <HybridNavigationTopBar>
+      <PageHeader>
         <div className="flex items-center justify-center h-64">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
-      </HybridNavigationTopBar>
+      </PageHeader>
     );
   }
 
   return (
-    <HybridNavigationTopBar>
+    <PageHeader>
       <div className="max-w-4xl mx-auto space-y-6">
         {/* Header */}
         <div className="flex items-center gap-4">
@@ -469,6 +469,6 @@ export default function CreateInspectionSchedulePage() {
           </div>
         </form>
       </div>
-    </HybridNavigationTopBar>
+    </PageHeader>
   );
 }

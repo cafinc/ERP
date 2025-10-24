@@ -49,7 +49,7 @@ export default function SupportPage() {
   };
 
   return (
-    <HybridNavigationTopBar>
+    <PageHeader>
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         {/* Header */}
         <div className="mb-4">
@@ -300,6 +300,6 @@ export default function SupportPage() {
           </div>
         </div>
       </div>
-    </HybridNavigationTopBar>
+    </PageHeader>
   );
 }

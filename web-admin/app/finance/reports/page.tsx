@@ -96,7 +96,7 @@ export default function ReportsPage() {
   ];
 
   return (
-    <HybridNavigationTopBar>
+    <PageHeader>
       <PageHeader
         title="Financial Reports"
         subtitle="Generate and download comprehensive financial reports"
@@ -196,6 +196,6 @@ export default function ReportsPage() {
           </div>
         </div>
       </div>
-    </HybridNavigationTopBar>
+    </PageHeader>
   );
 }

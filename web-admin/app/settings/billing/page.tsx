@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import CompactHeader from '@/components/CompactHeader';
+import PageHeader from '@/components/PageHeader';
 import { CreditCard, Download, Calendar } from 'lucide-react';
 
 export default function BillingPage() {
@@ -11,10 +11,10 @@ export default function BillingPage() {
   ];
 
   return (
-    <HybridNavigationTopBar>
+    <PageHeader>
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         <div className="max-w-4xl mx-auto">
-          <CompactHeader
+          <PageHeader
             title="Billing & Subscription"
             subtitle="Manage your subscription and billing information"
             icon={CreditCard}
@@ -88,6 +88,6 @@ export default function BillingPage() {
           </div>
         </div>
       </div>
-    </HybridNavigationTopBar>
+    </PageHeader>
   );
 }

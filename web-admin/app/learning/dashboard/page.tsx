@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import CompactHeader from '@/components/CompactHeader';
+import PageHeader from '@/components/PageHeader';
 import {
   BookOpen,
   FileText,
@@ -44,9 +44,9 @@ export default function LearningDashboardPage() {
   ];
 
   return (
-    <HybridNavigationTopBar>
+    <PageHeader>
       <div className="p-4 space-y-6">
-        <CompactHeader
+        <PageHeader
           title="Learning Centre Dashboard"
           icon={LayoutDashboard}
           badges={[
@@ -103,6 +103,6 @@ export default function LearningDashboardPage() {
           </div>
         </div>
       </div>
-    </HybridNavigationTopBar>
+    </PageHeader>
   );
 }

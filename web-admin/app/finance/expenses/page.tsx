@@ -132,7 +132,7 @@ export default function ExpensesPage() {
   };
 
   return (
-    <HybridNavigationTopBar>
+    <PageHeader>
       <PageHeader
         title="Expenses"
         subtitle={`${filteredExpenses.length} expense${filteredExpenses.length !== 1 ? 's' : ''} • Total: $${totalExpenses.toLocaleString()}`}
@@ -367,6 +367,6 @@ export default function ExpensesPage() {
           </div>
         )}
       </div>
-    </HybridNavigationTopBar>
+    </PageHeader>
   );
 }

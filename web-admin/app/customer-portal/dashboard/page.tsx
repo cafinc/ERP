@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import CompactHeader from '@/components/CompactHeader';
+import PageHeader from '@/components/PageHeader';
 import {
   Home,
   MapPin,
@@ -173,7 +173,7 @@ export default function CustomerDashboardPage() {
     <CustomerPortalLayout>
       <div className="space-y-6">
         {/* Compact Header */}
-        <CompactHeader
+        <PageHeader
           title="My Dashboard"
           subtitle="Welcome back! Here's your snow removal service overview"
           icon={Home}

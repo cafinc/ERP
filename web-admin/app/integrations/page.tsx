@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import DashboardLayout from "@/components/DashboardLayout";
-import CompactHeader from "@/components/CompactHeader";
+import PageHeader from '@/components/PageHeader';
 import {
   Plus,
   RefreshCw,
@@ -145,7 +145,7 @@ export default function IntegrationsPage() {
 
   return (
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
-        <CompactHeader
+        <PageHeader
           title="Integration Hub"
           icon={LinkIcon}
           badges={[

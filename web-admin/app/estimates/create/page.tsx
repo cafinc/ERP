@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import CompactHeader from '@/components/CompactHeader';
+import PageHeader from '@/components/PageHeader';
 import TemplateSelector from '@/components/TemplateSelector';
-import HybridNavigationTopBar from '@/components/HybridNavigationTopBar';
+import PageHeader from '@/components/PageHeader';
 import api from '@/lib/api';
 import {
   Plus,
@@ -428,9 +428,9 @@ export default function CreateEstimatePage() {
   const isCompany = selectedCustomer?.customer_type === 'company';
 
   return (
-    <HybridNavigationTopBar>
+    <PageHeader>
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto">
-        <CompactHeader
+        <PageHeader
           title="Create Estimate"
           backUrl="/estimates"
           icon={FileText}
@@ -1134,6 +1134,6 @@ export default function CreateEstimatePage() {
           onClose={() => setShowTemplateSelector(false)}
         />
       )}
-    </HybridNavigationTopBar>
+    </PageHeader>
   );
 }

@@ -123,7 +123,7 @@ export default function ContactsPage() {
   });
 
   return (
-    <HybridNavigationTopBar>
+    <PageHeader>
       <div className="p-8">
         {/* Header */}
         <div className="mb-8 flex items-center justify-between">
@@ -370,6 +370,6 @@ export default function ContactsPage() {
           </div>
         )}
       </div>
-    </HybridNavigationTopBar>
+    </PageHeader>
   );
 }

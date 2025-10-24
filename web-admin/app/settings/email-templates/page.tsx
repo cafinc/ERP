@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import CompactHeader from '@/components/CompactHeader';
+import PageHeader from '@/components/PageHeader';
 
 export default function EmailTemplatesPage() {
   const [templates] = useState([
@@ -13,7 +13,7 @@ export default function EmailTemplatesPage() {
 
   return (
     <div style={{ padding: '24px', backgroundColor: '#f8fafc', minHeight: '100vh' }}>
-      <CompactHeader
+      <PageHeader
         title="Email Templates"
         subtitle="Manage your email templates for automated communications"
         backUrl="/settings"

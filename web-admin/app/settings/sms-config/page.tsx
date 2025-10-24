@@ -76,7 +76,7 @@ export default function SMSConfigPage() {
   };
 
   return (
-    <HybridNavigationTopBar>
+    <PageHeader>
       <div className="max-w-4xl mx-auto space-y-6">
         {/* Header */}
         <div className="flex items-center gap-4">
@@ -211,6 +211,6 @@ export default function SMSConfigPage() {
           )}
         </div>
       </div>
-    </HybridNavigationTopBar>
+    </PageHeader>
   );
 }

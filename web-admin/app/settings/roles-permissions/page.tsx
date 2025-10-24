@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import CompactHeader from '@/components/CompactHeader';
+import PageHeader from '@/components/PageHeader';
 
 export default function RolesPermissionsPage() {
   const [roles] = useState([
@@ -13,7 +13,7 @@ export default function RolesPermissionsPage() {
 
   return (
     <div style={{ padding: '24px', backgroundColor: '#f8fafc', minHeight: '100vh' }}>
-      <CompactHeader
+      <PageHeader
         title="Roles & Permissions"
         subtitle="Manage user roles and access permissions"
         backUrl="/settings"

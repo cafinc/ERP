@@ -156,7 +156,7 @@ export default function WorkOrdersPage() {
 
   if (loading) {
     return (
-      <HybridNavigationTopBar>
+      <PageHeader>
         <div className="min-h-screen bg-gray-50 flex flex-col">
           <PageHeader
             title="Work Orders"
@@ -171,7 +171,7 @@ export default function WorkOrdersPage() {
             <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
           </div>
         </div>
-      </HybridNavigationTopBar>
+      </PageHeader>
     );
   }
 

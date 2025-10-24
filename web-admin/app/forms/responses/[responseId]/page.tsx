@@ -212,29 +212,29 @@ export default function ViewResponsePage() {
 
   if (loading) {
     return (
-      <HybridNavigationTopBar>
+      <PageHeader>
         <div className="flex items-center justify-center h-full">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#3f72af] mx-auto"></div>
             <p className="mt-4 text-gray-600">Loading response...</p>
           </div>
         </div>
-      </HybridNavigationTopBar>
+      </PageHeader>
     );
   }
 
   if (!response || !template) {
     return (
-      <HybridNavigationTopBar>
+      <PageHeader>
         <div className="text-center py-12">
           <p className="text-red-600">Response not found</p>
         </div>
-      </HybridNavigationTopBar>
+      </PageHeader>
     );
   }
 
   return (
-    <HybridNavigationTopBar>
+    <PageHeader>
       <div className="p-8">
         <div className="max-w-4xl mx-auto">
           {/* Header */}
@@ -316,6 +316,6 @@ export default function ViewResponsePage() {
           </div>
         </div>
       </div>
-    </HybridNavigationTopBar>
+    </PageHeader>
   );
 }

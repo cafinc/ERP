@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import CompactHeader from '@/components/CompactHeader';
+import PageHeader from '@/components/PageHeader';
 import api from '@/lib/api';
 import {
   MapPin,
@@ -80,9 +80,9 @@ export default function DispatchDashboardPage() {
   ];
 
   return (
-    <HybridNavigationTopBar>
+    <PageHeader>
       <div className="p-4 space-y-6">
-        <CompactHeader
+        <PageHeader
           title="Dispatch Dashboard"
           icon={LayoutDashboard}
           badges={[
@@ -178,6 +178,6 @@ export default function DispatchDashboardPage() {
           </div>
         </div>
       </div>
-    </HybridNavigationTopBar>
+    </PageHeader>
   );
 }

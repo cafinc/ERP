@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import CompactHeader from '@/components/CompactHeader';
+import PageHeader from '@/components/PageHeader';
 import api from '@/lib/api';
 import {
   Activity,
@@ -115,19 +115,19 @@ export default function AutomationAnalyticsPage() {
 
   if (loading) {
     return (
-      <HybridNavigationTopBar>
+      <PageHeader>
         <div className="flex items-center justify-center h-full">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
-      </HybridNavigationTopBar>
+      </PageHeader>
     );
   }
 
   return (
-    <HybridNavigationTopBar>
+    <PageHeader>
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
         {/* Compact Header */}
-        <CompactHeader
+        <PageHeader
           title="Automation Analytics"
           icon={Activity}
           badges={[
@@ -377,6 +377,6 @@ export default function AutomationAnalyticsPage() {
           </div>
         </div>
       </div>
-    </HybridNavigationTopBar>
+    </PageHeader>
   );
 }

@@ -116,7 +116,7 @@ export default function SMSPage() {
   };
 
   return (
-    <HybridNavigationTopBar>
+    <PageHeader>
       <div className="p-8">
         {/* Header */}
         <div className="mb-8 flex items-center justify-between">
@@ -316,6 +316,6 @@ export default function SMSPage() {
           )}
         </div>
       </div>
-    </HybridNavigationTopBar>
+    </PageHeader>
   );
 }

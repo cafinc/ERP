@@ -89,17 +89,17 @@ export default function DispatchDetailPage() {
 
   if (loading) {
     return (
-      <HybridNavigationTopBar>
+      <PageHeader>
         <div className="flex items-center justify-center h-full">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
-      </HybridNavigationTopBar>
+      </PageHeader>
     );
   }
 
   if (!dispatch) {
     return (
-      <HybridNavigationTopBar>
+      <PageHeader>
         <div className="p-8">
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-12 text-center">
             <AlertCircle className="w-16 h-16 text-red-300 mx-auto mb-4" />
@@ -113,12 +113,12 @@ export default function DispatchDetailPage() {
             </button>
           </div>
         </div>
-      </HybridNavigationTopBar>
+      </PageHeader>
     );
   }
 
   return (
-    <HybridNavigationTopBar>
+    <PageHeader>
       <div className="p-8">
         {/* Header */}
         <div className="mb-4 flex items-center justify-between">
@@ -265,6 +265,6 @@ export default function DispatchDetailPage() {
           </div>
         </div>
       </div>
-    </HybridNavigationTopBar>
+    </PageHeader>
   );
 }

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import CompactHeader from '@/components/CompactHeader';
+import PageHeader from '@/components/PageHeader';
 import api from '@/lib/api';
 import {
   Plus,
@@ -168,18 +168,18 @@ export default function WorkflowBuilderPage() {
 
   if (loading) {
     return (
-      <HybridNavigationTopBar>
+      <PageHeader>
         <div className="flex items-center justify-center h-full">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
-      </HybridNavigationTopBar>
+      </PageHeader>
     );
   }
 
   return (
-    <HybridNavigationTopBar>
+    <PageHeader>
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
-        <CompactHeader
+        <PageHeader
           title="Workflow Builder"
           icon={Zap}
           badges={[
@@ -364,6 +364,6 @@ export default function WorkflowBuilderPage() {
           )}
         </div>
       </div>
-    </HybridNavigationTopBar>
+    </PageHeader>
   );
 }

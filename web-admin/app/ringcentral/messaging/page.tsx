@@ -85,7 +85,7 @@ export default function TeamMessagingPage() {
   };
 
   return (
-    <HybridNavigationTopBar>
+    <PageHeader>
       <div className="p-8">
         {/* Header */}
         <div className="mb-8">
@@ -245,6 +245,6 @@ export default function TeamMessagingPage() {
           </div>
         </div>
       </div>
-    </HybridNavigationTopBar>
+    </PageHeader>
   );
 }

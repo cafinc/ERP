@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import DashboardLayout from "@/components/DashboardLayout";
-import CompactHeader from "@/components/CompactHeader";
+import PageHeader from '@/components/PageHeader';
 import {
   Users,
   Clock,
@@ -64,7 +64,7 @@ export default function HRModulePage() {
 
   return (
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
-        <CompactHeader
+        <PageHeader
           title="HR Module"
           icon={Users}
           badges={[

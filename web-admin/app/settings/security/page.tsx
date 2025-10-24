@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import CompactHeader from '@/components/CompactHeader';
+import PageHeader from '@/components/PageHeader';
 import { Key, Shield, Smartphone, Clock, CheckCircle } from 'lucide-react';
 
 export default function SecuritySettingsPage() {
@@ -21,7 +21,7 @@ export default function SecuritySettingsPage() {
 
   return (
     <div style={{ padding: '24px', backgroundColor: '#f8fafc', minHeight: '100vh' }}>
-      <CompactHeader
+      <PageHeader
         title="Security Settings"
         subtitle="Manage your password, 2FA, and active sessions"
         backUrl="/settings"

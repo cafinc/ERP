@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import DashboardLayout from "@/components/DashboardLayout";
-import CompactHeader from "@/components/CompactHeader";
+import PageHeader from '@/components/PageHeader';
 import {
   Users,
   Clock,
@@ -88,7 +88,7 @@ export default function HRModuleDesignB() {
           </div>
         </div>
 
-        <CompactHeader
+        <PageHeader
           title="HR Module"
           icon={Users}
           badges={[

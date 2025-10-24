@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
-import CompactHeader from '@/components/CompactHeader';
+import PageHeader from '@/components/PageHeader';
 import api from '@/lib/api';
 import {
   Plus,
@@ -209,23 +209,23 @@ export default function RecurringServicesPage() {
 
   if (loading) {
     return (
-      <HybridNavigationTopBar>
+      <PageHeader>
         <div className="flex items-center justify-center h-full">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto"></div>
             <p className="mt-4 text-gray-600">Loading recurring services...</p>
           </div>
         </div>
-      </HybridNavigationTopBar>
+      </PageHeader>
     );
   }
 
   return (
-    <HybridNavigationTopBar>
+    <PageHeader>
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         <div className="max-w-7xl mx-auto">
           {/* Compact Header */}
-          <CompactHeader
+          <PageHeader
             title="Recurring Services"
             subtitle={`Manage recurring services for ${customer?.name}`}
             backUrl={`/customers/${customerId}`}
@@ -646,6 +646,6 @@ export default function RecurringServicesPage() {
           </div>
         </div>
       )}
-    </HybridNavigationTopBar>
+    </PageHeader>
   );
 }

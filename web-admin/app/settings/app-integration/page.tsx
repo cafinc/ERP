@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import CompactHeader from '@/components/CompactHeader';
+import PageHeader from '@/components/PageHeader';
 
 export default function AppIntegrationPage() {
   const [integrations] = useState([
@@ -13,7 +13,7 @@ export default function AppIntegrationPage() {
 
   return (
     <div style={{ padding: '24px', backgroundColor: '#f8fafc', minHeight: '100vh' }}>
-      <CompactHeader
+      <PageHeader
         title="App Integrations"
         subtitle="Connect and manage third-party integrations"
         backUrl="/settings"

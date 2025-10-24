@@ -148,7 +148,7 @@ export default function InvoiceCreatePage() {
   const totals = calculateTotals();
 
   return (
-    <HybridNavigationTopBar>
+    <PageHeader>
       <div className="p-8">
         {/* Header */}
         <div className="mb-8 flex items-center space-x-4">
@@ -453,6 +453,6 @@ export default function InvoiceCreatePage() {
           </div>
         </form>
       </div>
-    </HybridNavigationTopBar>
+    </PageHeader>
   );
 }

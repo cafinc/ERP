@@ -106,7 +106,7 @@ export default function PaymentsPage() {
   const totalPayments = filteredPayments.reduce((sum, payment) => sum + payment.amount, 0);
 
   return (
-    <HybridNavigationTopBar>
+    <PageHeader>
       <PageHeader
         title="Payments"
         subtitle={`${filteredPayments.length} payment${filteredPayments.length !== 1 ? 's' : ''} • Total: $${totalPayments.toLocaleString()}`}
@@ -242,6 +242,6 @@ export default function PaymentsPage() {
           </div>
         </div>
       </div>
-    </HybridNavigationTopBar>
+    </PageHeader>
   );
 }

@@ -167,17 +167,17 @@ export default function EstimateDetailPage() {
 
   if (loading) {
     return (
-      <HybridNavigationTopBar>
+      <PageHeader>
         <div className="flex items-center justify-center h-full">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
-      </HybridNavigationTopBar>
+      </PageHeader>
     );
   }
 
   if (!estimate) {
     return (
-      <HybridNavigationTopBar>
+      <PageHeader>
         <div className="flex flex-col items-center justify-center h-full">
           <FileText className="w-16 h-16 text-gray-300 mb-4" />
           <h2 className="text-2xl font-bold text-gray-900 mb-2">Estimate Not Found</h2>
@@ -190,12 +190,12 @@ export default function EstimateDetailPage() {
             <span>Back to Estimates</span>
           </button>
         </div>
-      </HybridNavigationTopBar>
+      </PageHeader>
     );
   }
 
   return (
-    <HybridNavigationTopBar>
+    <PageHeader>
       <div className="p-8">
         {/* Header */}
         <div className="mb-4 flex items-center justify-between">
@@ -491,6 +491,6 @@ export default function EstimateDetailPage() {
           />
         )}
       </div>
-    </HybridNavigationTopBar>
+    </PageHeader>
   );
 }

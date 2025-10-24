@@ -145,7 +145,7 @@ export default function ProjectCreatePage() {
   };
 
   return (
-    <HybridNavigationTopBar>
+    <PageHeader>
       <div className="p-8">
         {/* Header */}
         <div className="mb-8 flex items-center space-x-4">
@@ -321,6 +321,6 @@ export default function ProjectCreatePage() {
           </div>
         </div>
       </div>
-    </HybridNavigationTopBar>
+    </PageHeader>
   );
 }

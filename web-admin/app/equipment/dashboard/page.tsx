@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import CompactHeader from '@/components/CompactHeader';
+import PageHeader from '@/components/PageHeader';
 import api from '@/lib/api';
 import {
   Truck,
@@ -78,9 +78,9 @@ export default function EquipmentDashboardPage() {
   ];
 
   return (
-    <HybridNavigationTopBar>
+    <PageHeader>
       <div className="p-4 space-y-6">
-        <CompactHeader
+        <PageHeader
           title="Equipment Dashboard"
           icon={LayoutDashboard}
           badges={[
@@ -176,6 +176,6 @@ export default function EquipmentDashboardPage() {
           </div>
         </div>
       </div>
-    </HybridNavigationTopBar>
+    </PageHeader>
   );
 }

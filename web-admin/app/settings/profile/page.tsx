@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useAuth } from '@/lib/auth';
 import api from '@/lib/api';
-import HybridNavigationTopBar from '@/components/HybridNavigationTopBar';
+import PageHeader from '@/components/PageHeader';
 import {
   User,
   Mail,
@@ -262,7 +262,7 @@ export default function ProfileSettings() {
   };
 
   return (
-    <HybridNavigationTopBar>
+    <PageHeader>
       <div className="p-8">
         {/* Header */}
         <div className="mb-8">
@@ -604,6 +604,6 @@ export default function ProfileSettings() {
           </div>
         </div>
       </div>
-    </HybridNavigationTopBar>
+    </PageHeader>
   );
 }

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import api from '@/lib/api';
-import CompactHeader from '@/components/CompactHeader';
+import PageHeader from '@/components/PageHeader';
 import { Palette, Upload, Image as ImageIcon, Eye, RotateCcw } from 'lucide-react';
 
 const PRESET_COLORS = [
@@ -103,7 +103,7 @@ export default function BrandingSettingsPage() {
 
   return (
     <div style={{ padding: '24px', backgroundColor: '#f8fafc', minHeight: '100vh' }}>
-      <CompactHeader
+      <PageHeader
         title="Branding Settings"
         subtitle="Customize your platform's appearance and branding"
         backUrl="/settings"

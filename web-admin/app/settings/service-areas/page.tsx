@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import CompactHeader from '@/components/CompactHeader';
+import PageHeader from '@/components/PageHeader';
 import { MapPin, Plus, Trash2 } from 'lucide-react';
 
 export default function ServiceAreasPage() {
@@ -11,10 +11,10 @@ export default function ServiceAreasPage() {
   ]);
 
   return (
-    <HybridNavigationTopBar>
+    <PageHeader>
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         <div className="max-w-4xl mx-auto">
-          <CompactHeader
+          <PageHeader
             title="Service Areas"
             subtitle="Define the areas where you provide services"
             icon={MapPin}
@@ -57,6 +57,6 @@ export default function ServiceAreasPage() {
           </div>
         </div>
       </div>
-    </HybridNavigationTopBar>
+    </PageHeader>
   );
 }

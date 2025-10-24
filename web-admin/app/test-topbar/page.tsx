@@ -7,7 +7,7 @@ export default function TestTopBar() {
   const router = useRouter();
 
   return (
-    <HybridNavigationTopBar>
+    <PageHeader>
       <div className="p-6">
         {/* Banner */}
         <div className="mb-6 bg-gradient-to-r from-blue-600 to-teal-600 text-white p-6 rounded-xl shadow-lg">
@@ -149,6 +149,6 @@ export default function TestTopBar() {
           </div>
         </div>
       </div>
-    </HybridNavigationTopBar>
+    </PageHeader>
   );
 }

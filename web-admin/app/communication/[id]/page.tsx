@@ -111,20 +111,20 @@ export default function ConversationDetailPage() {
 
   if (loading) {
     return (
-      <HybridNavigationTopBar>
+      <PageHeader>
         <div className="flex items-center justify-center h-full">
           <div className="text-center">
             <RefreshCw className="w-12 h-12 animate-spin text-[#3f72af] mx-auto mb-4" />
             <p className="text-gray-600">Loading conversation...</p>
           </div>
         </div>
-      </HybridNavigationTopBar>
+      </PageHeader>
     );
   }
 
   if (!conversation) {
     return (
-      <HybridNavigationTopBar>
+      <PageHeader>
         <div className="p-8">
           <div className="text-center py-12">
             <MessageSquare className="w-16 h-16 text-gray-300 mx-auto mb-4" />
@@ -137,12 +137,12 @@ export default function ConversationDetailPage() {
             </button>
           </div>
         </div>
-      </HybridNavigationTopBar>
+      </PageHeader>
     );
   }
 
   return (
-    <HybridNavigationTopBar>
+    <PageHeader>
       <div className="h-screen flex flex-col">
         {/* Header */}
         <div className="bg-white border-b border-gray-200 px-6 py-4">
@@ -257,6 +257,6 @@ export default function ConversationDetailPage() {
           </form>
         </div>
       </div>
-    </HybridNavigationTopBar>
+    </PageHeader>
   );
 }

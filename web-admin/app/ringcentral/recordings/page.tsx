@@ -123,7 +123,7 @@ export default function RecordingsPage() {
   };
 
   return (
-    <HybridNavigationTopBar>
+    <PageHeader>
       <div className="p-8">
         {/* Header */}
         <div className="mb-8">
@@ -298,6 +298,6 @@ export default function RecordingsPage() {
           )}
         </div>
       </div>
-    </HybridNavigationTopBar>
+    </PageHeader>
   );
 }

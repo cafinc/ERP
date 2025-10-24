@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import CompactHeader from '@/components/CompactHeader';
+import PageHeader from '@/components/PageHeader';
 
 export default function NotificationsPage() {
   const [emailNotifications, setEmailNotifications] = useState(true);
@@ -11,7 +11,7 @@ export default function NotificationsPage() {
 
   return (
     <div style={{ padding: '24px', backgroundColor: '#f8fafc', minHeight: '100vh' }}>
-      <CompactHeader
+      <PageHeader
         title="Notification Settings"
         subtitle="Manage your notification preferences"
         backUrl="/settings"

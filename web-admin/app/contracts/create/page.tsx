@@ -172,7 +172,7 @@ export default function CreateContractPage() {
   };
 
   return (
-    <HybridNavigationTopBar>
+    <PageHeader>
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Header */}
         <div className="flex items-center gap-4">
@@ -494,6 +494,6 @@ export default function CreateContractPage() {
           </button>
         </div>
       </form>
-    </HybridNavigationTopBar>
+    </PageHeader>
   );
 }

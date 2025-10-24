@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import CompactHeader from '@/components/CompactHeader';
+import PageHeader from '@/components/PageHeader';
 import {
   User,
   Bell,
@@ -182,7 +182,7 @@ export default function SettingsPage() {
   return (
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
         {/* Compact Header */}
-        <CompactHeader
+        <PageHeader
           title="Settings"
           icon={SettingsIcon}
           badges={[

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import CompactHeader from '@/components/CompactHeader';
+import PageHeader from '@/components/PageHeader';
 import api from '@/lib/api';
 import {
   Plus,
@@ -123,7 +123,7 @@ export default function TeamPage() {
   return (
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         {/* Compact Header */}
-        <CompactHeader
+        <PageHeader
           title="Team Members"
           icon={Users}
           badges={[

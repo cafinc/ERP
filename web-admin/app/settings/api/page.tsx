@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import CompactHeader from '@/components/CompactHeader';
+import PageHeader from '@/components/PageHeader';
 
 export default function ApiSettingsPage() {
   const [apiKeys] = useState([
@@ -11,7 +11,7 @@ export default function ApiSettingsPage() {
 
   return (
     <div style={{ padding: '24px', backgroundColor: '#f8fafc', minHeight: '100vh' }}>
-      <CompactHeader
+      <PageHeader
         title="API Settings"
         subtitle="Manage your API keys and access tokens"
         backUrl="/settings"

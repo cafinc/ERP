@@ -107,16 +107,16 @@ export default function TeamMemberFormPage() {
 
   if (loading) {
     return (
-      <HybridNavigationTopBar>
+      <PageHeader>
         <div className="flex items-center justify-center h-64">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
-      </HybridNavigationTopBar>
+      </PageHeader>
     );
   }
 
   return (
-    <HybridNavigationTopBar>
+    <PageHeader>
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Header */}
         <div className="flex items-center gap-4">
@@ -342,6 +342,6 @@ export default function TeamMemberFormPage() {
           </button>
         </div>
       </form>
-    </HybridNavigationTopBar>
+    </PageHeader>
   );
 }

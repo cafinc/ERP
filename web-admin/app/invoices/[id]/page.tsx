@@ -134,17 +134,17 @@ export default function InvoiceDetailPage() {
 
   if (loading) {
     return (
-      <HybridNavigationTopBar>
+      <PageHeader>
         <div className="flex items-center justify-center h-full">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
-      </HybridNavigationTopBar>
+      </PageHeader>
     );
   }
 
   if (!invoice) {
     return (
-      <HybridNavigationTopBar>
+      <PageHeader>
         <div className="p-8">
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-12 text-center">
             <FileText className="w-16 h-16 text-red-300 mx-auto mb-4" />
@@ -159,12 +159,12 @@ export default function InvoiceDetailPage() {
             </button>
           </div>
         </div>
-      </HybridNavigationTopBar>
+      </PageHeader>
     );
   }
 
   return (
-    <HybridNavigationTopBar>
+    <PageHeader>
       <div className="p-8">
         {/* Header */}
         <div className="mb-4 flex items-center justify-between">
@@ -498,6 +498,6 @@ export default function InvoiceDetailPage() {
           </div>
         )}
       </div>
-    </HybridNavigationTopBar>
+    </PageHeader>
   );
 }

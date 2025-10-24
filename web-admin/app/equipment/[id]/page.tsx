@@ -130,17 +130,17 @@ export default function EquipmentDetailPage() {
 
   if (loading) {
     return (
-      <HybridNavigationTopBar>
+      <PageHeader>
         <div className="flex items-center justify-center h-64">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
-      </HybridNavigationTopBar>
+      </PageHeader>
     );
   }
 
   if (!equipment) {
     return (
-      <HybridNavigationTopBar>
+      <PageHeader>
         <div className="text-center py-12">
           <AlertCircle className="w-12 h-12 text-gray-400 mx-auto mb-4" />
           <h2 className="text-xl font-semibold text-gray-900">Equipment not found</h2>
@@ -151,12 +151,12 @@ export default function EquipmentDetailPage() {
             Return to Equipment
           </button>
         </div>
-      </HybridNavigationTopBar>
+      </PageHeader>
     );
   }
 
   return (
-    <HybridNavigationTopBar>
+    <PageHeader>
       <div className="space-y-6">
         {/* Header */}
         <div className="flex items-center justify-between">
@@ -337,6 +337,6 @@ export default function EquipmentDetailPage() {
           </div>
         )}
       </div>
-    </HybridNavigationTopBar>
+    </PageHeader>
   );
 }

@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useAuth } from '@/lib/auth';
 import api from '@/lib/api';
-import CompactHeader from '@/components/CompactHeader';
+import PageHeader from '@/components/PageHeader';
 import AvatarPicker from '@/components/AvatarPicker';
 import { User, Mail, Phone, MapPin, Calendar, Building, Camera } from 'lucide-react';
 
@@ -68,7 +68,7 @@ export default function AccountSettingsPage() {
 
   return (
     <div style={{ padding: '24px', backgroundColor: '#f8fafc', minHeight: '100vh' }}>
-      <CompactHeader
+      <PageHeader
         title="Account Settings"
         subtitle="Manage your personal information and preferences"
         backUrl="/settings"

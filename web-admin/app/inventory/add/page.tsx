@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import CompactHeader from '@/components/CompactHeader';
+import PageHeader from '@/components/PageHeader';
 import api from '@/lib/api';
 import {
   Package,
@@ -84,10 +84,10 @@ export default function AddInventoryItemPage() {
   };
 
   return (
-    <HybridNavigationTopBar>
+    <PageHeader>
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         {/* Header */}
-        <CompactHeader
+        <PageHeader
           title="Add Inventory Item"
           icon={Package}
           actions={[
@@ -337,6 +337,6 @@ export default function AddInventoryItemPage() {
           </form>
         </div>
       </div>
-    </HybridNavigationTopBar>
+    </PageHeader>
   );
 }
