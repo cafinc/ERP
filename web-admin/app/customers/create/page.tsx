@@ -637,7 +637,7 @@ export default function CustomerFormPage() {
                 <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
                     <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center space-x-2">
                       <User className="w-5 h-5 text-[#3f72af]" />
-                      <span>Individual Information</span>
+                      <span>Contact Information</span>
                     </h2>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
