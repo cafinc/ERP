@@ -131,12 +131,13 @@ export default function CustomerFormPage() {
     active: true,
     // Company-specific accounting fields
     accounting: {
-      tax_id: '',
+      business_number: '',
       billing_email: '',
       billing_phone: '',
-      payment_terms: 'net_30',
+      payment_terms: 'due_on_receipt',
+      credit_limit_enabled: false,
       credit_limit: '',
-      preferred_payment_method: '',
+      preferred_payment_method: 'e_transfer',
       po_required: false,
       billing_address: '',
       notes: '',
