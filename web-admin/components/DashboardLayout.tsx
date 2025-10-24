@@ -236,7 +236,17 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         { icon: FileText, label: 'Estimates', href: '/estimates' },
         { icon: FileText, label: 'Agreements', href: '/contracts' },
         { icon: FolderOpen, label: 'Projects', href: '/projects' },
-        { icon: Receipt, label: 'Invoices', href: '/invoices' },
+      ],
+    },
+    {
+      icon: Briefcase,
+      label: 'Operations',
+      key: 'operations',
+      dashboardHref: '/operations',
+      submenu: [
+        { icon: ClipboardList, label: 'Operations Dashboard', href: '/operations' },
+        { icon: FileText, label: 'Work Orders', href: '/work-orders' },
+        { icon: ShoppingCart, label: 'Purchase Orders', href: '/purchase-orders' },
       ],
     },
     {
@@ -246,7 +256,6 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       dashboardHref: '/finance/dashboard',
       submenu: [
         { icon: Receipt, label: 'Invoices', href: '/invoices' },
-        { icon: FileText, label: 'Estimates', href: '/estimates' },
         { icon: TrendingUp, label: 'Expenses', href: '/finance/expenses' },
         { icon: CreditCard, label: 'Payments', href: '/finance/payments' },
         { icon: BarChart3, label: 'Reports', href: '/finance/reports' },
