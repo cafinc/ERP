@@ -100,9 +100,7 @@ async def get_agreement_templates(
 async def get_agreement_template(template_id: str):
     """Get a specific agreement template by ID"""
     try:
-        db = get_database()
-        
-        template = db.agreement_templates.find_one({"_id": ObjectId(template_id)})
+        template = await db.agreement_templates.find_one({"_id": ObjectId(template_id)})
         
         if not template:
             raise HTTPException(
@@ -127,8 +125,6 @@ async def get_agreement_template(template_id: str):
 async def create_agreement_template(template: AgreementTemplateCreate):
     """Create a new agreement template"""
     try:
-        db = get_database()
-        
         # Prepare template document
         template_doc = template.dict()
         template_doc["is_archived"] = False
@@ -137,10 +133,10 @@ async def create_agreement_template(template: AgreementTemplateCreate):
         template_doc["updated_at"] = datetime.utcnow()
         
         # Insert into database
-        result = db.agreement_templates.insert_one(template_doc)
+        result = await db.agreement_templates.insert_one(template_doc)
         
         # Retrieve the created template
-        created_template = db.agreement_templates.find_one({"_id": result.inserted_id})
+        created_template = await db.agreement_templates.find_one({"_id": result.inserted_id})
         created_template["_id"] = str(created_template["_id"])
         
         logger.info(f"Created agreement template: {template.template_name}")
@@ -158,10 +154,8 @@ async def create_agreement_template(template: AgreementTemplateCreate):
 async def update_agreement_template(template_id: str, template: AgreementTemplateUpdate):
     """Update an existing agreement template"""
     try:
-        db = get_database()
-        
         # Check if template exists
-        existing_template = db.agreement_templates.find_one({"_id": ObjectId(template_id)})
+        existing_template = await db.agreement_templates.find_one({"_id": ObjectId(template_id)})
         if not existing_template:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
@@ -173,13 +167,13 @@ async def update_agreement_template(template_id: str, template: AgreementTemplat
         update_doc["updated_at"] = datetime.utcnow()
         
         # Update the template
-        db.agreement_templates.update_one(
+        await db.agreement_templates.update_one(
             {"_id": ObjectId(template_id)},
             {"$set": update_doc}
         )
         
         # Retrieve updated template
-        updated_template = db.agreement_templates.find_one({"_id": ObjectId(template_id)})
+        updated_template = await db.agreement_templates.find_one({"_id": ObjectId(template_id)})
         updated_template["_id"] = str(updated_template["_id"])
         
         logger.info(f"Updated agreement template: {template_id}")
@@ -199,10 +193,8 @@ async def update_agreement_template(template_id: str, template: AgreementTemplat
 async def delete_agreement_template(template_id: str):
     """Delete an agreement template (hard delete)"""
     try:
-        db = get_database()
-        
         # Check if template exists
-        template = db.agreement_templates.find_one({"_id": ObjectId(template_id)})
+        template = await db.agreement_templates.find_one({"_id": ObjectId(template_id)})
         if not template:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
@@ -210,7 +202,7 @@ async def delete_agreement_template(template_id: str):
             )
         
         # Delete the template
-        db.agreement_templates.delete_one({"_id": ObjectId(template_id)})
+        await db.agreement_templates.delete_one({"_id": ObjectId(template_id)})
         
         logger.info(f"Deleted agreement template: {template_id}")
         return None
