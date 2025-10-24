@@ -14,652 +14,803 @@ from typing import Dict, List, Any
 # Backend URL from frontend/.env
 BASE_URL = "https://snowops-admin.preview.emergentagent.com/api"
 
-class CommunicationPreferenceTests:
+class CustomerManagementTests:
     def __init__(self):
-        self.base_url = BACKEND_URL
+        self.session = requests.Session()
         self.test_results = []
         self.created_customers = []
+        self.created_sites = []
         
-    def log_result(self, test_name, success, message, response_data=None):
+    def log_result(self, test_name: str, success: bool, details: str = "", response_data: Any = None):
         """Log test result"""
         result = {
             "test": test_name,
             "success": success,
-            "message": message,
-            "timestamp": datetime.now().isoformat()
+            "details": details,
+            "timestamp": datetime.now().isoformat(),
+            "response_data": response_data
         }
-        if response_data:
-            result["response_data"] = response_data
         self.test_results.append(result)
-        
         status = "✅ PASS" if success else "❌ FAIL"
         print(f"{status}: {test_name}")
-        print(f"   {message}")
+        if details:
+            print(f"   Details: {details}")
         if not success and response_data:
             print(f"   Response: {response_data}")
         print()
 
-    def test_create_customer_sms_preference(self):
-        """Test 1: Create Customer with SMS Preference + Mobile"""
-        test_name = "Create Customer with SMS Preference + Mobile"
+    def create_sample_base64_file(self, filename: str, content: str) -> dict:
+        """Create a sample base64 encoded file for testing"""
+        file_content = base64.b64encode(content.encode()).decode()
+        return {
+            "name": filename,
+            "type": "text/plain" if filename.endswith('.txt') else "application/pdf",
+            "size": len(content),
+            "data": file_content
+        }
+
+    def test_customer_creation_contact_type(self):
+        """Test 1: Customer Creation - Contact Type with all fields"""
+        print("=== Test 1: Customer Creation - Contact Type ===")
         
+        # Test 1a: Contact with SMS preference (mobile required)
         customer_data = {
-            "name": "Jane Doe",
-            "email": "jane@example.com",
-            "phone": "(403) 555-1234",
-            "mobile": "(555) 987-6543",
+            "name": "Sarah Johnson",
+            "email": "sarah.johnson@email.com",
+            "phone": "555-0123",
+            "mobile": "555-0124",
+            "address": "123 Main Street, Toronto, ON M5V 3A8",
+            "customer_type": "individual",
             "communication_preference": "sms",
-            "address": "123 Main St, Calgary, AB",
-            "customer_type": "individual",
-            "notes": "Test customer for SMS preference"
+            "custom_fields": [
+                {
+                    "field_name": "property_size",
+                    "field_value": "2500",
+                    "field_type": "number"
+                },
+                {
+                    "field_name": "gate_code",
+                    "field_value": "1234",
+                    "field_type": "text"
+                },
+                {
+                    "field_name": "service_start_date",
+                    "field_value": "2024-01-15",
+                    "field_type": "date"
+                }
+            ],
+            "attachments": [
+                self.create_sample_base64_file("property_photo.txt", "Sample property photo content"),
+                self.create_sample_base64_file("contract.txt", "Sample contract document content")
+            ],
+            "tags": ["VIP", "Seasonal"],
+            "notes": "Prefers early morning service. Has two driveways."
         }
         
         try:
-            response = requests.post(f"{self.base_url}/customers", json=customer_data, timeout=10)
-            
-            if response.status_code in [200, 201]:
-                data = response.json()
-                customer_id = data.get("id")
+            response = self.session.post(f"{BASE_URL}/customers", json=customer_data)
+            if response.status_code == 201:
+                customer = response.json()
+                self.created_customers.append(customer["id"])
                 
-                # Verify all fields are saved correctly
-                if (data.get("communication_preference") == "sms" and 
-                    data.get("mobile") == "(555) 987-6543" and
-                    data.get("name") == "Jane Doe"):
-                    
-                    self.created_customers.append(customer_id)
-                    self.log_result(test_name, True, 
-                                  f"Customer created successfully with SMS preference. ID: {customer_id}")
-                    return customer_id
+                # Verify all fields are properly saved
+                required_fields = ["name", "email", "phone", "mobile", "address", "communication_preference"]
+                missing_fields = [field for field in required_fields if not customer.get(field)]
+                
+                if not missing_fields and customer.get("custom_fields") and customer.get("attachments"):
+                    self.log_result(
+                        "Customer Creation - Contact Type (SMS preference)",
+                        True,
+                        f"Customer created with ID: {customer['id']}. All fields including custom_fields and attachments saved correctly."
+                    )
                 else:
-                    self.log_result(test_name, False, 
-                                  "Customer created but fields not saved correctly", data)
-                    return None
+                    self.log_result(
+                        "Customer Creation - Contact Type (SMS preference)",
+                        False,
+                        f"Missing fields: {missing_fields}. Custom fields: {len(customer.get('custom_fields', []))}. Attachments: {len(customer.get('attachments', []))}"
+                    )
             else:
-                self.log_result(test_name, False, 
-                              f"Failed to create customer. Status: {response.status_code}", 
-                              response.text)
-                return None
-                
+                self.log_result(
+                    "Customer Creation - Contact Type (SMS preference)",
+                    False,
+                    f"HTTP {response.status_code}: {response.text}"
+                )
         except Exception as e:
-            self.log_result(test_name, False, f"Exception occurred: {str(e)}")
-            return None
+            self.log_result(
+                "Customer Creation - Contact Type (SMS preference)",
+                False,
+                f"Exception: {str(e)}"
+            )
 
-    def test_create_customer_inapp_preference(self):
-        """Test 2: Create Customer with InApp Preference (No Mobile)"""
-        test_name = "Create Customer with InApp Preference (No Mobile)"
-        
-        customer_data = {
-            "name": "Bob Smith",
-            "email": "bob@example.com",
-            "phone": "(403) 555-5678",
-            "mobile": "",  # Empty mobile
+        # Test 1b: Contact with InApp preference (mobile optional)
+        customer_data_inapp = {
+            "name": "Michael Chen",
+            "email": "michael.chen@email.com", 
+            "phone": "555-0125",
+            "address": "456 Oak Avenue, Vancouver, BC V6B 2N9",
+            "customer_type": "individual",
             "communication_preference": "inapp",
-            "address": "456 Oak Ave, Calgary, AB",
-            "customer_type": "individual",
-            "notes": "Test customer for InApp preference"
+            "custom_fields": [
+                {
+                    "field_name": "preferred_time",
+                    "field_value": "morning",
+                    "field_type": "text"
+                }
+            ],
+            "notes": "Prefers in-app notifications only"
         }
         
         try:
-            response = requests.post(f"{self.base_url}/customers", json=customer_data, timeout=10)
-            
-            if response.status_code in [200, 201]:
-                data = response.json()
-                customer_id = data.get("id")
+            response = self.session.post(f"{BASE_URL}/customers", json=customer_data_inapp)
+            if response.status_code == 201:
+                customer = response.json()
+                self.created_customers.append(customer["id"])
                 
-                # Verify communication preference is inapp and mobile is empty
-                if (data.get("communication_preference") == "inapp" and 
-                    data.get("mobile") == "" and
-                    data.get("name") == "Bob Smith"):
-                    
-                    self.created_customers.append(customer_id)
-                    self.log_result(test_name, True, 
-                                  f"Customer created successfully with InApp preference. ID: {customer_id}")
-                    return customer_id
+                if (customer.get("communication_preference") == "inapp" and 
+                    not customer.get("mobile") and 
+                    customer.get("name") == "Michael Chen"):
+                    self.log_result(
+                        "Customer Creation - Contact Type (InApp preference)",
+                        True,
+                        f"Customer created with ID: {customer['id']}. InApp preference set, mobile not required."
+                    )
                 else:
-                    self.log_result(test_name, False, 
-                                  "Customer created but fields not saved correctly", data)
-                    return None
+                    self.log_result(
+                        "Customer Creation - Contact Type (InApp preference)",
+                        False,
+                        f"InApp preference not properly set or unexpected mobile field"
+                    )
             else:
-                self.log_result(test_name, False, 
-                              f"Failed to create customer. Status: {response.status_code}", 
-                              response.text)
-                return None
-                
+                self.log_result(
+                    "Customer Creation - Contact Type (InApp preference)",
+                    False,
+                    f"HTTP {response.status_code}: {response.text}"
+                )
         except Exception as e:
-            self.log_result(test_name, False, f"Exception occurred: {str(e)}")
-            return None
+            self.log_result(
+                "Customer Creation - Contact Type (InApp preference)",
+                False,
+                f"Exception: {str(e)}"
+            )
 
-    def test_retrieve_customer_preference(self, customer_id):
-        """Test 3: Retrieve Customer and Verify Preference"""
-        test_name = "Retrieve Customer and Verify Preference"
+    def test_customer_creation_company_type(self):
+        """Test 2: Customer Creation - Company Type"""
+        print("=== Test 2: Customer Creation - Company Type ===")
         
-        if not customer_id:
-            self.log_result(test_name, False, "No customer ID provided for retrieval test")
-            return
-        
-        try:
-            response = requests.get(f"{self.base_url}/customers/{customer_id}", timeout=10)
-            
-            if response.status_code == 200:
-                data = response.json()
-                
-                # Verify response includes communication_preference field
-                if "communication_preference" in data:
-                    preference = data.get("communication_preference")
-                    mobile = data.get("mobile", "")
-                    
-                    self.log_result(test_name, True, 
-                                  f"Customer retrieved successfully. Preference: {preference}, Mobile: {mobile}")
-                else:
-                    self.log_result(test_name, False, 
-                                  "Customer retrieved but missing communication_preference field", data)
-            else:
-                self.log_result(test_name, False, 
-                              f"Failed to retrieve customer. Status: {response.status_code}", 
-                              response.text)
-                
-        except Exception as e:
-            self.log_result(test_name, False, f"Exception occurred: {str(e)}")
-
-    def test_update_communication_preference(self, customer_id):
-        """Test 4: Update Communication Preference"""
-        test_name = "Update Communication Preference"
-        
-        if not customer_id:
-            self.log_result(test_name, False, "No customer ID provided for update test")
-            return
-        
-        update_data = {
-            "communication_preference": "inapp"
+        company_data = {
+            "name": "Maple Leaf Properties Inc.",
+            "email": "admin@mapleleafproperties.com",
+            "phone": "416-555-0100",
+            "address": "789 Business District, Toronto, ON M5H 2N2",
+            "customer_type": "company",
+            "accounting": {
+                "tax_id": "123456789RT0001",
+                "billing_email": "billing@mapleleafproperties.com",
+                "billing_phone": "416-555-0101",
+                "payment_terms": "net_30",
+                "credit_limit": 50000.00,
+                "preferred_payment_method": "ach",
+                "po_required": True,
+                "billing_address": "789 Business District, Accounting Dept, Toronto, ON M5H 2N2",
+                "notes": "Requires PO for all services over $1000"
+            },
+            "custom_fields": [
+                {
+                    "field_name": "account_manager",
+                    "field_value": "Jennifer Smith",
+                    "field_type": "text"
+                },
+                {
+                    "field_name": "contract_renewal_date",
+                    "field_value": "2024-12-31",
+                    "field_type": "date"
+                }
+            ],
+            "tags": ["Commercial", "High-Value"],
+            "notes": "Large commercial client with multiple properties"
         }
         
         try:
-            response = requests.put(f"{self.base_url}/customers/{customer_id}", 
-                                  json=update_data, timeout=10)
-            
-            if response.status_code == 200:
-                data = response.json()
+            response = self.session.post(f"{BASE_URL}/customers", json=company_data)
+            if response.status_code == 201:
+                company = response.json()
+                self.created_customers.append(company["id"])
                 
-                # Verify preference was updated
-                if data.get("communication_preference") == "inapp":
-                    self.log_result(test_name, True, 
-                                  "Communication preference updated successfully from SMS to InApp")
+                # Verify company-specific fields
+                if (company.get("customer_type") == "company" and 
+                    company.get("accounting") and 
+                    company["accounting"].get("tax_id") == "123456789RT0001"):
+                    self.log_result(
+                        "Customer Creation - Company Type",
+                        True,
+                        f"Company created with ID: {company['id']}. Accounting fields properly saved."
+                    )
                 else:
-                    self.log_result(test_name, False, 
-                                  "Update request succeeded but preference not changed", data)
+                    self.log_result(
+                        "Customer Creation - Company Type",
+                        False,
+                        f"Company type or accounting fields not properly saved"
+                    )
             else:
-                self.log_result(test_name, False, 
-                              f"Failed to update customer. Status: {response.status_code}", 
-                              response.text)
-                
+                self.log_result(
+                    "Customer Creation - Company Type",
+                    False,
+                    f"HTTP {response.status_code}: {response.text}"
+                )
         except Exception as e:
-            self.log_result(test_name, False, f"Exception occurred: {str(e)}")
+            self.log_result(
+                "Customer Creation - Company Type",
+                False,
+                f"Exception: {str(e)}"
+            )
 
-    def test_list_customers_preference_field(self):
-        """Test 5: List All Customers - Check Preference Field"""
-        test_name = "List All Customers - Check Preference Field"
+    def test_site_creation_integration(self):
+        """Test 3: Site Creation Integration (if createSite=true functionality exists)"""
+        print("=== Test 3: Site Creation Integration ===")
         
-        try:
-            response = requests.get(f"{self.base_url}/customers", timeout=10)
-            
-            if response.status_code == 200:
-                customers = response.json()
-                
-                if isinstance(customers, list) and len(customers) > 0:
-                    # Check if all customers have communication_preference field
-                    customers_with_preference = 0
-                    total_customers = len(customers)
-                    
-                    for customer in customers:
-                        if "communication_preference" in customer:
-                            customers_with_preference += 1
-                    
-                    if customers_with_preference == total_customers:
-                        self.log_result(test_name, True, 
-                                      f"All {total_customers} customers have communication_preference field")
-                    else:
-                        self.log_result(test_name, False, 
-                                      f"Only {customers_with_preference}/{total_customers} customers have communication_preference field")
-                else:
-                    self.log_result(test_name, True, 
-                                  "No customers found in system (empty list returned)")
-                    
-            else:
-                self.log_result(test_name, False, 
-                              f"Failed to list customers. Status: {response.status_code}", 
-                              response.text)
-                
-        except Exception as e:
-            self.log_result(test_name, False, f"Exception occurred: {str(e)}")
-
-    def test_edge_cases(self):
-        """Test 6: Edge Cases and Validation"""
-        test_name = "Edge Cases and Validation"
+        # Note: Based on the server.py code, there's no direct createSite parameter in customer creation
+        # This would need to be implemented or tested via separate site creation
         
-        # Test with invalid communication preference
-        invalid_customer_data = {
-            "name": "Test Invalid",
-            "email": "invalid@example.com",
-            "phone": "(403) 555-9999",
-            "communication_preference": "invalid_preference",  # Invalid value
-            "address": "789 Test St, Calgary, AB",
+        # First create a customer
+        customer_data = {
+            "name": "Site Test Customer",
+            "email": "sitetest@email.com",
+            "phone": "555-0130",
+            "address": "100 Site Test Road, Calgary, AB T2P 2M5",
             "customer_type": "individual"
         }
         
         try:
-            response = requests.post(f"{self.base_url}/customers", json=invalid_customer_data, timeout=10)
-            
-            # Should either accept it (no validation) or reject it (with validation)
-            if response.status_code in [200, 201]:
-                data = response.json()
-                customer_id = data.get("id")
-                if customer_id:
-                    self.created_customers.append(customer_id)
+            response = self.session.post(f"{BASE_URL}/customers", json=customer_data)
+            if response.status_code == 201:
+                customer = response.json()
+                customer_id = customer["id"]
+                self.created_customers.append(customer_id)
                 
-                self.log_result(test_name, True, 
-                              "System accepts invalid communication preference (no validation enforced)")
-            elif response.status_code in [400, 422]:
-                self.log_result(test_name, True, 
-                              "System properly validates communication preference values")
-            else:
-                self.log_result(test_name, False, 
-                              f"Unexpected response for invalid data. Status: {response.status_code}", 
-                              response.text)
+                # Try to create a site for this customer (if site endpoint exists)
+                site_data = {
+                    "name": "Customer Primary Site",
+                    "address": "100 Site Test Road, Calgary, AB T2P 2M5",
+                    "customer_id": customer_id,
+                    "site_type": "residential"
+                }
                 
-        except Exception as e:
-            self.log_result(test_name, False, f"Exception occurred: {str(e)}")
-
-    def cleanup_test_data(self):
-        """Clean up test customers"""
-        print("🧹 Cleaning up test data...")
-        
-        for customer_id in self.created_customers:
-            try:
-                response = requests.delete(f"{self.base_url}/customers/{customer_id}", timeout=10)
-                if response.status_code in [200, 204]:
-                    print(f"   Deleted customer {customer_id}")
+                site_response = self.session.post(f"{BASE_URL}/sites", json=site_data)
+                if site_response.status_code == 201:
+                    site = site_response.json()
+                    self.created_sites.append(site["id"])
+                    
+                    # Update customer with site_id
+                    update_response = self.session.put(
+                        f"{BASE_URL}/customers/{customer_id}",
+                        json={"site_ids": [site["id"]]}
+                    )
+                    
+                    if update_response.status_code == 200:
+                        self.log_result(
+                            "Site Creation Integration",
+                            True,
+                            f"Site created and linked to customer. Site ID: {site['id']}"
+                        )
+                    else:
+                        self.log_result(
+                            "Site Creation Integration",
+                            False,
+                            f"Site created but failed to link to customer: {update_response.text}"
+                        )
                 else:
-                    print(f"   Failed to delete customer {customer_id}: {response.status_code}")
-            except Exception as e:
-                print(f"   Error deleting customer {customer_id}: {str(e)}")
+                    self.log_result(
+                        "Site Creation Integration",
+                        False,
+                        f"Site creation failed: HTTP {site_response.status_code}: {site_response.text}"
+                    )
+            else:
+                self.log_result(
+                    "Site Creation Integration",
+                    False,
+                    f"Customer creation failed: HTTP {response.status_code}: {response.text}"
+                )
+        except Exception as e:
+            self.log_result(
+                "Site Creation Integration",
+                False,
+                f"Exception: {str(e)}"
+            )
 
-    def run_all_tests(self):
-        """Run all communication preference tests"""
-        print("🚀 Starting Communication Preference Backend Tests")
-        print(f"Backend URL: {self.base_url}")
-        print("=" * 60)
+    def test_user_access_creation(self):
+        """Test 4: User Access Creation (require_access flow)"""
+        print("=== Test 4: User Access Creation ===")
         
-        # Test 1: Create customer with SMS preference
-        sms_customer_id = self.test_create_customer_sms_preference()
-        
-        # Test 2: Create customer with InApp preference
-        inapp_customer_id = self.test_create_customer_inapp_preference()
-        
-        # Test 3: Retrieve customer and verify preference
-        if sms_customer_id:
-            self.test_retrieve_customer_preference(sms_customer_id)
-        
-        # Test 4: Update communication preference
-        if sms_customer_id:
-            self.test_update_communication_preference(sms_customer_id)
-        
-        # Test 5: List customers and check preference field
-        self.test_list_customers_preference_field()
-        
-        # Test 6: Edge cases
-        self.test_edge_cases()
-        
-        # Summary
-        self.print_summary()
-        
-        # Cleanup
-        self.cleanup_test_data()
-
-    def print_summary(self):
-        """Print test summary"""
-        print("=" * 60)
-        print("📊 TEST SUMMARY")
-        print("=" * 60)
-        
-        total_tests = len(self.test_results)
-        passed_tests = sum(1 for result in self.test_results if result["success"])
-        failed_tests = total_tests - passed_tests
-        
-        print(f"Total Tests: {total_tests}")
-        print(f"Passed: {passed_tests}")
-        print(f"Failed: {failed_tests}")
-        print(f"Success Rate: {(passed_tests/total_tests)*100:.1f}%")
-        
-        if failed_tests > 0:
-            print("\n❌ FAILED TESTS:")
-            for result in self.test_results:
-                if not result["success"]:
-                    print(f"   - {result['test']}: {result['message']}")
-        
-        print("\n" + "=" * 60)
-
-class CustomerAttachmentsTests:
-    def __init__(self):
-        self.base_url = BACKEND_URL
-        self.test_results = []
-        self.created_customers = []
-        
-    def log_result(self, test_name, success, message, response_data=None):
-        """Log test result"""
-        result = {
-            "test": test_name,
-            "success": success,
-            "message": message,
-            "timestamp": datetime.now().isoformat()
+        customer_with_access_data = {
+            "customer": {
+                "name": "Access Test User",
+                "email": "accesstest@email.com",
+                "phone": "555-0140",
+                "address": "200 Access Test Lane, Edmonton, AB T5J 2R4",
+                "customer_type": "individual"
+            },
+            "require_access": True,
+            "access_web": True,
+            "access_inapp": True,
+            "user_role": "customer"
         }
-        if response_data:
-            result["response_data"] = response_data
-        self.test_results.append(result)
         
-        status = "✅ PASS" if success else "❌ FAIL"
-        print(f"{status}: {test_name}")
-        print(f"   {message}")
-        if not success and response_data:
-            print(f"   Response: {response_data}")
-        print()
+        try:
+            response = self.session.post(f"{BASE_URL}/customers/with-access", json=customer_with_access_data)
+            if response.status_code == 200:
+                result = response.json()
+                if result.get("success") and result.get("customer") and result.get("user_account"):
+                    customer = result["customer"]
+                    user_account = result["user_account"]
+                    self.created_customers.append(customer["id"])
+                    
+                    self.log_result(
+                        "User Access Creation",
+                        True,
+                        f"Customer with access created. Customer ID: {customer['id']}, User ID: {user_account['id']}"
+                    )
+                else:
+                    self.log_result(
+                        "User Access Creation",
+                        False,
+                        f"Response missing expected fields: {result}"
+                    )
+            else:
+                self.log_result(
+                    "User Access Creation",
+                    False,
+                    f"HTTP {response.status_code}: {response.text}"
+                )
+        except Exception as e:
+            self.log_result(
+                "User Access Creation",
+                False,
+                f"Exception: {str(e)}"
+            )
 
-    def test_create_customer_with_attachments(self):
-        """Test Case 1: Create customer with attachments field"""
-        test_name = "Create Customer with Attachments"
+    def test_link_to_company(self):
+        """Test 5: Link to Company functionality"""
+        print("=== Test 5: Link to Company ===")
         
-        # Sample base64 encoded file data (small image)
-        sample_file_data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
+        # First create a company
+        company_data = {
+            "name": "Test Company for Linking",
+            "email": "company@testlinking.com",
+            "phone": "555-0150",
+            "address": "300 Company Plaza, Montreal, QC H3A 0G4",
+            "customer_type": "company"
+        }
         
+        try:
+            company_response = self.session.post(f"{BASE_URL}/customers", json=company_data)
+            if company_response.status_code == 201:
+                company = company_response.json()
+                company_id = company["id"]
+                self.created_customers.append(company_id)
+                
+                # Create an individual customer linked to the company
+                individual_data = {
+                    "name": "John Doe",
+                    "email": "john.doe@testlinking.com",
+                    "phone": "555-0151",
+                    "address": "300 Company Plaza, Montreal, QC H3A 0G4",
+                    "customer_type": "individual",
+                    "company_id": company_id,
+                    "company_name": company["name"]
+                }
+                
+                individual_response = self.session.post(f"{BASE_URL}/customers", json=individual_data)
+                if individual_response.status_code == 201:
+                    individual = individual_response.json()
+                    self.created_customers.append(individual["id"])
+                    
+                    # Verify the link
+                    if (individual.get("company_id") == company_id and 
+                        individual.get("company_name") == company["name"]):
+                        self.log_result(
+                            "Link to Company",
+                            True,
+                            f"Individual {individual['id']} successfully linked to company {company_id}"
+                        )
+                    else:
+                        self.log_result(
+                            "Link to Company",
+                            False,
+                            f"Company link not properly saved in individual record"
+                        )
+                else:
+                    self.log_result(
+                        "Link to Company",
+                        False,
+                        f"Individual creation failed: HTTP {individual_response.status_code}: {individual_response.text}"
+                    )
+            else:
+                self.log_result(
+                    "Link to Company",
+                    False,
+                    f"Company creation failed: HTTP {company_response.status_code}: {company_response.text}"
+                )
+        except Exception as e:
+            self.log_result(
+                "Link to Company",
+                False,
+                f"Exception: {str(e)}"
+            )
+
+    def test_file_upload(self):
+        """Test 6: File Upload (attachments field with base64 data)"""
+        print("=== Test 6: File Upload ===")
+        
+        # Create customer with multiple file attachments
         customer_data = {
-            "name": "Sarah Johnson",
-            "email": "sarah.johnson@example.com", 
-            "phone": "+1-555-0123",
-            "mobile": "+1-555-0124",
-            "address": "123 Main Street, Toronto, ON M5V 3A8",
+            "name": "File Upload Test Customer",
+            "email": "filetest@email.com",
+            "phone": "555-0160",
+            "address": "400 Upload Test Street, Ottawa, ON K1A 0A6",
             "customer_type": "individual",
-            "communication_preference": "sms",
             "attachments": [
+                self.create_sample_base64_file("document1.txt", "This is the first test document with some content."),
+                self.create_sample_base64_file("document2.txt", "This is the second test document with different content."),
                 {
-                    "name": "drivers_license.jpg",
+                    "name": "image.jpg",
                     "type": "image/jpeg",
                     "size": 1024,
-                    "data": sample_file_data
-                },
-                {
-                    "name": "property_deed.pdf", 
-                    "type": "application/pdf",
-                    "size": 2048,
-                    "data": sample_file_data
+                    "data": base64.b64encode(b"fake image data for testing").decode()
                 }
             ]
         }
         
         try:
-            response = requests.post(f"{self.base_url}/customers", json=customer_data)
-            
-            if response.status_code in [200, 201]:
+            response = self.session.post(f"{BASE_URL}/customers", json=customer_data)
+            if response.status_code == 201:
                 customer = response.json()
-                customer_id = customer.get('id')
-                self.created_customers.append(customer_id)
+                self.created_customers.append(customer["id"])
                 
-                # Verify attachments are in response
-                if 'attachments' in customer and len(customer['attachments']) == 2:
-                    self.log_result(
-                        test_name, 
-                        True, 
-                        f"Customer created successfully with ID: {customer_id}. Attachments field present with {len(customer['attachments'])} files"
+                attachments = customer.get("attachments", [])
+                if len(attachments) == 3:
+                    # Verify all attachments have required fields
+                    valid_attachments = all(
+                        att.get("name") and att.get("type") and att.get("size") and att.get("data")
+                        for att in attachments
                     )
-                    return customer_id
+                    
+                    if valid_attachments:
+                        self.log_result(
+                            "File Upload",
+                            True,
+                            f"Customer created with {len(attachments)} attachments. All have required fields (name, type, size, data)."
+                        )
+                    else:
+                        self.log_result(
+                            "File Upload",
+                            False,
+                            f"Some attachments missing required fields"
+                        )
                 else:
                     self.log_result(
-                        test_name, 
-                        False, 
-                        "Attachments field missing or incorrect count", 
-                        customer
+                        "File Upload",
+                        False,
+                        f"Expected 3 attachments, got {len(attachments)}"
                     )
-                    return None
             else:
                 self.log_result(
-                    test_name, 
-                    False, 
-                    f"Failed to create customer. Status: {response.status_code}", 
-                    response.text
+                    "File Upload",
+                    False,
+                    f"HTTP {response.status_code}: {response.text}"
                 )
-                return None
-                
         except Exception as e:
-            self.log_result(test_name, False, f"Error: {str(e)}")
-            return None
+            self.log_result(
+                "File Upload",
+                False,
+                f"Exception: {str(e)}"
+            )
 
-    def test_create_customer_without_attachments(self):
-        """Test Case 2: Create customer without attachments field"""
-        test_name = "Create Customer without Attachments"
+    def test_customer_retrieval(self):
+        """Test 7: Customer Retrieval (GET operations)"""
+        print("=== Test 7: Customer Retrieval ===")
         
-        customer_data = {
-            "name": "Michael Chen",
-            "email": "michael.chen@example.com",
-            "phone": "+1-555-0125", 
-            "address": "456 Oak Avenue, Vancouver, BC V6B 1A1",
-            "customer_type": "individual",
-            "communication_preference": "inapp"
-            # Note: No attachments field
+        # Test 7a: Get all customers
+        try:
+            response = self.session.get(f"{BASE_URL}/customers")
+            if response.status_code == 200:
+                customers = response.json()
+                if isinstance(customers, list) and len(customers) > 0:
+                    self.log_result(
+                        "Customer Retrieval - List All",
+                        True,
+                        f"Retrieved {len(customers)} customers"
+                    )
+                else:
+                    self.log_result(
+                        "Customer Retrieval - List All",
+                        False,
+                        f"Expected list of customers, got: {type(customers)}"
+                    )
+            else:
+                self.log_result(
+                    "Customer Retrieval - List All",
+                    False,
+                    f"HTTP {response.status_code}: {response.text}"
+                )
+        except Exception as e:
+            self.log_result(
+                "Customer Retrieval - List All",
+                False,
+                f"Exception: {str(e)}"
+            )
+
+        # Test 7b: Get specific customer (if we have created customers)
+        if self.created_customers:
+            customer_id = self.created_customers[0]
+            try:
+                response = self.session.get(f"{BASE_URL}/customers/{customer_id}")
+                if response.status_code == 200:
+                    customer = response.json()
+                    if customer.get("id") == customer_id:
+                        self.log_result(
+                            "Customer Retrieval - Get Specific",
+                            True,
+                            f"Retrieved customer {customer_id} with all fields"
+                        )
+                    else:
+                        self.log_result(
+                            "Customer Retrieval - Get Specific",
+                            False,
+                            f"Customer ID mismatch: expected {customer_id}, got {customer.get('id')}"
+                        )
+                else:
+                    self.log_result(
+                        "Customer Retrieval - Get Specific",
+                        False,
+                        f"HTTP {response.status_code}: {response.text}"
+                    )
+            except Exception as e:
+                self.log_result(
+                    "Customer Retrieval - Get Specific",
+                    False,
+                    f"Exception: {str(e)}"
+                )
+
+    def test_customer_update(self):
+        """Test 8: Customer Update (PUT operations)"""
+        print("=== Test 8: Customer Update ===")
+        
+        if not self.created_customers:
+            self.log_result(
+                "Customer Update",
+                False,
+                "No customers available for update testing"
+            )
+            return
+        
+        customer_id = self.created_customers[0]
+        
+        # Test updating various fields
+        update_data = {
+            "phone": "555-9999",
+            "communication_preference": "inapp",
+            "notes": "Updated notes for testing",
+            "tags": ["Updated", "Test"]
         }
         
         try:
-            response = requests.post(f"{self.base_url}/customers", json=customer_data)
-            
-            if response.status_code in [200, 201]:
-                customer = response.json()
-                customer_id = customer.get('id')
-                self.created_customers.append(customer_id)
-                
-                # Verify attachments field is empty or default
-                attachments = customer.get('attachments', [])
-                self.log_result(
-                    test_name, 
-                    True, 
-                    f"Customer created successfully with ID: {customer_id}. Attachments field: {attachments} (empty as expected)"
-                )
-                return customer_id
-            else:
-                self.log_result(
-                    test_name, 
-                    False, 
-                    f"Failed to create customer. Status: {response.status_code}", 
-                    response.text
-                )
-                return None
-                
-        except Exception as e:
-            self.log_result(test_name, False, f"Error: {str(e)}")
-            return None
-
-    def test_get_customer_with_attachments(self, customer_id):
-        """Test Case 3: Get customer with attachments"""
-        test_name = "Get Customer with Attachments"
-        
-        if not customer_id:
-            self.log_result(test_name, False, "No customer ID provided")
-            return False
-            
-        try:
-            response = requests.get(f"{self.base_url}/customers/{customer_id}")
-            
+            response = self.session.put(f"{BASE_URL}/customers/{customer_id}", json=update_data)
             if response.status_code == 200:
-                customer = response.json()
+                updated_customer = response.json()
                 
-                # Verify attachments field is returned
-                if 'attachments' in customer:
-                    attachments = customer['attachments']
-                    attachment_details = []
-                    
-                    for i, attachment in enumerate(attachments):
-                        name = attachment.get('name', 'Unknown')
-                        file_type = attachment.get('type', 'Unknown')
-                        size = attachment.get('size', 0)
-                        has_data = 'data' in attachment and len(attachment.get('data', '')) > 0
-                        attachment_details.append(f"{name} ({file_type}, {size} bytes, data: {'✅' if has_data else '❌'})")
-                    
+                # Verify updates
+                updates_applied = (
+                    updated_customer.get("phone") == "555-9999" and
+                    updated_customer.get("communication_preference") == "inapp" and
+                    updated_customer.get("notes") == "Updated notes for testing"
+                )
+                
+                if updates_applied:
                     self.log_result(
-                        test_name, 
-                        True, 
-                        f"Customer retrieved successfully: {customer.get('name')}. Attachments field present with {len(attachments)} files: {', '.join(attachment_details)}"
+                        "Customer Update",
+                        True,
+                        f"Customer {customer_id} successfully updated with new phone, preference, and notes"
                     )
-                    return True
                 else:
                     self.log_result(
-                        test_name, 
-                        False, 
-                        "Attachments field missing from response", 
-                        customer
+                        "Customer Update",
+                        False,
+                        f"Updates not properly applied: {updated_customer}"
                     )
-                    return False
             else:
                 self.log_result(
-                    test_name, 
-                    False, 
-                    f"Failed to get customer. Status: {response.status_code}", 
-                    response.text
+                    "Customer Update",
+                    False,
+                    f"HTTP {response.status_code}: {response.text}"
                 )
-                return False
-                
         except Exception as e:
-            self.log_result(test_name, False, f"Error: {str(e)}")
-            return False
+            self.log_result(
+                "Customer Update",
+                False,
+                f"Exception: {str(e)}"
+            )
 
-    def test_database_storage_verification(self, customer_id):
-        """Additional Test: Verify attachments are stored in database"""
-        test_name = "Database Storage Verification"
-        
-        if not customer_id:
-            self.log_result(test_name, False, "No customer ID provided")
-            return False
+        # Test adding/removing attachments
+        if len(self.created_customers) > 1:
+            customer_id = self.created_customers[1]
             
-        try:
-            import base64
+            new_attachment = self.create_sample_base64_file("updated_document.txt", "This is an updated document")
             
-            # Get customer again to verify persistence
-            response = requests.get(f"{self.base_url}/customers/{customer_id}")
-            
-            if response.status_code == 200:
-                customer = response.json()
-                attachments = customer.get('attachments', [])
+            try:
+                response = self.session.put(
+                    f"{BASE_URL}/customers/{customer_id}",
+                    json={"attachments": [new_attachment]}
+                )
                 
-                if len(attachments) > 0:
-                    valid_attachments = []
-                    invalid_attachments = []
+                if response.status_code == 200:
+                    updated_customer = response.json()
+                    attachments = updated_customer.get("attachments", [])
                     
-                    # Check if data is properly base64 encoded
-                    for attachment in attachments:
-                        data = attachment.get('data', '')
-                        if data:
-                            try:
-                                # Try to decode base64 data
-                                decoded = base64.b64decode(data)
-                                valid_attachments.append(f"{attachment.get('name')} ({len(decoded)} bytes)")
-                            except Exception as decode_error:
-                                invalid_attachments.append(f"{attachment.get('name')}: {decode_error}")
-                    
-                    if len(invalid_attachments) == 0:
+                    if len(attachments) == 1 and attachments[0].get("name") == "updated_document.txt":
                         self.log_result(
-                            test_name, 
-                            True, 
-                            f"All {len(attachments)} attachments properly stored in database: {', '.join(valid_attachments)}"
+                            "Customer Update - Attachments",
+                            True,
+                            f"Customer attachments successfully updated"
                         )
-                        return True
                     else:
                         self.log_result(
-                            test_name, 
-                            False, 
-                            f"Invalid attachments found: {', '.join(invalid_attachments)}"
+                            "Customer Update - Attachments",
+                            False,
+                            f"Attachment update failed: {attachments}"
                         )
-                        return False
                 else:
-                    self.log_result(test_name, True, "No attachments to verify")
-                    return True
+                    self.log_result(
+                        "Customer Update - Attachments",
+                        False,
+                        f"HTTP {response.status_code}: {response.text}"
+                    )
+            except Exception as e:
+                self.log_result(
+                    "Customer Update - Attachments",
+                    False,
+                    f"Exception: {str(e)}"
+                )
+
+    def test_error_handling(self):
+        """Test error handling for missing required fields"""
+        print("=== Test 9: Error Handling ===")
+        
+        # Test missing required fields
+        invalid_customer_data = {
+            "name": "Test Customer",
+            # Missing email, phone, address
+        }
+        
+        try:
+            response = self.session.post(f"{BASE_URL}/customers", json=invalid_customer_data)
+            if response.status_code in [400, 422]:  # Bad Request or Unprocessable Entity
+                self.log_result(
+                    "Error Handling - Missing Required Fields",
+                    True,
+                    f"Properly rejected invalid data with HTTP {response.status_code}"
+                )
             else:
                 self.log_result(
-                    test_name, 
-                    False, 
-                    f"Failed to retrieve customer for verification. Status: {response.status_code}", 
-                    response.text
+                    "Error Handling - Missing Required Fields",
+                    False,
+                    f"Expected 400/422 error, got HTTP {response.status_code}: {response.text}"
                 )
-                return False
-                
         except Exception as e:
-            self.log_result(test_name, False, f"Error during verification: {str(e)}")
-            return False
+            self.log_result(
+                "Error Handling - Missing Required Fields",
+                False,
+                f"Exception: {str(e)}"
+            )
+
+        # Test invalid email format
+        invalid_email_data = {
+            "name": "Test Customer",
+            "email": "invalid-email-format",
+            "phone": "555-0000",
+            "address": "Test Address"
+        }
+        
+        try:
+            response = self.session.post(f"{BASE_URL}/customers", json=invalid_email_data)
+            if response.status_code in [400, 422]:
+                self.log_result(
+                    "Error Handling - Invalid Email Format",
+                    True,
+                    f"Properly rejected invalid email with HTTP {response.status_code}"
+                )
+            else:
+                self.log_result(
+                    "Error Handling - Invalid Email Format",
+                    False,
+                    f"Expected 400/422 error, got HTTP {response.status_code}: {response.text}"
+                )
+        except Exception as e:
+            self.log_result(
+                "Error Handling - Invalid Email Format",
+                False,
+                f"Exception: {str(e)}"
+            )
 
     def cleanup_test_data(self):
-        """Clean up test customers"""
-        print("🧹 Cleaning up test data...")
+        """Clean up created test data"""
+        print("=== Cleanup Test Data ===")
+        
+        # Delete created customers
         for customer_id in self.created_customers:
             try:
-                response = requests.delete(f"{self.base_url}/customers/{customer_id}")
+                response = self.session.delete(f"{BASE_URL}/customers/{customer_id}")
                 if response.status_code == 200:
-                    print(f"   ✅ Deleted customer {customer_id}")
+                    print(f"✅ Deleted customer {customer_id}")
                 else:
-                    print(f"   ⚠️  Failed to delete customer {customer_id}")
+                    print(f"❌ Failed to delete customer {customer_id}: {response.status_code}")
             except Exception as e:
-                print(f"   ❌ Error deleting customer {customer_id}: {str(e)}")
+                print(f"❌ Error deleting customer {customer_id}: {str(e)}")
+        
+        # Delete created sites
+        for site_id in self.created_sites:
+            try:
+                response = self.session.delete(f"{BASE_URL}/sites/{site_id}")
+                if response.status_code == 200:
+                    print(f"✅ Deleted site {site_id}")
+                else:
+                    print(f"❌ Failed to delete site {site_id}: {response.status_code}")
+            except Exception as e:
+                print(f"❌ Error deleting site {site_id}: {str(e)}")
 
     def run_all_tests(self):
-        """Run all customer attachment tests"""
-        print("🚀 Starting Customer Attachments API Tests")
-        print("=" * 50)
+        """Run all customer management tests"""
+        print("🚀 Starting Comprehensive Customer Management Backend API Tests")
+        print(f"Backend URL: {BASE_URL}")
+        print("=" * 80)
         
-        # Test Case 1: Create customer with attachments
-        customer_id_with_attachments = self.test_create_customer_with_attachments()
+        start_time = time.time()
         
-        # Test Case 2: Create customer without attachments
-        customer_id_without_attachments = self.test_create_customer_without_attachments()
+        # Run all tests
+        self.test_customer_creation_contact_type()
+        self.test_customer_creation_company_type()
+        self.test_site_creation_integration()
+        self.test_user_access_creation()
+        self.test_link_to_company()
+        self.test_file_upload()
+        self.test_customer_retrieval()
+        self.test_customer_update()
+        self.test_error_handling()
         
-        # Test Case 3: Get customer with attachments
-        if customer_id_with_attachments:
-            self.test_get_customer_with_attachments(customer_id_with_attachments)
-        
-        # Additional Test: Database verification
-        if customer_id_with_attachments:
-            self.test_database_storage_verification(customer_id_with_attachments)
+        end_time = time.time()
         
         # Summary
-        self.print_summary()
-        
-        # Cleanup
-        self.cleanup_test_data()
-
-    def print_summary(self):
-        """Print test summary"""
-        print("=" * 60)
-        print("📊 CUSTOMER ATTACHMENTS TEST SUMMARY")
-        print("=" * 60)
+        print("=" * 80)
+        print("📊 TEST SUMMARY")
+        print("=" * 80)
         
         total_tests = len(self.test_results)
         passed_tests = sum(1 for result in self.test_results if result["success"])
         failed_tests = total_tests - passed_tests
         
         print(f"Total Tests: {total_tests}")
-        print(f"Passed: {passed_tests}")
-        print(f"Failed: {failed_tests}")
+        print(f"Passed: {passed_tests} ✅")
+        print(f"Failed: {failed_tests} ❌")
         print(f"Success Rate: {(passed_tests/total_tests)*100:.1f}%")
+        print(f"Execution Time: {end_time - start_time:.2f} seconds")
         
         if failed_tests > 0:
             print("\n❌ FAILED TESTS:")
             for result in self.test_results:
                 if not result["success"]:
-                    print(f"   - {result['test']}: {result['message']}")
+                    print(f"  - {result['test']}: {result['details']}")
         
-        print("\n" + "=" * 60)
+        print("\n🧹 Cleaning up test data...")
+        self.cleanup_test_data()
+        
+        return {
+            "total_tests": total_tests,
+            "passed_tests": passed_tests,
+            "failed_tests": failed_tests,
+            "success_rate": (passed_tests/total_tests)*100,
+            "execution_time": end_time - start_time,
+            "results": self.test_results
+        }
 
 if __name__ == "__main__":
-    # Run communication preference tests
-    print("Running Communication Preference Tests...")
-    comm_tester = CommunicationPreferenceTests()
-    comm_tester.run_all_tests()
-    
-    print("\n" + "="*80 + "\n")
-    
-    # Run customer attachments tests
-    print("Running Customer Attachments Tests...")
-    attachments_tester = CustomerAttachmentsTests()
-    attachments_tester.run_all_tests()
+    tester = CustomerManagementTests()
+    results = tester.run_all_tests()
