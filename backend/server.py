@@ -92,6 +92,7 @@ from models import (
 )
 from sms_service import sms_service
 from email_service import email_service
+from user_access_service import create_user_account
 from pdf_service import pdf_service
 from weather_service import weather_service
 from twilio_service import twilio_service
