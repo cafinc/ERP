@@ -230,9 +230,9 @@ export default function CustomerFormPage() {
     if (!files) return;
     
     Array.from(files).forEach(file => {
-      // Limit file size to 10MB
-      if (file.size > 10 * 1024 * 1024) {
-        alert(`File ${file.name} is too large. Maximum size is 10MB.`);
+      // Limit file size to 500KB to avoid proxy size limits
+      if (file.size > 500 * 1024) {
+        alert(`File ${file.name} is too large. Maximum size is 500KB per file.\n\nFor larger files, please upload them after creating the customer.`);
         return;
       }
       
@@ -245,6 +245,9 @@ export default function CustomerFormPage() {
           size: file.size,
           data: result
         }]);
+      };
+      reader.onerror = () => {
+        alert(`Error reading file ${file.name}`);
       };
       reader.readAsDataURL(file);
     });
