@@ -804,7 +804,7 @@ export default function CustomerFormPage() {
                         {linkToCompany && (
                           <div className="relative w-64 mx-3">
                             <div className="relative">
-                              <Building className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                              <Building className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
                               <input
                                 type="text"
                                 value={companySearch}
@@ -837,7 +837,7 @@ export default function CustomerFormPage() {
                                   setTimeout(() => setShowSearchResults(false), 200);
                                 }}
                                 disabled={loadingCompanies}
-                                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
+                                className="w-full pl-8 pr-4 py-1 h-6 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
                                 placeholder={loadingCompanies ? "Loading companies..." : "Search for a company..."}
                               />
                               {loadingCompanies && (
