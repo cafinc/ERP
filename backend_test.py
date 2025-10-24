@@ -15,359 +15,328 @@ BACKEND_URL = "https://snow-dash-1.preview.emergentagent.com/api"
 
 class CommunicationPreferenceTests:
     def __init__(self):
-        self.session = requests.Session()
-        self.created_customers = []  # Track created customers for cleanup
+        self.base_url = BACKEND_URL
+        self.test_results = []
+        self.created_customers = []
         
-    def log_test(self, test_name: str, status: str, details: str = ""):
-        """Log test results"""
-        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        status_symbol = "✅" if status == "PASS" else "❌"
-        print(f"[{timestamp}] {status_symbol} {test_name}: {status}")
-        if details:
-            print(f"    Details: {details}")
+    def log_result(self, test_name, success, message, response_data=None):
+        """Log test result"""
+        result = {
+            "test": test_name,
+            "success": success,
+            "message": message,
+            "timestamp": datetime.now().isoformat()
+        }
+        if response_data:
+            result["response_data"] = response_data
+        self.test_results.append(result)
+        
+        status = "✅ PASS" if success else "❌ FAIL"
+        print(f"{status}: {test_name}")
+        print(f"   {message}")
+        if not success and response_data:
+            print(f"   Response: {response_data}")
         print()
-    
-    def make_request(self, method: str, endpoint: str, data: Optional[Dict] = None) -> Dict[str, Any]:
-        """Make HTTP request and return response data"""
-        url = f"{API_BASE}{endpoint}"
+
+    def test_create_customer_sms_preference(self):
+        """Test 1: Create Customer with SMS Preference + Mobile"""
+        test_name = "Create Customer with SMS Preference + Mobile"
+        
+        customer_data = {
+            "name": "Jane Doe",
+            "email": "jane@example.com",
+            "phone": "(403) 555-1234",
+            "mobile": "(555) 987-6543",
+            "communication_preference": "sms",
+            "address": "123 Main St, Calgary, AB",
+            "customer_type": "individual",
+            "notes": "Test customer for SMS preference"
+        }
         
         try:
-            if method.upper() == "GET":
-                response = self.session.get(url, timeout=30)
-            elif method.upper() == "POST":
-                response = self.session.post(url, json=data, timeout=30)
-            elif method.upper() == "PUT":
-                response = self.session.put(url, json=data, timeout=30)
-            elif method.upper() == "DELETE":
-                response = self.session.delete(url, timeout=30)
+            response = requests.post(f"{self.base_url}/customers", json=customer_data, timeout=10)
+            
+            if response.status_code in [200, 201]:
+                data = response.json()
+                customer_id = data.get("id")
+                
+                # Verify all fields are saved correctly
+                if (data.get("communication_preference") == "sms" and 
+                    data.get("mobile") == "(555) 987-6543" and
+                    data.get("name") == "Jane Doe"):
+                    
+                    self.created_customers.append(customer_id)
+                    self.log_result(test_name, True, 
+                                  f"Customer created successfully with SMS preference. ID: {customer_id}")
+                    return customer_id
+                else:
+                    self.log_result(test_name, False, 
+                                  "Customer created but fields not saved correctly", data)
+                    return None
             else:
-                raise ValueError(f"Unsupported HTTP method: {method}")
-            
-            return {
-                "status_code": response.status_code,
-                "data": response.json() if response.content else {},
-                "success": 200 <= response.status_code < 300
-            }
-        except requests.exceptions.RequestException as e:
-            return {
-                "status_code": 0,
-                "data": {"error": str(e)},
-                "success": False
-            }
-        except json.JSONDecodeError:
-            return {
-                "status_code": response.status_code,
-                "data": {"error": "Invalid JSON response"},
-                "success": False
-            }
-    
-    def test_1_company_customer_creation(self):
-        """Test 1: Company Customer Creation"""
-        test_name = "Company Customer Creation"
-        
-        company_data = {
-            "name": "ABC Snow Services Inc.",
-            "email": "admin@abcsnow.ca",
-            "phone": "(403) 555-1234",
-            "address": "123 Main St SW, Calgary, AB T2P 1J9, Canada",
-            "customer_type": "company",
-            "notes": "Commercial snow removal company",
-            "accounting": {
-                "tax_id": "123456789",
-                "billing_email": "billing@abcsnow.ca",
-                "billing_phone": "(403) 555-1235",
-                "payment_terms": "net_30",
-                "credit_limit": 50000.0,
-                "preferred_payment_method": "invoice",
-                "po_required": True,
-                "billing_address": "123 Main St SW, Calgary, AB T2P 1J9, Canada"
-            }
-        }
-        
-        response = self.make_request("POST", "/customers", company_data)
-        
-        if response["success"]:
-            customer_data = response["data"]
-            self.created_customers.append(customer_data.get("id"))
-            
-            # Verify required fields
-            checks = [
-                ("ID field present", customer_data.get("id") is not None),
-                ("Name correct", customer_data.get("name") == company_data["name"]),
-                ("Email correct", customer_data.get("email") == company_data["email"]),
-                ("Phone correct", customer_data.get("phone") == company_data["phone"]),
-                ("Address correct", customer_data.get("address") == company_data["address"]),
-                ("Customer type correct", customer_data.get("customer_type") == "company"),
-                ("Accounting fields saved", customer_data.get("accounting") is not None)
-            ]
-            
-            failed_checks = [check[0] for check in checks if not check[1]]
-            
-            if not failed_checks:
-                self.log_test(test_name, "PASS", f"Company created with ID: {customer_data.get('id')}")
-                return customer_data.get("id")
-            else:
-                self.log_test(test_name, "FAIL", f"Failed checks: {', '.join(failed_checks)}")
+                self.log_result(test_name, False, 
+                              f"Failed to create customer. Status: {response.status_code}", 
+                              response.text)
                 return None
-        else:
-            self.log_test(test_name, "FAIL", f"HTTP {response['status_code']}: {response['data']}")
+                
+        except Exception as e:
+            self.log_result(test_name, False, f"Exception occurred: {str(e)}")
             return None
-    
-    def test_2_individual_customer_without_company(self):
-        """Test 2: Individual Customer Creation WITHOUT Company Link"""
-        test_name = "Individual Customer Creation (No Company Link)"
+
+    def test_create_customer_inapp_preference(self):
+        """Test 2: Create Customer with InApp Preference (No Mobile)"""
+        test_name = "Create Customer with InApp Preference (No Mobile)"
         
-        individual_data = {
-            "name": "John Smith",
-            "email": "john@example.com",
+        customer_data = {
+            "name": "Bob Smith",
+            "email": "bob@example.com",
             "phone": "(403) 555-5678",
-            "address": "456 Oak Ave NW, Calgary, AB T2N 2K8, Canada",
+            "mobile": "",  # Empty mobile
+            "communication_preference": "inapp",
+            "address": "456 Oak Ave, Calgary, AB",
             "customer_type": "individual",
-            "notes": "Residential customer"
+            "notes": "Test customer for InApp preference"
         }
         
-        response = self.make_request("POST", "/customers", individual_data)
-        
-        if response["success"]:
-            customer_data = response["data"]
-            self.created_customers.append(customer_data.get("id"))
+        try:
+            response = requests.post(f"{self.base_url}/customers", json=customer_data, timeout=10)
             
-            # Verify required fields
-            checks = [
-                ("ID field present", customer_data.get("id") is not None),
-                ("Name correct", customer_data.get("name") == individual_data["name"]),
-                ("Email correct", customer_data.get("email") == individual_data["email"]),
-                ("Customer type correct", customer_data.get("customer_type") == "individual"),
-                ("No company_id", customer_data.get("company_id") is None),
-                ("No company_name", customer_data.get("company_name") is None)
-            ]
-            
-            failed_checks = [check[0] for check in checks if not check[1]]
-            
-            if not failed_checks:
-                self.log_test(test_name, "PASS", f"Individual created with ID: {customer_data.get('id')}")
-                return customer_data.get("id")
+            if response.status_code in [200, 201]:
+                data = response.json()
+                customer_id = data.get("id")
+                
+                # Verify communication preference is inapp and mobile is empty
+                if (data.get("communication_preference") == "inapp" and 
+                    data.get("mobile") == "" and
+                    data.get("name") == "Bob Smith"):
+                    
+                    self.created_customers.append(customer_id)
+                    self.log_result(test_name, True, 
+                                  f"Customer created successfully with InApp preference. ID: {customer_id}")
+                    return customer_id
+                else:
+                    self.log_result(test_name, False, 
+                                  "Customer created but fields not saved correctly", data)
+                    return None
             else:
-                self.log_test(test_name, "FAIL", f"Failed checks: {', '.join(failed_checks)}")
+                self.log_result(test_name, False, 
+                              f"Failed to create customer. Status: {response.status_code}", 
+                              response.text)
                 return None
-        else:
-            self.log_test(test_name, "FAIL", f"HTTP {response['status_code']}: {response['data']}")
+                
+        except Exception as e:
+            self.log_result(test_name, False, f"Exception occurred: {str(e)}")
             return None
-    
-    def test_3_individual_customer_with_company_link(self, company_id: str):
-        """Test 3: Individual Customer Creation WITH Company Link"""
-        test_name = "Individual Customer Creation (With Company Link)"
+
+    def test_retrieve_customer_preference(self, customer_id):
+        """Test 3: Retrieve Customer and Verify Preference"""
+        test_name = "Retrieve Customer and Verify Preference"
         
-        if not company_id:
-            self.log_test(test_name, "SKIP", "No company ID available from previous test")
-            return None
+        if not customer_id:
+            self.log_result(test_name, False, "No customer ID provided for retrieval test")
+            return
         
-        # First get company name
-        company_response = self.make_request("GET", f"/customers/{company_id}")
-        if not company_response["success"]:
-            self.log_test(test_name, "FAIL", "Could not retrieve company for linking")
-            return None
-        
-        company_name = company_response["data"].get("name")
-        
-        individual_data = {
-            "name": "Jane Doe",
-            "email": "jane.doe@abcsnow.ca",
-            "phone": "(403) 555-9876",
-            "address": "789 Pine St SE, Calgary, AB T2G 3H7, Canada",
-            "customer_type": "individual",
-            "company_id": company_id,
-            "company_name": company_name,
-            "notes": "Employee of ABC Snow Services"
-        }
-        
-        response = self.make_request("POST", "/customers", individual_data)
-        
-        if response["success"]:
-            customer_data = response["data"]
-            self.created_customers.append(customer_data.get("id"))
+        try:
+            response = requests.get(f"{self.base_url}/customers/{customer_id}", timeout=10)
             
-            # Verify required fields
-            checks = [
-                ("ID field present", customer_data.get("id") is not None),
-                ("Name correct", customer_data.get("name") == individual_data["name"]),
-                ("Customer type correct", customer_data.get("customer_type") == "individual"),
-                ("Company ID saved", customer_data.get("company_id") == company_id),
-                ("Company name saved", customer_data.get("company_name") == company_name)
-            ]
-            
-            failed_checks = [check[0] for check in checks if not check[1]]
-            
-            if not failed_checks:
-                self.log_test(test_name, "PASS", f"Individual linked to company, ID: {customer_data.get('id')}")
-                return customer_data.get("id")
+            if response.status_code == 200:
+                data = response.json()
+                
+                # Verify response includes communication_preference field
+                if "communication_preference" in data:
+                    preference = data.get("communication_preference")
+                    mobile = data.get("mobile", "")
+                    
+                    self.log_result(test_name, True, 
+                                  f"Customer retrieved successfully. Preference: {preference}, Mobile: {mobile}")
+                else:
+                    self.log_result(test_name, False, 
+                                  "Customer retrieved but missing communication_preference field", data)
             else:
-                self.log_test(test_name, "FAIL", f"Failed checks: {', '.join(failed_checks)}")
-                return None
-        else:
-            self.log_test(test_name, "FAIL", f"HTTP {response['status_code']}: {response['data']}")
-            return None
-    
-    def test_4_retrieve_customer_with_company_link(self, individual_id: str):
-        """Test 4: Retrieve Customer with Company Link"""
-        test_name = "Retrieve Customer with Company Link"
+                self.log_result(test_name, False, 
+                              f"Failed to retrieve customer. Status: {response.status_code}", 
+                              response.text)
+                
+        except Exception as e:
+            self.log_result(test_name, False, f"Exception occurred: {str(e)}")
+
+    def test_update_communication_preference(self, customer_id):
+        """Test 4: Update Communication Preference"""
+        test_name = "Update Communication Preference"
         
-        if not individual_id:
-            self.log_test(test_name, "SKIP", "No individual ID available from previous test")
+        if not customer_id:
+            self.log_result(test_name, False, "No customer ID provided for update test")
             return
-        
-        response = self.make_request("GET", f"/customers/{individual_id}")
-        
-        if response["success"]:
-            customer_data = response["data"]
-            
-            # Verify company link fields are present
-            checks = [
-                ("Customer retrieved", customer_data.get("id") == individual_id),
-                ("Company ID present", customer_data.get("company_id") is not None),
-                ("Company name present", customer_data.get("company_name") is not None),
-                ("Data integrity", len(customer_data.get("company_name", "")) > 0)
-            ]
-            
-            failed_checks = [check[0] for check in checks if not check[1]]
-            
-            if not failed_checks:
-                self.log_test(test_name, "PASS", f"Company link data: {customer_data.get('company_name')}")
-            else:
-                self.log_test(test_name, "FAIL", f"Failed checks: {', '.join(failed_checks)}")
-        else:
-            self.log_test(test_name, "FAIL", f"HTTP {response['status_code']}: {response['data']}")
-    
-    def test_5_list_customers_filter_by_type(self):
-        """Test 5: List All Customers - Filter by Type"""
-        test_name = "List Customers - Filter by Company Type"
-        
-        # Get all customers first
-        all_response = self.make_request("GET", "/customers")
-        
-        if not all_response["success"]:
-            self.log_test(test_name, "FAIL", f"Could not retrieve customers: {all_response['data']}")
-            return
-        
-        all_customers = all_response["data"]
-        
-        # Filter companies manually (since API doesn't have type filter)
-        company_customers = [c for c in all_customers if c.get("customer_type") == "company"]
-        individual_customers = [c for c in all_customers if c.get("customer_type") == "individual"]
-        
-        checks = [
-            ("Customers retrieved", len(all_customers) > 0),
-            ("Company customers found", len(company_customers) > 0),
-            ("Individual customers found", len(individual_customers) > 0),
-            ("Type filtering works", all(c.get("customer_type") == "company" for c in company_customers))
-        ]
-        
-        failed_checks = [check[0] for check in checks if not check[1]]
-        
-        if not failed_checks:
-            self.log_test(test_name, "PASS", f"Found {len(company_customers)} companies, {len(individual_customers)} individuals")
-        else:
-            self.log_test(test_name, "FAIL", f"Failed checks: {', '.join(failed_checks)}")
-    
-    def test_6_update_customer_company_link(self, individual_id: str, company_id: str):
-        """Test 6: Update Customer Company Link"""
-        test_name = "Update Customer Company Link"
-        
-        if not individual_id or not company_id:
-            self.log_test(test_name, "SKIP", "Missing individual or company ID from previous tests")
-            return
-        
-        # Get company name for update
-        company_response = self.make_request("GET", f"/customers/{company_id}")
-        if not company_response["success"]:
-            self.log_test(test_name, "FAIL", "Could not retrieve company for update")
-            return
-        
-        company_name = company_response["data"].get("name")
         
         update_data = {
-            "company_id": company_id,
-            "company_name": f"Updated - {company_name}",
-            "notes": "Updated company link"
+            "communication_preference": "inapp"
         }
         
-        response = self.make_request("PUT", f"/customers/{individual_id}", update_data)
-        
-        if response["success"]:
-            customer_data = response["data"]
+        try:
+            response = requests.put(f"{self.base_url}/customers/{customer_id}", 
+                                  json=update_data, timeout=10)
             
-            checks = [
-                ("Update successful", customer_data.get("id") == individual_id),
-                ("Company ID updated", customer_data.get("company_id") == company_id),
-                ("Company name updated", "Updated -" in customer_data.get("company_name", "")),
-                ("Notes updated", customer_data.get("notes") == "Updated company link")
-            ]
-            
-            failed_checks = [check[0] for check in checks if not check[1]]
-            
-            if not failed_checks:
-                self.log_test(test_name, "PASS", "Company link updated successfully")
+            if response.status_code == 200:
+                data = response.json()
+                
+                # Verify preference was updated
+                if data.get("communication_preference") == "inapp":
+                    self.log_result(test_name, True, 
+                                  "Communication preference updated successfully from SMS to InApp")
+                else:
+                    self.log_result(test_name, False, 
+                                  "Update request succeeded but preference not changed", data)
             else:
-                self.log_test(test_name, "FAIL", f"Failed checks: {', '.join(failed_checks)}")
-        else:
-            self.log_test(test_name, "FAIL", f"HTTP {response['status_code']}: {response['data']}")
-    
-    def cleanup(self):
-        """Clean up created test data"""
+                self.log_result(test_name, False, 
+                              f"Failed to update customer. Status: {response.status_code}", 
+                              response.text)
+                
+        except Exception as e:
+            self.log_result(test_name, False, f"Exception occurred: {str(e)}")
+
+    def test_list_customers_preference_field(self):
+        """Test 5: List All Customers - Check Preference Field"""
+        test_name = "List All Customers - Check Preference Field"
+        
+        try:
+            response = requests.get(f"{self.base_url}/customers", timeout=10)
+            
+            if response.status_code == 200:
+                customers = response.json()
+                
+                if isinstance(customers, list) and len(customers) > 0:
+                    # Check if all customers have communication_preference field
+                    customers_with_preference = 0
+                    total_customers = len(customers)
+                    
+                    for customer in customers:
+                        if "communication_preference" in customer:
+                            customers_with_preference += 1
+                    
+                    if customers_with_preference == total_customers:
+                        self.log_result(test_name, True, 
+                                      f"All {total_customers} customers have communication_preference field")
+                    else:
+                        self.log_result(test_name, False, 
+                                      f"Only {customers_with_preference}/{total_customers} customers have communication_preference field")
+                else:
+                    self.log_result(test_name, True, 
+                                  "No customers found in system (empty list returned)")
+                    
+            else:
+                self.log_result(test_name, False, 
+                              f"Failed to list customers. Status: {response.status_code}", 
+                              response.text)
+                
+        except Exception as e:
+            self.log_result(test_name, False, f"Exception occurred: {str(e)}")
+
+    def test_edge_cases(self):
+        """Test 6: Edge Cases and Validation"""
+        test_name = "Edge Cases and Validation"
+        
+        # Test with invalid communication preference
+        invalid_customer_data = {
+            "name": "Test Invalid",
+            "email": "invalid@example.com",
+            "phone": "(403) 555-9999",
+            "communication_preference": "invalid_preference",  # Invalid value
+            "address": "789 Test St, Calgary, AB",
+            "customer_type": "individual"
+        }
+        
+        try:
+            response = requests.post(f"{self.base_url}/customers", json=invalid_customer_data, timeout=10)
+            
+            # Should either accept it (no validation) or reject it (with validation)
+            if response.status_code in [200, 201]:
+                data = response.json()
+                customer_id = data.get("id")
+                if customer_id:
+                    self.created_customers.append(customer_id)
+                
+                self.log_result(test_name, True, 
+                              "System accepts invalid communication preference (no validation enforced)")
+            elif response.status_code in [400, 422]:
+                self.log_result(test_name, True, 
+                              "System properly validates communication preference values")
+            else:
+                self.log_result(test_name, False, 
+                              f"Unexpected response for invalid data. Status: {response.status_code}", 
+                              response.text)
+                
+        except Exception as e:
+            self.log_result(test_name, False, f"Exception occurred: {str(e)}")
+
+    def cleanup_test_data(self):
+        """Clean up test customers"""
         print("🧹 Cleaning up test data...")
+        
         for customer_id in self.created_customers:
             try:
-                response = self.make_request("DELETE", f"/customers/{customer_id}")
-                if response["success"]:
-                    print(f"   ✅ Deleted customer {customer_id}")
+                response = requests.delete(f"{self.base_url}/customers/{customer_id}", timeout=10)
+                if response.status_code in [200, 204]:
+                    print(f"   Deleted customer {customer_id}")
                 else:
-                    print(f"   ❌ Failed to delete customer {customer_id}")
+                    print(f"   Failed to delete customer {customer_id}: {response.status_code}")
             except Exception as e:
-                print(f"   ❌ Error deleting customer {customer_id}: {e}")
-        print()
-    
+                print(f"   Error deleting customer {customer_id}: {str(e)}")
+
     def run_all_tests(self):
-        """Run all customer company linking tests"""
-        print("🚀 Starting Customer Company Linking Backend Tests")
-        print(f"📡 Backend URL: {API_BASE}")
+        """Run all communication preference tests"""
+        print("🚀 Starting Communication Preference Backend Tests")
+        print(f"Backend URL: {self.base_url}")
         print("=" * 60)
-        print()
         
-        # Test 1: Create company customer
-        company_id = self.test_1_company_customer_creation()
+        # Test 1: Create customer with SMS preference
+        sms_customer_id = self.test_create_customer_sms_preference()
         
-        # Test 2: Create individual without company
-        individual_no_company_id = self.test_2_individual_customer_without_company()
+        # Test 2: Create customer with InApp preference
+        inapp_customer_id = self.test_create_customer_inapp_preference()
         
-        # Test 3: Create individual with company link
-        individual_with_company_id = self.test_3_individual_customer_with_company_link(company_id)
+        # Test 3: Retrieve customer and verify preference
+        if sms_customer_id:
+            self.test_retrieve_customer_preference(sms_customer_id)
         
-        # Test 4: Retrieve customer with company link
-        self.test_4_retrieve_customer_with_company_link(individual_with_company_id)
+        # Test 4: Update communication preference
+        if sms_customer_id:
+            self.test_update_communication_preference(sms_customer_id)
         
-        # Test 5: List customers and filter by type
-        self.test_5_list_customers_filter_by_type()
+        # Test 5: List customers and check preference field
+        self.test_list_customers_preference_field()
         
-        # Test 6: Update customer company link
-        self.test_6_update_customer_company_link(individual_no_company_id, company_id)
+        # Test 6: Edge cases
+        self.test_edge_cases()
         
-        print("=" * 60)
-        print("🏁 Customer Company Linking Tests Complete")
+        # Summary
+        self.print_summary()
         
         # Cleanup
-        self.cleanup()
+        self.cleanup_test_data()
 
-def main():
-    """Main test execution"""
-    test_suite = CustomerTestSuite()
-    try:
-        test_suite.run_all_tests()
-    except KeyboardInterrupt:
-        print("\n⚠️  Tests interrupted by user")
-        test_suite.cleanup()
-    except Exception as e:
-        print(f"\n💥 Unexpected error: {e}")
-        test_suite.cleanup()
+    def print_summary(self):
+        """Print test summary"""
+        print("=" * 60)
+        print("📊 TEST SUMMARY")
+        print("=" * 60)
+        
+        total_tests = len(self.test_results)
+        passed_tests = sum(1 for result in self.test_results if result["success"])
+        failed_tests = total_tests - passed_tests
+        
+        print(f"Total Tests: {total_tests}")
+        print(f"Passed: {passed_tests}")
+        print(f"Failed: {failed_tests}")
+        print(f"Success Rate: {(passed_tests/total_tests)*100:.1f}%")
+        
+        if failed_tests > 0:
+            print("\n❌ FAILED TESTS:")
+            for result in self.test_results:
+                if not result["success"]:
+                    print(f"   - {result['test']}: {result['message']}")
+        
+        print("\n" + "=" * 60)
 
 if __name__ == "__main__":
-    main()
+    tester = CommunicationPreferenceTests()
+    tester.run_all_tests()
