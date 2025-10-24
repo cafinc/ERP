@@ -1575,6 +1575,73 @@ export default function CustomerFormPage() {
                     />
                   </div>
                 </div>
+                
+                {/* File Upload Section */}
+                <div>
+                  <div className="bg-white shadow-sm rounded-lg p-6 border border-gray-200">
+                    <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                      <Paperclip className="w-5 h-5 mr-2 text-[#3f72af]" />
+                      <span>Documents & Photos</span>
+                    </h3>
+                    
+                    {/* Upload Button */}
+                    <div className="mb-4">
+                      <label className="cursor-pointer inline-flex items-center gap-2 px-4 py-2 bg-[#3f72af] text-white text-sm font-medium rounded-lg hover:bg-[#2f5a8f] transition-colors">
+                        <Upload className="w-4 h-4" />
+                        <span>Upload Files</span>
+                        <input
+                          type="file"
+                          multiple
+                          accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.txt"
+                          onChange={handleFileUpload}
+                          className="hidden"
+                        />
+                      </label>
+                      <p className="text-xs text-gray-500 mt-2">
+                        Upload documents, photos, contracts, etc. (Max 10MB per file)
+                      </p>
+                    </div>
+                    
+                    {/* Uploaded Files List */}
+                    {uploadedFiles.length > 0 && (
+                      <div className="space-y-2">
+                        {uploadedFiles.map((file, index) => (
+                          <div
+                            key={index}
+                            className="flex items-center justify-between p-3 bg-gray-50 rounded-lg border border-gray-200 hover:border-[#3f72af] transition-colors"
+                          >
+                            <div className="flex items-center gap-3 flex-1 min-w-0">
+                              {getFileIcon(file.type)}
+                              <div className="flex-1 min-w-0">
+                                <p className="text-sm font-medium text-gray-900 truncate">
+                                  {file.name}
+                                </p>
+                                <p className="text-xs text-gray-500">
+                                  {formatFileSize(file.size)}
+                                </p>
+                              </div>
+                            </div>
+                            <button
+                              type="button"
+                              onClick={() => removeFile(index)}
+                              className="flex-shrink-0 p-1 text-red-600 hover:text-red-800 hover:bg-red-50 rounded transition-colors"
+                              title="Remove file"
+                            >
+                              <X className="w-5 h-5" />
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    
+                    {uploadedFiles.length === 0 && (
+                      <div className="text-center py-8 border-2 border-dashed border-gray-300 rounded-lg">
+                        <Upload className="w-8 h-8 text-gray-400 mx-auto mb-2" />
+                        <p className="text-sm text-gray-600">No files uploaded yet</p>
+                      </div>
+                    )}
+                  </div>
+                </div>
               </div>
               
               {/* Action Buttons */}
