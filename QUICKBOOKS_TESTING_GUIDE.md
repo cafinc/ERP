@@ -198,7 +198,7 @@ If you want to test the API directly without using the UI:
 ### **Test Creating a Customer:**
 
 ```bash
-curl -X POST 'https://serviceflow-hub-1.preview.emergentagent.com/api/quickbooks/customers?user_id=YOUR_USER_ID' \
+curl -X POST 'https://snow-dash-1.preview.emergentagent.com/api/quickbooks/customers?user_id=YOUR_USER_ID' \
   -H 'Content-Type: application/json' \
   -d '{
     "DisplayName": "API Test Customer",

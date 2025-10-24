@@ -108,7 +108,7 @@ export default function TeamMemberProfileScreen() {
   const handleResendLicenseRequest = async () => {
     try {
       const user_id_str = member?.id || id;
-      const upload_link = `https://serviceflow-hub-1.preview.emergentagent.com/upload-license/${user_id_str}`;
+      const upload_link = `https://snow-dash-1.preview.emergentagent.com/upload-license/${user_id_str}`;
       
       Alert.alert(
         'Resend Upload Request',
