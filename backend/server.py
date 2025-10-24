@@ -761,6 +761,82 @@ async def create_customer(customer: CustomerCreate):
     
     return Customer(**customer_dict)
 
+@api_router.post("/customers/with-access")
+async def create_customer_with_access(request_data: Dict[str, Any]):
+    """
+    Create customer and optionally create user account with access
+    
+    Request body:
+    - customer: Customer data
+    - require_access: bool
+    - access_web: bool
+    - access_inapp: bool
+    - user_role: str
+    """
+    customer_data = request_data.get('customer', {})
+    require_access = request_data.get('require_access', False)
+    access_web = request_data.get('access_web', False)
+    access_inapp = request_data.get('access_inapp', False)
+    user_role = request_data.get('user_role', 'customer')
+    
+    # Create customer first
+    customer_dict = customer_data.copy()
+    customer_dict["created_at"] = datetime.utcnow()
+    customer_dict["active"] = True
+    
+    # Add user access info to customer record
+    customer_dict["user_access"] = {
+        "enabled": require_access,
+        "web": access_web if require_access else False,
+        "inapp": access_inapp if require_access else False,
+        "role": user_role if require_access else None
+    }
+    
+    result = await db.customers.insert_one(customer_dict)
+    customer_id = str(result.inserted_id)
+    customer_dict["id"] = customer_id
+    
+    user_account = None
+    
+    # Create user account if access is required
+    if require_access and (access_web or access_inapp):
+        # Extract name and email
+        name = customer_dict.get('name', '')
+        email = customer_dict.get('email', '')
+        company_id = customer_dict.get('company_id')
+        
+        # Split name into first and last
+        name_parts = name.split(' ', 1)
+        first_name = name_parts[0] if len(name_parts) > 0 else 'User'
+        last_name = name_parts[1] if len(name_parts) > 1 else ''
+        
+        # Create user account
+        user_account = create_user_account(
+            customer_id=customer_id,
+            email=email,
+            first_name=first_name,
+            last_name=last_name,
+            role=user_role,
+            access_web=access_web,
+            access_inapp=access_inapp,
+            company_id=company_id
+        )
+        
+        if user_account:
+            # Store user_id in customer record
+            await db.customers.update_one(
+                {"_id": ObjectId(customer_id)},
+                {"$set": {"user_id": user_account['id']}}
+            )
+            customer_dict["user_id"] = user_account['id']
+    
+    return {
+        "success": True,
+        "customer": customer_dict,
+        "user_account": user_account,
+        "message": "Customer created successfully" + (" with user access" if user_account else "")
+    }
+
 @api_router.get("/customers", response_model=List[Customer])
 async def get_customers(active: bool = None):
     query = {}
