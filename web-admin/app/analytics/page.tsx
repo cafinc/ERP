@@ -195,12 +195,7 @@ export default function AnalyticsPage() {
         {/* Compact Header */}
         <PageHeader
           title="Analytics Dashboard"
-          icon={BarChart3}
-          badges={[
-            { label: `$${data.revenue.total.toLocaleString()} Revenue`, color: 'green' },
-            { label: `${data.projects.active} Active Projects`, color: 'blue' },
-            { label: `${data.customers.total} Customers`, color: 'purple' },
-          ]}
+          
         />
 
         {/* Timeframe Filter */}

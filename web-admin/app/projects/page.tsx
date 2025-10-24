@@ -112,12 +112,7 @@ export default function ProjectsPage() {
         {/* Compact Header */}
         <PageHeader
           title="Projects"
-          icon={FolderOpen}
-          badges={[
-            { label: `${statsData.total} Total`, color: 'blue' },
-            { label: `${statsData.inProgress} In Progress`, color: 'yellow' },
-            { label: `${statsData.completed} Completed`, color: 'green' },
-          ]}
+          
           actions={[
             {
               label: 'New Project',

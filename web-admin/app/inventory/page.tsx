@@ -154,12 +154,7 @@ export default function InventoryPage() {
         {/* Header */}
         <PageHeader
           title="Inventory & Assets"
-          icon={Package}
-          badges={[
-            { label: `${totalItems} Total Items`, color: 'blue' },
-            { label: `${lowStockCount} Low Stock`, color: 'yellow' },
-            { label: `${outOfStockCount} Out of Stock`, color: 'red' },
-          ]}
+          
           actions={[
             {
               label: 'Add Item',

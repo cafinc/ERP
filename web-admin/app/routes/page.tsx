@@ -15,8 +15,7 @@ export default function RoutesPage() {
           <PageHeader
             title="Routes"
             subtitle="Manage and optimize your service routes"
-            icon={Map}
-            actions={[
+          actions={[
               {
                 label: 'Create Route',
                 onClick: () => {},

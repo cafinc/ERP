@@ -123,14 +123,7 @@ export default function AutomationDashboardPage() {
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
         <PageHeader
           title="Automation Dashboard"
-          icon={Zap}
-          badges={[
-            { 
-              label: automationStatus?.status === 'active' ? 'Active' : 'Inactive', 
-              color: automationStatus?.status === 'active' ? 'green' : 'red' 
-            },
-            { label: `${automationStatus?.workflows_registered || 0} Workflows`, color: 'blue' },
-          ]}
+          
           actions={[
             {
               label: 'Analytics',

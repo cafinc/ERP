@@ -147,12 +147,7 @@ export default function InvoicesPage() {
         {/* Compact Header */}
         <PageHeader
           title="Invoices"
-          icon={FileText}
-          badges={[
-            { label: `${invoices.length} Total`, color: 'blue' },
-            { label: `$${totalPaid.toLocaleString()} Paid`, color: 'green' },
-            { label: `$${totalOutstanding.toLocaleString()} Due`, color: 'orange' },
-          ]}
+          
           actions={[
             {
               label: 'New Invoice',

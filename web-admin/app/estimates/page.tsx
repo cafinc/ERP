@@ -119,12 +119,7 @@ export default function EstimatesPage() {
         {/* Compact Header */}
         <PageHeader
           title="Estimates"
-          icon={FileText}
-          badges={[
-            { label: `${statsData.total} Total`, color: 'blue' },
-            { label: `${statsData.approved} Approved`, color: 'green' },
-            { label: `$${statsData.totalValue.toLocaleString()} Value`, color: 'purple' },
-          ]}
+          
           actions={[
             {
               label: 'New Estimate',

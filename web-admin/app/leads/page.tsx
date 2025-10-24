@@ -300,8 +300,7 @@ export default function LeadsPage() {
             title="Lead Management"
             subtitle="Track and convert potential customers"
             backUrl="/customers"
-            icon={Users}
-            actions={[
+          actions={[
               {
                 label: 'Export',
                 icon: Download,

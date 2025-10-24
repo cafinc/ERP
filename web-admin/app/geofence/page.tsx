@@ -263,8 +263,7 @@ export default function GeofenceManagementPage() {
             title="Geofence Management"
             subtitle="Configure automatic site entry/exit detection zones"
             backUrl="/sites"
-            icon={Radio}
-            actions={[
+          actions={[
               {
                 label: 'Refresh',
                 icon: RefreshCw,

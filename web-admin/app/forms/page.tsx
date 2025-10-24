@@ -176,31 +176,7 @@ export default function FormsPage() {
         {/* Compact Header */}
         <PageHeader
           title="Forms Management"
-          icon={ClipboardList}
-          badges={[
-            { label: `${templates.length} Templates`, color: 'blue' },
-            { label: `${responses.length} Submissions`, color: 'green' },
-          ]}
-          centerContent={
-            <div className="flex items-center space-x-2 flex-wrap gap-y-2">
-              {formTypes.map(type => {
-                const gradient = getFormTypeGradient(type.color);
-                return (
-                  <button
-                    key={type.id}
-                    onClick={() => setFilterType(type.id)}
-                    className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-all shadow-sm ${
-                      filterType === type.id
-                        ? `bg-gradient-to-r ${gradient.replace('500', '600').replace('600', '700')} text-white shadow-md scale-105`
-                        : `bg-gradient-to-r ${gradient.replace('500', '400').replace('600', '500')} text-white hover:${gradient.replace('400', '500').replace('500', '600')}`
-                    }`}
-                  >
-                    {type.label} ({type.count})
-                  </button>
-                );
-              })}
-            </div>
-          }
+          
           actions={[
             {
               label: 'Create Form',

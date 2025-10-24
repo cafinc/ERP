@@ -111,11 +111,7 @@ export default function ServicesPage() {
         {/* Compact Header */}
         <PageHeader
           title="Services"
-          icon={Package}
-          badges={[
-            { label: `${services.length} Total`, color: 'blue' },
-            { label: `${services.filter(s => s.active).length} Active`, color: 'green' },
-          ]}
+          
           actions={[
             {
               label: 'Add Service',

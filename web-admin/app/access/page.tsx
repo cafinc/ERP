@@ -163,13 +163,7 @@ export default function AccessDashboardPage() {
         {/* Header */}
         <PageHeader
           title="Access Control Dashboard"
-          icon={Shield}
-          badges={[
-            { label: `${users.length} Total Users`, color: 'blue' },
-            { label: `${activeCount} Active`, color: 'green' },
-            { label: `${internalCount} Internal`, color: 'blue' },
-            { label: `${subcontractorCount} Subcontractors`, color: 'orange' },
-          ]}
+          
           actions={[
             {
               label: 'Add User',

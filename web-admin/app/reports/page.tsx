@@ -141,11 +141,7 @@ export default function ReportsPage() {
         {/* Compact Header */}
         <PageHeader
           title="Automated Reports"
-          icon={FileText}
-          badges={[
-            { label: `${reportTypes.length} Report Types`, color: 'blue' },
-            { label: 'Export Ready', color: 'green' },
-          ]}
+          
         />
 
         {/* Date Range Selector */}

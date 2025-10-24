@@ -125,12 +125,7 @@ export default function EquipmentPage() {
         {/* Compact Header */}
         <PageHeader
           title="Equipment"
-          icon={Truck}
-          badges={[
-            { label: `${equipment.length} Total`, color: 'blue' },
-            { label: `${equipment.filter(e => e.status === 'available').length} Available`, color: 'green' },
-            { label: `${equipment.filter(e => isMaintenanceDue(e.maintenance_due)).length} Maintenance Due`, color: 'orange' },
-          ]}
+          
           actions={[
             {
               label: 'Add Equipment',
