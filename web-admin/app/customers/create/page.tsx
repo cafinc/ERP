@@ -824,6 +824,12 @@ export default function CustomerFormPage() {
                         {fieldErrors['phone'] && (
                           <p className="text-red-500 text-xs mt-1">{fieldErrors['phone']}</p>
                         )}
+                        {customerForm.communication_preference === 'sms' && (
+                          <p className="text-amber-600 text-xs mt-1 flex items-start gap-1">
+                            <AlertCircle className="w-3 h-3 mt-0.5 flex-shrink-0" />
+                            <span>If this is a mobile number, please also enter it in the Mobile Number field below for SMS notifications.</span>
+                          </p>
+                        )}
                       </div>
 
                       {/* Communication Preference (Left) and Mobile Number (Right) - Side by Side */}
