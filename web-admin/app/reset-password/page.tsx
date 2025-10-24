@@ -1,5 +1,7 @@
 'use client';
 
+import PageHeader from '@/components/PageHeader';
+
 import { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import {
@@ -45,6 +47,12 @@ export default function ResetPasswordPage() {
 
   if (!token) {
     return (
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <PageHeader
+        title="Reset Password"
+        subtitle="Manage reset password"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Reset Password" }]}
+      />
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center p-4">
         <div className="bg-white rounded-lg shadow-xl max-w-md w-full p-8 text-center">
           <h2 className="text-2xl font-bold text-gray-900 mb-2">Invalid Link</h2>

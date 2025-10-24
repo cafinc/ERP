@@ -1,3 +1,4 @@
+import PageHeader from '@/components/PageHeader';
 "use client";
 
 import { useRouter } from "next/navigation";
@@ -76,7 +77,13 @@ export default function PreviewNewDesign() {
   ];
 
   return (
-    <HybridNavigationLayout>
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <PageHeader
+        title="Preview New Design"
+        subtitle="Manage preview new design"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Preview New Design" }]}
+      />
+      <HybridNavigationLayout>
       <div className="p-6">
         {/* Banner */}
         <div className="mb-6 bg-gradient-to-r from-[#3f72af] to-[#2c5282] text-white p-6 rounded-xl shadow-lg">

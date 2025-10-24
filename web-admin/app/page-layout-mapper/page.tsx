@@ -1,3 +1,4 @@
+import PageHeader from '@/components/PageHeader';
 "use client";
 
 import { useState } from "react";
@@ -218,7 +219,13 @@ export default function PageLayoutMapper() {
   };
 
   return (
-    <DashboardLayout>
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <PageHeader
+        title="Page Layout Mapper"
+        subtitle="Manage page layout mapper"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Page Layout Mapper" }]}
+      />
+      <DashboardLayout>
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 p-6">
         <div className="max-w-7xl mx-auto">
           {/* Header */}

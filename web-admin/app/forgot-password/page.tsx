@@ -1,5 +1,7 @@
 'use client';
 
+import PageHeader from '@/components/PageHeader';
+
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import {
@@ -34,6 +36,12 @@ export default function ForgotPasswordPage() {
 
   if (success) {
     return (
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <PageHeader
+        title="Forgot Password"
+        subtitle="Manage forgot password"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Forgot Password" }]}
+      />
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center p-4">
         <div className="bg-white rounded-lg shadow-xl max-w-md w-full p-8 text-center">
           <CheckCircle className="w-16 h-16 text-green-600 mx-auto mb-4" />

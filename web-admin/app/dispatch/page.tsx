@@ -1,5 +1,7 @@
 'use client';
 
+import PageHeader from '@/components/PageHeader';
+
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import api from '@/lib/api';
@@ -72,7 +74,14 @@ export default function DispatchesPage() {
 
   const getStatusIcon = (status: string) => {
     switch (status?.toLowerCase()) {
-      case 'scheduled': return <Clock className="w-4 h-4" />;
+      case 'scheduled': return (
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <PageHeader
+        title="Dispatch"
+        subtitle="Manage dispatch"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Dispatch" }]}
+      />
+      <Clock className="w-4 h-4" />;
       case 'in_progress': return <PlayCircle className="w-4 h-4" />;
       case 'completed': return <CheckCircle className="w-4 h-4" />;
       case 'cancelled': return <XCircle className="w-4 h-4" />;

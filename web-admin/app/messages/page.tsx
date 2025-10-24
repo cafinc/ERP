@@ -1,5 +1,7 @@
 'use client';
 
+import PageHeader from '@/components/PageHeader';
+
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import api from '@/lib/api';
@@ -271,6 +273,12 @@ export default function MessagesPage() {
   ];
 
   return (
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <PageHeader
+        title="Messages"
+        subtitle="Manage messages"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Messages" }]}
+      />
       <div className="h-[calc(100vh-4rem)] flex">
         {/* Sidebar - Conversations List */}
         <div className="w-80 border-r border-gray-200 bg-white flex flex-col">

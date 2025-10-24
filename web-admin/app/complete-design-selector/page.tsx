@@ -1,3 +1,4 @@
+import PageHeader from '@/components/PageHeader';
 "use client";
 
 import { useState } from "react";
@@ -282,7 +283,13 @@ export default function CompleteDesignSelector() {
   const allSelectionsComplete = Object.values(selections).every((v) => v !== null);
 
   return (
-    <DashboardLayout>
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <PageHeader
+        title="Complete Design Selector"
+        subtitle="Manage complete design selector"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Complete Design Selector" }]}
+      />
+      <DashboardLayout>
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 p-6">
         <div className="max-w-7xl mx-auto">
           {/* Header */}

@@ -1,5 +1,7 @@
 'use client';
 
+import PageHeader from '@/components/PageHeader';
+
 import React, { useState, useEffect, useRef } from 'react';
 import { 
   PaperAirplaneIcon, 
@@ -238,7 +240,13 @@ export default function CrewCommunicationsPage() {
   };
 
   return (
-    <div className="flex h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <PageHeader
+        title="Communications"
+        subtitle="Manage communications"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Crew Portal", href: "/crew-portal" }, { label: "Communications" }]}
+      />
+      <div className="flex h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50">
       {/* Project Sidebar */}
       <div className="w-80 bg-white border-r border-gray-200 flex flex-col shadow-lg">
         <div className="p-6 border-b border-gray-200 bg-gradient-to-r from-blue-500 to-blue-600">

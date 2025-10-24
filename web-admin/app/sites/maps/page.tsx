@@ -1,3 +1,4 @@
+import PageHeader from '@/components/PageHeader';
 "use client";
 
 import { useState, useEffect } from "react";
@@ -28,7 +29,13 @@ export default function SiteMapsListPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <PageHeader
+        title="Maps"
+        subtitle="Manage maps"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Sites", href: "/sites" }, { label: "Maps" }]}
+      />
+      <div className="min-h-screen bg-gray-50 p-8">
       <div className="max-w-7xl mx-auto">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Site Maps</h1>

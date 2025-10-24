@@ -1,5 +1,7 @@
 'use client';
 
+import PageHeader from '@/components/PageHeader';
+
 import React, { useState, useEffect } from 'react';
 import {
   PlusIcon,
@@ -140,7 +142,13 @@ export default function TemplatesPage() {
   }, {} as Record<string, Template[]>);
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <PageHeader
+        title="Templates"
+        subtitle="Manage templates"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Templates" }]}
+      />
+      <div className="min-h-screen bg-gray-50 p-6">
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900">Template Library</h1>

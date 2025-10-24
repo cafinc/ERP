@@ -1,5 +1,7 @@
 'use client';
 
+import PageHeader from '@/components/PageHeader';
+
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import api from '@/lib/api';
@@ -64,7 +66,14 @@ export default function LearningDocumentsPage() {
   };
 
   const getFileIcon = (fileType: string) => {
-    if (fileType.includes('video')) return <Video className="w-5 h-5" />;
+    if (fileType.includes('video')) return (
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <PageHeader
+        title="Learning Documents"
+        subtitle="Manage learning documents"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Learning Documents" }]}
+      />
+      <Video className="w-5 h-5" />;
     if (fileType.includes('image')) return <ImageIcon className="w-5 h-5" />;
     return <FileText className="w-5 h-5" />;
   };

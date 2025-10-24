@@ -1,5 +1,7 @@
 'use client';
 
+import PageHeader from '@/components/PageHeader';
+
 import { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import api from '@/lib/api';
@@ -78,6 +80,12 @@ export default function FeedbackFormPage() {
   };
 
   return (
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <PageHeader
+        title="Feedback"
+        subtitle="Manage feedback"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Feedback" }]}
+      />
       <div className="max-w-3xl mx-auto space-y-6">
         {/* Header */}
         <div className="flex items-center gap-4">

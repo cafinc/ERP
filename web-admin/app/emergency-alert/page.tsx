@@ -1,5 +1,7 @@
 'use client';
 
+import PageHeader from '@/components/PageHeader';
+
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import api from '@/lib/api';
@@ -93,6 +95,12 @@ export default function EmergencyAlertPage() {
   };
 
   return (
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <PageHeader
+        title="Emergency Alert"
+        subtitle="Manage emergency alert"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Emergency Alert" }]}
+      />
       <div className="max-w-4xl mx-auto space-y-6">
         {/* Header */}
         <div className="flex items-center gap-4">

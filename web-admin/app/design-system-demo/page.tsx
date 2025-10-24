@@ -1,5 +1,7 @@
 'use client';
 
+import PageHeader from '@/components/PageHeader';
+
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import DashboardLayout from '@/components/DashboardLayout';
@@ -209,7 +211,13 @@ export default function DesignSystemDemo() {
   ];
 
   return (
-    <DashboardLayout>
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <PageHeader
+        title="Design System Demo"
+        subtitle="Manage design system demo"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Design System Demo" }]}
+      />
+      <DashboardLayout>
       <div className="h-screen bg-gradient-to-br from-gray-50 to-blue-50 overflow-auto p-6">
         {/* Header */}
         <div className="mb-6">

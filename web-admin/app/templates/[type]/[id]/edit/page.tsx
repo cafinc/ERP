@@ -1,5 +1,7 @@
 'use client';
 
+import PageHeader from '@/components/PageHeader';
+
 import React, { useState, useEffect, useRef } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { ArrowLeftIcon, CheckIcon, SparklesIcon, TrashIcon } from '@heroicons/react/24/outline';
@@ -137,6 +139,12 @@ export default function EditTemplatePage() {
 
   if (loading) {
     return (
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <PageHeader
+        title="Edit"
+        subtitle="Manage edit"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Templates", href: "/templates" }, { label: "[Type]", href: "/templates/[type]" }, { label: "[Id]", href: "/templates/[type]/[id]" }, { label: "Edit" }]}
+      />
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>

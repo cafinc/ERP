@@ -1,5 +1,7 @@
 'use client';
 
+import PageHeader from '@/components/PageHeader';
+
 import React, { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import {
@@ -97,6 +99,12 @@ export default function TemplateViewPage() {
 
   if (loading) {
     return (
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <PageHeader
+        title="[Id]"
+        subtitle="Manage [id]"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Templates", href: "/templates" }, { label: "[Type]", href: "/templates/[type]" }, { label: "[Id]" }]}
+      />
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>

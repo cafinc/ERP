@@ -1,5 +1,7 @@
 'use client';
 
+import PageHeader from '@/components/PageHeader';
+
 import { useState, useEffect, useRef } from 'react';
 import api from '@/lib/api';
 import maplibregl from 'maplibre-gl';
@@ -268,7 +270,13 @@ export default function LiveTrackingPage() {
 
   if (loading) {
     return (
-        <div className="flex items-center justify-center h-screen">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <PageHeader
+        title="Tracking"
+        subtitle="Manage tracking"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Tracking" }]}
+      />
+      <div className="flex items-center justify-center h-screen">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
       );

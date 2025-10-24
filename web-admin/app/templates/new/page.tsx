@@ -1,5 +1,7 @@
 'use client';
 
+import PageHeader from '@/components/PageHeader';
+
 import React, { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { ArrowLeftIcon, CheckIcon, SparklesIcon } from '@heroicons/react/24/outline';
@@ -172,7 +174,13 @@ export default function CreateTemplatePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <PageHeader
+        title="New"
+        subtitle="Manage new"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Templates", href: "/templates" }, { label: "New" }]}
+      />
+      <div className="min-h-screen bg-gray-50 p-6">
       {/* Header */}
       <div className="mb-6">
         <button

@@ -1,5 +1,7 @@
 'use client';
 
+import PageHeader from '@/components/PageHeader';
+
 import { useState, useEffect, useRef } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import api from '@/lib/api';
@@ -339,6 +341,12 @@ export default function SiteMapsGeofencingPage() {
 
   if (loading) {
     return (
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <PageHeader
+        title="Maps"
+        subtitle="Manage maps"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Sites", href: "/sites" }, { label: "[Id]", href: "/sites/[id]" }, { label: "Maps" }]}
+      />
       <div className="flex items-center justify-center h-screen">
         <div className="text-gray-600">Loading...</div>
       </div>
