@@ -634,24 +634,112 @@ export default function CustomerFormPage() {
                       </div>
 
                       <div className="md:col-span-2">
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Link to Company (Optional)
-                        </label>
-                        <select
-                          value={customerForm.company_id}
-                          onChange={e => setCustomerForm({ ...customerForm, company_id: e.target.value })}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        >
-                          <option key="none" value="">No company affiliation</option>
-                          {companies.map((company, index) => (
-                            <option key={company._id || company.id || `company-${index}`} value={company._id || company.id}>
-                              {company.name}
-                            </option>
-                          ))}
-                        </select>
-                        <p className="text-xs text-gray-500 mt-1">
-                          Select if this person is a contact for a company
-                        </p>
+                        <div className="flex items-center justify-between mb-3">
+                          <label className="block text-sm font-medium text-gray-700">
+                            Link to Company
+                          </label>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const newLinkCompany = !linkToCompany;
+                              setLinkToCompany(newLinkCompany);
+                              if (!newLinkCompany) {
+                                setCustomerForm({ ...customerForm, company_id: '' });
+                                setCompanySearch('');
+                                setFilteredCompanies([]);
+                              }
+                            }}
+                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#3f72af] focus:ring-offset-2 ${
+                              linkToCompany ? 'bg-[#3f72af]' : 'bg-gray-200'
+                            }`}
+                          >
+                            <span
+                              className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                                linkToCompany ? 'translate-x-6' : 'translate-x-1'
+                              }`}
+                            />
+                          </button>
+                        </div>
+                        
+                        {linkToCompany && (
+                          <div className="relative">
+                            <div className="relative">
+                              <Building className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                              <input
+                                type="text"
+                                value={companySearch}
+                                onChange={(e) => {
+                                  setCompanySearch(e.target.value);
+                                  const query = e.target.value.toLowerCase();
+                                  if (query.length > 0) {
+                                    const filtered = companies.filter(company =>
+                                      company.name?.toLowerCase().includes(query)
+                                    );
+                                    setFilteredCompanies(filtered);
+                                  } else {
+                                    setFilteredCompanies([]);
+                                  }
+                                }}
+                                onFocus={() => {
+                                  if (companySearch.length > 0) {
+                                    const query = companySearch.toLowerCase();
+                                    const filtered = companies.filter(company =>
+                                      company.name?.toLowerCase().includes(query)
+                                    );
+                                    setFilteredCompanies(filtered);
+                                  }
+                                }}
+                                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent"
+                                placeholder="Search for a company..."
+                              />
+                            </div>
+                            
+                            {/* Search Results Dropdown */}
+                            {filteredCompanies.length > 0 && (
+                              <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto">
+                                {filteredCompanies.map((company, index) => (
+                                  <button
+                                    key={company._id || company.id || `company-${index}`}
+                                    type="button"
+                                    onClick={() => {
+                                      setCustomerForm({ ...customerForm, company_id: company._id || company.id });
+                                      setCompanySearch(company.name);
+                                      setFilteredCompanies([]);
+                                    }}
+                                    className="w-full text-left px-4 py-2 hover:bg-gray-100 transition-colors flex items-center space-x-2"
+                                  >
+                                    <Building className="w-4 h-4 text-[#3f72af]" />
+                                    <span>{company.name}</span>
+                                  </button>
+                                ))}
+                              </div>
+                            )}
+                            
+                            {/* Selected Company Display */}
+                            {customerForm.company_id && companySearch && (
+                              <div className="mt-2 flex items-center justify-between bg-blue-50 border border-blue-200 rounded-lg px-3 py-2">
+                                <div className="flex items-center space-x-2">
+                                  <Building className="w-4 h-4 text-[#3f72af]" />
+                                  <span className="text-sm font-medium text-gray-700">{companySearch}</span>
+                                </div>
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    setCustomerForm({ ...customerForm, company_id: '' });
+                                    setCompanySearch('');
+                                  }}
+                                  className="text-gray-500 hover:text-red-500 transition-colors"
+                                >
+                                  <X className="w-4 h-4" />
+                                </button>
+                              </div>
+                            )}
+                            
+                            <p className="text-xs text-gray-500 mt-1">
+                              Search and select if this person is a contact for a company
+                            </p>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
