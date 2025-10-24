@@ -1564,23 +1564,6 @@ export default function CustomerFormPage() {
               </h2>
 
               <div className="space-y-6">
-                {/* Notes Section */}
-                <div>
-                  <div className="bg-white shadow-sm rounded-lg p-6 border border-gray-200">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                      <FileText className="w-5 h-5 mr-2 text-[#3f72af]" />
-                      <span>Additional Notes</span>
-                    </h3>
-                    <textarea
-                      value={customerForm.notes}
-                      onChange={e => setCustomerForm({ ...customerForm, notes: e.target.value })}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      rows={4}
-                      placeholder="Any additional information about this customer..."
-                    />
-                  </div>
-                </div>
-                
                 {/* File Upload Section */}
                 <div>
                   <div className="bg-white shadow-sm rounded-lg p-6 border border-gray-200">
@@ -1645,6 +1628,19 @@ export default function CustomerFormPage() {
                         <p className="text-sm text-gray-600">No files uploaded yet</p>
                       </div>
                     )}
+                  </div>
+                </div>
+                
+                {/* Notes Section */}
+                <div>
+                  <div className="bg-white shadow-sm rounded-lg p-6 border border-gray-200">
+                    <textarea
+                      value={customerForm.notes}
+                      onChange={e => setCustomerForm({ ...customerForm, notes: e.target.value })}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      rows={4}
+                      placeholder="Any additional information about this customer..."
+                    />
                   </div>
                 </div>
               </div>
