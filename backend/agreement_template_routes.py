@@ -73,8 +73,6 @@ async def get_agreement_templates(
 ):
     """Get all agreement templates with optional filters"""
     try:
-        db = get_database()
-        
         # Build query
         query = {}
         if is_archived is not None:
@@ -82,11 +80,10 @@ async def get_agreement_templates(
         if category:
             query["category"] = category
         
-        templates = list(db.agreement_templates.find(query))
-        
-        # Convert ObjectId to string
-        for template in templates:
+        templates = []
+        async for template in db.agreement_templates.find(query):
             template["_id"] = str(template["_id"])
+            templates.append(template)
         
         logger.info(f"Retrieved {len(templates)} agreement templates")
         return templates
