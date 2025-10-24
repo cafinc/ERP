@@ -68,7 +68,7 @@ export default function CustomerWorkOrdersPage() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Filters */}
-        <div className="bg-white rounded-lg shadow border border-gray-200 p-4 mb-6">
+        <div className="bg-white rounded-lg shadow shadow-sm border border-gray-200 p-4 mb-6 hover:shadow-md transition-shadow">
           <div className="flex gap-2">
             {['all', 'scheduled', 'in_progress', 'completed'].map((f) => (
               <button
@@ -88,12 +88,12 @@ export default function CustomerWorkOrdersPage() {
 
         {/* Work Orders List */}
         {loading ? (
-          <div className="bg-white rounded-lg shadow border border-gray-200 p-12 text-center">
+          <div className="bg-white rounded-lg shadow shadow-sm border border-gray-200 p-12 text-center hover:shadow-md transition-shadow">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto"></div>
             <p className="mt-4 text-gray-600">Loading work orders...</p>
           </div>
         ) : workOrders.length === 0 ? (
-          <div className="bg-white rounded-lg shadow border border-gray-200 p-12 text-center">
+          <div className="bg-white rounded-lg shadow shadow-sm border border-gray-200 p-12 text-center hover:shadow-md transition-shadow">
             <Briefcase className="w-16 h-16 text-gray-300 mx-auto mb-4" />
             <h3 className="text-lg font-semibold text-gray-900 mb-2">No work orders found</h3>
             <p className="text-gray-600">You don't have any work orders yet</p>
@@ -104,7 +104,7 @@ export default function CustomerWorkOrdersPage() {
               <div
                 key={workOrder._id || workOrder.id}
                 onClick={() => router.push(`/work-orders/${workOrder._id || workOrder.id}`)}
-                className="bg-white rounded-lg shadow border border-gray-200 p-6 hover:shadow-lg transition-shadow cursor-pointer"
+                className="bg-white rounded-lg shadow shadow-sm border border-gray-200 p-6 hover:shadow-lg transition-shadow cursor-pointer hover:shadow-md transition-shadow"
               >
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex items-start gap-3">

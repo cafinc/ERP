@@ -264,7 +264,7 @@ export default function WorkflowEditorPage() {
 
         <div className="mx-6 space-y-6">
           {/* Basic Info */}
-          <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-8">
+          <div className="bg-white rounded-lg shadow-lg shadow-sm border border-gray-200 p-8 hover:shadow-md transition-shadow">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Basic Information</h3>
             
             <div className="space-y-4">
@@ -342,7 +342,7 @@ export default function WorkflowEditorPage() {
           </div>
 
           {/* Trigger Configuration */}
-          <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-8">
+          <div className="bg-white rounded-lg shadow-lg shadow-sm border border-gray-200 p-8 hover:shadow-md transition-shadow">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Trigger Configuration</h3>
             
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
@@ -405,7 +405,7 @@ export default function WorkflowEditorPage() {
           </div>
 
           {/* Actions */}
-          <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-8">
+          <div className="bg-white rounded-lg shadow-lg shadow-sm border border-gray-200 p-8 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-semibold text-gray-900">Actions</h3>
               <button

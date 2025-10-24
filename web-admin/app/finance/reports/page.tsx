@@ -107,7 +107,7 @@ export default function ReportsPage() {
 
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         {/* Period Selector */}
-        <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-4 mb-4">
+        <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-4 mb-4 hover:shadow-md transition-shadow">
           <div className="flex items-center gap-4">
             <Calendar className="w-5 h-5 text-gray-400" />
             <label className="text-sm font-medium text-gray-700">Report Period:</label>
@@ -141,7 +141,7 @@ export default function ReportsPage() {
           {reports.map((report) => (
             <div
               key={report.id}
-              className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow cursor-pointer group"
+              className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow cursor-pointer group hover:shadow-md transition-shadow"
             >
               <div className={`w-12 h-12 bg-gradient-to-br ${report.color} rounded-lg flex items-center justify-center mb-4`}>
                 <report.icon className="w-6 h-6 text-white" />

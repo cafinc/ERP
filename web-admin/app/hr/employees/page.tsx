@@ -206,23 +206,23 @@ export default function EmployeesPage() {
       <div className="p-6">
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4 mt-6">
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <p className="text-sm text-gray-600">Total Employees</p>
             <p className="text-3xl font-bold text-gray-900">{employees.length}</p>
           </div>
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <p className="text-sm text-gray-600">Active</p>
             <p className="text-3xl font-bold text-green-600">
               {employees.filter((e: any) => e.employment_status === "active").length}
             </p>
           </div>
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <p className="text-sm text-gray-600">On Leave</p>
             <p className="text-3xl font-bold text-yellow-600">
               {employees.filter((e: any) => e.employment_status === "on_leave").length}
             </p>
           </div>
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <p className="text-sm text-gray-600">Departments</p>
             <p className="text-3xl font-bold text-[#3f72af]">
               {new Set(employees.map((e: any) => e.department)).size}
@@ -231,7 +231,7 @@ export default function EmployeesPage() {
         </div>
 
         {/* Employee List */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+        <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
           {loading ? (
             <div className="p-8 text-center text-gray-500">Loading employees...</div>
           ) : filteredEmployees.length === 0 ? (
@@ -271,7 +271,7 @@ export default function EmployeesPage() {
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                   {filteredEmployees.map((employee: any) => (
-                    <tr key={employee.id} className="hover:bg-gray-50">
+                    <tr key={employee.id} className="hover:bg-gray-50 transition-colors hover:bg-gray-50">
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center">
                           <div className="flex-shrink-0 h-10 w-10">

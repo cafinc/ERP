@@ -36,7 +36,7 @@ export default function PageLayoutMapper() {
           <div className="bg-blue-200 h-4 rounded"></div>
           <div className="bg-green-200 h-4 rounded"></div>
           <div className="bg-purple-200 h-4 rounded"></div>
-          <div className="bg-white border h-8 rounded col-span-3"></div>
+          <div className="bg-white shadow-sm border h-8 rounded col-span-3 hover:shadow-md transition-shadow"></div>
         </div>
       ),
     },
@@ -49,7 +49,7 @@ export default function PageLayoutMapper() {
       preview: (
         <div className="p-1">
           <div className="bg-gray-200 h-2 rounded mb-1"></div>
-          <div className="bg-white border rounded p-1">
+          <div className="bg-white shadow-sm border rounded p-1 hover:shadow-md transition-shadow">
             {[1, 2, 3].map((i) => (
               <div key={i} className="bg-gray-100 h-2 mb-1 rounded"></div>
             ))}
@@ -238,7 +238,7 @@ export default function PageLayoutMapper() {
             </p>
 
             {/* Layout Legend */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
               <h3 className="font-semibold text-gray-900 mb-4">Layout Options:</h3>
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                 {layoutOptions.map((layout) => {
@@ -277,7 +277,7 @@ export default function PageLayoutMapper() {
                   <h2 className="text-2xl font-bold text-gray-900">{group.category}</h2>
                 </div>
 
-                <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
                   <div className="divide-y divide-gray-200">
                     {group.pages.map((page) => {
                       const selectedLayout = layoutSelections[page.path];

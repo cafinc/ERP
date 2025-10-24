@@ -158,7 +158,7 @@ export default function ExpensesPage() {
 
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         {/* Search and Filters */}
-        <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-3 mb-4">
+        <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-3 mb-4 hover:shadow-md transition-shadow">
           <div className="flex items-center gap-3">
             <div className="flex-1 relative">
               <Search className="absolute left-2.5 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
@@ -191,7 +191,7 @@ export default function ExpensesPage() {
         </div>
 
         {/* Expenses List */}
-        <div className="bg-white rounded-xl shadow-lg border border-gray-200">
+        <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
           <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
@@ -208,7 +208,7 @@ export default function ExpensesPage() {
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {filteredExpenses.map((expense) => (
-                  <tr key={expense.id} className="hover:bg-gray-50">
+                  <tr key={expense.id} className="hover:bg-gray-50 transition-colors hover:bg-gray-50">
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
                       {new Date(expense.date).toLocaleDateString()}
                     </td>

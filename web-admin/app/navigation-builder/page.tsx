@@ -431,7 +431,7 @@ export default function NavigationBuilder() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Left: Available Pages Library */}
             <div className="lg:col-span-1">
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sticky top-4">
+              <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-4 sticky top-4 hover:shadow-md transition-shadow">
                 <h3 className="font-bold text-gray-900 mb-3">📚 Available Pages</h3>
                 <p className="text-xs text-gray-600 mb-4">
                   Click a category below to see pages you can add
@@ -480,7 +480,7 @@ export default function NavigationBuilder() {
 
             {/* Right: Navigation Structure Builder */}
             <div className="lg:col-span-2">
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
+              <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="font-bold text-gray-900">🔧 Your Navigation Structure</h3>
                   <button
@@ -605,7 +605,7 @@ export default function NavigationBuilder() {
                           <Icon className="w-4 h-4" />
                           <span className="text-sm">{section.label}</span>
                           {section.type === 'submenu' && (
-                            <span className="ml-auto text-xs bg-[#3f72af] px-2 py-0.5 rounded">
+                            <span className="ml-auto text-xs bg-[#3f72af] hover:bg-[#3f72af]/90 text-white px-2 py-0 rounded-lg font-medium transition-all shadow-sm hover:shadow-md.5 rounded">
                               {section.submenu?.length || 0}
                             </span>
                           )}

@@ -36,7 +36,7 @@ export default function RoutesPage() {
 
           {/* Quick Stats */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
-            <div className="bg-white rounded-xl shadow-lg p-4 border border-gray-200">
+            <div className="bg-white rounded-xl shadow-lg p-4 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-gray-600">Total Routes</p>
@@ -48,7 +48,7 @@ export default function RoutesPage() {
               </div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-lg p-4 border border-gray-200">
+            <div className="bg-white rounded-xl shadow-lg p-4 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-gray-600">Active Today</p>
@@ -60,7 +60,7 @@ export default function RoutesPage() {
               </div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-lg p-4 border border-gray-200">
+            <div className="bg-white rounded-xl shadow-lg p-4 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-gray-600">Sites Covered</p>
@@ -72,7 +72,7 @@ export default function RoutesPage() {
               </div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-lg p-4 border border-gray-200">
+            <div className="bg-white rounded-xl shadow-lg p-4 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-gray-600">Avg. Time</p>
@@ -86,7 +86,7 @@ export default function RoutesPage() {
           </div>
 
           {/* Search and Filter */}
-          <div className="bg-white rounded-xl shadow-lg p-4 border border-gray-200 mb-4">
+          <div className="bg-white rounded-xl shadow-lg p-4 shadow-sm border border-gray-200 mb-4 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-4">
               <div className="flex-1 relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -102,7 +102,7 @@ export default function RoutesPage() {
           </div>
 
           {/* Empty State */}
-          <div className="bg-white rounded-xl shadow-lg p-12 border border-gray-200 text-center">
+          <div className="bg-white rounded-xl shadow-lg p-12 shadow-sm border border-gray-200 text-center hover:shadow-md transition-shadow">
             <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4">
               <Map className="w-10 h-10 text-white" />
             </div>

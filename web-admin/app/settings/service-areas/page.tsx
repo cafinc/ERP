@@ -32,7 +32,7 @@ export default function ServiceAreasPage() {
             ]}
           />
 
-          <div className="bg-white rounded-xl shadow-lg p-8 border border-gray-200">
+          <div className="bg-white rounded-xl shadow-lg p-8 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
             <div className="space-y-4">
               {areas.map((area) => (
                 <div key={area.id} className="flex items-center justify-between p-4 border-2 border-gray-200 rounded-lg hover:border-gray-300 transition-all">

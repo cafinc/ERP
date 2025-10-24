@@ -222,7 +222,7 @@ export default function EquipmentDetailPage() {
         </div>
 
         {/* Quick Actions */}
-        <div className="bg-white rounded-lg border border-gray-200 p-6">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
           <h2 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h2>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
             <button
@@ -261,7 +261,7 @@ export default function EquipmentDetailPage() {
 
         {/* Equipment Details */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <h2 className="text-lg font-semibold text-gray-900 mb-4">Equipment Information</h2>
             <div className="space-y-3">
               {equipment.unit_number && (
@@ -294,7 +294,7 @@ export default function EquipmentDetailPage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <h2 className="text-lg font-semibold text-gray-900 mb-4">Maintenance</h2>
             <div className="space-y-3">
               {equipment.last_maintenance && (
@@ -325,7 +325,7 @@ export default function EquipmentDetailPage() {
 
         {/* Assignment */}
         {equipment.assigned_to && (
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
               <User className="w-5 h-5" />
               Current Assignment
@@ -336,7 +336,7 @@ export default function EquipmentDetailPage() {
 
         {/* Notes */}
         {equipment.notes && (
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <h2 className="text-lg font-semibold text-gray-900 mb-4">Notes</h2>
             <p className="text-gray-700 whitespace-pre-wrap">{equipment.notes}</p>
           </div>

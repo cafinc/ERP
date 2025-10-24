@@ -127,7 +127,7 @@ export default function EquipmentHistoryPage() {
 
         {/* Equipment Info Card */}
         {equipment && (
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-start justify-between mb-4">
               <div>
                 <h2 className="text-2xl font-bold text-gray-900">{equipment.name || equipment.unit_number}</h2>
@@ -164,7 +164,7 @@ export default function EquipmentHistoryPage() {
         )}
 
         {/* Inspection History */}
-        <div className="bg-white rounded-lg border border-gray-200 p-6">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
           <h2 className="text-xl font-semibold text-gray-900 mb-4">Inspection Timeline</h2>
 
           {formResponses.length === 0 ? (

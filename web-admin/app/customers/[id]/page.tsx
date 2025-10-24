@@ -529,7 +529,7 @@ export default function CustomerDetailPage() {
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-6 py-6">
         {/* Tab Content */}
-        <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6 mb-6">
+        <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-6 mb-6 hover:shadow-md transition-shadow">
           {/* Overview Tab */}
           {activeTab === 'overview' && (
             <div>
@@ -537,7 +537,7 @@ export default function CustomerDetailPage() {
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
               {/* Left Column - Contact Info */}
               <div className="space-y-6">
-                <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
                   <h2 className="text-xl font-semibold text-gray-900 mb-4">Contact Information</h2>
                   <div className="space-y-3">
                     <div className="flex items-start space-x-3">
@@ -581,7 +581,7 @@ export default function CustomerDetailPage() {
                 )}
 
                 {customer.custom_fields && customer.custom_fields.length > 0 && (
-                  <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                  <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
                     <h2 className="text-xl font-semibold text-gray-900 mb-4">Custom Information</h2>
                     <div className="space-y-3">
                       {customer.custom_fields.map((field: any, idx: number) => (
@@ -598,7 +598,7 @@ export default function CustomerDetailPage() {
               {/* Right Column - Quick Stats */}
               <div className="lg:col-span-2 space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                  <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
                     <div className="flex items-center space-x-3">
                       <div className="p-3 bg-blue-100 rounded-lg">
                         <MapPinned className="w-6 h-6 text-[#3f72af]" />
@@ -609,7 +609,7 @@ export default function CustomerDetailPage() {
                       </div>
                     </div>
                   </div>
-                  <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                  <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
                     <div className="flex items-center space-x-3">
                       <div className="p-3 bg-green-100 rounded-lg">
                         <ClipboardList className="w-6 h-6 text-green-600" />
@@ -620,7 +620,7 @@ export default function CustomerDetailPage() {
                       </div>
                     </div>
                   </div>
-                  <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                  <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
                     <div className="flex items-center space-x-3">
                       <div className="p-3 bg-purple-100 rounded-lg">
                         <FileSignature className="w-6 h-6 text-purple-600" />
@@ -634,7 +634,7 @@ export default function CustomerDetailPage() {
                 </div>
 
                 {/* Recent Activity */}
-                <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
                   <h2 className="text-xl font-semibold text-gray-900 mb-4">Recent Service Requests</h2>
                   {serviceRequests.slice(0, 3).length === 0 ? (
                     <p className="text-gray-600 text-center py-8">No recent service requests</p>
@@ -703,7 +703,7 @@ export default function CustomerDetailPage() {
 
           {/* Estimates Tab */}
           {activeTab === 'estimates' && (
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-xl font-semibold text-gray-900">Estimates</h2>
                 <button
@@ -781,7 +781,7 @@ export default function CustomerDetailPage() {
 
           {/* Projects Tab */}
           {activeTab === 'projects' && (
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-xl font-semibold text-gray-900">Projects</h2>
                 <button
@@ -877,7 +877,7 @@ export default function CustomerDetailPage() {
           {activeTab === 'agreements' && (
             <div className="space-y-6">
               {/* Header with Actions */}
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+              <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
                 <div className="flex items-center justify-between">
                   <h2 className="text-xl font-semibold text-gray-900">Service Agreements</h2>
                   <div className="flex items-center space-x-3">
@@ -901,7 +901,7 @@ export default function CustomerDetailPage() {
 
               {/* Pending Signature Estimates Section */}
               {estimates.filter((e: any) => e.status === 'sent' && !e.requires_agreement).length > 0 && (
-                <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="text-lg font-semibold text-gray-900">Pending Signature Estimates</h3>
                     <span className="px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-sm font-medium">
@@ -964,7 +964,7 @@ export default function CustomerDetailPage() {
               )}
 
               {/* Active Agreements Section */}
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+              <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Active Agreements</h3>
                 {contracts.length === 0 && estimates.filter((e: any) => e.status === 'sent' && !e.requires_agreement).length === 0 ? (
                   <div className="text-center py-12">
@@ -1043,7 +1043,7 @@ export default function CustomerDetailPage() {
 
           {/* Tasks Tab */}
           {activeTab === 'tasks' && (
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-xl font-semibold text-gray-900">Tasks</h2>
                 <button
@@ -1120,7 +1120,7 @@ export default function CustomerDetailPage() {
 
           {/* Service Requests Tab */}
           {activeTab === 'service-requests' && (
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-xl font-semibold text-gray-900">Service Requests</h2>
                 {serviceRequests.length === 0 ? (
@@ -1179,7 +1179,7 @@ export default function CustomerDetailPage() {
           {/* Forms Tab */}
           {activeTab === 'forms' && (
             <div className="lg:col-span-3">
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+              <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-xl font-semibold text-gray-900">Forms</h2>
                   <button
@@ -1217,7 +1217,7 @@ export default function CustomerDetailPage() {
           {/* Contacts Tab (Company only) */}
           {activeTab === 'contacts' && isCompany && (
             <div className="lg:col-span-3">
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+              <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-xl font-semibold text-gray-900">Contacts</h2>
                   <button
@@ -1264,7 +1264,7 @@ export default function CustomerDetailPage() {
           {/* Accounting Tab (Company only) */}
           {activeTab === 'accounting' && isCompany && (
             <div className="lg:col-span-3">
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+              <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
                 <h2 className="text-xl font-semibold text-gray-900 mb-4">Accounting Information</h2>
                 {customer.accounting ? (
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1311,7 +1311,7 @@ export default function CustomerDetailPage() {
           {/* Contracts Tab */}
           {activeTab === 'contracts' && (
             <div className="lg:col-span-3">
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+              <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
                 <h2 className="text-xl font-semibold text-gray-900 mb-4">Contracts</h2>
                 {contracts.length === 0 ? (
                   <p className="text-gray-600 text-center py-8">No contracts yet</p>
@@ -1332,7 +1332,7 @@ export default function CustomerDetailPage() {
           {/* Invoices Tab */}
           {activeTab === 'invoices' && (
             <div className="lg:col-span-3">
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+              <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
                 <h2 className="text-xl font-semibold text-gray-900 mb-4">Invoices</h2>
                 {invoices.length === 0 ? (
                   <p className="text-gray-600 text-center py-8">No invoices yet</p>
@@ -1362,7 +1362,7 @@ export default function CustomerDetailPage() {
 
         {/* Communication Center - Overview (Interactive Tabs) */}
         {activeTab === 'overview' && (
-          <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6 mt-6">
+          <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-6 mt-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-xl font-semibold text-gray-900">Communication Center</h2>
               <button
@@ -1492,7 +1492,7 @@ export default function CustomerDetailPage() {
 
         {/* Communication Center - Full View with Tabs */}
         {activeTab === 'communications' && (
-          <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6 mt-6">
+          <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-6 mt-6 hover:shadow-md transition-shadow">
             {(() => {
               const typeConfig = {
                 'inapp': { 

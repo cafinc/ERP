@@ -307,7 +307,7 @@ export default function TimeAttendancePage() {
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                   {timeEntries.map((entry: any) => (
-                    <tr key={entry.id} className="hover:bg-gray-50">
+                    <tr key={entry.id} className="hover:bg-gray-50 transition-colors hover:bg-gray-50">
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center">
                           <div className="flex-shrink-0 h-10 w-10">

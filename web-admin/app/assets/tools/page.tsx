@@ -165,7 +165,7 @@ export default function ToolsPage() {
         />
 
         {/* Compact Search and Filters */}
-        <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-3 mb-4 mx-6 mt-6">
+        <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-3 mb-4 mx-6 mt-6 hover:shadow-md transition-shadow">
           <div className="flex items-center gap-3">
             <div className="flex-1 relative">
               <Search className="absolute left-2.5 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
@@ -204,7 +204,7 @@ export default function ToolsPage() {
         {/* Tools Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 mx-6">
           {filteredTools.map((tool) => (
-            <div key={tool.id} className="bg-white rounded-xl shadow-lg border border-gray-200 p-4 hover:shadow-md transition-shadow">
+            <div key={tool.id} className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow hover:shadow-md transition-shadow">
               <div className="flex items-start justify-between mb-3">
                 <div>
                   <h3 className="text-base font-semibold text-gray-900">{tool.toolNumber}</h3>
@@ -261,7 +261,7 @@ export default function ToolsPage() {
         </div>
 
         {filteredTools.length === 0 && (
-          <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-12 text-center mx-6">
+          <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-12 text-center mx-6 hover:shadow-md transition-shadow">
             <Wrench className="w-12 h-12 text-gray-400 mx-auto mb-4" />
             <h3 className="text-lg font-semibold text-gray-900 mb-2">No tools found</h3>
             <p className="text-gray-500">Try adjusting your search or filters</p>

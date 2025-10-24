@@ -226,7 +226,7 @@ export default function ProjectsPage() {
 
         <div className="px-6 py-4 bg-white border-b border-gray-200">
           <div className="flex items-center justify-between">
-            <div className="bg-white border border-gray-200 rounded-lg px-3 py-1.5 flex items-center space-x-2">
+            <div className="bg-white shadow-sm border border-gray-200 rounded-lg px-3 py-1.5 flex items-center space-x-2 hover:shadow-md transition-shadow">
               <DollarSign className="w-4 h-4 text-[#3f72af]" />
               <span className="text-xs font-medium text-gray-700">Total Value:</span>
               <span className="text-lg font-bold text-[#3f72af]">
@@ -237,7 +237,7 @@ export default function ProjectsPage() {
         </div>
 
         {/* Search Bar */}
-        <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-3 mb-4 mx-6 mt-6">
+        <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-3 mb-4 mx-6 mt-6 hover:shadow-md transition-shadow">
           <div className="flex flex-col md:flex-row gap-4">
             {/* Search */}
             <div className="flex-1 relative">
@@ -263,7 +263,7 @@ export default function ProjectsPage() {
 
         {/* Projects Display */}
         {filteredProjects.length === 0 ? (
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-12 text-center mx-6">
+          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-12 text-center mx-6 hover:shadow-md transition-shadow">
             <FolderOpen className="w-16 h-16 text-gray-300 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-gray-900 mb-2">No Projects Found</h3>
             <p className="text-gray-600 mb-4">
@@ -291,7 +291,7 @@ export default function ProjectsPage() {
               return (
                 <div
                   key={project._id || `project-${index}`}
-                  className="bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-lg hover:border-blue-500 transition-all cursor-pointer overflow-hidden"
+                  className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 hover:shadow-lg hover:border-blue-500 transition-all cursor-pointer overflow-hidden hover:shadow-md transition-shadow"
                   onClick={() => project._id && router.push(`/projects/${project._id}`)}
                 >
                   {/* Card Header */}
@@ -400,7 +400,7 @@ export default function ProjectsPage() {
               return (
                 <div
                   key={project._id || `project-${index}`}
-                  className="bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-md hover:border-blue-500 transition-all cursor-pointer p-4"
+                  className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 hover:shadow-md hover:border-blue-500 transition-all cursor-pointer p-4 hover:shadow-md transition-shadow"
                   onClick={() => router.push(`/projects/${project._id}`)}
                 >
                   <div className="flex items-center gap-4">

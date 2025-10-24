@@ -35,7 +35,7 @@ export default function TestTopBar() {
         </div>
 
         {/* Instructions */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+        <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 mb-6 hover:shadow-md transition-shadow">
           <h3 className="text-xl font-bold text-gray-900 mb-4">🧭 How to Test:</h3>
           <ol className="space-y-3 text-gray-700">
             <li className="flex items-start gap-3">
@@ -127,7 +127,7 @@ export default function TestTopBar() {
         </div>
 
         {/* Sample Content */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+        <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
           <h3 className="text-lg font-bold text-gray-900 mb-4">Sample Dashboard Content</h3>
           <p className="text-gray-600 mb-4">
             This is your main content area. The top bar takes a bit of vertical space when active,

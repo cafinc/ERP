@@ -222,7 +222,7 @@ export default function TeamPage() {
         </div>
 
         {/* Search Bar */}
-        <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-3 mb-4 mx-6 mt-6">
+        <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-3 mb-4 mx-6 mt-6 hover:shadow-md transition-shadow">
           <div className="flex items-center gap-4">
             <div className="flex-1 relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -246,7 +246,7 @@ export default function TeamPage() {
 
         {/* Team Grid */}
         {filteredUsers.length === 0 ? (
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-12 text-center mx-6">
+          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-12 text-center mx-6 hover:shadow-md transition-shadow">
             <Users className="w-16 h-16 text-gray-300 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-gray-900 mb-2">No Team Members Found</h3>
             <p className="text-gray-600 mb-4">
@@ -269,7 +269,7 @@ export default function TeamPage() {
             {filteredUsers.map((user, index) => (
               <div
                 key={user.id}
-                className="bg-white rounded-xl shadow-md border border-gray-200 p-4 hover:shadow-md transition-shadow cursor-pointer"
+                className="bg-white rounded-xl shadow-md shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow cursor-pointer hover:shadow-md transition-shadow"
                 onClick={() => router.push(`/team/${user.id}`)}
               >
                 {/* Header */}

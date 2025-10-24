@@ -360,7 +360,7 @@ export default function CustomersPage() {
         
         {/* Customers Display */}
         {filteredCustomers.length === 0 ? (
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-12 text-center mx-6">
+          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-12 text-center mx-6 hover:shadow-md transition-shadow">
             <Users className="w-16 h-16 text-gray-300 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-gray-900 mb-2">No Customers Found</h3>
             <p className="text-gray-600 mb-4">
@@ -406,7 +406,7 @@ export default function CustomersPage() {
               return (
                 <div
                   key={customerId}
-                  className="bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-lg hover:border-blue-500 transition-all cursor-pointer overflow-hidden"
+                  className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 hover:shadow-lg hover:border-blue-500 transition-all cursor-pointer overflow-hidden hover:shadow-md transition-shadow"
                   onClick={() => router.push(`/customers/${customerId}`)}
                 >
                   {/* Card Header with Avatar */}
@@ -482,7 +482,7 @@ export default function CustomersPage() {
           </div>
         ) : (
           /* List View */
-          <div className="bg-white border border-gray-200 rounded-b-lg">
+          <div className="bg-white shadow-sm border border-gray-200 rounded-b-lg hover:shadow-md transition-shadow">
             {filteredCustomers.map((customer, index) => {
               const customerId = customer._id || customer.id;
               if (!customerId) return null;

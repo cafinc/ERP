@@ -150,7 +150,7 @@ export default function ConversationDetailPage() {
     <PageHeader>
       <div className="h-screen flex flex-col">
         {/* Header */}
-        <div className="bg-white border-b border-gray-200 px-6 py-4">
+        <div className="bg-white shadow-sm border-b border-gray-200 px-6 py-4 hover:shadow-md transition-shadow">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <button
@@ -230,7 +230,7 @@ export default function ConversationDetailPage() {
         </div>
 
         {/* Message Input */}
-        <div className="bg-white border-t border-gray-200 px-6 py-4">
+        <div className="bg-white shadow-sm border-t border-gray-200 px-6 py-4 hover:shadow-md transition-shadow">
           <form onSubmit={handleSendMessage} className="max-w-4xl mx-auto">
             <div className="flex items-end space-x-3">
               <textarea

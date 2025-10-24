@@ -62,7 +62,7 @@ export default function CustomerInvoicesPage() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Filters */}
-        <div className="bg-white rounded-lg shadow border border-gray-200 p-4 mb-6">
+        <div className="bg-white rounded-lg shadow shadow-sm border border-gray-200 p-4 mb-6 hover:shadow-md transition-shadow">
           <div className="flex gap-2">
             {['all', 'unpaid', 'paid', 'overdue'].map((f) => (
               <button
@@ -82,12 +82,12 @@ export default function CustomerInvoicesPage() {
 
         {/* Invoices List */}
         {loading ? (
-          <div className="bg-white rounded-lg shadow border border-gray-200 p-12 text-center">
+          <div className="bg-white rounded-lg shadow shadow-sm border border-gray-200 p-12 text-center hover:shadow-md transition-shadow">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto"></div>
             <p className="mt-4 text-gray-600">Loading invoices...</p>
           </div>
         ) : invoices.length === 0 ? (
-          <div className="bg-white rounded-lg shadow border border-gray-200 p-12 text-center">
+          <div className="bg-white rounded-lg shadow shadow-sm border border-gray-200 p-12 text-center hover:shadow-md transition-shadow">
             <Receipt className="w-16 h-16 text-gray-300 mx-auto mb-4" />
             <h3 className="text-lg font-semibold text-gray-900 mb-2">No invoices found</h3>
             <p className="text-gray-600">You don't have any invoices yet</p>
@@ -99,7 +99,7 @@ export default function CustomerInvoicesPage() {
               return (
                 <div
                   key={invoice._id || invoice.id}
-                  className="bg-white rounded-lg shadow border border-gray-200 p-6 hover:shadow-lg transition-shadow"
+                  className="bg-white rounded-lg shadow shadow-sm border border-gray-200 p-6 hover:shadow-lg transition-shadow hover:shadow-md transition-shadow"
                 >
                   <div className="flex items-start justify-between mb-4">
                     <div>

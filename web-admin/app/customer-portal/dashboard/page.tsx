@@ -47,7 +47,7 @@ function CustomerPortalLayout({ children }: CustomerPortalLayoutProps) {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
+      <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50 hover:shadow-md transition-shadow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center gap-3">
@@ -188,7 +188,7 @@ export default function CustomerDashboardPage() {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-4">
+          <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
                 <MapPin className="w-5 h-5 text-[#3f72af]" />
@@ -200,7 +200,7 @@ export default function CustomerDashboardPage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-4">
+          <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
                 <Calendar className="w-5 h-5 text-green-600" />
@@ -212,7 +212,7 @@ export default function CustomerDashboardPage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-4">
+          <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
                 <Receipt className="w-5 h-5 text-orange-600" />
@@ -224,7 +224,7 @@ export default function CustomerDashboardPage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-4">
+          <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
                 <DollarSign className="w-5 h-5 text-purple-600" />
@@ -236,7 +236,7 @@ export default function CustomerDashboardPage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-4">
+          <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-cyan-100 rounded-lg flex items-center justify-center flex-shrink-0">
                 <FolderOpen className="w-5 h-5 text-cyan-600" />
@@ -248,7 +248,7 @@ export default function CustomerDashboardPage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-4">
+          <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center flex-shrink-0">
                 <MessageSquare className="w-5 h-5 text-red-600" />
@@ -262,7 +262,7 @@ export default function CustomerDashboardPage() {
         </div>
 
         {/* Tabs Navigation */}
-        <div className="bg-white rounded-xl shadow-lg border border-gray-200">
+        <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
           <div className="border-b border-gray-200">
             <div className="flex space-x-8 px-6">
               <button
@@ -425,7 +425,7 @@ export default function CustomerDashboardPage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           {/* Communication Center (2/3 width) */}
           <div className="lg:col-span-2">
-            <div className="bg-white rounded-xl shadow-lg border border-gray-200">
+            <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
               <div className="p-4 border-b border-gray-200">
                 <h3 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
                   <MessageSquare className="w-5 h-5" />
@@ -458,7 +458,7 @@ export default function CustomerDashboardPage() {
 
           {/* Recent Activity (1/3 width) */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-xl shadow-lg border border-gray-200">
+            <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
               <div className="p-4 border-b border-gray-200">
                 <h3 className="text-lg font-semibold text-gray-900">Recent Activity</h3>
               </div>

@@ -522,7 +522,7 @@ export default function GmailPage() {
   if (!isConnected) {
     return (
         <div className="flex items-center justify-center h-full bg-gradient-to-br from-blue-50 to-indigo-100">
-          <div className="bg-white p-8 rounded-2xl shadow-2xl max-w-md text-center">
+          <div className="bg-white rounded-lg shadow-sm shadow-sm border border-gray-200 p-8 hover:shadow-md transition-shadow rounded-2xl shadow-2xl max-w-md text-center hover:shadow-md transition-shadow">
             <Mail className="w-16 h-16 text-[#3f72af] mx-auto mb-4" />
             <h1 className="text-2xl font-bold text-gray-900 mb-2">Connect Gmail</h1>
             <p className="text-gray-600 mb-4">
@@ -530,7 +530,7 @@ export default function GmailPage() {
             </p>
             <button
               onClick={connectGmail}
-              className="w-full bg-[#3f72af] hover:bg-[#3f72af]/90 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+              className="w-full bg-[#3f72af] hover:bg-[#3f72af]/90 text-white px-6 py-3 rounded-lg font-medium transition-all shadow-sm hover:shadow-md rounded-lg font-medium transition-colors"
             >
               Connect Gmail Account
             </button>
@@ -551,7 +551,7 @@ export default function GmailPage() {
           <div className="p-3 border-b border-gray-200 flex-shrink-0 space-y-2">
             <button
               onClick={() => setShowCompose(true)}
-              className="w-full bg-[#3f72af] hover:bg-[#3f72af]/90 text-white px-4 py-2 rounded-lg font-medium flex items-center justify-center space-x-2 text-sm"
+              className="w-full bg-[#3f72af] hover:bg-[#3f72af]/90 text-white px-4 py-2 rounded-lg font-medium transition-all shadow-sm hover:shadow-md rounded-lg font-medium flex items-center justify-center space-x-2 text-sm"
             >
               <Plus className="w-4 h-4" />
               <span>Compose</span>

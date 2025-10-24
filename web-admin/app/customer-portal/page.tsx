@@ -103,7 +103,7 @@ export default function CustomerPortalPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white rounded-lg shadow border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-4">
               <div className="bg-blue-100 p-3 rounded-lg">
                 <FileText className="w-6 h-6 text-blue-600" />
@@ -113,7 +113,7 @@ export default function CustomerPortalPage() {
             <p className="text-sm text-gray-600">Pending Estimates</p>
           </div>
 
-          <div className="bg-white rounded-lg shadow border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-4">
               <div className="bg-green-100 p-3 rounded-lg">
                 <Receipt className="w-6 h-6 text-green-600" />
@@ -123,7 +123,7 @@ export default function CustomerPortalPage() {
             <p className="text-sm text-gray-600">Unpaid Invoices</p>
           </div>
 
-          <div className="bg-white rounded-lg shadow border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-4">
               <div className="bg-orange-100 p-3 rounded-lg">
                 <Briefcase className="w-6 h-6 text-orange-600" />
@@ -133,7 +133,7 @@ export default function CustomerPortalPage() {
             <p className="text-sm text-gray-600">Active Work Orders</p>
           </div>
 
-          <div className="bg-white rounded-lg shadow border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-4">
               <div className="bg-red-100 p-3 rounded-lg">
                 <DollarSign className="w-6 h-6 text-red-600" />
@@ -152,7 +152,7 @@ export default function CustomerPortalPage() {
               <button
                 key={index}
                 onClick={() => router.push(action.route)}
-                className="bg-white rounded-lg shadow border border-gray-200 p-6 hover:shadow-lg transition-shadow text-left"
+                className="bg-white rounded-lg shadow shadow-sm border border-gray-200 p-6 hover:shadow-lg transition-shadow text-left hover:shadow-md transition-shadow"
               >
                 <div className={`w-12 h-12 rounded-lg ${getColorClasses(action.color)} flex items-center justify-center mb-4`}>
                   <action.icon className="w-6 h-6" />
@@ -176,7 +176,7 @@ export default function CustomerPortalPage() {
                   View All
                 </button>
               </div>
-              <div className="bg-white rounded-lg shadow border border-gray-200 divide-y">
+              <div className="bg-white rounded-lg shadow shadow-sm border border-gray-200 divide-y hover:shadow-md transition-shadow">
                 {tasks.map((task) => (
                   <div
                     key={task.id}
@@ -201,7 +201,7 @@ export default function CustomerPortalPage() {
           {/* Recent Activity */}
           <div>
             <h2 className="text-lg font-semibold text-gray-900 mb-4">Recent Activity</h2>
-            <div className="bg-white rounded-lg shadow border border-gray-200 divide-y">
+            <div className="bg-white rounded-lg shadow shadow-sm border border-gray-200 divide-y hover:shadow-md transition-shadow">
               <div className="p-4">
                 <div className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-green-500 rounded-full mt-2"></div>

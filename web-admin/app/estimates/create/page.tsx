@@ -482,7 +482,7 @@ export default function CreateEstimatePage() {
           </div>
 
           {/* Customer Selection */}
-          <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-8">
+          <div className="bg-white rounded-lg shadow-lg shadow-sm border border-gray-200 p-8 hover:shadow-md transition-shadow">
             <h2 className="text-lg font-semibold text-gray-900 mb-4">Customer & Site Information</h2>
             
             {/* Customer */}
@@ -570,7 +570,7 @@ export default function CreateEstimatePage() {
           </div>
 
           {/* Line Items by Section */}
-          <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-8">
+          <div className="bg-white rounded-lg shadow-lg shadow-sm border border-gray-200 p-8 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-lg font-semibold text-gray-900">Line Items</h2>
               <button
@@ -757,7 +757,7 @@ export default function CreateEstimatePage() {
           </div>
 
           {/* Attachments */}
-          <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-8">
+          <div className="bg-white rounded-lg shadow-lg shadow-sm border border-gray-200 p-8 hover:shadow-md transition-shadow">
             <h2 className="text-lg font-semibold text-gray-900 mb-4">Attachments</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
               <button
@@ -784,7 +784,7 @@ export default function CreateEstimatePage() {
           </div>
 
           {/* Terms & Settings */}
-          <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-8">
+          <div className="bg-white rounded-lg shadow-lg shadow-sm border border-gray-200 p-8 hover:shadow-md transition-shadow">
             <h2 className="text-lg font-semibold text-gray-900 mb-4">Terms & Settings</h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -873,7 +873,7 @@ export default function CreateEstimatePage() {
           </div>
 
           {/* Totals */}
-          <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-8">
+          <div className="bg-white rounded-lg shadow-lg shadow-sm border border-gray-200 p-8 hover:shadow-md transition-shadow">
             <div className="max-w-md ml-auto space-y-3">
               <div className="flex items-center justify-between text-gray-700">
                 <span>Subtotal:</span>

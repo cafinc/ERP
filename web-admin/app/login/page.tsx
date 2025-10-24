@@ -53,7 +53,7 @@ export default function LoginPage() {
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Login" }]}
       />
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
-      <div className="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md">
+      <div className="bg-white rounded-lg shadow-sm shadow-sm border border-gray-200 p-8 hover:shadow-md transition-shadow rounded-2xl shadow-2xl w-full max-w-md hover:shadow-md transition-shadow">
         <div className="text-center mb-8">
           <div className="flex justify-center mb-4">
             <img 

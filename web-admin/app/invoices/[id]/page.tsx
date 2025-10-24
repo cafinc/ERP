@@ -151,7 +151,7 @@ export default function InvoiceDetailPage() {
     return (
       <PageHeader>
         <div className="p-8">
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-12 text-center">
+          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-12 text-center hover:shadow-md transition-shadow">
             <FileText className="w-16 h-16 text-red-300 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-gray-900 mb-2">Invoice Not Found</h3>
             <p className="text-gray-600 mb-4">The invoice you're looking for doesn't exist.</p>
@@ -206,7 +206,7 @@ export default function InvoiceDetailPage() {
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
             {/* Invoice Info */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-xl font-semibold text-gray-900">Invoice Information</h2>
                 <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(invoice.status)}`}>
@@ -256,7 +256,7 @@ export default function InvoiceDetailPage() {
             </div>
 
             {/* Line Items */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
               <h2 className="text-xl font-semibold text-gray-900 mb-4">Line Items</h2>
               
               <div className="overflow-x-auto">
@@ -307,7 +307,7 @@ export default function InvoiceDetailPage() {
 
             {/* Payment History */}
             {invoice.payments && invoice.payments.length > 0 && (
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+              <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
                 <h2 className="text-xl font-semibold text-gray-900 mb-4">Payment History</h2>
                 
                 <div className="space-y-4">
@@ -347,7 +347,7 @@ export default function InvoiceDetailPage() {
           {/* Sidebar */}
           <div className="space-y-6">
             {/* Payment Summary */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Payment Summary</h3>
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
@@ -385,7 +385,7 @@ export default function InvoiceDetailPage() {
             </div>
 
             {/* Quick Stats */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Invoice Stats</h3>
               <div className="space-y-3">
                 <div className="flex items-center justify-between">

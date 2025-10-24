@@ -134,7 +134,7 @@ export default function CrewTimeTrackingPage() {
         </div>
 
         {/* Today's Summary */}
-        <div className="bg-white rounded-lg shadow border border-gray-200 p-6 mb-8">
+        <div className="bg-white rounded-lg shadow shadow-sm border border-gray-200 p-6 mb-8 hover:shadow-md transition-shadow">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">Today's Summary</h3>
           <div className="grid grid-cols-3 gap-4">
             <div>
@@ -159,7 +159,7 @@ export default function CrewTimeTrackingPage() {
 
         {/* Today's Entries */}
         {todayEntries.length > 0 && (
-          <div className="bg-white rounded-lg shadow border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Today's Entries</h3>
             <div className="space-y-4">
               {todayEntries.map((entry, index) => (

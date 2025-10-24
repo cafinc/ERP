@@ -96,7 +96,7 @@ export default function PhotoUploadPage() {
         </div>
 
         {/* Upload Area */}
-        <div className="bg-white rounded-lg border border-gray-200 p-6">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
           <label className="block">
             <div className="border-2 border-dashed border-gray-300 rounded-lg p-12 text-center cursor-pointer hover:border-blue-500 transition-colors">
               <input
@@ -116,7 +116,7 @@ export default function PhotoUploadPage() {
 
         {/* Selected Files */}
         {files.length > 0 && (
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <h2 className="text-lg font-semibold text-gray-900 mb-4">Selected Files ({files.length})</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {files.map((file, index) => (
@@ -142,7 +142,7 @@ export default function PhotoUploadPage() {
         )}
 
         {/* Metadata */}
-        <div className="bg-white rounded-lg border border-gray-200 p-4 space-y-4">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 space-y-4 hover:shadow-md transition-shadow">
           <h2 className="text-lg font-semibold text-gray-900">Photo Details</h2>
           
           <div>

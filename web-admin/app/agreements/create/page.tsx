@@ -236,7 +236,7 @@ export default function CreateAgreementPage() {
 
           {/* Step 1: Select Creation Method */}
           {step === 'select' && (
-            <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-8 backdrop-blur-sm">
+            <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
               <h2 className="text-2xl font-bold text-gray-900 mb-2 text-center">How would you like to create this agreement?</h2>
               <p className="text-gray-600 mb-8 text-center">Choose a method to get started</p>
 
@@ -338,7 +338,7 @@ export default function CreateAgreementPage() {
           {/* Step 2 & 3 content (details and review) would go here - keeping existing structure */}
           {/* For brevity, I'm showing a simplified version */}
           {(step === 'details' || step === 'review') && (
-            <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-8 backdrop-blur-sm">
+            <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
               <p className="text-gray-600">Details and review steps would continue here with the same structure as before...</p>
               <div className="mt-6 flex justify-between">
                 <button

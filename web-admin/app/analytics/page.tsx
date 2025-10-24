@@ -234,7 +234,7 @@ export default function AnalyticsPage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-semibold text-gray-900">This Month</h3>
               <Calendar className="w-6 h-6 text-gray-400" />
@@ -245,7 +245,7 @@ export default function AnalyticsPage() {
             <p className="text-sm text-gray-600">Current month revenue</p>
           </div>
 
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-semibold text-gray-900">Last Month</h3>
               <Calendar className="w-6 h-6 text-gray-400" />
@@ -259,7 +259,7 @@ export default function AnalyticsPage() {
 
         {/* Key Metrics */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-4">
               <div className="bg-green-100 rounded-lg p-3">
                 <Users className="w-6 h-6 text-green-600" />
@@ -273,7 +273,7 @@ export default function AnalyticsPage() {
             </p>
           </div>
 
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-4">
               <div className="bg-blue-100 rounded-lg p-3">
                 <FileText className="w-6 h-6 text-[#3f72af]" />
@@ -287,7 +287,7 @@ export default function AnalyticsPage() {
             </p>
           </div>
 
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-4">
               <div className="bg-purple-100 rounded-lg p-3">
                 <MapPin className="w-6 h-6 text-purple-600" />
@@ -301,7 +301,7 @@ export default function AnalyticsPage() {
             </p>
           </div>
 
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-4">
               <div className="bg-orange-100 rounded-lg p-3">
                 <Truck className="w-6 h-6 text-orange-600" />
@@ -318,7 +318,7 @@ export default function AnalyticsPage() {
 
         {/* Performance Metrics */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Estimate Performance</h3>
             <div className="space-y-4">
               <div>
@@ -352,7 +352,7 @@ export default function AnalyticsPage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Team Status</h3>
             <div className="space-y-4">
               <div>

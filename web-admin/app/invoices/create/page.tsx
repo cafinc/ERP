@@ -174,7 +174,7 @@ export default function InvoiceCreatePage() {
             {/* Main Content */}
             <div className="lg:col-span-2 space-y-6">
               {/* Customer & Terms */}
-              <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
+              <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-8 hover:shadow-md transition-shadow">
                 <h2 className="text-lg font-semibold text-gray-900 mb-4">Invoice Details</h2>
                 
                 <div className="grid grid-cols-2 gap-4">
@@ -303,7 +303,7 @@ export default function InvoiceCreatePage() {
               </div>
 
               {/* Line Items */}
-              <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
+              <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-8 hover:shadow-md transition-shadow">
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-lg font-semibold text-gray-900">Line Items</h2>
                   <button
@@ -374,7 +374,7 @@ export default function InvoiceCreatePage() {
               </div>
 
               {/* Notes */}
-              <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
+              <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-8 hover:shadow-md transition-shadow">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Notes (Optional)
                 </label>
@@ -390,7 +390,7 @@ export default function InvoiceCreatePage() {
 
             {/* Sidebar - Totals */}
             <div className="space-y-6">
-              <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8 sticky top-6">
+              <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-8 sticky top-6 hover:shadow-md transition-shadow">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Invoice Summary</h3>
                 
                 <div className="space-y-3">

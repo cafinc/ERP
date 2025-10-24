@@ -103,7 +103,7 @@ export default function HRModuleDesignB() {
 
         {/* Overview Cards - Balanced Style */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6 mt-6">
-          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow">
+          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-500">Total Employees</p>
@@ -116,7 +116,7 @@ export default function HRModuleDesignB() {
             </div>
           </div>
 
-          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow">
+          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-500">Active Time Entries</p>
@@ -129,7 +129,7 @@ export default function HRModuleDesignB() {
             </div>
           </div>
 
-          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow">
+          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-500">Pending PTO Requests</p>
@@ -149,7 +149,7 @@ export default function HRModuleDesignB() {
             <div
               key={module.href}
               onClick={() => router.push(module.href)}
-              className="bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-blue-200 transition-all cursor-pointer overflow-hidden group"
+              className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-100 hover:shadow-lg hover:border-blue-200 transition-all cursor-pointer overflow-hidden group hover:shadow-md transition-shadow"
             >
               <div className={`h-1 bg-gradient-to-r ${module.color}`} />
               <div className="p-6">

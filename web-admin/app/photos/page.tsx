@@ -166,7 +166,7 @@ export default function PhotoGalleryPage() {
           </div>
           <button
             onClick={() => setShowUploadModal(true)}
-            className="flex items-center gap-2 bg-[#3f72af] text-white px-4 py-2 rounded-lg hover:bg-[#2c5282] transition-colors"
+            className="flex items-center gap-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white px-4 py-2 rounded-lg font-medium transition-all shadow-sm hover:shadow-md rounded-lg hover:bg-[#2c5282] transition-colors"
           >
             <Upload className="w-5 h-5" />
             Upload Photos
@@ -174,7 +174,7 @@ export default function PhotoGalleryPage() {
         </div>
 
         {/* Filters */}
-        <div className="bg-white rounded-lg border border-gray-200 p-4">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -227,7 +227,7 @@ export default function PhotoGalleryPage() {
 
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <div className="bg-white rounded-lg border border-gray-200 p-4">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-3">
               <div className="bg-blue-100 rounded-lg p-3">
                 <ImageIcon className="w-6 h-6 text-[#3f72af]" />
@@ -239,7 +239,7 @@ export default function PhotoGalleryPage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg border border-gray-200 p-4">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-3">
               <div className="bg-green-100 rounded-lg p-3">
                 <Calendar className="w-6 h-6 text-green-600" />
@@ -257,7 +257,7 @@ export default function PhotoGalleryPage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg border border-gray-200 p-4">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-3">
               <div className="bg-purple-100 rounded-lg p-3">
                 <MapPin className="w-6 h-6 text-purple-600" />
@@ -271,7 +271,7 @@ export default function PhotoGalleryPage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg border border-gray-200 p-4">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-3">
               <div className="bg-orange-100 rounded-lg p-3">
                 <Filter className="w-6 h-6 text-orange-600" />
@@ -299,7 +299,7 @@ export default function PhotoGalleryPage() {
               filteredPhotos.map((photo) => (
                 <div
                   key={photo.id}
-                  className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow cursor-pointer"
+                  className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow cursor-pointer hover:shadow-md transition-shadow"
                   onClick={() => setSelectedPhoto(photo)}
                 >
                   <div className="aspect-square relative">
@@ -328,7 +328,7 @@ export default function PhotoGalleryPage() {
             )}
           </div>
         ) : (
-          <div className="bg-white rounded-lg border border-gray-200">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
@@ -342,7 +342,7 @@ export default function PhotoGalleryPage() {
               </thead>
               <tbody className="divide-y divide-gray-200">
                 {filteredPhotos.map((photo) => (
-                  <tr key={photo.id} className="hover:bg-gray-50">
+                  <tr key={photo.id} className="hover:bg-gray-50 transition-colors hover:bg-gray-50">
                     <td className="px-6 py-4">
                       <img src={photo.thumbnail_url || photo.url} alt={photo.filename} className="w-16 h-16 object-cover rounded" />
                     </td>

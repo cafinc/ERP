@@ -153,7 +153,7 @@ export default function ServiceFormPage() {
         </div>
 
         {/* Service Details */}
-        <div className="bg-white rounded-lg border border-gray-200 p-6">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
           <h2 className="text-lg font-semibold text-gray-900 mb-4">Service Details</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="col-span-2">
@@ -220,7 +220,7 @@ export default function ServiceFormPage() {
         </div>
 
         {/* Pricing */}
-        <div className="bg-white rounded-lg border border-gray-200 p-6">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-semibold text-gray-900">Pricing Structure</h2>
             <button

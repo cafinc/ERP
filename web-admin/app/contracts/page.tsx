@@ -200,7 +200,7 @@ export default function AgreementsPage() {
       <div className="flex-1 overflow-auto p-6">
         <div className="max-w-7xl mx-auto">
           {filteredAgreements.length === 0 ? (
-            <div className="bg-white rounded-lg shadow border border-gray-200 p-12 text-center">
+            <div className="bg-white rounded-lg shadow shadow-sm border border-gray-200 p-12 text-center hover:shadow-md transition-shadow">
               <FileSignature className="w-16 h-16 text-gray-300 mx-auto mb-4" />
               <h3 className="text-lg font-semibold text-gray-900 mb-2">
                 {searchQuery ? 'No agreements found' : activeTab === 'all' ? 'No Agreements Yet' : `No ${activeTab} Agreements`}
@@ -228,7 +228,7 @@ export default function AgreementsPage() {
               {filteredAgreements.map((agreement, index) => (
                 <div
                   key={agreement._id || `agreement-${index}`}
-                  className="bg-white rounded-lg shadow border border-gray-200 p-6 hover:shadow-md transition-shadow"
+                  className="bg-white rounded-lg shadow shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow hover:shadow-md transition-shadow"
                 >
                   <div className="flex items-start justify-between">
                     <div className="flex-1">

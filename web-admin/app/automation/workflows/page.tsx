@@ -216,7 +216,7 @@ export default function WorkflowBuilderPage() {
             <h3 className="text-lg font-semibold text-gray-900 mb-3">Get Started with Templates</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {templates.map((template, idx) => (
-                <div key={idx} className="bg-white rounded-xl shadow-lg border border-gray-200 p-4">
+                <div key={idx} className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
                   <div className="flex items-start justify-between mb-2">
                     <h4 className="font-semibold text-gray-900">{template.name}</h4>
                     <Zap className="w-5 h-5 text-[#3f72af]" />
@@ -243,7 +243,7 @@ export default function WorkflowBuilderPage() {
           <h3 className="text-lg font-semibold text-gray-900 mb-3">Your Custom Workflows</h3>
           
           {workflows.length === 0 ? (
-            <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-12 text-center">
+            <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-12 text-center hover:shadow-md transition-shadow">
               <Zap className="w-12 h-12 text-gray-400 mx-auto mb-4" />
               <h3 className="text-lg font-semibold text-gray-900 mb-2">No Custom Workflows Yet</h3>
               <p className="text-gray-600 mb-4">Create your first workflow to automate your operations</p>
@@ -260,7 +260,7 @@ export default function WorkflowBuilderPage() {
                 const TriggerIcon = getTriggerIcon(workflow.trigger?.trigger_type);
                 
                 return (
-                  <div key={workflow.id} className="bg-white rounded-xl shadow-lg border border-gray-200 p-4">
+                  <div key={workflow.id} className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
                     {/* Header */}
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex-1">

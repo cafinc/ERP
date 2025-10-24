@@ -324,7 +324,7 @@ export default function LeadsPage() {
 
           {/* Stats Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-gray-600">Total Leads</p>
@@ -337,7 +337,7 @@ export default function LeadsPage() {
               </div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-gray-600">Conversion Rate</p>
@@ -350,7 +350,7 @@ export default function LeadsPage() {
               </div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-gray-600">Pipeline Value</p>
@@ -365,7 +365,7 @@ export default function LeadsPage() {
               </div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-gray-600">Won Value</p>
@@ -419,7 +419,7 @@ export default function LeadsPage() {
           </div>
 
           {/* Filters */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-4">
+          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-4 mb-4 hover:shadow-md transition-shadow">
             <div className="flex flex-col md:flex-row gap-4">
               {/* Search */}
               <div className="flex-1 relative">
@@ -479,7 +479,7 @@ export default function LeadsPage() {
                 const totalValue = statusLeads.reduce((sum, l) => sum + (l.estimated_value || 0), 0);
 
                 return (
-                  <div key={status} className="bg-white rounded-xl shadow-sm border border-gray-200">
+                  <div key={status} className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
                     <div className={`p-4 border-b border-gray-200 bg-${config.color}-50`}>
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
@@ -563,7 +563,7 @@ export default function LeadsPage() {
 
           {/* List View */}
           {view === 'list' && (
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200">
+            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
               {filteredLeads.length === 0 ? (
                 <div className="p-12 text-center">
                   <Users className="w-16 h-16 text-gray-300 mx-auto mb-4" />
@@ -666,7 +666,7 @@ export default function LeadsPage() {
           {/* Analytics View */}
           {view === 'analytics' && (
             <div className="space-y-6">
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+              <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
                 <h2 className="text-lg font-semibold text-gray-900 mb-4">Lead Analytics</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>

@@ -103,7 +103,7 @@ export default function AnalyticsPage() {
           <>
             {/* Key Metrics */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+              <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
                 <div className="flex items-center justify-between mb-4">
                   <div className="p-3 bg-blue-100 rounded-lg">
                     <Phone className="w-6 h-6 text-[#3f72af]" />
@@ -116,7 +116,7 @@ export default function AnalyticsPage() {
                 </p>
               </div>
 
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+              <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
                 <div className="flex items-center justify-between mb-4">
                   <div className="p-3 bg-green-100 rounded-lg">
                     <PhoneIncoming className="w-6 h-6 text-green-600" />
@@ -126,7 +126,7 @@ export default function AnalyticsPage() {
                 <p className="text-3xl font-bold text-gray-900">0</p>
               </div>
 
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+              <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
                 <div className="flex items-center justify-between mb-4">
                   <div className="p-3 bg-purple-100 rounded-lg">
                     <PhoneOutgoing className="w-6 h-6 text-purple-600" />
@@ -136,7 +136,7 @@ export default function AnalyticsPage() {
                 <p className="text-3xl font-bold text-gray-900">0</p>
               </div>
 
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+              <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
                 <div className="flex items-center justify-between mb-4">
                   <div className="p-3 bg-orange-100 rounded-lg">
                     <Clock className="w-6 h-6 text-orange-600" />
@@ -150,7 +150,7 @@ export default function AnalyticsPage() {
             {/* Charts */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-8">
               {/* Call Volume Chart */}
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+              <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center space-x-2">
                   <BarChart3 className="w-5 h-5" />
                   <span>Call Volume Trend</span>
@@ -174,7 +174,7 @@ export default function AnalyticsPage() {
               </div>
 
               {/* Call Distribution */}
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+              <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center space-x-2">
                   <Users className="w-5 h-5" />
                   <span>Call Distribution</span>
@@ -186,7 +186,7 @@ export default function AnalyticsPage() {
             </div>
 
             {/* Performance Indicators */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Performance Indicators</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="border-l-4 border-green-500 pl-4">

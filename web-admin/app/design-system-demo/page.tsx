@@ -237,7 +237,7 @@ export default function DesignSystemDemo() {
         </div>
 
         {/* Color Palettes Section */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+        <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 mb-6 hover:shadow-md transition-shadow">
           <div className="flex items-center gap-2 mb-4">
             <Palette className="w-5 h-5 text-blue-600" />
             <h2 className="text-xl font-bold text-gray-900">Color Palettes</h2>
@@ -289,7 +289,7 @@ export default function DesignSystemDemo() {
         </div>
 
         {/* Navigation Layouts Section */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+        <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 mb-6 hover:shadow-md transition-shadow">
           <div className="flex items-center gap-2 mb-4">
             <Layout className="w-5 h-5 text-blue-600" />
             <h2 className="text-xl font-bold text-gray-900">Navigation Layouts</h2>
@@ -325,7 +325,7 @@ export default function DesignSystemDemo() {
         </div>
 
         {/* Button Styles Section */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+        <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 mb-6 hover:shadow-md transition-shadow">
           <div className="flex items-center gap-2 mb-4">
             <MousePointer className="w-5 h-5 text-blue-600" />
             <h2 className="text-xl font-bold text-gray-900">Button Styles</h2>

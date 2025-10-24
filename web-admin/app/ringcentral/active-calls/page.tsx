@@ -133,7 +133,7 @@ export default function ActiveCallsPage() {
 
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center space-x-4">
               <div className="p-3 bg-green-100 rounded-lg">
                 <Phone className="w-6 h-6 text-green-600" />
@@ -144,7 +144,7 @@ export default function ActiveCallsPage() {
               </div>
             </div>
           </div>
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center space-x-4">
               <div className="p-3 bg-blue-100 rounded-lg">
                 <Radio className="w-6 h-6 text-[#3f72af] animate-pulse" />
@@ -158,7 +158,7 @@ export default function ActiveCallsPage() {
         </div>
 
         {/* Active Calls List */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200">
+        <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
           {loading ? (
             <div className="flex items-center justify-center py-12">
               <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />

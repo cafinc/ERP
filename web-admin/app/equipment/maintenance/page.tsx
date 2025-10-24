@@ -243,7 +243,7 @@ export default function MaintenancePage() {
         </div>
 
         {/* Search Bar with Type Filter */}
-        <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-3 mb-4 mx-6 mt-6">
+        <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-3 mb-4 mx-6 mt-6 hover:shadow-md transition-shadow">
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1 relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -279,7 +279,7 @@ export default function MaintenancePage() {
 
         {/* Maintenance Records Grid */}
         {filteredRecords.length === 0 ? (
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-12 text-center mx-6">
+          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-12 text-center mx-6 hover:shadow-md transition-shadow">
             <Wrench className="w-16 h-16 text-gray-300 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-gray-900 mb-2">No Maintenance Records Found</h3>
             <p className="text-gray-600 mb-4">
@@ -302,7 +302,7 @@ export default function MaintenancePage() {
             {filteredRecords.map((record, index) => (
               <div
                 key={record.id || `maintenance-${index}`}
-                className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow cursor-pointer"
+                className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow cursor-pointer hover:shadow-md transition-shadow"
                 onClick={() => router.push(`/equipment/maintenance/${record.id}`)}
               >
                 {/* Header */}

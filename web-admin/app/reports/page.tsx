@@ -200,7 +200,7 @@ export default function ReportsPage() {
           {reportTypes.map((report) => (
             <div
               key={report.id}
-              className="bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-all overflow-hidden"
+              className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 hover:shadow-md transition-all overflow-hidden hover:shadow-md transition-shadow"
             >
               {/* Card Header */}
               <div className={`${report.color} p-4`}>
@@ -247,7 +247,7 @@ export default function ReportsPage() {
         {/* Scheduled Reports Section */}
         <div className="mx-6 mt-8">
           <h2 className="text-xl font-bold text-gray-900 mb-4">Scheduled Reports</h2>
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 text-center">
+          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-8 text-center hover:shadow-md transition-shadow">
             <RefreshCw className="w-12 h-12 text-gray-300 mx-auto mb-3" />
             <p className="text-gray-600">No scheduled reports yet.</p>
             <p className="text-sm text-gray-500 mt-2">

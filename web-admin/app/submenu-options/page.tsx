@@ -161,7 +161,7 @@ export default function SubmenuOptions() {
                         <p className="text-sm text-gray-600 mb-2">
                           📍 Appears below header, spans full width
                         </p>
-                        <div className="bg-white border-b border-gray-200 shadow-md p-4">
+                        <div className="bg-white shadow-sm border-b border-gray-200 shadow-md p-4 hover:shadow-md transition-shadow">
                           <div className="flex items-center gap-3 flex-wrap">
                             {hrSubmenu.map((item) => (
                               <button
@@ -285,7 +285,7 @@ export default function SubmenuOptions() {
                               return (
                                 <div
                                   key={item.href}
-                                  className="bg-white border-2 border-gray-200 rounded-xl p-4 hover:border-[#3f72af] hover:shadow-lg transition-all cursor-pointer"
+                                  className="bg-white shadow-sm border-2 border-gray-200 rounded-xl p-4 hover:border-[#3f72af] hover:shadow-lg transition-all cursor-pointer hover:shadow-md transition-shadow"
                                 >
                                   <div className="bg-[#3f72af]/10 w-12 h-12 rounded-lg flex items-center justify-center mb-3">
                                     <Icon className="w-6 h-6 text-[#3f72af]" />
@@ -320,7 +320,7 @@ export default function SubmenuOptions() {
                         <p className="text-sm text-gray-600 mb-2">
                           📍 Compact breadcrumb navigation
                         </p>
-                        <div className="bg-white border-b border-gray-200 p-3">
+                        <div className="bg-white shadow-sm border-b border-gray-200 p-3 hover:shadow-md transition-shadow">
                           <div className="flex items-center gap-2 text-sm">
                             <span className="text-gray-600">HR Module</span>
                             <ChevronRight className="w-4 h-4 text-gray-400" />

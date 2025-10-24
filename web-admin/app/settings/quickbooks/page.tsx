@@ -347,7 +347,7 @@ export default function QuickBooksSettings() {
         </div>
 
         {/* Connection Status Card */}
-        <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-4 mb-4">
+        <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-4 mb-4 hover:shadow-md transition-shadow">
           <div className="flex items-center justify-between mb-4">
             <div>
               <h2 className="text-xl font-semibold text-[#112d4e]">Connection Status</h2>
@@ -419,7 +419,7 @@ export default function QuickBooksSettings() {
 
         {/* Sync Settings (only show when connected) */}
         {connection?.connected && (
-          <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-4 mb-4">
+          <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-4 mb-4 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-xl font-semibold text-[#112d4e]">Sync Settings</h2>
               <SettingsIcon className="w-5 h-5 text-gray-400" />
@@ -529,7 +529,7 @@ export default function QuickBooksSettings() {
 
         {/* Sync Logs (only show when connected) */}
         {connection?.connected && (
-          <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
+          <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-xl font-semibold text-[#112d4e]">Recent Sync Activity</h2>
               <button
@@ -566,7 +566,7 @@ export default function QuickBooksSettings() {
                   </thead>
                   <tbody className="divide-y divide-gray-200">
                     {syncLogs.map((log) => (
-                      <tr key={log.id} className="hover:bg-gray-50">
+                      <tr key={log.id} className="hover:bg-gray-50 transition-colors hover:bg-gray-50">
                       <td className="px-4 py-3">
                         {getStatusIcon(log.status)}
                       </td>
@@ -595,7 +595,7 @@ export default function QuickBooksSettings() {
         )}
 
         {/* Features Overview */}
-        <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
+        <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
           <h2 className="text-xl font-semibold text-[#112d4e] mb-4">Integration Features</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {[

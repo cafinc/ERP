@@ -109,7 +109,7 @@ export default function SMSConfigPage() {
         </div>
 
         {/* Configuration Form */}
-        <div className="bg-white rounded-lg border border-gray-200 p-4 space-y-6">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 space-y-6 hover:shadow-md transition-shadow">
           <h2 className="text-xl font-semibold text-gray-900">Twilio Settings</h2>
 
           {/* Enable/Disable */}
@@ -167,7 +167,7 @@ export default function SMSConfigPage() {
           <button
             onClick={handleSave}
             disabled={saving}
-            className="flex items-center gap-2 bg-[#3f72af] text-white px-6 py-3 rounded-lg hover:bg-[#2c5282] disabled:opacity-50"
+            className="flex items-center gap-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white px-6 py-3 rounded-lg font-medium transition-all shadow-sm hover:shadow-md rounded-lg hover:bg-[#2c5282] disabled:opacity-50"
           >
             <Save className="w-5 h-5" />
             {saving ? 'Saving...' : 'Save Configuration'}
@@ -175,7 +175,7 @@ export default function SMSConfigPage() {
         </div>
 
         {/* Test SMS */}
-        <div className="bg-white rounded-lg border border-gray-200 p-4 space-y-4">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 space-y-4 hover:shadow-md transition-shadow">
           <h2 className="text-xl font-semibold text-gray-900">Test SMS</h2>
           
           <div>

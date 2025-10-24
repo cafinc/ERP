@@ -189,7 +189,7 @@ export default function WorkflowHistoryPage() {
           <h2 className="text-xl font-bold text-gray-900 mb-4">Execution Timeline</h2>
           
           {executions.length === 0 ? (
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-12 text-center">
+            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-12 text-center hover:shadow-md transition-shadow">
               <Activity className="w-12 h-12 text-gray-300 mx-auto mb-3" />
               <p className="text-gray-600">No executions found for the selected period</p>
             </div>
@@ -198,7 +198,7 @@ export default function WorkflowHistoryPage() {
               {executions.map((execution) => (
                 <div
                   key={execution.id}
-                  className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden"
+                  className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow"
                 >
                   {/* Execution Header */}
                   <div
@@ -271,7 +271,7 @@ export default function WorkflowHistoryPage() {
                             )}
 
                             {/* Step Card */}
-                            <div className="bg-white rounded-lg border border-gray-200 p-4">
+                            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
                               <div className="flex items-start gap-3">
                                 {/* Step Status Icon */}
                                 <div className="absolute left-0 top-4">

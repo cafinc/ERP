@@ -129,7 +129,7 @@ export default function CreateAgreementTemplatePage() {
       <div className="h-full bg-gray-50 overflow-auto">
         <div className="max-w-7xl mx-auto p-6">
           {/* Template Info */}
-          <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-8 backdrop-blur-sm mb-6">
+          <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm mb-6 hover:shadow-md transition-shadow">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Template Information</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
@@ -220,7 +220,7 @@ export default function CreateAgreementTemplatePage() {
           </div>
 
           {/* Sections Editor */}
-          <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 backdrop-blur-sm overflow-hidden">
+          <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 backdrop-blur-sm overflow-hidden hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 bg-gray-50">
               <h3 className="text-lg font-semibold text-gray-900">Agreement Sections</h3>
               <button

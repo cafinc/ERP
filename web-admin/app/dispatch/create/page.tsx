@@ -172,7 +172,7 @@ export default function DispatchCreatePage() {
         <form onSubmit={handleSubmit} className="max-w-5xl">
           <div className="space-y-6">
             {/* Basic Info */}
-            <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
+            <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-8 hover:shadow-md transition-shadow">
               <h2 className="text-lg font-semibold text-gray-900 mb-4">Basic Information</h2>
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -225,7 +225,7 @@ export default function DispatchCreatePage() {
             </div>
 
             {/* Services */}
-            <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
+            <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-8 hover:shadow-md transition-shadow">
               <h2 className="text-lg font-semibold text-gray-900 mb-4">Services *</h2>
               <p className="text-sm text-gray-600 mb-4">Select the services to be performed</p>
               
@@ -253,7 +253,7 @@ export default function DispatchCreatePage() {
             </div>
 
             {/* Crew Selection */}
-            <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
+            <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-8 hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between mb-4">
                 <div>
                   <h2 className="text-lg font-semibold text-gray-900">Crew Members</h2>
@@ -299,7 +299,7 @@ export default function DispatchCreatePage() {
             </div>
 
             {/* Equipment Selection */}
-            <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
+            <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-8 hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between mb-4">
                 <div>
                   <h2 className="text-lg font-semibold text-gray-900">Equipment</h2>
@@ -345,7 +345,7 @@ export default function DispatchCreatePage() {
             </div>
 
             {/* Site Selection */}
-            <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
+            <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-8 hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between mb-4">
                 <div>
                   <h2 className="text-lg font-semibold text-gray-900">Sites *</h2>
@@ -391,7 +391,7 @@ export default function DispatchCreatePage() {
             </div>
 
             {/* Notes */}
-            <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
+            <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-8 hover:shadow-md transition-shadow">
               <h2 className="text-lg font-semibold text-gray-900 mb-4">Notes</h2>
               <textarea
                 value={dispatchForm.notes}

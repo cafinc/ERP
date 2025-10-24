@@ -215,14 +215,14 @@ export default function InvoicesPage() {
               Overdue ({invoices.filter(i => i.status?.toLowerCase() === 'overdue').length})
             </button>
             <div className="flex-1"></div>
-            <div className="bg-white border border-gray-200 rounded-lg px-3 py-1.5 flex items-center space-x-2">
+            <div className="bg-white shadow-sm border border-gray-200 rounded-lg px-3 py-1.5 flex items-center space-x-2 hover:shadow-md transition-shadow">
               <DollarSign className="w-4 h-4 text-green-600" />
               <span className="text-sm font-medium text-gray-700">Total Paid:</span>
               <span className="text-lg font-bold text-green-600">
                 ${totalPaid.toLocaleString()}
               </span>
             </div>
-            <div className="bg-white border border-gray-200 rounded-lg px-3 py-1.5 flex items-center space-x-2">
+            <div className="bg-white shadow-sm border border-gray-200 rounded-lg px-3 py-1.5 flex items-center space-x-2 hover:shadow-md transition-shadow">
               <AlertCircle className="w-4 h-4 text-orange-600" />
               <span className="text-sm font-medium text-gray-700">Outstanding:</span>
               <span className="text-lg font-bold text-orange-600">
@@ -233,7 +233,7 @@ export default function InvoicesPage() {
         </div>
 
         {/* Search Bar */}
-        <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-3 mb-4 mx-6 mt-6">
+        <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-3 mb-4 mx-6 mt-6 hover:shadow-md transition-shadow">
           <div className="flex flex-col md:flex-row gap-4">
             {/* Search */}
             <div className="flex-1 relative">
@@ -277,7 +277,7 @@ export default function InvoicesPage() {
 
         {/* Invoices List */}
         {filteredInvoices.length === 0 ? (
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-12 text-center">
+          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-12 text-center hover:shadow-md transition-shadow">
             <FileText className="w-16 h-16 text-gray-300 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-gray-900 mb-2">No Invoices Found</h3>
             <p className="text-gray-600 mb-4">
@@ -296,7 +296,7 @@ export default function InvoicesPage() {
             )}
           </div>
         ) : (
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead className="bg-gray-50 border-b border-gray-200">
@@ -313,7 +313,7 @@ export default function InvoicesPage() {
                 </thead>
                 <tbody className="divide-y divide-gray-200">
                   {filteredInvoices.map((invoice, index) => (
-                    <tr key={invoice._id || invoice.id || `invoice-${index}`} className="hover:bg-gray-50 transition-colors">
+                    <tr key={invoice._id || invoice.id || `invoice-${index}`} className="hover:bg-gray-50 transition-colors hover:bg-gray-50 transition-colors">
                       <td className="px-6 py-4">
                         <div className="flex items-center">
                           <FileText className="w-4 h-4 text-gray-400 mr-2" />

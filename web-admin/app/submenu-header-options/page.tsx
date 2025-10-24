@@ -22,7 +22,7 @@ export default function SubmenuHeaderOptions() {
       name: 'Simple Title Only',
       description: 'Clean and minimal, just the page title',
       component: (
-        <div className="bg-white border-b border-gray-200 px-6 py-4">
+        <div className="bg-white shadow-sm border-b border-gray-200 px-6 py-4 hover:shadow-md transition-shadow">
           <h1 className="text-2xl font-semibold text-gray-900">Employee Management</h1>
         </div>
       )
@@ -32,7 +32,7 @@ export default function SubmenuHeaderOptions() {
       name: 'Title with Subtitle',
       description: 'Title with descriptive subtitle below',
       component: (
-        <div className="bg-white border-b border-gray-200 px-6 py-5">
+        <div className="bg-white shadow-sm border-b border-gray-200 px-6 py-5 hover:shadow-md transition-shadow">
           <h1 className="text-2xl font-semibold text-gray-900">Employee Management</h1>
           <p className="text-sm text-gray-500 mt-1">Manage your team members, roles, and access permissions</p>
         </div>
@@ -43,7 +43,7 @@ export default function SubmenuHeaderOptions() {
       name: 'Breadcrumb Navigation (Simple)',
       description: 'Shows navigation path with simple separators',
       component: (
-        <div className="bg-white border-b border-gray-200 px-6 py-4">
+        <div className="bg-white shadow-sm border-b border-gray-200 px-6 py-4 hover:shadow-md transition-shadow">
           <nav className="flex items-center text-sm text-gray-500 mb-2">
             <Link href="/" className="hover:text-gray-700">Home</Link>
             <ChevronRight className="w-4 h-4 mx-2" />
@@ -60,7 +60,7 @@ export default function SubmenuHeaderOptions() {
       name: 'Breadcrumb with Back Button',
       description: 'Breadcrumb navigation with a prominent back button',
       component: (
-        <div className="bg-white border-b border-gray-200 px-6 py-4">
+        <div className="bg-white shadow-sm border-b border-gray-200 px-6 py-4 hover:shadow-md transition-shadow">
           <div className="flex items-center gap-4 mb-3">
             <button className="flex items-center text-gray-600 hover:text-gray-900 transition-colors">
               <ChevronLeft className="w-5 h-5 mr-1" />
@@ -83,7 +83,7 @@ export default function SubmenuHeaderOptions() {
       name: 'Title with Action Buttons',
       description: 'Page title with action buttons on the right',
       component: (
-        <div className="bg-white border-b border-gray-200 px-6 py-4">
+        <div className="bg-white shadow-sm border-b border-gray-200 px-6 py-4 hover:shadow-md transition-shadow">
           <div className="flex items-center justify-between">
             <h1 className="text-2xl font-semibold text-gray-900">Employee Management</h1>
             <div className="flex gap-2">
@@ -105,7 +105,7 @@ export default function SubmenuHeaderOptions() {
       name: 'Full Featured Header',
       description: 'Breadcrumb, title, subtitle, and action buttons',
       component: (
-        <div className="bg-white border-b border-gray-200 px-6 py-5">
+        <div className="bg-white shadow-sm border-b border-gray-200 px-6 py-5 hover:shadow-md transition-shadow">
           <nav className="flex items-center text-sm text-gray-500 mb-3">
             <Link href="/" className="hover:text-gray-700">Home</Link>
             <ChevronRight className="w-4 h-4 mx-2" />
@@ -169,7 +169,7 @@ export default function SubmenuHeaderOptions() {
       name: 'Header with Tab Navigation',
       description: 'Page header with horizontal tabs for sub-sections',
       component: (
-        <div className="bg-white border-b border-gray-200">
+        <div className="bg-white shadow-sm border-b border-gray-200 hover:shadow-md transition-shadow">
           <div className="px-6 py-4">
             <div className="flex items-center justify-between mb-4">
               <h1 className="text-2xl font-semibold text-gray-900">Employee Management</h1>
@@ -200,7 +200,7 @@ export default function SubmenuHeaderOptions() {
       name: 'Header with Search & Filters',
       description: 'Header with integrated search bar and filter controls',
       component: (
-        <div className="bg-white border-b border-gray-200 px-6 py-4">
+        <div className="bg-white shadow-sm border-b border-gray-200 px-6 py-4 hover:shadow-md transition-shadow">
           <div className="flex items-center justify-between mb-4">
             <h1 className="text-2xl font-semibold text-gray-900">Employee Management</h1>
             <button className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700">
@@ -230,7 +230,7 @@ export default function SubmenuHeaderOptions() {
       name: 'Compact Header',
       description: 'Space-efficient design for data-dense pages',
       component: (
-        <div className="bg-white border-b border-gray-200 px-6 py-3">
+        <div className="bg-white shadow-sm border-b border-gray-200 px-6 py-3 hover:shadow-md transition-shadow">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <button className="text-gray-500 hover:text-gray-700">
@@ -255,7 +255,7 @@ export default function SubmenuHeaderOptions() {
       description: 'Header styled as an elevated card',
       component: (
         <div className="px-6 pt-6 pb-4">
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <nav className="flex items-center text-sm text-gray-500 mb-3">
               <Link href="/" className="hover:text-gray-700">Home</Link>
               <ChevronRight className="w-4 h-4 mx-2" />
@@ -288,7 +288,7 @@ export default function SubmenuHeaderOptions() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Main Header */}
-      <div className="bg-white border-b border-gray-200 px-6 py-6">
+      <div className="bg-white shadow-sm border-b border-gray-200 px-6 py-6 hover:shadow-md transition-shadow">
         <div className="max-w-7xl mx-auto">
           <Link href="/" className="text-blue-600 hover:text-blue-700 text-sm font-medium mb-2 inline-block">
             ← Back to Dashboard
@@ -313,7 +313,7 @@ export default function SubmenuHeaderOptions() {
         {/* Options Grid */}
         <div className="space-y-8">
           {headerOptions.map((option) => (
-            <div key={option.id} className="bg-white rounded-lg shadow-sm border-2 border-gray-200 overflow-hidden hover:border-blue-300 transition-colors">
+            <div key={option.id} className="bg-white rounded-lg shadow-sm shadow-sm border-2 border-gray-200 overflow-hidden hover:border-blue-300 transition-colors hover:shadow-md transition-shadow">
               {/* Option Info */}
               <div className="p-4 bg-gray-50 border-b border-gray-200">
                 <div className="flex items-start justify-between">
@@ -335,7 +335,7 @@ export default function SubmenuHeaderOptions() {
               </div>
 
               {/* Preview */}
-              <div className="bg-white">
+              <div className="bg-white rounded-lg">
                 <div className="text-xs text-gray-500 px-4 pt-3 pb-1 bg-gray-100 border-b border-gray-200">
                   Preview:
                 </div>

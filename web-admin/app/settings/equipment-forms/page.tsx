@@ -132,7 +132,7 @@ export default function EquipmentFormsPage() {
 
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-3">
               <div className="bg-blue-100 rounded-lg p-3">
                 <Truck className="w-6 h-6 text-[#3f72af]" />
@@ -144,7 +144,7 @@ export default function EquipmentFormsPage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-3">
               <div className="bg-green-100 rounded-lg p-3">
                 <FileText className="w-6 h-6 text-green-600" />
@@ -156,7 +156,7 @@ export default function EquipmentFormsPage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-3">
               <div className="bg-purple-100 rounded-lg p-3">
                 <LinkIcon className="w-6 h-6 text-purple-600" />
@@ -170,7 +170,7 @@ export default function EquipmentFormsPage() {
         </div>
 
         {/* Assignments Table */}
-        <div className="bg-white rounded-lg border border-gray-200">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
           <div className="p-4 border-b border-gray-200">
             <h2 className="text-xl font-semibold text-gray-900">Form Assignments</h2>
           </div>
@@ -194,7 +194,7 @@ export default function EquipmentFormsPage() {
                 </thead>
                 <tbody className="divide-y divide-gray-200">
                   {equipment.map((eq) => (
-                    <tr key={eq.id} className="hover:bg-gray-50">
+                    <tr key={eq.id} className="hover:bg-gray-50 transition-colors hover:bg-gray-50">
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div>
                           <div className="font-medium text-gray-900">{eq.name}</div>

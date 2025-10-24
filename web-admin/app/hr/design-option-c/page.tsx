@@ -146,7 +146,7 @@ export default function HRModuleDesignC() {
             <div
               key={module.href}
               onClick={() => router.push(module.href)}
-              className="bg-white rounded-2xl shadow-md border-2 border-gray-100 hover:shadow-xl hover:border-transparent hover:-translate-y-1 transition-all cursor-pointer overflow-hidden group"
+              className="bg-white rounded-2xl shadow-md shadow-sm border-2 border-gray-100 hover:shadow-xl hover:border-transparent hover:-translate-y-1 transition-all cursor-pointer overflow-hidden group hover:shadow-md transition-shadow"
             >
               <div className={`h-2 bg-gradient-to-r ${module.gradient}`} />
               <div className="p-6">

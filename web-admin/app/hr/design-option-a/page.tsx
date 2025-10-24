@@ -85,7 +85,7 @@ export default function HRModuleDesignA() {
 
         {/* Overview Cards - Conservative Style */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 mt-6">
-          <div className="bg-white rounded-lg shadow border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-600 uppercase tracking-wide">Total Employees</p>
@@ -97,7 +97,7 @@ export default function HRModuleDesignA() {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-600 uppercase tracking-wide">Active Time Entries</p>
@@ -109,7 +109,7 @@ export default function HRModuleDesignA() {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-600 uppercase tracking-wide">Pending PTO Requests</p>
@@ -128,7 +128,7 @@ export default function HRModuleDesignA() {
             <div
               key={module.href}
               onClick={() => router.push(module.href)}
-              className="bg-white rounded-lg shadow border border-gray-200 hover:shadow-md hover:border-blue-900 transition-all cursor-pointer p-6"
+              className="bg-white rounded-lg shadow shadow-sm border border-gray-200 hover:shadow-md hover:border-blue-900 transition-all cursor-pointer p-6 hover:shadow-md transition-shadow"
             >
               <div className="flex items-start justify-between mb-4">
                 <div className="bg-gray-100 p-3 rounded-lg">

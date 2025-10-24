@@ -100,7 +100,7 @@ export default function DispatchDashboardPage() {
             <button
               key={stat.label}
               onClick={() => router.push(stat.href)}
-              className="bg-white rounded-xl shadow-sm border border-gray-200 p-5 hover:shadow-md transition-all text-left"
+              className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-5 hover:shadow-md transition-all text-left hover:shadow-md transition-shadow"
             >
               <div className="flex items-center justify-between">
                 <div className="flex-1">
@@ -116,7 +116,7 @@ export default function DispatchDashboardPage() {
         </div>
 
         {/* Today's Operations */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+        <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
           <h2 className="text-lg font-semibold text-gray-900 mb-4">Today's Operations</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
@@ -147,7 +147,7 @@ export default function DispatchDashboardPage() {
         </div>
 
         {/* Quick Actions */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+        <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
           <h2 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             <button

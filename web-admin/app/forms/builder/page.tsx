@@ -264,7 +264,7 @@ export default function FormBuilderPage() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <h2 className="text-lg font-semibold text-gray-900 mb-4">Field Types</h2>
             <div className="space-y-2">
               {FIELD_TYPES.map((fieldType) => {
@@ -284,7 +284,7 @@ export default function FormBuilderPage() {
           </div>
 
           <div className="lg:col-span-2 space-y-6">
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
               <h2 className="text-lg font-semibold text-gray-900 mb-4">Form Settings</h2>
               <div className="space-y-4">
                 <div>
@@ -367,7 +367,7 @@ export default function FormBuilderPage() {
               </div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
               <h2 className="text-lg font-semibold text-gray-900 mb-4">Form Fields</h2>
               
               {fields.length === 0 ? (

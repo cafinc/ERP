@@ -178,7 +178,7 @@ export default function HomePage() {
             <a
               key={stat.label}
               href={stat.href}
-              className="bg-white rounded-xl shadow-sm border border-gray-200 p-5 hover:shadow-lg hover:border-blue-500 transition-all cursor-pointer transform hover:scale-105"
+              className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-5 hover:shadow-lg hover:border-blue-500 transition-all cursor-pointer transform hover:scale-105 hover:shadow-md transition-shadow"
             >
               <div className="flex items-center justify-between">
                 <div>
@@ -202,7 +202,7 @@ export default function HomePage() {
               <a
                 key={action.label}
                 href={action.href}
-                className="bg-white rounded-xl shadow-sm border border-gray-200 p-5 hover:shadow-md hover:border-blue-300 transition-all flex flex-col items-center justify-center text-center gap-3"
+                className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-5 hover:shadow-md hover:border-blue-300 transition-all flex flex-col items-center justify-center text-center gap-3 hover:shadow-md transition-shadow"
               >
                 <action.icon className="w-8 h-8 text-[#3f72af]" />
                 <span className="font-medium text-gray-900">{action.label}</span>
@@ -216,7 +216,7 @@ export default function HomePage() {
           {/* Activity Feed */}
           <div>
             <h2 className="text-lg font-bold text-gray-900 mb-3">Recent Activity</h2>
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-5">
+            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-5 hover:shadow-md transition-shadow">
               <div className="space-y-4">
                 {recentActivity.map((activity, index) => (
                   <div 
@@ -239,7 +239,7 @@ export default function HomePage() {
           {/* Platform Health */}
           <div>
             <h2 className="text-lg font-bold text-gray-900 mb-3">Platform Health</h2>
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-5">
+            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-5 hover:shadow-md transition-shadow">
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">

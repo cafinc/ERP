@@ -308,7 +308,7 @@ export default function CommunicationCenterPage() {
         </div>
 
         {/* Tabs */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 mb-4">
+        <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 mb-4 hover:shadow-md transition-shadow">
           <div className="flex items-center space-x-2 p-4 border-b border-gray-200 overflow-x-auto">
             <button
               onClick={() => setActiveTab('all')}
@@ -385,7 +385,7 @@ export default function CommunicationCenterPage() {
         </div>
 
         {/* Content */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200">
+        <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
           {loading ? (
             <div className="flex items-center justify-center py-12">
               <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />

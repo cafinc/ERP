@@ -151,7 +151,7 @@ export default function AutomationDashboardPage() {
 
         {/* Summary Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4 mx-6">
-          <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-4">
+          <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-600">Total Workflows</p>
@@ -163,7 +163,7 @@ export default function AutomationDashboardPage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-4">
+          <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-600">Executions Today</p>
@@ -175,7 +175,7 @@ export default function AutomationDashboardPage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-4">
+          <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-600">Success Rate</p>
@@ -187,7 +187,7 @@ export default function AutomationDashboardPage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-4">
+          <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-600">Time Saved Today</p>
@@ -207,7 +207,7 @@ export default function AutomationDashboardPage() {
             const stats = workflowStats.find(s => s.workflow_name === name);
             
             return (
-              <div key={name} className="bg-white rounded-xl shadow-lg border border-gray-200 p-4">
+              <div key={name} className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
                 <div className="flex items-start justify-between mb-3">
                   <div className="flex items-start space-x-3">
                     <div className="p-2 bg-blue-100 rounded-lg">
@@ -285,7 +285,7 @@ export default function AutomationDashboardPage() {
 
         {/* Recent Activity */}
         <div className="mt-6 mx-6">
-          <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-4">
+          <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
             <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center space-x-2">
               <Activity className="w-5 h-5" />
               <span>Recent Activity</span>

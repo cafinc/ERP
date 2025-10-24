@@ -129,7 +129,7 @@ export default function SafetyInspectionsPage() {
         </div>
 
         {/* Search Bar */}
-        <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-3 mb-4 mx-6 mt-6">
+        <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-3 mb-4 mx-6 mt-6 hover:shadow-md transition-shadow">
           <div className="relative">
             <Search className="absolute left-2.5 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
             <input
@@ -146,7 +146,7 @@ export default function SafetyInspectionsPage() {
           {filteredInspections.map((inspection, index) => (
             <div
               key={inspection.id || `inspection-${index}`}
-              className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow cursor-pointer"
+              className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow cursor-pointer hover:shadow-md transition-shadow"
               onClick={() => router.push(`/safety/inspections/${inspection.id}`)}
             >
               <div className="flex items-start justify-between mb-4">

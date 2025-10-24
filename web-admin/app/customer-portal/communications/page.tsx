@@ -294,7 +294,7 @@ export default function CustomerCommunicationsPage() {
       />
       <div className="flex flex-col h-screen bg-gradient-to-br from-orange-50 via-white to-orange-50">
       {/* Header */}
-      <div className="bg-white border-b border-gray-200 shadow-sm px-6 py-4">
+      <div className="bg-white shadow-sm border-b border-gray-200 shadow-sm px-6 py-4 hover:shadow-md transition-shadow">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="p-2 bg-orange-500 rounded-lg">
@@ -507,7 +507,7 @@ export default function CustomerCommunicationsPage() {
       )}
 
       {/* Input */}
-      <div className="bg-white border-t border-gray-200 px-6 py-4 shadow-lg">
+      <div className="bg-white shadow-sm border-t border-gray-200 px-6 py-4 shadow-lg hover:shadow-md transition-shadow">
         <div className="flex items-end gap-3">
           <input
             ref={fileInputRef}

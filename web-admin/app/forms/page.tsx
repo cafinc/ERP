@@ -229,7 +229,7 @@ export default function FormsPage() {
                   {filteredTemplates.map((template) => (
                     <div
                       key={template.id}
-                      className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow"
+                      className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow hover:shadow-md transition-shadow"
                     >
                       <div className="flex items-start justify-between mb-4">
                         <div className="flex items-center space-x-3">
@@ -296,7 +296,7 @@ export default function FormsPage() {
             ) : (
               <>
                 {/* Responses List */}
-                <div className="bg-white rounded-xl shadow-sm border border-gray-200">
+                <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
                   {responses.length === 0 ? (
                     <div className="text-center py-12">
                       <CheckCircle className="w-16 h-16 text-gray-300 mx-auto mb-4" />

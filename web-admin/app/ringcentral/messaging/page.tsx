@@ -98,7 +98,7 @@ export default function TeamMessagingPage() {
           <p className="text-gray-600">Internal team communication</p>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden" style={{ height: 'calc(100vh - 250px)' }}>
+        <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow" style={{ height: 'calc(100vh - 250px)' }}>
           <div className="grid grid-cols-12 h-full">
             {/* Chat List */}
             <div className="col-span-4 border-r border-gray-200 overflow-y-auto">

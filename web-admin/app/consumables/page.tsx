@@ -123,7 +123,7 @@ export default function ConsumablesPage() {
             </button>
             <button
               onClick={() => setShowCreateModal(true)}
-              className="flex items-center gap-2 bg-[#3f72af] text-white px-4 py-2 rounded-lg hover:bg-[#2c5282]"
+              className="flex items-center gap-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white px-4 py-2 rounded-lg font-medium transition-all shadow-sm hover:shadow-md rounded-lg hover:bg-[#2c5282]"
             >
               <Plus className="w-5 h-5" />
               Add Consumable
@@ -133,7 +133,7 @@ export default function ConsumablesPage() {
 
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-3">
               <div className="bg-blue-100 rounded-lg p-3">
                 <Package className="w-6 h-6 text-[#3f72af]" />
@@ -145,7 +145,7 @@ export default function ConsumablesPage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-3">
               <div className="bg-red-100 rounded-lg p-3">
                 <AlertTriangle className="w-6 h-6 text-red-600" />
@@ -157,7 +157,7 @@ export default function ConsumablesPage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-3">
               <div className="bg-green-100 rounded-lg p-3">
                 <TrendingDown className="w-6 h-6 text-green-600" />
@@ -171,7 +171,7 @@ export default function ConsumablesPage() {
         </div>
 
         {/* Consumables List */}
-        <div className="bg-white rounded-lg border border-gray-200">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
           <div className="p-4 border-b border-gray-200">
             <h2 className="text-xl font-semibold text-gray-900">Inventory</h2>
           </div>
@@ -183,7 +183,7 @@ export default function ConsumablesPage() {
               <p className="text-sm text-gray-600 mt-2">Add your first consumable to start tracking inventory</p>
               <button
                 onClick={() => setShowCreateModal(true)}
-                className="mt-4 inline-flex items-center gap-2 bg-[#3f72af] text-white px-4 py-2 rounded-lg hover:bg-[#2c5282]"
+                className="mt-4 inline-flex items-center gap-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white px-4 py-2 rounded-lg font-medium transition-all shadow-sm hover:shadow-md rounded-lg hover:bg-[#2c5282]"
               >
                 <Plus className="w-4 h-4" />
                 Add Consumable
@@ -207,7 +207,7 @@ export default function ConsumablesPage() {
                   {consumables.map((consumable) => {
                     const status = getStockStatus(consumable);
                     return (
-                      <tr key={consumable.id} className="hover:bg-gray-50">
+                      <tr key={consumable.id} className="hover:bg-gray-50 transition-colors hover:bg-gray-50">
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="font-medium text-gray-900">{consumable.name}</div>
                         </td>

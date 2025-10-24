@@ -487,7 +487,7 @@ export default function CustomerFormPage() {
           <form onSubmit={handleSubmit} className="space-y-6">
               {/* Customer Type Selection */}
               {!isEdit && (
-                <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-8 backdrop-blur-sm">
+                <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
                     <h2 className="text-2xl font-bold text-gray-900 mb-4">Customer Type *</h2>
                     <div className="grid grid-cols-2 gap-4">
                       <button
@@ -522,7 +522,7 @@ export default function CustomerFormPage() {
 
               {/* Individual Form */}
               {customerForm.customer_type === 'individual' && (
-                <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-8 backdrop-blur-sm">
+                <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
                     <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center space-x-2">
                       <User className="w-5 h-5 text-[#3f72af]" />
                       <span>Individual Information</span>
@@ -660,7 +660,7 @@ export default function CustomerFormPage() {
               {/* Company Form */}
               {customerForm.customer_type === 'company' && (
                 <div>
-                  <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-8 backdrop-blur-sm">
+                  <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
                     <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center space-x-2">
                       <Building className="w-5 h-5 text-[#3f72af]" />
                       <span>Company Information</span>
@@ -722,7 +722,7 @@ export default function CustomerFormPage() {
                   </div>
 
                   {/* Main Contact for Company */}
-                  <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-8 backdrop-blur-sm">
+                  <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
                     <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center space-x-2">
                       <User className="w-5 h-5 text-[#3f72af]" />
                       <span>Main Contact *</span>
@@ -844,7 +844,7 @@ export default function CustomerFormPage() {
                 </div>
 
                 {/* Company Accounting */}
-                <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-8 backdrop-blur-sm">
+                <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
                   <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center space-x-2">
                     <CreditCard className="w-5 h-5 text-[#3f72af]" />
                     <span>Accounting Information</span>
@@ -966,7 +966,7 @@ export default function CustomerFormPage() {
 
                 {/* Sites Section - Only show for companies, only after creation */}
                 {isEdit && (
-                  <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-8 backdrop-blur-sm">
+                  <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
                     <div className="flex items-center justify-between mb-4">
                       <h2 className="text-2xl font-bold text-gray-900 flex items-center space-x-2">
                         <MapPin className="w-5 h-5 text-[#3f72af]" />
@@ -990,7 +990,7 @@ export default function CustomerFormPage() {
             )}
 
             {/* Address Section (Common for both) */}
-            <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-8 backdrop-blur-sm">
+            <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
               <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center space-x-2">
                 <MapPin className="w-5 h-5 text-[#3f72af]" />
                 <span>Address *</span>
@@ -1079,7 +1079,7 @@ export default function CustomerFormPage() {
             </div>
 
             {/* Additional Notes */}
-            <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-8 backdrop-blur-sm">
+            <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
               <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center space-x-2">
                 <FileText className="w-5 h-5 text-[#3f72af]" />
                 <span>Additional Information</span>

@@ -172,7 +172,7 @@ export default function RingCentralSettings() {
         </div>
 
         {/* Connection Status Card */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-8">
+        <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-4 mb-8 hover:shadow-md transition-shadow">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <div className={`p-4 rounded-lg ${connected ? 'bg-green-100' : 'bg-gray-100'}`}>
@@ -300,7 +300,7 @@ export default function RingCentralSettings() {
           <p className="text-blue-800 text-sm mb-3">
             To receive real-time call notifications, configure your RingCentral webhook:
           </p>
-          <div className="bg-white rounded-lg p-4 border border-blue-200">
+          <div className="bg-white rounded-lg p-4 shadow-sm border border-blue-200 hover:shadow-md transition-shadow">
             <p className="text-sm text-gray-700 mb-2">
               <strong>Webhook URL:</strong>
             </p>

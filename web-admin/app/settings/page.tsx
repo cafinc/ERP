@@ -205,7 +205,7 @@ export default function SettingsPage() {
                     <button
                       key={item.href}
                       onClick={() => router.push(item.href)}
-                      className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow text-left"
+                      className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow text-left hover:shadow-md transition-shadow"
                     >
                       <div className="flex items-start gap-4">
                         <div className={`rounded-lg p-3 ${getColorClasses(item.color)}`}>

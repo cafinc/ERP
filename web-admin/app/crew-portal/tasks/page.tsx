@@ -70,7 +70,7 @@ export default function CrewTasksPage() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Filters */}
-        <div className="bg-white rounded-lg shadow border border-gray-200 p-4 mb-6">
+        <div className="bg-white rounded-lg shadow shadow-sm border border-gray-200 p-4 mb-6 hover:shadow-md transition-shadow">
           <div className="flex gap-2">
             {['active', 'all', 'pending', 'in_progress', 'completed'].map((f) => (
               <button
@@ -90,12 +90,12 @@ export default function CrewTasksPage() {
 
         {/* Tasks List */}
         {loading ? (
-          <div className="bg-white rounded-lg shadow border border-gray-200 p-12 text-center">
+          <div className="bg-white rounded-lg shadow shadow-sm border border-gray-200 p-12 text-center hover:shadow-md transition-shadow">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto"></div>
             <p className="mt-4 text-gray-600">Loading tasks...</p>
           </div>
         ) : tasks.length === 0 ? (
-          <div className="bg-white rounded-lg shadow border border-gray-200 p-12 text-center">
+          <div className="bg-white rounded-lg shadow shadow-sm border border-gray-200 p-12 text-center hover:shadow-md transition-shadow">
             <CheckSquare className="w-16 h-16 text-gray-300 mx-auto mb-4" />
             <h3 className="text-lg font-semibold text-gray-900 mb-2">No tasks found</h3>
             <p className="text-gray-600">You don't have any {filter === 'all' ? '' : filter + ' '}tasks</p>
@@ -106,7 +106,7 @@ export default function CrewTasksPage() {
               <div
                 key={task.id}
                 onClick={() => router.push(`/tasks/${task.id}`)}
-                className="bg-white rounded-lg shadow border border-gray-200 p-6 hover:shadow-lg transition-shadow cursor-pointer"
+                className="bg-white rounded-lg shadow shadow-sm border border-gray-200 p-6 hover:shadow-lg transition-shadow cursor-pointer hover:shadow-md transition-shadow"
               >
                 <div className="flex items-start gap-4">
                   <div className={`w-1 h-full rounded-full ${getPriorityColor(task.priority)}`}></div>

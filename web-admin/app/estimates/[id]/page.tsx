@@ -290,7 +290,7 @@ export default function EstimateDetailPage() {
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
             {/* Customer Information */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
               <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
                 <User className="w-5 h-5 mr-2" />
                 Customer Information
@@ -326,7 +326,7 @@ export default function EstimateDetailPage() {
             </div>
 
             {/* Line Items */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
               <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
                 <FileText className="w-5 h-5 mr-2" />
                 Line Items
@@ -373,7 +373,7 @@ export default function EstimateDetailPage() {
 
             {/* Notes & Terms */}
             {(estimate.notes || estimate.terms) && (
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 space-y-4">
+              <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-4 space-y-4 hover:shadow-md transition-shadow">
                 {estimate.notes && (
                   <div>
                     <h3 className="text-sm font-semibold text-gray-900 mb-2">Notes</h3>
@@ -393,7 +393,7 @@ export default function EstimateDetailPage() {
           {/* Sidebar */}
           <div className="space-y-6">
             {/* Dates */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
               <h2 className="text-lg font-semibold text-gray-900 mb-4">Important Dates</h2>
               <div className="space-y-3">
                 <div className="flex items-start space-x-3">
@@ -455,7 +455,7 @@ export default function EstimateDetailPage() {
 
             {/* Signature Section */}
             {estimate.customer_signature && (
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+              <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
                 <h2 className="text-lg font-semibold text-gray-900 mb-4">Customer Signature</h2>
                 <div className="space-y-4">
                   <div className="border-2 border-gray-200 rounded-lg p-4 bg-gray-50">

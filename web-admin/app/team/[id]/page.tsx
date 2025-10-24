@@ -242,7 +242,7 @@ export default function TeamMemberDetailPage() {
         {/* Main Info Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Contact Information */}
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <h2 className="text-lg font-semibold text-gray-900 mb-4">Contact Information</h2>
             <div className="space-y-3">
               <div className="flex items-center gap-3">
@@ -274,7 +274,7 @@ export default function TeamMemberDetailPage() {
           </div>
 
           {/* Account Details */}
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <h2 className="text-lg font-semibold text-gray-900 mb-4">Account Details</h2>
             <div className="space-y-3">
               <div className="flex items-center gap-3">
@@ -308,7 +308,7 @@ export default function TeamMemberDetailPage() {
 
         {/* Emergency Contact */}
         {(user.emergency_contact_name || user.emergency_contact_phone) && (
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
               <Heart className="w-5 h-5 text-red-500" />
               Emergency Contact
@@ -338,7 +338,7 @@ export default function TeamMemberDetailPage() {
 
         {/* Driver License */}
         {user.is_driver && user.driver_license_photo && (
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
               <Truck className="w-5 h-5 text-[#3f72af]" />
               Driver's License
@@ -355,7 +355,7 @@ export default function TeamMemberDetailPage() {
 
         {/* Documents */}
         {user.documents && user.documents.length > 0 && (
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
               <FileText className="w-5 h-5 text-gray-600" />
               Documents

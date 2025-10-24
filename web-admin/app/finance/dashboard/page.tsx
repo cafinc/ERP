@@ -137,7 +137,7 @@ export default function FinanceDashboardPage() {
         {/* Key Metrics */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mx-6 mt-6">
           {/* Revenue */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-4">
               <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center">
                 <TrendingUp className="w-6 h-6 text-white" />
@@ -153,7 +153,7 @@ export default function FinanceDashboardPage() {
           </div>
 
           {/* Expenses */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-4">
               <div className="w-12 h-12 bg-gradient-to-br from-red-500 to-orange-600 rounded-lg flex items-center justify-center">
                 <TrendingDown className="w-6 h-6 text-white" />
@@ -169,7 +169,7 @@ export default function FinanceDashboardPage() {
           </div>
 
           {/* Net Profit */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-4">
               <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-lg flex items-center justify-center">
                 <DollarSign className="w-6 h-6 text-white" />
@@ -185,7 +185,7 @@ export default function FinanceDashboardPage() {
           </div>
 
           {/* Outstanding */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-4">
               <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-yellow-600 rounded-lg flex items-center justify-center">
                 <Receipt className="w-6 h-6 text-white" />
@@ -203,7 +203,7 @@ export default function FinanceDashboardPage() {
         {/* Quick Actions & Stats */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mx-6 mt-6">
           {/* Quick Actions */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
             <div className="space-y-3">
               <button
@@ -238,7 +238,7 @@ export default function FinanceDashboardPage() {
           </div>
 
           {/* Invoice Status */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Invoice Status</h3>
             <div className="space-y-4">
               <div className="flex items-center justify-between">
@@ -278,7 +278,7 @@ export default function FinanceDashboardPage() {
           </div>
 
           {/* Upcoming Payments */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Upcoming Payments</h3>
             <div className="space-y-3">
               {upcomingPayments.map((payment) => (
@@ -306,7 +306,7 @@ export default function FinanceDashboardPage() {
         </div>
 
         {/* Recent Transactions */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 mx-6 mt-6">
+        <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 mx-6 mt-6 hover:shadow-md transition-shadow">
           <div className="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
             <h3 className="text-lg font-semibold text-gray-900">Recent Transactions</h3>
             <button className="text-sm text-[#3f72af] hover:text-blue-700 font-medium">

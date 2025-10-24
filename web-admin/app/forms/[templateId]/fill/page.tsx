@@ -508,7 +508,7 @@ export default function FillFormPage() {
           </div>
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
+          <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-8 hover:shadow-md transition-shadow">
             <div className="space-y-6">
               {template.fields.map((field: any) => (
                 <div key={field.id}>

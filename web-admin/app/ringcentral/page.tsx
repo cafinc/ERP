@@ -78,7 +78,7 @@ export default function RingCentralHub() {
 
         {/* Quick Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center space-x-4">
               <div className="p-3 bg-blue-100 rounded-lg">
                 <MessageSquare className="w-6 h-6 text-[#3f72af]" />
@@ -89,7 +89,7 @@ export default function RingCentralHub() {
               </div>
             </div>
           </div>
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center space-x-4">
               <div className="p-3 bg-green-100 rounded-lg">
                 <Phone className="w-6 h-6 text-green-600" />
@@ -100,7 +100,7 @@ export default function RingCentralHub() {
               </div>
             </div>
           </div>
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center space-x-4">
               <div className="p-3 bg-purple-100 rounded-lg">
                 <Mic className="w-6 h-6 text-purple-600" />
@@ -111,7 +111,7 @@ export default function RingCentralHub() {
               </div>
             </div>
           </div>
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center space-x-4">
               <div className="p-3 bg-orange-100 rounded-lg">
                 <Users className="w-6 h-6 text-orange-600" />
@@ -132,7 +132,7 @@ export default function RingCentralHub() {
               <Link
                 key={feature.href}
                 href={feature.href}
-                className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-lg transition-all hover:scale-105"
+                className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-4 hover:shadow-lg transition-all hover:scale-105 hover:shadow-md transition-shadow"
               >
                 <div className="flex items-start justify-between mb-4">
                   <div className={`p-3 ${feature.color} rounded-lg`}>

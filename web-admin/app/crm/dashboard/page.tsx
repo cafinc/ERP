@@ -158,7 +158,7 @@ export default function CRMDashboardPage() {
             <button
               key={stat.label}
               onClick={() => router.push(stat.href)}
-              className="bg-white rounded-xl shadow-sm border border-gray-200 p-5 hover:shadow-md transition-all text-left"
+              className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-5 hover:shadow-md transition-all text-left hover:shadow-md transition-shadow"
             >
               <div className="flex items-center justify-between">
                 <div className="flex-1">
@@ -176,7 +176,7 @@ export default function CRMDashboardPage() {
         {/* Three Column Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Recent Activity Feed */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-lg font-semibold text-gray-900">Recent Activity</h2>
               <button className="text-sm text-blue-600 hover:text-blue-700">View All</button>
@@ -226,7 +226,7 @@ export default function CRMDashboardPage() {
           </div>
 
           {/* Upcoming Tasks */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-lg font-semibold text-gray-900">Upcoming Tasks</h2>
               <button className="text-sm text-blue-600 hover:text-blue-700">Add Task</button>
@@ -280,7 +280,7 @@ export default function CRMDashboardPage() {
           </div>
 
           {/* Calendar Widget */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-lg font-semibold text-gray-900">Calendar</h2>
               <button className="text-sm text-blue-600 hover:text-blue-700">View Full</button>

@@ -368,7 +368,7 @@ export default function ContractDetailPage() {
         {/* Contract Details Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Customer Information */}
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <h2 className="text-lg font-semibold text-gray-900 mb-4">Customer Information</h2>
             <div className="space-y-3">
               <div className="flex items-center gap-3">
@@ -398,7 +398,7 @@ export default function ContractDetailPage() {
           </div>
 
           {/* Contract Details */}
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <h2 className="text-lg font-semibold text-gray-900 mb-4">Contract Details</h2>
             <div className="space-y-3">
               <div className="flex items-center gap-3">
@@ -435,13 +435,13 @@ export default function ContractDetailPage() {
         </div>
 
         {/* Service Description */}
-        <div className="bg-white rounded-lg border border-gray-200 p-6">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
           <h2 className="text-lg font-semibold text-gray-900 mb-4">Service Description</h2>
           <p className="text-gray-700 whitespace-pre-wrap">{contract.service_description}</p>
         </div>
 
         {/* Contract Content */}
-        <div className="bg-white rounded-lg border border-gray-200 p-6">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
           <h2 className="text-lg font-semibold text-gray-900 mb-4">Contract Agreement</h2>
           <div 
             className="prose max-w-none text-gray-700" 
@@ -451,7 +451,7 @@ export default function ContractDetailPage() {
 
         {/* Terms and Conditions */}
         {contract.terms_and_conditions && (
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <h2 className="text-lg font-semibold text-gray-900 mb-4">Terms & Conditions</h2>
             <p className="text-gray-700 whitespace-pre-wrap">{contract.terms_and_conditions}</p>
           </div>
@@ -460,7 +460,7 @@ export default function ContractDetailPage() {
         {/* Signatures */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Customer Signature */}
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <h2 className="text-lg font-semibold text-gray-900 mb-4">Customer Signature</h2>
             {contract.customer_signature ? (
               <div className="space-y-3">
@@ -496,7 +496,7 @@ export default function ContractDetailPage() {
           </div>
 
           {/* Company Signature */}
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <h2 className="text-lg font-semibold text-gray-900 mb-4">Company Signature</h2>
             {contract.company_signature ? (
               <div className="space-y-3">
@@ -532,7 +532,7 @@ export default function ContractDetailPage() {
 
         {/* Notes */}
         {contract.notes && (
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <h2 className="text-lg font-semibold text-gray-900 mb-4">Notes</h2>
             <p className="text-gray-700 whitespace-pre-wrap">{contract.notes}</p>
           </div>

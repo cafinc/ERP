@@ -180,7 +180,7 @@ export default function CrewPortalPage() {
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          <div className="bg-white rounded-lg shadow border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-4">
               <div className="bg-orange-100 p-3 rounded-lg">
                 <Briefcase className="w-6 h-6 text-orange-600" />
@@ -190,7 +190,7 @@ export default function CrewPortalPage() {
             <p className="text-sm text-gray-600">Active Work Orders</p>
           </div>
 
-          <div className="bg-white rounded-lg shadow border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-4">
               <div className="bg-blue-100 p-3 rounded-lg">
                 <CheckSquare className="w-6 h-6 text-blue-600" />
@@ -209,7 +209,7 @@ export default function CrewPortalPage() {
               <button
                 key={index}
                 onClick={() => router.push(action.route)}
-                className="bg-white rounded-lg shadow border border-gray-200 p-6 hover:shadow-lg transition-shadow text-left"
+                className="bg-white rounded-lg shadow shadow-sm border border-gray-200 p-6 hover:shadow-lg transition-shadow text-left hover:shadow-md transition-shadow"
               >
                 <div className={`w-12 h-12 rounded-lg ${getColorClasses(action.color)} flex items-center justify-center mb-4`}>
                   <action.icon className="w-6 h-6" />
@@ -233,7 +233,7 @@ export default function CrewPortalPage() {
                   View All
                 </button>
               </div>
-              <div className="bg-white rounded-lg shadow border border-gray-200 divide-y">
+              <div className="bg-white rounded-lg shadow shadow-sm border border-gray-200 divide-y hover:shadow-md transition-shadow">
                 {tasks.map((task) => (
                   <div
                     key={task.id}

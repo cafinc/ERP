@@ -111,7 +111,7 @@ export default function CustomerEditPage() {
         </div>
 
         <div className="max-w-3xl">
-          <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             {/* Customer Name */}
             <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700 mb-2">

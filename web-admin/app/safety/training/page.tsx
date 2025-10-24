@@ -92,7 +92,7 @@ export default function SafetyTrainingPage() {
         </div>
 
         {/* Search Bar */}
-        <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-3 mb-4 mx-6 mt-6">
+        <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-3 mb-4 mx-6 mt-6 hover:shadow-md transition-shadow">
           <div className="relative">
             <Search className="absolute left-2.5 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
             <input
@@ -107,7 +107,7 @@ export default function SafetyTrainingPage() {
 
         {/* Training List */}
         <div className="mx-6">
-          <div className="bg-white rounded-xl shadow-lg border border-gray-200">
+          <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
@@ -122,7 +122,7 @@ export default function SafetyTrainingPage() {
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                   {filteredTrainings.map((training) => (
-                    <tr key={training.id} className="hover:bg-gray-50">
+                    <tr key={training.id} className="hover:bg-gray-50 transition-colors hover:bg-gray-50">
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{training.employee}</td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{training.course}</td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{training.completionDate}</td>

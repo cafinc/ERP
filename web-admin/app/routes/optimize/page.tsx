@@ -349,7 +349,7 @@ export default function RouteOptimizationPage() {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
               {/* Site Selection Panel */}
               <div className="lg:col-span-1 space-y-6">
-                <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
                   <h2 className="text-lg font-semibold text-gray-900 mb-4">Select Sites</h2>
                   <p className="text-sm text-gray-600 mb-4">
                     Choose sites to include in route optimization
@@ -391,7 +391,7 @@ export default function RouteOptimizationPage() {
                 </div>
 
                 {/* Optimization Settings */}
-                <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
                   <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
                     <Settings className="w-5 h-5" />
                     Settings
@@ -474,7 +474,7 @@ export default function RouteOptimizationPage() {
                 {/* Stats Cards */}
                 {optimizationResult && (
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
+                    <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
                       <div className="flex items-center gap-3">
                         <div className="p-2 bg-blue-100 rounded-lg">
                           <Navigation className="w-5 h-5 text-[#3f72af]" />
@@ -489,7 +489,7 @@ export default function RouteOptimizationPage() {
                       </div>
                     </div>
 
-                    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
+                    <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
                       <div className="flex items-center gap-3">
                         <div className="p-2 bg-green-100 rounded-lg">
                           <Clock className="w-5 h-5 text-green-600" />
@@ -504,7 +504,7 @@ export default function RouteOptimizationPage() {
                       </div>
                     </div>
 
-                    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
+                    <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
                       <div className="flex items-center gap-3">
                         <div className="p-2 bg-orange-100 rounded-lg">
                           <TrendingDown className="w-5 h-5 text-orange-600" />
@@ -519,7 +519,7 @@ export default function RouteOptimizationPage() {
                       </div>
                     </div>
 
-                    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
+                    <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
                       <div className="flex items-center gap-3">
                         <div className="p-2 bg-purple-100 rounded-lg">
                           <MapPin className="w-5 h-5 text-purple-600" />
@@ -536,7 +536,7 @@ export default function RouteOptimizationPage() {
                 )}
 
                 {/* Route List */}
-                <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
                   <h2 className="text-lg font-semibold text-gray-900 mb-4">
                     Route Order
                     {optimizationResult && (
@@ -618,7 +618,7 @@ export default function RouteOptimizationPage() {
 
           {/* Templates View */}
           {view === 'templates' && (
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200">
+            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
               <div className="p-4 border-b border-gray-200">
                 <h2 className="text-lg font-semibold text-gray-900">Saved Route Templates</h2>
                 <p className="text-sm text-gray-600 mt-1">
@@ -682,7 +682,7 @@ export default function RouteOptimizationPage() {
           {/* Analytics View */}
           {view === 'analytics' && (
             <div className="space-y-6">
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+              <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
                 <h2 className="text-lg font-semibold text-gray-900 mb-4">Route Performance Analytics</h2>
                 <div className="text-center py-12">
                   <BarChart3 className="w-16 h-16 text-gray-300 mx-auto mb-4" />

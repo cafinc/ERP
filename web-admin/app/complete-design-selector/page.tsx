@@ -78,7 +78,7 @@ export default function CompleteDesignSelector() {
           <div className="bg-blue-100 h-8 rounded"></div>
           <div className="bg-green-100 h-8 rounded"></div>
           <div className="bg-purple-100 h-8 rounded"></div>
-          <div className="bg-white border h-16 rounded col-span-3"></div>
+          <div className="bg-white shadow-sm border h-16 rounded col-span-3 hover:shadow-md transition-shadow"></div>
         </div>
       ),
       bestFor: "Dashboards, Overview pages, Analytics",
@@ -90,7 +90,7 @@ export default function CompleteDesignSelector() {
       preview: (
         <div className="p-2">
           <div className="bg-gray-100 h-4 rounded mb-2"></div>
-          <div className="bg-white border rounded p-1">
+          <div className="bg-white shadow-sm border rounded p-1 hover:shadow-md transition-shadow">
             {[1, 2, 3].map((i) => (
               <div key={i} className="bg-gray-50 h-3 mb-1 rounded"></div>
             ))}
@@ -148,7 +148,7 @@ export default function CompleteDesignSelector() {
               </div>
             ))}
           </div>
-          <div className="bg-white border rounded h-16"></div>
+          <div className="bg-white shadow-sm border rounded h-16 hover:shadow-md transition-shadow"></div>
         </div>
       ),
       bestFor: "Settings, HR sections, Multi-view pages",
@@ -302,7 +302,7 @@ export default function CompleteDesignSelector() {
             </p>
             
             {/* Selection Summary */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
+            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
               <h3 className="font-semibold text-gray-900 mb-3">Your Selections:</h3>
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
                 {Object.entries(selections).map(([key, value]) => (

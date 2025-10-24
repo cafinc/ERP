@@ -155,7 +155,7 @@ export default function InspectionSchedulesPage() {
           </div>
           <button
             onClick={() => router.push('/equipment/inspections/schedules/create')}
-            className="flex items-center gap-2 bg-[#3f72af] text-white px-4 py-2 rounded-lg hover:bg-[#2c5282]"
+            className="flex items-center gap-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white px-4 py-2 rounded-lg font-medium transition-all shadow-sm hover:shadow-md rounded-lg hover:bg-[#2c5282]"
           >
             <Plus className="w-5 h-5" />
             Create Schedule
@@ -163,7 +163,7 @@ export default function InspectionSchedulesPage() {
         </div>
 
         {/* Filters */}
-        <div className="bg-white rounded-lg border border-gray-200 p-4">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
           <div className="flex items-center gap-4">
             <span className="text-sm font-medium text-gray-700">Filter:</span>
             <button
@@ -202,13 +202,13 @@ export default function InspectionSchedulesPage() {
         {/* Schedules List */}
         <div className="space-y-4">
           {schedules.length === 0 ? (
-            <div className="bg-white rounded-lg border border-gray-200 p-12 text-center">
+            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-12 text-center hover:shadow-md transition-shadow">
               <Calendar className="w-12 h-12 mx-auto mb-4 text-gray-400" />
               <p className="text-lg font-medium text-gray-900">No inspection schedules found</p>
               <p className="text-sm text-gray-600 mb-4">Create your first inspection schedule to get started</p>
               <button
                 onClick={() => router.push('/equipment/inspections/schedules/create')}
-                className="inline-flex items-center gap-2 bg-[#3f72af] text-white px-4 py-2 rounded-lg hover:bg-[#2c5282]"
+                className="inline-flex items-center gap-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white px-4 py-2 rounded-lg font-medium transition-all shadow-sm hover:shadow-md rounded-lg hover:bg-[#2c5282]"
               >
                 <Plus className="w-4 h-4" />
                 Create Schedule

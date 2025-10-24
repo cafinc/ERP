@@ -142,7 +142,7 @@ export default function AutomationAnalyticsPage() {
 
         {/* Summary Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mx-6 mt-6">
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-600 mb-1">Total Executions</p>
@@ -155,7 +155,7 @@ export default function AutomationAnalyticsPage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-600 mb-1">Successful</p>
@@ -168,7 +168,7 @@ export default function AutomationAnalyticsPage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-600 mb-1">Failed</p>
@@ -181,7 +181,7 @@ export default function AutomationAnalyticsPage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-600 mb-1">Avg Duration</p>
@@ -246,7 +246,7 @@ export default function AutomationAnalyticsPage() {
             {metrics.map((metric) => (
               <div
                 key={metric.workflow_id}
-                className="bg-white rounded-xl shadow-sm border border-gray-200 p-5 hover:shadow-md transition-all"
+                className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-5 hover:shadow-md transition-all hover:shadow-md transition-shadow"
               >
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-lg font-semibold text-gray-900">{metric.workflow_name}</h3>
@@ -316,7 +316,7 @@ export default function AutomationAnalyticsPage() {
         {/* Recent Executions */}
         <div className="mx-6 mt-8">
           <h2 className="text-xl font-bold text-gray-900 mb-4">Recent Executions</h2>
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
             {executions.length === 0 ? (
               <div className="p-8 text-center">
                 <Activity className="w-12 h-12 text-gray-300 mx-auto mb-3" />
@@ -346,7 +346,7 @@ export default function AutomationAnalyticsPage() {
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
                     {executions.map((execution) => (
-                      <tr key={execution.id} className="hover:bg-gray-50">
+                      <tr key={execution.id} className="hover:bg-gray-50 transition-colors hover:bg-gray-50">
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="text-sm font-medium text-gray-900">{execution.workflow_name}</div>
                         </td>

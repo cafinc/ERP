@@ -95,7 +95,7 @@ export default function ConsumablesAnalyticsPage() {
         </div>
 
         {/* Date Filter */}
-        <div className="bg-white rounded-lg border border-gray-200 p-4">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
           <div className="flex items-center gap-4">
             <Calendar className="w-5 h-5 text-gray-600" />
             <span className="text-sm font-medium text-gray-700">Time Period:</span>
@@ -114,7 +114,7 @@ export default function ConsumablesAnalyticsPage() {
 
         {/* Summary Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-3">
               <div className="bg-blue-100 rounded-lg p-3">
                 <Package className="w-6 h-6 text-[#3f72af]" />
@@ -126,7 +126,7 @@ export default function ConsumablesAnalyticsPage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-3">
               <div className="bg-purple-100 rounded-lg p-3">
                 <TrendingDown className="w-6 h-6 text-purple-600" />
@@ -138,7 +138,7 @@ export default function ConsumablesAnalyticsPage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-3">
               <div className="bg-green-100 rounded-lg p-3">
                 <DollarSign className="w-6 h-6 text-green-600" />
@@ -152,7 +152,7 @@ export default function ConsumablesAnalyticsPage() {
         </div>
 
         {/* Usage Table */}
-        <div className="bg-white rounded-lg border border-gray-200">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
           <div className="p-4 border-b border-gray-200">
             <h2 className="text-xl font-semibold text-gray-900">Usage Breakdown</h2>
           </div>
@@ -177,7 +177,7 @@ export default function ConsumablesAnalyticsPage() {
                 </thead>
                 <tbody className="divide-y divide-gray-200">
                   {usage.map((item, index) => (
-                    <tr key={index} className="hover:bg-gray-50">
+                    <tr key={index} className="hover:bg-gray-50 transition-colors hover:bg-gray-50">
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="font-medium text-gray-900">{item.consumable_name}</div>
                       </td>

@@ -219,7 +219,7 @@ export default function FeedbackDetailPage() {
           </div>
 
           {/* Message Info Card */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-4">
+          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-4 mb-4 hover:shadow-md transition-shadow">
             <div className="flex items-start justify-between mb-4">
               <div className="flex items-start space-x-4">
                 <div className={`p-3 rounded-lg ${getPriorityColor(message.priority)}`}>
@@ -252,7 +252,7 @@ export default function FeedbackDetailPage() {
 
           {/* Admin Response Section */}
           {isAdmin && (
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-4">
+            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-4 mb-4 hover:shadow-md transition-shadow">
               <h3 className="text-xl font-semibold text-gray-900 mb-4">Admin Response</h3>
               <div className="space-y-4">
                 <div>
@@ -328,7 +328,7 @@ export default function FeedbackDetailPage() {
 
           {/* Crew Acknowledgment Section */}
           {isCrew && message.assigned_crew_id === user?.id && (
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
               <h3 className="text-xl font-semibold text-gray-900 mb-4">Crew Acknowledgment</h3>
               <div className="space-y-4">
                 <div>
@@ -358,7 +358,7 @@ export default function FeedbackDetailPage() {
 
           {/* Timeline */}
           {(message.admin_responded_at || message.resolved_at) && (
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mt-6">
+            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-4 mt-6 hover:shadow-md transition-shadow">
               <h3 className="text-xl font-semibold text-gray-900 mb-4">Timeline</h3>
               <div className="space-y-4">
                 <div className="flex items-start space-x-3">

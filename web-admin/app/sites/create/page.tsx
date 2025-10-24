@@ -274,7 +274,7 @@ export default function CreateSitePage() {
         <div className="max-w-4xl mx-auto p-6">
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Customer Selection */}
-            <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-8 backdrop-blur-sm">
+            <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
               <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center space-x-2">
                 <User className="w-5 h-5 text-[#3f72af]" />
                 <span>Link to Customer *</span>
@@ -358,7 +358,7 @@ export default function CreateSitePage() {
             </div>
 
             {/* Site Information */}
-            <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-8 backdrop-blur-sm">
+            <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
               <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center space-x-2">
                 <Building2 className="w-5 h-5 text-[#3f72af]" />
                 <span>Site Information</span>
@@ -417,7 +417,7 @@ export default function CreateSitePage() {
             </div>
 
             {/* Location */}
-            <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-8 backdrop-blur-sm">
+            <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
               <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center space-x-2">
                 <MapPin className="w-5 h-5 text-[#3f72af]" />
                 <span>Location</span>
@@ -512,7 +512,7 @@ export default function CreateSitePage() {
             </div>
 
             {/* Access & Special Instructions */}
-            <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-8 backdrop-blur-sm">
+            <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
               <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center space-x-2">
                 <FileText className="w-5 h-5 text-[#3f72af]" />
                 <span>Access & Instructions</span>
@@ -602,7 +602,7 @@ export default function CreateSitePage() {
             </div>
 
             {/* Bottom Action Buttons */}
-            <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-6 backdrop-blur-sm">
+            <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-6 backdrop-blur-sm hover:shadow-md transition-shadow">
               <div className="flex gap-4 justify-end">
                 <button
                   type="button"

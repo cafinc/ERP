@@ -282,7 +282,7 @@ export default function GeofenceManagementPage() {
 
           {/* Stats Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-gray-600">Total Geofences</p>
@@ -294,7 +294,7 @@ export default function GeofenceManagementPage() {
               </div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-gray-600">Active Zones</p>
@@ -306,7 +306,7 @@ export default function GeofenceManagementPage() {
               </div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-gray-600">Events Today</p>
@@ -321,7 +321,7 @@ export default function GeofenceManagementPage() {
               </div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-gray-600">Active Crews</p>
@@ -385,7 +385,7 @@ export default function GeofenceManagementPage() {
 
           {/* List View */}
           {view === 'list' && (
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200">
+            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
               <div className="p-4 border-b border-gray-200">
                 <div className="flex flex-col md:flex-row gap-4">
                   {/* Search */}
@@ -569,7 +569,7 @@ export default function GeofenceManagementPage() {
 
           {/* Map View */}
           {view === 'map' && (
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
               <div className="text-center py-12">
                 <MapIcon className="w-16 h-16 text-gray-300 mx-auto mb-4" />
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Map View</h3>
@@ -589,7 +589,7 @@ export default function GeofenceManagementPage() {
 
           {/* Event Logs View */}
           {view === 'logs' && (
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200">
+            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
               <div className="p-4 border-b border-gray-200 flex items-center justify-between">
                 <div>
                   <h2 className="text-lg font-semibold text-gray-900">Geofence Event Logs</h2>
@@ -674,7 +674,7 @@ export default function GeofenceManagementPage() {
           {/* Analytics View */}
           {view === 'analytics' && (
             <div className="space-y-6">
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+              <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
                 <h2 className="text-lg font-semibold text-gray-900 mb-4">Geofence Analytics</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
@@ -699,7 +699,7 @@ export default function GeofenceManagementPage() {
                 </div>
               </div>
 
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+              <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
                 <h2 className="text-lg font-semibold text-gray-900 mb-4">Event Timeline</h2>
                 <p className="text-sm text-gray-600">
                   Visual timeline of all geofence events will be displayed here

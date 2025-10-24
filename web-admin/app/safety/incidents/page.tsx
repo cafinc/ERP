@@ -189,7 +189,7 @@ export default function IncidentReportingPage() {
         </div>
 
         {/* Search Bar */}
-        <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-3 mb-4 mx-6 mt-6">
+        <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-3 mb-4 mx-6 mt-6 hover:shadow-md transition-shadow">
           <div className="relative">
             <Search className="absolute left-2.5 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
             <input
@@ -204,7 +204,7 @@ export default function IncidentReportingPage() {
 
         {/* Incidents Grid */}
         {filteredIncidents.length === 0 ? (
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-12 text-center mx-6">
+          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-12 text-center mx-6 hover:shadow-md transition-shadow">
             <AlertTriangle className="w-16 h-16 text-gray-300 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-gray-900 mb-2">No Incidents Found</h3>
             <p className="text-gray-600 mb-4">
@@ -218,7 +218,7 @@ export default function IncidentReportingPage() {
             {filteredIncidents.map((incident, index) => (
               <div
                 key={incident.id || `incident-${index}`}
-                className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow cursor-pointer"
+                className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow cursor-pointer hover:shadow-md transition-shadow"
                 onClick={() => router.push(`/safety/incidents/${incident.id}`)}
               >
                 {/* Header */}

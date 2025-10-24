@@ -143,7 +143,7 @@ export default function TeamMemberFormPage() {
         </div>
 
         {/* Basic Information */}
-        <div className="bg-white rounded-lg border border-gray-200 p-6">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
           <h2 className="text-lg font-semibold text-gray-900 mb-4">Basic Information</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="col-span-2">
@@ -217,7 +217,7 @@ export default function TeamMemberFormPage() {
         </div>
 
         {/* Role & Permissions */}
-        <div className="bg-white rounded-lg border border-gray-200 p-6">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
           <h2 className="text-lg font-semibold text-gray-900 mb-4">Role & Permissions</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
@@ -274,7 +274,7 @@ export default function TeamMemberFormPage() {
         </div>
 
         {/* Emergency Contact */}
-        <div className="bg-white rounded-lg border border-gray-200 p-6">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
           <h2 className="text-lg font-semibold text-gray-900 mb-4">Emergency Contact</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>

@@ -135,7 +135,7 @@ export default function AgreementTemplatesPage() {
       <div className="h-full bg-gray-50 overflow-auto">
         <div className="max-w-7xl mx-auto p-6">
           {/* Filter Tabs */}
-          <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-4 backdrop-blur-sm mb-6">
+          <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-4 backdrop-blur-sm mb-6 hover:shadow-md transition-shadow">
             <div className="flex items-center space-x-4">
               <button
                 onClick={() => setFilter('active')}
@@ -172,12 +172,12 @@ export default function AgreementTemplatesPage() {
 
           {/* Templates Grid */}
           {loading ? (
-            <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-12 backdrop-blur-sm text-center">
+            <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-12 backdrop-blur-sm text-center hover:shadow-md transition-shadow">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#3f72af] mx-auto"></div>
               <p className="text-gray-600 mt-4">Loading templates...</p>
             </div>
           ) : templates.length === 0 ? (
-            <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-12 backdrop-blur-sm text-center">
+            <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-12 backdrop-blur-sm text-center hover:shadow-md transition-shadow">
               <FileText className="w-16 h-16 text-gray-300 mx-auto mb-4" />
               <h3 className="text-lg font-semibold text-gray-900 mb-2">
                 {filter === 'archived' ? 'No Archived Templates' : 'No Templates Yet'}
@@ -201,7 +201,7 @@ export default function AgreementTemplatesPage() {
           ) : (
             <div className="space-y-6">
               {Object.entries(templatesByCategory).map(([category, categoryTemplates]: [string, any]) => (
-                <div key={category} className="bg-white/60 rounded-2xl shadow-lg border border-white/40 backdrop-blur-sm overflow-hidden">
+                <div key={category} className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 backdrop-blur-sm overflow-hidden hover:shadow-md transition-shadow">
                   <div className="bg-gray-50 px-6 py-3 border-b border-gray-200">
                     <div className="flex items-center space-x-2">
                       <Folder className="w-5 h-5 text-[#3f72af]" />

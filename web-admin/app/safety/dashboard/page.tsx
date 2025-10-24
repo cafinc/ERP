@@ -40,7 +40,7 @@ export default function SafetyDashboardPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mx-6 mt-6">
           {/* Incidents */}
           <div 
-            className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow cursor-pointer"
+            className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow cursor-pointer hover:shadow-md transition-shadow"
             onClick={() => router.push('/safety/incidents')}
           >
             <div className="flex items-center gap-3 mb-4">
@@ -66,7 +66,7 @@ export default function SafetyDashboardPage() {
 
           {/* Inspections */}
           <div 
-            className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow cursor-pointer"
+            className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow cursor-pointer hover:shadow-md transition-shadow"
             onClick={() => router.push('/safety/inspections')}
           >
             <div className="flex items-center gap-3 mb-4">
@@ -92,7 +92,7 @@ export default function SafetyDashboardPage() {
 
           {/* Training */}
           <div 
-            className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow cursor-pointer"
+            className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow cursor-pointer hover:shadow-md transition-shadow"
             onClick={() => router.push('/safety/training')}
           >
             <div className="flex items-center gap-3 mb-4">
@@ -118,7 +118,7 @@ export default function SafetyDashboardPage() {
 
           {/* Safety Meetings */}
           <div 
-            className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow cursor-pointer"
+            className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow cursor-pointer hover:shadow-md transition-shadow"
             onClick={() => router.push('/safety/meetings')}
           >
             <div className="flex items-center gap-3 mb-4">
@@ -145,7 +145,7 @@ export default function SafetyDashboardPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <button
               onClick={() => router.push('/safety/hazards')}
-              className="bg-white rounded-xl shadow-lg border border-gray-200 p-4 hover:shadow-md transition-shadow text-left"
+              className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow text-left hover:shadow-md transition-shadow"
             >
               <FileText className="w-8 h-8 text-orange-600 mb-2" />
               <h3 className="font-semibold text-gray-900">Hazard Assessments</h3>
@@ -154,7 +154,7 @@ export default function SafetyDashboardPage() {
 
             <button
               onClick={() => router.push('/safety/ppe')}
-              className="bg-white rounded-xl shadow-lg border border-gray-200 p-4 hover:shadow-md transition-shadow text-left"
+              className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow text-left hover:shadow-md transition-shadow"
             >
               <HardHat className="w-8 h-8 text-yellow-600 mb-2" />
               <h3 className="font-semibold text-gray-900">PPE Management</h3>
@@ -163,7 +163,7 @@ export default function SafetyDashboardPage() {
 
             <button
               onClick={() => router.push('/safety/policies')}
-              className="bg-white rounded-xl shadow-lg border border-gray-200 p-4 hover:shadow-md transition-shadow text-left"
+              className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow text-left hover:shadow-md transition-shadow"
             >
               <FileText className="w-8 h-8 text-[#3f72af] mb-2" />
               <h3 className="font-semibold text-gray-900">Safety Policies</h3>
@@ -172,7 +172,7 @@ export default function SafetyDashboardPage() {
 
             <button
               onClick={() => router.push('/safety/emergency')}
-              className="bg-white rounded-xl shadow-lg border border-gray-200 p-4 hover:shadow-md transition-shadow text-left"
+              className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow text-left hover:shadow-md transition-shadow"
             >
               <AlertTriangle className="w-8 h-8 text-red-600 mb-2" />
               <h3 className="font-semibold text-gray-900">Emergency Plans</h3>

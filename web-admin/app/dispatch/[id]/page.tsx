@@ -106,7 +106,7 @@ export default function DispatchDetailPage() {
     return (
       <PageHeader>
         <div className="p-8">
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-12 text-center">
+          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-12 text-center hover:shadow-md transition-shadow">
             <AlertCircle className="w-16 h-16 text-red-300 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-gray-900 mb-2">Dispatch Not Found</h3>
             <button
@@ -154,7 +154,7 @@ export default function DispatchDetailPage() {
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
             {/* Dispatch Info */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-xl font-semibold text-gray-900">Dispatch Information</h2>
                 <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(dispatch.status)}`}>
@@ -189,7 +189,7 @@ export default function DispatchDetailPage() {
             </div>
 
             {/* Services */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
               <h2 className="text-xl font-semibold text-gray-900 mb-4">Services</h2>
               <div className="flex flex-wrap gap-2">
                 {dispatch.services.map((service, idx) => (
@@ -202,7 +202,7 @@ export default function DispatchDetailPage() {
 
             {/* Crew & Equipment */}
             <div className="grid grid-cols-2 gap-4">
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+              <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
                 <div className="flex items-center space-x-2 mb-4">
                   <Users className="w-5 h-5 text-gray-400" />
                   <h3 className="text-lg font-semibold text-gray-900">Crew Members</h3>
@@ -210,7 +210,7 @@ export default function DispatchDetailPage() {
                 <p className="text-3xl font-bold text-[#3f72af]">{dispatch.crew_ids.length}</p>
               </div>
 
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+              <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
                 <div className="flex items-center space-x-2 mb-4">
                   <Truck className="w-5 h-5 text-gray-400" />
                   <h3 className="text-lg font-semibold text-gray-900">Equipment</h3>
@@ -224,7 +224,7 @@ export default function DispatchDetailPage() {
           <div className="space-y-6">
             {/* Status Actions */}
             {dispatch.status !== 'completed' && dispatch.status !== 'cancelled' && (
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+              <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Status Actions</h3>
                 <div className="space-y-2">
                   {dispatch.status === 'scheduled' && (
@@ -260,7 +260,7 @@ export default function DispatchDetailPage() {
             )}
 
             {/* Site Count */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
               <div className="flex items-center space-x-2 mb-4">
                 <MapPin className="w-5 h-5 text-gray-400" />
                 <h3 className="text-lg font-semibold text-gray-900">Sites</h3>

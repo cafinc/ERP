@@ -179,7 +179,7 @@ export default function CreateInspectionSchedulePage() {
 
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Basic Information */}
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <h2 className="text-lg font-semibold text-gray-900 mb-4">Basic Information</h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -290,7 +290,7 @@ export default function CreateInspectionSchedulePage() {
           </div>
 
           {/* Settings */}
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <h2 className="text-lg font-semibold text-gray-900 mb-4">Settings</h2>
             
             <div className="space-y-4">
@@ -339,7 +339,7 @@ export default function CreateInspectionSchedulePage() {
           </div>
 
           {/* Compliance Rules */}
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-4">
               <div>
                 <h2 className="text-lg font-semibold text-gray-900">Compliance Rules</h2>
@@ -450,7 +450,7 @@ export default function CreateInspectionSchedulePage() {
             <button
               type="submit"
               disabled={loading}
-              className="flex items-center gap-2 bg-[#3f72af] text-white px-6 py-3 rounded-lg hover:bg-[#2c5282] disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex items-center gap-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white px-6 py-3 rounded-lg font-medium transition-all shadow-sm hover:shadow-md rounded-lg hover:bg-[#2c5282] disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? (
                 <>

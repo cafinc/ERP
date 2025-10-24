@@ -130,7 +130,7 @@ export default function EmergencyAlertPage() {
         </div>
 
         {/* Stats Card */}
-        <div className="bg-white rounded-lg border border-gray-200 p-6">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
           <div className="flex items-center gap-4">
             <div className="bg-blue-100 rounded-lg p-4">
               <Users className="w-8 h-8 text-[#3f72af]" />
@@ -152,7 +152,7 @@ export default function EmergencyAlertPage() {
         </div>
 
         {/* Alert Type Selection */}
-        <div className="bg-white rounded-lg border border-gray-200 p-6">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
           <h2 className="text-lg font-semibold text-gray-900 mb-4">Alert Type</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {ALERT_TYPES.map((type) => {
@@ -183,7 +183,7 @@ export default function EmergencyAlertPage() {
         </div>
 
         {/* Message Input */}
-        <div className="bg-white rounded-lg border border-gray-200 p-6">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
           <h2 className="text-lg font-semibold text-gray-900 mb-4">Alert Message</h2>
           <textarea
             value={message}
@@ -196,7 +196,7 @@ export default function EmergencyAlertPage() {
         </div>
 
         {/* Preview Card */}
-        <div className="bg-white rounded-lg border border-gray-200 p-6">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
           <h2 className="text-lg font-semibold text-gray-900 mb-4">Preview</h2>
           <div className="bg-gray-50 rounded-lg p-4">
             <div className="flex items-center gap-2 pb-3 border-b border-gray-200 mb-3">

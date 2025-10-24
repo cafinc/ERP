@@ -220,7 +220,7 @@ export default function ProjectDetailPage() {
     return (
       <PageHeader>
         <div className="p-8">
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-12 text-center">
+          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-12 text-center hover:shadow-md transition-shadow">
             <AlertCircle className="w-16 h-16 text-red-300 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-gray-900 mb-2">Project Not Found</h3>
             <p className="text-gray-600 mb-4">The project you're looking for doesn't exist.</p>
@@ -280,7 +280,7 @@ export default function ProjectDetailPage() {
                 {/* Customer Link */}
                 <button
                   onClick={() => router.push(`/customers/${project.customer_id}`)}
-                  className="bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-lg p-4 text-left transition-all border border-white/20 hover:border-white/40"
+                  className="bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-lg p-4 text-left transition-all shadow-sm border border-white/20 hover:border-white/40 hover:shadow-md transition-shadow"
                 >
                   <div className="flex items-center justify-between mb-2">
                     <User className="w-5 h-5 opacity-75" />
@@ -296,7 +296,7 @@ export default function ProjectDetailPage() {
                 {/* Estimate Link */}
                 <button
                   onClick={() => router.push(`/estimates/${project.estimate_id}`)}
-                  className="bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-lg p-4 text-left transition-all border border-white/20 hover:border-white/40"
+                  className="bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-lg p-4 text-left transition-all shadow-sm border border-white/20 hover:border-white/40 hover:shadow-md transition-shadow"
                 >
                   <div className="flex items-center justify-between mb-2">
                     <FileText className="w-5 h-5 opacity-75" />
@@ -308,7 +308,7 @@ export default function ProjectDetailPage() {
                 </button>
 
                 {/* Quick Stats */}
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 shadow-sm border border-white/20 hover:shadow-md transition-shadow">
                   <div className="flex items-center justify-between mb-2">
                     <CheckSquare className="w-5 h-5 opacity-75" />
                     <span className="text-2xl font-bold">{calculateProgress()}%</span>
@@ -322,7 +322,7 @@ export default function ProjectDetailPage() {
             </div>
 
             {/* Project Info */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-xl font-semibold text-gray-900">Project Information</h2>
                 <span className={`flex items-center space-x-2 px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(project.status)}`}>
@@ -388,7 +388,7 @@ export default function ProjectDetailPage() {
             </div>
 
             {/* Tasks Section */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-xl font-semibold text-gray-900">Tasks</h2>
                 <button
@@ -476,7 +476,7 @@ export default function ProjectDetailPage() {
           {/* Sidebar */}
           <div className="space-y-6">
             {/* Status Actions */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Status Actions</h3>
               <div className="space-y-2">
                 {project.status !== 'active' && (
@@ -513,7 +513,7 @@ export default function ProjectDetailPage() {
             </div>
 
             {/* Task Summary */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Task Summary</h3>
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
