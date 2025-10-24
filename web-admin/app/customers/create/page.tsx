@@ -77,6 +77,9 @@ export default function CustomerFormPage() {
   const [createSite, setCreateSite] = useState(false);
   const [siteName, setSiteName] = useState('');
   
+  // File upload states
+  const [uploadedFiles, setUploadedFiles] = useState<Array<{name: string, type: string, size: number, data: string}>>([]);
+  
   const [customerForm, setCustomerForm] = useState({
     // For individuals
     first_name: '',
