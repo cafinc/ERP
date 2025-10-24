@@ -1473,7 +1473,7 @@ export default function CustomerFormPage() {
                     
                     {/* Site Name - appears inline when Create Site is ON */}
                     {createSite && (
-                      <div className="flex-1 ml-3">
+                      <div className="w-64 ml-3">
                         <input
                           type="text"
                           value={siteName}
