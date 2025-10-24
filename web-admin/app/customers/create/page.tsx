@@ -906,34 +906,6 @@ export default function CustomerFormPage() {
                           </div>
                         )}
                         </div>
-                        
-                        {/* Require Access Toggle - Next to Link to Company */}
-                        <div className="flex items-center gap-3 ml-6">
-                          <button
-                            type="button"
-                            onClick={() => {
-                              const newRequireAccess = !requireAccess;
-                              setRequireAccess(newRequireAccess);
-                              if (!newRequireAccess) {
-                                setAccessWeb(false);
-                                setAccessInApp(false);
-                                setUserRole('customer');
-                              }
-                            }}
-                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#3f72af] focus:ring-offset-2 flex-shrink-0 ${
-                              requireAccess ? 'bg-[#3f72af]' : 'bg-gray-200'
-                            }`}
-                          >
-                            <span
-                              className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                                requireAccess ? 'translate-x-6' : 'translate-x-1'
-                              }`}
-                            />
-                          </button>
-                          <label className="text-sm font-medium text-gray-700 whitespace-nowrap">
-                            Require Access
-                          </label>
-                        </div>
                       </div>
                       
                       {/* Access Configuration - Shows when Require Access is ON */}
