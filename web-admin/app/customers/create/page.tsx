@@ -1589,7 +1589,7 @@ export default function CustomerFormPage() {
                         />
                       </label>
                       <p className="text-xs text-gray-500 mt-2">
-                        Upload documents, photos, contracts, etc. (Max 10MB per file)
+                        Upload documents, photos, contracts, etc. (Max 500KB per file)
                       </p>
                     </div>
                     
