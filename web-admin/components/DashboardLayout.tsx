@@ -405,12 +405,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         <EnhancedHeader />
         
         <div className="flex flex-1 overflow-hidden">
-          {/* Call Popup Widget - Real-time incoming call notifications */}
-          {/* TEMPORARILY DISABLED */}
-          {/* <CallPopup apiUrl={process.env.NEXT_PUBLIC_API_URL || ''} /> */}
-          
-          {/* Sidebar */}
-          <aside className={`${isSidebarMinimized ? 'w-16' : 'w-52'} bg-white border-r border-gray-200 flex flex-col transition-all duration-300 overflow-hidden`}>
+          {/* Sidebar removed - using top navigation only */}
+          <main className="flex-1 overflow-auto bg-gray-50">
         {/* Navigation */}
         <nav className="flex-1 overflow-y-auto p-4 space-y-1">
           {menuItems.map((item) => (
