@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import PageHeader from '@/components/PageHeader';
+import CompactHeader from '@/components/CompactHeader';
 import {
   BarChart3,
   Download,
@@ -97,7 +97,7 @@ export default function ReportsPage() {
 
   return (
     <HybridNavigationTopBar>
-      <PageHeader
+      <CompactHeader
         title="Financial Reports"
         subtitle="Generate and download comprehensive financial reports"
         icon={BarChart3}

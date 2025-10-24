@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import CompactHeader from '@/components/CompactHeader';
+import PageHeader from '@/components/PageHeader';
 import { HardHat, Plus, Edit, Trash2, Shield, CheckCircle, XCircle, MapPin } from 'lucide-react';
 
 export default function CrewPage() {
@@ -17,7 +17,7 @@ export default function CrewPage() {
 
   return (
     <div style={{ padding: '24px', backgroundColor: '#f8fafc', minHeight: '100vh' }}>
-      <CompactHeader
+      <PageHeader
         title="Crew Members"
         subtitle="Field workers and operational staff"
         backUrl="/access"

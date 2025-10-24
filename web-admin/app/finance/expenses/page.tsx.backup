@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import PageHeader from '@/components/PageHeader';
+import CompactHeader from '@/components/CompactHeader';
 import {
   TrendingDown,
   Plus,
@@ -133,7 +133,7 @@ export default function ExpensesPage() {
 
   return (
     <HybridNavigationTopBar>
-      <PageHeader
+      <CompactHeader
         title="Expenses"
         subtitle={`${filteredExpenses.length} expense${filteredExpenses.length !== 1 ? 's' : ''} • Total: $${totalExpenses.toLocaleString()}`}
         icon={TrendingDown}

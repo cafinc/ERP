@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/lib/auth';
 import api from '@/lib/api';
-import PageHeader from '@/components/PageHeader';
+import CompactHeader from '@/components/CompactHeader';
 import UserFormModal from '@/components/UserFormModal';
 import { Crown, Plus, Edit, Trash2, Shield, AlertCircle, CheckCircle, XCircle } from 'lucide-react';
 
@@ -111,7 +111,7 @@ export default function MasterUsersPage() {
 
   return (
     <div style={{ padding: '24px', backgroundColor: '#f8fafc', minHeight: '100vh' }}>
-      <PageHeader
+      <CompactHeader
         title="Master Users"
         subtitle="Platform owners with full system control"
         backUrl="/access"

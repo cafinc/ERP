@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import PageHeader from '@/components/PageHeader';
+import CompactHeader from '@/components/CompactHeader';
 import {
   CreditCard,
   Search,
@@ -107,7 +107,7 @@ export default function PaymentsPage() {
 
   return (
     <HybridNavigationTopBar>
-      <PageHeader
+      <CompactHeader
         title="Payments"
         subtitle={`${filteredPayments.length} payment${filteredPayments.length !== 1 ? 's' : ''} • Total: $${totalPayments.toLocaleString()}`}
         icon={CreditCard}
