@@ -69,7 +69,10 @@ export default function HazardAssessmentsPage() {
     <PageHeader>
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         <PageHeader
-          title="Hazard Assessments"
+        title="Hazard Assessments"
+        subtitle="Identify and mitigate workplace hazards"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Safety", href: "/safety/dashboard" }, { label: "Hazards" }]}
+        title="Hazard Assessments"
           
           actions={[
             {

@@ -127,7 +127,10 @@ export default function IncidentReportingPage() {
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         {/* Compact Header */}
         <PageHeader
-          title="Incident Reporting"
+        title="Incident Reporting"
+        subtitle="Document and track safety incidents"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Safety", href: "/safety/dashboard" }, { label: "Incidents" }]}
+        title="Incident Reporting"
           
           actions={[
             {

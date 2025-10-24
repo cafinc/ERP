@@ -67,7 +67,10 @@ export default function SafetyInspectionsPage() {
     <PageHeader>
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         <PageHeader
-          title="Safety Inspections"
+        title="Safety Inspections"
+        subtitle="Schedule and conduct safety inspections"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Safety", href: "/safety/dashboard" }, { label: "Inspections" }]}
+        title="Safety Inspections"
           
           actions={[
             {
