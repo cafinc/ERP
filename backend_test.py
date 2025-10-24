@@ -1,20 +1,19 @@
 #!/usr/bin/env python3
 """
-Backend API Testing for Customer Company Linking Feature
-Tests customer creation and company linking functionality
+Backend API Testing for Communication Preference Feature
+Tests comprehensive scenarios for customer communication preferences
 """
 
 import requests
 import json
+import sys
 import os
 from datetime import datetime
-from typing import Dict, Any, Optional
 
 # Get backend URL from environment
-BACKEND_URL = os.getenv('REACT_APP_BACKEND_URL', 'https://snow-dash-1.preview.emergentagent.com')
-API_BASE = f"{BACKEND_URL}/api"
+BACKEND_URL = "https://snow-dash-1.preview.emergentagent.com/api"
 
-class CustomerTestSuite:
+class CommunicationPreferenceTests:
     def __init__(self):
         self.session = requests.Session()
         self.created_customers = []  # Track created customers for cleanup
