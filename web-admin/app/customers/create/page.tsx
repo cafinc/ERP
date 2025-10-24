@@ -21,6 +21,8 @@ import {
   Plus,
   X,
   Smartphone,
+  MessageSquare,
+  Bell,
 } from 'lucide-react';
 
 // Canadian provinces
