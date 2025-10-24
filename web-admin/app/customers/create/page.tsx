@@ -1161,6 +1161,7 @@ export default function CustomerFormPage() {
               {/* Company Form */}
               {customerForm.customer_type === 'company' && (
                 <div>
+                  {/* Company Information */}
                   <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
                     <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center space-x-2">
                       <Building className="w-5 h-5 text-[#3f72af]" />
@@ -1170,7 +1171,7 @@ export default function CustomerFormPage() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="md:col-span-2">
                       <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Company Name *
+                        Legal Business Name *
                       </label>
                       <input
                         type="text"
@@ -1179,9 +1180,41 @@ export default function CustomerFormPage() {
                           setCustomerForm({ ...customerForm, company_name: e.target.value })
                         }
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="ABC Corporation"
+                        placeholder="ABC Corporation Ltd."
                         required
                       />
+                    </div>
+
+                    <div className="md:col-span-2">
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Operating As
+                      </label>
+                      <input
+                        type="text"
+                        value={customerForm.operating_as}
+                        onChange={e =>
+                          setCustomerForm({ ...customerForm, operating_as: e.target.value })
+                        }
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        placeholder="ABC Services"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Office Number *
+                      </label>
+                      <div className="relative">
+                        <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                        <input
+                          type="tel"
+                          value={customerForm.office_number}
+                          onChange={e => setCustomerForm({ ...customerForm, office_number: e.target.value })}
+                          className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                          placeholder="(555) 123-4567"
+                          required
+                        />
+                      </div>
                     </div>
 
                     <div>
@@ -1202,64 +1235,299 @@ export default function CustomerFormPage() {
                         />
                       </div>
                     </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Phone *
-                      </label>
-                      <div className="relative">
-                        <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-                        <input
-                          type="tel"
-                          value={customerForm.phone}
-                          onChange={e => handlePhoneChange('phone', e.target.value)}
-                          className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
-                          placeholder="555-123-4567"
-                          required
-                        />
-                      </div>
-                    </div>
                     </div>
                   </div>
 
-                  {/* Main Contact for Company */}
+                  {/* Company Address */}
                   <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
                     <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center space-x-2">
-                      <User className="w-5 h-5 text-[#3f72af]" />
-                      <span>Main Contact *</span>
+                      <MapPin className="w-5 h-5 text-[#3f72af]" />
+                      <span>Company Address *</span>
                     </h2>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        First Name *
-                      </label>
+                    <div className="md:col-span-2">
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Address *</label>
                       <input
                         type="text"
-                        value={customerForm.main_contact.first_name}
+                        value={customerForm.street_address}
                         onChange={e =>
-                          setCustomerForm({
-                            ...customerForm,
-                            main_contact: {
-                              ...customerForm.main_contact,
-                              first_name: e.target.value,
-                            },
-                          })
+                          setCustomerForm({ ...customerForm, street_address: e.target.value })
                         }
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="John"
+                        placeholder="123 Main Street"
                         required
                       />
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Last Name *
-                      </label>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">City *</label>
                       <input
                         type="text"
-                        value={customerForm.main_contact.last_name}
+                        value={customerForm.city}
                         onChange={e =>
+                          setCustomerForm({ ...customerForm, city: e.target.value })
+                        }
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        placeholder="Calgary"
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Province *</label>
+                      <select
+                        value={customerForm.province}
+                        onChange={e =>
+                          setCustomerForm({ ...customerForm, province: e.target.value })
+                        }
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        required
+                      >
+                        {CANADIAN_PROVINCES.map(prov => (
+                          <option key={prov.code} value={prov.code}>
+                            {prov.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Postal Code *</label>
+                      <input
+                        type="text"
+                        value={customerForm.postal_code}
+                        onChange={e =>
+                          setCustomerForm({ ...customerForm, postal_code: e.target.value })
+                        }
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        placeholder="T2P 1J9"
+                        required
+                      />
+                    </div>
+                    
+                    {/* Billing Address Toggle */}
+                    <div className="md:col-span-2 mt-4">
+                      <div className="flex items-center gap-3">
+                        <button
+                          type="button"
+                          onClick={() => setCustomerForm({ ...customerForm, billing_address_same: !customerForm.billing_address_same })}
+                          className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#3f72af] focus:ring-offset-2 flex-shrink-0 ${
+                            customerForm.billing_address_same ? 'bg-[#3f72af]' : 'bg-gray-200'
+                          }`}
+                        >
+                          <span
+                            className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                              customerForm.billing_address_same ? 'translate-x-6' : 'translate-x-1'
+                            }`}
+                          />
+                        </button>
+                        <label className="text-sm font-medium text-gray-700">
+                          Billing address same as company address
+                        </label>
+                      </div>
+                    </div>
+                    
+                    {/* Billing Address Fields */}
+                    {!customerForm.billing_address_same && (
+                      <>
+                        <div className="md:col-span-2 mt-4">
+                          <h3 className="text-lg font-semibold text-gray-900 mb-3">Billing Address</h3>
+                        </div>
+                        
+                        <div className="md:col-span-2">
+                          <label className="block text-sm font-medium text-gray-700 mb-2">Address *</label>
+                          <input
+                            type="text"
+                            value={customerForm.billing_address.street_address}
+                            onChange={e =>
+                              setCustomerForm({
+                                ...customerForm,
+                                billing_address: { ...customerForm.billing_address, street_address: e.target.value }
+                              })
+                            }
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="456 Billing Street"
+                            required
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">City *</label>
+                          <input
+                            type="text"
+                            value={customerForm.billing_address.city}
+                            onChange={e =>
+                              setCustomerForm({
+                                ...customerForm,
+                                billing_address: { ...customerForm.billing_address, city: e.target.value }
+                              })
+                            }
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="Calgary"
+                            required
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">Province *</label>
+                          <select
+                            value={customerForm.billing_address.province}
+                            onChange={e =>
+                              setCustomerForm({
+                                ...customerForm,
+                                billing_address: { ...customerForm.billing_address, province: e.target.value }
+                              })
+                            }
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            required
+                          >
+                            {CANADIAN_PROVINCES.map(prov => (
+                              <option key={prov.code} value={prov.code}>
+                                {prov.name}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">Postal Code *</label>
+                          <input
+                            type="text"
+                            value={customerForm.billing_address.postal_code}
+                            onChange={e =>
+                              setCustomerForm({
+                                ...customerForm,
+                                billing_address: { ...customerForm.billing_address, postal_code: e.target.value }
+                              })
+                            }
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="T2P 1J9"
+                            required
+                          />
+                        </div>
+                      </>
+                    )}
+                    </div>
+                  </div>
+
+                  {/* Contact Persons */}
+                  <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
+                    <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center space-x-2">
+                      <Users className="w-5 h-5 text-[#3f72af]" />
+                      <span>Contact Persons *</span>
+                    </h2>
+
+                    {/* Same Person Toggle */}
+                    <div className="mb-6">
+                      <div className="flex items-center gap-3">
+                        <button
+                          type="button"
+                          onClick={() => setCustomerForm({ ...customerForm, same_person_all_contacts: !customerForm.same_person_all_contacts })}
+                          className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#3f72af] focus:ring-offset-2 flex-shrink-0 ${
+                            customerForm.same_person_all_contacts ? 'bg-[#3f72af]' : 'bg-gray-200'
+                          }`}
+                        >
+                          <span
+                            className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                              customerForm.same_person_all_contacts ? 'translate-x-6' : 'translate-x-1'
+                            }`}
+                          />
+                        </button>
+                        <label className="text-sm font-medium text-gray-700">
+                          All positions are the same person
+                        </label>
+                      </div>
+                    </div>
+
+                    <div className="space-y-6">
+                      {customerForm.contacts.map((contact, index) => (
+                        <div key={index} className="bg-white shadow-sm rounded-lg p-6 border border-gray-200">
+                          <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                            <User className="w-5 h-5 mr-2 text-[#3f72af]" />
+                            <span>{contact.position}</span>
+                          </h3>
+
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="md:col-span-2">
+                              <label className="block text-sm font-medium text-gray-700 mb-2">
+                                Name {index === 0 || !customerForm.same_person_all_contacts ? '*' : ''}
+                              </label>
+                              <input
+                                type="text"
+                                value={contact.name}
+                                onChange={e => {
+                                  const newContacts = [...customerForm.contacts];
+                                  newContacts[index].name = e.target.value;
+                                  if (customerForm.same_person_all_contacts && index === 0) {
+                                    newContacts[1].name = e.target.value;
+                                    newContacts[2].name = e.target.value;
+                                  }
+                                  setCustomerForm({ ...customerForm, contacts: newContacts });
+                                }}
+                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                placeholder="John Doe"
+                                required={index === 0 || !customerForm.same_person_all_contacts}
+                                disabled={customerForm.same_person_all_contacts && index !== 0}
+                              />
+                            </div>
+
+                            <div>
+                              <label className="block text-sm font-medium text-gray-700 mb-2">
+                                Email {index === 0 || !customerForm.same_person_all_contacts ? '*' : ''}
+                              </label>
+                              <div className="relative">
+                                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                                <input
+                                  type="email"
+                                  value={contact.email}
+                                  onChange={e => {
+                                    const newContacts = [...customerForm.contacts];
+                                    newContacts[index].email = e.target.value;
+                                    if (customerForm.same_person_all_contacts && index === 0) {
+                                      newContacts[1].email = e.target.value;
+                                      newContacts[2].email = e.target.value;
+                                    }
+                                    setCustomerForm({ ...customerForm, contacts: newContacts });
+                                  }}
+                                  className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                                  placeholder="john@company.com"
+                                  required={index === 0 || !customerForm.same_person_all_contacts}
+                                  disabled={customerForm.same_person_all_contacts && index !== 0}
+                                />
+                              </div>
+                            </div>
+
+                            <div>
+                              <label className="block text-sm font-medium text-gray-700 mb-2">
+                                Phone {index === 0 || !customerForm.same_person_all_contacts ? '*' : ''}
+                              </label>
+                              <div className="relative">
+                                <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                                <input
+                                  type="tel"
+                                  value={contact.phone}
+                                  onChange={e => {
+                                    const newContacts = [...customerForm.contacts];
+                                    newContacts[index].phone = e.target.value;
+                                    if (customerForm.same_person_all_contacts && index === 0) {
+                                      newContacts[1].phone = e.target.value;
+                                      newContacts[2].phone = e.target.value;
+                                    }
+                                    setCustomerForm({ ...customerForm, contacts: newContacts });
+                                  }}
+                                  className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                                  placeholder="(555) 123-4567"
+                                  required={index === 0 || !customerForm.same_person_all_contacts}
+                                  disabled={customerForm.same_person_all_contacts && index !== 0}
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                           setCustomerForm({
                             ...customerForm,
                             main_contact: {
