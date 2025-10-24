@@ -64,6 +64,8 @@ import {
   User,
   Palette,
   Link2,
+  Briefcase,
+  ShoppingCart,
 } from 'lucide-react';
 import { useState } from 'react';
 import CallPopup from './CallPopup';
