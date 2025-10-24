@@ -174,7 +174,8 @@ export default function CustomerFormPage() {
         if (types.includes('route')) {
           street += component.long_name;
         }
-        if (types.includes('locality')) {
+        // Check multiple possible city types
+        if (types.includes('locality') || types.includes('postal_town') || types.includes('sublocality_level_1')) {
           city = component.long_name;
         }
         if (types.includes('administrative_area_level_1')) {
@@ -185,11 +186,14 @@ export default function CustomerFormPage() {
         }
       });
 
+      // Log for debugging
+      console.log('Google Places autocomplete result:', { street, city, province, postalCode });
+
       setCustomerForm(prev => ({
         ...prev,
         street_address: street,
-        city,
-        province,
+        city: city,
+        province: province,
         postal_code: postalCode,
       }));
     });
