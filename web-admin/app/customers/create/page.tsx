@@ -335,6 +335,18 @@ export default function CustomerFormPage() {
       }
     }
 
+    // Mobile validation (required if SMS communication preference)
+    if (customerForm.communication_preference === 'sms') {
+      if (!customerForm.mobile) {
+        errors['mobile'] = 'Mobile number is required for SMS communication';
+      } else {
+        const cleaned = customerForm.mobile.replace(/\D/g, '');
+        if (cleaned.length !== 10) {
+          errors['mobile'] = 'Mobile must be 10 digits';
+        }
+      }
+    }
+
     // Set all errors at once
     if (Object.keys(errors).length > 0) {
       setFieldErrors(errors);
