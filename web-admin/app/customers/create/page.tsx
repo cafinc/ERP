@@ -1644,31 +1644,55 @@ export default function CustomerFormPage() {
                       </select>
                     </div>
 
-                    {/* Credit Limit Toggle */}
+                    {/* Credit Limit Toggle and PO Required on same line */}
                     <div className="md:col-span-2">
-                      <div className="flex items-center gap-3 mb-2">
-                        <button
-                          type="button"
-                          onClick={() => setCustomerForm({
-                            ...customerForm,
-                            accounting: {
-                              ...customerForm.accounting,
-                              credit_limit_enabled: !customerForm.accounting.credit_limit_enabled
-                            }
-                          })}
-                          className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#3f72af] focus:ring-offset-2 flex-shrink-0 ${
-                            customerForm.accounting.credit_limit_enabled ? 'bg-[#3f72af]' : 'bg-gray-200'
-                          }`}
-                        >
-                          <span
-                            className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                              customerForm.accounting.credit_limit_enabled ? 'translate-x-6' : 'translate-x-1'
+                      <div className="flex items-center gap-6">
+                        {/* Credit Limit Toggle */}
+                        <div className="flex items-center gap-3">
+                          <button
+                            type="button"
+                            onClick={() => setCustomerForm({
+                              ...customerForm,
+                              accounting: {
+                                ...customerForm.accounting,
+                                credit_limit_enabled: !customerForm.accounting.credit_limit_enabled
+                              }
+                            })}
+                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#3f72af] focus:ring-offset-2 flex-shrink-0 ${
+                              customerForm.accounting.credit_limit_enabled ? 'bg-[#3f72af]' : 'bg-gray-200'
                             }`}
+                          >
+                            <span
+                              className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                                customerForm.accounting.credit_limit_enabled ? 'translate-x-6' : 'translate-x-1'
+                              }`}
+                            />
+                          </button>
+                          <label className="text-sm font-medium text-gray-700">
+                            Set Credit Limit
+                          </label>
+                        </div>
+
+                        {/* Purchase Order Required */}
+                        <div className="flex items-center gap-3">
+                          <input
+                            type="checkbox"
+                            checked={customerForm.accounting.po_required}
+                            onChange={e =>
+                              setCustomerForm({
+                                ...customerForm,
+                                accounting: {
+                                  ...customerForm.accounting,
+                                  po_required: e.target.checked,
+                                },
+                              })
+                            }
+                            className="w-5 h-5 text-[#3f72af] rounded focus:ring-blue-500"
                           />
-                        </button>
-                        <label className="text-sm font-medium text-gray-700">
-                          Set Credit Limit
-                        </label>
+                          <label className="text-sm font-medium text-gray-700">
+                            Purchase Order Required
+                          </label>
+                        </div>
                       </div>
                     </div>
 
@@ -1721,28 +1745,6 @@ export default function CustomerFormPage() {
                         <option value="credit_card">Credit Card</option>
                         <option value="bank_transfer">Bank Transfer</option>
                       </select>
-                    </div>
-
-                    <div className="md:col-span-2">
-                      <label className="flex items-center space-x-2 cursor-pointer">
-                        <input
-                          type="checkbox"
-                          checked={customerForm.accounting.po_required}
-                          onChange={e =>
-                            setCustomerForm({
-                              ...customerForm,
-                              accounting: {
-                                ...customerForm.accounting,
-                                po_required: e.target.checked,
-                              },
-                            })
-                          }
-                          className="w-5 h-5 text-[#3f72af] rounded focus:ring-blue-500"
-                        />
-                        <span className="text-sm font-medium text-gray-700">
-                          Purchase Order Required
-                        </span>
-                      </label>
                     </div>
                   </div>
                 </div>
