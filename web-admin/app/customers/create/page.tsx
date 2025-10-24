@@ -178,28 +178,55 @@ export default function CustomerFormPage() {
       let province = 'AB';
       let postalCode = '';
 
+      // Log all components for debugging
+      console.log('Google Places - All address components:', place.address_components);
+
       place.address_components.forEach((component: any) => {
         const types = component.types;
+        
+        // Street number
         if (types.includes('street_number')) {
           street = component.long_name + ' ';
         }
+        
+        // Street name
         if (types.includes('route')) {
           street += component.long_name;
         }
-        // Check multiple possible city types
-        if (types.includes('locality') || types.includes('postal_town') || types.includes('sublocality_level_1')) {
-          city = component.long_name;
+        
+        // City - check multiple possible types in priority order
+        if (!city) {
+          if (types.includes('locality')) {
+            city = component.long_name;
+          } else if (types.includes('sublocality')) {
+            city = component.long_name;
+          } else if (types.includes('sublocality_level_1')) {
+            city = component.long_name;
+          } else if (types.includes('postal_town')) {
+            city = component.long_name;
+          } else if (types.includes('administrative_area_level_3')) {
+            city = component.long_name;
+          }
         }
+        
+        // Province
         if (types.includes('administrative_area_level_1')) {
           province = component.short_name;
         }
+        
+        // Postal code
         if (types.includes('postal_code')) {
           postalCode = component.long_name;
         }
       });
 
-      // Log for debugging
-      console.log('Google Places autocomplete result:', { street, city, province, postalCode });
+      // Fallback: if city is still empty, try to extract from formatted address
+      if (!city && place.formatted_address) {
+        console.log('City not found in components, trying to extract from formatted address:', place.formatted_address);
+      }
+
+      // Log final extracted values
+      console.log('Google Places - Extracted values:', { street, city, province, postalCode });
 
       setCustomerForm(prev => ({
         ...prev,
