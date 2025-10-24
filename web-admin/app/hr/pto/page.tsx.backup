@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import PageHeader from '@/components/PageHeader';
+import CompactHeader from "@/components/CompactHeader";
 import {
   Calendar,
   CheckCircle,
@@ -168,7 +168,7 @@ export default function PTOManagementPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <PageHeader title="PTO Management" backUrl="/hr" />
+      <CompactHeader title="PTO Management" backUrl="/hr" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Stats Cards */}

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import PageHeader from '@/components/PageHeader';
+import CompactHeader from "@/components/CompactHeader";
 import {
   Award,
   BookOpen,
@@ -208,7 +208,7 @@ export default function TrainingPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <PageHeader title="Training & Certifications" backUrl="/hr" />
+      <CompactHeader title="Training & Certifications" backUrl="/hr" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Stats Cards */}

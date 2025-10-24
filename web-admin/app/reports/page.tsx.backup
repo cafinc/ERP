@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import PageHeader from '@/components/PageHeader';
+import CompactHeader from '@/components/CompactHeader';
 import api from '@/lib/api';
 import {
   FileText,
@@ -139,7 +139,7 @@ export default function ReportsPage() {
   return (
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
         {/* Compact Header */}
-        <PageHeader
+        <CompactHeader
           title="Automated Reports"
           icon={FileText}
           badges={[
