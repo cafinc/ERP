@@ -80,16 +80,18 @@ export default function CustomerEditPage() {
 
   if (loading) {
     return (
-      <PageHeader
-        title="Edit [Id]"
-        subtitle="Update information"
-        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Customers", href: "/customers" }, { label: "Details" }]}
-      />
-      <div className="flex-1 overflow-auto p-6">
-        <div className="flex items-center justify-center h-full">
-          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
+      <>
+        <PageHeader
+          title="Edit Customer"
+          subtitle="Update customer information"
+          breadcrumbs={[{ label: "Home", href: "/" }, { label: "Customers", href: "/customers" }, { label: "Edit" }]}
+        />
+        <div className="flex-1 overflow-auto p-6">
+          <div className="flex items-center justify-center h-full">
+            <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 
