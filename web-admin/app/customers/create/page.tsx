@@ -2107,7 +2107,7 @@ export default function CustomerFormPage() {
                     type="text"
                     value={customerForm.country}
                     onChange={e => setCustomerForm({ ...customerForm, country: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50"
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-gray-50 font-semibold transition-all"
                     placeholder="Canada"
                     readOnly
                     required
@@ -2115,7 +2115,7 @@ export default function CustomerFormPage() {
                 </div>
               </div>
             </div>
-            )}
+            </div>
 
             {/* Additional Notes */}
             <div className="bg-white/95 backdrop-blur-md rounded-3xl shadow-xl border border-white/40 overflow-hidden hover:shadow-2xl transition-shadow">
