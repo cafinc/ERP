@@ -146,7 +146,7 @@ index 94af161..e69de29 100644
 ----------------------+from typing import Dict, List, Any
 ----------------------+
 ----------------------+# Backend URL from frontend/.env
-----------------------+BACKEND_URL = "https://client-hub-48.preview.emergentagent.com/api"
+----------------------+BACKEND_URL = "https://admin-dash-restore.preview.emergentagent.com/api"
 ----------------------+
 ----------------------+class HRModuleTester:
 ----------------------+    def __init__(self):
@@ -743,7 +743,7 @@ index 94af161..e69de29 100644
 ----------------------+from typing import Dict, List, Any
 ----------------------+
 ----------------------+# Backend URL from frontend/.env
-----------------------+BACKEND_URL = "https://client-hub-48.preview.emergentagent.com/api"
+----------------------+BACKEND_URL = "https://admin-dash-restore.preview.emergentagent.com/api"
 ----------------------+
 ----------------------+class HRComprehensiveTester:
 ----------------------+    def __init__(self):
@@ -1935,7 +1935,7 @@ index 94af161..e69de29 100644
 -------------------------------------------------------------------+import traceback
 -------------------------------------------------------------------+
 -------------------------------------------------------------------+# Backend URL from frontend environment
--------------------------------------------------------------------+BACKEND_URL = "https://client-hub-48.preview.emergentagent.com/api"
+-------------------------------------------------------------------+BACKEND_URL = "https://admin-dash-restore.preview.emergentagent.com/api"
 -------------------------------------------------------------------+
 -------------------------------------------------------------------+class SiteMapsTestSuite:
 -------------------------------------------------------------------+    def __init__(self):
