@@ -912,6 +912,38 @@ export default function CreateSitePage() {
                     </option>
                   ))}
                 </select>
+                
+                {/* No services available message */}
+                {services.length === 0 && (
+                  <div className="mt-3 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+                    <p className="text-sm text-yellow-800 font-medium mb-2">No services available</p>
+                    <p className="text-xs text-yellow-700 mb-3">You need to create services first before assigning them to a site.</p>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        window.open('/services', '_blank');
+                      }}
+                      className="flex items-center gap-2 px-3 py-1.5 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors text-sm font-medium"
+                    >
+                      <Plus className="w-4 h-4" />
+                      Create Service (Opens in new tab)
+                    </button>
+                  </div>
+                )}
+                
+                {/* Link to services page */}
+                {services.length > 0 && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      window.open('/services', '_blank');
+                    }}
+                    className="mt-2 text-sm text-[#3f72af] hover:underline flex items-center gap-1"
+                  >
+                    <Plus className="w-3.5 h-3.5" />
+                    Create a new service
+                  </button>
+                )}
               </div>
 
               {/* Unit Type */}
