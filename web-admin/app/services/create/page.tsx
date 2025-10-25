@@ -311,6 +311,7 @@ export default function ServiceFormPage() {
           </button>
         </div>
       </form>
-    </div>
+      </div>
+    </>
   );
 }
