@@ -93,6 +93,12 @@ export default function CreateSitePage() {
   const [areaSize, setAreaSize] = useState('');
   const [internalNotes, setInternalNotes] = useState('');
   const [crewNotes, setCrewNotes] = useState('');
+  const [hasGateCode, setHasGateCode] = useState(false);
+  const [gateCode, setGateCode] = useState('');
+  const [hasLockbox, setHasLockbox] = useState(false);
+  const [lockboxCode, setLockboxCode] = useState('');
+  const [hasSecurityOnsite, setHasSecurityOnsite] = useState(false);
+  const [securityPhone, setSecurityPhone] = useState('');
   const [siteServices, setSiteServices] = useState<SiteService[]>([]);
   const [showManualCoordinates, setShowManualCoordinates] = useState(false);
 
