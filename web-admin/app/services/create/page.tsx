@@ -105,7 +105,7 @@ export default function ServiceFormPage() {
     e.preventDefault();
     
     if (!formData.name || !formData.service_type) {
-      alert('Please fill in all required fields');
+      toast.error('Please fill in all required fields');
       return;
     }
 
@@ -117,22 +117,25 @@ export default function ServiceFormPage() {
       }
     });
 
+    setSaving(true);
+    const loadingToast = toast.loading(isEdit ? 'Updating service...' : 'Creating service...');
+
     try {
-      setSaving(true);
       const payload = { ...formData, pricing };
       
       if (isEdit) {
         await api.put(`/services/${serviceId}`, payload);
-        alert('Service updated successfully!');
-        router.push('/services');
+        toast.success('Service updated successfully!', { id: loadingToast });
+        setTimeout(() => router.push('/services'), 1000);
       } else {
         await api.post('/services', payload);
-        alert('Service created successfully!');
-        router.push('/services');
+        toast.success('Service created successfully!', { id: loadingToast });
+        setTimeout(() => router.push('/services'), 1000);
       }
     } catch (error: any) {
       console.error('Error saving service:', error);
-      alert(error?.response?.data?.detail || 'Failed to save service');
+      const errorMessage = error?.response?.data?.detail || 'Failed to save service';
+      toast.error(errorMessage, { id: loadingToast });
     } finally {
       setSaving(false);
     }
