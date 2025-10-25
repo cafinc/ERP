@@ -30,7 +30,6 @@ const SERVICE_TYPES = [
   { value: 'call_back', label: 'Call Back', icon: '📞', color: 'text-purple-600' },
   { value: 'plowing', label: 'Plowing', icon: '❄️', color: 'text-blue-700' },
   { value: 'sanding', label: 'Sanding', icon: '⚪', color: 'text-yellow-700' },
-  { value: 'salting', label: 'Salting', icon: '🧂', color: 'text-gray-600' },
   { value: 'brining', label: 'Brining', icon: '💧', color: 'text-cyan-600' },
   { value: 'hauling', label: 'Hauling', icon: '🚛', color: 'text-orange-600' },
 ];
