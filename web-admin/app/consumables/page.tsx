@@ -52,7 +52,7 @@ export default function ConsumablesPage() {
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
-    unit: 'tons',
+    unit: 'bags',
     current_stock: 0,
     min_stock_level: 0,
     unit_cost: 0,
