@@ -73,6 +73,10 @@ export default function CustomerDetailPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const [linkingContact, setLinkingContact] = useState(false);
+  
+  // Archive Modal
+  const [showArchiveModal, setShowArchiveModal] = useState(false);
+  const [archiving, setArchiving] = useState(false);
 
   // Attach Form Modal
   const [showAttachFormModal, setShowAttachFormModal] = useState(false);
