@@ -813,7 +813,7 @@ export default function LeadsPage() {
           )}
 
           {/* List View */}
-          {view === 'list' && (
+          {viewMode === 'list' && (
             <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
               {filteredLeads.length === 0 ? (
                 <div className="p-12 text-center">
