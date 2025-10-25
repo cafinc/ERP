@@ -74,8 +74,6 @@ export default function UnifiedCommunicationsCenter() {
   const [replyText, setReplyText] = useState('');
   const [replySubject, setReplySubject] = useState('');
   const [sending, setSending] = useState(false);
-  const [quickComposeText, setQuickComposeText] = useState('');
-  const [quickComposeType, setQuickComposeType] = useState<'inapp' | 'sms' | 'email' | 'phone'>('inapp');
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
