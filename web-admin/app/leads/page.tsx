@@ -682,36 +682,22 @@ export default function LeadsPage() {
                 const Icon = config.icon;
                 const totalValue = statusLeads.reduce((sum, l) => sum + (l.estimated_value || 0), 0);
 
-                // Define color schemes matching the button styles
-                const colorSchemes = {
-                  new: { bg: 'bg-blue-500', text: 'text-blue-500', shadow: 'shadow-blue-500/30' },
-                  contacted: { bg: 'bg-yellow-500', text: 'text-yellow-500', shadow: 'shadow-yellow-500/30' },
-                  qualified: { bg: 'bg-purple-500', text: 'text-purple-500', shadow: 'shadow-purple-500/30' },
-                  proposal_sent: { bg: 'bg-indigo-500', text: 'text-indigo-500', shadow: 'shadow-indigo-500/30' },
-                };
-
-                const colors = colorSchemes[status];
-
                 return (
-                  <div key={status} className="bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-shadow overflow-hidden">
-                    {/* Column Header - Matching Button Style */}
-                    <div className={`p-4 ${colors.bg} shadow-lg ${colors.shadow}`}>
+                  <div key={status} className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
+                    <div className={`p-4 border-b border-gray-200 bg-${config.color}-50`}>
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
-                          <Icon className="w-5 h-5 text-white" />
-                          <h3 className="font-semibold text-white">{config.label}</h3>
+                          <Icon className={`w-5 h-5 text-${config.color}-600`} />
+                          <h3 className="font-semibold text-gray-900">{config.label}</h3>
                         </div>
-                        <span className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-xs font-bold text-white">
+                        <span className="px-2 py-0.5 bg-white rounded-full text-xs font-medium text-gray-700">
                           {statusLeads.length}
                         </span>
                       </div>
                       {totalValue > 0 && (
-                        <div className="flex items-center gap-1 mt-2">
-                          <DollarSign className="w-3.5 h-3.5 text-white/90" />
-                          <p className="text-sm font-medium text-white/90">
-                            ${(totalValue / 1000).toFixed(1)}k value
-                          </p>
-                        </div>
+                        <p className="text-xs text-gray-600 mt-2">
+                          ${(totalValue / 1000).toFixed(1)}k value
+                        </p>
                       )}
                     </div>
 
