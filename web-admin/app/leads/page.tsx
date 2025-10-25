@@ -398,13 +398,30 @@ export default function LeadsPage() {
         <div className="max-w-7xl mx-auto">
           {/* Compact Header */}
           <PageHeader
-        title="Leads"
-        subtitle="Track and convert potential customers"
-        breadcrumbs={[{ label: "Home", href: "/" }, { label: "CRM", href: "/crm/dashboard" }, { label: "Leads" }]}
-        title="Lead Management"
+            title="Lead Management"
             subtitle="Track and convert potential customers"
             backUrl="/customers"
-          actions={[
+            stats={[
+              {
+                label: 'Conversion Rate',
+                value: `${stats.conversionRate}%`,
+                icon: <TrendingUp className="w-4 h-4" />,
+                trend: `${stats.won} won`,
+              },
+              {
+                label: 'Pipeline Value',
+                value: `$${(stats.totalValue / 1000).toFixed(1)}k`,
+                icon: <DollarSign className="w-4 h-4" />,
+                trend: 'Total potential',
+              },
+              {
+                label: 'Won Value',
+                value: `$${(stats.wonValue / 1000).toFixed(1)}k`,
+                icon: <CheckCircle className="w-4 h-4" />,
+                trend: 'Converted',
+              },
+            ]}
+            actions={[
               {
                 label: 'Export',
                 icon: <Download className="w-4 h-4 mr-2" />,
@@ -423,63 +440,67 @@ export default function LeadsPage() {
             ]}
           />
 
-          {/* Stats Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
-            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-medium text-gray-600">Total Leads</p>
-                  <p className="text-3xl font-bold text-gray-900 mt-2">{stats.total}</p>
-                  <p className="text-xs text-gray-500 mt-1">{stats.active} active</p>
-                </div>
-                <div className="p-3 bg-blue-100 rounded-lg">
-                  <Users className="w-6 h-6 text-[#3f72af]" />
-                </div>
-              </div>
-            </div>
+          {/* Status Filter Buttons */}
+          <div className="mb-4 flex items-center gap-3">
+            <button
+              onClick={() => setStatusFilter('new')}
+              className={`px-4 py-2.5 rounded-xl font-semibold transition-all text-sm flex items-center gap-2 ${
+                statusFilter === 'new'
+                  ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30'
+                  : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-blue-500 hover:text-blue-500'
+              }`}
+            >
+              <div className={`w-2 h-2 rounded-full ${statusFilter === 'new' ? 'bg-white' : 'bg-blue-500'}`} />
+              New
+              <span className={`px-2 py-0.5 rounded-full text-xs font-bold ${
+                statusFilter === 'new' ? 'bg-white/20 text-white' : 'bg-blue-100 text-blue-600'
+              }`}>
+                {leads.filter(l => l.status === 'new').length}
+              </span>
+            </button>
 
-            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-medium text-gray-600">Conversion Rate</p>
-                  <p className="text-3xl font-bold text-green-600 mt-2">{stats.conversionRate}%</p>
-                  <p className="text-xs text-gray-500 mt-1">{stats.won} won</p>
-                </div>
-                <div className="p-3 bg-green-100 rounded-lg">
-                  <TrendingUp className="w-6 h-6 text-green-600" />
-                </div>
-              </div>
-            </div>
+            <button
+              onClick={() => setStatusFilter('contacted')}
+              className={`px-4 py-2.5 rounded-xl font-semibold transition-all text-sm flex items-center gap-2 ${
+                statusFilter === 'contacted'
+                  ? 'bg-yellow-500 text-white shadow-lg shadow-yellow-500/30'
+                  : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-yellow-500 hover:text-yellow-500'
+              }`}
+            >
+              <div className={`w-2 h-2 rounded-full ${statusFilter === 'contacted' ? 'bg-white' : 'bg-yellow-500'}`} />
+              Contacted
+              <span className={`px-2 py-0.5 rounded-full text-xs font-bold ${
+                statusFilter === 'contacted' ? 'bg-white/20 text-white' : 'bg-yellow-100 text-yellow-600'
+              }`}>
+                {leads.filter(l => l.status === 'contacted').length}
+              </span>
+            </button>
 
-            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-medium text-gray-600">Pipeline Value</p>
-                  <p className="text-3xl font-bold text-[#3f72af] mt-2">
-                    ${(stats.totalValue / 1000).toFixed(1)}k
-                  </p>
-                  <p className="text-xs text-gray-500 mt-1">Total potential</p>
-                </div>
-                <div className="p-3 bg-blue-100 rounded-lg">
-                  <DollarSign className="w-6 h-6 text-[#3f72af]" />
-                </div>
-              </div>
-            </div>
+            <button
+              onClick={() => setStatusFilter('won')}
+              className={`px-4 py-2.5 rounded-xl font-semibold transition-all text-sm flex items-center gap-2 ${
+                statusFilter === 'won'
+                  ? 'bg-green-500 text-white shadow-lg shadow-green-500/30'
+                  : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-green-500 hover:text-green-500'
+              }`}
+            >
+              <div className={`w-2 h-2 rounded-full ${statusFilter === 'won' ? 'bg-white' : 'bg-green-500'}`} />
+              Converted
+              <span className={`px-2 py-0.5 rounded-full text-xs font-bold ${
+                statusFilter === 'won' ? 'bg-white/20 text-white' : 'bg-green-100 text-green-600'
+              }`}>
+                {leads.filter(l => l.status === 'won').length}
+              </span>
+            </button>
 
-            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-medium text-gray-600">Won Value</p>
-                  <p className="text-3xl font-bold text-green-600 mt-2">
-                    ${(stats.wonValue / 1000).toFixed(1)}k
-                  </p>
-                  <p className="text-xs text-gray-500 mt-1">Converted</p>
-                </div>
-                <div className="p-3 bg-green-100 rounded-lg">
-                  <CheckCircle className="w-6 h-6 text-green-600" />
-                </div>
-              </div>
-            </div>
+            {statusFilter !== 'all' && (
+              <button
+                onClick={() => setStatusFilter('all')}
+                className="px-4 py-2.5 rounded-xl font-semibold transition-all text-sm text-gray-500 hover:text-gray-700 underline"
+              >
+                Clear Filter
+              </button>
+            )}
           </div>
 
           {/* View Toggle */}
