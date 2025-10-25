@@ -143,13 +143,16 @@ export default function ServicesPage() {
   const handleDelete = async (id: string) => {
     if (!confirm('Delete this service? This action cannot be undone.')) return;
     
+    const loadingToast = toast.loading('Deleting service...');
+    
     try {
       await api.delete(`/services/${id}`);
-      alert('Service deleted successfully!');
+      toast.success('Service deleted successfully!', { id: loadingToast });
       loadServices();
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error deleting service:', error);
-      alert('Failed to delete service');
+      const errorMessage = error?.response?.data?.detail || 'Failed to delete service';
+      toast.error(errorMessage, { id: loadingToast });
     }
   };
 
