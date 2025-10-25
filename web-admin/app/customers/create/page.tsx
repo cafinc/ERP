@@ -938,53 +938,18 @@ export default function CustomerFormPage() {
 
   return (
     <>
-      {/* Modern Header with Gradient */}
-      <div className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white shadow-lg">
-        <div className="max-w-4xl mx-auto px-6 py-6">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <button
-                onClick={() => router.back()}
-                className="p-2 hover:bg-white/10 rounded-lg transition-colors"
-              >
-                <ArrowLeft className="w-5 h-5" />
-              </button>
-              <div>
-                <h1 className="text-2xl font-bold">{isEdit ? 'Edit Customer' : 'New Customer'}</h1>
-                <p className="text-blue-100 text-sm">
-                  {isEdit ? 'Update customer information' : 'Add a new customer to your system'}
-                </p>
-              </div>
-            </div>
-            <button
-              type="submit"
-              form="customer-form"
-              disabled={saving}
-              className="flex items-center gap-2 px-6 py-3 bg-white text-blue-600 rounded-lg font-semibold hover:bg-blue-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg hover:shadow-xl"
-            >
-              {saving ? (
-                <>
-                  <svg className="animate-spin h-5 w-5" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                  </svg>
-                  <span>Saving...</span>
-                </>
-              ) : (
-                <>
-                  <Save className="w-5 h-5" />
-                  <span>{isEdit ? 'Update' : 'Create'} Customer</span>
-                </>
-              )}
-            </button>
-          </div>
-        </div>
-      </div>
+      <PageHeader
+        title={isEdit ? 'Edit Customer' : 'Create Customer'}
+        subtitle={isEdit ? 'Update customer information' : 'Add a new customer to your system'}
+        breadcrumbs={[
+          { label: 'Home', href: '/' },
+          { label: 'Customers', href: '/customers' },
+          { label: isEdit ? 'Edit' : 'Create' },
+        ]}
+      />
 
-      {/* Main Content - Modern Card Layout */}
-      <div className="flex-1 bg-gradient-to-br from-gray-50 to-blue-50/30 overflow-y-auto">
-        <div className="max-w-4xl mx-auto p-6">
-          <form id="customer-form" onSubmit={handleSubmit} className="space-y-6 pb-8">
+      <div className="max-w-4xl mx-auto p-6">
+        <form id="customer-form" onSubmit={handleSubmit} className="space-y-6 pb-8">
               {/* Customer Type Selection - Enhanced Design */}
               {!isEdit && (
                 <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 hover:shadow-2xl transition-all">
