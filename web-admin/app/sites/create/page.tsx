@@ -29,6 +29,18 @@ import {
 
 const SITE_TYPES = ['residential', 'commercial', 'industrial', 'retail', 'emergency_services'];
 
+// Helper function to get icon for each site type
+const getSiteTypeIcon = (type: string) => {
+  const icons: Record<string, JSX.Element> = {
+    residential: <Home className="w-5 h-5" />,
+    commercial: <Building className="w-5 h-5" />,
+    industrial: <Factory className="w-5 h-5" />,
+    retail: <ShoppingBag className="w-5 h-5" />,
+    emergency_services: <Siren className="w-5 h-5" />,
+  };
+  return icons[type] || <Building2 className="w-5 h-5" />;
+};
+
 interface Customer {
   _id: string;
   id?: string;
