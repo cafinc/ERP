@@ -9,8 +9,8 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import { Colors } from '../../utils/theme';
-import { useAuth } from '../../contexts/AuthContext';
+import { Colors } from '../utils/theme';
+import { useAuth } from '../contexts/AuthContext';
 
 interface MenuItem {
   title: string;
