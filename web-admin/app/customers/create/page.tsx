@@ -1517,14 +1517,17 @@ export default function CustomerFormPage() {
 
                   {/* Contact Persons */}
                   <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center space-x-2">
-                      <Users className="w-5 h-5 text-[#3f72af]" />
-                      <span>Contact Persons *</span>
-                    </h2>
-
-                    {/* Same Person Toggle */}
-                    <div className="mb-6">
+                    <div className="flex items-center justify-between mb-6">
+                      <h2 className="text-2xl font-bold text-gray-900 flex items-center space-x-2">
+                        <Users className="w-5 h-5 text-[#3f72af]" />
+                        <span>Contact Persons *</span>
+                      </h2>
+                      
+                      {/* Owner/Operator Toggle */}
                       <div className="flex items-center gap-3">
+                        <label className="text-sm font-medium text-gray-700">
+                          Owner/Operator
+                        </label>
                         <button
                           type="button"
                           onClick={() => setCustomerForm({ ...customerForm, same_person_all_contacts: !customerForm.same_person_all_contacts })}
@@ -1538,112 +1541,115 @@ export default function CustomerFormPage() {
                             }`}
                           />
                         </button>
-                        <label className="text-sm font-medium text-gray-700">
-                          All positions are the same person
-                        </label>
                       </div>
                     </div>
 
                     <div className="space-y-4">
-                      {customerForm.contacts.map((contact, index) => (
-                        <div key={index} className="bg-white shadow-sm rounded-lg p-4 border border-gray-200">
-                          <div className="grid grid-cols-12 gap-3 items-start">
-                            {/* Position Label */}
-                            <div className="col-span-12 md:col-span-2 flex items-center">
-                              <div className="flex items-center gap-2">
-                                <User className="w-4 h-4 text-[#3f72af]" />
-                                <span className="text-sm font-semibold text-gray-900">{contact.position}</span>
+                      {customerForm.contacts.map((contact, index) => {
+                        // Hide Accounting and Supervisor when Owner/Operator is toggled
+                        if (customerForm.same_person_all_contacts && index > 0) {
+                          return null;
+                        }
+                        
+                        return (
+                          <div key={index} className="bg-white shadow-sm rounded-lg p-4 border border-gray-200">
+                            <div className="grid grid-cols-12 gap-3 items-start">
+                              {/* Position Label */}
+                              <div className="col-span-12 md:col-span-2 flex items-center">
+                                <div className="flex items-center gap-2">
+                                  <User className="w-4 h-4 text-[#3f72af]" />
+                                  <span className="text-sm font-semibold text-gray-900">
+                                    {customerForm.same_person_all_contacts && index === 0 ? 'Owner' : contact.position}
+                                  </span>
+                                </div>
                               </div>
-                            </div>
 
-                            {/* Name Field */}
-                            <div className="col-span-12 md:col-span-3">
-                              <label className="block text-xs font-medium text-gray-700 mb-1">
-                                Name {index === 0 || !customerForm.same_person_all_contacts ? '*' : ''}
-                              </label>
-                              <input
-                                type="text"
-                                value={contact.name}
-                                onChange={e => {
-                                  const newContacts = [...customerForm.contacts];
-                                  newContacts[index].name = e.target.value;
-                                  if (customerForm.same_person_all_contacts && index === 0) {
-                                    newContacts[1].name = e.target.value;
-                                    newContacts[2].name = e.target.value;
-                                  }
-                                  setCustomerForm({ ...customerForm, contacts: newContacts });
-                                }}
-                                className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:border-transparent ${
-                                  fieldErrors[`contact_${index}_name`] ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'
-                                }`}
-                                placeholder="John Doe"
-                                required={index === 0 || !customerForm.same_person_all_contacts}
-                                disabled={customerForm.same_person_all_contacts && index !== 0}
-                              />
-                              {fieldErrors[`contact_${index}_name`] && (
-                                <p className="text-red-500 text-xs mt-1">{fieldErrors[`contact_${index}_name`]}</p>
-                              )}
-                            </div>
-
-                            {/* Phone Field */}
-                            <div className="col-span-12 md:col-span-3">
-                              <label className="block text-xs font-medium text-gray-700 mb-1">
-                                Phone {index === 0 || !customerForm.same_person_all_contacts ? '*' : ''}
-                              </label>
-                              <div className="relative">
-                                <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                              {/* Name Field */}
+                              <div className="col-span-12 md:col-span-3">
+                                <label className="block text-xs font-medium text-gray-700 mb-1">
+                                  Name *
+                                </label>
                                 <input
-                                  type="tel"
-                                  value={contact.phone}
-                                  onChange={e => handleContactPhoneChange(index, e.target.value)}
-                                  className={`w-full pl-9 pr-3 py-2 border rounded-lg focus:ring-2 focus:border-transparent ${
-                                    fieldErrors[`contact_${index}_phone`] ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'
-                                  }`}
-                                  placeholder="(555) 123-4567"
-                                  required={index === 0 || !customerForm.same_person_all_contacts}
-                                  disabled={customerForm.same_person_all_contacts && index !== 0}
-                                />
-                              </div>
-                              {fieldErrors[`contact_${index}_phone`] && (
-                                <p className="text-red-500 text-xs mt-1">{fieldErrors[`contact_${index}_phone`]}</p>
-                              )}
-                            </div>
-
-                            {/* Email Field */}
-                            <div className="col-span-12 md:col-span-4">
-                              <label className="block text-xs font-medium text-gray-700 mb-1">
-                                Email {index === 0 || !customerForm.same_person_all_contacts ? '*' : ''}
-                              </label>
-                              <div className="relative">
-                                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
-                                <input
-                                  type="email"
-                                  value={contact.email}
+                                  type="text"
+                                  value={contact.name}
                                   onChange={e => {
                                     const newContacts = [...customerForm.contacts];
-                                    newContacts[index].email = e.target.value;
+                                    newContacts[index].name = e.target.value;
                                     if (customerForm.same_person_all_contacts && index === 0) {
-                                      newContacts[1].email = e.target.value;
-                                      newContacts[2].email = e.target.value;
+                                      newContacts[1].name = e.target.value;
+                                      newContacts[2].name = e.target.value;
                                     }
                                     setCustomerForm({ ...customerForm, contacts: newContacts });
                                   }}
-                                  onBlur={e => handleContactEmailBlur(index, e.target.value)}
-                                  className={`w-full pl-9 pr-3 py-2 border rounded-lg focus:ring-2 focus:border-transparent ${
-                                    fieldErrors[`contact_${index}_email`] ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'
+                                  className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:border-transparent ${
+                                    fieldErrors[`contact_${index}_name`] ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'
                                   }`}
-                                  placeholder="john@company.com"
-                                  required={index === 0 || !customerForm.same_person_all_contacts}
-                                  disabled={customerForm.same_person_all_contacts && index !== 0}
+                                  placeholder="John Doe"
+                                  required
                                 />
+                                {fieldErrors[`contact_${index}_name`] && (
+                                  <p className="text-red-500 text-xs mt-1">{fieldErrors[`contact_${index}_name`]}</p>
+                                )}
                               </div>
-                              {fieldErrors[`contact_${index}_email`] && (
-                                <p className="text-red-500 text-xs mt-1">{fieldErrors[`contact_${index}_email`]}</p>
-                              )}
+
+                              {/* Phone Field */}
+                              <div className="col-span-12 md:col-span-3">
+                                <label className="block text-xs font-medium text-gray-700 mb-1">
+                                  Phone *
+                                </label>
+                                <div className="relative">
+                                  <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                                  <input
+                                    type="tel"
+                                    value={contact.phone}
+                                    onChange={e => handleContactPhoneChange(index, e.target.value)}
+                                    className={`w-full pl-9 pr-3 py-2 border rounded-lg focus:ring-2 focus:border-transparent ${
+                                      fieldErrors[`contact_${index}_phone`] ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'
+                                    }`}
+                                    placeholder="(555) 123-4567"
+                                    required
+                                  />
+                                </div>
+                                {fieldErrors[`contact_${index}_phone`] && (
+                                  <p className="text-red-500 text-xs mt-1">{fieldErrors[`contact_${index}_phone`]}</p>
+                                )}
+                              </div>
+
+                              {/* Email Field */}
+                              <div className="col-span-12 md:col-span-4">
+                                <label className="block text-xs font-medium text-gray-700 mb-1">
+                                  Email *
+                                </label>
+                                <div className="relative">
+                                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                                  <input
+                                    type="email"
+                                    value={contact.email}
+                                    onChange={e => {
+                                      const newContacts = [...customerForm.contacts];
+                                      newContacts[index].email = e.target.value;
+                                      if (customerForm.same_person_all_contacts && index === 0) {
+                                        newContacts[1].email = e.target.value;
+                                        newContacts[2].email = e.target.value;
+                                      }
+                                      setCustomerForm({ ...customerForm, contacts: newContacts });
+                                    }}
+                                    onBlur={e => handleContactEmailBlur(index, e.target.value)}
+                                    className={`w-full pl-9 pr-3 py-2 border rounded-lg focus:ring-2 focus:border-transparent ${
+                                      fieldErrors[`contact_${index}_email`] ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'
+                                    }`}
+                                    placeholder="john@company.com"
+                                    required
+                                  />
+                                </div>
+                                {fieldErrors[`contact_${index}_email`] && (
+                                  <p className="text-red-500 text-xs mt-1">{fieldErrors[`contact_${index}_email`]}</p>
+                                )}
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      ))}
+                        );
+                      })}
                     </div>
                   </div>
 
