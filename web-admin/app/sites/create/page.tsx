@@ -19,6 +19,7 @@ import {
   Map,
   Edit3,
   Briefcase,
+  Phone,
 } from 'lucide-react';
 
 const SITE_TYPES = ['residential', 'commercial', 'industrial', 'retail', 'emergency_services'];
