@@ -311,13 +311,12 @@ export default function SitesPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">{filteredSites.map((site, index) => (
               <div
                 key={site.id || `site-${index}`}
-                className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow hover:shadow-md transition-shadow"
+                className="bg-white rounded-xl shadow-sm border border-gray-200 p-5 hover:shadow-md transition-shadow cursor-pointer"
+                onClick={() => handleViewSite(site.id)}
               >
-                <div className="flex items-start justify-between mb-4">
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900">{site.name}</h3>
-                    <p className="text-sm text-gray-600">{site.type}</p>
-                  </div>
+                {/* Header - Site Name and Status */}
+                <div className="flex items-start justify-between mb-3">
+                  <h3 className="text-lg font-bold text-gray-900">{site.name || 'Unnamed Site'}</h3>
                   <span className={`px-2 py-1 text-xs font-medium rounded-full ${
                     site.active ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
                   }`}>
@@ -325,35 +324,52 @@ export default function SitesPage() {
                   </span>
                 </div>
 
-                <div className="space-y-2 mb-4">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-500">Address:</span>
-                    <span className="text-gray-900 font-medium text-right">{site.address}</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-500">Customer:</span>
-                    <span className="text-gray-900 font-medium">{site.customer_name}</span>
-                  </div>
-                  {site.size && (
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-500">Size:</span>
-                      <span className="text-gray-900 font-medium">{site.size} sq ft</span>
-                    </div>
-                  )}
+                {/* Address */}
+                <div className="mb-4">
+                  <p className="text-sm text-gray-600 flex items-start gap-2">
+                    <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                    <span>{site.location?.address || 'No address provided'}</span>
+                  </p>
                 </div>
 
+                {/* Tags - Customer and Service Type */}
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {/* Customer Tag */}
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-blue-50 text-blue-700 text-xs font-medium rounded-full">
+                    <Building className="w-3 h-3" />
+                    {getCustomerName(site.customer_id)}
+                  </span>
+                  
+                  {/* Site Type Tag */}
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-purple-50 text-purple-700 text-xs font-medium rounded-full">
+                    {site.site_type === 'residential' && '🏠'}
+                    {site.site_type === 'commercial' && '🏢'}
+                    {site.site_type === 'industrial' && '🏭'}
+                    {site.site_type === 'retail' && '🛍️'}
+                    {site.site_type === 'emergency_services' && '🚨'}
+                    {getSiteTypeLabel(site.site_type)}
+                  </span>
+                </div>
+
+                {/* Action Buttons */}
                 <div className="flex gap-2 pt-3 border-t border-gray-100">
                   <button 
-                    onClick={() => router.push(`/sites/${site.id}`)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      router.push(`/sites/${site.id}`);
+                    }}
                     className="flex-1 px-3 py-1.5 text-sm bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282]"
                   >
-                    View
+                    View Details
                   </button>
                   <button 
-                    onClick={() => router.push(`/sites/${site.id}/edit`)}
-                    className="flex-1 px-3 py-1.5 text-sm bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleViewOnMap(site);
+                    }}
+                    className="px-3 py-1.5 text-sm bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50"
                   >
-                    Edit
+                    <MapPin className="w-4 h-4" />
                   </button>
                 </div>
               </div>
