@@ -187,7 +187,7 @@ test_plan:
 
   - task: "HR Module - PTO Management APIs"
     implemented: true
-    working: false
+    working: true
     file: "/app/backend/hr_routes.py"
     stuck_count: 0
     priority: "high"
@@ -199,6 +199,9 @@ test_plan:
       - working: false
         agent: "testing"
         comment: "❌ POST /api/hr/pto-requests fails with HTTP 500 BSON ObjectId serialization error. GET endpoints working (found 1 PTO request). PTO balance retrieval functional. PTO request creation blocked by serialization issue."
+      - working: true
+        agent: "testing"
+        comment: "✅ BUG FIX CONFIRMED: POST /api/hr/pto-requests now working correctly. BSON ObjectId serialization issue resolved. PTO request creation successful with proper ID serialization (ID: 68fc6bb47761e9859f341acf). PTO management functionality restored."
 
   - task: "HR Module - Training & Certifications APIs"
     implemented: true
