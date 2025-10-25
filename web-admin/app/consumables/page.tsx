@@ -86,7 +86,7 @@ export default function ConsumablesPage() {
       setShowCreateModal(false);
       setFormData({
         name: '',
-        unit: 'tons',
+        unit: 'bags',
         current_stock: 0,
         min_stock_level: 0,
         unit_cost: 0,
