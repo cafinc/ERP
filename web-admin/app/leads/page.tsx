@@ -722,6 +722,26 @@ export default function LeadsPage() {
                         <Icon className="w-3.5 h-3.5" />
                         {config.label}
                       </span>
+
+                      {/* Services Requested Tags */}
+                      {lead.services_requested && lead.services_requested.length > 0 && (
+                        <div className="mt-3 flex flex-wrap gap-1.5">
+                          {lead.services_requested.map((serviceValue) => {
+                            const service = SERVICE_TYPES.find(s => s.value === serviceValue);
+                            if (!service) return null;
+                            return (
+                              <span
+                                key={serviceValue}
+                                className="inline-flex items-center gap-1 px-2 py-1 bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-lg text-xs font-medium text-gray-700"
+                                title={service.label}
+                              >
+                                <span className="text-base">{service.icon}</span>
+                                <span className="text-xs">{service.label}</span>
+                              </span>
+                            );
+                          })}
+                        </div>
+                      )}
                     </div>
 
                     {/* Card Body */}
