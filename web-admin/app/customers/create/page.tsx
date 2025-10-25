@@ -62,6 +62,8 @@ export default function CustomerFormPage() {
   const [saving, setSaving] = useState(false);
   const [companies, setCompanies] = useState<any[]>([]);
   const addressInputRef = useRef<HTMLInputElement>(null);
+  const companyAddressInputRef = useRef<HTMLInputElement>(null);
+  const billingAddressInputRef = useRef<HTMLInputElement>(null);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   
   // Company search states
