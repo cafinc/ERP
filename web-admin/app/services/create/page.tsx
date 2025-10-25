@@ -177,10 +177,27 @@ export default function ServiceFormPage() {
             
             {/* Service Details Card */}
             <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-                <Briefcase className="w-6 h-6 text-[#3f72af] mr-2" />
-                Service Details
-              </h2>
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-2xl font-bold text-gray-900 flex items-center">
+                  <Briefcase className="w-6 h-6 text-[#3f72af] mr-2" />
+                  Service Details
+                </h2>
+                
+                {/* Active Service Toggle */}
+                <label className="flex items-center cursor-pointer group">
+                  <span className="mr-3 text-sm font-semibold text-gray-700">Active Service</span>
+                  <div className="relative">
+                    <input
+                      type="checkbox"
+                      checked={formData.active}
+                      onChange={(e) => setFormData({ ...formData, active: e.target.checked })}
+                      className="sr-only peer"
+                    />
+                    <div className="w-14 h-7 bg-gray-300 rounded-full peer peer-checked:bg-[#3f72af] transition-all duration-300 shadow-inner"></div>
+                    <div className="absolute left-1 top-1 w-5 h-5 bg-white rounded-full transition-all duration-300 peer-checked:translate-x-7 shadow-md"></div>
+                  </div>
+                </label>
+              </div>
               
               <div className="space-y-6">
                 {/* Service Name and Service Type - Same Line */}
@@ -218,19 +235,6 @@ export default function ServiceFormPage() {
                       ))}
                     </select>
                   </div>
-                </div>
-
-                {/* Active Status */}
-                <div className="flex items-center">
-                  <label className="flex items-center cursor-pointer bg-gray-50/80 px-6 py-4 rounded-xl border-2 border-gray-200 hover:border-[#3f72af] transition-all">
-                    <input
-                      type="checkbox"
-                      checked={formData.active}
-                      onChange={(e) => setFormData({ ...formData, active: e.target.checked })}
-                      className="w-5 h-5 text-[#3f72af] border-gray-300 rounded focus:ring-[#3f72af] focus:ring-2"
-                    />
-                    <span className="ml-3 text-sm font-semibold text-gray-900">Active Service</span>
-                  </label>
                 </div>
 
                 {/* Description */}
