@@ -1714,36 +1714,79 @@ export default function CustomerDetailPage() {
       {/* Archive Confirmation Modal */}
       {showArchiveModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full mx-4 overflow-hidden">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full mx-4 overflow-hidden">
             <div className={`bg-gradient-to-r ${customer.active ? 'from-orange-500 to-red-500' : 'from-green-500 to-emerald-500'} p-6 text-white`}>
               <div className="flex items-center gap-3">
                 <AlertCircle className="w-8 h-8" />
                 <div>
-                  <h2 className="text-2xl font-bold">{customer.active ? 'Archive Customer?' : 'Unarchive Customer?'}</h2>
+                  <h2 className="text-2xl font-bold">
+                    {customer.active ? 'Archive Customer Confirmation' : 'Unarchive Customer Confirmation'}
+                  </h2>
                   <p className="text-white/90 mt-1">
-                    {customer.active ? 'This customer will be marked as inactive' : 'This customer will be marked as active'}
+                    {customer.active 
+                      ? 'Please review the information before archiving' 
+                      : 'Please review the information before unarchiving'}
                   </p>
                 </div>
               </div>
             </div>
 
             <div className="p-6">
-              <p className="text-gray-700 mb-4">
-                {customer.active 
-                  ? 'Archiving this customer will hide them from the main customer list. They will still appear in reports and historical data. You can unarchive them at any time.'
-                  : 'Unarchiving this customer will make them active again and they will appear in the main customer list.'}
-              </p>
-              
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
-                <div className="flex gap-2">
-                  <FileText className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
-                  <div className="text-sm text-blue-800">
-                    <p className="font-medium mb-1">Customer Details:</p>
-                    <p><strong>Name:</strong> {customer.name}</p>
-                    <p><strong>Email:</strong> {customer.email}</p>
-                    <p><strong>Type:</strong> {isCompany ? 'Company' : 'Individual'}</p>
+              <div className="space-y-4">
+                <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+                  <div className="flex gap-2 mb-3">
+                    <Users className="w-5 h-5 text-gray-600 flex-shrink-0 mt-0.5" />
+                    <div className="flex-1">
+                      <p className="font-semibold text-gray-900 mb-2">Customer Information:</p>
+                      <div className="space-y-2 text-sm text-gray-700">
+                        <p><span className="font-medium">Name:</span> {customer.name}</p>
+                        <p><span className="font-medium">Email:</span> {customer.email}</p>
+                        <p><span className="font-medium">Phone:</span> {formatPhoneNumber(customer.phone)}</p>
+                        <p><span className="font-medium">Type:</span> {isCompany ? 'Company' : 'Individual'}</p>
+                        <p><span className="font-medium">Current Status:</span> 
+                          <span className={`ml-2 px-2 py-0.5 rounded text-xs font-medium ${
+                            customer.active ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
+                          }`}>
+                            {customer.active ? 'Active' : 'Archived'}
+                          </span>
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
+
+                {customer.active ? (
+                  <div className="bg-orange-50 border border-orange-200 rounded-lg p-4">
+                    <div className="flex gap-2">
+                      <AlertCircle className="w-5 h-5 text-orange-600 flex-shrink-0 mt-0.5" />
+                      <div className="text-sm text-orange-800">
+                        <p className="font-medium mb-2">What happens when you archive this customer?</p>
+                        <ul className="list-disc list-inside space-y-1 ml-2">
+                          <li>Customer will be marked as inactive</li>
+                          <li>They will be hidden from the main customer list</li>
+                          <li>All historical data remains intact (projects, invoices, estimates, etc.)</li>
+                          <li>You can unarchive them at any time to restore access</li>
+                          <li>Archived customers still appear in reports and analytics</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                    <div className="flex gap-2">
+                      <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                      <div className="text-sm text-green-800">
+                        <p className="font-medium mb-2">What happens when you unarchive this customer?</p>
+                        <ul className="list-disc list-inside space-y-1 ml-2">
+                          <li>Customer will be marked as active</li>
+                          <li>They will appear in the main customer list</li>
+                          <li>All features and functionality will be restored</li>
+                          <li>You can create new projects, estimates, and invoices</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -1764,7 +1807,7 @@ export default function CustomerDetailPage() {
                     : 'bg-green-600 hover:bg-green-700 focus:ring-green-500'
                 }`}
               >
-                {archiving ? 'Processing...' : customer.active ? 'Archive Customer' : 'Unarchive Customer'}
+                {archiving ? 'Processing...' : customer.active ? 'Yes, Archive Customer' : 'Yes, Unarchive Customer'}
               </button>
             </div>
           </div>
