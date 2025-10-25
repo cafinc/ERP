@@ -1603,6 +1603,7 @@ export default function CustomerFormPage() {
                             <div className="relative">
                               <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
                               <input
+                                name="contact_0_email"
                                 type="email"
                                 value={customerForm.contacts[0].email}
                                 onChange={e => {
@@ -1611,12 +1612,28 @@ export default function CustomerFormPage() {
                                   newContacts[1].email = e.target.value;
                                   newContacts[2].email = e.target.value;
                                   setCustomerForm({ ...customerForm, contacts: newContacts });
+                                  
+                                  // Validate email
+                                  if (e.target.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e.target.value)) {
+                                    setFieldErrors({ ...fieldErrors, contact_0_email: 'Invalid email format' });
+                                  } else {
+                                    const newErrors = { ...fieldErrors };
+                                    delete newErrors.contact_0_email;
+                                    setFieldErrors(newErrors);
+                                  }
                                 }}
-                                className="w-full pl-9 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                                className={`w-full pl-9 pr-4 py-2 border rounded-lg focus:ring-2 focus:border-transparent text-sm ${
+                                  fieldErrors.contact_0_email 
+                                    ? 'border-red-500 focus:ring-red-500' 
+                                    : 'border-gray-300 focus:ring-blue-500'
+                                }`}
                                 placeholder="john@company.com"
                                 required
                               />
                             </div>
+                            {fieldErrors.contact_0_email && (
+                              <p className="text-red-500 text-xs mt-1">{fieldErrors.contact_0_email}</p>
+                            )}
                           </div>
 
                           <div>
@@ -1624,20 +1641,30 @@ export default function CustomerFormPage() {
                             <div className="relative">
                               <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
                               <input
+                                name="contact_0_phone"
                                 type="tel"
                                 value={customerForm.contacts[0].phone}
                                 onChange={e => {
+                                  const cleaned = e.target.value.replace(/\D/g, '');
+                                  const formatted = cleaned.slice(0, 10);
                                   const newContacts = [...customerForm.contacts];
-                                  newContacts[0].phone = e.target.value;
-                                  newContacts[1].phone = e.target.value;
-                                  newContacts[2].phone = e.target.value;
+                                  newContacts[0].phone = formatted;
+                                  newContacts[1].phone = formatted;
+                                  newContacts[2].phone = formatted;
                                   setCustomerForm({ ...customerForm, contacts: newContacts });
                                 }}
-                                className="w-full pl-9 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                                className={`w-full pl-9 pr-4 py-2 border rounded-lg focus:ring-2 focus:border-transparent text-sm ${
+                                  fieldErrors.contact_0_phone 
+                                    ? 'border-red-500 focus:ring-red-500' 
+                                    : 'border-gray-300 focus:ring-blue-500'
+                                }`}
                                 placeholder="(555) 123-4567"
                                 required
                               />
                             </div>
+                            {fieldErrors.contact_0_phone && (
+                              <p className="text-red-500 text-xs mt-1">{fieldErrors.contact_0_phone}</p>
+                            )}
                           </div>
                         </div>
                       </div>
