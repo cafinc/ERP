@@ -2003,10 +2003,9 @@ export default function CustomerFormPage() {
                   </div>
                 </div>
               </div>
-              
               <div className="p-6 space-y-4">
-              {/* Site Name Field - appears below header when Create Site is ON */}
-              {createSite && (
+                {/* Site Name Field - appears below header when Create Site is ON */}
+                {createSite && (
                 <div className="mb-4 pb-4 border-b border-gray-200">
                   <label className="block text-xs font-medium text-gray-700 mb-2">
                     Site Name <span className="text-red-500">*</span>
