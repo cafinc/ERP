@@ -1437,6 +1437,205 @@ export default function CustomerFormPage() {
                     </div>
                   </div>
 
+                  {/* Company Address */}
+                  <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
+                    <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center space-x-2">
+                      <MapPin className="w-5 h-5 text-[#3f72af]" />
+                      <span>Company Address *</span>
+                    </h2>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="md:col-span-2">
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Address *</label>
+                      <div className="relative">
+                        <input
+                          ref={companyAddressInputRef}
+                          type="text"
+                          value={customerForm.street_address}
+                          onChange={e =>
+                            setCustomerForm({ ...customerForm, street_address: e.target.value })
+                          }
+                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          placeholder="123 Main Street"
+                          required
+                        />
+                        <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center">
+                          <img 
+                            src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" 
+                            alt="Powered by Google"
+                            className="h-4"
+                          />
+                        </div>
+                      </div>
+                      <p className="text-xs text-gray-500 mt-1">
+                        Start typing to use Google address autocomplete
+                      </p>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">City *</label>
+                      <input
+                        type="text"
+                        value={customerForm.city}
+                        onChange={e =>
+                          setCustomerForm({ ...customerForm, city: e.target.value })
+                        }
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        placeholder="Calgary"
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Province *</label>
+                      <select
+                        value={customerForm.province}
+                        onChange={e =>
+                          setCustomerForm({ ...customerForm, province: e.target.value })
+                        }
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        required
+                      >
+                        {CANADIAN_PROVINCES.map(prov => (
+                          <option key={prov.code} value={prov.code}>
+                            {prov.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Postal Code *</label>
+                      <input
+                        type="text"
+                        value={customerForm.postal_code}
+                        onChange={e =>
+                          setCustomerForm({ ...customerForm, postal_code: e.target.value })
+                        }
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        placeholder="T2P 1J9"
+                        required
+                      />
+                    </div>
+                    
+                    {/* Billing Address Toggle */}
+                    <div className="md:col-span-2 mt-4">
+                      <div className="flex items-center gap-3">
+                        <button
+                          type="button"
+                          onClick={() => setCustomerForm({ ...customerForm, billing_address_same: !customerForm.billing_address_same })}
+                          className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#3f72af] focus:ring-offset-2 flex-shrink-0 ${
+                            customerForm.billing_address_same ? 'bg-[#3f72af]' : 'bg-gray-200'
+                          }`}
+                        >
+                          <span
+                            className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                              customerForm.billing_address_same ? 'translate-x-6' : 'translate-x-1'
+                            }`}
+                          />
+                        </button>
+                        <label className="text-sm font-medium text-gray-700">
+                          Billing address same as company address
+                        </label>
+                      </div>
+                    </div>
+                    
+                    {/* Billing Address Fields */}
+                    {!customerForm.billing_address_same && (
+                      <>
+                        <div className="md:col-span-2 mt-4">
+                          <h3 className="text-lg font-semibold text-gray-900 mb-3">Billing Address</h3>
+                        </div>
+                        
+                        <div className="md:col-span-2">
+                          <label className="block text-sm font-medium text-gray-700 mb-2">Address *</label>
+                          <div className="relative">
+                            <input
+                              ref={billingAddressInputRef}
+                              type="text"
+                              value={customerForm.billing_address.street_address}
+                              onChange={e =>
+                                setCustomerForm({
+                                  ...customerForm,
+                                  billing_address: { ...customerForm.billing_address, street_address: e.target.value }
+                                })
+                              }
+                              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                              placeholder="456 Billing Street"
+                              required
+                            />
+                            <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center">
+                              <img 
+                                src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" 
+                                alt="Powered by Google"
+                                className="h-4"
+                              />
+                            </div>
+                          </div>
+                          <p className="text-xs text-gray-500 mt-1">
+                            Start typing to use Google address autocomplete
+                          </p>
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">City *</label>
+                          <input
+                            type="text"
+                            value={customerForm.billing_address.city}
+                            onChange={e =>
+                              setCustomerForm({
+                                ...customerForm,
+                                billing_address: { ...customerForm.billing_address, city: e.target.value }
+                              })
+                            }
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="Calgary"
+                            required
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">Province *</label>
+                          <select
+                            value={customerForm.billing_address.province}
+                            onChange={e =>
+                              setCustomerForm({
+                                ...customerForm,
+                                billing_address: { ...customerForm.billing_address, province: e.target.value }
+                              })
+                            }
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            required
+                          >
+                            {CANADIAN_PROVINCES.map(prov => (
+                              <option key={prov.code} value={prov.code}>
+                                {prov.name}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">Postal Code *</label>
+                          <input
+                            type="text"
+                            value={customerForm.billing_address.postal_code}
+                            onChange={e =>
+                              setCustomerForm({
+                                ...customerForm,
+                                billing_address: { ...customerForm.billing_address, postal_code: e.target.value }
+                              })
+                            }
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="T2P 1J9"
+                            required
+                          />
+                        </div>
+                      </>
+                    )}
+                    </div>
+                  </div>
+
                   {/* Contact Persons */}
                   <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
                     <div className="flex items-center justify-between mb-6">
