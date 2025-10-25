@@ -179,17 +179,17 @@ sudo supervisorctl tail backend
 # QuickBooks Online Integration (production)
 QUICKBOOKS_CLIENT_ID=ABSb9lt1OEqUsOO4tsf3UewtCe9OHGCSgbXTfr7xX56iqhy9i9
 QUICKBOOKS_CLIENT_SECRET=qB6XscWqZsKgT3RRdZHojQqS48UjyzjfZd6S4ALA
-QUICKBOOKS_REDIRECT_URI=https://admin-dash-restore.preview.emergentagent.com/api/quickbooks/auth/callback
+QUICKBOOKS_REDIRECT_URI=https://custflow-1.preview.emergentagent.com/api/quickbooks/auth/callback
 QUICKBOOKS_ENVIRONMENT=production
 ```
 
 **URLs Configured in Intuit Portal:**
 - Host Domain: `plowpro-admin.preview.emergentagent.com`
-- Launch URL: `https://admin-dash-restore.preview.emergentagent.com/settings/quickbooks`
-- Disconnect URL: `https://admin-dash-restore.preview.emergentagent.com/settings/quickbooks`
-- Privacy Policy: `https://admin-dash-restore.preview.emergentagent.com/legal/privacy`
-- Terms of Service: `https://admin-dash-restore.preview.emergentagent.com/legal/terms`
-- Redirect URI: `https://admin-dash-restore.preview.emergentagent.com/api/quickbooks/auth/callback`
+- Launch URL: `https://custflow-1.preview.emergentagent.com/settings/quickbooks`
+- Disconnect URL: `https://custflow-1.preview.emergentagent.com/settings/quickbooks`
+- Privacy Policy: `https://custflow-1.preview.emergentagent.com/legal/privacy`
+- Terms of Service: `https://custflow-1.preview.emergentagent.com/legal/terms`
+- Redirect URI: `https://custflow-1.preview.emergentagent.com/api/quickbooks/auth/callback`
 
 ---
 
