@@ -1450,24 +1450,26 @@ export default function CustomerFormPage() {
                   </div>
 
                   {/* Company Address */}
-                  <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center space-x-2">
-                      <MapPin className="w-5 h-5 text-[#3f72af]" />
-                      <span>Company Address *</span>
-                    </h2>
+                  <div className="bg-white/95 backdrop-blur-md rounded-3xl shadow-xl border border-white/40 overflow-hidden hover:shadow-2xl transition-shadow">
+                    <div className="bg-gradient-to-br from-blue-50 to-indigo-50 border-b-2 border-blue-100 p-6">
+                      <h3 className="text-sm font-bold text-gray-900 flex items-center gap-2">
+                        <MapPin className="w-4 h-4 text-[#3f72af]" />
+                        Company Address <span className="text-red-500">*</span>
+                      </h3>
+                    </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="md:col-span-2">
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Address *</label>
-                      <div className="relative">
-                        <input
-                          ref={companyAddressInputRef}
-                          type="text"
-                          value={customerForm.street_address}
-                          onChange={e =>
-                            setCustomerForm({ ...customerForm, street_address: e.target.value })
-                          }
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    <div className="p-6 space-y-4">
+                      <div className="md:col-span-2">
+                        <label className="block text-xs font-medium text-gray-700 mb-2">Address <span className="text-red-500">*</span></label>
+                        <div className="relative">
+                          <input
+                            ref={companyAddressInputRef}
+                            type="text"
+                            value={customerForm.street_address}
+                            onChange={e =>
+                              setCustomerForm({ ...customerForm, street_address: e.target.value })
+                            }
+                            className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-semibold transition-all"
                           placeholder="123 Main Street"
                           required
                         />
