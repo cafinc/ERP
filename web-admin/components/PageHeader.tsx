@@ -197,13 +197,27 @@ export default function PageHeader({
                   const colorClass = colorClasses[stat.color || 'gray'];
                   const textColorClass = stat.color ? `text-${stat.color}-900` : 'text-gray-900';
                   
-                  return (
-                    <div key={index} className={`flex items-center gap-2 px-3 py-1.5 ${colorClass.split(' ')[0]} rounded-lg`}>
+                  const StatContent = (
+                    <>
                       {stat.icon && <div className={colorClass.split(' ')[1]}>{stat.icon}</div>}
                       <div className="flex flex-col">
                         <span className={`text-xs ${colorClass.split(' ')[1]} font-medium`}>{stat.label}</span>
                         <span className={`text-lg font-bold ${textColorClass}`}>{stat.value}</span>
                       </div>
+                    </>
+                  );
+                  
+                  return stat.onClick ? (
+                    <button
+                      key={index}
+                      onClick={stat.onClick}
+                      className={`flex items-center gap-2 px-3 py-1.5 ${colorClass.split(' ')[0]} rounded-lg cursor-pointer hover:opacity-80 transition-opacity`}
+                    >
+                      {StatContent}
+                    </button>
+                  ) : (
+                    <div key={index} className={`flex items-center gap-2 px-3 py-1.5 ${colorClass.split(' ')[0]} rounded-lg`}>
+                      {StatContent}
                     </div>
                   );
                 })}
