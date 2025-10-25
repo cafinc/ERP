@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
+import toast from 'react-hot-toast';
 import PageHeader from '@/components/PageHeader';
 import api from '@/lib/api';
 import {
@@ -10,6 +11,15 @@ import {
   RefreshCw,
   Plus,
   Trash2,
+  Briefcase,
+  DollarSign,
+  FileText,
+  Tag,
+  Snowflake,
+  Truck,
+  ShoppingCart,
+  Droplet,
+  Wind,
 } from 'lucide-react';
 
 export default function ServiceFormPage() {
