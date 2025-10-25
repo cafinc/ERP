@@ -18,6 +18,7 @@ import {
   Trash2,
   Map,
   Edit3,
+  Briefcase,
 } from 'lucide-react';
 
 const SITE_TYPES = ['residential', 'commercial', 'industrial', 'retail', 'emergency_services'];
