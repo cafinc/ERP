@@ -166,18 +166,25 @@ export default function SiteDetailPage() {
 
   if (!site) {
     return (
-      <PageHeader>
-        <div className="text-center py-12">
-          <AlertCircle className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-          <h2 className="text-xl font-semibold text-gray-900">Site not found</h2>
-          <button
-            onClick={() => router.push('/sites')}
-            className="mt-4 text-[#3f72af] hover:text-blue-800"
-          >
-            Return to Sites
-          </button>
+      <>
+        <PageHeader
+          title="Site Not Found"
+          subtitle="The requested site could not be found"
+          breadcrumbs={[{ label: "Home", href: "/" }, { label: "Sites", href: "/sites" }, { label: "Not Found" }]}
+        />
+        <div className="flex-1 overflow-auto p-6">
+          <div className="text-center py-12">
+            <AlertCircle className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+            <h2 className="text-xl font-semibold text-gray-900">Site not found</h2>
+            <button
+              onClick={() => router.push('/sites')}
+              className="mt-4 text-[#3f72af] hover:text-blue-800"
+            >
+              Return to Sites
+            </button>
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 
