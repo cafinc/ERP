@@ -2002,6 +2002,93 @@ export default function CustomerFormPage() {
         </div>
       </div>
 
+      {/* Success Modal */}
+      {showSuccessModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full mx-4 overflow-hidden animate-bounce-in">
+            <div className="bg-gradient-to-r from-green-500 to-emerald-500 p-6 text-white">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <div>
+                  <h2 className="text-2xl font-bold">Success!</h2>
+                  <p className="text-white/90 mt-1">
+                    Customer {isEdit ? 'updated' : 'created'} successfully
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="p-6 text-center">
+              <p className="text-gray-600">
+                Redirecting to customer details...
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Error Modal */}
+      {showErrorModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full mx-4 overflow-hidden">
+            <div className="bg-gradient-to-r from-red-500 to-rose-500 p-6 text-white">
+              <div className="flex items-center gap-3">
+                <AlertCircle className="w-8 h-8" />
+                <div>
+                  <h2 className="text-2xl font-bold">Validation Errors</h2>
+                  <p className="text-white/90 mt-1">
+                    Please fix the following issues before submitting
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="p-6">
+              <div className="space-y-3">
+                <p className="font-semibold text-gray-900 mb-3">
+                  {errorSections.length} section(s) need attention:
+                </p>
+                
+                {errorSections.map((section, index) => (
+                  <div key={index} className="flex items-start gap-3 p-3 bg-red-50 border border-red-200 rounded-lg">
+                    <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+                    <span className="text-sm text-red-900 font-medium">{section}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                <div className="flex gap-2">
+                  <svg className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <div className="text-sm text-blue-800">
+                    <p className="font-medium mb-1">Tip:</p>
+                    <p>Scroll through the form and look for fields highlighted in red. These fields require your attention.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="border-t p-6 bg-gray-50 flex justify-end">
+              <button
+                onClick={() => {
+                  setShowErrorModal(false);
+                  setSaving(false);
+                }}
+                className="px-6 py-2.5 text-sm font-medium bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
+              >
+                Got it, I'll fix these
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Duplicate Customer Modal */}
       {showDuplicateModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
