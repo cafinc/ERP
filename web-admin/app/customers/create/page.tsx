@@ -2209,7 +2209,7 @@ export default function CustomerFormPage() {
               </div>
               
               {/* Action Buttons */}
-              <div className="flex justify-end items-center gap-3 pt-4 pr-3">
+              <div className="flex justify-end items-center gap-3 pt-1 pr-12">
                 <button
                   type="button"
                   onClick={() => router.push('/customers')}
