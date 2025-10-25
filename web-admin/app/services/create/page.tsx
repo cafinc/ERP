@@ -183,23 +183,22 @@ export default function ServiceFormPage() {
               </h2>
               
               <div className="space-y-6">
-                {/* Service Name */}
-                <div>
-                  <label className="block text-sm font-semibold text-gray-900 mb-2">
-                    Service Name <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    required
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
-                    placeholder="e.g., Standard Snow Plowing"
-                  />
-                </div>
-
-                {/* Service Type and Active Status */}
+                {/* Service Name and Service Type - Same Line */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-900 mb-2">
+                      Service Name <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      required
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
+                      placeholder="e.g., Standard Snow Plowing"
+                    />
+                  </div>
+
                   <div>
                     <label className="block text-sm font-semibold text-gray-900 mb-2">
                       <Tag className="w-4 h-4 inline-block mr-1 text-[#3f72af]" />
@@ -219,18 +218,19 @@ export default function ServiceFormPage() {
                       ))}
                     </select>
                   </div>
+                </div>
 
-                  <div className="flex items-center justify-center">
-                    <label className="flex items-center cursor-pointer bg-gray-50/80 px-6 py-4 rounded-xl border-2 border-gray-200 hover:border-[#3f72af] transition-all">
-                      <input
-                        type="checkbox"
-                        checked={formData.active}
-                        onChange={(e) => setFormData({ ...formData, active: e.target.checked })}
-                        className="w-5 h-5 text-[#3f72af] border-gray-300 rounded focus:ring-[#3f72af] focus:ring-2"
-                      />
-                      <span className="ml-3 text-sm font-semibold text-gray-900">Active Service</span>
-                    </label>
-                  </div>
+                {/* Active Status */}
+                <div className="flex items-center">
+                  <label className="flex items-center cursor-pointer bg-gray-50/80 px-6 py-4 rounded-xl border-2 border-gray-200 hover:border-[#3f72af] transition-all">
+                    <input
+                      type="checkbox"
+                      checked={formData.active}
+                      onChange={(e) => setFormData({ ...formData, active: e.target.checked })}
+                      className="w-5 h-5 text-[#3f72af] border-gray-300 rounded focus:ring-[#3f72af] focus:ring-2"
+                    />
+                    <span className="ml-3 text-sm font-semibold text-gray-900">Active Service</span>
+                  </label>
                 </div>
 
                 {/* Description */}
