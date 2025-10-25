@@ -718,9 +718,21 @@ export default function CustomerFormPage() {
       // For individuals with company link
       if (customerForm.customer_type === 'individual' && customerForm.company_id) {
         submitData.company_id = customerForm.company_id;
-        const selectedCompany = companies.find(c => c._id === customerForm.company_id);
+        
+        // Try to get company name from loaded companies list
+        const selectedCompany = companies.find(c => c._id === customerForm.company_id || c.id === customerForm.company_id);
         if (selectedCompany) {
           submitData.company_name = selectedCompany.name;
+        } else {
+          // Fallback: fetch company name from API if not in loaded list
+          try {
+            const companyRes = await api.get(`/customers/${customerForm.company_id}`);
+            if (companyRes.data && companyRes.data.name) {
+              submitData.company_name = companyRes.data.name;
+            }
+          } catch (error) {
+            console.error('Error fetching company name:', error);
+          }
         }
       }
 
