@@ -89,6 +89,13 @@ export default function CustomerFormPage() {
   const [duplicateCustomers, setDuplicateCustomers] = useState<any[]>([]);
   const [checkingDuplicates, setCheckingDuplicates] = useState(false);
   
+  // Validation/Success modal states
+  const [showResultModal, setShowResultModal] = useState(false);
+  const [resultModalType, setResultModalType] = useState<'success' | 'error'>('success');
+  const [resultModalTitle, setResultModalTitle] = useState('');
+  const [resultModalMessage, setResultModalMessage] = useState('');
+  const [validationErrors, setValidationErrors] = useState<string[]>([]);
+  
   const [customerForm, setCustomerForm] = useState({
     // For individuals
     first_name: '',
