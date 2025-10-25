@@ -740,8 +740,10 @@ export default function CustomerFormPage() {
 
       if (isEdit) {
         await api.put(`/customers/${customerId}`, submitData);
-        alert('Customer updated successfully!');
-        router.push(`/customers/${customerId}`);
+        setShowSuccessModal(true);
+        setTimeout(() => {
+          router.push(`/customers/${customerId}`);
+        }, 1500);
       } else {
         // Validate access requirements if enabled
         if (requireAccess && !accessWeb && !accessInApp) {
