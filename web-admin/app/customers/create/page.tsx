@@ -878,7 +878,7 @@ export default function CustomerFormPage() {
   }
 
   return (
-    <div className="h-screen flex flex-col bg-gradient-to-br from-gray-50 via-blue-50/30 to-gray-50">
+    <div className="h-screen flex flex-col bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
       {/* Page Header */}
       <PageHeader
         title={isEdit ? 'Edit Customer' : 'New Customer'}
