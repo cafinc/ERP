@@ -824,25 +824,57 @@ export default function CustomerFormPage() {
           const message = createSite && siteName 
             ? `Customer created successfully! Site "${siteName}" has been created.`
             : 'Customer created successfully!';
-          alert(message);
+          
+          setResultModalType('success');
+          setResultModalTitle('Success!');
+          setResultModalMessage(message);
+          setValidationErrors([]);
+          setShowResultModal(true);
+          
+          // Redirect after showing modal
+          setTimeout(() => {
+            router.push(`/customers/${companyId}`);
+          }, 2000);
         } else if (createSite && siteName) {
-          alert(`Customer and site "${siteName}" created successfully!`);
+          setResultModalType('success');
+          setResultModalTitle('Success!');
+          setResultModalMessage(`Customer and site "${siteName}" created successfully!`);
+          setValidationErrors([]);
+          setShowResultModal(true);
+          
+          setTimeout(() => {
+            router.push(`/customers/${companyId}`);
+          }, 2000);
+        } else {
+          router.push(`/customers/${companyId}`);
         }
-        router.push(`/customers/${companyId}`);
       }
     } catch (error: any) {
       console.error('Error saving customer:', error);
       
       // Provide more specific error messages
+      let errorMessage = 'Failed to save customer. Please try again.';
+      const errorDetails: string[] = [];
+      
       if (error.response?.status === 502) {
-        alert('Failed to save customer: Request too large. Please try with fewer or smaller files (max 500KB each).');
+        errorMessage = 'Request too large';
+        errorDetails.push('Please try with fewer or smaller files (max 500KB each)');
       } else if (error.response?.status === 413) {
-        alert('Failed to save customer: Request payload too large. Please reduce the number of files or use smaller files.');
+        errorMessage = 'Request payload too large';
+        errorDetails.push('Please reduce the number of files or use smaller files');
+      } else if (error.response?.data?.detail) {
+        errorMessage = 'Error from server';
+        errorDetails.push(error.response.data.detail);
       } else if (error.message) {
-        alert(`Failed to save customer: ${error.message}`);
-      } else {
-        alert('Failed to save customer. Please try again.');
+        errorMessage = 'Error occurred';
+        errorDetails.push(error.message);
       }
+      
+      setResultModalType('error');
+      setResultModalTitle(errorMessage);
+      setResultModalMessage('Unable to create customer:');
+      setValidationErrors(errorDetails);
+      setShowResultModal(true);
     } finally {
       setSaving(false);
     }
