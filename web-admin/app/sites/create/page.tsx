@@ -209,7 +209,7 @@ export default function CreateSitePage() {
 
   const handleSaveService = () => {
     if (!selectedServiceId || !serviceUnitType || !servicePrice) {
-      alert('Please fill in all service fields');
+      toast.error('Please fill in all service fields');
       return;
     }
 
@@ -226,6 +226,7 @@ export default function CreateSitePage() {
 
     setSiteServices([...siteServices, newService]);
     setShowServiceModal(false);
+    toast.success(`${service.name} added successfully`);
   };
 
   const handleRemoveService = (serviceId: string) => {
