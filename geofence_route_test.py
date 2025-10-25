@@ -11,7 +11,7 @@ from datetime import datetime, timedelta
 from typing import Dict, Any, Optional
 
 # Configuration
-BASE_URL = "https://custflow-1.preview.emergentagent.com/api"
+BASE_URL = "https://biz-ops.preview.emergentagent.com/api"
 HEADERS = {"Content-Type": "application/json"}
 
 class GeofenceRouteTestSuite:

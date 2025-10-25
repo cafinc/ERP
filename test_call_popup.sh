@@ -8,7 +8,7 @@ echo "==================================="
 echo ""
 
 # Backend URL
-API_URL="https://custflow-1.preview.emergentagent.com/api"
+API_URL="https://biz-ops.preview.emergentagent.com/api"
 
 echo "1. Testing webhook endpoint with simulated incoming call..."
 curl -X POST "${API_URL}/webhooks/ringcentral" \
@@ -45,7 +45,7 @@ echo "Test complete!"
 echo "==================================="
 echo ""
 echo "Next steps:"
-echo "1. Open web admin: https://custflow-1.preview.emergentagent.com"
+echo "1. Open web admin: https://biz-ops.preview.emergentagent.com"
 echo "2. Log in to the dashboard"
 echo "3. Run this script again to see the call popup appear"
 echo ""
