@@ -79,20 +79,6 @@ export default function CustomerDetailPage() {
   const [selectedFormId, setSelectedFormId] = useState('');
   const [attachingForm, setAttachingForm] = useState(false);
 
-  // Communication Center sub-tab (default to first available type)
-  const [commSubTab, setCommSubTab] = useState('all');
-  const [messageInput, setMessageInput] = useState('');
-  const [sendingMessage, setSendingMessage] = useState(false);
-  
-  // Enhanced comms features
-  const [commSearch, setCommSearch] = useState('');
-  const [commSort, setCommSort] = useState<'newest' | 'oldest'>('newest');
-  const [showReplyModal, setShowReplyModal] = useState(false);
-  const [selectedComm, setSelectedComm] = useState<any>(null);
-  const [replyText, setReplyText] = useState('');
-  const [replySubject, setReplySubject] = useState('');
-  const [sending, setSending] = useState(false);
-
   const serviceTypes = {
     snow: {
       name: 'Snow Services',
