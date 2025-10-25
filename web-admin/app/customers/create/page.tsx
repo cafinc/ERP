@@ -1440,7 +1440,7 @@ export default function CustomerFormPage() {
                         </div>
                         
                         <div className="md:col-span-2">
-                          <label className="block text-sm font-medium text-gray-700 mb-2">Address *</label>
+                          <label className="block text-xs font-medium text-gray-700 mb-1">Address *</label>
                           <input
                             type="text"
                             value={customerForm.billing_address.street_address}
@@ -1450,14 +1450,14 @@ export default function CustomerFormPage() {
                                 billing_address: { ...customerForm.billing_address, street_address: e.target.value }
                               })
                             }
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-transparent"
                             placeholder="456 Billing Street"
                             required
                           />
                         </div>
 
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">City *</label>
+                          <label className="block text-xs font-medium text-gray-700 mb-1">City *</label>
                           <input
                             type="text"
                             value={customerForm.billing_address.city}
@@ -1467,14 +1467,14 @@ export default function CustomerFormPage() {
                                 billing_address: { ...customerForm.billing_address, city: e.target.value }
                               })
                             }
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-transparent"
                             placeholder="Calgary"
                             required
                           />
                         </div>
 
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">Province *</label>
+                          <label className="block text-xs font-medium text-gray-700 mb-1">Province *</label>
                           <select
                             value={customerForm.billing_address.province}
                             onChange={e =>
@@ -1483,7 +1483,7 @@ export default function CustomerFormPage() {
                                 billing_address: { ...customerForm.billing_address, province: e.target.value }
                               })
                             }
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-transparent"
                             required
                           >
                             {CANADIAN_PROVINCES.map(prov => (
@@ -1495,7 +1495,7 @@ export default function CustomerFormPage() {
                         </div>
 
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">Postal Code *</label>
+                          <label className="block text-xs font-medium text-gray-700 mb-1">Postal Code *</label>
                           <input
                             type="text"
                             value={customerForm.billing_address.postal_code}
@@ -1505,7 +1505,7 @@ export default function CustomerFormPage() {
                                 billing_address: { ...customerForm.billing_address, postal_code: e.target.value }
                               })
                             }
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-transparent"
                             placeholder="T2P 1J9"
                             required
                           />
