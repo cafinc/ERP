@@ -77,6 +77,8 @@ export default function CustomerDetailPage() {
   // Archive Modal
   const [showArchiveModal, setShowArchiveModal] = useState(false);
   const [archiving, setArchiving] = useState(false);
+  const [showArchiveSuccessModal, setShowArchiveSuccessModal] = useState(false);
+  const [archiveSuccessMessage, setArchiveSuccessMessage] = useState('');
 
   // Attach Form Modal
   const [showAttachFormModal, setShowAttachFormModal] = useState(false);
