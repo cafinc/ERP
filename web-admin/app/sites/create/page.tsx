@@ -229,32 +229,91 @@ export default function CreateSitePage() {
                 Site Information
               </h2>
               <div className="space-y-6">
-                {/* Site Name */}
+                {/* Site Name & Reference - Same Line */}
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-900 mb-2">
+                      Site Name <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      value={siteName}
+                      onChange={(e) => setSiteName(e.target.value)}
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
+                      placeholder="e.g., Main Office Parking Lot"
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-900 mb-2">
+                      Site Reference/Code
+                    </label>
+                    <input
+                      type="text"
+                      value={siteReference}
+                      onChange={(e) => setSiteReference(e.target.value)}
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
+                      placeholder="e.g., LOT-001, SITE-A"
+                    />
+                  </div>
+                </div>
+
+                {/* Site Contact Information */}
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-900 mb-2">
+                      Contact Phone
+                    </label>
+                    <input
+                      type="tel"
+                      value={siteContact?.phone || ''}
+                      onChange={(e) => setSiteContact({ ...siteContact, phone: e.target.value })}
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
+                      placeholder="e.g., (555) 123-4567"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-900 mb-2">
+                      Contact Email
+                    </label>
+                    <input
+                      type="email"
+                      value={siteContact?.email || ''}
+                      onChange={(e) => setSiteContact({ ...siteContact, email: e.target.value })}
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
+                      placeholder="e.g., contact@site.com"
+                    />
+                  </div>
+                </div>
+
+                {/* General Address */}
                 <div>
                   <label className="block text-sm font-semibold text-gray-900 mb-2">
-                    Site Name <span className="text-red-500">*</span>
+                    Site Address <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="text"
-                    value={siteName}
-                    onChange={(e) => setSiteName(e.target.value)}
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
                     className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
-                    placeholder="e.g., Main Office Parking Lot"
+                    placeholder="Enter full address"
                     required
                   />
                 </div>
 
-                {/* Site Reference */}
+                {/* Area Size */}
                 <div>
                   <label className="block text-sm font-semibold text-gray-900 mb-2">
-                    Site Reference/Code
+                    Area Size (sq ft)
                   </label>
                   <input
-                    type="text"
-                    value={siteReference}
-                    onChange={(e) => setSiteReference(e.target.value)}
+                    type="number"
+                    value={areaSize}
+                    onChange={(e) => setAreaSize(e.target.value)}
                     className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
-                    placeholder="e.g., LOT-001, SITE-A"
+                    placeholder="e.g., 5000"
                   />
                 </div>
               </div>
