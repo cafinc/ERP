@@ -515,6 +515,60 @@ export default function CustomerFormPage() {
     }
   };
 
+  // Check for duplicate customers
+  const checkForDuplicates = async () => {
+    setCheckingDuplicates(true);
+    try {
+      const response = await api.get('/api/customers');
+      const allCustomers = response.data;
+      
+      const duplicates: any[] = [];
+      
+      if (customerForm.customer_type === 'individual') {
+        // Check for duplicates by email or phone for individuals
+        const emailMatch = allCustomers.filter((c: any) => 
+          c.email?.toLowerCase() === customerForm.email.toLowerCase()
+        );
+        const phoneMatch = allCustomers.filter((c: any) => {
+          const cleanCurrentPhone = customerForm.phone.replace(/\D/g, '');
+          const cleanDbPhone = c.phone?.replace(/\D/g, '') || '';
+          return cleanDbPhone && cleanCurrentPhone && cleanDbPhone === cleanCurrentPhone;
+        });
+        
+        duplicates.push(...emailMatch, ...phoneMatch);
+      } else {
+        // Check for duplicates by company name for companies
+        const companyMatch = allCustomers.filter((c: any) => 
+          c.customer_type === 'company' && 
+          c.company_name?.toLowerCase() === customerForm.company_name.toLowerCase()
+        );
+        const emailMatch = allCustomers.filter((c: any) => 
+          c.email?.toLowerCase() === customerForm.email.toLowerCase()
+        );
+        
+        duplicates.push(...companyMatch, ...emailMatch);
+      }
+      
+      // Remove duplicates from the array itself
+      const uniqueDuplicates = Array.from(
+        new Map(duplicates.map(item => [item._id, item])).values()
+      );
+      
+      if (uniqueDuplicates.length > 0) {
+        setDuplicateCustomers(uniqueDuplicates);
+        setShowDuplicateModal(true);
+        return true; // Has duplicates
+      }
+      
+      return false; // No duplicates
+    } catch (error) {
+      console.error('Error checking duplicates:', error);
+      return false; // Continue anyway if check fails
+    } finally {
+      setCheckingDuplicates(false);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
