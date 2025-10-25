@@ -2006,9 +2006,14 @@ export default function CustomerFormPage() {
                     Province *
                   </label>
                   <select
+                    name="province"
                     value={customerForm.province}
                     onChange={e => setCustomerForm({ ...customerForm, province: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:border-transparent ${
+                      fieldErrors.province 
+                        ? 'border-red-500 focus:ring-red-500' 
+                        : 'border-gray-300 focus:ring-blue-500'
+                    }`}
                     required
                   >
                     {CANADIAN_PROVINCES.map(prov => (
@@ -2017,6 +2022,9 @@ export default function CustomerFormPage() {
                       </option>
                     ))}
                   </select>
+                  {fieldErrors.province && (
+                    <p className="text-red-500 text-xs mt-1">{fieldErrors.province}</p>
+                  )}
                 </div>
 
                 <div>
