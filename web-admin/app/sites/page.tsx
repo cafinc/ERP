@@ -333,7 +333,7 @@ export default function SitesPage() {
                 </div>
 
                 {/* Tags - Customer and Service Type */}
-                <div className="flex flex-wrap gap-2 mb-4">
+                <div className="flex flex-wrap gap-2">
                   {/* Customer Tag */}
                   <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-blue-50 text-blue-700 text-xs font-medium rounded-full">
                     <Building className="w-3 h-3" />
@@ -349,27 +349,18 @@ export default function SitesPage() {
                     {site.site_type === 'emergency_services' && '🚨'}
                     {getSiteTypeLabel(site.site_type)}
                   </span>
-                </div>
-
-                {/* Action Buttons */}
-                <div className="flex gap-2 pt-3 border-t border-gray-100">
-                  <button 
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      router.push(`/sites/${site.id}`);
-                    }}
-                    className="flex-1 px-3 py-1.5 text-sm bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282]"
-                  >
-                    View Details
-                  </button>
+                  
+                  {/* Map Button */}
                   <button 
                     onClick={(e) => {
                       e.stopPropagation();
                       handleViewOnMap(site);
                     }}
-                    className="px-3 py-1.5 text-sm bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50"
+                    className="ml-auto px-2.5 py-1 text-xs bg-white border border-gray-300 text-gray-700 rounded-full hover:bg-gray-50 inline-flex items-center gap-1"
+                    title="View on Map"
                   >
-                    <MapPin className="w-4 h-4" />
+                    <MapPin className="w-3 h-3" />
+                    Map
                   </button>
                 </div>
               </div>
