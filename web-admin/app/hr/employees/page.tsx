@@ -422,7 +422,7 @@ export default function EmployeesPage() {
             </div>
 
             {/* Modal Body */}
-            <form onSubmit={handleSubmit} className="p-6 space-y-6 max-h-[calc(90vh-180px)] overflow-y-auto">
+            <form id="employeeForm" onSubmit={handleSubmit} className="p-6 space-y-6 max-h-[calc(90vh-180px)] overflow-y-auto">
               {/* Personal Information Card */}
               <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-6 backdrop-blur-sm">
                 <h3 className="text-lg font-bold text-gray-900 flex items-center mb-4">
