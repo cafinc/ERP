@@ -104,6 +104,31 @@ export default function CreateSitePage() {
   const [siteServices, setSiteServices] = useState<SiteService[]>([]);
   const [showManualCoordinates, setShowManualCoordinates] = useState(false);
 
+  // Phone number formatting function
+  const formatPhoneNumber = (value: string) => {
+    // Remove all non-numeric characters
+    const phoneNumber = value.replace(/\D/g, '');
+    
+    // Format as (XXX) XXX-XXXX
+    if (phoneNumber.length <= 3) {
+      return phoneNumber;
+    } else if (phoneNumber.length <= 6) {
+      return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
+    } else {
+      return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`;
+    }
+  };
+
+  const handleContactPhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formatted = formatPhoneNumber(e.target.value);
+    setSiteContact({ ...siteContact, phone: formatted });
+  };
+
+  const handleSecurityPhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formatted = formatPhoneNumber(e.target.value);
+    setSecurityPhone(formatted);
+  };
+
   const CANADIAN_PROVINCES = [
     { code: 'AB', name: 'Alberta' },
     { code: 'BC', name: 'British Columbia' },
