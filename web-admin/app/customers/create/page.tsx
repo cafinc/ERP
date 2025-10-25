@@ -485,7 +485,7 @@ export default function CustomerFormPage() {
     setFieldErrors(errors);
   };
 
-  const handlePhoneChange = (field: 'phone' | 'mobile' | 'main_contact_phone', value: string) => {
+  const handlePhoneChange = (field: 'phone' | 'mobile', value: string) => {
     const formatted = formatPhoneNumber(value);
     if (field === 'phone') {
       setCustomerForm({ ...customerForm, phone: formatted });
@@ -493,12 +493,6 @@ export default function CustomerFormPage() {
     } else if (field === 'mobile') {
       setCustomerForm({ ...customerForm, mobile: formatted });
       validateField('mobile', formatted);
-    } else {
-      setCustomerForm({
-        ...customerForm,
-        main_contact: { ...customerForm.main_contact, phone: formatted },
-      });
-      validateField('main_contact_phone', formatted);
     }
   };
 
