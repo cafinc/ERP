@@ -876,7 +876,7 @@ export default function CustomerFormPage() {
       {/* Main Content */}
       <div className="h-full bg-gray-50 overflow-auto">
         <div className="max-w-4xl mx-auto p-6">
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} noValidate className="space-y-6">
               {/* Customer Type Selection */}
               {!isEdit && (
                 <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
