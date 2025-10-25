@@ -156,46 +156,45 @@ export default function ConversationDetailPage() {
   }
 
   return (
-    <PageHeader>
-      <div className="h-screen flex flex-col">
-        {/* Header */}
-        <div className="bg-white shadow-sm border-b border-gray-200 px-6 py-4 hover:shadow-md transition-shadow">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <button
-                onClick={() => router.push('/communication')}
-                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-              >
-                <ArrowLeft className="w-6 h-6 text-gray-600" />
-              </button>
-              <div className="flex items-center space-x-3">
-                <div className="p-3 bg-blue-100 rounded-full">
-                  <User className="w-6 h-6 text-[#3f72af]" />
-                </div>
-                <div>
-                  <h1 className="text-xl font-bold text-gray-900">
-                    {conversation.other_user?.name || 'Unknown User'}
-                  </h1>
-                  <div className="flex items-center space-x-2 mt-1">
-                    <span className={`inline-flex items-center space-x-1 px-2 py-0.5 rounded-full text-xs font-semibold ${getTypeBadge()}`}>
-                      {getTypeIcon()}
-                      <span className="ml-1">{conversation.type.toUpperCase()}</span>
-                    </span>
-                    <span className="text-sm text-gray-500">
-                      {conversation.other_user?.role?.charAt(0).toUpperCase() + conversation.other_user?.role?.slice(1)}
-                    </span>
-                  </div>
+    <div className="h-screen flex flex-col">
+      {/* Header */}
+      <div className="bg-white shadow-sm border-b border-gray-200 px-6 py-4 hover:shadow-md transition-shadow">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-4">
+            <button
+              onClick={() => router.push('/communication')}
+              className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+            >
+              <ArrowLeft className="w-6 h-6 text-gray-600" />
+            </button>
+            <div className="flex items-center space-x-3">
+              <div className="p-3 bg-blue-100 rounded-full">
+                <User className="w-6 h-6 text-[#3f72af]" />
+              </div>
+              <div>
+                <h1 className="text-xl font-bold text-gray-900">
+                  {conversation.other_user?.name || 'Unknown User'}
+                </h1>
+                <div className="flex items-center space-x-2 mt-1">
+                  <span className={`inline-flex items-center space-x-1 px-2 py-0.5 rounded-full text-xs font-semibold ${getTypeBadge()}`}>
+                    {getTypeIcon()}
+                    <span className="ml-1">{conversation.type.toUpperCase()}</span>
+                  </span>
+                  <span className="text-sm text-gray-500">
+                    {conversation.other_user?.role?.charAt(0).toUpperCase() + conversation.other_user?.role?.slice(1)}
+                  </span>
                 </div>
               </div>
             </div>
-            <button
-              onClick={fetchConversation}
-              className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-            >
-              <RefreshCw className="w-5 h-5 text-gray-600" />
-            </button>
           </div>
+          <button
+            onClick={fetchConversation}
+            className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+          >
+            <RefreshCw className="w-5 h-5 text-gray-600" />
+          </button>
         </div>
+      </div>
 
         {/* Messages */}
         <div className="flex-1 overflow-y-auto bg-gray-50 p-6">
