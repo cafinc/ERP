@@ -82,11 +82,15 @@ export default function ConsumablesPage() {
     
     try {
       const payload = {
-        ...formData,
-        current_stock: parseFloat(formData.current_stock) || 0,
-        min_stock_level: parseFloat(formData.min_stock_level) || 0,
-        unit_cost: parseFloat(formData.unit_cost) || 0,
+        name: formData.name.trim(),
+        unit: formData.unit,
+        current_stock: parseFloat(formData.current_stock as string) || 0,
+        min_stock_level: parseFloat(formData.min_stock_level as string) || 0,
+        unit_cost: parseFloat(formData.unit_cost as string) || 0,
+        category: formData.category,
       };
+      
+      console.log('Payload being sent:', payload);
       
       await api.post('/consumables', payload);
       toast.success('Consumable created successfully!', { id: loadingToast });
@@ -102,7 +106,10 @@ export default function ConsumablesPage() {
       loadConsumables();
     } catch (error: any) {
       console.error('Error creating consumable:', error);
-      const errorMessage = error?.response?.data?.detail || 'Failed to create consumable';
+      console.error('Error response:', error?.response?.data);
+      const errorMessage = error?.response?.data?.detail || 
+                          (error?.response?.data?.message) || 
+                          'Failed to create consumable. Please check all fields.';
       toast.error(errorMessage, { id: loadingToast });
     }
   };
