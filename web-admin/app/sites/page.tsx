@@ -158,6 +158,15 @@ export default function SitesPage() {
           ]}
           activeTab={filterActive}
           onTabChange={(value) => setFilterActive(value)}
+          secondaryTabs={[
+            { label: "🏠 Residential", value: "residential", count: sites.filter(s => s.site_type === 'residential').length },
+            { label: "🏢 Commercial", value: "commercial", count: sites.filter(s => s.site_type === 'commercial').length },
+            { label: "🏭 Industrial", value: "industrial", count: sites.filter(s => s.site_type === 'industrial').length },
+            { label: "🛍️ Retail", value: "retail", count: sites.filter(s => s.site_type === 'retail').length },
+            { label: "🚨 Emergency", value: "emergency_services", count: sites.filter(s => s.site_type === 'emergency_services').length },
+          ]}
+          activeSecondaryTab={filterType}
+          onSecondaryTabChange={(value) => setFilterType(value)}
           showSearch={true}
           searchPlaceholder="Search sites by name, address, or customer..."
           onSearch={setSearchQuery}
