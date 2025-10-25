@@ -950,68 +950,41 @@ export default function CustomerFormPage() {
 
       <div className="max-w-4xl mx-auto p-6">
         <form id="customer-form" onSubmit={handleSubmit} className="space-y-6 pb-8">
-              {/* Customer Type Selection - Enhanced Design */}
+              {/* Customer Type Selection - Matching Sites Design */}
               {!isEdit && (
-                <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 hover:shadow-2xl transition-all">
-                    <div className="mb-6">
-                      <h2 className="text-2xl font-bold text-gray-900 mb-2 flex items-center gap-2">
-                        <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center">
-                          <Users className="w-5 h-5 text-white" />
-                        </div>
-                        Customer Type *
-                      </h2>
-                      <p className="text-gray-600">Choose the type of customer you're adding</p>
-                    </div>
-                    <div className="grid grid-cols-2 gap-6">
+                <div className="bg-white rounded-xl shadow-sm border border-gray-200">
+                  <div className="p-6 border-b border-gray-200">
+                    <h2 className="text-2xl font-bold text-gray-900">Customer Type</h2>
+                    <p className="text-gray-600 mt-1">Choose the type of customer you're adding</p>
+                  </div>
+                  <div className="p-6">
+                    <div className="flex flex-wrap gap-2">
                       <button
                         type="button"
                         onClick={() => handleTypeSelection('individual')}
-                        className={`group relative p-8 border-2 rounded-2xl transition-all duration-300 ${
+                        className={`px-6 py-3 rounded-lg border-2 font-medium transition-all capitalize ${
                           customerForm.customer_type === 'individual'
-                            ? 'border-blue-500 bg-gradient-to-br from-blue-50 to-indigo-50 shadow-xl scale-105'
-                            : 'border-gray-200 hover:border-blue-300 hover:shadow-lg bg-white hover:scale-102'
+                            ? 'bg-blue-500 text-white border-blue-500'
+                            : 'bg-white text-gray-700 border-gray-300 hover:border-blue-300'
                         }`}
                       >
-                        <div className={`absolute top-4 right-4 w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all ${
-                          customerForm.customer_type === 'individual'
-                            ? 'border-blue-500 bg-blue-500'
-                            : 'border-gray-300 bg-white'
-                        }`}>
-                          {customerForm.customer_type === 'individual' && (
-                            <Check className="w-4 h-4 text-white" />
-                          )}
-                        </div>
-                        <Users className={`w-16 h-16 mx-auto mb-4 transition-colors ${
-                          customerForm.customer_type === 'individual' ? 'text-blue-600' : 'text-gray-400 group-hover:text-blue-500'
-                        }`} />
-                        <p className="font-bold text-gray-900 text-xl mb-2">Contact</p>
-                        <p className="text-sm text-gray-600">Individual person or homeowner</p>
+                        <Users className="w-5 h-5 inline-block mr-2" />
+                        Contact
                       </button>
                       <button
                         type="button"
                         onClick={() => handleTypeSelection('company')}
-                        className={`group relative p-8 border-2 rounded-2xl transition-all duration-300 ${
+                        className={`px-6 py-3 rounded-lg border-2 font-medium transition-all capitalize ${
                           customerForm.customer_type === 'company'
-                            ? 'border-blue-500 bg-gradient-to-br from-blue-50 to-indigo-50 shadow-xl scale-105'
-                            : 'border-gray-200 hover:border-blue-300 hover:shadow-lg bg-white hover:scale-102'
+                            ? 'bg-blue-500 text-white border-blue-500'
+                            : 'bg-white text-gray-700 border-gray-300 hover:border-blue-300'
                         }`}
                       >
-                        <div className={`absolute top-4 right-4 w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all ${
-                          customerForm.customer_type === 'company'
-                            ? 'border-blue-500 bg-blue-500'
-                            : 'border-gray-300 bg-white'
-                        }`}>
-                          {customerForm.customer_type === 'company' && (
-                            <Check className="w-4 h-4 text-white" />
-                          )}
-                        </div>
-                        <Building className={`w-16 h-16 mx-auto mb-4 transition-colors ${
-                          customerForm.customer_type === 'company' ? 'text-blue-600' : 'text-gray-400 group-hover:text-blue-500'
-                        }`} />
-                        <p className="font-bold text-gray-900 text-xl mb-2">Company</p>
-                        <p className="text-sm text-gray-600">Business or organization</p>
+                        <Building className="w-5 h-5 inline-block mr-2" />
+                        Company
                       </button>
                     </div>
+                  </div>
                 </div>
               )}
 
