@@ -190,7 +190,8 @@ export default function LeadsPage() {
 
   const handleCreateOrUpdate = async () => {
     if (!formData.name || !formData.email || !formData.phone) {
-      alert('Please fill in all required fields');
+      setErrorMessage('Please fill in all required fields (Name, Email, Phone)');
+      setShowErrorModal(true);
       return;
     }
 
@@ -200,6 +201,8 @@ export default function LeadsPage() {
         ...formData,
         estimated_value: formData.estimated_value ? parseFloat(formData.estimated_value) : null,
         next_follow_up: formData.next_follow_up || null,
+        services_requested: selectedServices,
+        documents: uploadedFiles,
       };
 
       if (editingLead) {
@@ -208,13 +211,18 @@ export default function LeadsPage() {
         await api.post('/leads', payload);
       }
 
-      alert(`Lead ${editingLead ? 'updated' : 'created'} successfully!`);
-      setShowModal(false);
-      resetForm();
-      loadLeads();
-    } catch (error) {
+      setShowSuccessModal(true);
+      setTimeout(() => {
+        setShowModal(false);
+        setShowSuccessModal(false);
+        resetForm();
+        loadLeads();
+      }, 2000);
+    } catch (error: any) {
       console.error('Error saving lead:', error);
-      alert('Failed to save lead');
+      const errorMsg = error?.response?.data?.detail || error?.message || 'Failed to save lead. Please try again.';
+      setErrorMessage(errorMsg);
+      setShowErrorModal(true);
     } finally {
       setSaving(false);
     }
