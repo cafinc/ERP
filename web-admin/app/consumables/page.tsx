@@ -694,5 +694,6 @@ export default function ConsumablesPage() {
           </div>
         )}
       </div>
-    );
+    </>
+  );
 }
