@@ -878,7 +878,7 @@ export default function CustomerFormPage() {
   }
 
   return (
-    <div className="h-screen flex flex-col bg-gray-50">
+    <div className="h-screen flex flex-col bg-gradient-to-br from-gray-50 via-blue-50/30 to-gray-50">
       {/* Page Header */}
       <PageHeader
         title={isEdit ? 'Edit Customer' : 'New Customer'}
@@ -890,7 +890,7 @@ export default function CustomerFormPage() {
       />
 
       {/* Main Content */}
-      <div className="flex-1 overflow-y-auto bg-gradient-to-br from-gray-50 via-blue-50/30 to-gray-50">
+      <div className="flex-1 overflow-y-auto">
         <div className="max-w-5xl mx-auto p-6">
           <form onSubmit={handleSubmit} noValidate className="space-y-6 pb-6">
               {/* Customer Type Selection */}
