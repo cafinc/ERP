@@ -400,6 +400,7 @@ export default function SiteDetailPage() {
           </div>
         )}
       </div>
-    </div>
+      </div>
+    </>
   );
 }
