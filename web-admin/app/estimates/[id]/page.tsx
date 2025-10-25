@@ -184,8 +184,13 @@ export default function EstimateDetailPage() {
 
   if (!estimate) {
     return (
-      <PageHeader>
-        <div className="flex flex-col items-center justify-center h-full">
+      <>
+        <PageHeader
+          title="Estimate Not Found"
+          subtitle="The estimate you're looking for doesn't exist"
+          breadcrumbs={[{ label: "Home", href: "/" }, { label: "Estimates", href: "/estimates" }]}
+        />
+        <div className="flex flex-col items-center justify-center h-full p-8">
           <FileText className="w-16 h-16 text-gray-300 mb-4" />
           <h2 className="text-2xl font-bold text-gray-900 mb-2">Estimate Not Found</h2>
           <p className="text-gray-600 mb-4">The estimate you're looking for doesn't exist</p>
@@ -197,12 +202,17 @@ export default function EstimateDetailPage() {
             <span>Back to Estimates</span>
           </button>
         </div>
-      </div>
+      </>
     );
   }
 
   return (
-    <PageHeader>
+    <>
+      <PageHeader
+        title="Estimate Details"
+        subtitle="View and manage estimate information"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Estimates", href: "/estimates" }, { label: "Details" }]}
+      />
       <div className="p-8">
         {/* Header */}
         <div className="mb-4 flex items-center justify-between">
