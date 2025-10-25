@@ -36,13 +36,15 @@ const UNITS = [
 ];
 
 interface Consumable {
-  id: string;
+  _id?: string;
+  id?: string;
   name: string;
+  consumable_type: string;
   unit: string;
-  current_stock: number;
-  min_stock_level: number;
-  unit_cost: number;
-  category: string;
+  quantity_available: number;
+  reorder_level: number;
+  cost_per_unit: number;
+  active?: boolean;
 }
 
 export default function ConsumablesPage() {
