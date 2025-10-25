@@ -1265,16 +1265,16 @@ export default function CustomerFormPage() {
               {/* Company Form */}
               {customerForm.customer_type === 'company' && (
                 <div>
-                  {/* Company Information - Compact */}
-                  <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-5 backdrop-blur-sm hover:shadow-md transition-shadow">
-                    <h2 className="text-xl font-bold text-gray-900 mb-3 flex items-center space-x-2">
-                      <Building className="w-4 h-4 text-[#3f72af]" />
+                  {/* Company Information */}
+                  <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
+                    <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center space-x-2">
+                      <Building className="w-5 h-5 text-[#3f72af]" />
                       <span>Company Information</span>
                     </h2>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="md:col-span-2">
-                      <label className="block text-xs font-medium text-gray-700 mb-1">
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
                         Legal Business Name *
                       </label>
                       <input
@@ -1283,14 +1283,14 @@ export default function CustomerFormPage() {
                         onChange={e =>
                           setCustomerForm({ ...customerForm, company_name: e.target.value })
                         }
-                        className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         placeholder="ABC Corporation Ltd."
                         required
                       />
                     </div>
 
                     <div className="md:col-span-2">
-                      <label className="block text-xs font-medium text-gray-700 mb-1">
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
                         Operating As
                       </label>
                       <input
@@ -1299,22 +1299,22 @@ export default function CustomerFormPage() {
                         onChange={e =>
                           setCustomerForm({ ...customerForm, operating_as: e.target.value })
                         }
-                        className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         placeholder="ABC Services"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-medium text-gray-700 mb-1">
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
                         Office Number *
                       </label>
                       <div className="relative">
-                        <Phone className="absolute left-2 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                        <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                         <input
                           type="tel"
                           value={customerForm.office_number}
                           onChange={e => setCustomerForm({ ...customerForm, office_number: e.target.value })}
-                          className="w-full pl-7 pr-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-transparent"
+                          className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                           placeholder="(555) 123-4567"
                           required
                         />
@@ -1322,18 +1322,18 @@ export default function CustomerFormPage() {
                     </div>
 
                     <div>
-                      <label className="block text-xs font-medium text-gray-700 mb-1">
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
                         Email *
                       </label>
                       <div className="relative">
-                        <Mail className="absolute left-2 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                        <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                         <input
                           type="email"
                           value={customerForm.email}
                           onChange={e =>
                             setCustomerForm({ ...customerForm, email: e.target.value })
                           }
-                          className="w-full pl-7 pr-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-transparent"
+                          className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                           placeholder="info@company.com"
                           required
                         />
@@ -1342,50 +1342,50 @@ export default function CustomerFormPage() {
                     </div>
                   </div>
 
-                  {/* Company Address - Compact */}
-                  <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-5 backdrop-blur-sm hover:shadow-md transition-shadow">
-                    <h2 className="text-xl font-bold text-gray-900 mb-3 flex items-center space-x-2">
-                      <MapPin className="w-4 h-4 text-[#3f72af]" />
+                  {/* Company Address */}
+                  <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
+                    <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center space-x-2">
+                      <MapPin className="w-5 h-5 text-[#3f72af]" />
                       <span>Company Address *</span>
                     </h2>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="md:col-span-2">
-                      <label className="block text-xs font-medium text-gray-700 mb-1">Address *</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Address *</label>
                       <input
                         type="text"
                         value={customerForm.street_address}
                         onChange={e =>
                           setCustomerForm({ ...customerForm, street_address: e.target.value })
                         }
-                        className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         placeholder="123 Main Street"
                         required
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-medium text-gray-700 mb-1">City *</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">City *</label>
                       <input
                         type="text"
                         value={customerForm.city}
                         onChange={e =>
                           setCustomerForm({ ...customerForm, city: e.target.value })
                         }
-                        className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         placeholder="Calgary"
                         required
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-medium text-gray-700 mb-1">Province *</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Province *</label>
                       <select
                         value={customerForm.province}
                         onChange={e =>
                           setCustomerForm({ ...customerForm, province: e.target.value })
                         }
-                        className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         required
                       >
                         {CANADIAN_PROVINCES.map(prov => (
@@ -1397,36 +1397,36 @@ export default function CustomerFormPage() {
                     </div>
 
                     <div>
-                      <label className="block text-xs font-medium text-gray-700 mb-1">Postal Code *</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Postal Code *</label>
                       <input
                         type="text"
                         value={customerForm.postal_code}
                         onChange={e =>
                           setCustomerForm({ ...customerForm, postal_code: e.target.value })
                         }
-                        className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         placeholder="T2P 1J9"
                         required
                       />
                     </div>
                     
                     {/* Billing Address Toggle */}
-                    <div className="md:col-span-2 mt-2">
-                      <div className="flex items-center gap-2">
+                    <div className="md:col-span-2 mt-4">
+                      <div className="flex items-center gap-3">
                         <button
                           type="button"
                           onClick={() => setCustomerForm({ ...customerForm, billing_address_same: !customerForm.billing_address_same })}
-                          className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#3f72af] focus:ring-offset-2 flex-shrink-0 ${
+                          className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#3f72af] focus:ring-offset-2 flex-shrink-0 ${
                             customerForm.billing_address_same ? 'bg-[#3f72af]' : 'bg-gray-200'
                           }`}
                         >
                           <span
-                            className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform ${
-                              customerForm.billing_address_same ? 'translate-x-5' : 'translate-x-1'
+                            className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                              customerForm.billing_address_same ? 'translate-x-6' : 'translate-x-1'
                             }`}
                           />
                         </button>
-                        <label className="text-xs font-medium text-gray-700">
+                        <label className="text-sm font-medium text-gray-700">
                           Billing address same as company address
                         </label>
                       </div>
@@ -1435,12 +1435,12 @@ export default function CustomerFormPage() {
                     {/* Billing Address Fields */}
                     {!customerForm.billing_address_same && (
                       <>
-                        <div className="md:col-span-2 mt-2 pt-2 border-t border-gray-200">
-                          <h3 className="text-sm font-semibold text-gray-700 mb-2">Billing Address</h3>
+                        <div className="md:col-span-2 mt-4">
+                          <h3 className="text-lg font-semibold text-gray-900 mb-3">Billing Address</h3>
                         </div>
                         
                         <div className="md:col-span-2">
-                          <label className="block text-xs font-medium text-gray-700 mb-1">Address *</label>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">Address *</label>
                           <input
                             type="text"
                             value={customerForm.billing_address.street_address}
@@ -1450,14 +1450,14 @@ export default function CustomerFormPage() {
                                 billing_address: { ...customerForm.billing_address, street_address: e.target.value }
                               })
                             }
-                            className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-transparent"
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                             placeholder="456 Billing Street"
                             required
                           />
                         </div>
 
                         <div>
-                          <label className="block text-xs font-medium text-gray-700 mb-1">City *</label>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">City *</label>
                           <input
                             type="text"
                             value={customerForm.billing_address.city}
@@ -1467,14 +1467,14 @@ export default function CustomerFormPage() {
                                 billing_address: { ...customerForm.billing_address, city: e.target.value }
                               })
                             }
-                            className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-transparent"
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                             placeholder="Calgary"
                             required
                           />
                         </div>
 
                         <div>
-                          <label className="block text-xs font-medium text-gray-700 mb-1">Province *</label>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">Province *</label>
                           <select
                             value={customerForm.billing_address.province}
                             onChange={e =>
@@ -1483,7 +1483,7 @@ export default function CustomerFormPage() {
                                 billing_address: { ...customerForm.billing_address, province: e.target.value }
                               })
                             }
-                            className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-transparent"
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                             required
                           >
                             {CANADIAN_PROVINCES.map(prov => (
@@ -1495,7 +1495,7 @@ export default function CustomerFormPage() {
                         </div>
 
                         <div>
-                          <label className="block text-xs font-medium text-gray-700 mb-1">Postal Code *</label>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">Postal Code *</label>
                           <input
                             type="text"
                             value={customerForm.billing_address.postal_code}
@@ -1505,7 +1505,7 @@ export default function CustomerFormPage() {
                                 billing_address: { ...customerForm.billing_address, postal_code: e.target.value }
                               })
                             }
-                            className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-transparent"
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                             placeholder="T2P 1J9"
                             required
                           />
@@ -1645,16 +1645,16 @@ export default function CustomerFormPage() {
                     </div>
                   </div>
 
-                {/* Company Accounting - Compact */}
-                <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-5 backdrop-blur-sm hover:shadow-md transition-shadow">
-                  <h2 className="text-xl font-bold text-gray-900 mb-3 flex items-center space-x-2">
-                    <CreditCard className="w-4 h-4 text-[#3f72af]" />
+                {/* Company Accounting */}
+                <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center space-x-2">
+                    <CreditCard className="w-5 h-5 text-[#3f72af]" />
                     <span>Accounting Information</span>
                   </h2>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-medium text-gray-700 mb-1">
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
                         Business Number
                       </label>
                       <input
@@ -1666,13 +1666,13 @@ export default function CustomerFormPage() {
                             accounting: { ...customerForm.accounting, business_number: e.target.value },
                           })
                         }
-                        className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         placeholder="123456789RC0001"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-medium text-gray-700 mb-1">
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
                         Payment Terms
                       </label>
                       <select
@@ -1686,7 +1686,7 @@ export default function CustomerFormPage() {
                             },
                           })
                         }
-                        className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       >
                         <option value="due_on_receipt">Due on Receipt</option>
                         <option value="net_15">Net 15</option>
@@ -1698,7 +1698,7 @@ export default function CustomerFormPage() {
 
                     {/* Credit Limit Toggle */}
                     <div className="md:col-span-2">
-                      <div className="flex items-center gap-2 mb-1">
+                      <div className="flex items-center gap-3 mb-2">
                         <button
                           type="button"
                           onClick={() => setCustomerForm({
@@ -1708,17 +1708,17 @@ export default function CustomerFormPage() {
                               credit_limit_enabled: !customerForm.accounting.credit_limit_enabled
                             }
                           })}
-                          className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#3f72af] focus:ring-offset-2 flex-shrink-0 ${
+                          className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#3f72af] focus:ring-offset-2 flex-shrink-0 ${
                             customerForm.accounting.credit_limit_enabled ? 'bg-[#3f72af]' : 'bg-gray-200'
                           }`}
                         >
                           <span
-                            className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform ${
-                              customerForm.accounting.credit_limit_enabled ? 'translate-x-5' : 'translate-x-1'
+                            className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                              customerForm.accounting.credit_limit_enabled ? 'translate-x-6' : 'translate-x-1'
                             }`}
                           />
                         </button>
-                        <label className="text-xs font-medium text-gray-700">
+                        <label className="text-sm font-medium text-gray-700">
                           Set Credit Limit
                         </label>
                       </div>
@@ -1726,11 +1726,11 @@ export default function CustomerFormPage() {
 
                     {customerForm.accounting.credit_limit_enabled && (
                       <div>
-                        <label className="block text-xs font-medium text-gray-700 mb-1">
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
                           Credit Limit Amount
                         </label>
                         <div className="relative">
-                          <span className="absolute left-2 top-1/2 transform -translate-y-1/2 text-sm text-gray-500">$</span>
+                          <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">$</span>
                           <input
                             type="number"
                             value={customerForm.accounting.credit_limit}
@@ -1743,7 +1743,7 @@ export default function CustomerFormPage() {
                                 },
                               })
                             }
-                            className="w-full pl-6 pr-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-transparent"
+                            className="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                             placeholder="10000.00"
                           />
                         </div>
@@ -1751,7 +1751,7 @@ export default function CustomerFormPage() {
                     )}
 
                     <div>
-                      <label className="block text-xs font-medium text-gray-700 mb-1">
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
                         Preferred Payment Method
                       </label>
                       <select
@@ -1765,7 +1765,7 @@ export default function CustomerFormPage() {
                             },
                           })
                         }
-                        className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       >
                         <option value="e_transfer">E-Transfer</option>
                         <option value="direct_debit">Direct Debit</option>
@@ -1789,9 +1789,9 @@ export default function CustomerFormPage() {
                               },
                             })
                           }
-                          className="w-4 h-4 text-[#3f72af] rounded focus:ring-blue-500"
+                          className="w-5 h-5 text-[#3f72af] rounded focus:ring-blue-500"
                         />
-                        <span className="text-xs font-medium text-gray-700">
+                        <span className="text-sm font-medium text-gray-700">
                           Purchase Order Required
                         </span>
                       </label>
