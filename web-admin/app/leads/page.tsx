@@ -512,9 +512,9 @@ export default function LeadsPage() {
           {/* View Toggle */}
           <div className="mb-4 flex space-x-2">
             <button
-              onClick={() => setView('pipeline')}
+              onClick={() => setViewMode('pipeline')}
               className={`px-4 py-2 rounded-lg font-medium transition-colors text-sm ${
-                view === 'pipeline'
+                viewMode === 'pipeline'
                   ? 'bg-[#3f72af] text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
