@@ -382,19 +382,24 @@ export default function CreateSitePage() {
               </div>
             </div>
 
-            {/* Site Type - Compact */}
-            <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-6 backdrop-blur-sm hover:shadow-md transition-shadow">
-              <label className="block text-sm font-semibold text-gray-900 mb-3">
-                <Building2 className="w-4 h-4 inline-block mr-2 text-[#3f72af]" />
-                Site Type <span className="text-red-500">*</span>
+            {/* Site Type */}
+            <div className="bg-white/95 backdrop-blur-md rounded-3xl shadow-xl border border-white/40 p-6 hover:shadow-2xl transition-shadow">
+              <h3 className="text-sm font-bold text-gray-900 mb-4 flex items-center gap-2">
+                <div className="bg-gradient-to-br from-[#3f72af] to-[#2c5282] rounded-xl p-2">
+                  <Building2 className="w-4 h-4 text-white" />
+                </div>
+                Site Type
+              </h3>
+              <label className="block text-xs font-medium text-gray-700 mb-3">
+                Select Site Type <span className="text-red-500">*</span>
               </label>
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
                 {SITE_TYPES.map((type) => (
                   <button
                     key={type}
                     type="button"
                     onClick={() => setSiteType(type)}
-                    className={`px-3 py-3 rounded-xl border-2 font-medium transition-all hover:scale-105 flex flex-col items-center gap-1.5 ${
+                    className={`px-3 py-3 rounded-xl border-2 font-semibold transition-all hover:scale-105 flex flex-col items-center gap-2 ${
                       siteType === type
                         ? 'bg-[#3f72af] text-white border-[#3f72af] shadow-lg'
                         : 'bg-white text-gray-700 border-gray-200 hover:border-[#3f72af] hover:shadow-md'
@@ -411,60 +416,61 @@ export default function CreateSitePage() {
               </div>
             </div>
 
-            {/* Site Information Card */}
-            <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-                <MapPin className="w-6 h-6 text-[#3f72af] mr-2" />
-                Site Information
-              </h2>
-              <div className="space-y-6">
-                {/* Site Name & Reference - Same Line */}
-                <div className="grid grid-cols-2 gap-4">
+            {/* Site Information - Blue Section */}
+            <div className="bg-white/95 backdrop-blur-md rounded-3xl shadow-xl border border-white/40 overflow-hidden hover:shadow-2xl transition-shadow">
+              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 border-b-2 border-blue-100 p-6">
+                <h3 className="text-sm font-bold text-gray-900 flex items-center gap-2">
+                  <MapPin className="w-4 h-4 text-[#3f72af]" />
+                  Site Information
+                </h3>
+              </div>
+              <div className="p-6 space-y-4">{/* Site Name & Reference - Same Line */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-semibold text-gray-900 mb-2">
+                    <label className="block text-xs font-medium text-gray-700 mb-2">
                       Site Name <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="text"
                       value={siteName}
                       onChange={(e) => setSiteName(e.target.value)}
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-semibold transition-all"
                       placeholder="e.g., Main Office Parking Lot"
                       required
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-semibold text-gray-900 mb-2">
+                    <label className="block text-xs font-medium text-gray-700 mb-2">
                       Site Reference/Code
                     </label>
                     <input
                       type="text"
                       value={siteReference}
                       onChange={(e) => setSiteReference(e.target.value)}
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-semibold transition-all"
                       placeholder="e.g., LOT-001, SITE-A"
                     />
                   </div>
                 </div>
 
                 {/* Site Contact Information */}
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-semibold text-gray-900 mb-2">
+                    <label className="block text-xs font-medium text-gray-700 mb-2">
                       Site Contact Name
                     </label>
                     <input
                       type="text"
                       value={siteContact?.name || ''}
                       onChange={(e) => setSiteContact({ ...siteContact, name: e.target.value })}
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-semibold transition-all"
                       placeholder="e.g., John Smith"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-semibold text-gray-900 mb-2">
+                    <label className="block text-xs font-medium text-gray-700 mb-2">
                       Phone Number
                     </label>
                     <div className="relative">
