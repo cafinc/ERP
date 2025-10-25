@@ -919,7 +919,7 @@ export default function LeadsPage() {
           )}
 
           {/* Analytics View */}
-          {view === 'analytics' && (
+          {viewMode === 'analytics' && (
             <div className="space-y-6">
               <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
                 <h2 className="text-lg font-semibold text-gray-900 mb-4">Lead Analytics</h2>
