@@ -829,28 +829,26 @@ export default function CustomerFormPage() {
         }
 
         if (!requireAccess) {
-          const message = createSite && siteName 
-            ? `Customer created successfully! Site "${siteName}" has been created.`
-            : 'Customer created successfully!';
-          alert(message);
+          setShowSuccessModal(true);
+          setTimeout(() => {
+            router.push(`/customers/${companyId}`);
+          }, 1500);
         } else if (createSite && siteName) {
-          alert(`Customer and site "${siteName}" created successfully!`);
+          setShowSuccessModal(true);
+          setTimeout(() => {
+            router.push(`/customers/${companyId}`);
+          }, 1500);
+        } else {
+          setTimeout(() => {
+            router.push(`/customers/${companyId}`);
+          }, 1500);
         }
-        router.push(`/customers/${companyId}`);
       }
     } catch (error: any) {
       console.error('Error saving customer:', error);
-      
-      // Provide more specific error messages
-      if (error.response?.status === 502) {
-        alert('Failed to save customer: Request too large. Please try with fewer or smaller files (max 500KB each).');
-      } else if (error.response?.status === 413) {
-        alert('Failed to save customer: Request payload too large. Please reduce the number of files or use smaller files.');
-      } else if (error.message) {
-        alert(`Failed to save customer: ${error.message}`);
-      } else {
-        alert('Failed to save customer. Please try again.');
-      }
+      const errorMessage = error.response?.data?.detail || error.message || 'An error occurred while saving the customer';
+      setErrorSections(['System Error: ' + errorMessage]);
+      setShowErrorModal(true);
     } finally {
       setSaving(false);
     }
