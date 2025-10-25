@@ -13,7 +13,7 @@ import sys
 import traceback
 
 # Backend URL from frontend environment
-BACKEND_URL = "https://task-hub-modern.preview.emergentagent.com/api"
+BACKEND_URL = "https://modern-admin-dash-1.preview.emergentagent.com/api"
 
 class SiteMapsTestSuite:
     def __init__(self):

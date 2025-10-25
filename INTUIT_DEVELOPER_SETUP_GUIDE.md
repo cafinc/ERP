@@ -105,7 +105,7 @@ Scroll down to **"Redirect URIs"** section:
 1. Click **"Add URI"**
 2. Enter **EXACTLY** this URL:
    ```
-   https://task-hub-modern.preview.emergentagent.com/api/quickbooks/auth/callback
+   https://modern-admin-dash-1.preview.emergentagent.com/api/quickbooks/auth/callback
    ```
 3. Click **"Save"**
 
@@ -175,7 +175,7 @@ Go to your app in the developer portal:
 1. **Keys & OAuth tab**
    - [ ] Client ID is visible
    - [ ] Client Secret is visible (click "Show" to reveal)
-   - [ ] Redirect URI is configured: `https://task-hub-modern.preview.emergentagent.com/api/quickbooks/auth/callback`
+   - [ ] Redirect URI is configured: `https://modern-admin-dash-1.preview.emergentagent.com/api/quickbooks/auth/callback`
 
 2. **Settings tab**
    - [ ] App name is set
@@ -197,7 +197,7 @@ This creates a fake QuickBooks company with sample data you can test with.
 
 ### Step 3: Test the OAuth Connection
 
-1. Open your web admin: https://task-hub-modern.preview.emergentagent.com
+1. Open your web admin: https://modern-admin-dash-1.preview.emergentagent.com
 2. Go to **Settings → QuickBooks**
 3. Click **"Connect to QuickBooks"**
 4. You should see the QuickBooks login page
@@ -222,7 +222,7 @@ This creates a fake QuickBooks company with sample data you can test with.
 1. Go to Intuit Developer Portal → Your App → Keys & OAuth
 2. Check that the redirect URI is **EXACTLY**:
    ```
-   https://task-hub-modern.preview.emergentagent.com/api/quickbooks/auth/callback
+   https://modern-admin-dash-1.preview.emergentagent.com/api/quickbooks/auth/callback
    ```
 3. Common mistakes:
    - ❌ `http://` instead of `https://`
@@ -347,7 +347,7 @@ If you need additional features later:
 Environment: Sandbox (Testing)
 Client ID: ABdknRlnQfJGNRNMkuSmvAFCSJwYK1ulX1ov9YsFuEPLaS7A9t
 Client Secret: j1wT3lTiuv6XjLwsDweWNulPa6Ml69d9VZ1YYSbG
-Redirect URI: https://task-hub-modern.preview.emergentagent.com/api/quickbooks/auth/callback
+Redirect URI: https://modern-admin-dash-1.preview.emergentagent.com/api/quickbooks/auth/callback
 Scope: com.intuit.quickbooks.accounting
 Status: ✓ Working - Ready to test!
 ```
@@ -358,7 +358,7 @@ Status: ✓ Working - Ready to test!
 Environment: Production (Live)
 Client ID: ABdknRlnQfJGNRNMkuSmvAFCSJwYK1ulX1ov9YsFuEPLaS7A9t ← Same!
 Client Secret: j1wT3lTiuv6XjLwsDweWNulPa6Ml69d9VZ1YYSbG ← Same!
-Redirect URI: https://task-hub-modern.preview.emergentagent.com/api/quickbooks/auth/callback ← Same!
+Redirect URI: https://modern-admin-dash-1.preview.emergentagent.com/api/quickbooks/auth/callback ← Same!
 Scope: com.intuit.quickbooks.accounting ← Same!
 Only difference: Change QUICKBOOKS_ENVIRONMENT in .env
 ```
@@ -383,7 +383,7 @@ Based on the credentials you provided:
 1. **Verify Redirect URI** (Most Important!)
    - Log into https://developer.intuit.com
    - Go to your app → Keys & OAuth
-   - Confirm redirect URI is: `https://task-hub-modern.preview.emergentagent.com/api/quickbooks/auth/callback`
+   - Confirm redirect URI is: `https://modern-admin-dash-1.preview.emergentagent.com/api/quickbooks/auth/callback`
    - If not there, add it and save
 
 2. **Create Sandbox Company** (if you don't have one)
