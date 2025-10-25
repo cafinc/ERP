@@ -169,7 +169,7 @@ test_plan:
 
   - task: "HR Module - Time & Attendance APIs"
     implemented: true
-    working: false
+    working: true
     file: "/app/backend/hr_routes.py"
     stuck_count: 0
     priority: "high"
@@ -181,6 +181,9 @@ test_plan:
       - working: false
         agent: "testing"
         comment: "❌ POST /api/hr/time-entries fails with HTTP 500 BSON ObjectId serialization error. GET endpoints working (found 1 time entry). Clock in/out functionality blocked by serialization issue."
+      - working: true
+        agent: "testing"
+        comment: "✅ BUG FIX CONFIRMED: POST /api/hr/time-entries now working correctly. BSON ObjectId serialization issue resolved. Time entry creation successful with proper ID serialization (ID: 68fc6bb47761e9859f341ace). Clock-in functionality restored."
 
   - task: "HR Module - PTO Management APIs"
     implemented: true
