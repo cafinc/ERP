@@ -228,124 +228,144 @@ export default function CreateSitePage() {
                 Site Information
               </h2>
               <div className="space-y-6">
-            {/* Site Name */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Site Name <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="text"
-                value={siteName}
-                onChange={(e) => setSiteName(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="e.g., Main Office Parking Lot"
-                required
-              />
+              <div className="space-y-6">
+                {/* Site Name */}
+                <div>
+                  <label className="block text-sm font-semibold text-gray-900 mb-2">
+                    Site Name <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    value={siteName}
+                    onChange={(e) => setSiteName(e.target.value)}
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
+                    placeholder="e.g., Main Office Parking Lot"
+                    required
+                  />
+                </div>
+
+                {/* Site Reference */}
+                <div>
+                  <label className="block text-sm font-semibold text-gray-900 mb-2">
+                    Site Reference/Code
+                  </label>
+                  <input
+                    type="text"
+                    value={siteReference}
+                    onChange={(e) => setSiteReference(e.target.value)}
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
+                    placeholder="e.g., LOT-001, SITE-A"
+                  />
+                </div>
+              </div>
             </div>
 
-            {/* Site Reference */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Site Reference/Code
-              </label>
-              <input
-                type="text"
-                value={siteReference}
-                onChange={(e) => setSiteReference(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="e.g., LOT-001, SITE-A"
-              />
-            </div>
+            {/* Customer Selection Card */}
+            <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                <User className="w-6 h-6 text-[#3f72af] mr-2" />
+                Customer Assignment
+              </h2>
 
-            {/* Customer Dropdown */}
-            <div className="relative">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Customer <span className="text-red-500">*</span>
-              </label>
-              <button
-                type="button"
-                onClick={() => setShowCustomerDropdown(!showCustomerDropdown)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-left flex items-center justify-between bg-white"
-              >
-                <span className={!customerId ? 'text-gray-400' : 'text-gray-900'}>
-                  {customerId ? getCustomerName(customerId) : 'Select a customer'}
-                </span>
-                <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
+              {/* Customer Dropdown */}
+              <div className="relative">
+                <label className="block text-sm font-semibold text-gray-900 mb-2">
+                  Customer <span className="text-red-500">*</span>
+                </label>
+                <button
+                  type="button"
+                  onClick={() => setShowCustomerDropdown(!showCustomerDropdown)}
+                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] text-left flex items-center justify-between bg-white hover:border-gray-300 transition-all"
+                >
+                  <span className={!customerId ? 'text-gray-400' : 'text-gray-900 font-medium'}>
+                    {customerId ? getCustomerName(customerId) : 'Select a customer'}
+                  </span>
+                  <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
 
-              {showCustomerDropdown && (
-                <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg">
-                  <div className="p-3 border-b border-gray-200">
-                    <div className="relative">
-                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
-                      <input
-                        type="text"
-                        value={customerSearch}
-                        onChange={(e) => setCustomerSearch(e.target.value)}
-                        className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="Search customers..."
-                      />
+                {showCustomerDropdown && (
+                  <div className="absolute z-10 w-full mt-2 bg-white border-2 border-gray-200 rounded-xl shadow-2xl overflow-hidden">
+                    <div className="p-4 border-b border-gray-200 bg-gray-50">
+                      <div className="relative">
+                        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                        <input
+                          type="text"
+                          value={customerSearch}
+                          onChange={(e) => setCustomerSearch(e.target.value)}
+                          className="w-full pl-10 pr-4 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af]"
+                          placeholder="Search customers..."
+                        />
+                      </div>
+                    </div>
+                    <div className="max-h-64 overflow-y-auto">
+                      {filteredCustomers.map((customer) => (
+                        <button
+                          key={customer._id || customer.id}
+                          type="button"
+                          onClick={() => {
+                            setCustomerId(customer._id || customer.id!);
+                            setShowCustomerDropdown(false);
+                            setCustomerSearch('');
+                          }}
+                          className={`w-full px-4 py-3 text-left hover:bg-blue-50 flex items-center justify-between transition-colors ${
+                            customerId === (customer._id || customer.id) ? 'bg-blue-50 border-l-4 border-[#3f72af]' : ''
+                          }`}
+                        >
+                          <div>
+                            <div className="font-semibold text-gray-900">{customer.name}</div>
+                            {customer.email && (
+                              <div className="text-sm text-gray-500">{customer.email}</div>
+                            )}
+                          </div>
+                          {customerId === (customer._id || customer.id) && (
+                            <svg className="w-5 h-5 text-[#3f72af]" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                            </svg>
+                          )}
+                        </button>
+                      ))}
+                      {filteredCustomers.length === 0 && (
+                        <div className="px-4 py-8 text-center text-gray-500">
+                          <User className="w-12 h-12 text-gray-300 mx-auto mb-2" />
+                          <p>No customers found</p>
+                        </div>
+                      )}
                     </div>
                   </div>
-                  <div className="max-h-60 overflow-y-auto">
-                    {filteredCustomers.map((customer) => (
-                      <button
-                        key={customer._id || customer.id}
-                        type="button"
-                        onClick={() => {
-                          setCustomerId(customer._id || customer.id!);
-                          setShowCustomerDropdown(false);
-                          setCustomerSearch('');
-                        }}
-                        className={`w-full px-4 py-3 text-left hover:bg-gray-50 flex items-center justify-between ${
-                          customerId === (customer._id || customer.id) ? 'bg-blue-50' : ''
-                        }`}
-                      >
-                        <div>
-                          <div className="font-medium text-gray-900">{customer.name}</div>
-                          {customer.email && (
-                            <div className="text-sm text-gray-500">{customer.email}</div>
-                          )}
-                        </div>
-                        {customerId === (customer._id || customer.id) && (
-                          <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                          </svg>
-                        )}
-                      </button>
-                    ))}
-                    {filteredCustomers.length === 0 && (
-                      <div className="px-4 py-8 text-center text-gray-500">
-                        No customers found
-                      </div>
-                    )}
-                  </div>
-                </div>
-              )}
+                )}
+              </div>
             </div>
 
-            {/* Site Type */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Site Type <span className="text-red-500">*</span>
-              </label>
-              <div className="flex flex-wrap gap-2">
-                {SITE_TYPES.map((type) => (
-                  <button
-                    key={type}
-                    type="button"
-                    onClick={() => setSiteType(type)}
-                    className={`px-4 py-2 rounded-lg border-2 font-medium transition-all capitalize ${
-                      siteType === type
-                        ? 'bg-blue-500 text-white border-blue-500'
-                        : 'bg-white text-gray-700 border-gray-300 hover:border-blue-300'
-                    }`}
-                  >
-                    {type.replace('_', ' ')}
-                  </button>
-                ))}
+            {/* Site Type Card */}
+            <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                <Building2 className="w-6 h-6 text-[#3f72af] mr-2" />
+                Site Type
+              </h2>
+
+              {/* Site Type */}
+              <div>
+                <label className="block text-sm font-semibold text-gray-900 mb-4">
+                  Select Site Type <span className="text-red-500">*</span>
+                </label>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                  {SITE_TYPES.map((type) => (
+                    <button
+                      key={type}
+                      type="button"
+                      onClick={() => setSiteType(type)}
+                      className={`px-4 py-4 rounded-xl border-2 font-semibold transition-all hover:scale-105 capitalize ${
+                        siteType === type
+                          ? 'bg-[#3f72af] text-white border-[#3f72af] shadow-lg'
+                          : 'bg-white text-gray-700 border-gray-200 hover:border-[#3f72af] hover:shadow-md'
+                      }`}
+                    >
+                      {type.replace('_', ' ')}
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
 
