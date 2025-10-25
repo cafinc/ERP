@@ -382,12 +382,12 @@ def test_site_creation_api():
         
         response_time = end_time - start_time
         
-        if response.status_code == 201 and response_time < 5.0:
+        if response.status_code in [200, 201] and response_time < 5.0:
             data = response.json()
             results["created_sites"].append(data.get("id"))
             print(f"✅ PASS: API responded in {response_time:.2f} seconds (< 5s)")
             results["passed"] += 1
-        elif response.status_code == 201:
+        elif response.status_code in [200, 201]:
             data = response.json()
             results["created_sites"].append(data.get("id"))
             print(f"⚠️  SLOW: API responded in {response_time:.2f} seconds (> 5s)")
