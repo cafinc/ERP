@@ -403,7 +403,7 @@ export default function ConsumablesPage() {
                         type="number"
                         step="0.01"
                         value={formData.min_stock_level}
-                        onChange={(e) => setFormData({ ...formData, min_stock_level: parseFloat(e.target.value) || 0 })}
+                        onChange={(e) => setFormData({ ...formData, min_stock_level: e.target.value })}
                         className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-semibold"
                         placeholder="0.00"
                         required
@@ -420,7 +420,7 @@ export default function ConsumablesPage() {
                           type="number"
                           step="0.01"
                           value={formData.unit_cost}
-                          onChange={(e) => setFormData({ ...formData, unit_cost: parseFloat(e.target.value) || 0 })}
+                          onChange={(e) => setFormData({ ...formData, unit_cost: e.target.value })}
                           className="w-full pl-8 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-bold text-[#3f72af]"
                           placeholder="0.00"
                           required
