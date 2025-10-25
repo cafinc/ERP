@@ -513,15 +513,15 @@ export default function LeadsPage() {
             {/* View Mode Buttons */}
             <div className="flex items-center gap-3">
               <button
-                onClick={() => setViewMode('pipeline')}
+                onClick={() => setViewMode('grid')}
                 className={`px-4 py-2.5 rounded-xl font-semibold transition-all text-sm flex items-center gap-2 ${
-                  viewMode === 'pipeline'
+                  viewMode === 'grid'
                     ? 'bg-purple-500 text-white shadow-lg shadow-purple-500/30'
                     : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-purple-500 hover:text-purple-500'
                 }`}
               >
-                <TrendingUp className="w-4 h-4" />
-                Pipeline
+                <BarChart3 className="w-4 h-4" />
+                Grid
               </button>
               <button
                 onClick={() => setViewMode('list')}
