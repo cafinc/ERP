@@ -1,14 +1,16 @@
 ---
 user_problem_statement: |
-  Current Task: Implement toggle and search bar functionality for "Link to Company" on the /customers/create page.
+  Current Task: Re-implement enhanced phone/email validation and duplicate customer detection on /customers/create page.
   
   Requirements:
-  - Replace dropdown with a toggle switch
-  - When toggle is ON, show a search bar to find companies
-  - Search bar should connect to backend company data
-  - Link customer to company profile for projects, emails, SMS, and in-app messaging
+  - Add US phone number formatting (XXX) XXX-XXXX for all phone fields
+  - Add email validation with red error highlighting
+  - Validate Contact Persons fields (name, email, phone) for Company forms
+  - Implement duplicate customer detection before submission
+  - Show modal popup if duplicates found with option to proceed or cancel
+  - Apply comprehensive form validation with error messages
   
-  Previous Context: HR Module and Integration Hub overnight build completed.
+  Previous Context: Customer create page was reverted to original state. Need to re-implement validation and duplicate detection features.
 
 backend:
   - task: "Site Maps API - Create site map with annotations"
