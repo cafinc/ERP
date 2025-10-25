@@ -1976,6 +1976,9 @@ export default function CustomerFormPage() {
                   <p className="text-xs text-gray-500 mt-1">
                     Start typing to use Google address autocomplete
                   </p>
+                  {fieldErrors.street_address && (
+                    <p className="text-red-500 text-xs mt-1">{fieldErrors.street_address}</p>
+                  )}
                 </div>
 
                 <div>
