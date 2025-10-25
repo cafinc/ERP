@@ -106,9 +106,14 @@ export default function DispatchDetailPage() {
 
   if (!dispatch) {
     return (
-      <PageHeader>
+      <>
+        <PageHeader
+          title="Dispatch Not Found"
+          subtitle="The dispatch you're looking for doesn't exist"
+          breadcrumbs={[{ label: "Home", href: "/" }, { label: "Dispatch", href: "/dispatch" }]}
+        />
         <div className="p-8">
-          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-12 text-center hover:shadow-md transition-shadow">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-12 text-center">
             <AlertCircle className="w-16 h-16 text-red-300 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-gray-900 mb-2">Dispatch Not Found</h3>
             <button
@@ -120,12 +125,17 @@ export default function DispatchDetailPage() {
             </button>
           </div>
         </div>
-      </div>
+      </>
     );
   }
 
   return (
-    <PageHeader>
+    <>
+      <PageHeader
+        title="Dispatch Details"
+        subtitle="View and manage dispatch information"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Dispatch", href: "/dispatch" }, { label: "Details" }]}
+      />
       <div className="p-8">
         {/* Header */}
         <div className="mb-4 flex items-center justify-between">
