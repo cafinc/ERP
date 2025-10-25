@@ -333,6 +333,35 @@ export default function CreateSitePage() {
               </div>
             </div>
 
+            {/* Site Type - Compact */}
+            <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-6 backdrop-blur-sm hover:shadow-md transition-shadow">
+              <label className="block text-sm font-semibold text-gray-900 mb-3">
+                <Building2 className="w-4 h-4 inline-block mr-2 text-[#3f72af]" />
+                Site Type <span className="text-red-500">*</span>
+              </label>
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
+                {SITE_TYPES.map((type) => (
+                  <button
+                    key={type}
+                    type="button"
+                    onClick={() => setSiteType(type)}
+                    className={`px-3 py-3 rounded-xl border-2 font-medium transition-all hover:scale-105 flex flex-col items-center gap-1.5 ${
+                      siteType === type
+                        ? 'bg-[#3f72af] text-white border-[#3f72af] shadow-lg'
+                        : 'bg-white text-gray-700 border-gray-200 hover:border-[#3f72af] hover:shadow-md'
+                    }`}
+                  >
+                    <div className={siteType === type ? 'text-white' : 'text-[#3f72af]'}>
+                      {getSiteTypeIcon(type)}
+                    </div>
+                    <span className="text-xs capitalize leading-tight text-center">
+                      {type.replace('_', ' ')}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
             {/* Site Information Card */}
             <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
               <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
