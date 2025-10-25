@@ -207,11 +207,11 @@ export default function ConsumablesPage() {
   return (
     <>
       <PageHeader
-        title="Inventory Management"
+        title="Consumable Management"
         subtitle="Track and manage consumable materials for winter operations"
         breadcrumbs={[
           { label: "Home", href: "/" },
-          { label: "Inventory", href: "/consumables" }
+          { label: "Consumable", href: "/consumables" }
         ]}
         actions={
           <div className="flex gap-3">
@@ -227,7 +227,7 @@ export default function ConsumablesPage() {
               className="flex items-center gap-2 px-4 py-2 text-sm bg-[#3f72af] hover:bg-[#2c5282] text-white rounded-lg font-semibold transition-all shadow-sm hover:shadow-md"
             >
               <Plus className="w-4 h-4" />
-              Add Consumable
+              Create Consumable
             </button>
           </div>
         }
