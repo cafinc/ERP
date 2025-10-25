@@ -24,11 +24,9 @@ import {
 
 // Category configurations with icons
 const CATEGORIES = [
-  { value: 'salt', label: 'Salt', icon: '🧂', color: 'text-gray-600' },
-  { value: 'sand', label: 'Sand', icon: '🏖️', color: 'text-yellow-600' },
-  { value: 'chemical', label: 'Chemical', icon: '🧪', color: 'text-purple-600' },
-  { value: 'fuel', label: 'Fuel', icon: '⛽', color: 'text-orange-600' },
-  { value: 'other', label: 'Other', icon: '📦', color: 'text-blue-600' },
+  { value: 'traction_control', label: 'Traction Control', icon: '🏔️', color: 'text-orange-600' },
+  { value: 'ice_management', label: 'Ice Management', icon: '🧊', color: 'text-blue-600' },
+  { value: 'miscellaneous', label: 'Miscellaneous', icon: '📦', color: 'text-gray-600' },
 ];
 
 const UNITS = [
