@@ -167,16 +167,18 @@ export default function EstimateDetailPage() {
 
   if (loading) {
     return (
-      <PageHeader
-        title="Estimates Details"
-        subtitle="View and manage details"
-        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Estimates", href: "/estimates" }, { label: "Details" }]}
-      />
-      <div className="flex-1 overflow-auto p-6">
-        <div className="flex items-center justify-center h-full">
-          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
+      <>
+        <PageHeader
+          title="Estimate Details"
+          subtitle="View and manage estimate details"
+          breadcrumbs={[{ label: "Home", href: "/" }, { label: "Estimates", href: "/estimates" }, { label: "Details" }]}
+        />
+        <div className="flex-1 overflow-auto p-6">
+          <div className="flex items-center justify-center h-full">
+            <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 
