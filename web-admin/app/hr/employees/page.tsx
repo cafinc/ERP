@@ -421,8 +421,283 @@ export default function EmployeesPage() {
               </button>
             </div>
 
-            <form onSubmit={handleSubmit} className="px-6 py-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Modal Body */}
+            <form onSubmit={handleSubmit} className="p-6 space-y-6 max-h-[calc(90vh-180px)] overflow-y-auto">
+              {/* Personal Information Card */}
+              <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-6 backdrop-blur-sm">
+                <h3 className="text-lg font-bold text-gray-900 flex items-center mb-4">
+                  <User className="w-5 h-5 text-[#3f72af] mr-2" />
+                  Personal Information
+                </h3>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-900 mb-2">
+                      First Name <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={formData.first_name}
+                      onChange={(e) => setFormData({ ...formData, first_name: e.target.value })}
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
+                      placeholder="John"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-900 mb-2">
+                      Last Name <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={formData.last_name}
+                      onChange={(e) => setFormData({ ...formData, last_name: e.target.value })}
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
+                      placeholder="Smith"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-900 mb-2">
+                      Phone <span className="text-red-500">*</span>
+                    </label>
+                    <div className="relative">
+                      <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                      <input
+                        type="tel"
+                        required
+                        value={formData.phone}
+                        onChange={(e) => handlePhoneChange('phone', e.target.value)}
+                        className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
+                        placeholder="(555) 123-4567"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-900 mb-2">
+                      Email <span className="text-red-500">*</span>
+                    </label>
+                    <div className="relative">
+                      <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                      <input
+                        type="email"
+                        required
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
+                        placeholder="john@example.com"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Employment Information Card */}
+              <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-6 backdrop-blur-sm">
+                <h3 className="text-lg font-bold text-gray-900 flex items-center mb-4">
+                  <Briefcase className="w-5 h-5 text-[#3f72af] mr-2" />
+                  Employment Information
+                </h3>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-900 mb-2">
+                      Job Title <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={formData.job_title}
+                      onChange={(e) => setFormData({ ...formData, job_title: e.target.value })}
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
+                      placeholder="Snow Plow Operator"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-900 mb-2">Department</label>
+                    <input
+                      type="text"
+                      value={formData.department}
+                      onChange={(e) => setFormData({ ...formData, department: e.target.value })}
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
+                      placeholder="Operations"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-900 mb-2">
+                      Employment Type <span className="text-red-500">*</span>
+                    </label>
+                    <select
+                      required
+                      value={formData.employment_type}
+                      onChange={(e) => setFormData({ ...formData, employment_type: e.target.value })}
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white transition-all"
+                    >
+                      <option value="full_time">Full Time</option>
+                      <option value="part_time">Part Time</option>
+                      <option value="contract">Contract</option>
+                      <option value="seasonal">Seasonal</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-900 mb-2">
+                      <Calendar className="w-4 h-4 inline-block mr-1 text-[#3f72af]" />
+                      Hire Date <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="date"
+                      required
+                      value={formData.hire_date}
+                      onChange={(e) => setFormData({ ...formData, hire_date: e.target.value })}
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-900 mb-2">
+                      <DollarSign className="w-4 h-4 inline-block mr-1 text-[#3f72af]" />
+                      Hourly Rate
+                    </label>
+                    <input
+                      type="number"
+                      step="0.01"
+                      value={formData.hourly_rate}
+                      onChange={(e) => setFormData({ ...formData, hourly_rate: e.target.value })}
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
+                      placeholder="25.00"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-900 mb-2">
+                      <DollarSign className="w-4 h-4 inline-block mr-1 text-[#3f72af]" />
+                      Annual Salary
+                    </label>
+                    <input
+                      type="number"
+                      step="0.01"
+                      value={formData.salary}
+                      onChange={(e) => setFormData({ ...formData, salary: e.target.value })}
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
+                      placeholder="50000.00"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Emergency Contact Card */}
+              <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-6 backdrop-blur-sm">
+                <h3 className="text-lg font-bold text-gray-900 flex items-center mb-4">
+                  <Phone className="w-5 h-5 text-[#3f72af] mr-2" />
+                  Emergency Contact
+                </h3>
+                
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-900 mb-2">Contact Name</label>
+                    <input
+                      type="text"
+                      value={formData.emergency_contact_name}
+                      onChange={(e) => setFormData({ ...formData, emergency_contact_name: e.target.value })}
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
+                      placeholder="Jane Smith"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-900 mb-2">Contact Phone</label>
+                    <div className="relative">
+                      <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                      <input
+                        type="tel"
+                        value={formData.emergency_contact_phone}
+                        onChange={(e) => handlePhoneChange('emergency_contact_phone', e.target.value)}
+                        className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
+                        placeholder="(555) 123-4567"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-900 mb-2">Relationship</label>
+                    <input
+                      type="text"
+                      value={formData.emergency_contact_relationship}
+                      onChange={(e) => setFormData({ ...formData, emergency_contact_relationship: e.target.value })}
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
+                      placeholder="Spouse"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Document Upload Card */}
+              <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-6 backdrop-blur-sm">
+                <h3 className="text-lg font-bold text-gray-900 flex items-center mb-4">
+                  <Upload className="w-5 h-5 text-[#3f72af] mr-2" />
+                  Documents & Attachments
+                </h3>
+                
+                <div className="space-y-4">
+                  {/* Upload Button */}
+                  <div>
+                    <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-xl cursor-pointer hover:border-[#3f72af] hover:bg-blue-50 transition-all">
+                      <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                        <Upload className="w-10 h-10 mb-3 text-gray-400" />
+                        <p className="mb-2 text-sm text-gray-600">
+                          <span className="font-semibold">Click to upload</span> or drag and drop
+                        </p>
+                        <p className="text-xs text-gray-500">Contracts, Certifications, ID (Max 500KB per file)</p>
+                      </div>
+                      <input
+                        type="file"
+                        multiple
+                        onChange={handleFileUpload}
+                        className="hidden"
+                        accept=".pdf,.doc,.docx,.xls,.xlsx,.png,.jpg,.jpeg,.gif"
+                      />
+                    </label>
+                  </div>
+
+                  {/* Uploaded Files List */}
+                  {uploadedFiles.length > 0 && (
+                    <div className="space-y-2">
+                      <p className="text-sm font-semibold text-gray-700">
+                        Uploaded Files ({uploadedFiles.length})
+                      </p>
+                      {uploadedFiles.map((file, index) => (
+                        <div
+                          key={index}
+                          className="flex items-center justify-between p-3 bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-lg hover:shadow-md transition-all"
+                        >
+                          <div className="flex items-center gap-3 flex-1 min-w-0">
+                            {getFileIcon(file.type)}
+                            <div className="flex-1 min-w-0">
+                              <p className="text-sm font-medium text-gray-900 truncate">{file.name}</p>
+                              <p className="text-xs text-gray-500">{formatFileSize(file.size)}</p>
+                            </div>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => removeFile(index)}
+                            className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors flex-shrink-0"
+                            title="Remove file"
+                          >
+                            <X className="w-4 h-4" />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </form>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     First Name *
