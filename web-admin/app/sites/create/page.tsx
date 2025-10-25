@@ -308,94 +308,98 @@ export default function CreateSitePage() {
                   </div>
                 </div>
 
-                {/* Address with Google Autocomplete */}
-                <div className="md:col-span-2">
-                  <label className="block text-sm font-semibold text-gray-900 mb-2">
-                    Address <span className="text-red-500">*</span>
-                  </label>
-                  <div className="relative">
+                {/* Address Section with Google Maps */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {/* Address with Google Autocomplete */}
+                  <div className="md:col-span-2">
+                    <label className="block text-sm font-semibold text-gray-900 mb-2">
+                      Address <span className="text-red-500">*</span>
+                    </label>
+                    <div className="relative">
+                      <input
+                        ref={inputRef}
+                        type="text"
+                        value={address}
+                        onChange={(e) => setAddress(e.target.value)}
+                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
+                        placeholder="123 Main Street"
+                        required
+                      />
+                      <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center">
+                        <img 
+                          src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" 
+                          alt="Powered by Google"
+                          className="h-4"
+                        />
+                      </div>
+                    </div>
+                    <p className="text-xs text-gray-500 mt-2">
+                      Start typing to use Google address autocomplete
+                    </p>
+                  </div>
+
+                  {/* City */}
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-900 mb-2">
+                      City <span className="text-red-500">*</span>
+                    </label>
                     <input
-                      ref={inputRef}
                       type="text"
-                      value={address}
-                      onChange={(e) => setAddress(e.target.value)}
+                      value={city}
+                      onChange={(e) => setCity(e.target.value)}
                       className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
-                      placeholder="123 Main Street"
+                      placeholder="Calgary"
                       required
                     />
-                    <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center">
-                      <img 
-                        src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" 
-                        alt="Powered by Google"
-                        className="h-4"
-                      />
-                    </div>
                   </div>
-                  <p className="text-xs text-gray-500 mt-2">
-                    Start typing to use Google address autocomplete
-                  </p>
-                </div>
 
-                {/* City & Province */}
-                <div>
-                  <label className="block text-sm font-semibold text-gray-900 mb-2">
-                    City <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
-                    placeholder="Calgary"
-                    required
-                  />
-                </div>
+                  {/* Province */}
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-900 mb-2">
+                      Province <span className="text-red-500">*</span>
+                    </label>
+                    <select
+                      value={province}
+                      onChange={(e) => setProvince(e.target.value)}
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all bg-white"
+                      required
+                    >
+                      {CANADIAN_PROVINCES.map(prov => (
+                        <option key={prov.code} value={prov.code}>
+                          {prov.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
 
-                <div>
-                  <label className="block text-sm font-semibold text-gray-900 mb-2">
-                    Province <span className="text-red-500">*</span>
-                  </label>
-                  <select
-                    value={province}
-                    onChange={(e) => setProvince(e.target.value)}
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all bg-white"
-                    required
-                  >
-                    {CANADIAN_PROVINCES.map(prov => (
-                      <option key={prov.code} value={prov.code}>
-                        {prov.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+                  {/* Postal Code */}
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-900 mb-2">
+                      Postal Code <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      value={postalCode}
+                      onChange={(e) => setPostalCode(e.target.value)}
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
+                      placeholder="T2P 1J9"
+                      required
+                    />
+                  </div>
 
-                {/* Postal Code & Area Size */}
-                <div>
-                  <label className="block text-sm font-semibold text-gray-900 mb-2">
-                    Postal Code <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    value={postalCode}
-                    onChange={(e) => setPostalCode(e.target.value)}
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
-                    placeholder="T2P 1J9"
-                    required
-                  />
-                </div>
-
-                {/* Area Size */}
-                <div>
-                  <label className="block text-sm font-semibold text-gray-900 mb-2">
-                    Area Size (sq ft)
-                  </label>
-                  <input
-                    type="number"
-                    value={areaSize}
-                    onChange={(e) => setAreaSize(e.target.value)}
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
-                    placeholder="e.g., 5000"
-                  />
+                  {/* Area Size */}
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-900 mb-2">
+                      Area Size (sq ft)
+                    </label>
+                    <input
+                      type="number"
+                      value={areaSize}
+                      onChange={(e) => setAreaSize(e.target.value)}
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
+                      placeholder="e.g., 5000"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
