@@ -140,29 +140,16 @@ export default function DispatchCreatePage() {
 
   if (loading) {
     return (
-      <>
-        <PageHeader
-          title="Create Dispatch"
-          subtitle="Add new dispatch"
-          breadcrumbs={[{ label: "Home", href: "/" }, { label: "Dispatch", href: "/dispatch" }, { label: "Create" }]}
-        />
-        <div className="flex-1 overflow-auto p-6">
-          <div className="flex items-center justify-center h-full">
-            <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
-          </div>
+      <div className="flex-1 overflow-auto p-6">
+        <div className="flex items-center justify-center h-full">
+          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
-      </>
+      </div>
     );
   }
 
   return (
-    <>
-      <PageHeader
-        title="Create Dispatch"
-        subtitle="Add new dispatch"
-        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Dispatch", href: "/dispatch" }, { label: "Create" }]}
-      />
-      <div className="p-8">
+    <div className="p-8">
         {/* Header */}
         <div className="mb-8 flex items-center space-x-4">
           <button
