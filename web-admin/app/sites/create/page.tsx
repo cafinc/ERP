@@ -58,6 +58,7 @@ export default function CreateSitePage() {
   // Form states
   const [siteName, setSiteName] = useState('');
   const [siteReference, setSiteReference] = useState('');
+  const [siteContact, setSiteContact] = useState<{ phone?: string; email?: string }>({});
   const [customerId, setCustomerId] = useState('');
   const [customerSearch, setCustomerSearch] = useState('');
   const [showCustomerDropdown, setShowCustomerDropdown] = useState(false);
