@@ -520,11 +520,49 @@ export default function CustomerFormPage() {
       }
     }
 
+    // Company-specific validation: Contact Persons
+    if (customerForm.customer_type === 'company') {
+      customerForm.contacts.forEach((contact, index) => {
+        // Only validate first contact if same_person toggle is on
+        if (customerForm.same_person_all_contacts && index > 0) {
+          return;
+        }
+        
+        if (!contact.name) {
+          errors[`contact_${index}_name`] = `${contact.position} name is required`;
+        }
+        
+        if (!contact.email) {
+          errors[`contact_${index}_email`] = `${contact.position} email is required`;
+        } else if (!isValidEmail(contact.email)) {
+          errors[`contact_${index}_email`] = `Invalid email format for ${contact.position}`;
+        }
+        
+        if (!contact.phone) {
+          errors[`contact_${index}_phone`] = `${contact.position} phone is required`;
+        } else {
+          const cleaned = contact.phone.replace(/\D/g, '');
+          if (cleaned.length !== 10) {
+            errors[`contact_${index}_phone`] = `${contact.position} phone must be 10 digits`;
+          }
+        }
+      });
+    }
+
     // Set all errors at once
     if (Object.keys(errors).length > 0) {
       setFieldErrors(errors);
       alert('Please fix the errors in the form before submitting');
       return;
+    }
+
+    // Check for duplicates (only for new customers, not edits)
+    if (!isEdit) {
+      const hasDuplicates = await checkDuplicateCustomers();
+      if (hasDuplicates) {
+        setSaving(false);
+        return; // Stop submission, modal will handle user decision
+      }
     }
 
     // Phone validation and auto-format
@@ -536,6 +574,14 @@ export default function CustomerFormPage() {
     }
     if (customerForm.main_contact?.phone) {
       customerForm.main_contact.phone = formatPhoneNumber(customerForm.main_contact.phone);
+    }
+    
+    // Format contact persons phones
+    if (customerForm.customer_type === 'company') {
+      customerForm.contacts = customerForm.contacts.map(contact => ({
+        ...contact,
+        phone: formatPhoneNumber(contact.phone)
+      }));
     }
 
     if (!customerForm.email || !customerForm.phone || !customerForm.street_address) {
