@@ -103,6 +103,11 @@ export default function CreateSitePage() {
   const [requiresKeyCard, setRequiresKeyCard] = useState(false);
   const [siteServices, setSiteServices] = useState<SiteService[]>([]);
   const [showManualCoordinates, setShowManualCoordinates] = useState(false);
+  const [notification, setNotification] = useState<{
+    show: boolean;
+    type: 'success' | 'error';
+    message: string;
+  }>({ show: false, type: 'success', message: '' });
 
   // Phone number formatting function
   const formatPhoneNumber = (value: string) => {
