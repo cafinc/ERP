@@ -1984,13 +1984,21 @@ export default function CustomerFormPage() {
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">City *</label>
                   <input
+                    name="city"
                     type="text"
                     value={customerForm.city}
                     onChange={e => setCustomerForm({ ...customerForm, city: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:border-transparent ${
+                      fieldErrors.city 
+                        ? 'border-red-500 focus:ring-red-500' 
+                        : 'border-gray-300 focus:ring-blue-500'
+                    }`}
                     placeholder="Calgary"
                     required
                   />
+                  {fieldErrors.city && (
+                    <p className="text-red-500 text-xs mt-1">{fieldErrors.city}</p>
+                  )}
                 </div>
 
                 <div>
