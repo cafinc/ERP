@@ -28,6 +28,7 @@ import {
   KeyRound,
   Lock,
   Shield,
+  CreditCard,
 } from 'lucide-react';
 
 const SITE_TYPES = ['residential', 'commercial', 'industrial', 'retail', 'emergency_services'];
