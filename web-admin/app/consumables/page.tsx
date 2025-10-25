@@ -83,11 +83,12 @@ export default function ConsumablesPage() {
     try {
       const payload = {
         name: formData.name.trim(),
+        consumable_type: formData.category,  // Backend expects consumable_type
         unit: formData.unit,
-        current_stock: parseFloat(formData.current_stock as string) || 0,
-        min_stock_level: parseFloat(formData.min_stock_level as string) || 0,
-        unit_cost: parseFloat(formData.unit_cost as string) || 0,
-        category: formData.category,
+        quantity_available: parseFloat(formData.current_stock as string) || 0,  // Backend expects quantity_available
+        reorder_level: parseFloat(formData.min_stock_level as string) || 0,  // Backend expects reorder_level
+        cost_per_unit: parseFloat(formData.unit_cost as string) || 0,  // Backend expects cost_per_unit
+        notes: null,
       };
       
       console.log('Payload being sent:', payload);
