@@ -204,61 +204,6 @@ export default function SiteDetailPage() {
       />
       <div className="flex-1 overflow-auto p-6">
       <div className="space-y-6">
-        {/* Header */}
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <button
-              onClick={() => router.push('/sites')}
-              className="text-gray-600 hover:text-gray-900"
-            >
-              <ArrowLeft className="w-6 h-6" />
-            </button>
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900">{site.name}</h1>
-              {site.site_reference && (
-                <p className="text-gray-600 mt-1">Ref: {site.site_reference}</p>
-              )}
-            </div>
-          </div>
-          
-          <div className="flex gap-2">
-            <button
-              onClick={() => router.push(`/sites/${siteId}/maps`)}
-              className="flex items-center gap-2 px-4 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282]"
-            >
-              <MapPin className="w-4 h-4" />
-              Site Maps
-            </button>
-            <button
-              onClick={handleViewOnMap}
-              className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
-            >
-              <SquareArrowOutUpRight className="w-4 h-4" />
-              View on Map
-            </button>
-            <button
-              onClick={() => router.push(`/sites/${siteId}/edit`)}
-              className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
-              disabled={actionLoading}
-            >
-              <Edit className="w-4 h-4" />
-              Edit
-            </button>
-            <button
-              onClick={handleArchiveSite}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg ${
-                site.active
-                  ? 'border border-orange-300 text-orange-600 hover:bg-orange-50'
-                  : 'border border-green-300 text-green-600 hover:bg-green-50'
-              }`}
-              disabled={actionLoading}
-            >
-              <Archive className="w-4 h-4" />
-              {site.active ? 'Archive' : 'Restore'}
-            </button>
-          </div>
-        </div>
-
         {/* Status Badge */}
         <div>
           <span className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium ${
