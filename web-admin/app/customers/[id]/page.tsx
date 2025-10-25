@@ -525,6 +525,12 @@ export default function CustomerDetailPage() {
             onClick: () => router.push(`/customers/${customerId}/edit`),
             variant: 'secondary',
           },
+          {
+            label: customer.active ? 'Archive' : 'Unarchive',
+            icon: <X className="w-4 h-4 mr-2" />,
+            onClick: () => setShowArchiveModal(true),
+            variant: 'secondary',
+          },
         ]}
       />
 
