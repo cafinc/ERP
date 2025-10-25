@@ -400,6 +400,11 @@ export default function LeadsPage() {
           <PageHeader
             title="Lead Management"
             subtitle="Track and convert potential customers"
+            breadcrumbs={[
+              { label: "Home", href: "/" },
+              { label: "CRM", href: "/crm/dashboard" },
+              { label: "Leads" }
+            ]}
             backUrl="/customers"
             stats={[
               {
