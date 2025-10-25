@@ -30,11 +30,9 @@ const CATEGORIES = [
 ];
 
 const UNITS = [
-  { value: 'tons', label: 'Tons' },
-  { value: 'lbs', label: 'Pounds' },
-  { value: 'gallons', label: 'Gallons' },
-  { value: 'liters', label: 'Liters' },
-  { value: 'bags', label: 'Bags' },
+  { value: 'bags', label: 'Bag' },
+  { value: 'yards', label: 'Yard' },
+  { value: 'gallons', label: 'Gallon' },
 ];
 
 interface Consumable {
