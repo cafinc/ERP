@@ -1298,14 +1298,26 @@ export default function CustomerFormPage() {
                       <div className="relative">
                         <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                         <input
+                          name="office_number"
                           type="tel"
                           value={customerForm.office_number}
-                          onChange={e => setCustomerForm({ ...customerForm, office_number: e.target.value })}
-                          className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                          onChange={e => {
+                            const cleaned = e.target.value.replace(/\D/g, '');
+                            const formatted = cleaned.slice(0, 10);
+                            setCustomerForm({ ...customerForm, office_number: formatted });
+                          }}
+                          className={`w-full pl-10 pr-4 py-1.5 border rounded-lg focus:ring-2 focus:border-transparent text-sm ${
+                            fieldErrors.office_number 
+                              ? 'border-red-500 focus:ring-red-500' 
+                              : 'border-gray-300 focus:ring-blue-500'
+                          }`}
                           placeholder="(555) 123-4567"
                           required
                         />
                       </div>
+                      {fieldErrors.office_number && (
+                        <p className="text-red-500 text-xs mt-1">{fieldErrors.office_number}</p>
+                      )}
                     </div>
 
                     <div>
@@ -1315,16 +1327,22 @@ export default function CustomerFormPage() {
                       <div className="relative">
                         <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                         <input
+                          name="email"
                           type="email"
                           value={customerForm.email}
-                          onChange={e =>
-                            setCustomerForm({ ...customerForm, email: e.target.value })
-                          }
-                          className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                          onChange={handleEmailChange}
+                          className={`w-full pl-10 pr-4 py-1.5 border rounded-lg focus:ring-2 focus:border-transparent text-sm ${
+                            fieldErrors.email 
+                              ? 'border-red-500 focus:ring-red-500' 
+                              : 'border-gray-300 focus:ring-blue-500'
+                          }`}
                           placeholder="info@company.com"
                           required
                         />
                       </div>
+                      {fieldErrors.email && (
+                        <p className="text-red-500 text-xs mt-1">{fieldErrors.email}</p>
+                      )}
                     </div>
                     </div>
                   </div>
