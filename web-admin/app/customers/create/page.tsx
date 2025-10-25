@@ -1970,34 +1970,35 @@ export default function CustomerFormPage() {
             {/* Address Section (Common for both) */}
             {/* Address Section - Individual Customers Only */}
             {customerForm.customer_type === 'individual' && (
-            <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <MapPin className="w-5 h-5 text-[#3f72af]" />
-                  <span>Address *</span>
-                </div>
-                {/* Create Site Toggle - label first, then toggle */}
-                <div className="flex items-center gap-2">
-                  <label className="text-sm font-medium text-gray-700">
-                    Create Site
-                  </label>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setCreateSite(!createSite);
-                      if (createSite) {
-                        setSiteName('');
-                      }
-                    }}
-                    className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#3f72af] focus:ring-offset-2 flex-shrink-0 ${
-                      createSite ? 'bg-[#3f72af]' : 'bg-gray-200'
-                    }`}
-                  >
-                    <span
-                      className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                        createSite ? 'translate-x-6' : 'translate-x-1'
+            <div className="bg-white/95 backdrop-blur-md rounded-3xl shadow-xl border border-white/40 overflow-hidden hover:shadow-2xl transition-shadow">
+              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 border-b-2 border-blue-100 p-6">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-sm font-bold text-gray-900 flex items-center gap-2">
+                    <MapPin className="w-4 h-4 text-[#3f72af]" />
+                    Address <span className="text-red-500">*</span>
+                  </h3>
+                  {/* Create Site Toggle - label first, then toggle */}
+                  <div className="flex items-center gap-2">
+                    <label className="text-xs font-medium text-gray-700">
+                      Create Site
+                    </label>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setCreateSite(!createSite);
+                        if (createSite) {
+                          setSiteName('');
+                        }
+                      }}
+                      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#3f72af] focus:ring-offset-2 flex-shrink-0 ${
+                        createSite ? 'bg-[#3f72af]' : 'bg-gray-200'
                       }`}
-                    />
+                    >
+                      <span
+                        className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                          createSite ? 'translate-x-6' : 'translate-x-1'
+                        }`}
+                      />
                   </button>
                 </div>
               </h2>
