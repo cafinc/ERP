@@ -229,7 +229,6 @@ export default function CreateSitePage() {
                 Site Information
               </h2>
               <div className="space-y-6">
-              <div className="space-y-6">
                 {/* Site Name */}
                 <div>
                   <label className="block text-sm font-semibold text-gray-900 mb-2">
