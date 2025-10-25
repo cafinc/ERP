@@ -2548,6 +2548,85 @@ export default function CustomerFormPage() {
           </div>
         </div>
       )}
+
+      {/* Success/Error Result Modal */}
+      {showResultModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className={`bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden ${
+            resultModalType === 'success' ? 'border-t-4 border-green-500' : 'border-t-4 border-red-500'
+          }`}>
+            {/* Modal Header */}
+            <div className={`px-6 py-4 ${
+              resultModalType === 'success' 
+                ? 'bg-gradient-to-r from-green-500 to-emerald-500' 
+                : 'bg-gradient-to-r from-red-500 to-rose-500'
+            }`}>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  {resultModalType === 'success' ? (
+                    <Check className="w-6 h-6 text-white" />
+                  ) : (
+                    <AlertCircle className="w-6 h-6 text-white" />
+                  )}
+                  <h3 className="text-xl font-bold text-white">{resultModalTitle}</h3>
+                </div>
+                <button
+                  onClick={() => setShowResultModal(false)}
+                  className="text-white hover:bg-white/20 rounded-lg p-1 transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+
+            {/* Modal Body */}
+            <div className="p-6">
+              <p className={`text-sm mb-4 ${
+                resultModalType === 'success' ? 'text-gray-700' : 'text-gray-800 font-medium'
+              }`}>
+                {resultModalMessage}
+              </p>
+
+              {validationErrors.length > 0 && (
+                <div className={`rounded-lg p-4 ${
+                  resultModalType === 'success' 
+                    ? 'bg-green-50 border border-green-200' 
+                    : 'bg-red-50 border border-red-200'
+                }`}>
+                  <ul className="space-y-2">
+                    {validationErrors.map((error, index) => (
+                      <li key={index} className={`text-sm flex items-start gap-2 ${
+                        resultModalType === 'success' ? 'text-green-800' : 'text-red-800'
+                      }`}>
+                        {resultModalType === 'success' ? (
+                          <Check className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                        ) : (
+                          <AlertCircle className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                        )}
+                        <span>{error}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+
+            {/* Modal Footer */}
+            <div className="bg-gray-50 px-6 py-4 flex justify-end border-t">
+              <button
+                onClick={() => setShowResultModal(false)}
+                className={`px-6 py-2 text-sm font-medium text-white rounded-lg transition-colors ${
+                  resultModalType === 'success'
+                    ? 'bg-green-600 hover:bg-green-700'
+                    : 'bg-red-600 hover:bg-red-700'
+                }`}
+              >
+                {resultModalType === 'success' ? 'OK' : 'Close'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
