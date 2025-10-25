@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import PageHeader from '@/components/PageHeader';
+import CustomerCommunicationsTab from '@/components/CustomerCommunicationsTab';
 import api from '@/lib/api';
 import { formatPhoneNumber } from '@/lib/utils/formatters';
 import {
