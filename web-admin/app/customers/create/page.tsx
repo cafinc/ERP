@@ -2242,7 +2242,7 @@ export default function CustomerFormPage() {
 
       {/* Success Modal */}
       {showSuccessModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/20 backdrop-blur-sm">
           <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full mx-4 overflow-hidden animate-bounce-in">
             <div className="bg-gradient-to-r from-green-500 to-emerald-500 p-6 text-white">
               <div className="flex items-center gap-3">
