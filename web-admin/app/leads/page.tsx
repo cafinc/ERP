@@ -935,13 +935,6 @@ export default function LeadsPage() {
                   </div>
                 </div>
               </div>
-                      onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
-                      placeholder="123 Main St, City, Province"
-                    />
-                  </div>
-                </div>
-              </div>
 
               {/* Lead Qualification Card */}
               <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-6 backdrop-blur-sm">
