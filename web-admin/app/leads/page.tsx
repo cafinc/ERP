@@ -67,6 +67,7 @@ interface Lead {
   lost_reason?: string;
   created_at: string;
   converted_customer_id?: string;
+  services_requested?: string[];
 }
 
 const STATUS_CONFIG = {
