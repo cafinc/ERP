@@ -200,12 +200,15 @@ export default function ServicesPage() {
   }
 
   return (
-      <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
-        {/* Compact Header */}
+      <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto">
         <PageHeader
           title="Services"
-          subtitle="Manage service offerings and pricing"
-          breadcrumbs={[{ label: "Home", href: "/" }, { label: "Dispatch", href: "/dispatch" }, { label: "Services" }]}
+          subtitle="Manage service offerings, pricing, and availability"
+          breadcrumbs={[
+            { label: "Home", href: "/" },
+            { label: "Dispatch", href: "/dispatch" },
+            { label: "Services" }
+          ]}
           actions={[
             {
               label: 'Add Service',
@@ -214,78 +217,19 @@ export default function ServicesPage() {
               variant: 'primary',
             },
           ]}
+          tabs={[
+            { label: "All", value: "all", count: services.length },
+            { label: "❄️ Plowing", value: "plowing", count: services.filter(s => s.service_type === 'plowing').length },
+            { label: "⚪ Sanding", value: "sanding", count: services.filter(s => s.service_type === 'sanding').length },
+            { label: "🧂 Salting", value: "salting", count: services.filter(s => s.service_type === 'salting').length },
+            { label: "🚶 Sidewalk", value: "sidewalk_clear", count: services.filter(s => s.service_type === 'sidewalk_clear').length },
+          ]}
+          activeTab={filterType}
+          onTabChange={(value) => setFilterType(value)}
+          showSearch={true}
+          searchPlaceholder="Search services..."
+          onSearch={setSearchQuery}
         />
-
-        {/* Search and Filter Section */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
-          {/* Search Bar */}
-          <div className="mb-4">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-              <input
-                type="text"
-                placeholder="Search services..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
-              />
-            </div>
-          </div>
-
-          {/* Filter Buttons */}
-          <div className="flex items-center space-x-2 flex-wrap gap-2">
-            <button
-              onClick={() => setFilterType('all')}
-              className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-all ${
-                filterType === 'all'
-                  ? 'bg-[#3f72af] text-white shadow-md'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
-            >
-              All ({services.length})
-            </button>
-            <button
-              onClick={() => setFilterType('plowing')}
-              className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-all ${
-                filterType === 'plowing'
-                  ? 'bg-[#3f72af] text-white shadow-md'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
-            >
-              ❄️ Plowing ({services.filter(s => s.service_type === 'plowing').length})
-            </button>
-            <button
-              onClick={() => setFilterType('sanding')}
-              className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-all ${
-                filterType === 'sanding'
-                  ? 'bg-[#3f72af] text-white shadow-md'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
-            >
-              ⚪ Sanding ({services.filter(s => s.service_type === 'sanding').length})
-            </button>
-            <button
-              onClick={() => setFilterType('salting')}
-              className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-all ${
-                filterType === 'salting'
-                  ? 'bg-[#3f72af] text-white shadow-md'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
-            >
-              🧂 Salting ({services.filter(s => s.service_type === 'salting').length})
-            </button>
-            <button
-              onClick={() => setFilterType('sidewalk_clear')}
-              className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-all ${
-                filterType === 'sidewalk_clear'
-                  ? 'bg-[#3f72af] text-white shadow-md'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
-            >
-              🚶 Sidewalk ({services.filter(s => s.service_type === 'sidewalk_clear').length})
-            </button>
-          </div>
-        </div>
 
  
 
