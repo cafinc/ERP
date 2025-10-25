@@ -121,9 +121,7 @@ async def get_sync_logs(
             query["status"] = status
         
         logs = await sync_logs_collection.find(query).sort("started_at", -1).skip(skip).limit(limit).to_list(limit)
-        for log in logs:
-            log["id"] = str(log["_id"])
-            del log["_id"]
+        logs = [serialize_doc(log) for log in logs]
         
         total = await sync_logs_collection.count_documents(query)
         
