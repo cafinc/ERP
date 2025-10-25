@@ -1375,113 +1375,46 @@ export default function CustomerDetailPage() {
             {communications.length === 0 ? (
               <p className="text-center text-gray-500 py-8">No communications recorded yet</p>
             ) : (
-              (() => {
-                const typeConfig = {
-                  'inapp': { icon: MessageCircle, color: 'bg-orange-500', textColor: 'text-orange-600', bgLight: 'bg-orange-50', label: 'In-App' },
-                  'sms': { icon: MessageSquare, color: 'bg-green-500', textColor: 'text-green-600', bgLight: 'bg-green-50', label: 'SMS' },
-                  'email': { icon: Mail, color: 'bg-blue-500', textColor: 'text-blue-600', bgLight: 'bg-blue-50', label: 'Email' },
-                  'phone': { icon: PhoneCall, color: 'bg-purple-500', textColor: 'text-purple-600', bgLight: 'bg-purple-50', label: 'Phone' },
-                };
+              <div className="grid grid-cols-4 gap-4">
+                {(() => {
+                  const typeConfig = {
+                    'inapp': { icon: MessageCircle, color: 'bg-orange-500', textColor: 'text-orange-600', bgLight: 'bg-orange-50', label: 'In-App' },
+                    'sms': { icon: MessageSquare, color: 'bg-green-500', textColor: 'text-green-600', bgLight: 'bg-green-50', label: 'SMS' },
+                    'email': { icon: Mail, color: 'bg-blue-500', textColor: 'text-blue-600', bgLight: 'bg-blue-50', label: 'Email' },
+                    'phone': { icon: PhoneCall, color: 'bg-purple-500', textColor: 'text-purple-600', bgLight: 'bg-purple-50', label: 'Phone' },
+                  };
 
-                // Group communications by type
-                const groupedComms = communications.reduce((acc: any, comm: any) => {
-                  const type = comm.type || 'inapp';
-                  if (!acc[type]) acc[type] = [];
-                  acc[type].push(comm);
-                  return acc;
-                }, {});
+                  // Group communications by type
+                  const groupedComms = communications.reduce((acc: any, comm: any) => {
+                    const type = comm.type || 'inapp';
+                    if (!acc[type]) acc[type] = [];
+                    acc[type].push(comm);
+                    return acc;
+                  }, {});
 
-                // Get available types
-                const availableTypes = Object.keys(groupedComms).filter(type => 
-                  ['inapp', 'sms', 'email', 'phone'].includes(type)
-                );
+                  return Object.keys(typeConfig).map((type) => {
+                    const config = typeConfig[type as keyof typeof typeConfig];
+                    const Icon = config.icon;
+                    const count = groupedComms[type]?.length || 0;
 
-                return (
-                  <>
-                    {/* Colored Tabs */}
-                    <div className="flex space-x-2 mb-4">
-                      {availableTypes.map((type) => {
-                        const config = typeConfig[type as keyof typeof typeConfig];
-                        if (!config) return null;
-                        const Icon = config.icon;
-                        const count = groupedComms[type].length;
-                        const isActive = commSubTab === type;
-
-                        return (
-                          <button
-                            key={type}
-                            onClick={() => setCommSubTab(type)}
-                            className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-all ${
-                              isActive 
-                                ? `${config.color} text-white shadow-lg` 
-                                : `${config.bgLight} ${config.textColor} hover:shadow-md`
-                            }`}
-                          >
-                            <Icon className="w-4 h-4" />
-                            <span>{config.label}</span>
-                            <span className={`text-xs px-2 py-0.5 rounded-full ${
-                              isActive ? 'bg-white/20' : 'bg-white'
-                            }`}>
-                              {count}
-                            </span>
-                          </button>
-                        );
-                      })}
-                    </div>
-
-                    {/* Recent Communications for Selected Tab */}
-                    <div className="space-y-3">
-                      {groupedComms[commSubTab]?.slice(0, 5).map((comm: any, idx: number) => {
-                        const config = typeConfig[commSubTab as keyof typeof typeConfig];
-                        if (!config) return null;
-                        const Icon = config.icon;
-
-                        return (
-                          <div
-                            key={idx}
-                            className="flex items-start space-x-3 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors border border-gray-200"
-                          >
-                            <div className={`p-2 rounded-lg ${config.color} text-white flex-shrink-0`}>
-                              <Icon className="w-4 h-4" />
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <div className="flex items-center justify-between mb-1">
-                                <span className="text-sm font-medium text-gray-900">
-                                  {comm.subject || comm.title || 'No subject'}
-                                </span>
-                                <div className="flex items-center space-x-2">
-                                  {comm.direction && (
-                                    <span className={`text-xs px-2 py-0.5 rounded-full ${
-                                      comm.direction === 'outbound' ? 'bg-blue-100 text-blue-700' : 'bg-green-100 text-green-700'
-                                    }`}>
-                                      {comm.direction === 'outbound' ? 'Sent' : 'Received'}
-                                    </span>
-                                  )}
-                                  <span className="text-xs text-gray-500">
-                                    {new Date(comm.timestamp || comm.created_at).toLocaleDateString()}
-                                  </span>
-                                </div>
-                              </div>
-                              <p className="text-sm text-gray-600 line-clamp-2">
-                                {comm.content || comm.message || comm.body || 'No content'}
-                              </p>
-                            </div>
+                    return (
+                      <div
+                        key={type}
+                        className={`${config.bgLight} rounded-lg p-4 border border-gray-200 hover:shadow-md transition-all cursor-pointer`}
+                        onClick={() => setActiveTab('communications')}
+                      >
+                        <div className="flex items-center gap-3 mb-2">
+                          <div className={`p-2 rounded-lg ${config.color} text-white`}>
+                            <Icon className="w-5 h-5" />
                           </div>
-                        );
-                      })}
-                      
-                      {groupedComms[commSubTab]?.length > 5 && (
-                        <button
-                          onClick={() => setActiveTab('communications')}
-                          className="w-full text-center py-2 text-sm text-[#3f72af] hover:text-[#2d5480] font-medium"
-                        >
-                          View all {groupedComms[commSubTab].length} {typeConfig[commSubTab as keyof typeof typeConfig].label.toLowerCase()} messages →
-                        </button>
-                      )}
-                    </div>
-                  </>
-                );
-              })()
+                          <span className="font-semibold text-gray-900 text-2xl">{count}</span>
+                        </div>
+                        <p className={`text-sm font-medium ${config.textColor}`}>{config.label}</p>
+                      </div>
+                    );
+                  });
+                })()}
+              </div>
             )}
           </div>
         )}
