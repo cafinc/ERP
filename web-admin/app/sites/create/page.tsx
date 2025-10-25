@@ -987,6 +987,6 @@ export default function CreateSitePage() {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }
