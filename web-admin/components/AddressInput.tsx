@@ -67,6 +67,12 @@ export default function AddressInput({
       autocompleteRef.current.addListener('place_changed', () => {
         const place = autocompleteRef.current.getPlace();
         
+        // Safety check: ensure place object exists and has required properties
+        if (!place || !place.formatted_address) {
+          // User pressed enter or didn't select from dropdown
+          return;
+        }
+        
         if (place.formatted_address) {
           onChange(place.formatted_address);
         }
