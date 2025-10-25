@@ -124,6 +124,8 @@ export default function LeadsPage() {
     notes: '',
     next_follow_up: '',
   });
+  const [selectedServices, setSelectedServices] = useState<string[]>([]);
+  const [uploadedFiles, setUploadedFiles] = useState<Array<{name: string, type: string, size: number, data: string}>>([]);
   const [saving, setSaving] = useState(false);
   const [teamMembers, setTeamMembers] = useState<any[]>([]);
 
