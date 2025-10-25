@@ -961,63 +961,67 @@ export default function CustomerFormPage() {
                           />
                         </button>
                       </div>
-                    </h2>
+                    </div>
+                  </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          First Name *
-                        </label>
-                        <input
-                          type="text"
-                          value={customerForm.first_name}
-                          onChange={e =>
-                            setCustomerForm({ ...customerForm, first_name: e.target.value })
-                          }
-                          className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:border-transparent ${
-                            fieldErrors['first_name'] ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'
-                          }`}
-                          placeholder="John"
-                          required
-                        />
-                        {fieldErrors['first_name'] && (
-                          <p className="text-red-500 text-xs mt-1">{fieldErrors['first_name']}</p>
-                        )}
-                      </div>
-
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Last Name *
-                        </label>
-                        <input
-                          type="text"
-                          value={customerForm.last_name}
-                          onChange={e =>
-                            setCustomerForm({ ...customerForm, last_name: e.target.value })
-                          }
-                          className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:border-transparent ${
-                            fieldErrors['last_name'] ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'
-                          }`}
-                          placeholder="Smith"
-                          required
-                        />
-                        {fieldErrors['last_name'] && (
-                          <p className="text-red-500 text-xs mt-1">{fieldErrors['last_name']}</p>
-                        )}
-                      </div>
-
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Email *</label>
-                        <div className="relative">
-                          <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    <div className="p-6 space-y-4">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-xs font-medium text-gray-700 mb-2">
+                            First Name <span className="text-red-500">*</span>
+                          </label>
                           <input
-                            type="email"
-                            value={customerForm.email}
-                            onChange={e => setCustomerForm({ ...customerForm, email: e.target.value })}
-                            onBlur={e => validateField('email', e.target.value)}
-                            className={`w-full pl-10 pr-4 py-1.5 border rounded-lg focus:ring-2 focus:border-transparent text-sm ${
-                              fieldErrors['email'] ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'
+                            type="text"
+                            value={customerForm.first_name}
+                            onChange={e =>
+                              setCustomerForm({ ...customerForm, first_name: e.target.value })
+                            }
+                            className={`w-full px-4 py-3 border-2 rounded-lg focus:ring-2 focus:border-[#3f72af] bg-white font-semibold transition-all ${
+                              fieldErrors['first_name'] ? 'border-red-500 focus:ring-red-500' : 'border-gray-200 focus:ring-[#3f72af]'
                             }`}
+                            placeholder="John"
+                            required
+                          />
+                          {fieldErrors['first_name'] && (
+                            <p className="text-red-500 text-xs mt-1">{fieldErrors['first_name']}</p>
+                          )}
+                        </div>
+
+                        <div>
+                          <label className="block text-xs font-medium text-gray-700 mb-2">
+                            Last Name <span className="text-red-500">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            value={customerForm.last_name}
+                            onChange={e =>
+                              setCustomerForm({ ...customerForm, last_name: e.target.value })
+                            }
+                            className={`w-full px-4 py-3 border-2 rounded-lg focus:ring-2 focus:border-[#3f72af] bg-white font-semibold transition-all ${
+                              fieldErrors['last_name'] ? 'border-red-500 focus:ring-red-500' : 'border-gray-200 focus:ring-[#3f72af]'
+                            }`}
+                            placeholder="Smith"
+                            required
+                          />
+                          {fieldErrors['last_name'] && (
+                            <p className="text-red-500 text-xs mt-1">{fieldErrors['last_name']}</p>
+                          )}
+                        </div>
+
+                        <div>
+                          <label className="block text-xs font-medium text-gray-700 mb-2">
+                            Email <span className="text-red-500">*</span>
+                          </label>
+                          <div className="relative">
+                            <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                            <input
+                              type="email"
+                              value={customerForm.email}
+                              onChange={e => setCustomerForm({ ...customerForm, email: e.target.value })}
+                              onBlur={e => validateField('email', e.target.value)}
+                              className={`w-full pl-10 pr-4 py-3 border-2 rounded-lg focus:ring-2 focus:border-[#3f72af] bg-white font-semibold transition-all ${
+                                fieldErrors['email'] ? 'border-red-500 focus:ring-red-500' : 'border-gray-200 focus:ring-[#3f72af]'
+                              }`}
                             placeholder="john@example.com"
                             required
                           />
