@@ -189,7 +189,20 @@ export default function SiteDetailPage() {
   }
 
   return (
-    <PageHeader>
+    <>
+      <PageHeader
+        title={site.name}
+        subtitle={site.site_reference ? `Ref: ${site.site_reference}` : "Site Details"}
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Sites", href: "/sites" }, { label: site.name }]}
+        actions={[
+          {
+            label: "Edit Site",
+            onClick: () => router.push(`/sites/${siteId}/edit`),
+            variant: 'primary',
+          },
+        ]}
+      />
+      <div className="flex-1 overflow-auto p-6">
       <div className="space-y-6">
         {/* Header */}
         <div className="flex items-center justify-between">
