@@ -421,42 +421,22 @@ export default function CustomerDetailPage() {
   const isCompany = customer.customer_type === 'company';
 
   // Organized tab groups for cleaner navigation
-  const tabGroups = [
+  const tabSections = [
     {
       label: 'General',
       tabs: [
         { id: 'overview', name: 'Overview', icon: Users },
-        { id: 'sites', name: 'Sites', icon: MapPinned, count: sites.length },
-      ]
-    },
-    {
-      label: 'Sales & Projects',
-      tabs: [
         { id: 'estimates', name: 'Estimates', icon: FileText, count: estimates.length },
-        { id: 'projects', name: 'Projects', icon: FolderOpen, count: projects.length },
+        { id: 'sites', name: 'Sites', icon: MapPinned, count: sites.length },
         { id: 'agreements', name: 'Agreements', icon: FileSignature, count: contracts.length },
-      ]
-    },
-    {
-      label: 'Billing',
-      tabs: [
+        { id: 'projects', name: 'Projects', icon: FolderOpen, count: projects.length },
         { id: 'invoices', name: 'Invoices', icon: CreditCard, count: invoices.length },
-        ...(isCompany ? [{ id: 'accounting', name: 'Accounting', icon: DollarSign }] : []),
-      ]
-    },
-    {
-      label: 'Operations',
-      tabs: [
         { id: 'tasks', name: 'Tasks', icon: CheckCircle, count: tasks.length },
-        { id: 'service-requests', name: 'Service Requests', icon: ClipboardList, count: serviceRequests.length },
-      ]
-    },
-    {
-      label: 'Data',
-      tabs: [
-        { id: 'communications', name: 'Communications', icon: Mail, count: communications.length },
-        { id: 'forms', name: 'Forms', icon: FileText },
-        ...(isCompany ? [{ id: 'contacts', name: 'Contacts', icon: Users, count: contacts.length }] : []),
+        { id: 'communications', name: 'Comms', icon: Mail, count: communications.length },
+        ...(isCompany ? [
+          { id: 'accounting', name: 'Accounting', icon: DollarSign },
+          { id: 'contacts', name: 'Contacts', icon: Users, count: contacts.length }
+        ] : []),
       ]
     },
   ];
