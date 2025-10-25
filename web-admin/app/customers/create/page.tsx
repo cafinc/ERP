@@ -659,11 +659,28 @@ export default function CustomerFormPage() {
       return;
     }
 
-    if (!customerForm.email || !customerForm.phone || !customerForm.street_address) {
+    // Check required fields based on customer type
+    const missingFields: string[] = [];
+    
+    if (!customerForm.email) {
+      missingFields.push('Email is required');
+    }
+    
+    if (customerForm.customer_type === 'individual') {
+      if (!customerForm.phone) missingFields.push('Phone is required');
+    } else {
+      if (!customerForm.office_number) missingFields.push('Office Number is required');
+    }
+    
+    if (!customerForm.street_address) {
+      missingFields.push('Street address is required');
+    }
+    
+    if (missingFields.length > 0) {
       setResultModalType('error');
       setResultModalTitle('Required Fields Missing');
-      setResultModalMessage('Please fill in all required fields');
-      setValidationErrors(['Email is required', 'Phone is required', 'Street address is required']);
+      setResultModalMessage('Please fill in all required fields:');
+      setValidationErrors(missingFields);
       setShowResultModal(true);
       return;
     }
