@@ -519,7 +519,7 @@ export default function CustomerFormPage() {
   const checkForDuplicates = async () => {
     setCheckingDuplicates(true);
     try {
-      const response = await api.get('/api/customers');
+      const response = await api.get('/customers');
       const allCustomers = response.data;
       
       const duplicates: any[] = [];
