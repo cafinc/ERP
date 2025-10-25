@@ -1,16 +1,31 @@
 ---
 user_problem_statement: |
-  Current Task: Re-implement enhanced phone/email validation and duplicate customer detection on /customers/create page.
+  Current Task: Complete archive/unarchive success modal implementation and comprehensive testing of customer management features.
   
-  Requirements:
-  - Add US phone number formatting (XXX) XXX-XXXX for all phone fields
-  - Add email validation with red error highlighting
-  - Validate Contact Persons fields (name, email, phone) for Company forms
-  - Implement duplicate customer detection before submission
-  - Show modal popup if duplicates found with option to proceed or cancel
-  - Apply comprehensive form validation with error messages
+  Completed Work:
+  - ✅ Fixed handleArchiveCustomer function to properly toggle active status (archive/unarchive)
+  - ✅ Archive success modal already implemented with proper styling and auto-close
+  - ✅ Unarchive success modal implemented (same component with dynamic messaging)
   
-  Previous Context: Customer create page was reverted to original state. Need to re-implement validation and duplicate detection features.
+  Testing Requirements:
+  Phase 1 - Backend Testing:
+  - Test customer archive/unarchive API endpoints (PUT /api/customers/{id} with active flag)
+  - Test customer create API with all validation (individual and company types)
+  - Test duplicate detection API (POST /api/customers/check-duplicate)
+  - Test company linking functionality
+  - Test communication preferences and attachments
+  
+  Phase 2 - Frontend Testing (Manual or Automated):
+  - Test all toggles on /customers/create page (Link to Company, Communication Preference, Require Access, Create Site)
+  - Test customer type switching (Individual to Company)
+  - Test validation and error highlighting (phone format, email validation, required fields)
+  - Test Contact Persons section with Owner/Operator toggle for companies
+  - Test Google Places autocomplete for addresses
+  - Test duplicate customer detection modal workflow
+  - Test file upload functionality
+  - Test archive/unarchive buttons and modals on customer profile page
+  
+  Previous Context: Customer management features have been extensively developed. Need comprehensive validation that everything works correctly.
 
 backend:
   - task: "Site Maps API - Create site map with annotations"
