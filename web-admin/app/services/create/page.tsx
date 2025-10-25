@@ -22,6 +22,18 @@ import {
   Wind,
 } from 'lucide-react';
 
+// Helper function to get icon for service types
+const getServiceTypeIcon = (type: string) => {
+  const icons: Record<string, JSX.Element> = {
+    plowing: <Snowflake className="w-5 h-5" />,
+    sanding: <Droplet className="w-5 h-5" />,
+    salting: <ShoppingCart className="w-5 h-5" />,
+    brining: <Wind className="w-5 h-5" />,
+    hauling: <Truck className="w-5 h-5" />,
+  };
+  return icons[type] || <Briefcase className="w-5 h-5" />;
+};
+
 export default function ServiceFormPage() {
   const router = useRouter();
   const params = useParams();
