@@ -28,6 +28,7 @@ interface StatBadge {
   value: number;
   icon?: React.ReactNode;
   color?: 'blue' | 'green' | 'purple' | 'orange' | 'red' | 'gray';
+  onClick?: () => void;
 }
 
 interface PageHeaderProps {
