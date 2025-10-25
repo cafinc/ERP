@@ -443,67 +443,6 @@ export default function SitesPage() {
               </div>
             </div>
           )}
-
-        {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <div className="bg-white rounded-xl shadow-md shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
-            <div className="flex items-center gap-3">
-              <div className="bg-blue-100 rounded-lg p-3">
-                <MapPin className="w-6 h-6 text-[#3f72af]" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold text-gray-900">
-                  {sites.length}
-                </p>
-                <p className="text-sm text-gray-600">Total Sites</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-xl shadow-md shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
-            <div className="flex items-center gap-3">
-              <div className="bg-green-100 rounded-lg p-3">
-                <MapPin className="w-6 h-6 text-green-600" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold text-gray-900">
-                  {sites.filter(s => s.active).length}
-                </p>
-                <p className="text-sm text-gray-600">Active</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-xl shadow-md shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
-            <div className="flex items-center gap-3">
-              <div className="bg-purple-100 rounded-lg p-3">
-                <Building className="w-6 h-6 text-purple-600" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold text-gray-900">
-                  {new Set(sites.map(s => s.customer_id)).size}
-                </p>
-                <p className="text-sm text-gray-600">Customers</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-xl shadow-md shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
-            <div className="flex items-center gap-3">
-              <div className="bg-orange-100 rounded-lg p-3">
-                <Archive className="w-6 h-6 text-orange-600" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold text-gray-900">
-                  {sites.filter(s => !s.active).length}
-                </p>
-                <p className="text-sm text-gray-600">Archived</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Old table removed - now using conditional list view above */}
         </div>
       </div>
     );
