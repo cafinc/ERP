@@ -254,19 +254,19 @@ export default function ServiceFormPage() {
               </div>
             </div>
 
-            {/* Pricing Structure Card */}
+            {/* Default Pricing Card */}
             <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-2xl font-bold text-gray-900 flex items-center">
                   <DollarSign className="w-6 h-6 text-[#3f72af] mr-2" />
-                  Pricing Structure
+                  Default Pricing
                 </h2>
                 <button
                   type="button"
                   onClick={addPricingEntry}
-                  className="flex items-center gap-2 px-4 py-2 bg-[#3f72af] text-white rounded-xl hover:bg-[#2c5282] transition-all shadow-md hover:shadow-lg font-medium"
+                  className="flex items-center gap-2 px-3 py-2 text-sm bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-all shadow-sm hover:shadow-md font-medium"
                 >
-                  <Plus className="w-5 h-5" />
+                  <Plus className="w-4 h-4" />
                   Add Pricing Tier
                 </button>
               </div>
