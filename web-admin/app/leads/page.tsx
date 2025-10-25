@@ -127,6 +127,9 @@ export default function LeadsPage() {
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
   const [uploadedFiles, setUploadedFiles] = useState<Array<{name: string, type: string, size: number, data: string}>>([]);
   const [saving, setSaving] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showErrorModal, setShowErrorModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const [teamMembers, setTeamMembers] = useState<any[]>([]);
 
   useEffect(() => {
