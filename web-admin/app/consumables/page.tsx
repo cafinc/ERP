@@ -362,8 +362,8 @@ export default function ConsumablesPage() {
 
         {/* Create Modal */}
         {showCreateModal && (
-          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fadeIn">
-            <div className="bg-white/95 backdrop-blur-md rounded-3xl max-w-2xl w-full shadow-2xl border border-white/40 animate-slideUp">
+          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fadeIn overflow-y-auto">
+            <div className="bg-white/95 backdrop-blur-md rounded-3xl max-w-2xl w-full shadow-2xl border border-white/40 animate-slideUp my-8">
               {/* Modal Header */}
               <div className="flex items-center justify-between p-6 border-b border-gray-200/50">
                 <div className="flex items-center gap-3">
@@ -384,7 +384,7 @@ export default function ConsumablesPage() {
               </div>
 
               {/* Modal Body */}
-              <form onSubmit={handleCreate} className="p-6 space-y-6">
+              <form onSubmit={handleCreate} className="p-6 space-y-6 max-h-[calc(90vh-180px)] overflow-y-auto">
                 {/* Name and Category */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
