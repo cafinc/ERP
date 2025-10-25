@@ -252,24 +252,25 @@ export default function ConsumablesPage() {
                 <tbody className="divide-y divide-gray-200">
                   {consumables.map((consumable) => {
                     const status = getStockStatus(consumable);
+                    const consumableId = consumable._id || consumable.id;
                     return (
-                      <tr key={consumable.id} className="hover:bg-gray-50 transition-colors hover:bg-gray-50">
+                      <tr key={consumableId} className="hover:bg-gray-50 transition-colors hover:bg-gray-50">
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="font-medium text-gray-900">{consumable.name}</div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <span className="px-2 py-1 text-xs font-medium bg-gray-100 text-gray-700 rounded capitalize">
-                            {consumable.category}
+                            {consumable.consumable_type?.replace(/_/g, ' ')}
                           </span>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-gray-900">
-                          {consumable.current_stock} {consumable.unit}
+                          {consumable.quantity_available} {consumable.unit}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-gray-600">
-                          {consumable.min_stock_level} {consumable.unit}
+                          {consumable.reorder_level} {consumable.unit}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-gray-900">
-                          ${consumable.unit_cost.toFixed(2)}
+                          ${consumable.cost_per_unit?.toFixed(2) || '0.00'}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <span className={`px-2 py-1 text-xs font-medium rounded ${
