@@ -119,14 +119,6 @@ export default function CustomerFormPage() {
     same_person_all_contacts: false,
     customer_type: 'individual',
     company_id: '',
-    // Main contact for companies
-    main_contact: {
-      first_name: '',
-      last_name: '',
-      phone: '',
-      email: '',
-      position: 'Manager',
-    },
     notes: '',
     active: true,
     // Company-specific accounting fields
