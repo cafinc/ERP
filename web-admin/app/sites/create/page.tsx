@@ -25,6 +25,9 @@ import {
   Factory,
   ShoppingBag,
   Siren,
+  KeyRound,
+  Lock,
+  Shield,
 } from 'lucide-react';
 
 const SITE_TYPES = ['residential', 'commercial', 'industrial', 'retail', 'emergency_services'];
