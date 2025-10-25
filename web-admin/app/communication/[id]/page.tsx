@@ -131,17 +131,24 @@ export default function ConversationDetailPage() {
 
   if (!conversation) {
     return (
-      <PageHeader>
-        <div className="p-8">
-          <div className="text-center py-12">
-            <MessageSquare className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-            <p className="text-gray-500 text-lg">Conversation not found</p>
-            <button
-              onClick={() => router.push('/communication')}
-              className="mt-4 px-6 py-2 bg-[#3f72af] hover:bg-[#2c5282] text-white rounded-lg font-medium transition-colors"
-            >
-              Back to Communication Center
-            </button>
+      <div className="h-screen flex flex-col bg-gray-50">
+        <PageHeader
+          title="Communication Details"
+          subtitle="Conversation not found"
+          breadcrumbs={[{ label: "Home", href: "/" }, { label: "Communication", href: "/communication" }, { label: "Details" }]}
+        />
+        <div className="flex-1 overflow-auto p-6">
+          <div className="flex items-center justify-center h-full">
+            <div className="text-center">
+              <MessageSquare className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+              <p className="text-gray-500 text-lg">Conversation not found</p>
+              <button
+                onClick={() => router.push('/communication')}
+                className="mt-4 px-6 py-2 bg-[#3f72af] hover:bg-[#2c5282] text-white rounded-lg font-medium transition-colors"
+              >
+                Back to Communication Center
+              </button>
+            </div>
           </div>
         </div>
       </div>
