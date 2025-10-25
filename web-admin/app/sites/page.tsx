@@ -503,7 +503,7 @@ export default function SitesPage() {
               </tbody>
             </table>
           </div>
-          )}
+        </div>
         </div>
       </div>
     );
