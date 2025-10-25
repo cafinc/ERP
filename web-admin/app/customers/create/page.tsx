@@ -1694,34 +1694,75 @@ export default function CustomerFormPage() {
 
                               <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">Email {index === 0 ? '*' : ''}</label>
-                                <input
-                                  type="email"
-                                  value={contact.email}
-                                  onChange={e => {
-                                    const newContacts = [...customerForm.contacts];
-                                    newContacts[index].email = e.target.value;
-                                    setCustomerForm({ ...customerForm, contacts: newContacts });
-                                  }}
-                                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
-                                  placeholder="email@company.com"
-                                  required={index === 0}
-                                />
+                                <div className="relative">
+                                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-3 h-3 text-gray-400" />
+                                  <input
+                                    name={`contact_${index}_email_multi`}
+                                    type="email"
+                                    value={contact.email}
+                                    onChange={e => {
+                                      const newContacts = [...customerForm.contacts];
+                                      newContacts[index].email = e.target.value;
+                                      setCustomerForm({ ...customerForm, contacts: newContacts });
+                                      
+                                      // Validate email
+                                      if (e.target.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e.target.value)) {
+                                        setFieldErrors({ ...fieldErrors, [`contact_${index}_email_multi`]: 'Invalid email format' });
+                                      } else {
+                                        const newErrors = { ...fieldErrors };
+                                        delete newErrors[`contact_${index}_email_multi`];
+                                        setFieldErrors(newErrors);
+                                      }
+                                    }}
+                                    className={`w-full pl-8 pr-3 py-2 border rounded-lg focus:ring-2 focus:border-transparent text-sm ${
+                                      fieldErrors[`contact_${index}_email_multi`]
+                                        ? 'border-red-500 focus:ring-red-500' 
+                                        : 'border-gray-300 focus:ring-blue-500'
+                                    }`}
+                                    placeholder="email@company.com"
+                                    required={index === 0}
+                                  />
+                                </div>
+                                {fieldErrors[`contact_${index}_email_multi`] && (
+                                  <p className="text-red-500 text-xs mt-1">{fieldErrors[`contact_${index}_email_multi`]}</p>
+                                )}
                               </div>
 
                               <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">Phone {index === 0 ? '*' : ''}</label>
-                                <input
-                                  type="tel"
-                                  value={contact.phone}
-                                  onChange={e => {
-                                    const newContacts = [...customerForm.contacts];
-                                    newContacts[index].phone = e.target.value;
-                                    setCustomerForm({ ...customerForm, contacts: newContacts });
-                                  }}
-                                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
-                                  placeholder="(555) 123-4567"
-                                  required={index === 0}
-                                />
+                                <div className="relative">
+                                  <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-3 h-3 text-gray-400" />
+                                  <input
+                                    name={`contact_${index}_phone_multi`}
+                                    type="tel"
+                                    value={formatPhoneNumber(contact.phone)}
+                                    onChange={e => {
+                                      const cleaned = e.target.value.replace(/\D/g, '');
+                                      const newContacts = [...customerForm.contacts];
+                                      newContacts[index].phone = cleaned.slice(0, 10);
+                                      setCustomerForm({ ...customerForm, contacts: newContacts });
+                                      
+                                      // Validate phone (must be 10 digits for US format)
+                                      if (cleaned && cleaned.length !== 10) {
+                                        setFieldErrors({ ...fieldErrors, [`contact_${index}_phone_multi`]: 'Phone must be 10 digits' });
+                                      } else {
+                                        const newErrors = { ...fieldErrors };
+                                        delete newErrors[`contact_${index}_phone_multi`];
+                                        setFieldErrors(newErrors);
+                                      }
+                                    }}
+                                    className={`w-full pl-8 pr-3 py-2 border rounded-lg focus:ring-2 focus:border-transparent text-sm ${
+                                      fieldErrors[`contact_${index}_phone_multi`]
+                                        ? 'border-red-500 focus:ring-red-500' 
+                                        : 'border-gray-300 focus:ring-blue-500'
+                                    }`}
+                                    placeholder="(555) 123-4567"
+                                    required={index === 0}
+                                  />
+                                </div>
+                                {fieldErrors[`contact_${index}_phone_multi`] && (
+                                  <p className="text-red-500 text-xs mt-1">{fieldErrors[`contact_${index}_phone_multi`]}</p>
+                                )}
                               </div>
 
                               <div className="flex items-end">
