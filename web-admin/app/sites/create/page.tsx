@@ -283,28 +283,31 @@ export default function CreateSitePage() {
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-semibold text-gray-900 mb-2">
-                      Contact Phone
+                      Site Contact Name
                     </label>
                     <input
-                      type="tel"
-                      value={siteContact?.phone || ''}
-                      onChange={(e) => setSiteContact({ ...siteContact, phone: e.target.value })}
+                      type="text"
+                      value={siteContact?.name || ''}
+                      onChange={(e) => setSiteContact({ ...siteContact, name: e.target.value })}
                       className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
-                      placeholder="e.g., (555) 123-4567"
+                      placeholder="e.g., John Smith"
                     />
                   </div>
 
                   <div>
                     <label className="block text-sm font-semibold text-gray-900 mb-2">
-                      Contact Email
+                      Phone Number
                     </label>
-                    <input
-                      type="email"
-                      value={siteContact?.email || ''}
-                      onChange={(e) => setSiteContact({ ...siteContact, email: e.target.value })}
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
-                      placeholder="e.g., contact@site.com"
-                    />
+                    <div className="relative">
+                      <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                      <input
+                        type="tel"
+                        value={siteContact?.phone || ''}
+                        onChange={(e) => setSiteContact({ ...siteContact, phone: e.target.value })}
+                        className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
+                        placeholder="(555) 123-4567"
+                      />
+                    </div>
                   </div>
                 </div>
 
