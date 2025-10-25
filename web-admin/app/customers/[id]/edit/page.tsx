@@ -96,7 +96,12 @@ export default function CustomerEditPage() {
   }
 
   return (
-    <PageHeader>
+    <>
+      <PageHeader
+        title="Edit Customer"
+        subtitle="Update customer information"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Customers", href: "/customers" }, { label: "Edit" }]}
+      />
       <div className="p-8">
         {/* Header */}
         <div className="mb-8 flex items-center space-x-4">
