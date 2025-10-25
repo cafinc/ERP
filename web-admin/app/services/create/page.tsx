@@ -133,8 +133,14 @@ export default function ServiceFormPage() {
   }
 
   return (
-    <PageHeader>
-      <form onSubmit={handleSubmit} className="space-y-6">
+    <>
+      <PageHeader
+        title="Create Service"
+        subtitle="Add a new service offering"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Services", href: "/services" }, { label: "Create" }]}
+      />
+      <div className="flex-1 overflow-auto p-6">
+        <form onSubmit={handleSubmit} className="space-y-6">
         {/* Header */}
         <div className="flex items-center gap-4">
           <button
