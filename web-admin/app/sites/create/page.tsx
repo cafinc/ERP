@@ -598,38 +598,38 @@ export default function CreateSitePage() {
                     Internal Notes (Admin Only)
                   </label>
                   <p className="text-xs text-gray-500 mb-2 flex items-center">
-                    <AlertCircle className="w-4 h-4 mr-1" />
+                    <AlertCircle className="w-3 h-3 mr-1" />
                     Only visible to administrators
                   </p>
                   <textarea
                     value={internalNotes}
                     onChange={(e) => setInternalNotes(e.target.value)}
                     rows={4}
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all resize-none"
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-semibold transition-all resize-none"
                     placeholder="Private notes for admin team..."
                   />
                 </div>
 
                 {/* Crew Notes */}
                 <div>
-                  <label className="block text-sm font-semibold text-gray-900 mb-2">
+                  <label className="block text-xs font-medium text-gray-700 mb-2">
                     Crew Notes
                   </label>
-                  <p className="text-sm text-gray-600 mb-3 flex items-center">
-                    <AlertCircle className="w-4 h-4 mr-1" />
+                  <p className="text-xs text-gray-500 mb-2 flex items-center">
+                    <AlertCircle className="w-3 h-3 mr-1" />
                     Visible to crew and customer
                   </p>
                   <textarea
                     value={crewNotes}
                     onChange={(e) => setCrewNotes(e.target.value)}
                     rows={4}
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all resize-none"
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-semibold transition-all resize-none"
                     placeholder="Special instructions, access codes, gate information, etc..."
                   />
                 </div>
 
-                {/* Access & Security Toggles - Horizontal Layout */}
-                <div className="grid grid-cols-4 gap-4">
+                {/* Access & Security Toggles - 4-Column Grid */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                   {/* Gate Code Toggle */}
                   <div className="border-2 border-gray-200 rounded-xl p-4 bg-gray-50/50">
                     <div className="flex flex-col items-center gap-3">
