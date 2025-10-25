@@ -1830,19 +1830,20 @@ export default function CustomerFormPage() {
               </div>
             )}
 
-            {/* Address Section (Common for both) */}
-            <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <MapPin className="w-5 h-5 text-[#3f72af]" />
-                  <span>Address *</span>
-                </div>
-                {/* Create Site Toggle - label first, then toggle */}
-                <div className="flex items-center gap-2">
-                  <label className="text-sm font-medium text-gray-700">
-                    Create Site
-                  </label>
-                  <button
+            {/* Address Section (Only for Contact customers) */}
+            {customerForm.customer_type === 'individual' && (
+              <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
+                <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center justify-between">
+                  <div className="flex items-center space-x-2">
+                    <MapPin className="w-5 h-5 text-[#3f72af]" />
+                    <span>Address *</span>
+                  </div>
+                  {/* Create Site Toggle - label first, then toggle */}
+                  <div className="flex items-center gap-2">
+                    <label className="text-sm font-medium text-gray-700">
+                      Create Site
+                    </label>
+                    <button
                     type="button"
                     onClick={() => {
                       setCreateSite(!createSite);
