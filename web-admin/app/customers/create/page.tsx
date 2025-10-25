@@ -717,7 +717,7 @@ export default function CustomerFormPage() {
       const submitData: any = {
         name,
         email: customerForm.email,
-        phone: customerForm.phone,
+        phone: customerForm.customer_type === 'company' ? customerForm.office_number : customerForm.phone,
         address,
         customer_type: customerForm.customer_type,
         notes: customerForm.notes,
