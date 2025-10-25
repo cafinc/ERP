@@ -648,13 +648,16 @@ export default function CustomerFormPage() {
       return;
     }
 
-    // Check for duplicates before proceeding
-    if (!isEdit) {
+    // Check for duplicates before proceeding (unless bypassed)
+    if (!isEdit && !(window as any).bypassDuplicateCheck) {
       const hasDuplicates = await checkForDuplicates();
       if (hasDuplicates) {
         return; // Stop submission and show modal
       }
     }
+    
+    // Clear bypass flag if it was set
+    (window as any).bypassDuplicateCheck = false;
 
     try {
       setSaving(true);
