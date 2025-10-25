@@ -282,6 +282,6 @@ export default function DispatchDetailPage() {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
