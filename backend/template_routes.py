@@ -363,24 +363,6 @@ async def apply_template(
 
 # ========== Utility Endpoints ==========
 
-@router.get("/templates/{template_type}/categories")
-async def get_categories(template_type: str):
-    """Get all categories for a template type"""
-    try:
-        categories = await template_service.get_categories(template_type)
-        
-        return {
-            "success": True,
-            "categories": categories
-        }
-    
-    except ValueError as e:
-        raise HTTPException(status_code=400, detail=str(e))
-    except Exception as e:
-        logger.error(f"Error getting categories: {str(e)}")
-        raise HTTPException(status_code=500, detail=str(e))
-
-
 @router.get("/templates/{template_type}/{template_id}/stats")
 async def get_template_stats(
     template_type: str,
