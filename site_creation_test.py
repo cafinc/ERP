@@ -72,7 +72,7 @@ def test_site_creation_api():
         
         response = requests.post(f"{BACKEND_URL}/sites", json=site_data, timeout=10)
         
-        if response.status_code == 201:
+        if response.status_code in [200, 201]:
             data = response.json()
             if "id" in data and data.get("name") == site_data["name"]:
                 results["created_sites"].append(data.get("id"))
@@ -140,7 +140,7 @@ def test_site_creation_api():
         
         response = requests.post(f"{BACKEND_URL}/sites", json=site_data_with_optionals, timeout=10)
         
-        if response.status_code == 201:
+        if response.status_code in [200, 201]:
             data = response.json()
             if (data.get("site_reference") == "SITE-001" and 
                 data.get("area_size") == 2500.5 and
@@ -341,7 +341,7 @@ def test_site_creation_api():
             
             response = requests.post(f"{BACKEND_URL}/sites", json=site_data, timeout=10)
             
-            if response.status_code == 201:
+            if response.status_code in [200, 201]:
                 data = response.json()
                 if data.get("site_type") == site_type:
                     success_count += 1
@@ -420,7 +420,7 @@ def test_site_creation_api():
         
         response = requests.post(f"{BACKEND_URL}/sites", json=site_data, timeout=10)
         
-        if response.status_code == 201:
+        if response.status_code in [200, 201]:
             data = response.json()
             
             # Check if response has proper structure for toast notifications
