@@ -1265,16 +1265,16 @@ export default function CustomerFormPage() {
               {/* Company Form */}
               {customerForm.customer_type === 'company' && (
                 <div>
-                  {/* Company Information */}
-                  <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center space-x-2">
-                      <Building className="w-5 h-5 text-[#3f72af]" />
+                  {/* Company Information - Compact */}
+                  <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-5 backdrop-blur-sm hover:shadow-md transition-shadow">
+                    <h2 className="text-xl font-bold text-gray-900 mb-3 flex items-center space-x-2">
+                      <Building className="w-4 h-4 text-[#3f72af]" />
                       <span>Company Information</span>
                     </h2>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     <div className="md:col-span-2">
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-xs font-medium text-gray-700 mb-1">
                         Legal Business Name *
                       </label>
                       <input
@@ -1283,14 +1283,14 @@ export default function CustomerFormPage() {
                         onChange={e =>
                           setCustomerForm({ ...customerForm, company_name: e.target.value })
                         }
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-transparent"
                         placeholder="ABC Corporation Ltd."
                         required
                       />
                     </div>
 
                     <div className="md:col-span-2">
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-xs font-medium text-gray-700 mb-1">
                         Operating As
                       </label>
                       <input
@@ -1299,22 +1299,22 @@ export default function CustomerFormPage() {
                         onChange={e =>
                           setCustomerForm({ ...customerForm, operating_as: e.target.value })
                         }
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-transparent"
                         placeholder="ABC Services"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-xs font-medium text-gray-700 mb-1">
                         Office Number *
                       </label>
                       <div className="relative">
-                        <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                        <Phone className="absolute left-2 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
                         <input
                           type="tel"
                           value={customerForm.office_number}
                           onChange={e => setCustomerForm({ ...customerForm, office_number: e.target.value })}
-                          className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                          className="w-full pl-7 pr-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-transparent"
                           placeholder="(555) 123-4567"
                           required
                         />
@@ -1322,18 +1322,18 @@ export default function CustomerFormPage() {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-xs font-medium text-gray-700 mb-1">
                         Email *
                       </label>
                       <div className="relative">
-                        <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                        <Mail className="absolute left-2 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
                         <input
                           type="email"
                           value={customerForm.email}
                           onChange={e =>
                             setCustomerForm({ ...customerForm, email: e.target.value })
                           }
-                          className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                          className="w-full pl-7 pr-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-transparent"
                           placeholder="info@company.com"
                           required
                         />
