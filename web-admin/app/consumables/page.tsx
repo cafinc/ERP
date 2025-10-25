@@ -134,14 +134,14 @@ export default function ConsumablesPage() {
   };
 
   const getStockStatus = (consumable: Consumable) => {
-    const percentage = (consumable.current_stock / consumable.min_stock_level) * 100;
+    const percentage = (consumable.quantity_available / consumable.reorder_level) * 100;
     if (percentage < 50) return { color: 'red', label: 'Critical' };
     if (percentage < 100) return { color: 'yellow', label: 'Low' };
     return { color: 'green', label: 'Good' };
   };
 
-  const lowStockCount = consumables.filter(c => c.current_stock < c.min_stock_level).length;
-  const totalValue = consumables.reduce((sum, c) => sum + (c.current_stock * c.unit_cost), 0);
+  const lowStockCount = consumables.filter(c => c.quantity_available < c.reorder_level).length;
+  const totalValue = consumables.reduce((sum, c) => sum + (c.quantity_available * (c.cost_per_unit || 0)), 0);
 
   if (loading) {
     return (
