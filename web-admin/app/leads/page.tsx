@@ -704,7 +704,11 @@ export default function LeadsPage() {
               ) : (
                 <div className="divide-y divide-gray-200">
                   {filteredLeads.map(lead => {
-                    const config = STATUS_CONFIG[lead.status];
+                    const config = STATUS_CONFIG[lead.status] || { 
+                      label: lead.status, 
+                      color: 'gray', 
+                      icon: Clock 
+                    };
                     const Icon = config.icon;
 
                     return (
