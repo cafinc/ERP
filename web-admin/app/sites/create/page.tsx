@@ -290,7 +290,7 @@ export default function CreateSitePage() {
   };
 
   return (
-    <div className="h-screen flex flex-col bg-gradient-to-br from-gray-50 to-gray-100">
+    <div className="h-screen flex flex-col bg-gray-50">
       <PageHeader
         title="Create Site"
         subtitle="Add a new site location with services and details"
@@ -301,7 +301,7 @@ export default function CreateSitePage() {
         ]}
       />
 
-      <div className="flex-1 overflow-y-auto">
+      <div className="flex-1 overflow-y-auto bg-gradient-to-br from-gray-50 via-blue-50/30 to-gray-50">
         <div className="max-w-5xl mx-auto p-6">
           <form onSubmit={handleSubmit} noValidate className="space-y-6 pb-6">
             {/* Customer Assignment */}
