@@ -1308,11 +1308,20 @@ export default function CustomerFormPage() {
                         <input
                           name="office_number"
                           type="tel"
-                          value={customerForm.office_number}
+                          value={formatPhoneNumber(customerForm.office_number)}
                           onChange={e => {
                             const cleaned = e.target.value.replace(/\D/g, '');
                             const formatted = cleaned.slice(0, 10);
                             setCustomerForm({ ...customerForm, office_number: formatted });
+                            
+                            // Validate phone (must be 10 digits for US format)
+                            if (cleaned && cleaned.length !== 10) {
+                              setFieldErrors({ ...fieldErrors, office_number: 'Phone must be 10 digits' });
+                            } else {
+                              const newErrors = { ...fieldErrors };
+                              delete newErrors.office_number;
+                              setFieldErrors(newErrors);
+                            }
                           }}
                           className={`w-full pl-10 pr-4 py-1.5 border rounded-lg focus:ring-2 focus:border-transparent text-sm ${
                             fieldErrors.office_number 
