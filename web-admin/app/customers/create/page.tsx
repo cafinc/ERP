@@ -1050,17 +1050,22 @@ export default function CustomerFormPage() {
                 </div>
               )}
 
-              {/* Individual Form */}
+              {/* Individual Form - Enhanced Design */}
               {customerForm.customer_type === 'individual' && (
-                <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center justify-between">
-                      <div className="flex items-center space-x-2">
-                        <User className="w-5 h-5 text-[#3f72af]" />
-                        <span>Contact Information</span>
+                <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 hover:shadow-2xl transition-all">
+                    <div className="flex items-center justify-between mb-6 pb-4 border-b border-gray-200">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center">
+                          <User className="w-6 h-6 text-white" />
+                        </div>
+                        <div>
+                          <h2 className="text-2xl font-bold text-gray-900">Contact Information</h2>
+                          <p className="text-sm text-gray-600">Individual customer details</p>
+                        </div>
                       </div>
-                      {/* Active Customer Toggle - label first, then toggle */}
-                      <div className="flex items-center gap-2">
-                        <label className="text-sm font-medium text-gray-700">
+                      {/* Active Customer Toggle - Enhanced */}
+                      <div className="flex items-center gap-3 bg-gray-50 px-4 py-2 rounded-xl">
+                        <label className="text-sm font-semibold text-gray-700">
                           Active
                         </label>
                         <button
