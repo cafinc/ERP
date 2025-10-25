@@ -897,6 +897,7 @@ export default function CustomerFormPage() {
                           Last Name *
                         </label>
                         <input
+                          name="last_name"
                           type="text"
                           value={customerForm.last_name}
                           onChange={e =>
