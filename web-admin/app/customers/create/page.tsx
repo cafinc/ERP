@@ -607,7 +607,31 @@ export default function CustomerFormPage() {
     // Set all errors at once
     if (Object.keys(errors).length > 0) {
       setFieldErrors(errors);
-      alert('Please fix the errors in the form before submitting');
+      
+      // Determine which sections have errors
+      const sections = new Set<string>();
+      Object.keys(errors).forEach(key => {
+        if (key.includes('first_name') || key.includes('last_name') || key.includes('company_name')) {
+          sections.add(customerForm.customer_type === 'individual' ? 'Personal Information' : 'Company Information');
+        }
+        if (key.includes('email') || key.includes('phone') || key.includes('mobile')) {
+          if (key.startsWith('contact_')) {
+            sections.add('Contact Persons');
+          } else {
+            sections.add('Contact Details');
+          }
+        }
+        if (key.includes('contact_') && (key.includes('name') || key.includes('phone') || key.includes('email'))) {
+          sections.add('Contact Persons');
+        }
+        if (key.includes('address') || key.includes('city') || key.includes('province') || key.includes('postal')) {
+          sections.add('Address');
+        }
+      });
+      
+      setErrorSections(Array.from(sections));
+      setShowErrorModal(true);
+      setSaving(false);
       return;
     }
 
