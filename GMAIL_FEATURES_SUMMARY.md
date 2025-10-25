@@ -98,7 +98,7 @@
 
 **Option 2: Public Access** (requires routing configuration)
 The web-admin needs to be configured to serve on the main domain:
-`https://snowops-admin.preview.emergentagent.com`
+`https://client-hub-48.preview.emergentagent.com`
 
 ---
 

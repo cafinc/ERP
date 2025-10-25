@@ -13,7 +13,7 @@ from typing import Dict, List, Any
 import uuid
 
 # Configuration
-BASE_URL = "https://snowops-admin.preview.emergentagent.com/api"
+BASE_URL = "https://client-hub-48.preview.emergentagent.com/api"
 TIMEOUT = 30
 
 class EnhancedBackendTester:

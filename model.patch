@@ -131,7 +131,7 @@ index 5a8eddd..e69de29 100644
 -------------------+from typing import Dict, List, Any
 -------------------+
 -------------------+# Backend URL from frontend/.env
--------------------+BACKEND_URL = "https://snowops-admin.preview.emergentagent.com/api"
+-------------------+BACKEND_URL = "https://client-hub-48.preview.emergentagent.com/api"
 -------------------+
 -------------------+class HRModuleTester:
 -------------------+    def __init__(self):
@@ -728,7 +728,7 @@ index 5a8eddd..e69de29 100644
 -------------------+from typing import Dict, List, Any
 -------------------+
 -------------------+# Backend URL from frontend/.env
--------------------+BACKEND_URL = "https://snowops-admin.preview.emergentagent.com/api"
+-------------------+BACKEND_URL = "https://client-hub-48.preview.emergentagent.com/api"
 -------------------+
 -------------------+class HRComprehensiveTester:
 -------------------+    def __init__(self):
@@ -1920,7 +1920,7 @@ index 5a8eddd..e69de29 100644
 ----------------------------------------------------------------+import traceback
 ----------------------------------------------------------------+
 ----------------------------------------------------------------+# Backend URL from frontend environment
-----------------------------------------------------------------+BACKEND_URL = "https://snowops-admin.preview.emergentagent.com/api"
+----------------------------------------------------------------+BACKEND_URL = "https://client-hub-48.preview.emergentagent.com/api"
 ----------------------------------------------------------------+
 ----------------------------------------------------------------+class SiteMapsTestSuite:
 ----------------------------------------------------------------+    def __init__(self):

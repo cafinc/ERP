@@ -1,70 +1,54 @@
 <analysis>
-The AI engineer systematically developed a comprehensive customer creation page, responding to numerous iterative user requests. Initially, the task involved refining an existing Link to Company toggle and search functionality, including debugging UI rendering issues and backend service conflicts. Subsequently, major features were added: a Communication Preference section (SMS/InApp) influencing mobile number validation, a robust Require Access system with user role assignment and email credentials (involving new backend services and model updates), and a Create Site toggle for automatic site generation. Each feature involved significant UI/UX adjustments, layout reordering for optimal presentation (e.g., inline search bars, toggles aligned with headers), and integration with both frontend state and backend APIs/models. The engineer consistently addressed UI positioning, styling, validation, and backend data persistence. The work also included fixing an unrelated critical build error in  and enhancing the email template system. The current focus is on adding file upload capabilities to the Additional Information section.
+The AI engineer systematically evolved the  page in the  application, addressing numerous iterative user requests. Key feature additions included file upload with backend integration and error handling, comprehensive Google Places API integration for addresses, and improved communication preference management. A significant effort was dedicated to refactoring the Company customer creation form, introducing dynamic contact structures, updated accounting fields, and conditional UI elements. The engineer also encountered and resolved several critical issues, such as 502 proxy errors (due to large file uploads), 422 validation errors (due to schema mismatches), and persistent build errors (due to  remnants), often requiring careful debugging and service restarts. The work involved meticulous UI/UX adjustments, state management, and backend model updates, with a continuous focus on form validation and user feedback.
 </analysis>
 
 <product_requirements>
-The application, an admin dashboard for snow removal, requires a highly intuitive UI/UX with standardized headers, tabbed navigation, and responsive design. Core features include a Communication Center, a robust Template System, Work Orders, Purchase Orders, and Operations Dashboard, along with advanced automations (Service Lifecycle, Fleet Tracking, Weather-Driven Dispatch, Analytics). Recent development has focused on enhancing the  page. This involves:
-1.  Replacing a Link to Company dropdown with a toggle-controlled search bar.
-2.  Adding Communication Preference (SMS/InApp) options that conditionally make the mobile number required.
-3.  Implementing a Require Access toggle that, when active, reveals Web/InApp access options and a user role dropdown, triggering user account creation with email credentials.
-4.  Adding a Create Site toggle with a conditional Site Name field, to automatically create a site upon customer saving.
-5.  Extensive UI/UX refinements for all new elements, including layout adjustments, alignment, and sizing.
-6.  Changing Individual to Contact across relevant sections.
-7.  Enhancing the address input with a Google logo and robust city population.
-8.  Adding a Create Customer and Cancel button at the form's bottom, replacing a header action.
-9.  Converting Active Customer checkbox to a toggle, moving it to the Contact Information header.
-10. Moving the Create Site toggle to the Address header.
-11. Adding document/photo upload functionality under Additional Information.
+The application, an admin dashboard, requires a highly intuitive UI/UX for customer management. The core task revolved around enhancing the  page. Initial requirements involved implementing a Link to Company toggle, Communication Preference options (SMS/InApp) dictating mobile number requirements, a Require Access toggle for user roles, and a Create Site toggle. UI/UX refinements, replacing Individual with Contact, enhancing Google address input, and repositioning form elements were crucial. Document/photo upload functionality under Additional Information was also requested. Later, a major overhaul of the Company customer form was requested, including distinct layout for Legal Business Name and Operating As, separate Company Address and Billing Address fields with Google Autocomplete, Office Number, Email, dynamic Contact Persons fields (Manager, Accounting, Supervisor) with a toggle to combine them, updated Accounting Information (Business Number, Payment Terms, Credit Limit toggle, Preferred Payment Method), conditional address display, and dynamic button text. Comprehensive form validation with red error highlighting was also a critical request.
 </product_requirements>
 
 <key_technical_concepts>
--   **Full-stack Architecture**: Monorepo with Next.js (web-admin), FastAPI (backend), MongoDB.
--   **UI Frameworks**: React with Next.js App Router for web-admin, leveraging React hooks for state.
--   **API Development**: FastAPI for CRUD operations and custom endpoints.
--   **Data Models**: Pydantic for API data validation and MongoDB for persistence.
--   **Email Service**: SMTP for sending emails, integrated with database templates.
--   **User Management**: Basic user creation, role assignment, and credential notification.
--   **Google Places API**: For robust address auto-completion and data extraction.
--   **UI Components**:  for consistent layout, custom toggles, search bars, and forms.
+- **Full-stack Architecture**: Monorepo structure (Next.js for web-admin, FastAPI for backend, MongoDB).
+- **UI Framework**: React with Next.js App Router for web-admin, utilizing React hooks for state management.
+- **API Development**: FastAPI for building robust RESTful APIs and data handling.
+- **Data Models**: Pydantic for defining backend data schemas and validation.
+- **Third-party Integration**: Google Places API for address auto-completion.
+- **Form Management**: Extensive use of form state, validation, and submission logic.
 </key_technical_concepts>
 
 <code_architecture>
-The application is structured as a monorepo in the  directory, containing  (FastAPI),  (Expo mobile), and  (Next.js for dashboard).
+The application is structured as a monorepo within the  directory, encompassing  (FastAPI),  (Expo mobile), and  (Next.js dashboard).
 
 
 
-**Key Files and Changes:**
--   ** (Heavily MODIFIED):** This is the primary file under active development.
-    -   **Importance:** Handles the creation/editing of customer records, including complex forms and dynamic UI elements.
-    -   **Changes:** Implemented Link to Company toggle with search, Communication Preference radio buttons, Require Access toggle with user roles, Create Site toggle with site name input. Numerous layout adjustments for all these features, including dynamic positioning and sizing. Integrated Google Places API for address auto-completion. Added file upload state and handler functions. Updated form submission logic to integrate with backend services for user and site creation. Replaced  with  throughout.
--   ** (MODIFIED):** Defines Pydantic models for database entities.
-    -   **Importance:** Centralized data schema for the backend.
-    -   **Changes:** Added , , , ,  fields to the  model. Added a  field with . Added  model and associated fields for dynamic email content.
--   ** (MODIFIED):** Manages email sending functionality.
-    -   **Importance:** Handles all outbound email communication.
-    -   **Changes:** Added a  method to send login details to newly created users, fetching templates from the database.
--   ** (NEW):** Provides business logic for user account creation.
-    -   **Importance:** Encapsulates the process of creating user accounts and assigning roles.
-    -   **Changes:** Created to contain the logic for hashing passwords, creating user entries in the database, and managing user-specific access details.
--   ** (MODIFIED):** The main FastAPI application entry point.
-    -   **Importance:** Orchestrates API routes and integrates backend services.
-    -   **Changes:** Imported  and . Modified the  POST endpoint () to conditionally call user creation and email services based on frontend input ().
--   ** (NEW):** Script to populate the database with an email template.
-    -   **Importance:** Ensures essential email templates are available in the database for dynamic use.
-    -   **Changes:** Created to insert a default login credentials email template into the MongoDB.
--   ** (MODIFIED):** An existing page for site mapping functionality.
-    -   **Importance:** Displays site-related geographical data.
-    -   **Changes:** Fixed a critical build error related to the  directive placement and a duplicate HTML wrapping element.
+- ** (Heavily MODIFIED):**
+    - **Importance:** This is the core customer creation/editing interface, featuring complex forms and dynamic UI.
+    - **Changes:** Extensive modifications to implement Link to Company toggle, Communication Preference controls, Require Access system, Create Site toggle, and numerous layout and styling adjustments. Integrated file upload functionality, including state management (, , ) and handler functions (, , ), and its submission to the backend. Replaced Individual with Contact. Enhanced Google Places API integration for address auto-completion and city population. Implemented a Copy from Phone button. Introduced and later removed/re-implemented (due to bugs) duplicate customer detection with modal popups. Redesigned the Company customer form, including Legal Business Name, Operating As, conditional Company Address and Billing Address with Google Autocomplete, updated Contact Persons section (Manager, Accounting, Supervisor roles, single-person toggle), and revised Accounting Information. Addressed page scrolling, implemented dynamic Create Customer/Create Company button text, and added comprehensive form validation with red highlighting for invalid fields. Debugged and removed old  references causing build errors. Adjusted site creation payload to expect a  object.
+- ** (MODIFIED):**
+    - **Importance:** Defines the Pydantic data models for the FastAPI backend, ensuring data integrity.
+    - **Changes:** Added fields such as , , , , ,  (Optional[str]), and  (Optional[List[dict]]) to the  model. The  model was updated to use , , . A  model (latitude, longitude, address fields) and a  model (requiring a  object) were defined to support site creation.
+- ** (MODIFIED):**
+    - **Importance:** The main FastAPI application entry point, responsible for routing and integrating backend services.
+    - **Changes:** Modified the  POST endpoint () to handle new fields from the frontend, including attachments, and to conditionally invoke user creation and email services based on .
+- ** (NEW):**
+    - **Importance:** Handles the business logic for user account creation.
+    - **Changes:** Created to encapsulate password hashing, user database entry, and managing user-specific access.
+- ** (MODIFIED):**
+    - **Importance:** Manages outbound email communication.
+    - **Changes:** Added a  method to send login details, dynamically fetching templates from the database.
+- ** (NEW):**
+    - **Importance:** Script to populate the database with essential email templates.
+    - **Changes:** Created to insert a default login credentials email template into MongoDB.
 </code_architecture>
 
 <pending_tasks>
--   Add the UI for the file upload functionality to the Additional Notes section in .
+- Update the multiple contacts compact layout within the Company form's Contact Persons section to include proper phone number and email formatting and validation.
+- Re-implement the duplicate customer detection and modal popup system, which was temporarily removed due to a grey screen build error.
 </pending_tasks>
 
 <current_work>
-The AI engineer is currently implementing a user request on the  file to add document and photo upload functionality under the Additional Information section. Before the trajectory ended, the engineer had completed the backend logic and state management necessary for this feature on the frontend. Specifically, the following states were added to the  component:  (to store an array of files),  (for tracking upload status), and  (for handling any issues). Additionally, necessary icons (, , ) were imported, and the core handler functions for file selection (), initiating upload (), and removing files () have been defined. The immediate next step is to integrate these functions with the actual JSX elements in the Additional Notes section to provide the visual interface for users to interact with the file upload feature.
+The AI engineer is currently in the process of enhancing the Contact Persons section within the Company customer creation form on . Specifically, the task involves applying proper phone number and email formatting, along with corresponding validation, to the contact fields. The previous action successfully updated the single contact form layout. The immediate next step is to locate and modify the multiple contacts compact layout to ensure these formatting and validation rules are consistently applied across all contact person entries in the Company form, adhering to the user's request for consistent phone/email behavior.
 </current_work>
 
 <optional_next_step>
-Add the file upload UI to the Additional Notes section of .
+Update the multiple contacts compact layout with phone/email formatting and validation.
 </optional_next_step>
