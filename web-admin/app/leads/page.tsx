@@ -549,7 +549,7 @@ export default function LeadsPage() {
           {/* Filters */}
           <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-4 mb-4 hover:shadow-md transition-shadow">
             <div className="flex flex-col md:flex-row gap-4">
-              {/* Search */}
+              {/* Search with Advanced Filter */}
               <div className="flex-1 relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
                 <input
@@ -557,11 +557,103 @@ export default function LeadsPage() {
                   placeholder="Search leads by name, email, phone, or company..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                  className="w-full pl-10 pr-24 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                 />
+                <button
+                  onClick={() => setShowFilterDropdown(!showFilterDropdown)}
+                  className="absolute right-2 top-1/2 transform -translate-y-1/2 px-3 py-1 bg-gray-100 hover:bg-gray-200 rounded-md transition-colors flex items-center gap-1.5 text-xs font-medium text-gray-700"
+                >
+                  <Filter className="w-3.5 h-3.5" />
+                  Filters
+                </button>
+
+                {/* Advanced Filter Dropdown */}
+                {showFilterDropdown && (
+                  <div className="absolute right-0 top-full mt-2 w-72 bg-white border border-gray-200 rounded-lg shadow-xl z-50 animate-slideUp">
+                    <div className="p-4">
+                      <div className="text-sm font-semibold text-gray-900 mb-4 flex items-center justify-between">
+                        <span>Advanced Filters</span>
+                        <button
+                          onClick={() => setShowFilterDropdown(false)}
+                          className="text-gray-400 hover:text-gray-600"
+                        >
+                          <XCircle className="w-4 h-4" />
+                        </button>
+                      </div>
+                      
+                      {/* Status Filter */}
+                      <div className="mb-4">
+                        <label className="text-xs font-medium text-gray-700 mb-2 block">Status</label>
+                        <select
+                          value={statusFilter}
+                          onChange={(e) => setStatusFilter(e.target.value)}
+                          className="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white text-sm"
+                        >
+                          <option value="all">All Status</option>
+                          {Object.entries(STATUS_CONFIG).map(([key, config]) => (
+                            <option key={key} value={key}>
+                              {config.label}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+
+                      {/* Priority Filter */}
+                      <div className="mb-4">
+                        <label className="text-xs font-medium text-gray-700 mb-2 block">Priority</label>
+                        <select
+                          value={priorityFilter}
+                          onChange={(e) => setPriorityFilter(e.target.value)}
+                          className="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white text-sm"
+                        >
+                          <option value="all">All Priorities</option>
+                          <option value="low">Low Priority</option>
+                          <option value="medium">Medium Priority</option>
+                          <option value="high">High Priority</option>
+                        </select>
+                      </div>
+
+                      {/* Source Filter */}
+                      <div className="mb-4">
+                        <label className="text-xs font-medium text-gray-700 mb-2 block">Source</label>
+                        <select
+                          className="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white text-sm"
+                        >
+                          <option value="all">All Sources</option>
+                          {LEAD_SOURCES.map(source => (
+                            <option key={source} value={source}>
+                              {source}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+
+                      {/* Apply/Clear Buttons */}
+                      <div className="flex gap-2 pt-3 border-t border-gray-200">
+                        <button
+                          onClick={() => {
+                            setStatusFilter('all');
+                            setPriorityFilter('all');
+                            setSearchQuery('');
+                            setShowFilterDropdown(false);
+                          }}
+                          className="flex-1 px-3 py-2 text-xs border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium"
+                        >
+                          Clear All
+                        </button>
+                        <button
+                          onClick={() => setShowFilterDropdown(false)}
+                          className="flex-1 px-3 py-2 text-xs bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-colors font-medium"
+                        >
+                          Apply
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
 
-              {/* Status Filter */}
+              {/* Status Filter - Quick Select */}
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
@@ -574,6 +666,20 @@ export default function LeadsPage() {
                   </option>
                 ))}
               </select>
+
+              {/* Priority Filter - Quick Select */}
+              <select
+                value={priorityFilter}
+                onChange={(e) => setPriorityFilter(e.target.value)}
+                className="px-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+              >
+                <option value="all">All Priorities</option>
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+              </select>
+            </div>
+          </div>
 
               {/* Priority Filter */}
               <select
