@@ -481,6 +481,23 @@ export default function LeadsPage() {
               </button>
 
               <button
+                onClick={() => setStatusFilter('scheduled')}
+                className={`px-4 py-2.5 rounded-xl font-semibold transition-all text-sm flex items-center gap-2 ${
+                  statusFilter === 'scheduled'
+                    ? 'bg-purple-500 text-white shadow-lg shadow-purple-500/30'
+                    : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-purple-500 hover:text-purple-500'
+                }`}
+              >
+                <div className={`w-2 h-2 rounded-full ${statusFilter === 'scheduled' ? 'bg-white' : 'bg-purple-500'}`} />
+                Scheduled
+                <span className={`px-2 py-0.5 rounded-full text-xs font-bold ${
+                  statusFilter === 'scheduled' ? 'bg-white/20 text-white' : 'bg-purple-100 text-purple-600'
+                }`}>
+                  {leads.filter(l => l.status === 'scheduled').length}
+                </span>
+              </button>
+
+              <button
                 onClick={() => setStatusFilter('converted')}
                 className={`px-4 py-2.5 rounded-xl font-semibold transition-all text-sm flex items-center gap-2 ${
                   statusFilter === 'converted'
