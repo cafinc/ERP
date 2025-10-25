@@ -317,9 +317,9 @@ export default function DispatchesPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {filteredDispatches.map((dispatch) => (
               <div
-                key={dispatch._id}
-                className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow cursor-pointer hover:shadow-md transition-shadow"
-                onClick={() => router.push(`/dispatch/${dispatch._id}`)}
+                key={dispatch._id || dispatch.id || `dispatch-${Math.random()}`}
+                className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow cursor-pointer"
+                onClick={() => router.push(`/dispatch/${dispatch._id || dispatch.id}`)}
               >
                 {/* Header */}
                 <div className="flex items-start justify-between mb-4">
