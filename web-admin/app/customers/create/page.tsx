@@ -1952,6 +1952,8 @@ export default function CustomerFormPage() {
             )}
 
             {/* Address Section (Common for both) */}
+            {/* Address Section - Individual Customers Only */}
+            {customerForm.customer_type === 'individual' && (
             <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
               <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center justify-between">
                 <div className="flex items-center space-x-2">
