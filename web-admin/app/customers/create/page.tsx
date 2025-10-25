@@ -1968,7 +1968,7 @@ export default function CustomerFormPage() {
             )}
 
             {/* Address Section (Common for both) */}
-            {/* Address Section - Individual Customers Only - TEMPORARILY DISABLED FOR DEBUGGING
+            {/* Address Section - Individual Customers Only */}
             {customerForm.customer_type === 'individual' && (
             <div className="bg-white/95 backdrop-blur-md rounded-3xl shadow-xl border border-white/40 overflow-hidden hover:shadow-2xl transition-shadow">
               <div className="bg-gradient-to-br from-blue-50 to-indigo-50 border-b-2 border-blue-100 p-6">
