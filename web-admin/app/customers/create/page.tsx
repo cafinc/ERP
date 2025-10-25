@@ -1751,7 +1751,7 @@ export default function CustomerFormPage() {
                     )}
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-xs font-medium text-gray-700 mb-1">
                         Preferred Payment Method
                       </label>
                       <select
@@ -1765,7 +1765,7 @@ export default function CustomerFormPage() {
                             },
                           })
                         }
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-transparent"
                       >
                         <option value="e_transfer">E-Transfer</option>
                         <option value="direct_debit">Direct Debit</option>
@@ -1789,9 +1789,9 @@ export default function CustomerFormPage() {
                               },
                             })
                           }
-                          className="w-5 h-5 text-[#3f72af] rounded focus:ring-blue-500"
+                          className="w-4 h-4 text-[#3f72af] rounded focus:ring-blue-500"
                         />
-                        <span className="text-sm font-medium text-gray-700">
+                        <span className="text-xs font-medium text-gray-700">
                           Purchase Order Required
                         </span>
                       </label>
