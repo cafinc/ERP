@@ -356,11 +356,11 @@ export default function DispatchCreatePage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-96 overflow-y-auto">
                   {sites.map((site) => (
                     <button
-                      key={site._id}
+                      key={site._id || site.id}
                       type="button"
-                      onClick={() => handleSiteToggle(site._id)}
+                      onClick={() => handleSiteToggle(site._id || site.id)}
                       className={`flex items-center justify-between p-3 border-2 rounded-lg transition-all ${
-                        dispatchForm.site_ids.includes(site._id)
+                        dispatchForm.site_ids.includes(site._id || site.id)
                           ? 'border-blue-500 bg-blue-50'
                           : 'border-gray-200 hover:border-gray-300'
                       }`}
