@@ -2182,12 +2182,17 @@ export default function CustomerFormPage() {
                 Cancel
               </button>
               <button
-                onClick={async () => {
+                onClick={() => {
                   setShowDuplicateModal(false);
                   setDuplicates([]);
-                  // Continue with form submission by calling handleSubmit logic
-                  // We'll need to extract submission logic to a separate function
-                  handleSubmit(new Event('submit') as any);
+                  setSkipDuplicateCheck(true);
+                  // Trigger form submission after setting skip flag
+                  setTimeout(() => {
+                    const form = document.querySelector('form');
+                    if (form) {
+                      form.requestSubmit();
+                    }
+                  }, 100);
                 }}
                 className="px-6 py-2.5 text-sm font-medium bg-orange-600 text-white rounded-lg hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 transition-colors"
               >
