@@ -22,16 +22,22 @@ import {
   Wind,
 } from 'lucide-react';
 
-// Helper function to get icon for service types
-const getServiceTypeIcon = (type: string) => {
-  const icons: Record<string, JSX.Element> = {
-    plowing: <Snowflake className="w-5 h-5" />,
-    sanding: <Droplet className="w-5 h-5" />,
-    salting: <ShoppingCart className="w-5 h-5" />,
-    brining: <Wind className="w-5 h-5" />,
-    hauling: <Truck className="w-5 h-5" />,
-  };
-  return icons[type] || <Briefcase className="w-5 h-5" />;
+// Service type configurations with icons and labels
+const SERVICE_TYPES = [
+  { value: 'site_checks', label: 'Site Checks', icon: '🔍', color: 'text-blue-600' },
+  { value: 'sidewalk_clear', label: 'Sidewalk Clear', icon: '🚶', color: 'text-green-600' },
+  { value: 'second_sidewalk_clear', label: '2nd Sidewalk Clear', icon: '🚶‍♂️', color: 'text-green-700' },
+  { value: 'call_back', label: 'Call Back', icon: '📞', color: 'text-purple-600' },
+  { value: 'plowing', label: 'Plowing', icon: '❄️', color: 'text-blue-700' },
+  { value: 'sanding', label: 'Sanding', icon: '⚪', color: 'text-yellow-700' },
+  { value: 'salting', label: 'Salting', icon: '🧂', color: 'text-gray-600' },
+  { value: 'brining', label: 'Brining', icon: '💧', color: 'text-cyan-600' },
+  { value: 'hauling', label: 'Hauling', icon: '🚛', color: 'text-orange-600' },
+];
+
+// Helper function to get service type config
+const getServiceTypeConfig = (type: string) => {
+  return SERVICE_TYPES.find(st => st.value === type) || SERVICE_TYPES[0];
 };
 
 export default function ServiceFormPage() {
