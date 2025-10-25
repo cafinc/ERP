@@ -2083,6 +2083,119 @@ export default function CustomerFormPage() {
           </form>
         </div>
       </div>
+
+      {/* Duplicate Customer Modal */}
+      {showDuplicateModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-3xl w-full mx-4 max-h-[80vh] overflow-hidden">
+            <div className="bg-gradient-to-r from-yellow-500 to-orange-500 p-6 text-white">
+              <div className="flex items-center gap-3">
+                <AlertCircle className="w-8 h-8" />
+                <div>
+                  <h2 className="text-2xl font-bold">Potential Duplicate Customer Found</h2>
+                  <p className="text-white/90 mt-1">
+                    We found {duplicates.length} customer{duplicates.length > 1 ? 's' : ''} that might match
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="p-6 overflow-y-auto max-h-[calc(80vh-200px)]">
+              <div className="space-y-4">
+                {duplicates.map((dup, index) => (
+                  <div 
+                    key={dup.id} 
+                    className="border border-gray-200 rounded-lg p-4 hover:border-blue-300 hover:shadow-md transition-all"
+                  >
+                    <div className="flex items-start justify-between">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-2">
+                          <h3 className="text-lg font-semibold text-gray-900">{dup.name}</h3>
+                          <span className="px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full">
+                            {dup.customer_type === 'company' ? 'Company' : 'Individual'}
+                          </span>
+                        </div>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
+                          <div className="flex items-center gap-2">
+                            <Mail className="w-4 h-4 text-gray-400" />
+                            <span className="text-gray-700">{dup.email || 'No email'}</span>
+                            {dup.match_reason.includes('email') && (
+                              <span className="px-1.5 py-0.5 text-xs bg-red-100 text-red-700 rounded">Match</span>
+                            )}
+                          </div>
+                          
+                          <div className="flex items-center gap-2">
+                            <Phone className="w-4 h-4 text-gray-400" />
+                            <span className="text-gray-700">{dup.phone || 'No phone'}</span>
+                            {dup.match_reason.includes('phone') && (
+                              <span className="px-1.5 py-0.5 text-xs bg-red-100 text-red-700 rounded">Match</span>
+                            )}
+                          </div>
+                          
+                          {dup.address && (
+                            <div className="flex items-center gap-2 md:col-span-2">
+                              <MapPin className="w-4 h-4 text-gray-400" />
+                              <span className="text-gray-700">{dup.address}</span>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                      
+                      <button
+                        onClick={() => {
+                          window.open(`/customers/${dup.id}`, '_blank');
+                        }}
+                        className="ml-4 px-3 py-1.5 text-xs font-medium text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors"
+                      >
+                        View
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                <div className="flex gap-2">
+                  <AlertCircle className="w-5 h-5 text-yellow-600 flex-shrink-0 mt-0.5" />
+                  <div className="text-sm text-yellow-800">
+                    <p className="font-medium mb-1">Review carefully before proceeding</p>
+                    <p>
+                      If this is a new customer with similar information, click "Create Anyway". 
+                      Otherwise, use the existing customer record to avoid duplicates.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="border-t p-6 bg-gray-50 flex justify-end gap-3">
+              <button
+                onClick={() => {
+                  setShowDuplicateModal(false);
+                  setDuplicates([]);
+                  setSaving(false);
+                }}
+                className="px-6 py-2.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={async () => {
+                  setShowDuplicateModal(false);
+                  setDuplicates([]);
+                  // Continue with form submission by calling handleSubmit logic
+                  // We'll need to extract submission logic to a separate function
+                  handleSubmit(new Event('submit') as any);
+                }}
+                className="px-6 py-2.5 text-sm font-medium bg-orange-600 text-white rounded-lg hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 transition-colors"
+              >
+                Create Anyway
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
