@@ -875,6 +875,7 @@ export default function CustomerFormPage() {
                           First Name *
                         </label>
                         <input
+                          name="first_name"
                           type="text"
                           value={customerForm.first_name}
                           onChange={e =>
