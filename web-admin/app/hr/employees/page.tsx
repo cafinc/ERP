@@ -16,7 +16,17 @@ import {
   Briefcase,
   User,
   X,
+  Upload,
+  File,
+  Image as ImageIcon,
+  Paperclip,
+  DollarSign,
+  FileText,
+  Users,
+  CheckCircle,
+  RefreshCw,
 } from "lucide-react";
+import { formatPhoneNumber } from "@/lib/utils/formatters";
 
 export default function EmployeesPage() {
   const router = useRouter();
