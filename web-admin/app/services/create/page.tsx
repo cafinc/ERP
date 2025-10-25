@@ -81,7 +81,7 @@ export default function ServiceFormPage() {
       setPricingEntries(entries.length > 0 ? entries : [{ unit: 'hourly', amount: 0 }]);
     } catch (error) {
       console.error('Error loading service:', error);
-      alert('Failed to load service');
+      toast.error('Failed to load service');
     } finally {
       setLoading(false);
     }
