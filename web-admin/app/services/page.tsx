@@ -216,58 +216,73 @@ export default function ServicesPage() {
           ]}
         />
 
-        {/* Filter Buttons */}
-        <div className="px-6 py-4 bg-white border-b border-gray-200">
-          <div className="flex items-center space-x-2 flex-wrap gap-y-2">
+        {/* Search and Filter Section */}
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+          {/* Search Bar */}
+          <div className="mb-4">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <input
+                type="text"
+                placeholder="Search services..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
+              />
+            </div>
+          </div>
+
+          {/* Filter Buttons */}
+          <div className="flex items-center space-x-2 flex-wrap gap-2">
             <button
               onClick={() => setFilterType('all')}
-              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+              className={`px-4 py-2 rounded-lg font-medium transition-all ${
                 filterType === 'all'
                   ? 'bg-[#3f72af] text-white shadow-md'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
-              All Types ({services.length})
+              All ({services.length})
             </button>
             <button
               onClick={() => setFilterType('plowing')}
-              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+              className={`px-4 py-2 rounded-lg font-medium transition-all ${
                 filterType === 'plowing'
-                  ? 'bg-[#3f72af] text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
+                  ? 'bg-[#3f72af] text-white shadow-md'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
-              Plowing ({services.filter(s => s.service_type === 'plowing').length})
-            </button>
-            <button
-              onClick={() => setFilterType('salting')}
-              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                filterType === 'salting'
-                  ? 'bg-cyan-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
-              }`}
-            >
-              Salting ({services.filter(s => s.service_type === 'salting').length})
+              ❄️ Plowing ({services.filter(s => s.service_type === 'plowing').length})
             </button>
             <button
               onClick={() => setFilterType('sanding')}
-              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+              className={`px-4 py-2 rounded-lg font-medium transition-all ${
                 filterType === 'sanding'
-                  ? 'bg-orange-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
+                  ? 'bg-[#3f72af] text-white shadow-md'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
-              Sanding ({services.filter(s => s.service_type === 'sanding').length})
+              ⚪ Sanding ({services.filter(s => s.service_type === 'sanding').length})
+            </button>
+            <button
+              onClick={() => setFilterType('salting')}
+              className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                filterType === 'salting'
+                  ? 'bg-[#3f72af] text-white shadow-md'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+            >
+              🧂 Salting ({services.filter(s => s.service_type === 'salting').length})
             </button>
             <button
               onClick={() => setFilterType('sidewalk_clear')}
-              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+              className={`px-4 py-2 rounded-lg font-medium transition-all ${
                 filterType === 'sidewalk_clear'
-                  ? 'bg-green-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
+                  ? 'bg-[#3f72af] text-white shadow-md'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
-              Sidewalk ({services.filter(s => s.service_type === 'sidewalk_clear').length})
+              🚶 Sidewalk ({services.filter(s => s.service_type === 'sidewalk_clear').length})
             </button>
           </div>
         </div>
