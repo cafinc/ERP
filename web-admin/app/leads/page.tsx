@@ -55,7 +55,7 @@ interface Lead {
   phone: string;
   address?: string;
   company?: string;
-  status: 'new' | 'contacted' | 'qualified' | 'proposal_sent' | 'negotiating' | 'won' | 'lost';
+  status: 'new' | 'contacted' | 'scheduled' | 'converted';
   source: string;
   estimated_value?: number;
   priority: 'low' | 'medium' | 'high';
