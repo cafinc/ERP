@@ -88,6 +88,7 @@ export default function CustomerFormPage() {
   const [showDuplicateModal, setShowDuplicateModal] = useState(false);
   const [duplicates, setDuplicates] = useState<any[]>([]);
   const [checkingDuplicates, setCheckingDuplicates] = useState(false);
+  const [skipDuplicateCheck, setSkipDuplicateCheck] = useState(false);
   
   const [customerForm, setCustomerForm] = useState({
     // For individuals
