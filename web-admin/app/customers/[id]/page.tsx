@@ -1825,6 +1825,35 @@ export default function CustomerDetailPage() {
           </div>
         </div>
       )}
+
+      {/* Archive Success Modal */}
+      {showArchiveSuccessModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full mx-4 overflow-hidden animate-bounce-in">
+            <div className="bg-gradient-to-r from-green-500 to-emerald-500 p-6 text-white">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <div>
+                  <h2 className="text-2xl font-bold">Success!</h2>
+                  <p className="text-white/90 mt-1">
+                    {archiveSuccessMessage}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="p-6 text-center">
+              <p className="text-gray-600">
+                Customer status has been updated
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
     );
 }
