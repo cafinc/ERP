@@ -218,33 +218,34 @@ export default function PageHeader({
                         key={index}
                         href={action.href}
                         className={`px-4 py-2 text-sm font-medium rounded-lg inline-flex items-center ${
+                          action.variant === 'primary'
+                            ? 'text-white bg-blue-600 hover:bg-blue-700'
+                            : 'text-gray-700 bg-white border border-gray-300 hover:bg-gray-50'
+                        }`}
+                      >
+                        {action.icon}
+                        {action.label}
+                      </Link>
+                    );
+                  }
+                  return (
+                    <button
+                      key={index}
+                      onClick={action.onClick}
+                      className={`px-4 py-2 text-sm font-medium rounded-lg inline-flex items-center ${
                         action.variant === 'primary'
-                          ? 'text-white bg-blue-600 hover:bg-blue-700'
+                          ? 'text-white bg-[#3f72af] hover:bg-[#2c5282]'
                           : 'text-gray-700 bg-white border border-gray-300 hover:bg-gray-50'
                       }`}
                     >
                       {action.icon}
                       {action.label}
-                    </Link>
+                    </button>
                   );
-                }
-                return (
-                  <button
-                    key={index}
-                    onClick={action.onClick}
-                    className={`px-4 py-2 text-sm font-medium rounded-lg inline-flex items-center ${
-                      action.variant === 'primary'
-                        ? 'text-white bg-[#3f72af] hover:bg-[#2c5282]'
-                        : 'text-gray-700 bg-white border border-gray-300 hover:bg-gray-50'
-                    }`}
-                  >
-                    {action.icon}
-                    {action.label}
-                  </button>
-                );
-              })}
-            </div>
-          )}
+                })}
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Search and Filter Row */}
