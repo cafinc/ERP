@@ -1099,6 +1099,7 @@ class CustomerManagementTests:
         self.test_file_upload()
         self.test_customer_retrieval()
         self.test_customer_update()
+        self.test_duplicate_customer_check()
         self.test_error_handling()
         
         end_time = time.time()
