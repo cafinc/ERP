@@ -558,7 +558,7 @@ export default function CustomerFormPage() {
     }
 
     // Check for duplicates (only for new customers, not edits)
-    if (!isEdit) {
+    if (!isEdit && !skipDuplicateCheck) {
       const hasDuplicates = await checkDuplicateCustomers();
       if (hasDuplicates) {
         setSaving(false);
