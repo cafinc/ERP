@@ -3,6 +3,7 @@
 import PageHeader from '@/components/PageHeader';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 import api from '@/lib/api';
 import {
   Plus,
@@ -13,6 +14,12 @@ import {
   Trash2,
   RefreshCw,
   BarChart3,
+  X,
+  Droplets,
+  Mountain,
+  Fuel,
+  BeakerIcon,
+  Box,
 } from 'lucide-react';
 
 interface Consumable {
