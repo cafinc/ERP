@@ -35,6 +35,7 @@ import {
   MessageCircle,
   PhoneCall,
   Send,
+  Wallet,
 } from 'lucide-react';
 
 export default function CustomerDetailPage() {
