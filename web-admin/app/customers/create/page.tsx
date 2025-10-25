@@ -266,6 +266,8 @@ export default function CustomerFormPage() {
     let province = 'AB';
     let postalCode = '';
 
+    console.log('Google Places - All components:', components);
+
     components.forEach((component: any) => {
       const types = component.types;
       
@@ -280,18 +282,16 @@ export default function CustomerFormPage() {
       }
       
       // City - check multiple possible types in priority order
-      if (!city) {
-        if (types.includes('locality')) {
-          city = component.long_name;
-        } else if (types.includes('sublocality')) {
-          city = component.long_name;
-        } else if (types.includes('sublocality_level_1')) {
-          city = component.long_name;
-        } else if (types.includes('postal_town')) {
-          city = component.long_name;
-        } else if (types.includes('administrative_area_level_3')) {
-          city = component.long_name;
-        }
+      if (types.includes('locality')) {
+        city = component.long_name;
+      } else if (!city && types.includes('sublocality')) {
+        city = component.long_name;
+      } else if (!city && types.includes('sublocality_level_1')) {
+        city = component.long_name;
+      } else if (!city && types.includes('postal_town')) {
+        city = component.long_name;
+      } else if (!city && types.includes('administrative_area_level_3')) {
+        city = component.long_name;
       }
       
       // Province
@@ -304,6 +304,8 @@ export default function CustomerFormPage() {
         postalCode = component.long_name;
       }
     });
+
+    console.log('Google Places - Extracted:', { street, city, province, postalCode });
 
     return { street, city, province, postalCode };
   };
