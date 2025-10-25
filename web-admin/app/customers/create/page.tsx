@@ -677,17 +677,15 @@ export default function CustomerFormPage() {
           ? `${customerForm.first_name} ${customerForm.last_name}`.trim()
           : customerForm.company_name;
 
-      // Construct address from broken out fields (only for individuals)
+      // Construct address from broken out fields
       let address = '';
-      if (customerForm.customer_type === 'individual') {
-        const addressParts = [
-          customerForm.street_address,
-          customerForm.city,
-          `${customerForm.province} ${customerForm.postal_code}`,
-          customerForm.country,
-        ].filter(Boolean);
-        address = addressParts.join(', ');
-      }
+      const addressParts = [
+        customerForm.street_address,
+        customerForm.city,
+        `${customerForm.province} ${customerForm.postal_code}`,
+        customerForm.country,
+      ].filter(Boolean);
+      address = addressParts.join(', ');
 
       const submitData: any = {
         name,
@@ -698,8 +696,8 @@ export default function CustomerFormPage() {
         active: customerForm.active,
       };
 
-      // Only add address for individuals (companies don't have address section anymore)
-      if (customerForm.customer_type === 'individual' && address) {
+      // Add address for both individuals and companies
+      if (address) {
         submitData.address = address;
       }
 
