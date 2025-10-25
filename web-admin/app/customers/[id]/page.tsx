@@ -512,8 +512,19 @@ export default function CustomerDetailPage() {
               {/* Left Column - Contact Info */}
               <div className="space-y-6">
                 <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
-                  <h2 className="text-xl font-semibold text-gray-900 mb-4">Contact Information</h2>
+                  <h2 className="text-xl font-semibold text-gray-900 mb-4">
+                    {isCompany ? 'Company Information' : 'Contact Information'}
+                  </h2>
                   <div className="space-y-3">
+                    {isCompany && customer.operating_as && (
+                      <div className="flex items-start space-x-3">
+                        <Briefcase className="w-5 h-5 text-gray-400 mt-0.5" />
+                        <div>
+                          <p className="text-sm text-gray-600">Operating As</p>
+                          <p className="text-gray-900">{customer.operating_as}</p>
+                        </div>
+                      </div>
+                    )}
                     <div className="flex items-start space-x-3">
                       <Mail className="w-5 h-5 text-gray-400 mt-0.5" />
                       <div>
@@ -524,17 +535,19 @@ export default function CustomerDetailPage() {
                     <div className="flex items-start space-x-3">
                       <Phone className="w-5 h-5 text-gray-400 mt-0.5" />
                       <div>
-                        <p className="text-sm text-gray-600">Phone</p>
+                        <p className="text-sm text-gray-600">{isCompany ? 'Office Number' : 'Phone'}</p>
                         <p className="text-gray-900">{formatPhoneNumber(customer.phone)}</p>
                       </div>
                     </div>
-                    <div className="flex items-start space-x-3">
-                      <MapPin className="w-5 h-5 text-gray-400 mt-0.5" />
-                      <div>
-                        <p className="text-sm text-gray-600">Address</p>
-                        <p className="text-gray-900">{customer.address}</p>
+                    {customer.address && (
+                      <div className="flex items-start space-x-3">
+                        <MapPin className="w-5 h-5 text-gray-400 mt-0.5" />
+                        <div>
+                          <p className="text-sm text-gray-600">{isCompany ? 'Company Address' : 'Address'}</p>
+                          <p className="text-gray-900">{customer.address}</p>
+                        </div>
                       </div>
-                    </div>
+                    )}
                     {!isCompany && customer.company_name && (
                       <div className="flex items-start space-x-3 pt-2 border-t border-gray-200">
                         <Briefcase className="w-5 h-5 text-[#3f72af] mt-0.5" />
@@ -551,6 +564,59 @@ export default function CustomerDetailPage() {
                     )}
                   </div>
                 </div>
+
+                {/* Company Accounting Information - Only for Companies */}
+                {isCompany && customer.accounting && (
+                  <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
+                    <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center space-x-2">
+                      <CreditCard className="w-5 h-5 text-[#3f72af]" />
+                      <span>Accounting Information</span>
+                    </h2>
+                    <div className="space-y-3">
+                      {customer.accounting.business_number && (
+                        <div className="flex items-start space-x-3">
+                          <FileText className="w-5 h-5 text-gray-400 mt-0.5" />
+                          <div>
+                            <p className="text-sm text-gray-600">Business Number</p>
+                            <p className="text-gray-900">{customer.accounting.business_number}</p>
+                          </div>
+                        </div>
+                      )}
+                      <div className="flex items-start space-x-3">
+                        <DollarSign className="w-5 h-5 text-gray-400 mt-0.5" />
+                        <div>
+                          <p className="text-sm text-gray-600">Payment Terms</p>
+                          <p className="text-gray-900 capitalize">{customer.accounting.payment_terms?.replace('_', ' ') || 'Due on Receipt'}</p>
+                        </div>
+                      </div>
+                      {customer.accounting.credit_limit && (
+                        <div className="flex items-start space-x-3">
+                          <CreditCard className="w-5 h-5 text-gray-400 mt-0.5" />
+                          <div>
+                            <p className="text-sm text-gray-600">Credit Limit</p>
+                            <p className="text-gray-900">${parseFloat(customer.accounting.credit_limit).toLocaleString()}</p>
+                          </div>
+                        </div>
+                      )}
+                      <div className="flex items-start space-x-3">
+                        <Wallet className="w-5 h-5 text-gray-400 mt-0.5" />
+                        <div>
+                          <p className="text-sm text-gray-600">Preferred Payment Method</p>
+                          <p className="text-gray-900 capitalize">{customer.accounting.preferred_payment_method?.replace('_', ' ') || 'E-Transfer'}</p>
+                        </div>
+                      </div>
+                      {customer.accounting.po_required && (
+                        <div className="flex items-start space-x-3">
+                          <CheckCircle className="w-5 h-5 text-green-500 mt-0.5" />
+                          <div>
+                            <p className="text-sm text-gray-600">Purchase Order Required</p>
+                            <p className="text-gray-900">Yes</p>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
 
                 {!isCompany && customer.company_name && (
                   <div className="bg-blue-50 rounded-xl border border-blue-200 p-6">
