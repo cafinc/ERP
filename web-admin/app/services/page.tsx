@@ -207,7 +207,7 @@ export default function ServicesPage() {
             {
               label: 'Add Service',
               icon: <Plus className="w-4 h-4 mr-2" />,
-              onClick: () => router.push('/services/create'),
+              onClick: () => setShowCreateModal(true),
               variant: 'primary',
             },
           ]}
