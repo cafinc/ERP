@@ -1,7 +1,8 @@
 'use client';
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { MapPin } from 'lucide-react';
+import { loadGoogleMapsScript } from '@/lib/googleMapsLoader';
 
 interface AddressInputProps {
   value: string;
