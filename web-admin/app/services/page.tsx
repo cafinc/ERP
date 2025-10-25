@@ -191,7 +191,11 @@ export default function ServicesPage() {
     
     const matchesType = filterType === 'all' || service.service_type === filterType;
     
-    return matchesSearch && matchesType;
+    const matchesActive = filterActive === 'all' || 
+                         (filterActive === 'active' && service.active) ||
+                         (filterActive === 'inactive' && !service.active);
+    
+    return matchesSearch && matchesType && matchesActive;
   });
 
   if (loading) {
