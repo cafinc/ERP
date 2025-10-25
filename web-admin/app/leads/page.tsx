@@ -674,55 +674,6 @@ export default function LeadsPage() {
                         </select>
                       </div>
 
-                      {/* View Mode Toggle */}
-                      <div className="mb-4">
-                        <label className="text-xs font-semibold text-gray-700 mb-2 block uppercase tracking-wide">View Mode</label>
-                        <div className="grid grid-cols-3 gap-2">
-                          <button
-                            onClick={() => {
-                              setViewMode('pipeline');
-                              setShowFilterDropdown(false);
-                            }}
-                            className={`flex flex-col items-center justify-center gap-1.5 px-3 py-3 rounded-lg transition-all ${
-                              viewMode === 'pipeline'
-                                ? 'bg-[#3f72af] text-white shadow-md'
-                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                            }`}
-                          >
-                            <TrendingUp className="w-5 h-5" />
-                            <span className="text-xs font-medium">Pipeline</span>
-                          </button>
-                          <button
-                            onClick={() => {
-                              setViewMode('list');
-                              setShowFilterDropdown(false);
-                            }}
-                            className={`flex flex-col items-center justify-center gap-1.5 px-3 py-3 rounded-lg transition-all ${
-                              viewMode === 'list'
-                                ? 'bg-[#3f72af] text-white shadow-md'
-                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                            }`}
-                          >
-                            <BarChart3 className="w-5 h-5" />
-                            <span className="text-xs font-medium">List</span>
-                          </button>
-                          <button
-                            onClick={() => {
-                              setViewMode('analytics');
-                              setShowFilterDropdown(false);
-                            }}
-                            className={`flex flex-col items-center justify-center gap-1.5 px-3 py-3 rounded-lg transition-all ${
-                              viewMode === 'analytics'
-                                ? 'bg-[#3f72af] text-white shadow-md'
-                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                            }`}
-                          >
-                            <Eye className="w-5 h-5" />
-                            <span className="text-xs font-medium">Analytics</span>
-                          </button>
-                        </div>
-                      </div>
-
                       {/* Apply/Clear Buttons */}
                       <div className="flex gap-2 pt-4 border-t border-gray-200">
                         <button
