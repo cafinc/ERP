@@ -434,13 +434,6 @@ export default function CustomerFormPage() {
         country: 'Canada',
         customer_type: data.customer_type || 'individual',
         company_id: data.company_id || '',
-        main_contact: {
-          first_name: '',
-          last_name: '',
-          phone: '',
-          email: '',
-          position: 'Manager',
-        },
         notes: data.notes || '',
         active: data.active !== false,
         accounting: data.accounting || {
