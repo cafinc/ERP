@@ -370,170 +370,201 @@ export default function CreateSitePage() {
               </div>
             </div>
 
-            {/* Address Section */}
-            <div>
-              <div className="flex items-center justify-between mb-2">
-                <label className="block text-sm font-medium text-gray-700">
-                  Site Address
-                </label>
-                <button
-                  type="button"
-                  onClick={() => setShowManualCoordinates(!showManualCoordinates)}
-                  className="flex items-center gap-2 text-sm text-blue-600 hover:text-blue-700"
-                >
-                  {showManualCoordinates ? (
-                    <>
-                      <MapPin className="w-4 h-4" />
-                      Use Address
-                    </>
-                  ) : (
-                    <>
-                      <Edit3 className="w-4 h-4" />
-                      Manual Coordinates
-                    </>
-                  )}
-                </button>
-              </div>
+            {/* Location & Address Card */}
+            <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                <Map className="w-6 h-6 text-[#3f72af] mr-2" />
+                Location & Address
+              </h2>
 
-              {!showManualCoordinates ? (
-                <input
-                  ref={inputRef}
-                  type="text"
-                  value={address}
-                  onChange={(e) => setAddress(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="Start typing address..."
-                />
-              ) : (
+              {/* Address Section */}
+              <div className="space-y-6">
                 <div>
-                  <p className="text-sm text-gray-600 mb-3">
-                    Enter coordinates manually if address lookup fails
-                  </p>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Latitude <span className="text-red-500">*</span>
-                      </label>
-                      <input
-                        type="number"
-                        step="any"
-                        value={latitude}
-                        onChange={(e) => setLatitude(e.target.value)}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="43.6532"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Longitude <span className="text-red-500">*</span>
-                      </label>
-                      <input
-                        type="number"
-                        step="any"
-                        value={longitude}
-                        onChange={(e) => setLongitude(e.target.value)}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="-79.3832"
-                      />
-                    </div>
+                  <div className="flex items-center justify-between mb-3">
+                    <label className="block text-sm font-semibold text-gray-900">
+                      Site Address
+                    </label>
+                    <button
+                      type="button"
+                      onClick={() => setShowManualCoordinates(!showManualCoordinates)}
+                      className="flex items-center gap-2 text-sm font-medium text-[#3f72af] hover:text-[#2c5282] transition-colors"
+                    >
+                      {showManualCoordinates ? (
+                        <>
+                          <MapPin className="w-4 h-4" />
+                          Use Address Lookup
+                        </>
+                      ) : (
+                        <>
+                          <Edit3 className="w-4 h-4" />
+                          Enter Manual Coordinates
+                        </>
+                      )}
+                    </button>
                   </div>
+
+                  {!showManualCoordinates ? (
+                    <input
+                      ref={inputRef}
+                      type="text"
+                      value={address}
+                      onChange={(e) => setAddress(e.target.value)}
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
+                      placeholder="Start typing address..."
+                    />
+                  ) : (
+                    <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
+                      <p className="text-sm text-blue-900 font-medium mb-4 flex items-center">
+                        <AlertCircle className="w-4 h-4 mr-2" />
+                        Enter coordinates manually if address lookup fails
+                      </p>
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-sm font-semibold text-gray-900 mb-2">
+                            Latitude <span className="text-red-500">*</span>
+                          </label>
+                          <input
+                            type="number"
+                            step="any"
+                            value={latitude}
+                            onChange={(e) => setLatitude(e.target.value)}
+                            className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
+                            placeholder="43.6532"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-semibold text-gray-900 mb-2">
+                            Longitude <span className="text-red-500">*</span>
+                          </label>
+                          <input
+                            type="number"
+                            step="any"
+                            value={longitude}
+                            onChange={(e) => setLongitude(e.target.value)}
+                            className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
+                            placeholder="-79.3832"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
 
-            {/* Area Size */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Area Size (sq ft)
-              </label>
-              <input
-                type="number"
-                value={areaSize}
-                onChange={(e) => setAreaSize(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="e.g., 5000"
-              />
-            </div>
-
-            {/* Internal Notes */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Internal Notes (Admin Only)
-              </label>
-              <p className="text-sm text-gray-500 mb-2">Only visible to administrators</p>
-              <textarea
-                value={internalNotes}
-                onChange={(e) => setInternalNotes(e.target.value)}
-                rows={3}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
-                placeholder="Private notes for admin team..."
-              />
-            </div>
-
-            {/* Crew Notes */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Crew Notes
-              </label>
-              <p className="text-sm text-gray-500 mb-2">Visible to crew and customer</p>
-              <textarea
-                value={crewNotes}
-                onChange={(e) => setCrewNotes(e.target.value)}
-                rows={3}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
-                placeholder="Special instructions, access codes, etc..."
-              />
-            </div>
-
-            {/* Site Services */}
-            <div>
-              <div className="flex items-center justify-between mb-4">
+                {/* Area Size */}
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900">Site Services</h3>
-                  <p className="text-sm text-gray-500">Configure services for this site</p>
+                  <label className="block text-sm font-semibold text-gray-900 mb-2">
+                    Area Size (sq ft)
+                  </label>
+                  <input
+                    type="number"
+                    value={areaSize}
+                    onChange={(e) => setAreaSize(e.target.value)}
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
+                    placeholder="e.g., 5000"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Notes Card */}
+            <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                <FileText className="w-6 h-6 text-[#3f72af] mr-2" />
+                Site Notes
+              </h2>
+
+              <div className="space-y-6">
+                {/* Internal Notes */}
+                <div>
+                  <label className="block text-sm font-semibold text-gray-900 mb-2">
+                    Internal Notes (Admin Only)
+                  </label>
+                  <p className="text-sm text-gray-600 mb-3 flex items-center">
+                    <AlertCircle className="w-4 h-4 mr-1" />
+                    Only visible to administrators
+                  </p>
+                  <textarea
+                    value={internalNotes}
+                    onChange={(e) => setInternalNotes(e.target.value)}
+                    rows={4}
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all resize-none"
+                    placeholder="Private notes for admin team..."
+                  />
+                </div>
+
+                {/* Crew Notes */}
+                <div>
+                  <label className="block text-sm font-semibold text-gray-900 mb-2">
+                    Crew Notes
+                  </label>
+                  <p className="text-sm text-gray-600 mb-3 flex items-center">
+                    <AlertCircle className="w-4 h-4 mr-1" />
+                    Visible to crew and customer
+                  </p>
+                  <textarea
+                    value={crewNotes}
+                    onChange={(e) => setCrewNotes(e.target.value)}
+                    rows={4}
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all resize-none"
+                    placeholder="Special instructions, access codes, gate information, etc..."
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Site Services Card */}
+            <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-900 flex items-center">
+                    <Briefcase className="w-6 h-6 text-[#3f72af] mr-2" />
+                    Site Services
+                  </h2>
+                  <p className="text-sm text-gray-600 mt-1">Configure services for this site</p>
                 </div>
                 <button
                   type="button"
                   onClick={handleAddService}
-                  className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+                  className="flex items-center gap-2 px-5 py-2.5 bg-[#3f72af] text-white rounded-xl hover:bg-[#2c5282] transition-all shadow-md hover:shadow-lg font-medium"
                 >
-                  <Plus className="w-4 h-4" />
+                  <Plus className="w-5 h-5" />
                   Add Service
                 </button>
               </div>
 
               {siteServices.length === 0 ? (
-                <div className="text-center py-8 bg-gray-50 rounded-lg border-2 border-dashed border-gray-300">
-                  <FileText className="w-12 h-12 text-gray-400 mx-auto mb-2" />
-                  <p className="text-gray-500">No services configured yet</p>
+                <div className="text-center py-12 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl border-2 border-dashed border-gray-300">
+                  <FileText className="w-16 h-16 text-gray-300 mx-auto mb-3" />
+                  <p className="text-gray-500 font-medium">No services configured yet</p>
+                  <p className="text-sm text-gray-400 mt-1">Click "Add Service" to get started</p>
                 </div>
               ) : (
                 <div className="space-y-3">
                   {siteServices.map((service) => (
                     <div
                       key={service.service_id}
-                      className="bg-gray-50 rounded-lg p-4 border border-gray-200"
+                      className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-5 border-2 border-blue-100 hover:shadow-md transition-all"
                     >
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
-                          <h4 className="font-semibold text-gray-900 mb-2">{service.service_name}</h4>
-                          <div className="grid grid-cols-3 gap-4 text-sm">
-                            <div>
-                              <span className="text-gray-500">Unit Type:</span>
-                              <span className="ml-2 font-medium text-gray-900 capitalize">
+                          <h4 className="font-bold text-gray-900 mb-3 text-lg">{service.service_name}</h4>
+                          <div className="grid grid-cols-3 gap-4">
+                            <div className="bg-white/80 rounded-lg p-3">
+                              <span className="text-xs text-gray-600 font-medium block mb-1">Unit Type</span>
+                              <span className="text-sm font-bold text-gray-900 capitalize">
                                 {service.unit_type.replace('_', ' ')}
                               </span>
                             </div>
-                            <div>
-                              <span className="text-gray-500">Price:</span>
-                              <span className="ml-2 font-medium text-gray-900">
+                            <div className="bg-white/80 rounded-lg p-3">
+                              <span className="text-xs text-gray-600 font-medium block mb-1">Price</span>
+                              <span className="text-sm font-bold text-[#3f72af]">
                                 ${service.price.toFixed(2)}
                               </span>
                             </div>
                             {service.frequency && (
-                              <div>
-                                <span className="text-gray-500">Frequency:</span>
-                                <span className="ml-2 font-medium text-gray-900 capitalize">
+                              <div className="bg-white/80 rounded-lg p-3">
+                                <span className="text-xs text-gray-600 font-medium block mb-1">Frequency</span>
+                                <span className="text-sm font-bold text-gray-900 capitalize">
                                   {service.frequency}
                                 </span>
                               </div>
@@ -544,6 +575,7 @@ export default function CreateSitePage() {
                           type="button"
                           onClick={() => handleRemoveService(service.service_id)}
                           className="ml-4 p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                          title="Remove service"
                         >
                           <Trash2 className="w-5 h-5" />
                         </button>
@@ -553,39 +585,36 @@ export default function CreateSitePage() {
                 </div>
               )}
             </div>
-          </div>
 
-          {/* Footer */}
-          <div className="p-6 border-t border-gray-200 flex items-center justify-between bg-gray-50">
-            <button
-              type="button"
-              onClick={() => router.back()}
-              className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors"
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              disabled={loading}
-              className="flex items-center gap-2 px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-            >
-              {loading ? (
-                <>
-                  <svg className="animate-spin h-5 w-5" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                  </svg>
-                  <span>Creating...</span>
-                </>
-              ) : (
-                <>
-                  <Save className="w-5 h-5" />
-                  <span>Create Site</span>
-                </>
-              )}
-            </button>
-          </div>
-        </form>
+            {/* Form Actions */}
+            <div className="flex items-center justify-between gap-4 pt-4">
+              <button
+                type="button"
+                onClick={() => router.back()}
+                className="px-8 py-3 border-2 border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 hover:border-gray-400 transition-all font-semibold"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                disabled={loading}
+                className="flex items-center gap-2 px-8 py-3 bg-[#3f72af] text-white rounded-xl hover:bg-[#2c5282] disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-md hover:shadow-lg font-semibold"
+              >
+                {loading ? (
+                  <>
+                    <div className="w-5 h-5 border-3 border-white border-t-transparent rounded-full animate-spin"></div>
+                    Creating...
+                  </>
+                ) : (
+                  <>
+                    <Save className="w-5 h-5" />
+                    Create Site
+                  </>
+                )}
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
 
       {/* Service Modal */}
