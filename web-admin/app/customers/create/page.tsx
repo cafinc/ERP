@@ -464,7 +464,7 @@ export default function CustomerFormPage() {
     const errors = { ...fieldErrors };
     
     // Email validation
-    if (fieldName === 'email' || fieldName === 'main_contact_email') {
+    if (fieldName === 'email') {
       if (value && !isValidEmail(value)) {
         errors[fieldName] = 'Invalid email format';
       } else {
