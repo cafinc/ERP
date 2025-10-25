@@ -218,15 +218,16 @@ export default function CreateSitePage() {
         ]}
       />
 
-      <div className="max-w-4xl mx-auto p-6">
-        <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-sm border border-gray-200">
-          {/* Header */}
-          <div className="p-6 border-b border-gray-200">
-            <h2 className="text-2xl font-bold text-gray-900">Site Information</h2>
-            <p className="text-gray-600 mt-1">Fill in the details to create a new site</p>
-          </div>
-
-          <div className="p-6 space-y-6">
+      <div className="h-full bg-gray-50 overflow-auto">
+        <div className="max-w-4xl mx-auto p-6">
+          <form onSubmit={handleSubmit} noValidate className="space-y-6">
+            {/* Site Information Card */}
+            <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                <MapPin className="w-6 h-6 text-[#3f72af] mr-2" />
+                Site Information
+              </h2>
+              <div className="space-y-6">
             {/* Site Name */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
