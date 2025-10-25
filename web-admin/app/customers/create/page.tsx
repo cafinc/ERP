@@ -814,14 +814,12 @@ export default function CustomerFormPage() {
           const siteData = {
             name: siteName,
             customer_id: companyId,
-            address: address,
-            street_address: customerForm.street_address,
-            city: customerForm.city,
-            province: customerForm.province,
-            postal_code: customerForm.postal_code,
-            country: customerForm.country,
-            status: 'active',
-            type: 'residential', // Default type
+            location: {
+              latitude: 0,  // Default coordinates - would need geocoding for real coordinates
+              longitude: 0,
+              address: address
+            },
+            site_type: 'residential', // Changed from 'type' to 'site_type'
             notes: `Site created automatically with contact ${customerForm.first_name} ${customerForm.last_name}`,
           };
           
