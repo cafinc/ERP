@@ -161,13 +161,13 @@ export default function InventoryPage() {
           actions={[
             {
               label: 'Add Item',
-              icon: Plus,
+              icon: <Plus className="w-4 h-4 mr-2" />,
               onClick: () => router.push('/inventory/add'),
               variant: 'primary',
             },
             {
               label: 'Export CSV',
-              icon: Download,
+              icon: <Download className="w-4 h-4 mr-2" />,
               onClick: exportToCSV,
               variant: 'secondary',
             },
