@@ -100,6 +100,7 @@ export default function CreateSitePage() {
   const [lockboxCode, setLockboxCode] = useState('');
   const [hasSecurityOnsite, setHasSecurityOnsite] = useState(false);
   const [securityPhone, setSecurityPhone] = useState('');
+  const [requiresKeyCard, setRequiresKeyCard] = useState(false);
   const [siteServices, setSiteServices] = useState<SiteService[]>([]);
   const [showManualCoordinates, setShowManualCoordinates] = useState(false);
 
