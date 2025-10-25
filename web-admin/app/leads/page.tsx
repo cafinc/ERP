@@ -365,18 +365,16 @@ export default function LeadsPage() {
 
   const getStats = () => {
     const total = leads.length;
-    const won = leads.filter(l => l.status === 'won').length;
-    const lost = leads.filter(l => l.status === 'lost').length;
-    const active = leads.filter(l => !['won', 'lost'].includes(l.status)).length;
+    const converted = leads.filter(l => l.status === 'converted').length;
+    const active = leads.filter(l => l.status !== 'converted').length;
     const totalValue = leads
-      .filter(l => l.status !== 'lost')
       .reduce((sum, l) => sum + (l.estimated_value || 0), 0);
-    const wonValue = leads
-      .filter(l => l.status === 'won')
+    const convertedValue = leads
+      .filter(l => l.status === 'converted')
       .reduce((sum, l) => sum + (l.estimated_value || 0), 0);
-    const conversionRate = total > 0 ? ((won / total) * 100).toFixed(1) : '0';
+    const conversionRate = total > 0 ? ((converted / total) * 100).toFixed(1) : '0';
 
-    return { total, won, lost, active, totalValue, wonValue, conversionRate };
+    return { total, converted, active, totalValue, convertedValue, conversionRate };
   };
 
   const stats = getStats();
