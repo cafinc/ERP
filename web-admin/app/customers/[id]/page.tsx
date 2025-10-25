@@ -338,18 +338,28 @@ export default function CustomerDetailPage() {
   const handleArchiveCustomer = async () => {
     try {
       setArchiving(true);
+      const wasActive = customer.active;
+      
       await api.put(`/customers/${customerId}`, {
         ...customer,
         active: false,
       });
       
       setShowArchiveModal(false);
+      
       // Refresh customer data
       const response = await api.get(`/customers/${customerId}`);
       setCustomer(response.data);
       
-      // Show success message
-      alert(customer.active ? 'Customer archived successfully' : 'Customer unarchived successfully');
+      // Show success modal with appropriate message
+      setArchiveSuccessMessage(wasActive ? 'Customer archived successfully!' : 'Customer unarchived successfully!');
+      setShowArchiveSuccessModal(true);
+      
+      // Auto-close after 2 seconds
+      setTimeout(() => {
+        setShowArchiveSuccessModal(false);
+      }, 2000);
+      
     } catch (error) {
       console.error('Error archiving customer:', error);
       alert('Error updating customer status');
