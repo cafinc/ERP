@@ -70,13 +70,10 @@ interface Lead {
 }
 
 const STATUS_CONFIG = {
-  new: { label: 'New', color: 'blue', icon: Star },
-  contacted: { label: 'Contacted', color: 'purple', icon: Phone },
-  qualified: { label: 'Qualified', color: 'indigo', icon: CheckCircle },
-  proposal_sent: { label: 'Proposal Sent', color: 'orange', icon: MessageSquare },
-  negotiating: { label: 'Negotiating', color: 'yellow', icon: TrendingUp },
-  won: { label: 'Won', color: 'green', icon: UserCheck },
-  lost: { label: 'Lost', color: 'red', icon: UserX },
+  new: { label: 'New', color: 'blue', icon: UserPlus },
+  contacted: { label: 'Contacted', color: 'yellow', icon: PhoneCall },
+  scheduled: { label: 'Scheduled', color: 'purple', icon: Calendar },
+  converted: { label: 'Converted', color: 'green', icon: UserCheck },
 };
 
 const LEAD_SOURCES = [
