@@ -156,13 +156,15 @@ export default function SitesPage() {
               label: 'Total Sites',
               value: sites.length,
               icon: <MapPin className="w-4 h-4" />,
-              color: 'blue'
+              color: 'blue',
+              onClick: () => setFilterActive('all')
             },
             {
               label: 'Active',
               value: sites.filter(s => s.active).length,
               icon: <MapPin className="w-4 h-4" />,
-              color: 'green'
+              color: 'green',
+              onClick: () => setFilterActive('active')
             },
             {
               label: 'Customers',
@@ -174,16 +176,10 @@ export default function SitesPage() {
               label: 'Archived',
               value: sites.filter(s => !s.active).length,
               icon: <Archive className="w-4 h-4" />,
-              color: 'orange'
+              color: 'orange',
+              onClick: () => setFilterActive('archived')
             }
           ]}
-          tabs={[
-            { label: "Active", value: "active", count: sites.filter(s => s.active).length },
-            { label: "Archived", value: "archived", count: sites.filter(s => !s.active).length },
-            { label: "All", value: "all", count: sites.length },
-          ]}
-          activeTab={filterActive}
-          onTabChange={(value) => setFilterActive(value)}
           secondaryTabs={[
             { label: "All Types", value: "all", count: sites.length },
             { label: "🏠 Residential", value: "residential", count: sites.filter(s => s.site_type === 'residential').length },
