@@ -511,13 +511,13 @@ export default function LeadsPage() {
             </div>
 
             {/* View Mode Buttons */}
-            <div className="flex items-center gap-2 bg-gray-100 rounded-xl p-1">
+            <div className="flex items-center gap-3">
               <button
                 onClick={() => setViewMode('pipeline')}
-                className={`flex items-center gap-2 px-3 py-2 rounded-lg font-medium transition-all text-sm ${
+                className={`px-4 py-2.5 rounded-xl font-semibold transition-all text-sm flex items-center gap-2 ${
                   viewMode === 'pipeline'
-                    ? 'bg-white text-gray-900 shadow-sm'
-                    : 'text-gray-600 hover:text-gray-900'
+                    ? 'bg-purple-500 text-white shadow-lg shadow-purple-500/30'
+                    : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-purple-500 hover:text-purple-500'
                 }`}
               >
                 <TrendingUp className="w-4 h-4" />
@@ -525,10 +525,10 @@ export default function LeadsPage() {
               </button>
               <button
                 onClick={() => setViewMode('list')}
-                className={`flex items-center gap-2 px-3 py-2 rounded-lg font-medium transition-all text-sm ${
+                className={`px-4 py-2.5 rounded-xl font-semibold transition-all text-sm flex items-center gap-2 ${
                   viewMode === 'list'
-                    ? 'bg-white text-gray-900 shadow-sm'
-                    : 'text-gray-600 hover:text-gray-900'
+                    ? 'bg-indigo-500 text-white shadow-lg shadow-indigo-500/30'
+                    : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-indigo-500 hover:text-indigo-500'
                 }`}
               >
                 <BarChart3 className="w-4 h-4" />
@@ -536,10 +536,10 @@ export default function LeadsPage() {
               </button>
               <button
                 onClick={() => setViewMode('analytics')}
-                className={`flex items-center gap-2 px-3 py-2 rounded-lg font-medium transition-all text-sm ${
+                className={`px-4 py-2.5 rounded-xl font-semibold transition-all text-sm flex items-center gap-2 ${
                   viewMode === 'analytics'
-                    ? 'bg-white text-gray-900 shadow-sm'
-                    : 'text-gray-600 hover:text-gray-900'
+                    ? 'bg-pink-500 text-white shadow-lg shadow-pink-500/30'
+                    : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-pink-500 hover:text-pink-500'
                 }`}
               >
                 <Eye className="w-4 h-4" />
