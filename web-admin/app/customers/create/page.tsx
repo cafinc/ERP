@@ -634,7 +634,7 @@ export default function CustomerFormPage() {
       errors.site_name = 'Site name is required when Create Site is enabled';
     }
     
-    // If there are errors, set them and scroll to first error
+    // If there are errors, set them and show modal
     if (Object.keys(errors).length > 0) {
       setFieldErrors(errors);
       
@@ -645,13 +645,26 @@ export default function CustomerFormPage() {
         errorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
       
-      // Show summary alert
-      alert(`Please fix ${Object.keys(errors).length} error(s) in the form before submitting.`);
+      // Show error modal with list of errors
+      const errorMessages = Object.entries(errors).map(([field, message]) => {
+        const fieldName = field.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+        return `${fieldName}: ${message}`;
+      });
+      
+      setResultModalType('error');
+      setResultModalTitle('Validation Error');
+      setResultModalMessage(`Please fix the following ${Object.keys(errors).length} error(s):`);
+      setValidationErrors(errorMessages);
+      setShowResultModal(true);
       return;
     }
 
     if (!customerForm.email || !customerForm.phone || !customerForm.street_address) {
-      alert('Please fill in all required fields');
+      setResultModalType('error');
+      setResultModalTitle('Required Fields Missing');
+      setResultModalMessage('Please fill in all required fields');
+      setValidationErrors(['Email is required', 'Phone is required', 'Street address is required']);
+      setShowResultModal(true);
       return;
     }
 
