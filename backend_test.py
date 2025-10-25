@@ -671,9 +671,334 @@ class CustomerManagementTests:
                     f"Exception: {str(e)}"
                 )
 
+    def test_duplicate_customer_check(self):
+        """Test 9: Duplicate Customer Check Endpoint"""
+        print("=== Test 9: Duplicate Customer Check Endpoint ===")
+        
+        # First, get existing customers for testing
+        existing_customers = []
+        try:
+            response = self.session.get(f"{BASE_URL}/customers")
+            if response.status_code == 200:
+                existing_customers = response.json()[:5]  # Use first 5 for testing
+        except Exception as e:
+            print(f"Warning: Could not get existing customers: {e}")
+        
+        # Create some test customers for duplicate testing
+        test_customers = [
+            {
+                "name": "John Smith Duplicate Test",
+                "email": "john.duplicate@example.com",
+                "phone": "(555) 123-4567",
+                "customer_type": "individual",
+                "address": "123 Duplicate Test St, Test City, ST 12345"
+            },
+            {
+                "name": "Jane Doe Duplicate Test",
+                "email": "jane.duplicate@example.com", 
+                "phone": "555-987-6543",
+                "customer_type": "individual",
+                "address": "456 Duplicate Test Ave, Test City, ST 67890"
+            }
+        ]
+        
+        created_test_customers = []
+        for customer_data in test_customers:
+            try:
+                response = self.session.post(f"{BASE_URL}/customers", json=customer_data)
+                if response.status_code in [200, 201]:
+                    created_customer = response.json()
+                    created_test_customers.append(created_customer)
+                    self.created_customers.append(created_customer["id"])
+            except Exception as e:
+                print(f"Error creating test customer: {e}")
+        
+        # Test 9a: Exact Email Match
+        if created_test_customers:
+            test_email = created_test_customers[0].get('email', '')
+            if test_email:
+                test_data = {
+                    "email": test_email,
+                    "name": "Different Name",
+                    "phone": "555-999-8888"
+                }
+                
+                try:
+                    response = self.session.post(f"{BASE_URL}/customers/check-duplicate", json=test_data)
+                    if response.status_code == 200:
+                        result = response.json()
+                        if result.get('count', 0) > 0:
+                            email_match_found = any('email' in dup.get('match_reason', []) for dup in result.get('duplicates', []))
+                            if email_match_found:
+                                self.log_result(
+                                    "Duplicate Check - Exact Email Match",
+                                    True,
+                                    f"Found {result['count']} duplicate(s) with email match"
+                                )
+                            else:
+                                self.log_result(
+                                    "Duplicate Check - Exact Email Match",
+                                    False,
+                                    "Duplicates found but no email match reason"
+                                )
+                        else:
+                            self.log_result(
+                                "Duplicate Check - Exact Email Match",
+                                False,
+                                "No duplicates found for existing email"
+                            )
+                    else:
+                        self.log_result(
+                            "Duplicate Check - Exact Email Match",
+                            False,
+                            f"HTTP {response.status_code}: {response.text}"
+                        )
+                except Exception as e:
+                    self.log_result(
+                        "Duplicate Check - Exact Email Match",
+                        False,
+                        f"Exception: {str(e)}"
+                    )
+        
+        # Test 9b: Exact Phone Match
+        if created_test_customers:
+            test_phone = created_test_customers[0].get('phone', '')
+            if test_phone:
+                test_data = {
+                    "email": "different@email.com",
+                    "name": "Different Name",
+                    "phone": test_phone
+                }
+                
+                try:
+                    response = self.session.post(f"{BASE_URL}/customers/check-duplicate", json=test_data)
+                    if response.status_code == 200:
+                        result = response.json()
+                        if result.get('count', 0) > 0:
+                            phone_match_found = any('phone' in dup.get('match_reason', []) for dup in result.get('duplicates', []))
+                            if phone_match_found:
+                                self.log_result(
+                                    "Duplicate Check - Exact Phone Match",
+                                    True,
+                                    f"Found {result['count']} duplicate(s) with phone match"
+                                )
+                            else:
+                                self.log_result(
+                                    "Duplicate Check - Exact Phone Match",
+                                    False,
+                                    "Duplicates found but no phone match reason"
+                                )
+                        else:
+                            self.log_result(
+                                "Duplicate Check - Exact Phone Match",
+                                False,
+                                "No duplicates found for existing phone"
+                            )
+                    else:
+                        self.log_result(
+                            "Duplicate Check - Exact Phone Match",
+                            False,
+                            f"HTTP {response.status_code}: {response.text}"
+                        )
+                except Exception as e:
+                    self.log_result(
+                        "Duplicate Check - Exact Phone Match",
+                        False,
+                        f"Exception: {str(e)}"
+                    )
+        
+        # Test 9c: Name Similarity Match
+        if created_test_customers:
+            full_name = created_test_customers[0].get('name', '')
+            if len(full_name) > 6:
+                partial_name = full_name[:len(full_name)//2]
+                test_data = {
+                    "email": "different@email.com",
+                    "name": partial_name,
+                    "phone": "555-999-7777"
+                }
+                
+                try:
+                    response = self.session.post(f"{BASE_URL}/customers/check-duplicate", json=test_data)
+                    if response.status_code == 200:
+                        result = response.json()
+                        if result.get('count', 0) > 0:
+                            name_match_found = any('name' in dup.get('match_reason', []) for dup in result.get('duplicates', []))
+                            if name_match_found:
+                                self.log_result(
+                                    "Duplicate Check - Name Similarity Match",
+                                    True,
+                                    f"Found {result['count']} duplicate(s) with name match"
+                                )
+                            else:
+                                self.log_result(
+                                    "Duplicate Check - Name Similarity Match",
+                                    False,
+                                    "Duplicates found but no name match reason"
+                                )
+                        else:
+                            self.log_result(
+                                "Duplicate Check - Name Similarity Match",
+                                False,
+                                "No duplicates found for partial name"
+                            )
+                    else:
+                        self.log_result(
+                            "Duplicate Check - Name Similarity Match",
+                            False,
+                            f"HTTP {response.status_code}: {response.text}"
+                        )
+                except Exception as e:
+                    self.log_result(
+                        "Duplicate Check - Name Similarity Match",
+                        False,
+                        f"Exception: {str(e)}"
+                    )
+        
+        # Test 9d: No Matches - Unique Customer
+        test_data = {
+            "email": "unique.customer.test@nonexistent.domain",
+            "name": "Unique Test Customer Name 12345",
+            "phone": "555-000-9999"
+        }
+        
+        try:
+            response = self.session.post(f"{BASE_URL}/customers/check-duplicate", json=test_data)
+            if response.status_code == 200:
+                result = response.json()
+                if result.get('count', 0) == 0 and len(result.get('duplicates', [])) == 0:
+                    self.log_result(
+                        "Duplicate Check - No Matches (Unique Customer)",
+                        True,
+                        "No duplicates found for unique customer data"
+                    )
+                else:
+                    self.log_result(
+                        "Duplicate Check - No Matches (Unique Customer)",
+                        False,
+                        f"Unexpected duplicates found: {result['count']}"
+                    )
+            else:
+                self.log_result(
+                    "Duplicate Check - No Matches (Unique Customer)",
+                    False,
+                    f"HTTP {response.status_code}: {response.text}"
+                )
+        except Exception as e:
+            self.log_result(
+                "Duplicate Check - No Matches (Unique Customer)",
+                False,
+                f"Exception: {str(e)}"
+            )
+        
+        # Test 9e: Empty/Missing Parameters
+        try:
+            response = self.session.post(f"{BASE_URL}/customers/check-duplicate", json={})
+            if response.status_code == 200:
+                result = response.json()
+                if result.get('count', 0) == 0 and len(result.get('duplicates', [])) == 0:
+                    self.log_result(
+                        "Duplicate Check - Empty Parameters",
+                        True,
+                        "Empty request handled correctly"
+                    )
+                else:
+                    self.log_result(
+                        "Duplicate Check - Empty Parameters",
+                        False,
+                        "Empty request returned unexpected results"
+                    )
+            else:
+                self.log_result(
+                    "Duplicate Check - Empty Parameters",
+                    False,
+                    f"HTTP {response.status_code}: {response.text}"
+                )
+        except Exception as e:
+            self.log_result(
+                "Duplicate Check - Empty Parameters",
+                False,
+                f"Exception: {str(e)}"
+            )
+        
+        # Test 9f: Response Format Validation
+        test_data = {
+            "email": "format.test@example.com",
+            "name": "Format Test Customer",
+            "phone": "555-123-4567"
+        }
+        
+        try:
+            response = self.session.post(f"{BASE_URL}/customers/check-duplicate", json=test_data)
+            if response.status_code == 200:
+                result = response.json()
+                
+                # Check required fields
+                required_fields = ['duplicates', 'count']
+                missing_fields = [field for field in required_fields if field not in result]
+                
+                if not missing_fields:
+                    # Check duplicates array structure
+                    if isinstance(result.get('duplicates'), list):
+                        if len(result['duplicates']) > 0:
+                            duplicate = result['duplicates'][0]
+                            expected_duplicate_fields = ['id', 'name', 'email', 'phone', 'customer_type', 'address', 'match_reason']
+                            missing_duplicate_fields = [field for field in expected_duplicate_fields if field not in duplicate]
+                            
+                            if not missing_duplicate_fields and isinstance(duplicate.get('match_reason'), list):
+                                if result.get('count') == len(result.get('duplicates', [])):
+                                    self.log_result(
+                                        "Duplicate Check - Response Format",
+                                        True,
+                                        "Response format is correct"
+                                    )
+                                else:
+                                    self.log_result(
+                                        "Duplicate Check - Response Format",
+                                        False,
+                                        f"Count mismatch: count={result.get('count')}, array length={len(result.get('duplicates', []))}"
+                                    )
+                            else:
+                                self.log_result(
+                                    "Duplicate Check - Response Format",
+                                    False,
+                                    f"Duplicate structure issues: missing fields={missing_duplicate_fields}, match_reason type={type(duplicate.get('match_reason'))}"
+                                )
+                        else:
+                            # Empty duplicates array is valid
+                            self.log_result(
+                                "Duplicate Check - Response Format",
+                                True,
+                                "Response format is correct (empty duplicates)"
+                            )
+                    else:
+                        self.log_result(
+                            "Duplicate Check - Response Format",
+                            False,
+                            "duplicates should be an array"
+                        )
+                else:
+                    self.log_result(
+                        "Duplicate Check - Response Format",
+                        False,
+                        f"Missing required fields: {missing_fields}"
+                    )
+            else:
+                self.log_result(
+                    "Duplicate Check - Response Format",
+                    False,
+                    f"HTTP {response.status_code}: {response.text}"
+                )
+        except Exception as e:
+            self.log_result(
+                "Duplicate Check - Response Format",
+                False,
+                f"Exception: {str(e)}"
+            )
+
     def test_error_handling(self):
         """Test error handling for missing required fields"""
-        print("=== Test 9: Error Handling ===")
+        print("=== Test 10: Error Handling ===")
         
         # Test missing required fields
         invalid_customer_data = {
