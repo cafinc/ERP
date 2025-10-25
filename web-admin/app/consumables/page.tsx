@@ -81,15 +81,22 @@ export default function ConsumablesPage() {
     const loadingToast = toast.loading('Creating consumable...');
     
     try {
-      await api.post('/consumables', formData);
+      const payload = {
+        ...formData,
+        current_stock: parseFloat(formData.current_stock) || 0,
+        min_stock_level: parseFloat(formData.min_stock_level) || 0,
+        unit_cost: parseFloat(formData.unit_cost) || 0,
+      };
+      
+      await api.post('/consumables', payload);
       toast.success('Consumable created successfully!', { id: loadingToast });
       setShowCreateModal(false);
       setFormData({
         name: '',
         unit: 'bags',
-        current_stock: 0,
-        min_stock_level: 0,
-        unit_cost: 0,
+        current_stock: '',
+        min_stock_level: '',
+        unit_cost: '',
         category: 'traction_control',
       });
       loadConsumables();
