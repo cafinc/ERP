@@ -205,32 +205,35 @@ export default function ConsumablesPage() {
   }
 
   return (
-      <div className="space-y-6">
-        {/* Header */}
-        <div className="flex justify-between items-center">
-          <div>
-            <h1 className="text-3xl font-bold text-gray-900">Consumables Management</h1>
-            <p className="text-gray-600 mt-1">Track inventory of salt, sand, and other materials</p>
-          </div>
+    <>
+      <PageHeader
+        title="Inventory Management"
+        subtitle="Track and manage consumable materials for winter operations"
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "Inventory", href: "/consumables" }
+        ]}
+        actions={
           <div className="flex gap-3">
             <button
               onClick={() => router.push('/consumables/analytics')}
-              className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
+              className="flex items-center gap-2 px-4 py-2 text-sm border-2 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 hover:border-gray-400 transition-all font-semibold"
             >
-              <BarChart3 className="w-5 h-5" />
+              <BarChart3 className="w-4 h-4" />
               Analytics
             </button>
             <button
               onClick={() => setShowCreateModal(true)}
-              className="flex items-center gap-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white px-4 py-2 rounded-lg font-medium transition-all shadow-sm hover:shadow-md rounded-lg hover:bg-[#2c5282]"
+              className="flex items-center gap-2 px-4 py-2 text-sm bg-[#3f72af] hover:bg-[#2c5282] text-white rounded-lg font-semibold transition-all shadow-sm hover:shadow-md"
             >
-              <Plus className="w-5 h-5" />
+              <Plus className="w-4 h-4" />
               Add Consumable
             </button>
           </div>
-        </div>
-
-        {/* Stats */}
+        }
+      />
+      
+      <div className="space-y-6">{/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-3">
