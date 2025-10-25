@@ -2271,7 +2271,7 @@ export default function CustomerFormPage() {
 
       {/* Error Modal */}
       {showErrorModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/20 backdrop-blur-sm">
           <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full mx-4 overflow-hidden">
             <div className="bg-gradient-to-r from-red-500 to-rose-500 p-6 text-white">
               <div className="flex items-center gap-3">
