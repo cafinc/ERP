@@ -1369,65 +1369,67 @@ export default function CustomerFormPage() {
 
               {/* Company Form */}
               {customerForm.customer_type === 'company' && (
-                <div>
+                <div className="bg-white/95 backdrop-blur-md rounded-3xl shadow-xl border border-white/40 overflow-hidden hover:shadow-2xl transition-shadow">
                   {/* Company Information */}
-                  <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center space-x-2">
-                      <Building className="w-5 h-5 text-[#3f72af]" />
-                      <span>Company Information</span>
-                    </h2>
+                  <div className="bg-gradient-to-br from-blue-50 to-indigo-50 border-b-2 border-blue-100 p-6">
+                    <h3 className="text-sm font-bold text-gray-900 flex items-center gap-2">
+                      <Building className="w-4 h-4 text-[#3f72af]" />
+                      Company Information
+                    </h3>
+                  </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Legal Business Name *
-                      </label>
-                      <input
-                        type="text"
-                        value={customerForm.company_name}
-                        onChange={e =>
-                          setCustomerForm({ ...customerForm, company_name: e.target.value })
-                        }
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="ABC Corporation Ltd."
-                        required
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Operating As
-                      </label>
-                      <input
-                        type="text"
-                        value={customerForm.operating_as}
-                        onChange={e =>
-                          setCustomerForm({ ...customerForm, operating_as: e.target.value })
-                        }
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="ABC Services"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Office Number *
-                      </label>
-                      <div className="relative">
-                        <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                  <div className="p-6 space-y-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-medium text-gray-700 mb-2">
+                          Legal Business Name <span className="text-red-500">*</span>
+                        </label>
                         <input
-                          type="tel"
-                          value={customerForm.office_number}
-                          onChange={e => setCustomerForm({ ...customerForm, office_number: e.target.value })}
-                          className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
-                          placeholder="(555) 123-4567"
+                          type="text"
+                          value={customerForm.company_name}
+                          onChange={e =>
+                            setCustomerForm({ ...customerForm, company_name: e.target.value })
+                          }
+                          className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-semibold transition-all"
+                          placeholder="ABC Corporation Ltd."
                           required
                         />
                       </div>
-                    </div>
 
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <div>
+                        <label className="block text-xs font-medium text-gray-700 mb-2">
+                          Operating As
+                        </label>
+                        <input
+                          type="text"
+                          value={customerForm.operating_as}
+                          onChange={e =>
+                            setCustomerForm({ ...customerForm, operating_as: e.target.value })
+                          }
+                          className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-semibold transition-all"
+                          placeholder="ABC Services"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-medium text-gray-700 mb-2">
+                          Office Number <span className="text-red-500">*</span>
+                        </label>
+                        <div className="relative">
+                          <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                          <input
+                            type="tel"
+                            value={customerForm.office_number}
+                            onChange={e => setCustomerForm({ ...customerForm, office_number: e.target.value })}
+                            className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-semibold transition-all"
+                            placeholder="(555) 123-4567"
+                            required
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-medium text-gray-700 mb-2">
                         Email *
                       </label>
                       <div className="relative">
