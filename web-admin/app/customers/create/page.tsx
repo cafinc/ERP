@@ -190,11 +190,17 @@ export default function CustomerFormPage() {
   };
 
   const setupAutocomplete = () => {
-    if (!window.google) return;
+    if (!window.google) {
+      console.log('Google Maps not loaded yet');
+      return;
+    }
+
+    console.log('Setting up Google Places autocomplete...');
 
     // Contact Address Autocomplete (existing)
     const contactAddressInput = document.getElementById('address-autocomplete') as HTMLInputElement;
     if (contactAddressInput) {
+      console.log('Initializing contact address autocomplete');
       const contactAutocomplete = new window.google.maps.places.Autocomplete(contactAddressInput, {
         componentRestrictions: { country: 'ca' },
         fields: ['address_components', 'formatted_address'],
@@ -215,11 +221,14 @@ export default function CustomerFormPage() {
           postal_code: postalCode,
         }));
       });
+    } else {
+      console.log('Contact address input not found');
     }
 
     // Company Address Autocomplete (for company customers)
     const companyAddressInput = document.getElementById('company-address-autocomplete') as HTMLInputElement;
     if (companyAddressInput) {
+      console.log('Initializing company address autocomplete');
       const companyAutocomplete = new window.google.maps.places.Autocomplete(companyAddressInput, {
         componentRestrictions: { country: 'ca' },
         fields: ['address_components', 'formatted_address'],
@@ -240,11 +249,14 @@ export default function CustomerFormPage() {
           postal_code: postalCode,
         }));
       });
+    } else {
+      console.log('Company address input not found');
     }
 
     // Billing Address Autocomplete (for company customers)
     const billingAddressInput = document.getElementById('billing-address-autocomplete') as HTMLInputElement;
     if (billingAddressInput) {
+      console.log('Initializing billing address autocomplete');
       const billingAutocomplete = new window.google.maps.places.Autocomplete(billingAddressInput, {
         componentRestrictions: { country: 'ca' },
         fields: ['address_components', 'formatted_address'],
@@ -267,7 +279,11 @@ export default function CustomerFormPage() {
           }
         }));
       });
+    } else {
+      console.log('Billing address input not found');
     }
+    
+    console.log('Google Places autocomplete setup complete');
   };
 
   // Helper function to extract address components
