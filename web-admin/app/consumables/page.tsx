@@ -284,13 +284,13 @@ export default function ConsumablesPage() {
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="flex gap-2">
                             <button
-                              onClick={() => router.push(`/consumables/${consumable.id}/edit`)}
+                              onClick={() => router.push(`/consumables/${consumableId}/edit`)}
                               className="p-1 text-[#3f72af] hover:bg-blue-50 rounded"
                             >
                               <Edit className="w-4 h-4" />
                             </button>
                             <button
-                              onClick={() => handleDelete(consumable.id)}
+                              onClick={() => handleDelete(consumableId!)}
                               className="p-1 text-red-600 hover:bg-red-50 rounded"
                             >
                               <Trash2 className="w-4 h-4" />
