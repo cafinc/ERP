@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import PageHeader from '@/components/PageHeader';
-import PageHeader from '@/components/PageHeader';
 import { Building, Mail, Phone, MapPin, Globe, FileText } from 'lucide-react';
 
 export default function CompanySettingsPage() {
