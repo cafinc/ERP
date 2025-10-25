@@ -613,6 +613,7 @@ export default function CreateSitePage() {
                           onChange={(e) => setGateCode(e.target.value)}
                           className="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all bg-white text-sm"
                           placeholder="#1234"
+                          required
                         />
                       </div>
                     )}
