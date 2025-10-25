@@ -718,18 +718,18 @@ export default function CustomerFormPage() {
         
         // Create site if toggle is ON
         if (createSite && siteName) {
+          const fullAddress = `${customerForm.street_address}, ${customerForm.city}, ${customerForm.province} ${customerForm.postal_code}, Canada`;
+          
           const siteData = {
             name: siteName,
             customer_id: companyId,
-            address: address,
-            street_address: customerForm.street_address,
-            city: customerForm.city,
-            province: customerForm.province,
-            postal_code: customerForm.postal_code,
-            country: customerForm.country,
-            status: 'active',
-            type: 'residential', // Default type
-            notes: `Site created automatically with contact ${customerForm.first_name ? customerForm.first_name + ' ' + customerForm.last_name : customerForm.company_name}`,
+            location: {
+              latitude: 0, // Default to 0 - can be updated later with geocoding
+              longitude: 0,
+              address: fullAddress
+            },
+            site_type: customerForm.customer_type === 'company' ? 'commercial' : 'residential',
+            notes: `Site created automatically with ${customerForm.customer_type === 'company' ? 'company' : 'contact'} ${customerForm.company_name || (customerForm.first_name + ' ' + customerForm.last_name)}`,
           };
           
           try {
