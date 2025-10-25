@@ -363,7 +363,7 @@ export default function ConsumablesPage() {
                         type="number"
                         step="0.01"
                         value={formData.current_stock}
-                        onChange={(e) => setFormData({ ...formData, current_stock: parseFloat(e.target.value) || 0 })}
+                        onChange={(e) => setFormData({ ...formData, current_stock: e.target.value })}
                         className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-semibold"
                         placeholder="0.00"
                         required
