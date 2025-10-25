@@ -794,23 +794,23 @@ export default function CustomerFormPage() {
         // If company with main contact, create the contact as individual
         if (customerForm.customer_type === 'company' && customerForm.main_contact.first_name) {
           const contactName = `${customerForm.main_contact.first_name} ${customerForm.main_contact.last_name}`.trim();
-          const contactData = {
+          const contactData: any = {
             name: contactName,
             email: customerForm.main_contact.email,
             phone: customerForm.main_contact.phone,
-            address, // Use same address as company
             customer_type: 'individual',
             company_id: companyId,
             company_name: customerForm.company_name,
             notes: `Position: ${customerForm.main_contact.position}`,
             active: true,
           };
+          // Don't send address for company contacts (companies don't have address)
 
           await api.post('/customers', contactData);
         }
         
-        // Create site if toggle is ON
-        if (createSite && siteName) {
+        // Create site if toggle is ON (only for individuals with address)
+        if (createSite && siteName && customerForm.customer_type === 'individual' && address) {
           const siteData = {
             name: siteName,
             customer_id: companyId,
@@ -822,7 +822,7 @@ export default function CustomerFormPage() {
             country: customerForm.country,
             status: 'active',
             type: 'residential', // Default type
-            notes: `Site created automatically with contact ${customerForm.first_name ? customerForm.first_name + ' ' + customerForm.last_name : customerForm.company_name}`,
+            notes: `Site created automatically with contact ${customerForm.first_name} ${customerForm.last_name}`,
           };
           
           try {
@@ -831,7 +831,7 @@ export default function CustomerFormPage() {
           } catch (siteError) {
             console.error('Error creating site:', siteError);
             // Don't fail the whole operation if site creation fails
-            alert(`Customer created, but site creation failed: ${siteError}`);
+            console.error(`Customer created, but site creation failed: ${siteError}`);
           }
         }
 
