@@ -263,7 +263,7 @@ export default function SitesPage() {
           ) : undefined}
         />
 
-        {/* Sites Grid */}
+        {/* Sites Content */}
         <div className="mx-6 mt-6">
           {filteredSites.length === 0 ? (
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-12 text-center hover:shadow-md transition-shadow">
@@ -284,7 +284,8 @@ export default function SitesPage() {
                 </button>
               )}
             </div>
-          ) : (
+          ) : viewMode === 'grid' ? (
+            /* Grid View */
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">{filteredSites.map((site, index) => (
               <div
                 key={site.id || `site-${index}`}
