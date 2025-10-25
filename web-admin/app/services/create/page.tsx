@@ -206,32 +206,19 @@ export default function ServiceFormPage() {
                       <Tag className="w-4 h-4 inline-block mr-1 text-[#3f72af]" />
                       Service Type <span className="text-red-500">*</span>
                     </label>
-                    <div className="relative">
-                      <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#3f72af]">
-                        {getServiceTypeIcon(formData.service_type)}
-                      </div>
-                      <select
-                        value={formData.service_type}
-                        onChange={(e) => setFormData({ ...formData, service_type: e.target.value })}
-                        required
-                        className="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all bg-white appearance-none"
-                      >
-                        <option value="site_checks">Site Checks</option>
-                        <option value="sidewalk_clear">Sidewalk Clear</option>
-                        <option value="second_sidewalk_clear">2nd Sidewalk Clear</option>
-                        <option value="call_back">Call Back</option>
-                        <option value="plowing">Plowing</option>
-                        <option value="sanding">Sanding</option>
-                        <option value="salting">Salting</option>
-                        <option value="brining">Brining</option>
-                        <option value="hauling">Hauling</option>
-                      </select>
-                      <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                        <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                        </svg>
-                      </div>
-                    </div>
+                    <select
+                      value={formData.service_type}
+                      onChange={(e) => setFormData({ ...formData, service_type: e.target.value })}
+                      required
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all bg-white"
+                      style={{ fontSize: '16px' }}
+                    >
+                      {SERVICE_TYPES.map(type => (
+                        <option key={type.value} value={type.value}>
+                          {type.icon} {type.label}
+                        </option>
+                      ))}
+                    </select>
                   </div>
 
                   <div className="flex items-center justify-center">
