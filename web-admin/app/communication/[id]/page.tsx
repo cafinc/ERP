@@ -270,6 +270,5 @@ export default function ConversationDetailPage() {
           </form>
         </div>
       </div>
-    </div>
   );
 }
