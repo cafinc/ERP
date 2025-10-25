@@ -496,6 +496,20 @@ export default function CustomerFormPage() {
     }
   };
 
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const email = e.target.value;
+    setCustomerForm({ ...customerForm, email });
+    
+    // Validate email format
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setFieldErrors({ ...fieldErrors, email: 'Invalid email format' });
+    } else {
+      const newErrors = { ...fieldErrors };
+      delete newErrors.email;
+      setFieldErrors(newErrors);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
