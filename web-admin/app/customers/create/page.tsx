@@ -2419,7 +2419,6 @@ export default function CustomerFormPage() {
                   </div>
                 </div>
               </div>
-            )}
               
               {/* Action Buttons */}
               <div className="flex justify-between items-center pt-6 border-t">
