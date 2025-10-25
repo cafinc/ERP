@@ -1710,6 +1710,66 @@ export default function CustomerDetailPage() {
           </div>
         </div>
       )}
+
+      {/* Archive Confirmation Modal */}
+      {showArchiveModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full mx-4 overflow-hidden">
+            <div className={`bg-gradient-to-r ${customer.active ? 'from-orange-500 to-red-500' : 'from-green-500 to-emerald-500'} p-6 text-white`}>
+              <div className="flex items-center gap-3">
+                <AlertCircle className="w-8 h-8" />
+                <div>
+                  <h2 className="text-2xl font-bold">{customer.active ? 'Archive Customer?' : 'Unarchive Customer?'}</h2>
+                  <p className="text-white/90 mt-1">
+                    {customer.active ? 'This customer will be marked as inactive' : 'This customer will be marked as active'}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="p-6">
+              <p className="text-gray-700 mb-4">
+                {customer.active 
+                  ? 'Archiving this customer will hide them from the main customer list. They will still appear in reports and historical data. You can unarchive them at any time.'
+                  : 'Unarchiving this customer will make them active again and they will appear in the main customer list.'}
+              </p>
+              
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+                <div className="flex gap-2">
+                  <FileText className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                  <div className="text-sm text-blue-800">
+                    <p className="font-medium mb-1">Customer Details:</p>
+                    <p><strong>Name:</strong> {customer.name}</p>
+                    <p><strong>Email:</strong> {customer.email}</p>
+                    <p><strong>Type:</strong> {isCompany ? 'Company' : 'Individual'}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="border-t p-6 bg-gray-50 flex justify-end gap-3">
+              <button
+                onClick={() => setShowArchiveModal(false)}
+                disabled={archiving}
+                className="px-6 py-2.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors disabled:opacity-50"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleArchiveCustomer}
+                disabled={archiving}
+                className={`px-6 py-2.5 text-sm font-medium text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors disabled:opacity-50 ${
+                  customer.active 
+                    ? 'bg-orange-600 hover:bg-orange-700 focus:ring-orange-500' 
+                    : 'bg-green-600 hover:bg-green-700 focus:ring-green-500'
+                }`}
+              >
+                {archiving ? 'Processing...' : customer.active ? 'Archive Customer' : 'Unarchive Customer'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
     );
 }
