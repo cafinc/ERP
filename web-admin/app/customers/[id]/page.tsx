@@ -1487,292 +1487,74 @@ export default function CustomerDetailPage() {
         )}
 
         {/* Communication Center - Full View with Tabs */}
-        {activeTab === 'communications' && (
-          <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-6 mt-6 hover:shadow-md transition-shadow">
-            {(() => {
-              const typeConfig = {
-                'inapp': { 
-                  icon: MessageCircle, 
-                  color: 'bg-orange-500', 
-                  bgLight: 'bg-orange-50',
-                  textColor: 'text-orange-600',
-                  label: 'In-App',
-                  placeholder: 'Type your message...',
-                  integration: 'internal'
-                },
-                'sms': { 
-                  icon: MessageSquare, 
-                  color: 'bg-green-500',
-                  bgLight: 'bg-green-50', 
-                  textColor: 'text-green-600',
-                  label: 'SMS',
-                  placeholder: 'Type SMS message...',
-                  integration: 'ringcentral'
-                },
-                'email': { 
-                  icon: Mail, 
-                  color: 'bg-blue-500',
-                  bgLight: 'bg-blue-50', 
-                  textColor: 'text-blue-600',
-                  label: 'Email',
-                  placeholder: 'Compose email...',
-                  integration: 'gmail'
-                },
-                'phone': { 
-                  icon: PhoneCall, 
-                  color: 'bg-purple-500',
-                  bgLight: 'bg-purple-50', 
-                  textColor: 'text-purple-600',
-                  label: 'Phone',
-                  placeholder: 'Call notes...',
-                  integration: 'ringcentral'
-                },
-              };
-
-              // Group communications by type
-              const groupedComms = communications.reduce((acc: any, comm: any) => {
-                const type = comm.type || 'inapp';
-                if (!acc[type]) acc[type] = [];
-                acc[type].push(comm);
-                return acc;
-              }, {});
-
-              const displayComms = groupedComms[commSubTab] || [];
-              const config = typeConfig[commSubTab as keyof typeof typeConfig];
-
-              const handleSendMessage = async () => {
-                if (!messageInput.trim()) return;
-                
-                setSendingMessage(true);
+        {activeTab === 'communications' && customer && (
+          <div className="mt-6">
+            <CustomerCommunicationsTab
+              customerId={customerId}
+              customerName={customer.name}
+              customerEmail={customer.email}
+              customerPhone={customer.phone}
+              communications={communications}
+              onRefresh={async () => {
+                // Reload communications
                 try {
-                  // Integration point for sending messages
-                  if (commSubTab === 'inapp') {
-                    // Send via internal messaging API
-                    await api.post('/messages/send', {
-                      customer_id: customerId,
-                      message: messageInput,
-                      type: 'inapp'
-                    });
-                  } else if (commSubTab === 'sms') {
-                    // Send via RingCentral SMS API
-                    await api.post('/integrations/ringcentral/sms', {
-                      to: customer.phone,
-                      message: messageInput,
-                      customer_id: customerId
-                    });
-                  } else if (commSubTab === 'email') {
-                    // Send via Gmail API
-                    await api.post('/integrations/gmail/send', {
-                      to: customer.email,
-                      subject: 'Message from ' + customer.name,
-                      body: messageInput,
-                      customer_id: customerId
-                    });
-                  } else if (commSubTab === 'phone') {
-                    // Log phone call via RingCentral
-                    await api.post('/integrations/ringcentral/call-log', {
-                      phone: customer.phone,
-                      notes: messageInput,
-                      customer_id: customerId
-                    });
+                  const allCommunications: any[] = [];
+                  
+                  // Fetch emails
+                  try {
+                    const emailResponse = await api.get(`/api/gmail/emails?query=${customer.email}`);
+                    const emails = emailResponse.data.emails || [];
+                    
+                    // Format email communications
+                    const formattedEmails = emails.map((email: any) => ({
+                      type: 'email',
+                      subject: email.subject,
+                      content: email.snippet || email.body,
+                      from: email.from,
+                      to: email.to,
+                      timestamp: email.timestamp,
+                      direction: email.from === customer.email ? 'inbound' : 'outbound',
+                    }));
+                    
+                    allCommunications.push(...formattedEmails);
+                  } catch (emailError) {
+                    console.error('Error fetching emails:', emailError);
                   }
                   
-                  setMessageInput('');
-                  // Reload communications
-                  const response = await api.get(`/communications?customer_id=${customerId}`);
-                  setCommunications(response.data);
+                  // Fetch messages (InApp)
+                  try {
+                    const messagesResponse = await api.get('/api/messages/conversations');
+                    const conversations = messagesResponse.data || [];
+                    
+                    conversations.forEach((conv: any) => {
+                      if (conv.customer_id === customerId) {
+                        conv.messages?.forEach((msg: any) => {
+                          allCommunications.push({
+                            type: 'inapp',
+                            title: conv.title || 'Message',
+                            content: msg.text || msg.content,
+                            from: msg.sender,
+                            timestamp: msg.timestamp || msg.created_at,
+                            direction: msg.sender === 'admin' ? 'outbound' : 'inbound',
+                          });
+                        });
+                      }
+                    });
+                  } catch (msgError) {
+                    console.error('Error fetching messages:', msgError);
+                  }
+                  
+                  // Sort all communications by timestamp (newest first)
+                  allCommunications.sort((a, b) => 
+                    new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+                  );
+                  
+                  setCommunications(allCommunications);
                 } catch (error) {
-                  console.error('Error sending message:', error);
-                  alert('Failed to send message. Please try again.');
-                } finally {
-                  setSendingMessage(false);
+                  console.error('Error reloading communications:', error);
                 }
-              };
-
-              return (
-                <>
-                  {/* Communication Type Tabs - Always Show All */}
-                  <div className="flex items-center space-x-2 mb-6">
-                    {Object.keys(typeConfig).map((type) => {
-                      const tabConfig = typeConfig[type as keyof typeof typeConfig];
-                      const Icon = tabConfig.icon;
-                      const count = groupedComms[type]?.length || 0;
-                      const isActive = commSubTab === type;
-
-                      return (
-                        <button
-                          key={type}
-                          onClick={() => setCommSubTab(type)}
-                          className={`flex items-center space-x-2 px-4 py-3 rounded-lg font-medium transition-all ${
-                            isActive 
-                              ? `${tabConfig.color} text-white shadow-lg` 
-                              : `${tabConfig.bgLight} ${tabConfig.textColor} hover:shadow-md`
-                          }`}
-                        >
-                          <Icon className="w-5 h-5" />
-                          <span>{tabConfig.label}</span>
-                          <span className={`text-xs px-2 py-0.5 rounded-full ${
-                            isActive ? 'bg-white/20' : 'bg-white'
-                          }`}>
-                            {count}
-                          </span>
-                        </button>
-                      );
-                    })}
-                  </div>
-
-                  {/* Integration Status Banner */}
-                  {config && (
-                    <div className={`mb-4 p-3 ${config.bgLight} border border-gray-200 rounded-lg flex items-center justify-between`}>
-                      <div className="flex items-center space-x-2">
-                        <div className={`w-2 h-2 rounded-full bg-green-500`}></div>
-                        <span className="text-sm text-gray-700">
-                          {config.integration === 'ringcentral' && 'RingCentral Integration Active'}
-                          {config.integration === 'gmail' && 'Gmail Integration Active'}
-                          {config.integration === 'internal' && 'Internal Messaging'}
-                        </span>
-                      </div>
-                      <span className="text-xs text-gray-500">
-                        {commSubTab === 'phone' && customer.phone}
-                        {commSubTab === 'sms' && customer.phone}
-                        {commSubTab === 'email' && customer.email}
-                      </span>
-                    </div>
-                  )}
-
-                  {/* Messages Display */}
-                  <div className="border border-gray-200 rounded-lg mb-4">
-                    {/* Messages Area - Chat style for InApp/SMS, List for Email/Phone */}
-                    {(commSubTab === 'inapp' || commSubTab === 'sms') ? (
-                      <div className="h-[500px] overflow-y-auto p-4 space-y-4 bg-gray-50">
-                        {displayComms.length === 0 ? (
-                          <div className="flex flex-col items-center justify-center h-full text-gray-500">
-                            <config.icon className="w-16 h-16 mb-4 opacity-50" />
-                            <p className="text-lg font-medium">No {config.label} messages yet</p>
-                            <p className="text-sm">Start a conversation using the input below</p>
-                          </div>
-                        ) : (
-                          displayComms.map((comm: any, idx: number) => {
-                            const isOutbound = comm.direction === 'outbound';
-                            return (
-                              <div key={idx} className={`flex ${isOutbound ? 'justify-end' : 'justify-start'}`}>
-                                <div className={`max-w-[70%] ${isOutbound ? `${config.color} text-white` : 'bg-white text-gray-900 border border-gray-200'} rounded-lg p-3 shadow-sm`}>
-                                  <p className="text-sm">{comm.content || comm.message || comm.body}</p>
-                                  <p className={`text-xs mt-1 ${isOutbound ? 'text-white/70' : 'text-gray-500'}`}>
-                                    {new Date(comm.timestamp || comm.created_at).toLocaleString([], { 
-                                      month: 'short', 
-                                      day: 'numeric', 
-                                      hour: '2-digit', 
-                                      minute: '2-digit' 
-                                    })}
-                                  </p>
-                                </div>
-                              </div>
-                            );
-                          })
-                        )}
-                      </div>
-                    ) : (
-                      <div className="max-h-[500px] overflow-y-auto p-4 space-y-3 bg-gray-50">
-                        {displayComms.length === 0 ? (
-                          <div className="flex flex-col items-center justify-center py-16 text-gray-500">
-                            <config.icon className="w-16 h-16 mb-4 opacity-50" />
-                            <p className="text-lg font-medium">No {config.label} communications yet</p>
-                            <p className="text-sm">Messages will appear here once activity starts</p>
-                          </div>
-                        ) : (
-                          displayComms.map((comm: any, idx: number) => (
-                            <div key={idx} className="flex items-start space-x-3 p-4 bg-white rounded-lg border border-gray-200 hover:shadow-md transition-all">
-                              <div className={`p-2 rounded-lg ${config.color} text-white flex-shrink-0`}>
-                                <config.icon className="w-5 h-5" />
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <div className="flex items-center justify-between mb-1">
-                                  <span className="text-sm font-semibold text-gray-900">
-                                    {comm.subject || comm.title || 'No subject'}
-                                  </span>
-                                  <div className="flex items-center space-x-2">
-                                    {comm.direction && (
-                                      <span className={`text-xs px-2 py-0.5 rounded-full ${
-                                        comm.direction === 'outbound' ? 'bg-blue-100 text-blue-700' : 'bg-green-100 text-green-700'
-                                      }`}>
-                                        {comm.direction === 'outbound' ? 'Sent' : 'Received'}
-                                      </span>
-                                    )}
-                                    <span className="text-xs text-gray-500">
-                                      {new Date(comm.timestamp || comm.created_at).toLocaleDateString()}
-                                    </span>
-                                  </div>
-                                </div>
-                                <p className="text-sm text-gray-600 line-clamp-2">
-                                  {comm.content || comm.message || comm.body || 'No content'}
-                                </p>
-                              </div>
-                            </div>
-                          ))
-                        )}
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Reply/Send Message Box */}
-                  <div className={`border border-gray-200 rounded-lg p-4 ${config.bgLight}`}>
-                    <div className="flex items-start space-x-3">
-                      <div className={`p-2 rounded-lg ${config.color} text-white`}>
-                        <config.icon className="w-5 h-5" />
-                      </div>
-                      <div className="flex-1">
-                        <textarea
-                          value={messageInput}
-                          onChange={(e) => setMessageInput(e.target.value)}
-                          placeholder={config.placeholder}
-                          rows={3}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent resize-none"
-                          onKeyDown={(e) => {
-                            if (e.key === 'Enter' && e.ctrlKey) {
-                              handleSendMessage();
-                            }
-                          }}
-                        />
-                        <div className="flex items-center justify-between mt-2">
-                          <span className="text-xs text-gray-500">
-                            {commSubTab === 'email' && 'Tip: Compose your email message'}
-                            {commSubTab === 'sms' && 'Tip: SMS via RingCentral'}
-                            {commSubTab === 'inapp' && 'Tip: Press Ctrl+Enter to send'}
-                            {commSubTab === 'phone' && 'Tip: Log call notes'}
-                          </span>
-                          <button
-                            onClick={handleSendMessage}
-                            disabled={!messageInput.trim() || sendingMessage}
-                            className={`px-6 py-2 ${config.color} text-white rounded-lg font-medium hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center space-x-2`}
-                          >
-                            {sendingMessage ? (
-                              <>
-                                <svg className="animate-spin h-4 w-4" fill="none" viewBox="0 0 24 24">
-                                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                </svg>
-                                <span>Sending...</span>
-                              </>
-                            ) : (
-                              <>
-                                <Send className="w-4 h-4" />
-                                <span>
-                                  {commSubTab === 'email' && 'Send Email'}
-                                  {commSubTab === 'sms' && 'Send SMS'}
-                                  {commSubTab === 'inapp' && 'Send Message'}
-                                  {commSubTab === 'phone' && 'Log Call'}
-                                </span>
-                              </>
-                            )}
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </>
-              );
-            })()}
+              }}
+            />
           </div>
         )}
       </div>
