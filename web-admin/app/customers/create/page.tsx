@@ -153,6 +153,18 @@ export default function CustomerFormPage() {
     initGooglePlaces();
   }, [customerId]);
 
+  // Re-initialize autocomplete when customer type changes
+  useEffect(() => {
+    // Small delay to ensure DOM elements are rendered
+    const timer = setTimeout(() => {
+      if (window.google && window.google.maps) {
+        setupAutocomplete();
+      }
+    }, 100);
+    
+    return () => clearTimeout(timer);
+  }, [customerForm.customer_type]);
+
   const initGooglePlaces = () => {
     if (typeof window === 'undefined') return;
     
