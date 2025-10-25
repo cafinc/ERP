@@ -424,6 +424,58 @@ export default function CustomerFormPage() {
     }
   };
 
+  // Handler for Contact Persons phone changes
+  const handleContactPhoneChange = (index: number, value: string) => {
+    const formatted = formatPhoneNumber(value);
+    const newContacts = [...customerForm.contacts];
+    newContacts[index].phone = formatted;
+    
+    // If same person toggle is on and it's the first contact, update all
+    if (customerForm.same_person_all_contacts && index === 0) {
+      newContacts[1].phone = formatted;
+      newContacts[2].phone = formatted;
+    }
+    
+    setCustomerForm({ ...customerForm, contacts: newContacts });
+    validateField(`contact_${index}_phone`, formatted);
+  };
+
+  // Handler for Contact Persons email validation
+  const handleContactEmailBlur = (index: number, value: string) => {
+    validateField(`contact_${index}_email`, value);
+  };
+
+  // Check for duplicate customers
+  const checkDuplicateCustomers = async () => {
+    try {
+      setCheckingDuplicates(true);
+      
+      const name = customerForm.customer_type === 'individual'
+        ? `${customerForm.first_name} ${customerForm.last_name}`.trim()
+        : customerForm.company_name;
+      
+      const response = await api.post('/customers/check-duplicate', {
+        email: customerForm.email,
+        phone: customerForm.phone,
+        name: name
+      });
+      
+      if (response.data.count > 0) {
+        setDuplicates(response.data.duplicates);
+        setShowDuplicateModal(true);
+        return true; // Found duplicates
+      }
+      
+      return false; // No duplicates
+    } catch (error) {
+      console.error('Error checking duplicates:', error);
+      // Continue with submission even if check fails
+      return false;
+    } finally {
+      setCheckingDuplicates(false);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
