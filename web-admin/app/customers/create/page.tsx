@@ -1593,12 +1593,18 @@ export default function CustomerFormPage() {
                                     }
                                     setCustomerForm({ ...customerForm, contacts: newContacts });
                                   }}
-                                  className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                                  onBlur={e => handleContactEmailBlur(index, e.target.value)}
+                                  className={`w-full pl-10 pr-4 py-1.5 border rounded-lg focus:ring-2 focus:border-transparent text-sm ${
+                                    fieldErrors[`contact_${index}_email`] ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'
+                                  }`}
                                   placeholder="john@company.com"
                                   required={index === 0 || !customerForm.same_person_all_contacts}
                                   disabled={customerForm.same_person_all_contacts && index !== 0}
                                 />
                               </div>
+                              {fieldErrors[`contact_${index}_email`] && (
+                                <p className="text-red-500 text-xs mt-1">{fieldErrors[`contact_${index}_email`]}</p>
+                              )}
                             </div>
 
                             <div>
@@ -1610,21 +1616,18 @@ export default function CustomerFormPage() {
                                 <input
                                   type="tel"
                                   value={contact.phone}
-                                  onChange={e => {
-                                    const newContacts = [...customerForm.contacts];
-                                    newContacts[index].phone = e.target.value;
-                                    if (customerForm.same_person_all_contacts && index === 0) {
-                                      newContacts[1].phone = e.target.value;
-                                      newContacts[2].phone = e.target.value;
-                                    }
-                                    setCustomerForm({ ...customerForm, contacts: newContacts });
-                                  }}
-                                  className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                                  onChange={e => handleContactPhoneChange(index, e.target.value)}
+                                  className={`w-full pl-10 pr-4 py-1.5 border rounded-lg focus:ring-2 focus:border-transparent text-sm ${
+                                    fieldErrors[`contact_${index}_phone`] ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'
+                                  }`}
                                   placeholder="(555) 123-4567"
                                   required={index === 0 || !customerForm.same_person_all_contacts}
                                   disabled={customerForm.same_person_all_contacts && index !== 0}
                                 />
                               </div>
+                              {fieldErrors[`contact_${index}_phone`] && (
+                                <p className="text-red-500 text-xs mt-1">{fieldErrors[`contact_${index}_phone`]}</p>
+                              )}
                             </div>
                           </div>
                         </div>
