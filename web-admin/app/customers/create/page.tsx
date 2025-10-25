@@ -1652,7 +1652,7 @@ export default function CustomerFormPage() {
                               <input
                                 name="contact_0_phone"
                                 type="tel"
-                                value={customerForm.contacts[0].phone}
+                                value={formatPhoneNumber(customerForm.contacts[0].phone)}
                                 onChange={e => {
                                   const cleaned = e.target.value.replace(/\D/g, '');
                                   const formatted = cleaned.slice(0, 10);
@@ -1661,6 +1661,15 @@ export default function CustomerFormPage() {
                                   newContacts[1].phone = formatted;
                                   newContacts[2].phone = formatted;
                                   setCustomerForm({ ...customerForm, contacts: newContacts });
+                                  
+                                  // Validate phone (must be 10 digits for US format)
+                                  if (cleaned && cleaned.length !== 10) {
+                                    setFieldErrors({ ...fieldErrors, contact_0_phone: 'Phone must be 10 digits' });
+                                  } else {
+                                    const newErrors = { ...fieldErrors };
+                                    delete newErrors.contact_0_phone;
+                                    setFieldErrors(newErrors);
+                                  }
                                 }}
                                 className={`w-full pl-9 pr-4 py-2 border rounded-lg focus:ring-2 focus:border-transparent text-sm ${
                                   fieldErrors.contact_0_phone 
