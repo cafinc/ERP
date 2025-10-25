@@ -139,43 +139,6 @@ export default function SitesPage() {
 
   return (
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto">
-        {/* Stats Badges Row */}
-        <div className="bg-white border-b border-gray-200 px-6 py-3">
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-blue-50 rounded-lg">
-              <MapPin className="w-4 h-4 text-blue-600" />
-              <div className="flex flex-col">
-                <span className="text-xs text-blue-600 font-medium">Total Sites</span>
-                <span className="text-lg font-bold text-blue-900">{sites.length}</span>
-              </div>
-            </div>
-            
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-green-50 rounded-lg">
-              <MapPin className="w-4 h-4 text-green-600" />
-              <div className="flex flex-col">
-                <span className="text-xs text-green-600 font-medium">Active</span>
-                <span className="text-lg font-bold text-green-900">{sites.filter(s => s.active).length}</span>
-              </div>
-            </div>
-            
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-purple-50 rounded-lg">
-              <Building className="w-4 h-4 text-purple-600" />
-              <div className="flex flex-col">
-                <span className="text-xs text-purple-600 font-medium">Customers</span>
-                <span className="text-lg font-bold text-purple-900">{new Set(sites.map(s => s.customer_id)).size}</span>
-              </div>
-            </div>
-            
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-orange-50 rounded-lg">
-              <Archive className="w-4 h-4 text-orange-600" />
-              <div className="flex flex-col">
-                <span className="text-xs text-orange-600 font-medium">Archived</span>
-                <span className="text-lg font-bold text-orange-900">{sites.filter(s => !s.active).length}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <PageHeader
           title="Sites"
           subtitle="Manage service locations and properties"
@@ -187,6 +150,32 @@ export default function SitesPage() {
               onClick: handleCreateSite,
               variant: 'primary',
             },
+          ]}
+          stats={[
+            {
+              label: 'Total Sites',
+              value: sites.length,
+              icon: <MapPin className="w-4 h-4" />,
+              color: 'blue'
+            },
+            {
+              label: 'Active',
+              value: sites.filter(s => s.active).length,
+              icon: <MapPin className="w-4 h-4" />,
+              color: 'green'
+            },
+            {
+              label: 'Customers',
+              value: new Set(sites.map(s => s.customer_id)).size,
+              icon: <Building className="w-4 h-4" />,
+              color: 'purple'
+            },
+            {
+              label: 'Archived',
+              value: sites.filter(s => !s.active).length,
+              icon: <Archive className="w-4 h-4" />,
+              color: 'orange'
+            }
           ]}
           tabs={[
             { label: "Active", value: "active", count: sites.filter(s => s.active).length },
