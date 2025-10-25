@@ -33,6 +33,40 @@ sync_logs_collection = db["sync_logs"]
 
 router = APIRouter(prefix="/integrations", tags=["Integration Hub"])
 
+# Helper function to serialize MongoDB documents
+def serialize_doc(doc):
+    """Convert MongoDB document to JSON-serializable dict, handling all BSON types recursively"""
+    if doc is None:
+        return None
+    
+    if isinstance(doc, list):
+        return [serialize_doc(item) for item in doc]
+    
+    if isinstance(doc, dict):
+        result = {}
+        for key, value in doc.items():
+            if key == "_id":
+                result["id"] = str(value)
+            elif isinstance(value, ObjectId):
+                result[key] = str(value)
+            elif isinstance(value, datetime):
+                result[key] = value.isoformat()
+            elif isinstance(value, dict):
+                result[key] = serialize_doc(value)
+            elif isinstance(value, list):
+                result[key] = serialize_doc(value)
+            else:
+                result[key] = value
+        return result
+    
+    if isinstance(doc, ObjectId):
+        return str(doc)
+    
+    if isinstance(doc, datetime):
+        return doc.isoformat()
+    
+    return doc
+
 # ==================== INTEGRATION MANAGEMENT ====================
 
 @router.post("", response_model=dict)
