@@ -478,7 +478,7 @@ export default function CustomerDashboardPage() {
                       <div className="flex-1 min-w-0">
                         <h4 className="font-medium text-gray-900 text-sm">{activity.title}</h4>
                         <p className="text-xs text-gray-600 mt-1 line-clamp-2">{activity.description}</p>
-                        <p className="text-xs text-gray-500 mt-1">
+                        <p className="text-xs text-gray-500 mt-1" suppressHydrationWarning>
                           {new Date(activity.date).toLocaleDateString('en-US', { 
                             year: 'numeric', 
                             month: 'short', 
