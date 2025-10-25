@@ -25,6 +25,26 @@ import {
   AlertTriangle,
 } from 'lucide-react';
 
+// Service type configurations with icons and labels
+const SERVICE_TYPES = [
+  { value: 'site_checks', label: 'Site Checks', icon: '🔍', color: 'text-blue-600' },
+  { value: 'sidewalk_clear', label: 'Sidewalk Clear', icon: '🚶', color: 'text-green-600' },
+  { value: 'second_sidewalk_clear', label: '2nd Sidewalk Clear', icon: '🚶‍♂️', color: 'text-green-700' },
+  { value: 'call_back', label: 'Call Back', icon: '📞', color: 'text-purple-600' },
+  { value: 'plowing', label: 'Plowing', icon: '❄️', color: 'text-blue-700' },
+  { value: 'sanding', label: 'Sanding', icon: '⚪', color: 'text-yellow-700' },
+  { value: 'brining', label: 'Brining', icon: '💧', color: 'text-cyan-600' },
+  { value: 'hauling', label: 'Hauling', icon: '🚛', color: 'text-orange-600' },
+];
+
+const UNITS = [
+  { value: 'hourly', label: 'Hourly' },
+  { value: 'per_occurrence', label: 'Per Occurrence' },
+  { value: 'monthly', label: 'Monthly' },
+  { value: 'per_yard', label: 'Per Yard' },
+  { value: 'no_charge', label: 'No Charge' },
+];
+
 interface Service {
   id: string;
   name: string;
