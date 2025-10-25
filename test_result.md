@@ -283,7 +283,7 @@ test_plan:
 
   - task: "Integration Hub - Sync Logs APIs"
     implemented: true
-    working: false
+    working: true
     file: "/app/backend/integration_routes.py"
     stuck_count: 0
     priority: "medium"
@@ -292,6 +292,9 @@ test_plan:
       - working: false
         agent: "testing"
         comment: "❌ GET sync logs endpoint failing. Likely due to async/sync mismatch or ObjectId serialization issue."
+      - working: true
+        agent: "testing"
+        comment: "✅ BUG FIX CONFIRMED: GET /api/integrations/sync-logs now working correctly. Datetime serialization issue resolved. Endpoint returns proper response structure with logs array. No serialization errors detected."
 
   - task: "Communication Center - Core Messaging APIs"
     implemented: true
