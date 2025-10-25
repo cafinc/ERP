@@ -81,8 +81,12 @@ export default function ConsumablesPage() {
 
   const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    const loadingToast = toast.loading('Creating consumable...');
+    
     try {
       await api.post('/consumables', formData);
+      toast.success('Consumable created successfully!', { id: loadingToast });
       setShowCreateModal(false);
       setFormData({
         name: '',
@@ -93,21 +97,26 @@ export default function ConsumablesPage() {
         category: 'salt',
       });
       loadConsumables();
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error creating consumable:', error);
-      alert('Failed to create consumable');
+      const errorMessage = error?.response?.data?.detail || 'Failed to create consumable';
+      toast.error(errorMessage, { id: loadingToast });
     }
   };
 
   const handleDelete = async (id: string) => {
     if (!confirm('Delete this consumable? This action cannot be undone.')) return;
     
+    const loadingToast = toast.loading('Deleting consumable...');
+    
     try {
       await api.delete(`/consumables/${id}`);
+      toast.success('Consumable deleted successfully!', { id: loadingToast });
       loadConsumables();
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error deleting consumable:', error);
-      alert('Failed to delete consumable');
+      const errorMessage = error?.response?.data?.detail || 'Failed to delete consumable';
+      toast.error(errorMessage, { id: loadingToast });
     }
   };
 
