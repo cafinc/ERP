@@ -138,14 +138,11 @@ export default function SitesPage() {
   }
 
   return (
-      <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
-        {/* Compact Header */}
+      <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto">
         <PageHeader
-        title="Sites"
-        subtitle="Manage service locations and properties"
-        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Dispatch", href: "/dispatch" }, { label: "Sites" }]}
-        title="Sites"
-          
+          title="Sites"
+          subtitle="Manage service locations and properties"
+          breadcrumbs={[{ label: "Home", href: "/" }, { label: "Dispatch", href: "/dispatch" }, { label: "Sites" }]}
           actions={[
             {
               label: 'Add Site',
@@ -154,59 +151,107 @@ export default function SitesPage() {
               variant: 'primary',
             },
           ]}
-        />
+          tabs={[
+            { label: "Active", value: "active", count: sites.filter(s => s.active).length },
+            { label: "Archived", value: "archived", count: sites.filter(s => !s.active).length },
+            { label: "All", value: "all", count: sites.length },
+          ]}
+          activeTab={filterActive}
+          onTabChange={(value) => setFilterActive(value)}
+          showSearch={true}
+          searchPlaceholder="Search sites by name, address, or customer..."
+          onSearch={setSearchQuery}
+          showFilter={true}
+          onFilterClick={() => setShowFilterDropdown(!showFilterDropdown)}
+          filterDropdown={showFilterDropdown ? (
+            <div className="absolute right-0 mt-2 w-72 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+              <div className="p-4">
+                <div className="text-sm font-semibold text-gray-900 mb-3">Advanced Filters</div>
+                
+                {/* Site Type Filter */}
+                <div className="mb-4">
+                  <label className="text-xs font-medium text-gray-700 mb-2 block">Site Type</label>
+                  <select
+                    value={filterType}
+                    onChange={(e) => setFilterType(e.target.value)}
+                    className="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white text-sm"
+                  >
+                    <option value="all">All Types</option>
+                    <option value="residential">🏠 Residential</option>
+                    <option value="commercial">🏢 Commercial</option>
+                    <option value="industrial">🏭 Industrial</option>
+                    <option value="retail">🛍️ Retail</option>
+                    <option value="emergency_services">🚨 Emergency Services</option>
+                  </select>
+                </div>
 
-        {/* Filter Buttons */}
-        <div className="px-6 py-4 bg-white border-b border-gray-200">
-          <div className="flex items-center space-x-2 flex-wrap gap-y-2">
-            <button
-              onClick={() => setFilterActive('active')}
-              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                filterActive === 'active'
-                  ? 'bg-green-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
-              }`}
-            >
-              Active ({sites.filter(s => s.active).length})
-            </button>
-            <button
-              onClick={() => setFilterActive('archived')}
-              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                filterActive === 'archived'
-                  ? 'bg-gray-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
-              }`}
-            >
-              Archived ({sites.filter(s => !s.active).length})
-            </button>
-            <button
-              onClick={() => setFilterActive('all')}
-              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                filterActive === 'all'
-                  ? 'bg-[#3f72af] text-white shadow-md'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-100 transition-all'
-              }`}
-            >
-              All ({sites.length})
-            </button>
-          </div>
-        </div>
+                {/* Customer Filter */}
+                <div className="mb-4">
+                  <label className="text-xs font-medium text-gray-700 mb-2 block">Customer</label>
+                  <select
+                    value={filterCustomer}
+                    onChange={(e) => setFilterCustomer(e.target.value)}
+                    className="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white text-sm"
+                  >
+                    <option value="all">All Customers</option>
+                    {customers.map(customer => (
+                      <option key={customer.id} value={customer.id}>{customer.name}</option>
+                    ))}
+                  </select>
+                </div>
 
-        {/* Search Bar with Filters */}
-        <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-3 mb-4 mx-6 mt-6 hover:shadow-md transition-shadow">
-          <div className="flex flex-col md:flex-row gap-4">
-            <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-              <input
-                type="text"
-                placeholder="Search sites..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
-              />
+                {/* View Mode Toggle */}
+                <div className="mb-4">
+                  <label className="text-xs font-medium text-gray-700 mb-2 block">View Mode</label>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => setViewMode('grid')}
+                      className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-lg transition-colors ${
+                        viewMode === 'grid'
+                          ? 'bg-[#3f72af] text-white'
+                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      }`}
+                    >
+                      <LayoutGrid className="w-4 h-4" />
+                      <span className="text-sm">Grid</span>
+                    </button>
+                    <button
+                      onClick={() => setViewMode('list')}
+                      className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-lg transition-colors ${
+                        viewMode === 'list'
+                          ? 'bg-[#3f72af] text-white'
+                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      }`}
+                    >
+                      <List className="w-4 h-4" />
+                      <span className="text-sm">List</span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Apply/Clear Buttons */}
+                <div className="flex gap-2 pt-3 border-t border-gray-200">
+                  <button
+                    onClick={() => {
+                      setFilterType('all');
+                      setFilterCustomer('all');
+                      setShowFilterDropdown(false);
+                    }}
+                    className="flex-1 px-3 py-2 text-sm border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50"
+                  >
+                    Clear
+                  </button>
+                  <button
+                    onClick={() => setShowFilterDropdown(false)}
+                    className="flex-1 px-3 py-2 text-sm bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282]"
+                  >
+                    Apply
+                  </button>
+                </div>
+              </div>
             </div>
-            <select
-              value={filterType}
+          ) : undefined}
+        />
               onChange={(e) => setFilterType(e.target.value)}
               className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             >
