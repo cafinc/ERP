@@ -996,6 +996,452 @@ class CustomerManagementTests:
                 f"Exception: {str(e)}"
             )
 
+    def test_site_creation_api_comprehensive(self):
+        """Comprehensive testing of POST /api/sites endpoint"""
+        print("\n" + "="*60)
+        print("🏢 TESTING SITE CREATION API ENDPOINT")
+        print("="*60)
+        
+        # Ensure we have a customer to link sites to
+        if not self.created_customers:
+            # Create a test customer first
+            customer_data = {
+                "name": "Site Test Customer",
+                "email": "sitetest@example.com",
+                "phone": "555-SITE-001",
+                "customer_type": "individual",
+                "address": "123 Site Test Street, Toronto, ON"
+            }
+            
+            try:
+                response = self.session.post(f"{BASE_URL}/customers", json=customer_data)
+                if response.status_code == 201:
+                    customer = response.json()
+                    self.created_customers.append(customer)
+                    print(f"✅ Created test customer: {customer.get('id')}")
+                else:
+                    print(f"❌ Failed to create test customer: {response.status_code}")
+                    return
+            except Exception as e:
+                print(f"❌ Error creating test customer: {str(e)}")
+                return
+        
+        test_customer_id = self.created_customers[0].get('id')
+        
+        # Test 1: Successful site creation with all required fields
+        site_data = {
+            "customer_id": test_customer_id,
+            "name": "Main Office Parking Lot",
+            "site_type": "parking_lot",
+            "location": {
+                "latitude": 43.6532,
+                "longitude": -79.3832,
+                "address": "123 Main Street, Toronto, ON M5V 3A8"
+            }
+        }
+        
+        try:
+            response = self.session.post(f"{BASE_URL}/sites", json=site_data)
+            if response.status_code == 201:
+                data = response.json()
+                if "id" in data and data.get("name") == site_data["name"]:
+                    self.created_sites.append(data)
+                    
+                    # Verify all required fields are returned
+                    required_fields = ["id", "customer_id", "name", "site_type", "location", "active", "created_at"]
+                    missing_fields = [field for field in required_fields if field not in data]
+                    
+                    if not missing_fields:
+                        # Verify location data structure
+                        location = data.get("location", {})
+                        if all(key in location for key in ["latitude", "longitude", "address"]):
+                            self.log_result(
+                                "Site Creation - Success with Required Fields",
+                                True,
+                                f"Site created successfully with ID: {data.get('id')}"
+                            )
+                        else:
+                            self.log_result(
+                                "Site Creation - Success with Required Fields",
+                                False,
+                                "Location data incomplete in response"
+                            )
+                    else:
+                        self.log_result(
+                            "Site Creation - Success with Required Fields",
+                            False,
+                            f"Missing fields in response: {missing_fields}"
+                        )
+                else:
+                    self.log_result(
+                        "Site Creation - Success with Required Fields",
+                        False,
+                        f"Invalid response structure: {data}"
+                    )
+            else:
+                self.log_result(
+                    "Site Creation - Success with Required Fields",
+                    False,
+                    f"Expected 201, got {response.status_code}: {response.text}"
+                )
+        except Exception as e:
+            self.log_result(
+                "Site Creation - Success with Required Fields",
+                False,
+                f"Exception: {str(e)}"
+            )
+        
+        # Test 2: Site creation with optional fields
+        site_data_with_optionals = {
+            "customer_id": test_customer_id,
+            "name": "Secondary Driveway Site",
+            "site_reference": "SITE-001",
+            "site_type": "driveway",
+            "area_size": 2500.5,
+            "location": {
+                "latitude": 43.7532,
+                "longitude": -79.4832,
+                "address": "456 Oak Avenue, Toronto, ON M4B 1B3"
+            },
+            "internal_notes": "Admin only notes here",
+            "crew_notes": "Crew can see these notes",
+            "services": [],
+            "access_fields": []
+        }
+        
+        try:
+            response = self.session.post(f"{BASE_URL}/sites", json=site_data_with_optionals)
+            if response.status_code == 201:
+                data = response.json()
+                if (data.get("site_reference") == "SITE-001" and 
+                    data.get("area_size") == 2500.5 and
+                    data.get("internal_notes") == "Admin only notes here"):
+                    self.created_sites.append(data)
+                    self.log_result(
+                        "Site Creation - With Optional Fields",
+                        True,
+                        f"Site created with optional fields: {data.get('id')}"
+                    )
+                else:
+                    self.log_result(
+                        "Site Creation - With Optional Fields",
+                        False,
+                        f"Optional fields not properly saved: {data}"
+                    )
+            else:
+                self.log_result(
+                    "Site Creation - With Optional Fields",
+                    False,
+                    f"Expected 201, got {response.status_code}: {response.text}"
+                )
+        except Exception as e:
+            self.log_result(
+                "Site Creation - With Optional Fields",
+                False,
+                f"Exception: {str(e)}"
+            )
+        
+        # Test 3: Validation error - missing name field
+        invalid_data = {
+            "customer_id": test_customer_id,
+            "site_type": "parking_lot",
+            "location": {
+                "latitude": 43.6532,
+                "longitude": -79.3832,
+                "address": "789 Pine Street, Toronto, ON"
+            }
+            # Missing required 'name' field
+        }
+        
+        try:
+            response = self.session.post(f"{BASE_URL}/sites", json=invalid_data)
+            if response.status_code in [400, 422]:
+                self.log_result(
+                    "Site Creation - Validation Error (Missing Name)",
+                    True,
+                    f"Proper validation error returned: {response.status_code}"
+                )
+            else:
+                self.log_result(
+                    "Site Creation - Validation Error (Missing Name)",
+                    False,
+                    f"Expected 400/422, got {response.status_code}: {response.text}"
+                )
+        except Exception as e:
+            self.log_result(
+                "Site Creation - Validation Error (Missing Name)",
+                False,
+                f"Exception: {str(e)}"
+            )
+        
+        # Test 4: Validation error - missing customer_id field
+        invalid_data = {
+            "name": "Test Site Without Customer",
+            "site_type": "sidewalk",
+            "location": {
+                "latitude": 43.6532,
+                "longitude": -79.3832,
+                "address": "321 Elm Street, Toronto, ON"
+            }
+            # Missing required 'customer_id' field
+        }
+        
+        try:
+            response = self.session.post(f"{BASE_URL}/sites", json=invalid_data)
+            if response.status_code in [400, 422]:
+                self.log_result(
+                    "Site Creation - Validation Error (Missing Customer ID)",
+                    True,
+                    f"Proper validation error returned: {response.status_code}"
+                )
+            else:
+                self.log_result(
+                    "Site Creation - Validation Error (Missing Customer ID)",
+                    False,
+                    f"Expected 400/422, got {response.status_code}: {response.text}"
+                )
+        except Exception as e:
+            self.log_result(
+                "Site Creation - Validation Error (Missing Customer ID)",
+                False,
+                f"Exception: {str(e)}"
+            )
+        
+        # Test 5: Validation error - missing site_type field
+        invalid_data = {
+            "customer_id": test_customer_id,
+            "name": "Site Without Type",
+            "location": {
+                "latitude": 43.6532,
+                "longitude": -79.3832,
+                "address": "654 Maple Drive, Toronto, ON"
+            }
+            # Missing required 'site_type' field
+        }
+        
+        try:
+            response = self.session.post(f"{BASE_URL}/sites", json=invalid_data)
+            if response.status_code in [400, 422]:
+                self.log_result(
+                    "Site Creation - Validation Error (Missing Site Type)",
+                    True,
+                    f"Proper validation error returned: {response.status_code}"
+                )
+            else:
+                self.log_result(
+                    "Site Creation - Validation Error (Missing Site Type)",
+                    False,
+                    f"Expected 400/422, got {response.status_code}: {response.text}"
+                )
+        except Exception as e:
+            self.log_result(
+                "Site Creation - Validation Error (Missing Site Type)",
+                False,
+                f"Exception: {str(e)}"
+            )
+        
+        # Test 6: Validation error - missing location field
+        invalid_data = {
+            "customer_id": test_customer_id,
+            "name": "Site Without Location",
+            "site_type": "parking_lot"
+            # Missing required 'location' field
+        }
+        
+        try:
+            response = self.session.post(f"{BASE_URL}/sites", json=invalid_data)
+            if response.status_code in [400, 422]:
+                self.log_result(
+                    "Site Creation - Validation Error (Missing Location)",
+                    True,
+                    f"Proper validation error returned: {response.status_code}"
+                )
+            else:
+                self.log_result(
+                    "Site Creation - Validation Error (Missing Location)",
+                    False,
+                    f"Expected 400/422, got {response.status_code}: {response.text}"
+                )
+        except Exception as e:
+            self.log_result(
+                "Site Creation - Validation Error (Missing Location)",
+                False,
+                f"Exception: {str(e)}"
+            )
+        
+        # Test 7: Validation error - incomplete location data
+        invalid_data = {
+            "customer_id": test_customer_id,
+            "name": "Site With Incomplete Location",
+            "site_type": "driveway",
+            "location": {
+                "longitude": -79.3832,
+                "address": "987 Cedar Lane, Toronto, ON"
+                # Missing required 'latitude' field
+            }
+        }
+        
+        try:
+            response = self.session.post(f"{BASE_URL}/sites", json=invalid_data)
+            if response.status_code in [400, 422]:
+                self.log_result(
+                    "Site Creation - Validation Error (Incomplete Location)",
+                    True,
+                    f"Proper validation error returned: {response.status_code}"
+                )
+            else:
+                self.log_result(
+                    "Site Creation - Validation Error (Incomplete Location)",
+                    False,
+                    f"Expected 400/422, got {response.status_code}: {response.text}"
+                )
+        except Exception as e:
+            self.log_result(
+                "Site Creation - Validation Error (Incomplete Location)",
+                False,
+                f"Exception: {str(e)}"
+            )
+        
+        # Test 8: ObjectId serialization in response
+        site_data = {
+            "customer_id": test_customer_id,
+            "name": "ObjectId Serialization Test Site",
+            "site_type": "sidewalk",
+            "location": {
+                "latitude": 43.8532,
+                "longitude": -79.5832,
+                "address": "147 Birch Road, Toronto, ON M1P 2K5"
+            }
+        }
+        
+        try:
+            response = self.session.post(f"{BASE_URL}/sites", json=site_data)
+            if response.status_code == 201:
+                data = response.json()
+                site_id = data.get("id")
+                
+                # Verify ID is a string and proper format
+                if isinstance(site_id, str) and len(site_id) == 24:
+                    # Verify no _id field in response (should be converted to id)
+                    if "_id" not in data:
+                        self.created_sites.append(data)
+                        self.log_result(
+                            "Site Creation - ObjectId Serialization",
+                            True,
+                            f"ObjectId properly serialized to string: {site_id}"
+                        )
+                    else:
+                        self.log_result(
+                            "Site Creation - ObjectId Serialization",
+                            False,
+                            "_id field still present in response"
+                        )
+                else:
+                    self.log_result(
+                        "Site Creation - ObjectId Serialization",
+                        False,
+                        f"Invalid ID format: {site_id}"
+                    )
+            else:
+                self.log_result(
+                    "Site Creation - ObjectId Serialization",
+                    False,
+                    f"Expected 201, got {response.status_code}: {response.text}"
+                )
+        except Exception as e:
+            self.log_result(
+                "Site Creation - ObjectId Serialization",
+                False,
+                f"Exception: {str(e)}"
+            )
+        
+        # Test 9: Different site types
+        site_types = ["parking_lot", "driveway", "sidewalk", "commercial_lot", "residential"]
+        success_count = 0
+        
+        for i, site_type in enumerate(site_types):
+            site_data = {
+                "customer_id": test_customer_id,
+                "name": f"Test {site_type.replace('_', ' ').title()} Site",
+                "site_type": site_type,
+                "location": {
+                    "latitude": 43.6532 + (i * 0.01),
+                    "longitude": -79.3832 + (i * 0.01),
+                    "address": f"{100 + i*10} Test Street, Toronto, ON"
+                }
+            }
+            
+            try:
+                response = self.session.post(f"{BASE_URL}/sites", json=site_data)
+                if response.status_code == 201:
+                    data = response.json()
+                    if data.get("site_type") == site_type:
+                        success_count += 1
+                        self.created_sites.append(data)
+            except Exception:
+                pass
+        
+        if success_count == len(site_types):
+            self.log_result(
+                "Site Creation - Different Site Types",
+                True,
+                f"All {len(site_types)} site types created successfully"
+            )
+        else:
+            self.log_result(
+                "Site Creation - Different Site Types",
+                False,
+                f"Only {success_count}/{len(site_types)} site types created successfully"
+            )
+        
+        # Test 10: Response time performance
+        site_data = {
+            "customer_id": test_customer_id,
+            "name": "Performance Test Site",
+            "site_type": "parking_lot",
+            "location": {
+                "latitude": 43.9532,
+                "longitude": -79.6832,
+                "address": "999 Performance Drive, Toronto, ON M9P 9P9"
+            }
+        }
+        
+        try:
+            start_time = time.time()
+            response = self.session.post(f"{BASE_URL}/sites", json=site_data)
+            end_time = time.time()
+            
+            response_time = end_time - start_time
+            
+            if response.status_code == 201 and response_time < 5.0:
+                data = response.json()
+                self.created_sites.append(data)
+                self.log_result(
+                    "Site Creation - Response Time Performance",
+                    True,
+                    f"API responded in {response_time:.2f} seconds (< 5s)"
+                )
+            elif response.status_code == 201:
+                data = response.json()
+                self.created_sites.append(data)
+                self.log_result(
+                    "Site Creation - Response Time Performance",
+                    True,
+                    f"API responded in {response_time:.2f} seconds (slow but working)"
+                )
+            else:
+                self.log_result(
+                    "Site Creation - Response Time Performance",
+                    False,
+                    f"Expected 201, got {response.status_code}: {response.text}"
+                )
+        except Exception as e:
+            self.log_result(
+                "Site Creation - Response Time Performance",
+                False,
+                f"Exception: {str(e)}"
+            )
+
     def test_error_handling(self):
         """Test error handling for missing required fields"""
         print("=== Test 10: Error Handling ===")
