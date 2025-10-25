@@ -119,6 +119,57 @@ export default function ConsumablesPage() {
     }
   };
 
+  const handleEdit = (consumable: Consumable) => {
+    setEditingConsumable(consumable);
+    setFormData({
+      name: consumable.name,
+      unit: consumable.unit,
+      current_stock: consumable.quantity_available,
+      min_stock_level: consumable.reorder_level,
+      unit_cost: consumable.cost_per_unit,
+      category: consumable.consumable_type,
+    });
+    setShowEditModal(true);
+  };
+
+  const handleUpdate = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!editingConsumable) return;
+    
+    const loadingToast = toast.loading('Updating consumable...');
+    
+    try {
+      const payload = {
+        name: formData.name.trim(),
+        consumable_type: formData.category,
+        unit: formData.unit,
+        quantity_available: parseFloat(formData.current_stock as string) || 0,
+        reorder_level: parseFloat(formData.min_stock_level as string) || 0,
+        cost_per_unit: parseFloat(formData.unit_cost as string) || 0,
+      };
+      
+      const consumableId = editingConsumable._id || editingConsumable.id;
+      await api.put(`/consumables/${consumableId}`, payload);
+      toast.success('Consumable updated successfully!', { id: loadingToast });
+      setShowEditModal(false);
+      setEditingConsumable(null);
+      setFormData({
+        name: '',
+        unit: 'bags',
+        current_stock: '',
+        min_stock_level: '',
+        unit_cost: '',
+        category: 'traction_control',
+      });
+      loadConsumables();
+    } catch (error: any) {
+      console.error('Error updating consumable:', error);
+      const errorMessage = error?.response?.data?.detail || 'Failed to update consumable';
+      toast.error(errorMessage, { id: loadingToast });
+    }
+  };
+
   const handleDelete = async (id: string) => {
     if (!confirm('Delete this consumable? This action cannot be undone.')) return;
     
