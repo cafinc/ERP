@@ -493,6 +493,211 @@ export default function ServicesPage() {
             </table>
           </div>
         </div>
+
+        {/* Create Service Modal */}
+        {showCreateModal && (
+          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fadeIn">
+            <div className="bg-white/95 backdrop-blur-md rounded-3xl max-w-2xl w-full shadow-2xl border border-white/40 animate-slideUp max-h-[90vh] overflow-y-auto">
+              {/* Modal Header */}
+              <div className="flex items-center justify-between p-6 border-b border-gray-200/50 sticky top-0 bg-white/95 backdrop-blur-md z-10">
+                <div className="flex items-center gap-3">
+                  <div className="bg-gradient-to-br from-[#3f72af] to-[#2c5282] rounded-xl p-3">
+                    <Briefcase className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h2 className="text-2xl font-bold text-gray-900">Create Service</h2>
+                    <p className="text-sm text-gray-600 mt-0.5">Add a new service offering</p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setShowCreateModal(false)}
+                  className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                >
+                  <X className="w-5 h-5 text-gray-500" />
+                </button>
+              </div>
+
+              {/* Modal Body */}
+              <form onSubmit={handleCreate} className="p-6 space-y-6">
+                {/* Service Details Card */}
+                <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-6 backdrop-blur-sm">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-lg font-bold text-gray-900 flex items-center">
+                      <Briefcase className="w-5 h-5 text-[#3f72af] mr-2" />
+                      Service Details
+                    </h3>
+                    
+                    {/* Active Service Toggle */}
+                    <label className="flex items-center cursor-pointer group">
+                      <span className="mr-3 text-sm font-semibold text-gray-700">Active Service</span>
+                      <div className="relative">
+                        <input
+                          type="checkbox"
+                          checked={formData.active}
+                          onChange={(e) => setFormData({ ...formData, active: e.target.checked })}
+                          className="sr-only peer"
+                        />
+                        <div className="w-14 h-7 bg-gray-300 rounded-full peer peer-checked:bg-[#3f72af] transition-all duration-300 shadow-inner"></div>
+                        <div className="absolute left-1 top-1 w-5 h-5 bg-white rounded-full transition-all duration-300 peer-checked:translate-x-7 shadow-md"></div>
+                      </div>
+                    </label>
+                  </div>
+
+                  <div className="space-y-4">
+                    {/* Service Name and Type */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-semibold text-gray-900 mb-2">
+                          Service Name <span className="text-red-500">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          value={formData.name}
+                          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                          required
+                          className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
+                          placeholder="e.g., Standard Snow Plowing"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-semibold text-gray-900 mb-2">
+                          <Tag className="w-4 h-4 inline-block mr-1 text-[#3f72af]" />
+                          Service Type <span className="text-red-500">*</span>
+                        </label>
+                        <select
+                          value={formData.service_type}
+                          onChange={(e) => setFormData({ ...formData, service_type: e.target.value })}
+                          required
+                          className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all bg-white"
+                          style={{ fontSize: '16px' }}
+                        >
+                          {SERVICE_TYPES.map(type => (
+                            <option key={type.value} value={type.value}>
+                              {type.icon} {type.label}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
+
+                    {/* Description */}
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-900 mb-2">
+                        <FileText className="w-4 h-4 inline-block mr-1 text-[#3f72af]" />
+                        Description
+                      </label>
+                      <textarea
+                        value={formData.description}
+                        onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                        rows={3}
+                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all resize-none"
+                        placeholder="Describe this service in detail..."
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Default Pricing Card */}
+                <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-6 backdrop-blur-sm">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-lg font-bold text-gray-900 flex items-center">
+                      <DollarSign className="w-5 h-5 text-[#3f72af] mr-2" />
+                      Default Pricing
+                    </h3>
+                    <button
+                      type="button"
+                      onClick={addPricingEntry}
+                      className="flex items-center gap-2 px-3 py-2 text-sm bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-all shadow-sm hover:shadow-md font-medium"
+                    >
+                      <Plus className="w-4 h-4" />
+                      Add Pricing Tier
+                    </button>
+                  </div>
+                  
+                  <div className="space-y-3">
+                    {pricingEntries.map((entry, index) => (
+                      <div key={index} className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-4 border-2 border-blue-100 hover:shadow-md transition-all">
+                        <div className="flex items-center gap-3">
+                          {/* Unit Type Dropdown */}
+                          <div className="flex-1">
+                            <label className="block text-xs font-medium text-gray-600 mb-1">Unit Type</label>
+                            <select
+                              value={entry.unit}
+                              onChange={(e) => updatePricingEntry(index, 'unit', e.target.value)}
+                              className="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-medium text-sm"
+                            >
+                              {UNITS.map(unit => (
+                                <option key={unit.value} value={unit.value}>
+                                  {unit.label}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                          
+                          {/* Amount Input */}
+                          <div className="flex-1">
+                            <label className="block text-xs font-medium text-gray-600 mb-1">Amount</label>
+                            <div className="relative">
+                              <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 font-bold">$</span>
+                              <input
+                                type="number"
+                                step="0.01"
+                                value={entry.amount}
+                                onChange={(e) => updatePricingEntry(index, 'amount', e.target.value)}
+                                className="w-full pl-8 pr-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] font-bold text-[#3f72af] text-sm"
+                                placeholder="0.00"
+                              />
+                            </div>
+                          </div>
+                          
+                          {/* Delete Button */}
+                          {pricingEntries.length > 1 && (
+                            <div className="flex items-end">
+                              <button
+                                type="button"
+                                onClick={() => removePricingEntry(index)}
+                                className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                                title="Remove pricing tier"
+                              >
+                                <Trash2 className="w-4 h-4" />
+                              </button>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                    
+                    {pricingEntries.length === 0 && (
+                      <div className="text-center py-8 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl border-2 border-dashed border-gray-300">
+                        <DollarSign className="w-12 h-12 text-gray-300 mx-auto mb-2" />
+                        <p className="text-gray-500 font-medium text-sm">No pricing tiers configured</p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Modal Footer */}
+                <div className="flex items-center justify-end gap-3 pt-4 border-t border-gray-200/50">
+                  <button
+                    type="button"
+                    onClick={() => setShowCreateModal(false)}
+                    className="px-5 py-2 text-sm border-2 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 hover:border-gray-400 transition-all font-semibold"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="flex items-center gap-2 px-5 py-2 text-sm bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-all shadow-sm hover:shadow-md font-semibold"
+                  >
+                    <Save className="w-4 h-4" />
+                    Create Service
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
       </div>
     );
 }
