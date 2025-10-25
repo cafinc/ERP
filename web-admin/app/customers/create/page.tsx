@@ -751,12 +751,24 @@ export default function CustomerFormPage() {
 
       if (isEdit) {
         await api.put(`/customers/${customerId}`, submitData);
-        alert('Customer updated successfully!');
-        router.push(`/customers/${customerId}`);
+        
+        setResultModalType('success');
+        setResultModalTitle('Customer Updated!');
+        setResultModalMessage('Customer information has been updated successfully.');
+        setValidationErrors([]);
+        setShowResultModal(true);
+        
+        setTimeout(() => {
+          router.push(`/customers/${customerId}`);
+        }, 2000);
       } else {
         // Validate access requirements if enabled
         if (requireAccess && !accessWeb && !accessInApp) {
-          alert('Please select at least one access type (Web or In-App)');
+          setResultModalType('error');
+          setResultModalTitle('Access Type Required');
+          setResultModalMessage('Please select at least one access type:');
+          setValidationErrors(['Web Access', 'In-App Access']);
+          setShowResultModal(true);
           return;
         }
 
@@ -778,14 +790,24 @@ export default function CustomerFormPage() {
           // Show user credentials if account was created
           if (response.data.user_account) {
             const user = response.data.user_account;
-            alert(
-              `Customer created successfully with user access!\n\n` +
-              `Username: ${user.username}\n` +
-              `Password: ${user.password}\n` +
-              `Role: ${user.role}\n` +
-              `Access: ${accessWeb ? 'Web' : ''} ${accessWeb && accessInApp ? '&' : ''} ${accessInApp ? 'In-App' : ''}\n\n` +
-              `${user.email_sent ? 'Credentials email sent to ' + user.email : 'Note: Email not configured'}`
-            );
+            const accessTypes = `${accessWeb ? 'Web' : ''} ${accessWeb && accessInApp ? '&' : ''} ${accessInApp ? 'In-App' : ''}`;
+            
+            setResultModalType('success');
+            setResultModalTitle('Customer Created with User Access!');
+            setResultModalMessage('Customer and user account created successfully:');
+            setValidationErrors([
+              `Username: ${user.username}`,
+              `Password: ${user.password}`,
+              `Role: ${user.role}`,
+              `Access: ${accessTypes}`,
+              user.email_sent ? `✓ Credentials email sent to ${user.email}` : 'Note: Email not configured'
+            ]);
+            setShowResultModal(true);
+            
+            setTimeout(() => {
+              router.push(`/customers/${companyId}`);
+            }, 4000);
+            return; // Exit early after showing credentials
           }
         } else {
           // Normal customer creation without access
@@ -813,10 +835,19 @@ export default function CustomerFormPage() {
           try {
             await api.post('/sites', siteData);
             console.log('Site created successfully:', siteName);
-          } catch (siteError) {
+          } catch (siteError: any) {
             console.error('Error creating site:', siteError);
-            // Don't fail the whole operation if site creation fails
-            alert(`Customer created, but site creation failed: ${siteError}`);
+            // Show warning but don't fail the whole operation
+            setResultModalType('error');
+            setResultModalTitle('Site Creation Failed');
+            setResultModalMessage('Customer was created successfully, but site creation failed:');
+            setValidationErrors([siteError.message || 'Unknown error']);
+            setShowResultModal(true);
+            
+            setTimeout(() => {
+              router.push(`/customers/${companyId}`);
+            }, 3000);
+            return;
           }
         }
 
