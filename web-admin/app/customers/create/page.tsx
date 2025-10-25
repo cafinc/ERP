@@ -84,6 +84,11 @@ export default function CustomerFormPage() {
   // File upload states
   const [uploadedFiles, setUploadedFiles] = useState<Array<{name: string, type: string, size: number, data: string}>>([]);
   
+  // Duplicate detection states
+  const [showDuplicateModal, setShowDuplicateModal] = useState(false);
+  const [duplicateCustomers, setDuplicateCustomers] = useState<any[]>([]);
+  const [checkingDuplicates, setCheckingDuplicates] = useState(false);
+  
   const [customerForm, setCustomerForm] = useState({
     // For individuals
     first_name: '',
