@@ -1364,7 +1364,8 @@ export default function CustomerFormPage() {
                       )}
                     </div>
                   </div>
-                )}
+                </div>
+              )}
 
               {/* Company Form */}
               {customerForm.customer_type === 'company' && (
