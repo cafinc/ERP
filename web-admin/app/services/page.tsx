@@ -23,6 +23,10 @@ import {
   FileText,
   Box,
   AlertTriangle,
+  LayoutGrid,
+  List,
+  Filter,
+  SlidersHorizontal,
 } from 'lucide-react';
 
 // Service type configurations with icons and labels
