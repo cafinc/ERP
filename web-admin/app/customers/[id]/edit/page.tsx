@@ -265,6 +265,6 @@ export default function CustomerEditPage() {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
