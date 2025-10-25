@@ -1645,16 +1645,16 @@ export default function CustomerFormPage() {
                     </div>
                   </div>
 
-                {/* Company Accounting */}
-                <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
-                  <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center space-x-2">
-                    <CreditCard className="w-5 h-5 text-[#3f72af]" />
+                {/* Company Accounting - Compact */}
+                <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-5 backdrop-blur-sm hover:shadow-md transition-shadow">
+                  <h2 className="text-xl font-bold text-gray-900 mb-3 flex items-center space-x-2">
+                    <CreditCard className="w-4 h-4 text-[#3f72af]" />
                     <span>Accounting Information</span>
                   </h2>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-xs font-medium text-gray-700 mb-1">
                         Business Number
                       </label>
                       <input
@@ -1666,13 +1666,13 @@ export default function CustomerFormPage() {
                             accounting: { ...customerForm.accounting, business_number: e.target.value },
                           })
                         }
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-transparent"
                         placeholder="123456789RC0001"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-xs font-medium text-gray-700 mb-1">
                         Payment Terms
                       </label>
                       <select
@@ -1686,7 +1686,7 @@ export default function CustomerFormPage() {
                             },
                           })
                         }
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-transparent"
                       >
                         <option value="due_on_receipt">Due on Receipt</option>
                         <option value="net_15">Net 15</option>
@@ -1698,7 +1698,7 @@ export default function CustomerFormPage() {
 
                     {/* Credit Limit Toggle */}
                     <div className="md:col-span-2">
-                      <div className="flex items-center gap-3 mb-2">
+                      <div className="flex items-center gap-2 mb-1">
                         <button
                           type="button"
                           onClick={() => setCustomerForm({
@@ -1708,17 +1708,17 @@ export default function CustomerFormPage() {
                               credit_limit_enabled: !customerForm.accounting.credit_limit_enabled
                             }
                           })}
-                          className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#3f72af] focus:ring-offset-2 flex-shrink-0 ${
+                          className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#3f72af] focus:ring-offset-2 flex-shrink-0 ${
                             customerForm.accounting.credit_limit_enabled ? 'bg-[#3f72af]' : 'bg-gray-200'
                           }`}
                         >
                           <span
-                            className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                              customerForm.accounting.credit_limit_enabled ? 'translate-x-6' : 'translate-x-1'
+                            className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform ${
+                              customerForm.accounting.credit_limit_enabled ? 'translate-x-5' : 'translate-x-1'
                             }`}
                           />
                         </button>
-                        <label className="text-sm font-medium text-gray-700">
+                        <label className="text-xs font-medium text-gray-700">
                           Set Credit Limit
                         </label>
                       </div>
@@ -1726,11 +1726,11 @@ export default function CustomerFormPage() {
 
                     {customerForm.accounting.credit_limit_enabled && (
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <label className="block text-xs font-medium text-gray-700 mb-1">
                           Credit Limit Amount
                         </label>
                         <div className="relative">
-                          <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">$</span>
+                          <span className="absolute left-2 top-1/2 transform -translate-y-1/2 text-sm text-gray-500">$</span>
                           <input
                             type="number"
                             value={customerForm.accounting.credit_limit}
@@ -1743,7 +1743,7 @@ export default function CustomerFormPage() {
                                 },
                               })
                             }
-                            className="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            className="w-full pl-6 pr-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-transparent"
                             placeholder="10000.00"
                           />
                         </div>
