@@ -58,7 +58,7 @@ export default function ConsumablesPage() {
     current_stock: 0,
     min_stock_level: 0,
     unit_cost: 0,
-    category: 'salt',
+    category: 'traction_control',
   });
 
   useEffect(() => {
