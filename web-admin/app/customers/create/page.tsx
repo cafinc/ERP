@@ -186,81 +186,126 @@ export default function CustomerFormPage() {
   };
 
   const setupAutocomplete = () => {
-    if (!addressInputRef.current || !window.google) return;
-
-    const autocomplete = new window.google.maps.places.Autocomplete(addressInputRef.current, {
-      componentRestrictions: { country: 'ca' },
-      fields: ['address_components', 'formatted_address'],
-      types: ['address'],
-    });
-
-    autocomplete.addListener('place_changed', () => {
-      const place = autocomplete.getPlace();
-      if (!place.address_components) return;
-
-      let street = '';
-      let city = '';
-      let province = 'AB';
-      let postalCode = '';
-
-      // Log all components for debugging
-      console.log('Google Places - All address components:', place.address_components);
-
-      place.address_components.forEach((component: any) => {
-        const types = component.types;
-        
-        // Street number
-        if (types.includes('street_number')) {
-          street = component.long_name + ' ';
-        }
-        
-        // Street name
-        if (types.includes('route')) {
-          street += component.long_name;
-        }
-        
-        // City - check multiple possible types in priority order
-        if (!city) {
-          if (types.includes('locality')) {
-            city = component.long_name;
-          } else if (types.includes('sublocality')) {
-            city = component.long_name;
-          } else if (types.includes('sublocality_level_1')) {
-            city = component.long_name;
-          } else if (types.includes('postal_town')) {
-            city = component.long_name;
-          } else if (types.includes('administrative_area_level_3')) {
-            city = component.long_name;
-          }
-        }
-        
-        // Province
-        if (types.includes('administrative_area_level_1')) {
-          province = component.short_name;
-        }
-        
-        // Postal code
-        if (types.includes('postal_code')) {
-          postalCode = component.long_name;
-        }
+    // Setup for individual customer address
+    if (addressInputRef.current && window.google) {
+      const autocomplete = new window.google.maps.places.Autocomplete(addressInputRef.current, {
+        componentRestrictions: { country: 'ca' },
+        fields: ['address_components', 'formatted_address'],
+        types: ['address'],
       });
 
-      // Fallback: if city is still empty, try to extract from formatted address
-      if (!city && place.formatted_address) {
-        console.log('City not found in components, trying to extract from formatted address:', place.formatted_address);
+      autocomplete.addListener('place_changed', () => {
+        const place = autocomplete.getPlace();
+        if (!place.address_components) return;
+
+        const addressData = extractAddressComponents(place.address_components);
+        setCustomerForm(prev => ({
+          ...prev,
+          street_address: addressData.street,
+          city: addressData.city,
+          province: addressData.province,
+          postal_code: addressData.postalCode,
+        }));
+      });
+    }
+
+    // Setup for company address
+    if (companyAddressInputRef.current && window.google) {
+      const companyAutocomplete = new window.google.maps.places.Autocomplete(companyAddressInputRef.current, {
+        componentRestrictions: { country: 'ca' },
+        fields: ['address_components', 'formatted_address'],
+        types: ['address'],
+      });
+
+      companyAutocomplete.addListener('place_changed', () => {
+        const place = companyAutocomplete.getPlace();
+        if (!place.address_components) return;
+
+        const addressData = extractAddressComponents(place.address_components);
+        setCustomerForm(prev => ({
+          ...prev,
+          street_address: addressData.street,
+          city: addressData.city,
+          province: addressData.province,
+          postal_code: addressData.postalCode,
+        }));
+      });
+    }
+
+    // Setup for billing address
+    if (billingAddressInputRef.current && window.google) {
+      const billingAutocomplete = new window.google.maps.places.Autocomplete(billingAddressInputRef.current, {
+        componentRestrictions: { country: 'ca' },
+        fields: ['address_components', 'formatted_address'],
+        types: ['address'],
+      });
+
+      billingAutocomplete.addListener('place_changed', () => {
+        const place = billingAutocomplete.getPlace();
+        if (!place.address_components) return;
+
+        const addressData = extractAddressComponents(place.address_components);
+        setCustomerForm(prev => ({
+          ...prev,
+          billing_address: {
+            ...prev.billing_address,
+            street_address: addressData.street,
+            city: addressData.city,
+            province: addressData.province,
+            postal_code: addressData.postalCode,
+          }
+        }));
+      });
+    }
+  };
+
+  // Helper function to extract address components
+  const extractAddressComponents = (components: any[]) => {
+    let street = '';
+    let city = '';
+    let province = 'AB';
+    let postalCode = '';
+
+    components.forEach((component: any) => {
+      const types = component.types;
+      
+      // Street number
+      if (types.includes('street_number')) {
+        street = component.long_name + ' ';
       }
-
-      // Log final extracted values
-      console.log('Google Places - Extracted values:', { street, city, province, postalCode });
-
-      setCustomerForm(prev => ({
-        ...prev,
-        street_address: street,
-        city: city,
-        province: province,
-        postal_code: postalCode,
-      }));
+      
+      // Street name
+      if (types.includes('route')) {
+        street += component.long_name;
+      }
+      
+      // City - check multiple possible types in priority order
+      if (!city) {
+        if (types.includes('locality')) {
+          city = component.long_name;
+        } else if (types.includes('sublocality')) {
+          city = component.long_name;
+        } else if (types.includes('sublocality_level_1')) {
+          city = component.long_name;
+        } else if (types.includes('postal_town')) {
+          city = component.long_name;
+        } else if (types.includes('administrative_area_level_3')) {
+          city = component.long_name;
+        }
+      }
+      
+      // Province
+      if (types.includes('administrative_area_level_1')) {
+        province = component.short_name;
+      }
+      
+      // Postal code
+      if (types.includes('postal_code')) {
+        postalCode = component.long_name;
+      }
     });
+
+    return { street, city, province, postalCode };
   };
 
   const loadCompanies = async () => {
