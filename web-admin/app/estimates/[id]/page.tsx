@@ -508,6 +508,6 @@ export default function EstimateDetailPage() {
           />
         )}
       </div>
-    </div>
+    </>
   );
 }
