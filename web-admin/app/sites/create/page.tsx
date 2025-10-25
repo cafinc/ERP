@@ -293,7 +293,7 @@ export default function CreateSitePage() {
     <>
       <PageHeader
         title="Create Site"
-        subtitle="Add a new site location"
+        subtitle="Add a new site location with services and details"
         breadcrumbs={[
           { label: 'Home', href: '/' },
           { label: 'Sites', href: '/sites' },
@@ -301,22 +301,27 @@ export default function CreateSitePage() {
         ]}
       />
 
-      <div className="h-full bg-gray-50 overflow-auto">
-        <div className="max-w-4xl mx-auto p-6">
+      <div className="h-full bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto">
+        <div className="max-w-5xl mx-auto p-6">
           <form onSubmit={handleSubmit} noValidate className="space-y-6">
-            {/* Customer Assignment - Compact at Top */}
-            <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-6 backdrop-blur-sm hover:shadow-md transition-shadow">
+            {/* Customer Assignment */}
+            <div className="bg-white/95 backdrop-blur-md rounded-3xl shadow-xl border border-white/40 p-6 hover:shadow-2xl transition-shadow">
+              <h3 className="text-sm font-bold text-gray-900 mb-4 flex items-center gap-2">
+                <div className="bg-gradient-to-br from-[#3f72af] to-[#2c5282] rounded-xl p-2">
+                  <User className="w-4 h-4 text-white" />
+                </div>
+                Customer Assignment
+              </h3>
               <div className="relative">
-                <label className="block text-sm font-semibold text-gray-900 mb-2">
-                  <User className="w-4 h-4 inline-block mr-2 text-[#3f72af]" />
+                <label className="block text-xs font-medium text-gray-700 mb-2">
                   Customer <span className="text-red-500">*</span>
                 </label>
                 <button
                   type="button"
                   onClick={() => setShowCustomerDropdown(!showCustomerDropdown)}
-                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] text-left flex items-center justify-between bg-white hover:border-gray-300 transition-all"
+                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] text-left flex items-center justify-between bg-white hover:border-gray-300 transition-all font-semibold"
                 >
-                  <span className={!customerId ? 'text-gray-400' : 'text-gray-900 font-medium'}>
+                  <span className={!customerId ? 'text-gray-400' : 'text-gray-900'}>
                     {customerId ? getCustomerName(customerId) : 'Select a customer'}
                   </span>
                   <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
