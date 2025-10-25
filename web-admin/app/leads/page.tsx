@@ -719,14 +719,9 @@ export default function LeadsPage() {
               </button>
             </div>
           </div>
-                <RefreshCw className="w-4 h-4" />
-                Refresh
-              </button>
-            </div>
-          </div>
 
           {/* Pipeline View */}
-          {view === 'pipeline' && (
+          {viewMode === 'pipeline' && (
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
               {(['new', 'contacted', 'qualified', 'proposal_sent'] as const).map(status => {
                 const statusLeads = filteredLeads.filter(l => l.status === status);
