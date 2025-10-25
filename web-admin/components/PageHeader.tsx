@@ -152,6 +152,36 @@ export default function PageHeader({
   // Default variant - Full Featured Header (white background)
   return (
     <div className="bg-white border-b border-gray-200">
+      {/* Stats Row - if provided */}
+      {stats && stats.length > 0 && (
+        <div className="px-6 py-3 border-b border-gray-200">
+          <div className="flex items-center gap-4">
+            {stats.map((stat, index) => {
+              const colorClasses = {
+                blue: 'bg-blue-50 text-blue-600',
+                green: 'bg-green-50 text-green-600',
+                purple: 'bg-purple-50 text-purple-600',
+                orange: 'bg-orange-50 text-orange-600',
+                red: 'bg-red-50 text-red-600',
+                gray: 'bg-gray-50 text-gray-600',
+              };
+              const colorClass = colorClasses[stat.color || 'gray'];
+              const textColorClass = stat.color ? `text-${stat.color}-900` : 'text-gray-900';
+              
+              return (
+                <div key={index} className={`flex items-center gap-2 px-3 py-1.5 ${colorClass.split(' ')[0]} rounded-lg`}>
+                  {stat.icon && <div className={colorClass.split(' ')[1]}>{stat.icon}</div>}
+                  <div className="flex flex-col">
+                    <span className={`text-xs ${colorClass.split(' ')[1]} font-medium`}>{stat.label}</span>
+                    <span className={`text-lg font-bold ${textColorClass}`}>{stat.value}</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
       <div className="px-6 py-5">
         {/* Breadcrumbs */}
         {breadcrumbs && breadcrumbs.length > 0 && (
