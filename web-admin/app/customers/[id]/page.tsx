@@ -333,6 +333,29 @@ export default function CustomerDetailPage() {
     }
   };
 
+  const handleArchiveCustomer = async () => {
+    try {
+      setArchiving(true);
+      await api.put(`/customers/${customerId}`, {
+        ...customer,
+        active: false,
+      });
+      
+      setShowArchiveModal(false);
+      // Refresh customer data
+      const response = await api.get(`/customers/${customerId}`);
+      setCustomer(response.data);
+      
+      // Show success message
+      alert(customer.active ? 'Customer archived successfully' : 'Customer unarchived successfully');
+    } catch (error) {
+      console.error('Error archiving customer:', error);
+      alert('Error updating customer status');
+    } finally {
+      setArchiving(false);
+    }
+  };
+
   const handleSearchIndividuals = async () => {
     if (!searchQuery.trim()) {
       setSearchResults([]);
