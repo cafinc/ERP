@@ -109,7 +109,7 @@ index b03e84e..e69de29 100644
 -----------------+import traceback
 -----------------+
 -----------------+# Backend URL from frontend environment
------------------+BACKEND_URL = "https://erp-modernizer.preview.emergentagent.com/api"
+-----------------+BACKEND_URL = "https://task-hub-modern.preview.emergentagent.com/api"
 -----------------+
 -----------------+def print_test_header(test_name):
 -----------------+    """Print formatted test header"""
@@ -480,7 +480,7 @@ index b03e84e..e69de29 100644
 ---------------------------+from datetime import datetime
 ---------------------------+
 ---------------------------+# Backend URL from environment
----------------------------+BACKEND_URL = "https://erp-modernizer.preview.emergentagent.com/api"
+---------------------------+BACKEND_URL = "https://task-hub-modern.preview.emergentagent.com/api"
 ---------------------------+
 ---------------------------+class DuplicateCustomerTester:
 ---------------------------+    def __init__(self):
@@ -1266,7 +1266,7 @@ index b03e84e..e69de29 100644
 --------------------------------------------------+from typing import Dict, List, Any
 --------------------------------------------------+
 --------------------------------------------------+# Backend URL from frontend/.env
---------------------------------------------------+BACKEND_URL = "https://erp-modernizer.preview.emergentagent.com/api"
+--------------------------------------------------+BACKEND_URL = "https://task-hub-modern.preview.emergentagent.com/api"
 --------------------------------------------------+
 --------------------------------------------------+class HRModuleTester:
 --------------------------------------------------+    def __init__(self):
@@ -1863,7 +1863,7 @@ index b03e84e..e69de29 100644
 --------------------------------------------------+from typing import Dict, List, Any
 --------------------------------------------------+
 --------------------------------------------------+# Backend URL from frontend/.env
---------------------------------------------------+BACKEND_URL = "https://erp-modernizer.preview.emergentagent.com/api"
+--------------------------------------------------+BACKEND_URL = "https://task-hub-modern.preview.emergentagent.com/api"
 --------------------------------------------------+
 --------------------------------------------------+class HRComprehensiveTester:
 --------------------------------------------------+    def __init__(self):
@@ -3055,7 +3055,7 @@ index b03e84e..e69de29 100644
 -----------------------------------------------------------------------------------------------+import traceback
 -----------------------------------------------------------------------------------------------+
 -----------------------------------------------------------------------------------------------+# Backend URL from frontend environment
------------------------------------------------------------------------------------------------+BACKEND_URL = "https://erp-modernizer.preview.emergentagent.com/api"
+-----------------------------------------------------------------------------------------------+BACKEND_URL = "https://task-hub-modern.preview.emergentagent.com/api"
 -----------------------------------------------------------------------------------------------+
 -----------------------------------------------------------------------------------------------+class SiteMapsTestSuite:
 -----------------------------------------------------------------------------------------------+    def __init__(self):
@@ -8052,7 +8052,7 @@ index b03e84e..e69de29 100644
 -------------+from datetime import datetime
 -------------+
 -------------+# Backend URL from frontend/.env
--------------+BACKEND_URL = "https://erp-modernizer.preview.emergentagent.com/api"
+-------------+BACKEND_URL = "https://task-hub-modern.preview.emergentagent.com/api"
 -------------+
 -------------+def test_site_creation_api():
 -------------+    """Test the POST /api/sites endpoint comprehensively"""

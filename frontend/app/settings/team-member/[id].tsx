@@ -108,7 +108,7 @@ export default function TeamMemberProfileScreen() {
   const handleResendLicenseRequest = async () => {
     try {
       const user_id_str = member?.id || id;
-      const upload_link = `https://erp-modernizer.preview.emergentagent.com/upload-license/${user_id_str}`;
+      const upload_link = `https://task-hub-modern.preview.emergentagent.com/upload-license/${user_id_str}`;
       
       Alert.alert(
         'Resend Upload Request',
