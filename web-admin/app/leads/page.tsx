@@ -1015,6 +1015,122 @@ export default function LeadsPage() {
                 </div>
               </div>
 
+              {/* Services Requested Card */}
+              <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-6 backdrop-blur-sm">
+                <h3 className="text-lg font-bold text-gray-900 flex items-center mb-4">
+                  <Briefcase className="w-5 h-5 text-[#3f72af] mr-2" />
+                  Services Requested
+                </h3>
+                
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                  {SERVICE_TYPES.map((service) => (
+                    <button
+                      key={service.value}
+                      type="button"
+                      onClick={() => toggleService(service.value)}
+                      className={`p-4 rounded-xl border-2 transition-all hover:scale-105 ${
+                        selectedServices.includes(service.value)
+                          ? `border-${service.color}-500 bg-${service.color}-50 shadow-lg`
+                          : 'border-gray-200 bg-white hover:border-gray-300 hover:shadow-md'
+                      }`}
+                    >
+                      <div className="text-center">
+                        <div className="text-3xl mb-2">{service.icon}</div>
+                        <p className={`text-xs font-bold ${
+                          selectedServices.includes(service.value)
+                            ? `text-${service.color}-700`
+                            : 'text-gray-700'
+                        }`}>
+                          {service.label}
+                        </p>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+                
+                {selectedServices.length > 0 && (
+                  <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                    <p className="text-sm font-semibold text-blue-900">
+                      Selected: {selectedServices.length} service{selectedServices.length !== 1 ? 's' : ''}
+                    </p>
+                    <div className="flex flex-wrap gap-2 mt-2">
+                      {selectedServices.map((serviceValue) => {
+                        const service = SERVICE_TYPES.find(s => s.value === serviceValue);
+                        return (
+                          <span
+                            key={serviceValue}
+                            className="inline-flex items-center gap-1 px-3 py-1 bg-white border border-blue-300 rounded-full text-xs font-medium text-blue-700"
+                          >
+                            {service?.icon} {service?.label}
+                          </span>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Document Upload Card */}
+              <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-6 backdrop-blur-sm">
+                <h3 className="text-lg font-bold text-gray-900 flex items-center mb-4">
+                  <Upload className="w-5 h-5 text-[#3f72af] mr-2" />
+                  Documents & Attachments
+                </h3>
+                
+                <div className="space-y-4">
+                  {/* Upload Button */}
+                  <div>
+                    <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-xl cursor-pointer hover:border-[#3f72af] hover:bg-blue-50 transition-all">
+                      <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                        <Upload className="w-10 h-10 mb-3 text-gray-400" />
+                        <p className="mb-2 text-sm text-gray-600">
+                          <span className="font-semibold">Click to upload</span> or drag and drop
+                        </p>
+                        <p className="text-xs text-gray-500">PDF, Images, Documents (Max 500KB per file)</p>
+                      </div>
+                      <input
+                        type="file"
+                        multiple
+                        onChange={handleFileUpload}
+                        className="hidden"
+                        accept=".pdf,.doc,.docx,.xls,.xlsx,.png,.jpg,.jpeg,.gif"
+                      />
+                    </label>
+                  </div>
+
+                  {/* Uploaded Files List */}
+                  {uploadedFiles.length > 0 && (
+                    <div className="space-y-2">
+                      <p className="text-sm font-semibold text-gray-700">
+                        Uploaded Files ({uploadedFiles.length})
+                      </p>
+                      {uploadedFiles.map((file, index) => (
+                        <div
+                          key={index}
+                          className="flex items-center justify-between p-3 bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-lg hover:shadow-md transition-all"
+                        >
+                          <div className="flex items-center gap-3 flex-1 min-w-0">
+                            {getFileIcon(file.type)}
+                            <div className="flex-1 min-w-0">
+                              <p className="text-sm font-medium text-gray-900 truncate">{file.name}</p>
+                              <p className="text-xs text-gray-500">{formatFileSize(file.size)}</p>
+                            </div>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => removeFile(index)}
+                            className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors flex-shrink-0"
+                            title="Remove file"
+                          >
+                            <X className="w-4 h-4" />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+
               {/* Notes Card */}
               <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-6 backdrop-blur-sm">
                 <h3 className="text-lg font-bold text-gray-900 flex items-center mb-4">
