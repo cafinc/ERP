@@ -112,6 +112,18 @@ backend:
         agent: "testing"
         comment: "Minor: Invalid ObjectId validation returns 500 errors instead of 404. Affects GET, PUT, POST set-current, and DELETE endpoints when non-existent IDs are provided. Core functionality works perfectly."
 
+  - task: "Site Creation API - POST /api/sites endpoint"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ POST /api/sites endpoint working perfectly. 10/10 tests passed (100% success rate). All core functionality verified: successful creation with required fields (name, customer_id, site_type, location), optional fields support (site_reference, area_size, internal_notes, crew_notes, services, access_fields), proper validation errors for missing fields (422 status codes), ObjectId serialization working correctly, multiple site types supported (parking_lot, driveway, sidewalk, commercial_lot, residential), excellent response time (< 0.1s), and response structure compatible with toast notifications. API returns HTTP 200 with proper JSON structure including id field for frontend integration."
+
 frontend:
   - task: "Site Maps Frontend Integration"
     implemented: false
