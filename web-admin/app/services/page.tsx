@@ -236,7 +236,7 @@ export default function ServicesPage() {
           <div className="flex items-center space-x-2 flex-wrap gap-2">
             <button
               onClick={() => setFilterType('all')}
-              className={`px-4 py-2 rounded-lg font-medium transition-all ${
+              className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-all ${
                 filterType === 'all'
                   ? 'bg-[#3f72af] text-white shadow-md'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -246,7 +246,7 @@ export default function ServicesPage() {
             </button>
             <button
               onClick={() => setFilterType('plowing')}
-              className={`px-4 py-2 rounded-lg font-medium transition-all ${
+              className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-all ${
                 filterType === 'plowing'
                   ? 'bg-[#3f72af] text-white shadow-md'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -256,7 +256,7 @@ export default function ServicesPage() {
             </button>
             <button
               onClick={() => setFilterType('sanding')}
-              className={`px-4 py-2 rounded-lg font-medium transition-all ${
+              className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-all ${
                 filterType === 'sanding'
                   ? 'bg-[#3f72af] text-white shadow-md'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -266,7 +266,7 @@ export default function ServicesPage() {
             </button>
             <button
               onClick={() => setFilterType('salting')}
-              className={`px-4 py-2 rounded-lg font-medium transition-all ${
+              className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-all ${
                 filterType === 'salting'
                   ? 'bg-[#3f72af] text-white shadow-md'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -276,7 +276,7 @@ export default function ServicesPage() {
             </button>
             <button
               onClick={() => setFilterType('sidewalk_clear')}
-              className={`px-4 py-2 rounded-lg font-medium transition-all ${
+              className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-all ${
                 filterType === 'sidewalk_clear'
                   ? 'bg-[#3f72af] text-white shadow-md'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
