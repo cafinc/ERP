@@ -36,6 +36,7 @@ export default function EmployeesPage() {
   const [statusFilter, setStatusFilter] = useState("all");
   const [showModal, setShowModal] = useState(false);
   const [editingEmployee, setEditingEmployee] = useState(null);
+  const [uploadedFiles, setUploadedFiles] = useState<Array<{name: string, type: string, size: number, data: string}>>([]);
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
