@@ -580,17 +580,15 @@ export default function CreateSitePage() {
                   />
                 </div>
 
-                {/* Access & Security Toggles */}
-                <div className="space-y-4">
+                {/* Access & Security Toggles - Horizontal Layout */}
+                <div className="grid grid-cols-3 gap-4">
                   {/* Gate Code Toggle */}
                   <div className="border-2 border-gray-200 rounded-xl p-4 bg-gray-50/50">
-                    <div className="flex items-center justify-between mb-3">
-                      <div className="flex items-center gap-2">
-                        <KeyRound className="w-5 h-5 text-[#3f72af]" />
-                        <label className="text-sm font-semibold text-gray-900">
-                          Gate Code
-                        </label>
-                      </div>
+                    <div className="flex flex-col items-center gap-3">
+                      <KeyRound className="w-6 h-6 text-[#3f72af]" />
+                      <label className="text-sm font-semibold text-gray-900 text-center">
+                        Gate Code
+                      </label>
                       <button
                         type="button"
                         onClick={() => setHasGateCode(!hasGateCode)}
@@ -606,25 +604,25 @@ export default function CreateSitePage() {
                       </button>
                     </div>
                     {hasGateCode && (
-                      <input
-                        type="text"
-                        value={gateCode}
-                        onChange={(e) => setGateCode(e.target.value)}
-                        className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all bg-white"
-                        placeholder="Enter gate code (e.g., #1234)"
-                      />
+                      <div className="mt-4">
+                        <input
+                          type="text"
+                          value={gateCode}
+                          onChange={(e) => setGateCode(e.target.value)}
+                          className="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all bg-white text-sm"
+                          placeholder="#1234"
+                        />
+                      </div>
                     )}
                   </div>
 
                   {/* Lockbox Toggle */}
                   <div className="border-2 border-gray-200 rounded-xl p-4 bg-gray-50/50">
-                    <div className="flex items-center justify-between mb-3">
-                      <div className="flex items-center gap-2">
-                        <Lock className="w-5 h-5 text-[#3f72af]" />
-                        <label className="text-sm font-semibold text-gray-900">
-                          Lockbox
-                        </label>
-                      </div>
+                    <div className="flex flex-col items-center gap-3">
+                      <Lock className="w-6 h-6 text-[#3f72af]" />
+                      <label className="text-sm font-semibold text-gray-900 text-center">
+                        Lockbox
+                      </label>
                       <button
                         type="button"
                         onClick={() => setHasLockbox(!hasLockbox)}
@@ -640,25 +638,25 @@ export default function CreateSitePage() {
                       </button>
                     </div>
                     {hasLockbox && (
-                      <input
-                        type="text"
-                        value={lockboxCode}
-                        onChange={(e) => setLockboxCode(e.target.value)}
-                        className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all bg-white"
-                        placeholder="Enter lockbox code (e.g., 5678)"
-                      />
+                      <div className="mt-4">
+                        <input
+                          type="text"
+                          value={lockboxCode}
+                          onChange={(e) => setLockboxCode(e.target.value)}
+                          className="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all bg-white text-sm"
+                          placeholder="5678"
+                        />
+                      </div>
                     )}
                   </div>
 
                   {/* Security Onsite Toggle */}
                   <div className="border-2 border-gray-200 rounded-xl p-4 bg-gray-50/50">
-                    <div className="flex items-center justify-between mb-3">
-                      <div className="flex items-center gap-2">
-                        <Shield className="w-5 h-5 text-[#3f72af]" />
-                        <label className="text-sm font-semibold text-gray-900">
-                          Security Onsite
-                        </label>
-                      </div>
+                    <div className="flex flex-col items-center gap-3">
+                      <Shield className="w-6 h-6 text-[#3f72af]" />
+                      <label className="text-sm font-semibold text-gray-900 text-center">
+                        Security Onsite
+                      </label>
                       <button
                         type="button"
                         onClick={() => setHasSecurityOnsite(!hasSecurityOnsite)}
@@ -674,14 +672,14 @@ export default function CreateSitePage() {
                       </button>
                     </div>
                     {hasSecurityOnsite && (
-                      <div className="relative">
-                        <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                      <div className="mt-4 relative">
+                        <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
                         <input
                           type="tel"
                           value={securityPhone}
                           onChange={(e) => setSecurityPhone(e.target.value)}
-                          className="w-full pl-10 pr-4 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all bg-white"
-                          placeholder="Security phone number"
+                          className="w-full pl-9 pr-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all bg-white text-sm"
+                          placeholder="555-1234"
                         />
                       </div>
                     )}
