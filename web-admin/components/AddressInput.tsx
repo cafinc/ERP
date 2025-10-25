@@ -132,62 +132,6 @@ export default function AddressInput({
     };
   }, []);
 
-  useEffect(() => {
-    if (typeof window !== 'undefined' && window.google && inputRef.current) {
-      // Initialize Google Places Autocomplete
-      autocompleteRef.current = new window.google.maps.places.Autocomplete(inputRef.current, {
-        componentRestrictions: { country: 'ca' },
-        fields: ['address_components', 'formatted_address', 'geometry'],
-      });
-
-      // Listen for place selection
-      autocompleteRef.current.addListener('place_changed', () => {
-        const place = autocompleteRef.current.getPlace();
-        
-        // Safety check: ensure place object exists and has required properties
-        if (!place || !place.formatted_address) {
-          // User pressed enter or didn't select from dropdown
-          return;
-        }
-        
-        if (place.formatted_address) {
-          onChange(place.formatted_address);
-        }
-
-        // Extract address components
-        if (place.address_components && onPlaceSelect) {
-          const addressData: any = {
-            formatted_address: place.formatted_address,
-            lat: place.geometry?.location?.lat(),
-            lng: place.geometry?.location?.lng(),
-          };
-
-          place.address_components.forEach((component: any) => {
-            const types = component.types;
-            
-            if (types.includes('locality')) {
-              addressData.city = component.long_name;
-              if (onCityChange) onCityChange(component.long_name);
-            }
-            if (types.includes('administrative_area_level_1')) {
-              addressData.province = component.short_name;
-              if (onProvinceChange) onProvinceChange(component.short_name);
-            }
-            if (types.includes('postal_code')) {
-              addressData.postal_code = component.long_name;
-              if (onPostalCodeChange) onPostalCodeChange(component.long_name);
-            }
-            if (types.includes('country')) {
-              addressData.country = component.long_name;
-            }
-          });
-
-          onPlaceSelect(addressData);
-        }
-      });
-    }
-  }, [onChange, onPlaceSelect, onCityChange, onProvinceChange, onPostalCodeChange]);
-
   return (
     <div className="space-y-4">
       {/* Address Field */}
