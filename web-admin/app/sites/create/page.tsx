@@ -459,9 +459,11 @@ export default function CreateSitePage() {
                       <input
                         type="tel"
                         value={siteContact?.phone || ''}
-                        onChange={(e) => setSiteContact({ ...siteContact, phone: e.target.value })}
+                        onChange={handleContactPhoneChange}
                         className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
                         placeholder="(555) 123-4567"
+                        pattern="\(\d{3}\) \d{3}-\d{4}"
+                        title="Phone number must be in format: (555) 123-4567"
                       />
                     </div>
                   </div>
