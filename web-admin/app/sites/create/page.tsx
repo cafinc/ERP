@@ -583,7 +583,7 @@ export default function CreateSitePage() {
                 </div>
 
                 {/* Access & Security Toggles - Horizontal Layout */}
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-4 gap-4">
                   {/* Gate Code Toggle */}
                   <div className="border-2 border-gray-200 rounded-xl p-4 bg-gray-50/50">
                     <div className="flex flex-col items-center gap-3">
@@ -683,6 +683,37 @@ export default function CreateSitePage() {
                           className="w-full pl-9 pr-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all bg-white text-sm"
                           placeholder="555-1234"
                         />
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Key Card Toggle */}
+                  <div className="border-2 border-gray-200 rounded-xl p-4 bg-gray-50/50">
+                    <div className="flex flex-col items-center gap-3">
+                      <CreditCard className="w-6 h-6 text-[#3f72af]" />
+                      <label className="text-sm font-semibold text-gray-900 text-center">
+                        Key Card
+                      </label>
+                      <button
+                        type="button"
+                        onClick={() => setRequiresKeyCard(!requiresKeyCard)}
+                        className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                          requiresKeyCard ? 'bg-[#3f72af]' : 'bg-gray-300'
+                        }`}
+                      >
+                        <span
+                          className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                            requiresKeyCard ? 'translate-x-6' : 'translate-x-1'
+                          }`}
+                        />
+                      </button>
+                    </div>
+                    {requiresKeyCard && (
+                      <div className="mt-4 flex items-center justify-center">
+                        <div className="bg-orange-500 text-white px-4 py-2 rounded-lg font-bold text-sm shadow-lg flex items-center gap-2 animate-pulse">
+                          <CreditCard className="w-4 h-4" />
+                          <span>REQUIRED</span>
+                        </div>
                       </div>
                     )}
                   </div>
