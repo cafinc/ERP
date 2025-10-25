@@ -942,6 +942,8 @@ export default function LeadsPage() {
                       value={formData.address}
                       onChange={(address) => setFormData({ ...formData, address })}
                       placeholder="Start typing address..."
+                      showCityProvincePostal={false}
+                      label=""
                     />
                   </div>
                 </div>
