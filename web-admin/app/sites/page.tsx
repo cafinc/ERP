@@ -252,30 +252,11 @@ export default function SitesPage() {
             </div>
           ) : undefined}
         />
-              onChange={(e) => setFilterType(e.target.value)}
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            >
-              <option value="all">All Types</option>
-              <option value="parking_lot">Parking Lot</option>
-              <option value="driveway">Driveway</option>
-              <option value="sidewalk">Sidewalk</option>
-              <option value="roadway">Roadway</option>
-              <option value="loading_dock">Loading Dock</option>
-              <option value="other">Other</option>
-            </select>
-            <button
-              onClick={loadData}
-              className="px-4 py-2 bg-gray-100 hover:bg-gray-100 transition-all text-gray-700 rounded-lg transition-colors flex items-center space-x-2"
-            >
-              <RefreshCw className="w-4 h-4" />
-              <span>Refresh</span>
-            </button>
-          </div>
-        </div>
 
         {/* Sites Grid */}
+        <div className="mx-6 mt-6">
         {filteredSites.length === 0 ? (
-          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-12 text-center mx-6 hover:shadow-md transition-shadow">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-12 text-center hover:shadow-md transition-shadow">
             <MapPin className="w-16 h-16 text-gray-300 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-gray-900 mb-2">No Sites Found</h3>
             <p className="text-gray-600 mb-4">
