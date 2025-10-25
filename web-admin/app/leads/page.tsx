@@ -110,7 +110,7 @@ export default function LeadsPage() {
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [priorityFilter, setPriorityFilter] = useState<string>('all');
   const [showFilterDropdown, setShowFilterDropdown] = useState(false);
-  const [viewMode, setViewMode] = useState<'pipeline' | 'list' | 'analytics'>('pipeline');
+  const [viewMode, setViewMode] = useState<'grid' | 'list' | 'analytics'>('grid');
   const [showModal, setShowModal] = useState(false);
   const [editingLead, setEditingLead] = useState<Lead | null>(null);
   const [formData, setFormData] = useState({
