@@ -162,15 +162,13 @@ export default function AccessDashboardPage() {
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
         {/* Header */}
         <PageHeader
-        title="Access Control"
-        subtitle="Manage user access and permissions"
-        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Access" }]}
-        title="Access Control Dashboard"
-          
+          title="Access Control Dashboard"
+          subtitle="Manage user access and permissions"
+          breadcrumbs={[{ label: "Home", href: "/" }, { label: "Access" }]}
           actions={[
             {
               label: 'Add User',
-              icon: UserPlus,
+              icon: <UserPlus className="w-4 h-4 mr-2" />,
               onClick: () => alert('Add User feature coming soon!'),
               variant: 'primary',
             },
