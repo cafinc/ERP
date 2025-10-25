@@ -289,19 +289,21 @@ export default function CreateSitePage() {
                   </div>
                 </div>
 
-                {/* General Address */}
+                {/* General Address with Google Autocomplete */}
                 <div>
                   <label className="block text-sm font-semibold text-gray-900 mb-2">
                     Site Address <span className="text-red-500">*</span>
                   </label>
                   <input
+                    ref={inputRef}
                     type="text"
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
                     className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
-                    placeholder="Enter full address"
+                    placeholder="Start typing address..."
                     required
                   />
+                  <p className="text-xs text-gray-500 mt-2">Start typing to search with Google Maps</p>
                 </div>
 
                 {/* Area Size */}
