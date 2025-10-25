@@ -88,6 +88,58 @@ export default function ServicesPage() {
     }
   };
 
+  const addPricingEntry = () => {
+    setPricingEntries([...pricingEntries, { unit: 'hourly', amount: '' }]);
+  };
+
+  const removePricingEntry = (index: number) => {
+    setPricingEntries(pricingEntries.filter((_, i) => i !== index));
+  };
+
+  const updatePricingEntry = (index: number, field: string, value: any) => {
+    const updated = [...pricingEntries];
+    updated[index] = { ...updated[index], [field]: value };
+    setPricingEntries(updated);
+  };
+
+  const handleCreate = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!formData.name || !formData.service_type) {
+      toast.error('Please fill in all required fields');
+      return;
+    }
+
+    // Convert pricing entries to object
+    const pricing: { [key: string]: number } = {};
+    pricingEntries.forEach(entry => {
+      if (entry.unit && entry.amount) {
+        pricing[entry.unit] = parseFloat(entry.amount);
+      }
+    });
+
+    const loadingToast = toast.loading('Creating service...');
+
+    try {
+      const payload = { ...formData, pricing };
+      await api.post('/services', payload);
+      toast.success('Service created successfully!', { id: loadingToast });
+      setShowCreateModal(false);
+      setFormData({
+        name: '',
+        service_type: 'plowing',
+        description: '',
+        active: true,
+      });
+      setPricingEntries([{ unit: 'hourly', amount: '' }]);
+      loadServices();
+    } catch (error: any) {
+      console.error('Error creating service:', error);
+      const errorMessage = error?.response?.data?.detail || 'Failed to create service';
+      toast.error(errorMessage, { id: loadingToast });
+    }
+  };
+
   const handleDelete = async (id: string) => {
     if (!confirm('Delete this service? This action cannot be undone.')) return;
     
