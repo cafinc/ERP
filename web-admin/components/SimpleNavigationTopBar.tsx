@@ -106,9 +106,8 @@ export default function SimpleNavigationTopBar({ children }: { children: React.R
     {
       label: 'Dispatch',
       icon: MapPin,
-      href: '/dispatch/dashboard',
+      href: '/dispatch',
       submenu: [
-        { label: 'Dispatch Dashboard', href: '/dispatch/dashboard' },
         { label: 'Dispatch', href: '/dispatch' },
         { label: 'Sites', href: '/sites' },
         { label: 'Site Maps', href: '/sites/maps' },
