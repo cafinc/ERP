@@ -1568,11 +1568,16 @@ export default function CustomerFormPage() {
                                   }
                                   setCustomerForm({ ...customerForm, contacts: newContacts });
                                 }}
-                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:border-transparent ${
+                                  fieldErrors[`contact_${index}_name`] ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'
+                                }`}
                                 placeholder="John Doe"
                                 required={index === 0 || !customerForm.same_person_all_contacts}
                                 disabled={customerForm.same_person_all_contacts && index !== 0}
                               />
+                              {fieldErrors[`contact_${index}_name`] && (
+                                <p className="text-red-500 text-xs mt-1">{fieldErrors[`contact_${index}_name`]}</p>
+                              )}
                             </div>
 
                             <div>
