@@ -1515,46 +1515,48 @@ export default function CustomerFormPage() {
                     </div>
                   </div>
 
-                  {/* Contact Persons */}
-                  <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center space-x-2">
-                      <Users className="w-5 h-5 text-[#3f72af]" />
-                      <span>Contact Persons *</span>
-                    </h2>
-
-                    {/* Same Person Toggle */}
-                    <div className="mb-6">
-                      <div className="flex items-center gap-3">
+                  {/* Contact Persons - Compact Layout */}
+                  <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-6 backdrop-blur-sm hover:shadow-md transition-shadow">
+                    <div className="flex items-center justify-between mb-4">
+                      <h2 className="text-xl font-bold text-gray-900 flex items-center space-x-2">
+                        <Users className="w-5 h-5 text-[#3f72af]" />
+                        <span>Contact Persons *</span>
+                      </h2>
+                      
+                      {/* Same Person Toggle */}
+                      <div className="flex items-center gap-2">
                         <button
                           type="button"
                           onClick={() => setCustomerForm({ ...customerForm, same_person_all_contacts: !customerForm.same_person_all_contacts })}
-                          className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#3f72af] focus:ring-offset-2 flex-shrink-0 ${
+                          className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#3f72af] focus:ring-offset-2 flex-shrink-0 ${
                             customerForm.same_person_all_contacts ? 'bg-[#3f72af]' : 'bg-gray-200'
                           }`}
                         >
                           <span
-                            className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                              customerForm.same_person_all_contacts ? 'translate-x-6' : 'translate-x-1'
+                            className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform ${
+                              customerForm.same_person_all_contacts ? 'translate-x-5' : 'translate-x-1'
                             }`}
                           />
                         </button>
-                        <label className="text-sm font-medium text-gray-700">
-                          All positions are the same person
+                        <label className="text-xs font-medium text-gray-600 whitespace-nowrap">
+                          Same person
                         </label>
                       </div>
                     </div>
 
-                    <div className="space-y-6">
+                    {/* Compact Grid Layout */}
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
                       {customerForm.contacts.map((contact, index) => (
-                        <div key={index} className="bg-white shadow-sm rounded-lg p-6 border border-gray-200">
-                          <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                            <User className="w-5 h-5 mr-2 text-[#3f72af]" />
-                            <span>{contact.position}</span>
-                          </h3>
+                        <div key={index} className="bg-gray-50 rounded-lg p-3 border border-gray-200">
+                          <div className="flex items-center gap-1.5 mb-2 pb-2 border-b border-gray-200">
+                            <User className="w-4 h-4 text-[#3f72af]" />
+                            <span className="text-xs font-semibold text-gray-700">{contact.position}</span>
+                          </div>
 
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div className="md:col-span-2">
-                              <label className="block text-sm font-medium text-gray-700 mb-2">
+                          <div className="space-y-2">
+                            {/* Name Field */}
+                            <div>
+                              <label className="block text-xs font-medium text-gray-600 mb-1">
                                 Name {index === 0 || !customerForm.same_person_all_contacts ? '*' : ''}
                               </label>
                               <input
@@ -1569,7 +1571,7 @@ export default function CustomerFormPage() {
                                   }
                                   setCustomerForm({ ...customerForm, contacts: newContacts });
                                 }}
-                                className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:border-transparent ${
+                                className={`w-full px-2 py-1.5 text-sm border rounded focus:ring-1 focus:border-transparent ${
                                   fieldErrors[`contact_${index}_name`] ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'
                                 }`}
                                 placeholder="John Doe"
@@ -1577,16 +1579,17 @@ export default function CustomerFormPage() {
                                 disabled={customerForm.same_person_all_contacts && index !== 0}
                               />
                               {fieldErrors[`contact_${index}_name`] && (
-                                <p className="text-red-500 text-xs mt-1">{fieldErrors[`contact_${index}_name`]}</p>
+                                <p className="text-red-500 text-[10px] mt-0.5">{fieldErrors[`contact_${index}_name`]}</p>
                               )}
                             </div>
 
+                            {/* Email Field */}
                             <div>
-                              <label className="block text-sm font-medium text-gray-700 mb-2">
+                              <label className="block text-xs font-medium text-gray-600 mb-1">
                                 Email {index === 0 || !customerForm.same_person_all_contacts ? '*' : ''}
                               </label>
                               <div className="relative">
-                                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                                <Mail className="absolute left-2 top-1/2 transform -translate-y-1/2 w-3.5 h-3.5 text-gray-400" />
                                 <input
                                   type="email"
                                   value={contact.email}
@@ -1600,7 +1603,7 @@ export default function CustomerFormPage() {
                                     setCustomerForm({ ...customerForm, contacts: newContacts });
                                   }}
                                   onBlur={e => handleContactEmailBlur(index, e.target.value)}
-                                  className={`w-full pl-10 pr-4 py-1.5 border rounded-lg focus:ring-2 focus:border-transparent text-sm ${
+                                  className={`w-full pl-7 pr-2 py-1.5 text-sm border rounded focus:ring-1 focus:border-transparent ${
                                     fieldErrors[`contact_${index}_email`] ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'
                                   }`}
                                   placeholder="john@company.com"
@@ -1609,21 +1612,22 @@ export default function CustomerFormPage() {
                                 />
                               </div>
                               {fieldErrors[`contact_${index}_email`] && (
-                                <p className="text-red-500 text-xs mt-1">{fieldErrors[`contact_${index}_email`]}</p>
+                                <p className="text-red-500 text-[10px] mt-0.5">{fieldErrors[`contact_${index}_email`]}</p>
                               )}
                             </div>
 
+                            {/* Phone Field */}
                             <div>
-                              <label className="block text-sm font-medium text-gray-700 mb-2">
+                              <label className="block text-xs font-medium text-gray-600 mb-1">
                                 Phone {index === 0 || !customerForm.same_person_all_contacts ? '*' : ''}
                               </label>
                               <div className="relative">
-                                <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                                <Phone className="absolute left-2 top-1/2 transform -translate-y-1/2 w-3.5 h-3.5 text-gray-400" />
                                 <input
                                   type="tel"
                                   value={contact.phone}
                                   onChange={e => handleContactPhoneChange(index, e.target.value)}
-                                  className={`w-full pl-10 pr-4 py-1.5 border rounded-lg focus:ring-2 focus:border-transparent text-sm ${
+                                  className={`w-full pl-7 pr-2 py-1.5 text-sm border rounded focus:ring-1 focus:border-transparent ${
                                     fieldErrors[`contact_${index}_phone`] ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'
                                   }`}
                                   placeholder="(555) 123-4567"
@@ -1632,7 +1636,7 @@ export default function CustomerFormPage() {
                                 />
                               </div>
                               {fieldErrors[`contact_${index}_phone`] && (
-                                <p className="text-red-500 text-xs mt-1">{fieldErrors[`contact_${index}_phone`]}</p>
+                                <p className="text-red-500 text-[10px] mt-0.5">{fieldErrors[`contact_${index}_phone`]}</p>
                               )}
                             </div>
                           </div>
