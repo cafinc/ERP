@@ -6,6 +6,7 @@ import PageHeader from '@/components/PageHeader';
 import api from '@/lib/api';
 import {
   Users,
+  User,
   Plus,
   Search,
   Filter,
