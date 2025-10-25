@@ -985,36 +985,66 @@ export default function CustomerFormPage() {
       <div className="flex-1 bg-gradient-to-br from-gray-50 to-blue-50/30 overflow-y-auto">
         <div className="max-w-4xl mx-auto p-6">
           <form id="customer-form" onSubmit={handleSubmit} className="space-y-6 pb-8">
-              {/* Customer Type Selection */}
+              {/* Customer Type Selection - Enhanced Design */}
               {!isEdit && (
-                <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-4">Customer Type *</h2>
-                    <div className="grid grid-cols-2 gap-4">
+                <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 hover:shadow-2xl transition-all">
+                    <div className="mb-6">
+                      <h2 className="text-2xl font-bold text-gray-900 mb-2 flex items-center gap-2">
+                        <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center">
+                          <Users className="w-5 h-5 text-white" />
+                        </div>
+                        Customer Type *
+                      </h2>
+                      <p className="text-gray-600">Choose the type of customer you're adding</p>
+                    </div>
+                    <div className="grid grid-cols-2 gap-6">
                       <button
                         type="button"
                         onClick={() => handleTypeSelection('individual')}
-                        className={`p-8 border-2 rounded-xl transition-all hover:scale-105 ${
+                        className={`group relative p-8 border-2 rounded-2xl transition-all duration-300 ${
                           customerForm.customer_type === 'individual'
-                            ? 'border-[#3f72af] bg-blue-50 shadow-lg'
-                            : 'border-gray-300 hover:border-gray-400 hover:shadow-md bg-white'
+                            ? 'border-blue-500 bg-gradient-to-br from-blue-50 to-indigo-50 shadow-xl scale-105'
+                            : 'border-gray-200 hover:border-blue-300 hover:shadow-lg bg-white hover:scale-102'
                         }`}
                       >
-                        <Users className="w-12 h-12 mx-auto mb-4 text-[#3f72af]" />
-                        <p className="font-bold text-gray-900 text-xl">Contact</p>
-                        <p className="text-sm text-gray-600 mt-2">Person or homeowner</p>
+                        <div className={`absolute top-4 right-4 w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all ${
+                          customerForm.customer_type === 'individual'
+                            ? 'border-blue-500 bg-blue-500'
+                            : 'border-gray-300 bg-white'
+                        }`}>
+                          {customerForm.customer_type === 'individual' && (
+                            <Check className="w-4 h-4 text-white" />
+                          )}
+                        </div>
+                        <Users className={`w-16 h-16 mx-auto mb-4 transition-colors ${
+                          customerForm.customer_type === 'individual' ? 'text-blue-600' : 'text-gray-400 group-hover:text-blue-500'
+                        }`} />
+                        <p className="font-bold text-gray-900 text-xl mb-2">Contact</p>
+                        <p className="text-sm text-gray-600">Individual person or homeowner</p>
                       </button>
                       <button
                         type="button"
                         onClick={() => handleTypeSelection('company')}
-                        className={`p-8 border-2 rounded-xl transition-all hover:scale-105 ${
+                        className={`group relative p-8 border-2 rounded-2xl transition-all duration-300 ${
                           customerForm.customer_type === 'company'
-                            ? 'border-[#3f72af] bg-blue-50 shadow-lg'
-                            : 'border-gray-300 hover:border-gray-400 hover:shadow-md bg-white'
+                            ? 'border-blue-500 bg-gradient-to-br from-blue-50 to-indigo-50 shadow-xl scale-105'
+                            : 'border-gray-200 hover:border-blue-300 hover:shadow-lg bg-white hover:scale-102'
                         }`}
                       >
-                        <Building className="w-12 h-12 mx-auto mb-4 text-[#3f72af]" />
-                        <p className="font-bold text-gray-900 text-xl">Company</p>
-                        <p className="text-sm text-gray-600 mt-2">Business or organization</p>
+                        <div className={`absolute top-4 right-4 w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all ${
+                          customerForm.customer_type === 'company'
+                            ? 'border-blue-500 bg-blue-500'
+                            : 'border-gray-300 bg-white'
+                        }`}>
+                          {customerForm.customer_type === 'company' && (
+                            <Check className="w-4 h-4 text-white" />
+                          )}
+                        </div>
+                        <Building className={`w-16 h-16 mx-auto mb-4 transition-colors ${
+                          customerForm.customer_type === 'company' ? 'text-blue-600' : 'text-gray-400 group-hover:text-blue-500'
+                        }`} />
+                        <p className="font-bold text-gray-900 text-xl mb-2">Company</p>
+                        <p className="text-sm text-gray-600">Business or organization</p>
                       </button>
                     </div>
                 </div>
