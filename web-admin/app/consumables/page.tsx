@@ -213,24 +213,20 @@ export default function ConsumablesPage() {
           { label: "Home", href: "/" },
           { label: "Consumable", href: "/consumables" }
         ]}
-        actions={
-          <div className="flex gap-3">
-            <button
-              onClick={() => router.push('/consumables/analytics')}
-              className="flex items-center gap-2 px-4 py-2 text-sm border-2 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 hover:border-gray-400 transition-all font-semibold"
-            >
-              <BarChart3 className="w-4 h-4" />
-              Analytics
-            </button>
-            <button
-              onClick={() => setShowCreateModal(true)}
-              className="flex items-center gap-2 px-4 py-2 text-sm bg-[#3f72af] hover:bg-[#2c5282] text-white rounded-lg font-semibold transition-all shadow-sm hover:shadow-md"
-            >
-              <Plus className="w-4 h-4" />
-              Create Consumable
-            </button>
-          </div>
-        }
+        actions={[
+          {
+            label: "Analytics",
+            onClick: () => router.push('/consumables/analytics'),
+            icon: <BarChart3 className="w-4 h-4 mr-2" />,
+            variant: 'secondary'
+          },
+          {
+            label: "Create Consumable",
+            onClick: () => setShowCreateModal(true),
+            icon: <Plus className="w-4 h-4 mr-2" />,
+            variant: 'primary'
+          }
+        ]}
       />
       
       <div className="space-y-6">{/* Stats */}
