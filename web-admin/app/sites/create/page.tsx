@@ -64,6 +64,9 @@ export default function CreateSitePage() {
   const [showCustomerDropdown, setShowCustomerDropdown] = useState(false);
   const [siteType, setSiteType] = useState('');
   const [address, setAddress] = useState('');
+  const [city, setCity] = useState('');
+  const [province, setProvince] = useState('AB');
+  const [postalCode, setPostalCode] = useState('');
   const [latitude, setLatitude] = useState('');
   const [longitude, setLongitude] = useState('');
   const [areaSize, setAreaSize] = useState('');
@@ -71,6 +74,22 @@ export default function CreateSitePage() {
   const [crewNotes, setCrewNotes] = useState('');
   const [siteServices, setSiteServices] = useState<SiteService[]>([]);
   const [showManualCoordinates, setShowManualCoordinates] = useState(false);
+
+  const CANADIAN_PROVINCES = [
+    { code: 'AB', name: 'Alberta' },
+    { code: 'BC', name: 'British Columbia' },
+    { code: 'MB', name: 'Manitoba' },
+    { code: 'NB', name: 'New Brunswick' },
+    { code: 'NL', name: 'Newfoundland and Labrador' },
+    { code: 'NT', name: 'Northwest Territories' },
+    { code: 'NS', name: 'Nova Scotia' },
+    { code: 'NU', name: 'Nunavut' },
+    { code: 'ON', name: 'Ontario' },
+    { code: 'PE', name: 'Prince Edward Island' },
+    { code: 'QC', name: 'Quebec' },
+    { code: 'SK', name: 'Saskatchewan' },
+    { code: 'YT', name: 'Yukon' },
+  ];
 
   // Service modal states
   const [showServiceModal, setShowServiceModal] = useState(false);
