@@ -677,24 +677,31 @@ export default function CustomerFormPage() {
           ? `${customerForm.first_name} ${customerForm.last_name}`.trim()
           : customerForm.company_name;
 
-      // Construct address from broken out fields
-      const addressParts = [
-        customerForm.street_address,
-        customerForm.city,
-        `${customerForm.province} ${customerForm.postal_code}`,
-        customerForm.country,
-      ].filter(Boolean);
-      const address = addressParts.join(', ');
+      // Construct address from broken out fields (only for individuals)
+      let address = '';
+      if (customerForm.customer_type === 'individual') {
+        const addressParts = [
+          customerForm.street_address,
+          customerForm.city,
+          `${customerForm.province} ${customerForm.postal_code}`,
+          customerForm.country,
+        ].filter(Boolean);
+        address = addressParts.join(', ');
+      }
 
       const submitData: any = {
         name,
         email: customerForm.email,
         phone: customerForm.phone,
-        address,
         customer_type: customerForm.customer_type,
         notes: customerForm.notes,
         active: customerForm.active,
       };
+
+      // Only add address for individuals (companies don't have address section anymore)
+      if (customerForm.customer_type === 'individual' && address) {
+        submitData.address = address;
+      }
 
       // Add mobile to custom_fields if provided
       if (customerForm.mobile) {
