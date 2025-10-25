@@ -312,14 +312,22 @@ export default function CustomerFormPage() {
       if (!city) {
         if (types.includes('locality')) {
           city = component.long_name;
+          console.log('City found (locality):', city);
         } else if (types.includes('sublocality')) {
           city = component.long_name;
+          console.log('City found (sublocality):', city);
         } else if (types.includes('sublocality_level_1')) {
           city = component.long_name;
+          console.log('City found (sublocality_level_1):', city);
         } else if (types.includes('postal_town')) {
           city = component.long_name;
+          console.log('City found (postal_town):', city);
+        } else if (types.includes('administrative_area_level_2')) {
+          city = component.long_name;
+          console.log('City found (administrative_area_level_2):', city);
         } else if (types.includes('administrative_area_level_3')) {
           city = component.long_name;
+          console.log('City found (administrative_area_level_3):', city);
         }
       }
       
@@ -333,6 +341,12 @@ export default function CustomerFormPage() {
         postalCode = component.long_name;
       }
     });
+
+    // Fallback: if city is still empty, log warning
+    if (!city) {
+      console.warn('City could not be extracted from Google Places. Available components:', 
+        components.map(c => ({ types: c.types, name: c.long_name })));
+    }
 
     console.log('Google Places - Extracted values:', { street, city, province, postalCode });
 
