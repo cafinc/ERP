@@ -934,22 +934,35 @@ export default function LeadsPage() {
               </div>
             </form>
 
-            <div className="p-4 border-t border-gray-200 flex justify-end gap-3">
+            {/* Modal Footer */}
+            <div className="flex items-center justify-end gap-3 p-6 border-t border-gray-200/50">
               <button
+                type="button"
                 onClick={() => {
                   setShowModal(false);
                   resetForm();
                 }}
-                className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg font-medium transition-colors"
+                className="px-5 py-2 text-sm border-2 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 hover:border-gray-400 transition-all font-semibold"
               >
                 Cancel
               </button>
               <button
+                type="button"
                 onClick={handleCreateOrUpdate}
                 disabled={saving}
-                className="px-6 py-2 bg-[#3f72af] hover:bg-[#2c5282] disabled:bg-gray-300 text-white rounded-lg font-medium transition-colors"
+                className="flex items-center gap-2 px-5 py-2 text-sm bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] disabled:bg-gray-400 disabled:cursor-not-allowed transition-all shadow-sm hover:shadow-md font-semibold"
               >
-                {saving ? 'Saving...' : editingLead ? 'Update' : 'Create'}
+                {saving ? (
+                  <>
+                    <RefreshCw className="w-4 h-4 animate-spin" />
+                    Saving...
+                  </>
+                ) : (
+                  <>
+                    <CheckCircle className="w-4 h-4" />
+                    {editingLead ? 'Update Lead' : 'Create Lead'}
+                  </>
+                )}
               </button>
             </div>
           </div>
