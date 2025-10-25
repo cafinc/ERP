@@ -919,6 +919,7 @@ export default function CustomerFormPage() {
                         <div className="relative">
                           <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                           <input
+                            name="email"
                             type="email"
                             value={customerForm.email}
                             onChange={e => setCustomerForm({ ...customerForm, email: e.target.value })}
