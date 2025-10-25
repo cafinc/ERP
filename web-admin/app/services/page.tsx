@@ -61,6 +61,16 @@ export default function ServicesPage() {
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [filterType, setFilterType] = useState('all');
+  const [showCreateModal, setShowCreateModal] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    service_type: 'plowing',
+    description: '',
+    active: true,
+  });
+  const [pricingEntries, setPricingEntries] = useState([
+    { unit: 'hourly', amount: '' as any },
+  ]);
 
   useEffect(() => {
     loadServices();
