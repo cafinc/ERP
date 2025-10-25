@@ -340,9 +340,10 @@ export default function CustomerDetailPage() {
       setArchiving(true);
       const wasActive = customer.active;
       
+      // Toggle the active status
       await api.put(`/customers/${customerId}`, {
         ...customer,
-        active: false,
+        active: !wasActive,
       });
       
       setShowArchiveModal(false);
@@ -361,7 +362,7 @@ export default function CustomerDetailPage() {
       }, 2000);
       
     } catch (error) {
-      console.error('Error archiving customer:', error);
+      console.error('Error archiving/unarchiving customer:', error);
       alert('Error updating customer status');
     } finally {
       setArchiving(false);
