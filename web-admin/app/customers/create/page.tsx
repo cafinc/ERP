@@ -1273,7 +1273,7 @@ export default function CustomerFormPage() {
                     </h2>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="md:col-span-2">
+                    <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
                         Legal Business Name *
                       </label>
@@ -1289,7 +1289,7 @@ export default function CustomerFormPage() {
                       />
                     </div>
 
-                    <div className="md:col-span-2">
+                    <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
                         Operating As
                       </label>
