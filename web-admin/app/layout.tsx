@@ -5,6 +5,7 @@ import './globals.css';
 import { AuthProvider } from '@/lib/auth';
 import { usePathname } from 'next/navigation';
 import HybridNavigationTopBar from '@/components/HybridNavigationTopBar';
+import { Toaster } from 'react-hot-toast';
 
 const inter = Inter({ subsets: ['latin'] });
 
