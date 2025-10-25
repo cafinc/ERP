@@ -307,7 +307,7 @@ export default function PageHeader({
           </div>
         )}
 
-        {/* Tabs */}
+        {/* Primary Tabs */}
         {tabs && tabs.length > 0 && (
           <div className="flex items-center gap-6 border-b border-gray-200 -mb-5 pb-0">
             <div className="flex gap-6">
@@ -356,6 +356,28 @@ export default function PageHeader({
                 {customTabsRight}
               </div>
             )}
+          </div>
+        )}
+
+        {/* Secondary Tabs (Type filters) */}
+        {secondaryTabs && secondaryTabs.length > 0 && (
+          <div className="flex items-center gap-3 mt-3 overflow-x-auto">
+            {secondaryTabs.map((tab) => (
+              <button
+                key={tab.value}
+                onClick={() => onSecondaryTabChange && onSecondaryTabChange(tab.value)}
+                className={`px-3 py-1.5 text-xs font-medium rounded-full whitespace-nowrap transition-colors ${
+                  activeSecondaryTab === tab.value
+                    ? 'bg-[#3f72af] text-white'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+              >
+                {tab.label}
+                {tab.count !== undefined && (
+                  <span className="ml-1.5">({tab.count})</span>
+                )}
+              </button>
+            ))}
           </div>
         )}
       </div>
