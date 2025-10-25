@@ -1951,12 +1951,17 @@ export default function CustomerFormPage() {
                   <div className="relative">
                     <input
                       id="address-autocomplete"
+                      name="street_address"
                       type="text"
                       value={customerForm.street_address}
                       onChange={e =>
                         setCustomerForm({ ...customerForm, street_address: e.target.value })
                       }
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:border-transparent ${
+                        fieldErrors.street_address 
+                          ? 'border-red-500 focus:ring-red-500' 
+                          : 'border-gray-300 focus:ring-blue-500'
+                      }`}
                       placeholder="123 Main Street"
                       required
                     />
