@@ -689,23 +689,6 @@ export default function CustomerFormPage() {
           companyId = response.data._id || response.data.id;
         }
 
-        // If company with main contact, create the contact as individual
-        if (customerForm.customer_type === 'company' && customerForm.main_contact.first_name) {
-          const contactName = `${customerForm.main_contact.first_name} ${customerForm.main_contact.last_name}`.trim();
-          const contactData = {
-            name: contactName,
-            email: customerForm.main_contact.email,
-            phone: customerForm.main_contact.phone,
-            address, // Use same address as company
-            customer_type: 'individual',
-            company_id: companyId,
-            company_name: customerForm.company_name,
-            notes: `Position: ${customerForm.main_contact.position}`,
-            active: true,
-          };
-
-          await api.post('/customers', contactData);
-        }
         
         // Create site if toggle is ON
         if (createSite && siteName) {
