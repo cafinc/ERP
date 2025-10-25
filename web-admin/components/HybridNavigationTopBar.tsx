@@ -99,9 +99,8 @@ export default function HybridNavigationTopBar({ children }: { children: React.R
     {
       label: 'Dispatch',
       icon: MapPin,
-      href: '/dispatch/dashboard',
+      href: '/dispatch',
       submenu: [
-        { label: 'Dispatch Dashboard', href: '/dispatch/dashboard', icon: LayoutDashboard },
         { label: 'Dispatch', href: '/dispatch', icon: MapPin },
         { label: 'Sites', href: '/sites', icon: MapPin },
         { label: 'Site Maps', href: '/sites/maps', icon: MapPin },
