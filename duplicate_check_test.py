@@ -10,7 +10,7 @@ import sys
 from datetime import datetime
 
 # Backend URL from environment
-BACKEND_URL = "https://biz-ops.preview.emergentagent.com/api"
+BACKEND_URL = "https://erp-modernizer.preview.emergentagent.com/api"
 
 class DuplicateCustomerTester:
     def __init__(self):

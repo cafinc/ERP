@@ -98,7 +98,7 @@
 
 **Option 2: Public Access** (requires routing configuration)
 The web-admin needs to be configured to serve on the main domain:
-`https://biz-ops.preview.emergentagent.com`
+`https://erp-modernizer.preview.emergentagent.com`
 
 ---
 
