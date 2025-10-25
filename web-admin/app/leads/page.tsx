@@ -89,6 +89,18 @@ const LEAD_SOURCES = [
   'Other',
 ];
 
+// Service types with icons for lead requests
+const SERVICE_TYPES = [
+  { value: 'plowing', label: 'Snow Plowing', icon: '❄️', color: 'blue' },
+  { value: 'sanding', label: 'Sanding', icon: '⚪', color: 'yellow' },
+  { value: 'salting', label: 'Salting', icon: '🧂', color: 'orange' },
+  { value: 'sidewalk_clear', label: 'Sidewalk Clear', icon: '🚶', color: 'green' },
+  { value: 'hauling', label: 'Snow Hauling', icon: '🚛', color: 'purple' },
+  { value: 'ice_management', label: 'Ice Management', icon: '🧊', color: 'cyan' },
+  { value: 'site_checks', label: 'Site Checks', icon: '🔍', color: 'indigo' },
+  { value: 'maintenance', label: 'Maintenance', icon: '🔧', color: 'gray' },
+];
+
 export default function LeadsPage() {
   const router = useRouter();
   const [leads, setLeads] = useState<Lead[]>([]);
