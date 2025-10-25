@@ -31,7 +31,20 @@ import {
   RefreshCw,
   Download,
   Eye,
+  Snowflake,
+  Wrench,
+  Hammer,
+  Truck,
+  Home,
+  Briefcase,
+  Upload,
+  File,
+  X,
+  Image as ImageIcon,
+  Paperclip,
 } from 'lucide-react';
+import AddressInput from '@/components/AddressInput';
+import { formatPhoneNumber } from '@/lib/utils/formatters';
 
 interface Lead {
   id: string;
