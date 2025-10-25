@@ -2202,22 +2202,22 @@ export default function CustomerFormPage() {
               </div>
               
               {/* Action Buttons */}
-              <div className="flex justify-between items-center pt-6 border-t">
+              <div className="flex justify-end items-center gap-3 pt-6">
                 <button
                   type="button"
                   onClick={() => router.push('/customers')}
-                  className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors"
+                  className="px-5 py-2 text-sm font-semibold text-gray-700 bg-white border-2 border-gray-300 rounded-lg hover:bg-gray-50 hover:border-gray-400 transition-all"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={saving}
-                  className="px-4 py-2 text-sm font-medium bg-[#3f72af] text-white rounded-lg hover:bg-[#2f5a8f] focus:outline-none focus:ring-2 focus:ring-[#3f72af] focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
+                  className="px-5 py-2 text-sm font-semibold bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center gap-2 shadow-sm hover:shadow-md"
                 >
                   {saving ? (
                     <>
-                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                      <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent"></div>
                       Creating...
                     </>
                   ) : (
