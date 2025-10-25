@@ -2115,20 +2115,21 @@ export default function CustomerFormPage() {
             )}
 
             {/* Additional Notes */}
-            <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center space-x-2">
-                <FileText className="w-5 h-5 text-[#3f72af]" />
-                <span>Additional Information</span>
-              </h2>
+            <div className="bg-white/95 backdrop-blur-md rounded-3xl shadow-xl border border-white/40 overflow-hidden hover:shadow-2xl transition-shadow">
+              <div className="bg-gradient-to-br from-orange-50 to-yellow-50 border-b-2 border-orange-100 p-6">
+                <h3 className="text-sm font-bold text-gray-900 flex items-center gap-2">
+                  <FileText className="w-4 h-4 text-orange-600" />
+                  Additional Information
+                </h3>
+              </div>
 
-              <div className="space-y-6">
-                {/* File Upload Section */}
+              <div className="p-6 space-y-4">{/* File Upload Section */}
                 <div>
-                  <div className="bg-white shadow-sm rounded-lg p-6 border border-gray-200">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                      <Paperclip className="w-5 h-5 mr-2 text-[#3f72af]" />
-                      <span>Documents & Photos</span>
-                    </h3>
+                  <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl p-6 border border-gray-200">
+                    <h4 className="text-sm font-bold text-gray-900 mb-4 flex items-center gap-2">
+                      <Paperclip className="w-4 h-4 text-[#3f72af]" />
+                      Documents & Photos
+                    </h4>
                     
                     {/* Upload Button */}
                     <div className="mb-4">
