@@ -1413,6 +1413,9 @@ class CustomerManagementTests:
         self.test_phone_format_validation()
         self.test_communication_preferences_detailed()
         
+        # Site Creation API Tests
+        self.test_site_creation_api_comprehensive()
+        
         self.test_error_handling()
         
         end_time = time.time()
