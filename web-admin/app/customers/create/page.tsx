@@ -2096,6 +2096,7 @@ export default function CustomerFormPage() {
                 </div>
               </div>
             </div>
+            )}
 
             {/* Additional Notes */}
             <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
