@@ -582,20 +582,22 @@ export default function CreateSitePage() {
               </div>
             </div>
 
-            {/* Notes Card */}
-            <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-                <FileText className="w-6 h-6 text-[#3f72af] mr-2" />
-                Site Notes
-              </h2>
+            {/* Notes Section - Orange/Yellow for alerts/warnings */}
+            <div className="bg-white/95 backdrop-blur-md rounded-3xl shadow-xl border border-white/40 overflow-hidden hover:shadow-2xl transition-shadow">
+              <div className="bg-gradient-to-br from-orange-50 to-yellow-50 border-b-2 border-orange-100 p-6">
+                <h3 className="text-sm font-bold text-gray-900 flex items-center gap-2">
+                  <FileText className="w-4 h-4 text-orange-600" />
+                  Site Notes & Instructions
+                </h3>
+              </div>
 
-              <div className="space-y-6">
+              <div className="p-6 space-y-4">
                 {/* Internal Notes */}
                 <div>
-                  <label className="block text-sm font-semibold text-gray-900 mb-2">
+                  <label className="block text-xs font-medium text-gray-700 mb-2">
                     Internal Notes (Admin Only)
                   </label>
-                  <p className="text-sm text-gray-600 mb-3 flex items-center">
+                  <p className="text-xs text-gray-500 mb-2 flex items-center">
                     <AlertCircle className="w-4 h-4 mr-1" />
                     Only visible to administrators
                   </p>
