@@ -2102,7 +2102,7 @@ export default function CustomerFormPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Country *</label>
+                  <label className="block text-xs font-medium text-gray-700 mb-2">Country <span className="text-red-500">*</span></label>
                   <input
                     type="text"
                     value={customerForm.country}
@@ -2115,7 +2115,7 @@ export default function CustomerFormPage() {
                 </div>
               </div>
             </div>
-            </div>
+            )}
 
             {/* Additional Notes */}
             <div className="bg-white/95 backdrop-blur-md rounded-3xl shadow-xl border border-white/40 overflow-hidden hover:shadow-2xl transition-shadow">
