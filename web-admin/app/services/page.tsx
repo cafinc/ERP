@@ -62,6 +62,9 @@ export default function ServicesPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [filterType, setFilterType] = useState('all');
   const [showCreateModal, setShowCreateModal] = useState(false);
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [showFilterDropdown, setShowFilterDropdown] = useState(false);
+  const [filterActive, setFilterActive] = useState('all'); // 'all', 'active', 'inactive'
   const [formData, setFormData] = useState({
     name: '',
     service_type: 'plowing',
