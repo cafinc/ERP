@@ -110,15 +110,13 @@ export default function ServicesPage() {
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         {/* Compact Header */}
         <PageHeader
-        title="Services"
-        subtitle="Manage service offerings and pricing"
-        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Dispatch", href: "/dispatch" }, { label: "Services" }]}
-        title="Services"
-          
+          title="Services"
+          subtitle="Manage service offerings and pricing"
+          breadcrumbs={[{ label: "Home", href: "/" }, { label: "Dispatch", href: "/dispatch" }, { label: "Services" }]}
           actions={[
             {
               label: 'Add Service',
-              icon: Plus,
+              icon: <Plus className="w-4 h-4 mr-2" />,
               onClick: () => router.push('/services/create'),
               variant: 'primary',
             },
