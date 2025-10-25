@@ -1421,14 +1421,13 @@ export default function CustomerDetailPage() {
 
         {/* Communication Center - Full View with Tabs */}
         {activeTab === 'communications' && customer && (
-          <div className="mt-6">
-            <CustomerCommunicationsTab
-              customerId={customerId}
-              customerName={customer.name}
-              customerEmail={customer.email}
-              customerPhone={customer.phone}
-              communications={communications}
-              onRefresh={async () => {
+          <CustomerCommunicationsTab
+            customerId={customerId}
+            customerName={customer.name}
+            customerEmail={customer.email}
+            customerPhone={customer.phone}
+            communications={communications}
+            onRefresh={async () => {
                 // Reload communications
                 try {
                   const allCommunications: any[] = [];
