@@ -16,6 +16,13 @@ import {
   Building,
   Archive,
   Edit,
+  LayoutGrid,
+  List,
+  Filter,
+  Home,
+  Factory,
+  ShoppingBag,
+  Truck,
 } from 'lucide-react';
 
 interface Site {
