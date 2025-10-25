@@ -56,6 +56,8 @@ export default function SitesPage() {
   const [filterCustomer, setFilterCustomer] = useState('all');
   const [filterType, setFilterType] = useState('all');
   const [filterActive, setFilterActive] = useState('active');
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [showFilterDropdown, setShowFilterDropdown] = useState(false);
 
   useEffect(() => {
     loadData();
