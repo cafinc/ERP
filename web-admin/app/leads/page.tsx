@@ -15,6 +15,8 @@ import {
   UserX,
   Clock,
   Phone,
+  PhoneCall,
+  UserPlus,
   Mail,
   MapPin,
   DollarSign,
