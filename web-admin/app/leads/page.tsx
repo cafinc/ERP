@@ -884,7 +884,25 @@ export default function LeadsPage() {
                     </div>
                   </div>
 
+                  {/* Phone first, then Email */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-900 mb-2">
+                        Phone <span className="text-red-500">*</span>
+                      </label>
+                      <div className="relative">
+                        <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                        <input
+                          type="tel"
+                          value={formData.phone}
+                          onChange={(e) => handlePhoneChange(e.target.value)}
+                          className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
+                          placeholder="(555) 123-4567"
+                          required
+                        />
+                      </div>
+                    </div>
+                    
                     <div>
                       <label className="block text-sm font-semibold text-gray-900 mb-2">
                         Email <span className="text-red-500">*</span>
@@ -901,33 +919,22 @@ export default function LeadsPage() {
                         />
                       </div>
                     </div>
-
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-900 mb-2">
-                        Phone <span className="text-red-500">*</span>
-                      </label>
-                      <div className="relative">
-                        <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-                        <input
-                          type="tel"
-                          value={formData.phone}
-                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                          className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
-                          placeholder="(555) 123-4567"
-                          required
-                        />
-                      </div>
-                    </div>
                   </div>
 
+                  {/* Use AddressInput component */}
                   <div>
                     <label className="block text-sm font-semibold text-gray-900 mb-2">
                       <MapPin className="w-4 h-4 inline-block mr-1 text-[#3f72af]" />
                       Address
                     </label>
-                    <input
-                      type="text"
+                    <AddressInput
                       value={formData.address}
+                      onChange={(address) => setFormData({ ...formData, address })}
+                      placeholder="Start typing address..."
+                    />
+                  </div>
+                </div>
+              </div>
                       onChange={(e) => setFormData({ ...formData, address: e.target.value })}
                       className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
                       placeholder="123 Main St, City, Province"
