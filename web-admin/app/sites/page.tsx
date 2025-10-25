@@ -151,6 +151,32 @@ export default function SitesPage() {
               variant: 'primary',
             },
           ]}
+          stats={[
+            { 
+              label: "Total Sites", 
+              value: sites.length, 
+              icon: <MapPin className="w-4 h-4" />,
+              color: "blue"
+            },
+            { 
+              label: "Active", 
+              value: sites.filter(s => s.active).length, 
+              icon: <MapPin className="w-4 h-4" />,
+              color: "green"
+            },
+            { 
+              label: "Customers", 
+              value: new Set(sites.map(s => s.customer_id)).size, 
+              icon: <Building className="w-4 h-4" />,
+              color: "purple"
+            },
+            { 
+              label: "Archived", 
+              value: sites.filter(s => !s.active).length, 
+              icon: <Archive className="w-4 h-4" />,
+              color: "orange"
+            },
+          ]}
           tabs={[
             { label: "Active", value: "active", count: sites.filter(s => s.active).length },
             { label: "Archived", value: "archived", count: sites.filter(s => !s.active).length },
