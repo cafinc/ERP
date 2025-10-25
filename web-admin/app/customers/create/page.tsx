@@ -1606,7 +1606,7 @@ export default function CustomerFormPage() {
                               </div>
 
                               <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">Email {index === 0 ? '*' : ''}</label>
                                 <input
                                   type="email"
                                   value={contact.email}
@@ -1622,7 +1622,7 @@ export default function CustomerFormPage() {
                               </div>
 
                               <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">Phone {index === 0 ? '*' : ''}</label>
                                 <input
                                   type="tel"
                                   value={contact.phone}
