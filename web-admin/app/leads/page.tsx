@@ -681,22 +681,12 @@ export default function LeadsPage() {
             </div>
           </div>
 
-              {/* Priority Filter */}
-              <select
-                value={priorityFilter}
-                onChange={(e) => setPriorityFilter(e.target.value)}
-                className="px-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
-              >
-                <option value="all">All Priority</option>
-                <option value="high">High Priority</option>
-                <option value="medium">Medium Priority</option>
-                <option value="low">Low Priority</option>
-              </select>
-
-              <button
-                onClick={loadLeads}
-                className="px-4 py-1.5 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg font-medium transition-colors text-sm flex items-center gap-2"
-              >
+          {/* View Switcher */}
+          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-2 mb-4 flex items-center gap-2">
+            <button
+              onClick={loadLeads}
+              className="px-4 py-1.5 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg font-medium transition-colors text-sm flex items-center gap-2"
+            >
                 <RefreshCw className="w-4 h-4" />
                 Refresh
               </button>
