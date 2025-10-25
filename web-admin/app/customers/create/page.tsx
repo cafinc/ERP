@@ -519,64 +519,76 @@ export default function CustomerFormPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    
+    // Reset previous errors
+    setFieldErrors({});
     const errors: Record<string, string> = {};
-
-    // Validation for required fields
+    
+    // Validate based on customer type
     if (customerForm.customer_type === 'individual') {
-      if (!customerForm.first_name) errors['first_name'] = 'First name is required';
-      if (!customerForm.last_name) errors['last_name'] = 'Last name is required';
+      // Contact validation
+      if (!customerForm.first_name?.trim()) errors.first_name = 'First name is required';
+      if (!customerForm.last_name?.trim()) errors.last_name = 'Last name is required';
+      if (!customerForm.email?.trim()) {
+        errors.email = 'Email is required';
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customerForm.email)) {
+        errors.email = 'Invalid email format';
+      }
+      if (!customerForm.phone?.trim()) {
+        errors.phone = 'Phone is required';
+      }
+      if (customerForm.communication_preference === 'sms' && !customerForm.mobile?.trim()) {
+        errors.mobile = 'Mobile number is required for SMS notifications';
+      }
     } else {
-      if (!customerForm.company_name) errors['company_name'] = 'Company name is required';
-      if (!customerForm.main_contact.first_name) errors['main_contact_first_name'] = 'First name is required';
-      if (!customerForm.main_contact.last_name) errors['main_contact_last_name'] = 'Last name is required';
-    }
-
-    // Email validation (required)
-    if (!customerForm.email) {
-      errors['email'] = 'Email is required';
-    } else if (!isValidEmail(customerForm.email)) {
-      errors['email'] = 'Invalid email format';
-    }
-
-    // Phone validation (required)
-    if (!customerForm.phone) {
-      errors['phone'] = 'Phone is required';
-    } else {
-      const cleaned = customerForm.phone.replace(/\D/g, '');
-      if (cleaned.length !== 10) {
-        errors['phone'] = 'Phone must be 10 digits';
+      // Company validation
+      if (!customerForm.company_name?.trim()) errors.company_name = 'Legal Business Name is required';
+      if (!customerForm.office_number?.trim()) errors.office_number = 'Office Number is required';
+      if (!customerForm.email?.trim()) {
+        errors.email = 'Email is required';
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customerForm.email)) {
+        errors.email = 'Invalid email format';
+      }
+      
+      // Manager contact validation (required)
+      if (!customerForm.contacts[0]?.name?.trim()) {
+        errors['contact_0_name'] = 'Manager name is required';
+      }
+      if (!customerForm.contacts[0]?.email?.trim()) {
+        errors['contact_0_email'] = 'Manager email is required';
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customerForm.contacts[0].email)) {
+        errors['contact_0_email'] = 'Invalid email format';
+      }
+      if (!customerForm.contacts[0]?.phone?.trim()) {
+        errors['contact_0_phone'] = 'Manager phone is required';
       }
     }
-
-    // Mobile validation (required if SMS communication preference)
-    if (customerForm.communication_preference === 'sms') {
-      if (!customerForm.mobile) {
-        errors['mobile'] = 'Mobile number is required for SMS communication';
-      } else {
-        const cleaned = customerForm.mobile.replace(/\D/g, '');
-        if (cleaned.length !== 10) {
-          errors['mobile'] = 'Mobile must be 10 digits';
-        }
-      }
+    
+    // Address validation (common)
+    if (!customerForm.street_address?.trim()) errors.street_address = 'Street address is required';
+    if (!customerForm.city?.trim()) errors.city = 'City is required';
+    if (!customerForm.province?.trim()) errors.province = 'Province is required';
+    if (!customerForm.postal_code?.trim()) errors.postal_code = 'Postal code is required';
+    
+    // Create Site validation
+    if (createSite && !siteName?.trim()) {
+      errors.site_name = 'Site name is required when Create Site is enabled';
     }
-
-    // Set all errors at once
+    
+    // If there are errors, set them and scroll to first error
     if (Object.keys(errors).length > 0) {
       setFieldErrors(errors);
-      alert('Please fix the errors in the form before submitting');
+      
+      // Scroll to first error
+      const firstErrorKey = Object.keys(errors)[0];
+      const errorElement = document.querySelector(`[name="${firstErrorKey}"], #${firstErrorKey}`);
+      if (errorElement) {
+        errorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      
+      // Show summary alert
+      alert(`Please fix ${Object.keys(errors).length} error(s) in the form before submitting.`);
       return;
-    }
-
-    // Phone validation and auto-format
-    if (customerForm.phone) {
-      customerForm.phone = formatPhoneNumber(customerForm.phone);
-    }
-    if (customerForm.mobile) {
-      customerForm.mobile = formatPhoneNumber(customerForm.mobile);
-    }
-    if (customerForm.main_contact?.phone) {
-      customerForm.main_contact.phone = formatPhoneNumber(customerForm.main_contact.phone);
     }
 
     if (!customerForm.email || !customerForm.phone || !customerForm.street_address) {
