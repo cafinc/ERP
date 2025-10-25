@@ -548,43 +548,6 @@ export default function LeadsPage() {
             </div>
           </div>
 
-          {/* View Toggle */}
-          <div className="mb-4 flex space-x-2">
-            <button
-              onClick={() => setViewMode('pipeline')}
-              className={`px-4 py-2 rounded-lg font-medium transition-colors text-sm ${
-                viewMode === 'pipeline'
-                  ? 'bg-[#3f72af] text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
-            >
-              <BarChart3 className="w-4 h-4 inline-block mr-2" />
-              Pipeline
-            </button>
-            <button
-              onClick={() => setViewMode('list')}
-              className={`px-4 py-2 rounded-lg font-medium transition-colors text-sm ${
-                viewMode === 'list'
-                  ? 'bg-[#3f72af] text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
-            >
-              <Users className="w-4 h-4 inline-block mr-2" />
-              List View
-            </button>
-            <button
-              onClick={() => setViewMode('analytics')}
-              className={`px-4 py-2 rounded-lg font-medium transition-colors text-sm ${
-                viewMode === 'analytics'
-                  ? 'bg-[#3f72af] text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
-            >
-              <BarChart3 className="w-4 h-4 inline-block mr-2" />
-              Analytics
-            </button>
-          </div>
-
           {/* Search Bar with Advanced Filter */}
           <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-4 mb-4 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-4">
