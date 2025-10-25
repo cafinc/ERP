@@ -2087,7 +2087,7 @@ export default function CustomerFormPage() {
                   ) : (
                     <>
                       <UserPlus className="w-4 h-4" />
-                      Create Customer
+                      {customerForm.customer_type === 'company' ? 'Create Company' : 'Create Customer'}
                     </>
                   )}
                 </button>
