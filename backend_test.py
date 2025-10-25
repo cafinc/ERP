@@ -1082,15 +1082,323 @@ class CustomerManagementTests:
             except Exception as e:
                 print(f"❌ Error deleting site {site_id}: {str(e)}")
 
+    def test_customer_archive_unarchive(self):
+        """Test HIGHEST PRIORITY: Customer Archive/Unarchive functionality"""
+        print("=== HIGHEST PRIORITY: Customer Archive/Unarchive Testing ===")
+        
+        # First create a customer to test archive/unarchive
+        customer_data = {
+            "name": "Archive Test Customer",
+            "email": "archive.test@email.com",
+            "phone": "555-0200",
+            "address": "500 Archive Test Blvd, Halifax, NS B3H 4R2",
+            "customer_type": "individual",
+            "active": True
+        }
+        
+        try:
+            # Create customer
+            response = self.session.post(f"{BASE_URL}/customers", json=customer_data)
+            if response.status_code != 201:
+                self.log_result(
+                    "Archive/Unarchive - Customer Creation",
+                    False,
+                    f"Failed to create test customer: HTTP {response.status_code}: {response.text}"
+                )
+                return
+            
+            customer = response.json()
+            customer_id = customer["id"]
+            self.created_customers.append(customer_id)
+            
+            # Verify initial active status
+            if customer.get("active") != True:
+                self.log_result(
+                    "Archive/Unarchive - Initial Active Status",
+                    False,
+                    f"Customer not created with active=True: {customer.get('active')}"
+                )
+                return
+            
+            # Test 1: Archive customer (set active=false)
+            archive_data = {"active": False}
+            archive_response = self.session.put(f"{BASE_URL}/customers/{customer_id}", json=archive_data)
+            
+            if archive_response.status_code == 200:
+                archived_customer = archive_response.json()
+                if archived_customer.get("active") == False:
+                    self.log_result(
+                        "Customer Archive API - Set active=false",
+                        True,
+                        f"Customer {customer_id} successfully archived. Active status: {archived_customer.get('active')}"
+                    )
+                else:
+                    self.log_result(
+                        "Customer Archive API - Set active=false",
+                        False,
+                        f"Archive failed - active status not updated: {archived_customer.get('active')}"
+                    )
+            else:
+                self.log_result(
+                    "Customer Archive API - Set active=false",
+                    False,
+                    f"Archive request failed: HTTP {archive_response.status_code}: {archive_response.text}"
+                )
+                return
+            
+            # Test 2: Verify GET returns correct active status (archived)
+            get_response = self.session.get(f"{BASE_URL}/customers/{customer_id}")
+            if get_response.status_code == 200:
+                retrieved_customer = get_response.json()
+                if retrieved_customer.get("active") == False:
+                    self.log_result(
+                        "Archive Status Verification - GET after archive",
+                        True,
+                        f"GET correctly returns active=false for archived customer"
+                    )
+                else:
+                    self.log_result(
+                        "Archive Status Verification - GET after archive",
+                        False,
+                        f"GET returns incorrect active status: {retrieved_customer.get('active')}"
+                    )
+            else:
+                self.log_result(
+                    "Archive Status Verification - GET after archive",
+                    False,
+                    f"GET request failed: HTTP {get_response.status_code}: {get_response.text}"
+                )
+            
+            # Test 3: Unarchive customer (set active=true)
+            unarchive_data = {"active": True}
+            unarchive_response = self.session.put(f"{BASE_URL}/customers/{customer_id}", json=unarchive_data)
+            
+            if unarchive_response.status_code == 200:
+                unarchived_customer = unarchive_response.json()
+                if unarchived_customer.get("active") == True:
+                    self.log_result(
+                        "Customer Unarchive API - Set active=true",
+                        True,
+                        f"Customer {customer_id} successfully unarchived. Active status: {unarchived_customer.get('active')}"
+                    )
+                else:
+                    self.log_result(
+                        "Customer Unarchive API - Set active=true",
+                        False,
+                        f"Unarchive failed - active status not updated: {unarchived_customer.get('active')}"
+                    )
+            else:
+                self.log_result(
+                    "Customer Unarchive API - Set active=true",
+                    False,
+                    f"Unarchive request failed: HTTP {unarchive_response.status_code}: {unarchive_response.text}"
+                )
+                return
+            
+            # Test 4: Verify GET returns correct active status (unarchived)
+            final_get_response = self.session.get(f"{BASE_URL}/customers/{customer_id}")
+            if final_get_response.status_code == 200:
+                final_customer = final_get_response.json()
+                if final_customer.get("active") == True:
+                    self.log_result(
+                        "Archive Status Verification - GET after unarchive",
+                        True,
+                        f"GET correctly returns active=true for unarchived customer"
+                    )
+                else:
+                    self.log_result(
+                        "Archive Status Verification - GET after unarchive",
+                        False,
+                        f"GET returns incorrect active status: {final_customer.get('active')}"
+                    )
+            else:
+                self.log_result(
+                    "Archive Status Verification - GET after unarchive",
+                    False,
+                    f"Final GET request failed: HTTP {final_get_response.status_code}: {final_get_response.text}"
+                )
+            
+            # Test 5: Verify data integrity is maintained after archive/unarchive
+            original_name = customer_data["name"]
+            original_email = customer_data["email"]
+            original_phone = customer_data["phone"]
+            original_address = customer_data["address"]
+            
+            if (final_customer.get("name") == original_name and
+                final_customer.get("email") == original_email and
+                final_customer.get("phone") == original_phone and
+                final_customer.get("address") == original_address):
+                self.log_result(
+                    "Data Integrity - Archive/Unarchive Preservation",
+                    True,
+                    "All customer data preserved correctly after archive/unarchive cycle"
+                )
+            else:
+                self.log_result(
+                    "Data Integrity - Archive/Unarchive Preservation",
+                    False,
+                    f"Data integrity compromised: name={final_customer.get('name')}, email={final_customer.get('email')}"
+                )
+                
+        except Exception as e:
+            self.log_result(
+                "Customer Archive/Unarchive Testing",
+                False,
+                f"Exception during archive/unarchive testing: {str(e)}"
+            )
+
+    def test_phone_format_validation(self):
+        """Test phone format validation and normalization"""
+        print("=== Phone Format Validation Testing ===")
+        
+        phone_formats = [
+            "(555) 123-4567",
+            "555-123-4567", 
+            "5551234567",
+            "555.123.4567",
+            "+1 555 123 4567"
+        ]
+        
+        success_count = 0
+        for i, phone_format in enumerate(phone_formats):
+            try:
+                customer_data = {
+                    "name": f"Phone Test {i+1}",
+                    "email": f"phone.test{i+1}@email.com",
+                    "phone": phone_format,
+                    "address": "123 Phone Test St",
+                    "customer_type": "individual",
+                    "active": True
+                }
+                
+                response = self.session.post(f"{BASE_URL}/customers", json=customer_data)
+                
+                if response.status_code in [200, 201]:
+                    result = response.json()
+                    if "id" in result:
+                        self.created_customers.append(result["id"])
+                        success_count += 1
+                        
+            except Exception as e:
+                continue
+        
+        if success_count == len(phone_formats):
+            self.log_result(
+                "Phone Format Validation",
+                True,
+                f"All {len(phone_formats)} phone formats accepted successfully"
+            )
+        else:
+            self.log_result(
+                "Phone Format Validation",
+                False,
+                f"Only {success_count}/{len(phone_formats)} phone formats accepted"
+            )
+
+    def test_communication_preferences_detailed(self):
+        """Test communication preference settings with mobile validation"""
+        print("=== Communication Preferences Testing ===")
+        
+        # Test 1: SMS preference with mobile number
+        sms_customer_data = {
+            "name": "SMS Preference Customer",
+            "email": "sms.pref@email.com",
+            "phone": "555-0210",
+            "mobile": "555-0211",
+            "address": "600 SMS Test Ave",
+            "customer_type": "individual",
+            "communication_preference": "sms",
+            "active": True
+        }
+        
+        try:
+            response = self.session.post(f"{BASE_URL}/customers", json=sms_customer_data)
+            if response.status_code in [200, 201]:
+                result = response.json()
+                if ("id" in result and 
+                    result.get("communication_preference") == "sms" and
+                    result.get("mobile") == "555-0211"):
+                    self.created_customers.append(result["id"])
+                    self.log_result(
+                        "Communication Preference - SMS with Mobile",
+                        True,
+                        f"SMS preference with mobile number set successfully. Mobile: {result.get('mobile')}"
+                    )
+                else:
+                    self.log_result(
+                        "Communication Preference - SMS with Mobile",
+                        False,
+                        f"SMS preference or mobile not saved correctly: pref={result.get('communication_preference')}, mobile={result.get('mobile')}"
+                    )
+            else:
+                self.log_result(
+                    "Communication Preference - SMS with Mobile",
+                    False,
+                    f"SMS customer creation failed: HTTP {response.status_code}: {response.text}"
+                )
+        except Exception as e:
+            self.log_result(
+                "Communication Preference - SMS with Mobile",
+                False,
+                f"Exception: {str(e)}"
+            )
+        
+        # Test 2: InApp preference without mobile
+        inapp_customer_data = {
+            "name": "InApp Preference Customer",
+            "email": "inapp.pref@email.com",
+            "phone": "555-0220",
+            "address": "700 InApp Test Blvd",
+            "customer_type": "individual",
+            "communication_preference": "inapp",
+            "active": True
+        }
+        
+        try:
+            response = self.session.post(f"{BASE_URL}/customers", json=inapp_customer_data)
+            if response.status_code in [200, 201]:
+                result = response.json()
+                if ("id" in result and 
+                    result.get("communication_preference") == "inapp" and
+                    not result.get("mobile")):
+                    self.created_customers.append(result["id"])
+                    self.log_result(
+                        "Communication Preference - InApp without Mobile",
+                        True,
+                        "InApp preference without mobile set successfully"
+                    )
+                else:
+                    self.log_result(
+                        "Communication Preference - InApp without Mobile",
+                        False,
+                        f"InApp preference not saved correctly or unexpected mobile: pref={result.get('communication_preference')}, mobile={result.get('mobile')}"
+                    )
+            else:
+                self.log_result(
+                    "Communication Preference - InApp without Mobile",
+                    False,
+                    f"InApp customer creation failed: HTTP {response.status_code}: {response.text}"
+                )
+        except Exception as e:
+            self.log_result(
+                "Communication Preference - InApp without Mobile",
+                False,
+                f"Exception: {str(e)}"
+            )
+
     def run_all_tests(self):
-        """Run all customer management tests"""
+        """Run all customer management tests with priority focus"""
         print("🚀 Starting Comprehensive Customer Management Backend API Tests")
+        print("🔥 PRIORITY FOCUS: Archive/Unarchive and Customer Management APIs")
         print(f"Backend URL: {BASE_URL}")
         print("=" * 80)
         
         start_time = time.time()
         
-        # Run all tests
+        # HIGHEST PRIORITY: Archive/Unarchive functionality
+        self.test_customer_archive_unarchive()
+        
+        # Run existing comprehensive tests
         self.test_customer_creation_contact_type()
         self.test_customer_creation_company_type()
         self.test_site_creation_integration()
@@ -1100,6 +1408,11 @@ class CustomerManagementTests:
         self.test_customer_retrieval()
         self.test_customer_update()
         self.test_duplicate_customer_check()
+        
+        # Additional priority tests
+        self.test_phone_format_validation()
+        self.test_communication_preferences_detailed()
+        
         self.test_error_handling()
         
         end_time = time.time()
