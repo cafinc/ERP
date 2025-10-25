@@ -290,7 +290,7 @@ export default function CreateSitePage() {
   };
 
   return (
-    <div className="h-screen flex flex-col bg-gradient-to-br from-gray-50 via-blue-50/30 to-gray-50">
+    <div className="h-screen flex flex-col bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
       <PageHeader
         title="Create Site"
         subtitle="Add a new site location with services and details"
