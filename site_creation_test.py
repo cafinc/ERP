@@ -106,7 +106,7 @@ def test_site_creation_api():
                 results["failed"] += 1
                 results["errors"].append("Test 1: Invalid response structure")
         else:
-            print(f"❌ FAIL: Expected 201, got {response.status_code}")
+            print(f"❌ FAIL: Expected 200/201, got {response.status_code}")
             print(f"Response: {response.text}")
             results["failed"] += 1
             results["errors"].append(f"Test 1: HTTP {response.status_code}")
@@ -153,7 +153,7 @@ def test_site_creation_api():
                 results["failed"] += 1
                 results["errors"].append("Test 2: Optional fields not saved")
         else:
-            print(f"❌ FAIL: Expected 201, got {response.status_code}")
+            print(f"❌ FAIL: Expected 200/201, got {response.status_code}")
             print(f"Response: {response.text}")
             results["failed"] += 1
             results["errors"].append(f"Test 2: HTTP {response.status_code}")
@@ -393,7 +393,7 @@ def test_site_creation_api():
             print(f"⚠️  SLOW: API responded in {response_time:.2f} seconds (> 5s)")
             results["passed"] += 1
         else:
-            print(f"❌ FAIL: Expected 201, got {response.status_code}")
+            print(f"❌ FAIL: Expected 200/201, got {response.status_code}")
             results["failed"] += 1
             results["errors"].append(f"Test 9: HTTP {response.status_code}")
             
@@ -442,7 +442,7 @@ def test_site_creation_api():
                 results["failed"] += 1
                 results["errors"].append("Test 10: Response structure incompatible")
         else:
-            print(f"❌ FAIL: Expected 201, got {response.status_code}")
+            print(f"❌ FAIL: Expected 200/201, got {response.status_code}")
             results["failed"] += 1
             results["errors"].append(f"Test 10: HTTP {response.status_code}")
             
