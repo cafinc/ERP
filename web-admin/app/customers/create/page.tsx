@@ -2032,15 +2032,23 @@ export default function CustomerFormPage() {
                     Postal Code *
                   </label>
                   <input
+                    name="postal_code"
                     type="text"
                     value={customerForm.postal_code}
                     onChange={e =>
                       setCustomerForm({ ...customerForm, postal_code: e.target.value })
                     }
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:border-transparent ${
+                      fieldErrors.postal_code 
+                        ? 'border-red-500 focus:ring-red-500' 
+                        : 'border-gray-300 focus:ring-blue-500'
+                    }`}
                     placeholder="T2P 1J9"
                     required
                   />
+                  {fieldErrors.postal_code && (
+                    <p className="text-red-500 text-xs mt-1">{fieldErrors.postal_code}</p>
+                  )}
                 </div>
 
                 <div>
