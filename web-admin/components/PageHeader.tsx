@@ -23,14 +23,25 @@ interface Tab {
   count?: number;
 }
 
+interface StatBadge {
+  label: string;
+  value: number;
+  icon?: React.ReactNode;
+  color?: 'blue' | 'green' | 'purple' | 'orange' | 'red' | 'gray';
+}
+
 interface PageHeaderProps {
   title: string;
   subtitle?: string;
   breadcrumbs?: BreadcrumbItem[];
   actions?: ActionButton[];
+  stats?: StatBadge[];
   tabs?: Tab[];
   activeTab?: string;
   onTabChange?: (value: string) => void;
+  secondaryTabs?: Tab[];
+  activeSecondaryTab?: string;
+  onSecondaryTabChange?: (value: string) => void;
   showSearch?: boolean;
   searchPlaceholder?: string;
   onSearch?: (query: string) => void;
