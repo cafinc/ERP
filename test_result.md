@@ -418,7 +418,7 @@ test_plan:
 
   - task: "Template System - Utility Endpoints"
     implemented: true
-    working: false
+    working: true
     file: "/app/backend/template_routes.py"
     stuck_count: 0
     priority: "medium"
@@ -427,6 +427,9 @@ test_plan:
       - working: false
         agent: "testing"
         comment: "Minor: GET /api/templates/{type}/categories endpoint failing due to route ordering issue. FastAPI matches /templates/{type}/{id} before /templates/{type}/categories. Stats endpoint working correctly. Core functionality unaffected."
+      - working: true
+        agent: "testing"
+        comment: "✅ BUG FIX CONFIRMED: GET /api/templates/{type}/categories now working correctly. Route ordering issue resolved. Categories endpoint returns proper categories list instead of matching as template ID. Template system fully functional."
 
   - task: "Template System - Pre-built Templates & Database"
     implemented: true
