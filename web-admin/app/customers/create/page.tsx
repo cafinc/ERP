@@ -648,6 +648,14 @@ export default function CustomerFormPage() {
       return;
     }
 
+    // Check for duplicates before proceeding
+    if (!isEdit) {
+      const hasDuplicates = await checkForDuplicates();
+      if (hasDuplicates) {
+        return; // Stop submission and show modal
+      }
+    }
+
     try {
       setSaving(true);
 
