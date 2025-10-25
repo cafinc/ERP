@@ -443,18 +443,16 @@ export default function CustomerDetailPage() {
 
   const tabs = [
     { id: 'overview', name: 'Overview', icon: Users },
-    { id: 'sites', name: 'Sites', icon: MapPinned, count: sites.length },
     { id: 'estimates', name: 'Estimates', icon: FileText, count: estimates.length },
+    { id: 'sites', name: 'Sites', icon: MapPinned, count: sites.length },
+    { id: 'agreements', name: 'Agreements', icon: FileSignature, count: contracts.length },
     { id: 'projects', name: 'Projects', icon: FolderOpen, count: projects.length },
     { id: 'invoices', name: 'Invoices', icon: CreditCard, count: invoices.length },
-    { id: 'agreements', name: 'Agreements', icon: FileSignature, count: contracts.length },
     { id: 'tasks', name: 'Tasks', icon: CheckCircle, count: tasks.length },
-    { id: 'service-requests', name: 'Service Requests', icon: ClipboardList, count: serviceRequests.length },
-    { id: 'communications', name: 'Communications', icon: Mail, count: communications.length },
-    { id: 'forms', name: 'Forms', icon: FileText },
+    { id: 'communications', name: 'Comms', icon: Mail, count: communications.length },
     ...(isCompany ? [
-      { id: 'contacts', name: 'Contacts', icon: Users, count: contacts.length },
       { id: 'accounting', name: 'Accounting', icon: DollarSign },
+      { id: 'contacts', name: 'Contacts', icon: Users, count: contacts.length },
     ] : []),
   ];
 
