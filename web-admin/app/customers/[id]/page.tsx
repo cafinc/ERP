@@ -535,6 +535,20 @@ export default function CustomerDetailPage() {
                         <p className="text-gray-900">{customer.address}</p>
                       </div>
                     </div>
+                    {!isCompany && customer.company_name && (
+                      <div className="flex items-start space-x-3 pt-2 border-t border-gray-200">
+                        <Briefcase className="w-5 h-5 text-[#3f72af] mt-0.5" />
+                        <div>
+                          <p className="text-sm text-gray-600">Linked to Company</p>
+                          <button
+                            onClick={() => router.push(`/customers/${customer.company_id}`)}
+                            className="text-[#3f72af] hover:text-blue-800 font-medium hover:underline"
+                          >
+                            {customer.company_name}
+                          </button>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
 
