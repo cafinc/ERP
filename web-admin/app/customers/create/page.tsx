@@ -2115,7 +2115,6 @@ export default function CustomerFormPage() {
                 </div>
               </div>
             </div>
-            </div>
             )}
 
             {/* Additional Notes */}
