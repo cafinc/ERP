@@ -236,17 +236,18 @@ export default function CreateSitePage() {
     e.preventDefault();
 
     if (!siteName.trim() || !customerId || !siteType) {
-      alert('Please fill in Site Name, Customer, and Site Type');
+      toast.error('Please fill in Site Name, Customer, and Site Type');
       return;
     }
 
     // Validate location
     if (!address && (!latitude || !longitude)) {
-      alert('Please provide either an address or manual coordinates');
+      toast.error('Please provide either an address or manual coordinates');
       return;
     }
 
     setLoading(true);
+    const loadingToast = toast.loading('Creating site...');
 
     try {
       const siteData = {
@@ -267,11 +268,16 @@ export default function CreateSitePage() {
       };
 
       const response = await api.post('/sites', siteData);
-      alert('Site created successfully!');
-      router.push(`/sites/${response.data._id || response.data.id}`);
+      toast.success('Site created successfully!', { id: loadingToast });
+      
+      // Wait a moment for the user to see the success message
+      setTimeout(() => {
+        router.push(`/sites/${response.data._id || response.data.id}`);
+      }, 1000);
     } catch (error: any) {
       console.error('Error creating site:', error);
-      alert(error.response?.data?.detail || 'Failed to create site. Please try again.');
+      const errorMessage = error.response?.data?.detail || 'Failed to create site. Please try again.';
+      toast.error(errorMessage, { id: loadingToast });
     } finally {
       setLoading(false);
     }
