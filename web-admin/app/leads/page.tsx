@@ -447,66 +447,105 @@ export default function LeadsPage() {
           />
 
           {/* Status Filter Buttons */}
-          <div className="mb-4 flex items-center gap-3">
-            <button
-              onClick={() => setStatusFilter('new')}
-              className={`px-4 py-2.5 rounded-xl font-semibold transition-all text-sm flex items-center gap-2 ${
-                statusFilter === 'new'
-                  ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30'
-                  : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-blue-500 hover:text-blue-500'
-              }`}
-            >
-              <div className={`w-2 h-2 rounded-full ${statusFilter === 'new' ? 'bg-white' : 'bg-blue-500'}`} />
-              New
-              <span className={`px-2 py-0.5 rounded-full text-xs font-bold ${
-                statusFilter === 'new' ? 'bg-white/20 text-white' : 'bg-blue-100 text-blue-600'
-              }`}>
-                {leads.filter(l => l.status === 'new').length}
-              </span>
-            </button>
-
-            <button
-              onClick={() => setStatusFilter('contacted')}
-              className={`px-4 py-2.5 rounded-xl font-semibold transition-all text-sm flex items-center gap-2 ${
-                statusFilter === 'contacted'
-                  ? 'bg-yellow-500 text-white shadow-lg shadow-yellow-500/30'
-                  : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-yellow-500 hover:text-yellow-500'
-              }`}
-            >
-              <div className={`w-2 h-2 rounded-full ${statusFilter === 'contacted' ? 'bg-white' : 'bg-yellow-500'}`} />
-              Contacted
-              <span className={`px-2 py-0.5 rounded-full text-xs font-bold ${
-                statusFilter === 'contacted' ? 'bg-white/20 text-white' : 'bg-yellow-100 text-yellow-600'
-              }`}>
-                {leads.filter(l => l.status === 'contacted').length}
-              </span>
-            </button>
-
-            <button
-              onClick={() => setStatusFilter('won')}
-              className={`px-4 py-2.5 rounded-xl font-semibold transition-all text-sm flex items-center gap-2 ${
-                statusFilter === 'won'
-                  ? 'bg-green-500 text-white shadow-lg shadow-green-500/30'
-                  : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-green-500 hover:text-green-500'
-              }`}
-            >
-              <div className={`w-2 h-2 rounded-full ${statusFilter === 'won' ? 'bg-white' : 'bg-green-500'}`} />
-              Converted
-              <span className={`px-2 py-0.5 rounded-full text-xs font-bold ${
-                statusFilter === 'won' ? 'bg-white/20 text-white' : 'bg-green-100 text-green-600'
-              }`}>
-                {leads.filter(l => l.status === 'won').length}
-              </span>
-            </button>
-
-            {statusFilter !== 'all' && (
+          <div className="mb-4 flex items-center gap-3 justify-between">
+            <div className="flex items-center gap-3">
               <button
-                onClick={() => setStatusFilter('all')}
-                className="px-4 py-2.5 rounded-xl font-semibold transition-all text-sm text-gray-500 hover:text-gray-700 underline"
+                onClick={() => setStatusFilter('new')}
+                className={`px-4 py-2.5 rounded-xl font-semibold transition-all text-sm flex items-center gap-2 ${
+                  statusFilter === 'new'
+                    ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30'
+                    : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-blue-500 hover:text-blue-500'
+                }`}
               >
-                Clear Filter
+                <div className={`w-2 h-2 rounded-full ${statusFilter === 'new' ? 'bg-white' : 'bg-blue-500'}`} />
+                New
+                <span className={`px-2 py-0.5 rounded-full text-xs font-bold ${
+                  statusFilter === 'new' ? 'bg-white/20 text-white' : 'bg-blue-100 text-blue-600'
+                }`}>
+                  {leads.filter(l => l.status === 'new').length}
+                </span>
               </button>
-            )}
+
+              <button
+                onClick={() => setStatusFilter('contacted')}
+                className={`px-4 py-2.5 rounded-xl font-semibold transition-all text-sm flex items-center gap-2 ${
+                  statusFilter === 'contacted'
+                    ? 'bg-yellow-500 text-white shadow-lg shadow-yellow-500/30'
+                    : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-yellow-500 hover:text-yellow-500'
+                }`}
+              >
+                <div className={`w-2 h-2 rounded-full ${statusFilter === 'contacted' ? 'bg-white' : 'bg-yellow-500'}`} />
+                Contacted
+                <span className={`px-2 py-0.5 rounded-full text-xs font-bold ${
+                  statusFilter === 'contacted' ? 'bg-white/20 text-white' : 'bg-yellow-100 text-yellow-600'
+                }`}>
+                  {leads.filter(l => l.status === 'contacted').length}
+                </span>
+              </button>
+
+              <button
+                onClick={() => setStatusFilter('won')}
+                className={`px-4 py-2.5 rounded-xl font-semibold transition-all text-sm flex items-center gap-2 ${
+                  statusFilter === 'won'
+                    ? 'bg-green-500 text-white shadow-lg shadow-green-500/30'
+                    : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-green-500 hover:text-green-500'
+                }`}
+              >
+                <div className={`w-2 h-2 rounded-full ${statusFilter === 'won' ? 'bg-white' : 'bg-green-500'}`} />
+                Converted
+                <span className={`px-2 py-0.5 rounded-full text-xs font-bold ${
+                  statusFilter === 'won' ? 'bg-white/20 text-white' : 'bg-green-100 text-green-600'
+                }`}>
+                  {leads.filter(l => l.status === 'won').length}
+                </span>
+              </button>
+
+              {statusFilter !== 'all' && (
+                <button
+                  onClick={() => setStatusFilter('all')}
+                  className="px-4 py-2.5 rounded-xl font-semibold transition-all text-sm text-gray-500 hover:text-gray-700 underline"
+                >
+                  Clear Filter
+                </button>
+              )}
+            </div>
+
+            {/* View Mode Buttons */}
+            <div className="flex items-center gap-2 bg-gray-100 rounded-xl p-1">
+              <button
+                onClick={() => setViewMode('pipeline')}
+                className={`flex items-center gap-2 px-3 py-2 rounded-lg font-medium transition-all text-sm ${
+                  viewMode === 'pipeline'
+                    ? 'bg-white text-gray-900 shadow-sm'
+                    : 'text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                <TrendingUp className="w-4 h-4" />
+                Pipeline
+              </button>
+              <button
+                onClick={() => setViewMode('list')}
+                className={`flex items-center gap-2 px-3 py-2 rounded-lg font-medium transition-all text-sm ${
+                  viewMode === 'list'
+                    ? 'bg-white text-gray-900 shadow-sm'
+                    : 'text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                <BarChart3 className="w-4 h-4" />
+                List
+              </button>
+              <button
+                onClick={() => setViewMode('analytics')}
+                className={`flex items-center gap-2 px-3 py-2 rounded-lg font-medium transition-all text-sm ${
+                  viewMode === 'analytics'
+                    ? 'bg-white text-gray-900 shadow-sm'
+                    : 'text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                <Eye className="w-4 h-4" />
+                Analytics
+              </button>
+            </div>
           </div>
 
           {/* View Toggle */}
