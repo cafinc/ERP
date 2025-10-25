@@ -837,6 +837,70 @@ async def create_customer_with_access(request_data: Dict[str, Any]):
         "message": "Customer created successfully" + (" with user access" if user_account else "")
     }
 
+@api_router.post("/customers/check-duplicate")
+async def check_duplicate_customer(data: Dict[str, Any]):
+    """
+    Check for potential duplicate customers based on email, phone, or name
+    Returns list of potential matches
+    """
+    email = data.get('email', '').strip().lower()
+    phone = data.get('phone', '').strip()
+    name = data.get('name', '').strip().lower()
+    
+    # Remove formatting from phone for comparison
+    phone_clean = ''.join(filter(str.isdigit, phone)) if phone else ''
+    
+    # Build query to find potential duplicates
+    query_conditions = []
+    
+    if email:
+        query_conditions.append({"email": {"$regex": f"^{email}$", "$options": "i"}})
+    
+    if phone_clean and len(phone_clean) >= 10:
+        # Match last 10 digits of phone
+        query_conditions.append({"phone": {"$regex": phone_clean[-10:]}})
+    
+    if name and len(name) > 3:
+        # Fuzzy match on name
+        query_conditions.append({"name": {"$regex": name, "$options": "i"}})
+    
+    if not query_conditions:
+        return {"duplicates": [], "count": 0}
+    
+    # Find potential duplicates using $or
+    duplicates = await db.customers.find(
+        {"$or": query_conditions}
+    ).limit(10).to_list(10)
+    
+    # Format response
+    duplicate_list = []
+    for dup in duplicates:
+        duplicate_list.append({
+            "id": str(dup.get("_id")),
+            "name": dup.get("name", ""),
+            "email": dup.get("email", ""),
+            "phone": dup.get("phone", ""),
+            "customer_type": dup.get("customer_type", "individual"),
+            "address": dup.get("address", ""),
+            "match_reason": []  # Will be filled below
+        })
+        
+        # Determine match reason
+        match_reasons = []
+        if email and dup.get("email", "").lower() == email:
+            match_reasons.append("email")
+        if phone_clean and phone_clean[-10:] in ''.join(filter(str.isdigit, dup.get("phone", ""))):
+            match_reasons.append("phone")
+        if name and name in dup.get("name", "").lower():
+            match_reasons.append("name")
+        
+        duplicate_list[-1]["match_reason"] = match_reasons
+    
+    return {
+        "duplicates": duplicate_list,
+        "count": len(duplicate_list)
+    }
+
 @api_router.get("/customers", response_model=List[Customer])
 async def get_customers(active: bool = None):
     query = {}
