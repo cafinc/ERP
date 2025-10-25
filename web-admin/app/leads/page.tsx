@@ -409,7 +409,7 @@ export default function LeadsPage() {
                 label: 'Conversion Rate',
                 value: `${stats.conversionRate}%`,
                 icon: <TrendingUp className="w-4 h-4" />,
-                trend: `${stats.won} won`,
+                trend: `${stats.converted} converted`,
               },
               {
                 label: 'Pipeline Value',
@@ -418,8 +418,8 @@ export default function LeadsPage() {
                 trend: 'Total potential',
               },
               {
-                label: 'Won Value',
-                value: `$${(stats.wonValue / 1000).toFixed(1)}k`,
+                label: 'Converted Value',
+                value: `$${(stats.convertedValue / 1000).toFixed(1)}k`,
                 icon: <CheckCircle className="w-4 h-4" />,
                 trend: 'Converted',
               },
