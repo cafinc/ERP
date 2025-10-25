@@ -204,6 +204,9 @@ export default function PageHeader({
                       <div className="flex flex-col">
                         <span className={`text-xs ${colorClass.split(' ')[1]} font-medium`}>{stat.label}</span>
                         <span className={`text-lg font-bold ${textColorClass}`}>{stat.value}</span>
+                        {stat.trend && (
+                          <span className="text-xs text-gray-500 mt-0.5">{stat.trend}</span>
+                        )}
                       </div>
                     </>
                   );
