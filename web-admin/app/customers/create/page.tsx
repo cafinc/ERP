@@ -878,10 +878,11 @@ export default function CustomerFormPage() {
   }
 
   return (
-    <>
+    <div className="h-screen flex flex-col bg-gradient-to-br from-gray-50 to-gray-100">
       {/* Page Header */}
       <PageHeader
         title={isEdit ? 'Edit Customer' : 'New Customer'}
+        subtitle={isEdit ? 'Update customer information and details' : 'Add a new customer to your system'}
         breadcrumbs={[
           { label: 'Customers', href: '/customers' },
           { label: isEdit ? 'Edit' : 'New' }
@@ -889,39 +890,44 @@ export default function CustomerFormPage() {
       />
 
       {/* Main Content */}
-      <div className="h-full bg-gray-50 overflow-auto">
-        <div className="max-w-4xl mx-auto p-6">
-          <form onSubmit={handleSubmit} noValidate className="space-y-6">
+      <div className="flex-1 overflow-y-auto">
+        <div className="max-w-5xl mx-auto p-6">
+          <form onSubmit={handleSubmit} noValidate className="space-y-6 pb-6">
               {/* Customer Type Selection */}
               {!isEdit && (
-                <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-4">Customer Type *</h2>
-                    <div className="grid grid-cols-2 gap-4">
+                <div className="bg-white/95 backdrop-blur-md rounded-3xl shadow-xl border border-white/40 p-6 hover:shadow-2xl transition-shadow">
+                    <h3 className="text-sm font-bold text-gray-900 mb-4 flex items-center gap-2">
+                      <div className="bg-gradient-to-br from-[#3f72af] to-[#2c5282] rounded-xl p-2">
+                        <Users className="w-4 h-4 text-white" />
+                      </div>
+                      Customer Type <span className="text-red-500">*</span>
+                    </h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <button
                         type="button"
                         onClick={() => handleTypeSelection('individual')}
-                        className={`p-8 border-2 rounded-xl transition-all hover:scale-105 ${
+                        className={`p-6 border-2 rounded-xl transition-all hover:scale-105 ${
                           customerForm.customer_type === 'individual'
                             ? 'border-[#3f72af] bg-blue-50 shadow-lg'
                             : 'border-gray-300 hover:border-gray-400 hover:shadow-md bg-white'
                         }`}
                       >
-                        <Users className="w-12 h-12 mx-auto mb-4 text-[#3f72af]" />
-                        <p className="font-bold text-gray-900 text-xl">Contact</p>
-                        <p className="text-sm text-gray-600 mt-2">Person or homeowner</p>
+                        <User className="w-10 h-10 mx-auto mb-3 text-[#3f72af]" />
+                        <p className="font-bold text-gray-900 text-lg">Contact</p>
+                        <p className="text-xs text-gray-600 mt-1">Person or homeowner</p>
                       </button>
                       <button
                         type="button"
                         onClick={() => handleTypeSelection('company')}
-                        className={`p-8 border-2 rounded-xl transition-all hover:scale-105 ${
+                        className={`p-6 border-2 rounded-xl transition-all hover:scale-105 ${
                           customerForm.customer_type === 'company'
                             ? 'border-[#3f72af] bg-blue-50 shadow-lg'
                             : 'border-gray-300 hover:border-gray-400 hover:shadow-md bg-white'
                         }`}
                       >
-                        <Building className="w-12 h-12 mx-auto mb-4 text-[#3f72af]" />
-                        <p className="font-bold text-gray-900 text-xl">Company</p>
-                        <p className="text-sm text-gray-600 mt-2">Business or organization</p>
+                        <Building className="w-10 h-10 mx-auto mb-3 text-[#3f72af]" />
+                        <p className="font-bold text-gray-900 text-lg">Company</p>
+                        <p className="text-xs text-gray-600 mt-1">Business or organization</p>
                       </button>
                     </div>
                 </div>
@@ -929,25 +935,26 @@ export default function CustomerFormPage() {
 
               {/* Individual Form */}
               {customerForm.customer_type === 'individual' && (
-                <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center justify-between">
-                      <div className="flex items-center space-x-2">
-                        <User className="w-5 h-5 text-[#3f72af]" />
-                        <span>Contact Information</span>
-                      </div>
-                      {/* Active Customer Toggle - label first, then toggle */}
-                      <div className="flex items-center gap-2">
-                        <label className="text-sm font-medium text-gray-700">
-                          Active
-                        </label>
-                        <button
-                          type="button"
-                          onClick={() => setCustomerForm({ ...customerForm, active: !customerForm.active })}
-                          className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#3f72af] focus:ring-offset-2 flex-shrink-0 ${
-                            customerForm.active ? 'bg-[#3f72af]' : 'bg-gray-200'
-                          }`}
-                        >
-                          <span
+                <div className="bg-white/95 backdrop-blur-md rounded-3xl shadow-xl border border-white/40 overflow-hidden hover:shadow-2xl transition-shadow">
+                    <div className="bg-gradient-to-br from-blue-50 to-indigo-50 border-b-2 border-blue-100 p-6">
+                      <div className="flex items-center justify-between">
+                        <h3 className="text-sm font-bold text-gray-900 flex items-center gap-2">
+                          <User className="w-4 h-4 text-[#3f72af]" />
+                          Contact Information
+                        </h3>
+                        {/* Active Customer Toggle */}
+                        <div className="flex items-center gap-2">
+                          <label className="text-xs font-medium text-gray-700">
+                            Active
+                          </label>
+                          <button
+                            type="button"
+                            onClick={() => setCustomerForm({ ...customerForm, active: !customerForm.active })}
+                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#3f72af] focus:ring-offset-2 flex-shrink-0 ${
+                              customerForm.active ? 'bg-[#3f72af]' : 'bg-gray-200'
+                            }`}
+                          >
+                            <span
                             className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
                               customerForm.active ? 'translate-x-6' : 'translate-x-1'
                             }`}
