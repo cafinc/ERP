@@ -523,7 +523,7 @@ export default function CustomerDetailPage() {
       />
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-6 py-6">
+      <div className="mx-auto px-6 py-6">
         {/* Tab Content */}
         <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-6 mb-6 hover:shadow-md transition-shadow">
           {/* Overview Tab */}
