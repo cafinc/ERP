@@ -52,6 +52,8 @@ export default function ConsumablesPage() {
   const [consumables, setConsumables] = useState<Consumable[]>([]);
   const [loading, setLoading] = useState(true);
   const [showCreateModal, setShowCreateModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [editingConsumable, setEditingConsumable] = useState<Consumable | null>(null);
   const [formData, setFormData] = useState({
     name: '',
     unit: 'bags',
