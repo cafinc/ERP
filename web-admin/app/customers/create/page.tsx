@@ -2115,7 +2115,8 @@ export default function CustomerFormPage() {
                 </div>
               </div>
             </div>
-            )}
+            )} 
+            END TEMPORARILY DISABLED SECTION */}
 
             {/* Additional Notes */}
             <div className="bg-white/95 backdrop-blur-md rounded-3xl shadow-xl border border-white/40 overflow-hidden hover:shadow-2xl transition-shadow">
