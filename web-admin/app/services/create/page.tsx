@@ -117,16 +117,18 @@ export default function ServiceFormPage() {
 
   if (loading) {
     return (
-      <PageHeader
-        title="Create Services"
-        subtitle="Add new services"
-        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Services", href: "/services" }, { label: "Create" }]}
-      />
-      <div className="flex-1 overflow-auto p-6">
-        <div className="flex items-center justify-center h-64">
-          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
+      <>
+        <PageHeader
+          title="Create Services"
+          subtitle="Add new services"
+          breadcrumbs={[{ label: "Home", href: "/" }, { label: "Services", href: "/services" }, { label: "Create" }]}
+        />
+        <div className="flex-1 overflow-auto p-6">
+          <div className="flex items-center justify-center h-64">
+            <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 
