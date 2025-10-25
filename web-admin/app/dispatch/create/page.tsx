@@ -310,11 +310,11 @@ export default function DispatchCreatePage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {equipment.map((equip) => (
                     <button
-                      key={equip._id}
+                      key={equip._id || equip.id}
                       type="button"
-                      onClick={() => handleEquipmentToggle(equip._id)}
+                      onClick={() => handleEquipmentToggle(equip._id || equip.id)}
                       className={`flex items-center justify-between p-3 border-2 rounded-lg transition-all ${
-                        dispatchForm.equipment_ids.includes(equip._id)
+                        dispatchForm.equipment_ids.includes(equip._id || equip.id)
                           ? 'border-blue-500 bg-blue-50'
                           : 'border-gray-200 hover:border-gray-300'
                       }`}
