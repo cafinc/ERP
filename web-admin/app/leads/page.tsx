@@ -851,7 +851,7 @@ export default function LeadsPage() {
                           </div>
 
                           <div className="flex items-center gap-2 flex-shrink-0">
-                            {lead.status === 'won' && !lead.converted_customer_id && (
+                            {lead.status === 'converted' && !lead.converted_customer_id && (
                               <button
                                 onClick={() => handleConvertToCustomer(lead)}
                                 className="px-3 py-1.5 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium transition-colors text-sm flex items-center gap-1"
