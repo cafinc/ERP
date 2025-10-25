@@ -210,8 +210,13 @@ export default function FeedbackDetailPage() {
   }
 
   return (
-    <PageHeader>
-      <div className="p-8">
+    <div className="h-screen flex flex-col bg-gray-50">
+      <PageHeader
+        title="Feedback Details"
+        subtitle="View and manage feedback"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Communication", href: "/communication" }, { label: "Feedback", href: "/communication/feedback" }, { label: "Details" }]}
+      />
+      <div className="flex-1 overflow-auto p-6">
         <div className="max-w-5xl mx-auto">
           {/* Header */}
           <div className="mb-8 flex items-center space-x-4">
