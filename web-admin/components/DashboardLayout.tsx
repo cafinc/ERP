@@ -75,8 +75,6 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const { user, loading, logout, isAdmin } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
-    return false;
-  });
 
   // Auto-expand menu based on current pathname
   useEffect(() => {
