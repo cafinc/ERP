@@ -708,9 +708,11 @@ export default function CreateSitePage() {
                         <input
                           type="tel"
                           value={securityPhone}
-                          onChange={(e) => setSecurityPhone(e.target.value)}
+                          onChange={handleSecurityPhoneChange}
                           className="w-full pl-9 pr-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all bg-white text-sm"
-                          placeholder="555-1234"
+                          placeholder="(555) 123-4567"
+                          pattern="\(\d{3}\) \d{3}-\d{4}"
+                          title="Phone number must be in format: (555) 123-4567"
                           required
                         />
                       </div>
