@@ -941,6 +941,7 @@ export default function CustomerFormPage() {
                         <div className="relative">
                           <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                           <input
+                            name="phone"
                             type="tel"
                             value={customerForm.phone}
                             onChange={e => handlePhoneChange('phone', e.target.value)}
