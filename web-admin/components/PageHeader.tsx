@@ -25,7 +25,8 @@ interface Tab {
 
 interface StatBadge {
   label: string;
-  value: number;
+  value: number | string;
+  trend?: string;
   icon?: React.ReactNode;
   color?: 'blue' | 'green' | 'purple' | 'orange' | 'red' | 'gray';
   onClick?: () => void;
