@@ -20,6 +20,11 @@ import {
   Edit3,
   Briefcase,
   Phone,
+  Home,
+  Building,
+  Factory,
+  ShoppingBag,
+  Siren,
 } from 'lucide-react';
 
 const SITE_TYPES = ['residential', 'commercial', 'industrial', 'retail', 'emergency_services'];
