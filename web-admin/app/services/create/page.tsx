@@ -339,24 +339,24 @@ export default function ServiceFormPage() {
               <button
                 type="button"
                 onClick={() => router.push('/services')}
-                className="px-8 py-3 border-2 border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 hover:border-gray-400 transition-all font-semibold"
+                className="px-5 py-2 text-sm border-2 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 hover:border-gray-400 transition-all font-semibold"
                 disabled={saving}
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="flex items-center gap-2 px-8 py-3 bg-[#3f72af] text-white rounded-xl hover:bg-[#2c5282] disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-md hover:shadow-lg font-semibold"
+                className="flex items-center gap-2 px-5 py-2 text-sm bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm hover:shadow-md font-semibold"
                 disabled={saving}
               >
                 {saving ? (
                   <>
-                    <RefreshCw className="w-5 h-5 animate-spin" />
+                    <RefreshCw className="w-4 h-4 animate-spin" />
                     {isEdit ? 'Updating...' : 'Creating...'}
                   </>
                 ) : (
                   <>
-                    <Save className="w-5 h-5" />
+                    <Save className="w-4 h-4" />
                     {isEdit ? 'Update Service' : 'Create Service'}
                   </>
                 )}
