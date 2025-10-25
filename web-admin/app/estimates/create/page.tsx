@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import PageHeader from '@/components/PageHeader';
 import TemplateSelector from '@/components/TemplateSelector';
-import PageHeader from '@/components/PageHeader';
 import api from '@/lib/api';
 import {
   Plus,
