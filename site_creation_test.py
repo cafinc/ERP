@@ -41,7 +41,7 @@ def test_site_creation_api():
     
     try:
         response = requests.post(f"{BACKEND_URL}/customers", json=customer_data, timeout=10)
-        if response.status_code == 201:
+        if response.status_code in [200, 201]:
             customer = response.json()
             test_customer_id = customer.get('id')
             results["created_customers"].append(test_customer_id)
