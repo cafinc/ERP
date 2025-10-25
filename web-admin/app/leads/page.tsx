@@ -1185,6 +1185,50 @@ export default function LeadsPage() {
           </div>
         </div>
       )}
+
+      {/* Success Modal */}
+      {showSuccessModal && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[60] p-4 animate-fadeIn">
+          <div className="bg-white rounded-3xl max-w-md w-full shadow-2xl border border-green-200 animate-slideUp">
+            <div className="p-8 text-center">
+              <div className="mx-auto w-20 h-20 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center mb-4 animate-bounce">
+                <CheckCircle className="w-10 h-10 text-white" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                Success!
+              </h3>
+              <p className="text-gray-600">
+                Lead {editingLead ? 'updated' : 'created'} successfully!
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Error Modal */}
+      {showErrorModal && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[60] p-4 animate-fadeIn">
+          <div className="bg-white rounded-3xl max-w-md w-full shadow-2xl border border-red-200 animate-slideUp">
+            <div className="p-8">
+              <div className="mx-auto w-20 h-20 bg-gradient-to-br from-red-400 to-red-600 rounded-full flex items-center justify-center mb-4">
+                <XCircle className="w-10 h-10 text-white" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-2 text-center">
+                Error
+              </h3>
+              <p className="text-gray-600 text-center mb-6">
+                {errorMessage}
+              </p>
+              <button
+                onClick={() => setShowErrorModal(false)}
+                className="w-full px-5 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-all shadow-sm hover:shadow-md font-semibold"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
     );
 }
