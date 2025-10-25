@@ -1487,7 +1487,6 @@ export default function CustomerDetailPage() {
                 }
               }}
             />
-          </div>
         )}
       </div>
 
