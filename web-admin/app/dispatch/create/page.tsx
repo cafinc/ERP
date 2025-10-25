@@ -372,7 +372,7 @@ export default function DispatchCreatePage() {
                           <p className="text-xs text-gray-500 truncate max-w-xs">{site.address}</p>
                         </div>
                       </div>
-                      {dispatchForm.site_ids.includes(site._id) ? (
+                      {dispatchForm.site_ids.includes(site._id || site.id) ? (
                         <CheckSquare className="w-5 h-5 text-[#3f72af]" />
                       ) : (
                         <Square className="w-5 h-5 text-gray-400" />
