@@ -1342,50 +1342,50 @@ export default function CustomerFormPage() {
                     </div>
                   </div>
 
-                  {/* Company Address */}
-                  <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center space-x-2">
-                      <MapPin className="w-5 h-5 text-[#3f72af]" />
+                  {/* Company Address - Compact */}
+                  <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-5 backdrop-blur-sm hover:shadow-md transition-shadow">
+                    <h2 className="text-xl font-bold text-gray-900 mb-3 flex items-center space-x-2">
+                      <MapPin className="w-4 h-4 text-[#3f72af]" />
                       <span>Company Address *</span>
                     </h2>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     <div className="md:col-span-2">
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Address *</label>
+                      <label className="block text-xs font-medium text-gray-700 mb-1">Address *</label>
                       <input
                         type="text"
                         value={customerForm.street_address}
                         onChange={e =>
                           setCustomerForm({ ...customerForm, street_address: e.target.value })
                         }
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-transparent"
                         placeholder="123 Main Street"
                         required
                       />
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">City *</label>
+                      <label className="block text-xs font-medium text-gray-700 mb-1">City *</label>
                       <input
                         type="text"
                         value={customerForm.city}
                         onChange={e =>
                           setCustomerForm({ ...customerForm, city: e.target.value })
                         }
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-transparent"
                         placeholder="Calgary"
                         required
                       />
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Province *</label>
+                      <label className="block text-xs font-medium text-gray-700 mb-1">Province *</label>
                       <select
                         value={customerForm.province}
                         onChange={e =>
                           setCustomerForm({ ...customerForm, province: e.target.value })
                         }
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-transparent"
                         required
                       >
                         {CANADIAN_PROVINCES.map(prov => (
@@ -1397,36 +1397,36 @@ export default function CustomerFormPage() {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Postal Code *</label>
+                      <label className="block text-xs font-medium text-gray-700 mb-1">Postal Code *</label>
                       <input
                         type="text"
                         value={customerForm.postal_code}
                         onChange={e =>
                           setCustomerForm({ ...customerForm, postal_code: e.target.value })
                         }
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-transparent"
                         placeholder="T2P 1J9"
                         required
                       />
                     </div>
                     
                     {/* Billing Address Toggle */}
-                    <div className="md:col-span-2 mt-4">
-                      <div className="flex items-center gap-3">
+                    <div className="md:col-span-2 mt-2">
+                      <div className="flex items-center gap-2">
                         <button
                           type="button"
                           onClick={() => setCustomerForm({ ...customerForm, billing_address_same: !customerForm.billing_address_same })}
-                          className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#3f72af] focus:ring-offset-2 flex-shrink-0 ${
+                          className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#3f72af] focus:ring-offset-2 flex-shrink-0 ${
                             customerForm.billing_address_same ? 'bg-[#3f72af]' : 'bg-gray-200'
                           }`}
                         >
                           <span
-                            className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                              customerForm.billing_address_same ? 'translate-x-6' : 'translate-x-1'
+                            className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform ${
+                              customerForm.billing_address_same ? 'translate-x-5' : 'translate-x-1'
                             }`}
                           />
                         </button>
-                        <label className="text-sm font-medium text-gray-700">
+                        <label className="text-xs font-medium text-gray-700">
                           Billing address same as company address
                         </label>
                       </div>
@@ -1435,8 +1435,8 @@ export default function CustomerFormPage() {
                     {/* Billing Address Fields */}
                     {!customerForm.billing_address_same && (
                       <>
-                        <div className="md:col-span-2 mt-4">
-                          <h3 className="text-lg font-semibold text-gray-900 mb-3">Billing Address</h3>
+                        <div className="md:col-span-2 mt-2 pt-2 border-t border-gray-200">
+                          <h3 className="text-sm font-semibold text-gray-700 mb-2">Billing Address</h3>
                         </div>
                         
                         <div className="md:col-span-2">
