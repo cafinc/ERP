@@ -599,4 +599,121 @@ async def predict_maintenance_needs(equipment_id: str):
         raise HTTPException(status_code=500, detail=str(e))
 
 
+# ========== Equipment Availability Status ==========
+
+@router.get("/availability-status")
+async def get_equipment_availability_status():
+    """
+    Get real-time availability status for all equipment
+    Returns status: available, in_use, maintenance for each equipment
+    """
+    try:
+        # Get all equipment
+        all_equipment = await equipment_collection.find({}).to_list(length=None)
+        
+        # Get active work orders to check which equipment is in use
+        work_orders_collection = db["work_orders"]
+        active_work_orders = await work_orders_collection.find({
+            "status": {"$in": ["pending", "in_progress"]}
+        }).to_list(length=None)
+        
+        # Build set of equipment IDs that are currently in use
+        equipment_in_use = set()
+        for wo in active_work_orders:
+            if wo.get("equipment_needed"):
+                for eq in wo["equipment_needed"]:
+                    equipment_in_use.add(eq)
+        
+        # Get maintenance schedules
+        upcoming_maintenance = await maintenance_log_collection.find({
+            "status": {"$in": ["scheduled", "in_progress"]},
+            "scheduled_date": {"$gte": datetime.utcnow().isoformat()[:10]}
+        }).to_list(length=None)
+        
+        equipment_in_maintenance = set()
+        for maint in upcoming_maintenance:
+            equipment_in_maintenance.add(maint.get("equipment_id"))
+        
+        # Build availability status for each equipment
+        availability_status = []
+        for equipment in all_equipment:
+            equipment_id = str(equipment["_id"])
+            equipment_name = equipment.get("name")
+            
+            # Determine status
+            if equipment_id in equipment_in_maintenance or equipment.get("status") == "maintenance":
+                status = "maintenance"
+                available_in = "Unknown"
+                current_location = "Maintenance Shop"
+            elif equipment_id in equipment_in_use:
+                status = "in_use"
+                # Try to find which work order is using it
+                current_wo = next((wo for wo in active_work_orders 
+                                  if equipment_id in wo.get("equipment_needed", [])), None)
+                if current_wo:
+                    available_in = "2-4 hours"  # Estimate
+                    current_location = current_wo.get("site_address", "On Job Site")
+                else:
+                    available_in = "Unknown"
+                    current_location = "In Use"
+            else:
+                status = "available"
+                available_in = None
+                current_location = "Equipment Yard"
+            
+            availability_status.append({
+                "equipment_id": equipment_id,
+                "name": equipment_name,
+                "type": equipment.get("type"),
+                "status": status,
+                "available_in": available_in,
+                "current_location": current_location,
+                "last_used": equipment.get("last_used"),
+                "health_score": equipment.get("health_score", 100.0)
+            })
+        
+        return {
+            "success": True,
+            "equipment": availability_status,
+            "summary": {
+                "total": len(availability_status),
+                "available": len([e for e in availability_status if e["status"] == "available"]),
+                "in_use": len([e for e in availability_status if e["status"] == "in_use"]),
+                "maintenance": len([e for e in availability_status if e["status"] == "maintenance"])
+            }
+        }
+        
+    except Exception as e:
+        logger.error(f"Error getting equipment availability: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/{equipment_id}/availability")
+async def get_single_equipment_availability(equipment_id: str):
+    """Get availability status for a single equipment item"""
+    try:
+        # Get all statuses
+        all_status = await get_equipment_availability_status()
+        
+        # Find specific equipment
+        equipment_status = next(
+            (e for e in all_status["equipment"] if e["equipment_id"] == equipment_id),
+            None
+        )
+        
+        if not equipment_status:
+            raise HTTPException(status_code=404, detail="Equipment not found")
+        
+        return {
+            "success": True,
+            "equipment": equipment_status
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error getting single equipment availability: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 logger.info("Smart equipment ecosystem routes initialized successfully")
