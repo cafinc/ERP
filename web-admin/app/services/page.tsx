@@ -602,16 +602,17 @@ export default function ServicesPage() {
               {/* Modal Body */}
               <form onSubmit={handleCreate} className="p-6 space-y-6 max-h-[calc(90vh-180px)] overflow-y-auto">
                 {/* Service Details Card */}
-                <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-6 backdrop-blur-sm">
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-lg font-bold text-gray-900 flex items-center">
-                      <Briefcase className="w-5 h-5 text-[#3f72af] mr-2" />
+                <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 backdrop-blur-sm overflow-hidden">
+                  {/* Header with Gradient */}
+                  <div className="bg-gradient-to-r from-[#3f72af] to-[#2c5282] px-6 py-4 flex items-center justify-between">
+                    <h3 className="text-lg font-bold text-white flex items-center">
+                      <Briefcase className="w-5 h-5 mr-2" />
                       Service Details
                     </h3>
                     
                     {/* Active Service Toggle */}
                     <label className="flex items-center cursor-pointer group">
-                      <span className="mr-3 text-sm font-semibold text-gray-700">Active Service</span>
+                      <span className="mr-3 text-sm font-semibold text-white">Active Service</span>
                       <div className="relative">
                         <input
                           type="checkbox"
@@ -619,13 +620,13 @@ export default function ServicesPage() {
                           onChange={(e) => setFormData({ ...formData, active: e.target.checked })}
                           className="sr-only peer"
                         />
-                        <div className="w-14 h-7 bg-gray-300 rounded-full peer peer-checked:bg-[#3f72af] transition-all duration-300 shadow-inner"></div>
+                        <div className="w-14 h-7 bg-white/30 rounded-full peer peer-checked:bg-green-400 transition-all duration-300 shadow-inner"></div>
                         <div className="absolute left-1 top-1 w-5 h-5 bg-white rounded-full transition-all duration-300 peer-checked:translate-x-7 shadow-md"></div>
                       </div>
                     </label>
                   </div>
 
-                  <div className="space-y-4">
+                  <div className="p-6 space-y-4">
                     {/* Service Name and Type */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
