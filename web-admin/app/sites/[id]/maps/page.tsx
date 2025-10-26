@@ -870,7 +870,204 @@ export default function SiteMapsGeofencingPage() {
 
       {/* Main Content */}
       <div className="flex-1 relative">
-        {activeTab === 'geofence' ? (
+        {/* Property Overview Tab */}
+        {activeTab === 'overview' && (
+          <div className="p-6">
+            {/* Quick Stats */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+              <div className="bg-white rounded-lg shadow-sm p-6">
+                <div className="flex items-center justify-between mb-2">
+                  <Building className="w-8 h-8 text-blue-600" />
+                </div>
+                <p className="text-sm text-gray-600">Site Type</p>
+                <p className="text-2xl font-bold text-gray-900 capitalize">{site?.site_type || 'N/A'}</p>
+              </div>
+              
+              <div className="bg-white rounded-lg shadow-sm p-6">
+                <div className="flex items-center justify-between mb-2">
+                  <Maximize2 className="w-8 h-8 text-green-600" />
+                </div>
+                <p className="text-sm text-gray-600">Area Size</p>
+                <p className="text-2xl font-bold text-gray-900">
+                  {site?.area_size ? `${site.area_size.toLocaleString()} sq ft` : 'N/A'}
+                </p>
+              </div>
+              
+              <div className="bg-white rounded-lg shadow-sm p-6">
+                <div className="flex items-center justify-between mb-2">
+                  <Activity className="w-8 h-8 text-purple-600" />
+                </div>
+                <p className="text-sm text-gray-600">Active Services</p>
+                <p className="text-2xl font-bold text-gray-900">{site?.services?.length || 0}</p>
+              </div>
+              
+              <div className="bg-white rounded-lg shadow-sm p-6">
+                <div className="flex items-center justify-between mb-2">
+                  <Calendar className="w-8 h-8 text-orange-600" />
+                </div>
+                <p className="text-sm text-gray-600">Created</p>
+                <p className="text-2xl font-bold text-gray-900">
+                  {site?.created_at ? new Date(site.created_at).toLocaleDateString() : 'N/A'}
+                </p>
+              </div>
+            </div>
+
+            {/* Map and Info Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              {/* Main Map View */}
+              <div className="lg:col-span-2">
+                <div className="bg-white rounded-lg shadow-sm overflow-hidden">
+                  <div className="p-4 border-b border-gray-200 flex items-center justify-between">
+                    <h3 className="text-lg font-semibold text-gray-900">Interactive Map</h3>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => {
+                          const url = `https://www.google.com/maps/search/?api=1&query=${site?.location.latitude},${site?.location.longitude}`;
+                          window.open(url, '_blank');
+                        }}
+                        className="px-3 py-1.5 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 inline-flex items-center"
+                      >
+                        <ExternalLink className="w-4 h-4 mr-1" />
+                        Open in Google Maps
+                      </button>
+                      <button
+                        onClick={() => setActiveTab('geofence')}
+                        className="px-3 py-1.5 text-sm bg-purple-600 text-white rounded-lg hover:bg-purple-700 inline-flex items-center"
+                      >
+                        <Pentagon className="w-4 h-4 mr-1" />
+                        Edit Boundaries
+                      </button>
+                      <button
+                        onClick={() => setActiveTab('annotations')}
+                        className="px-3 py-1.5 text-sm bg-green-600 text-white rounded-lg hover:bg-green-700 inline-flex items-center"
+                      >
+                        <Pencil className="w-4 h-4 mr-1" />
+                        Add Annotations
+                      </button>
+                    </div>
+                  </div>
+                  <div ref={mapRef} className="w-full h-[500px]"></div>
+                </div>
+              </div>
+
+              {/* Site Information Sidebar */}
+              <div className="space-y-4">
+                {/* Location Details */}
+                <div className="bg-white rounded-lg shadow-sm p-6">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                    <MapPin className="w-5 h-5 mr-2 text-blue-600" />
+                    Location Details
+                  </h3>
+                  <div className="space-y-3">
+                    <div>
+                      <p className="text-sm text-gray-600">Address</p>
+                      <p className="text-sm font-medium text-gray-900">{site?.location.address || 'N/A'}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-600">Coordinates</p>
+                      <p className="text-xs font-mono text-gray-900">
+                        {site?.location.latitude?.toFixed(6)}, {site?.location.longitude?.toFixed(6)}
+                      </p>
+                    </div>
+                    {site?.site_reference && (
+                      <div>
+                        <p className="text-sm text-gray-600">Reference ID</p>
+                        <p className="text-sm font-medium text-gray-900">{site.site_reference}</p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Quick Actions */}
+                <div className="bg-white rounded-lg shadow-sm p-6">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                    <Activity className="w-5 h-5 mr-2 text-purple-600" />
+                    Quick Actions
+                  </h3>
+                  <div className="space-y-2">
+                    <button
+                      onClick={() => router.push(`/sites/${siteId}`)}
+                      className="w-full px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 text-left flex items-center"
+                    >
+                      <Info className="w-4 h-4 mr-2" />
+                      View Full Site Details
+                    </button>
+                    <button
+                      onClick={() => setActiveTab('geofence')}
+                      className="w-full px-4 py-2 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 text-left flex items-center"
+                    >
+                      <Pentagon className="w-4 h-4 mr-2" />
+                      Manage Geofence
+                    </button>
+                    <button
+                      onClick={() => setActiveTab('annotations')}
+                      className="w-full px-4 py-2 bg-green-100 text-green-700 rounded-lg hover:bg-green-200 text-left flex items-center"
+                    >
+                      <Pencil className="w-4 h-4 mr-2" />
+                      Add Map Annotations
+                    </button>
+                    <button
+                      onClick={() => {
+                        // TODO: Implement share functionality
+                        alert('Share functionality coming soon!');
+                      }}
+                      className="w-full px-4 py-2 bg-purple-100 text-purple-700 rounded-lg hover:bg-purple-200 text-left flex items-center"
+                    >
+                      <Share2 className="w-4 h-4 mr-2" />
+                      Share Map with Customer
+                    </button>
+                  </div>
+                </div>
+
+                {/* Map Versions */}
+                {siteMaps.length > 0 && (
+                  <div className="bg-white rounded-lg shadow-sm p-6">
+                    <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                      <Layers className="w-5 h-5 mr-2 text-orange-600" />
+                      Saved Map Versions
+                    </h3>
+                    <div className="space-y-2">
+                      {siteMaps.slice(0, 3).map((map) => (
+                        <div
+                          key={map.id}
+                          className="p-3 bg-gray-50 rounded-lg hover:bg-gray-100 cursor-pointer"
+                          onClick={() => {
+                            setActiveTab('annotations');
+                            setTimeout(() => loadMap(map), 100);
+                          }}
+                        >
+                          <div className="flex items-center justify-between">
+                            <div className="flex-1">
+                              <p className="text-sm font-medium text-gray-900">{map.name}</p>
+                              <p className="text-xs text-gray-600">
+                                v{map.version} • {map.annotations?.length || 0} annotations
+                              </p>
+                            </div>
+                            {map.is_current && (
+                              <span className="px-2 py-0.5 bg-green-100 text-green-800 text-xs font-semibold rounded-full">
+                                Current
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                      {siteMaps.length > 3 && (
+                        <button
+                          onClick={() => setActiveTab('annotations')}
+                          className="w-full text-sm text-blue-600 hover:text-blue-700 font-medium"
+                        >
+                          View all {siteMaps.length} versions →
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {activeTab === 'geofence' && (
           <>
             {/* Map */}
             <div ref={mapRef} className="w-full h-full" style={{ minHeight: '600px' }} />
