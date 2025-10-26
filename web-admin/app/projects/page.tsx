@@ -487,5 +487,13 @@ export default function ProjectsPage() {
           </div>
         )}
       </div>
+      
+      {/* Customer Quick View Modal */}
+      {selectedCustomerId && (
+        <CustomerQuickViewModal
+          customerId={selectedCustomerId}
+          onClose={() => setSelectedCustomerId(null)}
+        />
+      )}
     );
 }
