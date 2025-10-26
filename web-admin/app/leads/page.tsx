@@ -838,13 +838,28 @@ export default function LeadsPage() {
                 return (
                   <div
                     key={lead.id}
-                    className="bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-all cursor-pointer overflow-hidden group"
-                    onClick={() => handleEdit(lead)}
+                    className="bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-all cursor-pointer overflow-hidden group relative"
                   >
+                    {/* Checkbox for bulk selection */}
+                    <div className="absolute top-3 left-3 z-10">
+                      <input
+                        type="checkbox"
+                        checked={selectedLeads.includes(lead.id)}
+                        onChange={(e) => {
+                          e.stopPropagation();
+                          toggleSelectLead(lead.id);
+                        }}
+                        onClick={(e) => e.stopPropagation()}
+                        className="w-5 h-5 rounded border-gray-300 text-blue-500 focus:ring-2 focus:ring-blue-500 cursor-pointer"
+                      />
+                    </div>
+                    
+                    {/* Card Content - wrapped in div with onClick */}
+                    <div onClick={() => handleQuickView(lead)}>
                     {/* Card Header */}
                     <div className="p-4 border-b border-gray-100">
                       <div className="flex items-start justify-between mb-2">
-                        <div className="flex-1 min-w-0">
+                        <div className="flex-1 min-w-0 pl-8">
                           <h3 className="font-semibold text-gray-900 text-base truncate group-hover:text-[#3f72af] transition-colors">
                             {lead.name}
                           </h3>
