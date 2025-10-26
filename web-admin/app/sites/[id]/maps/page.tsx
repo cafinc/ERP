@@ -734,11 +734,12 @@ export default function SiteMapsGeofencingPage() {
         base_map_data: screenshot,
         base_map_url: site?.location.address || '',
         annotations: annotations,
+        measurements: overviewMeasurementResults.length > 0 ? overviewMeasurementResults : undefined,
         legend_items: generateLegend(),
       };
 
       await api.post('/site-maps', mapData);
-      alert('Map saved successfully!');
+      alert('Map saved successfully with measurements!');
       setShowSaveModal(false);
       setMapName('');
       loadSiteMaps();
