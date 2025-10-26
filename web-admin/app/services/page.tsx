@@ -58,7 +58,7 @@ interface Service {
   description?: string;
   pricing: { [key: string]: number };
   active: boolean;
-  equipment_ids?: string[];
+  equipment?: Array<{ equipment_id: string; rate: number; unit: string }>;
   consumable_ids?: string[];
   requires_consumables?: boolean;
   created_at: string;
