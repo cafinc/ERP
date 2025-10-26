@@ -383,15 +383,14 @@ export default function InvoicesPage() {
             </div>
           </div>
         )}
+
+        {/* Customer Quick View Modal */}
+        {selectedCustomerId && (
+          <CustomerQuickViewModal
+            customerId={selectedCustomerId}
+            onClose={() => setSelectedCustomerId(null)}
+          />
+        )}
       </div>
-      
-      {/* Customer Quick View Modal */}
-      {selectedCustomerId && (
-        <CustomerQuickViewModal
-          customerId={selectedCustomerId}
-          onClose={() => setSelectedCustomerId(null)}
-        />
-      )}
-    </div>
   );
 }
