@@ -91,6 +91,7 @@ interface SiteMap {
   base_map_data?: string;
   base_map_url?: string;
   annotations: SiteMapAnnotation[];
+  measurements?: Array<any>;
   legend_items?: Array<{ category: string; label: string; color: string; icon: string }>;
   is_current: boolean;
   created_at: string;
