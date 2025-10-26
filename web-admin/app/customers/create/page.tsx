@@ -425,8 +425,6 @@ export default function CustomerFormPage() {
       if (!customerForm.last_name) errors['last_name'] = 'Last name is required';
     } else {
       if (!customerForm.company_name) errors['company_name'] = 'Company name is required';
-      if (!customerForm.main_contact.first_name) errors['main_contact_first_name'] = 'First name is required';
-      if (!customerForm.main_contact.last_name) errors['main_contact_last_name'] = 'Last name is required';
     }
 
     // Email validation (required)
