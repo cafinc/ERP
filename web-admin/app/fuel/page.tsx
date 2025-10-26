@@ -91,8 +91,20 @@ export default function FuelPage() {
     try {
       const [equipmentRes, trucksRes, toolsRes] = await Promise.all([
         api.get('/inventory').catch(() => ({ data: [] })),
-        api.get('/trucks').catch(() => ({ data: [] })),
-        api.get('/tools').catch(() => ({ data: [] })),
+        api.get('/trucks').catch((err) => {
+          // Silently handle 404 for trucks endpoint if it doesn't exist yet
+          if (err?.response?.status !== 404) {
+            console.warn('Trucks endpoint error:', err?.response?.status);
+          }
+          return { data: [] };
+        }),
+        api.get('/tools').catch((err) => {
+          // Silently handle 404 for tools endpoint if it doesn't exist yet
+          if (err?.response?.status !== 404) {
+            console.warn('Tools endpoint error:', err?.response?.status);
+          }
+          return { data: [] };
+        }),
       ]);
       setEquipment(equipmentRes.data || []);
       setTrucks(trucksRes.data || []);
