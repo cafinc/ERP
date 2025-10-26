@@ -2211,6 +2211,8 @@ async def update_site_map(map_id: str, map_update: SiteMapUpdate):
     except HTTPException:
         raise
     except Exception as e:
+        if "not a valid ObjectId" in str(e):
+            raise HTTPException(status_code=404, detail="Site map not found")
         raise HTTPException(status_code=500, detail=f"Error updating site map: {str(e)}")
 
 @api_router.delete("/site-maps/{map_id}")
