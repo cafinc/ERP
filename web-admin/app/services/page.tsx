@@ -84,7 +84,7 @@ export default function ServicesPage() {
     service_type: 'plowing',
     description: '',
     active: true,
-    equipment_ids: [] as string[],
+    equipment: [] as Array<{ equipment_id: string; rate: number; unit: string }>,
     consumable_ids: [] as string[],
     requires_consumables: false,
   });
