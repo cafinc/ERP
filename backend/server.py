@@ -2259,16 +2259,6 @@ async def set_current_site_map(map_id: str):
         if "not a valid ObjectId" in str(e):
             raise HTTPException(status_code=404, detail="Site map not found")
         raise HTTPException(status_code=500, detail=f"Error setting current site map: {str(e)}")
-            {"_id": ObjectId(map_id)},
-            {"$set": {"is_current": True}}
-        )
-        
-        return {"message": "Site map set as current successfully"}
-        
-    except HTTPException:
-        raise
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error setting current map: {str(e)}")
 
 
 # ==================== EQUIPMENT ENDPOINTS ====================
