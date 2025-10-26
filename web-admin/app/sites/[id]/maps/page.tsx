@@ -951,14 +951,288 @@ export default function SiteMapsGeofencingPage() {
             )}
           </>
         ) : (
-          <div className="flex items-center justify-center h-full">
-            <div className="text-center">
-              <MapIcon className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Map Annotations</h3>
-              <p className="text-gray-600">This feature is coming soon...</p>
-              <p className="text-sm text-gray-500 mt-2">
-                Map annotations allow you to mark important features like entrances, exits, obstacles, etc.
-              </p>
+          <div className="flex gap-6 h-full">
+            {/* Drawing Toolbar */}
+            <div className="w-72 bg-white rounded-lg shadow-sm p-4 h-fit">
+              <h3 className="font-semibold text-gray-900 mb-4 flex items-center">
+                <Pencil className="w-5 h-5 mr-2" />
+                Drawing Tools
+              </h3>
+              
+              {/* Drawing modes */}
+              <div className="space-y-2 mb-4">
+                <button
+                  onClick={() => startAnnotationDrawing('polygon')}
+                  className={`w-full px-3 py-2 rounded-lg flex items-center ${
+                    drawingMode === 'polygon' ? 'bg-blue-100 text-blue-700 font-semibold' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
+                >
+                  <Square className="w-4 h-4 mr-2" />
+                  Draw Area (Polygon)
+                </button>
+                <button
+                  onClick={() => startAnnotationDrawing('polyline')}
+                  className={`w-full px-3 py-2 rounded-lg flex items-center ${
+                    drawingMode === 'polyline' ? 'bg-blue-100 text-blue-700 font-semibold' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
+                >
+                  <Pencil className="w-4 h-4 mr-2" />
+                  Draw Line
+                </button>
+                <button
+                  onClick={() => startAnnotationDrawing('rectangle')}
+                  className={`w-full px-3 py-2 rounded-lg flex items-center ${
+                    drawingMode === 'rectangle' ? 'bg-blue-100 text-blue-700 font-semibold' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
+                >
+                  <Square className="w-4 h-4 mr-2" />
+                  Rectangle
+                </button>
+                <button
+                  onClick={() => startAnnotationDrawing('circle')}
+                  className={`w-full px-3 py-2 rounded-lg flex items-center ${
+                    drawingMode === 'circle' ? 'bg-blue-100 text-blue-700 font-semibold' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
+                >
+                  <Circle className="w-4 h-4 mr-2" />
+                  Circle
+                </button>
+                <button
+                  onClick={() => startAnnotationDrawing('marker')}
+                  className={`w-full px-3 py-2 rounded-lg flex items-center ${
+                    drawingMode === 'marker' ? 'bg-blue-100 text-blue-700 font-semibold' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
+                >
+                  <MapPin className="w-4 h-4 mr-2" />
+                  Add Marker
+                </button>
+              </div>
+
+              {/* Colors */}
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700 mb-2">Color</label>
+                <div className="grid grid-cols-3 gap-2">
+                  {drawingColors.map((color) => (
+                    <button
+                      key={color.value}
+                      onClick={() => setSelectedColor(color.value)}
+                      className={`w-full h-10 rounded-lg border-2 transition-transform ${
+                        selectedColor === color.value ? 'border-gray-900 scale-110' : 'border-gray-300'
+                      }`}
+                      style={{ backgroundColor: color.value }}
+                      title={color.name}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              {/* Category */}
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700 mb-2">Category</label>
+                <select
+                  value={selectedCategory}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                >
+                  {annotationCategories.map((cat) => (
+                    <option key={cat.value} value={cat.value}>
+                      {cat.icon} {cat.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="border-t border-gray-200 pt-4 space-y-2">
+                <button
+                  onClick={() => undoAnnotation()}
+                  disabled={undoStack.current.length === 0}
+                  className="w-full px-3 py-2 rounded-lg flex items-center bg-gray-100 text-gray-700 hover:bg-gray-200 disabled:opacity-50"
+                >
+                  <Undo className="w-4 h-4 mr-2" />
+                  Undo
+                </button>
+                <button
+                  onClick={() => redoAnnotation()}
+                  disabled={redoStack.current.length === 0}
+                  className="w-full px-3 py-2 rounded-lg flex items-center bg-gray-100 text-gray-700 hover:bg-gray-200 disabled:opacity-50"
+                >
+                  <Redo className="w-4 h-4 mr-2" />
+                  Redo
+                </button>
+                <button
+                  onClick={clearAllAnnotations}
+                  className="w-full px-3 py-2 rounded-lg flex items-center bg-red-100 text-red-700 hover:bg-red-200"
+                >
+                  <Trash2 className="w-4 h-4 mr-2" />
+                  Clear All
+                </button>
+              </div>
+
+              <div className="border-t border-gray-200 mt-4 pt-4 space-y-2">
+                <button
+                  onClick={() => setShowSaveModal(true)}
+                  disabled={annotations.length === 0}
+                  className="w-full px-3 py-2 rounded-lg flex items-center bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50"
+                >
+                  <Save className="w-4 h-4 mr-2" />
+                  Save Map
+                </button>
+                <button
+                  onClick={() => setShowMapsList(!showMapsList)}
+                  className="w-full px-3 py-2 rounded-lg flex items-center bg-purple-600 text-white hover:bg-purple-700"
+                >
+                  <Layers className="w-4 h-4 mr-2" />
+                  View Saved Maps ({siteMaps.length})
+                </button>
+              </div>
+
+              {/* Annotations count */}
+              <div className="mt-4 p-3 bg-blue-50 rounded-lg">
+                <p className="text-sm text-blue-900">
+                  <strong>{annotations.length}</strong> annotation{annotations.length !== 1 ? 's' : ''}
+                </p>
+                {currentMap && (
+                  <p className="text-xs text-blue-700 mt-1">
+                    Current: {currentMap.name} (v{currentMap.version})
+                  </p>
+                )}
+              </div>
+            </div>
+
+            {/* Map Canvas */}
+            <div className="flex-1">
+              <div className="bg-white rounded-lg shadow-sm overflow-hidden h-full">
+                <div ref={annotationsMapRef} className="w-full h-[calc(100vh-280px)]"></div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Save Map Modal */}
+        {showSaveModal && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+            <div className="bg-white rounded-lg max-w-md w-full p-6">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-semibold">Save Map</h3>
+                <button
+                  onClick={() => setShowSaveModal(false)}
+                  className="text-gray-400 hover:text-gray-600"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Map Name
+                </label>
+                <input
+                  type="text"
+                  value={mapName}
+                  onChange={(e) => setMapName(e.target.value)}
+                  placeholder="e.g., Winter 2024 Layout"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              <div className="flex justify-end space-x-3">
+                <button
+                  onClick={() => setShowSaveModal(false)}
+                  className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleSaveMap}
+                  disabled={saving || !mapName.trim()}
+                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 inline-flex items-center"
+                >
+                  {saving ? (
+                    <>
+                      <RefreshCw className="w-4 h-4 mr-2 animate-spin" />
+                      Saving...
+                    </>
+                  ) : (
+                    <>
+                      <Camera className="w-4 h-4 mr-2" />
+                      Save
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Maps List Modal */}
+        {showMapsList && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+            <div className="bg-white rounded-lg max-w-3xl w-full max-h-[80vh] overflow-auto">
+              <div className="p-6 border-b border-gray-200 flex items-center justify-between">
+                <h3 className="text-lg font-semibold">Saved Map Versions</h3>
+                <button
+                  onClick={() => setShowMapsList(false)}
+                  className="text-gray-400 hover:text-gray-600"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+              <div className="p-6">
+                {annotationsLoading ? (
+                  <div className="text-center py-12">
+                    <RefreshCw className="w-8 h-8 text-blue-600 animate-spin mx-auto mb-4" />
+                    <p className="text-gray-600">Loading maps...</p>
+                  </div>
+                ) : siteMaps.length === 0 ? (
+                  <div className="text-center py-12">
+                    <Layers className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                    <p className="text-gray-500">No saved maps yet</p>
+                  </div>
+                ) : (
+                  <div className="space-y-4">
+                    {siteMaps.map((map) => (
+                      <div
+                        key={map.id}
+                        className="border border-gray-200 rounded-lg p-4 hover:bg-gray-50"
+                      >
+                        <div className="flex items-start justify-between">
+                          <div className="flex-1">
+                            <div className="flex items-center gap-2 mb-2">
+                              <h4 className="font-semibold text-gray-900">{map.name}</h4>
+                              {map.is_current && (
+                                <span className="px-2 py-1 bg-green-100 text-green-800 text-xs font-semibold rounded-full">
+                                  Current
+                                </span>
+                              )}
+                            </div>
+                            <p className="text-sm text-gray-600">Version {map.version}</p>
+                            <p className="text-sm text-gray-500">
+                              {map.annotations?.length || 0} annotations
+                            </p>
+                            <p className="text-sm text-gray-500">
+                              Created: {new Date(map.created_at).toLocaleString()}
+                            </p>
+                          </div>
+                          <div className="flex space-x-2">
+                            <button
+                              onClick={() => loadMap(map)}
+                              className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg"
+                              title="Load this map"
+                            >
+                              <Eye className="w-5 h-5" />
+                            </button>
+                            <button
+                              onClick={() => map.id && deleteMap(map.id)}
+                              className="p-2 text-red-600 hover:bg-red-50 rounded-lg"
+                              title="Delete this map"
+                            >
+                              <Trash2 className="w-5 h-5" />
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         )}
