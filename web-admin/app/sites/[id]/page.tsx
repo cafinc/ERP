@@ -104,12 +104,21 @@ export default function SiteDetailPage() {
   const [actionLoading, setActionLoading] = useState(false);
   const [showMeasureModal, setShowMeasureModal] = useState(false);
   const [activeTab, setActiveTab] = useState('overview');
+  const [measurements, setMeasurements] = useState<any[]>([]);
+  const [measurementType, setMeasurementType] = useState<'distance' | 'area'>('distance');
+  const [currentDistance, setCurrentDistance] = useState(0);
+  const [currentArea, setCurrentArea] = useState(0);
+  const [measurementPath, setMeasurementPath] = useState<Array<{ lat: number; lng: number }>>([]);
   
   // Map refs
   const mapRef = useRef<HTMLDivElement>(null);
+  const measureMapRef = useRef<HTMLDivElement>(null);
   const mapInstance = useRef<google.maps.Map | null>(null);
+  const measureMapInstance = useRef<google.maps.Map | null>(null);
   const geofencePolygon = useRef<google.maps.Polygon | null>(null);
-  const measurementPath = useRef<google.maps.Polyline | null>(null);
+  const drawingPolyline = useRef<google.maps.Polyline | null>(null);
+  const drawingPolygon = useRef<google.maps.Polygon | null>(null);
+  const drawingMarkers = useRef<google.maps.Marker[]>([]);
   const markers = useRef<google.maps.Marker[]>([]);
 
   useEffect(() => {
