@@ -1449,6 +1449,7 @@ export default function CustomerFormPage() {
                         />
                       </div>
                     </div>
+                  </div>
                     
                     {/* Billing Address Toggle */}
                     <div className="p-6 pt-0">
