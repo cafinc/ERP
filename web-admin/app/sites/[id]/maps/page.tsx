@@ -101,10 +101,31 @@ export default function SiteMapsGeofencingPage() {
   const [mapMode, setMapMode] = useState<'view' | 'edit'>('view');
   const [saving, setSaving] = useState(false);
   
+  // Annotations state
+  const [siteMaps, setSiteMaps] = useState<SiteMap[]>([]);
+  const [currentMap, setCurrentMap] = useState<SiteMap | null>(null);
+  const [annotations, setAnnotations] = useState<SiteMapAnnotation[]>([]);
+  const [drawingMode, setDrawingMode] = useState<string | null>(null);
+  const [selectedColor, setSelectedColor] = useState('#3B82F6');
+  const [selectedCategory, setSelectedCategory] = useState('custom');
+  const [showMapsList, setShowMapsList] = useState(false);
+  const [showSaveModal, setShowSaveModal] = useState(false);
+  const [mapName, setMapName] = useState('');
+  const [annotationsLoading, setAnnotationsLoading] = useState(false);
+  
   const mapRef = useRef<HTMLDivElement>(null);
   const googleMapRef = useRef<any>(null);
   const drawingManagerRef = useRef<any>(null);
   const polygonRef = useRef<any>(null);
+  
+  // Annotations refs
+  const annotationsMapRef = useRef<HTMLDivElement>(null);
+  const annotationsGoogleMapRef = useRef<any>(null);
+  const annotationsDrawingManagerRef = useRef<any>(null);
+  const overlaysRef = useRef<any[]>([]);
+  const undoStack = useRef<SiteMapAnnotation[][]>([]);
+  const redoStack = useRef<SiteMapAnnotation[][]>([]);
+  
   const [drawingPath, setDrawingPath] = useState<GeoPoint[]>([]);
   const [measurements, setMeasurements] = useState<any>(null);
   const [googleMapsLoaded, setGoogleMapsLoaded] = useState(false);
