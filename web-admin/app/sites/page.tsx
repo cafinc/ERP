@@ -58,6 +58,14 @@ export default function SitesPage() {
   const [filterActive, setFilterActive] = useState('active');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [showFilterDropdown, setShowFilterDropdown] = useState(false);
+  
+  // Bulk Operations State
+  const [selectedSites, setSelectedSites] = useState<string[]>([]);
+  const [bulkActionType, setBulkActionType] = useState<'delete' | 'archive' | null>(null);
+  
+  // Quick View State
+  const [quickViewSite, setQuickViewSite] = useState<Site | null>(null);
+  const [showQuickView, setShowQuickView] = useState(false);
 
   useEffect(() => {
     loadData();
