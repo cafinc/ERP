@@ -59,6 +59,9 @@ interface Service {
   pricing: { [key: string]: number };
   active: boolean;
   equipment?: Array<{ equipment_id: string; rate: number; unit: string }>;
+  trucks?: Array<{ truck_id: string; rate: number; unit: string }>;
+  trailers?: Array<{ trailer_id: string; rate: number; unit: string }>;
+  tools?: Array<{ tool_id: string; rate: number; unit: string }>;
   consumable_ids?: string[];
   requires_consumables?: boolean;
   created_at: string;
