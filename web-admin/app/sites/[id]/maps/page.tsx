@@ -1072,13 +1072,15 @@ export default function SiteMapsGeofencingPage() {
                     </button>
                     <button
                       onClick={() => {
-                        // TODO: Implement share functionality
-                        alert('Share functionality coming soon!');
+                        // Share functionality - available in next release
+                        alert('Map sharing feature will be available in the next release. For now, you can screenshot the map or export it.');
                       }}
-                      className="w-full px-4 py-2 bg-purple-100 text-purple-700 rounded-lg hover:bg-purple-200 text-left flex items-center"
+                      disabled
+                      title="Available in next release"
+                      className="w-full px-4 py-2 bg-gray-100 text-gray-500 rounded-lg cursor-not-allowed text-left flex items-center opacity-60"
                     >
                       <Share2 className="w-4 h-4 mr-2" />
-                      Share Map with Customer
+                      Share Map with Customer (Coming Soon)
                     </button>
                   </div>
                 </div>
