@@ -29,8 +29,33 @@ async def websocket_endpoint(
         await websocket.close(code=4000, reason="user_id required")
         return
     
-    # TODO: Validate token when auth is fully implemented
-    # For now, accept connection with user_id
+    # Validate authentication token
+    if not token:
+        await websocket.close(code=4001, reason="Authentication token required")
+        logger.warning(f"WebSocket connection attempt without token for user {user_id}")
+        return
+    
+    try:
+        # Validate token
+        token_data = validate_token(token)
+        token_user_id = token_data.get('user_id') or token_data.get('sub')
+        
+        # Verify user_id matches token
+        if token_user_id != user_id:
+            await websocket.close(code=4003, reason="User ID mismatch")
+            logger.warning(f"User ID mismatch: token={token_user_id}, param={user_id}")
+            return
+        
+        logger.info(f"WebSocket authenticated for user {user_id}")
+        
+    except HTTPException as e:
+        await websocket.close(code=4002, reason=f"Invalid token: {e.detail}")
+        logger.warning(f"WebSocket authentication failed for user {user_id}: {e.detail}")
+        return
+    except Exception as e:
+        await websocket.close(code=4002, reason="Authentication failed")
+        logger.error(f"WebSocket authentication error for user {user_id}: {str(e)}")
+        return
     
     await connection_manager.connect(websocket, user_id)
     
