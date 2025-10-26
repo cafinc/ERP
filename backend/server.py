@@ -12562,3 +12562,36 @@ logger.info("Leads endpoints registered successfully")
 
 # Include the router with all endpoints
 app.include_router(api_router)
+
+@app.get("/")
+async def read_root():
+    return {
+        "message": "Snow Removal Business Tracking API",
+        "version": "1.0.0"
+    }
+
+@app.get("/health")
+async def health_check():
+    """
+    Health check endpoint for monitoring
+    Returns the health status of the application and its dependencies
+    """
+    try:
+        # Check database connection
+        await db.command('ping')
+        db_status = "healthy"
+    except Exception as e:
+        logger.error(f"Database health check failed: {e}")
+        db_status = "unhealthy"
+    
+    overall_status = "healthy" if db_status == "healthy" else "degraded"
+    
+    return {
+        "status": overall_status,
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "services": {
+            "api": "healthy",
+            "database": db_status,
+        },
+        "version": "1.0.0"
+    }
