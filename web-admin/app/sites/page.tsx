@@ -449,9 +449,24 @@ export default function SitesPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">{filteredSites.map((site, index) => (
               <div
                 key={site.id || `site-${index}`}
-                className="bg-white rounded-xl shadow-sm border border-gray-200 p-5 hover:shadow-md transition-shadow cursor-pointer"
-                onClick={() => handleViewSite(site.id)}
+                className="bg-white rounded-xl shadow-sm border border-gray-200 p-5 hover:shadow-md transition-shadow cursor-pointer relative"
               >
+                {/* Checkbox for bulk selection */}
+                <div className="absolute top-3 left-3 z-10">
+                  <input
+                    type="checkbox"
+                    checked={selectedSites.includes(site.id)}
+                    onChange={(e) => {
+                      e.stopPropagation();
+                      toggleSelectSite(site.id);
+                    }}
+                    onClick={(e) => e.stopPropagation()}
+                    className="w-5 h-5 rounded border-gray-300 text-blue-500 focus:ring-2 focus:ring-blue-500 cursor-pointer"
+                  />
+                </div>
+                
+                {/* Card Content - wrapped in div with onClick */}
+                <div onClick={() => handleQuickView(site)} className="pl-6">
                 {/* Header - Site Name and Status */}
                 <div className="flex items-start justify-between mb-3">
                   <h3 className="text-lg font-bold text-gray-900">{site.name || 'Unnamed Site'}</h3>
