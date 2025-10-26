@@ -145,7 +145,8 @@ export default function ProjectCreatePage() {
   };
 
   return (
-    <PageHeader
+    <>
+      <PageHeader
         title="Create Projects"
         subtitle="Add new projects"
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Projects", href: "/projects" }, { label: "Create" }]}
