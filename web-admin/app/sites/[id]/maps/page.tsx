@@ -200,6 +200,13 @@ export default function SiteMapsGeofencingPage() {
     }
   }, [googleMapsLoaded, site, activeTab]);
 
+  // Initialize overview map
+  useEffect(() => {
+    if (googleMapsLoaded && site && overviewMapRef.current && activeTab === 'overview' && !overviewGoogleMapRef.current) {
+      initializeOverviewMap();
+    }
+  }, [googleMapsLoaded, site, activeTab]);
+
   useEffect(() => {
     if (googleMapsLoaded && site && mapRef.current && (activeTab === 'geofence' || activeTab === 'overview') && !googleMapRef.current) {
       console.log('Initializing map with:', site);
