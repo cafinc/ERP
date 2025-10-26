@@ -915,16 +915,20 @@ export default function ServicesPage() {
                 </div>
 
                 {/* Consumables Selection Card */}
-                <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-6 backdrop-blur-sm">
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-lg font-bold text-gray-900 flex items-center">
-                      <ShoppingCart className="w-5 h-5 text-[#3f72af] mr-2" />
-                      Consumables
-                    </h3>
+                <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 backdrop-blur-sm overflow-hidden">
+                  {/* Header with Gradient */}
+                  <div className="bg-gradient-to-r from-orange-500 to-orange-600 px-6 py-4 flex items-center justify-between">
+                    <div>
+                      <h3 className="text-lg font-bold text-white flex items-center">
+                        <ShoppingCart className="w-5 h-5 mr-2" />
+                        Consumables
+                      </h3>
+                      <p className="text-sm text-orange-100 mt-1">Link consumables needed for this service</p>
+                    </div>
                     
                     {/* Requires Consumables Toggle */}
                     <label className="flex items-center cursor-pointer group">
-                      <span className="mr-3 text-sm font-semibold text-gray-700">Requires Consumables</span>
+                      <span className="mr-3 text-sm font-semibold text-white">Required</span>
                       <div className="relative">
                         <input
                           type="checkbox"
@@ -932,15 +936,13 @@ export default function ServicesPage() {
                           onChange={(e) => setFormData({ ...formData, requires_consumables: e.target.checked })}
                           className="sr-only peer"
                         />
-                        <div className="w-14 h-7 bg-gray-300 rounded-full peer peer-checked:bg-[#3f72af] transition-all duration-300 shadow-inner"></div>
+                        <div className="w-14 h-7 bg-white/30 rounded-full peer peer-checked:bg-yellow-300 transition-all duration-300 shadow-inner"></div>
                         <div className="absolute left-1 top-1 w-5 h-5 bg-white rounded-full transition-all duration-300 peer-checked:translate-x-7 shadow-md"></div>
                       </div>
                     </label>
                   </div>
                   
-                  {formData.requires_consumables ? (
-                    <>
-                      <p className="text-sm text-gray-600 mb-4">Select consumables needed for this service</p>
+                  <div className="p-6">
                       <div className="space-y-2 max-h-48 overflow-y-auto">
                         {consumables.length === 0 ? (
                           <div className="text-center py-6 bg-gray-50 rounded-xl">
