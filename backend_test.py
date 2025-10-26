@@ -9,15 +9,14 @@ import aiohttp
 import json
 import os
 import sys
-from datetime import datetime, timedelta
+from datetime import datetime
 from typing import Dict, Any, List
-import base64
 
 # Get backend URL from environment
 BACKEND_URL = os.getenv('REACT_APP_BACKEND_URL', 'https://map-measure-admin.preview.emergentagent.com')
 API_BASE = f"{BACKEND_URL}/api"
 
-class BackendTester:
+class SiteMapsAPITester:
     def __init__(self):
         self.session = None
         self.test_results = []
@@ -70,15 +69,15 @@ class BackendTester:
             return False, str(e), 0
     
     async def setup_test_data(self):
-        """Create test customer and site for testing"""
-        print("\n🔧 Setting up test data...")
+        """Create test customer and site for Site Maps testing"""
+        print("\n🔧 Setting up test data for Site Maps...")
         
         # Create test customer
         customer_data = {
-            "name": "Test Customer for Site Service History",
-            "email": "test.customer.ssh@example.com",
-            "phone": "+1-555-0123",
-            "address": "123 Test Street, Test City, TC 12345",
+            "name": "Site Maps Test Customer",
+            "email": "sitemaps.test@example.com",
+            "phone": "+1-555-0199",
+            "address": "456 Maps Test Street, Test City, TC 12345",
             "customer_type": "individual"
         }
         
@@ -92,18 +91,18 @@ class BackendTester:
         
         # Create test site
         site_data = {
-            "name": "Test Site for Service History",
+            "name": "Site Maps Test Site",
             "customer_id": self.test_data["customer_id"],
             "site_type": "parking_lot",
             "location": {
-                "latitude": 43.6532,
-                "longitude": -79.3832,
-                "address": "123 Test Site Avenue, Toronto, ON M5V 3A8"
+                "latitude": 51.0447,
+                "longitude": -114.0719,
+                "address": "789 Site Maps Avenue, Calgary, AB T2P 1J9"
             },
-            "site_reference": "TSH-001",
-            "area_size": 5000.0,
-            "internal_notes": "Test site for service history testing",
-            "crew_notes": "Handle with care - test site"
+            "site_reference": "SM-TEST-001",
+            "area_size": 8000.0,
+            "internal_notes": "Test site for Site Maps API testing",
+            "crew_notes": "Site Maps testing - handle with care"
         }
         
         success, response, status = await self.make_request("POST", "/sites", site_data)
@@ -116,469 +115,543 @@ class BackendTester:
         
         return True
     
-    async def test_site_service_history_apis(self):
-        """Test all Site Service History API endpoints"""
-        print("\n🧪 Testing Site Service History APIs...")
+    async def test_site_maps_create_api(self):
+        """Test POST /api/site-maps - Create new site map"""
+        print("\n🗺️ Testing Site Maps Creation API...")
         
         site_id = self.test_data["site_id"]
         
-        # 1. Test POST /api/sites/{site_id}/service-history - Create new service history entry
-        print("\n1. Testing Service History Creation...")
+        # Test 1: Create site map with complete data structure matching frontend format
+        print("\n1️⃣ Testing POST /api/site-maps - Complete data structure")
         
-        # Test with all fields
-        service_data_full = {
+        site_map_data = {
             "site_id": site_id,
-            "service_date": "2024-01-15",
-            "service_type": "Snow Plowing",
-            "status": "completed",
-            "crew_lead": "John Smith",
-            "crew_members": ["Jane Doe", "Bob Wilson"],
-            "description": "Complete snow plowing of parking lot",
-            "notes": "Heavy snowfall, required extra passes",
-            "duration_hours": 2.5,
-            "photos": ["photo1.jpg", "photo2.jpg"],
-            "weather_conditions": "Heavy snow, -5°C",
-            "equipment_used": ["Plow Truck #1", "Salt Spreader #2"]
-        }
-        
-        success, response, status = await self.make_request("POST", f"/sites/{site_id}/service-history", service_data_full)
-        if success and response.get("service_history_id"):
-            self.test_data["service_history_id_1"] = response["service_history_id"]
-            self.log_test("Create service history (full fields)", True, f"Created with ID: {response['service_history_id']}")
-        else:
-            self.log_test("Create service history (full fields)", False, f"Status: {status}", response)
-        
-        # Test with minimal required fields only
-        service_data_minimal = {
-            "site_id": site_id,
-            "service_date": "2024-01-16",
-            "service_type": "Salting",
-            "status": "completed"
-        }
-        
-        success, response, status = await self.make_request("POST", f"/sites/{site_id}/service-history", service_data_minimal)
-        if success and response.get("service_history_id"):
-            self.test_data["service_history_id_2"] = response["service_history_id"]
-            self.log_test("Create service history (minimal fields)", True, f"Created with ID: {response['service_history_id']}")
-        else:
-            self.log_test("Create service history (minimal fields)", False, f"Status: {status}", response)
-        
-        # Create a third entry for testing
-        service_data_3 = {
-            "site_id": site_id,
-            "service_date": "2024-01-17",
-            "service_type": "Landscaping",
-            "status": "in_progress",
-            "crew_lead": "Alice Johnson",
-            "duration_hours": 1.0
-        }
-        
-        success, response, status = await self.make_request("POST", f"/sites/{site_id}/service-history", service_data_3)
-        if success and response.get("service_history_id"):
-            self.test_data["service_history_id_3"] = response["service_history_id"]
-            self.log_test("Create service history (third entry)", True, f"Created with ID: {response['service_history_id']}")
-        else:
-            self.log_test("Create service history (third entry)", False, f"Status: {status}", response)
-        
-        # 2. Test GET /api/sites/{site_id}/service-history - Get all service history
-        print("\n2. Testing Service History Retrieval...")
-        
-        # Test without filters
-        success, response, status = await self.make_request("GET", f"/sites/{site_id}/service-history")
-        if success and response.get("service_history"):
-            count = len(response["service_history"])
-            self.log_test("Get all service history", True, f"Retrieved {count} entries")
-        else:
-            self.log_test("Get all service history", False, f"Status: {status}", response)
-        
-        # Test with limit parameter
-        success, response, status = await self.make_request("GET", f"/sites/{site_id}/service-history", params={"limit": 2})
-        if success and response.get("service_history"):
-            count = len(response["service_history"])
-            self.log_test("Get service history with limit", True, f"Retrieved {count} entries (limit=2)")
-        else:
-            self.log_test("Get service history with limit", False, f"Status: {status}", response)
-        
-        # Test with service_type filter
-        success, response, status = await self.make_request("GET", f"/sites/{site_id}/service-history", params={"service_type": "Snow Plowing"})
-        if success and response.get("service_history"):
-            count = len(response["service_history"])
-            self.log_test("Get service history by type", True, f"Retrieved {count} Snow Plowing entries")
-        else:
-            self.log_test("Get service history by type", False, f"Status: {status}", response)
-        
-        # Test with status filter
-        success, response, status = await self.make_request("GET", f"/sites/{site_id}/service-history", params={"status": "completed"})
-        if success and response.get("service_history"):
-            count = len(response["service_history"])
-            self.log_test("Get service history by status", True, f"Retrieved {count} completed entries")
-        else:
-            self.log_test("Get service history by status", False, f"Status: {status}", response)
-        
-        # 3. Test GET /api/sites/{site_id}/service-history/{history_id} - Get specific entry
-        print("\n3. Testing Specific Service History Retrieval...")
-        
-        if "service_history_id_1" in self.test_data:
-            history_id = self.test_data["service_history_id_1"]
-            success, response, status = await self.make_request("GET", f"/sites/{site_id}/service-history/{history_id}")
-            if success and response.get("service_history"):
-                self.log_test("Get specific service history", True, f"Retrieved entry with ID: {history_id}")
-            else:
-                self.log_test("Get specific service history", False, f"Status: {status}", response)
-        
-        # Test with invalid history_id (should return 404)
-        success, response, status = await self.make_request("GET", f"/sites/{site_id}/service-history/invalid_id")
-        if status == 404:
-            self.log_test("Get invalid service history (404 test)", True, "Correctly returned 404")
-        else:
-            self.log_test("Get invalid service history (404 test)", False, f"Expected 404, got {status}", response)
-        
-        # 4. Test GET /api/sites/{site_id}/service-history/stats - Get statistics
-        print("\n4. Testing Service History Statistics...")
-        
-        success, response, status = await self.make_request("GET", f"/sites/{site_id}/service-history/stats")
-        if success and "total_services" in response and "by_type" in response:
-            total = response["total_services"]
-            by_type = response["by_type"]
-            self.log_test("Get service history stats", True, f"Total: {total}, Types: {len(by_type)}")
-        else:
-            self.log_test("Get service history stats", False, f"Status: {status}", response)
-        
-        # 5. Test PATCH /api/sites/{site_id}/service-history/{history_id} - Update entry
-        print("\n5. Testing Service History Updates...")
-        
-        if "service_history_id_1" in self.test_data:
-            history_id = self.test_data["service_history_id_1"]
-            
-            # Test updating service_type
-            update_data = {"service_type": "Snow Removal"}
-            success, response, status = await self.make_request("PATCH", f"/sites/{site_id}/service-history/{history_id}", update_data)
-            if success:
-                self.log_test("Update service history (service_type)", True, "Successfully updated service_type")
-            else:
-                self.log_test("Update service history (service_type)", False, f"Status: {status}", response)
-            
-            # Test updating status and notes
-            update_data = {
-                "status": "completed",
-                "crew_lead": "Updated Lead",
-                "notes": "Updated notes with additional information"
-            }
-            success, response, status = await self.make_request("PATCH", f"/sites/{site_id}/service-history/{history_id}", update_data)
-            if success:
-                self.log_test("Update service history (multiple fields)", True, "Successfully updated multiple fields")
-            else:
-                self.log_test("Update service history (multiple fields)", False, f"Status: {status}", response)
-        
-        # Test updating non-existent entry (should return 404)
-        update_data = {"status": "completed"}
-        success, response, status = await self.make_request("PATCH", f"/sites/{site_id}/service-history/invalid_id", update_data)
-        if status == 404:
-            self.log_test("Update invalid service history (404 test)", True, "Correctly returned 404")
-        else:
-            self.log_test("Update invalid service history (404 test)", False, f"Expected 404, got {status}", response)
-        
-        # 6. Test DELETE /api/sites/{site_id}/service-history/{history_id} - Delete entry
-        print("\n6. Testing Service History Deletion...")
-        
-        if "service_history_id_3" in self.test_data:
-            history_id = self.test_data["service_history_id_3"]
-            
-            # Delete the entry
-            success, response, status = await self.make_request("DELETE", f"/sites/{site_id}/service-history/{history_id}")
-            if success:
-                self.log_test("Delete service history", True, f"Successfully deleted entry {history_id}")
-                
-                # Verify entry is removed
-                success, response, status = await self.make_request("GET", f"/sites/{site_id}/service-history/{history_id}")
-                if status == 404:
-                    self.log_test("Verify deletion (404 check)", True, "Entry correctly removed")
-                else:
-                    self.log_test("Verify deletion (404 check)", False, f"Entry still exists, status: {status}")
-            else:
-                self.log_test("Delete service history", False, f"Status: {status}", response)
-        
-        # Test deleting non-existent entry (should return 404)
-        success, response, status = await self.make_request("DELETE", f"/sites/{site_id}/service-history/invalid_id")
-        if status == 404:
-            self.log_test("Delete invalid service history (404 test)", True, "Correctly returned 404")
-        else:
-            self.log_test("Delete invalid service history (404 test)", False, f"Expected 404, got {status}", response)
-    
-    async def test_site_maps_apis(self):
-        """Test all Site Maps API endpoints"""
-        print("\n🗺️ Testing Site Maps APIs...")
-        
-        site_id = self.test_data["site_id"]
-        
-        # 1. Test POST /api/site-maps - Create new site map
-        print("\n1. Testing Site Map Creation...")
-        
-        # Create base64 sample image data
-        sample_image = base64.b64encode(b"fake_image_data_for_testing").decode('utf-8')
-        
-        map_data_1 = {
-            "site_id": site_id,
-            "name": "Main Site Map v1",
-            "base_map_type": "satellite",
-            "base_map_data": sample_image,
+            "name": "Test Map v1",
+            "base_map_type": "google_maps",
+            "base_map_data": "data:image/png;base64,test",
+            "base_map_url": "Test Location",
             "annotations": [
                 {
+                    "id": "ann_123456",
                     "type": "polygon",
-                    "coordinates": [[43.6532, -79.3832], [43.6533, -79.3831], [43.6534, -79.3833]],
-                    "color": "#FF0000",
                     "category": "plowing_zone",
-                    "label": "Main Plowing Area"
-                },
-                {
-                    "type": "marker",
-                    "coordinates": [43.6532, -79.3832],
-                    "color": "#0000FF",
-                    "category": "entrance",
-                    "label": "Main Entrance"
+                    "color": "#3B82F6",
+                    "coordinates": [{"x": -114.0719, "y": 51.0447}],
+                    "properties": {"strokeWeight": 2}
                 }
             ],
             "legend_items": [
-                {"color": "#FF0000", "label": "Plowing Zones"},
-                {"color": "#0000FF", "label": "Entrances"}
+                {"category": "plowing_zone", "label": "Plowing Zone", "color": "#3B82F6", "icon": "▭"}
             ]
         }
         
-        success, response, status = await self.make_request("POST", "/site-maps", map_data_1)
+        success, response, status = await self.make_request("POST", "/site-maps", site_map_data)
         if success and response.get("id"):
             self.test_data["map_id_1"] = response["id"]
             version = response.get("version", 0)
             is_current = response.get("is_current", False)
-            self.log_test("Create site map (v1)", True, f"Created map ID: {response['id']}, Version: {version}, Current: {is_current}")
+            
+            # Verify version auto-increment and is_current flag
+            if version == 1 and is_current:
+                self.log_test("Create site map with annotations", True, 
+                             f"Version: {version}, Current: {is_current}, ID: {response['id']}")
+            else:
+                self.log_test("Create site map with annotations", False, 
+                             f"Version or current flag incorrect: v{version}, current={is_current}")
         else:
-            self.log_test("Create site map (v1)", False, f"Status: {status}", response)
+            self.log_test("Create site map with annotations", False, 
+                         f"HTTP {status}: {response}")
         
-        # Create second version
-        map_data_2 = {
+        # Test 2: Verify version auto-increment works
+        print("\n2️⃣ Testing version auto-increment")
+        
+        site_map_data_v2 = {
             "site_id": site_id,
-            "name": "Main Site Map v2",
-            "base_map_type": "hybrid",
-            "base_map_data": sample_image,
-            "annotations": [
-                {
-                    "type": "rectangle",
-                    "coordinates": [[43.6532, -79.3832], [43.6535, -79.3830]],
-                    "color": "#00FF00",
-                    "category": "parking_area",
-                    "label": "Parking Zone"
-                }
-            ],
-            "legend_items": [
-                {"color": "#00FF00", "label": "Parking Areas"}
-            ]
+            "name": "Test Map v2",
+            "base_map_type": "google_maps",
+            "base_map_data": "data:image/png;base64,test2",
+            "base_map_url": "Test Location 2",
+            "annotations": []
         }
         
-        success, response, status = await self.make_request("POST", "/site-maps", map_data_2)
+        success, response, status = await self.make_request("POST", "/site-maps", site_map_data_v2)
         if success and response.get("id"):
             self.test_data["map_id_2"] = response["id"]
             version = response.get("version", 0)
             is_current = response.get("is_current", False)
-            self.log_test("Create site map (v2)", True, f"Created map ID: {response['id']}, Version: {version}, Current: {is_current}")
+            
+            if version == 2 and is_current:
+                self.log_test("Version auto-increment", True, 
+                             f"Version: {version}, Current: {is_current}")
+            else:
+                self.log_test("Version auto-increment", False, 
+                             f"Expected version 2, got {version}")
         else:
-            self.log_test("Create site map (v2)", False, f"Status: {status}", response)
+            self.log_test("Version auto-increment", False, 
+                         f"HTTP {status}: {response}")
         
-        # 2. Test GET /api/site-maps/site/{site_id} - Get all maps for a site
-        print("\n2. Testing Site Maps Retrieval...")
+        # Test 3: Test with empty annotations array
+        print("\n3️⃣ Testing create with empty annotations")
         
-        # Test without filters (all versions)
+        site_map_empty = {
+            "site_id": site_id,
+            "name": "Empty Annotations Map",
+            "base_map_type": "uploaded_image",
+            "annotations": []
+        }
+        
+        success, response, status = await self.make_request("POST", "/site-maps", site_map_empty)
+        if success and response.get("id"):
+            self.test_data["map_id_3"] = response["id"]
+            self.log_test("Create with empty annotations", True, "Successfully created")
+        else:
+            self.log_test("Create with empty annotations", False, 
+                         f"HTTP {status}: {response}")
+    
+    async def test_site_maps_get_by_site_api(self):
+        """Test GET /api/site-maps/site/{site_id} - Get all maps for a site"""
+        print("\n📋 Testing Site Maps Get by Site API...")
+        
+        site_id = self.test_data["site_id"]
+        
+        # Test 4: Get all maps without query parameters
+        print("\n4️⃣ Testing GET /api/site-maps/site/{site_id} - All versions")
+        
         success, response, status = await self.make_request("GET", f"/site-maps/site/{site_id}")
         if success and isinstance(response, list):
             count = len(response)
-            current_count = sum(1 for m in response if m.get("is_current"))
-            self.log_test("Get all site maps", True, f"Retrieved {count} maps, {current_count} current")
+            if count >= 3:  # Should have at least 3 maps we created
+                self.log_test("Get all maps for site", True, f"Found {count} maps")
+            else:
+                self.log_test("Get all maps for site", False, f"Expected >=3 maps, got {count}")
         else:
-            self.log_test("Get all site maps", False, f"Status: {status}", response)
+            self.log_test("Get all maps for site", False, 
+                         f"HTTP {status}: {response}")
         
-        # Test with current_only=true
-        success, response, status = await self.make_request("GET", f"/site-maps/site/{site_id}", params={"current_only": True})
+        # Test 5: Get with current_only=true
+        print("\n5️⃣ Testing GET with current_only=true")
+        
+        success, response, status = await self.make_request("GET", f"/site-maps/site/{site_id}", 
+                                                           params={"current_only": "true"})
         if success and isinstance(response, list):
             count = len(response)
-            all_current = all(m.get("is_current") for m in response)
-            self.log_test("Get current site maps only", True, f"Retrieved {count} current maps, All current: {all_current}")
+            if count == 1 and response[0].get("is_current"):
+                self.log_test("Get current only maps", True, f"Found 1 current map")
+            else:
+                self.log_test("Get current only maps", False, 
+                             f"Expected 1 current map, got {count}")
         else:
-            self.log_test("Get current site maps only", False, f"Status: {status}", response)
+            self.log_test("Get current only maps", False, 
+                         f"HTTP {status}: {response}")
         
-        # 3. Test GET /api/site-maps/{map_id} - Get specific map
-        print("\n3. Testing Specific Site Map Retrieval...")
+        # Test 6: Get with current_only=false
+        print("\n6️⃣ Testing GET with current_only=false")
+        
+        success, response, status = await self.make_request("GET", f"/site-maps/site/{site_id}", 
+                                                           params={"current_only": "false"})
+        if success and isinstance(response, list):
+            count = len(response)
+            if count >= 3:
+                self.log_test("Get all versions with current_only=false", True, f"Found {count} maps")
+            else:
+                self.log_test("Get all versions with current_only=false", False, 
+                             f"Expected >=3 maps, got {count}")
+        else:
+            self.log_test("Get all versions with current_only=false", False, 
+                         f"HTTP {status}: {response}")
+        
+        # Test 7: Verify sorting by version descending
+        print("\n7️⃣ Testing sorting by version descending")
+        
+        success, response, status = await self.make_request("GET", f"/site-maps/site/{site_id}")
+        if success and isinstance(response, list) and len(response) >= 2:
+            versions = [m.get("version", 0) for m in response]
+            is_sorted = all(versions[i] >= versions[i+1] for i in range(len(versions)-1))
+            if is_sorted:
+                self.log_test("Sorting by version descending", True, f"Versions: {versions}")
+            else:
+                self.log_test("Sorting by version descending", False, f"Not sorted: {versions}")
+        else:
+            self.log_test("Sorting by version descending", False, "Not enough maps to test sorting")
+    
+    async def test_site_maps_get_specific_api(self):
+        """Test GET /api/site-maps/{map_id} - Get specific map"""
+        print("\n🎯 Testing Site Maps Get Specific API...")
+        
+        # Test 8: Get specific map with valid ID
+        print("\n8️⃣ Testing GET /api/site-maps/{map_id} - Valid ID")
         
         if "map_id_1" in self.test_data:
             map_id = self.test_data["map_id_1"]
             success, response, status = await self.make_request("GET", f"/site-maps/{map_id}")
-            if success and response.get("id"):
+            if success and response.get("id") == map_id:
                 annotations_count = len(response.get("annotations", []))
-                legend_count = len(response.get("legend_items", []))
-                self.log_test("Get specific site map", True, f"Retrieved map with {annotations_count} annotations, {legend_count} legend items")
+                self.log_test("Get specific map by ID", True, 
+                             f"Full map structure returned with {annotations_count} annotations")
             else:
-                self.log_test("Get specific site map", False, f"Status: {status}", response)
-        
-        # Test with invalid map_id
-        success, response, status = await self.make_request("GET", "/site-maps/invalid_map_id")
-        if status == 404 or status == 500:  # Expecting error for invalid ID
-            self.log_test("Get invalid site map (error test)", True, f"Correctly returned error {status}")
+                self.log_test("Get specific map by ID", False, "ID mismatch or missing data")
         else:
-            self.log_test("Get invalid site map (error test)", False, f"Expected error, got {status}", response)
+            self.log_test("Get specific map by ID", False, "No map ID available for testing")
         
-        # 4. Test PUT /api/site-maps/{map_id} - Update map
-        print("\n4. Testing Site Map Updates...")
+        # Test 9: Get with invalid map_id (should return 404, not 500)
+        print("\n9️⃣ Testing GET with invalid map_id")
         
-        if "map_id_1" in self.test_data:
-            map_id = self.test_data["map_id_1"]
-            
-            # Test updating name
-            update_data = {"name": "Updated Main Site Map v1"}
-            success, response, status = await self.make_request("PUT", f"/site-maps/{map_id}", update_data)
-            if success and response.get("name") == "Updated Main Site Map v1":
-                self.log_test("Update site map name", True, "Successfully updated map name")
-            else:
-                self.log_test("Update site map name", False, f"Status: {status}", response)
-            
-            # Test updating annotations array
-            update_data = {
-                "annotations": [
-                    {
-                        "type": "circle",
-                        "coordinates": [43.6532, -79.3832],
-                        "radius": 50,
-                        "color": "#FFFF00",
-                        "category": "hazard",
-                        "label": "Caution Area"
-                    }
-                ]
+        invalid_id = "invalid_map_id_123"
+        success, response, status = await self.make_request("GET", f"/site-maps/{invalid_id}")
+        if status == 404:
+            self.log_test("Invalid map_id returns 404", True, "Proper error handling")
+        elif status == 500:
+            self.log_test("Invalid map_id returns 404", False, "Returns 500 instead of 404")
+        else:
+            self.log_test("Invalid map_id returns 404", False, 
+                         f"Unexpected status: {status}")
+    
+    async def test_site_maps_update_api(self):
+        """Test PUT /api/site-maps/{map_id} - Update map"""
+        print("\n✏️ Testing Site Maps Update API...")
+        
+        if "map_id_1" not in self.test_data:
+            self.log_test("Update tests skipped", False, "No map ID available")
+            return
+        
+        map_id = self.test_data["map_id_1"]
+        
+        # Test 10: Update name only
+        print("\n🔟 Testing PUT /api/site-maps/{map_id} - Update name")
+        
+        update_data = {"name": "Updated Test Map Name"}
+        success, response, status = await self.make_request("PUT", f"/site-maps/{map_id}", update_data)
+        if success and response.get("name") == "Updated Test Map Name":
+            self.log_test("Update map name", True, "Name updated successfully")
+        else:
+            self.log_test("Update map name", False, f"HTTP {status}: {response}")
+        
+        # Test 11: Update annotations array
+        print("\n1️⃣1️⃣ Testing PUT - Update annotations array")
+        
+        new_annotations = [
+            {
+                "id": "ann_updated",
+                "type": "circle",
+                "category": "fire_hydrant",
+                "color": "#FF0000",
+                "coordinates": [{"x": -114.0720, "y": 51.0448}],
+                "properties": {"radius": 5}
             }
-            success, response, status = await self.make_request("PUT", f"/site-maps/{map_id}", update_data)
-            if success:
-                updated_annotations = response.get("annotations", [])
-                self.log_test("Update site map annotations", True, f"Updated annotations: {len(updated_annotations)} items")
-            else:
-                self.log_test("Update site map annotations", False, f"Status: {status}", response)
+        ]
+        update_data = {"annotations": new_annotations}
+        success, response, status = await self.make_request("PUT", f"/site-maps/{map_id}", update_data)
+        if success and len(response.get("annotations", [])) == 1:
+            self.log_test("Update annotations array", True, "Annotations updated")
+        else:
+            self.log_test("Update annotations array", False, f"HTTP {status}: {response}")
         
-        # 5. Test POST /api/site-maps/{map_id}/set-current - Set current version
-        print("\n5. Testing Set Current Map Version...")
+        # Test 12: Verify updated_at timestamp changes
+        print("\n1️⃣2️⃣ Testing updated_at timestamp changes")
         
-        if "map_id_1" in self.test_data:
-            map_id = self.test_data["map_id_1"]
+        # Get current timestamp
+        success1, response1, status1 = await self.make_request("GET", f"/site-maps/{map_id}")
+        if success1:
+            original_updated_at = response1.get("updated_at")
             
-            # Set map 1 as current
-            success, response, status = await self.make_request("POST", f"/site-maps/{map_id}/set-current")
-            if success:
-                self.log_test("Set map as current", True, f"Successfully set map {map_id} as current")
-                
-                # Verify only one current map per site
-                success, response, status = await self.make_request("GET", f"/site-maps/site/{site_id}")
-                if success and isinstance(response, list):
-                    current_maps = [m for m in response if m.get("is_current")]
-                    if len(current_maps) == 1 and current_maps[0]["id"] == map_id:
-                        self.log_test("Verify single current map", True, "Only one map is marked as current")
-                    else:
-                        self.log_test("Verify single current map", False, f"Found {len(current_maps)} current maps")
+            # Update the map
+            update_data = {"name": "Timestamp Test Map"}
+            success2, response2, status2 = await self.make_request("PUT", f"/site-maps/{map_id}", update_data)
+            if success2:
+                new_updated_at = response2.get("updated_at")
+                if new_updated_at != original_updated_at:
+                    self.log_test("Updated_at timestamp changes", True, "Timestamp updated")
                 else:
-                    self.log_test("Verify single current map", False, "Could not retrieve maps for verification")
+                    self.log_test("Updated_at timestamp changes", False, "Timestamp not changed")
             else:
-                self.log_test("Set map as current", False, f"Status: {status}", response)
+                self.log_test("Updated_at timestamp changes", False, "Update failed")
+        else:
+            self.log_test("Updated_at timestamp changes", False, "Could not get original map")
+    
+    async def test_site_maps_set_current_api(self):
+        """Test POST /api/site-maps/{map_id}/set-current - Set current version"""
+        print("\n🎯 Testing Site Maps Set Current API...")
         
-        # 6. Test DELETE /api/site-maps/{map_id} - Delete map
-        print("\n6. Testing Site Map Deletion...")
+        if len([k for k in self.test_data.keys() if k.startswith("map_id_")]) < 2:
+            self.log_test("Set current tests skipped", False, "Need at least 2 maps")
+            return
+        
+        site_id = self.test_data["site_id"]
+        map_id_1 = self.test_data["map_id_1"]
+        
+        # Test 13: Set current version
+        print("\n1️⃣3️⃣ Testing POST /api/site-maps/{map_id}/set-current")
+        
+        success, response, status = await self.make_request("POST", f"/site-maps/{map_id_1}/set-current")
+        if success:
+            # Verify the change
+            success_check, response_check, status_check = await self.make_request("GET", f"/site-maps/{map_id_1}")
+            if success_check and response_check.get("is_current"):
+                self.log_test("Set current version", True, "Version set as current")
+            else:
+                self.log_test("Set current version", False, "Version not set as current")
+        else:
+            self.log_test("Set current version", False, f"HTTP {status}: {response}")
+        
+        # Test 14: Verify previous current becomes false
+        print("\n1️⃣4️⃣ Testing previous current becomes false")
         
         if "map_id_2" in self.test_data:
-            map_id = self.test_data["map_id_2"]
-            
-            # Delete the map
-            success, response, status = await self.make_request("DELETE", f"/site-maps/{map_id}")
+            map_id_2 = self.test_data["map_id_2"]
+            success, response, status = await self.make_request("GET", f"/site-maps/{map_id_2}")
             if success:
-                self.log_test("Delete site map", True, f"Successfully deleted map {map_id}")
-                
-                # Verify map is deleted
-                success, response, status = await self.make_request("GET", f"/site-maps/{map_id}")
-                if status == 404 or status == 500:
-                    self.log_test("Verify map deletion", True, "Map correctly removed")
+                is_current = response.get("is_current")
+                if not is_current:
+                    self.log_test("Previous current becomes false", True, "Previous current updated")
                 else:
-                    self.log_test("Verify map deletion", False, f"Map still exists, status: {status}")
+                    self.log_test("Previous current becomes false", False, "Previous current still true")
             else:
-                self.log_test("Delete site map", False, f"Status: {status}", response)
+                self.log_test("Previous current becomes false", False, f"HTTP {status}: {response}")
+        
+        # Test 15: Verify new current is true
+        print("\n1️⃣5️⃣ Testing new current is true")
+        
+        success, response, status = await self.make_request("GET", f"/site-maps/site/{site_id}", 
+                                                           params={"current_only": "true"})
+        if success and isinstance(response, list) and len(response) == 1:
+            current_map = response[0]
+            if current_map.get("id") == map_id_1 and current_map.get("is_current"):
+                self.log_test("Verify new current is true", True, "Correct map is current")
+            else:
+                self.log_test("Verify new current is true", False, "Wrong map is current")
+        else:
+            self.log_test("Verify new current is true", False, "Could not verify current map")
     
-    async def test_sites_api_integration(self):
-        """Test Sites API integration with related features"""
-        print("\n🏢 Testing Sites API Integration...")
+    async def test_site_maps_delete_api(self):
+        """Test DELETE /api/site-maps/{map_id} - Delete map"""
+        print("\n🗑️ Testing Site Maps Delete API...")
+        
+        if "map_id_3" not in self.test_data:
+            self.log_test("Delete tests skipped", False, "No map ID available for deletion")
+            return
+        
+        map_id = self.test_data["map_id_3"]
+        
+        # Test 16: Delete map
+        print("\n1️⃣6️⃣ Testing DELETE /api/site-maps/{map_id}")
+        
+        success, response, status = await self.make_request("DELETE", f"/site-maps/{map_id}")
+        if success:
+            self.log_test("Delete site map", True, "Map deleted successfully")
+            
+            # Verify map is removed
+            success_check, response_check, status_check = await self.make_request("GET", f"/site-maps/{map_id}")
+            if status_check == 404:
+                self.log_test("Verify map deletion", True, "Map correctly removed")
+            else:
+                self.log_test("Verify map deletion", False, f"Map still exists, status: {status_check}")
+        else:
+            self.log_test("Delete site map", False, f"HTTP {status}: {response}")
+    
+    async def test_error_handling(self):
+        """Test error handling for invalid ObjectIds"""
+        print("\n⚠️ Testing Error Handling...")
+        
+        # Test 17: ObjectId validation errors should return 404, not 500
+        print("\n1️⃣7️⃣ Testing ObjectId validation error handling")
+        
+        invalid_ids = ["not_an_objectid", "123", "invalid_format"]
+        
+        for invalid_id in invalid_ids:
+            # Test GET endpoint
+            success, response, status = await self.make_request("GET", f"/site-maps/{invalid_id}")
+            if status == 404:
+                self.log_test(f"GET invalid ObjectId ({invalid_id}) returns 404", True, "Proper error handling")
+            elif status == 500:
+                self.log_test(f"GET invalid ObjectId ({invalid_id}) returns 404", False, "Returns 500 instead of 404")
+            else:
+                self.log_test(f"GET invalid ObjectId ({invalid_id}) returns 404", False, f"Unexpected status: {status}")
+            
+            # Test PUT endpoint
+            update_data = {"name": "Test Update"}
+            success, response, status = await self.make_request("PUT", f"/site-maps/{invalid_id}", update_data)
+            if status == 404:
+                self.log_test(f"PUT invalid ObjectId ({invalid_id}) returns 404", True, "Proper error handling")
+            elif status == 500:
+                self.log_test(f"PUT invalid ObjectId ({invalid_id}) returns 404", False, "Returns 500 instead of 404")
+            else:
+                self.log_test(f"PUT invalid ObjectId ({invalid_id}) returns 404", False, f"Unexpected status: {status}")
+            
+            # Test POST set-current endpoint
+            success, response, status = await self.make_request("POST", f"/site-maps/{invalid_id}/set-current")
+            if status == 404:
+                self.log_test(f"POST set-current invalid ObjectId ({invalid_id}) returns 404", True, "Proper error handling")
+            elif status == 500:
+                self.log_test(f"POST set-current invalid ObjectId ({invalid_id}) returns 404", False, "Returns 500 instead of 404")
+            else:
+                self.log_test(f"POST set-current invalid ObjectId ({invalid_id}) returns 404", False, f"Unexpected status: {status}")
+            
+            # Test DELETE endpoint
+            success, response, status = await self.make_request("DELETE", f"/site-maps/{invalid_id}")
+            if status == 404:
+                self.log_test(f"DELETE invalid ObjectId ({invalid_id}) returns 404", True, "Proper error handling")
+            elif status == 500:
+                self.log_test(f"DELETE invalid ObjectId ({invalid_id}) returns 404", False, "Returns 500 instead of 404")
+            else:
+                self.log_test(f"DELETE invalid ObjectId ({invalid_id}) returns 404", False, f"Unexpected status: {status}")
+    
+    async def test_annotation_model_flexibility(self):
+        """Test annotation model accepts flexible coordinate structures"""
+        print("\n🔧 Testing Annotation Model Flexibility...")
         
         site_id = self.test_data["site_id"]
         
-        # Test GET /api/sites/{site_id} - Verify site data
-        success, response, status = await self.make_request("GET", f"/sites/{site_id}")
-        if success and response.get("id"):
-            self.log_test("Get site data", True, f"Retrieved site: {response.get('name')}")
-        else:
-            self.log_test("Get site data", False, f"Status: {status}", response)
+        # Test 18: Flexible coordinate structures
+        print("\n1️⃣8️⃣ Testing flexible coordinate structures")
         
-        # Test geofence endpoint if it exists
-        success, response, status = await self.make_request("GET", f"/sites/{site_id}/geofence")
-        if success:
-            self.log_test("Get site geofence", True, "Geofence data retrieved")
-        elif status == 404:
-            self.log_test("Get site geofence", True, "No geofence configured (404 expected)")
-        else:
-            self.log_test("Get site geofence", False, f"Unexpected status: {status}", response)
-    
-    async def test_error_handling_edge_cases(self):
-        """Test error handling and edge cases"""
-        print("\n⚠️ Testing Error Handling & Edge Cases...")
-        
-        # Test invalid ObjectIds
-        invalid_ids = ["invalid_id", "123", "not_an_object_id"]
-        
-        for invalid_id in invalid_ids:
-            # Test invalid site_id in service history
-            success, response, status = await self.make_request("GET", f"/sites/{invalid_id}/service-history")
-            if status in [400, 404, 500]:  # Any error status is acceptable for invalid ID
-                self.log_test(f"Invalid site_id handling ({invalid_id})", True, f"Correctly returned error {status}")
-            else:
-                self.log_test(f"Invalid site_id handling ({invalid_id})", False, f"Unexpected status: {status}")
-        
-        # Test missing required fields (should return 422)
-        invalid_service_data = {
-            "site_id": self.test_data.get("site_id"),
-            # Missing required fields: service_date, service_type, status
+        flexible_map_data = {
+            "site_id": site_id,
+            "name": "Flexible Coordinates Test",
+            "base_map_type": "google_maps",
+            "annotations": [
+                {
+                    "id": "flex_1",
+                    "type": "polygon",
+                    "category": "custom",
+                    "coordinates": [
+                        {"x": 1.0, "y": 2.0},
+                        {"x": 3.0, "y": 4.0},
+                        {"x": 5.0, "y": 6.0}
+                    ],
+                    "properties": {
+                        "strokeWeight": 3,
+                        "fillOpacity": 0.5,
+                        "custom_field": "test_value"
+                    }
+                },
+                {
+                    "id": "flex_2",
+                    "type": "polyline",
+                    "category": "custom",
+                    "coordinates": [
+                        {"lat": 51.0447, "lng": -114.0719},
+                        {"lat": 51.0448, "lng": -114.0720}
+                    ],
+                    "properties": {"strokeWeight": 2}
+                }
+            ]
         }
         
-        success, response, status = await self.make_request("POST", f"/sites/{self.test_data.get('site_id')}/service-history", invalid_service_data)
-        if status == 422:
-            self.log_test("Missing required fields (422 test)", True, "Correctly returned 422 validation error")
-        else:
-            self.log_test("Missing required fields (422 test)", False, f"Expected 422, got {status}", response)
-        
-        # Test non-existent site_id
-        fake_site_id = "507f1f77bcf86cd799439011"  # Valid ObjectId format but non-existent
-        success, response, status = await self.make_request("GET", f"/sites/{fake_site_id}/service-history")
-        if status in [404, 200]:  # 404 or empty result (200) both acceptable
-            if status == 200 and response.get("count") == 0:
-                self.log_test("Non-existent site_id handling", True, "Returned empty result for non-existent site")
-            elif status == 404:
-                self.log_test("Non-existent site_id handling", True, "Correctly returned 404 for non-existent site")
+        success, response, status = await self.make_request("POST", "/site-maps", flexible_map_data)
+        if success and response.get("id"):
+            self.test_data["flexible_map_id"] = response["id"]
+            
+            # Check if annotation structure is preserved
+            annotations = response.get("annotations", [])
+            if len(annotations) >= 2:
+                first_annotation = annotations[0]
+                custom_field = first_annotation.get("properties", {}).get("custom_field")
+                if custom_field == "test_value":
+                    self.log_test("Flexible coordinate structures", True, "Custom fields and coordinates preserved")
+                else:
+                    self.log_test("Flexible coordinate structures", False, "Custom fields not preserved")
             else:
-                self.log_test("Non-existent site_id handling", False, f"Unexpected response for non-existent site")
+                self.log_test("Flexible coordinate structures", False, "Annotations not preserved")
         else:
-            self.log_test("Non-existent site_id handling", False, f"Unexpected status: {status}")
+            self.log_test("Flexible coordinate structures", False, f"HTTP {status}: {response}")
+    
+    async def test_boolean_parameter_parsing(self):
+        """Test boolean parameter parsing for current_only"""
+        print("\n🔢 Testing Boolean Parameter Parsing...")
+        
+        site_id = self.test_data["site_id"]
+        
+        # Test 19: Boolean parameter parsing
+        print("\n1️⃣9️⃣ Testing boolean parameter parsing")
+        
+        # Test with boolean true
+        success, response, status = await self.make_request("GET", f"/site-maps/site/{site_id}", 
+                                                           params={"current_only": True})
+        if success:
+            self.log_test("Boolean parameter (True) parsing", True, "Successfully parsed boolean True")
+        else:
+            self.log_test("Boolean parameter (True) parsing", False, f"HTTP {status}: {response}")
+        
+        # Test with boolean false
+        success, response, status = await self.make_request("GET", f"/site-maps/site/{site_id}", 
+                                                           params={"current_only": False})
+        if success:
+            self.log_test("Boolean parameter (False) parsing", True, "Successfully parsed boolean False")
+        else:
+            self.log_test("Boolean parameter (False) parsing", False, f"HTTP {status}: {response}")
+        
+        # Test with string "true"
+        success, response, status = await self.make_request("GET", f"/site-maps/site/{site_id}", 
+                                                           params={"current_only": "true"})
+        if success:
+            self.log_test("String parameter ('true') parsing", True, "Successfully parsed string 'true'")
+        else:
+            self.log_test("String parameter ('true') parsing", False, f"HTTP {status}: {response}")
+        
+        # Test with string "false"
+        success, response, status = await self.make_request("GET", f"/site-maps/site/{site_id}", 
+                                                           params={"current_only": "false"})
+        if success:
+            self.log_test("String parameter ('false') parsing", True, "Successfully parsed string 'false'")
+        else:
+            self.log_test("String parameter ('false') parsing", False, f"HTTP {status}: {response}")
+    
+    async def cleanup_test_data(self):
+        """Clean up test data"""
+        print("\n🧹 Cleaning up test data...")
+        
+        # Delete test maps
+        for key in list(self.test_data.keys()):
+            if key.startswith("map_id_") or key == "flexible_map_id":
+                map_id = self.test_data[key]
+                try:
+                    await self.make_request("DELETE", f"/site-maps/{map_id}")
+                    print(f"✅ Deleted map: {map_id}")
+                except:
+                    print(f"⚠️ Could not delete map: {map_id}")
+        
+        # Delete test site
+        if "site_id" in self.test_data:
+            try:
+                await self.make_request("DELETE", f"/sites/{self.test_data['site_id']}")
+                print(f"✅ Deleted site: {self.test_data['site_id']}")
+            except:
+                print(f"⚠️ Could not delete site: {self.test_data['site_id']}")
+        
+        # Delete test customer
+        if "customer_id" in self.test_data:
+            try:
+                await self.make_request("DELETE", f"/customers/{self.test_data['customer_id']}")
+                print(f"✅ Deleted customer: {self.test_data['customer_id']}")
+            except:
+                print(f"⚠️ Could not delete customer: {self.test_data['customer_id']}")
     
     async def run_all_tests(self):
-        """Run all test suites"""
-        print("🚀 Starting Comprehensive Backend API Testing")
+        """Run all Site Maps API tests"""
+        print("🚀 Starting Site Maps API Re-Testing After Fixes")
         print(f"Backend URL: {BACKEND_URL}")
         print(f"API Base: {API_BASE}")
+        print(f"Test Time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
         
         # Setup test data
         if not await self.setup_test_data():
             print("❌ Failed to setup test data. Aborting tests.")
             return
         
-        # Run test suites
-        await self.test_site_service_history_apis()
-        await self.test_site_maps_apis()
-        await self.test_sites_api_integration()
-        await self.test_error_handling_edge_cases()
+        try:
+            # Run all test suites
+            await self.test_site_maps_create_api()
+            await self.test_site_maps_get_by_site_api()
+            await self.test_site_maps_get_specific_api()
+            await self.test_site_maps_update_api()
+            await self.test_site_maps_set_current_api()
+            await self.test_site_maps_delete_api()
+            await self.test_error_handling()
+            await self.test_annotation_model_flexibility()
+            await self.test_boolean_parameter_parsing()
+        finally:
+            # Always cleanup
+            await self.cleanup_test_data()
         
         # Print summary
         self.print_summary()
@@ -586,7 +659,7 @@ class BackendTester:
     def print_summary(self):
         """Print test results summary"""
         print("\n" + "="*80)
-        print("📊 TEST RESULTS SUMMARY")
+        print("📊 SITE MAPS API TEST RESULTS SUMMARY")
         print("="*80)
         
         total_tests = len(self.test_results)
@@ -611,17 +684,19 @@ class BackendTester:
         
         # Determine overall status
         if success_rate >= 90:
-            print("🎉 EXCELLENT: All systems working correctly!")
+            print("🎉 EXCELLENT: Site Maps APIs working correctly after fixes!")
         elif success_rate >= 75:
-            print("✅ GOOD: Most systems working with minor issues")
+            print("✅ GOOD: Most Site Maps APIs working with minor issues")
         elif success_rate >= 50:
-            print("⚠️ WARNING: Significant issues detected")
+            print("⚠️ WARNING: Significant issues detected in Site Maps APIs")
         else:
-            print("🚨 CRITICAL: Major system failures detected")
+            print("🚨 CRITICAL: Major Site Maps API failures detected")
+        
+        return success_rate >= 75  # Return True if mostly working
 
 async def main():
     """Main test runner"""
-    async with BackendTester() as tester:
+    async with SiteMapsAPITester() as tester:
         await tester.run_all_tests()
 
 if __name__ == "__main__":
