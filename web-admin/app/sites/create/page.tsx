@@ -305,114 +305,118 @@ export default function CreateSitePage() {
         <div className="max-w-5xl mx-auto p-6">
           <form onSubmit={handleSubmit} noValidate className="space-y-6 pb-6">
             {/* Customer Assignment */}
-            <div className="bg-white/95 backdrop-blur-md rounded-3xl shadow-xl border border-white/40 p-6 hover:shadow-2xl transition-shadow">
-              <h3 className="text-sm font-bold text-gray-900 mb-4 flex items-center gap-2">
-                <div className="bg-gradient-to-br from-[#3f72af] to-[#2c5282] rounded-xl p-2">
-                  <User className="w-4 h-4 text-white" />
-                </div>
-                Customer Assignment
-              </h3>
-              <div className="relative">
-                <label className="block text-xs font-medium text-gray-700 mb-2">
-                  Customer <span className="text-red-500">*</span>
-                </label>
-                <button
-                  type="button"
-                  onClick={() => setShowCustomerDropdown(!showCustomerDropdown)}
-                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] text-left flex items-center justify-between bg-white hover:border-gray-300 transition-all font-semibold"
-                >
-                  <span className={!customerId ? 'text-gray-400' : 'text-gray-900'}>
-                    {customerId ? getCustomerName(customerId) : 'Select a customer'}
-                  </span>
-                  <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
+            <div className="bg-white/95 backdrop-blur-md rounded-3xl shadow-xl border border-white/40 overflow-hidden hover:shadow-2xl transition-shadow">
+              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 border-b-2 border-blue-100 p-6">
+                <h3 className="text-sm font-bold text-gray-900 flex items-center gap-2">
+                  <User className="w-4 h-4 text-[#3f72af]" />
+                  Customer Assignment
+                </h3>
+              </div>
+              <div className="p-6">
+                <div className="relative">
+                  <label className="block text-xs font-medium text-gray-700 mb-2">
+                    Customer <span className="text-red-500">*</span>
+                  </label>
+                  <button
+                    type="button"
+                    onClick={() => setShowCustomerDropdown(!showCustomerDropdown)}
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] text-left flex items-center justify-between bg-white hover:border-gray-300 transition-all font-semibold"
+                  >
+                    <span className={!customerId ? 'text-gray-400' : 'text-gray-900'}>
+                      {customerId ? getCustomerName(customerId) : 'Select a customer'}
+                    </span>
+                    <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
 
-                {showCustomerDropdown && (
-                  <div className="absolute z-10 w-full mt-2 bg-white border-2 border-gray-200 rounded-xl shadow-2xl overflow-hidden">
-                    <div className="p-4 border-b border-gray-200 bg-gray-50">
-                      <div className="relative">
-                        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-                        <input
-                          type="text"
-                          value={customerSearch}
-                          onChange={(e) => setCustomerSearch(e.target.value)}
-                          className="w-full pl-10 pr-4 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af]"
-                          placeholder="Search customers..."
-                        />
+                  {showCustomerDropdown && (
+                    <div className="absolute z-10 w-full mt-2 bg-white border-2 border-gray-200 rounded-xl shadow-2xl overflow-hidden">
+                      <div className="p-4 border-b border-gray-200 bg-gray-50">
+                        <div className="relative">
+                          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                          <input
+                            type="text"
+                            value={customerSearch}
+                            onChange={(e) => setCustomerSearch(e.target.value)}
+                            className="w-full pl-10 pr-4 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af]"
+                            placeholder="Search customers..."
+                          />
+                        </div>
+                      </div>
+                      <div className="max-h-64 overflow-y-auto">
+                        {filteredCustomers.map((customer) => (
+                          <button
+                            key={customer._id || customer.id}
+                            type="button"
+                            onClick={() => {
+                              setCustomerId(customer._id || customer.id!);
+                              setShowCustomerDropdown(false);
+                              setCustomerSearch('');
+                            }}
+                            className={`w-full px-4 py-3 text-left hover:bg-blue-50 flex items-center justify-between transition-colors ${
+                              customerId === (customer._id || customer.id) ? 'bg-blue-50 border-l-4 border-[#3f72af]' : ''
+                            }`}
+                          >
+                            <div>
+                              <div className="font-semibold text-gray-900">{customer.name}</div>
+                              {customer.email && (
+                                <div className="text-sm text-gray-500">{customer.email}</div>
+                              )}
+                            </div>
+                            {customerId === (customer._id || customer.id) && (
+                              <svg className="w-5 h-5 text-[#3f72af]" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                              </svg>
+                            )}
+                          </button>
+                        ))}
+                        {filteredCustomers.length === 0 && (
+                          <div className="px-4 py-8 text-center text-gray-500">
+                            <User className="w-12 h-12 text-gray-300 mx-auto mb-2" />
+                            <p>No customers found</p>
+                          </div>
+                        )}
                       </div>
                     </div>
-                    <div className="max-h-64 overflow-y-auto">
-                      {filteredCustomers.map((customer) => (
-                        <button
-                          key={customer._id || customer.id}
-                          type="button"
-                          onClick={() => {
-                            setCustomerId(customer._id || customer.id!);
-                            setShowCustomerDropdown(false);
-                            setCustomerSearch('');
-                          }}
-                          className={`w-full px-4 py-3 text-left hover:bg-blue-50 flex items-center justify-between transition-colors ${
-                            customerId === (customer._id || customer.id) ? 'bg-blue-50 border-l-4 border-[#3f72af]' : ''
-                          }`}
-                        >
-                          <div>
-                            <div className="font-semibold text-gray-900">{customer.name}</div>
-                            {customer.email && (
-                              <div className="text-sm text-gray-500">{customer.email}</div>
-                            )}
-                          </div>
-                          {customerId === (customer._id || customer.id) && (
-                            <svg className="w-5 h-5 text-[#3f72af]" fill="currentColor" viewBox="0 0 20 20">
-                              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                            </svg>
-                          )}
-                        </button>
-                      ))}
-                      {filteredCustomers.length === 0 && (
-                        <div className="px-4 py-8 text-center text-gray-500">
-                          <User className="w-12 h-12 text-gray-300 mx-auto mb-2" />
-                          <p>No customers found</p>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
             </div>
 
             {/* Site Type */}
-            <div className="bg-white/95 backdrop-blur-md rounded-3xl shadow-xl border border-white/40 p-6 hover:shadow-2xl transition-shadow">
-              <h3 className="text-sm font-bold text-gray-900 mb-4 flex items-center gap-2">
-                <div className="bg-gradient-to-br from-[#3f72af] to-[#2c5282] rounded-xl p-2">
-                  <Building2 className="w-4 h-4 text-white" />
+            <div className="bg-white/95 backdrop-blur-md rounded-3xl shadow-xl border border-white/40 overflow-hidden hover:shadow-2xl transition-shadow">
+              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 border-b-2 border-blue-100 p-6">
+                <h3 className="text-sm font-bold text-gray-900 flex items-center gap-2">
+                  <Building2 className="w-4 h-4 text-[#3f72af]" />
+                  Site Type
+                </h3>
+              </div>
+              <div className="p-6">
+                <label className="block text-xs font-medium text-gray-700 mb-3">
+                  Select Site Type <span className="text-red-500">*</span>
+                </label>
+                <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+                  {SITE_TYPES.map((type) => (
+                    <button
+                      key={type}
+                      type="button"
+                      onClick={() => setSiteType(type)}
+                      className={`px-3 py-3 rounded-xl border-2 font-semibold transition-all hover:scale-105 flex flex-col items-center gap-2 ${
+                        siteType === type
+                          ? 'bg-[#3f72af] text-white border-[#3f72af] shadow-lg'
+                          : 'bg-white text-gray-700 border-gray-200 hover:border-[#3f72af] hover:shadow-md'
+                      }`}
+                    >
+                      <div className={siteType === type ? 'text-white' : 'text-[#3f72af]'}>
+                        {getSiteTypeIcon(type)}
+                      </div>
+                      <span className="text-xs capitalize leading-tight text-center">
+                        {type.replace('_', ' ')}
+                      </span>
+                    </button>
+                  ))}
                 </div>
-                Site Type
-              </h3>
-              <label className="block text-xs font-medium text-gray-700 mb-3">
-                Select Site Type <span className="text-red-500">*</span>
-              </label>
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
-                {SITE_TYPES.map((type) => (
-                  <button
-                    key={type}
-                    type="button"
-                    onClick={() => setSiteType(type)}
-                    className={`px-3 py-3 rounded-xl border-2 font-semibold transition-all hover:scale-105 flex flex-col items-center gap-2 ${
-                      siteType === type
-                        ? 'bg-[#3f72af] text-white border-[#3f72af] shadow-lg'
-                        : 'bg-white text-gray-700 border-gray-200 hover:border-[#3f72af] hover:shadow-md'
-                    }`}
-                  >
-                    <div className={siteType === type ? 'text-white' : 'text-[#3f72af]'}>
-                      {getSiteTypeIcon(type)}
-                    </div>
-                    <span className="text-xs capitalize leading-tight text-center">
-                      {type.replace('_', ' ')}
-                    </span>
-                  </button>
-                ))}
               </div>
             </div>
 
