@@ -453,7 +453,7 @@ export default function DashboardPage() {
           <h3 className="text-lg font-bold text-gray-900 mb-4">Quick Actions</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <button
-              onClick={() => router.push('/leads?action=create')}
+              onClick={() => setShowLeadModal(true)}
               className="p-4 border-2 border-gray-200 rounded-xl hover:border-blue-500 hover:bg-blue-50 transition-all group"
             >
               <Users className="w-8 h-8 text-gray-400 group-hover:text-blue-600 mb-2 mx-auto" />
