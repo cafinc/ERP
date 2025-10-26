@@ -61,7 +61,7 @@ RINGCENTRAL_CLIENT_SECRET=your_client_secret_here
 RINGCENTRAL_JWT_TOKEN=your_jwt_token_here
 RINGCENTRAL_ACCOUNT_ID=your_account_id_here
 RINGCENTRAL_SERVER_URL=https://platform.ringcentral.com
-RINGCENTRAL_REDIRECT_URI=https://map-measure-admin.preview.emergentagent.com/api/auth/ringcentral/callback
+RINGCENTRAL_REDIRECT_URI=https://service-history-app.preview.emergentagent.com/api/auth/ringcentral/callback
 ```
 
 ### 3. Create Webhook Subscription
@@ -71,7 +71,7 @@ RINGCENTRAL_REDIRECT_URI=https://map-measure-admin.preview.emergentagent.com/api
 2. Create a new webhook subscription
 3. Use this webhook URL:
    ```
-   https://map-measure-admin.preview.emergentagent.com/api/webhooks/ringcentral
+   https://service-history-app.preview.emergentagent.com/api/webhooks/ringcentral
    ```
 4. Subscribe to these events:
    - **Presence** - `/restapi/v1.0/account/~/extension/~/presence`
@@ -114,7 +114,7 @@ webhook_response = requests.post(
         ],
         'deliveryMode': {
             'transportType': 'WebHook',
-            'address': 'https://map-measure-admin.preview.emergentagent.com/api/webhooks/ringcentral'
+            'address': 'https://service-history-app.preview.emergentagent.com/api/webhooks/ringcentral'
         },
         'expiresIn': 630720000  # Max: 20 years
     }
@@ -129,7 +129,7 @@ print("Webhook created:", webhook_response.json())
 
 ```bash
 # Simulate incoming call
-curl -X POST "https://map-measure-admin.preview.emergentagent.com/api/webhooks/ringcentral" \
+curl -X POST "https://service-history-app.preview.emergentagent.com/api/webhooks/ringcentral" \
   -H "Content-Type: application/json" \
   -d '{
     "event": "/restapi/v1.0/account/~/extension/~/presence",
@@ -148,7 +148,7 @@ curl -X POST "https://map-measure-admin.preview.emergentagent.com/api/webhooks/r
   }'
 
 # Check active calls
-curl "https://map-measure-admin.preview.emergentagent.com/api/ringcentral/active-calls"
+curl "https://service-history-app.preview.emergentagent.com/api/ringcentral/active-calls"
 ```
 
 #### Test Script
@@ -160,7 +160,7 @@ chmod +x /app/test_call_popup.sh
 
 ### 5. Verify Frontend Integration
 
-1. Open web admin: https://map-measure-admin.preview.emergentagent.com
+1. Open web admin: https://service-history-app.preview.emergentagent.com
 2. Log in to the dashboard
 3. The CallPopup component will automatically connect to the SSE stream
 4. Trigger a test call using the cURL command above
@@ -217,7 +217,7 @@ RingCentral → Webhook Endpoint → MongoDB (active_calls)
 
 2. **Check Active Calls**
    ```bash
-   curl https://map-measure-admin.preview.emergentagent.com/api/ringcentral/active-calls
+   curl https://service-history-app.preview.emergentagent.com/api/ringcentral/active-calls
    ```
    - Should return calls with status='ringing'
 

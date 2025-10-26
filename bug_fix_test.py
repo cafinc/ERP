@@ -18,7 +18,7 @@ import sys
 import traceback
 
 # Backend URL from frontend environment
-BACKEND_URL = "https://map-measure-admin.preview.emergentagent.com/api"
+BACKEND_URL = "https://service-history-app.preview.emergentagent.com/api"
 
 def print_test_header(test_name):
     """Print formatted test header"""

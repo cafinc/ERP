@@ -12,7 +12,7 @@ from datetime import datetime
 from typing import Dict, List, Any
 
 # Get backend URL from environment
-BACKEND_URL = os.getenv('EXPO_PUBLIC_BACKEND_URL', 'https://map-measure-admin.preview.emergentagent.com')
+BACKEND_URL = os.getenv('EXPO_PUBLIC_BACKEND_URL', 'https://service-history-app.preview.emergentagent.com')
 API_BASE = f"{BACKEND_URL}/api"
 
 class EnhancedSiteTestSuite:
