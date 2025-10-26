@@ -1065,6 +1065,13 @@ export default function LeadsPage() {
                               </button>
                             )}
                             <button
+                              onClick={() => handleQuickView(lead)}
+                              className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                              title="Quick View"
+                            >
+                              <Eye className="w-4 h-4" />
+                            </button>
+                            <button
                               onClick={() => handleEdit(lead)}
                               className="p-2 text-[#3f72af] hover:bg-blue-50 rounded-lg transition-colors"
                             >
