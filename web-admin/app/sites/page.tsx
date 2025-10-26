@@ -237,6 +237,12 @@ export default function SitesPage() {
           breadcrumbs={[{ label: "Home", href: "/" }, { label: "Dispatch", href: "/dispatch" }, { label: "Sites" }]}
           actions={[
             {
+              label: 'Export',
+              icon: <Download className="w-4 h-4 mr-2" />,
+              onClick: exportToCSV,
+              variant: 'secondary',
+            },
+            {
               label: 'Add Site',
               icon: <Plus className="w-4 h-4 mr-2" />,
               onClick: handleCreateSite,
