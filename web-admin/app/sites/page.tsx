@@ -629,5 +629,6 @@ export default function SitesPage() {
           onClose={() => setSelectedCustomerId(null)}
         />
       )}
-    );
+    </>
+  );
 }
