@@ -1,6 +1,7 @@
 'use client';
 
 import PageHeader from '@/components/PageHeader';
+import CustomerQuickViewModal from '@/components/CustomerQuickViewModal';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useAuth } from '@/lib/auth';
