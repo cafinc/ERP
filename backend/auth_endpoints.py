@@ -43,18 +43,18 @@ async def email_login_endpoint(db, email_service, request_data):
         
         print(f"[DEBUG] User found: {user_doc.get('email')}")
         
-        # Check if user has a password set
-        if not user_doc.get("password_hash"):
-            print(f"[DEBUG] No password_hash found")
+        # Check if user has a password set (support both 'password' and 'password_hash' fields)
+        password_field = user_doc.get("password_hash") or user_doc.get("password")
+        if not password_field:
+            print(f"[DEBUG] No password found")
             raise HTTPException(status_code=401, detail="This account uses a different login method")
         
         print(f"[DEBUG] Password hash exists, verifying...")
         print(f"[DEBUG] Request password length: {len(request_data.password)}")
-        print(f"[DEBUG] Request password repr: {repr(request_data.password)}")
-        print(f"[DEBUG] Hash from DB: {user_doc['password_hash'][:40]}...")
+        print(f"[DEBUG] Hash from DB: {password_field[:40]}...")
         
         # Verify password
-        verify_result = verify_password(request_data.password, user_doc["password_hash"])
+        verify_result = verify_password(request_data.password, password_field)
         print(f"[DEBUG] Password verification result: {verify_result}")
         
         if not verify_result:
