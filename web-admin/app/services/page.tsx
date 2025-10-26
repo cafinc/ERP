@@ -174,6 +174,9 @@ export default function ServicesPage() {
         ...formData, 
         pricing,
         equipment: formData.equipment,
+        trucks: formData.trucks,
+        trailers: formData.trailers,
+        tools: formData.tools,
         consumable_ids: formData.requires_consumables ? formData.consumable_ids : [],
         requires_consumables: formData.requires_consumables,
       };
@@ -186,6 +189,9 @@ export default function ServicesPage() {
         description: '',
         active: true,
         equipment: [],
+        trucks: [],
+        trailers: [],
+        tools: [],
         consumable_ids: [],
         requires_consumables: false,
       });
