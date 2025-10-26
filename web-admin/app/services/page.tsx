@@ -943,7 +943,8 @@ export default function ServicesPage() {
                   </div>
                   
                   <div className="p-6">
-                      <div className="space-y-2 max-h-48 overflow-y-auto">
+                  {formData.requires_consumables ? (
+                    <div className="space-y-2 max-h-48 overflow-y-auto">
                         {consumables.length === 0 ? (
                           <div className="text-center py-6 bg-gray-50 rounded-xl">
                             <Package className="w-10 h-10 text-gray-300 mx-auto mb-2" />
