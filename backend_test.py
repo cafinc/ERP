@@ -587,7 +587,7 @@ class BackendTester:
                             "type": "marker",
                             "category": "entrance",
                             "color": "#10B981",
-                            "coordinates": {"lat": 43.6532, "lng": -79.3832},
+                            "coordinates": [{"lat": 43.6532, "lng": -79.3832}],
                             "notes": "Main entrance - updated"
                         }
                     ]
