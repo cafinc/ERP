@@ -493,11 +493,11 @@ export default function SiteDetailPage() {
                 <h3 className="text-lg font-semibold text-gray-900">Site Location</h3>
                 <div className="space-x-2">
                   <button
-                    onClick={() => setShowGeofenceModal(true)}
+                    onClick={() => router.push(`/geofence?site=${siteId}`)}
                     className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 inline-flex items-center"
                   >
                     <Plus className="w-4 h-4 mr-2" />
-                    Add Geofence
+                    Manage Geofence
                   </button>
                   <button
                     onClick={() => setShowMeasureModal(true)}
