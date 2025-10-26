@@ -682,10 +682,11 @@ export default function ServicesPage() {
                 </div>
 
                 {/* Default Pricing Card */}
-                <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-6 backdrop-blur-sm">
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-lg font-bold text-gray-900 flex items-center">
-                      <DollarSign className="w-5 h-5 text-[#3f72af] mr-2" />
+                <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 backdrop-blur-sm overflow-hidden">
+                  {/* Header with Gradient */}
+                  <div className="bg-gradient-to-r from-green-600 to-green-700 px-6 py-4 flex items-center justify-between">
+                    <h3 className="text-lg font-bold text-white flex items-center">
+                      <DollarSign className="w-5 h-5 mr-2" />
                       Default Pricing
                     </h3>
                     <button
