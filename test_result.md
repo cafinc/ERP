@@ -60,15 +60,18 @@ backend:
 
   - task: "Site Maps API - Get site maps by site"
     implemented: true
-    working: true
+    working: false
     file: "/app/backend/server.py"
-    stuck_count: 0
+    stuck_count: 1
     priority: "high"
     needs_retesting: false
     status_history:
       - working: true
         agent: "testing"
         comment: "✅ GET /api/site-maps/site/{site_id} endpoint working correctly. Supports current_only parameter, proper sorting by version, and maintains only one current map per site."
+      - working: false
+        agent: "testing"
+        comment: "❌ COMPREHENSIVE RE-TESTING FAILED: GET /api/site-maps/site/{site_id} endpoint has issues with current_only parameter. Boolean parameter not properly handled - returns aiohttp error 'Invalid variable type: value should be str, int or float, got True of type <class 'bool'>'. Basic retrieval works but query parameter parsing broken."
 
   - task: "Site Maps API - Get specific site map"
     implemented: true
