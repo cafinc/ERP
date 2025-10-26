@@ -15,6 +15,19 @@ import {
   Ruler,
   Map as MapIcon,
   Pentagon,
+  Layers,
+  Circle,
+  Square,
+  Pencil,
+  Type,
+  Camera,
+  Undo,
+  Redo,
+  Trash2,
+  Eye,
+  Download,
+  Plus,
+  RefreshCw,
 } from 'lucide-react';
 
 interface Site {
