@@ -108,6 +108,35 @@ async def get_site_service_history(
         logger.error(f"Error getting service history: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
+# Get service history statistics
+@router.get("/sites/{site_id}/service-history/stats")
+async def get_service_history_stats(site_id: str):
+    """
+    Get statistics about service history for a site
+    """
+    try:
+        pipeline = [
+            {"$match": {"site_id": site_id}},
+            {"$group": {
+                "_id": "$service_type",
+                "count": {"$sum": 1},
+                "total_hours": {"$sum": "$duration_hours"}
+            }}
+        ]
+        
+        stats = await service_history_collection.aggregate(pipeline).to_list(100)
+        
+        total_services = await service_history_collection.count_documents({"site_id": site_id})
+        
+        return {
+            "success": True,
+            "total_services": total_services,
+            "by_type": stats
+        }
+    except Exception as e:
+        logger.error(f"Error getting service history stats: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
 # Get single service history entry
 @router.get("/sites/{site_id}/service-history/{history_id}")
 async def get_service_history_entry(site_id: str, history_id: str):
@@ -126,6 +155,8 @@ async def get_service_history_entry(site_id: str, history_id: str):
             "success": True,
             "service_history": entry
         }
+    except HTTPException:
+        raise
     except Exception as e:
         logger.error(f"Error getting service history entry: {e}")
         raise HTTPException(status_code=500, detail=str(e))
@@ -154,6 +185,8 @@ async def update_service_history(site_id: str, history_id: str, update: ServiceH
             "success": True,
             "message": "Service history updated successfully"
         }
+    except HTTPException:
+        raise
     except Exception as e:
         logger.error(f"Error updating service history: {e}")
         raise HTTPException(status_code=500, detail=str(e))
@@ -176,37 +209,10 @@ async def delete_service_history(site_id: str, history_id: str):
             "success": True,
             "message": "Service history deleted successfully"
         }
+    except HTTPException:
+        raise
     except Exception as e:
         logger.error(f"Error deleting service history: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
-
-# Get service history statistics
-@router.get("/sites/{site_id}/service-history/stats")
-async def get_service_history_stats(site_id: str):
-    """
-    Get statistics about service history for a site
-    """
-    try:
-        pipeline = [
-            {"$match": {"site_id": site_id}},
-            {"$group": {
-                "_id": "$service_type",
-                "count": {"$sum": 1},
-                "total_hours": {"$sum": "$duration_hours"}
-            }}
-        ]
-        
-        stats = await service_history_collection.aggregate(pipeline).to_list(100)
-        
-        total_services = await service_history_collection.count_documents({"site_id": site_id})
-        
-        return {
-            "success": True,
-            "total_services": total_services,
-            "by_type": stats
-        }
-    except Exception as e:
-        logger.error(f"Error getting service history stats: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 logger.info("Site service history routes initialized successfully")
