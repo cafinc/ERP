@@ -221,6 +221,18 @@ backend:
         comment: "✅ Error handling working correctly. Invalid ObjectId formats are handled gracefully with proper HTTP 500 responses. BSON ObjectId serialization works correctly for all endpoints. All endpoints return proper HTTP status codes (200, 404, 500) and descriptive error messages. Route ordering fixed to prevent conflicts between parameterized and static routes."
 
 frontend:
+  - task: "Site Detail Page - Service History Tab UI"
+    implemented: true
+    working: "pending_manual_test"
+    file: "/app/web-admin/app/sites/[id]/page.tsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "pending_manual_test"
+        agent: "development"
+        comment: "✅ SERVICE HISTORY UI IMPLEMENTED: Added comprehensive Service History tab to Site Detail page with full CRUD functionality. Features include: 1) New 'Service History' tab in site detail navigation, 2) Service history list view with status icons (completed, in_progress, scheduled, cancelled) and color-coded status badges, 3) Display of service details (date, duration, crew lead, crew members, description, notes, weather conditions, equipment used, photos), 4) 'Add Service Record' button to open creation modal, 5) Service creation modal with fields for all service history data, 6) Delete functionality with confirmation, 7) Empty state with call-to-action, 8) Loading states for async operations, 9) Proper API integration with /api/sites/{site_id}/service-history endpoints, 10) Real-time data refresh after create/delete operations. Ready for manual testing."
+
   - task: "Site Maps Frontend Integration"
     implemented: false
     working: "NA"
