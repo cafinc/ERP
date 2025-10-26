@@ -461,12 +461,17 @@ export default function CustomerFormPage() {
       customerForm.contacts.forEach((contact, index) => {
         // Only validate first contact if same_person toggle is on
         if (customerForm.same_person_all_contacts && index > 0) {
-          return;
+          return; // Skip validation for other positions when toggle is on
         }
         
         // Only validate if the contact has any information filled in
         // (making them optional unless data is started)
         const hasAnyData = contact.name || contact.email || contact.phone;
+        
+        // For the first contact when toggle is on, make it completely optional
+        if (customerForm.same_person_all_contacts && index === 0 && !hasAnyData) {
+          return; // Skip validation if first contact is empty when toggle is on
+        }
         
         if (hasAnyData) {
           if (!contact.name) {
