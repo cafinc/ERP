@@ -516,6 +516,7 @@ export default function SitesPage() {
                     Map
                   </button>
                 </div>
+                </div>
               </div>
             ))}
           </div>
