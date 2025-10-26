@@ -62,7 +62,7 @@ export default function AgreementsPage() {
     try {
       setLoading(true);
       const res = await api.get('/contracts');
-      let agreementsData = Array.isArray(res.data) ? res.data : (res.data?.contracts || []);
+      const agreementsData = Array.isArray(res.data) ? res.data : (res.data?.contracts || []);
       setAgreements(agreementsData);
     } catch (error) {
       console.error('Error loading agreements:', error);

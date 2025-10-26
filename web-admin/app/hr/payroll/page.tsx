@@ -112,7 +112,7 @@ export default function PayrollSettingsPage() {
     if (!lastPayDate) return "Set initial pay date";
 
     const last = new Date(lastPayDate);
-    let next = new Date(last);
+    const next = new Date(last);
 
     switch (frequency) {
       case "weekly":
