@@ -782,15 +782,41 @@ export default function SiteDetailPage() {
               <div className="p-6 border-b border-gray-200 flex items-center justify-between">
                 <h3 className="text-lg font-semibold text-gray-900 flex items-center">
                   <History className="w-5 h-5 mr-2" />
-                  Service History
+                  Service History ({serviceHistory.length} records)
                 </h3>
-                <button
-                  onClick={() => setShowServiceModal(true)}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 inline-flex items-center"
-                >
-                  <Plus className="w-4 h-4 mr-2" />
-                  Add Service Record
-                </button>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => exportToExcel()}
+                    className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 inline-flex items-center"
+                    disabled={serviceHistory.length === 0}
+                  >
+                    <Download className="w-4 h-4 mr-2" />
+                    Export to Excel
+                  </button>
+                  <button
+                    onClick={() => exportToPDF()}
+                    className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 inline-flex items-center"
+                    disabled={serviceHistory.length === 0}
+                  >
+                    <Download className="w-4 h-4 mr-2" />
+                    Export to PDF
+                  </button>
+                  <button
+                    onClick={() => exportToGoogleSheets()}
+                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 inline-flex items-center"
+                    disabled={serviceHistory.length === 0}
+                  >
+                    <Download className="w-4 h-4 mr-2" />
+                    Google Sheets
+                  </button>
+                  <button
+                    onClick={() => setShowServiceModal(true)}
+                    className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 inline-flex items-center"
+                  >
+                    <Plus className="w-4 h-4 mr-2" />
+                    Add Record
+                  </button>
+                </div>
               </div>
 
               {serviceHistoryLoading ? (
@@ -799,15 +825,56 @@ export default function SiteDetailPage() {
                   <p className="text-gray-600">Loading service history...</p>
                 </div>
               ) : serviceHistory.length > 0 ? (
-                <div className="divide-y divide-gray-200">
-                  {serviceHistory.map((entry) => (
-                    <div key={entry.id} className="p-6 hover:bg-gray-50">
-                      <div className="flex items-start justify-between">
-                        <div className="flex-1">
-                          <div className="flex items-center gap-3 mb-2">
-                            {getStatusIcon(entry.status)}
-                            <h4 className="font-semibold text-gray-900">{entry.service_type}</h4>
-                            <span className={`px-2 py-1 text-xs font-semibold rounded-full capitalize ${
+                <div className="overflow-x-auto">
+                  <table className="w-full">
+                    <thead className="bg-gray-50 border-b border-gray-200">
+                      <tr>
+                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Date
+                        </th>
+                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Service Type
+                        </th>
+                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Status
+                        </th>
+                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Duration (hrs)
+                        </th>
+                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Crew Lead
+                        </th>
+                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Crew Members
+                        </th>
+                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Description
+                        </th>
+                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Weather
+                        </th>
+                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Equipment
+                        </th>
+                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Notes
+                        </th>
+                        <th className="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Actions
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody className="bg-white divide-y divide-gray-200">
+                      {serviceHistory.map((entry, index) => (
+                        <tr key={entry.id} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                          <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-900">
+                            {new Date(entry.service_date).toLocaleDateString()}
+                          </td>
+                          <td className="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">
+                            {entry.service_type}
+                          </td>
+                          <td className="px-4 py-3 whitespace-nowrap">
+                            <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize ${
                               entry.status === 'completed' ? 'bg-green-100 text-green-800' :
                               entry.status === 'in_progress' ? 'bg-yellow-100 text-yellow-800' :
                               entry.status === 'scheduled' ? 'bg-blue-100 text-blue-800' :
@@ -815,77 +882,45 @@ export default function SiteDetailPage() {
                             }`}>
                               {entry.status.replace('_', ' ')}
                             </span>
-                          </div>
-                          
-                          <div className="grid grid-cols-2 gap-4 text-sm text-gray-600 mb-3">
-                            <div className="flex items-center">
-                              <Calendar className="w-4 h-4 mr-2 text-gray-400" />
-                              {new Date(entry.service_date).toLocaleDateString()}
-                            </div>
-                            {entry.duration_hours && (
-                              <div className="flex items-center">
-                                <Clock className="w-4 h-4 mr-2 text-gray-400" />
-                                {entry.duration_hours} hours
-                              </div>
-                            )}
-                            {entry.crew_lead && (
-                              <div className="flex items-center">
-                                <User className="w-4 h-4 mr-2 text-gray-400" />
-                                Crew Lead: {entry.crew_lead}
-                              </div>
-                            )}
-                            {entry.crew_members && entry.crew_members.length > 0 && (
-                              <div className="flex items-center">
-                                <Users className="w-4 h-4 mr-2 text-gray-400" />
-                                {entry.crew_members.length} crew member(s)
-                              </div>
-                            )}
-                          </div>
-
-                          {entry.description && (
-                            <p className="text-sm text-gray-700 mb-2">{entry.description}</p>
-                          )}
-
-                          {entry.notes && (
-                            <div className="bg-yellow-50 p-3 rounded-lg mb-2">
-                              <p className="text-sm text-gray-700">{entry.notes}</p>
-                            </div>
-                          )}
-
-                          {entry.weather_conditions && (
-                            <div className="text-sm text-gray-600 mb-2">
-                              <span className="font-medium">Weather:</span> {entry.weather_conditions}
-                            </div>
-                          )}
-
-                          {entry.equipment_used && entry.equipment_used.length > 0 && (
-                            <div className="flex flex-wrap gap-2 mb-2">
-                              <span className="text-sm font-medium text-gray-700">Equipment:</span>
-                              {entry.equipment_used.map((equipment, idx) => (
-                                <span key={idx} className="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs">
-                                  {equipment}
-                                </span>
-                              ))}
-                            </div>
-                          )}
-
-                          {entry.photos && entry.photos.length > 0 && (
-                            <div className="flex items-center gap-2 text-sm text-gray-600">
-                              <Camera className="w-4 h-4" />
-                              {entry.photos.length} photo(s) attached
-                            </div>
-                          )}
-                        </div>
-
-                        <button
-                          onClick={() => handleDeleteService(entry.id)}
-                          className="ml-4 p-2 text-red-600 hover:bg-red-50 rounded-lg"
-                        >
-                          <Trash2 className="w-5 h-5" />
-                        </button>
-                      </div>
-                    </div>
-                  ))}
+                          </td>
+                          <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-900">
+                            {entry.duration_hours || '-'}
+                          </td>
+                          <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-900">
+                            {entry.crew_lead || '-'}
+                          </td>
+                          <td className="px-4 py-3 text-sm text-gray-900">
+                            {entry.crew_members && entry.crew_members.length > 0 
+                              ? entry.crew_members.join(', ') 
+                              : '-'}
+                          </td>
+                          <td className="px-4 py-3 text-sm text-gray-700 max-w-xs truncate">
+                            {entry.description || '-'}
+                          </td>
+                          <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-900">
+                            {entry.weather_conditions || '-'}
+                          </td>
+                          <td className="px-4 py-3 text-sm text-gray-900">
+                            {entry.equipment_used && entry.equipment_used.length > 0 
+                              ? entry.equipment_used.join(', ') 
+                              : '-'}
+                          </td>
+                          <td className="px-4 py-3 text-sm text-gray-700 max-w-xs truncate">
+                            {entry.notes || '-'}
+                          </td>
+                          <td className="px-4 py-3 whitespace-nowrap text-center">
+                            <button
+                              onClick={() => handleDeleteService(entry.id)}
+                              className="text-red-600 hover:text-red-900"
+                              title="Delete"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
               ) : (
                 <div className="p-12 text-center">
