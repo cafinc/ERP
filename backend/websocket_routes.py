@@ -22,6 +22,7 @@ async def websocket_endpoint(
 ):
     """
     WebSocket endpoint for real-time updates
+    Requires authentication via token query parameter
     Connect: ws://host/api/ws?user_id=USER_ID&token=AUTH_TOKEN
     """
     
