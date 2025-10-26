@@ -1437,7 +1437,6 @@ export default function CustomerFormPage() {
                           <label className="block text-sm font-medium text-gray-700 mb-2">Address *</label>
                           <div className="relative">
                             <input
-                              ref={billingAddressInputRef}
                               type="text"
                               value={customerForm.billing_address.street_address}
                               onChange={e =>
