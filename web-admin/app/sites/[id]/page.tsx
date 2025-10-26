@@ -270,6 +270,140 @@ export default function SiteDetailPage() {
     return icons[status] || <Circle className="w-5 h-5 text-gray-600" />;
   };
 
+  // Export functions
+  const exportToExcel = () => {
+    // Convert service history to CSV format
+    const headers = ['Date', 'Service Type', 'Status', 'Duration (hrs)', 'Crew Lead', 'Crew Members', 'Description', 'Weather', 'Equipment', 'Notes'];
+    const csvData = serviceHistory.map(entry => [
+      new Date(entry.service_date).toLocaleDateString(),
+      entry.service_type,
+      entry.status.replace('_', ' '),
+      entry.duration_hours || '',
+      entry.crew_lead || '',
+      entry.crew_members?.join('; ') || '',
+      entry.description || '',
+      entry.weather_conditions || '',
+      entry.equipment_used?.join('; ') || '',
+      entry.notes || '',
+    ]);
+
+    // Create CSV content
+    const csvContent = [
+      headers.join(','),
+      ...csvData.map(row => row.map(cell => `"${cell}"`).join(','))
+    ].join('\n');
+
+    // Create and download file
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    link.setAttribute('href', url);
+    link.setAttribute('download', `service-history-${site?.name || 'site'}-${new Date().toISOString().split('T')[0]}.csv`);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const exportToPDF = () => {
+    // Create a simple HTML table for PDF
+    const headers = ['Date', 'Service Type', 'Status', 'Duration', 'Crew Lead', 'Description'];
+    const rows = serviceHistory.map(entry => [
+      new Date(entry.service_date).toLocaleDateString(),
+      entry.service_type,
+      entry.status.replace('_', ' '),
+      entry.duration_hours ? `${entry.duration_hours}h` : '',
+      entry.crew_lead || '',
+      entry.description || '',
+    ]);
+
+    // Create printable HTML
+    const printWindow = window.open('', '', 'width=800,height=600');
+    if (printWindow) {
+      printWindow.document.write(`
+        <html>
+          <head>
+            <title>Service History - ${site?.name || 'Site'}</title>
+            <style>
+              body { font-family: Arial, sans-serif; margin: 20px; }
+              h1 { color: #1e40af; }
+              table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+              th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+              th { background-color: #f3f4f6; font-weight: 600; }
+              tr:nth-child(even) { background-color: #f9fafb; }
+              .footer { margin-top: 20px; font-size: 12px; color: #666; }
+            </style>
+          </head>
+          <body>
+            <h1>Service History Report</h1>
+            <p><strong>Site:</strong> ${site?.name || 'N/A'}</p>
+            <p><strong>Address:</strong> ${site?.location?.address || 'N/A'}</p>
+            <p><strong>Generated:</strong> ${new Date().toLocaleString()}</p>
+            <table>
+              <thead>
+                <tr>${headers.map(h => `<th>${h}</th>`).join('')}</tr>
+              </thead>
+              <tbody>
+                ${rows.map(row => `<tr>${row.map(cell => `<td>${cell}</td>`).join('')}</tr>`).join('')}
+              </tbody>
+            </table>
+            <div class="footer">
+              <p>Total Records: ${serviceHistory.length}</p>
+            </div>
+          </body>
+        </html>
+      `);
+      printWindow.document.close();
+      setTimeout(() => {
+        printWindow.print();
+      }, 500);
+    }
+  };
+
+  const exportToGoogleSheets = () => {
+    // Create CSV and open instructions modal
+    const headers = ['Date', 'Service Type', 'Status', 'Duration (hrs)', 'Crew Lead', 'Crew Members', 'Description', 'Weather', 'Equipment', 'Notes'];
+    const csvData = serviceHistory.map(entry => [
+      new Date(entry.service_date).toLocaleDateString(),
+      entry.service_type,
+      entry.status.replace('_', ' '),
+      entry.duration_hours || '',
+      entry.crew_lead || '',
+      entry.crew_members?.join('; ') || '',
+      entry.description || '',
+      entry.weather_conditions || '',
+      entry.equipment_used?.join('; ') || '',
+      entry.notes || '',
+    ]);
+
+    const csvContent = [
+      headers.join(','),
+      ...csvData.map(row => row.map(cell => `"${cell}"`).join(','))
+    ].join('\n');
+
+    // Create and download CSV file
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    link.setAttribute('href', url);
+    link.setAttribute('download', `service-history-${site?.name || 'site'}-for-google-sheets.csv`);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    // Show instructions
+    alert(
+      'CSV file downloaded!\n\n' +
+      'To import into Google Sheets:\n' +
+      '1. Go to sheets.google.com\n' +
+      '2. Click File > Import\n' +
+      '3. Upload the downloaded CSV file\n' +
+      '4. Choose "Replace spreadsheet" or "Insert new sheet"\n' +
+      '5. Click "Import data"'
+    );
+  };
+
   const initializeMap = () => {
     if (!mapRef.current || !window.google || !site) return;
 
