@@ -158,7 +158,7 @@ export default function ServicesPage() {
       const payload = { 
         ...formData, 
         pricing,
-        equipment_ids: formData.equipment_ids,
+        equipment: formData.equipment,
         consumable_ids: formData.requires_consumables ? formData.consumable_ids : [],
         requires_consumables: formData.requires_consumables,
       };
@@ -170,7 +170,7 @@ export default function ServicesPage() {
         service_type: 'plowing',
         description: '',
         active: true,
-        equipment_ids: [],
+        equipment: [],
         consumable_ids: [],
         requires_consumables: false,
       });
