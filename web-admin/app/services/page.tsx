@@ -733,7 +733,7 @@ export default function ServicesPage() {
                     <button
                       type="button"
                       onClick={addPricingEntry}
-                      className="flex items-center gap-2 px-3 py-2 text-sm bg-white text-green-600 rounded-lg hover:bg-green-50 transition-all shadow-sm hover:shadow-md font-medium border-2 border-white"
+                      className="flex items-center gap-2 px-3 py-2 text-sm bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all shadow-sm hover:shadow-md font-medium"
                     >
                       <Plus className="w-4 h-4" />
                       Add Pricing Tier
