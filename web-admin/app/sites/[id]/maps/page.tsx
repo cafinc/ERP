@@ -815,6 +815,227 @@ export default function SiteMapsGeofencingPage() {
     setAnnotations(next || []);
   };
 
+  // ==================== OVERVIEW MEASUREMENT FUNCTIONS ====================
+  
+  const startOverviewMeasurement = (mode: 'distance' | 'area') => {
+    if (!overviewGoogleMapRef.current || !window.google) return;
+    
+    setOverviewMeasurementMode(mode);
+    
+    // Clear existing measurement tool
+    if (overviewMeasurementToolRef.current) {
+      overviewMeasurementToolRef.current.setMap(null);
+    }
+    
+    if (mode === 'distance') {
+      // Enable polyline drawing for distance
+      const drawingManager = new window.google.maps.drawing.DrawingManager({
+        drawingMode: window.google.maps.drawing.OverlayType.POLYLINE,
+        drawingControl: false,
+        polylineOptions: {
+          strokeColor: '#FF0000',
+          strokeOpacity: 0.8,
+          strokeWeight: 3,
+          editable: false,
+        },
+      });
+      
+      drawingManager.setMap(overviewGoogleMapRef.current);
+      overviewMeasurementToolRef.current = drawingManager;
+      
+      window.google.maps.event.addListener(drawingManager, 'overlaycomplete', (event: any) => {
+        const polyline = event.overlay;
+        const path = polyline.getPath();
+        
+        // Calculate distance
+        let totalDistance = 0;
+        for (let i = 0; i < path.getLength() - 1; i++) {
+          const from = path.getAt(i);
+          const to = path.getAt(i + 1);
+          totalDistance += window.google.maps.geometry.spherical.computeDistanceBetween(from, to);
+        }
+        
+        const distanceMeters = totalDistance;
+        const distanceFeet = distanceMeters * 3.28084;
+        const distanceMiles = distanceMeters / 1609.34;
+        
+        // Add info window
+        const midPoint = path.getAt(Math.floor(path.getLength() / 2));
+        const infoWindow = new window.google.maps.InfoWindow({
+          position: midPoint,
+          content: `
+            <div style="padding: 8px;">
+              <strong>Distance</strong><br/>
+              ${distanceFeet.toFixed(2)} feet<br/>
+              ${distanceMeters.toFixed(2)} meters<br/>
+              ${distanceMiles.toFixed(3)} miles
+            </div>
+          `,
+        });
+        infoWindow.open(overviewGoogleMapRef.current);
+        
+        // Store overlay and result
+        overviewMeasurementOverlaysRef.current.push(polyline);
+        overviewMeasurementOverlaysRef.current.push(infoWindow);
+        
+        setOverviewMeasurementResults([
+          ...overviewMeasurementResults,
+          {
+            type: 'distance',
+            distanceFeet: distanceFeet.toFixed(2),
+            distanceMeters: distanceMeters.toFixed(2),
+            distanceMiles: distanceMiles.toFixed(3),
+          },
+        ]);
+        
+        // Stop drawing
+        drawingManager.setDrawingMode(null);
+        setOverviewMeasurementMode(null);
+      });
+    } else if (mode === 'area') {
+      // Enable polygon drawing for area
+      const drawingManager = new window.google.maps.drawing.DrawingManager({
+        drawingMode: window.google.maps.drawing.OverlayType.POLYGON,
+        drawingControl: false,
+        polygonOptions: {
+          strokeColor: '#00FF00',
+          strokeOpacity: 0.8,
+          strokeWeight: 2,
+          fillColor: '#00FF00',
+          fillOpacity: 0.2,
+          editable: false,
+        },
+      });
+      
+      drawingManager.setMap(overviewGoogleMapRef.current);
+      overviewMeasurementToolRef.current = drawingManager;
+      
+      window.google.maps.event.addListener(drawingManager, 'overlaycomplete', (event: any) => {
+        const polygon = event.overlay;
+        const path = polygon.getPath();
+        
+        // Calculate area
+        const areaSquareMeters = window.google.maps.geometry.spherical.computeArea(path);
+        const areaSquareFeet = areaSquareMeters * 10.764;
+        const areaAcres = areaSquareMeters * 0.000247105;
+        
+        // Calculate perimeter
+        let perimeter = 0;
+        for (let i = 0; i < path.getLength(); i++) {
+          const from = path.getAt(i);
+          const to = path.getAt((i + 1) % path.getLength());
+          perimeter += window.google.maps.geometry.spherical.computeDistanceBetween(from, to);
+        }
+        const perimeterFeet = perimeter * 3.28084;
+        
+        // Add info window
+        const bounds = new window.google.maps.LatLngBounds();
+        for (let i = 0; i < path.getLength(); i++) {
+          bounds.extend(path.getAt(i));
+        }
+        const center = bounds.getCenter();
+        
+        const infoWindow = new window.google.maps.InfoWindow({
+          position: center,
+          content: `
+            <div style="padding: 8px;">
+              <strong>Area</strong><br/>
+              ${areaSquareFeet.toLocaleString(undefined, {maximumFractionDigits: 0})} sq ft<br/>
+              ${areaSquareMeters.toLocaleString(undefined, {maximumFractionDigits: 0})} sq m<br/>
+              ${areaAcres.toFixed(4)} acres<br/>
+              <strong>Perimeter</strong><br/>
+              ${perimeterFeet.toFixed(2)} feet
+            </div>
+          `,
+        });
+        infoWindow.open(overviewGoogleMapRef.current);
+        
+        // Store overlay and result
+        overviewMeasurementOverlaysRef.current.push(polygon);
+        overviewMeasurementOverlaysRef.current.push(infoWindow);
+        
+        setOverviewMeasurementResults([
+          ...overviewMeasurementResults,
+          {
+            type: 'area',
+            areaSquareFeet: areaSquareFeet.toLocaleString(undefined, {maximumFractionDigits: 0}),
+            areaSquareMeters: areaSquareMeters.toLocaleString(undefined, {maximumFractionDigits: 0}),
+            areaAcres: areaAcres.toFixed(4),
+            perimeterFeet: perimeterFeet.toFixed(2),
+          },
+        ]);
+        
+        // Stop drawing
+        drawingManager.setDrawingMode(null);
+        setOverviewMeasurementMode(null);
+      });
+    }
+  };
+  
+  const clearOverviewMeasurements = () => {
+    // Clear all measurement overlays
+    overviewMeasurementOverlaysRef.current.forEach((overlay) => {
+      overlay.setMap(null);
+      if (overlay.close) overlay.close(); // Close info windows
+    });
+    overviewMeasurementOverlaysRef.current = [];
+    setOverviewMeasurementResults([]);
+    setOverviewMeasurementMode(null);
+    
+    if (overviewMeasurementToolRef.current) {
+      overviewMeasurementToolRef.current.setMap(null);
+      overviewMeasurementToolRef.current = null;
+    }
+  };
+  
+  const exportMapAsImage = async (tabName: string) => {
+    let mapInstance: any = null;
+    
+    if (tabName === 'overview') {
+      mapInstance = overviewGoogleMapRef.current;
+    } else if (tabName === 'geofence') {
+      mapInstance = googleMapRef.current;
+    } else if (tabName === 'annotations') {
+      mapInstance = annotationsGoogleMapRef.current;
+    }
+    
+    if (!mapInstance) {
+      alert('Map not initialized');
+      return;
+    }
+    
+    try {
+      const center = mapInstance.getCenter();
+      const zoom = mapInstance.getZoom() || 19;
+      
+      if (!center) {
+        alert('Unable to get map center');
+        return;
+      }
+      
+      const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || '';
+      const staticMapUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${center.lat()},${center.lng()}&zoom=${zoom}&size=1200x800&maptype=satellite&key=${apiKey}`;
+      
+      // Fetch and download
+      const response = await fetch(staticMapUrl);
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `${site?.name || 'site'}_${tabName}_map_${new Date().toISOString().split('T')[0]}.png`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+      
+      alert('Map exported successfully!');
+    } catch (error) {
+      console.error('Error exporting map:', error);
+      alert('Failed to export map');
+    }
+  };
+
 
   if (loading) {
     return (
