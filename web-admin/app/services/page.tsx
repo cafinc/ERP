@@ -937,6 +937,409 @@ export default function ServicesPage() {
                   )}
                 </div>
 
+                {/* Trucks Selection Card */}
+                <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 backdrop-blur-sm overflow-hidden">
+                  {/* Header with Gradient */}
+                  <div className="bg-gradient-to-r from-cyan-600 to-cyan-700 px-6 py-4">
+                    <h3 className="text-lg font-bold text-white flex items-center">
+                      <Truck className="w-5 h-5 mr-2" />
+                      Trucks & Rates
+                    </h3>
+                    <p className="text-sm text-cyan-100 mt-1">Select trucks and set rates for each</p>
+                  </div>
+                  
+                  <div className="p-6 space-y-3 max-h-96 overflow-y-auto">
+                    {trucks.length === 0 ? (
+                      <div className="text-center py-6 bg-gray-50 rounded-xl">
+                        <Truck className="w-10 h-10 text-gray-300 mx-auto mb-2" />
+                        <p className="text-sm text-gray-500">No trucks available</p>
+                      </div>
+                    ) : (
+                      trucks.map((item: any) => {
+                        const truckId = item.id || item._id;
+                        const existingTruck = formData.trucks.find(t => t.truck_id === truckId);
+                        const isSelected = !!existingTruck;
+                        
+                        return (
+                          <div
+                            key={truckId}
+                            className={`p-4 rounded-xl border-2 transition-all ${
+                              isSelected
+                                ? 'bg-gradient-to-br from-cyan-50 to-blue-50 border-cyan-300 shadow-md'
+                                : 'bg-gray-50 border-gray-200 hover:border-cyan-200'
+                            }`}
+                          >
+                            <div className="flex items-start gap-3">
+                              <input
+                                type="checkbox"
+                                checked={isSelected}
+                                onChange={(e) => {
+                                  if (e.target.checked) {
+                                    setFormData({
+                                      ...formData,
+                                      trucks: [...formData.trucks, { truck_id: truckId, rate: 0, unit: 'hourly' }]
+                                    });
+                                  } else {
+                                    setFormData({
+                                      ...formData,
+                                      trucks: formData.trucks.filter(t => t.truck_id !== truckId)
+                                    });
+                                  }
+                                }}
+                                className="w-5 h-5 rounded border-gray-300 text-cyan-500 focus:ring-2 focus:ring-cyan-500 cursor-pointer mt-1"
+                              />
+                              
+                              <div className="flex-1">
+                                <div className="flex items-center justify-between mb-2">
+                                  <div>
+                                    <p className="font-bold text-gray-900">{item.name || item.make + ' ' + item.model}</p>
+                                    {item.plate_number && (
+                                      <p className="text-xs text-gray-600">Plate: {item.plate_number}</p>
+                                    )}
+                                  </div>
+                                </div>
+                                
+                                {isSelected && (
+                                  <div className="mt-3 grid grid-cols-2 gap-3">
+                                    <div>
+                                      <label className="block text-xs font-medium text-gray-600 mb-1">Unit Type</label>
+                                      <select
+                                        value={existingTruck?.unit || 'hourly'}
+                                        onChange={(e) => {
+                                          setFormData({
+                                            ...formData,
+                                            trucks: formData.trucks.map(tr =>
+                                              tr.truck_id === truckId ? { ...tr, unit: e.target.value } : tr
+                                            )
+                                          });
+                                        }}
+                                        className="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-medium text-sm"
+                                      >
+                                        {UNITS.filter(u => u.value !== 'no_charge').map(unit => (
+                                          <option key={unit.value} value={unit.value}>{unit.label}</option>
+                                        ))}
+                                      </select>
+                                    </div>
+                                    
+                                    <div>
+                                      <label className="block text-xs font-medium text-gray-600 mb-1">Rate</label>
+                                      <div className="relative">
+                                        <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 font-bold">$</span>
+                                        <input
+                                          type="number"
+                                          step="0.01"
+                                          min="0"
+                                          value={existingTruck?.rate || ''}
+                                          onChange={(e) => {
+                                            setFormData({
+                                              ...formData,
+                                              trucks: formData.trucks.map(tr =>
+                                                tr.truck_id === truckId ? { ...tr, rate: parseFloat(e.target.value) || 0 } : tr
+                                              )
+                                            });
+                                          }}
+                                          className="w-full pl-8 pr-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] font-bold text-[#3f72af] text-sm"
+                                          placeholder="0.00"
+                                        />
+                                      </div>
+                                    </div>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })
+                    )}
+                  </div>
+                  
+                  {formData.trucks.length > 0 && (
+                    <div className="mx-6 mb-6 p-4 bg-cyan-50 border-2 border-cyan-200 rounded-xl">
+                      <p className="text-sm font-semibold text-gray-900 mb-2">{formData.trucks.length} Truck(s) Selected</p>
+                      <div className="space-y-1">
+                        {formData.trucks.map((tr, index) => {
+                          const truckItem = trucks.find((t: any) => (t.id || t._id) === tr.truck_id);
+                          return (
+                            <div key={index} className="text-xs text-gray-700 flex items-center justify-between">
+                              <span>• {truckItem?.name || truckItem?.make + ' ' + truckItem?.model || 'Unknown'}</span>
+                              <span className="font-bold text-[#3f72af]">${tr.rate.toFixed(2)}/{tr.unit.replace('_', ' ')}</span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Trailers Selection Card */}
+                <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 backdrop-blur-sm overflow-hidden">
+                  {/* Header with Gradient */}
+                  <div className="bg-gradient-to-r from-teal-600 to-teal-700 px-6 py-4">
+                    <h3 className="text-lg font-bold text-white flex items-center">
+                      <Link className="w-5 h-5 mr-2" />
+                      Trailers & Rates
+                    </h3>
+                    <p className="text-sm text-teal-100 mt-1">Select trailers and set rates for each</p>
+                  </div>
+                  
+                  <div className="p-6 space-y-3 max-h-96 overflow-y-auto">
+                    {trailers.length === 0 ? (
+                      <div className="text-center py-6 bg-gray-50 rounded-xl">
+                        <Link className="w-10 h-10 text-gray-300 mx-auto mb-2" />
+                        <p className="text-sm text-gray-500">No trailers available</p>
+                      </div>
+                    ) : (
+                      trailers.map((item: any) => {
+                        const trailerId = item.id || item._id;
+                        const existingTrailer = formData.trailers.find(t => t.trailer_id === trailerId);
+                        const isSelected = !!existingTrailer;
+                        
+                        return (
+                          <div
+                            key={trailerId}
+                            className={`p-4 rounded-xl border-2 transition-all ${
+                              isSelected
+                                ? 'bg-gradient-to-br from-teal-50 to-cyan-50 border-teal-300 shadow-md'
+                                : 'bg-gray-50 border-gray-200 hover:border-teal-200'
+                            }`}
+                          >
+                            <div className="flex items-start gap-3">
+                              <input
+                                type="checkbox"
+                                checked={isSelected}
+                                onChange={(e) => {
+                                  if (e.target.checked) {
+                                    setFormData({
+                                      ...formData,
+                                      trailers: [...formData.trailers, { trailer_id: trailerId, rate: 0, unit: 'hourly' }]
+                                    });
+                                  } else {
+                                    setFormData({
+                                      ...formData,
+                                      trailers: formData.trailers.filter(t => t.trailer_id !== trailerId)
+                                    });
+                                  }
+                                }}
+                                className="w-5 h-5 rounded border-gray-300 text-teal-500 focus:ring-2 focus:ring-teal-500 cursor-pointer mt-1"
+                              />
+                              
+                              <div className="flex-1">
+                                <div className="flex items-center justify-between mb-2">
+                                  <div>
+                                    <p className="font-bold text-gray-900">{item.name || item.type}</p>
+                                    {item.plate_number && (
+                                      <p className="text-xs text-gray-600">Plate: {item.plate_number}</p>
+                                    )}
+                                  </div>
+                                </div>
+                                
+                                {isSelected && (
+                                  <div className="mt-3 grid grid-cols-2 gap-3">
+                                    <div>
+                                      <label className="block text-xs font-medium text-gray-600 mb-1">Unit Type</label>
+                                      <select
+                                        value={existingTrailer?.unit || 'hourly'}
+                                        onChange={(e) => {
+                                          setFormData({
+                                            ...formData,
+                                            trailers: formData.trailers.map(trl =>
+                                              trl.trailer_id === trailerId ? { ...trl, unit: e.target.value } : trl
+                                            )
+                                          });
+                                        }}
+                                        className="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-medium text-sm"
+                                      >
+                                        {UNITS.filter(u => u.value !== 'no_charge').map(unit => (
+                                          <option key={unit.value} value={unit.value}>{unit.label}</option>
+                                        ))}
+                                      </select>
+                                    </div>
+                                    
+                                    <div>
+                                      <label className="block text-xs font-medium text-gray-600 mb-1">Rate</label>
+                                      <div className="relative">
+                                        <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 font-bold">$</span>
+                                        <input
+                                          type="number"
+                                          step="0.01"
+                                          min="0"
+                                          value={existingTrailer?.rate || ''}
+                                          onChange={(e) => {
+                                            setFormData({
+                                              ...formData,
+                                              trailers: formData.trailers.map(trl =>
+                                                trl.trailer_id === trailerId ? { ...trl, rate: parseFloat(e.target.value) || 0 } : trl
+                                              )
+                                            });
+                                          }}
+                                          className="w-full pl-8 pr-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] font-bold text-[#3f72af] text-sm"
+                                          placeholder="0.00"
+                                        />
+                                      </div>
+                                    </div>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })
+                    )}
+                  </div>
+                  
+                  {formData.trailers.length > 0 && (
+                    <div className="mx-6 mb-6 p-4 bg-teal-50 border-2 border-teal-200 rounded-xl">
+                      <p className="text-sm font-semibold text-gray-900 mb-2">{formData.trailers.length} Trailer(s) Selected</p>
+                      <div className="space-y-1">
+                        {formData.trailers.map((trl, index) => {
+                          const trailerItem = trailers.find((t: any) => (t.id || t._id) === trl.trailer_id);
+                          return (
+                            <div key={index} className="text-xs text-gray-700 flex items-center justify-between">
+                              <span>• {trailerItem?.name || trailerItem?.type || 'Unknown'}</span>
+                              <span className="font-bold text-[#3f72af]">${trl.rate.toFixed(2)}/{trl.unit.replace('_', ' ')}</span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Tools Selection Card */}
+                <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 backdrop-blur-sm overflow-hidden">
+                  {/* Header with Gradient */}
+                  <div className="bg-gradient-to-r from-amber-600 to-amber-700 px-6 py-4">
+                    <h3 className="text-lg font-bold text-white flex items-center">
+                      <Wrench className="w-5 h-5 mr-2" />
+                      Tools & Rates
+                    </h3>
+                    <p className="text-sm text-amber-100 mt-1">Select tools and set rates for each</p>
+                  </div>
+                  
+                  <div className="p-6 space-y-3 max-h-96 overflow-y-auto">
+                    {tools.length === 0 ? (
+                      <div className="text-center py-6 bg-gray-50 rounded-xl">
+                        <Wrench className="w-10 h-10 text-gray-300 mx-auto mb-2" />
+                        <p className="text-sm text-gray-500">No tools available</p>
+                      </div>
+                    ) : (
+                      tools.map((item: any) => {
+                        const toolId = item.id || item._id;
+                        const existingTool = formData.tools.find(t => t.tool_id === toolId);
+                        const isSelected = !!existingTool;
+                        
+                        return (
+                          <div
+                            key={toolId}
+                            className={`p-4 rounded-xl border-2 transition-all ${
+                              isSelected
+                                ? 'bg-gradient-to-br from-amber-50 to-yellow-50 border-amber-300 shadow-md'
+                                : 'bg-gray-50 border-gray-200 hover:border-amber-200'
+                            }`}
+                          >
+                            <div className="flex items-start gap-3">
+                              <input
+                                type="checkbox"
+                                checked={isSelected}
+                                onChange={(e) => {
+                                  if (e.target.checked) {
+                                    setFormData({
+                                      ...formData,
+                                      tools: [...formData.tools, { tool_id: toolId, rate: 0, unit: 'hourly' }]
+                                    });
+                                  } else {
+                                    setFormData({
+                                      ...formData,
+                                      tools: formData.tools.filter(t => t.tool_id !== toolId)
+                                    });
+                                  }
+                                }}
+                                className="w-5 h-5 rounded border-gray-300 text-amber-500 focus:ring-2 focus:ring-amber-500 cursor-pointer mt-1"
+                              />
+                              
+                              <div className="flex-1">
+                                <div className="flex items-center justify-between mb-2">
+                                  <div>
+                                    <p className="font-bold text-gray-900">{item.name}</p>
+                                    {item.type && (
+                                      <p className="text-xs text-gray-600 capitalize">{item.type}</p>
+                                    )}
+                                  </div>
+                                </div>
+                                
+                                {isSelected && (
+                                  <div className="mt-3 grid grid-cols-2 gap-3">
+                                    <div>
+                                      <label className="block text-xs font-medium text-gray-600 mb-1">Unit Type</label>
+                                      <select
+                                        value={existingTool?.unit || 'hourly'}
+                                        onChange={(e) => {
+                                          setFormData({
+                                            ...formData,
+                                            tools: formData.tools.map(tl =>
+                                              tl.tool_id === toolId ? { ...tl, unit: e.target.value } : tl
+                                            )
+                                          });
+                                        }}
+                                        className="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-medium text-sm"
+                                      >
+                                        {UNITS.filter(u => u.value !== 'no_charge').map(unit => (
+                                          <option key={unit.value} value={unit.value}>{unit.label}</option>
+                                        ))}
+                                      </select>
+                                    </div>
+                                    
+                                    <div>
+                                      <label className="block text-xs font-medium text-gray-600 mb-1">Rate</label>
+                                      <div className="relative">
+                                        <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 font-bold">$</span>
+                                        <input
+                                          type="number"
+                                          step="0.01"
+                                          min="0"
+                                          value={existingTool?.rate || ''}
+                                          onChange={(e) => {
+                                            setFormData({
+                                              ...formData,
+                                              tools: formData.tools.map(tl =>
+                                                tl.tool_id === toolId ? { ...tl, rate: parseFloat(e.target.value) || 0 } : tl
+                                              )
+                                            });
+                                          }}
+                                          className="w-full pl-8 pr-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] font-bold text-[#3f72af] text-sm"
+                                          placeholder="0.00"
+                                        />
+                                      </div>
+                                    </div>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })
+                    )}
+                  </div>
+                  
+                  {formData.tools.length > 0 && (
+                    <div className="mx-6 mb-6 p-4 bg-amber-50 border-2 border-amber-200 rounded-xl">
+                      <p className="text-sm font-semibold text-gray-900 mb-2">{formData.tools.length} Tool(s) Selected</p>
+                      <div className="space-y-1">
+                        {formData.tools.map((tl, index) => {
+                          const toolItem = tools.find((t: any) => (t.id || t._id) === tl.tool_id);
+                          return (
+                            <div key={index} className="text-xs text-gray-700 flex items-center justify-between">
+                              <span>• {toolItem?.name || 'Unknown'}</span>
+                              <span className="font-bold text-[#3f72af]">${tl.rate.toFixed(2)}/{tl.unit.replace('_', ' ')}</span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+
                 {/* Consumables Selection Card */}
                 <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 backdrop-blur-sm overflow-hidden">
                   {/* Header with Gradient */}
