@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import PageHeader from '@/components/PageHeader';
 import SimpleNavigationTopBar from '@/components/SimpleNavigationTopBar';
 import LowStockAlertBanner from '@/components/LowStockAlertBanner';
+import CustomerQuickViewModal from '@/components/CustomerQuickViewModal';
 import {
   Plus,
   Search,
