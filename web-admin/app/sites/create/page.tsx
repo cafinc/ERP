@@ -773,77 +773,78 @@ export default function CreateSitePage() {
             </div>
 
             {/* Site Services Card */}
-            <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
-              <div className="flex items-center justify-between mb-6">
-                <div>
-                  <h2 className="text-2xl font-bold text-gray-900 flex items-center">
-                    <Briefcase className="w-6 h-6 text-[#3f72af] mr-2" />
+            <div className="bg-white/95 backdrop-blur-md rounded-3xl shadow-xl border border-white/40 overflow-hidden hover:shadow-2xl transition-shadow">
+              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 border-b-2 border-blue-100 p-6">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-sm font-bold text-gray-900 flex items-center gap-2">
+                    <Briefcase className="w-4 h-4 text-[#3f72af]" />
                     Site Services
-                  </h2>
-                  <p className="text-sm text-gray-600 mt-1">Configure services for this site</p>
+                  </h3>
+                  <button
+                    type="button"
+                    onClick={handleAddService}
+                    className="flex items-center gap-2 px-4 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-all shadow-sm hover:shadow-md font-medium text-sm"
+                  >
+                    <Plus className="w-4 h-4" />
+                    Add Service
+                  </button>
                 </div>
-                <button
-                  type="button"
-                  onClick={handleAddService}
-                  className="flex items-center gap-2 px-5 py-2.5 bg-[#3f72af] text-white rounded-xl hover:bg-[#2c5282] transition-all shadow-md hover:shadow-lg font-medium"
-                >
-                  <Plus className="w-5 h-5" />
-                  Add Service
-                </button>
               </div>
 
-              {siteServices.length === 0 ? (
-                <div className="text-center py-12 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl border-2 border-dashed border-gray-300">
-                  <FileText className="w-16 h-16 text-gray-300 mx-auto mb-3" />
-                  <p className="text-gray-500 font-medium">No services configured yet</p>
-                  <p className="text-sm text-gray-400 mt-1">Click "Add Service" to get started</p>
-                </div>
-              ) : (
-                <div className="space-y-3">
-                  {siteServices.map((service) => (
-                    <div
-                      key={service.service_id}
-                      className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-5 border-2 border-blue-100 hover:shadow-md transition-all"
-                    >
-                      <div className="flex items-start justify-between">
-                        <div className="flex-1">
-                          <h4 className="font-bold text-gray-900 mb-3 text-lg">{service.service_name}</h4>
-                          <div className="grid grid-cols-3 gap-4">
-                            <div className="bg-white/80 rounded-lg p-3">
-                              <span className="text-xs text-gray-600 font-medium block mb-1">Unit Type</span>
-                              <span className="text-sm font-bold text-gray-900 capitalize">
-                                {service.unit_type.replace('_', ' ')}
-                              </span>
-                            </div>
-                            <div className="bg-white/80 rounded-lg p-3">
-                              <span className="text-xs text-gray-600 font-medium block mb-1">Price</span>
-                              <span className="text-sm font-bold text-[#3f72af]">
-                                ${service.price.toFixed(2)}
-                              </span>
-                            </div>
-                            {service.frequency && (
+              <div className="p-6">
+                {siteServices.length === 0 ? (
+                  <div className="text-center py-8 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl border-2 border-dashed border-gray-300">
+                    <Briefcase className="w-12 h-12 text-gray-300 mx-auto mb-3" />
+                    <p className="text-gray-500 font-medium">No services configured yet</p>
+                    <p className="text-sm text-gray-400 mt-1">Click "Add Service" to get started</p>
+                  </div>
+                ) : (
+                  <div className="space-y-3">
+                    {siteServices.map((service) => (
+                      <div
+                        key={service.service_id}
+                        className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-5 border-2 border-blue-100 hover:shadow-md transition-all"
+                      >
+                        <div className="flex items-start justify-between">
+                          <div className="flex-1">
+                            <h4 className="font-bold text-gray-900 mb-3 text-base">{service.service_name}</h4>
+                            <div className="grid grid-cols-3 gap-4">
                               <div className="bg-white/80 rounded-lg p-3">
-                                <span className="text-xs text-gray-600 font-medium block mb-1">Frequency</span>
+                                <span className="text-xs text-gray-600 font-medium block mb-1">Unit Type</span>
                                 <span className="text-sm font-bold text-gray-900 capitalize">
-                                  {service.frequency}
+                                  {service.unit_type.replace('_', ' ')}
                                 </span>
                               </div>
-                            )}
+                              <div className="bg-white/80 rounded-lg p-3">
+                                <span className="text-xs text-gray-600 font-medium block mb-1">Price</span>
+                                <span className="text-sm font-bold text-[#3f72af]">
+                                  ${service.price.toFixed(2)}
+                                </span>
+                              </div>
+                              {service.frequency && (
+                                <div className="bg-white/80 rounded-lg p-3">
+                                  <span className="text-xs text-gray-600 font-medium block mb-1">Frequency</span>
+                                  <span className="text-sm font-bold text-gray-900 capitalize">
+                                    {service.frequency}
+                                  </span>
+                                </div>
+                              )}
+                            </div>
                           </div>
+                          <button
+                            type="button"
+                            onClick={() => handleRemoveService(service.service_id)}
+                            className="ml-4 p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                            title="Remove service"
+                          >
+                            <Trash2 className="w-5 h-5" />
+                          </button>
                         </div>
-                        <button
-                          type="button"
-                          onClick={() => handleRemoveService(service.service_id)}
-                          className="ml-4 p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
-                          title="Remove service"
-                        >
-                          <Trash2 className="w-5 h-5" />
-                        </button>
                       </div>
-                    </div>
-                  ))}
-                </div>
-              )}
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
 
             {/* Form Actions */}
