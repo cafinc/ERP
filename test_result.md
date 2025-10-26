@@ -45,15 +45,18 @@ backend:
 
   - task: "Site Maps API - Create site map with annotations"
     implemented: true
-    working: true
+    working: false
     file: "/app/backend/server.py"
-    stuck_count: 0
+    stuck_count: 1
     priority: "high"
     needs_retesting: false
     status_history:
       - working: true
         agent: "testing"
         comment: "✅ POST /api/site-maps endpoint working correctly. Successfully creates site maps with annotations, auto-increments version numbers, and sets current flag properly."
+      - working: false
+        agent: "testing"
+        comment: "❌ COMPREHENSIVE RE-TESTING FAILED: POST /api/site-maps endpoint failing with 422 validation errors. Pydantic model expects 'id' field in annotations and different coordinate structure. Annotations require 'id' field and coordinates should be dictionary format, not array format. Model validation mismatch between expected and actual data structure."
 
   - task: "Site Maps API - Get site maps by site"
     implemented: true
