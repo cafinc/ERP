@@ -1206,36 +1206,157 @@ export default function SiteMapsGeofencingPage() {
               {/* Main Map View */}
               <div className="lg:col-span-2">
                 <div className="bg-white rounded-lg shadow-sm overflow-hidden">
-                  <div className="p-4 border-b border-gray-200 flex items-center justify-between">
-                    <h3 className="text-lg font-semibold text-gray-900">Interactive Map</h3>
-                    <div className="flex gap-2">
+                  <div className="p-4 border-b border-gray-200">
+                    <div className="flex items-center justify-between mb-3">
+                      <h3 className="text-lg font-semibold text-gray-900">Interactive Map</h3>
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => exportMapAsImage('overview')}
+                          className="px-3 py-1.5 text-sm bg-orange-600 text-white rounded-lg hover:bg-orange-700 inline-flex items-center"
+                          title="Export map as image"
+                        >
+                          <Download className="w-4 h-4 mr-1" />
+                          Export
+                        </button>
+                        <button
+                          onClick={() => {
+                            const url = `https://www.google.com/maps/search/?api=1&query=${site?.location.latitude},${site?.location.longitude}`;
+                            window.open(url, '_blank');
+                          }}
+                          className="px-3 py-1.5 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 inline-flex items-center"
+                        >
+                          <ExternalLink className="w-4 h-4 mr-1" />
+                          Google Maps
+                        </button>
+                      </div>
+                    </div>
+                    
+                    {/* Measurement Tools */}
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="text-sm font-medium text-gray-700">Measurement Tools:</span>
                       <button
-                        onClick={() => {
-                          const url = `https://www.google.com/maps/search/?api=1&query=${site?.location.latitude},${site?.location.longitude}`;
-                          window.open(url, '_blank');
-                        }}
-                        className="px-3 py-1.5 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 inline-flex items-center"
+                        onClick={() => startOverviewMeasurement('distance')}
+                        disabled={overviewMeasurementMode !== null}
+                        className={`px-3 py-1.5 text-sm rounded-lg inline-flex items-center ${
+                          overviewMeasurementMode === 'distance'
+                            ? 'bg-red-600 text-white'
+                            : 'bg-red-100 text-red-700 hover:bg-red-200 disabled:opacity-50 disabled:cursor-not-allowed'
+                        }`}
                       >
-                        <ExternalLink className="w-4 h-4 mr-1" />
-                        Open in Google Maps
+                        <Ruler className="w-4 h-4 mr-1" />
+                        {overviewMeasurementMode === 'distance' ? 'Drawing...' : 'Measure Distance'}
                       </button>
                       <button
+                        onClick={() => startOverviewMeasurement('area')}
+                        disabled={overviewMeasurementMode !== null}
+                        className={`px-3 py-1.5 text-sm rounded-lg inline-flex items-center ${
+                          overviewMeasurementMode === 'area'
+                            ? 'bg-green-600 text-white'
+                            : 'bg-green-100 text-green-700 hover:bg-green-200 disabled:opacity-50 disabled:cursor-not-allowed'
+                        }`}
+                      >
+                        <Square className="w-4 h-4 mr-1" />
+                        {overviewMeasurementMode === 'area' ? 'Drawing...' : 'Measure Area'}
+                      </button>
+                      {overviewMeasurementResults.length > 0 && (
+                        <button
+                          onClick={clearOverviewMeasurements}
+                          className="px-3 py-1.5 text-sm bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 inline-flex items-center"
+                        >
+                          <Trash2 className="w-4 h-4 mr-1" />
+                          Clear Measurements
+                        </button>
+                      )}
+                      <button
                         onClick={() => setActiveTab('geofence')}
-                        className="px-3 py-1.5 text-sm bg-purple-600 text-white rounded-lg hover:bg-purple-700 inline-flex items-center"
+                        className="px-3 py-1.5 text-sm bg-purple-100 text-purple-700 rounded-lg hover:bg-purple-200 inline-flex items-center"
                       >
                         <Pentagon className="w-4 h-4 mr-1" />
                         Edit Boundaries
                       </button>
                       <button
                         onClick={() => setActiveTab('annotations')}
-                        className="px-3 py-1.5 text-sm bg-green-600 text-white rounded-lg hover:bg-green-700 inline-flex items-center"
+                        className="px-3 py-1.5 text-sm bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 inline-flex items-center"
                       >
                         <Pencil className="w-4 h-4 mr-1" />
                         Add Annotations
                       </button>
                     </div>
+                    
+                    {overviewMeasurementMode && (
+                      <div className="mt-3 bg-blue-50 border border-blue-200 rounded-lg p-3">
+                        <p className="text-sm text-blue-800">
+                          <strong>Click on the map</strong> to {overviewMeasurementMode === 'distance' ? 'draw a line for distance measurement' : 'draw a polygon for area measurement'}.
+                        </p>
+                      </div>
+                    )}
                   </div>
-                  <div ref={overviewMapRef} className="w-full h-[500px]"></div>
+                  <div className="relative">
+                    <div ref={overviewMapRef} className="w-full h-[500px]"></div>
+                    
+                    {/* Measurement Results Panel */}
+                    {overviewMeasurementResults.length > 0 && (
+                      <div className="absolute top-4 right-4 bg-white rounded-lg shadow-xl p-4 max-w-sm border border-gray-200 z-10 max-h-[400px] overflow-y-auto">
+                        <div className="flex items-center justify-between mb-3">
+                          <h4 className="font-semibold text-gray-900 flex items-center">
+                            <Ruler className="w-4 h-4 mr-2 text-blue-600" />
+                            Measurements
+                          </h4>
+                          <button
+                            onClick={clearOverviewMeasurements}
+                            className="text-gray-400 hover:text-red-600"
+                            title="Clear all measurements"
+                          >
+                            <X className="w-4 h-4" />
+                          </button>
+                        </div>
+                        <div className="space-y-3">
+                          {overviewMeasurementResults.map((result, idx) => (
+                            <div key={idx} className="p-3 bg-gray-50 rounded-lg border border-gray-200">
+                              <p className="text-xs font-semibold text-gray-600 uppercase mb-2">
+                                {result.type === 'distance' ? '📏 Distance' : '📐 Area'} #{idx + 1}
+                              </p>
+                              {result.type === 'distance' ? (
+                                <div className="space-y-1 text-sm">
+                                  <div className="flex justify-between">
+                                    <span className="text-gray-600">Feet:</span>
+                                    <span className="font-semibold">{result.distanceFeet} ft</span>
+                                  </div>
+                                  <div className="flex justify-between">
+                                    <span className="text-gray-600">Meters:</span>
+                                    <span className="font-semibold">{result.distanceMeters} m</span>
+                                  </div>
+                                  <div className="flex justify-between">
+                                    <span className="text-gray-600">Miles:</span>
+                                    <span className="font-semibold">{result.distanceMiles} mi</span>
+                                  </div>
+                                </div>
+                              ) : (
+                                <div className="space-y-1 text-sm">
+                                  <div className="flex justify-between">
+                                    <span className="text-gray-600">Area:</span>
+                                    <span className="font-semibold">{result.areaSquareFeet} sq ft</span>
+                                  </div>
+                                  <div className="flex justify-between">
+                                    <span className="text-gray-600">Area (m²):</span>
+                                    <span className="font-semibold">{result.areaSquareMeters} m²</span>
+                                  </div>
+                                  <div className="flex justify-between">
+                                    <span className="text-gray-600">Acres:</span>
+                                    <span className="font-semibold">{result.areaAcres}</span>
+                                  </div>
+                                  <div className="flex justify-between">
+                                    <span className="text-gray-600">Perimeter:</span>
+                                    <span className="font-semibold">{result.perimeterFeet} ft</span>
+                                  </div>
+                                </div>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
 
