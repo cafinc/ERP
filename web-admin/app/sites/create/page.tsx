@@ -28,6 +28,8 @@ import {
   Siren,
   KeyRound,
   Lock,
+  DollarSign,
+  Calendar,
   Shield,
   CreditCard,
 } from 'lucide-react';
