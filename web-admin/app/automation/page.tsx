@@ -122,15 +122,14 @@ export default function AutomationDashboardPage() {
   return (
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
         <PageHeader
-        title="Automation"
+        title="Automation Dashboard"
         subtitle="Configure automated workflows and triggers"
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Automation" }]}
-        title="Automation Dashboard"
           
           actions={[
             {
               label: 'Analytics',
-              icon: BarChart3,
+              icon: <BarChart3 className="w-4 h-4 mr-2" />,
               onClick: () => router.push('/automation/analytics'),
               variant: 'primary',
             },
