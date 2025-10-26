@@ -1317,7 +1317,7 @@ export default function CustomerFormPage() {
 
                       <div>
                         <label className="block text-xs font-medium text-gray-700 mb-2">
-                          Office Number <span className="text-red-500">*</span>
+                          Office Number
                         </label>
                         <div className="relative">
                           <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
@@ -1327,14 +1327,13 @@ export default function CustomerFormPage() {
                             onChange={e => setCustomerForm({ ...customerForm, office_number: formatPhoneNumber(e.target.value) })}
                             className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-semibold transition-all"
                             placeholder="(555) 123-4567"
-                            required
                           />
                         </div>
                       </div>
 
                       <div>
                         <label className="block text-xs font-medium text-gray-700 mb-2">
-                          Email <span className="text-red-500">*</span>
+                          Email
                         </label>
                         <div className="relative">
                           <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
@@ -1346,7 +1345,6 @@ export default function CustomerFormPage() {
                             }
                             className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-semibold transition-all"
                             placeholder="info@company.com"
-                            required
                           />
                         </div>
                       </div>
