@@ -1429,6 +1429,7 @@ export default function ServicesPage() {
                       <p className="text-xs text-gray-400 mt-1">Enable the toggle above to select consumables</p>
                     </div>
                   )}
+                  </div>
                 </div>
 
                 {/* Modal Footer */}
