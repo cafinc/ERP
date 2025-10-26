@@ -232,6 +232,7 @@ export default function SitesPage() {
   }
 
   return (
+    <>
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto">
         <PageHeader
           title="Sites"
