@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://service-hub-156.preview.emergentagent.com/api';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://map-measure-admin.preview.emergentagent.com/api';
 
 const api = axios.create({
   baseURL: API_URL,

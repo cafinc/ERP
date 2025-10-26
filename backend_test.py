@@ -12,7 +12,7 @@ from datetime import datetime
 from typing import Dict, List, Any
 
 # Backend URL from frontend/.env
-BASE_URL = "https://service-hub-156.preview.emergentagent.com/api"
+BASE_URL = "https://map-measure-admin.preview.emergentagent.com/api"
 
 class CustomerManagementTests:
     def __init__(self):

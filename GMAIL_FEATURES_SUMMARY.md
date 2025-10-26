@@ -98,7 +98,7 @@
 
 **Option 2: Public Access** (requires routing configuration)
 The web-admin needs to be configured to serve on the main domain:
-`https://service-hub-156.preview.emergentagent.com`
+`https://map-measure-admin.preview.emergentagent.com`
 
 ---
 

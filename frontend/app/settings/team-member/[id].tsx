@@ -108,7 +108,7 @@ export default function TeamMemberProfileScreen() {
   const handleResendLicenseRequest = async () => {
     try {
       const user_id_str = member?.id || id;
-      const upload_link = `https://service-hub-156.preview.emergentagent.com/upload-license/${user_id_str}`;
+      const upload_link = `https://map-measure-admin.preview.emergentagent.com/upload-license/${user_id_str}`;
       
       Alert.alert(
         'Resend Upload Request',

@@ -36,13 +36,13 @@ Before connecting, make sure your QuickBooks app has the correct redirect URI:
 4. Go to **Keys & OAuth** section
 5. Under **Redirect URIs**, verify you have:
    ```
-   https://service-hub-156.preview.emergentagent.com/api/quickbooks/auth/callback
+   https://map-measure-admin.preview.emergentagent.com/api/quickbooks/auth/callback
    ```
 6. If not there, add it and click **Save**
 
 ### Step 2: Connect via Web Admin
 
-1. Open your web admin dashboard: https://service-hub-156.preview.emergentagent.com
+1. Open your web admin dashboard: https://map-measure-admin.preview.emergentagent.com
 2. Log in as an admin user
 3. Navigate to **Settings** (sidebar)
 4. Click **QuickBooks** under Integrations
@@ -81,7 +81,7 @@ After connecting:
 ### Test 1: Create a Customer in QuickBooks
 
 ```bash
-curl -X POST 'https://service-hub-156.preview.emergentagent.com/api/quickbooks/customers?user_id=YOUR_USER_ID' \
+curl -X POST 'https://map-measure-admin.preview.emergentagent.com/api/quickbooks/customers?user_id=YOUR_USER_ID' \
   -H 'Content-Type: application/json' \
   -d '{
     "DisplayName": "Test Customer",
@@ -96,13 +96,13 @@ curl -X POST 'https://service-hub-156.preview.emergentagent.com/api/quickbooks/c
 ### Test 2: View Connection Status
 
 ```bash
-curl 'https://service-hub-156.preview.emergentagent.com/api/quickbooks/connection/status?user_id=YOUR_USER_ID'
+curl 'https://map-measure-admin.preview.emergentagent.com/api/quickbooks/connection/status?user_id=YOUR_USER_ID'
 ```
 
 ### Test 3: List Customers from QuickBooks
 
 ```bash
-curl 'https://service-hub-156.preview.emergentagent.com/api/quickbooks/customers?user_id=YOUR_USER_ID'
+curl 'https://map-measure-admin.preview.emergentagent.com/api/quickbooks/customers?user_id=YOUR_USER_ID'
 ```
 
 Replace `YOUR_USER_ID` with your actual user ID (you can get it from localStorage in the browser console: `JSON.parse(localStorage.getItem('user')).id`)
