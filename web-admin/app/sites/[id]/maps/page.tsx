@@ -140,6 +140,10 @@ export default function SiteMapsGeofencingPage() {
   const undoStack = useRef<SiteMapAnnotation[][]>([]);
   const redoStack = useRef<SiteMapAnnotation[][]>([]);
   
+  // Overview tab refs
+  const overviewMapRef = useRef<HTMLDivElement>(null);
+  const overviewGoogleMapRef = useRef<any>(null);
+  
   const [drawingPath, setDrawingPath] = useState<GeoPoint[]>([]);
   const [measurements, setMeasurements] = useState<any>(null);
   const [googleMapsLoaded, setGoogleMapsLoaded] = useState(false);
