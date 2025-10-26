@@ -529,7 +529,7 @@ export default function LeadsPage() {
               {
                 label: 'Export',
                 icon: <Download className="w-4 h-4 mr-2" />,
-                onClick: () => alert('Export functionality'),
+                onClick: exportToCSV,
                 variant: 'secondary',
               },
               {
