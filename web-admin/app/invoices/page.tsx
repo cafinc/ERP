@@ -148,11 +148,9 @@ export default function InvoicesPage() {
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         {/* Compact Header */}
         <PageHeader
-        title="Invoices"
-        subtitle="Manage customer invoices and billing"
-        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Finance", href: "/finance/dashboard" }, { label: "Invoices" }]}
-        title="Invoices"
-          
+          title="Invoices"
+          subtitle="Manage customer invoices and billing"
+          breadcrumbs={[{ label: "Home", href: "/" }, { label: "Finance", href: "/finance/dashboard" }, { label: "Invoices" }]}
           actions={[
             {
               label: 'New Invoice',
