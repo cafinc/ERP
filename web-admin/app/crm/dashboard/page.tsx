@@ -133,7 +133,7 @@ export default function CRMDashboardPage() {
             label: "New Lead",
             icon: <Users className="w-4 h-4 mr-2" />,
             variant: "secondary",
-            onClick: () => router.push('/leads/create'),
+            onClick: () => router.push('/leads'),
           },
           {
             label: "New Estimate",
