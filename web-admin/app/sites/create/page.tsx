@@ -228,8 +228,8 @@ export default function CreateSitePage() {
     toast.success(`${newServices.length} service configuration(s) added`);
   };
 
-  const handleRemoveService = (serviceId: string) => {
-    setSiteServices(siteServices.filter(s => s.service_id !== serviceId));
+  const handleRemoveService = (index: number) => {
+    setSiteServices(siteServices.filter((_, i) => i !== index));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
