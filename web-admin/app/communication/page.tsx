@@ -407,5 +407,6 @@ export default function CommunicationCenterPage() {
           onClose={() => setSelectedCustomerId(null)}
         />
       )}
-    );
+    </div>
+  );
 }
