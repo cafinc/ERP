@@ -124,6 +124,90 @@ backend:
         agent: "testing"
         comment: "✅ POST /api/sites endpoint working perfectly. 10/10 tests passed (100% success rate). All core functionality verified: successful creation with required fields (name, customer_id, site_type, location), optional fields support (site_reference, area_size, internal_notes, crew_notes, services, access_fields), proper validation errors for missing fields (422 status codes), ObjectId serialization working correctly, multiple site types supported (parking_lot, driveway, sidewalk, commercial_lot, residential), excellent response time (< 0.1s), and response structure compatible with toast notifications. API returns HTTP 200 with proper JSON structure including id field for frontend integration."
 
+  - task: "Site Service History API - Create Service History Entry"
+    implemented: true
+    working: true
+    file: "/app/backend/site_service_history_routes.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ POST /api/sites/{site_id}/service-history endpoint working perfectly. Successfully creates service history entries with all required fields (service_date, service_type, status) and optional fields (crew_lead, crew_members, description, notes, duration_hours, photos, weather_conditions, equipment_used). Returns proper service_history_id in response. Supports different service types (Snow Plowing, Salting, Landscaping, Maintenance) and statuses (completed, in_progress, scheduled)."
+
+  - task: "Site Service History API - Get Service History for Site"
+    implemented: true
+    working: true
+    file: "/app/backend/site_service_history_routes.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ GET /api/sites/{site_id}/service-history endpoint working perfectly. Successfully retrieves all service history entries for a site with proper sorting by service_date (descending). Query parameters working correctly: limit, service_type, and status filters. Returns proper response structure with count and service_history array. Handles non-existent sites gracefully by returning empty array."
+
+  - task: "Site Service History API - Get Single Service History Entry"
+    implemented: true
+    working: true
+    file: "/app/backend/site_service_history_routes.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ GET /api/sites/{site_id}/service-history/{history_id} endpoint working perfectly. Successfully retrieves specific service history entries with all required fields (id, site_id, service_date, service_type, status). Proper error handling for non-existent history_id returns 404 status code as expected."
+
+  - task: "Site Service History API - Update Service History"
+    implemented: true
+    working: true
+    file: "/app/backend/site_service_history_routes.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ PATCH /api/sites/{site_id}/service-history/{history_id} endpoint working perfectly. Successfully updates various fields (service_type, status, crew_lead, notes, duration_hours). Updated_at timestamp is properly updated. Proper error handling for non-existent history_id returns 404 status code. Update verification confirms changes are persisted correctly."
+
+  - task: "Site Service History API - Delete Service History"
+    implemented: true
+    working: true
+    file: "/app/backend/site_service_history_routes.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ DELETE /api/sites/{site_id}/service-history/{history_id} endpoint working perfectly. Successfully deletes service history entries and verification confirms deleted entries are no longer retrievable (returns 404). Proper error handling for non-existent history_id returns 404 status code as expected."
+
+  - task: "Site Service History API - Get Service History Statistics"
+    implemented: true
+    working: true
+    file: "/app/backend/site_service_history_routes.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ GET /api/sites/{site_id}/service-history/stats endpoint working perfectly. Successfully aggregates statistics by service type with proper structure. Returns total_services count and by_type breakdown with counts and total_hours. Route ordering issue was fixed by moving stats route before {history_id} route to prevent FastAPI from matching 'stats' as a parameter."
+
+  - task: "Site Service History API - Error Handling and BSON Serialization"
+    implemented: true
+    working: true
+    file: "/app/backend/site_service_history_routes.py"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ Error handling working correctly. Invalid ObjectId formats are handled gracefully with proper HTTP 500 responses. BSON ObjectId serialization works correctly for all endpoints. All endpoints return proper HTTP status codes (200, 404, 500) and descriptive error messages. Route ordering fixed to prevent conflicts between parameterized and static routes."
+
 frontend:
   - task: "Site Maps Frontend Integration"
     implemented: false
