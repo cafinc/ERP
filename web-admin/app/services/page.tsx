@@ -692,14 +692,14 @@ export default function ServicesPage() {
                     <button
                       type="button"
                       onClick={addPricingEntry}
-                      className="flex items-center gap-2 px-3 py-2 text-sm bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-all shadow-sm hover:shadow-md font-medium"
+                      className="flex items-center gap-2 px-3 py-2 text-sm bg-white text-green-600 rounded-lg hover:bg-green-50 transition-all shadow-sm hover:shadow-md font-medium border-2 border-white"
                     >
                       <Plus className="w-4 h-4" />
                       Add Pricing Tier
                     </button>
                   </div>
                   
-                  <div className="space-y-3">
+                  <div className="p-6 space-y-3">
                     {pricingEntries.map((entry, index) => (
                       <div key={index} className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-4 border-2 border-blue-100 hover:shadow-md transition-all">
                         <div className="flex items-center gap-3">
