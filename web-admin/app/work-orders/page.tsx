@@ -50,6 +50,7 @@ export default function WorkOrdersPage() {
   const [filterStatus, setFilterStatus] = useState('all');
   const [filterPriority, setFilterPriority] = useState('all');
   const [showFilterDropdown, setShowFilterDropdown] = useState(false);
+  const [selectedCustomerId, setSelectedCustomerId] = useState<string | null>(null);
 
   useEffect(() => {
     loadWorkOrders();
