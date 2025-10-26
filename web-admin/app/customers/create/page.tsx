@@ -1688,7 +1688,6 @@ export default function CustomerFormPage() {
                         </div>
                       </>
                     )}
-                    </div>
                   </div>
 
                   {/* Contact Persons */}
