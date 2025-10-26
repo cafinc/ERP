@@ -428,19 +428,41 @@ export default function CustomerFormPage() {
     }
 
     // Email validation (required)
-    if (!customerForm.email) {
-      errors['email'] = 'Email is required';
-    } else if (!isValidEmail(customerForm.email)) {
-      errors['email'] = 'Invalid email format';
+    // TODO: FUTURE FIX - Company customers should have proper contact person validation
+    // Currently email/phone are optional for companies but this needs better design:
+    // - Should we require at least one contact person with email/phone?
+    // - Should company-level email/phone be separate from contact persons?
+    // - Need to redesign contact flow for companies
+    if (customerForm.customer_type === 'individual') {
+      if (!customerForm.email) {
+        errors['email'] = 'Email is required';
+      } else if (!isValidEmail(customerForm.email)) {
+        errors['email'] = 'Invalid email format';
+      }
+    } else {
+      // For companies, email is optional (validated in contact persons instead)
+      if (customerForm.email && !isValidEmail(customerForm.email)) {
+        errors['email'] = 'Invalid email format';
+      }
     }
 
     // Phone validation (required)
-    if (!customerForm.phone) {
-      errors['phone'] = 'Phone is required';
+    if (customerForm.customer_type === 'individual') {
+      if (!customerForm.phone) {
+        errors['phone'] = 'Phone is required';
+      } else {
+        const cleaned = customerForm.phone.replace(/\D/g, '');
+        if (cleaned.length !== 10) {
+          errors['phone'] = 'Phone must be 10 digits';
+        }
+      }
     } else {
-      const cleaned = customerForm.phone.replace(/\D/g, '');
-      if (cleaned.length !== 10) {
-        errors['phone'] = 'Phone must be 10 digits';
+      // For companies, phone is optional (validated in contact persons instead)
+      if (customerForm.phone) {
+        const cleaned = customerForm.phone.replace(/\D/g, '');
+        if (cleaned.length !== 10) {
+          errors['phone'] = 'Phone must be 10 digits';
+        }
       }
     }
 
