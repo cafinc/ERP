@@ -28,6 +28,8 @@ db = client[db_name]
 
 work_orders_collection = db["work_orders"]
 customers_collection = db["customers"]
+sites_collection = db["sites"]
+services_collection = db["services"]
 
 # Helper functions
 def serialize_doc(doc):
