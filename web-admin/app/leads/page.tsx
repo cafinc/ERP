@@ -147,7 +147,15 @@ export default function LeadsPage() {
   useEffect(() => {
     loadLeads();
     loadTeamMembers();
-  }, []);
+    
+    // Check if we should open the create modal
+    const action = searchParams.get('action');
+    if (action === 'create') {
+      setShowModal(true);
+      // Clear the URL parameter
+      router.replace('/leads');
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     filterLeads();
