@@ -663,6 +663,46 @@ export default function LeadsPage() {
             </div>
           </div>
 
+          {/* Bulk Actions Bar */}
+          {selectedLeads.length > 0 && (
+            <div className="mb-4 bg-blue-500 text-white rounded-xl shadow-lg p-4 flex items-center justify-between animate-slideUp">
+              <div className="flex items-center gap-4">
+                <span className="font-semibold text-lg">
+                  {selectedLeads.length} lead{selectedLeads.length !== 1 ? 's' : ''} selected
+                </span>
+                <button
+                  onClick={toggleSelectAll}
+                  className="text-sm underline hover:text-blue-100 transition-colors"
+                >
+                  {selectedLeads.length === filteredLeads.length ? 'Deselect All' : 'Select All'}
+                </button>
+              </div>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setBulkActionType('status')}
+                  className="px-4 py-2 bg-white text-blue-500 rounded-lg font-medium hover:bg-blue-50 transition-colors flex items-center gap-2"
+                >
+                  <RefreshCw className="w-4 h-4" />
+                  Change Status
+                </button>
+                <button
+                  onClick={() => setBulkActionType('delete')}
+                  className="px-4 py-2 bg-red-500 text-white rounded-lg font-medium hover:bg-red-600 transition-colors flex items-center gap-2"
+                >
+                  <Trash2 className="w-4 h-4" />
+                  Delete
+                </button>
+                <button
+                  onClick={() => setSelectedLeads([])}
+                  className="p-2 hover:bg-blue-600 rounded-lg transition-colors"
+                  title="Clear selection"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+          )}
+
           {/* Search Bar with Advanced Filter */}
           <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-4 mb-4 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-4">
