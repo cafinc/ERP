@@ -78,6 +78,9 @@ export default function ServicesPage() {
   // Equipment and Consumables data
   const [equipment, setEquipment] = useState<any[]>([]);
   const [consumables, setConsumables] = useState<any[]>([]);
+  const [trucks, setTrucks] = useState<any[]>([]);
+  const [trailers, setTrailers] = useState<any[]>([]);
+  const [tools, setTools] = useState<any[]>([]);
   
   const [formData, setFormData] = useState({
     name: '',
@@ -85,6 +88,9 @@ export default function ServicesPage() {
     description: '',
     active: true,
     equipment: [] as Array<{ equipment_id: string; rate: number; unit: string }>,
+    trucks: [] as Array<{ truck_id: string; rate: number; unit: string }>,
+    trailers: [] as Array<{ trailer_id: string; rate: number; unit: string }>,
+    tools: [] as Array<{ tool_id: string; rate: number; unit: string }>,
     consumable_ids: [] as string[],
     requires_consumables: false,
   });
