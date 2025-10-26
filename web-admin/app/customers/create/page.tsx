@@ -1507,28 +1507,24 @@ export default function CustomerFormPage() {
                     </div>
 
                     <div className="p-6 space-y-4">
-                      <div className="md:col-span-2">
-                        <label className="block text-xs font-medium text-gray-700 mb-2">Address <span className="text-red-500">*</span></label>
-                        <div className="relative">
-                          <input
-                            ref={companyAddressInputRef}
-                            type="text"
-                            value={customerForm.street_address}
-                            onChange={e =>
-                              setCustomerForm({ ...customerForm, street_address: e.target.value })
-                            }
-                            className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-semibold transition-all"
-                          placeholder="123 Main Street"
-                          required
-                        />
-                        <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center">
-                          <img 
-                            src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" 
-                            alt="Powered by Google"
-                            className="h-4"
-                          />
-                        </div>
-                      </div>
+                      <AddressInput
+                        value={customerForm.street_address}
+                        onChange={(value) => setCustomerForm({ ...customerForm, street_address: value })}
+                        onPlaceSelect={(place) => {
+                          // Auto-fill city, province, postal code when address is selected
+                          setCustomerForm({
+                            ...customerForm,
+                            street_address: place.formatted_address || '',
+                            city: place.city || customerForm.city,
+                            province: place.province || customerForm.province,
+                            postal_code: place.postalCode || customerForm.postal_code,
+                          });
+                        }}
+                        label="Address"
+                        placeholder="123 Main Street"
+                        required={true}
+                        showCityProvincePostal={false}
+                      />
                       <p className="text-xs text-gray-500 mt-1">
                         Start typing to use Google address autocomplete
                       </p>
