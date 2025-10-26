@@ -2248,6 +2248,18 @@ async def set_current_site_map(map_id: str):
         # Mark this map as current
         await db.site_maps.update_one(
             {"_id": ObjectId(map_id)},
+            {"$set": {"is_current": True, "updated_at": datetime.utcnow()}}
+        )
+        
+        return {"message": "Site map set as current successfully"}
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        if "not a valid ObjectId" in str(e):
+            raise HTTPException(status_code=404, detail="Site map not found")
+        raise HTTPException(status_code=500, detail=f"Error setting current site map: {str(e)}")
+            {"_id": ObjectId(map_id)},
             {"$set": {"is_current": True}}
         )
         
