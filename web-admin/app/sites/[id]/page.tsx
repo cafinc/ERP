@@ -102,7 +102,6 @@ export default function SiteDetailPage() {
   const [customer, setCustomer] = useState<Customer | null>(null);
   const [loading, setLoading] = useState(true);
   const [actionLoading, setActionLoading] = useState(false);
-  const [showGeofenceModal, setShowGeofenceModal] = useState(false);
   const [showMeasureModal, setShowMeasureModal] = useState(false);
   const [activeTab, setActiveTab] = useState('overview');
   
