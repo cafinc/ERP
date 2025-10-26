@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import PageHeader from '@/components/PageHeader';
 import SimpleNavigationTopBar from '@/components/SimpleNavigationTopBar';
+import LowStockAlertBanner from '@/components/LowStockAlertBanner';
 import {
   Plus,
   Search,
