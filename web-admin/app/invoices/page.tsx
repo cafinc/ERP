@@ -323,9 +323,23 @@ export default function InvoicesPage() {
                         </div>
                       </td>
                       <td className="px-6 py-4">
-                        <div className="flex items-center">
-                          <User className="w-4 h-4 text-gray-400 mr-2" />
-                          <span className="text-sm text-gray-900">{invoice.customer_name}</span>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center">
+                            <User className="w-4 h-4 text-gray-400 mr-2" />
+                            <span className="text-sm text-gray-900">{invoice.customer_name}</span>
+                          </div>
+                          {invoice.customer_id && (
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setSelectedCustomerId(invoice.customer_id);
+                              }}
+                              className="ml-2 p-1 text-[#3f72af] hover:bg-blue-50 rounded-md transition-colors"
+                              title="Quick View Customer"
+                            >
+                              <Eye className="w-4 h-4" />
+                            </button>
+                          )}
                         </div>
                       </td>
                       <td className="px-6 py-4">
