@@ -167,9 +167,8 @@ export default function CustomerFormPage() {
       loadLeadData(fromLeadId);
     }
   }, [customerId, fromLeadId]);
-    let postalCode = '';
 
-    console.log('Google Places - All components:', components);
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
 
     components.forEach((component: any) => {
       const types = component.types;
