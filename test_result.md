@@ -140,14 +140,17 @@ frontend:
   - task: "Customer Creation Form Validation - Individual and Company Types"
     implemented: true
     working: "NA"
-    file: "/app/frontend/app/customers/create.tsx"
+    file: "/app/web-admin/app/customers/create/page.tsx"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
       - working: "NA"
         agent: "testing"
         comment: "❌ CANNOT TEST: React Native/Expo application cannot be tested with Playwright browser automation. The customer creation form uses 'residential' and 'commercial' types, not 'Individual' and 'Company' as specified in test requirements. Form structure differs from test scenarios: uses single 'name' field instead of separate first_name/last_name, different validation logic, and different contact person structure. Backend APIs are fully tested (100% success rate). Frontend testing requires mobile app testing tools or manual device testing."
+      - working: "NA"
+        agent: "testing"
+        comment: "✅ CORRECTION: Found Next.js web-admin application at /app/web-admin/ running on port 3000. Customer creation form (/customers/create/page.tsx) uses 'individual' and 'company' types matching test requirements. Form has proper first_name/last_name fields for individuals, company_name for companies, and contact persons section. Ready for comprehensive validation testing."
 
 metadata:
   created_by: "testing_agent"
