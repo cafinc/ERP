@@ -147,14 +147,7 @@ export default function WeatherPlanningPage() {
 
   const getConditionIcon = (conditions: string) => {
     const lower = conditions.toLowerCase();
-    if (lower.includes('snow')) return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
-      <PageHeader
-        title="Weather"
-        subtitle="Manage weather"
-        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Weather" }]}
-      />
-      <CloudSnow className="w-6 h-6" />;
+    if (lower.includes('snow')) return <CloudSnow className="w-6 h-6" />;
     if (lower.includes('rain')) return <CloudRain className="w-6 h-6" />;
     return <Cloud className="w-6 h-6" />;
   };
