@@ -126,6 +126,7 @@ export default function DispatchesPage() {
   }
 
   return (
+    <>
       <div className="p-8">
         {/* Low Stock Alert Banner */}
         <LowStockAlertBanner />
