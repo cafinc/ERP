@@ -27,6 +27,8 @@ import {
   List,
   Filter,
   SlidersHorizontal,
+  Truck,
+  ShoppingCart,
 } from 'lucide-react';
 
 // Service type configurations with icons and labels
