@@ -527,6 +527,14 @@ export default function SitesPage() {
                 <table className="min-w-full divide-y divide-gray-200">
                   <thead className="bg-gray-50">
                     <tr>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-12">
+                        <input
+                          type="checkbox"
+                          checked={selectedSites.length === filteredSites.length && filteredSites.length > 0}
+                          onChange={toggleSelectAll}
+                          className="w-5 h-5 rounded border-gray-300 text-blue-500 focus:ring-2 focus:ring-blue-500 cursor-pointer"
+                        />
+                      </th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Site Name
                       </th>
@@ -550,6 +558,14 @@ export default function SitesPage() {
                   <tbody className="bg-white divide-y divide-gray-200">
                     {filteredSites.map((site) => (
                       <tr key={site.id} className="hover:bg-gray-50 transition-colors">
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <input
+                            type="checkbox"
+                            checked={selectedSites.includes(site.id)}
+                            onChange={() => toggleSelectSite(site.id)}
+                            className="w-5 h-5 rounded border-gray-300 text-blue-500 focus:ring-2 focus:ring-blue-500 cursor-pointer"
+                          />
+                        </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="font-medium text-gray-900">{site.name}</div>
                         </td>
