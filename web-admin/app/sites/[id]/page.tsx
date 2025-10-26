@@ -767,6 +767,135 @@ export default function SiteDetailPage() {
             </div>
           </div>
         )}
+
+        {/* Service History Tab */}
+        {activeTab === 'history' && (
+          <div className="space-y-6">
+            <div className="bg-white rounded-lg shadow-sm">
+              <div className="p-6 border-b border-gray-200 flex items-center justify-between">
+                <h3 className="text-lg font-semibold text-gray-900 flex items-center">
+                  <History className="w-5 h-5 mr-2" />
+                  Service History
+                </h3>
+                <button
+                  onClick={() => setShowServiceModal(true)}
+                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 inline-flex items-center"
+                >
+                  <Plus className="w-4 h-4 mr-2" />
+                  Add Service Record
+                </button>
+              </div>
+
+              {serviceHistoryLoading ? (
+                <div className="p-12 text-center">
+                  <RefreshCw className="w-8 h-8 text-blue-600 animate-spin mx-auto mb-4" />
+                  <p className="text-gray-600">Loading service history...</p>
+                </div>
+              ) : serviceHistory.length > 0 ? (
+                <div className="divide-y divide-gray-200">
+                  {serviceHistory.map((entry) => (
+                    <div key={entry.id} className="p-6 hover:bg-gray-50">
+                      <div className="flex items-start justify-between">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-3 mb-2">
+                            {getStatusIcon(entry.status)}
+                            <h4 className="font-semibold text-gray-900">{entry.service_type}</h4>
+                            <span className={`px-2 py-1 text-xs font-semibold rounded-full capitalize ${
+                              entry.status === 'completed' ? 'bg-green-100 text-green-800' :
+                              entry.status === 'in_progress' ? 'bg-yellow-100 text-yellow-800' :
+                              entry.status === 'scheduled' ? 'bg-blue-100 text-blue-800' :
+                              'bg-gray-100 text-gray-800'
+                            }`}>
+                              {entry.status.replace('_', ' ')}
+                            </span>
+                          </div>
+                          
+                          <div className="grid grid-cols-2 gap-4 text-sm text-gray-600 mb-3">
+                            <div className="flex items-center">
+                              <Calendar className="w-4 h-4 mr-2 text-gray-400" />
+                              {new Date(entry.service_date).toLocaleDateString()}
+                            </div>
+                            {entry.duration_hours && (
+                              <div className="flex items-center">
+                                <Clock className="w-4 h-4 mr-2 text-gray-400" />
+                                {entry.duration_hours} hours
+                              </div>
+                            )}
+                            {entry.crew_lead && (
+                              <div className="flex items-center">
+                                <User className="w-4 h-4 mr-2 text-gray-400" />
+                                Crew Lead: {entry.crew_lead}
+                              </div>
+                            )}
+                            {entry.crew_members && entry.crew_members.length > 0 && (
+                              <div className="flex items-center">
+                                <Users className="w-4 h-4 mr-2 text-gray-400" />
+                                {entry.crew_members.length} crew member(s)
+                              </div>
+                            )}
+                          </div>
+
+                          {entry.description && (
+                            <p className="text-sm text-gray-700 mb-2">{entry.description}</p>
+                          )}
+
+                          {entry.notes && (
+                            <div className="bg-yellow-50 p-3 rounded-lg mb-2">
+                              <p className="text-sm text-gray-700">{entry.notes}</p>
+                            </div>
+                          )}
+
+                          {entry.weather_conditions && (
+                            <div className="text-sm text-gray-600 mb-2">
+                              <span className="font-medium">Weather:</span> {entry.weather_conditions}
+                            </div>
+                          )}
+
+                          {entry.equipment_used && entry.equipment_used.length > 0 && (
+                            <div className="flex flex-wrap gap-2 mb-2">
+                              <span className="text-sm font-medium text-gray-700">Equipment:</span>
+                              {entry.equipment_used.map((equipment, idx) => (
+                                <span key={idx} className="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs">
+                                  {equipment}
+                                </span>
+                              ))}
+                            </div>
+                          )}
+
+                          {entry.photos && entry.photos.length > 0 && (
+                            <div className="flex items-center gap-2 text-sm text-gray-600">
+                              <Camera className="w-4 h-4" />
+                              {entry.photos.length} photo(s) attached
+                            </div>
+                          )}
+                        </div>
+
+                        <button
+                          onClick={() => handleDeleteService(entry.id)}
+                          className="ml-4 p-2 text-red-600 hover:bg-red-50 rounded-lg"
+                        >
+                          <Trash2 className="w-5 h-5" />
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="p-12 text-center">
+                  <History className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                  <p className="text-gray-500 mb-4">No service history recorded yet</p>
+                  <button
+                    onClick={() => setShowServiceModal(true)}
+                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 inline-flex items-center"
+                  >
+                    <Plus className="w-4 h-4 mr-2" />
+                    Add First Service Record
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Measure Modal */}
