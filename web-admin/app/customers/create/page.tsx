@@ -466,22 +466,28 @@ export default function CustomerFormPage() {
           return;
         }
         
-        if (!contact.name) {
-          errors[`contact_${index}_name`] = `${contact.position} name is required`;
-        }
+        // Only validate if the contact has any information filled in
+        // (making them optional unless data is started)
+        const hasAnyData = contact.name || contact.email || contact.phone;
         
-        if (!contact.email) {
-          errors[`contact_${index}_email`] = `${contact.position} email is required`;
-        } else if (!isValidEmail(contact.email)) {
-          errors[`contact_${index}_email`] = `Invalid email format for ${contact.position}`;
-        }
-        
-        if (!contact.phone) {
-          errors[`contact_${index}_phone`] = `${contact.position} phone is required`;
-        } else {
-          const cleaned = contact.phone.replace(/\D/g, '');
-          if (cleaned.length !== 10) {
-            errors[`contact_${index}_phone`] = `${contact.position} phone must be 10 digits`;
+        if (hasAnyData) {
+          if (!contact.name) {
+            errors[`contact_${index}_name`] = `${contact.position} name is required`;
+          }
+          
+          if (!contact.email) {
+            errors[`contact_${index}_email`] = `${contact.position} email is required`;
+          } else if (!isValidEmail(contact.email)) {
+            errors[`contact_${index}_email`] = `Invalid email format for ${contact.position}`;
+          }
+          
+          if (!contact.phone) {
+            errors[`contact_${index}_phone`] = `${contact.position} phone is required`;
+          } else {
+            const cleaned = contact.phone.replace(/\D/g, '');
+            if (cleaned.length !== 10) {
+              errors[`contact_${index}_phone`] = `${contact.position} phone must be 10 digits`;
+            }
           }
         }
       });
