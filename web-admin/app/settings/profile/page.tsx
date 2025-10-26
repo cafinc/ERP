@@ -611,5 +611,6 @@ export default function ProfileSettings() {
         </div>
       </div>
     </div>
+    </>
   );
 }
