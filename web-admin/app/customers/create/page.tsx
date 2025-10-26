@@ -168,50 +168,6 @@ export default function CustomerFormPage() {
     }
   }, [customerId, fromLeadId]);
 
-  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-
-    components.forEach((component: any) => {
-      const types = component.types;
-      
-      // Street number
-      if (types.includes('street_number')) {
-        street = component.long_name + ' ';
-      }
-      
-      // Street name
-      if (types.includes('route')) {
-        street += component.long_name;
-      }
-      
-      // City - check multiple possible types in priority order
-      if (types.includes('locality')) {
-        city = component.long_name;
-      } else if (!city && types.includes('sublocality')) {
-        city = component.long_name;
-      } else if (!city && types.includes('sublocality_level_1')) {
-        city = component.long_name;
-      } else if (!city && types.includes('postal_town')) {
-        city = component.long_name;
-      } else if (!city && types.includes('administrative_area_level_3')) {
-        city = component.long_name;
-      }
-      
-      // Province
-      if (types.includes('administrative_area_level_1')) {
-        province = component.short_name;
-      }
-      
-      // Postal code
-      if (types.includes('postal_code')) {
-        postalCode = component.long_name;
-      }
-    });
-
-    console.log('Google Places - Extracted:', { street, city, province, postalCode });
-
-    return { street, city, province, postalCode };
-  };
-
   const loadCompanies = async () => {
     try {
       setLoadingCompanies(true);
