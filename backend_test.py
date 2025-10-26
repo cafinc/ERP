@@ -2219,7 +2219,10 @@ class CustomerManagementTests:
         
         start_time = time.time()
         
-        # HIGHEST PRIORITY: Archive/Unarchive functionality
+        # HIGHEST PRIORITY: Customer Validation Rules (as requested in review)
+        self.test_customer_validation_rules()
+        
+        # SECOND PRIORITY: Archive/Unarchive functionality
         self.test_customer_archive_unarchive()
         
         # Run existing comprehensive tests
