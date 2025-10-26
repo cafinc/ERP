@@ -94,7 +94,7 @@ export default function SiteMapsGeofencingPage() {
   const params = useParams();
   const siteId = (Array.isArray(params?.id) ? params.id[0] : params?.id) as string;
 
-  const [activeTab, setActiveTab] = useState<'geofence' | 'annotations'>('geofence');
+  const [activeTab, setActiveTab] = useState<'overview' | 'geofence' | 'annotations'>('overview');
   const [site, setSite] = useState<Site | null>(null);
   const [geofence, setGeofence] = useState<Geofence | null>(null);
   const [loading, setLoading] = useState(true);
