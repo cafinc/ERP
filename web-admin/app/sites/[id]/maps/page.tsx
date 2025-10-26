@@ -130,6 +130,29 @@ export default function SiteMapsGeofencingPage() {
   const [measurements, setMeasurements] = useState<any>(null);
   const [googleMapsLoaded, setGoogleMapsLoaded] = useState(false);
 
+  // Drawing colors and categories
+  const drawingColors = [
+    { name: 'Blue', value: '#3B82F6' },
+    { name: 'Red', value: '#EF4444' },
+    { name: 'Green', value: '#10B981' },
+    { name: 'Yellow', value: '#F59E0B' },
+    { name: 'Purple', value: '#8B5CF6' },
+    { name: 'Orange', value: '#F97316' },
+  ];
+
+  const annotationCategories = [
+    { value: 'curb', label: 'Curb', icon: '╪' },
+    { value: 'drain', label: 'Drain', icon: '⊚' },
+    { value: 'speed_bump', label: 'Speed Bump', icon: '▲' },
+    { value: 'handicap', label: 'Handicap', icon: '♿' },
+    { value: 'sidewalk', label: 'Sidewalk', icon: '═' },
+    { value: 'plowing_zone', label: 'Plowing Zone', icon: '▭' },
+    { value: 'fire_hydrant', label: 'Fire Hydrant', icon: '🚰' },
+    { value: 'entrance', label: 'Entrance', icon: '→' },
+    { value: 'exit', label: 'Exit', icon: '←' },
+    { value: 'custom', label: 'Custom', icon: '★' },
+  ];
+
   useEffect(() => {
     if (siteId && siteId !== 'undefined') {
       fetchSiteDetails();
@@ -144,6 +167,20 @@ export default function SiteMapsGeofencingPage() {
         });
     }
   }, [siteId]);
+
+  // Load site maps when switching to annotations tab
+  useEffect(() => {
+    if (activeTab === 'annotations' && siteId) {
+      loadSiteMaps();
+    }
+  }, [activeTab, siteId]);
+
+  // Initialize annotations map
+  useEffect(() => {
+    if (googleMapsLoaded && site && annotationsMapRef.current && activeTab === 'annotations' && !annotationsGoogleMapRef.current) {
+      initializeAnnotationsMap();
+    }
+  }, [googleMapsLoaded, site, activeTab]);
 
   useEffect(() => {
     if (googleMapsLoaded && site && mapRef.current && activeTab === 'geofence' && !googleMapRef.current) {
