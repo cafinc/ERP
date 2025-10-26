@@ -147,15 +147,19 @@ export default function LeadsPage() {
   useEffect(() => {
     loadLeads();
     loadTeamMembers();
-    
+  }, []);
+
+  useEffect(() => {
     // Check if we should open the create modal
     const action = searchParams.get('action');
     if (action === 'create') {
       setShowModal(true);
-      // Clear the URL parameter
-      router.replace('/leads');
+      // Clear the URL parameter after modal state is set
+      setTimeout(() => {
+        router.replace('/leads', { scroll: false });
+      }, 100);
     }
-  }, [searchParams]);
+  }, [searchParams, router]);
 
   useEffect(() => {
     filterLeads();
