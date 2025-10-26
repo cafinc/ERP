@@ -1387,28 +1387,19 @@ export default function CustomerFormPage() {
                     </div>
 
                     <div className="p-6 space-y-4">
-                      <AddressInput
-                        value={customerForm.street_address}
-                        onChange={(value) => setCustomerForm({ ...customerForm, street_address: value })}
-                        onPlaceSelect={(place) => {
-                          // Auto-fill city, province, postal code when address is selected
-                          setCustomerForm({
-                            ...customerForm,
-                            street_address: place.formatted_address || '',
-                            city: place.city || customerForm.city,
-                            province: place.province || customerForm.province,
-                            postal_code: place.postalCode || customerForm.postal_code,
-                          });
-                        }}
-                        label="Address"
-                        placeholder="123 Main Street"
-                        required={true}
-                        showCityProvincePostal={false}
-                      />
-                      <p className="text-xs text-gray-500 mt-1">
-                        Start typing to use Google address autocomplete
-                      </p>
-                    </div>
+                      <div>
+                        <label className="block text-xs font-medium text-gray-700 mb-2">
+                          Address <span className="text-red-500">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          value={customerForm.street_address}
+                          onChange={(e) => setCustomerForm({ ...customerForm, street_address: e.target.value })}
+                          className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-semibold transition-all"
+                          placeholder="123 Main Street"
+                          required
+                        />
+                      </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                       <div>
