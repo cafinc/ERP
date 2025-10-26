@@ -5,9 +5,10 @@ WebSocket Routes - Real-time connection endpoints
 
 import logging
 import json
-from fastapi import APIRouter, WebSocket, WebSocketDisconnect, Query
+from fastapi import APIRouter, WebSocket, WebSocketDisconnect, Query, HTTPException
 from typing import Optional
 from realtime_service import connection_manager, realtime_service
+from auth import validate_token
 
 logger = logging.getLogger(__name__)
 
