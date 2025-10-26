@@ -1786,13 +1786,23 @@ export default function LeadsPage() {
               )}
 
               {/* Action Buttons */}
-              <div className="flex gap-3">
+              <div className="grid grid-cols-2 gap-3">
+                <button
+                  onClick={() => {
+                    // Navigate to customer create page with lead data
+                    router.push(`/customers/create?from_lead=${quickViewLead.id}`);
+                  }}
+                  className="col-span-2 px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg hover:from-green-600 hover:to-emerald-700 transition-all shadow-lg hover:shadow-xl font-semibold flex items-center justify-center gap-2"
+                >
+                  <UserPlus className="w-5 h-5" />
+                  Convert to Customer
+                </button>
                 <button
                   onClick={() => {
                     setShowQuickView(false);
                     handleEdit(quickViewLead);
                   }}
-                  className="flex-1 px-6 py-3 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-all shadow-sm hover:shadow-md font-semibold flex items-center justify-center gap-2"
+                  className="px-6 py-3 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-all shadow-sm hover:shadow-md font-semibold flex items-center justify-center gap-2"
                 >
                   <Edit className="w-5 h-5" />
                   Edit Lead
