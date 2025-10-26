@@ -374,6 +374,96 @@ export default function LeadsPage() {
     return <Paperclip className="w-5 h-5 text-gray-500" />;
   };
 
+  // Bulk Operations Functions
+  const toggleSelectLead = (leadId: string) => {
+    setSelectedLeads(prev => 
+      prev.includes(leadId) 
+        ? prev.filter(id => id !== leadId)
+        : [...prev, leadId]
+    );
+  };
+
+  const toggleSelectAll = () => {
+    if (selectedLeads.length === filteredLeads.length) {
+      setSelectedLeads([]);
+    } else {
+      setSelectedLeads(filteredLeads.map(l => l.id));
+    }
+  };
+
+  const handleBulkDelete = async () => {
+    if (!confirm(`Are you sure you want to delete ${selectedLeads.length} lead(s)?`)) {
+      return;
+    }
+
+    try {
+      await Promise.all(selectedLeads.map(id => api.delete(`/leads/${id}`)));
+      setShowSuccessModal(true);
+      setSelectedLeads([]);
+      setBulkActionType(null);
+      setTimeout(() => {
+        setShowSuccessModal(false);
+        loadLeads();
+      }, 2000);
+    } catch (error) {
+      console.error('Error deleting leads:', error);
+      setErrorMessage('Failed to delete leads. Please try again.');
+      setShowErrorModal(true);
+    }
+  };
+
+  const handleBulkStatusUpdate = async () => {
+    try {
+      await Promise.all(selectedLeads.map(id => 
+        api.put(`/leads/${id}`, { status: bulkStatus })
+      ));
+      setShowSuccessModal(true);
+      setSelectedLeads([]);
+      setBulkActionType(null);
+      setTimeout(() => {
+        setShowSuccessModal(false);
+        loadLeads();
+      }, 2000);
+    } catch (error) {
+      console.error('Error updating lead status:', error);
+      setErrorMessage('Failed to update lead status. Please try again.');
+      setShowErrorModal(true);
+    }
+  };
+
+  // Export Functions
+  const exportToCSV = () => {
+    const headers = ['Name', 'Email', 'Phone', 'Company', 'Status', 'Source', 'Priority', 'Estimated Value', 'Created Date'];
+    const rows = filteredLeads.map(lead => [
+      lead.name,
+      lead.email,
+      lead.phone,
+      lead.company || '',
+      lead.status,
+      lead.source,
+      lead.priority,
+      lead.estimated_value || '',
+      new Date(lead.created_at).toLocaleDateString(),
+    ]);
+
+    const csvContent = [
+      headers.join(','),
+      ...rows.map(row => row.map(cell => `"${cell}"`).join(','))
+    ].join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = `leads_export_${new Date().toISOString().split('T')[0]}.csv`;
+    link.click();
+  };
+
+  // Quick View Functions
+  const handleQuickView = (lead: Lead) => {
+    setQuickViewLead(lead);
+    setShowQuickView(true);
+  };
+
   const getStats = () => {
     const total = leads.length;
     const converted = leads.filter(l => l.status === 'converted').length;
