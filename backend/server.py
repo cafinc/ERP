@@ -9377,6 +9377,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Setup rate limiting
+setup_rate_limiting(app)
+
 @app.on_event("startup")
 async def startup_event():
     """Initialize services on startup"""
