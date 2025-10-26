@@ -761,42 +761,193 @@ export default function SiteDetailPage() {
         {/* Map & Geofence Tab */}
         {activeTab === 'map' && (
           <div className="space-y-6">
-            <div className="bg-white rounded-lg shadow-sm p-6">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-gray-900">Site Location</h3>
-                <div className="space-x-2">
+            {/* Professional Map Builder Preview Card */}
+            <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg shadow-sm p-8">
+              <div className="max-w-4xl mx-auto">
+                <div className="text-center mb-8">
+                  <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-full mb-4">
+                    <MapIcon className="w-8 h-8 text-white" />
+                  </div>
+                  <h2 className="text-3xl font-bold text-gray-900 mb-2">Professional Map Builder</h2>
+                  <p className="text-lg text-gray-600">
+                    Create, annotate, and manage professional site maps for your customers
+                  </p>
+                </div>
+
+                {/* Feature Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                  <div className="bg-white rounded-lg p-6 text-center">
+                    <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-100 rounded-lg mb-4">
+                      <MapPin className="w-6 h-6 text-blue-600" />
+                    </div>
+                    <h3 className="font-semibold text-gray-900 mb-2">Property Overview</h3>
+                    <p className="text-sm text-gray-600">
+                      Interactive map with site details, location info, and quick stats
+                    </p>
+                  </div>
+
+                  <div className="bg-white rounded-lg p-6 text-center">
+                    <div className="inline-flex items-center justify-center w-12 h-12 bg-purple-100 rounded-lg mb-4">
+                      <Pentagon className="w-6 h-6 text-purple-600" />
+                    </div>
+                    <h3 className="font-semibold text-gray-900 mb-2">Geofence & Boundaries</h3>
+                    <p className="text-sm text-gray-600">
+                      Define property boundaries, calculate areas, and set geofences
+                    </p>
+                  </div>
+
+                  <div className="bg-white rounded-lg p-6 text-center">
+                    <div className="inline-flex items-center justify-center w-12 h-12 bg-green-100 rounded-lg mb-4">
+                      <Pencil className="w-6 h-6 text-green-600" />
+                    </div>
+                    <h3 className="font-semibold text-gray-900 mb-3">Annotations & Markup</h3>
+                    <p className="text-sm text-gray-600">
+                      Professional drawings, labels, and customizable annotations
+                    </p>
+                  </div>
+                </div>
+
+                {/* Map Preview with Stats */}
+                <div className="bg-white rounded-lg shadow-md overflow-hidden mb-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2">
+                    {/* Map Preview */}
+                    <div className="relative h-64 md:h-auto">
+                      <div ref={mapRef} className="w-full h-full"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none"></div>
+                      <div className="absolute bottom-4 left-4 right-4">
+                        <p className="text-white text-sm font-medium mb-1">
+                          <MapPin className="w-4 h-4 inline mr-1" />
+                          {site?.location?.address || 'Site Location'}
+                        </p>
+                        {site.geofence && (
+                          <span className="inline-flex items-center px-2 py-1 bg-green-500 text-white text-xs rounded-full">
+                            <Shield className="w-3 h-3 mr-1" />
+                            Geofence Active
+                          </span>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Quick Stats */}
+                    <div className="p-6 bg-gray-50">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-4">Site Information</h3>
+                      <div className="space-y-4">
+                        <div className="flex items-start">
+                          <Building className="w-5 h-5 text-blue-600 mr-3 mt-0.5" />
+                          <div>
+                            <p className="text-sm text-gray-600">Site Type</p>
+                            <p className="font-semibold text-gray-900 capitalize">
+                              {site?.site_type || 'Not specified'}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="flex items-start">
+                          <Maximize2 className="w-5 h-5 text-green-600 mr-3 mt-0.5" />
+                          <div>
+                            <p className="text-sm text-gray-600">Area Size</p>
+                            <p className="font-semibold text-gray-900">
+                              {site?.area_size ? `${site.area_size.toLocaleString()} sq ft` : 'Not measured'}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="flex items-start">
+                          <Layers className="w-5 h-5 text-purple-600 mr-3 mt-0.5" />
+                          <div>
+                            <p className="text-sm text-gray-600">Active Services</p>
+                            <p className="font-semibold text-gray-900">
+                              {site?.services?.length || 0} services
+                            </p>
+                          </div>
+                        </div>
+                        <div className="flex items-start">
+                          <FileText className="w-5 h-5 text-orange-600 mr-3 mt-0.5" />
+                          <div>
+                            <p className="text-sm text-gray-600">GPS Coordinates</p>
+                            <p className="text-xs font-mono text-gray-900">
+                              {site?.location?.latitude?.toFixed(6)}, {site?.location?.longitude?.toFixed(6)}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Call to Action */}
+                <div className="flex justify-center gap-4">
                   <button
                     onClick={() => router.push(`/sites/${siteId}/maps`)}
-                    className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 inline-flex items-center"
+                    className="px-8 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 inline-flex items-center text-lg font-semibold shadow-lg hover:shadow-xl transition-all"
                   >
-                    <Camera className="w-4 h-4 mr-2" />
-                    Advanced Maps
+                    <Camera className="w-5 h-5 mr-2" />
+                    Open Map Builder
                   </button>
                   <button
-                    onClick={() => router.push(`/geofence?site=${siteId}`)}
-                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 inline-flex items-center"
+                    onClick={() => {
+                      const url = `https://www.google.com/maps/search/?api=1&query=${site?.location?.latitude},${site?.location?.longitude}`;
+                      window.open(url, '_blank');
+                    }}
+                    className="px-6 py-4 bg-white border-2 border-gray-300 text-gray-700 rounded-lg hover:border-gray-400 hover:bg-gray-50 inline-flex items-center font-semibold transition-all"
                   >
-                    <Plus className="w-4 h-4 mr-2" />
-                    Manage Geofence
-                  </button>
-                  <button
-                    onClick={() => setShowMeasureModal(true)}
-                    className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 inline-flex items-center"
-                  >
-                    <Ruler className="w-4 h-4 mr-2" />
-                    Measure
+                    <ExternalLink className="w-5 h-5 mr-2" />
+                    Open in Google Maps
                   </button>
                 </div>
               </div>
-              <div ref={mapRef} className="w-full h-[600px] rounded-lg"></div>
-              {site.geofence && (
-                <div className="mt-4 p-4 bg-blue-50 rounded-lg">
-                  <p className="text-sm text-blue-900">
-                    <Shield className="w-4 h-4 inline mr-2" />
-                    Geofence is active for this site
-                  </p>
+            </div>
+
+            {/* Quick Tips */}
+            <div className="bg-white rounded-lg shadow-sm p-6">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                <Info className="w-5 h-5 mr-2 text-blue-600" />
+                Map Builder Features
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="flex items-start">
+                  <div className="flex-shrink-0 w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                    <span className="text-blue-600 font-semibold">1</span>
+                  </div>
+                  <div>
+                    <p className="font-medium text-gray-900">Interactive Mapping</p>
+                    <p className="text-sm text-gray-600">
+                      Satellite view, street view, and multiple map layers
+                    </p>
+                  </div>
                 </div>
-              )}
+                <div className="flex items-start">
+                  <div className="flex-shrink-0 w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center mr-3">
+                    <span className="text-purple-600 font-semibold">2</span>
+                  </div>
+                  <div>
+                    <p className="font-medium text-gray-900">Drawing Tools</p>
+                    <p className="text-sm text-gray-600">
+                      Polygons, lines, markers, and custom shapes with colors
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <div className="flex-shrink-0 w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center mr-3">
+                    <span className="text-green-600 font-semibold">3</span>
+                  </div>
+                  <div>
+                    <p className="font-medium text-gray-900">Version Control</p>
+                    <p className="text-sm text-gray-600">
+                      Save multiple map versions and restore previous states
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <div className="flex-shrink-0 w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center mr-3">
+                    <span className="text-orange-600 font-semibold">4</span>
+                  </div>
+                  <div>
+                    <p className="font-medium text-gray-900">Export & Share</p>
+                    <p className="text-sm text-gray-600">
+                      Screenshot maps and share professional PDFs with customers
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         )}
