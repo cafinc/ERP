@@ -319,7 +319,19 @@ export default function WorkOrdersPage() {
                       <div className="flex items-center text-sm text-gray-600">
                         <User className="w-4 h-4 mr-2 text-gray-400" />
                         <span className="font-medium mr-1">Customer:</span>
-                        <span>{workOrder.customer_name}</span>
+                        <span className="flex-1">{workOrder.customer_name}</span>
+                        {workOrder.customer_id && (
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setSelectedCustomerId(workOrder.customer_id);
+                            }}
+                            className="ml-2 p-1 text-[#3f72af] hover:bg-blue-50 rounded-md transition-colors"
+                            title="Quick View Customer"
+                          >
+                            <Eye className="w-4 h-4" />
+                          </button>
+                        )}
                       </div>
                       <div className="flex items-center text-sm text-gray-600">
                         <MapPin className="w-4 h-4 mr-2 text-gray-400" />
