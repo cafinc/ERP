@@ -707,13 +707,21 @@ export default function CustomersPage() {
                     )}
 
                     {/* View Action */}
-                    <div className="col-span-2">
+                    <div className="col-span-2 flex items-center gap-2">
+                      <button
+                        onClick={() => handleQuickView(customer)}
+                        className="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs rounded-lg transition-colors flex items-center gap-1"
+                        title="Quick View"
+                      >
+                        <Eye className="w-3 h-3" />
+                        Quick View
+                      </button>
                       <button
                         onClick={() => router.push(`/customers/${customerId}`)}
                         className="px-3 py-1.5 bg-[#3f72af] hover:bg-[#2c5282] text-white text-xs rounded-lg transition-colors flex items-center gap-1"
                       >
-                        <Eye className="w-3 h-3" />
-                        View
+                        <Edit className="w-3 h-3" />
+                        Edit
                       </button>
                     </div>
                   </div>
