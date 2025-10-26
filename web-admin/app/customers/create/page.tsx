@@ -1603,10 +1603,8 @@ export default function CustomerFormPage() {
                     
                     {/* Billing Address Fields */}
                     {!customerForm.billing_address_same && (
-                      <>
-                        <div className="md:col-span-2 mt-4">
-                          <h3 className="text-lg font-semibold text-gray-900 mb-3">Billing Address</h3>
-                        </div>
+                      <div className="p-6 pt-0 space-y-4">
+                        <h3 className="text-lg font-semibold text-gray-900 mb-3">Billing Address</h3>
                         
                         <div className="md:col-span-2">
                           <label className="block text-sm font-medium text-gray-700 mb-2">Address *</label>
