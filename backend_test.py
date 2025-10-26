@@ -450,6 +450,8 @@ class BackendTester:
             map_data = {
                 "site_id": site_id,
                 "name": f"Test Map {uuid.uuid4().hex[:8]}",
+                "base_map_type": "satellite",
+                "base_map_url": "https://maps.googleapis.com/maps/api/staticmap?center=43.6532,-79.3832&zoom=18&size=800x600&maptype=satellite",
                 "annotations": [
                     {
                         "id": str(uuid.uuid4()),
@@ -465,11 +467,9 @@ class BackendTester:
                         "notes": "Main plowing area"
                     }
                 ],
-                "map_settings": {
-                    "zoom": 18,
-                    "center": {"lat": 43.6532, "lng": -79.3832},
-                    "map_type": "satellite"
-                }
+                "legend_items": [
+                    {"color": "#3B82F6", "label": "Plowing Zone", "type": "polygon"}
+                ]
             }
             
             response = self.session.post(f"{BACKEND_URL}/site-maps", json=map_data)
