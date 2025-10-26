@@ -229,7 +229,7 @@ export default function CustomersPage() {
             label: "Export",
             icon: <Download className="w-4 h-4 mr-2" />,
             variant: "secondary",
-            onClick: () => alert("Export functionality"),
+            onClick: exportToCSV,
           },
           {
             label: "New Customer",
