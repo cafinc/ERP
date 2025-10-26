@@ -1968,7 +1968,154 @@ export default function CustomerFormPage() {
             )}
 
             {/* Address Section - Individual Customers Only */}
-            {/* Individual customer address section temporarily disabled - will be rebuilt */}
+            {customerForm.customer_type === 'individual' && (
+              <div className="bg-white/95 backdrop-blur-md rounded-3xl shadow-xl border border-white/40 overflow-hidden hover:shadow-2xl transition-shadow">
+                <div className="bg-gradient-to-br from-green-50 to-emerald-50 border-b-2 border-green-100 p-6">
+                  <h3 className="text-sm font-bold text-gray-900 flex items-center gap-2">
+                    <MapPin className="w-4 h-4 text-green-600" />
+                    Individual Address
+                  </h3>
+                  <p className="text-xs text-gray-600 mt-1">Contact's residential or primary address</p>
+                </div>
+
+                <div className="p-6 space-y-4">
+                  {/* Street Address with Google Autocomplete */}
+                  <div className="md:col-span-2">
+                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                      Address <span className="text-red-500">*</span>
+                    </label>
+                    <div className="relative">
+                      <input
+                        ref={addressInputRef}
+                        type="text"
+                        value={customerForm.street_address}
+                        onChange={e =>
+                          setCustomerForm({ ...customerForm, street_address: e.target.value })
+                        }
+                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-semibold transition-all"
+                        placeholder="123 Main Street"
+                        required
+                      />
+                      <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center">
+                        <img 
+                          src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" 
+                          alt="Powered by Google"
+                          className="h-4"
+                        />
+                      </div>
+                    </div>
+                    <p className="text-xs text-gray-500 mt-1">
+                      Start typing to use Google address autocomplete
+                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    {/* City */}
+                    <div>
+                      <label className="block text-xs font-medium text-gray-700 mb-2">
+                        City <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        value={customerForm.city}
+                        onChange={e =>
+                          setCustomerForm({ ...customerForm, city: e.target.value })
+                        }
+                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-semibold transition-all"
+                        placeholder="Calgary"
+                        required
+                      />
+                    </div>
+
+                    {/* Province */}
+                    <div>
+                      <label className="block text-xs font-medium text-gray-700 mb-2">
+                        Province <span className="text-red-500">*</span>
+                      </label>
+                      <select
+                        value={customerForm.province}
+                        onChange={e =>
+                          setCustomerForm({ ...customerForm, province: e.target.value })
+                        }
+                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-semibold transition-all"
+                        required
+                      >
+                        {CANADIAN_PROVINCES.map(prov => (
+                          <option key={prov.code} value={prov.code}>
+                            {prov.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    {/* Postal Code */}
+                    <div>
+                      <label className="block text-xs font-medium text-gray-700 mb-2">
+                        Postal Code <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        value={customerForm.postal_code}
+                        onChange={e =>
+                          setCustomerForm({ ...customerForm, postal_code: e.target.value })
+                        }
+                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-semibold transition-all"
+                        placeholder="T2P 1J9"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  {/* Create Site Toggle */}
+                  <div className="pt-4 border-t border-gray-200">
+                    <div className="flex items-center gap-3 mb-4">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const newCreateSite = !createSite;
+                          setCreateSite(newCreateSite);
+                          if (!newCreateSite) {
+                            setSiteName('');
+                          }
+                        }}
+                        className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#3f72af] focus:ring-offset-2 flex-shrink-0 ${
+                          createSite ? 'bg-[#3f72af]' : 'bg-gray-200'
+                        }`}
+                      >
+                        <span
+                          className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                            createSite ? 'translate-x-6' : 'translate-x-1'
+                          }`}
+                        />
+                      </button>
+                      <label className="text-sm font-medium text-gray-700">
+                        Create Site with this Address
+                      </label>
+                    </div>
+
+                    {/* Site Name Input - Shows when Create Site is ON */}
+                    {createSite && (
+                      <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                        <label className="block text-xs font-medium text-gray-700 mb-2">
+                          Site Name <span className="text-red-500">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          value={siteName}
+                          onChange={(e) => setSiteName(e.target.value)}
+                          className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-semibold transition-all"
+                          placeholder="e.g., Home, Main Location, Office"
+                          required
+                        />
+                        <p className="text-xs text-gray-500 mt-2">
+                          A site will be created automatically using the address above
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* Additional Notes */}
             <div className="bg-white/95 backdrop-blur-md rounded-3xl shadow-xl border border-white/40 overflow-hidden hover:shadow-2xl transition-shadow">
