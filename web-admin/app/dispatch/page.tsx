@@ -2,6 +2,7 @@
 
 import PageHeader from '@/components/PageHeader';
 import LowStockAlertBanner from '@/components/LowStockAlertBanner';
+import CustomerQuickViewModal from '@/components/CustomerQuickViewModal';
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
