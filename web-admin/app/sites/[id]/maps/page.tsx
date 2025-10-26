@@ -1010,7 +1010,7 @@ export default function SiteMapsGeofencingPage() {
                       </button>
                     </div>
                   </div>
-                  <div ref={mapRef} className="w-full h-[500px]"></div>
+                  <div ref={overviewMapRef} className="w-full h-[500px]"></div>
                 </div>
               </div>
 
