@@ -42,6 +42,11 @@ import {
 interface Site {
   id: string;
   name: string;
+  site_type?: string;
+  area_size?: number;
+  site_reference?: string;
+  created_at?: string;
+  services?: any[];
   location: {
     address: string;
     latitude: number;
