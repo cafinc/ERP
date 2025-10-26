@@ -155,7 +155,13 @@ export default function ServicesPage() {
     const loadingToast = toast.loading('Creating service...');
 
     try {
-      const payload = { ...formData, pricing };
+      const payload = { 
+        ...formData, 
+        pricing,
+        equipment_ids: formData.equipment_ids,
+        consumable_ids: formData.requires_consumables ? formData.consumable_ids : [],
+        requires_consumables: formData.requires_consumables,
+      };
       await api.post('/services', payload);
       toast.success('Service created successfully!', { id: loadingToast });
       setShowCreateModal(false);
@@ -164,6 +170,9 @@ export default function ServicesPage() {
         service_type: 'plowing',
         description: '',
         active: true,
+        equipment_ids: [],
+        consumable_ids: [],
+        requires_consumables: false,
       });
       setPricingEntries([{ unit: 'hourly', amount: '' }]);
       loadServices();
