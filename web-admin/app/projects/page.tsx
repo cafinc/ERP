@@ -495,5 +495,6 @@ export default function ProjectsPage() {
           onClose={() => setSelectedCustomerId(null)}
         />
       )}
-    );
+    </div>
+  );
 }
