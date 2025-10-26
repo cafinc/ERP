@@ -40,6 +40,14 @@ import {
   CheckCircle,
   XCircle,
   Circle,
+  Pentagon,
+  Pencil,
+  ExternalLink,
+  Maximize2,
+  Layers,
+  Info,
+  Download,
+  Map as MapIcon,
 } from 'lucide-react';
 
 interface Site {
