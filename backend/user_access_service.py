@@ -105,7 +105,7 @@ def create_user_account(
         # Create user document
         user_doc = {
             'username': username,
-            'password': password_hash,  # TODO: Hash this properly
+            'password': password_hash,  # Now properly hashed with bcrypt
             'email': email,
             'first_name': first_name,
             'last_name': last_name,
