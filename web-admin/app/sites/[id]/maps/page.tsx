@@ -28,6 +28,15 @@ import {
   Download,
   Plus,
   RefreshCw,
+  Building,
+  Users,
+  Calendar,
+  FileText,
+  ExternalLink,
+  Maximize2,
+  Share2,
+  Info,
+  Activity,
 } from 'lucide-react';
 
 interface Site {
