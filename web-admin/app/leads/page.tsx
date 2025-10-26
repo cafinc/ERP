@@ -132,6 +132,16 @@ export default function LeadsPage() {
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [teamMembers, setTeamMembers] = useState<any[]>([]);
+  
+  // Bulk Operations State
+  const [selectedLeads, setSelectedLeads] = useState<string[]>([]);
+  const [showBulkActions, setShowBulkActions] = useState(false);
+  const [bulkActionType, setBulkActionType] = useState<'delete' | 'status' | null>(null);
+  const [bulkStatus, setBulkStatus] = useState<Lead['status']>('new');
+  
+  // Quick View State
+  const [quickViewLead, setQuickViewLead] = useState<Lead | null>(null);
+  const [showQuickView, setShowQuickView] = useState(false);
 
   useEffect(() => {
     loadLeads();
