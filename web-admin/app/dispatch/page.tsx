@@ -47,6 +47,7 @@ export default function DispatchesPage() {
   const [filterStatus, setFilterStatus] = useState('all');
   const [filterDate, setFilterDate] = useState('all');
   const [view, setView] = useState<'list' | 'map'>('list');
+  const [selectedCustomerId, setSelectedCustomerId] = useState<string | null>(null);
 
   useEffect(() => {
     loadDispatches();
