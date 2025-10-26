@@ -512,6 +512,42 @@ agent_communication:
     message: "Site Creation API backend testing completed successfully. 10/10 tests passed (100% success rate). POST /api/sites endpoint working perfectly with comprehensive validation: 1) Successful creation with all required fields (name, customer_id, site_type, location), 2) Optional fields support (site_reference, area_size, internal_notes, crew_notes, services, access_fields), 3) Proper validation errors for missing required fields (HTTP 422), 4) Location data validation (latitude, longitude, address), 5) ObjectId serialization working correctly (converts _id to id), 6) Multiple site types supported (parking_lot, driveway, sidewalk, commercial_lot, residential), 7) Excellent performance (< 0.1s response time), 8) Response structure fully compatible with toast notifications. API returns HTTP 200 with proper JSON structure. Ready for frontend Create Site page integration."
 
 backend:
+  - task: "Customer Creation Validation - Individual Customer Rules"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ Individual customer creation validation working correctly. Required fields (name, email, phone, address) properly validated. Missing email and phone return HTTP 422 validation errors. Name field accepts both single and full names (validation for first_name/last_name split not yet implemented but functional). Address field validation working for basic requirements."
+
+  - task: "Customer Creation Validation - Company Customer Rules"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ Company customer creation validation working correctly. Required fields (name as company_name, email as office_email, phone as office_number, address) properly validated. Missing company name, email, and phone return HTTP 422 validation errors. Contact persons are optional as expected - companies can be created without contact persons."
+
+  - task: "Customer Creation Validation - Email and Data Format Validation"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ Email format validation working perfectly. Invalid email formats (missing @-sign) return HTTP 422 with detailed Pydantic validation errors. Customer data structure contains all required fields (id, name, email, phone, address, customer_type, active, created_at). ObjectId serialization working correctly."
+
   - task: "Unified Communications System - Send Message API"
     implemented: true
     working: true
