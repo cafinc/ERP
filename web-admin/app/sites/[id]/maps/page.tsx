@@ -699,7 +699,7 @@ export default function SiteMapsGeofencingPage() {
   const deleteMap = async (mapId: string) => {
     if (!confirm('Are you sure you want to delete this map version?')) return;
     
-    try:
+    try {
       setSaving(true);
       await api.delete(`/site-maps/${mapId}`);
       alert('Map deleted successfully');
