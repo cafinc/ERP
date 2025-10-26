@@ -1,18 +1,17 @@
 #!/usr/bin/env python3
 """
-Comprehensive Backend API Testing for Customer Creation and Management
-Tests all customer CRUD operations, file attachments, communication preferences, and company linking
+Site Service History Backend API Testing
+Tests all Site Service History endpoints comprehensively
 """
 
 import requests
 import json
-import base64
-import time
-from datetime import datetime
-from typing import Dict, List, Any
+import sys
+from datetime import datetime, timedelta
+import uuid
 
-# Backend URL from frontend/.env
-BASE_URL = "https://map-measure-admin.preview.emergentagent.com/api"
+# Backend URL from frontend .env
+BACKEND_URL = "https://map-measure-admin.preview.emergentagent.com/api"
 
 class CustomerManagementTests:
     def __init__(self):
