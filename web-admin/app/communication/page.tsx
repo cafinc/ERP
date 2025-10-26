@@ -51,6 +51,7 @@ export default function CommunicationCenterPage() {
   const { user } = useAuth();
   const [activeTab, setActiveTab] = useState<'all' | 'direct' | 'sms' | 'email' | 'feedback'>('all');
   const [conversations, setConversations] = useState<Conversation[]>([]);
+  const [selectedCustomerId, setSelectedCustomerId] = useState<string | null>(null);
   const [feedbackMessages, setFeedbackMessages] = useState<FeedbackMessage[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
