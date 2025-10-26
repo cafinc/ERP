@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import PageHeader from '@/components/PageHeader';
+import CustomerQuickViewModal from '@/components/CustomerQuickViewModal';
 import api from '@/lib/api';
 import {
   Plus,
