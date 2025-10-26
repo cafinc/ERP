@@ -725,9 +725,9 @@ export default function ServicesPage() {
                 {/* Default Pricing Card */}
                 <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 backdrop-blur-sm overflow-hidden">
                   {/* Header */}
-                  <div className="bg-gradient-to-br from-blue-50 to-indigo-50 border-b-2 border-blue-100 p-6 flex items-center justify-between">
+                  <div className="bg-gradient-to-br from-green-50 to-emerald-50 border-b-2 border-green-100 p-6 flex items-center justify-between">
                     <h3 className="text-lg font-bold text-gray-900 flex items-center">
-                      <DollarSign className="w-5 h-5 text-[#3f72af] mr-2" />
+                      <DollarSign className="w-5 h-5 text-green-600 mr-2" />
                       Default Pricing
                     </h3>
                     <button
