@@ -81,17 +81,22 @@ export default function SiteDetailPage() {
   const loadSite = async () => {
     try {
       setLoading(true);
+      console.log('Loading site with ID:', siteId);
       const response = await api.get(`/sites/${siteId}`);
+      console.log('Site data received:', response.data);
       setSite(response.data);
       
       // Load customer details
       if (response.data.customer_id) {
+        console.log('Loading customer with ID:', response.data.customer_id);
         const customerResponse = await api.get(`/customers/${response.data.customer_id}`);
+        console.log('Customer data received:', customerResponse.data);
         setCustomer(customerResponse.data);
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error loading site:', error);
-      alert('Failed to load site');
+      console.error('Error details:', error.response?.data || error.message);
+      alert(`Failed to load site: ${error.response?.data?.detail || error.message || 'Unknown error'}`);
     } finally {
       setLoading(false);
     }
