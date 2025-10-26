@@ -629,50 +629,6 @@ export default function SiteDetailPage() {
         )}
       </div>
 
-      {/* Geofence Modal */}
-      {showGeofenceModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-auto">
-            <div className="p-6 border-b border-gray-200 flex items-center justify-between">
-              <h3 className="text-lg font-semibold">Add/Edit Geofence</h3>
-              <button
-                onClick={() => setShowGeofenceModal(false)}
-                className="text-gray-400 hover:text-gray-600"
-              >
-                <X className="w-6 h-6" />
-              </button>
-            </div>
-            <div className="p-6">
-              <p className="text-gray-600 mb-4">
-                Click on the map to draw a geofence boundary around the site.
-              </p>
-              <div className="h-96 bg-gray-100 rounded-lg mb-4">
-                {/* Map for drawing geofence will go here */}
-                <p className="text-center pt-40 text-gray-500">Geofence drawing map (to be implemented)</p>
-              </div>
-              <div className="flex justify-end space-x-3">
-                <button
-                  onClick={() => setShowGeofenceModal(false)}
-                  className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={() => {
-                    // Save geofence logic
-                    setShowGeofenceModal(false);
-                  }}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center"
-                >
-                  <Save className="w-4 h-4 mr-2" />
-                  Save Geofence
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* Measure Modal */}
       {showMeasureModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
