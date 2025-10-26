@@ -262,7 +262,8 @@ export default function ProfileSettings() {
   };
 
   return (
-    <PageHeader
+    <>
+      <PageHeader
         title="Profile"
         subtitle="Manage profile"
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Settings", href: "/settings" }, { label: "Profile" }]}
