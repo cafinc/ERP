@@ -125,6 +125,85 @@ export default function SitesPage() {
     return matchesSearch && matchesCustomer && matchesType && matchesActive;
   });
 
+  // Bulk Operations Functions
+  const toggleSelectSite = (siteId: string) => {
+    setSelectedSites(prev => 
+      prev.includes(siteId) 
+        ? prev.filter(id => id !== siteId)
+        : [...prev, siteId]
+    );
+  };
+
+  const toggleSelectAll = () => {
+    if (selectedSites.length === filteredSites.length) {
+      setSelectedSites([]);
+    } else {
+      setSelectedSites(filteredSites.map(s => s.id));
+    }
+  };
+
+  const handleBulkDelete = async () => {
+    if (!confirm(`Are you sure you want to delete ${selectedSites.length} site(s)?`)) {
+      return;
+    }
+
+    try {
+      await Promise.all(selectedSites.map(id => api.delete(`/sites/${id}`)));
+      alert('Sites deleted successfully!');
+      setSelectedSites([]);
+      setBulkActionType(null);
+      loadData();
+    } catch (error) {
+      console.error('Error deleting sites:', error);
+      alert('Failed to delete sites. Please try again.');
+    }
+  };
+
+  const handleBulkArchive = async (archive: boolean) => {
+    try {
+      await Promise.all(selectedSites.map(id => 
+        api.put(`/sites/${id}`, { active: !archive })
+      ));
+      alert(`Sites ${archive ? 'archived' : 'unarchived'} successfully!`);
+      setSelectedSites([]);
+      setBulkActionType(null);
+      loadData();
+    } catch (error) {
+      console.error('Error updating sites:', error);
+      alert('Failed to update sites. Please try again.');
+    }
+  };
+
+  // Export Functions
+  const exportToCSV = () => {
+    const headers = ['Site Name', 'Address', 'Customer', 'Type', 'Status', 'Created Date'];
+    const rows = filteredSites.map(site => [
+      site.name,
+      site.location?.address || '',
+      getCustomerName(site.customer_id),
+      getSiteTypeLabel(site.site_type),
+      site.active ? 'Active' : 'Archived',
+      new Date(site.created_at).toLocaleDateString(),
+    ]);
+
+    const csvContent = [
+      headers.join(','),
+      ...rows.map(row => row.map(cell => `"${cell}"`).join(','))
+    ].join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = `sites_export_${new Date().toISOString().split('T')[0]}.csv`;
+    link.click();
+  };
+
+  // Quick View Functions
+  const handleQuickView = (site: Site) => {
+    setQuickViewSite(site);
+    setShowQuickView(true);
+  };
+
   const handleCreateSite = () => {
     router.push('/sites/create');
   };
