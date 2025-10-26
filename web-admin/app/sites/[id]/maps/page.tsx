@@ -58,6 +58,31 @@ interface Geofence {
   stroke_weight: number;
 }
 
+interface SiteMapAnnotation {
+  id: string;
+  type: string;
+  category?: string;
+  label?: string;
+  color?: string;
+  coordinates: Array<{ x: number; y: number }>;
+  properties?: any;
+}
+
+interface SiteMap {
+  id?: string;
+  site_id: string;
+  version: number;
+  name: string;
+  base_map_type: string;
+  base_map_data?: string;
+  base_map_url?: string;
+  annotations: SiteMapAnnotation[];
+  legend_items?: Array<{ category: string; label: string; color: string; icon: string }>;
+  is_current: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
 declare global {
   interface Window {
     google: any;
