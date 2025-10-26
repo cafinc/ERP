@@ -165,10 +165,13 @@ export default function CustomerFormPage() {
     loadCompanies();
     if (isEdit) {
       loadCustomer();
+    } else if (fromLeadId) {
+      // Load lead data for conversion
+      loadLeadData(fromLeadId);
     }
     // Initialize Google Places Autocomplete
     initGooglePlaces();
-  }, [customerId]);
+  }, [customerId, fromLeadId]);
 
   const initGooglePlaces = () => {
     if (typeof window === 'undefined') return;
