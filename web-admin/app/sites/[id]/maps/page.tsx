@@ -143,10 +143,14 @@ export default function SiteMapsGeofencingPage() {
   // Overview tab refs
   const overviewMapRef = useRef<HTMLDivElement>(null);
   const overviewGoogleMapRef = useRef<any>(null);
+  const overviewMeasurementToolRef = useRef<any>(null);
+  const overviewMeasurementOverlaysRef = useRef<any[]>([]);
   
   const [drawingPath, setDrawingPath] = useState<GeoPoint[]>([]);
   const [measurements, setMeasurements] = useState<any>(null);
   const [googleMapsLoaded, setGoogleMapsLoaded] = useState(false);
+  const [overviewMeasurementMode, setOverviewMeasurementMode] = useState<'distance' | 'area' | null>(null);
+  const [overviewMeasurementResults, setOverviewMeasurementResults] = useState<any[]>([]);
 
   // Drawing colors and categories
   const drawingColors = [
