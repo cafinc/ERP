@@ -9,7 +9,7 @@ from datetime import datetime, timedelta
 import os
 
 # Configuration
-BACKEND_URL = os.getenv('EXPO_PUBLIC_BACKEND_URL', 'https://modern-admin-dash-1.preview.emergentagent.com')
+BACKEND_URL = os.getenv('EXPO_PUBLIC_BACKEND_URL', 'https://glass-admin-dash.preview.emergentagent.com')
 API_BASE = f"{BACKEND_URL}/api"
 
 def make_request(method, endpoint, data=None, params=None):
