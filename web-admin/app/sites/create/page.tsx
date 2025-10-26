@@ -196,33 +196,36 @@ export default function CreateSitePage() {
   };
 
   const handleAddService = () => {
-    setSelectedServiceId('');
-    setServiceUnitType('');
-    setServicePrice('');
-    setServiceFrequency('');
     setShowServiceModal(true);
+    setSelectedServiceId('');
+    setServiceUnitTypes({});
+    setServiceFrequency('');
   };
 
   const handleSaveService = () => {
-    if (!selectedServiceId || !serviceUnitType || !servicePrice) {
-      toast.error('Please fill in all service fields');
+    if (!selectedServiceId || Object.keys(serviceUnitTypes).length === 0) {
+      toast.error('Please select a service and at least one unit type with price');
       return;
     }
 
     const service = services.find(s => (s._id || s.id) === selectedServiceId);
     if (!service) return;
 
-    const newService: SiteService = {
+    // Create a separate entry for each unit type/price combination
+    const newServices = Object.entries(serviceUnitTypes).map(([unitType, price]) => ({
       service_id: selectedServiceId,
       service_name: service.name,
-      unit_type: serviceUnitType,
-      price: parseFloat(servicePrice),
+      unit_type: unitType,
+      price: parseFloat(price),
       frequency: serviceFrequency || undefined,
-    };
+    }));
 
-    setSiteServices([...siteServices, newService]);
+    setSiteServices([...siteServices, ...newServices]);
     setShowServiceModal(false);
-    toast.success(`${service.name} added successfully`);
+    setSelectedServiceId('');
+    setServiceUnitTypes({});
+    setServiceFrequency('');
+    toast.success(`${newServices.length} service configuration(s) added`);
   };
 
   const handleRemoveService = (serviceId: string) => {
