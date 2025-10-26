@@ -1076,6 +1076,14 @@ export default function SiteMapsGeofencingPage() {
 
           {activeTab === 'geofence' && (
             <div className="flex gap-2">
+              <button
+                onClick={() => exportMapAsImage('geofence')}
+                className="flex items-center gap-2 px-4 py-3 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors"
+                title="Export map as image"
+              >
+                <Download className="w-4 h-4" />
+                Export Map
+              </button>
               {mapMode === 'view' ? (
                 <button
                   onClick={enableDrawingMode}
