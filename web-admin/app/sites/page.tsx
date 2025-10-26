@@ -72,6 +72,7 @@ export default function SitesPage() {
   // Quick View State
   const [quickViewSite, setQuickViewSite] = useState<Site | null>(null);
   const [showQuickView, setShowQuickView] = useState(false);
+  const [selectedCustomerId, setSelectedCustomerId] = useState<string | null>(null);
 
   useEffect(() => {
     loadData();
