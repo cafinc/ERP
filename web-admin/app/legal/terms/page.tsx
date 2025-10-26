@@ -267,7 +267,7 @@ export default function TermsOfService() {
             <p className="text-gray-700">Email: support@cafinc.ca</p>
             <p className="text-gray-700">Phone: +1 (587) 877-0293</p>
             <p className="text-gray-700">Address: Calgary, Alberta, Canada</p>
-            <p className="text-gray-700 mt-2">Website: https://erp-modernize-2.preview.emergentagent.com</p>
+            <p className="text-gray-700 mt-2">Website: https://service-hub-156.preview.emergentagent.com</p>
           </div>
 
           <h2 className="text-2xl font-semibold text-gray-900 mt-8 mb-4">17. Acknowledgment</h2>

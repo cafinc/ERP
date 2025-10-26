@@ -11,7 +11,7 @@ import time
 from datetime import datetime
 
 # Backend URL from frontend/.env
-BACKEND_URL = "https://erp-modernize-2.preview.emergentagent.com/api"
+BACKEND_URL = "https://service-hub-156.preview.emergentagent.com/api"
 
 def test_site_creation_api():
     """Test the POST /api/sites endpoint comprehensively"""
