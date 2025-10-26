@@ -173,6 +173,16 @@ export default function CustomerFormPage() {
     initGooglePlaces();
   }, [customerId, fromLeadId]);
 
+  // Re-initialize Google Maps when customer type changes to company
+  useEffect(() => {
+    if (customerForm.customer_type === 'company' && window.google && window.google.maps) {
+      // Small delay to ensure the ref is attached
+      setTimeout(() => {
+        setupAutocomplete();
+      }, 100);
+    }
+  }, [customerForm.customer_type]);
+
   const initGooglePlaces = () => {
     if (typeof window === 'undefined') return;
     
