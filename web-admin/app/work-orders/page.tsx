@@ -261,6 +261,9 @@ export default function WorkOrdersPage() {
 
         {/* Work Orders Grid */}
         <div className="flex-1 p-6">
+          {/* Low Stock Alert Banner */}
+          <LowStockAlertBanner />
+          
           {filteredWorkOrders.length === 0 ? (
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-12 text-center">
               <ClipboardList className="w-12 h-12 text-gray-400 mx-auto mb-4" />
