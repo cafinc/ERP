@@ -762,16 +762,17 @@ export default function ServicesPage() {
                 </div>
 
                 {/* Equipment Selection Card */}
-                <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-6 backdrop-blur-sm">
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-lg font-bold text-gray-900 flex items-center">
-                      <Truck className="w-5 h-5 text-[#3f72af] mr-2" />
+                <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 backdrop-blur-sm overflow-hidden">
+                  {/* Header with Gradient */}
+                  <div className="bg-gradient-to-r from-purple-600 to-purple-700 px-6 py-4">
+                    <h3 className="text-lg font-bold text-white flex items-center">
+                      <Truck className="w-5 h-5 mr-2" />
                       Equipment & Rates
                     </h3>
+                    <p className="text-sm text-purple-100 mt-1">Select equipment and set rates for each</p>
                   </div>
-                  <p className="text-sm text-gray-600 mb-4">Select equipment and set rates for each</p>
                   
-                  <div className="space-y-3 max-h-96 overflow-y-auto">
+                  <div className="p-6 space-y-3 max-h-96 overflow-y-auto">
                     {equipment.length === 0 ? (
                       <div className="text-center py-6 bg-gray-50 rounded-xl">
                         <Truck className="w-10 h-10 text-gray-300 mx-auto mb-2" />
