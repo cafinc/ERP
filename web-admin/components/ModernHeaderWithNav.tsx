@@ -413,7 +413,7 @@ export default function ModernHeaderWithNav() {
 
   const quickAddItems = [
     { icon: <UserPlus className="w-4 h-4" />, label: 'Customer', path: '/customers/create' },
-    { icon: <TrendingUp className="w-4 h-4" />, label: 'Lead', path: '/leads/create' },
+    { icon: <TrendingUp className="w-4 h-4" />, label: 'Lead', path: '/leads' },
     { icon: <FileText className="w-4 h-4" />, label: 'Estimate', path: '/estimates/create' },
     { icon: <Briefcase className="w-4 h-4" />, label: 'Project', path: '/projects/create' },
   ];
