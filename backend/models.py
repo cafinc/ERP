@@ -366,12 +366,15 @@ class SiteUpdate(BaseModel):
 class SiteMapAnnotation(BaseModel):
     """Individual annotation on a site map (icon, line, shape, area, text)"""
     id: str  # Unique ID for this annotation
-    type: str  # 'icon', 'line', 'arrow', 'rectangle', 'circle', 'polygon', 'text', 'freehand'
+    type: str  # 'icon', 'line', 'arrow', 'rectangle', 'circle', 'polygon', 'text', 'freehand', 'polyline', 'marker'
     category: Optional[str] = None  # 'curb', 'drain', 'speed_bump', 'handicap', 'sidewalk', 'plowing_zone', 'fire_hydrant', 'entrance', 'exit', 'custom'
     label: Optional[str] = None  # Text label for the annotation
     color: Optional[str] = '#3B82F6'  # Color in hex format
-    coordinates: List[dict]  # Position data [{x, y}] or multiple points for polygons/lines
+    coordinates: List[dict]  # Position data [{x, y}] or multiple points for polygons/lines - flexible dict structure
     properties: Optional[dict] = {}  # Additional properties (icon type, stroke width, fill, etc.)
+    
+    class Config:
+        extra = "allow"  # Allow extra fields for flexibility
 
 class SiteMap(BaseModel):
     """Site map with annotations for documenting site layout"""
