@@ -963,6 +963,7 @@ export default function LeadsPage() {
                         ))}
                       </select>
                     </div>
+                    </div>
                   </div>
                 );
               })}
