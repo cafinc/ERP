@@ -392,5 +392,6 @@ export default function InvoicesPage() {
           onClose={() => setSelectedCustomerId(null)}
         />
       )}
-    );
+    </div>
+  );
 }
