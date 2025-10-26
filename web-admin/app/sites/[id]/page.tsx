@@ -136,6 +136,25 @@ export default function SiteDetailPage() {
   const [currentArea, setCurrentArea] = useState(0);
   const [measurementPath, setMeasurementPath] = useState<Array<{ lat: number; lng: number }>>([]);
   
+  // Service History State
+  const [serviceHistory, setServiceHistory] = useState<ServiceHistory[]>([]);
+  const [serviceHistoryLoading, setServiceHistoryLoading] = useState(false);
+  const [showServiceModal, setShowServiceModal] = useState(false);
+  const [editingService, setEditingService] = useState<ServiceHistory | null>(null);
+  const [serviceForm, setServiceForm] = useState({
+    service_date: new Date().toISOString().split('T')[0],
+    service_type: '',
+    crew_members: [] as string[],
+    crew_lead: '',
+    description: '',
+    notes: '',
+    status: 'completed',
+    duration_hours: 0,
+    photos: [] as string[],
+    weather_conditions: '',
+    equipment_used: [] as string[],
+  });
+  
   // Map refs
   const mapRef = useRef<HTMLDivElement>(null);
   const measureMapRef = useRef<HTMLDivElement>(null);
