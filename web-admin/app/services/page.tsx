@@ -1091,13 +1091,13 @@ export default function ServicesPage() {
 
                 {/* Trailers Selection Card */}
                 <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 backdrop-blur-sm overflow-hidden">
-                  {/* Header with Gradient */}
-                  <div className="bg-gradient-to-r from-teal-600 to-teal-700 px-6 py-4">
-                    <h3 className="text-lg font-bold text-white flex items-center">
-                      <Link className="w-5 h-5 mr-2" />
+                  {/* Header */}
+                  <div className="bg-gradient-to-br from-teal-50 to-cyan-50 border-b-2 border-teal-100 p-6">
+                    <h3 className="text-lg font-bold text-gray-900 flex items-center">
+                      <Link className="w-5 h-5 text-teal-600 mr-2" />
                       Trailers & Rates
                     </h3>
-                    <p className="text-sm text-teal-100 mt-1">Select trailers and set rates for each</p>
+                    <p className="text-sm text-gray-600 mt-1">Select trailers and set rates for each</p>
                   </div>
                   
                   <div className="p-6 space-y-3 max-h-96 overflow-y-auto">
