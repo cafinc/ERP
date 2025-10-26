@@ -309,7 +309,7 @@ export default function ProjectsPage() {
                   </div>
 
                   {/* Card Body */}
-                  <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
+                  <div className="p-4">
                     {/* Customer */}
                     <div className="flex items-center gap-2 text-sm text-gray-600 mb-3">
                       <User className="w-4 h-4 text-gray-400" />
