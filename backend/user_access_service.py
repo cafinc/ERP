@@ -99,9 +99,8 @@ def create_user_account(
         username = generate_username(email, first_name, last_name)
         password = generate_password()
         
-        # Hash password (in production, use proper hashing like bcrypt)
-        # For now, using a simple approach - should be enhanced
-        password_hash = password  # TODO: Implement proper password hashing
+        # Hash password using bcrypt
+        password_hash = hash_password(password)
         
         # Create user document
         user_doc = {
