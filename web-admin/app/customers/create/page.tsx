@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { useRouter, useParams } from 'next/navigation';
+import { useRouter, useParams, useSearchParams } from 'next/navigation';
 import PageHeader from '@/components/PageHeader';
 import api from '@/lib/api';
 import { formatPhoneNumber, validateEmail, isValidEmail } from '@/lib/utils/formatters';
