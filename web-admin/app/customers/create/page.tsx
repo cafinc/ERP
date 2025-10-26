@@ -55,8 +55,12 @@ const POSITION_OPTIONS = ['Owner', 'Manager', 'Accountant', 'Other'];
 export default function CustomerFormPage() {
   const router = useRouter();
   const params = useParams();
+  const searchParams = useSearchParams();
   const customerId = params?.id as string;
   const isEdit = !!customerId && customerId !== 'create';
+  
+  // Check if converting from lead
+  const fromLeadId = searchParams.get('from_lead');
   
   const [loading, setLoading] = useState(isEdit);
   const [saving, setSaving] = useState(false);
