@@ -284,8 +284,7 @@ export default function WorkOrdersPage() {
               {filteredWorkOrders.map((workOrder) => (
                 <div
                   key={workOrder._id}
-                  className="bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow cursor-pointer"
-                  onClick={() => router.push(`/work-orders/${workOrder._id}`)}
+                  className="bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow"
                 >
                   <div className="p-6">
                     {/* Header */}
@@ -353,17 +352,17 @@ export default function WorkOrdersPage() {
                           e.stopPropagation();
                           router.push(`/work-orders/${workOrder._id}`);
                         }}
-                        className="flex-1 inline-flex items-center justify-center px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
+                        className="flex-1 inline-flex items-center justify-center px-3 py-2 text-sm font-medium text-white bg-[#3f72af] rounded-md hover:bg-[#2c5282]"
                       >
                         <Eye className="w-4 h-4 mr-1" />
-                        View
+                        View Details
                       </button>
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
                           router.push(`/work-orders/${workOrder._id}/edit`);
                         }}
-                        className="flex-1 inline-flex items-center justify-center px-3 py-2 text-sm font-medium text-white bg-[#3f72af] rounded-md hover:bg-[#2c5282]"
+                        className="flex-1 inline-flex items-center justify-center px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
                       >
                         <Edit className="w-4 h-4 mr-1" />
                         Edit
