@@ -1,6 +1,7 @@
 'use client';
 
 import PageHeader from '@/components/PageHeader';
+import LowStockAlertBanner from '@/components/LowStockAlertBanner';
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
