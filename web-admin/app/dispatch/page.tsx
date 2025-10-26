@@ -406,5 +406,13 @@ export default function DispatchesPage() {
           </div>
         ))}
       </div>
+      
+      {/* Customer Quick View Modal */}
+      {selectedCustomerId && (
+        <CustomerQuickViewModal
+          customerId={selectedCustomerId}
+          onClose={() => setSelectedCustomerId(null)}
+        />
+      )}
     );
 }
