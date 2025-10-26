@@ -745,7 +745,7 @@ export default function SiteMapsGeofencingPage() {
       <PageHeader
         title="Maps"
         subtitle="Manage maps"
-        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Sites", href: "/sites" }, { label: "[Id]", href: "/sites/[id]" }, { label: "Maps" }]}
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Sites", href: "/sites" }, { label: site?.name || "Site", href: `/sites/${siteId}` }, { label: "Maps" }]}
       />
       <div className="flex items-center justify-center h-screen">
         <div className="text-gray-600">Loading...</div>
