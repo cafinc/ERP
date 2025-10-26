@@ -762,16 +762,6 @@ export default function CustomerFormPage() {
 
   return (
     <div className="h-screen flex flex-col bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
-      {/* Page Header */}
-      <PageHeader
-        title={isEdit ? 'Edit Customer' : 'New Customer'}
-        subtitle={isEdit ? 'Update customer information and details' : 'Add a new customer to your system'}
-        breadcrumbs={[
-          { label: 'Customers', href: '/customers' },
-          { label: isEdit ? 'Edit' : 'New' }
-        ]}
-      />
-
       {/* Main Content */}
       <div className="flex-1 overflow-y-auto">
         <div className="max-w-5xl mx-auto p-6">
