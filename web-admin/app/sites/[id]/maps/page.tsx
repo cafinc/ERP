@@ -286,6 +286,54 @@ export default function SiteMapsGeofencingPage() {
     }
   };
 
+  const initializeOverviewMap = () => {
+    if (!overviewMapRef.current || !window.google || !site || overviewGoogleMapRef.current) return;
+
+    const center = {
+      lat: site.location.latitude || 51.0447,
+      lng: site.location.longitude || -114.0719,
+    };
+
+    overviewGoogleMapRef.current = new window.google.maps.Map(overviewMapRef.current, {
+      center,
+      zoom: 18,
+      mapTypeId: 'satellite',
+      mapTypeControl: true,
+      streetViewControl: true,
+      fullscreenControl: true,
+      zoomControl: true,
+    });
+
+    // Add site marker
+    new window.google.maps.Marker({
+      position: center,
+      map: overviewGoogleMapRef.current,
+      title: site.name,
+      icon: {
+        path: window.google.maps.SymbolPath.CIRCLE,
+        scale: 10,
+        fillColor: '#3B82F6',
+        fillOpacity: 1,
+        strokeColor: '#ffffff',
+        strokeWeight: 2,
+      },
+    });
+
+    // Draw geofence if exists
+    if (geofence && geofence.polygon_coordinates && geofence.polygon_coordinates.length > 0) {
+      new window.google.maps.Polygon({
+        paths: geofence.polygon_coordinates,
+        strokeColor: '#10B981',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#10B981',
+        fillOpacity: 0.15,
+        map: overviewGoogleMapRef.current,
+      });
+    }
+  };
+
+
   const displayGeofence = (gf: Geofence) => {
     if (!googleMapRef.current || !window.google) return;
 
