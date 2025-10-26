@@ -125,9 +125,27 @@ export default function ServicesPage() {
       const [equipmentRes, consumablesRes, trucksRes, trailersRes, toolsRes] = await Promise.all([
         api.get('/inventory').catch(() => ({ data: [] })),
         api.get('/consumables').catch(() => ({ data: [] })),
-        api.get('/trucks').catch(() => ({ data: [] })),
-        api.get('/trailers').catch(() => ({ data: [] })),
-        api.get('/tools').catch(() => ({ data: [] })),
+        api.get('/trucks').catch((err) => {
+          // Silently handle 404 for trucks endpoint if it doesn't exist yet
+          if (err?.response?.status !== 404) {
+            console.warn('Trucks endpoint error:', err?.response?.status);
+          }
+          return { data: [] };
+        }),
+        api.get('/trailers').catch((err) => {
+          // Silently handle 404 for trailers endpoint if it doesn't exist yet
+          if (err?.response?.status !== 404) {
+            console.warn('Trailers endpoint error:', err?.response?.status);
+          }
+          return { data: [] };
+        }),
+        api.get('/tools').catch((err) => {
+          // Silently handle 404 for tools endpoint if it doesn't exist yet
+          if (err?.response?.status !== 404) {
+            console.warn('Tools endpoint error:', err?.response?.status);
+          }
+          return { data: [] };
+        }),
       ]);
       setEquipment(equipmentRes.data || []);
       setConsumables(consumablesRes.data || []);
