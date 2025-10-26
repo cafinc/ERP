@@ -12529,6 +12529,11 @@ from site_measurements_routes import router as site_measurements_router
 api_router.include_router(site_measurements_router)
 logger.info("Site measurements endpoints registered successfully")
 
+# Include Site Service History router
+from site_service_history_routes import router as site_service_history_router
+api_router.include_router(site_service_history_router)
+logger.info("Site service history endpoints registered successfully")
+
 # Include Agreement Template router
 from agreement_template_routes import router as agreement_template_router
 api_router.include_router(agreement_template_router)
