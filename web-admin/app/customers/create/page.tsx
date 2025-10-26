@@ -1457,7 +1457,7 @@ export default function CustomerFormPage() {
                           <input
                             type="tel"
                             value={customerForm.office_number}
-                            onChange={e => setCustomerForm({ ...customerForm, office_number: e.target.value })}
+                            onChange={e => setCustomerForm({ ...customerForm, office_number: formatPhoneNumber(e.target.value) })}
                             className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-semibold transition-all"
                             placeholder="(555) 123-4567"
                             required
@@ -1467,22 +1467,22 @@ export default function CustomerFormPage() {
 
                       <div>
                         <label className="block text-xs font-medium text-gray-700 mb-2">
-                        Email *
-                      </label>
-                      <div className="relative">
-                        <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-                        <input
-                          type="email"
-                          value={customerForm.email}
-                          onChange={e =>
-                            setCustomerForm({ ...customerForm, email: e.target.value })
-                          }
-                          className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
-                          placeholder="info@company.com"
-                          required
-                        />
+                          Email <span className="text-red-500">*</span>
+                        </label>
+                        <div className="relative">
+                          <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                          <input
+                            type="email"
+                            value={customerForm.email}
+                            onChange={e =>
+                              setCustomerForm({ ...customerForm, email: e.target.value })
+                            }
+                            className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-semibold transition-all"
+                            placeholder="info@company.com"
+                            required
+                          />
+                        </div>
                       </div>
-                    </div>
                     </div>
                   </div>
 
