@@ -56,6 +56,9 @@ interface Service {
   description?: string;
   pricing: { [key: string]: number };
   active: boolean;
+  equipment_ids?: string[];
+  consumable_ids?: string[];
+  requires_consumables?: boolean;
   created_at: string;
 }
 
@@ -69,11 +72,19 @@ export default function ServicesPage() {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [showFilterDropdown, setShowFilterDropdown] = useState(false);
   const [filterActive, setFilterActive] = useState('all'); // 'all', 'active', 'inactive'
+  
+  // Equipment and Consumables data
+  const [equipment, setEquipment] = useState<any[]>([]);
+  const [consumables, setConsumables] = useState<any[]>([]);
+  
   const [formData, setFormData] = useState({
     name: '',
     service_type: 'plowing',
     description: '',
     active: true,
+    equipment_ids: [] as string[],
+    consumable_ids: [] as string[],
+    requires_consumables: false,
   });
   const [pricingEntries, setPricingEntries] = useState([
     { unit: 'hourly', amount: '' as any },
