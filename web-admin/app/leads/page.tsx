@@ -1560,6 +1560,255 @@ export default function LeadsPage() {
           </div>
         </div>
       )}
+
+      {/* Bulk Action Modals */}
+      {bulkActionType === 'delete' && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[60] p-4 animate-fadeIn">
+          <div className="bg-white rounded-3xl max-w-md w-full shadow-2xl border border-red-200 animate-slideUp">
+            <div className="p-8">
+              <div className="mx-auto w-20 h-20 bg-gradient-to-br from-red-400 to-red-600 rounded-full flex items-center justify-center mb-4">
+                <Trash2 className="w-10 h-10 text-white" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-2 text-center">
+                Delete {selectedLeads.length} Lead{selectedLeads.length !== 1 ? 's' : ''}?
+              </h3>
+              <p className="text-gray-600 text-center mb-6">
+                This action cannot be undone. Are you sure you want to delete the selected leads?
+              </p>
+              <div className="flex gap-3">
+                <button
+                  onClick={() => setBulkActionType(null)}
+                  className="flex-1 px-5 py-3 border-2 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-all font-semibold"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleBulkDelete}
+                  className="flex-1 px-5 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-all shadow-sm hover:shadow-md font-semibold"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {bulkActionType === 'status' && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[60] p-4 animate-fadeIn">
+          <div className="bg-white rounded-3xl max-w-md w-full shadow-2xl border border-blue-200 animate-slideUp">
+            <div className="p-8">
+              <div className="mx-auto w-20 h-20 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center mb-4">
+                <RefreshCw className="w-10 h-10 text-white" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-2 text-center">
+                Update Status for {selectedLeads.length} Lead{selectedLeads.length !== 1 ? 's' : ''}
+              </h3>
+              <p className="text-gray-600 text-center mb-6">
+                Select the new status to apply to all selected leads:
+              </p>
+              <select
+                value={bulkStatus}
+                onChange={(e) => setBulkStatus(e.target.value as Lead['status'])}
+                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white text-sm mb-6"
+              >
+                {Object.entries(STATUS_CONFIG).map(([key, config]) => (
+                  <option key={key} value={key}>
+                    {config.label}
+                  </option>
+                ))}
+              </select>
+              <div className="flex gap-3">
+                <button
+                  onClick={() => setBulkActionType(null)}
+                  className="flex-1 px-5 py-3 border-2 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-all font-semibold"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleBulkStatusUpdate}
+                  className="flex-1 px-5 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all shadow-sm hover:shadow-md font-semibold"
+                >
+                  Update Status
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Quick View Panel */}
+      {showQuickView && quickViewLead && (
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-end z-[60] animate-fadeIn">
+          <div 
+            className="fixed inset-0"
+            onClick={() => setShowQuickView(false)}
+          />
+          <div className="relative w-full max-w-2xl h-full bg-white shadow-2xl animate-slideInRight overflow-y-auto">
+            {/* Header */}
+            <div className="sticky top-0 bg-gradient-to-br from-[#3f72af] to-[#2c5282] text-white p-6 flex items-center justify-between z-10">
+              <div className="flex items-center gap-3">
+                <div className="bg-white/20 backdrop-blur-md rounded-xl p-3">
+                  <Eye className="w-6 h-6" />
+                </div>
+                <div>
+                  <h2 className="text-2xl font-bold">{quickViewLead.name}</h2>
+                  <p className="text-blue-100 text-sm">Quick View</p>
+                </div>
+              </div>
+              <button
+                onClick={() => setShowQuickView(false)}
+                className="p-2 hover:bg-white/20 rounded-lg transition-colors"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+
+            {/* Content */}
+            <div className="p-6 space-y-6">
+              {/* Status and Priority */}
+              <div className="flex items-center gap-3">
+                <span className={`px-4 py-2 bg-${STATUS_CONFIG[quickViewLead.status].color}-100 text-${STATUS_CONFIG[quickViewLead.status].color}-700 text-sm font-medium rounded-full flex items-center gap-2`}>
+                  {(() => {
+                    const Icon = STATUS_CONFIG[quickViewLead.status].icon;
+                    return <Icon className="w-4 h-4" />;
+                  })()}
+                  {STATUS_CONFIG[quickViewLead.status].label}
+                </span>
+                <span className={`px-4 py-2 ${
+                  quickViewLead.priority === 'high' ? 'bg-red-100 text-red-700' :
+                  quickViewLead.priority === 'medium' ? 'bg-yellow-100 text-yellow-700' :
+                  'bg-green-100 text-green-700'
+                } text-sm font-medium rounded-full flex items-center gap-2`}>
+                  <Star className="w-4 h-4" />
+                  {quickViewLead.priority.charAt(0).toUpperCase() + quickViewLead.priority.slice(1)} Priority
+                </span>
+              </div>
+
+              {/* Contact Information */}
+              <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6">
+                <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                  <User className="w-5 h-5 text-[#3f72af]" />
+                  Contact Information
+                </h3>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <Phone className="w-5 h-5 text-gray-400" />
+                    <span className="text-gray-900">{quickViewLead.phone}</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Mail className="w-5 h-5 text-gray-400" />
+                    <span className="text-gray-900">{quickViewLead.email}</span>
+                  </div>
+                  {quickViewLead.company && (
+                    <div className="flex items-center gap-3">
+                      <Briefcase className="w-5 h-5 text-gray-400" />
+                      <span className="text-gray-900">{quickViewLead.company}</span>
+                    </div>
+                  )}
+                  {quickViewLead.address && (
+                    <div className="flex items-center gap-3">
+                      <MapPin className="w-5 h-5 text-gray-400" />
+                      <span className="text-gray-900">{quickViewLead.address}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Lead Details */}
+              <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6">
+                <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                  <TrendingUp className="w-5 h-5 text-[#3f72af]" />
+                  Lead Details
+                </h3>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <p className="text-sm text-gray-500 mb-1">Source</p>
+                    <p className="font-semibold text-gray-900">{quickViewLead.source}</p>
+                  </div>
+                  {quickViewLead.estimated_value && (
+                    <div>
+                      <p className="text-sm text-gray-500 mb-1">Estimated Value</p>
+                      <p className="font-semibold text-green-600">${quickViewLead.estimated_value.toLocaleString()}</p>
+                    </div>
+                  )}
+                  <div>
+                    <p className="text-sm text-gray-500 mb-1">Created</p>
+                    <p className="font-semibold text-gray-900">
+                      {new Date(quickViewLead.created_at).toLocaleDateString()}
+                    </p>
+                  </div>
+                  {quickViewLead.next_follow_up && (
+                    <div>
+                      <p className="text-sm text-gray-500 mb-1">Next Follow-up</p>
+                      <p className="font-semibold text-gray-900">
+                        {new Date(quickViewLead.next_follow_up).toLocaleDateString()}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Services Requested */}
+              {quickViewLead.services_requested && quickViewLead.services_requested.length > 0 && (
+                <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6">
+                  <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                    <Briefcase className="w-5 h-5 text-[#3f72af]" />
+                    Services Requested
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {quickViewLead.services_requested.map((serviceValue) => {
+                      const service = SERVICE_TYPES.find(s => s.value === serviceValue);
+                      if (!service) return null;
+                      return (
+                        <span
+                          key={serviceValue}
+                          className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-lg text-sm font-medium text-gray-700"
+                        >
+                          <span className="text-xl">{service.icon}</span>
+                          {service.label}
+                        </span>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {/* Notes */}
+              {quickViewLead.notes && (
+                <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6">
+                  <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                    <MessageSquare className="w-5 h-5 text-[#3f72af]" />
+                    Notes
+                  </h3>
+                  <p className="text-gray-700 whitespace-pre-wrap">{quickViewLead.notes}</p>
+                </div>
+              )}
+
+              {/* Action Buttons */}
+              <div className="flex gap-3">
+                <button
+                  onClick={() => {
+                    setShowQuickView(false);
+                    handleEdit(quickViewLead);
+                  }}
+                  className="flex-1 px-6 py-3 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-all shadow-sm hover:shadow-md font-semibold flex items-center justify-center gap-2"
+                >
+                  <Edit className="w-5 h-5" />
+                  Edit Lead
+                </button>
+                <button
+                  onClick={() => handleDelete(quickViewLead.id)}
+                  className="px-6 py-3 border-2 border-red-500 text-red-500 rounded-lg hover:bg-red-50 transition-all font-semibold flex items-center gap-2"
+                >
+                  <Trash2 className="w-5 h-5" />
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </>
     );
 }
