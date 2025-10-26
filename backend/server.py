@@ -2218,10 +2218,17 @@ async def update_site_map(map_id: str, map_update: SiteMapUpdate):
 @api_router.delete("/site-maps/{map_id}")
 async def delete_site_map(map_id: str):
     """Delete a site map"""
-    result = await db.site_maps.delete_one({"_id": ObjectId(map_id)})
-    if result.deleted_count == 0:
-        raise HTTPException(status_code=404, detail="Site map not found")
-    return {"message": "Site map deleted successfully"}
+    try:
+        result = await db.site_maps.delete_one({"_id": ObjectId(map_id)})
+        if result.deleted_count == 0:
+            raise HTTPException(status_code=404, detail="Site map not found")
+        return {"message": "Site map deleted successfully"}
+    except HTTPException:
+        raise
+    except Exception as e:
+        if "not a valid ObjectId" in str(e):
+            raise HTTPException(status_code=404, detail="Site map not found")
+        raise HTTPException(status_code=500, detail=f"Error deleting site map: {str(e)}")
 
 @api_router.post("/site-maps/{map_id}/set-current")
 async def set_current_site_map(map_id: str):
