@@ -1690,7 +1690,7 @@ export default function CustomerFormPage() {
                             required
                           />
                         </div>
-                      </>
+                      </div>
                     )}
                   </div>
 
