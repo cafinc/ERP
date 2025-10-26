@@ -1710,6 +1710,13 @@ export default function SiteMapsGeofencingPage() {
 
               <div className="border-t border-gray-200 mt-4 pt-4 space-y-2">
                 <button
+                  onClick={() => exportMapAsImage('annotations')}
+                  className="w-full px-3 py-2 rounded-lg flex items-center bg-orange-600 text-white hover:bg-orange-700"
+                >
+                  <Download className="w-4 h-4 mr-2" />
+                  Export Map as Image
+                </button>
+                <button
                   onClick={() => setShowSaveModal(true)}
                   disabled={annotations.length === 0}
                   className="w-full px-3 py-2 rounded-lg flex items-center bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50"
