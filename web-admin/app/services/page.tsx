@@ -761,53 +761,154 @@ export default function ServicesPage() {
 
                 {/* Equipment Selection Card */}
                 <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-6 backdrop-blur-sm">
-                  <h3 className="text-lg font-bold text-gray-900 flex items-center mb-4">
-                    <Truck className="w-5 h-5 text-[#3f72af] mr-2" />
-                    Equipment
-                  </h3>
-                  <p className="text-sm text-gray-600 mb-4">Select equipment that can be used for this service</p>
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-lg font-bold text-gray-900 flex items-center">
+                      <Truck className="w-5 h-5 text-[#3f72af] mr-2" />
+                      Equipment & Rates
+                    </h3>
+                  </div>
+                  <p className="text-sm text-gray-600 mb-4">Select equipment and set rates for each</p>
                   
-                  <div className="space-y-2 max-h-48 overflow-y-auto">
+                  <div className="space-y-3 max-h-96 overflow-y-auto">
                     {equipment.length === 0 ? (
                       <div className="text-center py-6 bg-gray-50 rounded-xl">
                         <Truck className="w-10 h-10 text-gray-300 mx-auto mb-2" />
                         <p className="text-sm text-gray-500">No equipment available</p>
                       </div>
                     ) : (
-                      equipment.map((item: any) => (
-                        <label
-                          key={item.id || item._id}
-                          className="flex items-center gap-3 p-3 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg hover:shadow-md transition-all cursor-pointer border-2 border-transparent hover:border-blue-200"
-                        >
-                          <input
-                            type="checkbox"
-                            checked={formData.equipment_ids.includes(item.id || item._id)}
-                            onChange={(e) => {
-                              const equipmentId = item.id || item._id;
-                              if (e.target.checked) {
-                                setFormData({
-                                  ...formData,
-                                  equipment_ids: [...formData.equipment_ids, equipmentId]
-                                });
-                              } else {
-                                setFormData({
-                                  ...formData,
-                                  equipment_ids: formData.equipment_ids.filter(id => id !== equipmentId)
-                                });
-                              }
-                            }}
-                            className="w-5 h-5 rounded border-gray-300 text-blue-500 focus:ring-2 focus:ring-blue-500 cursor-pointer"
-                          />
-                          <div className="flex-1">
-                            <p className="font-semibold text-gray-900">{item.name}</p>
-                            {item.equipment_type && (
-                              <p className="text-xs text-gray-600 capitalize">{item.equipment_type.replace('_', ' ')}</p>
-                            )}
+                      equipment.map((item: any) => {
+                        const equipmentId = item.id || item._id;
+                        const existingEquipment = formData.equipment.find(e => e.equipment_id === equipmentId);
+                        const isSelected = !!existingEquipment;
+                        
+                        return (
+                          <div
+                            key={equipmentId}
+                            className={`p-4 rounded-xl border-2 transition-all ${
+                              isSelected
+                                ? 'bg-gradient-to-br from-blue-50 to-indigo-50 border-blue-300 shadow-md'
+                                : 'bg-gray-50 border-gray-200 hover:border-blue-200'
+                            }`}
+                          >
+                            <div className="flex items-start gap-3">
+                              {/* Checkbox */}
+                              <input
+                                type="checkbox"
+                                checked={isSelected}
+                                onChange={(e) => {
+                                  if (e.target.checked) {
+                                    setFormData({
+                                      ...formData,
+                                      equipment: [
+                                        ...formData.equipment,
+                                        { equipment_id: equipmentId, rate: 0, unit: 'hourly' }
+                                      ]
+                                    });
+                                  } else {
+                                    setFormData({
+                                      ...formData,
+                                      equipment: formData.equipment.filter(e => e.equipment_id !== equipmentId)
+                                    });
+                                  }
+                                }}
+                                className="w-5 h-5 rounded border-gray-300 text-blue-500 focus:ring-2 focus:ring-blue-500 cursor-pointer mt-1"
+                              />
+                              
+                              {/* Equipment Info and Rate Inputs */}
+                              <div className="flex-1">
+                                <div className="flex items-center justify-between mb-2">
+                                  <div>
+                                    <p className="font-bold text-gray-900">{item.name}</p>
+                                    {item.equipment_type && (
+                                      <p className="text-xs text-gray-600 capitalize">{item.equipment_type.replace('_', ' ')}</p>
+                                    )}
+                                  </div>
+                                </div>
+                                
+                                {/* Rate Inputs - Only show when selected */}
+                                {isSelected && (
+                                  <div className="mt-3 grid grid-cols-2 gap-3">
+                                    {/* Unit Type Dropdown */}
+                                    <div>
+                                      <label className="block text-xs font-medium text-gray-600 mb-1">Unit Type</label>
+                                      <select
+                                        value={existingEquipment?.unit || 'hourly'}
+                                        onChange={(e) => {
+                                          setFormData({
+                                            ...formData,
+                                            equipment: formData.equipment.map(eq =>
+                                              eq.equipment_id === equipmentId
+                                                ? { ...eq, unit: e.target.value }
+                                                : eq
+                                            )
+                                          });
+                                        }}
+                                        className="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-medium text-sm"
+                                      >
+                                        {UNITS.filter(u => u.value !== 'no_charge').map(unit => (
+                                          <option key={unit.value} value={unit.value}>
+                                            {unit.label}
+                                          </option>
+                                        ))}
+                                      </select>
+                                    </div>
+                                    
+                                    {/* Rate Input */}
+                                    <div>
+                                      <label className="block text-xs font-medium text-gray-600 mb-1">Rate</label>
+                                      <div className="relative">
+                                        <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 font-bold">$</span>
+                                        <input
+                                          type="number"
+                                          step="0.01"
+                                          min="0"
+                                          value={existingEquipment?.rate || ''}
+                                          onChange={(e) => {
+                                            setFormData({
+                                              ...formData,
+                                              equipment: formData.equipment.map(eq =>
+                                                eq.equipment_id === equipmentId
+                                                  ? { ...eq, rate: parseFloat(e.target.value) || 0 }
+                                                  : eq
+                                              )
+                                            });
+                                          }}
+                                          className="w-full pl-8 pr-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] font-bold text-[#3f72af] text-sm"
+                                          placeholder="0.00"
+                                        />
+                                      </div>
+                                    </div>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
                           </div>
-                        </label>
-                      ))
+                        );
+                      })
                     )}
                   </div>
+                  
+                  {/* Selected Equipment Summary */}
+                  {formData.equipment.length > 0 && (
+                    <div className="mt-4 p-4 bg-blue-50 border-2 border-blue-200 rounded-xl">
+                      <p className="text-sm font-semibold text-gray-900 mb-2">
+                        {formData.equipment.length} Equipment Selected
+                      </p>
+                      <div className="space-y-1">
+                        {formData.equipment.map((eq, index) => {
+                          const equipmentItem = equipment.find((e: any) => (e.id || e._id) === eq.equipment_id);
+                          return (
+                            <div key={index} className="text-xs text-gray-700 flex items-center justify-between">
+                              <span>• {equipmentItem?.name || 'Unknown'}</span>
+                              <span className="font-bold text-[#3f72af]">
+                                ${eq.rate.toFixed(2)}/{eq.unit.replace('_', ' ')}
+                              </span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 {/* Consumables Selection Card */}
