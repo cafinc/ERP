@@ -19,6 +19,11 @@ import {
   DollarSign,
   Briefcase,
   Download,
+  Trash2,
+  X,
+  Archive,
+  CheckCircle,
+  XCircle,
 } from 'lucide-react';
 
 interface Customer {
