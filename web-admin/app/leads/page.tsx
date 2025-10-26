@@ -996,6 +996,16 @@ export default function LeadsPage() {
                     return (
                       <div key={lead.id} className="p-4 hover:bg-gray-50 transition-colors">
                         <div className="flex items-start justify-between gap-4">
+                          {/* Checkbox */}
+                          <div className="flex-shrink-0 pt-1">
+                            <input
+                              type="checkbox"
+                              checked={selectedLeads.includes(lead.id)}
+                              onChange={() => toggleSelectLead(lead.id)}
+                              className="w-5 h-5 rounded border-gray-300 text-blue-500 focus:ring-2 focus:ring-blue-500 cursor-pointer"
+                            />
+                          </div>
+                          
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-3 mb-2">
                               <h3 className="font-semibold text-gray-900">{lead.name}</h3>
