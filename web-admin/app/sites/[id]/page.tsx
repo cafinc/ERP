@@ -938,6 +938,174 @@ export default function SiteDetailPage() {
           </div>
         </div>
       )}
+
+      {/* Service History Modal */}
+      {showServiceModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-auto">
+            <div className="p-6 border-b border-gray-200 flex items-center justify-between">
+              <h3 className="text-lg font-semibold">
+                {editingService ? 'Edit Service Record' : 'Add Service Record'}
+              </h3>
+              <button
+                onClick={() => {
+                  setShowServiceModal(false);
+                  resetServiceForm();
+                }}
+                className="text-gray-400 hover:text-gray-600"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+            <div className="p-6">
+              <div className="space-y-4">
+                {/* Service Date */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Service Date <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="date"
+                    value={serviceForm.service_date}
+                    onChange={(e) => setServiceForm({ ...serviceForm, service_date: e.target.value })}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                </div>
+
+                {/* Service Type */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Service Type <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    value={serviceForm.service_type}
+                    onChange={(e) => setServiceForm({ ...serviceForm, service_type: e.target.value })}
+                    placeholder="e.g., Snow Plowing, Salting, Landscaping"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                </div>
+
+                {/* Status */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Status <span className="text-red-500">*</span>
+                  </label>
+                  <select
+                    value={serviceForm.status}
+                    onChange={(e) => setServiceForm({ ...serviceForm, status: e.target.value })}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  >
+                    <option value="completed">Completed</option>
+                    <option value="in_progress">In Progress</option>
+                    <option value="scheduled">Scheduled</option>
+                    <option value="cancelled">Cancelled</option>
+                  </select>
+                </div>
+
+                {/* Crew Lead */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Crew Lead
+                  </label>
+                  <input
+                    type="text"
+                    value={serviceForm.crew_lead}
+                    onChange={(e) => setServiceForm({ ...serviceForm, crew_lead: e.target.value })}
+                    placeholder="Name of crew lead"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                </div>
+
+                {/* Duration */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Duration (hours)
+                  </label>
+                  <input
+                    type="number"
+                    step="0.5"
+                    value={serviceForm.duration_hours}
+                    onChange={(e) => setServiceForm({ ...serviceForm, duration_hours: parseFloat(e.target.value) || 0 })}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                </div>
+
+                {/* Description */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Description
+                  </label>
+                  <textarea
+                    value={serviceForm.description}
+                    onChange={(e) => setServiceForm({ ...serviceForm, description: e.target.value })}
+                    rows={3}
+                    placeholder="Describe the service performed"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                </div>
+
+                {/* Notes */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Notes
+                  </label>
+                  <textarea
+                    value={serviceForm.notes}
+                    onChange={(e) => setServiceForm({ ...serviceForm, notes: e.target.value })}
+                    rows={2}
+                    placeholder="Additional notes"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                </div>
+
+                {/* Weather Conditions */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Weather Conditions
+                  </label>
+                  <input
+                    type="text"
+                    value={serviceForm.weather_conditions}
+                    onChange={(e) => setServiceForm({ ...serviceForm, weather_conditions: e.target.value })}
+                    placeholder="e.g., Clear, Snowy, Rainy"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                </div>
+              </div>
+
+              <div className="mt-6 flex justify-end space-x-3">
+                <button
+                  onClick={() => {
+                    setShowServiceModal(false);
+                    resetServiceForm();
+                  }}
+                  className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleCreateService}
+                  disabled={!serviceForm.service_type || !serviceForm.service_date || actionLoading}
+                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center"
+                >
+                  {actionLoading ? (
+                    <>
+                      <RefreshCw className="w-4 h-4 mr-2 animate-spin" />
+                      Saving...
+                    </>
+                  ) : (
+                    <>
+                      <Save className="w-4 h-4 mr-2" />
+                      Save Service Record
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
