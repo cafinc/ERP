@@ -56,6 +56,15 @@ export default function CustomersPage() {
     created: true,
     actions: true,
   });
+  
+  // Bulk Operations State
+  const [selectedCustomers, setSelectedCustomers] = useState<string[]>([]);
+  const [showBulkActions, setShowBulkActions] = useState(false);
+  const [bulkActionType, setBulkActionType] = useState<'delete' | 'archive' | null>(null);
+  
+  // Quick View State
+  const [quickViewCustomer, setQuickViewCustomer] = useState<Customer | null>(null);
+  const [showQuickView, setShowQuickView] = useState(false);
 
   useEffect(() => {
     loadCustomers();
