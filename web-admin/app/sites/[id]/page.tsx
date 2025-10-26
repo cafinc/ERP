@@ -86,12 +86,17 @@ export default function SiteDetailPage() {
       console.log('Site data received:', response.data);
       setSite(response.data);
       
-      // Load customer details
+      // Load customer details (optional - don't fail if customer not found)
       if (response.data.customer_id) {
-        console.log('Loading customer with ID:', response.data.customer_id);
-        const customerResponse = await api.get(`/customers/${response.data.customer_id}`);
-        console.log('Customer data received:', customerResponse.data);
-        setCustomer(customerResponse.data);
+        try {
+          console.log('Loading customer with ID:', response.data.customer_id);
+          const customerResponse = await api.get(`/customers/${response.data.customer_id}`);
+          console.log('Customer data received:', customerResponse.data);
+          setCustomer(customerResponse.data);
+        } catch (customerError: any) {
+          console.warn('Customer not found, but continuing with site display:', customerError);
+          // Don't fail the whole page if customer is missing
+        }
       }
     } catch (error: any) {
       console.error('Error loading site:', error);
