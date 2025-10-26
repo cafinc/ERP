@@ -813,6 +813,17 @@ export default function SiteMapsGeofencingPage() {
         {/* Tabs */}
         <div className="flex gap-1 border-b">
           <button
+            onClick={() => setActiveTab('overview')}
+            className={`flex items-center gap-2 px-6 py-3 font-medium transition-colors ${
+              activeTab === 'overview'
+                ? 'text-blue-600 border-b-2 border-blue-600'
+                : 'text-gray-600 hover:text-gray-900'
+            }`}
+          >
+            <MapPin className="w-4 h-4" />
+            Property Overview
+          </button>
+          <button
             onClick={() => setActiveTab('geofence')}
             className={`flex items-center gap-2 px-6 py-3 font-medium transition-colors ${
               activeTab === 'geofence'
@@ -821,7 +832,7 @@ export default function SiteMapsGeofencingPage() {
             }`}
           >
             <Pentagon className="w-4 h-4" />
-            Geo Fencing & Measurements
+            Geofence & Boundaries
           </button>
           <button
             onClick={() => setActiveTab('annotations')}
@@ -832,7 +843,7 @@ export default function SiteMapsGeofencingPage() {
             }`}
           >
             <MapIcon className="w-4 h-4" />
-            Map Annotations
+            Annotations & Markup
           </button>
         </div>
 
