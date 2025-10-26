@@ -643,6 +643,16 @@ export default function CustomersPage() {
                   className="px-6 py-4 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-b-0"
                 >
                   <div className="grid grid-cols-12 gap-4 items-center text-sm">
+                    {/* Checkbox Column */}
+                    <div className="col-span-1 flex items-center">
+                      <input
+                        type="checkbox"
+                        checked={selectedCustomers.includes(customerId)}
+                        onChange={() => toggleSelectCustomer(customerId)}
+                        className="w-5 h-5 rounded border-gray-300 text-blue-500 focus:ring-2 focus:ring-blue-500 cursor-pointer"
+                      />
+                    </div>
+                    
                     {/* Status */}
                     {visibleColumns.status && (
                       <div className="col-span-1">
