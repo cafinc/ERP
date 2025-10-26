@@ -151,8 +151,7 @@ export default function CreateSitePage() {
   // Service modal states
   const [showServiceModal, setShowServiceModal] = useState(false);
   const [selectedServiceId, setSelectedServiceId] = useState('');
-  const [serviceUnitType, setServiceUnitType] = useState('');
-  const [servicePrice, setServicePrice] = useState('');
+  const [serviceUnitTypes, setServiceUnitTypes] = useState<{[key: string]: string}>({});
   const [serviceFrequency, setServiceFrequency] = useState('');
 
   useEffect(() => {
