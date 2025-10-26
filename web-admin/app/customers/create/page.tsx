@@ -1857,7 +1857,6 @@ export default function CustomerFormPage() {
                     </label>
                     <div className="relative">
                       <input
-                        ref={addressInputRef}
                         type="text"
                         value={customerForm.street_address}
                         onChange={e =>
