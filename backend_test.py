@@ -1,53 +1,82 @@
 #!/usr/bin/env python3
 """
-Site Maps API Re-Testing After Fixes
-Comprehensive testing of all Site Maps endpoints as requested in review
+Backend API Testing Suite
+Tests core backend APIs after map enhancements to ensure system functionality
 """
 
-import asyncio
-import aiohttp
+import requests
 import json
-import os
-import sys
-from datetime import datetime
+import time
+from datetime import datetime, timedelta
 from typing import Dict, Any, List
+import uuid
 
-# Get backend URL from environment
-BACKEND_URL = os.getenv('REACT_APP_BACKEND_URL', 'https://service-history-app.preview.emergentagent.com')
-API_BASE = f"{BACKEND_URL}/api"
+# Configuration
+BACKEND_URL = "https://service-history-app.preview.emergentagent.com/api"
+TIMEOUT = 30
 
-class SiteMapsAPITester:
+class BackendTester:
     def __init__(self):
-        self.session = None
+        self.session = requests.Session()
+        self.session.timeout = TIMEOUT
         self.test_results = []
         self.test_data = {}
         
-    async def __aenter__(self):
-        self.session = aiohttp.ClientSession()
-        return self
-        
-    async def __aexit__(self, exc_type, exc_val, exc_tb):
-        if self.session:
-            await self.session.close()
-    
     def log_test(self, test_name: str, success: bool, details: str = "", response_data: Any = None):
         """Log test result"""
-        status = "✅ PASS" if success else "❌ FAIL"
-        print(f"{status} {test_name}")
-        if details:
-            print(f"    {details}")
-        if not success and response_data:
-            print(f"    Response: {response_data}")
-        
-        self.test_results.append({
+        result = {
             "test": test_name,
             "success": success,
             "details": details,
-            "response": response_data
-        })
-    
-    async def make_request(self, method: str, endpoint: str, data: Dict = None, params: Dict = None) -> tuple:
-        """Make HTTP request and return (success, response_data, status_code)"""
+            "timestamp": datetime.now().isoformat(),
+            "response_data": response_data
+        }
+        self.test_results.append(result)
+        status = "✅ PASS" if success else "❌ FAIL"
+        print(f"{status}: {test_name}")
+        if details:
+            print(f"   Details: {details}")
+        if not success and response_data:
+            print(f"   Response: {response_data}")
+        print()
+
+    def test_health_check(self):
+        """Test 1: Health Check - Verify API is running"""
+        try:
+            response = self.session.get(f"{BACKEND_URL}/")
+            
+            if response.status_code == 200:
+                data = response.json()
+                if "message" in data and "version" in data:
+                    self.log_test(
+                        "Health Check - API Running", 
+                        True, 
+                        f"API responding with version {data.get('version')}"
+                    )
+                    return True
+                else:
+                    self.log_test(
+                        "Health Check - API Running", 
+                        False, 
+                        "API responding but missing expected fields",
+                        data
+                    )
+                    return False
+            else:
+                self.log_test(
+                    "Health Check - API Running", 
+                    False, 
+                    f"HTTP {response.status_code}: {response.text}"
+                )
+                return False
+                
+        except Exception as e:
+            self.log_test(
+                "Health Check - API Running", 
+                False, 
+                f"Connection error: {str(e)}"
+            )
+            return False
         try:
             url = f"{API_BASE}{endpoint}"
             
