@@ -415,5 +415,6 @@ export default function DispatchesPage() {
           onClose={() => setSelectedCustomerId(null)}
         />
       )}
-    );
+    </>
+  );
 }
