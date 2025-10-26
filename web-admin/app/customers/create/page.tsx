@@ -1523,51 +1523,55 @@ export default function CustomerFormPage() {
                       </p>
                     </div>
 
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">City *</label>
-                      <input
-                        type="text"
-                        value={customerForm.city}
-                        onChange={e =>
-                          setCustomerForm({ ...customerForm, city: e.target.value })
-                        }
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="Calgary"
-                        required
-                      />
-                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      <div>
+                        <label className="block text-xs font-medium text-gray-700 mb-2">City <span className="text-red-500">*</span></label>
+                        <input
+                          type="text"
+                          value={customerForm.city}
+                          onChange={e =>
+                            setCustomerForm({ ...customerForm, city: e.target.value })
+                          }
+                          className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-semibold transition-all"
+                          placeholder="Calgary"
+                          required
+                        />
+                      </div>
 
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Province *</label>
-                      <select
-                        value={customerForm.province}
-                        onChange={e =>
-                          setCustomerForm({ ...customerForm, province: e.target.value })
-                        }
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        required
-                      >
-                        {CANADIAN_PROVINCES.map(prov => (
-                          <option key={prov.code} value={prov.code}>
-                            {prov.name}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
+                      <div>
+                        <label className="block text-xs font-medium text-gray-700 mb-2">Province <span className="text-red-500">*</span></label>
+                        <select
+                          value={customerForm.province}
+                          onChange={e =>
+                            setCustomerForm({ ...customerForm, province: e.target.value })
+                          }
+                          className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-semibold transition-all"
+                          required
+                        >
+                          <option value="">Select Province</option>
+                          {CANADIAN_PROVINCES.map(prov => (
+                            <option key={prov.code} value={prov.code}>
+                              {prov.name}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
 
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Postal Code *</label>
-                      <input
-                        type="text"
-                        value={customerForm.postal_code}
-                        onChange={e =>
-                          setCustomerForm({ ...customerForm, postal_code: e.target.value })
-                        }
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="T2P 1J9"
-                        required
-                      />
+                      <div>
+                        <label className="block text-xs font-medium text-gray-700 mb-2">Postal Code <span className="text-red-500">*</span></label>
+                        <input
+                          type="text"
+                          value={customerForm.postal_code}
+                          onChange={e =>
+                            setCustomerForm({ ...customerForm, postal_code: e.target.value })
+                          }
+                          className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-semibold transition-all"
+                          placeholder="T2P 1J9"
+                          required
+                        />
+                      </div>
                     </div>
+                  </div>
                     
                     {/* Billing Address Toggle */}
                     <div className="md:col-span-2 mt-4">
