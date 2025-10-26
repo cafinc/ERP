@@ -23,6 +23,11 @@ import {
   Factory,
   ShoppingBag,
   Truck,
+  Trash2,
+  X,
+  CheckCircle,
+  XCircle,
+  Download,
 } from 'lucide-react';
 
 interface Site {
