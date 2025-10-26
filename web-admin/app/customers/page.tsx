@@ -540,9 +540,24 @@ export default function CustomersPage() {
               return (
                 <div
                   key={customerId}
-                  className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 hover:shadow-lg hover:border-blue-500 transition-all cursor-pointer overflow-hidden hover:shadow-md transition-shadow"
-                  onClick={() => router.push(`/customers/${customerId}`)}
+                  className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 hover:shadow-lg hover:border-blue-500 transition-all cursor-pointer overflow-hidden hover:shadow-md transition-shadow relative"
                 >
+                  {/* Checkbox for bulk selection */}
+                  <div className="absolute top-3 left-3 z-10">
+                    <input
+                      type="checkbox"
+                      checked={selectedCustomers.includes(customerId)}
+                      onChange={(e) => {
+                        e.stopPropagation();
+                        toggleSelectCustomer(customerId);
+                      }}
+                      onClick={(e) => e.stopPropagation()}
+                      className="w-5 h-5 rounded border-gray-300 text-blue-500 focus:ring-2 focus:ring-blue-500 cursor-pointer"
+                    />
+                  </div>
+                  
+                  {/* Card Content - wrapped in div with onClick */}
+                  <div onClick={() => handleQuickView(customer)}>
                   {/* Card Header with Avatar */}
                   <div className="relative h-24 bg-gradient-to-br from-[#3f72af] to-[#2c5282]">
                     <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2">
