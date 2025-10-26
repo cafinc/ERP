@@ -469,7 +469,7 @@ export default function SitesPage() {
                 </div>
                 
                 {/* Card Content - wrapped in div with onClick */}
-                <div onClick={() => handleQuickView(site)} className="pl-6">
+                <div onClick={() => handleViewSite(site.id)} className="pl-6">
                 {/* Header - Site Name and Status */}
                 <div className="flex items-start justify-between mb-3">
                   <h3 className="text-lg font-bold text-gray-900">{site.name || 'Unnamed Site'}</h3>
