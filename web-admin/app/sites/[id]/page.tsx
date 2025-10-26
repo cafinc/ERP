@@ -82,6 +82,24 @@ interface Customer {
   company_name?: string;
 }
 
+interface ServiceHistory {
+  id: string;
+  site_id: string;
+  service_date: string;
+  service_type: string;
+  crew_members: string[];
+  crew_lead?: string;
+  description?: string;
+  notes?: string;
+  status: string;
+  duration_hours?: number;
+  photos: string[];
+  weather_conditions?: string;
+  equipment_used: string[];
+  created_at: string;
+  updated_at: string;
+}
+
 const getSiteTypeIcon = (type: string) => {
   const icons: Record<string, JSX.Element> = {
     residential: <Home className="w-5 h-5" />,
