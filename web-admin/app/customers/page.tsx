@@ -731,6 +731,164 @@ export default function CustomersPage() {
           </div>
         )}
       </div>
+
+      {/* Bulk Action Modal - Delete */}
+      {bulkActionType === 'delete' && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[60] p-4 animate-fadeIn">
+          <div className="bg-white rounded-3xl max-w-md w-full shadow-2xl border border-red-200 animate-slideUp">
+            <div className="p-8">
+              <div className="mx-auto w-20 h-20 bg-gradient-to-br from-red-400 to-red-600 rounded-full flex items-center justify-center mb-4">
+                <Trash2 className="w-10 h-10 text-white" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-2 text-center">
+                Delete {selectedCustomers.length} Customer{selectedCustomers.length !== 1 ? 's' : ''}?
+              </h3>
+              <p className="text-gray-600 text-center mb-6">
+                This action cannot be undone. Are you sure you want to delete the selected customers?
+              </p>
+              <div className="flex gap-3">
+                <button
+                  onClick={() => setBulkActionType(null)}
+                  className="flex-1 px-5 py-3 border-2 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-all font-semibold"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleBulkDelete}
+                  className="flex-1 px-5 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-all shadow-sm hover:shadow-md font-semibold"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Quick View Panel */}
+      {showQuickView && quickViewCustomer && (
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-end z-[60] animate-fadeIn">
+          <div 
+            className="fixed inset-0"
+            onClick={() => setShowQuickView(false)}
+          />
+          <div className="relative w-full max-w-2xl h-full bg-white shadow-2xl animate-slideInRight overflow-y-auto">
+            {/* Header */}
+            <div className="sticky top-0 bg-gradient-to-br from-[#3f72af] to-[#2c5282] text-white p-6 flex items-center justify-between z-10">
+              <div className="flex items-center gap-3">
+                <div className="bg-white/20 backdrop-blur-md rounded-xl p-3">
+                  <Eye className="w-6 h-6" />
+                </div>
+                <div>
+                  <h2 className="text-2xl font-bold">{quickViewCustomer.name}</h2>
+                  <p className="text-blue-100 text-sm">Customer Quick View</p>
+                </div>
+              </div>
+              <button
+                onClick={() => setShowQuickView(false)}
+                className="p-2 hover:bg-white/20 rounded-lg transition-colors"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+
+            {/* Content */}
+            <div className="p-6 space-y-6">
+              {/* Status and Type */}
+              <div className="flex items-center gap-3">
+                <span className={`px-4 py-2 ${
+                  quickViewCustomer.active ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-700'
+                } text-sm font-medium rounded-full`}>
+                  {quickViewCustomer.active ? 'Active' : 'Inactive'}
+                </span>
+                <span className={`px-4 py-2 ${
+                  quickViewCustomer.customer_type === 'company' ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-700'
+                } text-sm font-medium rounded-full flex items-center gap-2`}>
+                  {quickViewCustomer.customer_type === 'company' ? <Briefcase className="w-4 h-4" /> : <Users className="w-4 h-4" />}
+                  {quickViewCustomer.customer_type === 'company' ? 'Company' : 'Individual'}
+                </span>
+              </div>
+
+              {/* Contact Information */}
+              <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6">
+                <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                  <Users className="w-5 h-5 text-[#3f72af]" />
+                  Contact Information
+                </h3>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <Phone className="w-5 h-5 text-gray-400" />
+                    <span className="text-gray-900">{formatPhoneNumber(quickViewCustomer.phone)}</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Mail className="w-5 h-5 text-gray-400" />
+                    <span className="text-gray-900">{quickViewCustomer.email}</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <MapPin className="w-5 h-5 text-gray-400" />
+                    <span className="text-gray-900">{quickViewCustomer.address}</span>
+                  </div>
+                  {quickViewCustomer.company_name && (
+                    <div className="flex items-center gap-3">
+                      <Briefcase className="w-5 h-5 text-gray-400" />
+                      <span className="text-gray-900">{quickViewCustomer.company_name}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Notes */}
+              {quickViewCustomer.notes && (
+                <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6">
+                  <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                    <FileText className="w-5 h-5 text-[#3f72af]" />
+                    Notes
+                  </h3>
+                  <p className="text-gray-700 whitespace-pre-wrap">{quickViewCustomer.notes}</p>
+                </div>
+              )}
+
+              {/* Created Date */}
+              <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6">
+                <h3 className="text-lg font-bold text-gray-900 mb-4">Account Details</h3>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <p className="text-sm text-gray-500 mb-1">Created</p>
+                    <p className="font-semibold text-gray-900">
+                      {new Date(quickViewCustomer.created_at).toLocaleDateString()}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-500 mb-1">Customer ID</p>
+                    <p className="font-semibold text-gray-900 text-xs">{quickViewCustomer._id}</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex gap-3">
+                <button
+                  onClick={() => {
+                    setShowQuickView(false);
+                    router.push(`/customers/${quickViewCustomer._id}`);
+                  }}
+                  className="flex-1 px-6 py-3 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-all shadow-sm hover:shadow-md font-semibold flex items-center justify-center gap-2"
+                >
+                  <Edit className="w-5 h-5" />
+                  Edit Customer
+                </button>
+                <button
+                  onClick={() => router.push(`/customers/create?duplicate=${quickViewCustomer._id}`)}
+                  className="px-6 py-3 border-2 border-[#3f72af] text-[#3f72af] rounded-lg hover:bg-blue-50 transition-all font-semibold flex items-center gap-2"
+                >
+                  <Plus className="w-5 h-5" />
+                  Duplicate
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
