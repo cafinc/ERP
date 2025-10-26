@@ -594,9 +594,9 @@ export default function SitesPage() {
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="flex gap-2">
                             <button
-                              onClick={() => router.push(`/sites/${site.id}`)}
-                              className="p-1 text-[#3f72af] hover:bg-blue-50 rounded transition-colors"
-                              title="View site"
+                              onClick={() => handleQuickView(site)}
+                              className="p-1 text-blue-600 hover:bg-blue-50 rounded transition-colors"
+                              title="Quick View"
                             >
                               <Eye className="w-4 h-4" />
                             </button>
