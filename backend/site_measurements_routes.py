@@ -5,7 +5,7 @@ from datetime import datetime
 from bson import ObjectId
 import logging
 
-from database import db
+from server import db
 
 logger = logging.getLogger(__name__)
 router = APIRouter()
