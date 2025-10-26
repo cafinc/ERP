@@ -198,6 +198,78 @@ export default function SiteDetailPage() {
     }
   };
 
+  const loadServiceHistory = async () => {
+    try {
+      setServiceHistoryLoading(true);
+      const response = await api.get(`/sites/${siteId}/service-history`);
+      setServiceHistory(response.data.service_history || []);
+    } catch (error: any) {
+      console.error('Error loading service history:', error);
+      alert(`Failed to load service history: ${error.response?.data?.detail || error.message || 'Unknown error'}`);
+    } finally {
+      setServiceHistoryLoading(false);
+    }
+  };
+
+  const handleCreateService = async () => {
+    try {
+      setActionLoading(true);
+      await api.post(`/sites/${siteId}/service-history`, serviceForm);
+      alert('Service history created successfully');
+      setShowServiceModal(false);
+      loadServiceHistory();
+      resetServiceForm();
+    } catch (error: any) {
+      console.error('Error creating service history:', error);
+      alert(`Failed to create service history: ${error.response?.data?.detail || error.message || 'Unknown error'}`);
+    } finally {
+      setActionLoading(false);
+    }
+  };
+
+  const handleDeleteService = async (historyId: string) => {
+    if (!confirm('Are you sure you want to delete this service history entry?')) return;
+    
+    try {
+      setActionLoading(true);
+      await api.delete(`/sites/${siteId}/service-history/${historyId}`);
+      alert('Service history deleted successfully');
+      loadServiceHistory();
+    } catch (error: any) {
+      console.error('Error deleting service history:', error);
+      alert(`Failed to delete service history: ${error.response?.data?.detail || error.message || 'Unknown error'}`);
+    } finally {
+      setActionLoading(false);
+    }
+  };
+
+  const resetServiceForm = () => {
+    setServiceForm({
+      service_date: new Date().toISOString().split('T')[0],
+      service_type: '',
+      crew_members: [],
+      crew_lead: '',
+      description: '',
+      notes: '',
+      status: 'completed',
+      duration_hours: 0,
+      photos: [],
+      weather_conditions: '',
+      equipment_used: [],
+    });
+    setEditingService(null);
+  };
+
+  const getStatusIcon = (status: string) => {
+    const icons: Record<string, JSX.Element> = {
+      completed: <CheckCircle className="w-5 h-5 text-green-600" />,
+      in_progress: <Circle className="w-5 h-5 text-yellow-600" />,
+      scheduled: <Clock className="w-5 h-5 text-blue-600" />,
+      cancelled: <XCircle className="w-5 h-5 text-red-600" />,
+    };
+    return icons[status] || <Circle className="w-5 h-5 text-gray-600" />;
+  };
+
   const initializeMap = () => {
     if (!mapRef.current || !window.google || !site) return;
 
