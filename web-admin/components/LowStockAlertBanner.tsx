@@ -39,13 +39,13 @@ export default function LowStockAlertBanner({
       
       // Filter items that are at or below reorder level
       const lowStock = consumables.filter((item: any) => 
-        item.current_stock <= (item.reorder_level || 0)
+        (item.quantity_available || item.current_stock || 0) <= (item.reorder_level || 0)
       );
       
       setLowStockItems(lowStock.map((item: any) => ({
         id: item.id || item._id,
         name: item.name,
-        current_stock: item.current_stock,
+        current_stock: item.quantity_available || item.current_stock || 0,
         reorder_level: item.reorder_level || 0,
         unit: item.unit || 'units'
       })));
