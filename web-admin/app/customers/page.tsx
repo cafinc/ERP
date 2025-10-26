@@ -110,6 +110,86 @@ export default function CustomersPage() {
     return matchesSearch && matchesStatus && matchesType;
   });
 
+  // Bulk Operations Functions
+  const toggleSelectCustomer = (customerId: string) => {
+    setSelectedCustomers(prev => 
+      prev.includes(customerId) 
+        ? prev.filter(id => id !== customerId)
+        : [...prev, customerId]
+    );
+  };
+
+  const toggleSelectAll = () => {
+    if (selectedCustomers.length === filteredCustomers.length) {
+      setSelectedCustomers([]);
+    } else {
+      setSelectedCustomers(filteredCustomers.map(c => c._id || c.id));
+    }
+  };
+
+  const handleBulkDelete = async () => {
+    if (!confirm(`Are you sure you want to delete ${selectedCustomers.length} customer(s)?`)) {
+      return;
+    }
+
+    try {
+      await Promise.all(selectedCustomers.map(id => api.delete(`/customers/${id}`)));
+      alert('Customers deleted successfully!');
+      setSelectedCustomers([]);
+      setBulkActionType(null);
+      loadCustomers();
+    } catch (error) {
+      console.error('Error deleting customers:', error);
+      alert('Failed to delete customers. Please try again.');
+    }
+  };
+
+  const handleBulkArchive = async (archive: boolean) => {
+    try {
+      await Promise.all(selectedCustomers.map(id => 
+        api.put(`/customers/${id}`, { active: !archive })
+      ));
+      alert(`Customers ${archive ? 'archived' : 'unarchived'} successfully!`);
+      setSelectedCustomers([]);
+      setBulkActionType(null);
+      loadCustomers();
+    } catch (error) {
+      console.error('Error updating customers:', error);
+      alert('Failed to update customers. Please try again.');
+    }
+  };
+
+  // Export Functions
+  const exportToCSV = () => {
+    const headers = ['Name', 'Email', 'Phone', 'Address', 'Type', 'Status', 'Created Date'];
+    const rows = filteredCustomers.map(customer => [
+      customer.name,
+      customer.email,
+      customer.phone,
+      customer.address,
+      customer.customer_type || 'individual',
+      customer.active ? 'Active' : 'Inactive',
+      new Date(customer.created_at).toLocaleDateString(),
+    ]);
+
+    const csvContent = [
+      headers.join(','),
+      ...rows.map(row => row.map(cell => `"${cell}"`).join(','))
+    ].join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = `customers_export_${new Date().toISOString().split('T')[0]}.csv`;
+    link.click();
+  };
+
+  // Quick View Functions
+  const handleQuickView = (customer: Customer) => {
+    setQuickViewCustomer(customer);
+    setShowQuickView(true);
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex flex-col">
