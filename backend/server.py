@@ -2177,10 +2177,15 @@ async def get_site_maps_by_site(site_id: str, current_only: bool = False):
 @api_router.get("/site-maps/{map_id}", response_model=SiteMap)
 async def get_site_map(map_id: str):
     """Get a specific site map by ID"""
-    site_map = await db.site_maps.find_one({"_id": ObjectId(map_id)})
-    if not site_map:
-        raise HTTPException(status_code=404, detail="Site map not found")
-    return SiteMap(**serialize_doc(site_map))
+    try:
+        site_map = await db.site_maps.find_one({"_id": ObjectId(map_id)})
+        if not site_map:
+            raise HTTPException(status_code=404, detail="Site map not found")
+        return SiteMap(**serialize_doc(site_map))
+    except Exception as e:
+        if "not a valid ObjectId" in str(e):
+            raise HTTPException(status_code=404, detail="Site map not found")
+        raise HTTPException(status_code=500, detail=f"Error fetching site map: {str(e)}")
 
 @api_router.put("/site-maps/{map_id}", response_model=SiteMap)
 async def update_site_map(map_id: str, map_update: SiteMapUpdate):
