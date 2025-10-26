@@ -98,7 +98,7 @@
 
 **Option 2: Public Access** (requires routing configuration)
 The web-admin needs to be configured to serve on the main domain:
-`https://glass-admin-dash.preview.emergentagent.com`
+`https://erp-modernize-2.preview.emergentagent.com`
 
 ---
 

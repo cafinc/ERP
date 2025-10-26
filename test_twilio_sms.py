@@ -9,7 +9,7 @@ import json
 import os
 
 # Get backend URL from environment
-BACKEND_URL = os.getenv('EXPO_PUBLIC_BACKEND_URL', 'https://glass-admin-dash.preview.emergentagent.com')
+BACKEND_URL = os.getenv('EXPO_PUBLIC_BACKEND_URL', 'https://erp-modernize-2.preview.emergentagent.com')
 API_BASE = f"{BACKEND_URL}/api"
 
 def test_sms_status():

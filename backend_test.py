@@ -12,7 +12,7 @@ from datetime import datetime
 from typing import Dict, List, Any
 
 # Backend URL from frontend/.env
-BASE_URL = "https://glass-admin-dash.preview.emergentagent.com/api"
+BASE_URL = "https://erp-modernize-2.preview.emergentagent.com/api"
 
 class CustomerManagementTests:
     def __init__(self):

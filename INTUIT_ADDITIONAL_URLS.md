@@ -27,14 +27,14 @@ plowpro-admin.preview.emergentagent.com
 
 **URL to provide:**
 ```
-https://glass-admin-dash.preview.emergentagent.com/settings/quickbooks
+https://erp-modernize-2.preview.emergentagent.com/settings/quickbooks
 ```
 
 **What it is:** The page customers are redirected to after successfully connecting their QuickBooks account. This shows the connection status, sync settings, and activity logs.
 
 **Alternative option (if you prefer dashboard):**
 ```
-https://glass-admin-dash.preview.emergentagent.com
+https://erp-modernize-2.preview.emergentagent.com
 ```
 (Main dashboard - if you want users to start at the home page)
 
@@ -48,7 +48,7 @@ https://glass-admin-dash.preview.emergentagent.com
 
 **URL to provide:**
 ```
-https://glass-admin-dash.preview.emergentagent.com/settings/quickbooks
+https://erp-modernize-2.preview.emergentagent.com/settings/quickbooks
 ```
 
 **What it is:** The page customers are redirected to after disconnecting their QuickBooks integration. Same as Launch URL so they can reconnect if needed.
@@ -62,16 +62,16 @@ Here's a complete list of ALL URLs you need to configure in Intuit Developer Por
 ### Legal & Compliance
 ```
 Privacy Policy URL:
-https://glass-admin-dash.preview.emergentagent.com/legal/privacy
+https://erp-modernize-2.preview.emergentagent.com/legal/privacy
 
 End-User License Agreement URL (Terms of Service):
-https://glass-admin-dash.preview.emergentagent.com/legal/terms
+https://erp-modernize-2.preview.emergentagent.com/legal/terms
 ```
 
 ### OAuth Configuration
 ```
 Redirect URI:
-https://glass-admin-dash.preview.emergentagent.com/api/quickbooks/auth/callback
+https://erp-modernize-2.preview.emergentagent.com/api/quickbooks/auth/callback
 ```
 
 ### App Configuration
@@ -80,10 +80,10 @@ Host Domain:
 plowpro-admin.preview.emergentagent.com
 
 Launch URL:
-https://glass-admin-dash.preview.emergentagent.com/settings/quickbooks
+https://erp-modernize-2.preview.emergentagent.com/settings/quickbooks
 
 Disconnect URL:
-https://glass-admin-dash.preview.emergentagent.com/settings/quickbooks
+https://erp-modernize-2.preview.emergentagent.com/settings/quickbooks
 ```
 
 ---
@@ -95,11 +95,11 @@ For quick copy-paste into Intuit forms:
 | Field | Value |
 |-------|-------|
 | **Host Domain** | `plowpro-admin.preview.emergentagent.com` |
-| **Launch URL** | `https://glass-admin-dash.preview.emergentagent.com/settings/quickbooks` |
-| **Disconnect URL** | `https://glass-admin-dash.preview.emergentagent.com/settings/quickbooks` |
-| **Privacy Policy URL** | `https://glass-admin-dash.preview.emergentagent.com/legal/privacy` |
-| **Terms of Service URL** | `https://glass-admin-dash.preview.emergentagent.com/legal/terms` |
-| **Redirect URI** | `https://glass-admin-dash.preview.emergentagent.com/api/quickbooks/auth/callback` |
+| **Launch URL** | `https://erp-modernize-2.preview.emergentagent.com/settings/quickbooks` |
+| **Disconnect URL** | `https://erp-modernize-2.preview.emergentagent.com/settings/quickbooks` |
+| **Privacy Policy URL** | `https://erp-modernize-2.preview.emergentagent.com/legal/privacy` |
+| **Terms of Service URL** | `https://erp-modernize-2.preview.emergentagent.com/legal/terms` |
+| **Redirect URI** | `https://erp-modernize-2.preview.emergentagent.com/api/quickbooks/auth/callback` |
 
 ---
 
@@ -125,8 +125,8 @@ If you prefer different landing pages, here are alternatives:
 
 ### Option 1: QuickBooks Settings Page (Recommended) ✓
 ```
-Launch URL: https://glass-admin-dash.preview.emergentagent.com/settings/quickbooks
-Disconnect URL: https://glass-admin-dash.preview.emergentagent.com/settings/quickbooks
+Launch URL: https://erp-modernize-2.preview.emergentagent.com/settings/quickbooks
+Disconnect URL: https://erp-modernize-2.preview.emergentagent.com/settings/quickbooks
 ```
 **Pros:** 
 - Users see immediate connection status
@@ -136,8 +136,8 @@ Disconnect URL: https://glass-admin-dash.preview.emergentagent.com/settings/quic
 
 ### Option 2: Main Dashboard
 ```
-Launch URL: https://glass-admin-dash.preview.emergentagent.com
-Disconnect URL: https://glass-admin-dash.preview.emergentagent.com
+Launch URL: https://erp-modernize-2.preview.emergentagent.com
+Disconnect URL: https://erp-modernize-2.preview.emergentagent.com
 ```
 **Pros:**
 - Broader overview of the system
@@ -147,8 +147,8 @@ Disconnect URL: https://glass-admin-dash.preview.emergentagent.com
 
 ### Option 3: Settings Home Page
 ```
-Launch URL: https://glass-admin-dash.preview.emergentagent.com/settings
-Disconnect URL: https://glass-admin-dash.preview.emergentagent.com/settings
+Launch URL: https://erp-modernize-2.preview.emergentagent.com/settings
+Disconnect URL: https://erp-modernize-2.preview.emergentagent.com/settings
 ```
 **Pros:**
 - Shows all integration options
@@ -212,11 +212,11 @@ Location: Calgary, Alberta, Canada
 Before submitting or going live:
 
 - [ ] Host domain configured: `plowpro-admin.preview.emergentagent.com`
-- [ ] Launch URL configured: `https://glass-admin-dash.preview.emergentagent.com/settings/quickbooks`
-- [ ] Disconnect URL configured: `https://glass-admin-dash.preview.emergentagent.com/settings/quickbooks`
-- [ ] Privacy Policy URL configured: `https://glass-admin-dash.preview.emergentagent.com/legal/privacy`
-- [ ] Terms of Service URL configured: `https://glass-admin-dash.preview.emergentagent.com/legal/terms`
-- [ ] Redirect URI configured: `https://glass-admin-dash.preview.emergentagent.com/api/quickbooks/auth/callback`
+- [ ] Launch URL configured: `https://erp-modernize-2.preview.emergentagent.com/settings/quickbooks`
+- [ ] Disconnect URL configured: `https://erp-modernize-2.preview.emergentagent.com/settings/quickbooks`
+- [ ] Privacy Policy URL configured: `https://erp-modernize-2.preview.emergentagent.com/legal/privacy`
+- [ ] Terms of Service URL configured: `https://erp-modernize-2.preview.emergentagent.com/legal/terms`
+- [ ] Redirect URI configured: `https://erp-modernize-2.preview.emergentagent.com/api/quickbooks/auth/callback`
 - [ ] All URLs tested and accessible
 - [ ] OAuth flow tested successfully
 - [ ] Disconnect flow tested successfully
