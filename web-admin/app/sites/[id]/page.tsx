@@ -1233,46 +1233,7 @@ export default function SiteDetailPage() {
         )}
       </div>
 
-      {/* Measure Modal */}
-      {showMeasureModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-auto">
-            <div className="p-6 border-b border-gray-200 flex items-center justify-between">
-              <h3 className="text-lg font-semibold">Measure Property</h3>
-              <button
-                onClick={() => setShowMeasureModal(false)}
-                className="text-gray-400 hover:text-gray-600"
-              >
-                <X className="w-6 h-6" />
-              </button>
-            </div>
-            <div className="p-6">
-              <p className="text-gray-600 mb-4">
-                Click on the map to measure distances and calculate area.
-              </p>
-              <div className="h-96 bg-gray-100 rounded-lg mb-4">
-                {/* Map for measurements will go here */}
-                <p className="text-center pt-40 text-gray-500">Measurement tools (to be implemented)</p>
-              </div>
-              <div className="bg-blue-50 p-4 rounded-lg mb-4">
-                <h4 className="font-semibold text-gray-900 mb-2">Measurements:</h4>
-                <div className="space-y-1 text-sm">
-                  <p>Distance: <span className="font-mono font-semibold">-- ft</span></p>
-                  <p>Area: <span className="font-mono font-semibold">-- sq ft</span></p>
-                </div>
-              </div>
-              <div className="flex justify-end space-x-3">
-                <button
-                  onClick={() => setShowMeasureModal(false)}
-                  className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Measurement tools moved to Map Builder → Annotations tab */}
 
       {/* Service History Modal */}
       {showServiceModal && (
