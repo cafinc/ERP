@@ -435,6 +435,310 @@ export default function SiteMapsGeofencingPage() {
     }
   };
 
+  // ==================== ANNOTATIONS FUNCTIONS ====================
+  
+  const loadSiteMaps = async () => {
+    try {
+      setAnnotationsLoading(true);
+      const response = await api.get(`/site-maps/site/${siteId}`);
+      setSiteMaps(response.data || []);
+      
+      // Load the current map if exists
+      const current = response.data.find((m: SiteMap) => m.is_current);
+      if (current) {
+        setCurrentMap(current);
+        setAnnotations(current.annotations || []);
+      }
+    } catch (error: any) {
+      console.error('Error loading site maps:', error);
+    } finally {
+      setAnnotationsLoading(false);
+    }
+  };
+
+  const initializeAnnotationsMap = () => {
+    if (!annotationsMapRef.current || !window.google || !site) return;
+
+    const center = {
+      lat: site.location.latitude || 51.0447,
+      lng: site.location.longitude || -114.0719,
+    };
+
+    annotationsGoogleMapRef.current = new window.google.maps.Map(annotationsMapRef.current, {
+      center,
+      zoom: 19,
+      mapTypeId: 'satellite',
+      mapTypeControl: true,
+      streetViewControl: false,
+      fullscreenControl: true,
+      zoomControl: true,
+    });
+
+    // Initialize Drawing Manager for annotations
+    annotationsDrawingManagerRef.current = new window.google.maps.drawing.DrawingManager({
+      drawingControl: false,
+      polygonOptions: {
+        strokeColor: selectedColor,
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: selectedColor,
+        fillOpacity: 0.2,
+        editable: false,
+      },
+      polylineOptions: {
+        strokeColor: selectedColor,
+        strokeOpacity: 0.8,
+        strokeWeight: 3,
+        editable: false,
+      },
+      circleOptions: {
+        strokeColor: selectedColor,
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: selectedColor,
+        fillOpacity: 0.2,
+        editable: false,
+      },
+      rectangleOptions: {
+        strokeColor: selectedColor,
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: selectedColor,
+        fillOpacity: 0.2,
+        editable: false,
+      },
+      markerOptions: {
+        draggable: false,
+      },
+    });
+
+    annotationsDrawingManagerRef.current.setMap(annotationsGoogleMapRef.current);
+
+    // Listen for drawing complete events
+    google.maps.event.addListener(annotationsDrawingManagerRef.current, 'overlaycomplete', (event: any) => {
+      handleAnnotationDrawingComplete(event);
+    });
+  };
+
+  const handleAnnotationDrawingComplete = (event: any) => {
+    const overlay = event.overlay;
+    const type = event.type;
+
+    // Save overlay reference
+    overlaysRef.current.push(overlay);
+
+    // Extract coordinates based on type
+    let coordinates: Array<{ x: number; y: number }> = [];
+    
+    if (type === 'polygon') {
+      const path = overlay.getPath();
+      for (let i = 0; i < path.getLength(); i++) {
+        const latLng = path.getAt(i);
+        coordinates.push({ x: latLng.lng(), y: latLng.lat() });
+      }
+    } else if (type === 'polyline') {
+      const path = overlay.getPath();
+      for (let i = 0; i < path.getLength(); i++) {
+        const latLng = path.getAt(i);
+        coordinates.push({ x: latLng.lng(), y: latLng.lat() });
+      }
+    } else if (type === 'circle') {
+      const center = overlay.getCenter();
+      coordinates = [{ x: center.lng(), y: center.lat() }];
+    } else if (type === 'rectangle') {
+      const bounds = overlay.getBounds();
+      const ne = bounds.getNorthEast();
+      const sw = bounds.getSouthWest();
+      coordinates = [
+        { x: sw.lng(), y: ne.lat() },
+        { x: ne.lng(), y: ne.lat() },
+        { x: ne.lng(), y: sw.lat() },
+        { x: sw.lng(), y: sw.lat() },
+      ];
+    } else if (type === 'marker') {
+      const position = overlay.getPosition();
+      coordinates = [{ x: position.lng(), y: position.lat() }];
+    }
+
+    // Create annotation
+    const annotation: SiteMapAnnotation = {
+      id: `ann_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+      type: type,
+      category: selectedCategory,
+      color: selectedColor,
+      coordinates: coordinates,
+      properties: {
+        strokeWeight: 2,
+        strokeOpacity: 0.8,
+        fillOpacity: 0.2,
+      },
+    };
+
+    // Add to annotations with undo support
+    undoStack.current.push([...annotations]);
+    redoStack.current = [];
+    setAnnotations([...annotations, annotation]);
+
+    // Stop drawing mode
+    setDrawingMode(null);
+    if (annotationsDrawingManagerRef.current) {
+      annotationsDrawingManagerRef.current.setDrawingMode(null);
+    }
+  };
+
+  const startAnnotationDrawing = (mode: string) => {
+    setDrawingMode(mode);
+    if (annotationsDrawingManagerRef.current) {
+      let drawMode: any = null;
+      switch (mode) {
+        case 'polygon':
+          drawMode = google.maps.drawing.OverlayType.POLYGON;
+          break;
+        case 'polyline':
+          drawMode = google.maps.drawing.OverlayType.POLYLINE;
+          break;
+        case 'circle':
+          drawMode = google.maps.drawing.OverlayType.CIRCLE;
+          break;
+        case 'rectangle':
+          drawMode = google.maps.drawing.OverlayType.RECTANGLE;
+          break;
+        case 'marker':
+          drawMode = google.maps.drawing.OverlayType.MARKER;
+          break;
+      }
+      annotationsDrawingManagerRef.current.setDrawingMode(drawMode);
+    }
+  };
+
+  const captureMapScreenshot = async (): Promise<string> => {
+    if (!annotationsGoogleMapRef.current) return '';
+    
+    try {
+      const center = annotationsGoogleMapRef.current.getCenter();
+      const zoom = annotationsGoogleMapRef.current.getZoom() || 19;
+      
+      if (!center) return '';
+      
+      const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || '';
+      const staticMapUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${center.lat()},${center.lng()}&zoom=${zoom}&size=800x600&maptype=satellite&key=${apiKey}`;
+      
+      // Fetch the image and convert to base64
+      const response = await fetch(staticMapUrl);
+      const blob = await response.blob();
+      return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result as string);
+        reader.readAsDataURL(blob);
+      });
+    } catch (error) {
+      console.error('Error capturing screenshot:', error);
+      return '';
+    }
+  };
+
+  const handleSaveMap = async () => {
+    if (!mapName.trim()) {
+      alert('Please enter a name for this map');
+      return;
+    }
+
+    try {
+      setSaving(true);
+      
+      // Capture screenshot
+      const screenshot = await captureMapScreenshot();
+      
+      const mapData = {
+        site_id: siteId,
+        name: mapName,
+        base_map_type: 'google_maps',
+        base_map_data: screenshot,
+        base_map_url: site?.location.address || '',
+        annotations: annotations,
+        legend_items: generateLegend(),
+      };
+
+      await api.post('/site-maps', mapData);
+      alert('Map saved successfully!');
+      setShowSaveModal(false);
+      setMapName('');
+      loadSiteMaps();
+    } catch (error: any) {
+      console.error('Error saving map:', error);
+      alert(`Failed to save map: ${error.response?.data?.detail || error.message}`);
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const generateLegend = () => {
+    const categories = new Set(annotations.map(a => a.category).filter(Boolean));
+    return Array.from(categories).map(category => {
+      const cat = annotationCategories.find(c => c.value === category);
+      const annotation = annotations.find(a => a.category === category);
+      return {
+        category: category || 'custom',
+        label: cat?.label || 'Custom',
+        color: annotation?.color || '#3B82F6',
+        icon: cat?.icon || '★',
+      };
+    });
+  };
+
+  const loadMap = (map: SiteMap) => {
+    setCurrentMap(map);
+    setAnnotations(map.annotations || []);
+    setShowMapsList(false);
+    
+    // Clear existing overlays
+    overlaysRef.current.forEach(overlay => overlay.setMap(null));
+    overlaysRef.current = [];
+  };
+
+  const deleteMap = async (mapId: string) => {
+    if (!confirm('Are you sure you want to delete this map version?')) return;
+    
+    try:
+      setSaving(true);
+      await api.delete(`/site-maps/${mapId}`);
+      alert('Map deleted successfully');
+      loadSiteMaps();
+    } catch (error: any) {
+      console.error('Error deleting map:', error);
+      alert('Failed to delete map');
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const clearAllAnnotations = () => {
+    if (!confirm('Are you sure you want to clear all annotations?')) return;
+    
+    undoStack.current.push([...annotations]);
+    redoStack.current = [];
+    setAnnotations([]);
+    overlaysRef.current.forEach(overlay => overlay.setMap(null));
+    overlaysRef.current = [];
+  };
+
+  const undoAnnotation = () => {
+    if (undoStack.current.length === 0) return;
+    
+    const previous = undoStack.current.pop();
+    redoStack.current.push([...annotations]);
+    setAnnotations(previous || []);
+  };
+
+  const redoAnnotation = () => {
+    if (redoStack.current.length === 0) return;
+    
+    const next = redoStack.current.pop();
+    undoStack.current.push([...annotations]);
+    setAnnotations(next || []);
+  };
+
+
   if (loading) {
     return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
