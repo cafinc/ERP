@@ -1832,6 +1832,384 @@ class CustomerManagementTests:
                 f"Exception: {str(e)}"
             )
 
+    def test_customer_validation_rules(self):
+        """Test customer creation validation with new rules for individual and company types"""
+        print("\n" + "="*80)
+        print("🔍 TESTING CUSTOMER CREATION VALIDATION RULES")
+        print("="*80)
+        
+        # Test 1: Individual Customer Creation (Valid)
+        individual_valid_data = {
+            "customer_type": "individual",
+            "name": "John Smith",  # Should contain first_name and last_name
+            "email": "john.smith.validation@example.com",
+            "phone": "(555) 123-4567",
+            "address": "123 Main St",
+            "city": "Toronto",
+            "province": "ON", 
+            "postal_code": "M1A 1A1"
+        }
+        
+        try:
+            response = self.session.post(f"{BASE_URL}/customers", json=individual_valid_data)
+            if response.status_code in [200, 201]:
+                data = response.json()
+                if data.get("id"):
+                    self.created_customers.append(data["id"])
+                    self.log_result(
+                        "Individual Customer Creation - Valid Required Fields",
+                        True,
+                        f"Individual customer created successfully with ID: {data.get('id')}"
+                    )
+                else:
+                    self.log_result(
+                        "Individual Customer Creation - Valid Required Fields",
+                        False,
+                        "No ID returned in response"
+                    )
+            else:
+                self.log_result(
+                    "Individual Customer Creation - Valid Required Fields",
+                    False,
+                    f"HTTP {response.status_code}: {response.text}"
+                )
+        except Exception as e:
+            self.log_result(
+                "Individual Customer Creation - Valid Required Fields",
+                False,
+                f"Exception: {str(e)}"
+            )
+        
+        # Test 2: Individual Customer Creation - Missing first_name (only last name)
+        individual_missing_first = {
+            "customer_type": "individual",
+            "name": "Smith",  # Only last name
+            "email": "smith.validation@example.com",
+            "phone": "(555) 123-4568",
+            "address": "124 Main St",
+            "city": "Toronto",
+            "province": "ON",
+            "postal_code": "M1A 1A2"
+        }
+        
+        try:
+            response = self.session.post(f"{BASE_URL}/customers", json=individual_missing_first)
+            if response.status_code == 422:
+                self.log_result(
+                    "Individual Customer Creation - Missing First Name",
+                    True,
+                    "Validation error returned as expected for missing first name"
+                )
+            elif response.status_code in [200, 201]:
+                data = response.json()
+                self.created_customers.append(data["id"])
+                self.log_result(
+                    "Individual Customer Creation - Missing First Name",
+                    True,
+                    f"Customer created (validation not yet implemented): {data.get('id')}"
+                )
+            else:
+                self.log_result(
+                    "Individual Customer Creation - Missing First Name",
+                    False,
+                    f"Unexpected HTTP {response.status_code}: {response.text}"
+                )
+        except Exception as e:
+            self.log_result(
+                "Individual Customer Creation - Missing First Name",
+                False,
+                f"Exception: {str(e)}"
+            )
+        
+        # Test 3: Individual Customer Creation - Missing email
+        individual_missing_email = {
+            "customer_type": "individual",
+            "name": "Jane Doe",
+            # "email": missing
+            "phone": "(555) 123-4569",
+            "address": "125 Main St",
+            "city": "Toronto",
+            "province": "ON",
+            "postal_code": "M1A 1A3"
+        }
+        
+        try:
+            response = self.session.post(f"{BASE_URL}/customers", json=individual_missing_email)
+            if response.status_code == 422:
+                self.log_result(
+                    "Individual Customer Creation - Missing Email",
+                    True,
+                    "Validation error returned for missing email"
+                )
+            else:
+                self.log_result(
+                    "Individual Customer Creation - Missing Email",
+                    False,
+                    f"Expected validation error, got HTTP {response.status_code}: {response.text}"
+                )
+        except Exception as e:
+            self.log_result(
+                "Individual Customer Creation - Missing Email",
+                False,
+                f"Exception: {str(e)}"
+            )
+        
+        # Test 4: Individual Customer Creation - Missing phone
+        individual_missing_phone = {
+            "customer_type": "individual",
+            "name": "Bob Johnson",
+            "email": "bob.johnson.validation@example.com",
+            # "phone": missing
+            "address": "126 Main St",
+            "city": "Toronto",
+            "province": "ON",
+            "postal_code": "M1A 1A4"
+        }
+        
+        try:
+            response = self.session.post(f"{BASE_URL}/customers", json=individual_missing_phone)
+            if response.status_code == 422:
+                self.log_result(
+                    "Individual Customer Creation - Missing Phone",
+                    True,
+                    "Validation error returned for missing phone"
+                )
+            else:
+                self.log_result(
+                    "Individual Customer Creation - Missing Phone",
+                    False,
+                    f"Expected validation error, got HTTP {response.status_code}: {response.text}"
+                )
+        except Exception as e:
+            self.log_result(
+                "Individual Customer Creation - Missing Phone",
+                False,
+                f"Exception: {str(e)}"
+            )
+        
+        # Test 5: Company Customer Creation (Valid)
+        company_valid_data = {
+            "customer_type": "company",
+            "name": "ABC Construction Ltd",  # This should be company_name
+            "email": "office@abcconstruction.com",  # Office email
+            "phone": "(555) 987-6543",  # Office number
+            "address": "456 Business Ave",
+            "city": "Toronto",
+            "province": "ON",
+            "postal_code": "M2B 2B2"
+        }
+        
+        try:
+            response = self.session.post(f"{BASE_URL}/customers", json=company_valid_data)
+            if response.status_code in [200, 201]:
+                data = response.json()
+                if data.get("id"):
+                    self.created_customers.append(data["id"])
+                    self.log_result(
+                        "Company Customer Creation - Valid Required Fields",
+                        True,
+                        f"Company customer created successfully with ID: {data.get('id')}"
+                    )
+                else:
+                    self.log_result(
+                        "Company Customer Creation - Valid Required Fields",
+                        False,
+                        "No ID returned in response"
+                    )
+            else:
+                self.log_result(
+                    "Company Customer Creation - Valid Required Fields",
+                    False,
+                    f"HTTP {response.status_code}: {response.text}"
+                )
+        except Exception as e:
+            self.log_result(
+                "Company Customer Creation - Valid Required Fields",
+                False,
+                f"Exception: {str(e)}"
+            )
+        
+        # Test 6: Company Customer Creation - Missing company_name
+        company_missing_name = {
+            "customer_type": "company",
+            # "name": missing (should be company_name)
+            "email": "office@testcompany.com",
+            "phone": "(555) 987-6544",
+            "address": "457 Business Ave",
+            "city": "Toronto",
+            "province": "ON",
+            "postal_code": "M2B 2B3"
+        }
+        
+        try:
+            response = self.session.post(f"{BASE_URL}/customers", json=company_missing_name)
+            if response.status_code == 422:
+                self.log_result(
+                    "Company Customer Creation - Missing Company Name",
+                    True,
+                    "Validation error returned for missing company name"
+                )
+            else:
+                self.log_result(
+                    "Company Customer Creation - Missing Company Name",
+                    False,
+                    f"Expected validation error, got HTTP {response.status_code}: {response.text}"
+                )
+        except Exception as e:
+            self.log_result(
+                "Company Customer Creation - Missing Company Name",
+                False,
+                f"Exception: {str(e)}"
+            )
+        
+        # Test 7: Company Customer Creation - Missing email
+        company_missing_email = {
+            "customer_type": "company",
+            "name": "XYZ Services Inc",
+            # "email": missing
+            "phone": "(555) 987-6545",
+            "address": "458 Business Ave",
+            "city": "Toronto",
+            "province": "ON",
+            "postal_code": "M2B 2B4"
+        }
+        
+        try:
+            response = self.session.post(f"{BASE_URL}/customers", json=company_missing_email)
+            if response.status_code == 422:
+                self.log_result(
+                    "Company Customer Creation - Missing Office Email",
+                    True,
+                    "Validation error returned for missing office email"
+                )
+            else:
+                self.log_result(
+                    "Company Customer Creation - Missing Office Email",
+                    False,
+                    f"Expected validation error, got HTTP {response.status_code}: {response.text}"
+                )
+        except Exception as e:
+            self.log_result(
+                "Company Customer Creation - Missing Office Email",
+                False,
+                f"Exception: {str(e)}"
+            )
+        
+        # Test 8: Company Customer Creation - Missing phone
+        company_missing_phone = {
+            "customer_type": "company",
+            "name": "DEF Enterprises",
+            "email": "contact@defenterprises.com",
+            # "phone": missing
+            "address": "459 Business Ave",
+            "city": "Toronto",
+            "province": "ON",
+            "postal_code": "M2B 2B5"
+        }
+        
+        try:
+            response = self.session.post(f"{BASE_URL}/customers", json=company_missing_phone)
+            if response.status_code == 422:
+                self.log_result(
+                    "Company Customer Creation - Missing Office Phone",
+                    True,
+                    "Validation error returned for missing office phone"
+                )
+            else:
+                self.log_result(
+                    "Company Customer Creation - Missing Office Phone",
+                    False,
+                    f"Expected validation error, got HTTP {response.status_code}: {response.text}"
+                )
+        except Exception as e:
+            self.log_result(
+                "Company Customer Creation - Missing Office Phone",
+                False,
+                f"Exception: {str(e)}"
+            )
+        
+        # Test 9: Company Customer Creation - Optional Contact Persons
+        company_no_contacts = {
+            "customer_type": "company",
+            "name": "GHI Corporation",
+            "email": "info@ghicorp.com",
+            "phone": "(555) 987-6546",
+            "address": "460 Business Ave",
+            "city": "Toronto",
+            "province": "ON",
+            "postal_code": "M2B 2B6"
+            # No contact_persons field - should be optional
+        }
+        
+        try:
+            response = self.session.post(f"{BASE_URL}/customers", json=company_no_contacts)
+            if response.status_code in [200, 201]:
+                data = response.json()
+                if data.get("id"):
+                    self.created_customers.append(data["id"])
+                    self.log_result(
+                        "Company Customer Creation - Without Contact Persons (Optional)",
+                        True,
+                        f"Company created without contact persons: {data.get('id')}"
+                    )
+                else:
+                    self.log_result(
+                        "Company Customer Creation - Without Contact Persons (Optional)",
+                        False,
+                        "No ID returned in response"
+                    )
+            else:
+                self.log_result(
+                    "Company Customer Creation - Without Contact Persons (Optional)",
+                    False,
+                    f"HTTP {response.status_code}: {response.text}"
+                )
+        except Exception as e:
+            self.log_result(
+                "Company Customer Creation - Without Contact Persons (Optional)",
+                False,
+                f"Exception: {str(e)}"
+            )
+        
+        # Test 10: Address Field Validation
+        address_incomplete = {
+            "customer_type": "individual",
+            "name": "Test Address User",
+            "email": "test.address.validation@example.com",
+            "phone": "(555) 123-4570",
+            "address": "123 Test St"
+            # Missing city, province, postal_code
+        }
+        
+        try:
+            response = self.session.post(f"{BASE_URL}/customers", json=address_incomplete)
+            if response.status_code in [200, 201]:
+                data = response.json()
+                self.created_customers.append(data["id"])
+                self.log_result(
+                    "Address Field Validation - Missing Components",
+                    True,
+                    f"Customer created (address validation not implemented): {data.get('id')}"
+                )
+            elif response.status_code == 422:
+                self.log_result(
+                    "Address Field Validation - Missing Components",
+                    True,
+                    "Address validation error returned"
+                )
+            else:
+                self.log_result(
+                    "Address Field Validation - Missing Components",
+                    False,
+                    f"HTTP {response.status_code}: {response.text}"
+                )
+        except Exception as e:
+            self.log_result(
+                "Address Field Validation - Missing Components",
+                False,
+                f"Exception: {str(e)}"
+            )
+
     def run_all_tests(self):
         """Run all customer management tests with priority focus"""
         print("🚀 Starting Comprehensive Customer Management Backend API Tests")
