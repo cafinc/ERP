@@ -117,14 +117,20 @@ export default function ServicesPage() {
 
   const loadEquipmentAndConsumables = async () => {
     try {
-      const [equipmentRes, consumablesRes] = await Promise.all([
-        api.get('/inventory'),
-        api.get('/consumables'),
+      const [equipmentRes, consumablesRes, trucksRes, trailersRes, toolsRes] = await Promise.all([
+        api.get('/inventory').catch(() => ({ data: [] })),
+        api.get('/consumables').catch(() => ({ data: [] })),
+        api.get('/trucks').catch(() => ({ data: [] })),
+        api.get('/trailers').catch(() => ({ data: [] })),
+        api.get('/tools').catch(() => ({ data: [] })),
       ]);
       setEquipment(equipmentRes.data || []);
       setConsumables(consumablesRes.data || []);
+      setTrucks(trucksRes.data || []);
+      setTrailers(trailersRes.data || []);
+      setTools(toolsRes.data || []);
     } catch (error) {
-      console.error('Error loading equipment and consumables:', error);
+      console.error('Error loading resources:', error);
     }
   };
 
