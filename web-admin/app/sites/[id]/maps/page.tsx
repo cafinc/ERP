@@ -197,7 +197,7 @@ export default function SiteMapsGeofencingPage() {
   }, [googleMapsLoaded, site, activeTab]);
 
   useEffect(() => {
-    if (googleMapsLoaded && site && mapRef.current && activeTab === 'geofence' && !googleMapRef.current) {
+    if (googleMapsLoaded && site && mapRef.current && (activeTab === 'geofence' || activeTab === 'overview') && !googleMapRef.current) {
       console.log('Initializing map with:', site);
       initializeMap();
     }
