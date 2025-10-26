@@ -32,6 +32,14 @@ import {
   Factory,
   ShoppingBag,
   Siren,
+  History,
+  Clock,
+  Users,
+  Camera,
+  Trash2,
+  CheckCircle,
+  XCircle,
+  Circle,
 } from 'lucide-react';
 
 interface Site {
