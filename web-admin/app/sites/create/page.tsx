@@ -808,9 +808,9 @@ export default function CreateSitePage() {
                   </div>
                 ) : (
                   <div className="space-y-3">
-                    {siteServices.map((service) => (
+                    {siteServices.map((service, index) => (
                       <div
-                        key={service.service_id}
+                        key={`${service.service_id}-${index}`}
                         className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-5 border-2 border-blue-100 hover:shadow-md transition-all"
                       >
                         <div className="flex items-start justify-between">
@@ -841,7 +841,7 @@ export default function CreateSitePage() {
                           </div>
                           <button
                             type="button"
-                            onClick={() => handleRemoveService(service.service_id)}
+                            onClick={() => handleRemoveService(index)}
                             className="ml-4 p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
                             title="Remove service"
                           >
