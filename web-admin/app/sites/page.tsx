@@ -383,6 +383,46 @@ export default function SitesPage() {
           ) : undefined}
         />
 
+        {/* Bulk Actions Bar */}
+        {selectedSites.length > 0 && (
+          <div className="mx-6 mt-4 bg-blue-500 text-white rounded-xl shadow-lg p-4 flex items-center justify-between animate-slideUp">
+            <div className="flex items-center gap-4">
+              <span className="font-semibold text-lg">
+                {selectedSites.length} site{selectedSites.length !== 1 ? 's' : ''} selected
+              </span>
+              <button
+                onClick={toggleSelectAll}
+                className="text-sm underline hover:text-blue-100 transition-colors"
+              >
+                {selectedSites.length === filteredSites.length ? 'Deselect All' : 'Select All'}
+              </button>
+            </div>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => handleBulkArchive(true)}
+                className="px-4 py-2 bg-white text-blue-500 rounded-lg font-medium hover:bg-blue-50 transition-colors flex items-center gap-2"
+              >
+                <Archive className="w-4 h-4" />
+                Archive
+              </button>
+              <button
+                onClick={() => setBulkActionType('delete')}
+                className="px-4 py-2 bg-red-500 text-white rounded-lg font-medium hover:bg-red-600 transition-colors flex items-center gap-2"
+              >
+                <Trash2 className="w-4 h-4" />
+                Delete
+              </button>
+              <button
+                onClick={() => setSelectedSites([])}
+                className="p-2 hover:bg-blue-600 rounded-lg transition-colors"
+                title="Clear selection"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
+        )}
+
         {/* Sites Content */}
         <div className="mx-6 mt-6">
           {filteredSites.length === 0 ? (
