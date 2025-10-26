@@ -1168,7 +1168,9 @@ export default function SiteMapsGeofencingPage() {
               </div>
             )}
           </>
-        ) : (
+        )}
+
+        {activeTab === 'annotations' && (
           <div className="flex gap-6 h-full">
             {/* Drawing Toolbar */}
             <div className="w-72 bg-white rounded-lg shadow-sm p-4 h-fit">
