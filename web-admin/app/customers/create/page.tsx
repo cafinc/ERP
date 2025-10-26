@@ -1578,10 +1578,9 @@ export default function CustomerFormPage() {
                         />
                       </div>
                     </div>
-                  </div>
                     
                     {/* Billing Address Toggle */}
-                    <div className="md:col-span-2 mt-4">
+                    <div className="p-6 pt-0">
                       <div className="flex items-center gap-3">
                         <button
                           type="button"
