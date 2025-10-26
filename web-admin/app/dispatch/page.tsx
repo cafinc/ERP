@@ -125,6 +125,9 @@ export default function DispatchesPage() {
 
   return (
       <div className="p-8">
+        {/* Low Stock Alert Banner */}
+        <LowStockAlertBanner />
+        
         {/* Header */}
         <div className="mb-8 flex items-center justify-between">
           <div>
