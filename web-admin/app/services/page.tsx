@@ -94,6 +94,7 @@ export default function ServicesPage() {
 
   useEffect(() => {
     loadServices();
+    loadEquipmentAndConsumables();
   }, []);
 
   const loadServices = async () => {
@@ -105,6 +106,19 @@ export default function ServicesPage() {
       console.error('Error loading services:', error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const loadEquipmentAndConsumables = async () => {
+    try {
+      const [equipmentRes, consumablesRes] = await Promise.all([
+        api.get('/inventory'),
+        api.get('/consumables'),
+      ]);
+      setEquipment(equipmentRes.data || []);
+      setConsumables(consumablesRes.data || []);
+    } catch (error) {
+      console.error('Error loading equipment and consumables:', error);
     }
   };
 
