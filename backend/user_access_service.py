@@ -4,6 +4,7 @@ User Access Service for creating and managing user accounts
 import secrets
 import string
 import logging
+import bcrypt
 from typing import Dict, Optional
 from datetime import datetime
 from bson import ObjectId
@@ -22,6 +23,19 @@ mongo_url = os.getenv('MONGO_URL', 'mongodb://localhost:27017')
 client = AsyncIOMotorClient(mongo_url)
 db = client[os.getenv('DB_NAME', 'snow_removal')]
 users_collection = db['users']
+
+def hash_password(password: str) -> str:
+    """Hash password using bcrypt"""
+    salt = bcrypt.gensalt()
+    return bcrypt.hashpw(password.encode('utf-8'), salt).decode('utf-8')
+
+def verify_password(password: str, hashed: str) -> bool:
+    """Verify password against hash"""
+    try:
+        return bcrypt.checkpw(password.encode('utf-8'), hashed.encode('utf-8'))
+    except Exception as e:
+        logger.error(f"Password verification error: {e}")
+        return False
 
 def generate_username(email: str, first_name: str, last_name: str) -> str:
     """Generate username from email or name"""
