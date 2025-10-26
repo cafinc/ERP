@@ -424,45 +424,26 @@ export default function CustomerFormPage() {
       if (!customerForm.first_name) errors['first_name'] = 'First name is required';
       if (!customerForm.last_name) errors['last_name'] = 'Last name is required';
     } else {
+      // Company customers
       if (!customerForm.company_name) errors['company_name'] = 'Company name is required';
     }
 
-    // Email validation (required)
-    // TODO: FUTURE FIX - Company customers should have proper contact person validation
-    // Currently email/phone are optional for companies but this needs better design:
-    // - Should we require at least one contact person with email/phone?
-    // - Should company-level email/phone be separate from contact persons?
-    // - Need to redesign contact flow for companies
-    if (customerForm.customer_type === 'individual') {
-      if (!customerForm.email) {
-        errors['email'] = 'Email is required';
-      } else if (!isValidEmail(customerForm.email)) {
-        errors['email'] = 'Invalid email format';
-      }
-    } else {
-      // For companies, email is optional (validated in contact persons instead)
-      if (customerForm.email && !isValidEmail(customerForm.email)) {
-        errors['email'] = 'Invalid email format';
-      }
+    // Email validation (required for both types)
+    if (!customerForm.email) {
+      errors['email'] = 'Email is required';
+    } else if (!isValidEmail(customerForm.email)) {
+      errors['email'] = 'Invalid email format';
     }
 
-    // Phone validation (required)
-    if (customerForm.customer_type === 'individual') {
-      if (!customerForm.phone) {
-        errors['phone'] = 'Phone is required';
-      } else {
-        const cleaned = customerForm.phone.replace(/\D/g, '');
-        if (cleaned.length !== 10) {
-          errors['phone'] = 'Phone must be 10 digits';
-        }
-      }
+    // Phone validation (required for both types)
+    // For individuals: personal phone
+    // For companies: office number (stored in same field)
+    if (!customerForm.phone) {
+      errors['phone'] = customerForm.customer_type === 'company' ? 'Office number is required' : 'Phone is required';
     } else {
-      // For companies, phone is optional (validated in contact persons instead)
-      if (customerForm.phone) {
-        const cleaned = customerForm.phone.replace(/\D/g, '');
-        if (cleaned.length !== 10) {
-          errors['phone'] = 'Phone must be 10 digits';
-        }
+      const cleaned = customerForm.phone.replace(/\D/g, '');
+      if (cleaned.length !== 10) {
+        errors['phone'] = 'Phone must be 10 digits';
       }
     }
 
