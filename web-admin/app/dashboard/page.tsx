@@ -491,6 +491,57 @@ export default function DashboardPage() {
           </div>
         </div>
       </div>
+
+      {/* Create Lead Modal */}
+      {showLeadModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl max-w-2xl w-full shadow-2xl max-h-[90vh] overflow-y-auto">
+            <div className="p-6 border-b border-gray-200">
+              <div className="flex items-center justify-between">
+                <h2 className="text-2xl font-bold text-gray-900">Create New Lead</h2>
+                <button
+                  onClick={() => setShowLeadModal(false)}
+                  className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                >
+                  <XCircle className="w-6 h-6 text-gray-500" />
+                </button>
+              </div>
+            </div>
+            <div className="p-6">
+              <p className="text-gray-600 mb-4">
+                To create a full lead with all details, please use the{' '}
+                <button
+                  onClick={() => {
+                    setShowLeadModal(false);
+                    router.push('/leads');
+                  }}
+                  className="text-blue-600 hover:text-blue-700 font-semibold underline"
+                >
+                  Leads Page
+                </button>
+              </p>
+              
+              <div className="flex gap-3 justify-end mt-6">
+                <button
+                  onClick={() => setShowLeadModal(false)}
+                  className="px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 font-semibold transition-all"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={() => {
+                    setShowLeadModal(false);
+                    router.push('/leads');
+                  }}
+                  className="px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 font-semibold transition-all"
+                >
+                  Go to Leads Page
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
