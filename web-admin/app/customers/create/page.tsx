@@ -335,6 +335,36 @@ export default function CustomerFormPage() {
       setLoadingCompanies(false);
     }
   };
+
+  const loadLeadData = async (leadId: string) => {
+    try {
+      setLoading(true);
+      const response = await api.get(`/leads/${leadId}`);
+      const lead = response.data;
+      
+      // Pre-fill customer form with lead data
+      setCustomerForm({
+        ...customerForm,
+        first_name: lead.name.split(' ')[0] || '',
+        last_name: lead.name.split(' ').slice(1).join(' ') || '',
+        email: lead.email || '',
+        phone: lead.phone || '',
+        mobile: lead.phone || '',
+        company_name: lead.company || '',
+        customer_type: lead.company ? 'company' : 'individual',
+        street_address: lead.address || '',
+        notes: `Converted from lead on ${new Date().toLocaleDateString()}\n\nLead Source: ${lead.source}\nOriginal Notes: ${lead.notes || 'None'}`,
+      });
+
+      // Show a notification banner
+      alert(`✅ Lead data loaded! Customer form has been pre-filled with information from "${lead.name}"`);
+    } catch (error) {
+      console.error('Error loading lead data:', error);
+      alert('Failed to load lead data. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
   
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
