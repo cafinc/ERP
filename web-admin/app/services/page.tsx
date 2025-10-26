@@ -759,6 +759,144 @@ export default function ServicesPage() {
                   </div>
                 </div>
 
+                {/* Equipment Selection Card */}
+                <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-6 backdrop-blur-sm">
+                  <h3 className="text-lg font-bold text-gray-900 flex items-center mb-4">
+                    <Truck className="w-5 h-5 text-[#3f72af] mr-2" />
+                    Equipment
+                  </h3>
+                  <p className="text-sm text-gray-600 mb-4">Select equipment that can be used for this service</p>
+                  
+                  <div className="space-y-2 max-h-48 overflow-y-auto">
+                    {equipment.length === 0 ? (
+                      <div className="text-center py-6 bg-gray-50 rounded-xl">
+                        <Truck className="w-10 h-10 text-gray-300 mx-auto mb-2" />
+                        <p className="text-sm text-gray-500">No equipment available</p>
+                      </div>
+                    ) : (
+                      equipment.map((item: any) => (
+                        <label
+                          key={item.id || item._id}
+                          className="flex items-center gap-3 p-3 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg hover:shadow-md transition-all cursor-pointer border-2 border-transparent hover:border-blue-200"
+                        >
+                          <input
+                            type="checkbox"
+                            checked={formData.equipment_ids.includes(item.id || item._id)}
+                            onChange={(e) => {
+                              const equipmentId = item.id || item._id;
+                              if (e.target.checked) {
+                                setFormData({
+                                  ...formData,
+                                  equipment_ids: [...formData.equipment_ids, equipmentId]
+                                });
+                              } else {
+                                setFormData({
+                                  ...formData,
+                                  equipment_ids: formData.equipment_ids.filter(id => id !== equipmentId)
+                                });
+                              }
+                            }}
+                            className="w-5 h-5 rounded border-gray-300 text-blue-500 focus:ring-2 focus:ring-blue-500 cursor-pointer"
+                          />
+                          <div className="flex-1">
+                            <p className="font-semibold text-gray-900">{item.name}</p>
+                            {item.equipment_type && (
+                              <p className="text-xs text-gray-600 capitalize">{item.equipment_type.replace('_', ' ')}</p>
+                            )}
+                          </div>
+                        </label>
+                      ))
+                    )}
+                  </div>
+                </div>
+
+                {/* Consumables Selection Card */}
+                <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-6 backdrop-blur-sm">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-lg font-bold text-gray-900 flex items-center">
+                      <ShoppingCart className="w-5 h-5 text-[#3f72af] mr-2" />
+                      Consumables
+                    </h3>
+                    
+                    {/* Requires Consumables Toggle */}
+                    <label className="flex items-center cursor-pointer group">
+                      <span className="mr-3 text-sm font-semibold text-gray-700">Requires Consumables</span>
+                      <div className="relative">
+                        <input
+                          type="checkbox"
+                          checked={formData.requires_consumables}
+                          onChange={(e) => setFormData({ ...formData, requires_consumables: e.target.checked })}
+                          className="sr-only peer"
+                        />
+                        <div className="w-14 h-7 bg-gray-300 rounded-full peer peer-checked:bg-[#3f72af] transition-all duration-300 shadow-inner"></div>
+                        <div className="absolute left-1 top-1 w-5 h-5 bg-white rounded-full transition-all duration-300 peer-checked:translate-x-7 shadow-md"></div>
+                      </div>
+                    </label>
+                  </div>
+                  
+                  {formData.requires_consumables ? (
+                    <>
+                      <p className="text-sm text-gray-600 mb-4">Select consumables needed for this service</p>
+                      <div className="space-y-2 max-h-48 overflow-y-auto">
+                        {consumables.length === 0 ? (
+                          <div className="text-center py-6 bg-gray-50 rounded-xl">
+                            <Package className="w-10 h-10 text-gray-300 mx-auto mb-2" />
+                            <p className="text-sm text-gray-500">No consumables available</p>
+                          </div>
+                        ) : (
+                          consumables.map((item: any) => (
+                            <label
+                              key={item.id || item._id}
+                              className="flex items-center gap-3 p-3 bg-gradient-to-br from-yellow-50 to-orange-50 rounded-lg hover:shadow-md transition-all cursor-pointer border-2 border-transparent hover:border-yellow-200"
+                            >
+                              <input
+                                type="checkbox"
+                                checked={formData.consumable_ids.includes(item.id || item._id)}
+                                onChange={(e) => {
+                                  const consumableId = item.id || item._id;
+                                  if (e.target.checked) {
+                                    setFormData({
+                                      ...formData,
+                                      consumable_ids: [...formData.consumable_ids, consumableId]
+                                    });
+                                  } else {
+                                    setFormData({
+                                      ...formData,
+                                      consumable_ids: formData.consumable_ids.filter(id => id !== consumableId)
+                                    });
+                                  }
+                                }}
+                                className="w-5 h-5 rounded border-gray-300 text-yellow-500 focus:ring-2 focus:ring-yellow-500 cursor-pointer"
+                              />
+                              <div className="flex-1">
+                                <p className="font-semibold text-gray-900">{item.name}</p>
+                                <div className="flex items-center gap-2 mt-1">
+                                  <span className="text-xs text-gray-600">{item.unit}</span>
+                                  {item.current_stock !== undefined && (
+                                    <span className={`text-xs font-medium ${
+                                      item.current_stock > (item.reorder_level || 0) 
+                                        ? 'text-green-600' 
+                                        : 'text-red-600'
+                                    }`}>
+                                      Stock: {item.current_stock}
+                                    </span>
+                                  )}
+                                </div>
+                              </div>
+                            </label>
+                          ))
+                        )}
+                      </div>
+                    </>
+                  ) : (
+                    <div className="text-center py-8 bg-gray-50 rounded-xl">
+                      <ShoppingCart className="w-12 h-12 text-gray-300 mx-auto mb-2" />
+                      <p className="text-sm text-gray-500">This service does not require consumables</p>
+                      <p className="text-xs text-gray-400 mt-1">Enable the toggle above to select consumables</p>
+                    </div>
+                  )}
+                </div>
+
                 {/* Modal Footer */}
                 <div className="flex items-center justify-end gap-3 pt-4 border-t border-gray-200/50">
                   <button
