@@ -204,6 +204,135 @@ async def delete_work_order(work_order_id: str):
 
 logger.info("Work order routes initialized successfully")
 
+# Smart Service Recommendations
+@router.get("/recommended-services/{site_id}")
+async def get_recommended_services(site_id: str, customer_id: Optional[str] = None):
+    """
+    Get recommended services for a site based on:
+    - Historical work orders at this site
+    - Customer's service contracts
+    - Seasonal patterns
+    - Popular services
+    """
+    try:
+        recommendations = {
+            "historical": [],
+            "contractual": [],
+            "seasonal": [],
+            "popular": []
+        }
+        
+        # Get site info
+        site = await sites_collection.find_one({"_id": ObjectId(site_id)})
+        if not site:
+            # Site not found, return empty recommendations
+            return {"success": True, "recommendations": recommendations}
+        
+        # 1. Historical Services - Services performed at this site before
+        historical_work_orders = await work_orders_collection.find(
+            {"site_id": site_id}
+        ).sort("created_at", -1).limit(20).to_list(length=20)
+        
+        # Count service types
+        service_counts = {}
+        for wo in historical_work_orders:
+            service_type = wo.get("service_type")
+            if service_type:
+                service_counts[service_type] = service_counts.get(service_type, 0) + 1
+        
+        # Get top 3 historical services
+        sorted_services = sorted(service_counts.items(), key=lambda x: x[1], reverse=True)
+        for service_name, count in sorted_services[:3]:
+            # Try to get service details
+            service = await services_collection.find_one({"name": service_name})
+            recommendations["historical"].append({
+                "name": service_name,
+                "id": str(service["_id"]) if service else None,
+                "count": count,
+                "reason": f"Performed {count} times at this site"
+            })
+        
+        # 2. Contractual Services - Services from customer's contracts
+        if customer_id:
+            # Check if customer has any active contracts/agreements
+            # For now, we'll check service contracts or recurring services
+            customer = await customers_collection.find_one({"_id": ObjectId(customer_id)})
+            if customer and customer.get("service_contract"):
+                contract_services = customer.get("service_contract", {}).get("services", [])
+                for service_name in contract_services[:3]:
+                    service = await services_collection.find_one({"name": service_name})
+                    recommendations["contractual"].append({
+                        "name": service_name,
+                        "id": str(service["_id"]) if service else None,
+                        "reason": "Included in service contract"
+                    })
+        
+        # 3. Seasonal Services - Based on current month
+        current_month = datetime.utcnow().month
+        seasonal_services = []
+        
+        # Winter services (Nov-Mar): months 11, 12, 1, 2, 3
+        if current_month in [11, 12, 1, 2, 3]:
+            seasonal_services = ["Snow Plowing", "Salting", "Ice Removal", "Snow Removal"]
+        # Spring (Apr-May): months 4, 5
+        elif current_month in [4, 5]:
+            seasonal_services = ["Spring Cleanup", "Power Washing", "Landscaping"]
+        # Summer (Jun-Aug): months 6, 7, 8
+        elif current_month in [6, 7, 8]:
+            seasonal_services = ["Lawn Mowing", "Landscaping", "Irrigation"]
+        # Fall (Sep-Oct): months 9, 10
+        else:
+            seasonal_services = ["Fall Cleanup", "Leaf Removal", "Pre-Winter Prep"]
+        
+        for service_name in seasonal_services[:3]:
+            service = await services_collection.find_one({"name": service_name})
+            if service:
+                recommendations["seasonal"].append({
+                    "name": service_name,
+                    "id": str(service["_id"]),
+                    "reason": "Seasonal recommendation"
+                })
+        
+        # 4. Popular Services - Most commonly ordered across all sites
+        # Get all work orders and find most common service types
+        all_work_orders = await work_orders_collection.find({}).limit(100).to_list(length=100)
+        popular_counts = {}
+        for wo in all_work_orders:
+            service_type = wo.get("service_type")
+            if service_type:
+                popular_counts[service_type] = popular_counts.get(service_type, 0) + 1
+        
+        sorted_popular = sorted(popular_counts.items(), key=lambda x: x[1], reverse=True)
+        for service_name, count in sorted_popular[:3]:
+            # Skip if already in historical
+            if service_name not in [s["name"] for s in recommendations["historical"]]:
+                service = await services_collection.find_one({"name": service_name})
+                recommendations["popular"].append({
+                    "name": service_name,
+                    "id": str(service["_id"]) if service else None,
+                    "reason": "Popular service"
+                })
+        
+        return {
+            "success": True,
+            "site_id": site_id,
+            "site_name": site.get("name"),
+            "recommendations": recommendations
+        }
+        
+    except Exception as e:
+        logger.error(f"Error getting recommended services: {e}")
+        # Return empty recommendations instead of error
+        return {
+            "success": True,
+            "recommendations": {
+                "historical": [],
+                "contractual": [],
+                "seasonal": [],
+                "popular": []
+            }
+        }
+
 # Invoice Generation from Work Order
 @router.post("/{work_order_id}/generate-invoice")
 async def generate_invoice_from_work_order(work_order_id: str):
