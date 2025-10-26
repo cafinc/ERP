@@ -1,19 +1,23 @@
 #!/usr/bin/env python3
 """
-Site Service History Backend API Testing
-Tests all Site Service History endpoints comprehensively
+Comprehensive Backend API Testing for Site Service History and Site Maps
+Testing all endpoints mentioned in the review request
 """
 
-import requests
+import asyncio
+import aiohttp
 import json
+import os
 import sys
 from datetime import datetime, timedelta
-import uuid
+from typing import Dict, Any, List
+import base64
 
-# Backend URL from frontend .env
-BACKEND_URL = "https://map-measure-admin.preview.emergentagent.com/api"
+# Get backend URL from environment
+BACKEND_URL = os.getenv('REACT_APP_BACKEND_URL', 'https://map-measure-admin.preview.emergentagent.com')
+API_BASE = f"{BACKEND_URL}/api"
 
-class SiteServiceHistoryTester:
+class BackendTester:
     def __init__(self):
         self.session = requests.Session()
         self.test_results = []
