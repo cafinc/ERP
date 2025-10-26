@@ -885,30 +885,39 @@ export default function CreateSitePage() {
 
       {/* Service Modal */}
       {showServiceModal && (
-        <div className="fixed inset-0 bg-gray-900/20 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg shadow-2xl w-full max-w-md">
-            <div className="p-6 border-b border-gray-200">
-              <div className="flex items-center justify-between">
-                <h3 className="text-xl font-bold text-gray-900">Add Service</h3>
-                <button
-                  onClick={() => setShowServiceModal(false)}
-                  className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-                >
-                  <X className="w-5 h-5 text-gray-600" />
-                </button>
+        <div className="fixed inset-0 bg-gray-900/20 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fadeIn overflow-y-auto">
+          <div className="bg-white/95 backdrop-blur-md rounded-3xl max-w-2xl w-full shadow-2xl border border-white/40 animate-slideUp my-8">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between p-6 border-b border-gray-200/50">
+              <div className="flex items-center gap-3">
+                <div className="bg-gradient-to-br from-[#3f72af] to-[#2c5282] rounded-xl p-3">
+                  <Briefcase className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-900">Add Service</h2>
+                  <p className="text-sm text-gray-600 mt-0.5">Configure service for this site</p>
+                </div>
               </div>
+              <button
+                onClick={() => setShowServiceModal(false)}
+                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              >
+                <X className="w-5 h-5 text-gray-500" />
+              </button>
             </div>
 
-            <div className="p-6 space-y-4">
+            {/* Modal Body */}
+            <div className="p-6 space-y-6 max-h-[calc(90vh-180px)] overflow-y-auto">
               {/* Service Selection */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-gray-900 mb-2">
                   Service <span className="text-red-500">*</span>
                 </label>
                 <select
                   value={selectedServiceId}
                   onChange={(e) => setSelectedServiceId(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all bg-white"
+                  style={{ fontSize: '16px' }}
                 >
                   <option value="">Select a service</option>
                   {services.map((service) => (
@@ -951,73 +960,84 @@ export default function CreateSitePage() {
                 )}
               </div>
 
-              {/* Unit Type */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Unit Type <span className="text-red-500">*</span>
-                </label>
-                <div className="grid grid-cols-2 gap-2">
-                  {['hourly', 'per_occurrence', 'monthly', 'per_yard'].map((unit) => (
-                    <button
-                      key={unit}
-                      type="button"
-                      onClick={() => setServiceUnitType(unit)}
-                      className={`px-4 py-2 rounded-lg border-2 font-medium transition-all capitalize text-sm ${
-                        serviceUnitType === unit
-                          ? 'bg-blue-500 text-white border-blue-500'
-                          : 'bg-white text-gray-700 border-gray-300 hover:border-blue-300'
-                      }`}
-                    >
-                      {unit.replace('_', ' ')}
-                    </button>
-                  ))}
+              {/* Unit Type & Price */}
+              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 border-2 border-blue-100">
+                <h3 className="text-sm font-bold text-gray-900 mb-4 flex items-center gap-2">
+                  <DollarSign className="w-4 h-4 text-[#3f72af]" />
+                  Pricing Details
+                </h3>
+                
+                {/* Unit Type */}
+                <div className="mb-4">
+                  <label className="block text-xs font-medium text-gray-700 mb-2">
+                    Unit Type <span className="text-red-500">*</span>
+                  </label>
+                  <div className="grid grid-cols-2 gap-2">
+                    {['hourly', 'per_occurrence', 'monthly', 'per_yard'].map((unit) => (
+                      <button
+                        key={unit}
+                        type="button"
+                        onClick={() => setServiceUnitType(unit)}
+                        className={`px-4 py-3 rounded-lg border-2 font-semibold transition-all capitalize text-sm ${
+                          serviceUnitType === unit
+                            ? 'bg-[#3f72af] text-white border-[#3f72af] shadow-md'
+                            : 'bg-white text-gray-700 border-gray-200 hover:border-[#3f72af]'
+                        }`}
+                      >
+                        {unit.replace('_', ' ')}
+                      </button>
+                    ))}
+                  </div>
                 </div>
-              </div>
 
-              {/* Price */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Price <span className="text-red-500">*</span>
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">$</span>
-                  <input
-                    type="number"
-                    step="0.01"
-                    value={servicePrice}
-                    onChange={(e) => setServicePrice(e.target.value)}
-                    className="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    placeholder="0.00"
-                  />
+                {/* Price */}
+                <div>
+                  <label className="block text-xs font-medium text-gray-700 mb-2">
+                    Price <span className="text-red-500">*</span>
+                  </label>
+                  <div className="relative">
+                    <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 font-bold">$</span>
+                    <input
+                      type="number"
+                      step="0.01"
+                      value={servicePrice}
+                      onChange={(e) => setServicePrice(e.target.value)}
+                      className="w-full pl-8 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-semibold"
+                      placeholder="0.00"
+                    />
+                  </div>
                 </div>
               </div>
 
               {/* Frequency */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+              <div className="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-2xl p-6 border-2 border-purple-100">
+                <h3 className="text-sm font-bold text-gray-900 mb-4 flex items-center gap-2">
+                  <Calendar className="w-4 h-4 text-purple-600" />
                   Frequency (Optional)
-                </label>
+                </h3>
                 <input
                   type="text"
                   value={serviceFrequency}
                   onChange={(e) => setServiceFrequency(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-semibold"
                   placeholder="e.g., weekly, bi-weekly, as-needed"
                 />
               </div>
             </div>
 
-            <div className="p-6 border-t border-gray-200 flex items-center justify-end gap-3">
+            {/* Modal Footer */}
+            <div className="flex items-center justify-end gap-3 p-6 border-t border-gray-200/50">
               <button
                 onClick={() => setShowServiceModal(false)}
-                className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors"
+                className="px-5 py-2 text-sm border-2 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 hover:border-gray-400 transition-all font-semibold"
               >
                 Cancel
               </button>
               <button
                 onClick={handleSaveService}
-                className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+                className="flex items-center gap-2 px-5 py-2 text-sm bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-all shadow-sm hover:shadow-md font-semibold"
               >
+                <Plus className="w-4 h-4" />
                 Add Service
               </button>
             </div>
