@@ -16,6 +16,9 @@ from typing import List, Optional, Dict, Any
 from bson import ObjectId
 from datetime import datetime, timedelta, timezone
 
+# Import rate limiting
+from middleware.rate_limiter import setup_rate_limiting, limiter
+
 # Suppress noisy Google API logs
 logging.getLogger('googleapiclient.discovery_cache').setLevel(logging.WARNING)
 logging.getLogger('google_auth_httplib2').setLevel(logging.WARNING)
