@@ -79,7 +79,8 @@ export default function EmailConfigPage() {
   };
 
   return (
-    <PageHeader
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <PageHeader
         title="Email Config"
         subtitle="Manage email config"
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Settings", href: "/settings" }, { label: "Email Config" }]}
