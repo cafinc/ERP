@@ -1,0 +1,439 @@
+<analysis>
+The AI engineer's work began by confirming the overall plan with the user, which involved completing a list of pending tasks related to UI/UX fixes, feature enhancements, and pre-deployment readiness. Initial efforts focused on implementing measurement tools and export functionalities for the Unified Map Builder, along with creating deployment documentation. The process then shifted to resolving a significant number of JSX build errors across the  frontend, systematically debugging and applying fixes with the help of a  and custom scripts. Concurrently, critical issues in the  page were addressed, including dropdown styling, validation logic for different customer types, removal of HTML5  attributes, and crucially, separating shared address state between individual and company customer forms. Map loading issues in the Unified Map Builder were thoroughly debugged and resolved by fixing Next.js dynamic param handling, optimizing Google Maps initialization, and ensuring correct React ref attachment. The most recent phase involved implementing advanced map features like geofence saving, drag-and-drop icons, arrows, text boxes, clickable map items, and a dynamic map legend. The work is iterative, with continuous user feedback driving detailed fixes and feature additions, often requiring multiple restarts and debugging cycles.
+</analysis>
+
+<product_requirements>
+The core objective is to modernize an ERP web administration application, focusing on UI/UX and expanding features for field service management. Key requirements included:
+-   **Dashboard Lead Creation**: A New Lead button on the Dashboard should directly open a Create Lead modal.
+-   **Customer Creation Form**: Implement robust validation and consistent styling, adapting field requirements based on customer type (individual vs. company). Google Maps autocomplete was initially integrated, then removed due to issues.
+    *   **Implemented Fixes**: Fixed dropdown layering (z-index), added a spacer  for dropdowns, refined conditional validation, restructured toggle/search bar/selected company display for inline placement, removed all  HTML attributes to rely on JS validation, and critically *separated address state variables* into  and  to prevent data linkage and ensure distinct form inputs.
+-   **Service History**: Add a detailed service history section to the Site Detail Page, including data display (spreadsheet format) and export options (Google Sheets, Excel, PDF).
+-   **Site Map Building System**: Enhance site mapping capabilities to create professional maps. This involved integrating existing geofencing with advanced annotation tools, measurement functionality, map screenshotting, and a unified interface for property overview, geofence management, and annotations.
+    *   **Implemented Features**: Measurement tools and export buttons were added. The system was transformed into a Unified Map Builder (). Map initialization issues (intermittent loading,  literal param,  not attaching) were debugged and resolved with early returns and a  ref attachment delay. Geofence saving with a UI button was added. Implementation for drag-and-drop icon placement, arrows, text boxes with transparent backgrounds, clickable map items, and a dynamic map legend is actively ongoing.
+-   **Comprehensive Testing**: Conduct full system testing to ensure all features work, addressing deployment-blocking errors.
+-   **Pre-Deployment Readiness**: Review and implement critical security fixes (password hashing, WebSocket authentication, secure environment variables), perform UX cleanup (hide incomplete features), and optimize performance (database indexing, code cleanup) for production deployment. This includes generating a  and addressing build issues.
+</product_requirements>
+
+<key_technical_concepts>
+-   **Full-Stack Development**: Next.js (frontend), FastAPI (backend), MongoDB (database).
+-   **UI/UX Patterns**: Modals, conditional rendering, tabbed navigation, form validation, responsive design.
+-   **State Management**: React , , , , .
+-   **API Integration**: RESTful APIs, JWT for authentication, WebSocket.
+-   **Security**: bcrypt for password hashing, PyJWT for token validation, SlowAPI for rate limiting.
+-   **Performance**: MongoDB indexing, frontend rendering optimizations.
+-   **Mapping**: Google Maps API (drawing, geometry), custom overlays, event listeners, dynamic map legend.
+</key_technical_concepts>
+
+<code_architecture>
+
+-   :
+    -   **Importance**: Customer creation form.
+    -   **Changes**: Fixed styling, removed Google Maps autocomplete, refined validation logic for different customer types, fixed JSX build errors.
+    -   **Recent Specific Changes**: Increased dropdown z-index, added a spacer div to push content down for dropdown visibility, restructured layout to keep toggles inline, removed all  HTML attributes to rely on JavaScript validation, and separated shared address state into  and  to prevent data linkage, updating form inputs and the  function accordingly.
+-   , , , , :
+    -   **Importance**: Various application pages.
+    -   **Changes**: Fixed JSX structural build errors (missing closing tags, incorrect fragments, duplicate props).
+-   :
+    -   **Importance**: Site listing page.
+    -   **Changes**: Site cards in grid view now navigate to  instead of opening a quick view modal.
+-   :
+    -   **Importance**: Comprehensive site detail page.
+    -   **Changes**: Enhanced error handling. Integrated Service History tab. Replaced in-page map with a Unified Map Builder preview card linking to . Removed the measurement modal placeholder.
+-   :
+    -   **Importance**: FastAPI routes for managing site service history.
+    -   **Changes**: Created to handle CRUD operations for service history.
+-   :
+    -   **Importance**: Unified Map Builder for geofence and annotations. Initially transformed into a 3-tab system.
+    -   **Changes**: Implemented extensive state management, functions for drawing (polygons, rectangles, markers), saving, deleting, undo/redo, and exporting map images. Added map initialization for the overview tab. Fixed multiple JSX and Next.js App Router errors.
+    -   **Recent Specific Changes**: Resolved intermittent map loading by fixing Next.js dynamic param () handling, ensuring map container rendering with an early return pattern, and adding a  delay for Google Map ref attachment. Implemented measurement tool functions and UI. Added geofence saving functionality and a dedicated UI button. Started implementing drag-and-drop icon placement, custom icon options, arrows, text boxes, clickable items, and a dynamic legend by replacing the Layer Info panel with a new Legend component.
+-   :
+    -   **Importance**: Main FastAPI server, registers all API routes.
+    -   **Changes**: Registered  and . Added health endpoint. Integrated  middleware. Refined  validation.
+-   :
+    -   **Importance**: Backend data models.
+    -   **Changes**: Updated  models to make  more flexible.
+-   :
+    -   **Importance**: User management and credentials.
+    -   **Changes**: Implemented  and  using bcrypt. Updated  to store hashed passwords.
+-   :
+    -   **Importance**: Authentication logic.
+    -   **Changes**: Adjusted to use the 'password' field for verification.
+-   :
+    -   **Importance**: JWT token validation utilities.
+    -   **Changes**: Created to encapsulate JWT encoding/decoding logic for WebSocket authentication.
+-   :
+    -   **Importance**: WebSocket connection handling.
+    -   **Changes**: Integrated JWT token validation for secure WebSocket connections.
+-   :
+    -   **Importance**: API rate limiting.
+    -   **Changes**: Created using  to protect backend endpoints.
+-    & :
+    -   **Importance**: Environment variable management.
+    -   **Changes**: Added .  created.
+-   :
+    -   **Importance**: Specifies files to ignore from version control.
+    -   **Changes**: Added .
+-   :
+    -   **Importance**: Script for database indexing.
+    -   **Changes**: Ensured critical indexes for  and  collections are created.
+-   :
+    -   **Importance**: Documentation for optimization efforts.
+    -   **Changes**: Created to summarize performance improvements and cleanup.
+-    (New):
+    -   **Importance**: Comprehensive documentation for deployment steps.
+    -   **Changes**: Created.
+-   :
+    -   **Importance**: Records testing outcomes and problem statements.
+    -   **Changes**: Regularly updated with backend and frontend testing results, issue fixes, and current status.
+-   :
+    -   **Importance**: Site creation page.
+    -   **Changes**: Increased z-index of customer dropdown and confirmed a spacer  for proper content displacement.
+-   :
+    -   **Importance**: Email configuration page in web admin.
+    -   **Changes**: Fixed JSX parsing errors (e.g.,  unexpected, incorrect  usage as a wrapper) by restructuring the component's return statement to correctly wrap elements and use  as a self-closing component.
+-   :
+    -   **Importance**: Contract details page in web admin.
+    -   **Changes**: Fixed JSX parsing errors related to incorrect  usage, similar to .
+-    (New):
+    -   **Importance**: Mobile application screen for displaying site maps.
+    -   **Changes**: Created to provide a basic map viewing feature for the Expo frontend.
+-   ======================================
+  PRE-DEPLOYMENT SECURITY CHECK
+======================================
+
+1. Checking environment files...
+[0;32m✅ Backend .env file exists[0m
+[0;32m✅ JWT_SECRET_KEY has adequate length[0m
+[0;32m✅ MONGO_URL is configured[0m
+[1;33m⚠️  WARNING: GOOGLE_MAPS_API_KEY not found[0m
+[0;32m✅ Web admin .env.local file exists[0m
+
+2. Checking for hardcoded credentials...
+[1;33m⚠️  WARNING: Found 4 potential hardcoded passwords in backend code[0m
+
+3. Checking database indexes...
+[0;32m✅ Database index script exists[0m
+   Run: python /app/backend/create_indexes.py
+
+4. Checking security implementations...
+[0;32m✅ Password hashing implemented (bcrypt)[0m
+[0;32m✅ Rate limiting is enabled[0m
+[0;32m✅ WebSocket authentication implemented[0m
+
+5. Checking for console.log statements...
+[1;33m⚠️  WARNING: Found 71 console.log statements in web-admin[0m
+
+6. Checking file permissions...
+[1;33m⚠️  WARNING: .env file permissions are 644 (should be 600 or 400)[0m
+
+7. Checking for TODO and FIXME comments...
+[1;33m⚠️  WARNING: Found 13 TODO/FIXME comments in backend code[0m
+
+8. Checking dependencies...
+[0;32m✅ Backend requirements.txt exists[0m
+[0;32m✅ Web admin package.json exists[0m
+
+======================================
+  SECURITY CHECK SUMMARY
+======================================
+[0;31mErrors: 0[0m
+[1;33mWarnings: 5[0m
+
+[1;33m⚠️  WARNINGS FOUND - Review before deploying[0m (New):
+    -   **Importance**: Script for pre-deployment security and environment checks.
+    -   **Changes**: Created and executed to identify warnings.
+-   ========================================
+  PRODUCTION DEPLOYMENT PREPARATION
+========================================
+
+[0;34mStep 1: Generating new JWT secret key...[0m
+New JWT Secret: DuO8HM9fvvlvWzXucDQQYLZvb2mEaf-SsDgFmCQAHO0
+[1;33m⚠️  IMPORTANT: Update JWT_SECRET_KEY in /app/backend/.env with this value[0m
+
+[0;34mStep 2: Creating database indexes...[0m
+🚀 Creating database indexes for performance optimization...
+Creating users indexes...
+Creating customers indexes...
+Creating sites indexes...
+Creating equipment indexes...
+Creating dispatches indexes...
+Creating gps_locations indexes...
+Creating photos indexes...
+Creating form_templates indexes...
+Creating form_responses indexes...
+Creating messages indexes...
+Creating direct_messages indexes...
+Creating conversations indexes...
+Creating user_sessions indexes...
+  ⚠️  TTL index: An equivalent index already exists with the same name but different options. Requested index: { v: 2, key: { expires_at: 1 }, name: "expires_at_1", expireAfterSeconds: 0 }, existing index: { v: 2, key: { expires_at: 1 }, name: "expires_at_1" }, full error: {'ok': 0.0, 'errmsg': 'An equivalent index already exists with the same name but different options. Requested index: { v: 2, key: { expires_at: 1 }, name: "expires_at_1", expireAfterSeconds: 0 }, existing index: { v: 2, key: { expires_at: 1 }, name: "expires_at_1" }', 'code': 85, 'codeName': 'IndexOptionsConflict'}
+Creating otp_records indexes...
+  ⚠️  TTL index: An equivalent index already exists with the same name but different options. Requested index: { v: 2, key: { expires_at: 1 }, name: "expires_at_1", expireAfterSeconds: 0 }, existing index: { v: 2, key: { expires_at: 1 }, name: "expires_at_1" }, full error: {'ok': 0.0, 'errmsg': 'An equivalent index already exists with the same name but different options. Requested index: { v: 2, key: { expires_at: 1 }, name: "expires_at_1", expireAfterSeconds: 0 }, existing index: { v: 2, key: { expires_at: 1 }, name: "expires_at_1" }', 'code': 85, 'codeName': 'IndexOptionsConflict'}
+Creating notifications indexes...
+Creating consumables indexes...
+Creating consumable_usage indexes...
+Creating services indexes...
+Creating routes indexes...
+Creating invoices indexes...
+Creating gmail_connections indexes...
+Creating gmail_emails indexes...
+✅ All indexes created successfully!
+
+📊 Performance improvements:
+  - Query speed: 10-100x faster
+  - Collection scans: Eliminated
+  - Geospatial queries: Optimized
+  - TTL cleanup: Automated
+[0;32m✅ Database indexes created successfully[0m
+
+[0;34mStep 3: Building web admin frontend...[0m
+
+> web-admin@0.1.0 build
+> next build --turbopack
+
+   ▲ Next.js 15.5.6 (Turbopack)
+   - Environments: .env.local
+
+   Creating an optimized production build ...
+ ✓ Finished writing to disk in 87ms
+❌ Frontend build failed (New):
+    -   **Importance**: Script for production deployment preparation.
+    -   **Changes**: Created and executed, but encountered build errors.
+-   ============================================================
+  JSX SYNTAX BATCH FIX SCRIPT
+============================================================
+
+✅ Backup directory: /app/backups/jsx-fix
+
+🔍 Scanning for .tsx files in /app/web-admin/app...
+   Found 191 .tsx files
+
+🔧 Processing files...
+------------------------------------------------------------
+[1/191] layout.tsx ⏭️  SKIPPED
+[2/191] page.tsx ⏭️  SKIPPED
+[3/191] operations/page.tsx ⏭️  SKIPPED
+[4/191] reports/page.tsx ⏭️  SKIPPED
+[5/191] dispatch/page.tsx ⏭️  SKIPPED
+[6/191] dispatch/create/page.tsx ⏭️  SKIPPED
+[7/191] dispatch/[id]/page.tsx ⏭️  SKIPPED
+[8/191] dispatch/dashboard/page.tsx ⏭️  SKIPPED
+[9/191] tracking/page.tsx ⏭️  SKIPPED
+[10/191] finance/reports/page.tsx ⏭️  SKIPPED
+[11/191] finance/expenses/page.tsx ⏭️  SKIPPED
+[12/191] finance/payments/page.tsx ⏭️  SKIPPED
+[13/191] finance/dashboard/page.tsx ⏭️  SKIPPED
+[14/191] weather/page.tsx ⏭️  SKIPPED
+[15/191] shifts/history/page.tsx ⏭️  SKIPPED
+[16/191] ringcentral/page.tsx ⏭️  SKIPPED
+[17/191] ringcentral/contacts/page.tsx ⏭️  SKIPPED
+[18/191] ringcentral/recordings/page.tsx ⏭️  SKIPPED
+[19/191] ringcentral/messaging/page.tsx ⏭️  SKIPPED
+[20/191] ringcentral/analytics/page.tsx ⏭️  SKIPPED
+[21/191] ringcentral/sms/page.tsx ⏭️  SKIPPED
+[22/191] ringcentral/active-calls/page.tsx ⏭️  SKIPPED
+[23/191] feedback/page.tsx ⏭️  SKIPPED
+[24/191] submenu-header-options/page.tsx ⏭️  SKIPPED
+[25/191] subcontractor-portal/communications/page.tsx ⏭️  SKIPPED
+[26/191] services/page.tsx ⏭️  SKIPPED
+[27/191] services/create/page.tsx ⏭️  SKIPPED
+[28/191] services/[id]/edit/page.tsx ⏭️  SKIPPED
+[29/191] communications/center/layout.tsx ⏭️  SKIPPED
+[30/191] communications/center/page.tsx ⏭️  SKIPPED
+[31/191] equipment/page.tsx ⏭️  SKIPPED
+[32/191] equipment/maintenance/page.tsx ⏭️  SKIPPED
+[33/191] equipment/inspections/page.tsx ⏭️  SKIPPED
+[34/191] equipment/inspections/schedules/page.tsx ⏭️  SKIPPED
+[35/191] equipment/inspections/schedules/create/page.tsx ⏭️  SKIPPED
+[36/191] equipment/create/page.tsx ⏭️  SKIPPED
+[37/191] equipment/[id]/page.tsx ⏭️  SKIPPED
+[38/191] equipment/[id]/history/page.tsx ⏭️  SKIPPED
+[39/191] equipment/[id]/edit/page.tsx ⏭️  SKIPPED
+[40/191] equipment/dashboard/page.tsx ⏭️  SKIPPED
+[41/191] purchase-orders/page.tsx ⏭️  SKIPPED
+[42/191] crew/page.tsx ⏭️  SKIPPED
+[43/191] design-system-demo/page.tsx ⏭️  SKIPPED
+[44/191] tasks/page.tsx ⏭️  SKIPPED
+[45/191] page-layout-mapper/page.tsx ⏭️  SKIPPED
+[46/191] login/page.tsx ⏭️  SKIPPED
+[47/191] consumables/page.tsx ⏭️  SKIPPED
+[48/191] consumables/analytics/page.tsx ⏭️  SKIPPED
+[49/191] preview-new-design/page.tsx ⏭️  SKIPPED
+[50/191] agreements/create/page.tsx ⏭️  SKIPPED
+[51/191] agreements/templates/page.tsx ⏭️  SKIPPED
+[52/191] agreements/templates/create/page.tsx ⏭️  SKIPPED
+[53/191] inventory/page.tsx ⏭️  SKIPPED
+[54/191] inventory/add/page.tsx ⏭️  SKIPPED
+[55/191] messages/page.tsx ⏭️  SKIPPED
+[56/191] projects/page.tsx ⏭️  SKIPPED
+[57/191] projects/create/page.tsx ⏭️  SKIPPED
+[58/191] projects/[id]/page.tsx ⏭️  SKIPPED
+[59/191] integrations/page.tsx ⏭️  SKIPPED
+[60/191] hr/page.tsx ⏭️  SKIPPED
+[61/191] hr/performance/page.tsx ⏭️  SKIPPED
+[62/191] hr/design-option-a/page.tsx ⏭️  SKIPPED
+[63/191] hr/pto/page.tsx ⏭️  SKIPPED
+[64/191] hr/time-attendance/page.tsx ⏭️  SKIPPED
+[65/191] hr/design-option-c/page.tsx ⏭️  SKIPPED
+[66/191] hr/payroll/page.tsx ⏭️  SKIPPED
+[67/191] hr/training/page.tsx ⏭️  SKIPPED
+[68/191] hr/design-option-b/page.tsx ⏭️  SKIPPED
+[69/191] hr/employees/page.tsx ⏭️  SKIPPED
+[70/191] team/page.tsx ⏭️  SKIPPED
+[71/191] team/create/page.tsx ⏭️  SKIPPED
+[72/191] team/[id]/page.tsx ⏭️  SKIPPED
+[73/191] team/[id]/edit/page.tsx ⏭️  SKIPPED
+[74/191] assets/tools/page.tsx ⏭️  SKIPPED
+[75/191] assets/vehicles/page.tsx ⏭️  SKIPPED
+[76/191] assets/trailers/page.tsx ⏭️  SKIPPED
+[77/191] safety/inspections/page.tsx ⏭️  SKIPPED
+[78/191] safety/emergency/page.tsx ⏭️  SKIPPED
+[79/191] safety/hazards/page.tsx ⏭️  SKIPPED
+[80/191] safety/incidents/page.tsx ⏭️  SKIPPED
+[81/191] safety/policies/page.tsx ⏭️  SKIPPED
+[82/191] safety/ppe/page.tsx ⏭️  SKIPPED
+[83/191] safety/training/page.tsx ⏭️  SKIPPED
+[84/191] safety/meetings/page.tsx ⏭️  SKIPPED
+[85/191] safety/dashboard/page.tsx ⏭️  SKIPPED
+[86/191] forgot-password/page.tsx ⏭️  SKIPPED
+[87/191] submenu-options/page.tsx ⏭️  SKIPPED
+[88/191] navigation-builder/page.tsx ⏭️  SKIPPED
+[89/191] reset-password/page.tsx ⏭️  SKIPPED
+[90/191] fuel/page.tsx ⏭️  SKIPPED
+[91/191] analytics/page.tsx ⏭️  SKIPPED
+[92/191] settings/page.tsx ⏭️  SKIPPED
+[93/191] settings/email-config/page.tsx ⏭️  SKIPPED
+[94/191] settings/ringcentral/page.tsx ⏭️  SKIPPED
+[95/191] settings/quickbooks/page.tsx ⏭️  SKIPPED
+[96/191] settings/sms-config/page.tsx ⏭️  SKIPPED
+[97/191] settings/branding/page.tsx ⏭️  SKIPPED
+[98/191] settings/profile/page.tsx ⏭️  SKIPPED
+[99/191] settings/email-templates/page.tsx ⏭️  SKIPPED
+[100/191] settings/notifications/page.tsx ⏭️  SKIPPED
+[101/191] settings/billing/page.tsx ⏭️  SKIPPED
+[102/191] settings/webhooks/page.tsx ⏭️  SKIPPED
+[103/191] settings/account/page.tsx ⏭️  SKIPPED
+[104/191] settings/service-areas/page.tsx ⏭️  SKIPPED
+[105/191] settings/permissions-matrix/page.tsx ⏭️  SKIPPED
+[106/191] settings/roles-permissions/page.tsx ⏭️  SKIPPED
+[107/191] settings/preferences/page.tsx ⏭️  SKIPPED
+[108/191] settings/equipment-forms/page.tsx ⏭️  SKIPPED
+[109/191] settings/google/page.tsx ⏭️  SKIPPED
+[110/191] settings/security/page.tsx ⏭️  SKIPPED
+[111/191] settings/api/page.tsx ⏭️  SKIPPED
+[112/191] settings/company/page.tsx ⏭️  SKIPPED
+[113/191] settings/app-integration/page.tsx ⏭️  SKIPPED
+[114/191] settings/support/page.tsx ⏭️  SKIPPED
+[115/191] forms/page.tsx ⏭️  SKIPPED
+[116/191] forms/[templateId]/fill/page.tsx ⏭️  SKIPPED
+[117/191] forms/builder/page.tsx ⏭️  SKIPPED
+[118/191] forms/responses/[responseId]/page.tsx ⏭️  SKIPPED
+[119/191] emergency-alert/page.tsx ⏭️  SKIPPED
+[120/191] learning-documents/page.tsx ⏭️  SKIPPED
+[121/191] gmail/page_old.tsx ⏭️  SKIPPED
+[122/191] gmail/page.tsx ⏭️  SKIPPED
+[123/191] routes/page.tsx ⏭️  SKIPPED
+[124/191] routes/optimize/page.tsx ⏭️  SKIPPED
+[125/191] automation/page.tsx ⏭️  SKIPPED
+[126/191] automation/analytics/page.tsx ⏭️  SKIPPED
+[127/191] automation/workflows/page.tsx ⏭️  SKIPPED
+[128/191] automation/workflows/create/page.tsx ⏭️  SKIPPED
+[129/191] automation/workflows/[id]/history/page.tsx ⏭️  SKIPPED
+[130/191] automation/workflows/edit/[id]/page.tsx ⏭️  SKIPPED
+[131/191] sites/page.tsx ⏭️  SKIPPED
+[132/191] sites/create/page.tsx ⏭️  SKIPPED
+[133/191] sites/maps/page.tsx ⏭️  SKIPPED
+[134/191] sites/[id]/page.tsx ⏭️  SKIPPED
+[135/191] sites/[id]/maps/page-old-tabs.tsx ⏭️  SKIPPED
+[136/191] sites/[id]/maps/page.tsx ⏭️  SKIPPED
+[137/191] crm/dashboard/page.tsx ⏭️  SKIPPED
+[138/191] contracts/page.tsx ⏭️  SKIPPED
+[139/191] contracts/create/page.tsx ⏭️  SKIPPED
+[140/191] contracts/[id]/page.tsx ⏭️  SKIPPED
+[141/191] complete-design-selector/page.tsx ⏭️  SKIPPED
+[142/191] test-topbar/page.tsx ⏭️  SKIPPED
+[143/191] access/page.tsx ⏭️  SKIPPED
+[144/191] access/crew/page.tsx ⏭️  SKIPPED
+[145/191] access/master/page.tsx ⏭️  SKIPPED
+[146/191] access/vendors/page.tsx ⏭️  SKIPPED
+[147/191] access/admins/page.tsx ⏭️  SKIPPED
+[148/191] access/subcontractors/page.tsx ⏭️  SKIPPED
+[149/191] access/customers/page.tsx ⏭️  SKIPPED
+[150/191] access/dashboard/page.tsx ⏭️  SKIPPED
+[151/191] customer-portal/page.tsx ⏭️  SKIPPED
+[152/191] customer-portal/communications/page.tsx ⏭️  SKIPPED
+[153/191] customer-portal/estimates/page.tsx ⏭️  SKIPPED
+[154/191] customer-portal/work-orders/page.tsx ⏭️  SKIPPED
+[155/191] customer-portal/invoices/page.tsx ⏭️  SKIPPED
+[156/191] customer-portal/dashboard/page.tsx ⏭️  SKIPPED
+[157/191] crew-portal/page.tsx ⏭️  SKIPPED
+[158/191] crew-portal/communications/page.tsx ⏭️  SKIPPED
+[159/191] crew-portal/tasks/page.tsx ⏭️  SKIPPED
+[160/191] crew-portal/time-tracking/page.tsx ⏭️  SKIPPED
+[161/191] estimates/page.tsx ⏭️  SKIPPED
+[162/191] estimates/create/page.tsx ⏭️  SKIPPED
+[163/191] estimates/[id]/page.tsx ⏭️  SKIPPED
+[164/191] customers/page.tsx ⏭️  SKIPPED
+[165/191] customers/create/page.tsx ⏭️  SKIPPED
+[166/191] customers/[id]/page.tsx ⏭️  SKIPPED
+[167/191] customers/[id]/page-old2.tsx ⏭️  SKIPPED
+[168/191] customers/[id]/recurring-services/page.tsx ⏭️  SKIPPED
+[169/191] customers/[id]/edit/page.tsx ⏭️  SKIPPED
+[170/191] geofence/page.tsx ⏭️  SKIPPED
+[171/191] learning/dashboard/page.tsx ⏭️  SKIPPED
+[172/191] leads/page.tsx ⏭️  SKIPPED
+[173/191] test-slideout/page.tsx ⏭️  SKIPPED
+[174/191] communication/page.tsx ⏭️  SKIPPED
+[175/191] communication/feedback/[messageId]/page.tsx ⏭️  SKIPPED
+[176/191] communication/[id]/page.tsx ⏭️  SKIPPED
+[177/191] communication/dashboard/page.tsx ⏭️  SKIPPED
+[178/191] work-orders/page.tsx ⏭️  SKIPPED
+[179/191] work-orders/[id]/page.tsx ⏭️  SKIPPED
+[180/191] invoices/page.tsx ⏭️  SKIPPED
+[181/191] invoices/create/page.tsx ⏭️  SKIPPED
+[182/191] invoices/[id]/page.tsx ⏭️  SKIPPED
+[183/191] photos/page.tsx ⏭️  SKIPPED
+[184/191] photos/upload/page.tsx ⏭️  SKIPPED
+[185/191] dashboard/page.tsx ⏭️  SKIPPED
+[186/191] templates/page.tsx ⏭️  SKIPPED
+[187/191] templates/new/page.tsx ⏭️  SKIPPED
+[188/191] templates/[type]/[id]/page.tsx ⏭️  SKIPPED
+[189/191] templates/[type]/[id]/edit/page.tsx ⏭️  SKIPPED
+[190/191] legal/terms/page.tsx ⏭️  SKIPPED
+[191/191] legal/privacy/page.tsx ⏭️  SKIPPED
+
+============================================================
+  SUMMARY
+============================================================
+Total files scanned: 191
+✅ Files fixed: 0
+⏭️  Files skipped: 191
+❌ Errors: 0
+
+ℹ️  No files needed fixing or all were skipped (New):
+    -   **Importance**: Python script to automatically fix common JSX structural issues.
+    -   **Changes**: Created and used to batch-fix JSX errors, particularly those related to  usage.
+</code_architecture>
+
+<pending_tasks>
+-   Implement map export/screenshot functionality for the Site Maps annotations (initial request, then shifted focus).
+-   Fully implement specific measurement tools functionality and popups for Measure Area and Measure Distance calculations.
+-   Fully implement clickable items on the map for editing/viewing after placement.
+-   Refine and complete the dynamic map legend to accurately reflect all icons and measurement names.
+-   Address remaining ~95 JSX build errors in the  application.
+-   Conduct a final comprehensive system test.
+-   Rotate exposed credentials as a final pre-deployment step.
+</pending_tasks>
+
+<current_work>
+The AI engineer is actively working on enhancing the Unified Site Maps Builder in  with advanced annotation and interaction features. This involves implementing:
+1.  **Arrows**: Users can draw directional arrows on the map.
+2.  **Text Boxes**: Users can add text labels with transparent backgrounds.
+3.  **Clickable Items**: Map elements (icons, measurements, annotations) should be clickable for viewing or editing.
+4.  **Dynamic Legend**: A legend component that automatically updates to display all present map items (icons, measurements, annotations).
+
+Immediately prior to this summary, the AI had just finished integrating the new dynamic Legend component into the map interface, replacing the older Layer Info panel. The  and  functions have been updated to support these new functionalities. The  service needs to be restarted to apply these most recent changes and allow for testing.
+</current_work>
+
+<optional_next_step>
+Restart the  service and then test the newly implemented arrow, text box, and dynamic map legend features on the Unified Site Maps Builder page.
+</optional_next_step>

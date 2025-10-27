@@ -10,7 +10,7 @@ import sys
 from datetime import datetime
 
 # Backend URL from environment
-BACKEND_URL = "https://service-history-app.preview.emergentagent.com/api"
+BACKEND_URL = "https://fieldview-3.preview.emergentagent.com/api"
 
 class DuplicateCustomerTester:
     def __init__(self):

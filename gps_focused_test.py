@@ -8,7 +8,7 @@ import json
 import time
 from datetime import datetime, timedelta
 
-BASE_URL = "https://service-history-app.preview.emergentagent.com/api"
+BASE_URL = "https://fieldview-3.preview.emergentagent.com/api"
 HEADERS = {"Content-Type": "application/json"}
 
 def test_enhanced_gps_system():

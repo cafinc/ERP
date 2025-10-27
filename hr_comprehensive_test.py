@@ -11,7 +11,7 @@ from datetime import datetime, timedelta
 from typing import Dict, List, Any
 
 # Backend URL from frontend/.env
-BACKEND_URL = "https://service-history-app.preview.emergentagent.com/api"
+BACKEND_URL = "https://fieldview-3.preview.emergentagent.com/api"
 
 class HRComprehensiveTester:
     def __init__(self):
