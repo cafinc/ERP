@@ -452,18 +452,33 @@ export default function ModernHeaderWithNav() {
   }, []);
 
   return (
-    <header 
-      className={`text-white sticky top-0 z-40 transition-all duration-300 ${
-        isScrolled ? 'shadow-2xl' : 'shadow-lg'
-      }`} 
-      style={{ 
-        background: `linear-gradient(135deg, ${headerColor} 0%, ${headerColor}dd 100%)`,
-        backdropFilter: 'blur(12px)',
-        WebkitBackdropFilter: 'blur(12px)',
-        boxShadow: isScrolled ? '0 8px 32px rgba(0, 0, 0, 0.15)' : '0 4px 24px rgba(0, 0, 0, 0.12)',
-        borderBottom: '1px solid rgba(255, 255, 255, 0.1)'
-      }}
-    >
+    <>
+      {/* CSS for animated gradient */}
+      <style jsx>{`
+        @keyframes gradientShift {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        
+        .animated-gradient-header {
+          background: linear-gradient(135deg, ${headerColor} 0%, ${headerColor}cc 25%, ${headerColor}dd 50%, ${headerColor}cc 75%, ${headerColor} 100%);
+          background-size: 200% 200%;
+          animation: gradientShift 15s ease infinite;
+        }
+      `}</style>
+      
+      <header 
+        className={`text-white sticky top-0 z-40 transition-all duration-300 animated-gradient-header ${
+          isScrolled ? 'shadow-2xl' : 'shadow-lg'
+        }`} 
+        style={{ 
+          backdropFilter: 'blur(12px)',
+          WebkitBackdropFilter: 'blur(12px)',
+          boxShadow: isScrolled ? '0 8px 32px rgba(0, 0, 0, 0.15)' : '0 4px 24px rgba(0, 0, 0, 0.12)',
+          borderBottom: '1px solid rgba(255, 255, 255, 0.1)'
+        }}
+      >
       <div className="px-3 sm:px-4 md:px-6 py-2 sm:py-3">
         <div className="flex items-center justify-between gap-2 sm:gap-3 md:gap-4">
           {/* Left Side - Hamburger Menu and Company Name */}
