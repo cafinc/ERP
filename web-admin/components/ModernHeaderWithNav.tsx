@@ -894,12 +894,12 @@ export default function ModernHeaderWithNav() {
             <div ref={weatherRef} className="relative hidden xl:block">
               <button
                 onClick={() => router.push('/weather')}
-                className="flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 rounded-lg shadow-sm transition-all cursor-pointer border border-blue-400"
+                className="flex items-center gap-3 px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 rounded-lg shadow-sm transition-all cursor-pointer border border-blue-400"
               >
-                <span className="text-lg">{weather.icon}</span>
-                <div className="flex items-center gap-1.5">
-                  <span className="text-sm font-bold text-white">{weather.temp}°C</span>
-                  <span className="text-xs text-white opacity-90">{weather.condition}</span>
+                <span className="text-2xl">{weather.icon}</span>
+                <div className="flex items-center gap-2">
+                  <span className="text-base font-bold text-white">{weather.temp}°C</span>
+                  <span className="text-sm text-white opacity-90">{weather.condition}</span>
                 </div>
               </button>
             </div>
