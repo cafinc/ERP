@@ -12566,6 +12566,12 @@ from leads_routes import router as leads_router
 api_router.include_router(leads_router)
 logger.info("Leads endpoints registered successfully")
 
+# Include Fuel routes
+from fuel_routes import router as fuel_router
+api_router.include_router(fuel_router)
+logger.info("Fuel endpoints registered successfully")
+
+
 # Include the router with all endpoints
 app.include_router(api_router)
 
