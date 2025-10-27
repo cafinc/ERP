@@ -140,11 +140,37 @@ export default function UnifiedSiteMapsBuilder() {
   };
 
   const initializeUnifiedMap = useCallback(() => {
-    if (!window.google || !site || !mapContainerRef.current || mapRef.current) {
+    console.log('📍 Initializing unified map...');
+    console.log('  - window.google:', !!window.google);
+    console.log('  - site:', !!site);
+    console.log('  - mapContainerRef.current:', !!mapContainerRef.current);
+    console.log('  - mapRef.current:', !!mapRef.current);
+
+    if (!window.google) {
+      console.error('❌ Google Maps API not loaded');
+      return;
+    }
+    
+    if (!site) {
+      console.error('❌ Site data not available');
+      return;
+    }
+    
+    if (!mapContainerRef.current) {
+      console.error('❌ Map container ref not available');
+      return;
+    }
+    
+    if (mapRef.current) {
+      console.log('⚠️ Map already initialized, skipping');
       return;
     }
 
     try {
+      console.log('🗺️ Creating Google Map instance...');
+      console.log('  - Lat:', site.location.latitude);
+      console.log('  - Lng:', site.location.longitude);
+
       // Create map instance
       const map = new window.google.maps.Map(mapContainerRef.current, {
         center: { lat: site.location.latitude, lng: site.location.longitude },
@@ -158,7 +184,13 @@ export default function UnifiedSiteMapsBuilder() {
         scaleControl: true,
       });
 
+      console.log('✅ Map instance created');
       mapRef.current = map;
+
+      // Wait for map to be fully loaded
+      window.google.maps.event.addListenerOnce(map, 'tilesloaded', () => {
+        console.log('✅ Map tiles loaded');
+      });
 
       // Add site marker
       new window.google.maps.Marker({
@@ -174,6 +206,8 @@ export default function UnifiedSiteMapsBuilder() {
           strokeWeight: 2,
         },
       });
+
+      console.log('✅ Site marker added');
 
       // Initialize drawing manager
       const drawingManager = new window.google.maps.drawing.DrawingManager({
@@ -213,9 +247,11 @@ export default function UnifiedSiteMapsBuilder() {
 
       drawingManager.setMap(map);
       drawingManagerRef.current = drawingManager;
+      console.log('✅ Drawing manager initialized');
 
       // Listen for completed drawings
       window.google.maps.event.addListener(drawingManager, 'overlaycomplete', handleOverlayComplete);
+      console.log('✅ Event listeners attached');
 
       // Draw existing geofence if available
       if (geofenceBoundary && geofenceBoundary.length > 0) {
@@ -229,12 +265,14 @@ export default function UnifiedSiteMapsBuilder() {
           editable: false,
         });
         polygon.setMap(map);
+        console.log('✅ Existing geofence displayed');
       }
 
-      console.log('✅ Unified map initialized successfully');
+      console.log('✅✅✅ Unified map initialized successfully!');
       setMapInitialized(true);
     } catch (error) {
       console.error('❌ Map initialization error:', error);
+      console.error('Error details:', JSON.stringify(error, null, 2));
     }
   }, [site, geofenceBoundary, selectedColor]);
 
