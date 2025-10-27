@@ -815,6 +815,19 @@ export default function ModernHeaderWithNav() {
               />
             </div>
 
+            {/* Status Indicators - NEW */}
+            <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 bg-white bg-opacity-10 rounded-lg">
+              <div className="flex items-center gap-1.5">
+                <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
+                <span className="text-xs font-medium text-white">Operational</span>
+              </div>
+              <div className="w-px h-4 bg-white bg-opacity-30 mx-1"></div>
+              <div className="flex items-center gap-1">
+                <RefreshCw className="w-3 h-3 text-white opacity-70" />
+                <span className="text-xs text-white opacity-90">2m ago</span>
+              </div>
+            </div>
+
             {/* Avatar */}
             <div ref={profileRef} className="relative flex-shrink-0">
               <button
