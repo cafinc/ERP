@@ -1898,9 +1898,9 @@ export default function CustomerFormPage() {
                     <div className="relative">
                       <input
                         type="text"
-                        value={customerForm.street_address}
+                        value={customerForm.individual_address.street_address}
                         onChange={e =>
-                          setCustomerForm({ ...customerForm, street_address: e.target.value })
+                          setCustomerForm({ ...customerForm, individual_address: { ...customerForm.individual_address, street_address: e.target.value } })
                         }
                         className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-semibold transition-all"
                         placeholder="123 Main Street"
