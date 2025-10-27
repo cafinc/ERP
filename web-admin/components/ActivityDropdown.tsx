@@ -54,6 +54,8 @@ const MOCK_ACTIVITIES = [
 ];
 
 export default function ActivityDropdown({ isOpen, onClose }: ActivityDropdownProps) {
+  const router = useRouter();
+  
   if (!isOpen) return null;
 
   const getActivityIcon = (type: string) => {
