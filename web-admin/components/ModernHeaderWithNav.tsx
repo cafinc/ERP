@@ -314,6 +314,9 @@ export default function ModernHeaderWithNav() {
       if (themeMenuRef.current && !themeMenuRef.current.contains(event.target as Node)) {
         setShowThemeMenu(false);
       }
+      if (weatherRef.current && !weatherRef.current.contains(event.target as Node)) {
+        setShowWeatherWidget(false);
+      }
     };
 
     document.addEventListener('mousedown', handleClickOutside);
