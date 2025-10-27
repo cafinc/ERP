@@ -200,6 +200,7 @@ export default function ModernHeaderWithNav() {
         { label: 'Trailers', href: '/assets/trailers', icon: Settings },
         { label: 'Tools', href: '/assets/tools', icon: Settings },
         { label: 'Inventory', href: '/inventory', icon: FolderOpen },
+        { label: 'Fuel', href: '/fuel', icon: Fuel },
         { label: 'Maintenance', href: '/equipment/maintenance', icon: Settings },
         { label: 'Inspections', href: '/equipment/inspections', icon: FileText },
       ],
