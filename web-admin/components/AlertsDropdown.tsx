@@ -46,6 +46,8 @@ const MOCK_ALERTS = [
 ];
 
 export default function AlertsDropdown({ isOpen, onClose }: AlertsDropdownProps) {
+  const router = useRouter();
+  
   if (!isOpen) return null;
 
   const getAlertIcon = (type: string) => {
