@@ -107,7 +107,7 @@ export default function CrewPortalPage() {
     { icon: CheckSquare, label: 'My Tasks', route: '/crew-portal/tasks', color: 'blue' },
     { icon: Briefcase, label: 'Work Orders', route: '/crew-portal/work-orders', color: 'orange' },
     { icon: Clock, label: 'Time Tracking', route: '/crew-portal/time-tracking', color: 'green' },
-    { icon: Tool, label: 'Equipment', route: '/crew-portal/equipment', color: 'purple' },
+    { icon: Wrench, label: 'Equipment', route: '/crew-portal/equipment', color: 'purple' },
   ];
 
   const getColorClasses = (color: string) => {
