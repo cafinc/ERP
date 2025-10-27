@@ -130,7 +130,8 @@ export default function UnifiedSiteMapsBuilder() {
     } else {
       console.log('⏳ Waiting for conditions to be met');
     }
-  }, [googleMapsLoaded, site, mapInitialized, initializeUnifiedMap]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [googleMapsLoaded, site, mapInitialized]);
 
   const fetchSite = async () => {
     try {
