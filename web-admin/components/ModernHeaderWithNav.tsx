@@ -908,7 +908,7 @@ export default function ModernHeaderWithNav() {
             <div ref={profileRef} className="relative flex-shrink-0">
               <button
                 onClick={() => setShowProfileMenu(!showProfileMenu)}
-                className="w-7 h-7 rounded-full flex items-center justify-center bg-gradient-to-br from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 transition-all border-2 border-white shadow-lg cursor-pointer"
+                className="w-10 h-10 rounded-full flex items-center justify-center bg-gradient-to-br from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 transition-all border-2 border-white shadow-lg cursor-pointer"
               >
                 {user?.avatar ? (
                   user.avatar.length <= 4 ? (
