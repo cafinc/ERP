@@ -448,12 +448,22 @@ export default function ModernHeaderWithNav() {
     return pathname.startsWith(href);
   };
 
-  // Scroll detection for shadow
+  // Scroll detection for shadow and compact mode
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+      const currentScrollY = window.scrollY;
+      setIsScrolled(currentScrollY > 10);
+      
+      // Compact mode: Activate when scrolling down past 100px
+      if (currentScrollY > 100 && currentScrollY > lastScrollY) {
+        setIsCompact(true);
+      } else if (currentScrollY < 50) {
+        setIsCompact(false);
+      }
+      
+      setLastScrollY(currentScrollY);
     };
 
     window.addEventListener('scroll', handleScroll);
