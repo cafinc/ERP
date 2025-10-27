@@ -123,23 +123,30 @@ export default function UnifiedSiteMapsBuilder() {
 
   const fetchSite = async () => {
     try {
+      console.log('🔄 Fetching site data for ID:', siteId);
       setLoading(true);
       const response = await api.get(`/sites/${siteId}`);
+      console.log('✅ Site data received:', response.data);
       setSite(response.data);
+      console.log('✅ Site state updated');
       
       // Load existing geofence
       try {
         const geofenceRes = await api.get(`/sites/${siteId}/geofence`);
+        console.log('Geofence response:', geofenceRes.data);
         if (geofenceRes.data.has_geofence) {
           setGeofenceBoundary(geofenceRes.data.geofence.polygon_coordinates);
+          console.log('✅ Geofence boundary loaded');
         }
       } catch (err) {
-        console.log('No geofence found');
+        console.log('⚠️ No geofence found or error loading:', err);
       }
     } catch (error) {
-      console.error('Error fetching site:', error);
+      console.error('❌ Error fetching site:', error);
+      console.error('Error details:', error.response?.data);
     } finally {
       setLoading(false);
+      console.log('🏁 Site fetch complete');
     }
   };
 
