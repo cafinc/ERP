@@ -270,5 +270,6 @@ export default function EmailConfigPage() {
         </div>
       </div>
     </div>
+    </div>
   );
 }
