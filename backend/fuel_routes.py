@@ -1,13 +1,12 @@
 """
 Fuel tracking routes for managing fuel entries and consumption
 """
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
 from typing import List, Optional
 from datetime import datetime
 from bson import ObjectId
 from server import db
-from auth import get_current_user
 
 router = APIRouter()
 
