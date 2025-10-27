@@ -89,8 +89,12 @@ export default function UnifiedSiteMapsBuilder() {
 
   // Fetch site details
   useEffect(() => {
-    if (siteId && siteId !== 'undefined') {
+    console.log('📌 Site ID from params:', siteId);
+    console.log('📌 Params object:', params);
+    if (siteId && siteId !== 'undefined' && siteId !== '[id]') {
       fetchSite();
+    } else {
+      console.error('❌ Invalid site ID:', siteId);
     }
   }, [siteId]);
 
