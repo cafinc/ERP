@@ -1172,6 +1172,7 @@ export default function CustomerFormPage() {
                             )}
                           </div>
                         )}
+                        </div>
                         
                         {/* Selected Company Display - Below toggles on new line */}
                         {linkToCompany && customerForm.company_id && companySearch && (
