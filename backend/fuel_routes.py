@@ -39,23 +39,23 @@ def serialize_fuel_entry(entry):
     return None
 
 @router.get("/fuel")
-async def get_fuel_entries(current_user: dict = Depends(get_current_user)):
+async def get_fuel_entries():
     """Get all fuel entries"""
     try:
-        entries = list(db.fuel_entries.find().sort("date", -1))
+        entries = list(await db.fuel_entries.find().sort("date", -1).to_list(1000))
         return [serialize_fuel_entry(entry) for entry in entries]
     except Exception as e:
         print(f"Error fetching fuel entries: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.get("/fuel/{entry_id}")
-async def get_fuel_entry(entry_id: str, current_user: dict = Depends(get_current_user)):
+async def get_fuel_entry(entry_id: str):
     """Get a specific fuel entry"""
     try:
         if not ObjectId.is_valid(entry_id):
             raise HTTPException(status_code=400, detail="Invalid entry ID")
         
-        entry = db.fuel_entries.find_one({"_id": ObjectId(entry_id)})
+        entry = await db.fuel_entries.find_one({"_id": ObjectId(entry_id)})
         if not entry:
             raise HTTPException(status_code=404, detail="Fuel entry not found")
         
@@ -67,27 +67,23 @@ async def get_fuel_entry(entry_id: str, current_user: dict = Depends(get_current
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.post("/fuel")
-async def create_fuel_entry(entry: FuelEntry, current_user: dict = Depends(get_current_user)):
+async def create_fuel_entry(entry: FuelEntry):
     """Create a new fuel entry"""
     try:
         entry_dict = entry.dict()
         entry_dict['created_at'] = datetime.utcnow().isoformat()
-        entry_dict['created_by'] = current_user.get('email', 'unknown')
+        entry_dict['created_by'] = 'system'
         
-        result = db.fuel_entries.insert_one(entry_dict)
+        result = await db.fuel_entries.insert_one(entry_dict)
         
-        created_entry = db.fuel_entries.find_one({"_id": result.inserted_id})
+        created_entry = await db.fuel_entries.find_one({"_id": result.inserted_id})
         return serialize_fuel_entry(created_entry)
     except Exception as e:
         print(f"Error creating fuel entry: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.put("/fuel/{entry_id}")
-async def update_fuel_entry(
-    entry_id: str,
-    entry: FuelEntry,
-    current_user: dict = Depends(get_current_user)
-):
+async def update_fuel_entry(entry_id: str, entry: FuelEntry):
     """Update a fuel entry"""
     try:
         if not ObjectId.is_valid(entry_id):
@@ -95,9 +91,9 @@ async def update_fuel_entry(
         
         entry_dict = entry.dict()
         entry_dict['updated_at'] = datetime.utcnow().isoformat()
-        entry_dict['updated_by'] = current_user.get('email', 'unknown')
+        entry_dict['updated_by'] = 'system'
         
-        result = db.fuel_entries.update_one(
+        result = await db.fuel_entries.update_one(
             {"_id": ObjectId(entry_id)},
             {"$set": entry_dict}
         )
@@ -105,7 +101,7 @@ async def update_fuel_entry(
         if result.matched_count == 0:
             raise HTTPException(status_code=404, detail="Fuel entry not found")
         
-        updated_entry = db.fuel_entries.find_one({"_id": ObjectId(entry_id)})
+        updated_entry = await db.fuel_entries.find_one({"_id": ObjectId(entry_id)})
         return serialize_fuel_entry(updated_entry)
     except HTTPException:
         raise
@@ -114,13 +110,13 @@ async def update_fuel_entry(
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.delete("/fuel/{entry_id}")
-async def delete_fuel_entry(entry_id: str, current_user: dict = Depends(get_current_user)):
+async def delete_fuel_entry(entry_id: str):
     """Delete a fuel entry"""
     try:
         if not ObjectId.is_valid(entry_id):
             raise HTTPException(status_code=400, detail="Invalid entry ID")
         
-        result = db.fuel_entries.delete_one({"_id": ObjectId(entry_id)})
+        result = await db.fuel_entries.delete_one({"_id": ObjectId(entry_id)})
         
         if result.deleted_count == 0:
             raise HTTPException(status_code=404, detail="Fuel entry not found")
@@ -133,7 +129,7 @@ async def delete_fuel_entry(entry_id: str, current_user: dict = Depends(get_curr
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.get("/fuel/stats/summary")
-async def get_fuel_stats(current_user: dict = Depends(get_current_user)):
+async def get_fuel_stats():
     """Get fuel consumption statistics"""
     try:
         # Aggregate statistics
@@ -149,7 +145,7 @@ async def get_fuel_stats(current_user: dict = Depends(get_current_user)):
             }
         ]
         
-        result = list(db.fuel_entries.aggregate(pipeline))
+        result = await db.fuel_entries.aggregate(pipeline).to_list(10)
         
         if result:
             stats = result[0]
@@ -171,16 +167,16 @@ async def get_fuel_stats(current_user: dict = Depends(get_current_user)):
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.get("/fuel/vehicles")
-async def get_vehicles_for_fuel(current_user: dict = Depends(get_current_user)):
+async def get_vehicles_for_fuel():
     """Get all vehicles for fuel entry dropdown"""
     try:
         # Get unique vehicle IDs from fuel entries
-        vehicles_from_fuel = db.fuel_entries.distinct("vehicle_id")
+        vehicles_from_fuel = await db.fuel_entries.distinct("vehicle_id")
         
         # Get vehicles from equipment/vehicles collection if it exists
         vehicles = []
-        if db.equipment.count_documents({}) > 0:
-            equipment = list(db.equipment.find({"type": {"$in": ["vehicle", "truck", "trailer"]}}))
+        if await db.equipment.count_documents({}) > 0:
+            equipment = await db.equipment.find({"type": {"$in": ["vehicle", "truck", "trailer"]}}).to_list(100)
             vehicles.extend([{
                 "id": str(eq.get("_id")),
                 "name": eq.get("name", "Unknown"),
