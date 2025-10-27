@@ -488,17 +488,23 @@ export default function ModernHeaderWithNav() {
       `}</style>
       
       <header 
-        className={`text-white sticky top-0 z-40 transition-all duration-300 animated-gradient-header ${
+        className={`text-white sticky top-0 z-40 animated-gradient-header ${
           isScrolled ? 'shadow-2xl' : 'shadow-lg'
         }`} 
         style={{ 
           backdropFilter: 'blur(12px)',
           WebkitBackdropFilter: 'blur(12px)',
           boxShadow: isScrolled ? '0 8px 32px rgba(0, 0, 0, 0.15)' : '0 4px 24px rgba(0, 0, 0, 0.12)',
-          borderBottom: '1px solid rgba(255, 255, 255, 0.1)'
+          borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+          transition: 'all 0.3s ease-in-out',
+          height: isCompact ? '56px' : '64px',
         }}
       >
-      <div className="px-3 sm:px-4 md:px-6 py-2 sm:py-3">
+        <div className="max-w-[2000px] mx-auto px-4 transition-all duration-300" style={{ 
+          height: '100%',
+          paddingTop: isCompact ? '8px' : '12px',
+          paddingBottom: isCompact ? '8px' : '12px',
+        }}>
         <div className="flex items-center justify-between gap-2 sm:gap-3 md:gap-4">
           {/* Left Side - Hamburger Menu and Company Name */}
           <div className="flex items-center gap-4">
