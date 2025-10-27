@@ -335,7 +335,7 @@ export default function CreateSitePage() {
                   </button>
 
                   {showCustomerDropdown && (
-                    <div className="absolute z-10 w-full mt-2 bg-white border-2 border-gray-200 rounded-xl shadow-2xl overflow-hidden">
+                    <div className="absolute z-50 w-full mt-2 bg-white border-2 border-gray-200 rounded-xl shadow-2xl overflow-hidden">
                       <div className="p-4 border-b border-gray-200 bg-gray-50">
                         <div className="relative">
                           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
