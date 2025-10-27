@@ -1029,7 +1029,8 @@ export default function CustomerFormPage() {
                       </div>
 
                       <div className="md:col-span-2">
-                        <div className="flex items-center gap-3">
+                        {/* Toggles Row - Always inline */}
+                        <div className="flex items-center gap-3 flex-wrap">
                           {/* Require Access Toggle - Moved to the left */}
                           <button
                             type="button"
@@ -1080,10 +1081,11 @@ export default function CustomerFormPage() {
                           <label className="text-sm font-medium text-gray-700 whitespace-nowrap">
                             Link to Company
                           </label>
+                        </div>
                         
-                        {/* Search bar opens here when Link to Company is ON */}
+                        {/* Search bar opens below when Link to Company is ON */}
                         {linkToCompany && !customerForm.company_id && (
-                          <div className="relative w-64 mx-3">
+                          <div className="relative w-full max-w-md mt-3">
                             <div className="relative">
                               <Building className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
                               <input
