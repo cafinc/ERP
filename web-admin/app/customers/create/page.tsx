@@ -419,48 +419,58 @@ export default function CustomerFormPage() {
 
     const errors: Record<string, string> = {};
 
-    // Validation for required fields
+    // Validation for required fields based on customer type
     if (customerForm.customer_type === 'individual') {
+      // Individual customer validation
       if (!customerForm.first_name) errors['first_name'] = 'First name is required';
       if (!customerForm.last_name) errors['last_name'] = 'Last name is required';
-    } else {
-      // Company customers
-      if (!customerForm.company_name) errors['company_name'] = 'Company name is required';
-    }
-
-    // Email validation (required for both types)
-    if (!customerForm.email) {
-      errors['email'] = 'Email is required';
-    } else if (!isValidEmail(customerForm.email)) {
-      errors['email'] = 'Invalid email format';
-    }
-
-    // Phone validation (required for both types)
-    // For individuals: personal phone
-    // For companies: office number (stored in same field)
-    if (!customerForm.phone) {
-      errors['phone'] = customerForm.customer_type === 'company' ? 'Office number is required' : 'Phone is required';
-    } else {
-      const cleaned = customerForm.phone.replace(/\D/g, '');
-      if (cleaned.length !== 10) {
-        errors['phone'] = 'Phone must be 10 digits';
+      
+      // Email validation (required for individuals)
+      if (!customerForm.email) {
+        errors['email'] = 'Email is required';
+      } else if (!isValidEmail(customerForm.email)) {
+        errors['email'] = 'Invalid email format';
       }
-    }
 
-    // Mobile validation (required if SMS communication preference)
-    if (customerForm.communication_preference === 'sms') {
-      if (!customerForm.mobile) {
-        errors['mobile'] = 'Mobile number is required for SMS communication';
+      // Phone validation (required for individuals)
+      if (!customerForm.phone) {
+        errors['phone'] = 'Phone is required';
       } else {
-        const cleaned = customerForm.mobile.replace(/\D/g, '');
+        const cleaned = customerForm.phone.replace(/\D/g, '');
         if (cleaned.length !== 10) {
-          errors['mobile'] = 'Mobile must be 10 digits';
+          errors['phone'] = 'Phone must be 10 digits';
         }
       }
-    }
 
-    // Company-specific validation: Contact Persons
-    if (customerForm.customer_type === 'company') {
+      // Mobile validation (only if SMS communication preference)
+      if (customerForm.communication_preference === 'sms') {
+        if (!customerForm.mobile) {
+          errors['mobile'] = 'Mobile number is required for SMS communication';
+        } else {
+          const cleaned = customerForm.mobile.replace(/\D/g, '');
+          if (cleaned.length !== 10) {
+            errors['mobile'] = 'Mobile must be 10 digits';
+          }
+        }
+      }
+    } else {
+      // Company customer validation
+      if (!customerForm.company_name) errors['company_name'] = 'Company name is required';
+      
+      // For companies, email is optional (can use contact person emails)
+      if (customerForm.email && !isValidEmail(customerForm.email)) {
+        errors['email'] = 'Invalid email format';
+      }
+
+      // For companies, office number is optional
+      if (customerForm.phone) {
+        const cleaned = customerForm.phone.replace(/\D/g, '');
+        if (cleaned.length !== 10) {
+          errors['phone'] = 'Office number must be 10 digits';
+        }
+      }
+
+      // Company-specific validation: Contact Persons
       customerForm.contacts.forEach((contact, index) => {
         // Only validate first contact if same_person toggle is on
         if (customerForm.same_person_all_contacts && index > 0) {
@@ -468,7 +478,6 @@ export default function CustomerFormPage() {
         }
         
         // Only validate if the contact has any information filled in
-        // (making them optional unless data is started)
         const hasAnyData = contact.name || contact.email || contact.phone;
         
         // For the first contact when toggle is on, make it completely optional
