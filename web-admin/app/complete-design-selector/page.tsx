@@ -1,6 +1,6 @@
-import PageHeader from '@/components/PageHeader';
 "use client";
 
+import PageHeader from '@/components/PageHeader';
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import DashboardLayout from "@/components/DashboardLayout";
