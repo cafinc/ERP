@@ -94,6 +94,10 @@ export default function ModernHeaderWithNav() {
   const [weather, setWeather] = useState({ temp: -5, condition: 'Heavy Snow', icon: '❄️' });
   const [showWeatherWidget, setShowWeatherWidget] = useState(false);
   const weatherRef = useRef<HTMLDivElement>(null);
+  
+  // Phase 3: Status indicator dropdown
+  const [showStatusDropdown, setShowStatusDropdown] = useState(false);
+  const statusRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const savedBranding = localStorage.getItem('branding_settings');
