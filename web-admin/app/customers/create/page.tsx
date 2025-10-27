@@ -1164,6 +1164,11 @@ export default function CustomerFormPage() {
                                 )}
                               </div>
                             )}
+                            
+                            {/* Spacer to push content down when dropdown is visible */}
+                            {showSearchResults && companySearch.length > 0 && !loadingCompanies && (
+                              <div className="h-60"></div>
+                            )}
                           </div>
                         )}
                         
