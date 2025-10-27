@@ -1174,12 +1174,12 @@ export default function CustomerFormPage() {
                           </div>
                         )}
                         
-                        {/* Selected Company Display - Inline with toggles */}
+                        {/* Selected Company Display - Below toggles on new line */}
                         {linkToCompany && customerForm.company_id && companySearch && (
-                          <div className="flex items-center gap-2 mx-3">
-                            <div className="flex items-center bg-blue-50 border border-blue-200 rounded-md px-2 py-1 h-6">
-                              <Building className="w-3 h-3 text-[#3f72af] mr-1" />
-                              <span className="text-xs font-medium text-gray-700">{companySearch}</span>
+                          <div className="flex items-center gap-2 mt-3">
+                            <div className="flex items-center bg-blue-50 border border-blue-200 rounded-md px-3 py-1.5">
+                              <Building className="w-4 h-4 text-[#3f72af] mr-2" />
+                              <span className="text-sm font-medium text-gray-700">{companySearch}</span>
                             </div>
                             <button
                               type="button"
@@ -1187,14 +1187,13 @@ export default function CustomerFormPage() {
                                 setCustomerForm({ ...customerForm, company_id: '' });
                                 setCompanySearch('');
                               }}
-                              className="flex items-center justify-center w-6 h-6 bg-red-50 hover:bg-red-100 border border-red-200 rounded-md transition-colors"
+                              className="flex items-center justify-center w-7 h-7 bg-red-50 hover:bg-red-100 border border-red-200 rounded-md transition-colors"
                               title="Remove company link"
                             >
-                              <X className="w-3 h-3 text-red-600" />
+                              <X className="w-4 h-4 text-red-600" />
                             </button>
                           </div>
                         )}
-                        </div>
                       </div>
                       
                       {/* Access Configuration - Shows when Require Access is ON */}
