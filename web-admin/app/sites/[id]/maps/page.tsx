@@ -96,14 +96,16 @@ export default function UnifiedSiteMapsBuilder() {
 
   // Load Google Maps
   useEffect(() => {
+    console.log('🔄 Loading Google Maps API...');
     loadGoogleMapsScript()
       .then(() => {
-        console.log('✅ Google Maps API loaded');
+        console.log('✅ Google Maps API loaded successfully');
+        console.log('Google object:', window.google);
         setGoogleMapsLoaded(true);
       })
       .catch((error) => {
         console.error('❌ Failed to load Google Maps:', error);
-        alert('Failed to load Google Maps. Please refresh the page.');
+        alert('Failed to load Google Maps. Please check your API key and refresh the page.');
       });
   }, []);
 
