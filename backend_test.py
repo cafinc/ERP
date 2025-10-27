@@ -1286,8 +1286,13 @@ class BackendTester:
         geofence_success, geofence_total = self.test_site_geofence_api()
         print()
         
-        # Test 6: Rate Limiting
-        print("📋 Test 6: Rate Limiting")
+        # Test 6: Fuel Management API
+        print("📋 Test 6: Fuel Management API")
+        fuel_success, fuel_total = self.test_fuel_management_api()
+        print()
+        
+        # Test 7: Rate Limiting
+        print("📋 Test 7: Rate Limiting")
         rate_limit_ok = self.test_rate_limiting()
         print()
         
