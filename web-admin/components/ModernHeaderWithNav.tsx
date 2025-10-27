@@ -453,10 +453,16 @@ export default function ModernHeaderWithNav() {
 
   return (
     <header 
-      className={`bg-[#3f72af] text-white sticky top-0 z-40 transition-shadow duration-300 ${
+      className={`text-white sticky top-0 z-40 transition-all duration-300 ${
         isScrolled ? 'shadow-2xl' : 'shadow-lg'
       }`} 
-      style={{ backgroundColor: headerColor }}
+      style={{ 
+        background: `linear-gradient(135deg, ${headerColor} 0%, ${headerColor}dd 100%)`,
+        backdropFilter: 'blur(12px)',
+        WebkitBackdropFilter: 'blur(12px)',
+        boxShadow: isScrolled ? '0 8px 32px rgba(0, 0, 0, 0.15)' : '0 4px 24px rgba(0, 0, 0, 0.12)',
+        borderBottom: '1px solid rgba(255, 255, 255, 0.1)'
+      }}
     >
       <div className="px-3 sm:px-4 md:px-6 py-2 sm:py-3">
         <div className="flex items-center justify-between gap-2 sm:gap-3 md:gap-4">
