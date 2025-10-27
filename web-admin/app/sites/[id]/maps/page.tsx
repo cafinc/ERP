@@ -590,6 +590,49 @@ export default function UnifiedSiteMapsBuilder() {
   const activateTool = (tool: string, drawingMode?: any) => {
     if (!drawingManagerRef.current) return;
 
+    // Handle text tool separately (no drawing manager needed)
+    if (tool === 'text') {
+      // Text tool will prompt for text input
+      const text = prompt('Enter text to place on map:');
+      if (text && mapRef.current) {
+        const center = mapRef.current.getCenter();
+        
+        // Create custom overlay for text box
+        const infoWindow = new window.google.maps.InfoWindow({
+          position: center,
+          content: `
+            <div style="
+              padding: 8px 12px;
+              background: rgba(255, 255, 255, 0.9);
+              border: 2px solid ${selectedColor};
+              border-radius: 4px;
+              font-family: sans-serif;
+              font-size: 14px;
+              font-weight: 600;
+              color: #1f2937;
+              box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            ">${text}</div>
+          `,
+        });
+        
+        infoWindow.open(mapRef.current);
+        overlaysRef.current.push(infoWindow);
+        
+        const annotation = {
+          id: Date.now().toString(),
+          type: 'text',
+          category: 'text',
+          label: text,
+          color: selectedColor,
+          overlay: infoWindow,
+        };
+        setAnnotations([...annotations, annotation]);
+        console.log('📝 Text added:', text);
+      }
+      setActiveTool(null);
+      return;
+    }
+
     // Clear previous mode
     drawingManagerRef.current.setDrawingMode(null);
     setActiveTool(tool);
