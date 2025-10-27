@@ -645,8 +645,19 @@ export default function UnifiedSiteMapsBuilder() {
 
               {/* Drawing Tools */}
               <div className="space-y-2">
-                <p className="text-xs text-gray-500">Drawing Tools:</p>
+                <p className="text-xs text-gray-500">Annotation Type:</p>
                 <div className="grid grid-cols-2 gap-2">
+                  <button
+                    onClick={() => activateTool('marker', window.google?.maps?.drawing?.OverlayType?.MARKER)}
+                    className={`px-3 py-2 rounded-lg flex items-center justify-center gap-2 ${
+                      activeTool === 'marker'
+                        ? 'bg-blue-600 text-white'
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    }`}
+                  >
+                    <MapPin className="w-4 h-4" />
+                    <span className="text-sm">Icon</span>
+                  </button>
                   <button
                     onClick={() => activateTool('polygon', window.google?.maps?.drawing?.OverlayType?.POLYGON)}
                     className={`px-3 py-2 rounded-lg flex items-center justify-center gap-2 ${
