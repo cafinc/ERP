@@ -42,6 +42,7 @@ import {
   CheckCircle,
   Database,
   Server,
+  Fuel,
 } from 'lucide-react';
 
 interface MenuItem {
