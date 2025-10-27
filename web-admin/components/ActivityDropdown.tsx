@@ -141,12 +141,12 @@ export default function ActivityDropdown({ isOpen, onClose }: ActivityDropdownPr
       <div className="p-3 border-t border-gray-200 text-center">
         <button
           onClick={() => {
-            // Navigate to activity log page
+            router.push('/activity');
             onClose();
           }}
-          className="text-xs text-[#3f72af] hover:underline cursor-pointer"
+          className="text-xs text-[#3f72af] hover:underline cursor-pointer font-semibold"
         >
-          View Full Activity Log
+          View Full Activity Log →
         </button>
       </div>
     </div>
