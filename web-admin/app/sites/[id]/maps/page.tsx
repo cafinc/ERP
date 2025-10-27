@@ -587,15 +587,32 @@ export default function UnifiedSiteMapsBuilder() {
               </h3>
               <button
                 onClick={() => activateTool('boundary', window.google?.maps?.drawing?.OverlayType?.POLYGON)}
+                disabled={showGeofenceSave}
                 className={`w-full px-4 py-3 rounded-lg flex items-center gap-3 transition-colors ${
                   activeTool === 'boundary'
                     ? 'bg-purple-600 text-white'
+                    : showGeofenceSave
+                    ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
                     : 'bg-purple-50 text-purple-700 hover:bg-purple-100'
                 }`}
               >
                 <Pentagon className="w-5 h-5" />
                 <span className="font-medium">Draw Geofence Boundary</span>
               </button>
+              
+              {/* Save Geofence Button - Shows after drawing */}
+              {showGeofenceSave && (
+                <button
+                  onClick={saveGeofence}
+                  disabled={savingGeofence}
+                  className="w-full px-4 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 flex items-center justify-center gap-2 disabled:opacity-50"
+                >
+                  <Save className="w-5 h-5" />
+                  <span className="font-medium">
+                    {savingGeofence ? 'Saving...' : 'Save Geofence'}
+                  </span>
+                </button>
+              )}
             </div>
 
             {/* Add Annotations Section */}
