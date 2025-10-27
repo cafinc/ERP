@@ -115,11 +115,22 @@ export default function UnifiedSiteMapsBuilder() {
 
   // Initialize map when ready
   useEffect(() => {
+    console.log('🔄 Checking map initialization conditions...');
+    console.log('  - googleMapsLoaded:', googleMapsLoaded);
+    console.log('  - site exists:', !!site);
+    console.log('  - mapInitialized:', mapInitialized);
+    console.log('  - mapContainerRef:', !!mapContainerRef.current);
+    
     if (googleMapsLoaded && site && mapContainerRef.current && !mapInitialized) {
-      console.log('🗺️ Initializing unified map...');
-      initializeUnifiedMap();
+      console.log('✅ All conditions met, initializing map...');
+      // Use setTimeout to ensure DOM is ready
+      setTimeout(() => {
+        initializeUnifiedMap();
+      }, 100);
+    } else {
+      console.log('⏳ Waiting for conditions to be met');
     }
-  }, [googleMapsLoaded, site, mapInitialized]);
+  }, [googleMapsLoaded, site, mapInitialized, initializeUnifiedMap]);
 
   const fetchSite = async () => {
     try {
