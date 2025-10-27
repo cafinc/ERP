@@ -6,7 +6,7 @@ from pydantic import BaseModel, Field
 from typing import List, Optional
 from datetime import datetime
 from bson import ObjectId
-from database import db
+from server import db
 from auth import get_current_user
 
 router = APIRouter()
