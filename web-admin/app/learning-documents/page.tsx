@@ -268,6 +268,5 @@ export default function LearningDocumentsPage() {
           </div>
         )}
       </div>
-    </div>
     );
 }

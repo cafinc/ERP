@@ -371,6 +371,5 @@ export default function CreateTemplatePage() {
         />
       )}
     </div>
-    </div>
   );
 }

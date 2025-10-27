@@ -578,11 +578,5 @@ export default function CustomerCommunicationsPage() {
         </p>
       </div>
     </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
   );
 }

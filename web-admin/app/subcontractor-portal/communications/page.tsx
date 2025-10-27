@@ -564,11 +564,5 @@ export default function SubcontractorCommunicationsPage() {
         </p>
       </div>
     </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
   );
 }
