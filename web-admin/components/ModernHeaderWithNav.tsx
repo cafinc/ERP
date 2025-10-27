@@ -532,7 +532,8 @@ export default function ModernHeaderWithNav() {
                     : 'text-white hover:text-white'
                 }`}
                 style={{
-                  backgroundColor: showNavMenu ? '#607d8b' : 'transparent'
+                  backgroundColor: showNavMenu ? '#607d8b' : 'transparent',
+                  fontSize: isCompact ? '14px' : '16px',
                 }}
                 onMouseEnter={(e) => {
                   if (!showNavMenu) {
