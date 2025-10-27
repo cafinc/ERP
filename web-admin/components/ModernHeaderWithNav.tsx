@@ -38,6 +38,8 @@ import {
   Moon,
   Monitor,
   Clock,
+  CheckCircle,
+  Database,
 } from 'lucide-react';
 
 interface MenuItem {
