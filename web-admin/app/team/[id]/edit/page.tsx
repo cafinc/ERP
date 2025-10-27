@@ -125,8 +125,7 @@ export default function TeamMemberFormPage() {
   }
 
   return (
-    <PageHeader>
-      <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6">
         {/* Header */}
         <div className="flex items-center gap-4">
           <button

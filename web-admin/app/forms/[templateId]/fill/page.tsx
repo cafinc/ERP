@@ -483,8 +483,7 @@ export default function FillFormPage() {
 
   if (!template) {
     return (
-      <PageHeader>
-        <div className="text-center py-12">
+              <div className="text-center py-12">
           <p className="text-red-600">Form template not found</p>
         </div>
       </div>
@@ -492,8 +491,7 @@ export default function FillFormPage() {
   }
 
   return (
-    <PageHeader>
-      <div className="p-8">
+          <div className="p-8">
         <div className="max-w-3xl mx-auto">
           {/* Header */}
           <div className="mb-8 flex items-center space-x-4">

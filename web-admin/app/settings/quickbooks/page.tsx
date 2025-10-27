@@ -340,8 +340,7 @@ export default function QuickBooksSettings() {
   }
 
   return (
-    <PageHeader>
-      <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
+          <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         {/* Header */}
         <div className="mb-4">
           <h1 className="text-3xl font-bold text-[#112d4e]">QuickBooks Online Integration</h1>

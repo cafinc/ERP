@@ -234,8 +234,7 @@ export default function ViewResponsePage() {
 
   if (!response || !template) {
     return (
-      <PageHeader>
-        <div className="text-center py-12">
+              <div className="text-center py-12">
           <p className="text-red-600">Response not found</p>
         </div>
       </div>
@@ -243,8 +242,7 @@ export default function ViewResponsePage() {
   }
 
   return (
-    <PageHeader>
-      <div className="p-8">
+          <div className="p-8">
         <div className="max-w-4xl mx-auto">
           {/* Header */}
           <div className="mb-8 flex items-center justify-between">

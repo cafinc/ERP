@@ -149,8 +149,7 @@ export default function EquipmentDetailPage() {
 
   if (!equipment) {
     return (
-      <PageHeader>
-        <div className="text-center py-12">
+              <div className="text-center py-12">
           <AlertCircle className="w-12 h-12 text-gray-400 mx-auto mb-4" />
           <h2 className="text-xl font-semibold text-gray-900">Equipment not found</h2>
           <button
@@ -165,8 +164,7 @@ export default function EquipmentDetailPage() {
   }
 
   return (
-    <PageHeader>
-      <div className="space-y-6">
+          <div className="space-y-6">
         {/* Header */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">

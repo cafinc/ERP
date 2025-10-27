@@ -222,8 +222,7 @@ export default function ProjectDetailPage() {
 
   if (!project) {
     return (
-      <PageHeader>
-        <div className="p-8">
+              <div className="p-8">
           <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-12 text-center hover:shadow-md transition-shadow">
             <AlertCircle className="w-16 h-16 text-red-300 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-gray-900 mb-2">Project Not Found</h3>
@@ -242,8 +241,7 @@ export default function ProjectDetailPage() {
   }
 
   return (
-    <PageHeader>
-      <div className="p-8">
+          <div className="p-8">
         {/* Header */}
         <div className="mb-4 flex items-center justify-between">
           <div className="flex items-center space-x-4">
