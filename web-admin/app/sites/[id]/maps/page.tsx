@@ -334,6 +334,61 @@ export default function UnifiedSiteMapsBuilder() {
       setShowGeofenceSave(true);
       console.log('✅ Geofence drawn, save button shown');
       
+    } else if (activeTool === 'arrow') {
+      // Arrow with arrowhead
+      const path = overlay.getPath();
+      
+      // Add arrowhead symbol at the end
+      const lineSymbol = {
+        path: window.google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+        scale: 4,
+        strokeColor: selectedColor,
+        fillColor: selectedColor,
+        fillOpacity: 1,
+      };
+      
+      overlay.setOptions({
+        icons: [{
+          icon: lineSymbol,
+          offset: '100%',
+        }],
+        strokeWeight: 3,
+      });
+      
+      // Add click listener
+      window.google.maps.event.addListener(overlay, 'click', () => {
+        const label = prompt('Enter label for this arrow (optional):');
+        if (label) {
+          const midPoint = path.getAt(Math.floor(path.getLength() / 2));
+          const labelMarker = new window.google.maps.Marker({
+            position: midPoint,
+            map: mapRef.current,
+            label: {
+              text: label,
+              color: '#1f2937',
+              fontSize: '12px',
+              fontWeight: 'bold',
+            },
+            icon: {
+              path: window.google.maps.SymbolPath.CIRCLE,
+              scale: 0,
+            },
+          });
+          overlaysRef.current.push(labelMarker);
+        }
+      });
+      
+      const annotation = {
+        id: Date.now().toString(),
+        type: 'arrow',
+        category: 'arrow',
+        color: selectedColor,
+        overlay: overlay,
+        label: '',
+      };
+      setAnnotations([...annotations, annotation]);
+      console.log('➡️ Arrow added');
+      
     } else if (activeTool === 'measure-distance') {
       // Distance measurement
       const path = overlay.getPath();
@@ -348,13 +403,16 @@ export default function UnifiedSiteMapsBuilder() {
       const distanceFeet = distanceMeters * 3.28084;
       const distanceMiles = distanceMeters / 1609.34;
       
+      // Prompt for label
+      const label = prompt('Enter name for this measurement:') || 'Distance';
+      
       // Add info window with measurement
       const midPoint = path.getAt(Math.floor(path.getLength() / 2));
       const infoWindow = new window.google.maps.InfoWindow({
         position: midPoint,
         content: `
           <div style="padding: 12px; font-family: sans-serif;">
-            <strong style="font-size: 14px; color: #1f2937;">Distance Measurement</strong><br/>
+            <strong style="font-size: 14px; color: #1f2937;">${label}</strong><br/>
             <div style="margin-top: 8px; font-size: 13px;">
               <strong>${distanceFeet.toFixed(2)}</strong> feet<br/>
               <strong>${distanceMeters.toFixed(2)}</strong> meters<br/>
@@ -369,6 +427,7 @@ export default function UnifiedSiteMapsBuilder() {
       const measurement = {
         id: Date.now().toString(),
         type: 'distance',
+        label: label,
         distanceFeet: distanceFeet.toFixed(2),
         distanceMeters: distanceMeters.toFixed(2),
         distanceMiles: distanceMiles.toFixed(3),
@@ -394,6 +453,9 @@ export default function UnifiedSiteMapsBuilder() {
       }
       const perimeterFeet = perimeter * 3.28084;
       
+      // Prompt for label
+      const label = prompt('Enter name for this measurement:') || 'Area';
+      
       // Add info window
       const bounds = new window.google.maps.LatLngBounds();
       for (let i = 0; i < path.getLength(); i++) {
@@ -405,7 +467,7 @@ export default function UnifiedSiteMapsBuilder() {
         position: center,
         content: `
           <div style="padding: 12px; font-family: sans-serif;">
-            <strong style="font-size: 14px; color: #1f2937;">Area Measurement</strong><br/>
+            <strong style="font-size: 14px; color: #1f2937;">${label}</strong><br/>
             <div style="margin-top: 8px; font-size: 13px;">
               <strong>Area:</strong><br/>
               ${areaSquareFeet.toLocaleString(undefined, {maximumFractionDigits: 0})} sq ft<br/>
@@ -423,6 +485,7 @@ export default function UnifiedSiteMapsBuilder() {
       const measurement = {
         id: Date.now().toString(),
         type: 'area',
+        label: label,
         areaSquareFeet: areaSquareFeet.toLocaleString(undefined, {maximumFractionDigits: 0}),
         areaSquareMeters: areaSquareMeters.toLocaleString(undefined, {maximumFractionDigits: 0}),
         areaAcres: areaAcres.toFixed(4),
@@ -433,12 +496,83 @@ export default function UnifiedSiteMapsBuilder() {
       setMeasurements([...measurements, measurement]);
       console.log('📐 Area measured:', measurement);
       
+    } else if (activeTool === 'marker') {
+      // Icon marker with label
+      const label = prompt('Enter label for this marker:') || ANNOTATION_CATEGORIES.find(c => c.value === selectedCategory)?.label || 'Marker';
+      
+      // Add info window
+      const infoWindow = new window.google.maps.InfoWindow({
+        content: `
+          <div style="padding: 8px; font-family: sans-serif;">
+            <strong style="font-size: 13px; color: #1f2937;">${label}</strong><br/>
+            <span style="font-size: 11px; color: #6b7280;">
+              ${ANNOTATION_CATEGORIES.find(c => c.value === selectedCategory)?.label}
+            </span>
+          </div>
+        `,
+      });
+      
+      window.google.maps.event.addListener(overlay, 'click', () => {
+        infoWindow.open(mapRef.current, overlay);
+      });
+      
+      overlaysRef.current.push(infoWindow);
+      
+      const annotation = {
+        id: Date.now().toString(),
+        type: 'marker',
+        category: selectedCategory,
+        label: label,
+        color: selectedColor,
+        overlay: overlay,
+        infoWindow: infoWindow,
+      };
+      setAnnotations([...annotations, annotation]);
+      console.log('📍 Marker added:', annotation);
+      
     } else {
-      // Regular annotation
+      // Regular annotation shapes
+      const label = prompt('Enter label for this annotation (optional):');
+      
+      if (label) {
+        let center;
+        if (type === 'circle') {
+          center = overlay.getCenter();
+        } else if (type === 'rectangle') {
+          const bounds = overlay.getBounds();
+          center = bounds.getCenter();
+        } else if (type === 'polygon') {
+          const path = overlay.getPath();
+          const bounds = new window.google.maps.LatLngBounds();
+          for (let i = 0; i < path.getLength(); i++) {
+            bounds.extend(path.getAt(i));
+          }
+          center = bounds.getCenter();
+        }
+        
+        if (center) {
+          const infoWindow = new window.google.maps.InfoWindow({
+            position: center,
+            content: `
+              <div style="padding: 8px; font-family: sans-serif;">
+                <strong style="font-size: 13px; color: #1f2937;">${label}</strong>
+              </div>
+            `,
+          });
+          
+          window.google.maps.event.addListener(overlay, 'click', () => {
+            infoWindow.open(mapRef.current);
+          });
+          
+          overlaysRef.current.push(infoWindow);
+        }
+      }
+      
       const annotation = {
         id: Date.now().toString(),
         type: type,
         category: selectedCategory,
+        label: label || '',
         color: selectedColor,
         overlay: overlay,
       };
