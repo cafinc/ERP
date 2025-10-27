@@ -700,10 +700,21 @@ export default function ModernHeaderWithNav() {
                             {result.type === 'invoice' && <DollarSign className="w-5 h-5 text-gray-600" />}
                           </div>
                           <div className="flex-1 min-w-0">
-                            <p className="font-medium text-gray-900 truncate">{result.title}</p>
+                            <div className="flex items-center gap-2 mb-1">
+                              <p className="font-medium text-gray-900 truncate">{result.title}</p>
+                              <span className={`px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase ${
+                                result.type === 'customer' ? 'bg-blue-100 text-blue-700' :
+                                result.type === 'lead' ? 'bg-green-100 text-green-700' :
+                                result.type === 'estimate' ? 'bg-purple-100 text-purple-700' :
+                                result.type === 'project' ? 'bg-orange-100 text-orange-700' :
+                                'bg-gray-100 text-gray-700'
+                              }`}>
+                                {result.type}
+                              </span>
+                            </div>
                             <p className="text-xs text-gray-500 truncate">{result.subtitle}</p>
                           </div>
-                          <ChevronRight className="w-4 h-4 text-gray-400" />
+                          <ChevronRight className="w-4 h-4 text-gray-400 group-hover:translate-x-1 transition-transform" />
                         </button>
                       ))}
                     </div>
