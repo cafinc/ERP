@@ -459,7 +459,7 @@ export default function UnifiedSiteMapsBuilder() {
     if (drawingMode) {
       drawingManagerRef.current.setDrawingMode(drawingMode);
       
-      // Update drawing options with current color
+      // Update drawing options with current color and category
       const options = {
         fillColor: selectedColor,
         fillOpacity: 0.3,
@@ -469,7 +469,29 @@ export default function UnifiedSiteMapsBuilder() {
         draggable: true,
       };
 
-      if (drawingMode === window.google.maps.drawing.OverlayType.POLYGON) {
+      if (drawingMode === window.google.maps.drawing.OverlayType.MARKER) {
+        // Custom marker with category label
+        const category = ANNOTATION_CATEGORIES.find(c => c.value === selectedCategory);
+        drawingManagerRef.current.setOptions({
+          markerOptions: {
+            draggable: true,
+            label: {
+              text: category?.label.charAt(0) || '📍',
+              color: '#FFFFFF',
+              fontSize: '16px',
+              fontWeight: 'bold',
+            },
+            icon: {
+              path: window.google.maps.SymbolPath.CIRCLE,
+              scale: 20,
+              fillColor: selectedColor,
+              fillOpacity: 1,
+              strokeColor: '#FFFFFF',
+              strokeWeight: 3,
+            },
+          },
+        });
+      } else if (drawingMode === window.google.maps.drawing.OverlayType.POLYGON) {
         drawingManagerRef.current.setOptions({ polygonOptions: options });
       } else if (drawingMode === window.google.maps.drawing.OverlayType.POLYLINE) {
         drawingManagerRef.current.setOptions({ 
