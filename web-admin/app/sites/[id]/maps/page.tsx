@@ -115,21 +115,27 @@ export default function UnifiedSiteMapsBuilder() {
 
   // Initialize map when ready
   useEffect(() => {
-    console.log('🔄 Checking map initialization conditions...');
-    console.log('  - googleMapsLoaded:', googleMapsLoaded);
-    console.log('  - site exists:', !!site);
-    console.log('  - mapInitialized:', mapInitialized);
-    console.log('  - mapContainerRef:', !!mapContainerRef.current);
-    
-    if (googleMapsLoaded && site && mapContainerRef.current && !mapInitialized) {
-      console.log('✅ All conditions met, initializing map...');
-      // Use setTimeout to ensure DOM is ready
-      setTimeout(() => {
-        initializeUnifiedMap();
-      }, 100);
-    } else {
-      console.log('⏳ Waiting for conditions to be met');
+    if (!googleMapsLoaded || !site || mapInitialized) {
+      return;
     }
+
+    // Wait for next tick to ensure ref is attached
+    const timer = setTimeout(() => {
+      console.log('🔄 Checking map initialization conditions...');
+      console.log('  - googleMapsLoaded:', googleMapsLoaded);
+      console.log('  - site exists:', !!site);
+      console.log('  - mapInitialized:', mapInitialized);
+      console.log('  - mapContainerRef:', !!mapContainerRef.current);
+      
+      if (mapContainerRef.current) {
+        console.log('✅ All conditions met, initializing map...');
+        initializeUnifiedMap();
+      } else {
+        console.log('⏳ Map container ref not ready yet, will retry...');
+      }
+    }, 200);
+
+    return () => clearTimeout(timer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [googleMapsLoaded, site, mapInitialized]);
 
