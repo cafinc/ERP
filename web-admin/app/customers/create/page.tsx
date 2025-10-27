@@ -591,7 +591,7 @@ export default function CustomerFormPage() {
       }));
     }
 
-    if (!customerForm.email || !customerForm.phone || !customerForm.street_address) {
+    if (!customerForm.email || !customerForm.phone) {
       alert('Please fill in all required fields');
       return;
     }
@@ -605,15 +605,25 @@ export default function CustomerFormPage() {
           ? `${customerForm.first_name} ${customerForm.last_name}`.trim()
           : customerForm.company_name;
 
-      // Construct address from broken out fields
+      // Construct address from appropriate address object based on customer type
       let address = '';
-      const addressParts = [
-        customerForm.street_address,
-        customerForm.city,
-        `${customerForm.province} ${customerForm.postal_code}`,
-        customerForm.country,
-      ].filter(Boolean);
-      address = addressParts.join(', ');
+      if (customerForm.customer_type === 'individual') {
+        const addressParts = [
+          customerForm.individual_address.street_address,
+          customerForm.individual_address.city,
+          `${customerForm.individual_address.province} ${customerForm.individual_address.postal_code}`,
+          customerForm.individual_address.country,
+        ].filter(Boolean);
+        address = addressParts.join(', ');
+      } else {
+        const addressParts = [
+          customerForm.company_address.street_address,
+          customerForm.company_address.city,
+          `${customerForm.company_address.province} ${customerForm.company_address.postal_code}`,
+          customerForm.company_address.country,
+        ].filter(Boolean);
+        address = addressParts.join(', ');
+      }
 
       const submitData: any = {
         name,
