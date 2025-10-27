@@ -631,7 +631,7 @@ export default function ModernHeaderWithNav() {
             <div ref={quickAddRef} className="relative flex-shrink-0">
               <button
                 onClick={() => setShowQuickAdd(!showQuickAdd)}
-                className="p-2 rounded-lg transition-all duration-200 cursor-pointer hover:scale-110"
+                className="p-1.5 rounded-lg transition-all duration-200 cursor-pointer hover:scale-110"
                 style={{
                   backgroundColor: showQuickAdd ? '#e0e0e0' : '#607d8b',
                   transform: showQuickAdd ? 'rotate(45deg)' : 'rotate(0deg)',
@@ -656,7 +656,7 @@ export default function ModernHeaderWithNav() {
                 }}
                 title="Quick Add"
               >
-                <Plus className={`w-5 h-5 transition-transform duration-200 ${showQuickAdd ? 'text-gray-600' : 'text-white'}`} />
+                <Plus className={`w-4 h-4 transition-transform duration-200 ${showQuickAdd ? 'text-gray-600' : 'text-white'}`} />
               </button>
 
               {/* Quick Add Dropdown */}
