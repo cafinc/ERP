@@ -576,13 +576,15 @@ export default function ModernHeaderWithNav() {
             <div ref={quickAddRef} className="relative flex-shrink-0">
               <button
                 onClick={() => setShowQuickAdd(!showQuickAdd)}
-                className="p-2 rounded-lg transition-colors cursor-pointer"
+                className="p-2 rounded-lg transition-all duration-200 cursor-pointer hover:scale-110"
                 style={{
-                  backgroundColor: showQuickAdd ? '#e0e0e0' : '#607d8b'
+                  backgroundColor: showQuickAdd ? '#e0e0e0' : '#607d8b',
+                  transform: showQuickAdd ? 'rotate(45deg)' : 'rotate(0deg)',
                 }}
                 onMouseEnter={(e) => {
                   if (!showQuickAdd) {
                     e.currentTarget.style.backgroundColor = '#e0e0e0';
+                    e.currentTarget.style.transform = 'scale(1.1) rotate(90deg)';
                     const icon = e.currentTarget.querySelector('svg');
                     if (icon) icon.classList.add('text-gray-600');
                     if (icon) icon.classList.remove('text-white');
@@ -591,6 +593,7 @@ export default function ModernHeaderWithNav() {
                 onMouseLeave={(e) => {
                   if (!showQuickAdd) {
                     e.currentTarget.style.backgroundColor = '#607d8b';
+                    e.currentTarget.style.transform = 'scale(1) rotate(0deg)';
                     const icon = e.currentTarget.querySelector('svg');
                     if (icon) icon.classList.remove('text-gray-600');
                     if (icon) icon.classList.add('text-white');
@@ -598,7 +601,7 @@ export default function ModernHeaderWithNav() {
                 }}
                 title="Quick Add"
               >
-                <Plus className={`w-5 h-5 ${showQuickAdd ? 'text-gray-600' : 'text-white'}`} />
+                <Plus className={`w-5 h-5 transition-transform duration-200 ${showQuickAdd ? 'text-gray-600' : 'text-white'}`} />
               </button>
 
               {/* Quick Add Dropdown */}
