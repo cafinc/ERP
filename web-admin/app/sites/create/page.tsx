@@ -384,6 +384,11 @@ export default function CreateSitePage() {
                       </div>
                     </div>
                   )}
+                  
+                  {/* Spacer to push content down when dropdown is visible */}
+                  {showCustomerDropdown && (
+                    <div className="h-80"></div>
+                  )}
                 </div>
               </div>
             </div>
