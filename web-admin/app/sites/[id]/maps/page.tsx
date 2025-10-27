@@ -81,6 +81,10 @@ export default function UnifiedSiteMapsBuilder() {
   const [showGeofenceSave, setShowGeofenceSave] = useState(false);
   const [geofenceDrawn, setGeofenceDrawn] = useState<any>(null);
   const [savingGeofence, setSavingGeofence] = useState(false);
+  const [showLegend, setShowLegend] = useState(true);
+  const [selectedItem, setSelectedItem] = useState<any>(null);
+  const [showLabelInput, setShowLabelInput] = useState(false);
+  const [currentLabel, setCurrentLabel] = useState('');
   
   // Refs
   const mapContainerRef = useRef<HTMLDivElement>(null);
