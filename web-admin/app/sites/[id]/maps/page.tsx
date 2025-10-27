@@ -997,19 +997,76 @@ export default function UnifiedSiteMapsBuilder() {
               </button>
             </div>
 
-            {/* Layer Info */}
+            {/* Map Legend */}
             <div className="p-3 bg-gray-50 rounded-lg">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-xs font-medium text-gray-700">Layers</span>
-                <button onClick={() => setShowLayers(!showLayers)}>
-                  {showLayers ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
+                <span className="text-xs font-medium text-gray-700">Map Legend</span>
+                <button onClick={() => setShowLegend(!showLegend)}>
+                  {showLegend ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
                 </button>
               </div>
-              {showLayers && (
-                <div className="space-y-1 text-xs text-gray-600">
-                  <div>Boundary: {geofenceBoundary ? 'Active' : 'Not set'}</div>
-                  <div>Annotations: {annotations.length}</div>
-                  <div>Measurements: {measurements.length}</div>
+              {showLegend && (
+                <div className="space-y-3 max-h-60 overflow-y-auto">
+                  {/* Geofence */}
+                  {geofenceBoundary && (
+                    <div className="space-y-1">
+                      <div className="flex items-center gap-2">
+                        <div className="w-4 h-4 bg-purple-500 rounded border border-purple-700"></div>
+                        <span className="text-xs font-semibold text-gray-800">Geofence Boundary</span>
+                      </div>
+                    </div>
+                  )}
+                  
+                  {/* Measurements */}
+                  {measurements.length > 0 && (
+                    <div className="space-y-1">
+                      <div className="text-xs font-semibold text-gray-800">Measurements:</div>
+                      {measurements.map((m, idx) => (
+                        <div key={m.id} className="flex items-center gap-2 ml-2">
+                          <Ruler className="w-3 h-3 text-green-600" />
+                          <span className="text-xs text-gray-700">
+                            {m.label || `${m.type} #${idx + 1}`}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  
+                  {/* Annotations by Category */}
+                  {annotations.length > 0 && (
+                    <div className="space-y-1">
+                      <div className="text-xs font-semibold text-gray-800">Annotations:</div>
+                      {/* Group by category */}
+                      {Array.from(new Set(annotations.map(a => a.category))).map(category => {
+                        const categoryItems = annotations.filter(a => a.category === category);
+                        const categoryInfo = ANNOTATION_CATEGORIES.find(c => c.value === category);
+                        const CategoryIcon = categoryInfo?.icon || MapPin;
+                        
+                        return (
+                          <div key={category} className="space-y-1">
+                            <div className="flex items-center gap-2 ml-2">
+                              <CategoryIcon className="w-3 h-3" style={{ color: categoryItems[0]?.color || '#3B82F6' }} />
+                              <span className="text-xs font-medium text-gray-700">
+                                {categoryInfo?.label || category} ({categoryItems.length})
+                              </span>
+                            </div>
+                            {categoryItems.map((item, idx) => (
+                              item.label && (
+                                <div key={item.id} className="flex items-center gap-2 ml-6 text-xs text-gray-600">
+                                  • {item.label}
+                                </div>
+                              )
+                            ))}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+                  
+                  {/* Empty state */}
+                  {!geofenceBoundary && measurements.length === 0 && annotations.length === 0 && (
+                    <div className="text-xs text-gray-500 italic">No items on map yet</div>
+                  )}
                 </div>
               )}
             </div>
