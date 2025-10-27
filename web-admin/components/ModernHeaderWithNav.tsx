@@ -850,23 +850,86 @@ export default function ModernHeaderWithNav() {
               />
             </div>
 
-            {/* Status Indicators - NEW */}
-            <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 bg-white rounded-lg shadow-sm border border-gray-200">
-              <div className="flex items-center gap-1.5">
-                <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-sm"></div>
-                <span className="text-xs font-semibold text-gray-700">Operational</span>
-              </div>
-              <div className="w-px h-4 bg-gray-300 mx-1"></div>
-              <div className="flex items-center gap-1">
-                <RefreshCw className="w-3 h-3 text-gray-600" />
-                <span className="text-xs text-gray-600 font-medium">2m ago</span>
-              </div>
+            {/* Status Indicators - Clickable with Dropdown */}
+            <div ref={statusRef} className="relative hidden lg:block">
+              <button
+                onClick={() => setShowStatusDropdown(!showStatusDropdown)}
+                className="flex items-center gap-2 px-3 py-1.5 bg-white rounded-lg shadow-sm border border-gray-200 hover:bg-gray-50 transition-all cursor-pointer"
+              >
+                <div className="flex items-center gap-1.5">
+                  <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-sm"></div>
+                  <span className="text-xs font-semibold text-gray-700">Operational</span>
+                </div>
+                <div className="w-px h-4 bg-gray-300 mx-1"></div>
+                <div className="flex items-center gap-1">
+                  <RefreshCw className="w-3 h-3 text-gray-600" />
+                  <span className="text-xs text-gray-600 font-medium">2m ago</span>
+                </div>
+              </button>
+              
+              {/* Status Dropdown */}
+              {showStatusDropdown && (
+                <div className="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden z-50">
+                  <div className="bg-gradient-to-r from-green-500 to-green-600 p-4 text-white">
+                    <h3 className="font-bold text-lg mb-1">System Status</h3>
+                    <p className="text-sm opacity-90">All systems operational</p>
+                  </div>
+                  <div className="p-4 space-y-3">
+                    <div className="flex items-center justify-between py-2 border-b border-gray-100">
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
+                          <CheckCircle className="w-5 h-5 text-green-600" />
+                        </div>
+                        <div>
+                          <p className="font-semibold text-gray-900">API Status</p>
+                          <p className="text-xs text-gray-500">Healthy</p>
+                        </div>
+                      </div>
+                      <span className="px-2 py-1 bg-green-100 text-green-700 rounded text-xs font-semibold">ONLINE</span>
+                    </div>
+                    
+                    <div className="flex items-center justify-between py-2 border-b border-gray-100">
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
+                          <Database className="w-5 h-5 text-green-600" />
+                        </div>
+                        <div>
+                          <p className="font-semibold text-gray-900">Database</p>
+                          <p className="text-xs text-gray-500">Connected</p>
+                        </div>
+                      </div>
+                      <span className="px-2 py-1 bg-green-100 text-green-700 rounded text-xs font-semibold">ONLINE</span>
+                    </div>
+                    
+                    <div className="flex items-center justify-between py-2">
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
+                          <RefreshCw className="w-5 h-5 text-blue-600" />
+                        </div>
+                        <div>
+                          <p className="font-semibold text-gray-900">Last Sync</p>
+                          <p className="text-xs text-gray-500">2 minutes ago</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => {
+                      router.push('/alerts');
+                      setShowStatusDropdown(false);
+                    }}
+                    className="w-full bg-gray-50 px-4 py-3 text-sm font-semibold text-blue-600 hover:bg-blue-50 transition-colors border-t border-gray-200"
+                  >
+                    View All Alerts →
+                  </button>
+                </div>
+              )}
             </div>
 
-            {/* Weather Widget - NEW Phase 3 */}
+            {/* Weather Widget - Clickable to navigate to weather page */}
             <div ref={weatherRef} className="relative hidden xl:block">
               <button
-                onClick={() => setShowWeatherWidget(!showWeatherWidget)}
+                onClick={() => router.push('/weather')}
                 className="flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 rounded-lg shadow-sm transition-all cursor-pointer border border-blue-400"
               >
                 <span className="text-lg">{weather.icon}</span>
@@ -875,39 +938,6 @@ export default function ModernHeaderWithNav() {
                   <span className="text-xs text-white opacity-90">{weather.condition}</span>
                 </div>
               </button>
-              
-              {/* Weather Widget Dropdown */}
-              {showWeatherWidget && (
-                <div className="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden z-50">
-                  <div className="bg-gradient-to-r from-blue-500 to-blue-600 p-4 text-white">
-                    <h3 className="font-bold text-lg mb-1">Toronto Weather</h3>
-                    <p className="text-sm opacity-90">5-Day Forecast</p>
-                  </div>
-                  <div className="p-4 space-y-3">
-                    {[
-                      { day: 'Today', temp: -5, condition: 'Heavy Snow', icon: '❄️' },
-                      { day: 'Tomorrow', temp: -3, condition: 'Light Snow', icon: '🌨️' },
-                      { day: 'Wednesday', temp: -1, condition: 'Cloudy', icon: '☁️' },
-                      { day: 'Thursday', temp: 2, condition: 'Partly Cloudy', icon: '⛅' },
-                      { day: 'Friday', temp: 4, condition: 'Clear', icon: '☀️' },
-                    ].map((day, idx) => (
-                      <div key={idx} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
-                        <div className="flex items-center gap-3">
-                          <span className="text-2xl">{day.icon}</span>
-                          <div>
-                            <p className="font-semibold text-gray-900">{day.day}</p>
-                            <p className="text-xs text-gray-500">{day.condition}</p>
-                          </div>
-                        </div>
-                        <span className="text-lg font-bold text-gray-900">{day.temp}°C</span>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="bg-gray-50 px-4 py-3 text-xs text-gray-500 text-center border-t border-gray-200">
-                    Perfect for snow removal operations ❄️
-                  </div>
-                </div>
-              )}
             </div>
 
             {/* Avatar */}
