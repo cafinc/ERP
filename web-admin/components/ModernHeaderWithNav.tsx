@@ -526,7 +526,7 @@ export default function ModernHeaderWithNav() {
             <div ref={navMenuRef} className="relative">
               <button
                 onClick={() => setShowNavMenu(!showNavMenu)}
-                className={`p-2 rounded-lg transition-colors cursor-pointer ${
+                className={`p-2 rounded-lg transition-all duration-300 cursor-pointer ${
                   showNavMenu 
                     ? 'text-white' 
                     : 'text-white hover:text-white'
@@ -534,6 +534,7 @@ export default function ModernHeaderWithNav() {
                 style={{
                   backgroundColor: showNavMenu ? '#607d8b' : 'transparent',
                   fontSize: isCompact ? '14px' : '16px',
+                  transform: showNavMenu ? 'rotate(90deg)' : 'rotate(0deg)',
                 }}
                 onMouseEnter={(e) => {
                   if (!showNavMenu) {
