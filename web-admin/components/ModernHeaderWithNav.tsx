@@ -845,7 +845,7 @@ export default function ModernHeaderWithNav() {
                     />
                   )
                 ) : (
-                  <span className="text-sm font-bold">{getInitials()}</span>
+                  <span className="text-sm font-bold text-white">{getInitials()}</span>
                 )}
               </button>
 
