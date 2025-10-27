@@ -312,29 +312,134 @@ export default function UnifiedSiteMapsBuilder() {
     const overlay = event.overlay;
     const type = event.type;
 
+    console.log('✏️ Overlay completed:', type, 'Active tool:', activeTool);
+
     // Store overlay
     overlaysRef.current.push(overlay);
 
-    // Create annotation record
-    const annotation = {
-      id: Date.now().toString(),
-      type: type,
-      category: activeTool === 'boundary' ? 'boundary' : selectedCategory,
-      color: selectedColor,
-      overlay: overlay,
-    };
-
     if (activeTool === 'boundary') {
-      // Store as geofence boundary
+      // Geofence boundary drawing
       const path = overlay.getPath();
       const coordinates: GeoPoint[] = [];
       for (let i = 0; i < path.getLength(); i++) {
         const point = path.getAt(i);
         coordinates.push({ lat: point.lat(), lng: point.lng() });
       }
+      setGeofenceDrawn(overlay);
       setGeofenceBoundary(coordinates);
+      setShowGeofenceSave(true);
+      console.log('✅ Geofence drawn, save button shown');
+      
+    } else if (activeTool === 'measure-distance') {
+      // Distance measurement
+      const path = overlay.getPath();
+      let totalDistance = 0;
+      for (let i = 0; i < path.getLength() - 1; i++) {
+        const from = path.getAt(i);
+        const to = path.getAt(i + 1);
+        totalDistance += window.google.maps.geometry.spherical.computeDistanceBetween(from, to);
+      }
+      
+      const distanceMeters = totalDistance;
+      const distanceFeet = distanceMeters * 3.28084;
+      const distanceMiles = distanceMeters / 1609.34;
+      
+      // Add info window with measurement
+      const midPoint = path.getAt(Math.floor(path.getLength() / 2));
+      const infoWindow = new window.google.maps.InfoWindow({
+        position: midPoint,
+        content: `
+          <div style="padding: 12px; font-family: sans-serif;">
+            <strong style="font-size: 14px; color: #1f2937;">Distance Measurement</strong><br/>
+            <div style="margin-top: 8px; font-size: 13px;">
+              <strong>${distanceFeet.toFixed(2)}</strong> feet<br/>
+              <strong>${distanceMeters.toFixed(2)}</strong> meters<br/>
+              <strong>${distanceMiles.toFixed(3)}</strong> miles
+            </div>
+          </div>
+        `,
+      });
+      infoWindow.open(mapRef.current);
+      overlaysRef.current.push(infoWindow);
+      
+      const measurement = {
+        id: Date.now().toString(),
+        type: 'distance',
+        distanceFeet: distanceFeet.toFixed(2),
+        distanceMeters: distanceMeters.toFixed(2),
+        distanceMiles: distanceMiles.toFixed(3),
+        overlay: overlay,
+        infoWindow: infoWindow,
+      };
+      setMeasurements([...measurements, measurement]);
+      console.log('📏 Distance measured:', measurement);
+      
+    } else if (activeTool === 'measure-area') {
+      // Area measurement
+      const path = overlay.getPath();
+      const areaSquareMeters = window.google.maps.geometry.spherical.computeArea(path);
+      const areaSquareFeet = areaSquareMeters * 10.764;
+      const areaAcres = areaSquareMeters * 0.000247105;
+      
+      // Calculate perimeter
+      let perimeter = 0;
+      for (let i = 0; i < path.getLength(); i++) {
+        const from = path.getAt(i);
+        const to = path.getAt((i + 1) % path.getLength());
+        perimeter += window.google.maps.geometry.spherical.computeDistanceBetween(from, to);
+      }
+      const perimeterFeet = perimeter * 3.28084;
+      
+      // Add info window
+      const bounds = new window.google.maps.LatLngBounds();
+      for (let i = 0; i < path.getLength(); i++) {
+        bounds.extend(path.getAt(i));
+      }
+      const center = bounds.getCenter();
+      
+      const infoWindow = new window.google.maps.InfoWindow({
+        position: center,
+        content: `
+          <div style="padding: 12px; font-family: sans-serif;">
+            <strong style="font-size: 14px; color: #1f2937;">Area Measurement</strong><br/>
+            <div style="margin-top: 8px; font-size: 13px;">
+              <strong>Area:</strong><br/>
+              ${areaSquareFeet.toLocaleString(undefined, {maximumFractionDigits: 0})} sq ft<br/>
+              ${areaSquareMeters.toLocaleString(undefined, {maximumFractionDigits: 0})} sq m<br/>
+              ${areaAcres.toFixed(4)} acres<br/>
+              <strong>Perimeter:</strong><br/>
+              ${perimeterFeet.toFixed(2)} feet
+            </div>
+          </div>
+        `,
+      });
+      infoWindow.open(mapRef.current);
+      overlaysRef.current.push(infoWindow);
+      
+      const measurement = {
+        id: Date.now().toString(),
+        type: 'area',
+        areaSquareFeet: areaSquareFeet.toLocaleString(undefined, {maximumFractionDigits: 0}),
+        areaSquareMeters: areaSquareMeters.toLocaleString(undefined, {maximumFractionDigits: 0}),
+        areaAcres: areaAcres.toFixed(4),
+        perimeterFeet: perimeterFeet.toFixed(2),
+        overlay: overlay,
+        infoWindow: infoWindow,
+      };
+      setMeasurements([...measurements, measurement]);
+      console.log('📐 Area measured:', measurement);
+      
     } else {
+      // Regular annotation
+      const annotation = {
+        id: Date.now().toString(),
+        type: type,
+        category: selectedCategory,
+        color: selectedColor,
+        overlay: overlay,
+      };
       setAnnotations([...annotations, annotation]);
+      console.log('🎨 Annotation added:', annotation);
     }
 
     // Stop drawing mode after completing
