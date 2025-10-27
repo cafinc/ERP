@@ -1402,9 +1402,9 @@ export default function CustomerFormPage() {
                         <label className="block text-xs font-medium text-gray-700 mb-2">City <span className="text-red-500">*</span></label>
                         <input
                           type="text"
-                          value={customerForm.city}
+                          value={customerForm.company_address.city}
                           onChange={e =>
-                            setCustomerForm({ ...customerForm, city: e.target.value })
+                            setCustomerForm({ ...customerForm, company_address: { ...customerForm.company_address, city: e.target.value } })
                           }
                           className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-semibold transition-all"
                           placeholder="Calgary"
@@ -1415,9 +1415,9 @@ export default function CustomerFormPage() {
                       <div>
                         <label className="block text-xs font-medium text-gray-700 mb-2">Province <span className="text-red-500">*</span></label>
                         <select
-                          value={customerForm.province}
+                          value={customerForm.company_address.province}
                           onChange={e =>
-                            setCustomerForm({ ...customerForm, province: e.target.value })
+                            setCustomerForm({ ...customerForm, company_address: { ...customerForm.company_address, province: e.target.value } })
                           }
                           className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-semibold transition-all"
 
@@ -1435,9 +1435,9 @@ export default function CustomerFormPage() {
                         <label className="block text-xs font-medium text-gray-700 mb-2">Postal Code <span className="text-red-500">*</span></label>
                         <input
                           type="text"
-                          value={customerForm.postal_code}
+                          value={customerForm.company_address.postal_code}
                           onChange={e =>
-                            setCustomerForm({ ...customerForm, postal_code: e.target.value })
+                            setCustomerForm({ ...customerForm, company_address: { ...customerForm.company_address, postal_code: e.target.value } })
                           }
                           className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-semibold transition-all"
                           placeholder="T2P 1J9"
