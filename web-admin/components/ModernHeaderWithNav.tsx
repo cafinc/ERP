@@ -550,7 +550,7 @@ export default function ModernHeaderWithNav() {
                 aria-expanded={showNavMenu}
                 aria-haspopup="true"
               >
-                <Menu className="w-6 h-6" />
+                <Menu className="w-4 h-4" />
               </button>
 
               {/* Navigation Dropdown */}
