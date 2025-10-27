@@ -816,15 +816,15 @@ export default function ModernHeaderWithNav() {
             </div>
 
             {/* Status Indicators - NEW */}
-            <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 bg-white bg-opacity-10 rounded-lg">
+            <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 bg-white rounded-lg shadow-sm border border-gray-200">
               <div className="flex items-center gap-1.5">
-                <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
-                <span className="text-xs font-medium text-white">Operational</span>
+                <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-sm"></div>
+                <span className="text-xs font-semibold text-gray-700">Operational</span>
               </div>
-              <div className="w-px h-4 bg-white bg-opacity-30 mx-1"></div>
+              <div className="w-px h-4 bg-gray-300 mx-1"></div>
               <div className="flex items-center gap-1">
-                <RefreshCw className="w-3 h-3 text-white opacity-70" />
-                <span className="text-xs text-white opacity-90">2m ago</span>
+                <RefreshCw className="w-3 h-3 text-gray-600" />
+                <span className="text-xs text-gray-600 font-medium">2m ago</span>
               </div>
             </div>
 
@@ -832,11 +832,11 @@ export default function ModernHeaderWithNav() {
             <div ref={profileRef} className="relative flex-shrink-0">
               <button
                 onClick={() => setShowProfileMenu(!showProfileMenu)}
-                className="w-10 h-10 rounded-full flex items-center justify-center bg-white bg-opacity-20 hover:bg-opacity-30 transition-all border-2 border-white border-opacity-30 cursor-pointer"
+                className="w-10 h-10 rounded-full flex items-center justify-center bg-gradient-to-br from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 transition-all border-2 border-white shadow-lg cursor-pointer"
               >
                 {user?.avatar ? (
                   user.avatar.length <= 4 ? (
-                    <span className="text-xl">{user.avatar}</span>
+                    <span className="text-xl text-white font-bold">{user.avatar}</span>
                   ) : (
                     <img
                       src={user.avatar}
