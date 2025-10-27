@@ -107,7 +107,23 @@ export default function CustomerFormPage() {
     phone: '',
     mobile: '',
     communication_preference: 'sms', // 'sms' or 'inapp'
-    // Address broken out
+    // Individual Address
+    individual_address: {
+      street_address: '',
+      city: '',
+      province: 'AB',
+      postal_code: '',
+      country: 'Canada',
+    },
+    // Company Address (separate from individual)
+    company_address: {
+      street_address: '',
+      city: '',
+      province: 'AB',
+      postal_code: '',
+      country: 'Canada',
+    },
+    // Legacy fields for backward compatibility (will map to appropriate address)
     street_address: '',
     city: '',
     province: 'AB',
