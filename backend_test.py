@@ -804,6 +804,407 @@ class BackendTester:
 
         return success_count, total_tests
 
+    def test_fuel_management_api(self):
+        """Test 6: Fuel Management API - Test all fuel CRUD operations"""
+        success_count = 0
+        total_tests = 11
+        
+        # Test 6.1: Get all fuel entries (should be empty initially)
+        try:
+            response = self.session.get(f"{BACKEND_URL}/fuel")
+            if response.status_code == 200:
+                data = response.json()
+                if isinstance(data, list):
+                    self.log_test(
+                        "Fuel API - Get All Entries (Empty)", 
+                        True, 
+                        f"Retrieved {len(data)} fuel entries"
+                    )
+                    success_count += 1
+                else:
+                    self.log_test(
+                        "Fuel API - Get All Entries (Empty)", 
+                        False, 
+                        "Response is not a list", 
+                        data
+                    )
+            else:
+                self.log_test(
+                    "Fuel API - Get All Entries (Empty)", 
+                    False, 
+                    f"HTTP {response.status_code}: {response.text}"
+                )
+        except Exception as e:
+            self.log_test(
+                "Fuel API - Get All Entries (Empty)", 
+                False, 
+                f"Error: {str(e)}"
+            )
+
+        # Test 6.2: Create fuel entry
+        try:
+            fuel_data = {
+                "vehicle_id": "TRUCK-001",
+                "driver_name": "John Doe",
+                "fuel_type": "Diesel",
+                "quantity": 50.5,
+                "cost": 175.25,
+                "odometer": 45000,
+                "location": "Shell Gas Station, Main St",
+                "notes": "Regular refueling",
+                "date": "2025-01-15T10:30:00"
+            }
+            
+            response = self.session.post(f"{BACKEND_URL}/fuel", json=fuel_data)
+            if response.status_code == 200:
+                data = response.json()
+                if "id" in data and data.get("vehicle_id") == "TRUCK-001":
+                    self.test_data['fuel_entry_id'] = data["id"]
+                    self.log_test(
+                        "Fuel API - Create Entry", 
+                        True, 
+                        f"Created fuel entry with ID: {data['id']}"
+                    )
+                    success_count += 1
+                else:
+                    self.log_test(
+                        "Fuel API - Create Entry", 
+                        False, 
+                        "Missing ID or incorrect data", 
+                        data
+                    )
+            else:
+                self.log_test(
+                    "Fuel API - Create Entry", 
+                    False, 
+                    f"HTTP {response.status_code}: {response.text}"
+                )
+        except Exception as e:
+            self.log_test(
+                "Fuel API - Create Entry", 
+                False, 
+                f"Error: {str(e)}"
+            )
+
+        # Test 6.3: Get specific fuel entry
+        fuel_entry_id = self.test_data.get('fuel_entry_id')
+        if fuel_entry_id:
+            try:
+                response = self.session.get(f"{BACKEND_URL}/fuel/{fuel_entry_id}")
+                if response.status_code == 200:
+                    data = response.json()
+                    if data.get("id") == fuel_entry_id:
+                        self.log_test(
+                            "Fuel API - Get Specific Entry", 
+                            True, 
+                            f"Retrieved entry: {data.get('vehicle_id')}"
+                        )
+                        success_count += 1
+                    else:
+                        self.log_test(
+                            "Fuel API - Get Specific Entry", 
+                            False, 
+                            "ID mismatch", 
+                            data
+                        )
+                else:
+                    self.log_test(
+                        "Fuel API - Get Specific Entry", 
+                        False, 
+                        f"HTTP {response.status_code}: {response.text}"
+                    )
+            except Exception as e:
+                self.log_test(
+                    "Fuel API - Get Specific Entry", 
+                    False, 
+                    f"Error: {str(e)}"
+                )
+        else:
+            self.log_test(
+                "Fuel API - Get Specific Entry", 
+                False, 
+                "No fuel entry ID available"
+            )
+
+        # Test 6.4: Test invalid ID handling
+        try:
+            invalid_id = "invalid_id_123"
+            response = self.session.get(f"{BACKEND_URL}/fuel/{invalid_id}")
+            if response.status_code in [400, 404]:
+                self.log_test(
+                    "Fuel API - Invalid ID Handling", 
+                    True, 
+                    f"Proper error handling: {response.status_code}"
+                )
+                success_count += 1
+            else:
+                self.log_test(
+                    "Fuel API - Invalid ID Handling", 
+                    False, 
+                    f"Unexpected status: {response.status_code}", 
+                    response.text
+                )
+        except Exception as e:
+            self.log_test(
+                "Fuel API - Invalid ID Handling", 
+                False, 
+                f"Error: {str(e)}"
+            )
+
+        # Test 6.5: Create multiple entries for statistics
+        additional_entries = [
+            {
+                "vehicle_id": "TRUCK-002",
+                "driver_name": "Jane Smith",
+                "fuel_type": "Diesel",
+                "quantity": 45.0,
+                "cost": 157.50,
+                "odometer": 32000,
+                "location": "Petro-Canada, Highway 1",
+                "notes": "Highway refuel",
+                "date": "2025-01-14T14:20:00"
+            },
+            {
+                "vehicle_id": "VAN-001",
+                "driver_name": "Mike Johnson",
+                "fuel_type": "Gasoline",
+                "quantity": 35.2,
+                "cost": 126.72,
+                "odometer": 28500,
+                "location": "Esso Station, Downtown",
+                "notes": "City route fuel",
+                "date": "2025-01-13T09:15:00"
+            }
+        ]
+        
+        created_count = 0
+        for entry_data in additional_entries:
+            try:
+                response = self.session.post(f"{BACKEND_URL}/fuel", json=entry_data)
+                if response.status_code == 200:
+                    data = response.json()
+                    if "id" in data:
+                        if 'additional_fuel_ids' not in self.test_data:
+                            self.test_data['additional_fuel_ids'] = []
+                        self.test_data['additional_fuel_ids'].append(data["id"])
+                        created_count += 1
+            except Exception as e:
+                pass
+        
+        self.log_test(
+            "Fuel API - Create Multiple Entries", 
+            created_count == len(additional_entries), 
+            f"Created {created_count}/{len(additional_entries)} additional entries"
+        )
+        if created_count == len(additional_entries):
+            success_count += 1
+
+        # Test 6.6: Get fuel statistics
+        try:
+            response = self.session.get(f"{BACKEND_URL}/fuel/stats/summary")
+            if response.status_code == 200:
+                data = response.json()
+                required_fields = ["total_quantity", "total_cost", "avg_cost_per_gallon", "entry_count"]
+                if all(field in data for field in required_fields):
+                    self.log_test(
+                        "Fuel API - Get Statistics", 
+                        True, 
+                        f"Stats: {data['entry_count']} entries, ${data['total_cost']:.2f} total"
+                    )
+                    success_count += 1
+                else:
+                    self.log_test(
+                        "Fuel API - Get Statistics", 
+                        False, 
+                        "Missing required fields", 
+                        data
+                    )
+            else:
+                self.log_test(
+                    "Fuel API - Get Statistics", 
+                    False, 
+                    f"HTTP {response.status_code}: {response.text}"
+                )
+        except Exception as e:
+            self.log_test(
+                "Fuel API - Get Statistics", 
+                False, 
+                f"Error: {str(e)}"
+            )
+
+        # Test 6.7: Get vehicles list
+        try:
+            response = self.session.get(f"{BACKEND_URL}/fuel/vehicles")
+            if response.status_code == 200:
+                data = response.json()
+                if isinstance(data, list):
+                    self.log_test(
+                        "Fuel API - Get Vehicles List", 
+                        True, 
+                        f"Found {len(data)} vehicles"
+                    )
+                    success_count += 1
+                else:
+                    self.log_test(
+                        "Fuel API - Get Vehicles List", 
+                        False, 
+                        "Response is not a list", 
+                        data
+                    )
+            else:
+                self.log_test(
+                    "Fuel API - Get Vehicles List", 
+                    False, 
+                    f"HTTP {response.status_code}: {response.text}"
+                )
+        except Exception as e:
+            self.log_test(
+                "Fuel API - Get Vehicles List", 
+                False, 
+                f"Error: {str(e)}"
+            )
+
+        # Test 6.8: Update fuel entry
+        if fuel_entry_id:
+            try:
+                update_data = {
+                    "vehicle_id": "TRUCK-001",
+                    "driver_name": "John Doe",
+                    "fuel_type": "Diesel",
+                    "quantity": 50.5,
+                    "cost": 180.00,  # Updated cost
+                    "odometer": 45000,
+                    "location": "Shell Gas Station, Main St",
+                    "notes": "Regular refueling - Updated cost",  # Updated notes
+                    "date": "2025-01-15T10:30:00"
+                }
+                
+                response = self.session.put(f"{BACKEND_URL}/fuel/{fuel_entry_id}", json=update_data)
+                if response.status_code == 200:
+                    data = response.json()
+                    if data.get("cost") == 180.00 and "updated_at" in data:
+                        self.log_test(
+                            "Fuel API - Update Entry", 
+                            True, 
+                            f"Updated cost to ${data['cost']:.2f}"
+                        )
+                        success_count += 1
+                    else:
+                        self.log_test(
+                            "Fuel API - Update Entry", 
+                            False, 
+                            "Update not reflected or missing updated_at", 
+                            data
+                        )
+                else:
+                    self.log_test(
+                        "Fuel API - Update Entry", 
+                        False, 
+                        f"HTTP {response.status_code}: {response.text}"
+                    )
+            except Exception as e:
+                self.log_test(
+                    "Fuel API - Update Entry", 
+                    False, 
+                    f"Error: {str(e)}"
+                )
+        else:
+            self.log_test(
+                "Fuel API - Update Entry", 
+                False, 
+                "No fuel entry ID available"
+            )
+
+        # Test 6.9: Delete fuel entry
+        if fuel_entry_id:
+            try:
+                response = self.session.delete(f"{BACKEND_URL}/fuel/{fuel_entry_id}")
+                if response.status_code == 200:
+                    data = response.json()
+                    if "message" in data:
+                        self.log_test(
+                            "Fuel API - Delete Entry", 
+                            True, 
+                            f"Deleted successfully: {data['message']}"
+                        )
+                        success_count += 1
+                    else:
+                        self.log_test(
+                            "Fuel API - Delete Entry", 
+                            False, 
+                            "No success message", 
+                            data
+                        )
+                else:
+                    self.log_test(
+                        "Fuel API - Delete Entry", 
+                        False, 
+                        f"HTTP {response.status_code}: {response.text}"
+                    )
+            except Exception as e:
+                self.log_test(
+                    "Fuel API - Delete Entry", 
+                    False, 
+                    f"Error: {str(e)}"
+                )
+        else:
+            self.log_test(
+                "Fuel API - Delete Entry", 
+                False, 
+                "No fuel entry ID available"
+            )
+
+        # Test 6.10: Verify deletion
+        if fuel_entry_id:
+            try:
+                response = self.session.get(f"{BACKEND_URL}/fuel/{fuel_entry_id}")
+                if response.status_code == 404:
+                    self.log_test(
+                        "Fuel API - Verify Deletion", 
+                        True, 
+                        "Entry properly deleted (404 returned)"
+                    )
+                    success_count += 1
+                else:
+                    self.log_test(
+                        "Fuel API - Verify Deletion", 
+                        False, 
+                        f"Entry still exists: {response.status_code}"
+                    )
+            except Exception as e:
+                self.log_test(
+                    "Fuel API - Verify Deletion", 
+                    False, 
+                    f"Error: {str(e)}"
+                )
+        else:
+            self.log_test(
+                "Fuel API - Verify Deletion", 
+                False, 
+                "No fuel entry ID available"
+            )
+
+        # Test 6.11: Clean up additional entries
+        additional_ids = self.test_data.get('additional_fuel_ids', [])
+        cleanup_count = 0
+        for entry_id in additional_ids:
+            try:
+                response = self.session.delete(f"{BACKEND_URL}/fuel/{entry_id}")
+                if response.status_code == 200:
+                    cleanup_count += 1
+            except:
+                pass
+        
+        self.log_test(
+            "Fuel API - Cleanup Test Data", 
+            cleanup_count == len(additional_ids), 
+            f"Cleaned up {cleanup_count}/{len(additional_ids)} test entries"
+        )
+        if len(additional_ids) == 0 or cleanup_count == len(additional_ids):
+            success_count += 1
+
+        return success_count, total_tests
+
     def test_rate_limiting(self):
         """Test rate limiting functionality"""
         try:
