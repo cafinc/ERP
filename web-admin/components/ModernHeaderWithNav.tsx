@@ -901,5 +901,6 @@ export default function ModernHeaderWithNav() {
         </div>
       </div>
     </header>
+    </>
   );
 }
