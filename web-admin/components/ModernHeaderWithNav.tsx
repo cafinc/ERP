@@ -85,6 +85,15 @@ export default function ModernHeaderWithNav() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [showThemeMenu, setShowThemeMenu] = useState(false);
   const themeMenuRef = useRef<HTMLDivElement>(null);
+  
+  // Phase 3: Scroll behavior
+  const [isCompact, setIsCompact] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  
+  // Phase 3: Weather widget
+  const [weather, setWeather] = useState({ temp: -5, condition: 'Heavy Snow', icon: '❄️' });
+  const [showWeatherWidget, setShowWeatherWidget] = useState(false);
+  const weatherRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const savedBranding = localStorage.getItem('branding_settings');
