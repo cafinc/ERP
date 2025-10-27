@@ -511,13 +511,13 @@ export default function ModernHeaderWithNav() {
           boxShadow: isScrolled ? '0 8px 32px rgba(0, 0, 0, 0.15)' : '0 4px 24px rgba(0, 0, 0, 0.12)',
           borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
           transition: 'all 0.3s ease-in-out',
-          height: isCompact ? '56px' : '64px',
+          height: isCompact ? '84px' : '96px',
         }}
       >
-        <div className="max-w-[2000px] mx-auto px-4 transition-all duration-300" style={{ 
+        <div className="max-w-[2000px] mx-auto px-6 transition-all duration-300" style={{ 
           height: '100%',
-          paddingTop: isCompact ? '8px' : '12px',
-          paddingBottom: isCompact ? '8px' : '12px',
+          paddingTop: isCompact ? '12px' : '18px',
+          paddingBottom: isCompact ? '12px' : '18px',
         }}>
         <div className="flex items-center justify-between gap-2 sm:gap-3 md:gap-4">
           {/* Left Side - Hamburger Menu and Company Name */}
