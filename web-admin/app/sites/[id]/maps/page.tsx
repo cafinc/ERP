@@ -622,13 +622,21 @@ export default function UnifiedSiteMapsBuilder() {
 
         {/* Map Container */}
         <div className="flex-1 relative">
-          <div ref={mapContainerRef} className="w-full h-full" />
+          {/* Always render map container for ref */}
+          <div 
+            ref={mapContainerRef} 
+            className="w-full h-full"
+            style={{ display: loading ? 'none' : 'block' }}
+          />
           
-          {!mapInitialized && (
-            <div className="absolute inset-0 flex items-center justify-center bg-gray-100 bg-opacity-75">
+          {/* Loading overlay */}
+          {(loading || !mapInitialized) && (
+            <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
               <div className="text-center">
                 <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-                <p className="mt-4 text-gray-600">Initializing map...</p>
+                <p className="mt-4 text-gray-600">
+                  {loading ? 'Loading site data...' : 'Initializing map...'}
+                </p>
               </div>
             </div>
           )}
