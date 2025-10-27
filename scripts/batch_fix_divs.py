@@ -68,7 +68,7 @@ def fix_div_balance(filepath):
         if missing_closures == 0:
             print(f"✓ {filepath}: Balanced ({opening_divs} opening, {closing_divs} closing)")
             return True
-        elif missing_closs < 0:
+        elif missing_closures < 0:
             print(f"⚠️  {filepath}: More closing than opening tags! (opening:{opening_divs}, closing:{closing_divs})")
             return False
         
