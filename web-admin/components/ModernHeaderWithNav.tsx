@@ -776,6 +776,7 @@ export default function ModernHeaderWithNav() {
                 <Activity className="w-6 h-6" />
                 {activityCount > 0 && (
                   <span className="absolute top-0 right-0 flex items-center justify-center">
+                    <span className="absolute inline-flex h-4 w-4 rounded-full bg-orange-500 opacity-75 animate-ping"></span>
                     <span className="relative inline-flex items-center justify-center h-4 w-4 rounded-full bg-orange-500 text-white text-[10px] font-bold">
                       {activityCount > 9 ? '9+' : activityCount}
                     </span>
