@@ -512,6 +512,9 @@ export default function CustomerFormPage() {
     if (Object.keys(errors).length > 0) {
       setFieldErrors(errors);
       
+      // Log errors for debugging
+      console.log('Validation errors:', errors);
+      
       // Determine which sections have errors
       const sections = new Set<string>();
       Object.keys(errors).forEach(key => {
@@ -534,6 +537,11 @@ export default function CustomerFormPage() {
       });
       
       setErrorSections(Array.from(sections));
+      
+      // Show alert with specific errors for debugging
+      const errorMessages = Object.entries(errors).map(([field, msg]) => `${field}: ${msg}`).join('\n');
+      alert(`Please fix the following errors:\n\n${errorMessages}`);
+      
       setShowErrorModal(true);
       setSaving(false);
       return;
