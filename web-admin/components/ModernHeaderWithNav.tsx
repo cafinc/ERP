@@ -41,6 +41,7 @@ import {
   Clock,
   CheckCircle,
   Database,
+  Server,
 } from 'lucide-react';
 
 interface MenuItem {
