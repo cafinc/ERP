@@ -882,7 +882,7 @@ export default function CustomerFormPage() {
                               fieldErrors['first_name'] ? 'border-red-500 focus:ring-red-500' : 'border-gray-200 focus:ring-[#3f72af]'
                             }`}
                             placeholder="John"
-                            required
+
                           />
                           {fieldErrors['first_name'] && (
                             <p className="text-red-500 text-xs mt-1">{fieldErrors['first_name']}</p>
@@ -903,7 +903,7 @@ export default function CustomerFormPage() {
                               fieldErrors['last_name'] ? 'border-red-500 focus:ring-red-500' : 'border-gray-200 focus:ring-[#3f72af]'
                             }`}
                             placeholder="Smith"
-                            required
+
                           />
                           {fieldErrors['last_name'] && (
                             <p className="text-red-500 text-xs mt-1">{fieldErrors['last_name']}</p>
@@ -925,7 +925,7 @@ export default function CustomerFormPage() {
                                 fieldErrors['email'] ? 'border-red-500 focus:ring-red-500' : 'border-gray-200 focus:ring-[#3f72af]'
                               }`}
                             placeholder="john@example.com"
-                            required
+
                           />
                         </div>
                         {fieldErrors['email'] && (
@@ -945,7 +945,7 @@ export default function CustomerFormPage() {
                               fieldErrors['phone'] ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'
                             }`}
                             placeholder="(555) 123-4567"
-                            required
+
                           />
                         </div>
                         {fieldErrors['phone'] && (
@@ -1300,7 +1300,7 @@ export default function CustomerFormPage() {
                           }
                           className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-semibold transition-all"
                           placeholder="ABC Corporation Ltd."
-                          required
+
                         />
                       </div>
 
@@ -1331,7 +1331,7 @@ export default function CustomerFormPage() {
                             onChange={e => setCustomerForm({ ...customerForm, office_number: formatPhoneNumber(e.target.value) })}
                             className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-semibold transition-all"
                             placeholder="(555) 123-4567"
-                            required
+
                           />
                         </div>
                       </div>
@@ -1350,7 +1350,7 @@ export default function CustomerFormPage() {
                             }
                             className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-semibold transition-all"
                             placeholder="info@company.com"
-                            required
+
                           />
                         </div>
                       </div>
@@ -1377,7 +1377,7 @@ export default function CustomerFormPage() {
                           onChange={(e) => setCustomerForm({ ...customerForm, street_address: e.target.value })}
                           className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-semibold transition-all"
                           placeholder="123 Main Street"
-                          required
+
                         />
                       </div>
 
@@ -1392,7 +1392,7 @@ export default function CustomerFormPage() {
                           }
                           className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-semibold transition-all"
                           placeholder="Calgary"
-                          required
+
                         />
                       </div>
 
@@ -1404,7 +1404,7 @@ export default function CustomerFormPage() {
                             setCustomerForm({ ...customerForm, province: e.target.value })
                           }
                           className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-semibold transition-all"
-                          required
+
                         >
                           <option value="">Select Province</option>
                           {CANADIAN_PROVINCES.map(prov => (
@@ -1425,7 +1425,7 @@ export default function CustomerFormPage() {
                           }
                           className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-semibold transition-all"
                           placeholder="T2P 1J9"
-                          required
+
                         />
                       </div>
                     </div>
@@ -1472,7 +1472,7 @@ export default function CustomerFormPage() {
                               }
                               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                               placeholder="456 Billing Street"
-                              required
+
                             />
                             <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center">
                               <img 
@@ -1500,7 +1500,7 @@ export default function CustomerFormPage() {
                             }
                             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                             placeholder="Calgary"
-                            required
+
                           />
                         </div>
 
@@ -1515,7 +1515,7 @@ export default function CustomerFormPage() {
                               })
                             }
                             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                            required
+
                           >
                             {CANADIAN_PROVINCES.map(prov => (
                               <option key={prov.code} value={prov.code}>
@@ -1538,7 +1538,7 @@ export default function CustomerFormPage() {
                             }
                             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                             placeholder="T2P 1J9"
-                            required
+
                           />
                         </div>
                       </div>
@@ -1615,7 +1615,7 @@ export default function CustomerFormPage() {
                                     fieldErrors[`contact_${index}_name`] ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'
                                   }`}
                                   placeholder="John Doe"
-                                  required
+
                                 />
                                 {fieldErrors[`contact_${index}_name`] && (
                                   <p className="text-red-500 text-xs mt-1">{fieldErrors[`contact_${index}_name`]}</p>
@@ -1637,7 +1637,7 @@ export default function CustomerFormPage() {
                                       fieldErrors[`contact_${index}_phone`] ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'
                                     }`}
                                     placeholder="(555) 123-4567"
-                                    required
+
                                   />
                                 </div>
                                 {fieldErrors[`contact_${index}_phone`] && (
@@ -1669,7 +1669,7 @@ export default function CustomerFormPage() {
                                       fieldErrors[`contact_${index}_email`] ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'
                                     }`}
                                     placeholder="john@company.com"
-                                    required
+
                                   />
                                 </div>
                                 {fieldErrors[`contact_${index}_email`] && (
@@ -1888,7 +1888,7 @@ export default function CustomerFormPage() {
                         }
                         className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-semibold transition-all"
                         placeholder="123 Main Street"
-                        required
+
                       />
                       <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center">
                         <img 
@@ -1917,7 +1917,7 @@ export default function CustomerFormPage() {
                         }
                         className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-semibold transition-all"
                         placeholder="Calgary"
-                        required
+
                       />
                     </div>
 
@@ -1932,7 +1932,7 @@ export default function CustomerFormPage() {
                           setCustomerForm({ ...customerForm, province: e.target.value })
                         }
                         className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-semibold transition-all"
-                        required
+
                       >
                         {CANADIAN_PROVINCES.map(prov => (
                           <option key={prov.code} value={prov.code}>
@@ -1955,7 +1955,7 @@ export default function CustomerFormPage() {
                         }
                         className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-semibold transition-all"
                         placeholder="T2P 1J9"
-                        required
+
                       />
                     </div>
                   </div>
@@ -1999,7 +1999,7 @@ export default function CustomerFormPage() {
                           onChange={(e) => setSiteName(e.target.value)}
                           className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-semibold transition-all"
                           placeholder="e.g., Home, Main Location, Office"
-                          required
+
                         />
                         <p className="text-xs text-gray-500 mt-2">
                           A site will be created automatically using the address above
