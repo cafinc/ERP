@@ -130,12 +130,12 @@ export default function AlertsDropdown({ isOpen, onClose }: AlertsDropdownProps)
       <div className="p-3 border-t border-gray-200 text-center">
         <button
           onClick={() => {
-            // Navigate to alerts page
+            router.push('/alerts');
             onClose();
           }}
-          className="text-xs text-[#3f72af] hover:underline cursor-pointer"
+          className="text-xs text-[#3f72af] hover:underline cursor-pointer font-semibold"
         >
-          View All Alerts
+          View All Alerts →
         </button>
       </div>
     </div>
