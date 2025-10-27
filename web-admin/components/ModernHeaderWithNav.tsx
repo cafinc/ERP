@@ -684,14 +684,14 @@ export default function ModernHeaderWithNav() {
                             setShowSearchResults(false);
                             setSearchQuery('');
                           }}
-                          className="w-full flex items-center gap-3 px-4 py-3 hover:bg-gray-50 transition-colors text-left"
+                          className="w-full flex items-center gap-3 px-4 py-3 hover:bg-gradient-to-r hover:from-blue-50 hover:to-transparent transition-all text-left border-b border-gray-100 last:border-0 group"
                         >
-                          <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
-                            result.type === 'customer' ? 'bg-blue-100' :
-                            result.type === 'lead' ? 'bg-green-100' :
-                            result.type === 'estimate' ? 'bg-purple-100' :
-                            result.type === 'project' ? 'bg-orange-100' :
-                            'bg-gray-100'
+                          <div className={`w-10 h-10 rounded-lg flex items-center justify-center transform group-hover:scale-110 transition-transform ${
+                            result.type === 'customer' ? 'bg-gradient-to-br from-blue-100 to-blue-50' :
+                            result.type === 'lead' ? 'bg-gradient-to-br from-green-100 to-green-50' :
+                            result.type === 'estimate' ? 'bg-gradient-to-br from-purple-100 to-purple-50' :
+                            result.type === 'project' ? 'bg-gradient-to-br from-orange-100 to-orange-50' :
+                            'bg-gradient-to-br from-gray-100 to-gray-50'
                           }`}>
                             {result.type === 'customer' && <Users className="w-5 h-5 text-blue-600" />}
                             {result.type === 'lead' && <TrendingUp className="w-5 h-5 text-green-600" />}
