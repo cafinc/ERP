@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react';
+import { useRouter } from 'next/navigation';
 import { FileText, UserPlus, DollarSign, Briefcase, CheckCircle, Clock, TrendingUp } from 'lucide-react';
 
 interface ActivityDropdownProps {
