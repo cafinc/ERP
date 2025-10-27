@@ -669,64 +669,80 @@ export default function UnifiedSiteMapsBuilder() {
                 })}
               </div>
 
-              {/* Drawing Tools */}
+              {/* Annotation Type */}
               <div className="space-y-2">
                 <p className="text-xs text-gray-500">Annotation Type:</p>
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-3 gap-2">
                   <button
                     onClick={() => activateTool('marker', window.google?.maps?.drawing?.OverlayType?.MARKER)}
-                    className={`px-3 py-2 rounded-lg flex items-center justify-center gap-2 ${
+                    className={`px-3 py-2 rounded-lg flex flex-col items-center justify-center gap-1 ${
                       activeTool === 'marker'
                         ? 'bg-blue-600 text-white'
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     }`}
                   >
                     <MapPin className="w-4 h-4" />
-                    <span className="text-sm">Icon</span>
+                    <span className="text-xs">Icon</span>
+                  </button>
+                  <button
+                    onClick={() => activateTool('arrow', window.google?.maps?.drawing?.OverlayType?.POLYLINE)}
+                    className={`px-3 py-2 rounded-lg flex flex-col items-center justify-center gap-1 ${
+                      activeTool === 'arrow'
+                        ? 'bg-blue-600 text-white'
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    }`}
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                    <span className="text-xs">Arrow</span>
+                  </button>
+                  <button
+                    onClick={() => {
+                      setActiveTool('text');
+                      setShowLabelInput(true);
+                    }}
+                    className={`px-3 py-2 rounded-lg flex flex-col items-center justify-center gap-1 ${
+                      activeTool === 'text'
+                        ? 'bg-blue-600 text-white'
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    }`}
+                  >
+                    <Type className="w-4 h-4" />
+                    <span className="text-xs">Text</span>
                   </button>
                   <button
                     onClick={() => activateTool('polygon', window.google?.maps?.drawing?.OverlayType?.POLYGON)}
-                    className={`px-3 py-2 rounded-lg flex items-center justify-center gap-2 ${
+                    className={`px-3 py-2 rounded-lg flex flex-col items-center justify-center gap-1 ${
                       activeTool === 'polygon'
                         ? 'bg-blue-600 text-white'
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     }`}
                   >
                     <Pentagon className="w-4 h-4" />
-                    <span className="text-sm">Polygon</span>
+                    <span className="text-xs">Polygon</span>
                   </button>
                   <button
                     onClick={() => activateTool('rectangle', window.google?.maps?.drawing?.OverlayType?.RECTANGLE)}
-                    className={`px-3 py-2 rounded-lg flex items-center justify-center gap-2 ${
+                    className={`px-3 py-2 rounded-lg flex flex-col items-center justify-center gap-1 ${
                       activeTool === 'rectangle'
                         ? 'bg-blue-600 text-white'
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     }`}
                   >
                     <Square className="w-4 h-4" />
-                    <span className="text-sm">Rectangle</span>
+                    <span className="text-xs">Box</span>
                   </button>
                   <button
                     onClick={() => activateTool('circle', window.google?.maps?.drawing?.OverlayType?.CIRCLE)}
-                    className={`px-3 py-2 rounded-lg flex items-center justify-center gap-2 ${
+                    className={`px-3 py-2 rounded-lg flex flex-col items-center justify-center gap-1 ${
                       activeTool === 'circle'
                         ? 'bg-blue-600 text-white'
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     }`}
                   >
                     <Circle className="w-4 h-4" />
-                    <span className="text-sm">Circle</span>
-                  </button>
-                  <button
-                    onClick={() => activateTool('line', window.google?.maps?.drawing?.OverlayType?.POLYLINE)}
-                    className={`px-3 py-2 rounded-lg flex items-center justify-center gap-2 ${
-                      activeTool === 'line'
-                        ? 'bg-blue-600 text-white'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                    }`}
-                  >
-                    <Line className="w-4 h-4" />
-                    <span className="text-sm">Line</span>
+                    <span className="text-xs">Circle</span>
                   </button>
                 </div>
               </div>
