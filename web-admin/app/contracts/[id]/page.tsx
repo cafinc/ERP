@@ -586,6 +586,7 @@ export default function ContractDetailPage() {
           </div>
         </div>
       )}
+      </div>
     </div>
   );
 }
