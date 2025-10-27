@@ -8,7 +8,7 @@ import {
   Clock,
   CheckSquare,
   Briefcase,
-  Tool,
+  Wrench,
   PlayCircle,
   StopCircle,
   TrendingUp,
