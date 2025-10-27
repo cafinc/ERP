@@ -78,6 +78,9 @@ export default function UnifiedSiteMapsBuilder() {
   const [annotations, setAnnotations] = useState<any[]>([]);
   const [geofenceBoundary, setGeofenceBoundary] = useState<GeoPoint[] | null>(null);
   const [showLayers, setShowLayers] = useState(true);
+  const [showGeofenceSave, setShowGeofenceSave] = useState(false);
+  const [geofenceDrawn, setGeofenceDrawn] = useState<any>(null);
+  const [savingGeofence, setSavingGeofence] = useState(false);
   
   // Refs
   const mapContainerRef = useRef<HTMLDivElement>(null);
