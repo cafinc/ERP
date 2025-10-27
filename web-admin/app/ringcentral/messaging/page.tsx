@@ -1,5 +1,7 @@
 'use client';
 
+import PageHeader from '@/components/PageHeader';
+
 import { useState, useEffect } from 'react';
 import api from '@/lib/api';
 import {
@@ -85,7 +87,8 @@ export default function TeamMessagingPage() {
   };
 
   return (
-    <PageHeader
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <PageHeader
         title="Messaging"
         subtitle="Manage messaging"
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Ringcentral", href: "/ringcentral" }, { label: "Messaging" }]}
@@ -251,5 +254,6 @@ export default function TeamMessagingPage() {
         </div>
       </div>
     </div>
-  );
+  
+    </div>);
 }

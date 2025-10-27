@@ -1,5 +1,7 @@
 'use client';
 
+import PageHeader from '@/components/PageHeader';
+
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import api from '@/lib/api';
@@ -322,6 +324,7 @@ export default function QuickBooksSettings() {
 
   if (loading) {
     return (
+      <div className="min-h-screen bg-gray-50 flex flex-col">
       <PageHeader
         title="Quickbooks"
         subtitle="Manage quickbooks"
@@ -332,7 +335,8 @@ export default function QuickBooksSettings() {
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
       </div>
-    );
+    
+    </div>);
   }
 
   return (

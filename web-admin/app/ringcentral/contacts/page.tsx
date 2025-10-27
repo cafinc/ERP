@@ -1,5 +1,7 @@
 'use client';
 
+import PageHeader from '@/components/PageHeader';
+
 import { useState, useEffect } from 'react';
 import api from '@/lib/api';
 import {
@@ -123,7 +125,8 @@ export default function ContactsPage() {
   });
 
   return (
-    <PageHeader
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <PageHeader
         title="Contacts"
         subtitle="Manage contacts"
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Ringcentral", href: "/ringcentral" }, { label: "Contacts" }]}
@@ -376,5 +379,6 @@ export default function ContactsPage() {
         )}
       </div>
     </div>
-  );
+  
+    </div>);
 }

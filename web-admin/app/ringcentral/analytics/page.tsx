@@ -1,5 +1,7 @@
 'use client';
 
+import PageHeader from '@/components/PageHeader';
+
 import { useState, useEffect } from 'react';
 import api from '@/lib/api';
 import {
@@ -61,7 +63,8 @@ export default function AnalyticsPage() {
   const COLORS = ['#3B82F6', '#10B981', '#F59E0B', '#EF4444'];
 
   return (
-    <PageHeader
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <PageHeader
         title="Analytics"
         subtitle="Manage analytics"
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Ringcentral", href: "/ringcentral" }, { label: "Analytics" }]}
@@ -210,5 +213,6 @@ export default function AnalyticsPage() {
         )}
       </div>
     </div>
-  );
+  
+    </div>);
 }

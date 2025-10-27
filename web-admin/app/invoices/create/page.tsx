@@ -1,5 +1,7 @@
 'use client';
 
+import PageHeader from '@/components/PageHeader';
+
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import api from '@/lib/api';
@@ -148,7 +150,8 @@ export default function InvoiceCreatePage() {
   const totals = calculateTotals();
 
   return (
-    <PageHeader
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <PageHeader
         title="Create Invoices"
         subtitle="Add new invoices"
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Invoices", href: "/invoices" }, { label: "Create" }]}
@@ -459,5 +462,6 @@ export default function InvoiceCreatePage() {
         </form>
       </div>
     </div>
-  );
+  
+    </div>);
 }

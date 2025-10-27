@@ -1,5 +1,7 @@
 'use client';
 
+import PageHeader from '@/components/PageHeader';
+
 import { useState, useEffect } from 'react';
 import api from '@/lib/api';
 import {
@@ -123,7 +125,8 @@ export default function RecordingsPage() {
   };
 
   return (
-    <PageHeader
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <PageHeader
         title="Recordings"
         subtitle="Manage recordings"
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Ringcentral", href: "/ringcentral" }, { label: "Recordings" }]}
@@ -304,5 +307,6 @@ export default function RecordingsPage() {
         </div>
       </div>
     </div>
-  );
+  
+    </div>);
 }

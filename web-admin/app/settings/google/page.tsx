@@ -1,5 +1,7 @@
 'use client';
 
+import PageHeader from '@/components/PageHeader';
+
 import { useState, useEffect } from 'react';
 import api from '@/lib/api';
 import {
@@ -207,6 +209,7 @@ export default function GoogleWorkspaceSettings() {
 
   if (loading) {
     return (
+      <div className="min-h-screen bg-gray-50 flex flex-col">
       <PageHeader
         title="Google"
         subtitle="Manage google"
@@ -217,7 +220,8 @@ export default function GoogleWorkspaceSettings() {
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
       </div>
-    );
+    
+    </div>);
   }
 
   return (

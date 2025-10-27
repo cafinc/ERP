@@ -1,5 +1,7 @@
 'use client';
 
+import PageHeader from '@/components/PageHeader';
+
 import { useState, useEffect } from 'react';
 import api from '@/lib/api';
 import {
@@ -116,7 +118,8 @@ export default function SMSPage() {
   };
 
   return (
-    <PageHeader
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <PageHeader
         title="Sms"
         subtitle="Manage sms"
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Ringcentral", href: "/ringcentral" }, { label: "Sms" }]}
@@ -322,5 +325,6 @@ export default function SMSPage() {
         </div>
       </div>
     </div>
-  );
+  
+    </div>);
 }

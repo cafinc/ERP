@@ -1,5 +1,7 @@
 'use client';
 
+import PageHeader from '@/components/PageHeader';
+
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import api from '@/lib/api';
@@ -172,7 +174,8 @@ export default function CreateContractPage() {
   };
 
   return (
-    <PageHeader
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <PageHeader
         title="Create Contracts"
         subtitle="Add new contracts"
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Contracts", href: "/contracts" }, { label: "Create" }]}
@@ -500,5 +503,6 @@ export default function CreateContractPage() {
         </div>
       </form>
     </div>
-  );
+  
+    </div>);
 }

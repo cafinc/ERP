@@ -1,5 +1,7 @@
 'use client';
 
+import PageHeader from '@/components/PageHeader';
+
 import { useState } from 'react';
 import {
   Mail,
@@ -49,7 +51,8 @@ export default function SupportPage() {
   };
 
   return (
-    <PageHeader
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <PageHeader
         title="Support"
         subtitle="Manage support"
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Settings", href: "/settings" }, { label: "Support" }]}
@@ -306,5 +309,6 @@ export default function SupportPage() {
         </div>
       </div>
     </div>
-  );
+  
+    </div>);
 }

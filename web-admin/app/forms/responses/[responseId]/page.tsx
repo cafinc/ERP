@@ -1,5 +1,7 @@
 'use client';
 
+import PageHeader from '@/components/PageHeader';
+
 import { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import api from '@/lib/api';
@@ -212,6 +214,7 @@ export default function ViewResponsePage() {
 
   if (loading) {
     return (
+      <div className="min-h-screen bg-gray-50 flex flex-col">
       <PageHeader
         title="Responses Details"
         subtitle="View and manage details"
@@ -225,7 +228,8 @@ export default function ViewResponsePage() {
           </div>
         </div>
       </div>
-    );
+    
+    </div>);
   }
 
   if (!response || !template) {

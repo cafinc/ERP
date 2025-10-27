@@ -1,5 +1,7 @@
 'use client';
 
+import PageHeader from '@/components/PageHeader';
+
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import {
@@ -76,7 +78,8 @@ export default function SMSConfigPage() {
   };
 
   return (
-    <PageHeader
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <PageHeader
         title="Sms Config"
         subtitle="Manage sms config"
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Settings", href: "/settings" }, { label: "Sms Config" }]}
@@ -217,5 +220,6 @@ export default function SMSConfigPage() {
         </div>
       </div>
     </div>
-  );
+  
+    </div>);
 }

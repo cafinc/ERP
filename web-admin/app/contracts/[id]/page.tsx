@@ -1,5 +1,7 @@
 'use client';
 
+import PageHeader from '@/components/PageHeader';
+
 import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import SignaturePad from '@/components/SignaturePad';
@@ -236,6 +238,7 @@ export default function ContractDetailPage() {
 
   if (loading) {
     return (
+      <div className="min-h-screen bg-gray-50 flex flex-col">
       <PageHeader
         title="Contracts Details"
         subtitle="View and manage details"
@@ -246,7 +249,8 @@ export default function ContractDetailPage() {
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
       </div>
-    );
+    
+    </div>);
   }
 
   if (!contract) {

@@ -1,5 +1,7 @@
 'use client';
 
+import PageHeader from '@/components/PageHeader';
+
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import api from '@/lib/api';
@@ -147,6 +149,7 @@ export default function CreateInspectionSchedulePage() {
 
   if (loadingData) {
     return (
+      <div className="min-h-screen bg-gray-50 flex flex-col">
       <PageHeader
         title="Create Schedules"
         subtitle="Add new schedules"
@@ -157,7 +160,8 @@ export default function CreateInspectionSchedulePage() {
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
       </div>
-    );
+    
+    </div>);
   }
 
   return (

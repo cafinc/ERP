@@ -1,5 +1,7 @@
 'use client';
 
+import PageHeader from '@/components/PageHeader';
+
 import { useState, useEffect } from 'react';
 import api from '@/lib/api';
 import {
@@ -96,7 +98,8 @@ export default function ActiveCallsPage() {
   };
 
   return (
-    <PageHeader
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <PageHeader
         title="Active Calls"
         subtitle="Manage active calls"
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Ringcentral", href: "/ringcentral" }, { label: "Active Calls" }]}
@@ -259,5 +262,6 @@ export default function ActiveCallsPage() {
         </div>
       </div>
     </div>
-  );
+  
+    </div>);
 }

@@ -1,5 +1,7 @@
 'use client';
 
+import PageHeader from '@/components/PageHeader';
+
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useSearchParams, useRouter } from 'next/navigation';
 import SignaturePad from '@/components/SignaturePad';
@@ -461,6 +463,7 @@ export default function FillFormPage() {
 
   if (loading) {
     return (
+      <div className="min-h-screen bg-gray-50 flex flex-col">
       <PageHeader
         title="Fill"
         subtitle="Manage fill"
@@ -474,7 +477,8 @@ export default function FillFormPage() {
           </div>
         </div>
       </div>
-    );
+    
+    </div>);
   }
 
   if (!template) {

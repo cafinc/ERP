@@ -1,5 +1,7 @@
 'use client';
 
+import PageHeader from '@/components/PageHeader';
+
 import { useState, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import api from '@/lib/api';
@@ -231,7 +233,8 @@ export default function FormBuilderPage() {
   };
 
   return (
-    <PageHeader
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <PageHeader
         title="Builder"
         subtitle="Manage builder"
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Forms", href: "/forms" }, { label: "Builder" }]}
@@ -482,5 +485,6 @@ export default function FormBuilderPage() {
         </div>
       </div>
     </div>
-  );
+  
+    </div>);
 }

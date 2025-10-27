@@ -1,7 +1,5 @@
 'use client';
 
-import PageHeader from '@/components/PageHeader';
-
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import api from '@/lib/api';
@@ -76,8 +74,7 @@ export default function PhotoUploadPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
-      <PageHeader
+    <PageHeader
         title="Upload"
         subtitle="Manage upload"
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Photos", href: "/photos" }, { label: "Upload" }]}
@@ -212,6 +209,5 @@ export default function PhotoUploadPage() {
         )}
       </div>
     </div>
-  
-    </div>);
+  );
 }
