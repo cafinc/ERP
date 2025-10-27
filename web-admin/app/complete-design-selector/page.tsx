@@ -547,5 +547,6 @@ export default function CompleteDesignSelector() {
         </div>
       </div>
     </DashboardLayout>
+    </div>
   );
 }
