@@ -487,6 +487,30 @@ export default function UnifiedSiteMapsBuilder() {
     }
   };
 
+  const saveGeofence = async () => {
+    if (!geofenceBoundary || geofenceBoundary.length < 3) {
+      alert('Please draw a geofence boundary first');
+      return;
+    }
+
+    try {
+      setSavingGeofence(true);
+      await api.post(`/sites/${siteId}/geofence`, {
+        polygon_coordinates: geofenceBoundary,
+        color: '#9333EA',
+        opacity: 0.2,
+        stroke_color: '#9333EA',
+      });
+      alert('Geofence saved successfully!');
+      setShowGeofenceSave(false);
+    } catch (error) {
+      console.error('Error saving geofence:', error);
+      alert('Failed to save geofence');
+    } finally {
+      setSavingGeofence(false);
+    }
+  };
+
   const clearAll = () => {
     if (confirm('Are you sure you want to clear all annotations and measurements?')) {
       overlaysRef.current.forEach(overlay => overlay.setMap(null));
