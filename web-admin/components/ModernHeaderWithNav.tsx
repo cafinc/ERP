@@ -321,6 +321,9 @@ export default function ModernHeaderWithNav() {
       if (weatherRef.current && !weatherRef.current.contains(event.target as Node)) {
         setShowWeatherWidget(false);
       }
+      if (statusRef.current && !statusRef.current.contains(event.target as Node)) {
+        setShowStatusDropdown(false);
+      }
     };
 
     document.addEventListener('mousedown', handleClickOutside);
