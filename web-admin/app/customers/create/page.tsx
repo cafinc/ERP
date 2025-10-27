@@ -1389,8 +1389,8 @@ export default function CustomerFormPage() {
                         </label>
                         <input
                           type="text"
-                          value={customerForm.street_address}
-                          onChange={(e) => setCustomerForm({ ...customerForm, street_address: e.target.value })}
+                          value={customerForm.company_address.street_address}
+                          onChange={(e) => setCustomerForm({ ...customerForm, company_address: { ...customerForm.company_address, street_address: e.target.value } })}
                           className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-semibold transition-all"
                           placeholder="123 Main Street"
 
