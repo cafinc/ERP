@@ -1081,11 +1081,10 @@ export default function CustomerFormPage() {
                           <label className="text-sm font-medium text-gray-700 whitespace-nowrap">
                             Link to Company
                           </label>
-                        </div>
                         
-                        {/* Search bar opens below when Link to Company is ON */}
-                        {linkToCompany && !customerForm.company_id && (
-                          <div className="relative w-full max-w-md mt-3">
+                          {/* Search bar inline - reduced width */}
+                          {linkToCompany && !customerForm.company_id && (
+                            <div className="relative w-48 ml-2">
                             <div className="relative">
                               <Building className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
                               <input
