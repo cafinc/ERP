@@ -284,5 +284,6 @@ export default function TermsOfService() {
         </div>
       </div>
     </div>
+    </div>
   );
 }

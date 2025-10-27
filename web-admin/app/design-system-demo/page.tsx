@@ -376,5 +376,6 @@ export default function DesignSystemDemo() {
         </div>
       </div>
     </DashboardLayout>
+    </div>
   );
 }

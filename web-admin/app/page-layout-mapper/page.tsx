@@ -417,5 +417,6 @@ export default function PageLayoutMapper() {
         </div>
       </div>
     </DashboardLayout>
+    </div>
   );
 }
