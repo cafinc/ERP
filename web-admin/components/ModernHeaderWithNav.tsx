@@ -853,6 +853,53 @@ export default function ModernHeaderWithNav() {
               </div>
             </div>
 
+            {/* Weather Widget - NEW Phase 3 */}
+            <div ref={weatherRef} className="relative hidden xl:block">
+              <button
+                onClick={() => setShowWeatherWidget(!showWeatherWidget)}
+                className="flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 rounded-lg shadow-sm transition-all cursor-pointer border border-blue-400"
+              >
+                <span className="text-lg">{weather.icon}</span>
+                <div className="flex items-center gap-1.5">
+                  <span className="text-sm font-bold text-white">{weather.temp}°C</span>
+                  <span className="text-xs text-white opacity-90">{weather.condition}</span>
+                </div>
+              </button>
+              
+              {/* Weather Widget Dropdown */}
+              {showWeatherWidget && (
+                <div className="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden z-50">
+                  <div className="bg-gradient-to-r from-blue-500 to-blue-600 p-4 text-white">
+                    <h3 className="font-bold text-lg mb-1">Toronto Weather</h3>
+                    <p className="text-sm opacity-90">5-Day Forecast</p>
+                  </div>
+                  <div className="p-4 space-y-3">
+                    {[
+                      { day: 'Today', temp: -5, condition: 'Heavy Snow', icon: '❄️' },
+                      { day: 'Tomorrow', temp: -3, condition: 'Light Snow', icon: '🌨️' },
+                      { day: 'Wednesday', temp: -1, condition: 'Cloudy', icon: '☁️' },
+                      { day: 'Thursday', temp: 2, condition: 'Partly Cloudy', icon: '⛅' },
+                      { day: 'Friday', temp: 4, condition: 'Clear', icon: '☀️' },
+                    ].map((day, idx) => (
+                      <div key={idx} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
+                        <div className="flex items-center gap-3">
+                          <span className="text-2xl">{day.icon}</span>
+                          <div>
+                            <p className="font-semibold text-gray-900">{day.day}</p>
+                            <p className="text-xs text-gray-500">{day.condition}</p>
+                          </div>
+                        </div>
+                        <span className="text-lg font-bold text-gray-900">{day.temp}°C</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="bg-gray-50 px-4 py-3 text-xs text-gray-500 text-center border-t border-gray-200">
+                    Perfect for snow removal operations ❄️
+                  </div>
+                </div>
+              )}
+            </div>
+
             {/* Avatar */}
             <div ref={profileRef} className="relative flex-shrink-0">
               <button
