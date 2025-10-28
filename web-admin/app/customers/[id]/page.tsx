@@ -1149,7 +1149,7 @@ export default function CustomerDetailPage() {
                 <h2 className="text-xl font-semibold text-gray-900">Tasks</h2>
                 <button
                   className="flex items-center space-x-2 px-4 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
-                  onClick={() => alert('Task creation coming soon!')}
+                  onClick={handleCreateTask}
                 >
                   <Plus className="w-4 h-4" />
                   <span>New Task</span>
