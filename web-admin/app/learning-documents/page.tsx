@@ -36,6 +36,9 @@ export default function LearningDocumentsPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('all');
   const [showCreateModal, setShowCreateModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [editingDoc, setEditingDoc] = useState<LearningDocument | null>(null);
+  const [uploadFile, setUploadFile] = useState<File | null>(null);
 
   useEffect(() => {
     loadDocuments();
