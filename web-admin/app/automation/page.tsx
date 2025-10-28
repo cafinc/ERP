@@ -272,7 +272,7 @@ export default function AutomationDashboardPage() {
                     <span>Trigger Now</span>
                   </button>
                   <button
-                    onClick={() => alert('Workflow details coming soon!')}
+                    onClick={() => setSelectedWorkflow({name: workflowName, data: workflow})}
                     className="px-3 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg text-sm font-medium transition-colors"
                   >
                     <Activity className="w-4 h-4" />
