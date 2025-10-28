@@ -12571,6 +12571,11 @@ from fuel_routes import router as fuel_router
 api_router.include_router(fuel_router)
 logger.info("Fuel endpoints registered successfully")
 
+# Include Reports routes
+from reports_routes import router as reports_router
+api_router.include_router(reports_router)
+logger.info("Reports endpoints registered successfully")
+
 
 # Include the router with all endpoints
 app.include_router(api_router)
