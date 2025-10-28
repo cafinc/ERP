@@ -149,6 +149,23 @@ export default function InventoryPage() {
     window.URL.revokeObjectURL(url);
   };
 
+  const handleDeleteItem = async (itemId: string) => {
+    if (!confirm('Are you sure you want to delete this item? This action cannot be undone.')) {
+      return;
+    }
+
+    try {
+      await api.delete(`/inventory/${itemId}`);
+      alert('Item deleted successfully');
+      // Refresh inventory list
+      const response = await api.get('/inventory');
+      setInventoryItems(response.data);
+    } catch (error) {
+      console.error('Error deleting item:', error);
+      alert('Failed to delete item. Please try again.');
+    }
+  };
+
   return (
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
         {/* Header */}
