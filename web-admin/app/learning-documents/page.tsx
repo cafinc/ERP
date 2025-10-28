@@ -258,6 +258,7 @@ export default function LearningDocumentsPage() {
                 Close
               </button>
             </div>
+          </div>
         )}
       </div>
     );

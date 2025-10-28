@@ -267,6 +267,7 @@ export default function EquipmentDetailPage() {
                     <p className="text-sm text-gray-600">Unit Number</p>
                     <p className="text-sm font-medium text-gray-900">{equipment.unit_number}</p>
                   </div>
+                </div>
               )}
               {equipment.license_plate && (
                 <div className="flex items-center gap-3">
@@ -275,6 +276,7 @@ export default function EquipmentDetailPage() {
                     <p className="text-sm text-gray-600">License Plate</p>
                     <p className="text-sm font-medium text-gray-900">{equipment.license_plate}</p>
                   </div>
+                </div>
               )}
               <div className="flex items-center gap-3">
                 <Calendar className="w-5 h-5 text-gray-400" />
@@ -297,6 +299,7 @@ export default function EquipmentDetailPage() {
                       {new Date(equipment.last_maintenance).toLocaleDateString()}
                     </p>
                   </div>
+                </div>
               )}
               {equipment.maintenance_due && (
                 <div className="flex items-center gap-3">
@@ -307,6 +310,7 @@ export default function EquipmentDetailPage() {
                       {new Date(equipment.maintenance_due).toLocaleDateString()}
                     </p>
                   </div>
+                </div>
               )}
             </div>
 

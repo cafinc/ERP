@@ -522,6 +522,9 @@ export default function QuickBooksSettings() {
                   )}
                 </button>
               </div>
+          </div>
+          </div>
+          </div>
         )}
 
         {/* Sync Logs (only show when connected) */}

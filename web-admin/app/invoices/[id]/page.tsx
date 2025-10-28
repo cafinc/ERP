@@ -332,6 +332,9 @@ export default function InvoiceDetailPage() {
                     </div>
                   ))}
                 </div>
+              </div>
+              </div>
+              </div>
             )}
           </div>
 
@@ -370,6 +373,7 @@ export default function InvoiceDetailPage() {
                       {invoice.deposit_paid ? 'Deposit Paid' : 'Deposit Pending'}
                     </span>
                   </div>
+                </div>
               )}
             </div>
 
@@ -483,6 +487,9 @@ export default function InvoiceDetailPage() {
                   Cancel
                 </button>
               </div>
+          </div>
+          </div>
+          </div>
         )}
       </div>
   );

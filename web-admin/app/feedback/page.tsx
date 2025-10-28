@@ -196,6 +196,8 @@ export default function FeedbackFormPage() {
                     />
                   </label>
                 </div>
+            </div>
+            </div>
           )}
 
           {/* Submit Button */}
@@ -246,6 +248,8 @@ export default function FeedbackFormPage() {
                   Close
                 </button>
               </div>
+          </div>
+          </div>
         )}
       </div>
     );

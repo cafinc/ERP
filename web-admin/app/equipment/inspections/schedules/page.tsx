@@ -282,6 +282,7 @@ export default function InspectionSchedulesPage() {
                         <p className="text-xs text-gray-500">Assigned Inspector</p>
                         <p className="text-sm font-medium text-gray-900">{schedule.assigned_inspector_name}</p>
                       </div>
+                    </div>
                   )}
                 </div>
 
@@ -340,6 +341,8 @@ export default function InspectionSchedulesPage() {
                           </div>
                       ))}
                     </div>
+                  </div>
+                  </div>
                 )}
 
                 {/* Actions */}

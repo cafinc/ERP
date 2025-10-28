@@ -549,6 +549,7 @@ export default function FillFormPage() {
               onCancel={() => setShowSignatureModal(false)}
             />
           </div>
+        </div>
       )}
     </div>
   );

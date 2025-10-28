@@ -496,6 +496,7 @@ export default function CustomerCommunicationsPage() {
               ))
             )}
           </div>
+        </div>
       )}
 
       {/* Input */}

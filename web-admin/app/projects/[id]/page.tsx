@@ -588,6 +588,9 @@ export default function ProjectDetailPage() {
                   Cancel
                 </button>
               </div>
+          </div>
+          </div>
+          </div>
         )}
       </div>
   );

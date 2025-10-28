@@ -487,6 +487,7 @@ export default function SubcontractorCommunicationsPage() {
               ))
             )}
           </div>
+        </div>
       )}
 
       {/* Input */}

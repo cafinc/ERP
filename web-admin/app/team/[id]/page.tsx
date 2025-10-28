@@ -255,6 +255,7 @@ export default function TeamMemberDetailPage() {
                     <p className="text-sm text-gray-600">Phone</p>
                     <p className="text-sm font-medium text-gray-900">{user.phone}</p>
                   </div>
+                </div>
               )}
               <div className="flex items-center gap-3">
                 <Bell className="w-5 h-5 text-gray-400" />
@@ -319,6 +320,7 @@ export default function TeamMemberDetailPage() {
                 </div>
               )}
             </div>
+          </div>
         )}
 
         {/* Driver License */}
@@ -335,6 +337,7 @@ export default function TeamMemberDetailPage() {
                 className="max-w-md mx-auto rounded"
               />
             </div>
+          </div>
         )}
 
         {/* Documents */}
@@ -366,6 +369,8 @@ export default function TeamMemberDetailPage() {
                 </div>
               ))}
             </div>
+          </div>
+          </div>
         )}
       </div>
   );

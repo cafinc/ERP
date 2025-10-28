@@ -479,6 +479,7 @@ export default function CrewCommunicationsPage() {
                     ))
                   )}
                 </div>
+              </div>
             )}
 
             {/* Input */}

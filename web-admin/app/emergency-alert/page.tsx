@@ -260,6 +260,8 @@ export default function EmergencyAlertPage() {
                   Close
                 </button>
               </div>
+          </div>
+          </div>
         )}
       </div>
     );

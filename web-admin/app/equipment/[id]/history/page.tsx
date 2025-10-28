@@ -159,6 +159,9 @@ export default function EquipmentHistoryPage() {
                 <p className="text-3xl font-bold text-red-900">{issuesCount}</p>
                 <p className="text-sm text-red-700 mt-1">Issues Found</p>
               </div>
+          </div>
+          </div>
+          </div>
         )}
 
         {/* Inspection History */}
