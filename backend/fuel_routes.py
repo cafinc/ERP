@@ -48,6 +48,76 @@ async def get_fuel_entries():
         print(f"Error fetching fuel entries: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
+@router.get("/fuel/stats/summary")
+async def get_fuel_stats():
+    """Get fuel consumption statistics"""
+    try:
+        # Aggregate statistics
+        pipeline = [
+            {
+                "$group": {
+                    "_id": None,
+                    "total_quantity": {"$sum": "$quantity"},
+                    "total_cost": {"$sum": "$cost"},
+                    "avg_cost_per_gallon": {"$avg": {"$divide": ["$cost", "$quantity"]}},
+                    "entry_count": {"$sum": 1}
+                }
+            }
+        ]
+        
+        result = await db.fuel_entries.aggregate(pipeline).to_list(10)
+        
+        if result:
+            stats = result[0]
+            return {
+                "total_quantity": round(stats.get("total_quantity", 0), 2),
+                "total_cost": round(stats.get("total_cost", 0), 2),
+                "avg_cost_per_gallon": round(stats.get("avg_cost_per_gallon", 0), 2),
+                "entry_count": stats.get("entry_count", 0)
+            }
+        
+        return {
+            "total_quantity": 0,
+            "total_cost": 0,
+            "avg_cost_per_gallon": 0,
+            "entry_count": 0
+        }
+    except Exception as e:
+        print(f"Error fetching fuel stats: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.get("/fuel/vehicles")
+async def get_vehicles_for_fuel():
+    """Get all vehicles for fuel entry dropdown"""
+    try:
+        # Get unique vehicle IDs from fuel entries
+        vehicles_from_fuel = await db.fuel_entries.distinct("vehicle_id")
+        
+        # Get vehicles from equipment/vehicles collection if it exists
+        vehicles = []
+        if await db.equipment.count_documents({}) > 0:
+            equipment = await db.equipment.find({"type": {"$in": ["vehicle", "truck", "trailer"]}}).to_list(100)
+            vehicles.extend([{
+                "id": str(eq.get("_id")),
+                "name": eq.get("name", "Unknown"),
+                "type": eq.get("type", "vehicle")
+            } for eq in equipment])
+        
+        # Add vehicles from fuel entries that might not be in equipment
+        for vehicle_id in vehicles_from_fuel:
+            if not any(v["id"] == vehicle_id for v in vehicles):
+                vehicles.append({
+                    "id": vehicle_id,
+                    "name": vehicle_id,
+                    "type": "vehicle"
+                })
+        
+        return vehicles
+    except Exception as e:
+        print(f"Error fetching vehicles: {e}")
+        # Return empty list instead of error to allow page to load
+        return []
+
 @router.get("/fuel/{entry_id}")
 async def get_fuel_entry(entry_id: str):
     """Get a specific fuel entry"""
