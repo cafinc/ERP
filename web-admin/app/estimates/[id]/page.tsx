@@ -154,6 +154,32 @@ export default function EstimateDetailPage() {
     }
   };
 
+  const handleDownloadPDF = async () => {
+    try {
+      setActionLoading(true);
+      const response = await api.get(`/estimates/${estimateId}/pdf`, {
+        responseType: 'blob'
+      });
+      
+      // Create blob and download
+      const blob = new Blob([response.data], { type: 'application/pdf' });
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `estimate_${estimate?.estimate_number || estimateId}.pdf`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+      
+    } catch (error) {
+      console.error('Error downloading PDF:', error);
+      alert('Failed to download PDF. Please try again.');
+    } finally {
+      setActionLoading(false);
+    }
+  };
+
   const getStatusColor = (status: string) => {
     switch (status?.toLowerCase()) {
       case 'draft': return 'bg-gray-100 text-gray-700';
