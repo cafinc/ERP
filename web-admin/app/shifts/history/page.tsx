@@ -97,6 +97,33 @@ export default function ShiftHistoryPage() {
     </div>);
   }
 
+  const handleExport = () => {
+    // Create CSV content
+    const headers = ['Team Member', 'Date', 'Clock In', 'Clock Out', 'Duration', 'Status'];
+    const csvRows = [headers.join(',')];
+
+    filteredShifts.forEach(shift => {
+      const row = [
+        shift.team_member_name,
+        new Date(shift.start_time).toLocaleDateString(),
+        new Date(shift.start_time).toLocaleTimeString(),
+        shift.end_time ? new Date(shift.end_time).toLocaleTimeString() : 'Active',
+        shift.duration || 'In Progress',
+        shift.status
+      ];
+      csvRows.push(row.join(','));
+    });
+
+    const csvContent = csvRows.join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `shift_history_${new Date().toISOString().split('T')[0]}.csv`;
+    link.click();
+    window.URL.revokeObjectURL(url);
+  };
+
   return (
           <div className="space-y-6">
         {/* Header */}
