@@ -108,7 +108,8 @@ export default function TeamMemberProfileScreen() {
   const handleResendLicenseRequest = async () => {
     try {
       const user_id_str = member?.id || id;
-      const upload_link = `https://service-hub-166.preview.emergentagent.com/upload-license/${user_id_str}`;
+      const backendUrl = process.env.EXPO_PUBLIC_BACKEND_URL || '';
+      const upload_link = `${backendUrl}/upload-license/${user_id_str}`;
       
       Alert.alert(
         'Resend Upload Request',
