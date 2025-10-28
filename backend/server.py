@@ -10451,6 +10451,45 @@ async def get_estimate(estimate_id: str):
         raise HTTPException(status_code=404, detail="Estimate not found")
     return Estimate(**serialize_doc(estimate))
 
+@api_router.get("/estimates/{estimate_id}/pdf")
+async def download_estimate_pdf(estimate_id: str):
+    """Download estimate as PDF"""
+    from fastapi.responses import StreamingResponse
+    from pdf_generator import generate_estimate_pdf
+    
+    try:
+        # Get estimate data
+        estimate = await db.estimates.find_one({"_id": ObjectId(estimate_id)})
+        if not estimate:
+            raise HTTPException(status_code=404, detail="Estimate not found")
+        
+        # Get customer data if available
+        if estimate.get('customer_id'):
+            customer = await db.customers.find_one({"_id": ObjectId(estimate['customer_id'])})
+            if customer:
+                estimate['customer_name'] = customer.get('name', 'N/A')
+                estimate['customer_email'] = customer.get('email', '')
+                estimate['customer_phone'] = customer.get('phone', '')
+        
+        # Convert line_items to items for PDF generator
+        estimate['items'] = estimate.get('line_items', [])
+        
+        # Generate PDF
+        pdf_buffer = generate_estimate_pdf(estimate)
+        
+        # Return as downloadable file
+        filename = f"estimate_{estimate.get('estimate_number', estimate_id)}.pdf"
+        return StreamingResponse(
+            pdf_buffer,
+            media_type="application/pdf",
+            headers={"Content-Disposition": f"attachment; filename={filename}"}
+        )
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error generating estimate PDF: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to generate PDF: {str(e)}")
+
 @api_router.put("/estimates/{estimate_id}", response_model=Estimate)
 async def update_estimate(estimate_id: str, estimate_update: EstimateUpdate):
     """Update estimate"""
