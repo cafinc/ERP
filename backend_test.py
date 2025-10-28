@@ -1333,6 +1333,7 @@ class BackendTester:
             "Service History API": [r for r in self.test_results if "Service History API" in r['test']],
             "Site Maps API": [r for r in self.test_results if "Site Maps API" in r['test']],
             "Site Geofence API": [r for r in self.test_results if "Site Geofence API" in r['test']],
+            "Fuel Management API": [r for r in self.test_results if "Fuel API" in r['test']],
             "Rate Limiting": [r for r in self.test_results if "Rate Limiting" in r['test']]
         }
         
