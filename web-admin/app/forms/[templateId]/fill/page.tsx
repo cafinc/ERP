@@ -476,7 +476,9 @@ export default function FillFormPage() {
             <p className="mt-4 text-gray-600">Loading form...</p>
           </div>
     
-    </div>);
+    </div>
+    </div>
+    );
   }
 
   if (!template) {
