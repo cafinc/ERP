@@ -96,7 +96,7 @@ export default function ReportsPage() {
         end_date: dateRange.end,
       });
 
-      // For now, download as JSON
+      // Download as JSON with formatted data
       const blob = new Blob([JSON.stringify(response.data, null, 2)], { type: 'application/json' });
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
@@ -105,10 +105,10 @@ export default function ReportsPage() {
       link.click();
       window.URL.revokeObjectURL(url);
 
-      alert('Report generated successfully!');
+      alert('Report generated and downloaded successfully!');
     } catch (error) {
       console.error('Error generating report:', error);
-      alert('Failed to generate report. Feature coming soon!');
+      alert('Failed to generate report. Please check your date range and try again.');
     } finally {
       setLoading(false);
     }
@@ -117,14 +117,20 @@ export default function ReportsPage() {
   const handleScheduleReport = async (reportId: string) => {
     try {
       const frequency = prompt('Schedule frequency (daily/weekly/monthly):', 'weekly');
-      if (!frequency) return;
+      if (!frequency || !['daily', 'weekly', 'monthly'].includes(frequency.toLowerCase())) {
+        alert('Please enter a valid frequency: daily, weekly, or monthly');
+        return;
+      }
 
       const email = prompt('Send to email:', '');
-      if (!email) return;
+      if (!email || !email.includes('@')) {
+        alert('Please enter a valid email address');
+        return;
+      }
 
       await api.post('/reports/schedule', {
         report_type: reportId,
-        frequency,
+        frequency: frequency.toLowerCase(),
         email,
         active: true,
       });
@@ -132,7 +138,7 @@ export default function ReportsPage() {
       alert(`Report scheduled successfully! Will be sent ${frequency} to ${email}`);
     } catch (error) {
       console.error('Error scheduling report:', error);
-      alert('Failed to schedule report. Feature coming soon!');
+      alert('Failed to schedule report. Please try again.');
     }
   };
 
