@@ -177,7 +177,7 @@ export default function AccessDashboardPage() {
             {
               label: 'Add User',
               icon: <UserPlus className="w-4 h-4 mr-2" />,
-              onClick: () => alert('Add User feature coming soon!'),
+              onClick: () => setShowAddUserModal(true),
               variant: 'primary',
             },
           ]}
