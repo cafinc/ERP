@@ -729,8 +729,85 @@ export default function UnifiedSiteMapsBuilder() {
     alert('Save functionality will save geofence boundary and annotations');
   };
 
-  const exportMap = () => {
-    alert('Export functionality to download map as image');
+  const exportMap = async () => {
+    if (!mapRef.current || !site) {
+      alert('Map not ready');
+      return;
+    }
+
+    try {
+      // Get map bounds
+      const bounds = mapRef.current.getBounds();
+      const center = mapRef.current.getCenter();
+      const zoom = mapRef.current.getZoom();
+      
+      // Create a canvas to capture the map
+      const mapElement = mapContainerRef.current;
+      if (!mapElement) {
+        alert('Map element not found');
+        return;
+      }
+
+      // Use Google Maps Static API as fallback
+      const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
+      const size = '800x600';
+      const mapType = 'satellite'; // or 'roadmap', 'hybrid', 'terrain'
+      
+      // Build static map URL
+      const staticMapUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${center.lat()},${center.lng()}&zoom=${zoom}&size=${size}&maptype=${mapType}&key=${apiKey}`;
+      
+      // Add markers for measurements and annotations
+      let markers = '';
+      
+      // Add measurement overlays
+      measurements.forEach((m, idx) => {
+        if (m.overlay && m.overlay.getPath) {
+          const path = m.overlay.getPath();
+          const pathArray = path.getArray();
+          if (pathArray.length > 0) {
+            const firstPoint = pathArray[0];
+            markers += `&markers=color:blue|label:${idx + 1}|${firstPoint.lat()},${firstPoint.lng()}`;
+          }
+        }
+      });
+      
+      // Add annotation markers
+      annotations.forEach((ann, idx) => {
+        if (ann.position) {
+          markers += `&markers=color:red|label:A${idx + 1}|${ann.position.lat},${ann.position.lng}`;
+        }
+      });
+      
+      const fullUrl = staticMapUrl + markers;
+      
+      // Open in new tab or download
+      const link = document.createElement('a');
+      link.href = fullUrl;
+      link.target = '_blank';
+      link.download = `${site.name.replace(/\s+/g, '_')}_map_${new Date().toISOString().split('T')[0]}.png`;
+      
+      // Try to download directly
+      try {
+        const response = await fetch(fullUrl);
+        const blob = await response.blob();
+        const blobUrl = URL.createObjectURL(blob);
+        link.href = blobUrl;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(blobUrl);
+        
+        alert('Map exported successfully!');
+      } catch (fetchError) {
+        // Fallback: open in new tab
+        window.open(fullUrl, '_blank');
+        alert('Map opened in new tab. Right-click to save the image.');
+      }
+      
+    } catch (error) {
+      console.error('Error exporting map:', error);
+      alert('Failed to export map. Please try again.');
+    }
   };
 
   if (loading) {
