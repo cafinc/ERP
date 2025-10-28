@@ -106,7 +106,7 @@ export default function ShiftHistoryPage() {
             <p className="text-gray-600 mt-1">Track team member clock in/out times</p>
           </div>
           <button
-            onClick={() => alert('Export feature coming soon')}
+            onClick={handleExport}
             className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
           >
             <Download className="w-5 h-5" />
