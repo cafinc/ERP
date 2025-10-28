@@ -551,6 +551,7 @@ export default function CrewCommunicationsPage() {
               <p className="text-xl font-medium">Select a project</p>
               <p className="text-sm mt-2">Choose a project from the sidebar to start communicating</p>
             </div>
+          </div>
         )}
       </div>
   );
