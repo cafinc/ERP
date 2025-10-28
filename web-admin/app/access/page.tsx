@@ -121,6 +121,29 @@ export default function AccessDashboardPage() {
     return matchesSearch && matchesGroup && matchesStatus;
   });
 
+  const handleAddUser = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!newUser.name || !newUser.email || !newUser.password) {
+      alert('Please fill in all required fields');
+      return;
+    }
+
+    try {
+      await api.post('/users', newUser);
+      alert('User created successfully!');
+      setShowAddUserModal(false);
+      setNewUser({ name: '', email: '', role: 'crew', password: '', phone: '' });
+      
+      // Refresh users list
+      const response = await api.get('/users');
+      setUsers(response.data || []);
+    } catch (error) {
+      console.error('Error creating user:', error);
+      alert('Failed to create user. Please try again.');
+    }
+  };
+
   const internalCount = users.filter(u => u.access_group === 'Internal').length;
   const subcontractorCount = users.filter(u => u.access_group === 'Subcontractor').length;
   const activeCount = users.filter(u => u.status === 'active').length;
