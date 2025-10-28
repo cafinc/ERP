@@ -1050,7 +1050,7 @@ export default function CustomerDetailPage() {
                             <button
                               onClick={(e) => {
                                 e.stopPropagation();
-                                alert('Send reminder functionality coming soon!');
+                                handleSendReminder(estimate);
                               }}
                               className="mt-2 text-xs text-[#3f72af] hover:text-[#3f72af]/80 font-medium"
                             >
