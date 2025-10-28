@@ -48,6 +48,14 @@ export default function AccessDashboardPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [filterGroup, setFilterGroup] = useState<string>('all');
   const [filterStatus, setFilterStatus] = useState<string>('all');
+  const [showAddUserModal, setShowAddUserModal] = useState(false);
+  const [newUser, setNewUser] = useState({
+    name: '',
+    email: '',
+    role: 'crew',
+    password: '',
+    phone: ''
+  });
 
   const accessGroups: AccessGroup[] = [
     {
