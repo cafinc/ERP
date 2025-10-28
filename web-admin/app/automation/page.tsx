@@ -40,6 +40,7 @@ export default function AutomationDashboardPage() {
   const [automationStatus, setAutomationStatus] = useState<any>(null);
   const [workflowStats, setWorkflowStats] = useState<WorkflowStatus[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedWorkflow, setSelectedWorkflow] = useState<{name: string; data: Workflow} | null>(null);
 
   useEffect(() => {
     loadAutomationData();
