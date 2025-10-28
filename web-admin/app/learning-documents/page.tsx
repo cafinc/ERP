@@ -68,6 +68,55 @@ export default function LearningDocumentsPage() {
     }
   };
 
+  const handleEdit = async () => {
+    if (!editingDoc) return;
+
+    try {
+      await api.put(`/learning-documents/${editingDoc.id}`, {
+        title: editingDoc.title,
+        category: editingDoc.category,
+        description: editingDoc.description
+      });
+      
+      alert('Document updated successfully!');
+      setShowEditModal(false);
+      setEditingDoc(null);
+      loadDocuments();
+    } catch (error) {
+      console.error('Error updating document:', error);
+      alert('Failed to update document');
+    }
+  };
+
+  const handleFileUpload = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!uploadFile) {
+      alert('Please select a file');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('file', uploadFile);
+    formData.append('title', (e.target as any).title.value);
+    formData.append('category', (e.target as any).category.value);
+    formData.append('description', (e.target as any).description.value);
+
+    try {
+      await api.post('/learning-documents/upload', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      });
+      
+      alert('Document uploaded successfully!');
+      setShowCreateModal(false);
+      setUploadFile(null);
+      loadDocuments();
+    } catch (error) {
+      console.error('Error uploading document:', error);
+      alert('Failed to upload document');
+    }
+  };
+
   const getFileIcon = (fileType: string) => {
     if (fileType.includes('video')) return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
