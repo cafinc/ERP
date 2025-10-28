@@ -1107,6 +1107,118 @@ async def get_customer_stats(customer_id: str):
         logger.error(f"Error getting customer stats: {str(e)}")
         raise HTTPException(status_code=500, detail="Failed to get customer stats")
 
+@api_router.post("/customers/{customer_id}/send-reminder")
+async def send_customer_reminder(customer_id: str, reminder_data: dict):
+    """Send a reminder to customer (for estimates, invoices, etc.)"""
+    try:
+        customer = await db.customers.find_one({"_id": ObjectId(customer_id)})
+        if not customer:
+            raise HTTPException(status_code=404, detail="Customer not found")
+        
+        # Get the related item (estimate, invoice, etc.)
+        item_type = reminder_data.get("type", "general")  # estimate, invoice, general
+        item_id = reminder_data.get("item_id")
+        message = reminder_data.get("message", "This is a friendly reminder.")
+        
+        # Create a reminder record
+        reminder_doc = {
+            "customer_id": customer_id,
+            "customer_name": customer.get("name"),
+            "customer_email": customer.get("email"),
+            "type": item_type,
+            "item_id": item_id,
+            "message": message,
+            "sent_at": datetime.utcnow(),
+            "sent_by": reminder_data.get("sent_by", "system"),
+            "status": "sent"
+        }
+        
+        result = await db.reminders.insert_one(reminder_doc)
+        
+        # Log activity
+        await db.activity_logs.insert_one({
+            "customer_id": customer_id,
+            "activity_type": "reminder_sent",
+            "title": f"Reminder sent to {customer.get('name')}",
+            "description": f"{item_type.title()} reminder sent: {message[:100]}",
+            "created_by": reminder_data.get("sent_by", "system"),
+            "created_at": datetime.utcnow()
+        })
+        
+        # In production, integrate with email service here
+        # For now, we'll just log it
+        logger.info(f"Reminder sent to {customer.get('email')}: {message}")
+        
+        return {
+            "success": True,
+            "message": "Reminder sent successfully",
+            "reminder_id": str(result.inserted_id),
+            "customer_email": customer.get("email")
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error sending reminder: {str(e)}")
+        raise HTTPException(status_code=500, detail="Failed to send reminder")
+
+@api_router.post("/tasks/create")
+async def create_standalone_task(task_data: dict):
+    """Create a standalone task for a customer (not tied to project)"""
+    try:
+        # Validate customer exists
+        customer_id = task_data.get("customer_id")
+        if customer_id:
+            customer = await db.customers.find_one({"_id": ObjectId(customer_id)})
+            if not customer:
+                raise HTTPException(status_code=404, detail="Customer not found")
+        
+        # Create task document
+        task_doc = {
+            "customer_id": customer_id,
+            "customer_name": customer.get("name") if customer_id else None,
+            "title": task_data.get("title", "New Task"),
+            "description": task_data.get("description", ""),
+            "priority": task_data.get("priority", "medium"),  # low, medium, high
+            "status": task_data.get("status", "pending"),  # pending, in_progress, completed
+            "assignee_id": task_data.get("assignee_id"),
+            "assignee_name": task_data.get("assignee_name"),
+            "due_date": task_data.get("due_date"),
+            "created_by": task_data.get("created_by", "system"),
+            "created_at": datetime.utcnow(),
+            "updated_at": datetime.utcnow(),
+            "completed_at": None,
+            "notes": task_data.get("notes", ""),
+            "tags": task_data.get("tags", [])
+        }
+        
+        result = await db.tasks.insert_one(task_doc)
+        task_doc["id"] = str(result.inserted_id)
+        task_doc.pop("_id", None)
+        
+        # Log activity
+        if customer_id:
+            await db.activity_logs.insert_one({
+                "customer_id": customer_id,
+                "activity_type": "task_created",
+                "title": f"Task created: {task_data.get('title')}",
+                "description": task_data.get("description", ""),
+                "created_by": task_data.get("created_by", "system"),
+                "created_at": datetime.utcnow()
+            })
+        
+        return {
+            "success": True,
+            "message": "Task created successfully",
+            "task": task_doc
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error creating task: {str(e)}")
+        raise HTTPException(status_code=500, detail="Failed to create task")
+
 
 
 # ==================== SERVICE REQUEST ENDPOINTS ====================
