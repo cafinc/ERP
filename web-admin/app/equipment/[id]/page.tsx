@@ -133,26 +133,25 @@ export default function EquipmentDetailPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex flex-col">
-      <PageHeader
-        title="Equipment Details"
-        subtitle="View and manage details"
-        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Equipment", href: "/equipment" }, { label: "Details" }]}
-      />
-      <div className="flex-1 overflow-auto p-6">
-        <div className="flex items-center justify-center h-64">
-          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
+        <PageHeader
+          title="Equipment Details"
+          subtitle="View and manage details"
+          breadcrumbs={[{ label: "Home", href: "/" }, { label: "Equipment", href: "/equipment" }, { label: "Details" }]}
+        />
+        <div className="flex-1 overflow-auto p-6">
+          <div className="flex items-center justify-center h-64">
+            <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
+          </div>
         </div>
-    
-    </div>
-    </div>
+      </div>
     );
   }
 
   if (!equipment) {
     return (
-              <div className="text-center py-12">
-          <AlertCircle className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-          <h2 className="text-xl font-semibold text-gray-900">Equipment not found</h2>
+      <div className="text-center py-12">
+        <AlertCircle className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+        <h2 className="text-xl font-semibold text-gray-900">Equipment not found</h2>
           <button
             onClick={() => router.push('/equipment')}
             className="mt-4 text-[#3f72af] hover:text-blue-800"
