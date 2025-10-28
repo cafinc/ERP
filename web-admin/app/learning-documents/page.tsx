@@ -213,7 +213,10 @@ export default function LearningDocumentsPage() {
                     </div>
                     <div className="flex gap-1">
                       <button
-                        onClick={() => alert('Edit feature coming soon')}
+                        onClick={() => {
+                          setEditingDoc(doc);
+                          setShowEditModal(true);
+                        }}
                         className="p-1 text-[#3f72af] hover:bg-blue-50 rounded"
                       >
                         <Edit className="w-4 h-4" />
