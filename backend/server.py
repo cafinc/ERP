@@ -9482,6 +9482,7 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:3000",
         "https://service-hub-166.preview.emergentagent.com",
+        "https://service-hub-166.emergent.host",  # Production domain
         "exp://localhost:8081",
         "exp://127.0.0.1:8081"
     ],
