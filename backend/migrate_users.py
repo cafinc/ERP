@@ -13,9 +13,10 @@ MONGO_URL = os.getenv("MONGO_URL", "mongodb://localhost:27017")
 
 async def migrate_users():
     client = AsyncIOMotorClient(MONGO_URL)
-    db = client.snow_removal
+    db_name = os.getenv("DB_NAME", "snow_removal")
+    db = client[db_name]
     
-    print("Starting user migration...")
+    print(f"Starting user migration for database: {db_name}...")
     
     # Update all users to have default messaging fields if they don't exist
     result = await db.users.update_many(
