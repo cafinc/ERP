@@ -94,23 +94,29 @@ export default function EquipmentFormPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex flex-col">
+        <PageHeader
+          title="Create Equipment"
+          subtitle="Add new equipment"
+          breadcrumbs={[{ label: "Home", href: "/" }, { label: "Equipment", href: "/equipment" }, { label: "Create" }]}
+        />
+        <div className="flex-1 overflow-auto p-6">
+          <div className="flex items-center justify-center h-64">
+            <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-50 flex flex-col">
       <PageHeader
         title="Create Equipment"
         subtitle="Add new equipment"
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Equipment", href: "/equipment" }, { label: "Create" }]}
       />
       <div className="flex-1 overflow-auto p-6">
-        <div className="flex items-center justify-center h-64">
-          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
-        </div>
-    
-    </div>
-    </div>
-    );
-  }
-
-  return (
-          <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-6">
         {/* Header */}
         <div className="flex items-center gap-4">
           <button
