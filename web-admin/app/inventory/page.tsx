@@ -371,7 +371,7 @@ export default function InventoryPage() {
                             <Edit className="w-4 h-4" />
                           </button>
                           <button
-                            onClick={() => alert('Delete feature coming soon!')}
+                            onClick={() => handleDeleteItem(item._id)}
                             className="text-red-600 hover:text-red-900"
                             title="Delete"
                           >
