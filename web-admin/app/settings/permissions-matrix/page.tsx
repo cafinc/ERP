@@ -176,7 +176,6 @@ export default function PermissionsMatrixPage() {
             </button>
           ))}
         </div>
-      </div>
 
       {/* Bulk Actions */}
       <div style={{
@@ -248,7 +247,6 @@ export default function PermissionsMatrixPage() {
             Reset
           </button>
         </div>
-      </div>
 
       {/* Permission Categories */}
       {Object.entries(PERMISSION_CATEGORIES).map(([category, perms]) => (
@@ -292,7 +290,6 @@ export default function PermissionsMatrixPage() {
                     <div style={{ fontSize: '13px', color: '#64748b' }}>
                       {permission.description}
                     </div>
-                  </div>
                   <div>
                     {isActive ? (
                       <CheckCircle style={{ width: '24px', height: '24px', color: '#10b981' }} />
@@ -304,7 +301,6 @@ export default function PermissionsMatrixPage() {
               );
             })}
           </div>
-        </div>
       ))}
 
       {/* Save Button */}
@@ -336,6 +332,5 @@ export default function PermissionsMatrixPage() {
           Save Permissions for {selectedRole.charAt(0).toUpperCase() + selectedRole.slice(1)}
         </button>
       </div>
-    </div>
   );
 }

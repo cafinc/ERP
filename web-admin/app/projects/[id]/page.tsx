@@ -215,7 +215,6 @@ export default function ProjectDetailPage() {
         <div className="flex items-center justify-center h-full">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
-      </div>
     
     </div>);
   }
@@ -235,8 +234,6 @@ export default function ProjectDetailPage() {
               <span>Back to Projects</span>
             </button>
           </div>
-        </div>
-      </div>
     );
   }
 
@@ -257,7 +254,6 @@ export default function ProjectDetailPage() {
               </h1>
               <p className="text-gray-600 mt-1">{project.name}</p>
             </div>
-          </div>
           <div className="flex items-center space-x-3">
             <button
               onClick={() => router.push(`/projects/${projectId}/edit`)}
@@ -267,7 +263,6 @@ export default function ProjectDetailPage() {
               <span>Edit Project</span>
             </button>
           </div>
-        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           {/* Main Content */}
@@ -320,8 +315,6 @@ export default function ProjectDetailPage() {
                     {project.tasks?.filter(t => t.status === 'done').length || 0} / {project.tasks?.length || 0} Tasks
                   </p>
                 </div>
-              </div>
-            </div>
 
             {/* Project Info */}
             <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
@@ -365,7 +358,6 @@ export default function ProjectDetailPage() {
                     {project.estimate_number || project.estimate_id}
                   </p>
                 </div>
-              </div>
 
               {project.description && (
                 <div className="mt-6 pt-6 border-t border-gray-200">
@@ -386,8 +378,6 @@ export default function ProjectDetailPage() {
                     style={{ width: `${calculateProgress()}%` }}
                   />
                 </div>
-              </div>
-            </div>
 
             {/* Tasks Section */}
             <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
@@ -448,9 +438,6 @@ export default function ProjectDetailPage() {
                                   </span>
                                 )}
                               </div>
-                            </div>
-                          </div>
-                        </div>
                         <div className="flex items-center space-x-2 ml-4">
                           <span className={`px-2 py-1 rounded-full text-xs font-medium ${getTaskStatusColor(task.status)}`}>
                             {task.status.replace('_', ' ')}
@@ -462,8 +449,6 @@ export default function ProjectDetailPage() {
                             <Trash2 className="w-4 h-4" />
                           </button>
                         </div>
-                      </div>
-                    </div>
                   ))}
                 </div>
               ) : (
@@ -473,7 +458,6 @@ export default function ProjectDetailPage() {
                 </div>
               )}
             </div>
-          </div>
 
           {/* Sidebar */}
           <div className="space-y-6">
@@ -512,7 +496,6 @@ export default function ProjectDetailPage() {
                   </button>
                 )}
               </div>
-            </div>
 
             {/* Task Summary */}
             <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
@@ -540,10 +523,6 @@ export default function ProjectDetailPage() {
                     {project.tasks?.filter(t => t.status === 'done').length || 0}
                   </span>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
         {/* Task Modal */}
         {showTaskModal && (
@@ -589,7 +568,6 @@ export default function ProjectDetailPage() {
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
-              </div>
 
               <div className="flex items-center space-x-3 mt-6">
                 <button
@@ -610,10 +588,7 @@ export default function ProjectDetailPage() {
                   Cancel
                 </button>
               </div>
-            </div>
-          </div>
         )}
       </div>
-    </div>
   );
 }

@@ -123,7 +123,6 @@ export default function TemplateViewPage() {
             Back to Templates
           </button>
         </div>
-      </div>
     );
   }
 
@@ -188,9 +187,6 @@ export default function TemplateViewPage() {
                 Edit
               </button>
             </div>
-          </div>
-        </div>
-      </div>
 
       <div className="grid grid-cols-2 gap-6">
         {/* Template Content */}
@@ -211,7 +207,6 @@ export default function TemplateViewPage() {
               {JSON.stringify(template.content, null, 2)}
             </pre>
           </div>
-        </div>
 
         {/* Variables & Preview */}
         <div className="space-y-6">
@@ -298,9 +293,5 @@ export default function TemplateViewPage() {
                 </div>
               )}
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
   );
 }

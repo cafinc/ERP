@@ -66,7 +66,6 @@ export default function ResetPasswordPage() {
             Request New Link
           </button>
         </div>
-      </div>
     );
   }
 
@@ -86,7 +85,6 @@ export default function ResetPasswordPage() {
             Go to Login
           </button>
         </div>
-      </div>
     );
   }
 
@@ -150,7 +148,6 @@ export default function ResetPasswordPage() {
                 className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
             </div>
-          </div>
 
           <button
             type="submit"
@@ -161,6 +158,5 @@ export default function ResetPasswordPage() {
           </button>
         </form>
       </div>
-    </div>
   );
 }

@@ -129,7 +129,6 @@ export default function ServiceFormPage() {
         <div className="flex items-center justify-center h-64">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
-      </div>
     
     </div>);
   }
@@ -153,7 +152,6 @@ export default function ServiceFormPage() {
               {isEdit ? 'Update service details' : 'Create a new service offering'}
             </p>
           </div>
-        </div>
 
         {/* Service Details */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
@@ -219,8 +217,6 @@ export default function ServiceFormPage() {
                 placeholder="Describe this service..."
               />
             </div>
-          </div>
-        </div>
 
         {/* Pricing */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
@@ -275,7 +271,6 @@ export default function ServiceFormPage() {
               </div>
             ))}
           </div>
-        </div>
 
         {/* Submit Actions */}
         <div className="flex justify-end gap-4">

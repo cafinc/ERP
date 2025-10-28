@@ -103,7 +103,6 @@ export default function EquipmentFormPage() {
         <div className="flex items-center justify-center h-64">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
-      </div>
     
     </div>);
   }
@@ -127,7 +126,6 @@ export default function EquipmentFormPage() {
               {isEdit ? 'Update equipment information' : 'Add new equipment to your fleet'}
             </p>
           </div>
-        </div>
 
         {/* Basic Information */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
@@ -223,8 +221,6 @@ export default function EquipmentFormPage() {
                 <span className="text-sm font-medium text-gray-700">Requires Driver's License</span>
               </label>
             </div>
-          </div>
-        </div>
 
         {/* Maintenance */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
@@ -253,8 +249,6 @@ export default function EquipmentFormPage() {
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
               />
             </div>
-          </div>
-        </div>
 
         {/* Notes */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">

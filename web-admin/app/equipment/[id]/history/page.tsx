@@ -107,7 +107,6 @@ export default function EquipmentHistoryPage() {
         <div className="flex items-center justify-center h-64">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
-      </div>
     
     </div>);
   }
@@ -126,7 +125,6 @@ export default function EquipmentHistoryPage() {
             <h1 className="text-3xl font-bold text-gray-900">Inspection History</h1>
             <p className="text-gray-600 mt-1">Complete inspection timeline for equipment</p>
           </div>
-        </div>
 
         {/* Equipment Info Card */}
         {equipment && (
@@ -143,7 +141,6 @@ export default function EquipmentHistoryPage() {
                   {equipment.status}
                 </span>
               </div>
-            </div>
 
             {/* Statistics */}
             <div className="grid grid-cols-3 gap-4">
@@ -162,8 +159,6 @@ export default function EquipmentHistoryPage() {
                 <p className="text-3xl font-bold text-red-900">{issuesCount}</p>
                 <p className="text-sm text-red-700 mt-1">Issues Found</p>
               </div>
-            </div>
-          </div>
         )}
 
         {/* Inspection History */}
@@ -209,8 +204,6 @@ export default function EquipmentHistoryPage() {
                               {response.crew_name || 'Unknown'}
                             </span>
                           </div>
-                        </div>
-                      </div>
                       <span className={`px-3 py-1 rounded-full text-sm font-medium ${
                         isPassed 
                           ? 'bg-green-100 text-green-700' 
@@ -223,13 +216,10 @@ export default function EquipmentHistoryPage() {
                     <div className="flex items-center justify-end text-sm text-[#3f72af] hover:text-blue-700 font-medium">
                       View Details →
                     </div>
-                  </div>
                 );
               })}
             </div>
           )}
         </div>
-      </div>
-    </div>
   );
 }

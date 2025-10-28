@@ -258,8 +258,6 @@ export default function CrewCommunicationsPage() {
               <h2 className="text-xl font-bold text-white">My Projects</h2>
               <p className="text-sm text-blue-100 mt-1">Select project to chat</p>
             </div>
-          </div>
-        </div>
         
         <div className="flex-1 overflow-y-auto">
           {projects.length === 0 ? (
@@ -301,7 +299,6 @@ export default function CrewCommunicationsPage() {
               <MapPinIcon className="w-4 h-4" />
               <span>Location tracking active</span>
             </div>
-          </div>
         )}
       </div>
 
@@ -322,11 +319,9 @@ export default function CrewCommunicationsPage() {
                     </h1>
                     <p className="text-sm text-gray-500 mt-1">Project Communication</p>
                   </div>
-                </div>
                 <div className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
                   {filteredMessages.length} messages
                 </div>
-              </div>
 
               {/* Search Bar */}
               <div className="mt-4 relative">
@@ -339,7 +334,6 @@ export default function CrewCommunicationsPage() {
                   className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>
-            </div>
 
             {/* Messages */}
             <div className="flex-1 overflow-y-auto p-6">
@@ -409,7 +403,6 @@ export default function CrewCommunicationsPage() {
                             {new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                           </span>
                         </div>
-                      </div>
                     );
                   })}
                   <div ref={messagesEndRef} />
@@ -485,7 +478,6 @@ export default function CrewCommunicationsPage() {
                     ))
                   )}
                 </div>
-              </div>
             )}
 
             {/* Input */}
@@ -556,13 +548,7 @@ export default function CrewCommunicationsPage() {
               <p className="text-xl font-medium">Select a project</p>
               <p className="text-sm mt-2">Choose a project from the sidebar to start communicating</p>
             </div>
-          </div>
         )}
       </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
   );
 }

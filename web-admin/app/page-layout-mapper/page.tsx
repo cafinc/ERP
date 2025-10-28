@@ -55,7 +55,6 @@ export default function PageLayoutMapper() {
               <div key={i} className="bg-gray-100 h-2 mb-1 rounded"></div>
             ))}
           </div>
-        </div>
       ),
     },
     {
@@ -260,13 +259,9 @@ export default function PageLayoutMapper() {
                         <div className="mt-2 bg-white rounded border border-gray-200 h-16">
                           {layout.preview}
                         </div>
-                      </div>
-                    </div>
                   );
                 })}
               </div>
-            </div>
-          </div>
 
           {/* Page Groups */}
           {pageGroups.map((group) => {
@@ -342,14 +337,9 @@ export default function PageLayoutMapper() {
                                   );
                                 })}
                               </div>
-                            </div>
-                          </div>
-                        </div>
                       );
                     })}
                   </div>
-                </div>
-              </div>
             );
           })}
 
@@ -373,11 +363,9 @@ export default function PageLayoutMapper() {
                         <p className="font-semibold">{layout.name}</p>
                         <p className="text-sm text-blue-200">{count} pages</p>
                       </div>
-                    </div>
                   );
                 })}
               </div>
-            </div>
 
             <div className="flex items-center justify-between pt-4 border-t border-white/20">
               <div>
@@ -404,7 +392,6 @@ export default function PageLayoutMapper() {
                 Save & Continue to Implementation
               </button>
             </div>
-          </div>
 
           {/* Info */}
           <div className="mt-6 bg-amber-50 border border-amber-200 rounded-xl p-4">
@@ -414,8 +401,6 @@ export default function PageLayoutMapper() {
               feel free to customize!
             </p>
           </div>
-        </div>
-      </div>
     </DashboardLayout>
   );
 }

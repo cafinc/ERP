@@ -97,7 +97,6 @@ export default function PreviewNewDesign() {
             <span className="px-3 py-1 bg-white/20 rounded-lg text-sm font-medium">Navigation: Hybrid</span>
             <span className="px-3 py-1 bg-white/20 rounded-lg text-sm font-medium">Buttons: Shadow/Outlined</span>
           </div>
-        </div>
 
         {/* Header Section */}
         <div className="mb-6">
@@ -117,8 +116,6 @@ export default function PreviewNewDesign() {
               <div className="bg-gradient-to-br from-[#3f72af] to-[#2c5282] p-3 rounded-xl shadow-sm">
                 <Users className="h-8 w-8 text-white" />
               </div>
-            </div>
-          </div>
 
           <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
@@ -130,8 +127,6 @@ export default function PreviewNewDesign() {
               <div className="bg-gradient-to-br from-[#5b8ec4] to-[#3f72af] p-3 rounded-xl shadow-sm">
                 <Clock className="h-8 w-8 text-white" />
               </div>
-            </div>
-          </div>
 
           <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
@@ -143,9 +138,6 @@ export default function PreviewNewDesign() {
               <div className="bg-gradient-to-br from-[#3f72af] to-[#2c5282] p-3 rounded-xl shadow-sm">
                 <Calendar className="h-8 w-8 text-white" />
               </div>
-            </div>
-          </div>
-        </div>
 
         {/* Module Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
@@ -168,7 +160,6 @@ export default function PreviewNewDesign() {
                 </h3>
                 <p className="text-sm text-gray-600">{module.description}</p>
               </div>
-            </div>
           ))}
         </div>
 
@@ -190,7 +181,6 @@ export default function PreviewNewDesign() {
                   Export Data
                 </button>
               </div>
-            </div>
 
             {/* Secondary Actions - Outlined Style */}
             <div>
@@ -205,7 +195,6 @@ export default function PreviewNewDesign() {
                   View Calendar
                 </button>
               </div>
-            </div>
 
             {/* Danger Actions */}
             <div>
@@ -218,7 +207,6 @@ export default function PreviewNewDesign() {
                   Terminate Contract
                 </button>
               </div>
-            </div>
 
             {/* Icon Buttons */}
             <div>
@@ -237,9 +225,6 @@ export default function PreviewNewDesign() {
                   <Settings className="h-5 w-5" />
                 </button>
               </div>
-            </div>
-          </div>
-        </div>
 
         {/* Navigation Info */}
         <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
@@ -251,7 +236,6 @@ export default function PreviewNewDesign() {
             <li>• <strong>Hover Tooltips</strong> - Sidebar icons show labels on hover</li>
           </ul>
         </div>
-      </div>
     </HybridNavigationLayout>
   );
 }

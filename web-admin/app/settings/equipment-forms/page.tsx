@@ -102,7 +102,6 @@ export default function EquipmentFormsPage() {
         <div className="flex items-center justify-center h-64">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
-      </div>
     
     </div>);
   }
@@ -121,7 +120,6 @@ export default function EquipmentFormsPage() {
             <h1 className="text-3xl font-bold text-gray-900">Equipment Form Assignment</h1>
             <p className="text-gray-600 mt-1">Link inspection forms to equipment</p>
           </div>
-        </div>
 
         {/* Info Card */}
         <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 flex items-start gap-3">
@@ -131,7 +129,6 @@ export default function EquipmentFormsPage() {
               Assign specific inspection form templates to equipment. This will automatically use the assigned form when creating inspections for this equipment.
             </p>
           </div>
-        </div>
 
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -144,8 +141,6 @@ export default function EquipmentFormsPage() {
                 <p className="text-2xl font-bold text-gray-900">{equipment.length}</p>
                 <p className="text-sm text-gray-600">Total Equipment</p>
               </div>
-            </div>
-          </div>
 
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-3">
@@ -156,8 +151,6 @@ export default function EquipmentFormsPage() {
                 <p className="text-2xl font-bold text-gray-900">{formTemplates.length}</p>
                 <p className="text-sm text-gray-600">Form Templates</p>
               </div>
-            </div>
-          </div>
 
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-3">
@@ -168,9 +161,6 @@ export default function EquipmentFormsPage() {
                 <p className="text-2xl font-bold text-gray-900">{Object.keys(assignments).length}</p>
                 <p className="text-sm text-gray-600">Assignments</p>
               </div>
-            </div>
-          </div>
-        </div>
 
         {/* Assignments Table */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
@@ -240,7 +230,5 @@ export default function EquipmentFormsPage() {
             </div>
           )}
         </div>
-      </div>
-    </div>
   );
 }

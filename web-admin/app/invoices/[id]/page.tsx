@@ -146,7 +146,6 @@ export default function InvoiceDetailPage() {
         <div className="flex items-center justify-center h-full">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
-      </div>
     
     </div>);
   }
@@ -166,8 +165,6 @@ export default function InvoiceDetailPage() {
               <span>Back to Invoices</span>
             </button>
           </div>
-        </div>
-      </div>
     );
   }
 
@@ -186,7 +183,6 @@ export default function InvoiceDetailPage() {
               <h1 className="text-3xl font-bold text-gray-900">{invoice.invoice_number}</h1>
               <p className="text-gray-600 mt-1">Invoice Details</p>
             </div>
-          </div>
           <div className="flex items-center space-x-3">
             {invoice.status !== 'paid' && (
               <button
@@ -202,7 +198,6 @@ export default function InvoiceDetailPage() {
               <span>Download PDF</span>
             </button>
           </div>
-        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           {/* Main Content */}
@@ -247,7 +242,6 @@ export default function InvoiceDetailPage() {
                     {new Date(invoice.due_date).toLocaleDateString()}
                   </p>
                 </div>
-              </div>
 
               {invoice.notes && (
                 <div className="mt-6 pt-6 border-t border-gray-200">
@@ -304,8 +298,6 @@ export default function InvoiceDetailPage() {
                   <span className="text-gray-900">Total</span>
                   <span className="text-[#3f72af]">${invoice.total_amount.toFixed(2)}</span>
                 </div>
-              </div>
-            </div>
 
             {/* Payment History */}
             {invoice.payments && invoice.payments.length > 0 && (
@@ -329,20 +321,17 @@ export default function InvoiceDetailPage() {
                               {payment.transaction_id && ` • ${payment.transaction_id}`}
                             </p>
                           </div>
-                        </div>
                         <div className="text-right">
                           <p className="text-sm text-gray-600">
                             {new Date(payment.payment_date).toLocaleDateString()}
                           </p>
                         </div>
-                      </div>
                       {payment.notes && (
                         <p className="text-sm text-gray-600 mt-2 ml-11">{payment.notes}</p>
                       )}
                     </div>
                   ))}
                 </div>
-              </div>
             )}
           </div>
 
@@ -364,7 +353,6 @@ export default function InvoiceDetailPage() {
                   <span className="text-sm font-semibold text-gray-900">Amount Due</span>
                   <span className="text-xl font-bold text-[#3f72af]">${invoice.amount_due.toFixed(2)}</span>
                 </div>
-              </div>
 
               {invoice.deposit_required && (
                 <div className="mt-4 pt-4 border-t border-gray-200">
@@ -382,7 +370,6 @@ export default function InvoiceDetailPage() {
                       {invoice.deposit_paid ? 'Deposit Paid' : 'Deposit Pending'}
                     </span>
                   </div>
-                </div>
               )}
             </div>
 
@@ -400,10 +387,6 @@ export default function InvoiceDetailPage() {
                     {Math.ceil((new Date(invoice.due_date).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))}
                   </span>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
         {/* Payment Modal */}
         {showPaymentModal && (
@@ -483,7 +466,6 @@ export default function InvoiceDetailPage() {
                     placeholder="Add any notes about this payment"
                   />
                 </div>
-              </div>
 
               <div className="flex items-center space-x-3 mt-6">
                 <button
@@ -501,10 +483,7 @@ export default function InvoiceDetailPage() {
                   Cancel
                 </button>
               </div>
-            </div>
-          </div>
         )}
       </div>
-    </div>
   );
 }

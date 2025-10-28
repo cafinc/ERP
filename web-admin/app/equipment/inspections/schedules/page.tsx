@@ -143,7 +143,6 @@ export default function InspectionSchedulesPage() {
         <div className="flex items-center justify-center h-64">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
-      </div>
     
     </div>);
   }
@@ -200,7 +199,6 @@ export default function InspectionSchedulesPage() {
               Inactive Only
             </button>
           </div>
-        </div>
 
         {/* Schedules List */}
         <div className="space-y-4">
@@ -256,7 +254,6 @@ export default function InspectionSchedulesPage() {
                       <Trash2 className="w-4 h-4" />
                     </button>
                   </div>
-                </div>
 
                 {/* Details Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
@@ -268,7 +265,6 @@ export default function InspectionSchedulesPage() {
                         {getFrequencyLabel(schedule.frequency, schedule.custom_interval_days)}
                       </p>
                     </div>
-                  </div>
 
                   <div className="flex items-center gap-3">
                     <Calendar className="w-5 h-5 text-gray-400" />
@@ -278,7 +274,6 @@ export default function InspectionSchedulesPage() {
                         {formatDate(schedule.next_due_date)}
                       </p>
                     </div>
-                  </div>
 
                   {schedule.assigned_inspector_name && (
                     <div className="flex items-center gap-3">
@@ -287,7 +282,6 @@ export default function InspectionSchedulesPage() {
                         <p className="text-xs text-gray-500">Assigned Inspector</p>
                         <p className="text-sm font-medium text-gray-900">{schedule.assigned_inspector_name}</p>
                       </div>
-                    </div>
                   )}
                 </div>
 
@@ -336,7 +330,6 @@ export default function InspectionSchedulesPage() {
                                 <p className="text-xs text-gray-600">{rule.description}</p>
                               )}
                             </div>
-                          </div>
                           <div className="flex items-center gap-2">
                             {rule.threshold_days && (
                               <span className="text-xs text-gray-600">{rule.threshold_days} days</span>
@@ -345,10 +338,8 @@ export default function InspectionSchedulesPage() {
                               {getActionLabel(rule.action)}
                             </span>
                           </div>
-                        </div>
                       ))}
                     </div>
-                  </div>
                 )}
 
                 {/* Actions */}
@@ -364,11 +355,8 @@ export default function InspectionSchedulesPage() {
                     {schedule.active ? 'Deactivate Schedule' : 'Activate Schedule'}
                   </button>
                 </div>
-              </div>
             ))
           )}
         </div>
-      </div>
-    </div>
   );
 }

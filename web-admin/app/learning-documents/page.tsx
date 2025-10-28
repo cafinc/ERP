@@ -134,8 +134,6 @@ export default function LearningDocumentsPage() {
                 <p className="text-2xl font-bold text-gray-900">{documents.length}</p>
                 <p className="text-sm text-gray-600">Total Documents</p>
               </div>
-            </div>
-          </div>
 
           {categories.slice(0, 3).map((category) => {
             const count = documents.filter(d => d.category === category).length;
@@ -149,8 +147,6 @@ export default function LearningDocumentsPage() {
                     <p className="text-2xl font-bold text-gray-900">{count}</p>
                     <p className="text-sm text-gray-600 capitalize">{category}</p>
                   </div>
-                </div>
-              </div>
             );
           })}
         </div>
@@ -179,7 +175,6 @@ export default function LearningDocumentsPage() {
               ))}
             </select>
           </div>
-        </div>
 
         {/* Documents Grid */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
@@ -227,7 +222,6 @@ export default function LearningDocumentsPage() {
                         <Trash2 className="w-4 h-4" />
                       </button>
                     </div>
-                  </div>
 
                   <h3 className="font-semibold text-gray-900 mb-2">{doc.title}</h3>
                   {doc.description && (
@@ -246,7 +240,6 @@ export default function LearningDocumentsPage() {
                       </button>
                     )}
                   </div>
-                </div>
               ))}
             </div>
           )}
@@ -265,7 +258,6 @@ export default function LearningDocumentsPage() {
                 Close
               </button>
             </div>
-          </div>
         )}
       </div>
     );

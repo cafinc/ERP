@@ -159,7 +159,6 @@ export default function CreateInspectionSchedulePage() {
         <div className="flex items-center justify-center h-64">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
-      </div>
     
     </div>);
   }
@@ -178,7 +177,6 @@ export default function CreateInspectionSchedulePage() {
             <h1 className="text-3xl font-bold text-gray-900">Create Inspection Schedule</h1>
             <p className="text-gray-600 mt-1">Set up recurring equipment inspections</p>
           </div>
-        </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Basic Information */}
@@ -289,8 +287,6 @@ export default function CreateInspectionSchedulePage() {
                   ))}
                 </select>
               </div>
-            </div>
-          </div>
 
           {/* Settings */}
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
@@ -339,7 +335,6 @@ export default function CreateInspectionSchedulePage() {
                 </div>
               )}
             </div>
-          </div>
 
           {/* Compliance Rules */}
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
@@ -441,8 +436,6 @@ export default function CreateInspectionSchedulePage() {
                           className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         />
                       </div>
-                    </div>
-                  </div>
                 ))}
               </div>
             )}
@@ -477,6 +470,5 @@ export default function CreateInspectionSchedulePage() {
           </div>
         </form>
       </div>
-    </div>
   );
 }

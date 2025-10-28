@@ -476,8 +476,6 @@ export default function NavigationBuilder() {
                       </div>                    </details>
                   ))}
                 </div>
-              </div>
-            </div>
 
             {/* Right: Navigation Structure Builder */}
             <div className="lg:col-span-2">
@@ -569,8 +567,6 @@ export default function NavigationBuilder() {
                               </div>
                             )}
                           </div>
-                        </div>
-                      </div>
                     );
                   })}
                 </div>
@@ -592,7 +588,6 @@ export default function NavigationBuilder() {
                     Export Code
                   </button>
                 </div>
-              </div>
 
               {/* Preview */}
               <div className="mt-6 bg-gray-800 rounded-xl p-4">
@@ -611,15 +606,9 @@ export default function NavigationBuilder() {
                             </span>
                           )}
                         </div>
-                      </div>
                     );
                   })}
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </DashboardLayout>
   );
 }

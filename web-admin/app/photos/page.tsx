@@ -222,8 +222,6 @@ export default function PhotoGalleryPage() {
                 List
               </button>
             </div>
-          </div>
-        </div>
 
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -236,8 +234,6 @@ export default function PhotoGalleryPage() {
                 <p className="text-2xl font-bold text-gray-900">{photos.length}</p>
                 <p className="text-sm text-gray-600">Total Photos</p>
               </div>
-            </div>
-          </div>
 
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-3">
@@ -254,8 +250,6 @@ export default function PhotoGalleryPage() {
                 </p>
                 <p className="text-sm text-gray-600">This Week</p>
               </div>
-            </div>
-          </div>
 
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-3">
@@ -268,8 +262,6 @@ export default function PhotoGalleryPage() {
                 </p>
                 <p className="text-sm text-gray-600">Linked to Sites</p>
               </div>
-            </div>
-          </div>
 
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-3">
@@ -282,9 +274,6 @@ export default function PhotoGalleryPage() {
                 </p>
                 <p className="text-sm text-gray-600">Before/After</p>
               </div>
-            </div>
-          </div>
-        </div>
 
         {/* Photo Grid/List */}
         {viewMode === 'grid' ? (
@@ -322,8 +311,6 @@ export default function PhotoGalleryPage() {
                         </span>
                       ))}
                     </div>
-                  </div>
-                </div>
               ))
             )}
           </div>
@@ -425,9 +412,6 @@ export default function PhotoGalleryPage() {
                   </span>
                 ))}
               </div>
-            </div>
-          </div>
-        </div>
       )}
 
       {/* Upload Modal Placeholder */}
@@ -460,8 +444,6 @@ export default function PhotoGalleryPage() {
                 {uploading ? 'Uploading...' : 'Select Files'}
               </button>
             </div>
-          </div>
-        </div>
       )}
     );
 }

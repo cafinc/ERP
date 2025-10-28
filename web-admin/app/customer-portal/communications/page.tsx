@@ -306,7 +306,6 @@ export default function CustomerCommunicationsPage() {
                 Chat with your service provider
               </p>
             </div>
-          </div>
           <div className="flex items-center gap-4">
             {/* Connection Status */}
             <div className="flex items-center gap-2">
@@ -320,8 +319,6 @@ export default function CustomerCommunicationsPage() {
             <div className="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm font-medium">
               {filteredMessages.length} messages
             </div>
-          </div>
-        </div>
 
         {/* Search Bar */}
         <div className="mt-4 relative">
@@ -334,7 +331,6 @@ export default function CustomerCommunicationsPage() {
             className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
           />
         </div>
-      </div>
 
       {/* Messages */}
       <div className="flex-1 overflow-y-auto px-6 py-4">
@@ -344,7 +340,6 @@ export default function CustomerCommunicationsPage() {
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500 mx-auto mb-4" />
               <p className="text-gray-600">Loading messages...</p>
             </div>
-          </div>
         ) : filteredMessages.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full text-gray-400">
             <ChatBubbleLeftRightIcon className="w-20 h-20 mb-4 opacity-50" />
@@ -423,8 +418,6 @@ export default function CustomerCommunicationsPage() {
                         )
                       )}
                     </div>
-                  </div>
-                </div>
               );
             })}
             <div ref={messagesEndRef} />
@@ -503,7 +496,6 @@ export default function CustomerCommunicationsPage() {
               ))
             )}
           </div>
-        </div>
       )}
 
       {/* Input */}
@@ -577,6 +569,5 @@ export default function CustomerCommunicationsPage() {
           📱 InApp Messages • Real-time delivery • File attachments supported
         </p>
       </div>
-    </div>
   );
 }

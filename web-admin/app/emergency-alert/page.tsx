@@ -114,7 +114,6 @@ export default function EmergencyAlertPage() {
             <h1 className="text-3xl font-bold text-gray-900">Emergency Alert System</h1>
             <p className="text-gray-600 mt-1">Send urgent notifications to team members on shift</p>
           </div>
-        </div>
 
         {/* Warning Card */}
         <div className="bg-red-50 border-2 border-red-200 rounded-lg p-6">
@@ -126,8 +125,6 @@ export default function EmergencyAlertPage() {
                 Send urgent notifications to all team members currently on shift via Email and SMS.
               </p>
             </div>
-          </div>
-        </div>
 
         {/* Stats Card */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
@@ -149,7 +146,6 @@ export default function EmergencyAlertPage() {
               <RefreshCw className={`w-5 h-5 ${loading ? 'animate-spin' : ''}`} />
             </button>
           </div>
-        </div>
 
         {/* Alert Type Selection */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
@@ -180,7 +176,6 @@ export default function EmergencyAlertPage() {
               );
             })}
           </div>
-        </div>
 
         {/* Message Input */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
@@ -209,7 +204,6 @@ export default function EmergencyAlertPage() {
               {message || 'Your alert message will appear here...'}
             </p>
           </div>
-        </div>
 
         {/* Send Button */}
         <button
@@ -266,8 +260,6 @@ export default function EmergencyAlertPage() {
                   Close
                 </button>
               </div>
-            </div>
-          </div>
         )}
       </div>
     );

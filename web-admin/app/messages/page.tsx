@@ -307,7 +307,6 @@ export default function MessagesPage() {
                 className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
               />
             </div>
-          </div>
 
           {/* Conversations List */}
           <div className="flex-1 overflow-y-auto">
@@ -363,11 +362,9 @@ export default function MessagesPage() {
                       <Archive className="w-4 h-4 text-gray-400" />
                     </button>
                   </div>
-                </div>
               ))
             )}
           </div>
-        </div>
 
         {/* Main Chat Area */}
         <div className="flex-1 flex flex-col bg-gray-50">
@@ -444,9 +441,6 @@ export default function MessagesPage() {
                               <CheckCheck className="w-4 h-4" />
                             )}
                           </div>
-                        </div>
-                      </div>
-                    </div>
                   );
                 })}
                 <div ref={messagesEndRef} />
@@ -471,7 +465,6 @@ export default function MessagesPage() {
                             <X className="w-3 h-3 text-gray-600" />
                           </button>
                         </div>
-                      </div>
                     ))}
                   </div>
                 )}
@@ -532,7 +525,6 @@ export default function MessagesPage() {
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">No conversation selected</h3>
                 <p className="text-gray-600">Select a conversation from the list or start a new one</p>
               </div>
-            </div>
           )}
         </div>
 
@@ -577,7 +569,6 @@ export default function MessagesPage() {
                     Group Chat
                   </button>
                 </div>
-              </div>
 
               {/* Group Name */}
               {conversationType === 'group' && (
@@ -632,7 +623,6 @@ export default function MessagesPage() {
                     </label>
                   ))}
                 </div>
-              </div>
 
               {/* Action Buttons */}
               <div className="flex items-center justify-end space-x-3">
@@ -650,8 +640,6 @@ export default function MessagesPage() {
                   Create Conversation
                 </button>
               </div>
-            </div>
-          </div>
         )}
       </div>
     );

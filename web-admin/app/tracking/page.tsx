@@ -191,7 +191,6 @@ export default function LiveTrackingPage() {
                 <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
               </svg>
             </div>
-          </div>
         `;
 
         const popup = new maplibregl.Popup({ offset: 25 }).setHTML(`
@@ -345,7 +344,6 @@ export default function LiveTrackingPage() {
                 Equipment ({equipment.length})
               </button>
             </div>
-          </div>
 
           {/* Auto Refresh Toggle */}
           <label className="flex items-center gap-2 cursor-pointer">
@@ -388,9 +386,6 @@ export default function LiveTrackingPage() {
               <div className="w-4 h-4 bg-purple-600 rounded-full"></div>
               <span>Equipment</span>
             </div>
-          </div>
-        </div>
-      </div>
 
       <style jsx global>{`
         .crew-marker,

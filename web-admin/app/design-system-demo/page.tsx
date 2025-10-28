@@ -112,7 +112,6 @@ export default function DesignSystemDemo() {
             <div className="h-3 bg-gray-300 rounded mb-2 w-3/4"></div>
             <div className="h-16 bg-white rounded border border-gray-200"></div>
           </div>
-        </div>
       ),
     },
     {
@@ -130,7 +129,6 @@ export default function DesignSystemDemo() {
           <div className="bg-gray-50 p-2 h-20">
             <div className="h-16 bg-white rounded border border-gray-200"></div>
           </div>
-        </div>
       ),
     },
     {
@@ -152,8 +150,6 @@ export default function DesignSystemDemo() {
             <div className="bg-gray-50 p-2 h-22">
               <div className="h-14 bg-white rounded border border-gray-200"></div>
             </div>
-          </div>
-        </div>
       ),
     },
     {
@@ -170,7 +166,6 @@ export default function DesignSystemDemo() {
           <div className="bg-gray-50 p-2">
             <div className="h-16 bg-white rounded border border-gray-200"></div>
           </div>
-        </div>
       ),
     },
   ];
@@ -283,10 +278,8 @@ export default function DesignSystemDemo() {
                     style={{ backgroundColor: palette.accent }}
                   ></div>
                 </div>
-              </div>
             ))}
           </div>
-        </div>
 
         {/* Navigation Layouts Section */}
         <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 mb-6 hover:shadow-md transition-shadow">
@@ -322,7 +315,6 @@ export default function DesignSystemDemo() {
               </div>
             ))}
           </div>
-        </div>
 
         {/* Button Styles Section */}
         <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 mb-6 hover:shadow-md transition-shadow">
@@ -346,10 +338,8 @@ export default function DesignSystemDemo() {
                     </div>
                   ))}
                 </div>
-              </div>
             ))}
           </div>
-        </div>
 
         {/* Apply Button */}
         <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl shadow-lg p-6 text-white">
@@ -365,7 +355,6 @@ export default function DesignSystemDemo() {
               Apply Design System
             </button>
           </div>
-        </div>
 
         {/* Note */}
         <div className="mt-6 bg-amber-50 border border-amber-200 rounded-lg p-4">
@@ -374,7 +363,6 @@ export default function DesignSystemDemo() {
             I'll need to create a theme configuration system and update all components. Let me know which combination you prefer!
           </p>
         </div>
-      </div>
     </DashboardLayout>
   );
 }

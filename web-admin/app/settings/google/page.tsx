@@ -219,7 +219,6 @@ export default function GoogleWorkspaceSettings() {
         <div className="flex items-center justify-center h-full">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
-      </div>
     
     </div>);
   }
@@ -253,7 +252,6 @@ export default function GoogleWorkspaceSettings() {
                         <p className="text-sm text-green-600">Connected: {integration.connectionInfo}</p>
                       )}
                     </div>
-                  </div>
                   
                   {integration.connected ? (
                     <span className="flex items-center space-x-1 px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">
@@ -312,11 +310,8 @@ export default function GoogleWorkspaceSettings() {
                     </button>
                   )}
                 </div>
-              </div>
             );
           })}
         </div>
-      </div>
-    </div>
   );
 }

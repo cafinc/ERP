@@ -159,7 +159,6 @@ export default function RingCentralSettings() {
         <div className="flex items-center justify-center h-full">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
-      </div>
     
     </div>);
   }
@@ -194,7 +193,6 @@ export default function RingCentralSettings() {
                   </p>
                 )}
               </div>
-            </div>
 
             <div className="flex items-center space-x-3">
               {connected ? (
@@ -224,8 +222,6 @@ export default function RingCentralSettings() {
                 </button>
               )}
             </div>
-          </div>
-        </div>
 
         {/* Features Grid */}
         <div>
@@ -262,7 +258,6 @@ export default function RingCentralSettings() {
                           </span>
                         )}
                       </div>
-                    </div>
 
                     {feature.status === 'active' && (
                       <label className="relative inline-flex items-center cursor-pointer">
@@ -292,7 +287,6 @@ export default function RingCentralSettings() {
               );
             })}
           </div>
-        </div>
 
         {/* Webhook Configuration Info */}
         <div className="mt-8 bg-blue-50 border border-blue-200 rounded-xl p-6">
@@ -315,7 +309,5 @@ export default function RingCentralSettings() {
             Subscribe to: <code className="bg-blue-100 px-2 py-0.5 rounded">Presence</code> events
           </p>
         </div>
-      </div>
-    </div>
   );
 }

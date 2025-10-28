@@ -93,7 +93,6 @@ export default function ShiftHistoryPage() {
         <div className="flex items-center justify-center h-64">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
-      </div>
     
     </div>);
   }
@@ -126,8 +125,6 @@ export default function ShiftHistoryPage() {
                 <p className="text-2xl font-bold text-gray-900">{shifts.length}</p>
                 <p className="text-sm text-gray-600">Total Shifts</p>
               </div>
-            </div>
-          </div>
 
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-3">
@@ -138,8 +135,6 @@ export default function ShiftHistoryPage() {
                 <p className="text-2xl font-bold text-gray-900">{totalHours.toFixed(1)}h</p>
                 <p className="text-sm text-gray-600">Total Hours</p>
               </div>
-            </div>
-          </div>
 
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-3">
@@ -152,9 +147,6 @@ export default function ShiftHistoryPage() {
                 </p>
                 <p className="text-sm text-gray-600">Team Members</p>
               </div>
-            </div>
-          </div>
-        </div>
 
         {/* Filter */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
@@ -181,8 +173,6 @@ export default function ShiftHistoryPage() {
                 Completed
               </button>
             </div>
-          </div>
-        </div>
 
         {/* Shifts Table */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
@@ -235,7 +225,5 @@ export default function ShiftHistoryPage() {
             </div>
           )}
         </div>
-      </div>
-    </div>
   );
 }

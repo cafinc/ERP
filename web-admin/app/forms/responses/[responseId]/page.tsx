@@ -226,8 +226,6 @@ export default function ViewResponsePage() {
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#3f72af] mx-auto"></div>
             <p className="mt-4 text-gray-600">Loading response...</p>
           </div>
-        </div>
-      </div>
     
     </div>);
   }
@@ -237,7 +235,6 @@ export default function ViewResponsePage() {
               <div className="text-center py-12">
           <p className="text-red-600">Response not found</p>
         </div>
-      </div>
     );
   }
 
@@ -257,7 +254,6 @@ export default function ViewResponsePage() {
                 <h1 className="text-3xl font-bold text-gray-900">Form Response</h1>
                 <p className="text-gray-600 mt-1">{template.name}</p>
               </div>
-            </div>
             <a
               href={`/api/form-responses/${responseId}/pdf`}
               target="_blank"
@@ -280,7 +276,6 @@ export default function ViewResponsePage() {
                   <p className="text-sm text-gray-600">Submitted By</p>
                   <p className="font-semibold text-gray-900">{response.submitted_by}</p>
                 </div>
-              </div>
               <div className="flex items-center space-x-3">
                 <div className="p-3 bg-green-100 rounded-lg">
                   <Calendar className="w-6 h-6 text-green-600" />
@@ -291,7 +286,6 @@ export default function ViewResponsePage() {
                     {new Date(response.submitted_at).toLocaleString()}
                   </p>
                 </div>
-              </div>
               <div className="flex items-center space-x-3">
                 <div className="p-3 bg-purple-100 rounded-lg">
                   <CheckCircle className="w-6 h-6 text-purple-600" />
@@ -300,9 +294,6 @@ export default function ViewResponsePage() {
                   <p className="text-sm text-gray-600">Status</p>
                   <p className="font-semibold text-gray-900">Completed</p>
                 </div>
-              </div>
-            </div>
-          </div>
 
           {/* Form Data */}
           <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-8 hover:shadow-md transition-shadow">
@@ -317,12 +308,7 @@ export default function ViewResponsePage() {
                   <div className="pl-4">
                     {renderFieldValue(field, response.data[field.id])}
                   </div>
-                </div>
               ))}
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
   );
 }
