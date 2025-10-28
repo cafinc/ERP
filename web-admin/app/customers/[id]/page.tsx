@@ -436,6 +436,56 @@ export default function CustomerDetailPage() {
     }
   };
 
+  const handleSendReminder = async (estimate: any) => {
+    const message = prompt('Enter reminder message:', `Friendly reminder about estimate #${estimate.estimate_number}. Please review when you have a chance.`);
+    if (!message) return;
+
+    try {
+      const response = await api.post(`/customers/${customerId}/send-reminder`, {
+        type: 'estimate',
+        item_id: estimate._id,
+        message: message,
+        sent_by: 'admin'
+      });
+
+      if (response.data.success) {
+        alert(`Reminder sent to ${response.data.customer_email}`);
+      }
+    } catch (error) {
+      console.error('Error sending reminder:', error);
+      alert('Failed to send reminder. Please try again.');
+    }
+  };
+
+  const handleCreateTask = async () => {
+    const title = prompt('Task title:');
+    if (!title) return;
+
+    const description = prompt('Task description (optional):', '');
+    const priority = prompt('Priority (low/medium/high):', 'medium');
+
+    try {
+      const response = await api.post('/tasks/create', {
+        customer_id: customerId,
+        title: title,
+        description: description || '',
+        priority: priority || 'medium',
+        status: 'pending',
+        created_by: 'admin'
+      });
+
+      if (response.data.success) {
+        alert('Task created successfully!');
+        // Refresh tasks list
+        const tasksResponse = await api.get(`/tasks?customer_id=${customerId}`);
+        setTasks(tasksResponse.data || []);
+      }
+    } catch (error) {
+      console.error('Error creating task:', error);
+      alert('Failed to create task. Please try again.');
+    }
+  };
+
   if (loading) {
     return (
         <div className="flex items-center justify-center h-full">
