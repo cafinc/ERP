@@ -316,6 +316,80 @@ export default function AutomationDashboardPage() {
             </div>
           </div>
         </div>
+
+        {/* Workflow Details Modal */}
+        {selectedWorkflow && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+            <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full p-6 max-h-[80vh] overflow-y-auto">
+              <div className="flex justify-between items-start mb-6">
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-900">{selectedWorkflow.name}</h2>
+                  <p className="text-gray-600 mt-1">{selectedWorkflow.data.description}</p>
+                </div>
+                <button
+                  onClick={() => setSelectedWorkflow(null)}
+                  className="text-gray-400 hover:text-gray-600"
+                >
+                  ✕
+                </button>
+              </div>
+
+              {/* Steps */}
+              {selectedWorkflow.data.steps && selectedWorkflow.data.steps.length > 0 && (
+                <div className="mb-6">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-3">Workflow Steps</h3>
+                  <div className="space-y-3">
+                    {selectedWorkflow.data.steps.map((step, idx) => (
+                      <div key={idx} className="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
+                        <div className="flex-shrink-0 w-6 h-6 bg-[#3f72af] text-white rounded-full flex items-center justify-center text-sm font-medium">
+                          {idx + 1}
+                        </div>
+                        <div className="flex-1">
+                          <p className="text-gray-700">{step}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Required Context */}
+              {selectedWorkflow.data.required_context && selectedWorkflow.data.required_context.length > 0 && (
+                <div className="mb-6">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-3">Required Context</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedWorkflow.data.required_context.map((ctx, idx) => (
+                      <span key={idx} className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
+                        {ctx}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Trigger Types */}
+              {selectedWorkflow.data.trigger_types && selectedWorkflow.data.trigger_types.length > 0 && (
+                <div className="mb-6">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-3">Trigger Types</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedWorkflow.data.trigger_types.map((trigger, idx) => (
+                      <span key={idx} className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">
+                        {trigger}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <button
+                onClick={() => setSelectedWorkflow(null)}
+                className="w-full px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg font-medium transition-colors"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     );
 }
