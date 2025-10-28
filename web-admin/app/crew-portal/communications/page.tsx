@@ -299,6 +299,7 @@ export default function CrewCommunicationsPage() {
               <MapPinIcon className="w-4 h-4" />
               <span>Location tracking active</span>
             </div>
+          </div>
         )}
       </div>
 
