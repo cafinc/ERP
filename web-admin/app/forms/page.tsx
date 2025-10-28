@@ -175,15 +175,13 @@ export default function FormsPage() {
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         {/* Compact Header */}
         <PageHeader
-        title="Forms"
-        subtitle="Create and manage custom forms"
-        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Forms" }]}
-        title="Forms Management"
-          
+          title="Forms Management"
+          subtitle="Create and manage custom forms"
+          breadcrumbs={[{ label: "Home", href: "/" }, { label: "Forms" }]}
           actions={[
             {
               label: 'Create Form',
-              icon: Plus,
+              icon: <Plus className="w-4 h-4" />,
               onClick: () => window.location.href = '/forms/builder',
               variant: 'primary',
             },
