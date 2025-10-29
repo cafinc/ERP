@@ -179,6 +179,8 @@ export default function LearningDocumentsPage() {
                 <p className="text-2xl font-bold text-gray-900">{documents.length}</p>
                 <p className="text-sm text-gray-600">Total Documents</p>
               </div>
+            </div>
+          </div>
 
           {categories.slice(0, 3).map((category) => {
             const count = documents.filter(d => d.category === category).length;
@@ -192,6 +194,8 @@ export default function LearningDocumentsPage() {
                     <p className="text-2xl font-bold text-gray-900">{count}</p>
                     <p className="text-sm text-gray-600 capitalize">{category}</p>
                   </div>
+                </div>
+              </div>
             );
           })}
         </div>
