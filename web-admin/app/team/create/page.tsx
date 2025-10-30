@@ -353,6 +353,7 @@ export default function TeamMemberFormPage() {
             )}
           </button>
         </div>
+      </div>
       </form>
       </div>
     </div>
