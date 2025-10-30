@@ -154,6 +154,7 @@ export default function ServiceFormPage() {
               {isEdit ? 'Update service details' : 'Create a new service offering'}
             </p>
           </div>
+        </div>
 
         {/* Service Details */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
