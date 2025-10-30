@@ -319,5 +319,6 @@ export default function RingCentralSettings() {
             Subscribe to: <code className="bg-blue-100 px-2 py-0.5 rounded">Presence</code> events
           </p>
         </div>
+      </div>
   );
 }
