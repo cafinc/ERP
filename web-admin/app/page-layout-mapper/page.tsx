@@ -406,6 +406,7 @@ export default function PageLayoutMapper() {
               feel free to customize!
             </p>
           </div>
+        </div>
     </DashboardLayout>
   );
 }
