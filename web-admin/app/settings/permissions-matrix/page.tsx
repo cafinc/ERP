@@ -293,7 +293,7 @@ export default function PermissionsMatrixPage() {
                       <CheckCircle style={{ width: '24px', height: '24px', color: '#10b981' }} />
                     ) : (
                       <XCircle style={{ width: '24px', height: '24px', color: '#cbd5e1' }} />
-                    )}
+                  )}
               </div>
             </div>
           </button>
