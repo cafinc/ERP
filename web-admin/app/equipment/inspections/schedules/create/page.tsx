@@ -474,6 +474,8 @@ export default function CreateInspectionSchedulePage() {
         </div>
       </form>
     </div>
-  </div></div></div>
+  </div>
+  </div>
+  </div>
   );
 }
