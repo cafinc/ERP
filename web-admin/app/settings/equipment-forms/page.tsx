@@ -129,6 +129,7 @@ export default function EquipmentFormsPage() {
             <h1 className="text-3xl font-bold text-gray-900">Equipment Form Assignment</h1>
             <p className="text-gray-600 mt-1">Link inspection forms to equipment</p>
           </div>
+        </div>
 
         {/* Info Card */}
         <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 flex items-start gap-3">
@@ -138,6 +139,7 @@ export default function EquipmentFormsPage() {
               Assign specific inspection form templates to equipment. This will automatically use the assigned form when creating inspections for this equipment.
             </p>
           </div>
+        </div>
 
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
