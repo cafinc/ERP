@@ -142,7 +142,9 @@ export default function InspectionSchedulesPage() {
       <div className="flex-1 overflow-auto p-6">
         <div className="flex items-center justify-center h-64">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
-        </div></div></div>
+        </div>
+      </div>
+    </div>
   );
   }
 
@@ -167,7 +169,8 @@ export default function InspectionSchedulesPage() {
           >
             <Plus className="w-5 h-5" />
             Create Schedule
-          </button></div>
+          </button>
+        </div>
         {/* Filters */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
           <div className="flex items-center gap-4">
@@ -201,7 +204,8 @@ export default function InspectionSchedulesPage() {
               }`}
             >
               Inactive Only
-            </button></div>
+            </button>
+          </div>
         {/* Schedules List */}
         <div className="space-y-4">
           {schedules.length === 0 ? (
@@ -215,7 +219,8 @@ export default function InspectionSchedulesPage() {
               >
                 <Plus className="w-4 h-4" />
                 Create Schedule
-              </button></div>
+              </button>
+            </div>
           ) : (
             schedules.map((schedule) => (
               <div
@@ -253,7 +258,8 @@ export default function InspectionSchedulesPage() {
                       className="p-2 text-red-600 hover:bg-red-50 rounded-lg"
                     >
                       <Trash2 className="w-4 h-4" />
-                    </button></div>
+                    </button>
+                  </div>
                 {/* Details Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                   <div className="flex items-center gap-3">
@@ -280,7 +286,8 @@ export default function InspectionSchedulesPage() {
                       <div>
                         <p className="text-xs text-gray-500">Assigned Inspector</p>
                         <p className="text-sm font-medium text-gray-900">{schedule.assigned_inspector_name}</p>
-                      </div></div>
+                      </div>
+                    </div>
                   )}
                 </div>
 
@@ -336,9 +343,12 @@ export default function InspectionSchedulesPage() {
                             <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${getActionColor(rule.action)}`}>
                               {getActionLabel(rule.action)}
                             </span>
-                          </div></div></div>
+                          </div>
+                        </div>
+                      </div>
                       ))}
-                    </div></div>
+                    </div>
+                  </div>
                 )}
 
                 {/* Actions */}
@@ -352,12 +362,18 @@ export default function InspectionSchedulesPage() {
                     }`}
                   >
                     {schedule.active ? 'Deactivate Schedule' : 'Activate Schedule'}
-                  </button></div></div>
+                  </button>
+                </div>
+              </div>
             ))
-        </div></div></div>
+        </div>
+      </div>
+    </div>
           )}
         </div>
       </div>
-    </div></div></div>
+    </div>
+  </div>
+</div>
   );
 }

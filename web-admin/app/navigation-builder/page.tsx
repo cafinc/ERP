@@ -462,7 +462,8 @@ export default function NavigationBuilder() {
                               className="text-xs p-2 bg-gray-50 rounded hover:bg-[#3f72af] hover:text-white cursor-pointer transition-colors"
                             >
                               {page.name}                              <div className="text-gray-500 hover:text-blue-200 text-[10px]">{page.path}
-                              </div></div>
+                              </div>
+                            </div>
                           ))
                         ) : (
                           <div
@@ -470,7 +471,8 @@ export default function NavigationBuilder() {
                             className="text-xs p-2 bg-gray-50 rounded hover:bg-[#3f72af] hover:text-white cursor-pointer transition-colors"
                           >
                             {value.name}                            <div className="text-gray-500 hover:text-blue-200 text-[10px]">{value.path}
-                            </div></div>
+                            </div>
+                          </div>
                         )}
                       </div>                    </details>
                   ))}
@@ -487,7 +489,8 @@ export default function NavigationBuilder() {
                   >
                     <Plus className="w-4 h-4" />
                     Add Section
-                  </button></div>
+                  </button>
+                </div>
                 <div className="space-y-2 mb-6">
                   {navigation.map((section, idx) => {
                     const Icon = section.icon;
@@ -523,7 +526,8 @@ export default function NavigationBuilder() {
                                 className="p-1 text-red-600 hover:bg-red-50 rounded"
                               >
                                 <Trash2 className="w-4 h-4" />
-                              </button></div>
+                              </button>
+                            </div>
                             {section.type === 'single' && (
                               <input
                                 type="text"
@@ -546,7 +550,8 @@ export default function NavigationBuilder() {
                                       className="p-1 text-red-600 hover:bg-red-50 rounded"
                                     >
                                       <Trash2 className="w-3 h-3" />
-                                    </button></div>
+                                    </button>
+                                  </div>
                                 ))}
                                 <button
                                   onClick={() => setSelectedSection(section.id)}
@@ -557,9 +562,12 @@ export default function NavigationBuilder() {
                                   }`}
                                 >
                                   {selectedSection === section.id ? '✓ Selected - Click pages on left to add' : 'Add pages to this section'}
-                                </button></div>
+                                </button>
+                              </div>
                             )}
-                          </div></div></div>
+                          </div>
+                        </div>
+                      </div>
   );
                   })}
                 </div>
@@ -579,7 +587,8 @@ export default function NavigationBuilder() {
                   >
                     <Eye className="w-5 h-5" />
                     Export Code
-                  </button></div>
+                  </button>
+                </div>
               {/* Preview */}
               <div className="mt-6 bg-gray-800 rounded-xl p-4">
                 <h4 className="text-white font-semibold mb-3">Preview: Sidebar Navigation</h4>
@@ -596,11 +605,14 @@ export default function NavigationBuilder() {
                               {section.submenu?.length || 0}
                             </span>
                           )}
-                        </div></div>
+                        </div>
+                      </div>
   );
                   })}
                 </div>
-              </div></div></DashboardLayout>
+              </div>
+            </div>
+          </DashboardLayout>
   );
     </div>
 }
