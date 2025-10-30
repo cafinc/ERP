@@ -368,8 +368,10 @@ export default function InspectionSchedulesPage() {
                     {schedule.active ? 'Deactivate Schedule' : 'Activate Schedule'}
                   </button>
                 </div>
+              </div>
             ))
           )}
         </div>
+      </div>
   );
 }
