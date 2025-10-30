@@ -199,5 +199,8 @@ export default function PrivacyPolicy() {
             © 2024 F Property Services. All rights reserved.
           </p>
         </div>
+      </div>
+      </div>
+    </div>
   );
 }
