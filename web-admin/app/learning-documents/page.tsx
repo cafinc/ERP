@@ -275,6 +275,7 @@ export default function LearningDocumentsPage() {
                         <Trash2 className="w-4 h-4" />
                       </button>
                     </div>
+                  </div>
 
                   <h3 className="font-semibold text-gray-900 mb-2">{doc.title}</h3>
                   {doc.description && (
