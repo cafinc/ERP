@@ -179,17 +179,17 @@ sudo supervisorctl tail backend
 # QuickBooks Online Integration (production)
 QUICKBOOKS_CLIENT_ID=ABSb9lt1OEqUsOO4tsf3UewtCe9OHGCSgbXTfr7xX56iqhy9i9
 QUICKBOOKS_CLIENT_SECRET=qB6XscWqZsKgT3RRdZHojQqS48UjyzjfZd6S4ALA
-QUICKBOOKS_REDIRECT_URI=https://service-hub-166.preview.emergentagent.com/api/quickbooks/auth/callback
+QUICKBOOKS_REDIRECT_URI=https://mapforge-20.preview.emergentagent.com/api/quickbooks/auth/callback
 QUICKBOOKS_ENVIRONMENT=production
 ```
 
 **URLs Configured in Intuit Portal:**
 - Host Domain: `plowpro-admin.preview.emergentagent.com`
-- Launch URL: `https://service-hub-166.preview.emergentagent.com/settings/quickbooks`
-- Disconnect URL: `https://service-hub-166.preview.emergentagent.com/settings/quickbooks`
-- Privacy Policy: `https://service-hub-166.preview.emergentagent.com/legal/privacy`
-- Terms of Service: `https://service-hub-166.preview.emergentagent.com/legal/terms`
-- Redirect URI: `https://service-hub-166.preview.emergentagent.com/api/quickbooks/auth/callback`
+- Launch URL: `https://mapforge-20.preview.emergentagent.com/settings/quickbooks`
+- Disconnect URL: `https://mapforge-20.preview.emergentagent.com/settings/quickbooks`
+- Privacy Policy: `https://mapforge-20.preview.emergentagent.com/legal/privacy`
+- Terms of Service: `https://mapforge-20.preview.emergentagent.com/legal/terms`
+- Redirect URI: `https://mapforge-20.preview.emergentagent.com/api/quickbooks/auth/callback`
 
 ---
 

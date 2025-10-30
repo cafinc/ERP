@@ -98,7 +98,7 @@
 
 **Option 2: Public Access** (requires routing configuration)
 The web-admin needs to be configured to serve on the main domain:
-`https://service-hub-166.preview.emergentagent.com`
+`https://mapforge-20.preview.emergentagent.com`
 
 ---
 

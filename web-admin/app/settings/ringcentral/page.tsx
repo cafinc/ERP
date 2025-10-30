@@ -312,7 +312,7 @@ export default function RingCentralSettings() {
               <strong>Webhook URL:</strong>
             </p>
             <code className="block bg-gray-100 px-3 py-2 rounded text-sm text-gray-800 font-mono">
-              https://service-hub-166.preview.emergentagent.com/api/ringcentral/webhook
+              https://mapforge-20.preview.emergentagent.com/api/ringcentral/webhook
             </code>
           </div>
           <p className="text-blue-700 text-sm mt-3">

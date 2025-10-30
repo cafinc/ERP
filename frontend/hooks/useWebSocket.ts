@@ -38,7 +38,7 @@ export function useWebSocket(options: UseWebSocketOptions = {}) {
   const appState = useRef(AppState.currentState);
 
   const getWebSocketUrl = useCallback(() => {
-    const backendUrl = Constants.expoConfig?.extra?.EXPO_PUBLIC_BACKEND_URL || 'https://service-hub-166.preview.emergentagent.com';
+    const backendUrl = Constants.expoConfig?.extra?.EXPO_PUBLIC_BACKEND_URL || 'https://mapforge-20.preview.emergentagent.com';
     const wsUrl = backendUrl.replace('https://', 'wss://').replace('http://', 'ws://');
     
     let url = `${wsUrl}/api/ws`;

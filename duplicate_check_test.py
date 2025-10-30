@@ -10,7 +10,7 @@ import sys
 from datetime import datetime
 
 # Backend URL from environment
-BACKEND_URL = "https://service-hub-166.preview.emergentagent.com/api"
+BACKEND_URL = "https://mapforge-20.preview.emergentagent.com/api"
 
 class DuplicateCustomerTester:
     def __init__(self):
