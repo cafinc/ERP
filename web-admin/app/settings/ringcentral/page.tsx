@@ -231,6 +231,8 @@ export default function RingCentralSettings() {
                 </button>
               )}
             </div>
+          </div>
+        </div>
 
         {/* Features Grid */}
         <div>
