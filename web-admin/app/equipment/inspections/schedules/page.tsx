@@ -376,5 +376,7 @@ export default function InspectionSchedulesPage() {
         </div>
       </div>
     </div>
+    </div>
+    </div>
   );
 }
