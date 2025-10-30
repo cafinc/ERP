@@ -126,7 +126,14 @@ export default function TeamMemberFormPage() {
   }
 
   return (
-          <form onSubmit={handleSubmit} className="space-y-6">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <PageHeader
+        title={isEdit ? "Edit Team Member" : "Create Team Member"}
+        subtitle={isEdit ? "Update member information" : "Add new team member"}
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Team", href: "/team" }, { label: isEdit ? "Edit" : "Create" }]}
+      />
+      <div className="flex-1 overflow-auto p-6">
+        <form onSubmit={handleSubmit} className="space-y-6">
         {/* Header */}
         <div className="flex items-center gap-4">
           <button
