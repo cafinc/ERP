@@ -296,7 +296,7 @@ export default function RingCentralSettings() {
                     </button>
                   )}
                 </div>
-              );
+              )
             })}
           </div>
 
