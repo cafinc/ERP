@@ -344,6 +344,7 @@ export default function DesignSystemDemo() {
                     </div>
                   ))}
                 </div>
+              </div>
             ))}
           </div>
 
