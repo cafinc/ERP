@@ -264,5 +264,6 @@ export default function EmergencyAlertPage() {
           </div>
         )}
       </div>
-    );
+    </div>
+  );
 }
