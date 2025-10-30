@@ -240,7 +240,14 @@ export default function ProjectDetailPage() {
   }
 
   return (
-          <div className="p-8">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <PageHeader
+        title="Project Details"
+        subtitle={project?.name || "View project"}
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Projects", href: "/projects" }, { label: "Details" }]}
+      />
+      <div className="flex-1 overflow-auto p-6">
+        <div className="p-8">
         {/* Header */}
         <div className="mb-4 flex items-center justify-between">
           <div className="flex items-center space-x-4">
