@@ -456,6 +456,7 @@ export default function PhotoGalleryPage() {
                 {uploading ? 'Uploading...' : 'Select Files'}
               </button>
             </div>
+          </div>
         </div>
       )}
     );
