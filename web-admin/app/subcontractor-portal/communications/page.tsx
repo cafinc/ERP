@@ -563,5 +563,7 @@ export default function SubcontractorCommunicationsPage() {
           🏢 Subcontractor Portal • Real-time delivery • File attachments supported
         </p>
       </div>
+      </div>
+    </div>
   );
 }
