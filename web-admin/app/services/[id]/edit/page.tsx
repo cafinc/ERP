@@ -304,5 +304,6 @@ export default function ServiceFormPage() {
         </div>
       </form>
     </div>
+    </div>
   );
 }
