@@ -318,6 +318,8 @@ export default function PhotoGalleryPage() {
                         </span>
                       ))}
                     </div>
+                  </div>
+                </div>
               ))
             )}
           </div>
