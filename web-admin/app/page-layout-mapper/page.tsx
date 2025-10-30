@@ -260,9 +260,7 @@ export default function PageLayoutMapper() {
                         <p className="text-xs text-gray-600">{layout.description}</p>
                         <div className="mt-2 bg-white rounded border border-gray-200 h-16">
                           {layout.preview}
-                        </div>
-                      </div>
-                    </div>
+                        </div></div></div>
   );
                 })}
               </div>
@@ -340,15 +338,10 @@ export default function PageLayoutMapper() {
                                     </button>
   );
                                 })}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                              </div></div></div></div>
   );
                     })}
-                  </div>
-                </div>
-              </div>
+                  </div></div></div>
   );
           })}
 
@@ -371,8 +364,7 @@ export default function PageLayoutMapper() {
                       <div>
                         <p className="font-semibold">{layout.name}</p>
                         <p className="text-sm text-blue-200">{count} pages</p>
-                      </div>
-                    </div>
+                      </div></div>
   );
                 })}
               </div>
@@ -410,10 +402,7 @@ export default function PageLayoutMapper() {
               its layout. Your suggested layouts are pre-selected based on best practices, but
               feel free to customize!
             </p>
-          </div>
-        </div>
-      </div>
-    </DashboardLayout>
+          </div></div></div></DashboardLayout>
   );
     </div>
 }

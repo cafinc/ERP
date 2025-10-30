@@ -128,10 +128,7 @@ export default function ServiceFormPage() {
       <div className="flex-1 overflow-auto p-6">
         <div className="flex items-center justify-center h-64">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
-        </div>
-      </div>
-    </div>
-  </div>
+        </div></div></div></div>
   );
   }
 
@@ -299,11 +296,6 @@ export default function ServiceFormPage() {
                 {isEdit ? 'Update Service' : 'Create Service'}
               </>
             )}
-          </button>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
+          </button></div></div></form></div></div>
   );
 }
