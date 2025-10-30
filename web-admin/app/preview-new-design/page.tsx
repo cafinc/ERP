@@ -159,8 +159,7 @@ export default function PreviewNewDesign() {
                   {module.title}
                 </h3>
                 <p className="text-sm text-gray-600">{module.description}</p>
-              </div>
-            </div>
+              </div></div>
           ))}
         </div>
 
@@ -180,9 +179,7 @@ export default function PreviewNewDesign() {
                 <button className="flex items-center gap-2 px-4 py-2 bg-[#5b8ec4] text-white rounded-lg hover:bg-[#3f72af] shadow-lg hover:shadow-xl font-medium transform hover:-translate-y-0.5 transition-all">
                   <Download className="h-4 w-4" />
                   Export Data
-                </button>
-              </div>
-
+                </button></div>
             {/* Secondary Actions - Outlined Style */}
             <div>
               <h4 className="text-sm font-medium text-gray-700 mb-3">Secondary Actions (Outlined Style)</h4>
@@ -194,9 +191,7 @@ export default function PreviewNewDesign() {
                 <button className="flex items-center gap-2 px-4 py-2 border-2 border-[#5b8ec4] text-[#5b8ec4] rounded-lg hover:bg-[#5b8ec4] hover:text-white font-medium transition-all">
                   <Calendar className="h-4 w-4" />
                   View Calendar
-                </button>
-              </div>
-
+                </button></div>
             {/* Danger Actions */}
             <div>
               <h4 className="text-sm font-medium text-gray-700 mb-3">Danger Actions</h4>
@@ -206,9 +201,7 @@ export default function PreviewNewDesign() {
                 </button>
                 <button className="px-4 py-2 border-2 border-red-600 text-red-600 rounded-lg hover:bg-red-600 hover:text-white font-medium transition-all">
                   Terminate Contract
-                </button>
-              </div>
-
+                </button></div>
             {/* Icon Buttons */}
             <div>
               <h4 className="text-sm font-medium text-gray-700 mb-3">Icon Buttons (Icon Only & Ghost)</h4>
@@ -224,9 +217,7 @@ export default function PreviewNewDesign() {
                 </button>
                 <button className="p-2 text-gray-600 rounded-lg hover:bg-gray-100 transition-all">
                   <Settings className="h-5 w-5" />
-                </button>
-              </div>
-
+                </button></div>
         {/* Navigation Info */}
         <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
           <h4 className="font-semibold text-amber-900 mb-2">🧭 Hybrid Navigation Features:</h4>
@@ -252,8 +243,6 @@ export default function PreviewNewDesign() {
 </div>
 </div>
 </div>
-</div>
-</div>
-    </div>
+</div></div></div>
   );
 }

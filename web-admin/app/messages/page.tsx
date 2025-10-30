@@ -292,9 +292,7 @@ export default function MessagesPage() {
                 title="New Conversation"
               >
                 <Plus className="w-5 h-5" />
-              </button>
-            </div>
-            
+              </button></div>
             {/* Search */}
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
@@ -321,8 +319,7 @@ export default function MessagesPage() {
                   className="mt-4 text-[#3f72af] hover:underline"
                 >
                   Start a new conversation
-                </button>
-              </div>
+                </button></div>
             ) : (
               conversations.map((conv) => (
                 <div
@@ -360,9 +357,7 @@ export default function MessagesPage() {
                       title="Archive"
                     >
                       <Archive className="w-4 h-4 text-gray-400" />
-                    </button>
-                  </div>
-                </div>
+                    </button></div></div>
               ))
             )}
           </div>
@@ -383,9 +378,7 @@ export default function MessagesPage() {
                 </div>
                 <button className="p-2 hover:bg-gray-100 rounded-lg">
                   <MoreVertical className="w-5 h-5 text-gray-600" />
-                </button>
-              </div>
-
+                </button></div>
               {/* Messages */}
               <div className="flex-1 overflow-y-auto p-4 space-y-4">
                 {messages.map((message) => {
@@ -442,17 +435,14 @@ export default function MessagesPage() {
                               <CheckCheck className="w-4 h-4" />
                             )}
                           </div>
-                        </div>
-                      </div>
-                    </div>
+                        </div></div></div>
   );
                 })}
                 <div ref={messagesEndRef} />
               </div>
 
               {/* Message Input */}
-                </div>
-              </div>
+                </div></div>
               <div className="p-4 bg-white border-t border-gray-200">
                 {/* Attachments Preview */}
                 {attachments.length > 0 && (
@@ -469,14 +459,10 @@ export default function MessagesPage() {
                             className="p-0.5 hover:bg-gray-200 rounded"
                           >
                             <X className="w-3 h-3 text-gray-600" />
-                          </button>
-                        </div>
-                      </div>
+                          </button></div></div>
                     ))}
               </div>
-            </div>
-          </div>
-        </div>
+            </div></div></div>
                 )}
                 
                 <div className="flex items-end space-x-2">
@@ -521,8 +507,7 @@ export default function MessagesPage() {
                     className="p-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#3f72af]/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <Send className="w-5 h-5" />
-                  </button>
-                </div>
+                  </button></div>
                 <p className="text-xs text-gray-500 mt-2">
                   Press Enter to send, Shift+Enter for new line
                 </p>
@@ -549,9 +534,7 @@ export default function MessagesPage() {
                   className="p-1 hover:bg-gray-100 rounded"
                 >
                   <X className="w-5 h-5 text-gray-600" />
-                </button>
-              </div>
-
+                </button></div>
               {/* Conversation Type */}
               <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700 mb-2">Type</label>
@@ -577,9 +560,7 @@ export default function MessagesPage() {
                   >
                     <Users className="w-5 h-5 inline mr-2" />
                     Group Chat
-                  </button>
-                </div>
-
+                  </button></div>
               {/* Group Name */}
               {conversationType === 'group' && (
                 <div className="mb-4">
@@ -648,9 +629,7 @@ export default function MessagesPage() {
                   className="px-4 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#3f72af]/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Create Conversation
-                </button>
-              </div>
-            </div>
+                </button></div></div>
         )}
       </div>
   );
