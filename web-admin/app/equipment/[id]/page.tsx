@@ -340,6 +340,8 @@ export default function EquipmentDetailPage() {
             <p className="text-gray-700 whitespace-pre-wrap">{equipment.notes}</p>
           </div>
         )}
+        </div>
       </div>
+    </div>
   );
 }
