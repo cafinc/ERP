@@ -448,6 +448,7 @@ export default function ProjectDetailPage() {
                                   </span>
                                 )}
                               </div>
+                            </div>
                         <div className="flex items-center space-x-2 ml-4">
                           <span className={`px-2 py-1 rounded-full text-xs font-medium ${getTaskStatusColor(task.status)}`}>
                             {task.status.replace('_', ' ')}
@@ -459,6 +460,7 @@ export default function ProjectDetailPage() {
                             <Trash2 className="w-4 h-4" />
                           </button>
                         </div>
+                      </div>
                   ))}
                 </div>
               ) : (
