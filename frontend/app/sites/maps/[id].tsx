@@ -188,16 +188,40 @@ export default function SiteMapsScreen() {
       </View>
 
       {/* Map View */}
-      <MapView
-        style={styles.map}
-        initialRegion={{
-          latitude: site.location.latitude,
-          longitude: site.location.longitude,
-          latitudeDelta: 0.001,
-          longitudeDelta: 0.001,
-        }}
-        mapType="satellite"
-      >
+      {Platform.OS === 'web' ? (
+        <View style={[styles.map, { justifyContent: 'center', alignItems: 'center', backgroundColor: '#e0e0e0' }]}>
+          <Text style={{ fontSize: 16, color: Colors.textSecondary }}>
+            Map view is only available on mobile devices
+          </Text>
+          <Text style={{ fontSize: 14, color: Colors.textSecondary, marginTop: 8 }}>
+            Please use Expo Go app to view maps
+          </Text>
+        </View>
+      ) : (
+        MapView && (
+          <MapView
+            style={styles.map}
+            initialRegion={{
+              latitude: site.location.latitude,
+              longitude: site.location.longitude,
+              latitudeDelta: 0.001,
+              longitudeDelta: 0.001,
+            }}
+            mapType="satellite"
+          >
+            {/* Site marker */}
+            {Marker && (
+              <Marker
+                coordinate={{
+                  latitude: site.location.latitude,
+                  longitude: site.location.longitude,
+                }}
+                title={site.name}
+              />
+            )}
+          </MapView>
+        )
+      )}
         {/* Site Marker */}
         <Marker
           coordinate={{
