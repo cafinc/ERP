@@ -282,8 +282,6 @@ export default function PageLayoutMapper() {
                       const selectedLayout = layoutSelections[page.path];
                       const selectedLayoutOption = layoutOptions.find(
                         (l) => l.id === selectedLayout
-                        </div>
-                        </div>
                       );
                       const SelectedIcon = selectedLayoutOption?.icon || Grid3x3;
 
