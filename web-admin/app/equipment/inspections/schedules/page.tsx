@@ -345,9 +345,9 @@ export default function InspectionSchedulesPage() {
                             </span>
                           </div>
                         </div>
-                      </div>
                       ))}
-                    </div></div>
+                    </div>
+                  </div>
                 )}
 
                 {/* Actions */}
