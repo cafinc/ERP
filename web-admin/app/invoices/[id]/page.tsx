@@ -167,6 +167,7 @@ export default function InvoiceDetailPage() {
               <span>Back to Invoices</span>
             </button>
           </div>
+        </div>
     );
   }
 
