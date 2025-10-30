@@ -350,6 +350,10 @@ export default function DesignSystemDemo() {
             <strong>Note:</strong> This is a preview page. To implement the selected design system across your entire dashboard,
             I'll need to create a theme configuration system and update all components. Let me know which combination you prefer!
           </p>
-        </div></div></div></div></DashboardLayout></div>
+        </div>
+      </div>
+    </div>
+    </DashboardLayout>
+    </div>
   );
 }
