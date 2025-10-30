@@ -473,6 +473,7 @@ export default function CreateInspectionSchedulePage() {
             </button>
           </div>
         </div>
+        </div>
         </form>
       </div>
   );

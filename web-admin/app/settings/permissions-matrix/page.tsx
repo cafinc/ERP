@@ -295,6 +295,7 @@ export default function PermissionsMatrixPage() {
                     ) : (
                       <XCircle style={{ width: '24px', height: '24px', color: '#cbd5e1' }} />
                     )}
+              </div>
                   </div>
                 </button>
               </div>

@@ -608,6 +608,7 @@ export default function NavigationBuilder() {
                             </span>
                           )}
                         </div>
+      </div>
                       </div>
                       </div>
                     );

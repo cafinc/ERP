@@ -238,6 +238,7 @@ export default function PreviewNewDesign() {
           </ul>
         </div>
       </div>
+    </div>
     </HybridNavigationLayout>
     </div>
   );

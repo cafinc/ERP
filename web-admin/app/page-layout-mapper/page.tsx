@@ -347,6 +347,7 @@ export default function PageLayoutMapper() {
                     })}
                   </div>
                 </div>
+                </div>
             );
           })}
 

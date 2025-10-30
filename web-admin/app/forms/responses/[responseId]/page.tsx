@@ -228,6 +228,7 @@ export default function ViewResponsePage() {
           </div>
         </div>
       </div>
+        </div>
     );
   }
 
