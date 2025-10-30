@@ -87,6 +87,7 @@ export default function ResetPasswordPage() {
             Go to Login
           </button>
         </div>
+      </div>
     );
   }
 
