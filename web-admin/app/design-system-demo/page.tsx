@@ -370,7 +370,6 @@ export default function DesignSystemDemo() {
             I'll need to create a theme configuration system and update all components. Let me know which combination you prefer!
           </p>
         </div>
-      </div>
     </DashboardLayout>
   );
 }

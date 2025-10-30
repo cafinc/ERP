@@ -477,7 +477,6 @@ export default function FillFormPage() {
           </div>
         </div>
       </div>
-      </div>
     </div>
     );
   }
@@ -561,7 +560,6 @@ export default function FillFormPage() {
           </div>
         </div>
       )}
-      </div>
       </div>
       </div>
     </div>

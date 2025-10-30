@@ -262,8 +262,7 @@ export default function PageLayoutMapper() {
                         </div>
                     </div>
                     </div>
-                      </div>
-            );
+                  );
                 })}
               </div>
 
@@ -283,8 +282,7 @@ export default function PageLayoutMapper() {
                       const selectedLayout = layoutSelections[page.path];
                       const selectedLayoutOption = layoutOptions.find(
                         (l) => l.id === selectedLayout
-                          </div>
-            );
+                      );
                       const SelectedIcon = selectedLayoutOption?.icon || Grid3x3;
 
                       return (
@@ -339,18 +337,15 @@ export default function PageLayoutMapper() {
                                         }`}
                                       />
                                     </button>
-                                      </div>
-            );
+                                  );
                                 })}
                               </div>
                             </div>
                           </div>
                         </div>
-                          </div>
-            );
+                      );
                     })}
                   </div>
-                </div>
             );
           })}
 
@@ -377,8 +372,7 @@ export default function PageLayoutMapper() {
                     </div>
                     </div>
                     </div>
-                      </div>
-            );
+                  );
                 })}
               </div>
 
@@ -397,12 +391,10 @@ export default function PageLayoutMapper() {
                   localStorage.setItem(
                     "layoutSelections",
                     JSON.stringify(layoutSelections)
-                      </div>
-            );
+                  );
                   alert(
                     "Layout selections saved! Ready to implement complete design system."
-                      </div>
-            );
+                  );
                 }}
                 className="px-8 py-4 bg-white text-[#3f72af] rounded-xl font-bold text-lg shadow-2xl hover:bg-blue-50 hover:scale-105 transition-all"
               >

@@ -227,8 +227,7 @@ export default function ViewResponsePage() {
             <p className="mt-4 text-gray-600">Loading response...</p>
           </div>
         </div>
-          </div>
-    </div>
+      </div>
     );
   }
 
@@ -320,7 +319,6 @@ export default function ViewResponsePage() {
                 </div>
               ))}
             </div>
-            </div>
-    </div>
+        </div>
   );
 }
