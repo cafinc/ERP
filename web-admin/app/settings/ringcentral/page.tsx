@@ -322,5 +322,7 @@ export default function RingCentralSettings() {
           </p>
         </div>
       </div>
+    </div>
+  </div>
   );
 }
