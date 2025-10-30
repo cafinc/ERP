@@ -472,7 +472,6 @@ export default function CreateInspectionSchedulePage() {
               Cancel
             </button>
           </div>
-        </div>
         </form>
       </div>
   );
