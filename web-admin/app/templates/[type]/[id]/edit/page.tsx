@@ -298,17 +298,7 @@ export default function EditTemplatePage() {
                   Save Changes
                 </>
               )}
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-</div>
-</div>
-</form>
+            </button></div></div></div></div></div></div></div></div></div></form>
       {/* Placeholder Browser Modal */}
       {showPlaceholderBrowser && (
         <PlaceholderBrowser

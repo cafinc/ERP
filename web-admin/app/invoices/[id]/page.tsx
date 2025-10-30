@@ -257,7 +257,6 @@ export default function InvoiceDetailPage() {
                 </div>
               )}
             </div>
-
             {/* Line Items */}
             <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
               <h2 className="text-xl font-semibold text-gray-900 mb-4">Line Items</h2>
@@ -343,7 +342,6 @@ export default function InvoiceDetailPage() {
                 </div></div>
             )}
           </div>
-
           {/* Sidebar */}
           <div className="space-y-6">
             {/* Payment Summary */}
@@ -381,7 +379,6 @@ export default function InvoiceDetailPage() {
                   </div></div>
               )}
             </div>
-
             {/* Quick Stats */}
             <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Invoice Stats</h3>

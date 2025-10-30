@@ -296,7 +296,6 @@ export default function ProjectDetailPage() {
                     <p className="text-xs opacity-75 mt-1 truncate">{project.customer_email}</p>
                   )}
                 </button>
-
                 {/* Estimate Link */}
                 <button
                   onClick={() => router.push(`/estimates/${project.estimate_id}`)}
@@ -443,10 +442,7 @@ export default function ProjectDetailPage() {
                                     {new Date(task.due_date).toLocaleDateString()}
                                   </span>
                                 )}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                              </div></div></div></div>
                         <div className="flex items-center space-x-2 ml-4">
                           <span className={`px-2 py-1 rounded-full text-xs font-medium ${getTaskStatusColor(task.status)}`}>
                             {task.status.replace('_', ' ')}
@@ -469,7 +465,6 @@ export default function ProjectDetailPage() {
                 </div>
               )}
             </div>
-
           {/* Sidebar */}
           <div className="space-y-6">
             {/* Status Actions */}
@@ -507,7 +502,6 @@ export default function ProjectDetailPage() {
                   </button>
                 )}
               </div>
-
             {/* Task Summary */}
             <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Task Summary</h3>
