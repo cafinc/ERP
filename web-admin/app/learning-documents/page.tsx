@@ -224,6 +224,7 @@ export default function LearningDocumentsPage() {
               ))}
             </select>
           </div>
+        </div>
 
         {/* Documents Grid */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
