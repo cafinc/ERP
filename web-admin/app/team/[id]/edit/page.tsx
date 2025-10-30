@@ -151,6 +151,7 @@ export default function TeamMemberFormPage() {
               {isEdit ? 'Update team member information' : 'Add a new crew member, admin, or subcontractor'}
             </p>
           </div>
+        </div>
 
         {/* Basic Information */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
