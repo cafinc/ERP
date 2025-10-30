@@ -134,6 +134,7 @@ export default function EquipmentFormPage() {
               {isEdit ? 'Update equipment information' : 'Add new equipment to your fleet'}
             </p>
           </div>
+        </div>
 
         {/* Basic Information */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
