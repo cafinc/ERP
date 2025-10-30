@@ -229,6 +229,7 @@ export default function TeamMemberDetailPage() {
               Delete
             </button>
           </div>
+        </div>
 
         {/* Status Badges */}
         <div className="flex items-center gap-2">
