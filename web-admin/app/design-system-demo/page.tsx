@@ -365,6 +365,7 @@ export default function DesignSystemDemo() {
               Apply Design System
             </button>
           </div>
+        </div>
 
         {/* Note */}
         <div className="mt-6 bg-amber-50 border border-amber-200 rounded-lg p-4">
