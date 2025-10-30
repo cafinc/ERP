@@ -320,9 +320,11 @@ export default function CrewCommunicationsPage() {
                     </h1>
                     <p className="text-sm text-gray-500 mt-1">Project Communication</p>
                   </div>
+                </div>
                 <div className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
                   {filteredMessages.length} messages
                 </div>
+              </div>
 
               {/* Search Bar */}
               <div className="mt-4 relative">
