@@ -216,8 +216,7 @@ export default function ProjectDetailPage() {
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div></div>
       </div>
-    </div>
-  );
+    </div>);
   }
 
   if (!project) {
@@ -234,8 +233,7 @@ export default function ProjectDetailPage() {
               <ArrowLeft className="w-5 h-5" />
               <span>Back to Projects</span>
             </button></div>
-          </div>
-  );
+          </div>);
   }
 
   return (
@@ -369,8 +367,7 @@ export default function ProjectDetailPage() {
                 <div className="mt-6 pt-6 border-t border-gray-200">
                   <label className="text-sm text-gray-600">Description</label>
                   <p className="text-base text-gray-900 mt-2">{project.description}</p>
-                </div>
-              )}
+                </div>)}
 
               {/* Progress Bar */}
               <div className="mt-6 pt-6 border-t border-gray-200">
@@ -463,8 +460,7 @@ export default function ProjectDetailPage() {
                 <div className="text-center py-12">
                   <CheckSquare className="w-12 h-12 text-gray-300 mx-auto mb-3" />
                   <p className="text-gray-600">No tasks yet. Add your first task to get started.</p>
-                </div>
-              )}
+                </div>)}
             </div>
           {/* Sidebar */}
           <div className="space-y-6">
@@ -480,8 +476,7 @@ export default function ProjectDetailPage() {
                   >
                     <RefreshCw className="w-4 h-4" />
                     <span>Mark Active</span>
-                  </button>
-                )}
+                  </button>)}
                 {project.status !== 'on_hold' && (
                   <button
                     onClick={() => handleUpdateProjectStatus('on_hold')}
@@ -490,8 +485,7 @@ export default function ProjectDetailPage() {
                   >
                     <AlertCircle className="w-4 h-4" />
                     <span>Put On Hold</span>
-                  </button>
-                )}
+                  </button>)}
                 {project.status !== 'completed' && (
                   <button
                     onClick={() => handleUpdateProjectStatus('completed')}
@@ -500,8 +494,7 @@ export default function ProjectDetailPage() {
                   >
                     <CheckCircle className="w-4 h-4" />
                     <span>Mark Completed</span>
-                  </button>
-                )}
+                  </button>)}
               </div>
             {/* Task Summary */}
             <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
@@ -595,8 +588,7 @@ export default function ProjectDetailPage() {
                 </button></div>
               </div>
             </div>
-          </div>
-        )}
+          </div>)}
         </div></div>
       </div>
     </div>
@@ -612,6 +604,5 @@ export default function ProjectDetailPage() {
 </div>
 </div>
 </div>
-</div>
-  );
+</div>);
 }

@@ -130,8 +130,7 @@ export default function ServiceFormPage() {
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div></div>
       </div>
-    </div>
-  );
+    </div>);
   }
 
   return (
@@ -266,8 +265,7 @@ export default function ServiceFormPage() {
                     className="text-red-600 hover:text-red-800"
                   >
                     <Trash2 className="w-5 h-5" />
-                  </button>
-                )}
+                  </button>)}
               </div>
             ))}
           </div>
@@ -302,6 +300,5 @@ export default function ServiceFormPage() {
         </div>
       </form>
     </div>
-  </div>
-  );
+  </div>);
 }

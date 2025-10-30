@@ -295,8 +295,7 @@ export default function PermissionsMatrixPage() {
                       <XCircle style={{ width: '24px', height: '24px', color: '#cbd5e1' }} />
                   )}
               </div></div>
-            </button>
-  );
+            </button>);
             })}
           </div>
         </div>
@@ -331,6 +330,5 @@ export default function PermissionsMatrixPage() {
           <Save style={{ width: '20px', height: '20px' }} />
           Save Permissions for {selectedRole.charAt(0).toUpperCase() + selectedRole.slice(1)}
         </button></div>
-      </div>
-  );
+      </div>);
 }

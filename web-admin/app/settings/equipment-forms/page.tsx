@@ -103,8 +103,7 @@ export default function EquipmentFormsPage() {
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div></div>
       </div>
-    </div>
-  );
+    </div>);
   }
 
   return (
@@ -235,8 +234,7 @@ export default function EquipmentFormsPage() {
                   ))}
                 </tbody>
               </table>
-            </div>
-          )}
+            </div>)}
         </div></div>
       </div>
     </div>
@@ -246,6 +244,5 @@ export default function EquipmentFormsPage() {
 </div>
 </div>
 </div>
-</div>
-  );
+</div>);
 }

@@ -249,6 +249,5 @@ export default function PreviewNewDesign() {
 </div>
 </div>
 </div>
-</div>
-  );
+</div>);
 }

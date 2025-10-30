@@ -471,8 +471,7 @@ export default function NavigationBuilder() {
                             className="text-xs p-2 bg-gray-50 rounded hover:bg-[#3f72af] hover:text-white cursor-pointer transition-colors"
                           >
                             {value.name}                            <div className="text-gray-500 hover:text-blue-200 text-[10px]">{value.path}
-                            </div></div>
-                        )}
+                            </div></div>)}
                       </div>                    </details>
                   ))}
                 </div>
@@ -561,11 +560,9 @@ export default function NavigationBuilder() {
                                   }`}
                                 >
                                   {selectedSection === section.id ? '✓ Selected - Click pages on left to add' : 'Add pages to this section'}
-                                </button></div>
-                            )}
+                                </button></div>)}
                           </div></div>
-                        </div>
-  );
+                        </div>);
                   })}
                 </div>
 
@@ -602,12 +599,10 @@ export default function NavigationBuilder() {
                               {section.submenu?.length || 0}
                             </span>
                           )}
-                        </div></div>
-  );
+                        </div></div>);
                   })}
                 </div></div>
               </div>
-            </DashboardLayout>
-  );
+            </DashboardLayout>);
     </div>
 }
