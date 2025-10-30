@@ -130,6 +130,7 @@ export default function DesignSystemDemo() {
           <div className="bg-gray-50 p-2 h-20">
             <div className="h-16 bg-white rounded border border-gray-200"></div>
           </div>
+        </div>
       ),
     },
     {
