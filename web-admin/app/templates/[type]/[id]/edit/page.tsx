@@ -314,6 +314,5 @@ export default function EditTemplatePage() {
         />
       )}
     </div>
-    </div>
   );
 }
