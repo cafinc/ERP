@@ -608,7 +608,6 @@ export default function ProjectDetailPage() {
         </div>
         )}
         </div>
-      </div>
     </div>
   );
 }

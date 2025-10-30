@@ -296,7 +296,6 @@ export default function PermissionsMatrixPage() {
                       <XCircle style={{ width: '24px', height: '24px', color: '#cbd5e1' }} />
                     )}
               </div>
-              </div>
                   </div>
                 </button>
               </div>
@@ -336,7 +335,6 @@ export default function PermissionsMatrixPage() {
           Save Permissions for {selectedRole.charAt(0).toUpperCase() + selectedRole.slice(1)}
         </button>
       </div>
-    </div>
     </div>
   );
 }

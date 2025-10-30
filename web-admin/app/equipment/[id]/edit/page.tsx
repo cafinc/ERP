@@ -104,7 +104,6 @@ export default function EquipmentFormPage() {
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
       </div>
-      </div>
     );
   }
 

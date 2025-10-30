@@ -442,8 +442,6 @@ export default function MessagesPage() {
                               <CheckCheck className="w-4 h-4" />
                             )}
                           </div>
-                        </div>
-                      </div>
                       </div>
                   );
                 })}
@@ -648,9 +646,6 @@ export default function MessagesPage() {
                   Create Conversation
                 </button>
               </div>
-          </div>
-          </div>
-          </div>
           </div>
         )}
       </div>

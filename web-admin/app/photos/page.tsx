@@ -457,11 +457,6 @@ export default function PhotoGalleryPage() {
               </button>
             </div>
         </div>
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
       )}
     );
 }

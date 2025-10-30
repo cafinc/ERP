@@ -261,7 +261,6 @@ export default function PageLayoutMapper() {
                           {layout.preview}
                         </div>
                     </div>
-                    </div>
                   );
                 })}
               </div>
@@ -340,14 +339,10 @@ export default function PageLayoutMapper() {
                                   );
                                 })}
                               </div>
-                            </div>
-                          </div>
                         </div>
                       );
                     })}
                   </div>
-                </div>
-                </div>
                 </div>
             );
           })}
@@ -372,8 +367,6 @@ export default function PageLayoutMapper() {
                         <p className="font-semibold">{layout.name}</p>
                         <p className="text-sm text-blue-200">{count} pages</p>
                       </div>
-                    </div>
-                    </div>
                     </div>
                   );
                 })}
