@@ -344,8 +344,7 @@ export default function InspectionSchedulesPage() {
                               {getActionLabel(rule.action)}
                             </span>
                           </div>
-                        </div>
-                      ))}
+                        </div>))}
                     </div>
                   </div>
                 )}
