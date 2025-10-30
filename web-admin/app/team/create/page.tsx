@@ -281,6 +281,8 @@ export default function TeamMemberFormPage() {
                 <span className="ml-2 text-sm text-gray-700">Certified Driver</span>
               </label>
             </div>
+          </div>
+        </div>
 
         {/* Emergency Contact */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
