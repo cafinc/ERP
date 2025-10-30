@@ -563,7 +563,8 @@ export default function NavigationBuilder() {
                                   {selectedSection === section.id ? '✓ Selected - Click pages on left to add' : 'Add pages to this section'}
                                 </button></div>
                             )}
-                          </div></div></div>
+                          </div></div>
+                        </div>
   );
                   })}
                 </div>
@@ -604,7 +605,9 @@ export default function NavigationBuilder() {
                         </div></div>
   );
                   })}
-                </div></div></div></DashboardLayout>
+                </div></div>
+              </div>
+            </DashboardLayout>
   );
     </div>
 }

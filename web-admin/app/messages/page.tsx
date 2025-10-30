@@ -439,7 +439,9 @@ export default function MessagesPage() {
                             {isOwnMessage && (
                               <CheckCheck className="w-4 h-4" />
                             )}
-                          </div></div></div></div>
+                          </div></div>
+                        </div>
+                      </div>
   );
                 })}
                 <div ref={messagesEndRef} />
@@ -468,7 +470,9 @@ export default function MessagesPage() {
                         </div>
                       </div>
                     ))}
-              </div></div></div></div>
+              </div></div>
+            </div>
+          </div>
                 )}
                 
                 <div className="flex items-end space-x-2">
@@ -638,7 +642,8 @@ export default function MessagesPage() {
                   className="px-4 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#3f72af]/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Create Conversation
-                </button></div></div>
+                </button></div>
+              </div>
         )}
       </div>
   );
