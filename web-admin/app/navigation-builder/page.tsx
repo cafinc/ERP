@@ -447,6 +447,15 @@ export default function NavigationBuilder() {
                             {(() => {
                               const Icon = iconMap[key];
                               return <Icon className="w-4 h-4" />;
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </DashboardLayout>
+            </div>
+          </div>
                             })()}
                           </span>
                         )}
@@ -464,6 +473,16 @@ export default function NavigationBuilder() {
                               {page.name}                              <div className="text-gray-500 hover:text-blue-200 text-[10px]">{page.path}
                               </div>
                             </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</DashboardLayout>
+</div>
+</div>
           ))
                         ) : (
                           <div
@@ -474,6 +493,15 @@ export default function NavigationBuilder() {
                             </div></div>
           )}
                       </div>                    </details>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </DashboardLayout>
+  </div>
+</div>
                   ))}
                 </div>
 
@@ -551,6 +579,21 @@ export default function NavigationBuilder() {
                                       <Trash2 className="w-3 h-3" />
                                     </button>
                                   </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</DashboardLayout>
+</div>
+</div>
           ))}
                                 <button
                                   onClick={() => setSelectedSection(section.id)}
@@ -565,7 +608,29 @@ export default function NavigationBuilder() {
           )}
                           </div></div>
                         </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+</DashboardLayout>
+</div>
+</div>
           );
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DashboardLayout>
+</div>
+</div>
                   })}
                 </div>
 
@@ -603,11 +668,44 @@ export default function NavigationBuilder() {
                             </span>
                           )}
                         </div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</DashboardLayout>
+</div>
+</div>
           );
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</DashboardLayout>
+</div>
+</div>
                   })}
                 </div></div>
               </div>
             </DashboardLayout>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</DashboardLayout>
+</div>
+</div>
           );
     </div>
 }

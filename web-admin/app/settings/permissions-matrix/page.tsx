@@ -173,6 +173,9 @@ export default function PermissionsMatrixPage() {
             >
               {role}
             </button>
+        </div>
+      </div>
+    </div>
           ))}
         </div>
 
@@ -296,9 +299,21 @@ export default function PermissionsMatrixPage() {
                   )}
               </div></div>
             </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
           );
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
             })}
           </div>
+        </div>
+      </div>
         </div>
       </div>
           ))}
@@ -332,5 +347,6 @@ export default function PermissionsMatrixPage() {
           Save Permissions for {selectedRole.charAt(0).toUpperCase() + selectedRole.slice(1)}
         </button></div>
       </div>
+        </div>
           );
 }

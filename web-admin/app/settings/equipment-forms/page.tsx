@@ -218,6 +218,18 @@ export default function EquipmentFormsPage() {
                             <option key={template.id} value={template.id}>
                               {template.name}
                             </option>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
                           ))}
                         </select>
                       </td>
@@ -232,6 +244,18 @@ export default function EquipmentFormsPage() {
                         </button>
                       </td>
                     </tr>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
                   ))}
                 </tbody>
               </table>

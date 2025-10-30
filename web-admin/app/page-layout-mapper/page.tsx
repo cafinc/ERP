@@ -262,7 +262,23 @@ export default function PageLayoutMapper() {
                           {layout.preview}
                         </div></div>
                       </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</DashboardLayout>
+</div>
+</div>
           );
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </DashboardLayout>
+  </div>
+</div>
                 })}
               </div>
             </div>
@@ -282,6 +298,15 @@ export default function PageLayoutMapper() {
                       const selectedLayout = layoutSelections[page.path];
                       const selectedLayoutOption = layoutOptions.find(
                         (l) => l.id === selectedLayout
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </DashboardLayout>
+      </div>
+    </div>
                       );
                       const SelectedIcon = selectedLayoutOption?.icon || Grid3x3;
 
@@ -337,16 +362,72 @@ export default function PageLayoutMapper() {
                                         }`}
                                       />
                                     </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</DashboardLayout>
+</div>
+</div>
           );
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </DashboardLayout>
+        </div>
+      </div>
                                 })}
                               </div></div>
                             </div>
                           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</DashboardLayout>
+</div>
+</div>
           );
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </DashboardLayout>
+    </div>
+  </div>
                     })}
                   </div></div>
                 </div>
+        </div>
+      </div>
+    </div>
+  </DashboardLayout>
+</div>
+</div>
           );
+        </div>
+      </div>
+    </div>
+  </DashboardLayout>
+</div>
+</div>
           })}
 
           {/* Summary & Apply */}
@@ -369,7 +450,25 @@ export default function PageLayoutMapper() {
                         <p className="font-semibold">{layout.name}</p>
                         <p className="text-sm text-blue-200">{count} pages</p>
                       </div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</DashboardLayout>
+</div>
+</div>
           );
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </DashboardLayout>
+</div>
+</div>
                 })}
               </div>
             </div>
@@ -388,9 +487,27 @@ export default function PageLayoutMapper() {
                   localStorage.setItem(
                     "layoutSelections",
                     JSON.stringify(layoutSelections)
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </DashboardLayout>
+  </div>
+</div>
                   );
                   alert(
                     "Layout selections saved! Ready to implement complete design system."
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </DashboardLayout>
+  </div>
+</div>
                   );
                 }}
                 className="px-8 py-4 bg-white text-[#3f72af] rounded-xl font-bold text-lg shadow-2xl hover:bg-blue-50 hover:scale-105 transition-all"
@@ -409,6 +526,10 @@ export default function PageLayoutMapper() {
           </div></div>
         </div>
       </DashboardLayout>
+        </div>
+      </DashboardLayout>
+    </div>
+  </div>
           );
     </div>
 }

@@ -373,6 +373,22 @@ export default function TeamMemberDetailPage() {
                     <Download className="w-5 h-5" />
                   </a>
                 </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
           ))}
             </div></div>
           </div>

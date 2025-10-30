@@ -346,6 +346,14 @@ export default function InspectionSchedulesPage() {
                             </span>
                           </div>
                         </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
                       ))}
                     </div>
                   </div>
@@ -366,10 +374,15 @@ export default function InspectionSchedulesPage() {
                 </div>
               </div>
             </div>
+        </div>
+      </div>
+    </div>
+  </div>
           ))
           )}
         </div>
       </div>
     </div>
+        </div>
           );
 }

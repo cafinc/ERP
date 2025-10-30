@@ -362,6 +362,11 @@ export default function MessagesPage() {
                     </button>
                   </div>
                 </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
           ))
             )}
           </div>
@@ -426,6 +431,16 @@ export default function MessagesPage() {
                                   )}
                                   <span className="text-sm truncate">{att.file_name}</span>
                                 </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
                               ))}
                             </div>
           )}
@@ -441,7 +456,19 @@ export default function MessagesPage() {
                           </div></div>
                         </div>
                       </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
           );
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
                 })}
                 <div ref={messagesEndRef} />
               </div>
@@ -466,6 +493,14 @@ export default function MessagesPage() {
                           </button>
                         </div>
                       </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
           ))}
               </div></div>
             </div>
@@ -620,6 +655,17 @@ export default function MessagesPage() {
                         </span>
                       </div>
                     </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+</div>
+</div>
                   ))}
                 </div>
 
@@ -641,5 +687,13 @@ export default function MessagesPage() {
               </div>
           )}
       </div>
+        </div>
+      </div>
+    </button>
+  </div>
+</div>
+</div>
+</div>
+</div>
           );
 }

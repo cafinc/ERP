@@ -269,6 +269,11 @@ export default function ServiceFormPage() {
                   </button>
           )}
               </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
           ))}
           </div>
 
@@ -303,5 +308,6 @@ export default function ServiceFormPage() {
       </form>
     </div>
   </div>
+        </form>
           );
 }

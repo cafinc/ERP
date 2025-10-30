@@ -279,6 +279,16 @@ export default function InvoiceDetailPage() {
                         <td className="py-3 text-right text-sm text-gray-600">${item.unit_price.toFixed(2)}</td>
                         <td className="py-3 text-right text-sm font-medium text-gray-900">${item.total.toFixed(2)}</td>
                       </tr>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
                     ))}
                   </tbody>
                 </table>
@@ -338,6 +348,18 @@ export default function InvoiceDetailPage() {
                         <p className="text-sm text-gray-600 mt-2 ml-11">{payment.notes}</p>
                       )}
                     </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
           ))}
                 </div></div>
           )}

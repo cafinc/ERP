@@ -313,5 +313,8 @@ export default function EditTemplatePage() {
         />
       )}
     </div>
+        </div>
+      </div>
+    </div>
           );
 }
