@@ -124,6 +124,7 @@ export default function TemplateViewPage() {
             Back to Templates
           </button>
         </div>
+      </div>
     );
   }
 
