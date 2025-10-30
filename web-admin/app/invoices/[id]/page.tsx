@@ -145,15 +145,22 @@ export default function InvoiceDetailPage() {
       <div className="flex-1 overflow-auto p-6">
         <div className="flex items-center justify-center h-full">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
-        </div></div>
+        </div>
       </div>
-          );
+      </div>
+    );
   }
 
   if (!invoice) {
     return (
-              <div className="p-8">
-          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-12 text-center hover:shadow-md transition-shadow">
+      <div className="min-h-screen bg-gray-50 flex flex-col">
+        <PageHeader
+          title="Invoices Details"
+          subtitle="View and manage details"
+          breadcrumbs={[{ label: "Home", href: "/" }, { label: "Invoices", href: "/invoices" }, { label: "Details" }]}
+        />
+        <div className="p-8">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-12 text-center hover:shadow-md transition-shadow">
             <FileText className="w-16 h-16 text-red-300 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-gray-900 mb-2">Invoice Not Found</h3>
             <p className="text-gray-600 mb-4">The invoice you're looking for doesn't exist.</p>
@@ -163,8 +170,11 @@ export default function InvoiceDetailPage() {
             >
               <ArrowLeft className="w-5 h-5" />
               <span>Back to Invoices</span>
-            </button></div>
-          );
+            </button>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
