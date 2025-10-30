@@ -208,6 +208,7 @@ export default function TemplateViewPage() {
               {JSON.stringify(template.content, null, 2)}
             </pre>
           </div>
+        </div>
 
         {/* Variables & Preview */}
         <div className="space-y-6">
