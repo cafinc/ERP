@@ -573,5 +573,7 @@ export default function CustomerCommunicationsPage() {
           📱 InApp Messages • Real-time delivery • File attachments supported
         </p>
       </div>
+      </div>
+    </div>
   );
 }
