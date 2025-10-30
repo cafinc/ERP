@@ -326,6 +326,8 @@ export default function TeamMemberFormPage() {
                 placeholder="Spouse, Parent, etc."
               />
             </div>
+          </div>
+        </div>
 
         {/* Submit Actions */}
         <div className="flex justify-end gap-4">
