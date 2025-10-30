@@ -185,6 +185,9 @@ export default function ShiftHistoryPage() {
                 </p>
                 <p className="text-sm text-gray-600">Team Members</p>
               </div>
+            </div>
+          </div>
+        </div>
 
         {/* Filter */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
