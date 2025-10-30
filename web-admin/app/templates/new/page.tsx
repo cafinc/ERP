@@ -197,7 +197,10 @@ export default function CreateTemplatePage() {
             <div>
               <h1 className="text-3xl font-bold text-gray-900">Create New Template</h1>
               <p className="text-gray-600 mt-1">Build a custom template for your business documents</p>
-            </div></div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       {/* Form */}
       <form onSubmit={handleSubmit} className="max-w-4xl mx-auto">
@@ -274,7 +277,8 @@ export default function CreateTemplatePage() {
                 placeholder="e.g., residential, snow, seasonal"
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
-            </div></div>
+            </div>
+          </div>
 
           {/* Template Content */}
           <div>
@@ -297,7 +301,9 @@ export default function CreateTemplatePage() {
                   className="text-sm text-blue-600 hover:text-blue-700 px-3 py-1.5"
                 >
                   Insert Example
-                </button></div></div>
+                </button>
+              </div>
+            </div>
             <p className="text-xs text-gray-500 mb-2">
               Use {`{{variable_name}}`} for placeholders. Click "Browse Placeholders" to see 70+ system variables.
             </p>
@@ -351,7 +357,10 @@ export default function CreateTemplatePage() {
                   Create Template
                 </>
               )}
-            </button></div></div></form>
+            </button>
+          </div>
+        </div>
+      </form>
 
       {/* Placeholder Browser Modal */}
       {showPlaceholderBrowser && (
@@ -361,6 +370,7 @@ export default function CreateTemplatePage() {
           onClose={() => setShowPlaceholderBrowser(false)}
         />
       )}
-    </div></div>
+    </div>
+  </div>
   );
 }

@@ -80,7 +80,9 @@ export default function CommunicationDashboardPage() {
                 </div>
                 <div className={`${stat.color} p-3 rounded-lg`}>
                   <stat.icon className="w-6 h-6 text-white" />
-                </div></div></button>
+                </div>
+              </div>
+            </button>
           ))}
         </div>
 
@@ -115,6 +117,10 @@ export default function CommunicationDashboardPage() {
             >
               <Star className="w-8 h-8 text-gray-400 mb-2" />
               <span className="text-sm font-medium text-gray-700">Feedback</span>
-            </button></div></div></div></div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

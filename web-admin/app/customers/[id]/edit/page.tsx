@@ -939,7 +939,9 @@ export default function CustomerFormPage() {
                         <Building className="w-12 h-12 mx-auto mb-4 text-[#3f72af]" />
                         <p className="font-bold text-gray-900 text-xl">Company</p>
                         <p className="text-sm text-gray-600 mt-2">Business or organization</p>
-                      </button></div></div>
+                      </button>
+                    </div>
+                  </div>
               )}
 
               {/* Individual Form */}
@@ -967,7 +969,8 @@ export default function CustomerFormPage() {
                               customerForm.active ? 'translate-x-6' : 'translate-x-1'
                             }`}
                           />
-                        </button></div>
+                        </button>
+                      </div>
                     </h2>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1258,7 +1261,8 @@ export default function CustomerFormPage() {
                                         {company.email && (
                                           <p className="text-xs text-gray-500 truncate">{company.email}</p>
                                         )}
-                                      </div></button>
+                                      </div>
+                                    </button>
                                   ))
                                 ) : (
                                   <div className="px-4 py-6 text-center">
@@ -1291,9 +1295,11 @@ export default function CustomerFormPage() {
                               title="Remove company link"
                             >
                               <X className="w-3 h-3 text-red-600" />
-                            </button></div>
+                            </button>
+                          </div>
                         )}
-                        </div></div>
+                        </div>
+                      </div>
                       
                       {/* Access Configuration - Shows when Require Access is ON */}
                       {requireAccess && (
@@ -1357,9 +1363,12 @@ export default function CustomerFormPage() {
                               <p className="text-xs text-gray-500 mt-2">
                                 User will receive an email with their login credentials
                               </p>
-                            </div></div></div>
+                            </div>
+                          </div>
+                        </div>
                       )}
-                    </div></div>
+                    </div>
+                  </div>
                 )}
 
               {/* Company Form */}
@@ -1418,7 +1427,8 @@ export default function CustomerFormPage() {
                           placeholder="(555) 123-4567"
                           required
                         />
-                      </div></div>
+                      </div>
+                    </div>
 
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -1436,7 +1446,10 @@ export default function CustomerFormPage() {
                           placeholder="info@company.com"
                           required
                         />
-                      </div></div></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
                   {/* Company Address */}
                   <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
@@ -1466,7 +1479,8 @@ export default function CustomerFormPage() {
                             alt="Powered by Google"
                             className="h-4"
                           />
-                        </div></div>
+                        </div>
+                      </div>
                       <p className="text-xs text-gray-500 mt-1">
                         Start typing to use Google address autocomplete
                       </p>
@@ -1537,7 +1551,8 @@ export default function CustomerFormPage() {
                         <label className="text-sm font-medium text-gray-700">
                           Billing address same as company address
                         </label>
-                      </div></div>
+                      </div>
+                    </div>
                     
                     {/* Billing Address Fields */}
                     {!customerForm.billing_address_same && (
@@ -1569,7 +1584,8 @@ export default function CustomerFormPage() {
                                 alt="Powered by Google"
                                 className="h-4"
                               />
-                            </div></div>
+                            </div>
+                          </div>
                           <p className="text-xs text-gray-500 mt-1">
                             Start typing to use Google address autocomplete
                           </p>
@@ -1631,7 +1647,8 @@ export default function CustomerFormPage() {
                         </div>
                       </>
                     )}
-                    </div></div>
+                    </div>
+                  </div>
 
                   {/* Contact Persons */}
                   <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
@@ -1658,7 +1675,9 @@ export default function CustomerFormPage() {
                               customerForm.same_person_all_contacts ? 'translate-x-6' : 'translate-x-1'
                             }`}
                           />
-                        </button></div></div>
+                        </button>
+                      </div>
+                    </div>
 
                     <div className="space-y-4">
                       {customerForm.contacts.map((contact, index) => {
@@ -1677,7 +1696,8 @@ export default function CustomerFormPage() {
                                   <span className="text-sm font-semibold text-gray-900">
                                     {customerForm.same_person_all_contacts && index === 0 ? 'Owner' : contact.position}
                                   </span>
-                                </div></div>
+                                </div>
+                              </div>
 
                               {/* Name Field */}
                               <div className="col-span-12 md:col-span-3">
@@ -1760,10 +1780,13 @@ export default function CustomerFormPage() {
                                 {fieldErrors[`contact_${index}_email`] && (
                                   <p className="text-red-500 text-xs mt-1">{fieldErrors[`contact_${index}_email`]}</p>
                                 )}
-                              </div></div></div>
+                              </div>
+                            </div>
+                          </div>
   );
                       })}
-                    </div></div>
+                    </div>
+                  </div>
 
                 {/* Company Accounting */}
                 <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
@@ -1841,7 +1864,8 @@ export default function CustomerFormPage() {
                         <label className="text-sm font-medium text-gray-700">
                           Set Credit Limit
                         </label>
-                      </div></div>
+                      </div>
+                    </div>
 
                     {customerForm.accounting.credit_limit_enabled && (
                       <div>
@@ -1865,7 +1889,8 @@ export default function CustomerFormPage() {
                             className="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                             placeholder="10000.00"
                           />
-                        </div></div>
+                        </div>
+                      </div>
                     )}
 
                     <div>
@@ -1913,7 +1938,9 @@ export default function CustomerFormPage() {
                           Purchase Order Required
                         </span>
                       </label>
-                    </div></div></div>
+                    </div>
+                  </div>
+                </div>
 
                 {/* Sites Section - Only show for companies, only after creation */}
                 {isEdit && (
@@ -1930,7 +1957,8 @@ export default function CustomerFormPage() {
                       >
                         <Plus className="w-4 h-4" />
                         <span>Add Site</span>
-                      </button></div>
+                      </button>
+                    </div>
                     <p className="text-sm text-gray-600">
                       Manage service locations for this company. Sites can be added after the company is created.
                     </p>
@@ -1970,7 +1998,8 @@ export default function CustomerFormPage() {
                         createSite ? 'translate-x-6' : 'translate-x-1'
                       }`}
                     />
-                  </button></div>
+                  </button>
+                </div>
               </h2>
               
               {/* Site Name Field - appears below header when Create Site is ON */}
@@ -2016,7 +2045,8 @@ export default function CustomerFormPage() {
                         alt="Powered by Google"
                         className="h-4"
                       />
-                    </div></div>
+                    </div>
+                  </div>
                   <p className="text-xs text-gray-500 mt-1">
                     Start typing to use Google address autocomplete
                   </p>
@@ -2079,7 +2109,9 @@ export default function CustomerFormPage() {
                     readOnly
                     required
                   />
-                </div></div></div>
+                </div>
+              </div>
+            </div>
             )}
 
             {/* Additional Notes */}
@@ -2133,7 +2165,8 @@ export default function CustomerFormPage() {
                                 <p className="text-xs text-gray-500">
                                   {formatFileSize(file.size)}
                                 </p>
-                              </div></div>
+                              </div>
+                            </div>
                             <button
                               type="button"
                               onClick={() => removeFile(index)}
@@ -2141,7 +2174,8 @@ export default function CustomerFormPage() {
                               title="Remove file"
                             >
                               <X className="w-5 h-5" />
-                            </button></div>
+                            </button>
+                          </div>
                         ))}
                       </div>
                     )}
@@ -2152,7 +2186,8 @@ export default function CustomerFormPage() {
                         <p className="text-sm text-gray-600">No files uploaded yet</p>
                       </div>
                     )}
-                  </div></div>
+                  </div>
+                </div>
                 
                 {/* Notes Section */}
                 <div>
@@ -2164,7 +2199,9 @@ export default function CustomerFormPage() {
                       rows={4}
                       placeholder="Any additional information about this customer..."
                     />
-                  </div></div></div>
+                  </div>
+                </div>
+              </div>
               
               {/* Action Buttons */}
               <div className="flex justify-between items-center pt-6 border-t">
@@ -2191,7 +2228,12 @@ export default function CustomerFormPage() {
                       Create Customer
                     </>
                   )}
-                </button></div></div></form></div></div>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
 
       {/* Success Modal */}
       {showSuccessModal && (
@@ -2209,13 +2251,17 @@ export default function CustomerFormPage() {
                   <p className="text-white/90 mt-1">
                     Customer {isEdit ? 'updated' : 'created'} successfully
                   </p>
-                </div></div></div>
+                </div>
+              </div>
+            </div>
 
             <div className="p-6 text-center">
               <p className="text-gray-600">
                 Redirecting to customer details...
               </p>
-            </div></div></div>
+            </div>
+          </div>
+        </div>
       )}
 
       {/* Error Modal */}
@@ -2230,7 +2276,9 @@ export default function CustomerFormPage() {
                   <p className="text-white/90 mt-1">
                     Please fix the following issues before submitting
                   </p>
-                </div></div></div>
+                </div>
+              </div>
+            </div>
 
             <div className="p-6">
               <div className="space-y-3">
@@ -2254,7 +2302,10 @@ export default function CustomerFormPage() {
                   <div className="text-sm text-blue-800">
                     <p className="font-medium mb-1">Tip:</p>
                     <p>Scroll through the form and look for fields highlighted in red. These fields require your attention.</p>
-                  </div></div></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
             <div className="border-t p-6 bg-gray-50 flex justify-end">
               <button
@@ -2265,7 +2316,10 @@ export default function CustomerFormPage() {
                 className="px-6 py-2.5 text-sm font-medium bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
               >
                 Got it, I'll fix these
-              </button></div></div></div>
+              </button>
+            </div>
+          </div>
+        </div>
       )}
 
       {/* Duplicate Customer Modal */}
@@ -2280,7 +2334,9 @@ export default function CustomerFormPage() {
                   <p className="text-white/90 mt-1">
                     We found {duplicates.length} customer{duplicates.length > 1 ? 's' : ''} that might match
                   </p>
-                </div></div></div>
+                </div>
+              </div>
+            </div>
 
             <div className="p-6 overflow-y-auto max-h-[calc(80vh-200px)]">
               <div className="space-y-4">
@@ -2321,7 +2377,8 @@ export default function CustomerFormPage() {
                               <span className="text-gray-700">{dup.address}</span>
                             </div>
                           )}
-                        </div></div>
+                        </div>
+                      </div>
                       
                       <button
                         onClick={() => {
@@ -2330,7 +2387,9 @@ export default function CustomerFormPage() {
                         className="ml-4 px-3 py-1.5 text-xs font-medium text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors"
                       >
                         View
-                      </button></div></div>
+                      </button>
+                    </div>
+                  </div>
                 ))}
               </div>
 
@@ -2343,7 +2402,10 @@ export default function CustomerFormPage() {
                       If this is a new customer with similar information, click "Create Anyway". 
                       Otherwise, use the existing customer record to avoid duplicates.
                     </p>
-                  </div></div></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
             <div className="border-t p-6 bg-gray-50 flex justify-end gap-3">
               <button
@@ -2372,7 +2434,10 @@ export default function CustomerFormPage() {
                 className="px-6 py-2.5 text-sm font-medium bg-orange-600 text-white rounded-lg hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 transition-colors"
               >
                 Create Anyway
-              </button></div></div></div>
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </>
   );

@@ -358,7 +358,8 @@ export default function ServicesPage() {
                       />
                       <span className="text-sm text-gray-700">Inactive Only</span>
                     </label>
-                  </div></div>
+                  </div>
+                </div>
 
                 {/* View Mode Toggle */}
                 <div className="mb-4">
@@ -385,7 +386,9 @@ export default function ServicesPage() {
                     >
                       <List className="w-4 h-4" />
                       <span className="text-sm">List</span>
-                    </button></div></div>
+                    </button>
+                  </div>
+                </div>
 
                 {/* Apply/Clear Buttons */}
                 <div className="flex gap-2 pt-3 border-t border-gray-200">
@@ -403,7 +406,10 @@ export default function ServicesPage() {
                     className="flex-1 px-3 py-2 text-sm bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282]"
                   >
                     Apply
-                  </button></div></div></div>
+                  </button>
+                </div>
+              </div>
+            </div>
           ) : undefined}
         />
 
@@ -470,7 +476,9 @@ export default function ServicesPage() {
                     className="flex-1 px-3 py-1.5 text-sm bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50"
                   >
                     Edit
-                  </button></div></div>
+                  </button>
+                </div>
+              </div>
             ))}
           </div>
         )}
@@ -485,7 +493,9 @@ export default function ServicesPage() {
               <div>
                 <p className="text-2xl font-bold text-gray-900">{services.length}</p>
                 <p className="text-sm text-gray-600">Total Services</p>
-              </div></div></div>
+              </div>
+            </div>
+          </div>
 
           <div className="bg-white rounded-xl shadow-md shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-3">
@@ -497,7 +507,9 @@ export default function ServicesPage() {
                   {services.filter(s => s.active).length}
                 </p>
                 <p className="text-sm text-gray-600">Active</p>
-              </div></div></div>
+              </div>
+            </div>
+          </div>
 
           <div className="bg-white rounded-xl shadow-md shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-3">
@@ -509,7 +521,10 @@ export default function ServicesPage() {
                   {services.filter(s => !s.active).length}
                 </p>
                 <p className="text-sm text-gray-600">Inactive</p>
-              </div></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
 
         {/* Services Table */}
         <div className="bg-white rounded-xl shadow-md shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
@@ -591,14 +606,16 @@ export default function ServicesPage() {
                             className="text-red-600 hover:text-red-800"
                           >
                             <Trash2 className="w-4 h-4" />
-                          </button></div>
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   ))
                 )}
               </tbody>
             </table>
-          </div></div>
+          </div>
+        </div>
 
         {/* Create Service Modal */}
         {showCreateModal && (
@@ -613,13 +630,15 @@ export default function ServicesPage() {
                   <div>
                     <h2 className="text-2xl font-bold text-gray-900">Create Service</h2>
                     <p className="text-sm text-gray-600 mt-0.5">Add a new service offering</p>
-                  </div></div>
+                  </div>
+                </div>
                 <button
                   onClick={() => setShowCreateModal(false)}
                   className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
                 >
                   <X className="w-5 h-5 text-gray-500" />
-                </button></div>
+                </button>
+              </div>
 
               {/* Modal Body */}
               <form onSubmit={handleCreate} className="p-6 space-y-6 max-h-[calc(90vh-180px)] overflow-y-auto">
@@ -682,7 +701,8 @@ export default function ServicesPage() {
                             </option>
                           ))}
                         </select>
-                      </div></div>
+                      </div>
+                    </div>
 
                     {/* Description */}
                     <div>
@@ -697,7 +717,9 @@ export default function ServicesPage() {
                         className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all resize-none"
                         placeholder="Describe this service in detail..."
                       />
-                    </div></div></div>
+                    </div>
+                  </div>
+                </div>
 
                 {/* Default Pricing Card */}
                 <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 backdrop-blur-sm overflow-hidden">
@@ -714,7 +736,8 @@ export default function ServicesPage() {
                     >
                       <Plus className="w-4 h-4" />
                       Add Pricing Tier
-                    </button></div>
+                    </button>
+                  </div>
                   
                   <div className="p-6 space-y-3">
                     {pricingEntries.map((entry, index) => (
@@ -749,7 +772,8 @@ export default function ServicesPage() {
                                 className="w-full pl-8 pr-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] font-bold text-[#3f72af] text-sm"
                                 placeholder="0.00"
                               />
-                            </div></div>
+                            </div>
+                          </div>
                           
                           {/* Delete Button */}
                           {pricingEntries.length > 1 && (
@@ -761,9 +785,11 @@ export default function ServicesPage() {
                                 title="Remove pricing tier"
                               >
                                 <Trash2 className="w-4 h-4" />
-                              </button></div>
+                              </button>
+                            </div>
                           )}
-                        </div></div>
+                        </div>
+                      </div>
                     ))}
                     
                     {pricingEntries.length === 0 && (
@@ -772,7 +798,8 @@ export default function ServicesPage() {
                         <p className="text-gray-500 font-medium text-sm">No pricing tiers configured</p>
                       </div>
                     )}
-                  </div></div>
+                  </div>
+                </div>
 
                 {/* Equipment Selection Card */}
                 <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 backdrop-blur-sm overflow-hidden">
@@ -838,7 +865,8 @@ export default function ServicesPage() {
                                     {item.equipment_type && (
                                       <p className="text-xs text-gray-600 capitalize">{item.equipment_type.replace('_', ' ')}</p>
                                     )}
-                                  </div></div>
+                                  </div>
+                                </div>
                                 
                                 {/* Rate Inputs - Only show when selected */}
                                 {isSelected && (
@@ -891,9 +919,13 @@ export default function ServicesPage() {
                                           className="w-full pl-8 pr-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] font-bold text-[#3f72af] text-sm"
                                           placeholder="0.00"
                                         />
-                                      </div></div></div>
+                                      </div>
+                                    </div>
+                                  </div>
                                 )}
-                              </div></div></div>
+                              </div>
+                            </div>
+                          </div>
   );
                       })
                     )}
@@ -917,7 +949,8 @@ export default function ServicesPage() {
                             </div>
   );
                         })}
-                      </div></div>
+                      </div>
+                    </div>
                   )}
                 </div>
 
@@ -980,7 +1013,8 @@ export default function ServicesPage() {
                                     {item.plate_number && (
                                       <p className="text-xs text-gray-600">Plate: {item.plate_number}</p>
                                     )}
-                                  </div></div>
+                                  </div>
+                                </div>
                                 
                                 {isSelected && (
                                   <div className="mt-3 grid grid-cols-2 gap-3">
@@ -1024,9 +1058,13 @@ export default function ServicesPage() {
                                           className="w-full pl-8 pr-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] font-bold text-[#3f72af] text-sm"
                                           placeholder="0.00"
                                         />
-                                      </div></div></div>
+                                      </div>
+                                    </div>
+                                  </div>
                                 )}
-                              </div></div></div>
+                              </div>
+                            </div>
+                          </div>
   );
                       })
                     )}
@@ -1045,7 +1083,8 @@ export default function ServicesPage() {
                             </div>
   );
                         })}
-                      </div></div>
+                      </div>
+                    </div>
                   )}
                 </div>
 
@@ -1108,7 +1147,8 @@ export default function ServicesPage() {
                                     {item.plate_number && (
                                       <p className="text-xs text-gray-600">Plate: {item.plate_number}</p>
                                     )}
-                                  </div></div>
+                                  </div>
+                                </div>
                                 
                                 {isSelected && (
                                   <div className="mt-3 grid grid-cols-2 gap-3">
@@ -1152,9 +1192,13 @@ export default function ServicesPage() {
                                           className="w-full pl-8 pr-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] font-bold text-[#3f72af] text-sm"
                                           placeholder="0.00"
                                         />
-                                      </div></div></div>
+                                      </div>
+                                    </div>
+                                  </div>
                                 )}
-                              </div></div></div>
+                              </div>
+                            </div>
+                          </div>
   );
                       })
                     )}
@@ -1173,7 +1217,8 @@ export default function ServicesPage() {
                             </div>
   );
                         })}
-                      </div></div>
+                      </div>
+                    </div>
                   )}
                 </div>
 
@@ -1236,7 +1281,8 @@ export default function ServicesPage() {
                                     {item.type && (
                                       <p className="text-xs text-gray-600 capitalize">{item.type}</p>
                                     )}
-                                  </div></div>
+                                  </div>
+                                </div>
                                 
                                 {isSelected && (
                                   <div className="mt-3 grid grid-cols-2 gap-3">
@@ -1280,9 +1326,13 @@ export default function ServicesPage() {
                                           className="w-full pl-8 pr-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] font-bold text-[#3f72af] text-sm"
                                           placeholder="0.00"
                                         />
-                                      </div></div></div>
+                                      </div>
+                                    </div>
+                                  </div>
                                 )}
-                              </div></div></div>
+                              </div>
+                            </div>
+                          </div>
   );
                       })
                     )}
@@ -1301,7 +1351,8 @@ export default function ServicesPage() {
                             </div>
   );
                         })}
-                      </div></div>
+                      </div>
+                    </div>
                   )}
                 </div>
 
@@ -1380,7 +1431,8 @@ export default function ServicesPage() {
                                       Stock: {item.current_stock}
                                     </span>
                                   )}
-                                </div></div>
+                                </div>
+                              </div>
                             </label>
                           ))
                         )}
@@ -1393,7 +1445,8 @@ export default function ServicesPage() {
                       <p className="text-xs text-gray-400 mt-1">Enable the toggle above to select consumables</p>
                     </div>
                   )}
-                  </div></div>
+                  </div>
+                </div>
 
                 {/* Modal Footer */}
                 <div className="flex items-center justify-end gap-3 pt-4 border-t border-gray-200/50">
@@ -1410,7 +1463,11 @@ export default function ServicesPage() {
                   >
                     <Save className="w-4 h-4" />
                     Create Service
-                  </button></div></form></div></div>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
         )}
       </div>
   );

@@ -217,7 +217,9 @@ export default function TeamPage() {
               }`}
             >
               Inactive ({users.filter(u => !u.active).length})
-            </button></div></div>
+            </button>
+          </div>
+        </div>
 
         {/* Search Bar */}
         <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-3 mb-4 mx-6 mt-6 hover:shadow-md transition-shadow">
@@ -238,7 +240,9 @@ export default function TeamPage() {
             >
               <RefreshCw className="w-4 h-4" />
               <span>Refresh</span>
-            </button></div></div>
+            </button>
+          </div>
+        </div>
 
         {/* Team Grid */}
         {filteredUsers.length === 0 ? (
@@ -279,7 +283,8 @@ export default function TeamPage() {
                       {user.title && (
                         <p className="text-sm text-gray-600">{user.title}</p>
                       )}
-                    </div></div>
+                    </div>
+                  </div>
                   {user.active ? (
                     <UserCheck className="w-5 h-5 text-green-600" />
                   ) : (
@@ -297,7 +302,8 @@ export default function TeamPage() {
                     <span className={`text-xs font-medium ${getStatusColor(user.status)}`}>
                       {getStatusLabel(user.status)}
                     </span>
-                  </div></div>
+                  </div>
+                </div>
 
                 {/* Contact */}
                 <div className="space-y-2 mb-4">
@@ -349,7 +355,9 @@ export default function TeamPage() {
                   >
                     <Edit className="w-4 h-4" />
                     <span>Edit</span>
-                  </button></div></div>
+                  </button>
+                </div>
+              </div>
             ))}
           </div>
         )}

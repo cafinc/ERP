@@ -180,7 +180,9 @@ export default function ToolsPage() {
             <button className="px-3 py-1.5 text-sm bg-gray-100 border border-gray-300 rounded-lg hover:bg-gray-200 flex items-center gap-2">
               <Filter className="w-4 h-4" />
               More Filters
-            </button></div></div>
+            </button>
+          </div>
+        </div>
 
         {/* Category Filter Buttons */}
         <div className="flex gap-2 mb-4 flex-wrap mx-6">
@@ -243,7 +245,8 @@ export default function ToolsPage() {
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-500">Last Inspection:</span>
                   <span className="text-gray-900 font-medium">{tool.lastInspection}</span>
-                </div></div>
+                </div>
+              </div>
 
               <div className="flex gap-2 pt-3 border-t border-gray-100">
                 <button className="flex-1 px-3 py-1.5 text-sm bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282]">
@@ -251,7 +254,9 @@ export default function ToolsPage() {
                 </button>
                 <button className="flex-1 px-3 py-1.5 text-sm bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50">
                   Edit
-                </button></div></div>
+                </button>
+              </div>
+            </div>
           ))}
         </div>
 

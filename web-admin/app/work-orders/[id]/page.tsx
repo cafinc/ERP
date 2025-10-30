@@ -163,7 +163,9 @@ export default function WorkOrderDetailPage() {
               className="text-[#3f72af] hover:underline"
             >
               ← Back to Work Orders
-            </button></div></div>
+            </button>
+          </div>
+        </div>
       </SimpleNavigationTopBar>
     );
   }
@@ -229,7 +231,8 @@ export default function WorkOrderDetailPage() {
                     <p className="text-sm text-gray-600">
                       This work order is complete. Generate an invoice for the customer.
                     </p>
-                  </div></div>
+                  </div>
+                </div>
                 <button
                   onClick={handleGenerateInvoice}
                   disabled={generating}
@@ -250,7 +253,9 @@ export default function WorkOrderDetailPage() {
                       Generate Invoice
                     </>
                   )}
-                </button></div></div>
+                </button>
+              </div>
+            </div>
           )}
 
           {/* Invoice Link - Show if already invoiced */}
@@ -268,7 +273,9 @@ export default function WorkOrderDetailPage() {
                   className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors text-sm font-medium"
                 >
                   View Invoice
-                </button></div></div>
+                </button>
+              </div>
+            </div>
           )}
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -300,7 +307,8 @@ export default function WorkOrderDetailPage() {
                       </p>
                     </div>
                   )}
-                </div></div>
+                </div>
+              </div>
 
               {/* Description */}
               <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
@@ -354,7 +362,8 @@ export default function WorkOrderDetailPage() {
                       <p className="font-semibold text-gray-900">{workOrder.actual_hours}h</p>
                     </div>
                   )}
-                </div></div>
+                </div>
+              </div>
 
               {/* Assigned Crew */}
               {(workOrder.assigned_to || workOrder.assigned_crew) && (
@@ -414,9 +423,13 @@ export default function WorkOrderDetailPage() {
                         </span>
                       </div>
                     ))}
-                  </div></div>
+                  </div>
+                </div>
               )}
-            </div></div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </SimpleNavigationTopBar>
   );
 }

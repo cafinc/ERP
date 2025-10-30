@@ -86,7 +86,8 @@ export default function HRModulePage() {
                 <p className="text-3xl font-bold text-gray-900">24</p>
               </div>
               <Users className="h-12 w-12 text-blue-500" />
-            </div></div>
+            </div>
+          </div>
 
           <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
@@ -95,7 +96,8 @@ export default function HRModulePage() {
                 <p className="text-3xl font-bold text-gray-900">12</p>
               </div>
               <Clock className="h-12 w-12 text-green-500" />
-            </div></div>
+            </div>
+          </div>
 
           <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
@@ -104,7 +106,9 @@ export default function HRModulePage() {
                 <p className="text-3xl font-bold text-gray-900">5</p>
               </div>
               <Calendar className="h-12 w-12 text-purple-500" />
-            </div></div></div>
+            </div>
+          </div>
+        </div>
 
         {/* Module Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -126,7 +130,8 @@ export default function HRModulePage() {
                   {module.title}
                 </h3>
                 <p className="text-sm text-gray-600">{module.description}</p>
-              </div></div>
+              </div>
+            </div>
           ))}
         </div>
 
@@ -154,6 +159,9 @@ export default function HRModulePage() {
             >
               <Calendar className="h-5 w-5" />
               Approve PTO
-            </button></div></div></div>
+            </button>
+          </div>
+        </div>
+      </div>
   );
 }

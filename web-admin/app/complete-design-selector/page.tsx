@@ -93,7 +93,8 @@ export default function CompleteDesignSelector() {
             {[1, 2, 3].map((i) => (
               <div key={i} className="bg-gray-50 h-3 mb-1 rounded"></div>
             ))}
-          </div></div>
+          </div>
+        </div>
       ),
       bestFor: "Customers, Projects, Invoices",
     },
@@ -305,9 +306,12 @@ export default function CompleteDesignSelector() {
                     <div>
                       <p className="text-xs text-gray-500 capitalize">{key}</p>
                       <p className="text-sm font-medium capitalize">{value}</p>
-                    </div></div>
+                    </div>
+                  </div>
                 ))}
-              </div></div></div>
+              </div>
+            </div>
+          </div>
 
           {/* 1. Header Options */}
           <section className="mb-8">
@@ -340,7 +344,10 @@ export default function CompleteDesignSelector() {
                       <div>
                         <span className="text-amber-600 font-semibold">Cons:</span>
                         <ul className="ml-2">{option.cons.map((c, i) => <li key={i}>• {c}</li>)}</ul>
-                      </div></div></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               ))}
             </div>
           </section>
@@ -369,7 +376,8 @@ export default function CompleteDesignSelector() {
                     <p className="text-xs text-[#3f72af] font-medium">
                       Best for: {option.bestFor}
                     </p>
-                  </div></div>
+                  </div>
+                </div>
               ))}
             </div>
           </section>
@@ -398,7 +406,8 @@ export default function CompleteDesignSelector() {
                     <p className="text-xs text-[#3f72af] font-medium">
                       Best for: {option.bestFor}
                     </p>
-                  </div></div>
+                  </div>
+                </div>
               ))}
             </div>
           </section>
@@ -505,7 +514,9 @@ export default function CompleteDesignSelector() {
                   <div>
                     <p className="font-semibold">Components</p>
                     <p className="text-blue-200">All pages</p>
-                  </div></div></div>
+                  </div>
+                </div>
+              </div>
               <button
                 disabled={!allSelectionsComplete}
                 className={`px-8 py-4 rounded-xl font-bold text-lg shadow-2xl transition-all ${
@@ -516,7 +527,9 @@ export default function CompleteDesignSelector() {
               >
                 <Eye className="w-6 h-6 inline mr-2" />
                 Apply Complete Design System
-              </button></div></div>
+              </button>
+            </div>
+          </div>
 
           {/* Info */}
           <div className="mt-6 bg-blue-50 border border-blue-200 rounded-xl p-4">
@@ -524,6 +537,10 @@ export default function CompleteDesignSelector() {
               <strong>💡 Pro Tip:</strong> Take your time reviewing each option. Once you click "Apply",
               we'll implement everything across your entire platform in one comprehensive update.
             </p>
-          </div></div></div></DashboardLayout></div>
+          </div>
+        </div>
+      </div>
+    </DashboardLayout>
+  </div>
   );
 }

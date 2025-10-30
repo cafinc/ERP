@@ -166,7 +166,9 @@ export default function AgreementTemplatesPage() {
                 }`}
               >
                 All
-              </button></div></div>
+              </button>
+            </div>
+          </div>
 
           {/* Templates Grid */}
           {loading ? (
@@ -207,7 +209,8 @@ export default function AgreementTemplatesPage() {
                       <span className="px-2 py-1 bg-gray-200 text-gray-700 rounded-full text-xs font-medium">
                         {categoryTemplates.length}
                       </span>
-                    </div></div>
+                    </div>
+                  </div>
                   <div className="p-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                       {categoryTemplates.map((template: any) => (
@@ -306,13 +309,17 @@ export default function AgreementTemplatesPage() {
                                 <Trash2 className="w-4 h-4" />
                               </button>
                             )}
-                          </div></div>
+                          </div>
+                        </div>
                       ))}
-                    </div></div></div>
+                    </div>
+                  </div>
+                </div>
               ))}
             </div>
           )}
-        </div></div>
+        </div>
+      </div>
     </>
   );
 }

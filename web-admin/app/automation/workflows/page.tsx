@@ -207,7 +207,8 @@ export default function WorkflowBuilderPage() {
             <p className="text-xs text-blue-700 mt-1">
               Create, edit, and manage custom automation workflows. Choose from templates or build from scratch.
             </p>
-          </div></div>
+          </div>
+        </div>
 
         {/* Templates Section */}
         {templates.length > 0 && workflows.length === 0 && (
@@ -230,9 +231,11 @@ export default function WorkflowBuilderPage() {
                     className="w-full px-3 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg text-sm font-medium transition-colors"
                   >
                     Use Template
-                  </button></div>
+                  </button>
+                </div>
               ))}
-            </div></div>
+            </div>
+          </div>
         )}
 
         {/* Custom Workflows List */}
@@ -249,7 +252,8 @@ export default function WorkflowBuilderPage() {
                 className="px-4 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
               >
                 Create Workflow
-              </button></div>
+              </button>
+            </div>
           ) : (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               {workflows.map((workflow) => {
@@ -273,7 +277,8 @@ export default function WorkflowBuilderPage() {
                           )}
                         </div>
                         <p className="text-sm text-gray-600">{workflow.description}</p>
-                      </div></div>
+                      </div>
+                    </div>
 
                     {/* Trigger Info */}
                     <div className="flex items-center space-x-2 mb-3 p-2 bg-blue-50 rounded-lg">
@@ -301,7 +306,8 @@ export default function WorkflowBuilderPage() {
                             +{workflow.actions.length - 4} more
                           </span>
                         )}
-                      </div></div>
+                      </div>
+                    </div>
 
                     {/* Stats */}
                     <div className="flex items-center justify-between text-xs text-gray-500 mb-3 pb-3 border-b border-gray-200">
@@ -352,12 +358,15 @@ export default function WorkflowBuilderPage() {
                         title="Delete"
                       >
                         <Trash2 className="w-4 h-4" />
-                      </button></div></div>
+                      </button>
+                    </div>
+                  </div>
   );
               })}
             </div>
           )}
-        </div></div>
+        </div>
+      </div>
     </PageHeader>
   );
 }

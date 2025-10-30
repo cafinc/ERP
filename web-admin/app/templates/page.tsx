@@ -219,7 +219,8 @@ export default function TemplatesPage() {
               className={`p-2 rounded ${viewMode === 'list' ? 'bg-blue-100 text-blue-600' : 'bg-gray-100'}`}
             >
               List
-            </button></div>
+            </button>
+          </div>
 
           {/* Create Button */}
           <button
@@ -228,7 +229,9 @@ export default function TemplatesPage() {
           >
             <PlusIcon className="w-5 h-5" />
             New Template
-          </button></div></div>
+          </button>
+        </div>
+      </div>
 
       {/* Templates Grid/List */}
       {loading ? (
@@ -246,7 +249,8 @@ export default function TemplatesPage() {
             className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
           >
             Create Template
-          </button></div>
+          </button>
+        </div>
       ) : (
         <div className="space-y-8">
           {Object.entries(templatesByType).map(([type, typeTemplates]) => {
@@ -282,7 +286,8 @@ export default function TemplatesPage() {
                             )}
                           </div>
                           <p className="text-sm text-gray-600 line-clamp-2">{template.description}</p>
-                        </div></div>
+                        </div>
+                      </div>
 
                       {/* Tags */}
                       {template.tags && template.tags.length > 0 && (
@@ -336,13 +341,16 @@ export default function TemplatesPage() {
                             <TrashIcon className="w-4 h-4" />
                           </button>
                         )}
-                      </div></div>
+                      </div>
+                    </div>
                   ))}
-                </div></div>
+                </div>
+              </div>
   );
           })}
         </div>
       )}
-    </div></div>
+    </div>
+  </div>
   );
 }

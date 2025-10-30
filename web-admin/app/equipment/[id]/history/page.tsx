@@ -106,7 +106,9 @@ export default function EquipmentHistoryPage() {
       <div className="flex-1 overflow-auto p-6">
         <div className="flex items-center justify-center h-64">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
-        </div></div></div>
+        </div>
+      </div>
+    </div>
   );
   }
 
@@ -157,7 +159,10 @@ export default function EquipmentHistoryPage() {
                 <AlertCircle className="w-8 h-8 mx-auto mb-2 text-red-600" />
                 <p className="text-3xl font-bold text-red-900">{issuesCount}</p>
                 <p className="text-sm text-red-700 mt-1">Issues Found</p>
-              </div></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
         )}
 
         {/* Inspection History */}
@@ -202,7 +207,9 @@ export default function EquipmentHistoryPage() {
                               <User className="w-4 h-4" />
                               {response.crew_name || 'Unknown'}
                             </span>
-                          </div></div></div>
+                          </div>
+                        </div>
+                      </div>
                       <span className={`px-3 py-1 rounded-full text-sm font-medium ${
                         isPassed 
                           ? 'bg-green-100 text-green-700' 
@@ -214,11 +221,14 @@ export default function EquipmentHistoryPage() {
 
                     <div className="flex items-center justify-end text-sm text-[#3f72af] hover:text-blue-700 font-medium">
                       View Details →
-                    </div></div>
+                    </div>
+                  </div>
   );
               })}
             </div>
           )}
-        </div></div></div>
+        </div>
+      </div>
+    </div>
   );
 }

@@ -143,7 +143,8 @@ export default function AccountSettingsPage() {
                 }}
               >
                 <Camera style={{ width: '18px', height: '18px', color: 'white' }} />
-              </button></div>
+              </button>
+            </div>
             <div>
               <h2 style={{ fontSize: '20px', fontWeight: '600', marginBottom: '4px', color: '#1e293b' }}>
                 Profile Avatar
@@ -166,7 +167,10 @@ export default function AccountSettingsPage() {
                 }}
               >
                 Change Avatar
-              </button></div></div></div>
+              </button>
+            </div>
+          </div>
+        </div>
 
         {/* Profile Information */}
         <div style={{
@@ -191,7 +195,8 @@ export default function AccountSettingsPage() {
             <div>
               <h2 style={{ fontSize: '18px', fontWeight: '600', color: '#1e293b' }}>Profile Information</h2>
               <p style={{ fontSize: '14px', color: '#64748b' }}>Update your personal details</p>
-            </div></div>
+            </div>
+          </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px' }}>
             <div>
@@ -270,7 +275,9 @@ export default function AccountSettingsPage() {
                   fontSize: '14px'
                 }}
               />
-            </div></div></div>
+            </div>
+          </div>
+        </div>
 
         {/* Company Information */}
         <div style={{
@@ -295,7 +302,8 @@ export default function AccountSettingsPage() {
             <div>
               <h2 style={{ fontSize: '18px', fontWeight: '600', color: '#1e293b' }}>Company & Address</h2>
               <p style={{ fontSize: '14px', color: '#64748b' }}>Your business information</p>
-            </div></div>
+            </div>
+          </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '20px' }}>
             <div>
@@ -393,7 +401,10 @@ export default function AccountSettingsPage() {
                     fontSize: '14px'
                   }}
                 />
-              </div></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
 
         {/* Regional Settings */}
         <div style={{
@@ -418,7 +429,8 @@ export default function AccountSettingsPage() {
             <div>
               <h2 style={{ fontSize: '18px', fontWeight: '600', color: '#1e293b' }}>Regional Settings</h2>
               <p style={{ fontSize: '14px', color: '#64748b' }}>Your timezone and locale</p>
-            </div></div>
+            </div>
+          </div>
 
           <div>
             <label style={{ display: 'block', fontSize: '14px', fontWeight: '500', marginBottom: '8px', color: '#64748b' }}>
@@ -442,7 +454,8 @@ export default function AccountSettingsPage() {
               <option value="America/Denver">Mountain Time</option>
               <option value="America/Los_Angeles">Pacific Time</option>
             </select>
-          </div></div>
+          </div>
+        </div>
 
         {/* Save Button */}
         <div>
@@ -460,6 +473,9 @@ export default function AccountSettingsPage() {
             }}
           >
             Save Changes
-          </button></div></form></div>
+          </button>
+        </div>
+      </form>
+    </div>
   );
 }

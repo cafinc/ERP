@@ -81,7 +81,8 @@ export default function CustomerEstimatesPage() {
                 {f.charAt(0).toUpperCase() + f.slice(1)}
               </button>
             ))}
-          </div></div>
+          </div>
+        </div>
 
         {/* Estimates List */}
         {loading ? (
@@ -136,10 +137,14 @@ export default function CustomerEstimatesPage() {
                     <button className="px-4 py-2 bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 transition-colors flex items-center gap-2">
                       <Download className="w-4 h-4" />
                       Download
-                    </button></div></div></div>
+                    </button>
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         )}
-      </div></div>
+      </div>
+    </div>
   );
 }

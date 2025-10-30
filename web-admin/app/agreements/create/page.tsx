@@ -230,7 +230,9 @@ export default function CreateAgreementPage() {
                   step === 'review' ? 'bg-[#3f72af] text-white' : 'bg-gray-200'
                 }`}>3</div>
                 <span className="font-medium">Review & Save</span>
-              </div></div></div>
+              </div>
+            </div>
+          </div>
 
           {/* Step 1: Select Creation Method */}
           {step === 'select' && (
@@ -328,7 +330,9 @@ export default function CreateAgreementPage() {
                   <p className="text-sm text-gray-600 mb-4">
                     Create a custom agreement from the ground up with your own terms
                   </p>
-                </div></div></div>
+                </div>
+              </div>
+            </div>
           )}
 
           {/* Step 2 & 3 content (details and review) would go here - keeping existing structure */}
@@ -349,9 +353,12 @@ export default function CreateAgreementPage() {
                   className="px-6 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#3f72af]/90 transition-colors disabled:opacity-50"
                 >
                   {step === 'details' ? 'Continue to Review' : (saving ? 'Creating...' : 'Create Agreement')}
-                </button></div></div>
+                </button>
+              </div>
+            </div>
           )}
-        </div></div>
+        </div>
+      </div>
     </>
   );
 }

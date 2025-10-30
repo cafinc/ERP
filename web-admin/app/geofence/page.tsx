@@ -250,7 +250,8 @@ export default function GeofenceManagementPage() {
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto"></div>
             <p className="mt-4 text-gray-600">Loading geofence data...</p>
-          </div></div>
+          </div>
+        </div>
   );
   }
 
@@ -289,7 +290,9 @@ export default function GeofenceManagementPage() {
                 </div>
                 <div className="p-3 bg-blue-100 rounded-lg">
                   <MapIcon className="w-6 h-6 text-[#3f72af]" />
-                </div></div></div>
+                </div>
+              </div>
+            </div>
 
             <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between">
@@ -299,7 +302,9 @@ export default function GeofenceManagementPage() {
                 </div>
                 <div className="p-3 bg-green-100 rounded-lg">
                   <Radio className="w-6 h-6 text-green-600" />
-                </div></div></div>
+                </div>
+              </div>
+            </div>
 
             <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between">
@@ -312,7 +317,9 @@ export default function GeofenceManagementPage() {
                 </div>
                 <div className="p-3 bg-blue-100 rounded-lg">
                   <Activity className="w-6 h-6 text-[#3f72af]" />
-                </div></div></div>
+                </div>
+              </div>
+            </div>
 
             <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between">
@@ -323,7 +330,10 @@ export default function GeofenceManagementPage() {
                 </div>
                 <div className="p-3 bg-orange-100 rounded-lg">
                   <User className="w-6 h-6 text-orange-600" />
-                </div></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
 
           {/* View Toggle */}
           <div className="mb-4 flex space-x-2">
@@ -370,7 +380,8 @@ export default function GeofenceManagementPage() {
             >
               <Activity className="w-4 h-4 inline-block mr-2" />
               Analytics
-            </button></div>
+            </button>
+          </div>
 
           {/* List View */}
           {view === 'list' && (
@@ -399,7 +410,8 @@ export default function GeofenceManagementPage() {
                     <option value="active">Active Only</option>
                     <option value="inactive">Inactive Only</option>
                   </select>
-                </div></div>
+                </div>
+              </div>
 
               <div className="divide-y divide-gray-200">
                 {filteredGeofences.length === 0 ? (
@@ -445,7 +457,8 @@ export default function GeofenceManagementPage() {
                                     Unsaved
                                   </span>
                                 )}
-                              </div></div>
+                              </div>
+                            </div>
                             
                             <p className="text-sm text-gray-600 mb-3">
                               {geofence.latitude.toFixed(6)}, {geofence.longitude.toFixed(6)}
@@ -510,7 +523,8 @@ export default function GeofenceManagementPage() {
                                   </label>
                                 </>
                               )}
-                            </div></div>
+                            </div>
+                          </div>
 
                           <div className="flex items-center gap-2 flex-shrink-0">
                             {geofence.exists !== false && (
@@ -543,11 +557,14 @@ export default function GeofenceManagementPage() {
                                 <Trash2 className="w-4 h-4" />
                               </button>
                             )}
-                          </div></div></div>
+                          </div>
+                        </div>
+                      </div>
   );
                   })
                 )}
-              </div></div>
+              </div>
+            </div>
           )}
 
           {/* Map View */}
@@ -566,7 +583,8 @@ export default function GeofenceManagementPage() {
                   <br />• Real-time crew positions
                   <br />• Entry/exit event history
                 </p>
-              </div></div>
+              </div>
+            </div>
           )}
 
           {/* Event Logs View */}
@@ -585,7 +603,8 @@ export default function GeofenceManagementPage() {
                 >
                   <RefreshCw className="w-4 h-4" />
                   Refresh
-                </button></div>
+                </button>
+              </div>
 
               {logs.length === 0 ? (
                 <div className="p-12 text-center">
@@ -642,7 +661,10 @@ export default function GeofenceManagementPage() {
                             {log.notes && (
                               <p className="text-xs text-gray-500 italic mt-2">{log.notes}</p>
                             )}
-                          </div></div></div></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   ))}
                 </div>
               )}
@@ -661,7 +683,9 @@ export default function GeofenceManagementPage() {
                       {/* Placeholder for actual analytics */}
                       <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                         <span className="text-sm text-gray-900">Loading analytics...</span>
-                      </div></div></div>
+                      </div>
+                    </div>
+                  </div>
                   
                   <div>
                     <h3 className="text-sm font-medium text-gray-700 mb-3">Crew Activity</h3>
@@ -669,15 +693,21 @@ export default function GeofenceManagementPage() {
                       {/* Placeholder for crew analytics */}
                       <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                         <span className="text-sm text-gray-900">Loading crew data...</span>
-                      </div></div></div></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
               <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
                 <h2 className="text-lg font-semibold text-gray-900 mb-4">Event Timeline</h2>
                 <p className="text-sm text-gray-600">
                   Visual timeline of all geofence events will be displayed here
                 </p>
-              </div></div>
+              </div>
+            </div>
           )}
-        </div></div>
+        </div>
+      </div>
   );
 }

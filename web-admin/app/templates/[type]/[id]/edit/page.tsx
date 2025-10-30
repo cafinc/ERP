@@ -242,7 +242,8 @@ export default function EditTemplatePage() {
               >
                 <SparklesIcon className="w-4 h-4" />
                 Browse Placeholders
-              </button></div>
+              </button>
+            </div>
             <p className="text-xs text-gray-500 mb-2">
               Use {`{{variable_name}}`} for placeholders. Click "Browse Placeholders" to see 70+ system variables.
             </p>
@@ -296,7 +297,17 @@ export default function EditTemplatePage() {
                   Save Changes
                 </>
               )}
-            </button></div></div></div></div></div></div></div></div></div></form>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+</form>
 
       {/* Placeholder Browser Modal */}
       {showPlaceholderBrowser && (

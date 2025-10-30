@@ -194,7 +194,8 @@ export default function CreateContractPage() {
           <div>
             <h1 className="text-3xl font-bold text-gray-900">Create Contract</h1>
             <p className="text-gray-600 mt-1">Create a new service agreement</p>
-          </div></div>
+          </div>
+        </div>
 
         {/* Customer Selection */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
@@ -223,7 +224,9 @@ export default function CreateContractPage() {
                   className="text-sm text-[#3f72af] hover:text-blue-800"
                 >
                   Change
-                </button></div></div>
+                </button>
+              </div>
+            </div>
           ) : (
             <div>
               <button
@@ -262,7 +265,8 @@ export default function CreateContractPage() {
                         <p className="text-sm text-gray-600">{customer.email}</p>
                       </button>
                     ))}
-                  </div></div>
+                  </div>
+                </div>
               )}
             </div>
           )}
@@ -379,7 +383,8 @@ export default function CreateContractPage() {
                   onChange={(e) => setFormData({ ...formData, contract_value: parseFloat(e.target.value) || 0 })}
                   className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                 />
-              </div></div>
+              </div>
+            </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -464,7 +469,9 @@ export default function CreateContractPage() {
                   />
                 </div>
               )}
-            </div></div></div>
+            </div>
+          </div>
+        </div>
 
         {/* Submit Actions */}
         <div className="flex justify-end gap-4">
@@ -492,5 +499,9 @@ export default function CreateContractPage() {
                 Create Contract
               </>
             )}
-          </button></div></form></div></div>);
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
 }

@@ -77,7 +77,8 @@ export default function CustomerInvoicesPage() {
                 {f.charAt(0).toUpperCase() + f.slice(1)}
               </button>
             ))}
-          </div></div>
+          </div>
+        </div>
 
         {/* Invoices List */}
         {loading ? (
@@ -151,11 +152,14 @@ export default function CustomerInvoicesPage() {
                           Pay Now
                         </button>
                       )}
-                    </div></div></div>
+                    </div>
+                  </div>
+                </div>
   );
             })}
           </div>
         )}
-      </div></div>
+      </div>
+    </div>
   );
 }

@@ -1071,7 +1071,8 @@ export default function SiteMapsGeofencingPage() {
             <div>
               <h1 className="text-2xl font-bold text-gray-900">{site.name} - Site Maps</h1>
               <p className="text-sm text-gray-600 mt-1">{site.location.address}</p>
-            </div></div>
+            </div>
+          </div>
 
           {activeTab === 'geofence' && (
             <div className="flex gap-2">
@@ -1149,7 +1150,8 @@ export default function SiteMapsGeofencingPage() {
           >
             <MapIcon className="w-4 h-4" />
             Annotations & Markup
-          </button></div>
+          </button>
+        </div>
 
         {/* Instructions */}
         {activeTab === 'geofence' && mapMode === 'edit' && (
@@ -1204,7 +1206,8 @@ export default function SiteMapsGeofencingPage() {
                 <p className="text-2xl font-bold text-gray-900">
                   {site?.created_at ? new Date(site.created_at).toLocaleDateString() : 'N/A'}
                 </p>
-              </div></div>
+              </div>
+            </div>
 
             {/* Map and Info Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -1232,7 +1235,9 @@ export default function SiteMapsGeofencingPage() {
                         >
                           <ExternalLink className="w-4 h-4 mr-1" />
                           Google Maps
-                        </button></div></div>
+                        </button>
+                      </div>
+                    </div>
                     
                     {/* Measurement Tools */}
                     <div className="flex items-center gap-2 flex-wrap">
@@ -1283,7 +1288,8 @@ export default function SiteMapsGeofencingPage() {
                       >
                         <Pencil className="w-4 h-4 mr-1" />
                         Add Annotations
-                      </button></div>
+                      </button>
+                    </div>
                     
                     {overviewMeasurementMode && (
                       <div className="mt-3 bg-blue-50 border border-blue-200 rounded-lg p-3">
@@ -1310,7 +1316,8 @@ export default function SiteMapsGeofencingPage() {
                             title="Clear all measurements"
                           >
                             <X className="w-4 h-4" />
-                          </button></div>
+                          </button>
+                        </div>
                         <div className="space-y-3">
                           {overviewMeasurementResults.map((result, idx) => (
                             <div key={idx} className="p-3 bg-gray-50 rounded-lg border border-gray-200">
@@ -1330,7 +1337,8 @@ export default function SiteMapsGeofencingPage() {
                                   <div className="flex justify-between">
                                     <span className="text-gray-600">Miles:</span>
                                     <span className="font-semibold">{result.distanceMiles} mi</span>
-                                  </div></div>
+                                  </div>
+                                </div>
                               ) : (
                                 <div className="space-y-1 text-sm">
                                   <div className="flex justify-between">
@@ -1348,13 +1356,17 @@ export default function SiteMapsGeofencingPage() {
                                   <div className="flex justify-between">
                                     <span className="text-gray-600">Perimeter:</span>
                                     <span className="font-semibold">{result.perimeterFeet} ft</span>
-                                  </div></div>
+                                  </div>
+                                </div>
                               )}
                             </div>
                           ))}
-                        </div></div>
+                        </div>
+                      </div>
                     )}
-                  </div></div></div>
+                  </div>
+                </div>
+              </div>
 
               {/* Site Information Sidebar */}
               <div className="space-y-4">
@@ -1381,7 +1393,8 @@ export default function SiteMapsGeofencingPage() {
                         <p className="text-sm font-medium text-gray-900">{site.site_reference}</p>
                       </div>
                     )}
-                  </div></div>
+                  </div>
+                </div>
 
                 {/* Quick Actions */}
                 <div className="bg-white rounded-lg shadow-sm p-6">
@@ -1422,7 +1435,9 @@ export default function SiteMapsGeofencingPage() {
                     >
                       <Share2 className="w-4 h-4 mr-2" />
                       Share Map with Customer (Coming Soon)
-                    </button></div></div>
+                    </button>
+                  </div>
+                </div>
 
                 {/* Map Versions */}
                 {siteMaps.length > 0 && (
@@ -1453,7 +1468,8 @@ export default function SiteMapsGeofencingPage() {
                                 Current
                               </span>
                             )}
-                          </div></div>
+                          </div>
+                        </div>
                       ))}
                       {siteMaps.length > 3 && (
                         <button
@@ -1463,9 +1479,12 @@ export default function SiteMapsGeofencingPage() {
                           View all {siteMaps.length} versions →
                         </button>
                       )}
-                    </div></div>
+                    </div>
+                  </div>
                 )}
-              </div></div></div>
+              </div>
+            </div>
+          </div>
         )}
 
         {activeTab === 'geofence' && (
@@ -1518,7 +1537,9 @@ export default function SiteMapsGeofencingPage() {
                     <span className="font-semibold text-gray-900">
                       {measurements.num_points}
                     </span>
-                  </div></div></div>
+                  </div>
+                </div>
+              </div>
             )}
 
             {/* Geofence Info Panel (View Mode) */}
@@ -1562,7 +1583,9 @@ export default function SiteMapsGeofencingPage() {
                     <span className="font-semibold text-gray-900">
                       {geofence.polygon_coordinates.length}
                     </span>
-                  </div></div></div>
+                  </div>
+                </div>
+              </div>
             )}
           </>
         )}
@@ -1622,7 +1645,8 @@ export default function SiteMapsGeofencingPage() {
                 >
                   <MapPin className="w-4 h-4 mr-2" />
                   Add Marker
-                </button></div>
+                </button>
+              </div>
 
               {/* Colors */}
               <div className="mb-4">
@@ -1639,7 +1663,8 @@ export default function SiteMapsGeofencingPage() {
                       title={color.name}
                     />
                   ))}
-                </div></div>
+                </div>
+              </div>
 
               {/* Category */}
               <div className="mb-4">
@@ -1680,7 +1705,8 @@ export default function SiteMapsGeofencingPage() {
                 >
                   <Trash2 className="w-4 h-4 mr-2" />
                   Clear All
-                </button></div>
+                </button>
+              </div>
 
               <div className="border-t border-gray-200 mt-4 pt-4 space-y-2">
                 <button
@@ -1704,7 +1730,8 @@ export default function SiteMapsGeofencingPage() {
                 >
                   <Layers className="w-4 h-4 mr-2" />
                   View Saved Maps ({siteMaps.length})
-                </button></div>
+                </button>
+              </div>
 
               {/* Annotations count */}
               <div className="mt-4 p-3 bg-blue-50 rounded-lg">
@@ -1716,7 +1743,8 @@ export default function SiteMapsGeofencingPage() {
                     Current: {currentMap.name} (v{currentMap.version})
                   </p>
                 )}
-              </div></div>
+              </div>
+            </div>
 
             {/* Map Canvas */}
             <div className="flex-1">
@@ -1735,7 +1763,8 @@ export default function SiteMapsGeofencingPage() {
                   className="text-gray-400 hover:text-gray-600"
                 >
                   <X className="w-6 h-6" />
-                </button></div>
+                </button>
+              </div>
               <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Map Name
@@ -1771,7 +1800,10 @@ export default function SiteMapsGeofencingPage() {
                       Save
                     </>
                   )}
-                </button></div></div></div>
+                </button>
+              </div>
+            </div>
+          </div>
         )}
 
         {/* Maps List Modal */}
@@ -1785,7 +1817,8 @@ export default function SiteMapsGeofencingPage() {
                   className="text-gray-400 hover:text-gray-600"
                 >
                   <X className="w-6 h-6" />
-                </button></div>
+                </button>
+              </div>
               <div className="p-6">
                 {annotationsLoading ? (
                   <div className="text-center py-12">
@@ -1836,12 +1869,18 @@ export default function SiteMapsGeofencingPage() {
                               title="Delete this map"
                             >
                               <Trash2 className="w-5 h-5" />
-                            </button></div></div></div>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
                     ))}
                   </div>
                 )}
-              </div></div></div>
+              </div>
+            </div>
+          </div>
         )}
-      </div></div>
+      </div>
+    </div>
   );
 }

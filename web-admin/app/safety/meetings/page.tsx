@@ -114,7 +114,9 @@ export default function SafetyMeetingsPage() {
               }`}
             >
               Committee ({meetings.filter(m => m.type === 'Safety Committee').length})
-            </button></div></div>
+            </button>
+          </div>
+        </div>
 
         {/* Search Bar */}
         <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-3 mb-4 mx-6 mt-6 hover:shadow-md transition-shadow">
@@ -128,7 +130,9 @@ export default function SafetyMeetingsPage() {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
               />
-            </div></div></div>
+            </div>
+          </div>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mx-6">
           {filteredMeetings.map((meeting, index) => (
@@ -145,7 +149,9 @@ export default function SafetyMeetingsPage() {
                   <div className="flex-1 min-w-0">
                     <h3 className="font-semibold text-gray-900 truncate">{meeting.meeting_number}</h3>
                     <p className="text-sm text-gray-600 truncate">{meeting.topic}</p>
-                  </div></div></div>
+                  </div>
+                </div>
+              </div>
 
               <div className="flex items-center gap-2 mb-4">
                 <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${getTypeColor(meeting.type)}`}>
@@ -169,7 +175,8 @@ export default function SafetyMeetingsPage() {
                 <div className="flex items-center gap-2 text-sm text-gray-600">
                   <Clock className="w-4 h-4" />
                   <span>{meeting.duration} minutes</span>
-                </div></div>
+                </div>
+              </div>
 
               <div className="flex items-center space-x-2 pt-4 border-t border-gray-200">
                 <button
@@ -191,9 +198,12 @@ export default function SafetyMeetingsPage() {
                 >
                   <Edit className="w-4 h-4" />
                   <span>Edit</span>
-                </button></div></div>
+                </button>
+              </div>
+            </div>
           ))}
-        </div></div>
+        </div>
+      </div>
     </PageHeader>
   );
 }

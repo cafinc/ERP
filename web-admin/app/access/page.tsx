@@ -225,7 +225,8 @@ export default function AccessDashboardPage() {
                   <div>
                     <h3 className="text-xl font-bold">{group.name}</h3>
                     <p className="text-sm opacity-90 mt-1">{group.description}</p>
-                  </div></div>
+                  </div>
+                </div>
                 <span className="bg-white/20 px-3 py-1 rounded-full text-sm font-medium">
                   {users.filter(u => u.access_group === group.name).length} users
                 </span>
@@ -247,7 +248,8 @@ export default function AccessDashboardPage() {
                     +{group.permissions.length - 8} more permissions
                   </p>
                 )}
-              </div></div>
+              </div>
+            </div>
           ))}
         </div>
 
@@ -287,7 +289,8 @@ export default function AccessDashboardPage() {
               <option value="active">Active</option>
               <option value="inactive">Inactive</option>
             </select>
-          </div></div>
+          </div>
+        </div>
 
         {/* Users Table */}
         <div className="mx-6 mt-6">
@@ -380,7 +383,8 @@ export default function AccessDashboardPage() {
                             title="Delete"
                           >
                             <Trash2 className="w-4 h-4" />
-                          </button></div>
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   ))}
@@ -394,7 +398,8 @@ export default function AccessDashboardPage() {
                 <p className="text-gray-600">No users found matching your filters</p>
               </div>
             )}
-          </div></div>
+          </div>
+        </div>
 
         {/* Audit Log Notice */}
         <div className="mx-6 mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
@@ -406,7 +411,9 @@ export default function AccessDashboardPage() {
                 All access changes and permission modifications are automatically logged for security and compliance purposes. 
                 View audit logs in Settings → Security.
               </p>
-            </div></div></div>
+            </div>
+          </div>
+        </div>
 
         {/* Add User Modal */}
         {showAddUserModal && (
@@ -487,7 +494,11 @@ export default function AccessDashboardPage() {
                     className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 font-medium transition-colors"
                   >
                     Cancel
-                  </button></div></form></div></div>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
         )}
       </div>
   );

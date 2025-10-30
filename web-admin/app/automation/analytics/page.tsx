@@ -151,7 +151,9 @@ export default function AutomationAnalyticsPage() {
               </div>
               <div className="bg-blue-100 p-4 rounded-xl">
                 <Zap className="w-6 h-6 text-[#3f72af]" />
-              </div></div></div>
+              </div>
+            </div>
+          </div>
 
           <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
@@ -162,7 +164,9 @@ export default function AutomationAnalyticsPage() {
               </div>
               <div className="bg-green-100 p-4 rounded-xl">
                 <CheckCircle className="w-6 h-6 text-green-600" />
-              </div></div></div>
+              </div>
+            </div>
+          </div>
 
           <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
@@ -173,7 +177,9 @@ export default function AutomationAnalyticsPage() {
               </div>
               <div className="bg-red-100 p-4 rounded-xl">
                 <XCircle className="w-6 h-6 text-red-600" />
-              </div></div></div>
+              </div>
+            </div>
+          </div>
 
           <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
@@ -186,7 +192,10 @@ export default function AutomationAnalyticsPage() {
               </div>
               <div className="bg-purple-100 p-4 rounded-xl">
                 <Clock className="w-6 h-6 text-purple-600" />
-              </div></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
 
         {/* Filters */}
         <div className="px-6 py-4 bg-white rounded-xl shadow-lg border border-gray-200 mt-6 mx-6">
@@ -225,7 +234,10 @@ export default function AutomationAnalyticsPage() {
               >
                 <RefreshCw className="w-4 h-4" />
                 Refresh
-              </button></div></div></div>
+              </button>
+            </div>
+          </div>
+        </div>
 
         {/* Workflow Performance */}
         <div className="mx-6 mt-6">
@@ -244,7 +256,8 @@ export default function AutomationAnalyticsPage() {
                     'bg-red-100 text-red-700'
                   }`}>
                     {metric.success_rate.toFixed(1)}%
-                  </div></div>
+                  </div>
+                </div>
 
                 <div className="space-y-3">
                   <div className="flex items-center justify-between text-sm">
@@ -268,7 +281,8 @@ export default function AutomationAnalyticsPage() {
                     <span className="font-semibold text-gray-900">
                       {new Date(metric.last_execution).toLocaleString()}
                     </span>
-                  </div></div>
+                  </div>
+                </div>
 
                 {/* Progress Bar */}
                 <div className="mt-4">
@@ -277,7 +291,8 @@ export default function AutomationAnalyticsPage() {
                       className="bg-green-500 h-2 rounded-full transition-all"
                       style={{ width: `${metric.success_rate}%` }}
                     />
-                  </div></div>
+                  </div>
+                </div>
 
                 <button
                   onClick={() => router.push(`/automation/workflows/${metric.workflow_id}`)}
@@ -292,9 +307,11 @@ export default function AutomationAnalyticsPage() {
                 >
                   <Activity className="w-4 h-4" />
                   Execution History
-                </button></div>
+                </button>
+              </div>
             ))}
-          </div></div>
+          </div>
+        </div>
 
         {/* Recent Executions */}
         <div className="mx-6 mt-8">
@@ -360,7 +377,9 @@ export default function AutomationAnalyticsPage() {
                 </table>
               </div>
             )}
-          </div></div></div>
+          </div>
+        </div>
+      </div>
     </PageHeader>
   );
 }

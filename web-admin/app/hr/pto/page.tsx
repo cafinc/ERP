@@ -184,7 +184,8 @@ export default function PTOManagementPage() {
                 <p className="text-3xl font-bold text-yellow-600">{stats.pending}</p>
               </div>
               <Clock className="h-12 w-12 text-yellow-500" />
-            </div></div>
+            </div>
+          </div>
 
           <div className="bg-white rounded-lg shadow p-6">
             <div className="flex items-center justify-between">
@@ -193,7 +194,8 @@ export default function PTOManagementPage() {
                 <p className="text-3xl font-bold text-green-600">{stats.approved}</p>
               </div>
               <CheckCircle className="h-12 w-12 text-green-500" />
-            </div></div>
+            </div>
+          </div>
 
           <div className="bg-white rounded-lg shadow p-6">
             <div className="flex items-center justify-between">
@@ -202,7 +204,8 @@ export default function PTOManagementPage() {
                 <p className="text-3xl font-bold text-red-600">{stats.denied}</p>
               </div>
               <XCircle className="h-12 w-12 text-red-500" />
-            </div></div>
+            </div>
+          </div>
 
           <div className="bg-white rounded-lg shadow p-6">
             <div className="flex items-center justify-between">
@@ -211,7 +214,9 @@ export default function PTOManagementPage() {
                 <p className="text-3xl font-bold text-[#3f72af]">{stats.totalDays}</p>
               </div>
               <Calendar className="h-12 w-12 text-blue-500" />
-            </div></div></div>
+            </div>
+          </div>
+        </div>
 
         {/* Filters */}
         <div className="bg-white rounded-lg shadow p-4 mb-4">
@@ -246,7 +251,9 @@ export default function PTOManagementPage() {
             <button className="flex items-center gap-2 px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300">
               <Download className="h-4 w-4" />
               Export
-            </button></div></div>
+            </button>
+          </div>
+        </div>
 
         {/* PTO Requests List */}
         <div className="bg-white rounded-lg shadow overflow-hidden">
@@ -271,7 +278,8 @@ export default function PTOManagementPage() {
                       <div className="flex-shrink-0">
                         <div className="h-12 w-12 rounded-full bg-[#5b8ec4] flex items-center justify-center text-white font-semibold">
                           {request.employee_name?.charAt(0) || "?"}
-                        </div></div>
+                        </div>
+                      </div>
 
                       <div className="flex-1">
                         <div className="flex items-center gap-3 mb-2">
@@ -312,7 +320,8 @@ export default function PTOManagementPage() {
                             <span>
                               <strong>Duration:</strong> {request.total_days} day(s)
                             </span>
-                          </div></div>
+                          </div>
+                        </div>
 
                         {request.reason && (
                           <div className="text-sm text-gray-600 mb-2">
@@ -332,7 +341,8 @@ export default function PTOManagementPage() {
                             {request.reviewed_by}
                           </div>
                         )}
-                      </div></div>
+                      </div>
+                    </div>
 
                     <div className="flex flex-col gap-2 ml-4">
                       {request.status === "pending" && (
@@ -364,7 +374,10 @@ export default function PTOManagementPage() {
                       >
                         <TrendingUp className="h-4 w-4" />
                         View Balance
-                      </button></div></div></div>
+                      </button>
+                    </div>
+                  </div>
+                </div>
               ))}
             </div>
           )}
@@ -379,7 +392,8 @@ export default function PTOManagementPage() {
                 <span className="font-semibold">{stats.pending}</span> PTO request(s)
                 awaiting your review
               </p>
-            </div></div>
+            </div>
+          </div>
         )}
       </div>
 
@@ -400,7 +414,8 @@ export default function PTOManagementPage() {
                 className="text-gray-400 hover:text-gray-600"
               >
                 <XCircle className="h-6 w-6" />
-              </button></div>
+              </button>
+            </div>
 
             <div className="px-6 py-4">
               {employeeBalance ? (
@@ -449,7 +464,8 @@ export default function PTOManagementPage() {
                   <div className="text-xs text-gray-500 text-center pt-2">
                     Year: {employeeBalance.year} • Last Updated:{" "}
                     {new Date(employeeBalance.updated_at).toLocaleDateString()}
-                  </div></div>
+                  </div>
+                </div>
               ) : (
                 <div className="text-center py-8 text-gray-500">
                   Loading balance information...
@@ -467,7 +483,10 @@ export default function PTOManagementPage() {
                 className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors"
               >
                 Close
-              </button></div></div></div>
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

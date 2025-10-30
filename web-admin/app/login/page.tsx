@@ -101,12 +101,15 @@ export default function LoginPage() {
             className="w-full bg-[#3f72af] hover:bg-[#3f72af]/90 text-white font-semibold py-3 px-4 rounded-lg transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? 'Signing in...' : 'Sign In'}
-          </button></form>
+          </button>
+        </form>
 
         <div className="mt-6 text-center text-sm text-gray-500">
           <p className="bg-yellow-50 border border-yellow-200 rounded p-2">
             🔓 Demo Mode: Click "Sign In" (no credentials needed)
           </p>
-        </div></div></div>
+        </div>
+      </div>
+    </div>
   );
 }

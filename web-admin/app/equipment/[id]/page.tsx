@@ -141,7 +141,9 @@ export default function EquipmentDetailPage() {
         <div className="flex-1 overflow-auto p-6">
           <div className="flex items-center justify-center h-64">
             <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
-          </div></div></div>
+          </div>
+        </div>
+      </div>
   );
   }
 
@@ -155,7 +157,8 @@ export default function EquipmentDetailPage() {
             className="mt-4 text-[#3f72af] hover:text-blue-800"
           >
             Return to Equipment
-          </button></div>
+          </button>
+        </div>
   );
   }
 
@@ -202,7 +205,8 @@ export default function EquipmentDetailPage() {
             >
               <Trash2 className="w-4 h-4" />
               Delete
-            </button></div>
+            </button>
+          </div>
 
         {/* Status Badge */}
         <div className="flex items-center gap-3">
@@ -256,7 +260,8 @@ export default function EquipmentDetailPage() {
             >
               <Clock className="w-5 h-5" />
               View History
-            </button></div>
+            </button>
+          </div>
 
         {/* Equipment Details */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -269,7 +274,8 @@ export default function EquipmentDetailPage() {
                   <div>
                     <p className="text-sm text-gray-600">Unit Number</p>
                     <p className="text-sm font-medium text-gray-900">{equipment.unit_number}</p>
-                  </div></div>
+                  </div>
+                </div>
               )}
               {equipment.license_plate && (
                 <div className="flex items-center gap-3">
@@ -277,7 +283,8 @@ export default function EquipmentDetailPage() {
                   <div>
                     <p className="text-sm text-gray-600">License Plate</p>
                     <p className="text-sm font-medium text-gray-900">{equipment.license_plate}</p>
-                  </div></div>
+                  </div>
+                </div>
               )}
               <div className="flex items-center gap-3">
                 <Calendar className="w-5 h-5 text-gray-400" />
@@ -299,7 +306,8 @@ export default function EquipmentDetailPage() {
                     <p className="text-sm font-medium text-gray-900">
                       {new Date(equipment.last_maintenance).toLocaleDateString()}
                     </p>
-                  </div></div>
+                  </div>
+                </div>
               )}
               {equipment.maintenance_due && (
                 <div className="flex items-center gap-3">
@@ -309,7 +317,8 @@ export default function EquipmentDetailPage() {
                     <p className={`text-sm font-medium ${isMaintenanceDue() ? 'text-red-600' : 'text-gray-900'}`}>
                       {new Date(equipment.maintenance_due).toLocaleDateString()}
                     </p>
-                  </div></div>
+                  </div>
+                </div>
               )}
             </div>
 
@@ -331,6 +340,8 @@ export default function EquipmentDetailPage() {
             <p className="text-gray-700 whitespace-pre-wrap">{equipment.notes}</p>
           </div>
         )}
-        </div></div></div>
+        </div>
+      </div>
+    </div>
   );
 }

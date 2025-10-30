@@ -121,7 +121,8 @@ export default function SubmenuOptions() {
                         <li key={idx}>• {con}</li>
                       ))}
                     </ul>
-                  </div></div>
+                  </div>
+                </div>
 
                 <button
                   onClick={(e) => {
@@ -131,7 +132,8 @@ export default function SubmenuOptions() {
                   className="w-full px-4 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] text-sm font-medium transition-colors"
                 >
                   Preview Demo
-                </button></div>
+                </button>
+              </div>
             ))}
           </div>
 
@@ -148,7 +150,8 @@ export default function SubmenuOptions() {
                     className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
                   >
                     <X className="w-6 h-6" />
-                  </button></div>
+                  </button>
+                </div>
 
                 <div className="p-6">
                   {/* Top Bar Demo */}
@@ -168,7 +171,9 @@ export default function SubmenuOptions() {
                                 {item.label}
                               </button>
                             ))}
-                          </div></div></div>
+                          </div>
+                        </div>
+                      </div>
                       <div className="bg-gray-50 rounded-lg p-4">
                         <h4 className="font-semibold mb-2">Best For:</h4>
                         <ul className="text-sm text-gray-600 space-y-1">
@@ -176,7 +181,8 @@ export default function SubmenuOptions() {
                           <li>• Menus with 3-8 items</li>
                           <li>• Users who prefer horizontal navigation</li>
                         </ul>
-                      </div></div>
+                      </div>
+                    </div>
                   )}
 
                   {/* Slide Panel Demo */}
@@ -194,7 +200,8 @@ export default function SubmenuOptions() {
                               </h3>
                               <button className="p-2 hover:bg-gray-100 rounded-lg">
                                 <X className="w-5 h-5" />
-                              </button></div>
+                              </button>
+                            </div>
                             <div className="space-y-2">
                               {hrSubmenu.map((item) => {
                                 const Icon = item.icon;
@@ -210,7 +217,10 @@ export default function SubmenuOptions() {
                                   </button>
   );
                               })}
-                            </div></div></div></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                       <div className="bg-gray-50 rounded-lg p-4">
                         <h4 className="font-semibold mb-2">Best For:</h4>
                         <ul className="text-sm text-gray-600 space-y-1">
@@ -218,7 +228,8 @@ export default function SubmenuOptions() {
                           <li>• When you want icons + descriptions</li>
                           <li>• Modern, app-like experience</li>
                         </ul>
-                      </div></div>
+                      </div>
+                    </div>
                   )}
 
                   {/* Dropdown Demo */}
@@ -232,7 +243,8 @@ export default function SubmenuOptions() {
                           <div className="w-16 bg-gray-800 rounded-lg p-2">
                             <div className="p-2 bg-[#3f72af] rounded">
                               <Briefcase className="w-5 h-5 text-white" />
-                            </div></div>
+                            </div>
+                          </div>
                           <div className="w-64 bg-white rounded-lg shadow-xl border border-gray-200 p-2">
                             {hrSubmenu.slice(0, 5).map((item) => (
                               <button
@@ -242,7 +254,9 @@ export default function SubmenuOptions() {
                                 {item.label}
                               </button>
                             ))}
-                          </div></div></div>
+                          </div>
+                        </div>
+                      </div>
                       <div className="bg-gray-50 rounded-lg p-4">
                         <h4 className="font-semibold mb-2">Best For:</h4>
                         <ul className="text-sm text-gray-600 space-y-1">
@@ -250,7 +264,8 @@ export default function SubmenuOptions() {
                           <li>• Users familiar with standard menus</li>
                           <li>• Compact, space-efficient design</li>
                         </ul>
-                      </div></div>
+                      </div>
+                    </div>
                   )}
 
                   {/* Mega Menu Demo */}
@@ -284,7 +299,9 @@ export default function SubmenuOptions() {
                                 </div>
   );
                             })}
-                          </div></div></div>
+                          </div>
+                        </div>
+                      </div>
                       <div className="bg-gray-50 rounded-lg p-4">
                         <h4 className="font-semibold mb-2">Best For:</h4>
                         <ul className="text-sm text-gray-600 space-y-1">
@@ -292,7 +309,8 @@ export default function SubmenuOptions() {
                           <li>• Complex apps with many modules</li>
                           <li>• When you want to showcase features</li>
                         </ul>
-                      </div></div>
+                      </div>
+                    </div>
                   )}
 
                   {/* Breadcrumb Bar Demo */}
@@ -311,7 +329,9 @@ export default function SubmenuOptions() {
                                 <option key={item.href}>{item.label}</option>
                               ))}
                             </select>
-                          </div></div></div>
+                          </div>
+                        </div>
+                      </div>
                       <div className="bg-gray-50 rounded-lg p-4">
                         <h4 className="font-semibold mb-2">Best For:</h4>
                         <ul className="text-sm text-gray-600 space-y-1">
@@ -319,9 +339,12 @@ export default function SubmenuOptions() {
                           <li>• Power users who know the structure</li>
                           <li>• Maximum screen space for content</li>
                         </ul>
-                      </div></div>
+                      </div>
+                    </div>
                   )}
-                </div></div></div>
+                </div>
+              </div>
+            </div>
           )}
 
           {/* Recommendation */}
@@ -342,6 +365,11 @@ export default function SubmenuOptions() {
                 <p className="text-sm text-blue-100">
                   Clean, simple, all options visible. Good if you keep menus under 8 items.
                 </p>
-              </div></div></div></div></div></DashboardLayout>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </DashboardLayout>
   );
 }

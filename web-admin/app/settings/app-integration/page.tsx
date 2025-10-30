@@ -51,7 +51,8 @@ export default function AppIntegrationPage() {
                 >
                   {integration.status === 'connected' ? '✓ Connected' : 'Not Connected'}
                 </span>
-              </div></div>
+              </div>
+            </div>
             <button
               style={{
                 padding: '8px 16px',
@@ -65,8 +66,10 @@ export default function AppIntegrationPage() {
               }}
             >
               {integration.status === 'connected' ? 'Disconnect' : 'Connect'}
-            </button></div>
+            </button>
+          </div>
         ))}
-      </div></div>
+      </div>
+    </div>
   );
 }

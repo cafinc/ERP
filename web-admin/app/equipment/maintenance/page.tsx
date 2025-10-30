@@ -238,7 +238,9 @@ export default function MaintenancePage() {
               }`}
             >
               Completed ({records.filter((r) => r.status === 'completed').length})
-            </button></div></div>
+            </button>
+          </div>
+        </div>
 
         {/* Search Bar with Type Filter */}
         <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-3 mb-4 mx-6 mt-6 hover:shadow-md transition-shadow">
@@ -271,7 +273,9 @@ export default function MaintenancePage() {
             >
               <RefreshCw className="w-4 h-4" />
               <span>Refresh</span>
-            </button></div></div>
+            </button>
+          </div>
+        </div>
 
         {/* Maintenance Records Grid */}
         {filteredRecords.length === 0 ? (
@@ -310,7 +314,9 @@ export default function MaintenancePage() {
                     <div className="flex-1 min-w-0">
                       <h3 className="font-semibold text-gray-900 truncate">{record.equipment_name}</h3>
                       <p className="text-sm text-gray-600 truncate">{record.description}</p>
-                    </div></div></div>
+                    </div>
+                  </div>
+                </div>
 
                 {/* Badges */}
                 <div className="flex items-center gap-2 mb-4 flex-wrap">
@@ -371,7 +377,9 @@ export default function MaintenancePage() {
                   >
                     <Edit className="w-4 h-4" />
                     <span>Edit</span>
-                  </button></div></div>
+                  </button>
+                </div>
+              </div>
             ))}
           </div>
         )}

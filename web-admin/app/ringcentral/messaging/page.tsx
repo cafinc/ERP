@@ -116,7 +116,9 @@ export default function TeamMessagingPage() {
                     className="p-2 hover:bg-gray-200 rounded-lg transition-colors"
                   >
                     <RefreshCw className="w-4 h-4" />
-                  </button></div></div>
+                  </button>
+                </div>
+              </div>
 
               {loading ? (
                 <div className="flex items-center justify-center py-12">
@@ -132,7 +134,8 @@ export default function TeamMessagingPage() {
                     className="mt-4 px-4 py-2 bg-[#3f72af] hover:bg-[#2c5282] text-white rounded-lg text-sm transition-colors"
                   >
                     Retry
-                  </button></div>
+                  </button>
+                </div>
               ) : chats.length === 0 ? (
                 <div className="text-center py-12 px-4">
                   <MessageCircle className="w-12 h-12 text-gray-300 mx-auto mb-3" />
@@ -159,7 +162,9 @@ export default function TeamMessagingPage() {
                           <p className="text-sm text-gray-500 truncate">
                             {chat.description || 'Team conversation'}
                           </p>
-                        </div></div></div>
+                        </div>
+                      </div>
+                    </div>
                   ))}
                 </div>
               )}
@@ -202,7 +207,8 @@ export default function TeamMessagingPage() {
                               </p>
                             </div>
                             <p className="text-gray-700 mt-1">{message.text}</p>
-                          </div></div>
+                          </div>
+                        </div>
                       ))
                     )}
                   </div>
@@ -228,7 +234,9 @@ export default function TeamMessagingPage() {
                           <Send className="w-5 h-5" />
                         )}
                         <span>{sending ? 'Sending...' : 'Send'}</span>
-                      </button></form></div>
+                      </button>
+                    </form>
+                  </div>
                 </>
               ) : (
                 <div className="flex items-center justify-center h-full">
@@ -238,7 +246,13 @@ export default function TeamMessagingPage() {
                     <p className="text-gray-400 text-sm mt-2">
                       Choose a conversation from the list to start messaging
                     </p>
-                  </div></div>
+                  </div>
+                </div>
               )}
-            </div></div></div></div></div></div>);
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 }

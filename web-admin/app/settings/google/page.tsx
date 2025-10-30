@@ -37,6 +37,10 @@ export default function GoogleSettingsPage() {
             >
               <Save className="w-4 h-4" />
               {loading ? 'Saving...' : 'Save Settings'}
-            </button></div></div></div></div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

@@ -145,7 +145,10 @@ export default function InvoiceDetailPage() {
       <div className="flex-1 overflow-auto p-6">
         <div className="flex items-center justify-center h-full">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
-        </div></div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
   );
   }
 
@@ -162,7 +165,9 @@ export default function InvoiceDetailPage() {
             >
               <ArrowLeft className="w-5 h-5" />
               <span>Back to Invoices</span>
-            </button></div></div>
+            </button>
+          </div>
+        </div>
   );
   }
 
@@ -201,7 +206,8 @@ export default function InvoiceDetailPage() {
             <button className="flex items-center space-x-2 px-4 py-2 border border-gray-300 hover:bg-gray-50 rounded-lg font-medium transition-colors">
               <Download className="w-4 h-4" />
               <span>Download PDF</span>
-            </button></div>
+            </button>
+          </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           {/* Main Content */}
@@ -324,18 +330,21 @@ export default function InvoiceDetailPage() {
                               {payment.payment_method.replace('_', ' ')}
                               {payment.transaction_id && ` • ${payment.transaction_id}`}
                             </p>
-                          </div></div>
+                          </div>
+                        </div>
                         <div className="text-right">
                           <p className="text-sm text-gray-600">
                             {new Date(payment.payment_date).toLocaleDateString()}
                           </p>
-                        </div></div>
+                        </div>
+                      </div>
                       {payment.notes && (
                         <p className="text-sm text-gray-600 mt-2 ml-11">{payment.notes}</p>
                       )}
                     </div>
                   ))}
-                </div></div>
+                </div>
+              </div>
             )}
           </div>
 
@@ -373,7 +382,8 @@ export default function InvoiceDetailPage() {
                     <span className={`text-sm font-medium ${invoice.deposit_paid ? 'text-green-600' : 'text-orange-600'}`}>
                       {invoice.deposit_paid ? 'Deposit Paid' : 'Deposit Pending'}
                     </span>
-                  </div></div>
+                  </div>
+                </div>
               )}
             </div>
 
@@ -403,7 +413,8 @@ export default function InvoiceDetailPage() {
                   className="p-1 hover:bg-gray-100 rounded-lg transition-colors"
                 >
                   <X className="w-5 h-5" />
-                </button></div>
+                </button>
+              </div>
               
               <div className="space-y-4">
                 <div>
@@ -484,8 +495,13 @@ export default function InvoiceDetailPage() {
                   className="flex-1 px-4 py-2 border border-gray-300 hover:bg-gray-50 rounded-lg font-medium transition-colors"
                 >
                   Cancel
-                </button></div></div></div></div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
         )}
-        </div></div>
+        </div>
+      </div>
   );
 }

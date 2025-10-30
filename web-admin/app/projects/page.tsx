@@ -189,7 +189,8 @@ export default function ProjectsPage() {
                 }`}
               >
                 Cancelled ({projects.filter(p => p.status?.toLowerCase() === 'cancelled').length})
-              </button></div>
+              </button>
+            </div>
 
             {/* View Toggle */}
             <div className="flex items-center space-x-2 bg-gray-100 rounded-lg p-1">
@@ -218,7 +219,10 @@ export default function ProjectsPage() {
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 5a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM14 5a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1V5zM4 15a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1v-4zM14 15a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z" />
                 </svg>
-              </button></div></div></div>
+              </button>
+            </div>
+          </div>
+        </div>
 
         <div className="px-6 py-4 bg-white border-b border-gray-200">
           <div className="flex items-center justify-between">
@@ -228,7 +232,9 @@ export default function ProjectsPage() {
               <span className="text-lg font-bold text-[#3f72af]">
                 ${projects.reduce((sum, p) => sum + (p.total_amount || 0), 0).toLocaleString()}
               </span>
-            </div></div></div>
+            </div>
+          </div>
+        </div>
 
         {/* Search Bar */}
         <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-3 mb-4 mx-6 mt-6 hover:shadow-md transition-shadow">
@@ -251,7 +257,9 @@ export default function ProjectsPage() {
             >
               <RefreshCw className="w-4 h-4" />
               <span>Refresh</span>
-            </button></div></div>
+            </button>
+          </div>
+        </div>
 
         {/* Projects Display */}
         {filteredProjects.length === 0 ? (
@@ -297,7 +305,8 @@ export default function ProjectsPage() {
                     <div className="text-white mt-8">
                       <p className="text-xs opacity-90 mb-1">#{project.project_number}</p>
                       <h3 className="text-lg font-bold truncate">{project.name}</h3>
-                    </div></div>
+                    </div>
+                  </div>
 
                   {/* Card Body */}
                   <div className="p-4">
@@ -338,7 +347,8 @@ export default function ProjectsPage() {
                           className="bg-[#3f72af] h-2 rounded-full transition-all"
                           style={{ width: `${project.completion_percentage}%` }}
                         />
-                      </div></div>
+                      </div>
+                    </div>
 
                     {/* Amount */}
                     <div className="flex items-center justify-between pt-3 border-t border-gray-100">
@@ -373,7 +383,10 @@ export default function ProjectsPage() {
                       >
                         <Edit className="w-3 h-3" />
                         Edit
-                      </button></div></div></div>
+                      </button>
+                    </div>
+                  </div>
+                </div>
   );
             })}
           </div>
@@ -431,7 +444,8 @@ export default function ProjectsPage() {
                             />
                           </div>
                           <span className="text-xs font-medium">{project.completion_percentage}%</span>
-                        </div></div>
+                        </div>
+                      </div>
 
                       {project.site_address && (
                         <div className="mt-2 flex items-center gap-1 text-xs text-gray-500">
@@ -462,7 +476,10 @@ export default function ProjectsPage() {
                       >
                         <Edit className="w-4 h-4" />
                         Edit
-                      </button></div></div></div>
+                      </button>
+                    </div>
+                  </div>
+                </div>
   );
             })}
           </div>

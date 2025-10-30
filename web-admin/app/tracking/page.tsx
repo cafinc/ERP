@@ -277,7 +277,8 @@ export default function LiveTrackingPage() {
       />
       <div className="flex items-center justify-center h-screen">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
-        </div></div>
+        </div>
+      </div>
   );
   }
 
@@ -342,7 +343,8 @@ export default function LiveTrackingPage() {
               >
                 <Truck className="w-4 h-4" />
                 Equipment ({equipment.length})
-              </button></div>
+              </button>
+            </div>
 
           {/* Auto Refresh Toggle */}
           <label className="flex items-center gap-2 cursor-pointer">
@@ -362,7 +364,8 @@ export default function LiveTrackingPage() {
           >
             <RefreshCw className="w-4 h-4" />
             Refresh Now
-          </button></div>
+          </button>
+        </div>
 
         {/* Legend */}
         <div className="absolute bottom-4 left-4 bg-white rounded-lg shadow-lg p-3 z-10">
@@ -383,7 +386,10 @@ export default function LiveTrackingPage() {
             <div className="flex items-center gap-2 text-xs">
               <div className="w-4 h-4 bg-purple-600 rounded-full"></div>
               <span>Equipment</span>
-            </div></div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <style jsx global>{`
         .crew-marker,

@@ -105,7 +105,8 @@ export default function ConsumablesAnalyticsPage() {
         />
         <div className="flex items-center justify-center h-64">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
-        </div></div>
+        </div>
+      </div>
   );
   }
 
@@ -151,7 +152,8 @@ export default function ConsumablesAnalyticsPage() {
               <option value="90">Last 90 Days</option>
               <option value="365">Last Year</option>
             </select>
-          </div></div>
+          </div>
+        </div>
 
         {/* Summary Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -174,7 +176,8 @@ export default function ConsumablesAnalyticsPage() {
               <div className="text-green-600 text-sm font-semibold flex items-center gap-1">
                 <TrendingUp className="w-4 h-4" />
                 12%
-              </div></div>
+              </div>
+            </div>
             <p className="text-3xl font-bold text-gray-900 mb-1">{totalUsed.toFixed(0)}</p>
             <p className="text-sm text-gray-600">Total Units Used</p>
           </div>
@@ -187,10 +190,12 @@ export default function ConsumablesAnalyticsPage() {
               <div className="text-green-600 text-sm font-semibold flex items-center gap-1">
                 <TrendingUp className="w-4 h-4" />
                 8%
-              </div></div>
+              </div>
+            </div>
             <p className="text-3xl font-bold text-gray-900 mb-1">${totalCost.toLocaleString()}</p>
             <p className="text-sm text-gray-600">Total Cost</p>
-          </div></div>
+          </div>
+        </div>
 
         {/* Top 5 Consumables Chart */}
         <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6">
@@ -221,7 +226,8 @@ export default function ConsumablesAnalyticsPage() {
                     <div className="flex items-center justify-between text-xs text-gray-500">
                       <span>{item.total_used.toFixed(1)} {item.unit}</span>
                       <span>{percentage.toFixed(1)}% of total</span>
-                    </div></div>
+                    </div>
+                  </div>
   );
               })}
             </div>
@@ -291,6 +297,8 @@ export default function ConsumablesAnalyticsPage() {
               </table>
             </div>
           )}
-        </div></div></div>
+        </div>
+      </div>
+    </div>
   );
 }

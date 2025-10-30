@@ -106,7 +106,8 @@ export default function HRModuleDesignC() {
                 </p>
               </div>
               <Users className="h-12 w-12 text-blue-200" />
-            </div></div>
+            </div>
+          </div>
 
           <div className="bg-gradient-to-br from-teal-500 to-teal-600 rounded-2xl shadow-lg p-6 text-white transform hover:scale-105 transition-transform">
             <div className="flex items-center justify-between">
@@ -119,7 +120,8 @@ export default function HRModuleDesignC() {
                 </p>
               </div>
               <Clock className="h-12 w-12 text-teal-200" />
-            </div></div>
+            </div>
+          </div>
 
           <div className="bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl shadow-lg p-6 text-white transform hover:scale-105 transition-transform">
             <div className="flex items-center justify-between">
@@ -132,7 +134,9 @@ export default function HRModuleDesignC() {
                 </p>
               </div>
               <Calendar className="h-12 w-12 text-purple-200" />
-            </div></div></div>
+            </div>
+          </div>
+        </div>
 
         {/* Module Grid - Modern Vibrant */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -154,7 +158,8 @@ export default function HRModuleDesignC() {
                   {module.title}
                 </h3>
                 <p className="text-sm text-gray-600">{module.description}</p>
-              </div></div>
+              </div>
+            </div>
           ))}
         </div>
 
@@ -182,6 +187,10 @@ export default function HRModuleDesignC() {
             >
               <Calendar className="h-5 w-5" />
               Approve PTO
-            </button></div></div></div></DashboardLayout>
+            </button>
+          </div>
+        </div>
+      </div>
+    </DashboardLayout>
   );
 }

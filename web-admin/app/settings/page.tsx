@@ -214,11 +214,15 @@ export default function SettingsPage() {
                         <div className="flex-1">
                           <h3 className="font-semibold text-gray-900 mb-1">{item.title}</h3>
                           <p className="text-sm text-gray-600">{item.description}</p>
-                        </div></div></button>
+                        </div>
+                      </div>
+                    </button>
   );
                 })}
-              </div></div>
+              </div>
+            </div>
           ))}
-        </div></div>
+        </div>
+      </div>
   );
 }

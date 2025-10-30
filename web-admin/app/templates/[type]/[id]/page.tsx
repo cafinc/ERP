@@ -120,7 +120,9 @@ export default function TemplateViewPage() {
             className="text-blue-600 hover:text-blue-700"
           >
             Back to Templates
-          </button></div></div>
+          </button>
+        </div>
+      </div>
   );
   }
 
@@ -183,7 +185,8 @@ export default function TemplateViewPage() {
               >
                 <PencilIcon className="w-5 h-5" />
                 Edit
-              </button></div>
+              </button>
+            </div>
 
       <div className="grid grid-cols-2 gap-6">
         {/* Template Content */}
@@ -196,13 +199,15 @@ export default function TemplateViewPage() {
             >
               <ClipboardDocumentIcon className="w-4 h-4" />
               Copy JSON
-            </button></div>
+            </button>
+          </div>
           
           <div className="bg-gray-50 rounded-lg p-4 overflow-auto max-h-96">
             <pre className="text-sm text-gray-800 whitespace-pre-wrap">
               {JSON.stringify(template.content, null, 2)}
             </pre>
-          </div></div>
+          </div>
+        </div>
 
         {/* Variables & Preview */}
         <div className="space-y-6">
@@ -248,7 +253,8 @@ export default function TemplateViewPage() {
                       Apply Template
                     </>
                   )}
-                </button></div>
+                </button>
+              </div>
             ) : (
               <p className="text-gray-500 text-sm">No variables defined in this template</p>
             )}
@@ -287,6 +293,13 @@ export default function TemplateViewPage() {
                   </span>
                 </div>
               )}
-            </div></div></div></div></div></div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
   );
 }

@@ -278,7 +278,8 @@ export default function RouteOptimizationPage() {
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto"></div>
             <p className="mt-4 text-gray-600">Loading sites...</p>
-          </div></div>
+          </div>
+        </div>
       </PageHeader>
     );
   }
@@ -340,7 +341,8 @@ export default function RouteOptimizationPage() {
             >
               <BarChart3 className="w-4 h-4 inline-block mr-2" />
               Analytics
-            </button></div>
+            </button>
+          </div>
 
           {/* Optimizer View */}
           {view === 'optimizer' && (
@@ -385,7 +387,8 @@ export default function RouteOptimizationPage() {
                     className="text-sm text-[#3f72af] hover:underline mb-4"
                   >
                     Select All
-                  </button></div>
+                  </button>
+                </div>
 
                 {/* Optimization Settings */}
                 <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
@@ -432,7 +435,8 @@ export default function RouteOptimizationPage() {
                         placeholder="My Route Template"
                         className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                       />
-                    </div></div>
+                    </div>
+                  </div>
 
                   <div className="mt-6 space-y-2">
                     <button
@@ -460,7 +464,10 @@ export default function RouteOptimizationPage() {
                     >
                       <Save className="w-4 h-4" />
                       <span>Save as Template</span>
-                    </button></div></div></div>
+                    </button>
+                  </div>
+                </div>
+              </div>
 
               {/* Route Display & Stats */}
               <div className="lg:col-span-2 space-y-6">
@@ -478,7 +485,9 @@ export default function RouteOptimizationPage() {
                             {optimizationResult.estimated_distance_km}
                             <span className="text-xs font-normal text-gray-600 ml-1">km</span>
                           </p>
-                        </div></div></div>
+                        </div>
+                      </div>
+                    </div>
 
                     <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
                       <div className="flex items-center gap-3">
@@ -491,7 +500,9 @@ export default function RouteOptimizationPage() {
                             {Math.floor(optimizationResult.estimated_time_minutes / 60)}h{' '}
                             {optimizationResult.estimated_time_minutes % 60}m
                           </p>
-                        </div></div></div>
+                        </div>
+                      </div>
+                    </div>
 
                     <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
                       <div className="flex items-center gap-3">
@@ -504,7 +515,9 @@ export default function RouteOptimizationPage() {
                             {optimizationResult.savings_km}
                             <span className="text-xs font-normal text-gray-600 ml-1">km</span>
                           </p>
-                        </div></div></div>
+                        </div>
+                      </div>
+                    </div>
 
                     <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
                       <div className="flex items-center gap-3">
@@ -516,7 +529,10 @@ export default function RouteOptimizationPage() {
                           <p className="text-xl font-bold text-gray-900">
                             {optimizationResult.total_sites}
                           </p>
-                        </div></div></div></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 )}
 
                 {/* Route List */}
@@ -565,7 +581,8 @@ export default function RouteOptimizationPage() {
                               <GripVertical className="w-4 h-4 text-gray-400" />
                               <div className="w-7 h-7 bg-[#3f72af] text-white rounded-full flex items-center justify-center font-bold text-sm">
                                 {index + 1}
-                              </div></div>
+                              </div>
+                            </div>
 
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center gap-2">
@@ -588,12 +605,15 @@ export default function RouteOptimizationPage() {
                               className="p-1.5 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                             >
                               <Trash2 className="w-4 h-4" />
-                            </button></div>
+                            </button>
+                          </div>
   );
                       })}
                     </div>
                   )}
-                </div></div></div>
+                </div>
+              </div>
+            </div>
           )}
 
           {/* Templates View */}
@@ -633,7 +653,8 @@ export default function RouteOptimizationPage() {
                             <span className="text-xs text-gray-500">
                               Created {new Date(route.created_at).toLocaleDateString()}
                             </span>
-                          </div></div>
+                          </div>
+                        </div>
 
                         <div className="flex items-center gap-2">
                           <button
@@ -648,7 +669,10 @@ export default function RouteOptimizationPage() {
                             className="p-1.5 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                           >
                             <Trash2 className="w-4 h-4" />
-                          </button></div></div></div>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
                   ))}
                 </div>
               )}
@@ -666,9 +690,12 @@ export default function RouteOptimizationPage() {
                   <p className="text-sm text-gray-500 mt-2">
                     Track efficiency improvements, fuel savings, and time optimization over time
                   </p>
-                </div></div></div>
+                </div>
+              </div>
+            </div>
           )}
-        </div></div>
+        </div>
+      </div>
     </PageHeader>
   );
 }

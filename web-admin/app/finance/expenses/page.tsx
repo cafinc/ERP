@@ -169,7 +169,9 @@ export default function ExpensesPage() {
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-9 pr-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
               />
-            </div></div></div>
+            </div>
+          </div>
+        </div>
 
         {/* Category Filter Buttons */}
         <div className="flex gap-2 mb-4 flex-wrap">
@@ -238,7 +240,8 @@ export default function ExpensesPage() {
                 </tr>
               </tfoot>
             </table>
-          </div></div>
+          </div>
+        </div>
 
         {/* Add Expense Modal */}
         {showAddModal && (
@@ -248,7 +251,8 @@ export default function ExpensesPage() {
                 <h2 className="text-xl font-bold text-gray-900">Add New Expense</h2>
                 <button onClick={() => setShowAddModal(false)} className="text-gray-400 hover:text-gray-600">
                   <X className="w-6 h-6" />
-                </button></div>
+                </button>
+              </div>
 
               <form onSubmit={handleSubmit} className="p-4 space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -275,7 +279,8 @@ export default function ExpensesPage() {
                         <option key={cat} value={cat}>{cat}</option>
                       ))}
                     </select>
-                  </div></div>
+                  </div>
+                </div>
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Description *</label>
@@ -312,7 +317,8 @@ export default function ExpensesPage() {
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent text-sm"
                       placeholder="Vendor name"
                     />
-                  </div></div>
+                  </div>
+                </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
@@ -340,7 +346,8 @@ export default function ExpensesPage() {
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent text-sm"
                       placeholder="Associated project"
                     />
-                  </div></div>
+                  </div>
+                </div>
 
                 <div className="flex gap-3 pt-4">
                   <button
@@ -356,7 +363,11 @@ export default function ExpensesPage() {
                     className="px-4 py-2.5 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 font-medium"
                   >
                     Cancel
-                  </button></div></form></div></div>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
         )}
       </div>
     </PageHeader>

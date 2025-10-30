@@ -148,7 +148,9 @@ export default function PayrollSettingsPage() {
           <div className="bg-white rounded-lg shadow p-8 text-center">
             <RefreshCw className="h-12 w-12 text-gray-400 mx-auto mb-4 animate-spin" />
             <p className="text-gray-500">Loading payroll settings...</p>
-          </div></div></div>
+          </div>
+        </div>
+      </div>
   );
   }
 
@@ -178,7 +180,9 @@ export default function PayrollSettingsPage() {
                 calculation rules. These settings will be used to calculate employee
                 wages and overtime pay.
               </p>
-            </div></div></div>
+            </div>
+          </div>
+        </div>
 
         <form onSubmit={handleSave} className="space-y-6">
           {/* Company Information */}
@@ -223,7 +227,10 @@ export default function PayrollSettingsPage() {
                   <p className="mt-1 text-xs text-gray-500">
                     Employer Identification Number
                   </p>
-                </div></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
 
           {/* Pay Schedule */}
           <div className="bg-white rounded-lg shadow overflow-hidden">
@@ -277,7 +284,8 @@ export default function PayrollSettingsPage() {
                   <p className="mt-1 text-xs text-gray-500">
                     When is the next pay date?
                   </p>
-                </div></div>
+                </div>
+              </div>
 
               {/* Pay Schedule Info */}
               <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -314,7 +322,10 @@ export default function PayrollSettingsPage() {
                       formData.next_payroll_date
                     )}
                   </p>
-                </div></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
 
           {/* Wage Calculation Rules */}
           <div className="bg-white rounded-lg shadow overflow-hidden">
@@ -390,7 +401,8 @@ export default function PayrollSettingsPage() {
                   <p className="mt-1 text-xs text-gray-500">
                     Usually 2.0x for holidays/weekends
                   </p>
-                </div></div>
+                </div>
+              </div>
 
               {/* Calculation Examples */}
               <div className="mt-6 bg-gray-50 rounded-lg p-4">
@@ -421,7 +433,11 @@ export default function PayrollSettingsPage() {
                       {(25 * parseFloat(formData.double_time_multiplier)).toFixed(2)}
                       /hr
                     </span>
-                  </div></div></div></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
           {/* Save Button */}
           <div className="flex justify-end gap-4">
@@ -449,7 +465,9 @@ export default function PayrollSettingsPage() {
                   Save Settings
                 </>
               )}
-            </button></div></form>
+            </button>
+          </div>
+        </form>
 
         {/* Additional Info */}
         <div className="mt-8 bg-yellow-50 border border-yellow-200 rounded-lg p-4">
@@ -467,7 +485,9 @@ export default function PayrollSettingsPage() {
                   Employee wage rates are configured individually in Employee Management
                 </li>
               </ul>
-            </div></div></div>
+            </div>
+          </div>
+        </div>
 
         {/* Last Updated Info */}
         {settings?.updated_at && (
@@ -482,6 +502,7 @@ export default function PayrollSettingsPage() {
             })}
           </div>
         )}
-      </div></div>
+      </div>
+    </div>
   );
 }

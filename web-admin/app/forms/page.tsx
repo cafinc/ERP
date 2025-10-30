@@ -210,7 +210,9 @@ export default function FormsPage() {
               }`}
             >
               Submissions ({responses.length})
-            </button></div></div>
+            </button>
+          </div>
+        </div>
 
         {loading ? (
           <div className="flex items-center justify-center py-12">
@@ -239,7 +241,9 @@ export default function FormsPage() {
                             }`}>
                               {template.form_type.replace('_', ' ')}
                             </span>
-                          </div></div></div>
+                          </div>
+                        </div>
+                      </div>
 
                       {template.description && (
                         <p className="text-sm text-gray-600 mb-4 line-clamp-2">
@@ -271,7 +275,9 @@ export default function FormsPage() {
                           className="p-2 bg-red-50 hover:bg-red-100 text-red-600 rounded-lg transition-colors"
                         >
                           <Trash2 className="w-4 h-4" />
-                        </button></div></div>
+                        </button>
+                      </div>
+                    </div>
                   ))}
                 </div>
 
@@ -321,7 +327,8 @@ export default function FormsPage() {
                                   <p className="text-xs text-gray-400 mt-1">
                                     By: {response.submitted_by}
                                   </p>
-                                </div></div>
+                                </div>
+                              </div>
                               <div className="flex items-center space-x-2">
                                 <Link
                                   href={`/forms/responses/${response.id}`}
@@ -338,7 +345,9 @@ export default function FormsPage() {
                                 >
                                   <Download className="w-4 h-4" />
                                 </a>
-                              </div></div></div>
+                              </div>
+                            </div>
+                          </div>
   );
                       })}
                     </div>

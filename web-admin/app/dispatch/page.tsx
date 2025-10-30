@@ -143,7 +143,8 @@ export default function DispatchesPage() {
           >
             <Plus className="w-5 h-5" />
             <span>New Dispatch</span>
-          </button></div>
+          </button>
+        </div>
 
         {/* Summary Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
@@ -154,7 +155,8 @@ export default function DispatchesPage() {
                 <p className="text-2xl font-bold text-gray-900">{stats.total}</p>
               </div>
               <Calendar className="w-10 h-10 text-gray-300" />
-            </div></div>
+            </div>
+          </div>
 
           <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
@@ -163,7 +165,8 @@ export default function DispatchesPage() {
                 <p className="text-2xl font-bold text-[#3f72af]">{stats.scheduled}</p>
               </div>
               <Clock className="w-10 h-10 text-blue-300" />
-            </div></div>
+            </div>
+          </div>
 
           <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
@@ -172,7 +175,8 @@ export default function DispatchesPage() {
                 <p className="text-2xl font-bold text-yellow-600">{stats.inProgress}</p>
               </div>
               <PlayCircle className="w-10 h-10 text-yellow-300" />
-            </div></div>
+            </div>
+          </div>
 
           <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
@@ -181,7 +185,9 @@ export default function DispatchesPage() {
                 <p className="text-2xl font-bold text-green-600">{stats.completed}</p>
               </div>
               <CheckCircle className="w-10 h-10 text-green-300" />
-            </div></div></div>
+            </div>
+          </div>
+        </div>
 
         {/* View Toggle */}
         <div className="mb-4 flex space-x-2">
@@ -206,7 +212,8 @@ export default function DispatchesPage() {
           >
             <MapIcon className="w-4 h-4 inline-block mr-2" />
             Live Map
-          </button></div>
+          </button>
+        </div>
 
         {/* Filters - Show in list view only */}
         {view === 'list' && (
@@ -249,7 +256,9 @@ export default function DispatchesPage() {
               >
                 <RefreshCw className="w-5 h-5" />
                 <span>Refresh</span>
-              </button></div></div>
+              </button>
+            </div>
+          </div>
         )}
 
         {/* Map View */}
@@ -282,11 +291,13 @@ export default function DispatchesPage() {
                     <h4 className="font-semibold text-gray-900">Active Routes</h4>
                   </div>
                   <p className="text-sm text-gray-600">Optimized routes with ETA calculations</p>
-                </div></div>
+                </div>
+              </div>
               <p className="text-sm text-gray-500 mt-6">
                 Map integration with Google Maps API • Color-coded status indicators • Drag-and-drop dispatch assignment
               </p>
-            </div></div>
+            </div>
+          </div>
         )}
 
         {/* Dispatches List - Show in list view only */}
@@ -327,7 +338,8 @@ export default function DispatchesPage() {
                       {getStatusIcon(dispatch.status)}
                       <span>{dispatch.status.replace('_', ' ')}</span>
                     </span>
-                  </div></div>
+                  </div>
+                </div>
 
                 {/* Schedule Info */}
                 <div className="space-y-2 mb-4">
@@ -338,7 +350,8 @@ export default function DispatchesPage() {
                   <div className="flex items-center text-sm text-gray-600">
                     <Clock className="w-4 h-4 mr-2" />
                     <span>{dispatch.scheduled_time}</span>
-                  </div></div>
+                  </div>
+                </div>
 
                 {/* Details */}
                 <div className="grid grid-cols-3 gap-2 pt-4 border-t border-gray-200">
@@ -356,7 +369,8 @@ export default function DispatchesPage() {
                     <MapPin className="w-4 h-4 mx-auto text-gray-400 mb-1" />
                     <p className="text-xs text-gray-600">Sites</p>
                     <p className="text-sm font-semibold text-gray-900">{dispatch.site_ids?.length || 0}</p>
-                  </div></div>
+                  </div>
+                </div>
 
                 {/* Services */}
                 {dispatch.services && dispatch.services.length > 0 && (
@@ -373,7 +387,8 @@ export default function DispatchesPage() {
                           +{dispatch.services.length - 3} more
                         </span>
                       )}
-                    </div></div>
+                    </div>
+                  </div>
                 )}
 
                 {/* Actions */}
@@ -386,7 +401,8 @@ export default function DispatchesPage() {
                 >
                   <Eye className="w-4 h-4" />
                   <span>View Details</span>
-                </button></div>
+                </button>
+              </div>
             ))}
           </div>
         ))}

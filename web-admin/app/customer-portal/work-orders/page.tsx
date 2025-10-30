@@ -83,7 +83,8 @@ export default function CustomerWorkOrdersPage() {
                 {f.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}
               </button>
             ))}
-          </div></div>
+          </div>
+        </div>
 
         {/* Work Orders List */}
         {loading ? (
@@ -117,7 +118,8 @@ export default function CustomerWorkOrdersPage() {
                       <p className="text-sm text-gray-600">
                         {new Date(workOrder.scheduled_date || workOrder.created_at).toLocaleDateString()}
                       </p>
-                    </div></div>
+                    </div>
+                  </div>
                   <span className={`px-3 py-1 rounded-full text-xs font-medium border ${getStatusColor(workOrder.status)}`}>
                     {workOrder.status?.replace('_', ' ').toUpperCase() || 'PENDING'}
                   </span>
@@ -141,10 +143,13 @@ export default function CustomerWorkOrdersPage() {
                   <button className="text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1">
                     <Eye className="w-4 h-4" />
                     View Details
-                  </button></div></div>
+                  </button>
+                </div>
+              </div>
             ))}
           </div>
         )}
-      </div></div>
+      </div>
+    </div>
   );
 }

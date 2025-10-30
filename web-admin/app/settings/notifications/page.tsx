@@ -54,7 +54,8 @@ export default function NotificationsPage() {
                 <div style={{ fontWeight: '500', color: '#1e293b' }}>Weekly Reports</div>
                 <div style={{ fontSize: '14px', color: '#64748b' }}>Get weekly summary reports via email</div></div>
             </label>
-          </div></div>
+          </div>
+        </div>
 
         {/* SMS Notifications */}
         <div style={{
@@ -117,6 +118,9 @@ export default function NotificationsPage() {
             }}
           >
             Save Preferences
-          </button></div></div></div>
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }

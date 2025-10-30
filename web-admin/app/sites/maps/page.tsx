@@ -58,7 +58,8 @@ export default function SiteMapsListPage() {
               >
                 <Plus className="h-5 w-5" />
                 Create Site
-              </button></div>
+              </button>
+            </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {sites.map((site: any) => (
@@ -84,11 +85,14 @@ export default function SiteMapsListPage() {
                       <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-medium">
                         View Map
                       </span>
-                    </div></div></div>
+                    </div>
+                  </div>
+                </div>
               ))}
             </div>
           )}
-        </div></div>
+        </div>
+      </div>
     </>
   );
 }

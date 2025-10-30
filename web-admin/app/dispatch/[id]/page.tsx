@@ -98,7 +98,8 @@ export default function DispatchDetailPage() {
         <div className="flex-1 overflow-auto p-6">
           <div className="flex items-center justify-center h-full">
             <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
-          </div></div>
+          </div>
+        </div>
       </>
     );
   }
@@ -121,7 +122,9 @@ export default function DispatchDetailPage() {
             >
               <ArrowLeft className="w-5 h-5" />
               <span>Back to Dispatch</span>
-            </button></div></div>
+            </button>
+          </div>
+        </div>
       </>
     );
   }
@@ -146,7 +149,8 @@ export default function DispatchDetailPage() {
             <div>
               <h1 className="text-3xl font-bold text-gray-900">{dispatch.route_name}</h1>
               <p className="text-gray-600 mt-1">Dispatch Details</p>
-            </div></div>
+            </div>
+          </div>
           <div className="flex items-center space-x-3">
             <button
               onClick={() => router.push(`/dispatch/${dispatchId}/edit`)}
@@ -154,7 +158,9 @@ export default function DispatchDetailPage() {
             >
               <Edit className="w-4 h-4" />
               <span>Edit</span>
-            </button></div></div>
+            </button>
+          </div>
+        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           {/* Main Content */}
@@ -183,7 +189,8 @@ export default function DispatchDetailPage() {
                     <Clock className="w-4 h-4 mr-2 text-gray-400" />
                     {dispatch.scheduled_time}
                   </p>
-                </div></div>
+                </div>
+              </div>
 
               {dispatch.notes && (
                 <div className="mt-6 pt-6 border-t border-gray-200">
@@ -202,7 +209,8 @@ export default function DispatchDetailPage() {
                     {service.replace('_', ' ')}
                   </span>
                 ))}
-              </div></div>
+              </div>
+            </div>
 
             {/* Crew & Equipment */}
             <div className="grid grid-cols-2 gap-4">
@@ -220,7 +228,9 @@ export default function DispatchDetailPage() {
                   <h3 className="text-lg font-semibold text-gray-900">Equipment</h3>
                 </div>
                 <p className="text-3xl font-bold text-[#3f72af]">{dispatch.equipment_ids.length}</p>
-              </div></div></div>
+              </div>
+            </div>
+          </div>
 
           {/* Sidebar */}
           <div className="space-y-6">
@@ -256,7 +266,9 @@ export default function DispatchDetailPage() {
                   >
                     <XCircle className="w-4 h-4" />
                     <span>Cancel Dispatch</span>
-                  </button></div></div>
+                  </button>
+                </div>
+              </div>
             )}
 
             {/* Site Count */}
@@ -266,7 +278,10 @@ export default function DispatchDetailPage() {
                 <h3 className="text-lg font-semibold text-gray-900">Sites</h3>
               </div>
               <p className="text-3xl font-bold text-[#3f72af]">{dispatch.site_ids.length}</p>
-            </div></div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

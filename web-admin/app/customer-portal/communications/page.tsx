@@ -305,7 +305,8 @@ export default function CustomerCommunicationsPage() {
               <p className="text-sm text-gray-500 mt-1">
                 Chat with your service provider
               </p>
-            </div></div>
+            </div>
+          </div>
           <div className="flex items-center gap-4">
             {/* Connection Status */}
             <div className="flex items-center gap-2">
@@ -318,7 +319,9 @@ export default function CustomerCommunicationsPage() {
             {/* Message Count */}
             <div className="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm font-medium">
               {filteredMessages.length} messages
-            </div></div></div>
+            </div>
+          </div>
+        </div>
 
         {/* Search Bar */}
         <div className="mt-4 relative">
@@ -330,7 +333,8 @@ export default function CustomerCommunicationsPage() {
             placeholder="Search messages..."
             className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
           />
-        </div></div>
+        </div>
+      </div>
 
       {/* Messages */}
       <div className="flex-1 overflow-y-auto px-6 py-4">
@@ -339,7 +343,8 @@ export default function CustomerCommunicationsPage() {
             <div className="text-center">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500 mx-auto mb-4" />
               <p className="text-gray-600">Loading messages...</p>
-            </div></div>
+            </div>
+          </div>
         ) : filteredMessages.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full text-gray-400">
             <ChatBubbleLeftRightIcon className="w-20 h-20 mb-4 opacity-50" />
@@ -417,7 +422,9 @@ export default function CustomerCommunicationsPage() {
                           <CheckIcon className="w-4 h-4 opacity-75" title="Delivered" />
                         )
                       )}
-                    </div></div></div>
+                    </div>
+                  </div>
+                </div>
   );
             })}
             <div ref={messagesEndRef} />
@@ -450,7 +457,8 @@ export default function CustomerCommunicationsPage() {
                   className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 shadow-md"
                 >
                   <XMarkIcon className="w-4 h-4" />
-                </button></div>
+                </button>
+              </div>
             ))}
           </div>
           {uploadProgress > 0 && uploadProgress < 100 && (
@@ -477,7 +485,8 @@ export default function CustomerCommunicationsPage() {
               className="text-gray-400 hover:text-gray-600"
             >
               <XMarkIcon className="w-5 h-5" />
-            </button></div>
+            </button>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2 max-h-60 overflow-y-auto">
             {templates.length === 0 ? (
               <p className="text-sm text-gray-500 col-span-2">No templates available</p>
@@ -493,7 +502,8 @@ export default function CustomerCommunicationsPage() {
                 </button>
               ))
             )}
-          </div></div>
+          </div>
+        </div>
       )}
 
       {/* Input */}
@@ -561,10 +571,13 @@ export default function CustomerCommunicationsPage() {
             ) : (
               <PaperAirplaneIcon className="w-6 h-6" />
             )}
-          </button></div>
+          </button>
+        </div>
         <p className="text-xs text-gray-500 mt-2">
           📱 InApp Messages • Real-time delivery • File attachments supported
         </p>
-      </div></div></div>
+      </div>
+    </div>
+  </div>
   );
 }

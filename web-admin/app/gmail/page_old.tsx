@@ -289,7 +289,10 @@ export default function GmailPage() {
               className="w-full bg-[#3f72af] hover:bg-[#3f72af]/90 text-white px-6 py-3 rounded-lg font-medium transition-colors"
             >
               Connect Gmail Account
-            </button></div></div></DashboardLayout>
+            </button>
+          </div>
+        </div>
+      </DashboardLayout>
   );
   }
 
@@ -305,7 +308,8 @@ export default function GmailPage() {
           >
             <Plus className="w-4 h-4" />
             <span>Compose</span>
-          </button></div>
+          </button>
+        </div>
 
         <div className="flex-1 overflow-y-auto p-2">
           <div
@@ -360,7 +364,8 @@ export default function GmailPage() {
               <span>{label.name}</span>
             </div>
           ))}
-        </div></div>
+        </div>
+      </div>
 
       {/* Email List */}
       <div className="w-[480px] bg-white border-r border-gray-200 flex flex-col">
@@ -390,7 +395,8 @@ export default function GmailPage() {
               title="Disconnect Gmail"
             >
               <X className="w-5 h-5" />
-            </button></div>
+            </button>
+          </div>
 
           {selectedEmails.size > 0 && (
             <div className="flex items-center space-x-2">
@@ -415,7 +421,8 @@ export default function GmailPage() {
                 title="Delete"
               >
                 <Trash2 className="w-4 h-4" />
-              </button></div>
+              </button>
+            </div>
           )}
         </div>
 
@@ -481,10 +488,13 @@ export default function GmailPage() {
                           <span>Attachment</span>
                         </div>
                       )}
-                    </div></div></div>
+                    </div>
+                  </div>
+                </div>
               ))
           )}
-        </div></div>
+        </div>
+      </div>
 
       {/* Email Detail */}
       <div className="flex-1 bg-white flex flex-col">
@@ -521,7 +531,9 @@ export default function GmailPage() {
                     title="Delete"
                   >
                     <Trash2 className="w-5 h-5 text-red-600" />
-                  </button></div></div>
+                  </button>
+                </div>
+              </div>
 
               <div className="flex items-center space-x-4 text-sm text-gray-600">
                 <div className="flex items-center space-x-2">
@@ -530,7 +542,8 @@ export default function GmailPage() {
                 </div>
                 <span>•</span>
                 <span>{new Date(selectedEmail.date).toLocaleString()}</span>
-              </div></div>
+              </div>
+            </div>
 
             <div className="flex-1 overflow-y-auto p-6">
               <div
@@ -544,7 +557,8 @@ export default function GmailPage() {
             <div className="text-center">
               <Mail className="w-24 h-24 mx-auto mb-4 text-gray-300" />
               <p className="text-lg">Select an email to read</p>
-            </div></div>
+            </div>
+          </div>
         )}
       </div>
 
@@ -565,7 +579,8 @@ export default function GmailPage() {
                 className="p-2 hover:bg-gray-100 rounded-lg"
               >
                 <X className="w-5 h-5" />
-              </button></div>
+              </button>
+            </div>
 
             <div className="p-4 space-y-3 flex-1 overflow-y-auto">
               <div>
@@ -599,7 +614,8 @@ export default function GmailPage() {
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-transparent resize-none"
                   placeholder="Type your message here..."
                 />
-              </div></div>
+              </div>
+            </div>
 
             <div className="p-4 border-t border-gray-200 flex justify-end space-x-3">
               <button
@@ -617,8 +633,12 @@ export default function GmailPage() {
                 className="px-6 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium"
               >
                 Send
-              </button></div></div></div>
+              </button>
+            </div>
+          </div>
+        </div>
       )}
-    </div></DashboardLayout>
+    </div>
+  </DashboardLayout>
   );
 }

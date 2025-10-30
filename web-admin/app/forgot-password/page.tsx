@@ -57,7 +57,10 @@ export default function ForgotPasswordPage() {
             className="w-full bg-[#3f72af] text-white py-3 rounded-lg font-semibold hover:bg-[#2c5282]"
           >
             Back to Login
-          </button></div></div></div>
+          </button>
+        </div>
+      </div>
+    </div>
   );
   }
 
@@ -95,7 +98,8 @@ export default function ForgotPasswordPage() {
                 required
                 className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
-            </div></div>
+            </div>
+          </div>
 
           <button
             type="submit"
@@ -110,7 +114,8 @@ export default function ForgotPasswordPage() {
                 Send Reset Link
               </>
             )}
-          </button></form>
+          </button>
+        </form>
 
         {/* Help Text */}
         <div className="mt-6 text-center">
@@ -123,6 +128,8 @@ export default function ForgotPasswordPage() {
               Sign in
             </button>
           </p>
-        </div></div></div>
+        </div>
+      </div>
+    </div>
   );
 }

@@ -226,7 +226,8 @@ export default function TrainingPage() {
                 </p>
               </div>
               <BookOpen className="h-12 w-12 text-blue-500" />
-            </div></div>
+            </div>
+          </div>
 
           <div className="bg-white rounded-lg shadow p-6">
             <div className="flex items-center justify-between">
@@ -237,7 +238,8 @@ export default function TrainingPage() {
                 </p>
               </div>
               <Clock className="h-12 w-12 text-yellow-500" />
-            </div></div>
+            </div>
+          </div>
 
           <div className="bg-white rounded-lg shadow p-6">
             <div className="flex items-center justify-between">
@@ -248,7 +250,8 @@ export default function TrainingPage() {
                 </p>
               </div>
               <Clock className="h-12 w-12 text-blue-500" />
-            </div></div>
+            </div>
+          </div>
 
           <div className="bg-white rounded-lg shadow p-6">
             <div className="flex items-center justify-between">
@@ -259,7 +262,8 @@ export default function TrainingPage() {
                 </p>
               </div>
               <CheckCircle className="h-12 w-12 text-green-500" />
-            </div></div>
+            </div>
+          </div>
 
           <div className="bg-white rounded-lg shadow p-6">
             <div className="flex items-center justify-between">
@@ -273,7 +277,9 @@ export default function TrainingPage() {
                 </p>
               </div>
               <Award className="h-12 w-12 text-purple-500" />
-            </div></div></div>
+            </div>
+          </div>
+        </div>
 
         {/* Tabs */}
         <div className="bg-white rounded-lg shadow mb-4">
@@ -298,7 +304,9 @@ export default function TrainingPage() {
                 }`}
               >
                 Employee Assignments ({stats.totalAssignments})
-              </button></div></div>
+              </button>
+            </div>
+          </div>
 
           <div className="p-6">
             {activeTab === "programs" ? (
@@ -313,7 +321,8 @@ export default function TrainingPage() {
                   >
                     <Plus className="h-4 w-4" />
                     Add Program
-                  </button></div>
+                  </button>
+                </div>
 
                 {loading ? (
                   <div className="text-center py-8 text-gray-500">
@@ -328,7 +337,8 @@ export default function TrainingPage() {
                       className="text-blue-500 hover:text-[#3f72af]"
                     >
                       Create your first training program
-                    </button></div>
+                    </button>
+                  </div>
                 ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {trainings.map((training: any) => (
@@ -349,7 +359,8 @@ export default function TrainingPage() {
                                 Required
                               </span>
                             )}
-                          </div></div>
+                          </div>
+                        </div>
 
                         {training.description && (
                           <p className="text-sm text-gray-600 mb-4">
@@ -381,7 +392,9 @@ export default function TrainingPage() {
                             className="w-full px-4 py-2 bg-[#5b8ec4] text-white rounded-lg hover:bg-[#3f72af] text-sm"
                           >
                             Assign to Employee
-                          </button></div></div>
+                          </button>
+                        </div>
+                      </div>
                     ))}
                   </div>
                 )}
@@ -398,7 +411,8 @@ export default function TrainingPage() {
                   >
                     <Plus className="h-4 w-4" />
                     Assign Training
-                  </button></div>
+                  </button>
+                </div>
 
                 {employeeTrainings.length === 0 ? (
                   <div className="text-center py-8">
@@ -409,7 +423,8 @@ export default function TrainingPage() {
                       className="text-blue-500 hover:text-[#3f72af]"
                     >
                       Assign training to an employee
-                    </button></div>
+                    </button>
+                  </div>
                 ) : (
                   <div className="space-y-4">
                     {employeeTrainings.map((assignment: any) => (
@@ -422,7 +437,8 @@ export default function TrainingPage() {
                             <div className="flex-shrink-0">
                               <div className="h-12 w-12 rounded-full bg-[#5b8ec4] flex items-center justify-center text-white font-semibold">
                                 {assignment.employee_name?.charAt(0) || "?"}
-                              </div></div>
+                              </div>
+                            </div>
 
                             <div className="flex-1">
                               <div className="flex items-center gap-3 mb-2">
@@ -473,7 +489,8 @@ export default function TrainingPage() {
                                   <strong>Notes:</strong> {assignment.notes}
                                 </p>
                               )}
-                            </div></div>
+                            </div>
+                          </div>
 
                           <div className="flex flex-col gap-2 ml-4">
                             {assignment.status === "scheduled" && (
@@ -496,13 +513,17 @@ export default function TrainingPage() {
                                 Mark Complete
                               </button>
                             )}
-                          </div></div></div>
+                          </div>
+                        </div>
+                      </div>
                     ))}
                   </div>
                 )}
               </>
             )}
-          </div></div></div>
+          </div>
+        </div>
+      </div>
 
       {/* Add Program Modal */}
       {showProgramModal && (
@@ -520,7 +541,8 @@ export default function TrainingPage() {
                 className="text-gray-400 hover:text-gray-600"
               >
                 <X className="h-6 w-6" />
-              </button></div>
+              </button>
+            </div>
 
             <form onSubmit={handleCreateProgram} className="px-6 py-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -615,7 +637,8 @@ export default function TrainingPage() {
                   <label htmlFor="is_required" className="ml-2 text-sm text-gray-700">
                     Required Training
                   </label>
-                </div></div>
+                </div>
+              </div>
 
               <div className="flex justify-end gap-3 mt-6 pt-4 border-t border-gray-200">
                 <button
@@ -633,7 +656,11 @@ export default function TrainingPage() {
                   className="px-4 py-2 bg-[#5b8ec4] text-white rounded-lg hover:bg-[#3f72af]"
                 >
                   Create Program
-                </button></div></form></div></div>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
       )}
 
       {/* Assign Training Modal */}
@@ -652,7 +679,8 @@ export default function TrainingPage() {
                 className="text-gray-400 hover:text-gray-600"
               >
                 <X className="h-6 w-6" />
-              </button></div>
+              </button>
+            </div>
 
             <form onSubmit={handleAssignTraining} className="px-6 py-4">
               <div className="space-y-4">
@@ -710,7 +738,8 @@ export default function TrainingPage() {
                     }
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                   />
-                </div></div>
+                </div>
+              </div>
 
               <div className="flex justify-end gap-3 mt-6 pt-4 border-t border-gray-200">
                 <button
@@ -728,7 +757,11 @@ export default function TrainingPage() {
                   className="px-4 py-2 bg-[#5b8ec4] text-white rounded-lg hover:bg-[#3f72af]"
                 >
                   Assign Training
-                </button></div></form></div></div>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
       )}
     </div>
   );

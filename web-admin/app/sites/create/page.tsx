@@ -346,7 +346,8 @@ export default function CreateSitePage() {
                             className="w-full pl-10 pr-4 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af]"
                             placeholder="Search customers..."
                           />
-                        </div></div>
+                        </div>
+                      </div>
                       <div className="max-h-64 overflow-y-auto">
                         {filteredCustomers.map((customer) => (
                           <button
@@ -380,14 +381,17 @@ export default function CreateSitePage() {
                             <p>No customers found</p>
                           </div>
                         )}
-                      </div></div>
+                      </div>
+                    </div>
                   )}
                   
                   {/* Spacer to push content down when dropdown is visible */}
                   {showCustomerDropdown && (
                     <div className="h-80"></div>
                   )}
-                </div></div></div>
+                </div>
+              </div>
+            </div>
 
             {/* Site Type */}
             <div className="bg-white/95 backdrop-blur-md rounded-3xl shadow-xl border border-white/40 overflow-hidden hover:shadow-2xl transition-shadow">
@@ -421,7 +425,9 @@ export default function CreateSitePage() {
                       </span>
                     </button>
                   ))}
-                </div></div></div>
+                </div>
+              </div>
+            </div>
 
             {/* Site Information - Blue Section */}
             <div className="bg-white/95 backdrop-blur-md rounded-3xl shadow-xl border border-white/40 overflow-hidden hover:shadow-2xl transition-shadow">
@@ -458,7 +464,8 @@ export default function CreateSitePage() {
                       className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-semibold transition-all"
                       placeholder="e.g., LOT-001, SITE-A"
                     />
-                  </div></div>
+                  </div>
+                </div>
 
                 {/* Site Contact Information */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -490,7 +497,9 @@ export default function CreateSitePage() {
                         pattern="\(\d{3}\) \d{3}-\d{4}"
                         title="Phone number must be in format: (555) 123-4567"
                       />
-                    </div></div></div>
+                    </div>
+                  </div>
+                </div>
 
                 {/* Address - Full Width with Google Maps */}
                 <div>
@@ -513,7 +522,8 @@ export default function CreateSitePage() {
                         alt="Powered by Google"
                         className="h-4"
                       />
-                    </div></div>
+                    </div>
+                  </div>
                   <p className="text-xs text-gray-500 mt-1">
                     Start typing to use Google address autocomplete
                   </p>
@@ -565,7 +575,8 @@ export default function CreateSitePage() {
                       placeholder="T2P 1J9"
                       required
                     />
-                  </div></div>
+                  </div>
+                </div>
 
                 {/* Area Size */}
                 <div>
@@ -580,7 +591,9 @@ export default function CreateSitePage() {
                     placeholder="e.g., 5000"
                   />
                   <p className="text-xs text-gray-500 mt-1">Optional: Total area in square feet</p>
-                </div></div></div>
+                </div>
+              </div>
+            </div>
 
             {/* Notes Section - Orange/Yellow for alerts/warnings */}
             <div className="bg-white/95 backdrop-blur-md rounded-3xl shadow-xl border border-white/40 overflow-hidden hover:shadow-2xl transition-shadow">
@@ -649,7 +662,8 @@ export default function CreateSitePage() {
                             hasGateCode ? 'translate-x-6' : 'translate-x-1'
                           }`}
                         />
-                      </button></div>
+                      </button>
+                    </div>
                     {hasGateCode && (
                       <div className="mt-4">
                         <input
@@ -683,7 +697,8 @@ export default function CreateSitePage() {
                             hasLockbox ? 'translate-x-6' : 'translate-x-1'
                           }`}
                         />
-                      </button></div>
+                      </button>
+                    </div>
                     {hasLockbox && (
                       <div className="mt-4">
                         <input
@@ -717,7 +732,8 @@ export default function CreateSitePage() {
                             hasSecurityOnsite ? 'translate-x-6' : 'translate-x-1'
                           }`}
                         />
-                      </button></div>
+                      </button>
+                    </div>
                     {hasSecurityOnsite && (
                       <div className="mt-4 relative">
                         <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
@@ -754,15 +770,20 @@ export default function CreateSitePage() {
                             requiresKeyCard ? 'translate-x-6' : 'translate-x-1'
                           }`}
                         />
-                      </button></div>
+                      </button>
+                    </div>
                     {requiresKeyCard && (
                       <div className="mt-4 flex items-center justify-center">
                         <div className="bg-orange-500 text-white px-4 py-2 rounded-lg font-bold text-sm shadow-lg flex items-center gap-2 animate-pulse">
                           <CreditCard className="w-4 h-4" />
                           <span>REQUIRED</span>
-                        </div></div>
+                        </div>
+                      </div>
                     )}
-                  </div></div></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
             {/* Site Services Card */}
             <div className="bg-white/95 backdrop-blur-md rounded-3xl shadow-xl border border-white/40 overflow-hidden hover:shadow-2xl transition-shadow">
@@ -779,7 +800,9 @@ export default function CreateSitePage() {
                   >
                     <Plus className="w-4 h-4" />
                     Add Service
-                  </button></div></div>
+                  </button>
+                </div>
+              </div>
 
               <div className="p-6">
                 {siteServices.length === 0 ? (
@@ -819,7 +842,8 @@ export default function CreateSitePage() {
                                   </span>
                                 </div>
                               )}
-                            </div></div>
+                            </div>
+                          </div>
                           <button
                             type="button"
                             onClick={() => handleRemoveService(index)}
@@ -827,11 +851,14 @@ export default function CreateSitePage() {
                             title="Remove service"
                           >
                             <Trash2 className="w-5 h-5" />
-                          </button></div></div>
+                          </button>
+                        </div>
+                      </div>
                     ))}
                   </div>
                 )}
-              </div></div>
+              </div>
+            </div>
 
             {/* Form Actions */}
             {/* Form Actions - Bottom */}
@@ -859,7 +886,11 @@ export default function CreateSitePage() {
                     Create Site
                   </>
                 )}
-              </button></div></form></div></div>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
 
       {/* Service Modal */}
       {showServiceModal && (
@@ -874,13 +905,15 @@ export default function CreateSitePage() {
                 <div>
                   <h2 className="text-2xl font-bold text-gray-900">Add Service</h2>
                   <p className="text-sm text-gray-600 mt-0.5">Configure service for this site</p>
-                </div></div>
+                </div>
+              </div>
               <button
                 onClick={() => setShowServiceModal(false)}
                 className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
               >
                 <X className="w-5 h-5 text-gray-500" />
-              </button></div>
+              </button>
+            </div>
 
             {/* Modal Body */}
             <div className="p-6 space-y-6 max-h-[calc(90vh-180px)] overflow-y-auto">
@@ -917,7 +950,8 @@ export default function CreateSitePage() {
                     >
                       <Plus className="w-4 h-4" />
                       Create Service (Opens in new tab)
-                    </button></div>
+                    </button>
+                  </div>
                 )}
                 
                 {/* Link to services page */}
@@ -1023,7 +1057,8 @@ export default function CreateSitePage() {
                   className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] bg-white font-semibold"
                   placeholder="e.g., weekly, bi-weekly, as-needed"
                 />
-              </div></div>
+              </div>
+            </div>
 
             {/* Modal Footer */}
             <div className="flex items-center justify-end gap-3 p-6 border-t border-gray-200/50">
@@ -1039,7 +1074,10 @@ export default function CreateSitePage() {
               >
                 <Plus className="w-4 h-4" />
                 Add Service
-              </button></div></div></div>
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

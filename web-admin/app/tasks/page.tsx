@@ -41,7 +41,9 @@ export default function TasksPage() {
                 </div>
                 <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center">
                   <CheckSquare className="w-6 h-6 text-white" />
-                </div></div></div>
+                </div>
+              </div>
+            </div>
 
             <div className="bg-white rounded-xl shadow-lg p-4 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between">
@@ -51,7 +53,9 @@ export default function TasksPage() {
                 </div>
                 <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-600 rounded-lg flex items-center justify-center">
                   <Clock className="w-6 h-6 text-white" />
-                </div></div></div>
+                </div>
+              </div>
+            </div>
 
             <div className="bg-white rounded-xl shadow-lg p-4 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between">
@@ -61,7 +65,9 @@ export default function TasksPage() {
                 </div>
                 <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center">
                   <CheckSquare className="w-6 h-6 text-white" />
-                </div></div></div>
+                </div>
+              </div>
+            </div>
 
             <div className="bg-white rounded-xl shadow-lg p-4 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between">
@@ -71,7 +77,10 @@ export default function TasksPage() {
                 </div>
                 <div className="w-12 h-12 bg-gradient-to-br from-red-500 to-pink-600 rounded-lg flex items-center justify-center">
                   <Calendar className="w-6 h-6 text-white" />
-                </div></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
 
           {/* Search and Filter */}
           <div className="bg-white rounded-xl shadow-lg p-4 shadow-sm border border-gray-200 mb-4 hover:shadow-md transition-shadow">
@@ -101,7 +110,9 @@ export default function TasksPage() {
                     {status.charAt(0).toUpperCase() + status.slice(1)}
                   </button>
                 ))}
-              </div></div></div>
+              </div>
+            </div>
+          </div>
 
           {/* Empty State */}
           <div className="bg-white rounded-xl shadow-lg p-12 shadow-sm border border-gray-200 text-center hover:shadow-md transition-shadow">
@@ -112,6 +123,9 @@ export default function TasksPage() {
             <p className="text-gray-600 mb-4">Create your first task to start managing your team's work</p>
             <button className="px-6 py-3 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-all shadow-md hover:shadow-lg font-semibold">
               Create First Task
-            </button></div></div></div>
+            </button>
+          </div>
+        </div>
+      </div>
   );
 }

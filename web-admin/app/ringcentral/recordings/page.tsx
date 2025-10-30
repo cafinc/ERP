@@ -177,7 +177,9 @@ export default function RecordingsPage() {
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
-              </div></div></div>
+              </div>
+            </div>
+          </div>
           <div className="mt-4 flex items-center justify-end">
             <button
               onClick={fetchRecordings}
@@ -185,7 +187,9 @@ export default function RecordingsPage() {
             >
               <RefreshCw className="w-4 h-4" />
               <span>Search</span>
-            </button></div></div>
+            </button>
+          </div>
+        </div>
 
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
@@ -197,7 +201,10 @@ export default function RecordingsPage() {
               <div>
                 <p className="text-sm text-gray-600">Total Recordings</p>
                 <p className="text-2xl font-bold text-gray-900">{recordings.length}</p>
-              </div></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
 
         {/* Recordings List */}
         <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
@@ -244,7 +251,9 @@ export default function RecordingsPage() {
                               <Clock className="w-3 h-3" />
                               <span>{formatDuration(recording.duration || 0)}</span>
                             </span>
-                          </div></div></div>
+                          </div>
+                        </div>
+                      </div>
                       
                       {recording.recording && (
                         <div className="ml-12 flex items-center space-x-2">
@@ -263,7 +272,10 @@ export default function RecordingsPage() {
                       >
                         <Download className="w-4 h-4" />
                         <span>Download</span>
-                      </button></div></div></div>
+                      </button>
+                    </div>
+                  </div>
+                </div>
               ))}
             </div>
           )}
@@ -288,7 +300,12 @@ export default function RecordingsPage() {
                   className="p-2 rounded-lg border border-gray-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
                 >
                   <ChevronRight className="w-5 h-5" />
-                </button></div></div>
+                </button>
+              </div>
+            </div>
           )}
-        </div></div></div></div>);
+        </div>
+      </div>
+    </div>
+  </div>
 }

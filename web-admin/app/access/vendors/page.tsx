@@ -53,7 +53,9 @@ export default function VendorsPage() {
             <div>
               <h2 style={{ fontSize: '18px', fontWeight: '600', color: '#1e293b' }}>Vendors ({vendors.length})</h2>
               <p style={{ fontSize: '14px', color: '#64748b' }}>Suppliers and service providers</p>
-            </div></div></div>
+            </div>
+          </div>
+        </div>
 
         <table style={{ width: '100%', borderCollapse: 'collapse' }}>
           <thead>
@@ -136,7 +138,8 @@ export default function VendorsPage() {
                       cursor: 'pointer'
                     }}>
                       <Edit style={{ width: '14px', height: '14px', display: 'inline' }} /> Edit
-                    </button></div>
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}
@@ -167,7 +170,8 @@ export default function VendorsPage() {
           <div>
             <h2 style={{ fontSize: '18px', fontWeight: '600', color: '#1e293b' }}>Vendor Permissions</h2>
             <p style={{ fontSize: '14px', color: '#64748b' }}>Supplier portal access</p>
-          </div></div>
+          </div>
+        </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '16px' }}>
           {[
             'Receive Purchase Orders',
@@ -191,6 +195,8 @@ export default function VendorsPage() {
               <span style={{ fontSize: '14px', color: '#1e293b', fontWeight: '500' }}>{permission}</span>
             </div>
           ))}
-        </div></div></div>
+        </div>
+      </div>
+    </div>
   );
 }

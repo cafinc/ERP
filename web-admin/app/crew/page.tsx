@@ -175,7 +175,9 @@ export default function CrewPage() {
               }`}
             >
               All ({users.length})
-            </button></div></div>
+            </button>
+          </div>
+        </div>
 
         {/* Search Bar */}
         <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-3 mb-4 mx-6 mt-6 hover:shadow-md transition-shadow">
@@ -196,7 +198,9 @@ export default function CrewPage() {
             >
               <RefreshCw className="w-4 h-4" />
               <span>Refresh</span>
-            </button></div></div>
+            </button>
+          </div>
+        </div>
 
         {/* Crew Grid */}
         {filteredUsers.length === 0 ? (
@@ -235,7 +239,9 @@ export default function CrewPage() {
                     <div className="flex-1 min-w-0">
                       <h3 className="font-semibold text-gray-900 truncate">{user.name}</h3>
                       <p className="text-sm text-gray-600">{user.email}</p>
-                    </div></div></div>
+                    </div>
+                  </div>
+                </div>
 
                 {/* Badges */}
                 <div className="flex items-center gap-2 mb-4 flex-wrap">
@@ -301,7 +307,9 @@ export default function CrewPage() {
                   >
                     <Edit className="w-4 h-4" />
                     <span>Edit</span>
-                  </button></div></div>
+                  </button>
+                </div>
+              </div>
             ))}
           </div>
         )}

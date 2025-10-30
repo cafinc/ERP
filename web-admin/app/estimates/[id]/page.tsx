@@ -202,7 +202,8 @@ export default function EstimateDetailPage() {
         <div className="flex-1 overflow-auto p-6">
           <div className="flex items-center justify-center h-full">
             <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
-          </div></div>
+          </div>
+        </div>
       </>
     );
   }
@@ -225,7 +226,8 @@ export default function EstimateDetailPage() {
           >
             <ArrowLeft className="w-5 h-5" />
             <span>Back to Estimates</span>
-          </button></div>
+          </button>
+        </div>
       </>
     );
   }
@@ -250,13 +252,15 @@ export default function EstimateDetailPage() {
             <div>
               <h1 className="text-3xl font-bold text-gray-900">Estimate #{estimate.estimate_number}</h1>
               <p className="text-gray-600 mt-1">View and manage estimate details</p>
-            </div></div>
+            </div>
+          </div>
 
           <div className="flex items-center space-x-3">
             <span className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium ${getStatusColor(estimate.status)}`}>
               <span>{estimate.status}</span>
             </span>
-          </div></div>
+          </div>
+        </div>
 
         {/* Action Buttons */}
         <div className="mb-4 flex flex-wrap gap-3">
@@ -318,7 +322,8 @@ export default function EstimateDetailPage() {
           >
             <Trash2 className="w-5 h-5" />
             <span>Delete</span>
-          </button></div>
+          </button>
+        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           {/* Main Content */}
@@ -356,7 +361,8 @@ export default function EstimateDetailPage() {
                     <span className="text-gray-700">{estimate.customer_address}</span>
                   </div>
                 )}
-              </div></div>
+              </div>
+            </div>
 
             {/* Line Items */}
             <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
@@ -400,7 +406,9 @@ export default function EstimateDetailPage() {
                 <div className="flex justify-between text-lg font-bold pt-2 border-t border-gray-200">
                   <span className="text-gray-900">Total</span>
                   <span className="text-[#3f72af]">${estimate.total_amount?.toFixed(2) || '0.00'}</span>
-                </div></div></div>
+                </div>
+              </div>
+            </div>
 
             {/* Notes & Terms */}
             {(estimate.notes || estimate.terms) && (
@@ -434,7 +442,8 @@ export default function EstimateDetailPage() {
                     <p className="text-sm font-medium text-gray-900">
                       {new Date(estimate.created_at).toLocaleDateString()}
                     </p>
-                  </div></div>
+                  </div>
+                </div>
                 <div className="flex items-start space-x-3">
                   <Clock className="w-5 h-5 text-gray-400 mt-0.5" />
                   <div>
@@ -442,7 +451,8 @@ export default function EstimateDetailPage() {
                     <p className="text-sm font-medium text-gray-900">
                       {new Date(estimate.valid_until).toLocaleDateString()}
                     </p>
-                  </div></div>
+                  </div>
+                </div>
                 {estimate.sent_at && (
                   <div className="flex items-start space-x-3">
                     <Send className="w-5 h-5 text-gray-400 mt-0.5" />
@@ -451,7 +461,8 @@ export default function EstimateDetailPage() {
                       <p className="text-sm font-medium text-gray-900">
                         {new Date(estimate.sent_at).toLocaleDateString()}
                       </p>
-                    </div></div>
+                    </div>
+                  </div>
                 )}
                 {estimate.approved_at && (
                   <div className="flex items-start space-x-3">
@@ -461,9 +472,11 @@ export default function EstimateDetailPage() {
                       <p className="text-sm font-medium text-gray-900">
                         {new Date(estimate.approved_at).toLocaleDateString()}
                       </p>
-                    </div></div>
+                    </div>
+                  </div>
                 )}
-              </div></div>
+              </div>
+            </div>
 
             {/* Summary */}
             <div className="bg-gradient-to-br from-[#3f72af] to-[#3f72af]/80 rounded-xl shadow-sm p-4 text-white">
@@ -476,7 +489,8 @@ export default function EstimateDetailPage() {
               </div>
               <div className="text-xs opacity-75">
                 {estimate.items?.length || 0} line item{estimate.items?.length !== 1 ? 's' : ''}
-              </div></div>
+              </div>
+            </div>
 
             {/* Signature Section */}
             {estimate.customer_signature && (
@@ -504,9 +518,13 @@ export default function EstimateDetailPage() {
                     <div className="flex items-center space-x-2 mt-3 p-2 bg-green-50 border border-green-200 rounded">
                       <CheckCircle className="w-4 h-4 text-green-600" />
                       <span className="text-xs text-green-700 font-medium">Digitally Signed & Accepted</span>
-                    </div></div></div></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             )}
-          </div></div>
+          </div>
+        </div>
 
         {/* Signature Pad Modal */}
         {showSignaturePad && (

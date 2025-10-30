@@ -167,7 +167,9 @@ export default function CRMDashboardPage() {
                 </div>
                 <div className={`${stat.color} p-3 rounded-lg`}>
                   <stat.icon className="w-6 h-6 text-white" />
-                </div></div></button>
+                </div>
+              </div>
+            </button>
           ))}
         </div>
 
@@ -187,7 +189,8 @@ export default function CRMDashboardPage() {
                   <p className="text-sm font-medium text-gray-900">New customer added</p>
                   <p className="text-xs text-gray-600">John Smith - Residential</p>
                   <p className="text-xs text-gray-400 mt-1">2 hours ago</p>
-                </div></div>
+                </div>
+              </div>
               <div className="flex items-start gap-3 pb-3 border-b border-gray-100">
                 <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
                   <FileText className="w-4 h-4 text-purple-600" />
@@ -196,7 +199,8 @@ export default function CRMDashboardPage() {
                   <p className="text-sm font-medium text-gray-900">Estimate sent</p>
                   <p className="text-xs text-gray-600">EST-2024-156 - $4,500</p>
                   <p className="text-xs text-gray-400 mt-1">5 hours ago</p>
-                </div></div>
+                </div>
+              </div>
               <div className="flex items-start gap-3 pb-3 border-b border-gray-100">
                 <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
                   <FolderOpen className="w-4 h-4 text-green-600" />
@@ -205,7 +209,8 @@ export default function CRMDashboardPage() {
                   <p className="text-sm font-medium text-gray-900">Project started</p>
                   <p className="text-xs text-gray-600">Maple Street Property</p>
                   <p className="text-xs text-gray-400 mt-1">Yesterday</p>
-                </div></div>
+                </div>
+              </div>
               <div className="flex items-start gap-3">
                 <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0">
                   <Receipt className="w-4 h-4 text-orange-600" />
@@ -214,7 +219,10 @@ export default function CRMDashboardPage() {
                   <p className="text-sm font-medium text-gray-900">Payment received</p>
                   <p className="text-xs text-gray-600">INV-2024-089 - $3,200</p>
                   <p className="text-xs text-gray-400 mt-1">2 days ago</p>
-                </div></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
 
           {/* Upcoming Tasks */}
           <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
@@ -230,7 +238,9 @@ export default function CRMDashboardPage() {
                   <div className="flex items-center gap-2 mt-2">
                     <Calendar className="w-3 h-3 text-orange-600" />
                     <span className="text-xs text-orange-600 font-medium">Due Today</span>
-                  </div></div></div>
+                  </div>
+                </div>
+              </div>
               <div className="flex items-start gap-3 p-3 bg-gray-50 border border-gray-200 rounded-lg">
                 <input type="checkbox" className="mt-1 rounded border-gray-300" />
                 <div className="flex-1 min-w-0">
@@ -239,7 +249,9 @@ export default function CRMDashboardPage() {
                   <div className="flex items-center gap-2 mt-2">
                     <Calendar className="w-3 h-3 text-gray-600" />
                     <span className="text-xs text-gray-600">Tomorrow</span>
-                  </div></div></div>
+                  </div>
+                </div>
+              </div>
               <div className="flex items-start gap-3 p-3 bg-gray-50 border border-gray-200 rounded-lg">
                 <input type="checkbox" className="mt-1 rounded border-gray-300" />
                 <div className="flex-1 min-w-0">
@@ -248,7 +260,9 @@ export default function CRMDashboardPage() {
                   <div className="flex items-center gap-2 mt-2">
                     <Calendar className="w-3 h-3 text-gray-600" />
                     <span className="text-xs text-gray-600">Jan 26</span>
-                  </div></div></div>
+                  </div>
+                </div>
+              </div>
               <div className="flex items-start gap-3 p-3 bg-gray-50 border border-gray-200 rounded-lg">
                 <input type="checkbox" className="mt-1 rounded border-gray-300" />
                 <div className="flex-1 min-w-0">
@@ -257,7 +271,11 @@ export default function CRMDashboardPage() {
                   <div className="flex items-center gap-2 mt-2">
                     <Calendar className="w-3 h-3 text-gray-600" />
                     <span className="text-xs text-gray-600">Jan 28</span>
-                  </div></div></div></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
           {/* Calendar Widget */}
           <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
@@ -291,7 +309,8 @@ export default function CRMDashboardPage() {
                     {day}
                   </div>
                 ))}
-              </div></div>
+              </div>
+            </div>
             <div className="space-y-2 pt-3 border-t border-gray-200">
               <div className="flex items-center gap-2 text-xs">
                 <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
@@ -300,6 +319,11 @@ export default function CRMDashboardPage() {
               <div className="flex items-center gap-2 text-xs">
                 <div className="w-2 h-2 bg-blue-300 rounded-full"></div>
                 <span className="text-gray-700">Has appointments</span>
-              </div></div></div></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

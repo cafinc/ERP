@@ -244,7 +244,8 @@ export default function PermissionsMatrixPage() {
           >
             <RotateCcw style={{ width: '14px', height: '14px' }} />
             Reset
-          </button></div>
+          </button>
+        </div>
 
       {/* Permission Categories */}
       {Object.entries(PERMISSION_CATEGORIES).map(([category, perms]) => (
@@ -294,10 +295,14 @@ export default function PermissionsMatrixPage() {
                     ) : (
                       <XCircle style={{ width: '24px', height: '24px', color: '#cbd5e1' }} />
                     )}
-              </div></div></button>
+              </div>
+            </div>
+          </button>
   );
             })}
-          </div></div></div>
+          </div>
+        </div>
+      </div>
       ))}
 
       {/* Save Button */}
@@ -327,6 +332,8 @@ export default function PermissionsMatrixPage() {
         >
           <Save style={{ width: '20px', height: '20px' }} />
           Save Permissions for {selectedRole.charAt(0).toUpperCase() + selectedRole.slice(1)}
-        </button></div></div>
+        </button>
+      </div>
+    </div>
   );
 }

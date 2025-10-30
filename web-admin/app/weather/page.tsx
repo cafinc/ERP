@@ -223,7 +223,9 @@ export default function WeatherPlanningPage() {
             >
               <RefreshCw className="w-5 h-5 " />
               Refresh
-            </button></div></div>
+            </button>
+          </div>
+        </div>
 
         {/* Weather Alerts */}
         {weather.alerts && weather.alerts.length > 0 && (
@@ -238,7 +240,10 @@ export default function WeatherPlanningPage() {
                     <div className="flex items-center gap-4 mt-2 text-xs">
                       <span>Starts: {new Date(alert.start).toLocaleString()}</span>
                       <span>Ends: {new Date(alert.end).toLocaleString()}</span>
-                    </div></div></div></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         )}
@@ -255,7 +260,8 @@ export default function WeatherPlanningPage() {
                 <div className="flex items-center gap-2">
                   {getConditionIcon(weather.current.conditions)}
                   <span className="text-lg">{weather.current.conditions}</span>
-                </div></div>
+                </div>
+              </div>
               <div className="text-6xl font-bold mb-2">{weather.current.temp}°F</div>
               <p className="text-lg opacity-90">Feels like {weather.current.feels_like}°F</p>
             </div>
@@ -291,7 +297,10 @@ export default function WeatherPlanningPage() {
                   <span className="text-sm">Precip Rate</span>
                 </div>
                 <p className="text-2xl font-bold">{weather.current.precipitation} in/hr</p>
-              </div></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
 
         {/* 5-Day Forecast */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
@@ -313,7 +322,8 @@ export default function WeatherPlanningPage() {
                   <div className="flex items-center gap-1 text-[#3f72af]">
                     <TrendingDown className="w-4 h-4" />
                     <span className="font-semibold">{day.low}°</span>
-                  </div></div>
+                  </div>
+                </div>
                 {day.snow_amount && (
                   <div className="bg-blue-100 text-blue-800 rounded px-2 py-1 text-xs font-medium mb-2">
                     ❄️ {day.snow_amount} " snow
@@ -327,9 +337,12 @@ export default function WeatherPlanningPage() {
                   <div className="flex items-center justify-center gap-1">
                     <Wind className="w-3 h-3 " />
                     {day.wind_speed} mph
-                  </div></div></div>
+                  </div>
+                </div>
+              </div>
             ))}
-          </div></div>
+          </div>
+        </div>
 
         {/* Crew Alerts Sent */}
         {crewAlerts.length > 0 && (
@@ -345,7 +358,8 @@ export default function WeatherPlanningPage() {
                   </span>
                 </div>
               ))}
-            </div></div>
+            </div>
+          </div>
         )}
       </div>
   );

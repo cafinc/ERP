@@ -76,7 +76,9 @@ export default function WebhooksPage() {
                         {event}
                       </span>
                     ))}
-                  </div></div></div>
+                  </div>
+                </div>
+              </div>
               <div style={{ display: 'flex', gap: '8px', marginLeft: '16px' }}>
                 <button
                   style={{
@@ -119,8 +121,12 @@ export default function WebhooksPage() {
                   }}
                 >
                   Delete
-                </button></div></div></div>
+                </button>
+              </div>
+            </div>
+          </div>
         ))}
-      </div></div>
+      </div>
+    </div>
   );
 }

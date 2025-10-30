@@ -198,6 +198,9 @@ export default function PrivacyPolicy() {
           <p className="text-sm text-gray-600 text-center">
             © 2024 F Property Services. All rights reserved.
           </p>
-        </div></div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
   );
 }

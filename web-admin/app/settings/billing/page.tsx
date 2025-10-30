@@ -45,7 +45,9 @@ export default function BillingPage() {
               <div>
                 <p className="text-sm text-gray-600">Status</p>
                 <p className="text-2xl font-bold text-green-600 mt-1">Active</p>
-              </div></div></div>
+              </div>
+            </div>
+          </div>
 
           {/* Payment Method */}
           <div className="bg-white rounded-xl shadow-lg p-8 shadow-sm border border-gray-200 mb-4 hover:shadow-md transition-shadow">
@@ -58,10 +60,13 @@ export default function BillingPage() {
                 <div>
                   <p className="font-semibold text-gray-900">•••• •••• •••• 4242</p>
                   <p className="text-sm text-gray-600">Expires 12/2025</p>
-                </div></div>
+                </div>
+              </div>
               <button className="px-4 py-2 border-2 border-gray-300 rounded-lg hover:bg-gray-50 transition-all font-medium text-sm">
                 Update
-              </button></div></div>
+              </button>
+            </div>
+          </div>
 
           {/* Billing History */}
           <div className="bg-white rounded-xl shadow-lg p-8 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
@@ -74,13 +79,18 @@ export default function BillingPage() {
                     <div>
                       <p className="font-medium text-gray-900">${invoice.amount.toFixed(2)}</p>
                       <p className="text-sm text-gray-600">{invoice.date}</p>
-                    </div></div>
+                    </div>
+                  </div>
                   <button className="flex items-center gap-2 px-3 py-2 text-[#3f72af] hover:bg-blue-50 rounded-lg transition-all">
                     <Download className="w-4 h-4" />
                     <span className="text-sm font-medium">Download</span>
-                  </button></div>
+                  </button>
+                </div>
               ))}
-            </div></div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </PageHeader>
   );
 }

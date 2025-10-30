@@ -102,7 +102,9 @@ export default function EquipmentFormPage() {
       <div className="flex-1 overflow-auto p-6">
         <div className="flex items-center justify-center h-64">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
-        </div></div></div>
+        </div>
+      </div>
+    </div>
   );
   }
 
@@ -125,7 +127,8 @@ export default function EquipmentFormPage() {
             <p className="text-gray-600 mt-1">
               {isEdit ? 'Update equipment information' : 'Add new equipment to your fleet'}
             </p>
-          </div></div>
+          </div>
+        </div>
 
         {/* Basic Information */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
@@ -288,6 +291,10 @@ export default function EquipmentFormPage() {
                 {isEdit ? 'Update Equipment' : 'Create Equipment'}
               </>
             )}
-          </button></div></form></div></div>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
   );
 }

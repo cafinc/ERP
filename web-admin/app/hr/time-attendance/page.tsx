@@ -153,7 +153,8 @@ export default function TimeAttendancePage() {
                 <p className="text-3xl font-bold text-yellow-600">{stats.pending}</p>
               </div>
               <Clock className="h-12 w-12 text-yellow-500" />
-            </div></div>
+            </div>
+          </div>
 
           <div className="bg-white rounded-lg shadow p-6">
             <div className="flex items-center justify-between">
@@ -162,7 +163,8 @@ export default function TimeAttendancePage() {
                 <p className="text-3xl font-bold text-green-600">{stats.approved}</p>
               </div>
               <CheckCircle className="h-12 w-12 text-green-500" />
-            </div></div>
+            </div>
+          </div>
 
           <div className="bg-white rounded-lg shadow p-6">
             <div className="flex items-center justify-between">
@@ -173,7 +175,8 @@ export default function TimeAttendancePage() {
                 </p>
               </div>
               <Clock className="h-12 w-12 text-blue-500" />
-            </div></div>
+            </div>
+          </div>
 
           <div className="bg-white rounded-lg shadow p-6">
             <div className="flex items-center justify-between">
@@ -184,7 +187,9 @@ export default function TimeAttendancePage() {
                 </p>
               </div>
               <Calendar className="h-12 w-12 text-purple-500" />
-            </div></div></div>
+            </div>
+          </div>
+        </div>
 
         {/* Filters */}
         <div className="bg-white rounded-lg shadow p-4 mb-4">
@@ -245,13 +250,16 @@ export default function TimeAttendancePage() {
                   </option>
                 ))}
               </select>
-            </div></div>
+            </div>
+          </div>
 
           <div className="flex justify-end mt-4">
             <button className="flex items-center gap-2 px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300">
               <Download className="h-4 w-4" />
               Export Timesheet
-            </button></div></div>
+            </button>
+          </div>
+        </div>
 
         {/* Time Entries List */}
         <div className="bg-white rounded-lg shadow overflow-hidden">
@@ -305,11 +313,14 @@ export default function TimeAttendancePage() {
                           <div className="flex-shrink-0 h-10 w-10">
                             <div className="h-10 w-10 rounded-full bg-[#5b8ec4] flex items-center justify-center text-white font-semibold">
                               {entry.employee_name?.charAt(0) || "?"}
-                            </div></div>
+                            </div>
+                          </div>
                           <div className="ml-4">
                             <div className="text-sm font-medium text-gray-900">
                               {entry.employee_name || "Unknown"}
-                            </div></div></div>
+                            </div>
+                          </div>
+                        </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center text-sm text-gray-900">
@@ -381,7 +392,8 @@ export default function TimeAttendancePage() {
                               title="Reject"
                             >
                               <XCircle className="h-5 w-5" />
-                            </button></div>
+                            </button>
+                          </div>
                         )}
                         {entry.status === "approved" && (
                           <span className="text-green-600">✓ Approved</span>
@@ -411,8 +423,11 @@ export default function TimeAttendancePage() {
               </div>
               <button className="px-4 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-colors text-sm">
                 Approve All Pending
-              </button></div></div>
+              </button>
+            </div>
+          </div>
         )}
-      </div></div>
+      </div>
+    </div>
   );
 }

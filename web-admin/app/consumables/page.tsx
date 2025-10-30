@@ -239,7 +239,9 @@ export default function ConsumablesPage() {
               <div>
                 <p className="text-2xl font-bold text-gray-900">{consumables.length}</p>
                 <p className="text-sm text-gray-600">Total Items</p>
-              </div></div></div>
+              </div>
+            </div>
+          </div>
 
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-3">
@@ -249,7 +251,9 @@ export default function ConsumablesPage() {
               <div>
                 <p className="text-2xl font-bold text-gray-900">{lowStockCount}</p>
                 <p className="text-sm text-gray-600">Low Stock Alerts</p>
-              </div></div></div>
+              </div>
+            </div>
+          </div>
 
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-3">
@@ -259,7 +263,10 @@ export default function ConsumablesPage() {
               <div>
                 <p className="text-2xl font-bold text-gray-900">${totalValue.toFixed(2)}</p>
                 <p className="text-sm text-gray-600">Total Inventory Value</p>
-              </div></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
 
         {/* Consumables List */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
@@ -278,7 +285,8 @@ export default function ConsumablesPage() {
               >
                 <Plus className="w-4 h-4" />
                 Add Consumable
-              </button></div>
+              </button>
+            </div>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full">
@@ -340,7 +348,8 @@ export default function ConsumablesPage() {
                               title="Delete consumable"
                             >
                               <Trash2 className="w-4 h-4" />
-                            </button></div>
+                            </button>
+                          </div>
                         </td>
                       </tr>
                     );
@@ -364,13 +373,15 @@ export default function ConsumablesPage() {
                   <div>
                     <h2 className="text-2xl font-bold text-gray-900">Add Consumable</h2>
                     <p className="text-sm text-gray-600 mt-0.5">Track inventory for materials and supplies</p>
-                  </div></div>
+                  </div>
+                </div>
                 <button
                   onClick={() => setShowCreateModal(false)}
                   className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
                 >
                   <X className="w-5 h-5 text-gray-500" />
-                </button></div>
+                </button>
+              </div>
 
               {/* Modal Body */}
               <form onSubmit={handleCreate} className="p-6 space-y-6 max-h-[calc(90vh-180px)] overflow-y-auto">
@@ -406,7 +417,8 @@ export default function ConsumablesPage() {
                         </option>
                       ))}
                     </select>
-                  </div></div>
+                  </div>
+                </div>
 
                 {/* Stock and Unit */}
                 <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 border-2 border-blue-100">
@@ -444,7 +456,9 @@ export default function ConsumablesPage() {
                           </option>
                         ))}
                       </select>
-                    </div></div></div>
+                    </div>
+                  </div>
+                </div>
 
                 {/* Min Stock Level and Unit Cost */}
                 <div className="bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl p-6 border-2 border-orange-100">
@@ -485,7 +499,9 @@ export default function ConsumablesPage() {
                         />
                       </div>
                       <p className="text-xs text-gray-500 mt-1">Cost per unit</p>
-                    </div></div></div>
+                    </div>
+                  </div>
+                </div>
 
                 {/* Modal Footer */}
                 <div className="flex items-center justify-end gap-3 pt-4 border-t border-gray-200/50">
@@ -502,7 +518,11 @@ export default function ConsumablesPage() {
                   >
                     <Plus className="w-4 h-4" />
                     Create Consumable
-                  </button></div></form></div></div>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
         )}
 
         {/* Edit Modal */}
@@ -518,13 +538,15 @@ export default function ConsumablesPage() {
                   <div>
                     <h2 className="text-2xl font-bold text-gray-900">Edit Consumable</h2>
                     <p className="text-sm text-gray-600 mt-0.5">Update inventory details and settings</p>
-                  </div></div>
+                  </div>
+                </div>
                 <button
                   onClick={() => setShowEditModal(false)}
                   className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
                 >
                   <X className="w-5 h-5 text-gray-500" />
-                </button></div>
+                </button>
+              </div>
 
               {/* Modal Body */}
               <form onSubmit={handleUpdate} className="p-6 space-y-6 max-h-[calc(90vh-180px)] overflow-y-auto">
@@ -560,7 +582,8 @@ export default function ConsumablesPage() {
                         </option>
                       ))}
                     </select>
-                  </div></div>
+                  </div>
+                </div>
 
                 {/* Stock and Unit */}
                 <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 border-2 border-blue-100">
@@ -598,7 +621,9 @@ export default function ConsumablesPage() {
                           </option>
                         ))}
                       </select>
-                    </div></div></div>
+                    </div>
+                  </div>
+                </div>
 
                 {/* Min Stock Level and Unit Cost */}
                 <div className="bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl p-6 border-2 border-orange-100">
@@ -639,7 +664,9 @@ export default function ConsumablesPage() {
                         />
                       </div>
                       <p className="text-xs text-gray-500 mt-1">Cost per unit</p>
-                    </div></div></div>
+                    </div>
+                  </div>
+                </div>
 
                 {/* Modal Footer */}
                 <div className="flex items-center justify-end gap-3 pt-4 border-t border-gray-200/50">
@@ -656,7 +683,11 @@ export default function ConsumablesPage() {
                   >
                     <Edit className="w-4 h-4" />
                     Update Consumable
-                  </button></div></form></div></div>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
         )}
       </div>
     </>

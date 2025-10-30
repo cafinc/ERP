@@ -151,7 +151,10 @@ export default function TeamMemberDetailPage() {
       <div className="flex-1 overflow-auto p-6">
         <div className="flex items-center justify-center h-64">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
-        </div></div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
   );
   }
 
@@ -165,7 +168,8 @@ export default function TeamMemberDetailPage() {
             className="mt-4 text-[#3f72af] hover:text-blue-800"
           >
             Return to Team
-          </button></div>
+          </button>
+        </div>
   );
   }
 
@@ -223,7 +227,9 @@ export default function TeamMemberDetailPage() {
             >
               <Trash2 className="w-4 h-4" />
               Delete
-            </button></div></div>
+            </button>
+          </div>
+        </div>
 
         {/* Status Badges */}
         <div className="flex items-center gap-2">
@@ -251,14 +257,16 @@ export default function TeamMemberDetailPage() {
                 <div>
                   <p className="text-sm text-gray-600">Email</p>
                   <p className="text-sm font-medium text-gray-900">{user.email}</p>
-                </div></div>
+                </div>
+              </div>
               {user.phone && (
                 <div className="flex items-center gap-3">
                   <Phone className="w-5 h-5 text-gray-400" />
                   <div>
                     <p className="text-sm text-gray-600">Phone</p>
                     <p className="text-sm font-medium text-gray-900">{user.phone}</p>
-                  </div></div>
+                  </div>
+                </div>
               )}
               <div className="flex items-center gap-3">
                 <Bell className="w-5 h-5 text-gray-400" />
@@ -322,7 +330,8 @@ export default function TeamMemberDetailPage() {
                   <p className="text-sm font-medium text-gray-900">{user.emergency_contact_relationship}</p>
                 </div>
               )}
-            </div></div>
+            </div>
+          </div>
         )}
 
         {/* Driver License */}
@@ -338,7 +347,8 @@ export default function TeamMemberDetailPage() {
                 alt="Driver's License"
                 className="max-w-md mx-auto rounded"
               />
-            </div></div>
+            </div>
+          </div>
         )}
 
         {/* Documents */}
@@ -358,7 +368,8 @@ export default function TeamMemberDetailPage() {
                       <p className="text-xs text-gray-600">
                         Uploaded {new Date(doc.uploaded_at).toLocaleDateString()}
                       </p>
-                    </div></div>
+                    </div>
+                  </div>
                   <a
                     href={doc.url}
                     target="_blank"
@@ -369,8 +380,14 @@ export default function TeamMemberDetailPage() {
                   </a>
                 </div>
               ))}
-            </div></div></div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
         )}
-      </div></div></div>
+      </div>
+    </div>
+  </div>
   );
 }

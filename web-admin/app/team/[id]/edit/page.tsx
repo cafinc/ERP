@@ -118,7 +118,9 @@ export default function TeamMemberFormPage() {
       <div className="flex-1 overflow-auto p-6">
         <div className="flex items-center justify-center h-64">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
-        </div></div></div>
+        </div>
+      </div>
+    </div>
   );
   }
 
@@ -147,7 +149,8 @@ export default function TeamMemberFormPage() {
             <p className="text-gray-600 mt-1">
               {isEdit ? 'Update team member information' : 'Add a new crew member, admin, or subcontractor'}
             </p>
-          </div></div>
+          </div>
+        </div>
 
         {/* Basic Information */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
@@ -219,7 +222,9 @@ export default function TeamMemberFormPage() {
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                 placeholder="e.g., Crew Leader, Snow Plow Operator"
               />
-            </div></div></div>
+            </div>
+          </div>
+        </div>
 
         {/* Role & Permissions */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
@@ -274,7 +279,9 @@ export default function TeamMemberFormPage() {
                 />
                 <span className="ml-2 text-sm text-gray-700">Certified Driver</span>
               </label>
-            </div></div></div>
+            </div>
+          </div>
+        </div>
 
         {/* Emergency Contact */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
@@ -317,7 +324,9 @@ export default function TeamMemberFormPage() {
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                 placeholder="Spouse, Parent, etc."
               />
-            </div></div></div>
+            </div>
+          </div>
+        </div>
 
         {/* Submit Actions */}
         <div className="flex justify-end gap-4">
@@ -345,6 +354,10 @@ export default function TeamMemberFormPage() {
                 {isEdit ? 'Update Team Member' : 'Create Team Member'}
               </>
             )}
-          </button></div></form></div></div>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
   );
 }

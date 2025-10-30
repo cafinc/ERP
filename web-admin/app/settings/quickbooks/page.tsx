@@ -18,6 +18,9 @@ export default function QuickbooksSettingsPage() {
           >
             <LinkIcon className="w-4 h-4" />
             {connected ? 'Disconnect' : 'Connect QuickBooks'}
-          </button></div></div></div>
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }

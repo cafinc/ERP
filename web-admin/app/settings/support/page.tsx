@@ -104,7 +104,10 @@ export default function SupportPage() {
                     <p className="font-medium text-gray-900">Live Chat</p>
                     <p className="text-sm text-gray-600">Coming soon</p>
                     <p className="text-xs text-gray-500 mt-1">Real-time support</p>
-                  </div></div></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
             {/* Quick Links */}
             <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
@@ -144,7 +147,9 @@ export default function SupportPage() {
                     <span className="text-gray-700">QuickBooks Setup</span>
                   </div>
                 </a>
-              </div></div></div>
+              </div>
+            </div>
+          </div>
 
           {/* Contact Form */}
           <div className="lg:col-span-2">
@@ -163,7 +168,8 @@ export default function SupportPage() {
                     className="px-6 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-colors"
                   >
                     Send Another Message
-                  </button></div>
+                  </button>
+                </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -197,7 +203,8 @@ export default function SupportPage() {
                         className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="john@example.com"
                       />
-                    </div></div>
+                    </div>
+                  </div>
 
                   <div>
                     <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
@@ -254,7 +261,9 @@ export default function SupportPage() {
                           Send Message
                         </>
                       )}
-                    </button></div></form>
+                    </button>
+                  </div>
+                </form>
               )}
             </div>
 
@@ -293,5 +302,12 @@ export default function SupportPage() {
                     Go to Settings → QuickBooks and scroll to "Recent Sync Activity". This shows all sync operations
                     with success/error status and detailed error messages.
                   </p>
-                </div></div></div></div></div></div></div></div>);
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 }

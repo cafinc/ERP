@@ -30,7 +30,9 @@ export default function TestTopBar() {
               className="px-4 py-2 bg-white/20 hover:bg-white/30 rounded-lg text-sm font-medium transition-colors"
             >
               View All Options
-            </button></div></div>
+            </button>
+          </div>
+        </div>
 
         {/* Instructions */}
         <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 mb-6 hover:shadow-md transition-shadow">
@@ -121,7 +123,8 @@ export default function TestTopBar() {
                 <span>Clean, simple navigation</span>
               </li>
             </ul>
-          </div></div>
+          </div>
+        </div>
 
         {/* Sample Content */}
         <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
@@ -142,7 +145,10 @@ export default function TestTopBar() {
             <div className="bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-lg p-4">
               <p className="text-sm text-blue-100">Pending Tasks</p>
               <p className="text-3xl font-bold">18</p>
-            </div></div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </PageHeader>
   );
 }

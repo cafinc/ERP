@@ -47,7 +47,8 @@ export default function CompanySettingsPage() {
                 <div>
                   <h2 className="text-2xl font-bold text-gray-900">Business Details</h2>
                   <p className="text-sm text-gray-500">Your company information</p>
-                </div></div>
+                </div>
+              </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="md:col-span-2">
@@ -72,7 +73,8 @@ export default function CompanySettingsPage() {
                       className="w-full pl-10 pr-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       required
                     />
-                  </div></div>
+                  </div>
+                </div>
 
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">Phone *</label>
@@ -85,7 +87,8 @@ export default function CompanySettingsPage() {
                       className="w-full pl-10 pr-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       required
                     />
-                  </div></div>
+                  </div>
+                </div>
 
                 <div className="md:col-span-2">
                   <label className="block text-sm font-semibold text-gray-700 mb-2">Website</label>
@@ -97,7 +100,8 @@ export default function CompanySettingsPage() {
                       onChange={(e) => setCompanyInfo({ ...companyInfo, website: e.target.value })}
                       className="w-full pl-10 pr-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
-                  </div></div>
+                  </div>
+                </div>
 
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">Tax ID / Business Number</label>
@@ -107,7 +111,9 @@ export default function CompanySettingsPage() {
                     onChange={(e) => setCompanyInfo({ ...companyInfo, taxId: e.target.value })}
                     className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
-                </div></div></div>
+                </div>
+              </div>
+            </div>
 
             {/* Address */}
             <div className="bg-white rounded-xl shadow-lg p-8 shadow-sm border border-gray-200 mb-4 hover:shadow-md transition-shadow">
@@ -118,7 +124,8 @@ export default function CompanySettingsPage() {
                 <div>
                   <h2 className="text-2xl font-bold text-gray-900">Business Address</h2>
                   <p className="text-sm text-gray-500">Physical location of your company</p>
-                </div></div>
+                </div>
+              </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="md:col-span-2">
@@ -174,7 +181,9 @@ export default function CompanySettingsPage() {
                     className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     required
                   />
-                </div></div></div>
+                </div>
+              </div>
+            </div>
 
             {/* Save Button */}
             <div className="flex gap-4">
@@ -190,7 +199,11 @@ export default function CompanySettingsPage() {
                 className="flex-1 px-6 py-3 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-all shadow-md hover:shadow-lg font-semibold"
               >
                 Save Changes
-              </button></div></form></div></div>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
     </PageHeader>
   );
 }

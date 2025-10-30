@@ -162,7 +162,8 @@ export default function CrewPortalPage() {
                     Since {new Date(clockedInTime).toLocaleTimeString()}
                   </p>
                 )}
-              </div></div>
+              </div>
+            </div>
             <button
               onClick={handleClockAction}
               className={`px-8 py-3 rounded-lg font-semibold text-white transition-colors flex items-center gap-2 ${
@@ -173,7 +174,9 @@ export default function CrewPortalPage() {
               ) : (
                 <><PlayCircle className="w-5 h-5" /> Clock In</>
               )}
-            </button></div></div>
+            </button>
+          </div>
+        </div>
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
@@ -181,7 +184,8 @@ export default function CrewPortalPage() {
             <div className="flex items-center justify-between mb-4">
               <div className="bg-orange-100 p-3 rounded-lg">
                 <Briefcase className="w-6 h-6 text-orange-600" />
-              </div></div>
+              </div>
+            </div>
             <h3 className="text-2xl font-bold text-gray-900">{stats.active_work_orders}</h3>
             <p className="text-sm text-gray-600">Active Work Orders</p>
           </div>
@@ -190,10 +194,12 @@ export default function CrewPortalPage() {
             <div className="flex items-center justify-between mb-4">
               <div className="bg-blue-100 p-3 rounded-lg">
                 <CheckSquare className="w-6 h-6 text-blue-600" />
-              </div></div>
+              </div>
+            </div>
             <h3 className="text-2xl font-bold text-gray-900">{stats.pending_tasks}</h3>
             <p className="text-sm text-gray-600">Pending Tasks</p>
-          </div></div>
+          </div>
+        </div>
 
         {/* Quick Actions */}
         <div className="mb-8">
@@ -211,7 +217,8 @@ export default function CrewPortalPage() {
                 <h3 className="font-semibold text-gray-900">{action.label}</h3>
               </button>
             ))}
-          </div></div>
+          </div>
+        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Today's Tasks */}
@@ -224,7 +231,8 @@ export default function CrewPortalPage() {
                   className="text-sm text-blue-600 hover:text-blue-700"
                 >
                   View All
-                </button></div>
+                </button>
+              </div>
               <div className="bg-white rounded-lg shadow shadow-sm border border-gray-200 divide-y hover:shadow-md transition-shadow">
                 {tasks.map((task) => (
                   <div
@@ -239,9 +247,12 @@ export default function CrewPortalPage() {
                         <p className="text-sm text-gray-600">
                           {task.type.replace('_', ' ').toUpperCase()}
                         </p>
-                      </div></div></div>
+                      </div>
+                    </div>
+                  </div>
                 ))}
-              </div></div>
+              </div>
+            </div>
           )}
 
           {/* Safety Reminder */}
@@ -255,6 +266,12 @@ export default function CrewPortalPage() {
                   <p className="text-sm text-gray-700">
                     Always wear proper safety equipment and follow all safety protocols. Your safety is our top priority.
                   </p>
-                </div></div></div></div></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

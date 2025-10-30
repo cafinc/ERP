@@ -107,7 +107,8 @@ export default function CustomerPortalPage() {
             <div className="flex items-center justify-between mb-4">
               <div className="bg-blue-100 p-3 rounded-lg">
                 <FileText className="w-6 h-6 text-blue-600" />
-              </div></div>
+              </div>
+            </div>
             <h3 className="text-2xl font-bold text-gray-900">{stats.pending_estimates}</h3>
             <p className="text-sm text-gray-600">Pending Estimates</p>
           </div>
@@ -116,7 +117,8 @@ export default function CustomerPortalPage() {
             <div className="flex items-center justify-between mb-4">
               <div className="bg-green-100 p-3 rounded-lg">
                 <Receipt className="w-6 h-6 text-green-600" />
-              </div></div>
+              </div>
+            </div>
             <h3 className="text-2xl font-bold text-gray-900">{stats.unpaid_invoices}</h3>
             <p className="text-sm text-gray-600">Unpaid Invoices</p>
           </div>
@@ -125,7 +127,8 @@ export default function CustomerPortalPage() {
             <div className="flex items-center justify-between mb-4">
               <div className="bg-orange-100 p-3 rounded-lg">
                 <Briefcase className="w-6 h-6 text-orange-600" />
-              </div></div>
+              </div>
+            </div>
             <h3 className="text-2xl font-bold text-gray-900">{stats.active_work_orders}</h3>
             <p className="text-sm text-gray-600">Active Work Orders</p>
           </div>
@@ -134,10 +137,12 @@ export default function CustomerPortalPage() {
             <div className="flex items-center justify-between mb-4">
               <div className="bg-red-100 p-3 rounded-lg">
                 <DollarSign className="w-6 h-6 text-red-600" />
-              </div></div>
+              </div>
+            </div>
             <h3 className="text-2xl font-bold text-gray-900">${stats.total_due.toFixed(2)}</h3>
             <p className="text-sm text-gray-600">Total Due</p>
-          </div></div>
+          </div>
+        </div>
 
         {/* Quick Actions */}
         <div className="mb-8">
@@ -155,7 +160,8 @@ export default function CustomerPortalPage() {
                 <h3 className="font-semibold text-gray-900">{action.label}</h3>
               </button>
             ))}
-          </div></div>
+          </div>
+        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* My Tasks */}
@@ -168,7 +174,8 @@ export default function CustomerPortalPage() {
                   className="text-sm text-blue-600 hover:text-blue-700"
                 >
                   View All
-                </button></div>
+                </button>
+              </div>
               <div className="bg-white rounded-lg shadow shadow-sm border border-gray-200 divide-y hover:shadow-md transition-shadow">
                 {tasks.map((task) => (
                   <div
@@ -184,9 +191,11 @@ export default function CustomerPortalPage() {
                         </p>
                       </div>
                       <CheckSquare className="w-5 h-5 text-blue-500" />
-                    </div></div>
+                    </div>
+                  </div>
                 ))}
-              </div></div>
+              </div>
+            </div>
           )}
 
           {/* Recent Activity */}
@@ -199,13 +208,22 @@ export default function CustomerPortalPage() {
                   <div>
                     <p className="text-sm text-gray-900">Estimate EST-001 sent for review</p>
                     <p className="text-xs text-gray-500">2 hours ago</p>
-                  </div></div></div>
+                  </div>
+                </div>
+              </div>
               <div className="p-4">
                 <div className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
                   <div>
                     <p className="text-sm text-gray-900">Work order WO-123 completed</p>
                     <p className="text-xs text-gray-500">Yesterday</p>
-                  </div></div></div></div></div></div></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

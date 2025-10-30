@@ -215,7 +215,8 @@ export default function AnalyticsPage() {
               <option value="90">Last 90 Days</option>
               <option value="365">Last Year</option>
             </select>
-          </div></div>
+          </div>
+        </div>
 
         <div className="mx-6 mt-6 space-y-6">{/* Revenue Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -230,7 +231,8 @@ export default function AnalyticsPage() {
             <div className="flex items-center gap-2 text-sm opacity-90">
               <TrendingUp className="w-4 h-4" />
               <span>{data.revenue.change > 0 ? '+' : ''}{data.revenue.change.toFixed(1)}% from last month</span>
-            </div></div>
+            </div>
+          </div>
 
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-4">
@@ -252,7 +254,8 @@ export default function AnalyticsPage() {
               ${data.revenue.lastMonth.toLocaleString('en-US', { minimumFractionDigits: 2 })}
             </p>
             <p className="text-sm text-gray-600">Previous month revenue</p>
-          </div></div>
+          </div>
+        </div>
 
         {/* Key Metrics */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -310,7 +313,8 @@ export default function AnalyticsPage() {
             <p className="text-xs text-orange-600 mt-2">
               {data.equipment.available} available
             </p>
-          </div></div>
+          </div>
+        </div>
 
         {/* Performance Metrics */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -329,7 +333,8 @@ export default function AnalyticsPage() {
                     className="bg-green-600 h-2 rounded-full" 
                     style={{ width: `${data.estimates.acceptanceRate}%` }}
                   />
-                </div></div>
+                </div>
+              </div>
               <div className="grid grid-cols-3 gap-4 pt-4 border-t">
                 <div>
                   <p className="text-2xl font-bold text-gray-900">{data.estimates.total}</p>
@@ -342,7 +347,10 @@ export default function AnalyticsPage() {
                 <div>
                   <p className="text-2xl font-bold text-yellow-600">{data.estimates.pending}</p>
                   <p className="text-xs text-gray-600">Pending</p>
-                </div></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
 
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Team Status</h3>
@@ -359,7 +367,8 @@ export default function AnalyticsPage() {
                     className="bg-[#3f72af] h-2 rounded-full" 
                     style={{ width: `${(data.team.onShift / data.team.total) * 100}%` }}
                   />
-                </div></div>
+                </div>
+              </div>
               <div className="grid grid-cols-2 gap-4 pt-4 border-t">
                 <div>
                   <p className="text-2xl font-bold text-gray-900">{data.team.total}</p>
@@ -368,6 +377,12 @@ export default function AnalyticsPage() {
                 <div>
                   <p className="text-2xl font-bold text-green-600">{data.team.onShift}</p>
                   <p className="text-xs text-gray-600">On Shift</p>
-                </div></div></div></div></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

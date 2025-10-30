@@ -94,7 +94,9 @@ export default function AnalyticsPage() {
             >
               <RefreshCw className="w-4 h-4" />
               <span>Refresh</span>
-            </button></div></div>
+            </button>
+          </div>
+        </div>
 
         {loading ? (
           <div className="flex items-center justify-center py-12">
@@ -121,7 +123,8 @@ export default function AnalyticsPage() {
                 <div className="flex items-center justify-between mb-4">
                   <div className="p-3 bg-green-100 rounded-lg">
                     <PhoneIncoming className="w-6 h-6 text-green-600" />
-                  </div></div>
+                  </div>
+                </div>
                 <p className="text-sm text-gray-600 mb-1">Inbound Calls</p>
                 <p className="text-3xl font-bold text-gray-900">0</p>
               </div>
@@ -130,7 +133,8 @@ export default function AnalyticsPage() {
                 <div className="flex items-center justify-between mb-4">
                   <div className="p-3 bg-purple-100 rounded-lg">
                     <PhoneOutgoing className="w-6 h-6 text-purple-600" />
-                  </div></div>
+                  </div>
+                </div>
                 <p className="text-sm text-gray-600 mb-1">Outbound Calls</p>
                 <p className="text-3xl font-bold text-gray-900">0</p>
               </div>
@@ -139,10 +143,12 @@ export default function AnalyticsPage() {
                 <div className="flex items-center justify-between mb-4">
                   <div className="p-3 bg-orange-100 rounded-lg">
                     <Clock className="w-6 h-6 text-orange-600" />
-                  </div></div>
+                  </div>
+                </div>
                 <p className="text-sm text-gray-600 mb-1">Avg Duration</p>
                 <p className="text-3xl font-bold text-gray-900">0:00</p>
-              </div></div>
+              </div>
+            </div>
 
             {/* Charts */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-8">
@@ -178,7 +184,9 @@ export default function AnalyticsPage() {
                 </h3>
                 <div className="flex items-center justify-center h-[300px] text-gray-400">
                   <p>No data available</p>
-                </div></div></div>
+                </div>
+              </div>
+            </div>
 
             {/* Performance Indicators */}
             <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
@@ -198,8 +206,12 @@ export default function AnalyticsPage() {
                   <p className="text-sm text-gray-600 mb-1">Abandonment Rate</p>
                   <p className="text-2xl font-bold text-gray-900">0%</p>
                   <p className="text-sm text-gray-500 mt-1">Target: &lt; 5%</p>
-                </div></div></div>
+                </div>
+              </div>
+            </div>
           </>
         )}
-      </div></div></div>);
+      </div>
+    </div>
+  </div>
 }

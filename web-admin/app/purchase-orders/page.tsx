@@ -177,7 +177,8 @@ export default function PurchaseOrdersPage() {
           />
           <div className="flex items-center justify-center h-96">
             <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
-          </div></div>
+          </div>
+        </div>
       </SimpleNavigationTopBar>
     );
   }
@@ -236,7 +237,8 @@ export default function PurchaseOrdersPage() {
               >
                 <Plus className="w-4 h-4 mr-2" />
                 Create Purchase Order
-              </button></div>
+              </button>
+            </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredPurchaseOrders.map((po) => (
@@ -260,7 +262,8 @@ export default function PurchaseOrdersPage() {
                         <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusBadge(po.status)}`}>
                           {po.status.replace('_', ' ')}
                         </span>
-                      </div></div>
+                      </div>
+                    </div>
 
                     {/* Amount */}
                     <div className="bg-gray-50 rounded-lg p-4 mb-4">
@@ -282,7 +285,8 @@ export default function PurchaseOrdersPage() {
                             <span>{formatCurrency(po.shipping)}</span>
                           </div>
                         )}
-                      </div></div>
+                      </div>
+                    </div>
 
                     {/* Items */}
                     <div className="mb-4">
@@ -302,7 +306,8 @@ export default function PurchaseOrdersPage() {
                             +{po.items.length - 2} more items
                           </div>
                         )}
-                      </div></div>
+                      </div>
+                    </div>
 
                     {/* Details */}
                     <div className="space-y-2 mb-4 pt-4 border-t border-gray-100">
@@ -327,7 +332,8 @@ export default function PurchaseOrdersPage() {
                         <User className="w-4 h-4 mr-2 text-gray-400" />
                         <span className="font-medium mr-1">Created by:</span>
                         <span>{po.created_by}</span>
-                      </div></div>
+                      </div>
+                    </div>
 
                     {/* Actions */}
                     <div className="flex gap-2 pt-4 border-t border-gray-100">
@@ -350,11 +356,15 @@ export default function PurchaseOrdersPage() {
                       >
                         <Edit className="w-4 h-4 mr-1" />
                         Edit
-                      </button></div></div></div>
+                      </button>
+                    </div>
+                  </div>
+                </div>
               ))}
             </div>
           )}
-        </div></div>
+        </div>
+      </div>
     </SimpleNavigationTopBar>
   );
 }

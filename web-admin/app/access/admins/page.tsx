@@ -108,7 +108,9 @@ export default function AdminsPage() {
             <div>
               <h2 style={{ fontSize: '18px', fontWeight: '600', color: '#1e293b' }}>Admin Users ({admins.length})</h2>
               <p style={{ fontSize: '14px', color: '#64748b' }}>Users with administrative privileges</p>
-            </div></div></div>
+            </div>
+          </div>
+        </div>
 
         <table style={{ width: '100%', borderCollapse: 'collapse' }}>
           <thead>
@@ -198,7 +200,8 @@ export default function AdminsPage() {
                     >
                       <Trash2 style={{ width: '14px', height: '14px' }} />
                       Remove
-                    </button></div>
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}
@@ -229,7 +232,8 @@ export default function AdminsPage() {
           <div>
             <h2 style={{ fontSize: '18px', fontWeight: '600', color: '#1e293b' }}>Admin Permissions</h2>
             <p style={{ fontSize: '14px', color: '#64748b' }}>Standard administrative access</p>
-          </div></div>
+          </div>
+        </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '16px' }}>
           {[
             'Manage Operations',
@@ -255,6 +259,8 @@ export default function AdminsPage() {
               <span style={{ fontSize: '14px', color: '#1e293b', fontWeight: '500' }}>{permission}</span>
             </div>
           ))}
-        </div></div></div>
+        </div>
+      </div>
+    </div>
   );
 }

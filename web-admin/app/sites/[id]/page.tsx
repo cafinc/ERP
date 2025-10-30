@@ -496,7 +496,8 @@ export default function SiteDetailPage() {
         <div className="text-center">
           <RefreshCw className="w-8 h-8 text-blue-600 animate-spin mx-auto mb-4" />
           <p className="text-gray-600">Loading site details...</p>
-        </div></div>
+        </div>
+      </div>
   );
   }
 
@@ -511,7 +512,9 @@ export default function SiteDetailPage() {
             className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
           >
             Back to Sites
-          </button></div></div>
+          </button>
+        </div>
+      </div>
   );
   }
 
@@ -603,7 +606,8 @@ export default function SiteDetailPage() {
                 Service History
               </button>
             </nav>
-          </div></div>
+          </div>
+        </div>
 
         {/* Overview Tab */}
         {activeTab === 'overview' && (
@@ -697,7 +701,8 @@ export default function SiteDetailPage() {
                         <p className="text-sm text-gray-600 bg-gray-50 p-3 rounded-lg">{site.notes}</p>
                       </div>
                     )}
-                  </div></div>
+                  </div>
+                </div>
               )}
             </div>
 
@@ -726,7 +731,9 @@ export default function SiteDetailPage() {
                     >
                       View Customer
                       <SquareArrowOutUpRight className="w-4 h-4 ml-2" />
-                    </button></div></div>
+                    </button>
+                  </div>
+                </div>
               )}
 
               {/* Quick Stats */}
@@ -754,7 +761,9 @@ export default function SiteDetailPage() {
                     </dd>
                   </div>
                 </dl>
-              </div></div></div>
+              </div>
+            </div>
+          </div>
         )}
 
         {/* Map & Geofence Tab */}
@@ -803,7 +812,8 @@ export default function SiteDetailPage() {
                     <p className="text-sm text-gray-600">
                       Professional drawings, labels, and customizable annotations
                     </p>
-                  </div></div>
+                  </div>
+                </div>
 
                 {/* Map Preview with Stats */}
                 <div className="bg-white rounded-lg shadow-md overflow-hidden mb-6">
@@ -823,7 +833,8 @@ export default function SiteDetailPage() {
                             Geofence Active
                           </span>
                         )}
-                      </div></div>
+                      </div>
+                    </div>
 
                     {/* Quick Stats */}
                     <div className="p-6 bg-gray-50">
@@ -836,7 +847,8 @@ export default function SiteDetailPage() {
                             <p className="font-semibold text-gray-900 capitalize">
                               {site?.site_type || 'Not specified'}
                             </p>
-                          </div></div>
+                          </div>
+                        </div>
                         <div className="flex items-start">
                           <Maximize2 className="w-5 h-5 text-green-600 mr-3 mt-0.5" />
                           <div>
@@ -844,7 +856,8 @@ export default function SiteDetailPage() {
                             <p className="font-semibold text-gray-900">
                               {site?.area_size ? `${site.area_size.toLocaleString()} sq ft` : 'Not measured'}
                             </p>
-                          </div></div>
+                          </div>
+                        </div>
                         <div className="flex items-start">
                           <Layers className="w-5 h-5 text-purple-600 mr-3 mt-0.5" />
                           <div>
@@ -852,7 +865,8 @@ export default function SiteDetailPage() {
                             <p className="font-semibold text-gray-900">
                               {site?.services?.length || 0} services
                             </p>
-                          </div></div>
+                          </div>
+                        </div>
                         <div className="flex items-start">
                           <FileText className="w-5 h-5 text-orange-600 mr-3 mt-0.5" />
                           <div>
@@ -860,7 +874,12 @@ export default function SiteDetailPage() {
                             <p className="text-xs font-mono text-gray-900">
                               {site?.location?.latitude?.toFixed(6)}, {site?.location?.longitude?.toFixed(6)}
                             </p>
-                          </div></div></div></div></div></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
                 {/* Call to Action */}
                 <div className="flex justify-center gap-4">
@@ -880,7 +899,10 @@ export default function SiteDetailPage() {
                   >
                     <ExternalLink className="w-5 h-5 mr-2" />
                     Open in Google Maps
-                  </button></div></div></div>
+                  </button>
+                </div>
+              </div>
+            </div>
 
             {/* Quick Tips */}
             <div className="bg-white rounded-lg shadow-sm p-6">
@@ -898,7 +920,8 @@ export default function SiteDetailPage() {
                     <p className="text-sm text-gray-600">
                       Satellite view, street view, and multiple map layers
                     </p>
-                  </div></div>
+                  </div>
+                </div>
                 <div className="flex items-start">
                   <div className="flex-shrink-0 w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center mr-3">
                     <span className="text-purple-600 font-semibold">2</span>
@@ -908,7 +931,8 @@ export default function SiteDetailPage() {
                     <p className="text-sm text-gray-600">
                       Polygons, lines, markers, and custom shapes with colors
                     </p>
-                  </div></div>
+                  </div>
+                </div>
                 <div className="flex items-start">
                   <div className="flex-shrink-0 w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center mr-3">
                     <span className="text-green-600 font-semibold">3</span>
@@ -918,7 +942,8 @@ export default function SiteDetailPage() {
                     <p className="text-sm text-gray-600">
                       Save multiple map versions and restore previous states
                     </p>
-                  </div></div>
+                  </div>
+                </div>
                 <div className="flex items-start">
                   <div className="flex-shrink-0 w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center mr-3">
                     <span className="text-orange-600 font-semibold">4</span>
@@ -928,7 +953,11 @@ export default function SiteDetailPage() {
                     <p className="text-sm text-gray-600">
                       Screenshot maps and share professional PDFs with customers
                     </p>
-                  </div></div></div></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         )}
 
         {/* Services Tab */}
@@ -952,7 +981,9 @@ export default function SiteDetailPage() {
                       <div className="text-right">
                         <p className="text-lg font-bold text-gray-900">${service.cost}</p>
                         <p className="text-sm text-gray-500">per {service.unit_type}</p>
-                      </div></div></div>
+                      </div>
+                    </div>
+                  </div>
                 ))}
               </div>
             ) : (
@@ -1032,7 +1063,9 @@ export default function SiteDetailPage() {
                     <p className="text-gray-500">No access information available</p>
                   </div>
                 )}
-              </div></div></div>
+              </div>
+            </div>
+          </div>
         )}
 
         {/* Service History Tab */}
@@ -1075,7 +1108,9 @@ export default function SiteDetailPage() {
                   >
                     <Plus className="w-4 h-4 mr-2" />
                     Add Record
-                  </button></div></div>
+                  </button>
+                </div>
+              </div>
 
               {serviceHistoryLoading ? (
                 <div className="p-12 text-center">
@@ -1190,9 +1225,11 @@ export default function SiteDetailPage() {
                   >
                     <Plus className="w-4 h-4 mr-2" />
                     Add First Service Record
-                  </button></div>
+                  </button>
+                </div>
               )}
-            </div></div>
+            </div>
+          </div>
         )}
       </div>
 
@@ -1214,7 +1251,8 @@ export default function SiteDetailPage() {
                 className="text-gray-400 hover:text-gray-600"
               >
                 <X className="w-6 h-6" />
-              </button></div>
+              </button>
+            </div>
             <div className="p-6">
               <div className="space-y-4">
                 {/* Service Date */}
@@ -1329,7 +1367,8 @@ export default function SiteDetailPage() {
                     placeholder="e.g., Clear, Snowy, Rainy"
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
-                </div></div>
+                </div>
+              </div>
 
               <div className="mt-6 flex justify-end space-x-3">
                 <button
@@ -1357,7 +1396,11 @@ export default function SiteDetailPage() {
                       Save Service Record
                     </>
                   )}
-                </button></div></div></div></div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

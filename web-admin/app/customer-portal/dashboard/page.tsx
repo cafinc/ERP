@@ -57,7 +57,8 @@ function CustomerPortalLayout({ children }: CustomerPortalLayoutProps) {
               <div>
                 <h1 className="text-lg font-bold text-gray-900">Customer Portal</h1>
                 <p className="text-xs text-gray-500">Welcome back!</p>
-              </div></div>
+              </div>
+            </div>
 
             <div className="flex items-center gap-4">
               <button
@@ -78,7 +79,10 @@ function CustomerPortalLayout({ children }: CustomerPortalLayoutProps) {
                 className="p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
               >
                 <LogOut className="w-5 h-5" />
-              </button></div></div></div>
+              </button>
+            </div>
+          </div>
+        </div>
       </header>
 
       {/* Main Content */}
@@ -192,7 +196,9 @@ export default function CustomerDashboardPage() {
               <div>
                 <p className="text-2xl font-bold text-gray-900">{stats.activeSites}</p>
                 <p className="text-xs text-gray-600">Active Sites</p>
-              </div></div></div>
+              </div>
+            </div>
+          </div>
 
           <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-3">
@@ -202,7 +208,9 @@ export default function CustomerDashboardPage() {
               <div>
                 <p className="text-2xl font-bold text-gray-900">{stats.upcomingServices}</p>
                 <p className="text-xs text-gray-600">Upcoming</p>
-              </div></div></div>
+              </div>
+            </div>
+          </div>
 
           <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-3">
@@ -212,7 +220,9 @@ export default function CustomerDashboardPage() {
               <div>
                 <p className="text-2xl font-bold text-gray-900">{stats.pendingInvoices}</p>
                 <p className="text-xs text-gray-600">Pending</p>
-              </div></div></div>
+              </div>
+            </div>
+          </div>
 
           <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-3">
@@ -222,7 +232,9 @@ export default function CustomerDashboardPage() {
               <div>
                 <p className="text-2xl font-bold text-gray-900">${(stats.totalSpent / 1000).toFixed(1)}k</p>
                 <p className="text-xs text-gray-600">Total Spent</p>
-              </div></div></div>
+              </div>
+            </div>
+          </div>
 
           <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-3">
@@ -232,7 +244,9 @@ export default function CustomerDashboardPage() {
               <div>
                 <p className="text-2xl font-bold text-gray-900">{stats.activeProjects}</p>
                 <p className="text-xs text-gray-600">Projects</p>
-              </div></div></div>
+              </div>
+            </div>
+          </div>
 
           <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-3">
@@ -242,7 +256,10 @@ export default function CustomerDashboardPage() {
               <div>
                 <p className="text-2xl font-bold text-gray-900">{stats.messagesUnread}</p>
                 <p className="text-xs text-gray-600">Messages</p>
-              </div></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
 
         {/* Tabs Navigation */}
         <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
@@ -287,7 +304,9 @@ export default function CustomerDashboardPage() {
                 }`}
               >
                 Pending Invoices ({stats.pendingInvoices})
-              </button></div></div>
+              </button>
+            </div>
+          </div>
 
           {/* Tab Content */}
           <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
@@ -329,7 +348,9 @@ export default function CustomerDashboardPage() {
                     <Star className="w-8 h-8 text-purple-600 mb-3" />
                     <h3 className="font-semibold text-gray-900 mb-1">Give Feedback</h3>
                     <p className="text-sm text-gray-600">Rate our service</p>
-                  </button></div></div>
+                  </button>
+                </div>
+              </div>
             )}
 
             {activeTab === 'sites' && (
@@ -344,7 +365,8 @@ export default function CustomerDashboardPage() {
                         <h4 className="font-semibold text-gray-900">{site.name}</h4>
                         <p className="text-sm text-gray-600">{site.address}</p>
                         <p className="text-xs text-gray-500 mt-1">Last Service: {new Date(site.lastService).toLocaleDateString()}</p>
-                      </div></div>
+                      </div>
+                    </div>
                     <span className="px-3 py-1 bg-green-100 text-green-700 text-xs font-medium rounded-full">
                       Active
                     </span>
@@ -365,7 +387,9 @@ export default function CustomerDashboardPage() {
                         <h4 className="font-semibold text-gray-900">{service.service}</h4>
                         <p className="text-sm text-gray-600">{service.site}</p>
                         <p className="text-xs text-gray-500 mt-1">{new Date(service.date).toLocaleDateString()} at {service.time}</p>
-                      </div></div></div>
+                      </div>
+                    </div>
+                  </div>
                 ))}
               </div>
             )}
@@ -382,16 +406,20 @@ export default function CustomerDashboardPage() {
                         <h4 className="font-semibold text-gray-900">{invoice.number}</h4>
                         <p className="text-sm text-gray-600">{invoice.service}</p>
                         <p className="text-xs text-gray-500 mt-1">Due: {new Date(invoice.dueDate).toLocaleDateString()}</p>
-                      </div></div>
+                      </div>
+                    </div>
                     <div className="text-right">
                       <p className="text-xl font-bold text-gray-900">${invoice.amount}</p>
                       <button className="mt-2 px-4 py-1 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white text-sm rounded-lg transition-colors">
                         Pay Now
-                      </button></div></div>
+                      </button>
+                    </div>
+                  </div>
                 ))}
               </div>
             )}
-          </div></div>
+          </div>
+        </div>
 
         {/* Two Column Layout: Communication Center (Left) and Recent Activity (Right) */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
@@ -422,7 +450,11 @@ export default function CustomerDashboardPage() {
                   <button className="flex items-center gap-2 px-6 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg transition-colors">
                     <Send className="w-4 h-4" />
                     <span>Send Message</span>
-                  </button></div></div></div></div>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
 
           {/* Recent Activity (1/3 width) */}
           <div className="lg:col-span-1">
@@ -453,9 +485,15 @@ export default function CustomerDashboardPage() {
                             day: 'numeric' 
                           })}
                         </p>
-                      </div></div></div>
+                      </div>
+                    </div>
+                  </div>
                 ))}
-              </div></div></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </CustomerPortalLayout>
   );
 }

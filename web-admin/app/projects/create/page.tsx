@@ -165,7 +165,8 @@ export default function ProjectCreatePage() {
           <div>
             <h1 className="text-3xl font-bold text-gray-900">Create New Project</h1>
             <p className="text-gray-600 mt-1">Fill in the details to create a new project</p>
-          </div></div>
+          </div>
+        </div>
 
         <div className="max-w-3xl">
           <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-8 hover:shadow-md transition-shadow">
@@ -189,7 +190,8 @@ export default function ProjectCreatePage() {
                     </option>
                   ))}
                 </select>
-              </div></div>
+              </div>
+            </div>
 
             {/* Estimate Selection */}
             <div className="mb-4">
@@ -237,7 +239,8 @@ export default function ProjectCreatePage() {
                   className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                   placeholder="Enter project name"
                 />
-              </div></div>
+              </div>
+            </div>
 
             {/* Description */}
             <div className="mb-4">
@@ -266,7 +269,8 @@ export default function ProjectCreatePage() {
                   onChange={(e) => setProjectForm({ ...projectForm, start_date: e.target.value })}
                   className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                 />
-              </div></div>
+              </div>
+            </div>
 
             {/* Status */}
             <div className="mb-4">
@@ -308,7 +312,9 @@ export default function ProjectCreatePage() {
                 className="flex-1 px-6 py-3 border border-gray-300 hover:bg-gray-50 text-gray-700 rounded-lg font-medium transition-colors"
               >
                 Cancel
-              </button></div></form>
+              </button>
+            </div>
+          </form>
 
           {/* Info Box */}
           <div className="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
@@ -319,7 +325,10 @@ export default function ProjectCreatePage() {
               <li>• The project will inherit financial details from the linked estimate</li>
               <li>• You can update project status and details at any time</li>
             </ul>
-          </div></div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
     </>
   );
 }

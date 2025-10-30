@@ -56,7 +56,8 @@ export default function SecuritySettingsPage() {
               Change Password
             </h2>
             <p style={{ fontSize: '14px', color: '#64748b' }}>Update your password regularly for security</p>
-          </div></div>
+          </div>
+        </div>
 
         <form onSubmit={handlePasswordChange} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <div>
@@ -133,7 +134,9 @@ export default function SecuritySettingsPage() {
             }}
           >
             Update Password
-          </button></form></div>
+          </button>
+        </form>
+      </div>
 
       {/* Two-Factor Authentication */}
       <div style={{
@@ -161,7 +164,8 @@ export default function SecuritySettingsPage() {
                 Two-Factor Authentication
               </h2>
               <p style={{ fontSize: '14px', color: '#64748b' }}>Add an extra layer of security to your account</p>
-            </div></div>
+            </div>
+          </div>
           <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
             <input
               type="checkbox"
@@ -190,7 +194,8 @@ export default function SecuritySettingsPage() {
               <p style={{ fontSize: '14px', color: '#1e40af' }}>
                 Your account is protected with two-factor authentication
               </p>
-            </div></div>
+            </div>
+          </div>
         )}
       </div>
 
@@ -218,7 +223,8 @@ export default function SecuritySettingsPage() {
               Active Sessions
             </h2>
             <p style={{ fontSize: '14px', color: '#64748b' }}>Manage devices with access to your account</p>
-          </div></div>
+          </div>
+        </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           {sessions.map((session) => (
@@ -249,7 +255,8 @@ export default function SecuritySettingsPage() {
                   <p style={{ fontWeight: '600', color: '#1e293b', marginBottom: '4px' }}>{session.device}</p>
                   <p style={{ fontSize: '14px', color: '#64748b', marginBottom: '2px' }}>{session.location}</p>
                   <p style={{ fontSize: '12px', color: '#94a3b8' }}>Last active: {session.lastActive}</p>
-                </div></div>
+                </div>
+              </div>
               <div>
                 {session.current ? (
                   <span style={{
@@ -278,8 +285,11 @@ export default function SecuritySettingsPage() {
                     Revoke
                   </button>
                 )}
-              </div></div>
+              </div>
+            </div>
           ))}
-        </div></div></div>
+        </div>
+      </div>
+    </div>
   );
 }

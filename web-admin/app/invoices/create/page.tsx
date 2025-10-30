@@ -169,7 +169,8 @@ export default function InvoiceCreatePage() {
           <div>
             <h1 className="text-3xl font-bold text-gray-900">Create New Invoice</h1>
             <p className="text-gray-600 mt-1">Fill in the details to create a new invoice</p>
-          </div></div>
+          </div>
+        </div>
 
         <form onSubmit={handleSubmit} className="max-w-5xl">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
@@ -199,7 +200,8 @@ export default function InvoiceCreatePage() {
                           </option>
                         ))}
                       </select>
-                    </div></div>
+                    </div>
+                  </div>
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -230,7 +232,9 @@ export default function InvoiceCreatePage() {
                         className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                         placeholder="0.00"
                       />
-                    </div></div></div>
+                    </div>
+                  </div>
+                </div>
 
                 {/* Deposit */}
                 <div className="mt-4 pt-4 border-t border-gray-200">
@@ -261,7 +265,8 @@ export default function InvoiceCreatePage() {
                           className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                           placeholder="25"
                         />
-                      </div></div>
+                      </div>
+                    </div>
                   )}
                 </div>
 
@@ -294,9 +299,11 @@ export default function InvoiceCreatePage() {
                           className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                           placeholder="1.5"
                         />
-                      </div></div>
+                      </div>
+                    </div>
                   )}
-                </div></div>
+                </div>
+              </div>
 
               {/* Line Items */}
               <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-8 hover:shadow-md transition-shadow">
@@ -309,7 +316,8 @@ export default function InvoiceCreatePage() {
                   >
                     <Plus className="w-4 h-4" />
                     <span>Add Item</span>
-                  </button></div>
+                  </button>
+                </div>
 
                 <div className="space-y-3">
                   {lineItems.map((item) => (
@@ -360,9 +368,13 @@ export default function InvoiceCreatePage() {
                             disabled={lineItems.length === 1}
                           >
                             <Trash2 className="w-4 h-4" />
-                          </button></div></div></div>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
                   ))}
-                </div></div>
+                </div>
+              </div>
 
               {/* Notes */}
               <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-8 hover:shadow-md transition-shadow">
@@ -376,7 +388,8 @@ export default function InvoiceCreatePage() {
                   rows={4}
                   placeholder="Add any additional notes or terms..."
                 />
-              </div></div>
+              </div>
+            </div>
 
             {/* Sidebar - Totals */}
             <div className="space-y-6">
@@ -413,7 +426,8 @@ export default function InvoiceCreatePage() {
                         <span className="font-medium text-orange-600">
                           ${(totals.total * (invoiceForm.deposit_percentage / 100)).toFixed(2)}
                         </span>
-                      </div></div>
+                      </div>
+                    </div>
                   )}
                 </div>
 
@@ -441,5 +455,12 @@ export default function InvoiceCreatePage() {
                   className="w-full mt-3 px-6 py-3 border border-gray-300 hover:bg-gray-50 text-gray-700 rounded-lg font-medium transition-colors"
                 >
                   Cancel
-                </button></div></div></div></form></div></div></div>);
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 }

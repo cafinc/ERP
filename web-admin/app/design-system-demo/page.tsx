@@ -219,7 +219,8 @@ export default function DesignSystemDemo() {
             className="mt-2 text-blue-600 hover:text-blue-700 text-sm font-medium"
           >
             ← Back to HR Module
-          </button></div>
+          </button>
+        </div>
 
         {/* Color Palettes Section */}
         <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 mb-6 hover:shadow-md transition-shadow">
@@ -268,7 +269,8 @@ export default function DesignSystemDemo() {
                     style={{ backgroundColor: palette.accent }}
                   ></div></div></div>
             ))}
-          </div></div>
+          </div>
+        </div>
 
         {/* Navigation Layouts Section */}
         <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 mb-6 hover:shadow-md transition-shadow">
@@ -303,7 +305,8 @@ export default function DesignSystemDemo() {
                 {nav.preview}
               </div>
             ))}
-          </div></div>
+          </div>
+        </div>
 
         {/* Button Styles Section */}
         <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 mb-6 hover:shadow-md transition-shadow">
@@ -326,9 +329,11 @@ export default function DesignSystemDemo() {
                       <span className="text-xs text-gray-500">{button.name}</span>
                     </div>
                   ))}
-                </div></div>
+                </div>
+              </div>
             ))}
-          </div></div>
+          </div>
+        </div>
 
         {/* Apply Button */}
         <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl shadow-lg p-6 text-white">
@@ -342,7 +347,9 @@ export default function DesignSystemDemo() {
             </div>
             <button className="px-6 py-3 bg-white text-blue-600 rounded-lg hover:bg-blue-50 font-semibold shadow-lg">
               Apply Design System
-            </button></div></div>
+            </button>
+          </div>
+        </div>
 
         {/* Note */}
         <div className="mt-6 bg-amber-50 border border-amber-200 rounded-lg p-4">

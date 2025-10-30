@@ -209,7 +209,8 @@ export default function CustomersPage() {
         />
         <div className="flex items-center justify-center h-96">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
-        </div></div>
+        </div>
+      </div>
   );
   }
 
@@ -298,7 +299,8 @@ export default function CustomersPage() {
                     />
                     <span className="text-sm text-gray-700">Inactive Only</span>
                   </label>
-                </div></div>
+                </div>
+              </div>
 
               {/* Type Filter */}
               <div className="mb-4">
@@ -334,7 +336,8 @@ export default function CustomersPage() {
                     />
                     <span className="text-sm text-gray-700">Company</span>
                   </label>
-                </div></div>
+                </div>
+              </div>
 
               <div className="pt-3 border-t border-gray-200 flex gap-2">
                 <button
@@ -351,7 +354,10 @@ export default function CustomersPage() {
                   className="flex-1 px-3 py-1.5 text-xs font-medium text-white bg-[#3f72af] rounded hover:bg-[#2c5282]"
                 >
                   Apply
-                </button></div></div></div>
+                </button>
+              </div>
+            </div>
+          </div>
         ) : undefined}
         showViewToggle={true}
         viewMode={viewMode}
@@ -420,7 +426,10 @@ export default function CustomersPage() {
                         className="flex-1 px-3 py-1.5 text-xs font-medium text-white bg-blue-600 rounded hover:bg-blue-700"
                       >
                         Done
-                      </button></div></div></div>
+                      </button>
+                    </div>
+                  </div>
+                </div>
               )}
             </div>
           ) : undefined
@@ -439,7 +448,8 @@ export default function CustomersPage() {
               className="text-sm underline hover:text-blue-100 transition-colors"
             >
               {selectedCustomers.length === filteredCustomers.length ? 'Deselect All' : 'Select All'}
-            </button></div>
+            </button>
+          </div>
           <div className="flex items-center gap-2">
             <button
               onClick={() => handleBulkArchive(true)}
@@ -461,7 +471,9 @@ export default function CustomersPage() {
               title="Clear selection"
             >
               <X className="w-5 h-5" />
-            </button></div></div>
+            </button>
+          </div>
+        </div>
       )}
 
       <div className="p-6">
@@ -549,7 +561,8 @@ export default function CustomersPage() {
                     <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2">
                       <div className={`${avatarColor} w-20 h-20 rounded-full flex items-center justify-center text-white text-2xl font-bold border-4 border-white shadow-lg`}>
                         {initials}
-                      </div></div>
+                      </div>
+                    </div>
                     {/* Status Badge */}
                     <div className="absolute top-3 right-3">
                       <span className={`px-2 py-1 rounded-full text-xs font-medium ${
@@ -559,7 +572,8 @@ export default function CustomersPage() {
                       }`}>
                         {customer.active ? 'Active' : 'Inactive'}
                       </span>
-                    </div></div>
+                    </div>
+                  </div>
 
                   {/* Card Body */}
                   <div className="pt-12 px-4 pb-4 text-center">
@@ -589,7 +603,8 @@ export default function CustomersPage() {
                         <div className="flex items-center justify-center text-xs text-blue-700">
                           <Briefcase className="w-3 h-3 mr-1" />
                           <span className="truncate">{customer.company_name}</span>
-                        </div></div>
+                        </div>
+                      </div>
                     )}
 
                     {/* Contact Info */}
@@ -605,7 +620,11 @@ export default function CustomersPage() {
                       <div className="flex items-start text-xs text-gray-600">
                         <MapPin className="w-3 h-3 mr-2 mt-0.5 flex-shrink-0 text-gray-400" />
                         <span className="line-clamp-1">{customer.address}</span>
-                      </div></div></div></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
   );
             })}
           </div>
@@ -701,7 +720,10 @@ export default function CustomersPage() {
                       >
                         <Edit className="w-3 h-3" />
                         Edit
-                      </button></div></div></div>
+                      </button>
+                    </div>
+                  </div>
+                </div>
   );
             })}
           </div>
@@ -734,7 +756,11 @@ export default function CustomersPage() {
                   className="flex-1 px-5 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-all shadow-sm hover:shadow-md font-semibold"
                 >
                   Delete
-                </button></div></div></div></div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       )}
 
       {/* Quick View Panel */}
@@ -754,13 +780,15 @@ export default function CustomersPage() {
                 <div>
                   <h2 className="text-2xl font-bold">{quickViewCustomer.name}</h2>
                   <p className="text-blue-100 text-sm">Customer Quick View</p>
-                </div></div>
+                </div>
+              </div>
               <button
                 onClick={() => setShowQuickView(false)}
                 className="p-2 hover:bg-white/20 rounded-lg transition-colors"
               >
                 <X className="w-6 h-6" />
-              </button></div>
+              </button>
+            </div>
 
             {/* Content */}
             <div className="p-6 space-y-6">
@@ -804,7 +832,8 @@ export default function CustomersPage() {
                       <span className="text-gray-900">{quickViewCustomer.company_name}</span>
                     </div>
                   )}
-                </div></div>
+                </div>
+              </div>
 
               {/* Notes */}
               {quickViewCustomer.notes && (
@@ -830,7 +859,9 @@ export default function CustomersPage() {
                   <div>
                     <p className="text-sm text-gray-500 mb-1">Customer ID</p>
                     <p className="font-semibold text-gray-900 text-xs">{quickViewCustomer._id}</p>
-                  </div></div></div>
+                  </div>
+                </div>
+              </div>
 
               {/* Action Buttons */}
               <div className="flex gap-3">
@@ -850,7 +881,11 @@ export default function CustomersPage() {
                 >
                   <Plus className="w-5 h-5" />
                   Duplicate
-                </button></div></div></div></div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

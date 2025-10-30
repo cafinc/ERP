@@ -158,7 +158,9 @@ export default function ContactsPage() {
             >
               <UserPlus className="w-5 h-5" />
               <span>Add Contact</span>
-            </button></div></div>
+            </button>
+          </div>
+        </div>
 
         {/* Filters */}
         <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-4 mb-4 hover:shadow-md transition-shadow">
@@ -173,7 +175,8 @@ export default function ContactsPage() {
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
-              </div></div>
+              </div>
+            </div>
             <select
               value={contactType}
               onChange={(e) => setContactType(e.target.value)}
@@ -188,7 +191,9 @@ export default function ContactsPage() {
             >
               <RefreshCw className="w-4 h-4" />
               <span>Refresh</span>
-            </button></div></div>
+            </button>
+          </div>
+        </div>
 
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
@@ -200,7 +205,10 @@ export default function ContactsPage() {
               <div>
                 <p className="text-sm text-gray-600">Total Contacts</p>
                 <p className="text-2xl font-bold text-gray-900">{contacts.length}</p>
-              </div></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
 
         {/* Contacts Grid */}
         <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
@@ -235,13 +243,15 @@ export default function ContactsPage() {
                             <span>{contact.company}</span>
                           </p>
                         )}
-                      </div></div>
+                      </div>
+                    </div>
                     <button
                       onClick={() => handleDeleteContact(contact.id)}
                       className="p-1 text-red-600 hover:bg-red-50 rounded"
                     >
                       <Trash2 className="w-4 h-4" />
-                    </button></div>
+                    </button>
+                  </div>
                   
                   <div className="space-y-2 text-sm">
                     {contact.jobTitle && (
@@ -262,7 +272,8 @@ export default function ContactsPage() {
                         <span>{contact.phoneNumbers[0].phoneNumber}</span>
                       </p>
                     )}
-                  </div></div>
+                  </div>
+                </div>
               ))}
             </div>
           )}
@@ -299,7 +310,8 @@ export default function ContactsPage() {
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         required
                       />
-                    </div></div>
+                    </div>
+                  </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       Email
@@ -344,7 +356,8 @@ export default function ContactsPage() {
                       onChange={(e) => setJobTitle(e.target.value)}
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
-                  </div></div>
+                  </div>
+                </div>
                 <div className="flex items-center space-x-3 mt-6">
                   <button
                     type="submit"
@@ -358,7 +371,13 @@ export default function ContactsPage() {
                     className="flex-1 px-6 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg font-medium transition-colors"
                   >
                     Cancel
-                  </button></div></form></div></div>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
         )}
-      </div></div></div>);
+      </div>
+    </div>
+  </div>
 }

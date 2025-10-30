@@ -214,7 +214,8 @@ export default function RecurringServicesPage() {
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto"></div>
             <p className="mt-4 text-gray-600">Loading recurring services...</p>
-          </div></div>
+          </div>
+        </div>
       </PageHeader>
     );
   }
@@ -255,7 +256,9 @@ export default function RecurringServicesPage() {
                 </div>
                 <div className="p-3 bg-green-100 rounded-lg">
                   <CheckCircle className="w-6 h-6 text-green-600" />
-                </div></div></div>
+                </div>
+              </div>
+            </div>
 
             <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between">
@@ -265,7 +268,9 @@ export default function RecurringServicesPage() {
                 </div>
                 <div className="p-3 bg-gray-100 rounded-lg">
                   <Pause className="w-6 h-6 text-gray-600" />
-                </div></div></div>
+                </div>
+              </div>
+            </div>
 
             <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between">
@@ -283,7 +288,9 @@ export default function RecurringServicesPage() {
                 </div>
                 <div className="p-3 bg-blue-100 rounded-lg">
                   <DollarSign className="w-6 h-6 text-[#3f72af]" />
-                </div></div></div>
+                </div>
+              </div>
+            </div>
 
             <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between">
@@ -295,7 +302,10 @@ export default function RecurringServicesPage() {
                 </div>
                 <div className="p-3 bg-orange-100 rounded-lg">
                   <Clock className="w-6 h-6 text-orange-600" />
-                </div></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
 
           {/* Services List */}
           <div className="space-y-4">
@@ -349,7 +359,8 @@ export default function RecurringServicesPage() {
                             <div className="flex items-center gap-2">
                               <Clock className="w-4 h-4" />
                               <span>{service.total_services_completed} completed</span>
-                            </div></div>
+                            </div>
+                          </div>
 
                           {service.notes && (
                             <p className="text-xs text-gray-500 mt-2 italic">{service.notes}</p>
@@ -375,9 +386,13 @@ export default function RecurringServicesPage() {
                             className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                           >
                             <Trash2 className="w-4 h-4" />
-                          </button></div></div></div>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
                   ))}
-                </div></div>
+                </div>
+              </div>
             )}
 
             {/* Inactive Services */}
@@ -412,7 +427,9 @@ export default function RecurringServicesPage() {
                             <div className="flex items-center gap-2">
                               <DollarSign className="w-4 h-4" />
                               <span>${service.price_per_service} per service</span>
-                            </div></div></div>
+                            </div>
+                          </div>
+                        </div>
 
                         <div className="flex items-center gap-2 flex-shrink-0">
                           <button
@@ -433,9 +450,13 @@ export default function RecurringServicesPage() {
                             className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                           >
                             <Trash2 className="w-4 h-4" />
-                          </button></div></div></div>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
                   ))}
-                </div></div>
+                </div>
+              </div>
             )}
 
             {/* Empty State */}
@@ -455,9 +476,12 @@ export default function RecurringServicesPage() {
                 >
                   <Plus className="w-4 h-4" />
                   Add First Service
-                </button></div>
+                </button>
+              </div>
             )}
-          </div></div></div>
+          </div>
+        </div>
+      </div>
 
       {/* Create/Edit Modal */}
       {showModal && (
@@ -520,7 +544,8 @@ export default function RecurringServicesPage() {
                     <option value="monthly">Monthly</option>
                     <option value="seasonal">Seasonal</option>
                   </select>
-                </div></div>
+                </div>
+              </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
@@ -546,7 +571,8 @@ export default function RecurringServicesPage() {
                     onChange={(e) => setFormData({ ...formData, end_date: e.target.value })}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
-                </div></div>
+                </div>
+              </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -563,7 +589,8 @@ export default function RecurringServicesPage() {
                     placeholder="0.00"
                     required
                   />
-                </div></div>
+                </div>
+              </div>
 
               <div className="space-y-3">
                 <label className="flex items-center gap-2 cursor-pointer">
@@ -598,7 +625,8 @@ export default function RecurringServicesPage() {
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   placeholder="Additional notes about this recurring service..."
                 />
-              </div></div>
+              </div>
+            </div>
 
             <div className="p-4 border-t border-gray-200 flex justify-end gap-3">
               <button
@@ -616,7 +644,10 @@ export default function RecurringServicesPage() {
                 className="px-6 py-2 bg-[#3f72af] hover:bg-[#2c5282] disabled:bg-gray-300 text-white rounded-lg font-medium transition-colors"
               >
                 {saving ? 'Saving...' : editingService ? 'Update' : 'Create'}
-              </button></div></div></div>
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </PageHeader>
   );

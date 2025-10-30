@@ -261,7 +261,8 @@ export default function PerformancePage() {
                 <p className="text-3xl font-bold text-yellow-600">{stats.scheduled}</p>
               </div>
               <Clock className="h-12 w-12 text-yellow-500" />
-            </div></div>
+            </div>
+          </div>
 
           <div className="bg-white rounded-lg shadow p-6">
             <div className="flex items-center justify-between">
@@ -270,7 +271,8 @@ export default function PerformancePage() {
                 <p className="text-3xl font-bold text-[#3f72af]">{stats.inProgress}</p>
               </div>
               <FileText className="h-12 w-12 text-blue-500" />
-            </div></div>
+            </div>
+          </div>
 
           <div className="bg-white rounded-lg shadow p-6">
             <div className="flex items-center justify-between">
@@ -279,7 +281,8 @@ export default function PerformancePage() {
                 <p className="text-3xl font-bold text-green-600">{stats.completed}</p>
               </div>
               <CheckCircle className="h-12 w-12 text-green-500" />
-            </div></div>
+            </div>
+          </div>
 
           <div className="bg-white rounded-lg shadow p-6">
             <div className="flex items-center justify-between">
@@ -290,7 +293,9 @@ export default function PerformancePage() {
                 </p>
               </div>
               <Star className="h-12 w-12 text-purple-500" />
-            </div></div></div>
+            </div>
+          </div>
+        </div>
 
         {/* Filters */}
         <div className="bg-white rounded-lg shadow p-4 mb-4">
@@ -313,7 +318,9 @@ export default function PerformancePage() {
             >
               <Plus className="h-4 w-4" />
               Schedule Review
-            </button></div></div>
+            </button>
+          </div>
+        </div>
 
         {/* Reviews List */}
         <div className="bg-white rounded-lg shadow overflow-hidden">
@@ -336,7 +343,8 @@ export default function PerformancePage() {
                 className="text-blue-500 hover:text-[#3f72af]"
               >
                 Schedule your first performance review
-              </button></div>
+              </button>
+            </div>
           ) : (
             <div className="divide-y divide-gray-200">
               {reviews.map((review: any) => (
@@ -346,7 +354,8 @@ export default function PerformancePage() {
                       <div className="flex-shrink-0">
                         <div className="h-12 w-12 rounded-full bg-[#5b8ec4] flex items-center justify-center text-white font-semibold">
                           {review.employee_name?.charAt(0) || "?"}
-                        </div></div>
+                        </div>
+                      </div>
 
                       <div className="flex-1">
                         <div className="flex items-center gap-3 mb-2">
@@ -432,7 +441,8 @@ export default function PerformancePage() {
                             )}
                           </div>
                         )}
-                      </div></div>
+                      </div>
+                    </div>
 
                     <div className="flex flex-col gap-2 ml-4">
                       {review.status === "scheduled" && (
@@ -452,7 +462,9 @@ export default function PerformancePage() {
                           {review.status === "completed" ? "View Details" : "Complete Review"}
                         </button>
                       )}
-                    </div></div></div>
+                    </div>
+                  </div>
+                </div>
               ))}
             </div>
           )}
@@ -467,7 +479,8 @@ export default function PerformancePage() {
                 <span className="font-semibold">{stats.scheduled}</span> performance
                 review(s) scheduled
               </p>
-            </div></div>
+            </div>
+          </div>
         )}
       </div>
 
@@ -487,7 +500,8 @@ export default function PerformancePage() {
                 className="text-gray-400 hover:text-gray-600"
               >
                 <X className="h-6 w-6" />
-              </button></div>
+              </button>
+            </div>
 
             <form onSubmit={handleCreateReview} className="px-6 py-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -601,7 +615,8 @@ export default function PerformancePage() {
                     }
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                   />
-                </div></div>
+                </div>
+              </div>
 
               <div className="flex justify-end gap-3 mt-6 pt-4 border-t border-gray-200">
                 <button
@@ -619,7 +634,11 @@ export default function PerformancePage() {
                   className="px-4 py-2 bg-[#5b8ec4] text-white rounded-lg hover:bg-[#3f72af]"
                 >
                   Schedule Review
-                </button></div></form></div></div>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
       )}
 
       {/* Review Details/Complete Modal */}
@@ -639,7 +658,8 @@ export default function PerformancePage() {
                 className="text-gray-400 hover:text-gray-600"
               >
                 <X className="h-6 w-6" />
-              </button></div>
+              </button>
+            </div>
 
             <form onSubmit={handleUpdateReview} className="px-6 py-4">
               <div className="space-y-4">
@@ -663,7 +683,8 @@ export default function PerformancePage() {
                     />
                     {updateForm.overall_rating &&
                       renderStars(parseFloat(updateForm.overall_rating))}
-                  </div></div>
+                  </div>
+                </div>
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -729,7 +750,8 @@ export default function PerformancePage() {
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                     disabled={selectedReview.status === "completed"}
                   />
-                </div></div>
+                </div>
+              </div>
 
               <div className="flex justify-end gap-3 mt-6 pt-4 border-t border-gray-200">
                 <button
@@ -751,7 +773,10 @@ export default function PerformancePage() {
                     Complete Review
                   </button>
                 )}
-              </div></form></div></div>
+              </div>
+            </form>
+          </div>
+        </div>
       )}
     </div>
   );

@@ -87,7 +87,9 @@ export default function SafetyTrainingPage() {
               }`}
             >
               Expired ({trainings.filter(t => t.status === 'expired').length})
-            </button></div></div>
+            </button>
+          </div>
+        </div>
 
         {/* Search Bar */}
         <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-3 mb-4 mx-6 mt-6 hover:shadow-md transition-shadow">
@@ -100,7 +102,8 @@ export default function SafetyTrainingPage() {
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-9 pr-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
-          </div></div>
+          </div>
+        </div>
 
         {/* Training List */}
         <div className="mx-6">
@@ -140,7 +143,10 @@ export default function SafetyTrainingPage() {
                   ))}
                 </tbody>
               </table>
-            </div></div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </PageHeader>
   );
 }

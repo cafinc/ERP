@@ -91,7 +91,9 @@ export default function HRModuleDesignA() {
               </div>
               <div className="bg-blue-50 p-3 rounded-lg">
                 <Users className="h-8 w-8 text-blue-900" />
-              </div></div></div>
+              </div>
+            </div>
+          </div>
 
           <div className="bg-white rounded-lg shadow shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
@@ -101,7 +103,9 @@ export default function HRModuleDesignA() {
               </div>
               <div className="bg-blue-50 p-3 rounded-lg">
                 <Clock className="h-8 w-8 text-blue-900" />
-              </div></div></div>
+              </div>
+            </div>
+          </div>
 
           <div className="bg-white rounded-lg shadow shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
@@ -111,7 +115,10 @@ export default function HRModuleDesignA() {
               </div>
               <div className="bg-blue-50 p-3 rounded-lg">
                 <Calendar className="h-8 w-8 text-blue-900" />
-              </div></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
 
         {/* Module Grid - Conservative */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -159,6 +166,10 @@ export default function HRModuleDesignA() {
             >
               <Calendar className="h-5 w-5" />
               Approve PTO
-            </button></div></div></div></DashboardLayout>
+            </button>
+          </div>
+        </div>
+      </div>
+    </DashboardLayout>
   );
 }

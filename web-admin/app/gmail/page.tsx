@@ -532,7 +532,9 @@ export default function GmailPage() {
               className="w-full bg-[#3f72af] hover:bg-[#3f72af]/90 text-white px-6 py-3 rounded-lg font-medium transition-all shadow-sm hover:shadow-md rounded-lg font-medium transition-colors"
             >
               Connect Gmail Account
-            </button></div></div>
+            </button>
+          </div>
+        </div>
   );
   }
 
@@ -567,7 +569,8 @@ export default function GmailPage() {
             >
               <LinkIcon className="w-4 h-4" />
               <span>Auto-Link</span>
-            </button></div>
+            </button>
+          </div>
 
           <div className="flex-1 overflow-y-auto p-2">
             <div
@@ -622,7 +625,8 @@ export default function GmailPage() {
                 <span>{label.name}</span>
               </div>
             ))}
-          </div></div>
+          </div>
+        </div>
 
         {/* Email List */}
         <div className="w-[480px] bg-white border-r border-gray-200 flex flex-col">
@@ -652,7 +656,8 @@ export default function GmailPage() {
                 title="Disconnect Gmail"
               >
                 <X className="w-5 h-5" />
-              </button></div>
+              </button>
+            </div>
 
             {selectedEmails.size > 0 && (
               <div className="flex items-center space-x-2">
@@ -677,7 +682,8 @@ export default function GmailPage() {
                   title="Delete"
                 >
                   <Trash2 className="w-4 h-4" />
-                </button></div>
+                </button>
+              </div>
             )}
           </div>
 
@@ -743,10 +749,13 @@ export default function GmailPage() {
                             <span>Attachment</span>
                           </div>
                         )}
-                      </div></div></div>
+                      </div>
+                    </div>
+                  </div>
                 ))
             )}
-          </div></div>
+          </div>
+        </div>
 
         {/* Email Detail */}
         <div className="flex-1 bg-white flex flex-col">
@@ -790,7 +799,9 @@ export default function GmailPage() {
                       title="Delete"
                     >
                       <Trash2 className="w-5 h-5 text-red-600" />
-                    </button></div></div>
+                    </button>
+                  </div>
+                </div>
 
                 <div className="flex items-center space-x-4 text-sm text-gray-600">
                   <div className="flex items-center space-x-2">
@@ -822,7 +833,8 @@ export default function GmailPage() {
                           className="text-red-600 hover:text-red-700"
                         >
                           <X className="w-4 h-4" />
-                        </button></div>
+                        </button>
+                      </div>
                     ))}
                   </div>
                 )}
@@ -853,7 +865,8 @@ export default function GmailPage() {
                               title="Download"
                             >
                               <Download className="w-4 h-4 text-gray-600" />
-                            </button></div>
+                            </button>
+                          </div>
                         ))}
                       </div>
                     )}
@@ -873,7 +886,8 @@ export default function GmailPage() {
               <div className="text-center">
                 <Mail className="w-24 h-24 mx-auto mb-4 text-gray-300" />
                 <p className="text-lg">Select an email to read</p>
-              </div></div>
+              </div>
+            </div>
           )}
         </div>
 
@@ -902,7 +916,9 @@ export default function GmailPage() {
                     className="p-2 hover:bg-gray-100 rounded-lg"
                   >
                     <X className="w-5 h-5" />
-                  </button></div></div>
+                  </button>
+                </div>
+              </div>
 
               {showTemplates && (
                 <div className="p-4 border-b border-gray-200 bg-gray-50">
@@ -917,7 +933,8 @@ export default function GmailPage() {
                         <div className="font-medium text-sm text-gray-900">{template.name}</div>
                         <div className="text-xs text-gray-600">{template.subject}</div></button>
                     ))}
-                  </div></div>
+                  </div>
+                </div>
               )}
 
               <div className="p-4 space-y-3 flex-1 overflow-y-auto">
@@ -952,7 +969,8 @@ export default function GmailPage() {
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
                     placeholder="Type your message here..."
                   />
-                </div></div>
+                </div>
+              </div>
 
               <div className="p-4 border-t border-gray-200 flex justify-end space-x-3">
                 <button
@@ -970,7 +988,10 @@ export default function GmailPage() {
                   className="px-6 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium"
                 >
                   Send
-                </button></div></div></div>
+                </button>
+              </div>
+            </div>
+          </div>
         )}
 
         {/* Template Manager Modal */}
@@ -988,7 +1009,8 @@ export default function GmailPage() {
                   className="p-2 hover:bg-gray-100 rounded-lg"
                 >
                   <X className="w-5 h-5" />
-                </button></div>
+                </button>
+              </div>
 
               <div className="flex-1 overflow-y-auto p-4">
                 <div className="grid grid-cols-2 gap-4">
@@ -1029,9 +1051,13 @@ export default function GmailPage() {
                                 className="p-1 hover:bg-gray-200 rounded"
                               >
                                 <Trash className="w-4 h-4 text-red-600" />
-                              </button></div></div></div>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
                       ))}
-                    </div></div>
+                    </div>
+                  </div>
 
                   {/* Template Form */}
                   <div>
@@ -1098,7 +1124,13 @@ export default function GmailPage() {
                         className="w-full px-4 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium"
                       >
                         {editingTemplate ? 'Update Template' : 'Create Template'}
-                      </button></div></div></div></div></div></div>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         )}
 
         {/* Customer Link Modal */}
@@ -1115,7 +1147,8 @@ export default function GmailPage() {
                   className="p-2 hover:bg-gray-100 rounded-lg"
                 >
                   <X className="w-5 h-5" />
-                </button></div>
+                </button>
+              </div>
 
               <div className="p-4 border-b border-gray-200">
                 <div className="relative">
@@ -1127,7 +1160,8 @@ export default function GmailPage() {
                     onChange={(e) => setCustomerSearchQuery(e.target.value)}
                     className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm text-sm"
                   />
-                </div></div>
+                </div>
+              </div>
 
               <div className="flex-1 overflow-y-auto p-4">
                 <div className="space-y-2">
@@ -1140,7 +1174,10 @@ export default function GmailPage() {
                       <div className="font-medium text-sm text-gray-900">{customer.name}</div>
                       <div className="text-xs text-gray-600">{customer.email}</div></button>
                   ))}
-                </div></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
         )}
       </div>
   );

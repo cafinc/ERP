@@ -92,7 +92,9 @@ export default function ShiftHistoryPage() {
       <div className="flex-1 overflow-auto p-6">
         <div className="flex items-center justify-center h-64">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
-        </div></div></div>
+        </div>
+      </div>
+    </div>
   );
   }
 
@@ -144,7 +146,8 @@ export default function ShiftHistoryPage() {
           >
             <Download className="w-5 h-5" />
             Export
-          </button></div>
+          </button>
+        </div>
 
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -156,7 +159,9 @@ export default function ShiftHistoryPage() {
               <div>
                 <p className="text-2xl font-bold text-gray-900">{shifts.length}</p>
                 <p className="text-sm text-gray-600">Total Shifts</p>
-              </div></div></div>
+              </div>
+            </div>
+          </div>
 
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-3">
@@ -166,7 +171,9 @@ export default function ShiftHistoryPage() {
               <div>
                 <p className="text-2xl font-bold text-gray-900">{totalHours.toFixed(1)}h</p>
                 <p className="text-sm text-gray-600">Total Hours</p>
-              </div></div></div>
+              </div>
+            </div>
+          </div>
 
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-3">
@@ -178,7 +185,10 @@ export default function ShiftHistoryPage() {
                   {new Set(shifts.map(s => s.user_id)).size}
                 </p>
                 <p className="text-sm text-gray-600">Team Members</p>
-              </div></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
 
         {/* Filter */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
@@ -203,7 +213,10 @@ export default function ShiftHistoryPage() {
                 className={`px-4 py-2 rounded-lg text-sm font-medium ${filter === 'completed' ? 'bg-gray-100 text-gray-700' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
               >
                 Completed
-              </button></div></div></div>
+              </button>
+            </div>
+          </div>
+        </div>
 
         {/* Shifts Table */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
@@ -255,6 +268,9 @@ export default function ShiftHistoryPage() {
               </table>
             </div>
           )}
-        </div></div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
   );
 }
