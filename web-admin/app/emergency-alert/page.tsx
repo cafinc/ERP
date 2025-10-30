@@ -114,6 +114,7 @@ export default function EmergencyAlertPage() {
             <h1 className="text-3xl font-bold text-gray-900">Emergency Alert System</h1>
             <p className="text-gray-600 mt-1">Send urgent notifications to team members on shift</p>
           </div>
+        </div>
 
         {/* Warning Card */}
         <div className="bg-red-50 border-2 border-red-200 rounded-lg p-6">
