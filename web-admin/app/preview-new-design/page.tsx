@@ -237,6 +237,8 @@ export default function PreviewNewDesign() {
             <li>• <strong>Hover Tooltips</strong> - Sidebar icons show labels on hover</li>
           </ul>
         </div>
+      </div>
     </HybridNavigationLayout>
+    </div>
   );
 }
