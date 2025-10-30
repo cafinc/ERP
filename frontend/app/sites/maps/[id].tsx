@@ -222,30 +222,6 @@ export default function SiteMapsScreen() {
           </MapView>
         )
       )}
-        {/* Site Marker */}
-        <Marker
-          coordinate={{
-            latitude: site.location.latitude,
-            longitude: site.location.longitude,
-          }}
-          title={site.name}
-          description={site.location.address}
-          pinColor={Colors.primary}
-        />
-
-        {/* Geofence Polygon */}
-        {activeView !== 'overview' && geofence && (
-          <Polygon
-            coordinates={geofence.polygon_coordinates.map(coord => ({
-              latitude: coord.lat,
-              longitude: coord.lng,
-            }))}
-            fillColor={`${geofence.color}40`}
-            strokeColor={geofence.stroke_color}
-            strokeWidth={2}
-          />
-        )}
-      </MapView>
 
       {/* Info Cards */}
       <ScrollView style={styles.infoContainer}>
