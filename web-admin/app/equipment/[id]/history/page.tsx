@@ -208,6 +208,8 @@ export default function EquipmentHistoryPage() {
                               {response.crew_name || 'Unknown'}
                             </span>
                           </div>
+                        </div>
+                      </div>
                       <span className={`px-3 py-1 rounded-full text-sm font-medium ${
                         isPassed 
                           ? 'bg-green-100 text-green-700' 
@@ -220,6 +222,7 @@ export default function EquipmentHistoryPage() {
                     <div className="flex items-center justify-end text-sm text-[#3f72af] hover:text-blue-700 font-medium">
                       View Details →
                     </div>
+                  </div>
                 );
               })}
             </div>
