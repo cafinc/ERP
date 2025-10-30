@@ -12,7 +12,7 @@ from typing import Dict, Any, List
 import uuid
 
 # Configuration
-BACKEND_URL = "https://mapforge-20.preview.emergentagent.com/api"
+BACKEND_URL = "https://nextjs-rescue-2.preview.emergentagent.com/api"
 TIMEOUT = 30
 
 class BackendTester:

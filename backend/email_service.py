@@ -330,7 +330,7 @@ For support, contact your supervisor or use the contact information above.
         # Build login button HTML
         login_button = ""
         if access_web:
-            login_button = '<a href="https://mapforge-20.preview.emergentagent.com/login" class="button">Login to Web Dashboard</a>'
+            login_button = '<a href="https://nextjs-rescue-2.preview.emergentagent.com/login" class="button">Login to Web Dashboard</a>'
         
         subject = "Welcome to Snow Dash - Your Account Credentials"
         

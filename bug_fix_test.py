@@ -18,7 +18,7 @@ import sys
 import traceback
 
 # Backend URL from frontend environment
-BACKEND_URL = "https://mapforge-20.preview.emergentagent.com/api"
+BACKEND_URL = "https://nextjs-rescue-2.preview.emergentagent.com/api"
 
 def print_test_header(test_name):
     """Print formatted test header"""
