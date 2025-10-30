@@ -362,6 +362,7 @@ export default function MessagesPage() {
                       <Archive className="w-4 h-4 text-gray-400" />
                     </button>
                   </div>
+                </div>
               ))
             )}
           </div>
