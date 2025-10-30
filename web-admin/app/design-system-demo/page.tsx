@@ -283,6 +283,7 @@ export default function DesignSystemDemo() {
                     style={{ backgroundColor: palette.accent }}
                   ></div>
                 </div>
+              </div>
             ))}
           </div>
 
