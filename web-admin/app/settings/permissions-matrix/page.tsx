@@ -137,10 +137,9 @@ export default function PermissionsMatrixPage() {
     <div style={{ padding: '24px', backgroundColor: '#f8fafc', minHeight: '100vh' }}>
       <PageHeader
         title="Permissions Matrix"
-        subtitle="View and edit permissions"
+        subtitle="Configure role-based access control"
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Settings", href: "/settings" }, { label: "Permissions Matrix" }]}
-        title=\"Permissions Matrix\"
-        subtitle=\"Configure role-based access control\"\n        backUrl=\"/settings/roles-permissions\"
+        backUrl="/settings/roles-permissions"
       />
 
       {/* Role Selector */}
