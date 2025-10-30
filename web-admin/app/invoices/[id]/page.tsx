@@ -331,11 +331,13 @@ export default function InvoiceDetailPage() {
                               {payment.transaction_id && ` • ${payment.transaction_id}`}
                             </p>
                           </div>
+                        </div>
                         <div className="text-right">
                           <p className="text-sm text-gray-600">
                             {new Date(payment.payment_date).toLocaleDateString()}
                           </p>
                         </div>
+                      </div>
                       {payment.notes && (
                         <p className="text-sm text-gray-600 mt-2 ml-11">{payment.notes}</p>
                       )}
