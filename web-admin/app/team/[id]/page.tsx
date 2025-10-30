@@ -258,6 +258,7 @@ export default function TeamMemberDetailPage() {
                   <p className="text-sm text-gray-600">Email</p>
                   <p className="text-sm font-medium text-gray-900">{user.email}</p>
                 </div>
+              </div>
               {user.phone && (
                 <div className="flex items-center gap-3">
                   <Phone className="w-5 h-5 text-gray-400" />
