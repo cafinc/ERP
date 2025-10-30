@@ -149,6 +149,7 @@ export default function EmergencyAlertPage() {
               <RefreshCw className={`w-5 h-5 ${loading ? 'animate-spin' : ''}`} />
             </button>
           </div>
+        </div>
 
         {/* Alert Type Selection */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
