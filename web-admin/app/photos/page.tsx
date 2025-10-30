@@ -458,6 +458,7 @@ export default function PhotoGalleryPage() {
             </div>
         </div>
         </div>
+        </div>
       )}
     );
 }

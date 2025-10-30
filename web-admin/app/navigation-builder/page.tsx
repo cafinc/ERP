@@ -613,6 +613,7 @@ export default function NavigationBuilder() {
                     );
                   })}
                 </div>
+      </div>
     </DashboardLayout>
   );
 }

@@ -239,5 +239,6 @@ export default function PreviewNewDesign() {
         </div>
       </div>
     </HybridNavigationLayout>
+    </div>
   );
 }
