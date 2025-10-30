@@ -268,5 +268,7 @@ export default function ShiftHistoryPage() {
             </div>
           )}
         </div>
+      </div>
+    </div>
   );
 }
