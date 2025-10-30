@@ -8,12 +8,28 @@ import {
   ActivityIndicator,
   Alert,
   Dimensions,
+  Platform,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { router, useLocalSearchParams } from 'expo-router';
-import MapView, { Marker, Polygon, Polyline, Circle as MapCircle } from 'react-native-maps';
 import api from '../../../utils/api';
 import { Colors } from '../../../utils/theme';
+
+// Conditionally import MapView only on native platforms
+let MapView: any = null;
+let Marker: any = null;
+let Polygon: any = null;
+let Polyline: any = null;
+let MapCircle: any = null;
+
+if (Platform.OS !== 'web') {
+  const Maps = require('react-native-maps');
+  MapView = Maps.default;
+  Marker = Maps.Marker;
+  Polygon = Maps.Polygon;
+  Polyline = Maps.Polyline;
+  MapCircle = Maps.Circle;
+}
 
 const { width, height } = Dimensions.get('window');
 
