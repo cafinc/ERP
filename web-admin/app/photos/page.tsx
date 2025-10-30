@@ -424,6 +424,7 @@ export default function PhotoGalleryPage() {
         </div>
         </div>
         </div>
+        </div>
       )}
 
       {/* Upload Modal Placeholder */}
@@ -456,6 +457,7 @@ export default function PhotoGalleryPage() {
                 {uploading ? 'Uploading...' : 'Select Files'}
               </button>
             </div>
+        </div>
         </div>
         </div>
       )}

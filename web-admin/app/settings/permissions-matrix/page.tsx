@@ -301,6 +301,7 @@ export default function PermissionsMatrixPage() {
               );
             })}
           </div>
+              </div>
       ))}
 
       {/* Save Button */}
