@@ -386,6 +386,9 @@ export default function LiveTrackingPage() {
               <div className="w-4 h-4 bg-purple-600 rounded-full"></div>
               <span>Equipment</span>
             </div>
+          </div>
+        </div>
+      </div>
 
       <style jsx global>{`
         .crew-marker,
