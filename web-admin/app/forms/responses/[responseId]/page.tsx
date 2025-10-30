@@ -226,8 +226,8 @@ export default function ViewResponsePage() {
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#3f72af] mx-auto"></div>
             <p className="mt-4 text-gray-600">Loading response...</p>
           </div>
-    
-    </div>
+        </div>
+      </div>
     </div>
     );
   }
