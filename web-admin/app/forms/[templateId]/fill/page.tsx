@@ -475,8 +475,8 @@ export default function FillFormPage() {
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#3f72af] mx-auto"></div>
             <p className="mt-4 text-gray-600">Loading form...</p>
           </div>
-    
-    </div>
+        </div>
+      </div>
     </div>
     );
   }
