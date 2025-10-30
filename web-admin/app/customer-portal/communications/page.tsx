@@ -306,6 +306,7 @@ export default function CustomerCommunicationsPage() {
                 Chat with your service provider
               </p>
             </div>
+          </div>
           <div className="flex items-center gap-4">
             {/* Connection Status */}
             <div className="flex items-center gap-2">
