@@ -297,6 +297,7 @@ export default function SubcontractorCommunicationsPage() {
                 Communicate with project managers
               </p>
             </div>
+          </div>
           <div className="flex items-center gap-4">
             {/* Connection Status */}
             <div className="flex items-center gap-2">
