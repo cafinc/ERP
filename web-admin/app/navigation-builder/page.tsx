@@ -461,16 +461,18 @@ export default function NavigationBuilder() {
                               onClick={() => handlePageClick(page, true)}
                               className="text-xs p-2 bg-gray-50 rounded hover:bg-[#3f72af] hover:text-white cursor-pointer transition-colors"
                             >
-                              {page.name}
-                              <div className="text-gray-500 hover:text-blue-200 text-[10px]">{page.path}</div></div>
+                              {page.name}                              <div className="text-gray-500 hover:text-blue-200 text-[10px]">{page.path}
+                              </div>
+                            </div>
                           ))
                         ) : (
                           <div
                             onClick={() => handlePageClick(value, false)}
                             className="text-xs p-2 bg-gray-50 rounded hover:bg-[#3f72af] hover:text-white cursor-pointer transition-colors"
                           >
-                            {value.name}
-                            <div className="text-gray-500 hover:text-blue-200 text-[10px]">{value.path}</div></div>
+                            {value.name}                            <div className="text-gray-500 hover:text-blue-200 text-[10px]">{value.path}
+                            </div>
+                          </div>
                         )}
                       </div>                    </details>
                   ))}

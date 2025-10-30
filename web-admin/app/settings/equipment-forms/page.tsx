@@ -201,8 +201,9 @@ export default function EquipmentFormsPage() {
                     <tr key={eq.id} className="hover:bg-gray-50 transition-colors hover:bg-gray-50">
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div>
-                          <div className="font-medium text-gray-900">{eq.name}</div>
-                          <div className="text-sm text-gray-500">{eq.unit_number}</div></div>
+                          <div className="font-medium text-gray-900">{eq.name}</div>                          <div className="text-sm text-gray-500">{eq.unit_number}
+                          </div>
+                        </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <span className="px-2 py-1 text-xs font-medium bg-gray-100 text-gray-700 rounded capitalize">
