@@ -349,6 +349,7 @@ export default function DesignSystemDemo() {
               </div>
             ))}
           </div>
+        </div>
 
         {/* Apply Button */}
         <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl shadow-lg p-6 text-white">
