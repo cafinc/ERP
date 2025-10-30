@@ -403,6 +403,7 @@ export default function PageLayoutMapper() {
                 Save & Continue to Implementation
               </button>
             </div>
+          </div>
 
           {/* Info */}
           <div className="mt-6 bg-amber-50 border border-amber-200 rounded-xl p-4">
