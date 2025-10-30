@@ -171,6 +171,8 @@ export default function ShiftHistoryPage() {
                 <p className="text-2xl font-bold text-gray-900">{totalHours.toFixed(1)}h</p>
                 <p className="text-sm text-gray-600">Total Hours</p>
               </div>
+            </div>
+          </div>
 
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-3">
