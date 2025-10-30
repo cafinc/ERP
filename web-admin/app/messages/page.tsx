@@ -468,7 +468,8 @@ export default function MessagesPage() {
                           >
                             <X className="w-3 h-3 text-gray-600" />
                           </button>
-                        </div>
+                          </div>
+              </div>
                     ))}
                   </div>
               </div>
