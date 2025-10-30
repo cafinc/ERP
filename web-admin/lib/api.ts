@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://nextjs-rescue-2.preview.emergentagent.com/api';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://webadmin-rescue.preview.emergentagent.com/api';
 
 const api = axios.create({
   baseURL: API_URL,
