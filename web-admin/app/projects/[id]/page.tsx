@@ -442,7 +442,8 @@ export default function ProjectDetailPage() {
                                     {new Date(task.due_date).toLocaleDateString()}
                                   </span>
                                 )}
-                              </div></div></div></div>
+                              </div></div>
+                            </div></div>
                         <div className="flex items-center space-x-2 ml-4">
                           <span className={`px-2 py-1 rounded-full text-xs font-medium ${getTaskStatusColor(task.status)}`}>
                             {task.status.replace('_', ' ')}
