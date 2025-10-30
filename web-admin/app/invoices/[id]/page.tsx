@@ -332,8 +332,7 @@ export default function InvoiceDetailPage() {
                       {payment.notes && (
                         <p className="text-sm text-gray-600 mt-2 ml-11">{payment.notes}</p>
                       )}
-                    </div>
-                  ))}
+                    </div>))}
                 </div></div>)}
           </div>
           {/* Sidebar */}

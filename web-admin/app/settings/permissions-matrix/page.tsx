@@ -172,8 +172,7 @@ export default function PermissionsMatrixPage() {
               }}
             >
               {role}
-            </button>
-          ))}
+            </button>))}
         </div>
 
       {/* Bulk Actions */}
@@ -299,8 +298,7 @@ export default function PermissionsMatrixPage() {
             })}
           </div>
         </div>
-      </div>
-      ))}
+      </div>))}
 
       {/* Save Button */}
       <div style={{

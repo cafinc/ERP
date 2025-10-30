@@ -361,8 +361,7 @@ export default function MessagesPage() {
                       <Archive className="w-4 h-4 text-gray-400" />
                     </button>
                   </div>
-                </div>
-              ))
+                </div>))
             )}
           </div>
         {/* Main Chat Area */}
@@ -463,8 +462,7 @@ export default function MessagesPage() {
                             <X className="w-3 h-3 text-gray-600" />
                           </button>
                         </div>
-                      </div>
-                    ))}
+                      </div>))}
               </div></div>
             </div>
           </div>)}

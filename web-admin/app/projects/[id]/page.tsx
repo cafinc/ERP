@@ -453,8 +453,7 @@ export default function ProjectDetailPage() {
                           </button>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    </div>))}
                 </div>
               ) : (
                 <div className="text-center py-12">

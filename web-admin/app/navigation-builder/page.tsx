@@ -463,8 +463,7 @@ export default function NavigationBuilder() {
                             >
                               {page.name}                              <div className="text-gray-500 hover:text-blue-200 text-[10px]">{page.path}
                               </div>
-                            </div>
-                          ))
+                            </div>))
                         ) : (
                           <div
                             onClick={() => handlePageClick(value, false)}
@@ -549,8 +548,7 @@ export default function NavigationBuilder() {
                                     >
                                       <Trash2 className="w-3 h-3" />
                                     </button>
-                                  </div>
-                                ))}
+                                  </div>))}
                                 <button
                                   onClick={() => setSelectedSection(section.id)}
                                   className={`mt-2 px-3 py-1 text-xs rounded transition-colors ${
