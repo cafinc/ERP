@@ -102,13 +102,13 @@ export default function ShiftHistoryPage() {
     const headers = ['Team Member', 'Date', 'Clock In', 'Clock Out', 'Duration', 'Status'];
     const csvRows = [headers.join(',')];
 
-    filteredShifts.forEach(shift => {
+    shifts.forEach(shift => {
       const row = [
-        shift.team_member_name,
-        new Date(shift.start_time).toLocaleDateString(),
-        new Date(shift.start_time).toLocaleTimeString(),
-        shift.end_time ? new Date(shift.end_time).toLocaleTimeString() : 'Active',
-        shift.duration || 'In Progress',
+        shift.user_name || 'Unknown',
+        new Date(shift.clock_in).toLocaleDateString(),
+        new Date(shift.clock_in).toLocaleTimeString(),
+        shift.clock_out ? new Date(shift.clock_out).toLocaleTimeString() : 'Active',
+        formatDuration(shift.duration_minutes),
         shift.status
       ];
       csvRows.push(row.join(','));
