@@ -109,6 +109,7 @@ export default function EquipmentFormPage() {
   }
 
   return (
+    <div>
           <form onSubmit={handleSubmit} className="space-y-6">
         {/* Header */}
         <div className="flex items-center gap-4">
