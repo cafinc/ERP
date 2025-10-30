@@ -567,6 +567,8 @@ export default function NavigationBuilder() {
                               </div>
                             )}
                           </div>
+                        </div>
+                      </div>
                     );
                   })}
                 </div>
