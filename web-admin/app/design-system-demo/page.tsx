@@ -322,6 +322,7 @@ export default function DesignSystemDemo() {
               </div>
             ))}
           </div>
+        </div>
 
         {/* Button Styles Section */}
         <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 mb-6 hover:shadow-md transition-shadow">
