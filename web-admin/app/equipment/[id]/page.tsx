@@ -343,6 +343,5 @@ export default function EquipmentDetailPage() {
         </div>
       </div>
     </div>
-    </div>
   );
 }
