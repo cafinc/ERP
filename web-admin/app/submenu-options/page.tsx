@@ -208,7 +208,7 @@ export default function SubmenuOptions() {
                                       {item.label}
                                     </span>
                                   </button>
-                                );
+  );
                               })}
                             </div></div></div></div>
                       <div className="bg-gray-50 rounded-lg p-4">
@@ -282,7 +282,7 @@ export default function SubmenuOptions() {
                                     Manage and track
                                   </p>
                                 </div>
-                              );
+  );
                             })}
                           </div></div></div>
                       <div className="bg-gray-50 rounded-lg p-4">

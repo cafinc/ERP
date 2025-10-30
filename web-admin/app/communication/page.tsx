@@ -146,7 +146,7 @@ export default function CommunicationCenterPage() {
             Start a conversation by clicking on a contact
           </p>
         </div>
-      );
+  );
     }
 
     return (
@@ -200,7 +200,7 @@ export default function CommunicationCenterPage() {
           </Link>
         ))}
       </div>
-    );
+  );
   };
 
   const renderFeedbackBoard = () => {
@@ -284,7 +284,7 @@ export default function CommunicationCenterPage() {
             ))
           )}
         </div></div>
-    );
+  );
   };
 
   return (

@@ -161,5 +161,5 @@ export default function RingCentralHub() {
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div></div></div>
-    );
+  );
 }

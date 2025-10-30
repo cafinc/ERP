@@ -561,7 +561,7 @@ export default function NavigationBuilder() {
                                 </button></div>
                             )}
                           </div></div></div>
-                    );
+  );
                   })}
                 </div>
 
@@ -599,7 +599,7 @@ export default function NavigationBuilder() {
                             </span>
                           )}
                         </div></div>
-                    );
+  );
                   })}
                 </div></div></div></DashboardLayout>
   );

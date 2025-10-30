@@ -251,7 +251,7 @@ export default function GeofenceManagementPage() {
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto"></div>
             <p className="mt-4 text-gray-600">Loading geofence data...</p>
           </div></div>
-      );
+  );
   }
 
   return (
@@ -544,7 +544,7 @@ export default function GeofenceManagementPage() {
                               </button>
                             )}
                           </div></div></div>
-                    );
+  );
                   })
                 )}
               </div></div>
@@ -679,5 +679,5 @@ export default function GeofenceManagementPage() {
               </div></div>
           )}
         </div></div>
-    );
+  );
 }

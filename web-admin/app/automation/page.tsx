@@ -114,7 +114,7 @@ export default function AutomationDashboardPage() {
         <div className="flex items-center justify-center h-full">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
-      );
+  );
   }
 
   const totalExecutions = workflowStats.reduce((sum, w) => sum + w.executions_today, 0);
@@ -265,7 +265,7 @@ export default function AutomationDashboardPage() {
                   >
                     <Activity className="w-4 h-4" />
                   </button></div></div>
-            );
+  );
           })}
         </div>
 
@@ -296,7 +296,7 @@ export default function AutomationDashboardPage() {
                       {stat.status}
                     </span>
                   </div>
-                );
+  );
               })}
             </div></div></div>
 
@@ -367,5 +367,5 @@ export default function AutomationDashboardPage() {
               </button></div></div>
         )}
       </div>
-    );
+  );
 }

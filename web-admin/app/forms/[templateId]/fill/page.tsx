@@ -224,7 +224,7 @@ export default function FillFormPage() {
               </label>
             ))}
           </div>
-        );
+  );
 
       case 'rating':
         return (
@@ -244,7 +244,7 @@ export default function FillFormPage() {
               </button>
             ))}
           </div>
-        );
+  );
 
       case 'signature':
         return (
@@ -269,7 +269,7 @@ export default function FillFormPage() {
               </button>
             )}
           </div>
-        );
+  );
 
       case 'photo':
         return (
@@ -299,7 +299,7 @@ export default function FillFormPage() {
               </label>
             )}
           </div>
-        );
+  );
 
       // Inspection Field Types
       case 'pass_fail':
@@ -327,7 +327,7 @@ export default function FillFormPage() {
             >
               ✗ Fail
             </button></div>
-        );
+  );
 
       case 'yes_no':
         return (
@@ -354,7 +354,7 @@ export default function FillFormPage() {
             >
               No
             </button></div>
-        );
+  );
 
       case 'yes_no_na':
         return (
@@ -392,7 +392,7 @@ export default function FillFormPage() {
             >
               N/A
             </button></div>
-        );
+  );
 
       case 'condition':
         return (
@@ -420,7 +420,7 @@ export default function FillFormPage() {
               </button>
             ))}
           </div>
-        );
+  );
 
       case 'inspection_checklist':
         return (
@@ -449,7 +449,7 @@ export default function FillFormPage() {
               );
             })}
           </div>
-        );
+  );
 
       default:
         return <p className="text-gray-500">Unsupported field type: {field.type}</p>;
@@ -470,7 +470,7 @@ export default function FillFormPage() {
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#3f72af] mx-auto"></div>
             <p className="mt-4 text-gray-600">Loading form...</p>
           </div></div></div></div>
-    );
+  );
   }
 
   if (!template) {
@@ -478,7 +478,7 @@ export default function FillFormPage() {
               <div className="text-center py-12">
           <p className="text-red-600">Form template not found</p>
         </div>
-    );
+  );
   }
 
   return (

@@ -152,7 +152,7 @@ export default function TeamMemberDetailPage() {
         <div className="flex items-center justify-center h-64">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div></div></div></div>
-    );
+  );
   }
 
   if (!user) {
@@ -166,7 +166,7 @@ export default function TeamMemberDetailPage() {
           >
             Return to Team
           </button></div>
-    );
+  );
   }
 
   return (

@@ -210,7 +210,7 @@ export default function CustomersPage() {
         <div className="flex items-center justify-center h-96">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div></div>
-    );
+  );
   }
 
   return (
@@ -606,7 +606,7 @@ export default function CustomersPage() {
                         <MapPin className="w-3 h-3 mr-2 mt-0.5 flex-shrink-0 text-gray-400" />
                         <span className="line-clamp-1">{customer.address}</span>
                       </div></div></div></div></div>
-              );
+  );
             })}
           </div>
         ) : (
@@ -702,7 +702,7 @@ export default function CustomersPage() {
                         <Edit className="w-3 h-3" />
                         Edit
                       </button></div></div></div>
-              );
+  );
             })}
           </div>
         )}

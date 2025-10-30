@@ -179,7 +179,7 @@ export default function AnalyticsPage() {
         <div className="flex items-center justify-center h-full">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
-      );
+  );
   }
 
   if (!data) {
@@ -187,7 +187,7 @@ export default function AnalyticsPage() {
         <div className="text-center py-12">
           <p className="text-gray-600">Failed to load analytics data</p>
         </div>
-      );
+  );
   }
 
   return (
@@ -369,5 +369,5 @@ export default function AnalyticsPage() {
                   <p className="text-2xl font-bold text-green-600">{data.team.onShift}</p>
                   <p className="text-xs text-gray-600">On Shift</p>
                 </div></div></div></div></div></div></div>
-    );
+  );
 }

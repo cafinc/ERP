@@ -153,7 +153,7 @@ export default function PhotoGalleryPage() {
         <div className="flex items-center justify-center h-64">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
-      );
+  );
   }
 
   return (
@@ -448,5 +448,5 @@ export default function PhotoGalleryPage() {
               </button></div></div></div>
       )}
       </div></div></div></div></div></div></div></div></div></div></div></div></div>
-    );
+  );
 }

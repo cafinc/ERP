@@ -271,7 +271,7 @@ export default function GmailPage() {
       <DashboardLayout>
         <div className="flex items-center justify-center h-full">
           <div className="text-xl text-gray-600">Loading Gmail...</div></div></DashboardLayout>
-    );
+  );
   }
 
   if (!isConnected) {
@@ -290,7 +290,7 @@ export default function GmailPage() {
             >
               Connect Gmail Account
             </button></div></div></DashboardLayout>
-    );
+  );
   }
 
   return (

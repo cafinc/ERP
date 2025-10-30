@@ -141,7 +141,7 @@ export default function InvoicesPage() {
         <div className="flex items-center justify-center h-full">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
-      );
+  );
   }
 
   return (

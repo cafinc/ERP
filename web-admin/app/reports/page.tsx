@@ -251,5 +251,5 @@ export default function ReportsPage() {
               Click "Schedule" on any report above to set up automatic delivery.
             </p>
           </div></div></div>
-    );
+  );
 }

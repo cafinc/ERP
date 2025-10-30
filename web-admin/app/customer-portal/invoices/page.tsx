@@ -152,7 +152,7 @@ export default function CustomerInvoicesPage() {
                         </button>
                       )}
                     </div></div></div>
-              );
+  );
             })}
           </div>
         )}

@@ -402,7 +402,7 @@ export default function CrewCommunicationsPage() {
                             {new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                           </span>
                         </div></div>
-                    );
+  );
                   })}
                   <div ref={messagesEndRef} />
                 </div>

@@ -514,7 +514,7 @@ export default function GmailPage() {
     return (
         <div className="flex items-center justify-center h-full">
           <div className="text-xl text-gray-600">Loading Gmail...</div></div>
-      );
+  );
   }
 
   // Not connected state
@@ -533,7 +533,7 @@ export default function GmailPage() {
             >
               Connect Gmail Account
             </button></div></div>
-      );
+  );
   }
 
   const filteredCustomers = customers.filter(customer =>
@@ -1143,5 +1143,5 @@ export default function GmailPage() {
                 </div></div></div></div>
         )}
       </div>
-    );
+  );
 }

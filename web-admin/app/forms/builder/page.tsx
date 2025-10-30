@@ -279,7 +279,7 @@ export default function FormBuilderPage() {
                     <Icon className="w-5 h-5" />
                     <span className="font-medium">{fieldType.label}</span>
                   </button>
-                );
+  );
               })}
             </div></div>
 
@@ -335,7 +335,7 @@ export default function FormBuilderPage() {
                           }`}
                         >
                           <div className="text-sm font-semibold">{type.label}</div></button>
-                      );
+  );
                     })}
                   </div></div>
 

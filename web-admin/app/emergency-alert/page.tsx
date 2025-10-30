@@ -172,7 +172,7 @@ export default function EmergencyAlertPage() {
                     <CheckCircle className={`absolute top-2 right-2 w-5 h-5 ${colors.text}`} />
                   )}
                 </button>
-              );
+  );
             })}
           </div></div>
 

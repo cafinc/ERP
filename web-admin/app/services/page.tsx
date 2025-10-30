@@ -284,7 +284,7 @@ export default function ServicesPage() {
         <div className="flex items-center justify-center h-full">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
-      );
+  );
   }
 
   return (
@@ -894,7 +894,7 @@ export default function ServicesPage() {
                                       </div></div></div>
                                 )}
                               </div></div></div>
-                        );
+  );
                       })
                     )}
                   </div>
@@ -915,7 +915,7 @@ export default function ServicesPage() {
                                 ${eq.rate.toFixed(2)}/{eq.unit.replace('_', ' ')}
                               </span>
                             </div>
-                          );
+  );
                         })}
                       </div></div>
                   )}
@@ -1027,7 +1027,7 @@ export default function ServicesPage() {
                                       </div></div></div>
                                 )}
                               </div></div></div>
-                        );
+  );
                       })
                     )}
                   </div>
@@ -1043,7 +1043,7 @@ export default function ServicesPage() {
                               <span>• {truckItem?.name || truckItem?.make + ' ' + truckItem?.model || 'Unknown'}</span>
                               <span className="font-bold text-[#3f72af]">${tr.rate.toFixed(2)}/{tr.unit.replace('_', ' ')}</span>
                             </div>
-                          );
+  );
                         })}
                       </div></div>
                   )}
@@ -1155,7 +1155,7 @@ export default function ServicesPage() {
                                       </div></div></div>
                                 )}
                               </div></div></div>
-                        );
+  );
                       })
                     )}
                   </div>
@@ -1171,7 +1171,7 @@ export default function ServicesPage() {
                               <span>• {trailerItem?.name || trailerItem?.type || 'Unknown'}</span>
                               <span className="font-bold text-[#3f72af]">${trl.rate.toFixed(2)}/{trl.unit.replace('_', ' ')}</span>
                             </div>
-                          );
+  );
                         })}
                       </div></div>
                   )}
@@ -1283,7 +1283,7 @@ export default function ServicesPage() {
                                       </div></div></div>
                                 )}
                               </div></div></div>
-                        );
+  );
                       })
                     )}
                   </div>
@@ -1299,7 +1299,7 @@ export default function ServicesPage() {
                               <span>• {toolItem?.name || 'Unknown'}</span>
                               <span className="font-bold text-[#3f72af]">${tl.rate.toFixed(2)}/{tl.unit.replace('_', ' ')}</span>
                             </div>
-                          );
+  );
                         })}
                       </div></div>
                   )}
@@ -1413,5 +1413,5 @@ export default function ServicesPage() {
                   </button></div></form></div></div>
         )}
       </div>
-    );
+  );
 }

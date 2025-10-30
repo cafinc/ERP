@@ -409,7 +409,7 @@ export default function SubcontractorCommunicationsPage() {
                         )
                       )}
                     </div></div></div>
-              );
+  );
             })}
             <div ref={messagesEndRef} />
           </div>

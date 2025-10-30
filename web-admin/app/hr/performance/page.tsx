@@ -223,7 +223,7 @@ export default function PerformancePage() {
           />
         ))}
       </div>
-    );
+  );
   };
 
   const calculateStats = () => {

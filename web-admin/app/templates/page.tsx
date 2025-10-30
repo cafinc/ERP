@@ -339,7 +339,7 @@ export default function TemplatesPage() {
                       </div></div>
                   ))}
                 </div></div>
-            );
+  );
           })}
         </div>
       )}

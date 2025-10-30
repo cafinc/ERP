@@ -155,5 +155,5 @@ export default function HRModulePage() {
               <Calendar className="h-5 w-5" />
               Approve PTO
             </button></div></div></div>
-    );
+  );
 }

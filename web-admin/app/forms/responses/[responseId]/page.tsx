@@ -59,7 +59,7 @@ export default function ViewResponsePage() {
             <CheckCircle className={`w-5 h-5 ${value ? 'text-green-600' : 'text-gray-300'}`} />
             <span>{value ? 'Checked' : 'Not checked'}</span>
           </div>
-        );
+  );
 
       case 'rating':
         return (
@@ -74,7 +74,7 @@ export default function ViewResponsePage() {
             ))}
             <span className="ml-2 text-gray-600">({value}/5)</span>
           </div>
-        );
+  );
 
       case 'pass_fail':
         return (
@@ -91,7 +91,7 @@ export default function ViewResponsePage() {
               {value === 'Pass' ? '✓ Pass' : value === 'Fail' ? '✗ Fail' : value}
             </span>
           </div>
-        );
+  );
 
       case 'yes_no':
         return (
@@ -108,7 +108,7 @@ export default function ViewResponsePage() {
               {value}
             </span>
           </div>
-        );
+  );
 
       case 'yes_no_na':
         return (
@@ -127,7 +127,7 @@ export default function ViewResponsePage() {
               {value}
             </span>
           </div>
-        );
+  );
 
       case 'condition':
         return (
@@ -150,7 +150,7 @@ export default function ViewResponsePage() {
               {value}
             </span>
           </div>
-        );
+  );
 
       case 'inspection_checklist':
         return (
@@ -185,24 +185,24 @@ export default function ViewResponsePage() {
                     </span>
                   )}
                 </div>
-              );
+  );
             })}
           </div>
-        );
+  );
 
       case 'signature':
         return (
           <div className="border border-gray-300 rounded-lg p-4 bg-gray-50">
             <img src={value} alt="Signature" className="max-h-32" />
           </div>
-        );
+  );
 
       case 'photo':
         return (
           <div className="border border-gray-300 rounded-lg p-4 bg-gray-50">
             <img src={value} alt="Photo" className="max-h-64" />
           </div>
-        );
+  );
 
       case 'textarea':
         return <p className="whitespace-pre-wrap text-gray-900">{value}</p>;
@@ -226,7 +226,7 @@ export default function ViewResponsePage() {
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#3f72af] mx-auto"></div>
             <p className="mt-4 text-gray-600">Loading response...</p>
           </div></div></div></div>
-    );
+  );
   }
 
   if (!response || !template) {
@@ -234,7 +234,7 @@ export default function ViewResponsePage() {
               <div className="text-center py-12">
           <p className="text-red-600">Response not found</p>
         </div>
-    );
+  );
   }
 
   return (

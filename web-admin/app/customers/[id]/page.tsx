@@ -490,7 +490,7 @@ export default function CustomerDetailPage() {
     return (
         <div className="flex items-center justify-center h-full">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#3f72af]"></div></div>
-      );
+  );
   }
 
   if (!customer) {
@@ -504,7 +504,7 @@ export default function CustomerDetailPage() {
           >
             Back to Customers
           </button></div>
-      );
+  );
   }
 
   const isCompany = customer.customer_type === 'company';
@@ -1405,7 +1405,7 @@ export default function CustomerDetailPage() {
                         </div>
                         <p className={`text-sm font-medium ${config.textColor}`}>{config.label}</p>
                       </div>
-                    );
+  );
                   });
                 })()}
               </div>
@@ -1806,5 +1806,5 @@ export default function CustomerDetailPage() {
             </div></div></div>
       )}
     </div>
-    );
+  );
 }

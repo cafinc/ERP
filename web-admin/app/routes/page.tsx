@@ -100,5 +100,5 @@ export default function RoutesPage() {
             <button className="px-6 py-3 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-all shadow-md hover:shadow-lg font-semibold">
               Create First Route
             </button></div></div></div>
-    );
+  );
 }

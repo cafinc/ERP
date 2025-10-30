@@ -184,7 +184,7 @@ export default function DashboardPage() {
       <div className="flex items-center justify-center h-screen">
         <Activity className="w-8 h-8 animate-spin text-[#3f72af]" />
       </div>
-    );
+  );
   }
 
   return (
@@ -424,7 +424,7 @@ export default function DashboardPage() {
                         {new Date(activity.timestamp).toLocaleTimeString()}
                       </p>
                     </div></div>
-                );
+  );
               })}
             </div>
             <button className="mt-6 w-full px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm font-medium">

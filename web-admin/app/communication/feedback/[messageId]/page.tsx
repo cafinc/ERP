@@ -178,7 +178,7 @@ export default function FeedbackDetailPage() {
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#3f72af] mx-auto mb-4"></div>
               <p className="text-gray-600">Loading feedback...</p>
             </div></div></div></div>
-    );
+  );
   }
 
   if (!message) {
@@ -200,7 +200,7 @@ export default function FeedbackDetailPage() {
               >
                 Back to Communication Center
               </button></div></div></div></div>
-    );
+  );
   }
 
   return (

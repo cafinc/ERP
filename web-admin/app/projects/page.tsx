@@ -106,7 +106,7 @@ export default function ProjectsPage() {
         <div className="flex items-center justify-center h-full">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
-      );
+  );
   }
 
   return (
@@ -374,7 +374,7 @@ export default function ProjectsPage() {
                         <Edit className="w-3 h-3" />
                         Edit
                       </button></div></div></div>
-              );
+  );
             })}
           </div>
         ) : (
@@ -463,7 +463,7 @@ export default function ProjectsPage() {
                         <Edit className="w-4 h-4" />
                         Edit
                       </button></div></div></div>
-              );
+  );
             })}
           </div>
         )}

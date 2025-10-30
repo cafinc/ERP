@@ -123,7 +123,7 @@ export default function ConversationDetailPage() {
               <RefreshCw className="w-12 h-12 animate-spin text-[#3f72af] mx-auto mb-4" />
               <p className="text-gray-600">Loading conversation...</p>
             </div></div></div></div>
-    );
+  );
   }
 
   if (!conversation) {
@@ -145,7 +145,7 @@ export default function ConversationDetailPage() {
               >
                 Back to Communication Center
               </button></div></div></div></div>
-    );
+  );
   }
 
   return (

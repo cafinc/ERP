@@ -146,7 +146,7 @@ export default function InvoiceDetailPage() {
         <div className="flex items-center justify-center h-full">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div></div></div></div>
-    );
+  );
   }
 
   if (!invoice) {
@@ -163,7 +163,7 @@ export default function InvoiceDetailPage() {
               <ArrowLeft className="w-5 h-5" />
               <span>Back to Invoices</span>
             </button></div></div>
-    );
+  );
   }
 
   return (

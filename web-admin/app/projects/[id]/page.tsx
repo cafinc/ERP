@@ -215,7 +215,7 @@ export default function ProjectDetailPage() {
         <div className="flex items-center justify-center h-full">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div></div></div></div>
-    );
+  );
   }
 
   if (!project) {
@@ -232,7 +232,7 @@ export default function ProjectDetailPage() {
               <ArrowLeft className="w-5 h-5" />
               <span>Back to Projects</span>
             </button></div></div>
-    );
+  );
   }
 
   return (

@@ -825,7 +825,7 @@ export default function UnifiedSiteMapsBuilder() {
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
             <p className="mt-4 text-gray-600">Loading site data...</p>
           </div></div></div>
-    );
+  );
   }
 
   if (!site) {
@@ -833,7 +833,7 @@ export default function UnifiedSiteMapsBuilder() {
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <p className="text-red-600">Site not found</p>
       </div>
-    );
+  );
   }
 
   const CategoryIcon = ANNOTATION_CATEGORIES.find(cat => cat.value === selectedCategory)?.icon || MapPin;
@@ -915,7 +915,7 @@ export default function UnifiedSiteMapsBuilder() {
                       <Icon className="w-5 h-5" />
                       <span className="text-xs font-medium">{category.label}</span>
                     </button>
-                  );
+  );
                 })}
               </div>
 
@@ -1123,7 +1123,7 @@ export default function UnifiedSiteMapsBuilder() {
                               )
                             ))}
                           </div>
-                        );
+  );
                       })}
                     </div>
                   )}

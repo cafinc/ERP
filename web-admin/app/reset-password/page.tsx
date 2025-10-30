@@ -65,7 +65,7 @@ export default function ResetPasswordPage() {
           >
             Request New Link
           </button></div></div></div>
-    );
+  );
   }
 
   if (success) {
@@ -83,7 +83,7 @@ export default function ResetPasswordPage() {
           >
             Go to Login
           </button></div></div>
-    );
+  );
   }
 
   return (

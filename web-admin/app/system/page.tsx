@@ -206,7 +206,7 @@ export default function SystemPage() {
                       <button className="text-blue-600 hover:text-blue-700 text-sm font-medium flex items-center gap-1">
                         Configure <ExternalLink className="w-3 h-3" />
                       </button></div></div>
-                );
+  );
               })}
             </div></div></div>
 

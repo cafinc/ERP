@@ -339,7 +339,7 @@ export default function FormsPage() {
                                   <Download className="w-4 h-4" />
                                 </a>
                               </div></div></div>
-                        );
+  );
                       })}
                     </div>
                   )}
@@ -349,5 +349,5 @@ export default function FormsPage() {
           </div>
         )}
       </div>
-    );
+  );
 }

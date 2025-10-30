@@ -107,7 +107,7 @@ export default function EquipmentHistoryPage() {
         <div className="flex items-center justify-center h-64">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div></div></div>
-    );
+  );
   }
 
   return (
@@ -215,7 +215,7 @@ export default function EquipmentHistoryPage() {
                     <div className="flex items-center justify-end text-sm text-[#3f72af] hover:text-blue-700 font-medium">
                       View Details →
                     </div></div>
-                );
+  );
               })}
             </div>
           )}

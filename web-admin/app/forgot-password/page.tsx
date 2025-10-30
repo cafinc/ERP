@@ -58,7 +58,7 @@ export default function ForgotPasswordPage() {
           >
             Back to Login
           </button></div></div></div>
-    );
+  );
   }
 
   return (

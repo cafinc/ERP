@@ -294,7 +294,7 @@ export default function WorkflowBuilderPage() {
                               <ActionIcon className="w-3 h-3" />
                               <span className="truncate max-w-[100px]">{action.name}</span>
                             </div>
-                          );
+  );
                         })}
                         {(workflow.actions?.length || 0) > 4 && (
                           <span className="px-2 py-1 text-xs text-gray-500">
@@ -353,7 +353,7 @@ export default function WorkflowBuilderPage() {
                       >
                         <Trash2 className="w-4 h-4" />
                       </button></div></div>
-                );
+  );
               })}
             </div>
           )}

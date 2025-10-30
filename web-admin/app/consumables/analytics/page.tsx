@@ -106,7 +106,7 @@ export default function ConsumablesAnalyticsPage() {
         <div className="flex items-center justify-center h-64">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div></div>
-    );
+  );
   }
 
   return (
@@ -222,7 +222,7 @@ export default function ConsumablesAnalyticsPage() {
                       <span>{item.total_used.toFixed(1)} {item.unit}</span>
                       <span>{percentage.toFixed(1)}% of total</span>
                     </div></div>
-                );
+  );
               })}
             </div>
           ) : (

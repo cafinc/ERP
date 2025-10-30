@@ -437,7 +437,7 @@ export default function MessagesPage() {
                               <CheckCheck className="w-4 h-4" />
                             )}
                           </div></div></div></div>
-                  );
+  );
                 })}
                 <div ref={messagesEndRef} />
               </div>
@@ -634,5 +634,5 @@ export default function MessagesPage() {
                 </button></div></div>
         )}
       </div>
-    );
+  );
 }

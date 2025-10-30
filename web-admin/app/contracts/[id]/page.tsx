@@ -268,7 +268,7 @@ export default function ContractDetailPage() {
             >
               Return to Contracts
             </button></div></div></div>
-    );
+  );
   }
 
   return (

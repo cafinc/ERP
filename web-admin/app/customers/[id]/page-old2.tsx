@@ -212,7 +212,7 @@ export default function CustomerDetailPage() {
       <DashboardLayout>
         <div className="flex items-center justify-center h-full">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#3f72af]"></div></div></DashboardLayout>
-    );
+  );
   }
 
   if (!customer) {
@@ -227,7 +227,7 @@ export default function CustomerDetailPage() {
           >
             Back to Customers
           </button></div></DashboardLayout>
-    );
+  );
   }
 
   const isCompany = customer.customer_type === 'company';

@@ -418,7 +418,7 @@ export default function CustomerCommunicationsPage() {
                         )
                       )}
                     </div></div></div>
-              );
+  );
             })}
             <div ref={messagesEndRef} />
           </div>

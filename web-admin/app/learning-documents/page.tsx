@@ -148,7 +148,7 @@ export default function LearningDocumentsPage() {
         <div className="flex items-center justify-center h-64">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
-      );
+  );
   }
 
   return (
@@ -191,7 +191,7 @@ export default function LearningDocumentsPage() {
                     <p className="text-2xl font-bold text-gray-900">{count}</p>
                     <p className="text-sm text-gray-600 capitalize">{category}</p>
                   </div></div></div>
-            );
+  );
           })}
         </div>
 

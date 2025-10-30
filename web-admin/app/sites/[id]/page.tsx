@@ -497,7 +497,7 @@ export default function SiteDetailPage() {
           <RefreshCw className="w-8 h-8 text-blue-600 animate-spin mx-auto mb-4" />
           <p className="text-gray-600">Loading site details...</p>
         </div></div>
-    );
+  );
   }
 
   if (!site) {
@@ -512,7 +512,7 @@ export default function SiteDetailPage() {
           >
             Back to Sites
           </button></div></div>
-    );
+  );
   }
 
   return (

@@ -500,7 +500,7 @@ export default function LeadsPage() {
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto"></div>
             <p className="mt-4 text-gray-600">Loading leads...</p>
           </div></div>
-      );
+  );
   }
 
   return (
@@ -963,7 +963,7 @@ export default function LeadsPage() {
                         ))}
                       </select>
                     </div></div></div>
-                );
+  );
               })}
             </div>
           )}
@@ -1081,7 +1081,7 @@ export default function LeadsPage() {
                             >
                               <Trash2 className="w-4 h-4" />
                             </button></div></div></div>
-                    );
+  );
                   })}
                 </div>
               )}
@@ -1114,7 +1114,7 @@ export default function LeadsPage() {
                                 {count} ({percentage}%)
                               </span>
                             </div></div>
-                        );
+  );
                       })}
                     </div></div>
 

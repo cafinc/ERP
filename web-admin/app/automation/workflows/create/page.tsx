@@ -356,7 +356,7 @@ export default function WorkflowEditorPage() {
                     <Icon className={`w-6 h-6 mx-auto mb-2 ${triggerType === type.value ? 'text-[#3f72af]' : 'text-gray-400'}`} />
                     <div className="text-sm font-medium text-gray-900">{type.label}</div>
                     <div className="text-xs text-gray-500 mt-1">{type.description}</div></button>
-                );
+  );
               })}
             </div>
 
@@ -542,7 +542,7 @@ export default function WorkflowEditorPage() {
                           💡 Use {`{{variable}}`} syntax for dynamic content
                         </p>
                       </div></div>
-                  );
+  );
                 })}
               </div>
             )}
@@ -582,7 +582,7 @@ export default function WorkflowEditorPage() {
                       <Icon className="w-6 h-6 text-gray-700 mb-2" />
                       <div className="font-medium text-gray-900">{type.label}</div>
                       <div className="text-xs text-gray-500 mt-1">Click to add</div></button>
-                  );
+  );
                 })}
               </div></div></div></div>
       )}

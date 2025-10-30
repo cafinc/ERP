@@ -810,7 +810,7 @@ export default function UnifiedCommunicationsCenter() {
                                   <CheckCircle className="w-3 h-3" />
                                 )}
                               </div></div></div></div></div>
-                    );
+  );
                   })}
                 </div>
               )}

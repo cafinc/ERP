@@ -490,5 +490,5 @@ export default function AccessDashboardPage() {
                   </button></div></form></div></div>
         )}
       </div>
-    );
+  );
 }

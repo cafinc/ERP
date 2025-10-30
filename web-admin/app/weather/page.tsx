@@ -180,7 +180,7 @@ export default function WeatherPlanningPage() {
         <div className="flex items-center justify-center h-64">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div>
-      );
+  );
   }
 
   if (!weather) {
@@ -188,7 +188,7 @@ export default function WeatherPlanningPage() {
         <div className="text-center py-12">
           <p className="text-gray-600">Failed to load weather data</p>
         </div>
-      );
+  );
   }
 
   return (
@@ -348,5 +348,5 @@ export default function WeatherPlanningPage() {
             </div></div>
         )}
       </div>
-    );
+  );
 }
