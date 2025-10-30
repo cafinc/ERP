@@ -369,6 +369,7 @@ export default function TeamMemberDetailPage() {
                         Uploaded {new Date(doc.uploaded_at).toLocaleDateString()}
                       </p>
                     </div>
+                  </div>
                   <a
                     href={doc.url}
                     target="_blank"
