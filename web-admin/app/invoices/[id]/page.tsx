@@ -147,7 +147,6 @@ export default function InvoiceDetailPage() {
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div></div>
       </div>
-    </div>
           );
   }
 
@@ -165,7 +164,6 @@ export default function InvoiceDetailPage() {
               <ArrowLeft className="w-5 h-5" />
               <span>Back to Invoices</span>
             </button></div>
-          </div>
           );
   }
 
@@ -288,32 +286,26 @@ export default function InvoiceDetailPage() {
       </div>
     </div>
   </div>
-</div>
                     ))}
                   </tbody>
                 </table>
-              </div>
 
               {/* Totals */}
               <div className="mt-6 pt-6 border-t border-gray-200 space-y-2">
                 <div className="flex items-center justify-between text-sm">
                   <span className="text-gray-600">Subtotal</span>
                   <span className="font-medium text-gray-900">${invoice.subtotal.toFixed(2)}</span>
-                </div>
                 {invoice.discount_amount > 0 && (
                   <div className="flex items-center justify-between text-sm">
                     <span className="text-gray-600">Discount</span>
                     <span className="font-medium text-red-600">-${invoice.discount_amount.toFixed(2)}</span>
-                  </div>
           )}
                 <div className="flex items-center justify-between text-sm">
                   <span className="text-gray-600">Tax ({invoice.tax_rate}%)</span>
                   <span className="font-medium text-gray-900">${invoice.tax_amount.toFixed(2)}</span>
-                </div>
                 <div className="flex items-center justify-between text-lg font-bold pt-2 border-t border-gray-200">
                   <span className="text-gray-900">Total</span>
                   <span className="text-[#3f72af]">${invoice.total_amount.toFixed(2)}</span>
-                </div>
 
             {/* Payment History */}
             {invoice.payments && invoice.payments.length > 0 && (
@@ -349,21 +341,9 @@ export default function InvoiceDetailPage() {
                       )}
                     </div>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
           ))}
                 </div></div>
           )}
-          </div>
           {/* Sidebar */}
           <div className="space-y-6">
             {/* Payment Summary */}
@@ -373,22 +353,18 @@ export default function InvoiceDetailPage() {
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-gray-600">Total Amount</span>
                   <span className="text-lg font-bold text-gray-900">${invoice.total_amount.toFixed(2)}</span>
-                </div>
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-gray-600">Amount Paid</span>
                   <span className="text-lg font-bold text-green-600">${invoice.amount_paid.toFixed(2)}</span>
-                </div>
                 <div className="flex items-center justify-between pt-3 border-t border-gray-200">
                   <span className="text-sm font-semibold text-gray-900">Amount Due</span>
                   <span className="text-xl font-bold text-[#3f72af]">${invoice.amount_due.toFixed(2)}</span>
-                </div>
 
               {invoice.deposit_required && (
                 <div className="mt-4 pt-4 border-t border-gray-200">
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-sm text-gray-600">Deposit Required</span>
                     <span className="text-sm font-medium text-gray-900">${invoice.deposit_amount.toFixed(2)}</span>
-                  </div>
                   <div className="flex items-center space-x-2">
                     {invoice.deposit_paid ? (
                       <CheckCircle className="w-4 h-4 text-green-600" />
@@ -400,7 +376,6 @@ export default function InvoiceDetailPage() {
                     </span>
                   </div></div>
           )}
-            </div>
             {/* Quick Stats */}
             <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Invoice Stats</h3>
@@ -408,13 +383,11 @@ export default function InvoiceDetailPage() {
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-gray-600">Payments Received</span>
                   <span className="text-lg font-bold text-gray-900">{invoice.payments?.length || 0}</span>
-                </div>
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-gray-600">Days Until Due</span>
                   <span className="text-lg font-bold text-gray-900">
                     {Math.ceil((new Date(invoice.due_date).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))}
                   </span>
-                </div>
 
         {/* Payment Modal */}
         {showPaymentModal && (
@@ -427,8 +400,6 @@ export default function InvoiceDetailPage() {
                   className="p-1 hover:bg-gray-100 rounded-lg transition-colors"
                 >
                   <X className="w-5 h-5" />
-                </button>
-              </div>
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -445,11 +416,9 @@ export default function InvoiceDetailPage() {
                       placeholder="0.00"
                       max={invoice.amount_due}
                     />
-                  </div>
                   <p className="text-xs text-gray-500 mt-1">
                     Amount due: ${invoice.amount_due.toFixed(2)}
                   </p>
-                </div>
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -466,7 +435,6 @@ export default function InvoiceDetailPage() {
                     <option value="cash">Cash</option>
                     <option value="other">Other</option>
                   </select>
-                </div>
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -479,7 +447,6 @@ export default function InvoiceDetailPage() {
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="Enter transaction ID"
                   />
-                </div>
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -492,7 +459,6 @@ export default function InvoiceDetailPage() {
                     rows={3}
                     placeholder="Add any notes about this payment"
                   />
-                </div>
 
               <div className="flex items-center space-x-3 mt-6">
                 <button
@@ -502,28 +468,13 @@ export default function InvoiceDetailPage() {
                 >
                   {submitting ? <RefreshCw className="w-4 h-4 animate-spin" /> : <CheckCircle className="w-4 h-4" />}
                   <span>Record Payment</span>
-                </button>
                 <button
                   onClick={() => setShowPaymentModal(false)}
                   className="flex-1 px-4 py-2 border border-gray-300 hover:bg-gray-50 rounded-lg font-medium transition-colors"
                 >
                   Cancel
                 </button></div>
-              </div>
-            </div>
-          </div>
           )}
         </div></div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
           );
 }

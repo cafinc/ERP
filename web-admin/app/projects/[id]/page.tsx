@@ -216,7 +216,6 @@ export default function ProjectDetailPage() {
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div></div>
       </div>
-    </div>
           );
   }
 
@@ -234,7 +233,6 @@ export default function ProjectDetailPage() {
               <ArrowLeft className="w-5 h-5" />
               <span>Back to Projects</span>
             </button></div>
-          </div>
           );
   }
 
@@ -471,16 +469,12 @@ export default function ProjectDetailPage() {
 </div>
 </div>
 </div>
-</div>
           ))}
-                </div>
               ) : (
                 <div className="text-center py-12">
                   <CheckSquare className="w-12 h-12 text-gray-300 mx-auto mb-3" />
                   <p className="text-gray-600">No tasks yet. Add your first task to get started.</p>
-                </div>
           )}
-            </div>
           {/* Sidebar */}
           <div className="space-y-6">
             {/* Status Actions */}
@@ -517,7 +511,6 @@ export default function ProjectDetailPage() {
                     <span>Mark Completed</span>
                   </button>
           )}
-              </div>
             {/* Task Summary */}
             <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Task Summary</h3>
@@ -613,20 +606,5 @@ export default function ProjectDetailPage() {
           </div>
           )}
         </div></div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
           );
 }

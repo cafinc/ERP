@@ -369,7 +369,6 @@ export default function MessagesPage() {
 </div>
           ))
             )}
-          </div>
         {/* Main Chat Area */}
         <div className="flex-1 flex flex-col bg-gray-50">
           {selectedConversation ? (
@@ -436,13 +435,7 @@ export default function MessagesPage() {
                         </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
                               ))}
-                            </div>
           )}
                           
                           <div className="flex items-center justify-between mt-1">
@@ -454,24 +447,9 @@ export default function MessagesPage() {
                               <CheckCheck className="w-4 h-4" />
                             )}
                           </div></div>
-                        </div>
-                      </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
           );
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
                 })}
                 <div ref={messagesEndRef} />
-              </div>
 
               {/* Message Input */}
               <div className="p-4 bg-white border-t border-gray-200">
@@ -490,21 +468,8 @@ export default function MessagesPage() {
                             className="p-0.5 hover:bg-gray-200 rounded"
                           >
                             <X className="w-3 h-3 text-gray-600" />
-                          </button>
-                        </div>
-                      </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-</div>
-</div>
           ))}
               </div></div>
-            </div>
-          </div>
           )}
                 
                 <div className="flex items-end space-x-2">
@@ -526,7 +491,6 @@ export default function MessagesPage() {
                     ) : (
                       <Paperclip className="w-5 h-5 text-gray-600" />
                     )}
-                  </button>
                   <textarea
                     value={newMessage}
                     onChange={(e) => setNewMessage(e.target.value)}
@@ -548,12 +512,9 @@ export default function MessagesPage() {
                     className="p-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#3f72af]/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <Send className="w-5 h-5" />
-                  </button>
-                </div>
                 <p className="text-xs text-gray-500 mt-2">
                   Press Enter to send, Shift+Enter for new line
                 </p>
-              </div>
             </>
           ) : (
             <div className="flex-1 flex items-center justify-center">
@@ -561,9 +522,7 @@ export default function MessagesPage() {
                 <MessageSquare className="w-16 h-16 text-gray-300 mx-auto mb-4" />
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">No conversation selected</h3>
                 <p className="text-gray-600">Select a conversation from the list or start a new one</p>
-              </div>
           )}
-        </div>
         {/* New Conversation Modal */}
         {showNewConversation && (
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
@@ -575,8 +534,6 @@ export default function MessagesPage() {
                   className="p-1 hover:bg-gray-100 rounded"
                 >
                   <X className="w-5 h-5 text-gray-600" />
-                </button>
-              </div>
               {/* Conversation Type */}
               <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700 mb-2">Type</label>
@@ -591,7 +548,6 @@ export default function MessagesPage() {
                   >
                     <User className="w-5 h-5 inline mr-2" />
                     Direct Message
-                  </button>
                   <button
                     onClick={() => setConversationType('group')}
                     className={`flex-1 py-2 px-4 rounded-lg border ${
@@ -602,8 +558,6 @@ export default function MessagesPage() {
                   >
                     <Users className="w-5 h-5 inline mr-2" />
                     Group Chat
-                  </button>
-                </div>
               {/* Group Name */}
               {conversationType === 'group' && (
                 <div className="mb-4">
@@ -615,7 +569,6 @@ export default function MessagesPage() {
                     placeholder="Enter group name"
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
-                </div>
           )}
 
               {/* Participants */}
@@ -653,21 +606,8 @@ export default function MessagesPage() {
                         }`}>
                           {contact.type === 'team' ? 'Team' : 'Customer'}
                         </span>
-                      </div>
                     </label>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </button>
-    </div>
-  </div>
-</div>
-</div>
-</div>
                   ))}
-                </div>
 
               {/* Action Buttons */}
               <div className="flex items-center justify-end space-x-3">
@@ -676,7 +616,6 @@ export default function MessagesPage() {
                   className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
                 >
                   Cancel
-                </button>
                 <button
                   onClick={handleCreateConversation}
                   disabled={selectedUsers.length === 0}
@@ -684,16 +623,6 @@ export default function MessagesPage() {
                 >
                   Create Conversation
                 </button></div>
-              </div>
           )}
-      </div>
-        </div>
-      </div>
-    </button>
-  </div>
-</div>
-</div>
-</div>
-</div>
           );
 }

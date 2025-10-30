@@ -474,15 +474,7 @@ export default function NavigationBuilder() {
                               </div>
                             </div>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-</div>
 </DashboardLayout>
-</div>
-</div>
           ))
                         ) : (
                           <div
@@ -493,17 +485,8 @@ export default function NavigationBuilder() {
                             </div></div>
           )}
                       </div>                    </details>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </DashboardLayout>
-  </div>
-</div>
                   ))}
-                </div>
 
             {/* Right: Navigation Structure Builder */}
             <div className="lg:col-span-2">
@@ -516,8 +499,6 @@ export default function NavigationBuilder() {
                   >
                     <Plus className="w-4 h-4" />
                     Add Section
-                  </button>
-                </div>
                 <div className="space-y-2 mb-6">
                   {navigation.map((section, idx) => {
                     const Icon = section.icon;
@@ -553,8 +534,6 @@ export default function NavigationBuilder() {
                                 className="p-1 text-red-600 hover:bg-red-50 rounded"
                               >
                                 <Trash2 className="w-4 h-4" />
-                              </button>
-                            </div>
                             {section.type === 'single' && (
                               <input
                                 type="text"
@@ -571,29 +550,12 @@ export default function NavigationBuilder() {
                                   <div key={itemIdx} className="flex items-center gap-2 text-sm">
                                     <div className="flex-1 px-2 py-1 bg-gray-50 rounded">
                                       {item.name} <span className="text-gray-500 text-xs">→ {item.path}</span>
-                                    </div>
                                     <button
                                       onClick={() => removeSubmenuItem(section.id, item.path)}
                                       className="p-1 text-red-600 hover:bg-red-50 rounded"
                                     >
                                       <Trash2 className="w-3 h-3" />
-                                    </button>
-                                  </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
 </DashboardLayout>
-</div>
-</div>
           ))}
                                 <button
                                   onClick={() => setSelectedSection(section.id)}
@@ -607,32 +569,10 @@ export default function NavigationBuilder() {
                                 </button></div>
           )}
                           </div></div>
-                        </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-</div>
-</div>
 </DashboardLayout>
-</div>
-</div>
           );
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </DashboardLayout>
-</div>
-</div>
                   })}
-                </div>
 
                 {/* Action Buttons */}
                 <div className="flex gap-3 pt-4 border-t border-gray-200">
@@ -642,15 +582,12 @@ export default function NavigationBuilder() {
                   >
                     <Save className="w-5 h-5" />
                     Save Navigation Structure
-                  </button>
                   <button
                     onClick={exportCode}
                     className="flex items-center gap-2 px-4 py-3 border-2 border-[#3f72af] text-[#3f72af] rounded-xl font-semibold hover:bg-blue-50"
                   >
                     <Eye className="w-5 h-5" />
                     Export Code
-                  </button>
-                </div>
               {/* Preview */}
               <div className="mt-6 bg-gray-800 rounded-xl p-4">
                 <h4 className="text-white font-semibold mb-3">Preview: Sidebar Navigation</h4>
@@ -668,44 +605,12 @@ export default function NavigationBuilder() {
                             </span>
                           )}
                         </div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-</div>
-</div>
-</div>
 </DashboardLayout>
-</div>
-</div>
           );
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 </DashboardLayout>
-</div>
-</div>
                   })}
                 </div></div>
-              </div>
             </DashboardLayout>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
 </DashboardLayout>
-</div>
-</div>
           );
-    </div>
 }

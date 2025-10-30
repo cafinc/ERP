@@ -175,7 +175,6 @@ export default function PreviewNewDesign() {
 </HybridNavigationLayout>
 </div>
           ))}
-        </div>
 
         {/* Button Styles Showcase */}
         <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 mb-6 hover:shadow-md transition-shadow">
@@ -251,19 +250,6 @@ export default function PreviewNewDesign() {
   </div>
 </div>
 </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
         </HybridNavigationLayout>
-      </div>
           );
 }

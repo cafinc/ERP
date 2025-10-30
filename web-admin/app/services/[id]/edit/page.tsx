@@ -130,7 +130,6 @@ export default function ServiceFormPage() {
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div></div>
       </div>
-    </div>
           );
   }
 
@@ -273,9 +272,7 @@ export default function ServiceFormPage() {
       </div>
     </div>
   </div>
-</form>
           ))}
-          </div>
 
         {/* Submit Actions */}
         <div className="flex justify-end gap-4">
@@ -286,7 +283,6 @@ export default function ServiceFormPage() {
             disabled={saving}
           >
             Cancel
-          </button>
           <button
             type="submit"
             className="flex items-center gap-2 px-6 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] disabled:opacity-50 disabled:cursor-not-allowed"
@@ -304,10 +300,5 @@ export default function ServiceFormPage() {
               </>
             )}
           </button></div>
-        </div>
-      </form>
-    </div>
-  </div>
-        </form>
           );
 }

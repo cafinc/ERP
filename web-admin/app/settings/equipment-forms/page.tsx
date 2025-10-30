@@ -103,7 +103,6 @@ export default function EquipmentFormsPage() {
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div></div>
       </div>
-    </div>
           );
   }
 
@@ -229,7 +228,6 @@ export default function EquipmentFormsPage() {
         </div>
       </div>
     </div>
-  </div>
                           ))}
                         </select>
                       </td>
@@ -241,35 +239,12 @@ export default function EquipmentFormsPage() {
                         >
                           <Save className="w-4 h-4" />
                           Save
-                        </button>
                       </td>
                     </tr>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-</div>
-</div>
                   ))}
                 </tbody>
               </table>
-            </div>
           )}
         </div></div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
           );
 }

@@ -177,7 +177,6 @@ export default function PermissionsMatrixPage() {
       </div>
     </div>
           ))}
-        </div>
 
       {/* Bulk Actions */}
       <div style={{
@@ -301,21 +300,8 @@ export default function PermissionsMatrixPage() {
             </button>
         </div>
       </div>
-    </div>
-  </div>
-</div>
           );
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
             })}
-          </div>
-        </div>
-      </div>
-        </div>
-      </div>
           ))}
 
       {/* Save Button */}
@@ -346,7 +332,5 @@ export default function PermissionsMatrixPage() {
           <Save style={{ width: '20px', height: '20px' }} />
           Save Permissions for {selectedRole.charAt(0).toUpperCase() + selectedRole.slice(1)}
         </button></div>
-      </div>
-        </div>
           );
 }
