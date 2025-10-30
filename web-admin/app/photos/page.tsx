@@ -457,6 +457,7 @@ export default function PhotoGalleryPage() {
               </button>
             </div>
         </div>
+        </div>
       )}
     );
 }
