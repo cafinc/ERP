@@ -331,6 +331,7 @@ export default function SubcontractorCommunicationsPage() {
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-500 mx-auto mb-4" />
               <p className="text-gray-600">Loading messages...</p>
             </div>
+          </div>
         ) : filteredMessages.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full text-gray-400">
             <ChatBubbleLeftRightIcon className="w-20 h-20 mb-4 opacity-50" />
