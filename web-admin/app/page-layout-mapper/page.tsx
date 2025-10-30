@@ -260,10 +260,12 @@ export default function PageLayoutMapper() {
                         <div className="mt-2 bg-white rounded border border-gray-200 h-16">
                           {layout.preview}
                         </div>
+                      </div>
                     </div>
                   );
                 })}
               </div>
+            </div>
 
           {/* Page Groups */}
           {pageGroups.map((group) => {
