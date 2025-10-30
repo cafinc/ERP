@@ -449,6 +449,8 @@ export default function MessagesPage() {
               </div>
 
               {/* Message Input */}
+                </div>
+              </div>
               <div className="p-4 bg-white border-t border-gray-200">
                 {/* Attachments Preview */}
                 {attachments.length > 0 && (

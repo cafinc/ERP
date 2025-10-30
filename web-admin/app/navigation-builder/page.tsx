@@ -612,6 +612,7 @@ export default function NavigationBuilder() {
                   })}
                 </div>
       </div>
+      </div>
     </DashboardLayout>
   );
 }
