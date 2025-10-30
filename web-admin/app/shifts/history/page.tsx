@@ -214,6 +214,8 @@ export default function ShiftHistoryPage() {
                 Completed
               </button>
             </div>
+          </div>
+        </div>
 
         {/* Shifts Table */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
