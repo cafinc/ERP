@@ -376,6 +376,7 @@ export default function PageLayoutMapper() {
                   );
                 })}
               </div>
+            </div>
 
             <div className="flex items-center justify-between pt-4 border-t border-white/20">
               <div>
