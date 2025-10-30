@@ -55,6 +55,7 @@ export default function PageLayoutMapper() {
               <div key={i} className="bg-gray-100 h-2 mb-1 rounded"></div>
             ))}
           </div>
+        </div>
       ),
     },
     {
