@@ -224,6 +224,8 @@ export default function EquipmentFormPage() {
                 <span className="text-sm font-medium text-gray-700">Requires Driver's License</span>
               </label>
             </div>
+          </div>
+        </div>
 
         {/* Maintenance */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
