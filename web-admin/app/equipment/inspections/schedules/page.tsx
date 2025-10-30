@@ -334,6 +334,7 @@ export default function InspectionSchedulesPage() {
                                 <p className="text-xs text-gray-600">{rule.description}</p>
                               )}
                             </div>
+                          </div>
                           <div className="flex items-center gap-2">
                             {rule.threshold_days && (
                               <span className="text-xs text-gray-600">{rule.threshold_days} days</span>
@@ -342,9 +343,11 @@ export default function InspectionSchedulesPage() {
                               {getActionLabel(rule.action)}
                             </span>
                           </div>
-                        </div>))}
+                        </div>
+                      ))}
                     </div>
-                  </div>)}
+                  </div>
+                )}
 
                 {/* Actions */}
                 <div className="border-t border-gray-200 mt-4 pt-4">
