@@ -504,4 +504,5 @@ export default function CreateContractPage() {
       </form>
     </div>
   </div>
+  );
 }
