@@ -297,6 +297,7 @@ export default function PermissionsMatrixPage() {
                     )}
                   </div>
                 </button>
+              </div>
               );
             })}
           </div>
