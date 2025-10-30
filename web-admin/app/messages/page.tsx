@@ -367,8 +367,7 @@ export default function MessagesPage() {
     </div>
   </div>
 </div>
-          ))
-            )}
+          )))}
         {/* Main Chat Area */}
         <div className="flex-1 flex flex-col bg-gray-50">
           {selectedConversation ? (
