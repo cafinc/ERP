@@ -317,6 +317,7 @@ export default function ViewResponsePage() {
                   <div className="pl-4">
                     {renderFieldValue(field, response.data[field.id])}
                   </div>
+                </div>
               ))}
             </div>
     </div>
