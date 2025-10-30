@@ -157,6 +157,13 @@ export default function PhotoGalleryPage() {
   }
 
   return (
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <PageHeader
+        title="Photos"
+        subtitle="Photo gallery"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Photos" }]}
+      />
+      <div className="flex-1 overflow-auto p-6">
       <div className="space-y-6">
         {/* Header */}
         <div className="flex justify-between items-center">

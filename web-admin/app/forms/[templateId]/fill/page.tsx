@@ -490,6 +490,13 @@ export default function FillFormPage() {
   }
 
   return (
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <PageHeader
+        title="Fill Form"
+        subtitle="Complete form template"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Fill Form" }]}
+      />
+      <div className="flex-1 overflow-auto p-6">
           <div className="p-8">
         <div className="max-w-3xl mx-auto">
           {/* Header */}

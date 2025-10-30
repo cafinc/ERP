@@ -109,6 +109,13 @@ export default function EquipmentFormsPage() {
   }
 
   return (
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <PageHeader
+        title="Equipment Forms"
+        subtitle="Form templates"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Equipment Forms" }]}
+      />
+      <div className="flex-1 overflow-auto p-6">
           <div className="space-y-6">
         {/* Header */}
         <div className="flex items-center gap-4">

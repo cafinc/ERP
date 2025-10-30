@@ -125,6 +125,13 @@ export default function ShiftHistoryPage() {
   };
 
   return (
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <PageHeader
+        title="Shift History"
+        subtitle="View shift records"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Shift History" }]}
+      />
+      <div className="flex-1 overflow-auto p-6">
           <div className="space-y-6">
         {/* Header */}
         <div className="flex justify-between items-center">

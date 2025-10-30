@@ -166,6 +166,13 @@ export default function RingCentralSettings() {
   }
 
   return (
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <PageHeader
+        title="RingCentral Integration"
+        subtitle="Phone system"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "RingCentral Integration" }]}
+      />
+      <div className="flex-1 overflow-auto p-6">
           <div className="p-8">
         {/* Header */}
         <div className="mb-8">

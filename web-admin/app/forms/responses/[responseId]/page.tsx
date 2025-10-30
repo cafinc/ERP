@@ -241,6 +241,13 @@ export default function ViewResponsePage() {
   }
 
   return (
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <PageHeader
+        title="Form Response"
+        subtitle="View submission"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Form Response" }]}
+      />
+      <div className="flex-1 overflow-auto p-6">
           <div className="p-8">
         <div className="max-w-4xl mx-auto">
           {/* Header */}

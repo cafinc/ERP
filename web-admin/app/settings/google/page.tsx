@@ -226,6 +226,13 @@ export default function GoogleWorkspaceSettings() {
   }
 
   return (
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <PageHeader
+        title="Google Integration"
+        subtitle="Configure Google services"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Google Integration" }]}
+      />
+      <div className="flex-1 overflow-auto p-6">
           <div className="p-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Google Workspace Integration</h1>

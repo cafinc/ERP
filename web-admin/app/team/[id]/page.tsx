@@ -174,6 +174,13 @@ export default function TeamMemberDetailPage() {
   }
 
   return (
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <PageHeader
+        title="Team Member"
+        subtitle="View member details"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Team Member" }]}
+      />
+      <div className="flex-1 overflow-auto p-6">
           <div className="space-y-6">
         {/* Header */}
         <div className="flex items-center justify-between">
@@ -375,5 +382,7 @@ export default function TeamMemberDetailPage() {
           </div>
         )}
       </div>
+      </div>
+    </div>
   );
 }
