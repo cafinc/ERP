@@ -449,6 +449,8 @@ export default function ProjectDetailPage() {
                                 )}
                               </div>
                             </div>
+                          </div>
+                        </div>
                         <div className="flex items-center space-x-2 ml-4">
                           <span className={`px-2 py-1 rounded-full text-xs font-medium ${getTaskStatusColor(task.status)}`}>
                             {task.status.replace('_', ' ')}
@@ -461,6 +463,7 @@ export default function ProjectDetailPage() {
                           </button>
                         </div>
                       </div>
+                    </div>
                   ))}
                 </div>
               ) : (
