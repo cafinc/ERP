@@ -311,6 +311,8 @@ export default function SubcontractorCommunicationsPage() {
             <div className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">
               {filteredMessages.length} messages
             </div>
+          </div>
+        </div>
 
         {/* Search Bar */}
         <div className="mt-4 relative">
