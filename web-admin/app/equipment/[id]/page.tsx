@@ -163,7 +163,14 @@ export default function EquipmentDetailPage() {
   }
 
   return (
-          <div className="space-y-6">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <PageHeader
+        title="Equipment Details"
+        subtitle={equipment.name}
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Equipment", href: "/equipment" }, { label: "Details" }]}
+      />
+      <div className="flex-1 overflow-auto p-6">
+        <div className="space-y-6">
         {/* Header */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
