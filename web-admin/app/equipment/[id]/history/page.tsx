@@ -225,5 +225,7 @@ export default function EquipmentHistoryPage() {
             </div>
           )}
         </div>
+      </div>
+    </div>
   );
 }
