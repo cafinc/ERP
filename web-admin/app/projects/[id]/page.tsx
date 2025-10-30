@@ -236,6 +236,7 @@ export default function ProjectDetailPage() {
               <span>Back to Projects</span>
             </button>
           </div>
+        </div>
     );
   }
 
