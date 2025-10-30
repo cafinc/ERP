@@ -506,5 +506,6 @@ export default function InvoiceDetailPage() {
       </div>
     </div>
         </div>
+        </div>
   );
 }

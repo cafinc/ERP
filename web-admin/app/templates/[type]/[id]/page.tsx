@@ -300,5 +300,6 @@ export default function TemplateViewPage() {
       </div>
     </div>
         </div>
+        </div>
   );
 }

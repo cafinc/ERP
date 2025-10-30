@@ -295,6 +295,7 @@ export default function EquipmentFormPage() {
         </div>
       </div>
       </div>
+      </div>
       </form>
     </div>
   );
