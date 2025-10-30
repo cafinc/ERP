@@ -66,6 +66,8 @@ export default function ResetPasswordPage() {
             Request New Link
           </button>
         </div>
+      </div>
+    </div>
     );
   }
 
