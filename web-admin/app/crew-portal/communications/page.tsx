@@ -258,6 +258,8 @@ export default function CrewCommunicationsPage() {
               <h2 className="text-xl font-bold text-white">My Projects</h2>
               <p className="text-sm text-blue-100 mt-1">Select project to chat</p>
             </div>
+          </div>
+        </div>
         
         <div className="flex-1 overflow-y-auto">
           {projects.length === 0 ? (
