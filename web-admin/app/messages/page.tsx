@@ -471,7 +471,7 @@ export default function MessagesPage() {
                         </div>
                     ))}
                   </div>
-                  </div>
+              </div>
                 )}
                 
                 <div className="flex items-end space-x-2">
