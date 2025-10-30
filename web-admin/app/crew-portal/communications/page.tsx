@@ -543,6 +543,12 @@ export default function CrewCommunicationsPage() {
                 💼 Crew Portal • Real-time • Location sharing enabled
               </p>
             </div>
+          </div>
+          </div>
+          </div>
+          </div>
+          </div>
+          </div>
           </>
         ) : (
           <div className="flex items-center justify-center h-full text-gray-400">
