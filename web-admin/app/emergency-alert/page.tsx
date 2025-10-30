@@ -209,6 +209,7 @@ export default function EmergencyAlertPage() {
               {message || 'Your alert message will appear here...'}
             </p>
           </div>
+        </div>
 
         {/* Send Button */}
         <button
