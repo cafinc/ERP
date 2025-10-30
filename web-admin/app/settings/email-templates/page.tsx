@@ -75,15 +75,12 @@ export default function EmailTemplatesPage() {
                         }}
                       >
                         Delete
-                      </button>
-                    </div>
+                      </button></div>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
-        </div>
-      </div>
-    </div>
+        </div></div></div>
   );
 }

@@ -106,13 +106,10 @@ export default function DesignSystemDemo() {
           <div className="w-16 bg-gray-800 flex flex-col items-center py-2 gap-2">
             <div className="w-8 h-8 bg-blue-500 rounded"></div>
             <div className="w-8 h-8 bg-gray-600 rounded"></div>
-            <div className="w-8 h-8 bg-gray-600 rounded"></div>
-          </div>
+            <div className="w-8 h-8 bg-gray-600 rounded"></div></div>
           <div className="flex-1 bg-gray-50 p-2">
             <div className="h-3 bg-gray-300 rounded mb-2 w-3/4"></div>
-            <div className="h-16 bg-white rounded border border-gray-200"></div>
-          </div>
-        </div>
+            <div className="h-16 bg-white rounded border border-gray-200"></div></div></div>
       ),
     },
     {
@@ -125,12 +122,9 @@ export default function DesignSystemDemo() {
             <div className="w-6 h-6 bg-blue-500 rounded"></div>
             <div className="w-16 h-4 bg-gray-600 rounded"></div>
             <div className="w-16 h-4 bg-gray-600 rounded"></div>
-            <div className="w-16 h-4 bg-gray-600 rounded"></div>
-          </div>
+            <div className="w-16 h-4 bg-gray-600 rounded"></div></div>
           <div className="bg-gray-50 p-2 h-20">
-            <div className="h-16 bg-white rounded border border-gray-200"></div>
-          </div>
-        </div>
+            <div className="h-16 bg-white rounded border border-gray-200"></div></div></div>
       ),
     },
     {
@@ -142,18 +136,13 @@ export default function DesignSystemDemo() {
           <div className="w-12 bg-gray-800 flex flex-col items-center py-2 gap-2">
             <div className="w-6 h-6 bg-blue-500 rounded"></div>
             <div className="w-6 h-6 bg-gray-600 rounded"></div>
-            <div className="w-6 h-6 bg-gray-600 rounded"></div>
-          </div>
+            <div className="w-6 h-6 bg-gray-600 rounded"></div></div>
           <div className="flex-1">
             <div className="h-10 bg-gray-700 flex items-center px-2 gap-2">
               <div className="w-12 h-3 bg-gray-500 rounded"></div>
-              <div className="w-12 h-3 bg-gray-500 rounded"></div>
-            </div>
+              <div className="w-12 h-3 bg-gray-500 rounded"></div></div>
             <div className="bg-gray-50 p-2 h-22">
-              <div className="h-14 bg-white rounded border border-gray-200"></div>
-            </div>
-          </div>
-        </div>
+              <div className="h-14 bg-white rounded border border-gray-200"></div></div></div></div>
       ),
     },
     {
@@ -165,12 +154,9 @@ export default function DesignSystemDemo() {
           <div className="h-10 bg-white border-b-2 border-gray-200 flex items-center px-3 gap-2">
             <div className="w-6 h-6 bg-blue-500 rounded"></div>
             <div className="flex-1"></div>
-            <div className="w-6 h-6 bg-gray-300 rounded-full"></div>
-          </div>
+            <div className="w-6 h-6 bg-gray-300 rounded-full"></div></div>
           <div className="bg-gray-50 p-2">
-            <div className="h-16 bg-white rounded border border-gray-200"></div>
-          </div>
-        </div>
+            <div className="h-16 bg-white rounded border border-gray-200"></div></div></div>
       ),
     },
   ];
@@ -233,8 +219,7 @@ export default function DesignSystemDemo() {
             className="mt-2 text-blue-600 hover:text-blue-700 text-sm font-medium"
           >
             ← Back to HR Module
-          </button>
-        </div>
+          </button></div>
 
         {/* Color Palettes Section */}
         <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 mb-6 hover:shadow-md transition-shadow">
@@ -281,12 +266,9 @@ export default function DesignSystemDemo() {
                   <div
                     className="w-8 h-8 rounded-full border-2 border-white shadow"
                     style={{ backgroundColor: palette.accent }}
-                  ></div>
-                </div>
-              </div>
+                  ></div></div></div>
             ))}
-          </div>
-        </div>
+          </div></div>
 
         {/* Navigation Layouts Section */}
         <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 mb-6 hover:shadow-md transition-shadow">
@@ -321,8 +303,7 @@ export default function DesignSystemDemo() {
                 {nav.preview}
               </div>
             ))}
-          </div>
-        </div>
+          </div></div>
 
         {/* Button Styles Section */}
         <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 mb-6 hover:shadow-md transition-shadow">
@@ -345,11 +326,9 @@ export default function DesignSystemDemo() {
                       <span className="text-xs text-gray-500">{button.name}</span>
                     </div>
                   ))}
-                </div>
-              </div>
+                </div></div>
             ))}
-          </div>
-        </div>
+          </div></div>
 
         {/* Apply Button */}
         <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl shadow-lg p-6 text-white">
@@ -363,9 +342,7 @@ export default function DesignSystemDemo() {
             </div>
             <button className="px-6 py-3 bg-white text-blue-600 rounded-lg hover:bg-blue-50 font-semibold shadow-lg">
               Apply Design System
-            </button>
-          </div>
-        </div>
+            </button></div></div>
 
         {/* Note */}
         <div className="mt-6 bg-amber-50 border border-amber-200 rounded-lg p-4">
@@ -373,11 +350,6 @@ export default function DesignSystemDemo() {
             <strong>Note:</strong> This is a preview page. To implement the selected design system across your entire dashboard,
             I'll need to create a theme configuration system and update all components. Let me know which combination you prefer!
           </p>
-        </div>
-      </div>
-      </div>
-    </div>
-    </DashboardLayout>
-    </div>
+        </div></div></div></div></DashboardLayout></div>
   );
 }

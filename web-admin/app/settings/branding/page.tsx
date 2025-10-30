@@ -137,8 +137,7 @@ export default function BrandingSettingsPage() {
                 }}
               >
                 Close Preview
-              </button>
-            </div>
+              </button></div>
             <div style={{
               backgroundColor: headerColor,
               padding: '16px 24px',
@@ -167,9 +166,7 @@ export default function BrandingSettingsPage() {
               </div>
               <div style={{ color: 'white', fontSize: '14px' }}>
                 Preview Header
-              </div>
-            </div>
-          </div>
+              </div></div></div>
         )}
 
         {/* Company Information */}
@@ -194,8 +191,7 @@ export default function BrandingSettingsPage() {
             <div>
               <h2 style={{ fontSize: '18px', fontWeight: '600', color: '#1e293b' }}>Company Information</h2>
               <p style={{ fontSize: '14px', color: '#64748b' }}>Set your company name and logo</p>
-            </div>
-          </div>
+            </div></div>
 
           <div style={{ display: 'grid', gap: '20px' }}>
             <div>
@@ -296,11 +292,7 @@ export default function BrandingSettingsPage() {
                       Remove Logo
                     </button>
                   )}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+                </div></div></div></div></div>
 
         {/* Header Color Customization */}
         <div style={{
@@ -324,8 +316,7 @@ export default function BrandingSettingsPage() {
             <div>
               <h2 style={{ fontSize: '18px', fontWeight: '600', color: '#1e293b' }}>Header Color</h2>
               <p style={{ fontSize: '14px', color: '#64748b' }}>Choose your brand color for the header</p>
-            </div>
-          </div>
+            </div></div>
 
           {/* Preset Colors */}
           <div style={{ marginBottom: '20px' }}>
@@ -364,8 +355,7 @@ export default function BrandingSettingsPage() {
                   </span>
                 </button>
               ))}
-            </div>
-          </div>
+            </div></div>
 
           {/* Custom Color Picker */}
           <div>
@@ -407,9 +397,7 @@ export default function BrandingSettingsPage() {
                   fontFamily: 'monospace'
                 }}
               />
-            </div>
-          </div>
-        </div>
+            </div></div></div>
 
         {/* Actions */}
         <div style={{ display: 'flex', gap: '12px', justifyContent: 'space-between', flexWrap: 'wrap' }}>
@@ -451,8 +439,7 @@ export default function BrandingSettingsPage() {
             >
               <RotateCcw style={{ width: '16px', height: '16px' }} />
               Reset to Default
-            </button>
-          </div>
+            </button></div>
           <button
             onClick={handleSave}
             style={{
@@ -467,9 +454,6 @@ export default function BrandingSettingsPage() {
             }}
           >
             Save Branding
-          </button>
-        </div>
-      </div>
-    </div>
+          </button></div></div></div>
   );
 }

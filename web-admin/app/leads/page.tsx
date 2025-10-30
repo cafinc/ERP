@@ -499,8 +499,7 @@ export default function LeadsPage() {
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto"></div>
             <p className="mt-4 text-gray-600">Loading leads...</p>
-          </div>
-        </div>
+          </div></div>
       );
   }
 
@@ -672,9 +671,7 @@ export default function LeadsPage() {
               >
                 <Eye className="w-4 h-4" />
                 Analytics
-              </button>
-            </div>
-          </div>
+              </button></div></div>
 
           {/* Bulk Actions Bar */}
           {selectedLeads.length > 0 && (
@@ -688,8 +685,7 @@ export default function LeadsPage() {
                   className="text-sm underline hover:text-blue-100 transition-colors"
                 >
                   {selectedLeads.length === filteredLeads.length ? 'Deselect All' : 'Select All'}
-                </button>
-              </div>
+                </button></div>
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => setBulkActionType('status')}
@@ -711,9 +707,7 @@ export default function LeadsPage() {
                   title="Clear selection"
                 >
                   <X className="w-5 h-5" />
-                </button>
-              </div>
-            </div>
+                </button></div></div>
           )}
 
           {/* Search Bar with Advanced Filter */}
@@ -755,8 +749,7 @@ export default function LeadsPage() {
                           className="text-gray-400 hover:text-gray-600 transition-colors"
                         >
                           <XCircle className="w-5 h-5" />
-                        </button>
-                      </div>
+                        </button></div>
                       
                       {/* Status Filter */}
                       <div className="mb-4">
@@ -823,10 +816,7 @@ export default function LeadsPage() {
                           className="flex-1 px-4 py-2.5 text-sm bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-all font-semibold shadow-sm hover:shadow-md"
                         >
                           Apply Filters
-                        </button>
-                      </div>
-                    </div>
-                  </div>
+                        </button></div></div></div>
                 )}
               </div>
 
@@ -837,9 +827,7 @@ export default function LeadsPage() {
               >
                 <RefreshCw className="w-4 h-4" />
                 Refresh
-              </button>
-            </div>
-          </div>
+              </button></div></div>
 
           {/* Grid View */}
           {viewMode === 'grid' && (
@@ -955,8 +943,7 @@ export default function LeadsPage() {
                             Follow-up: {new Date(lead.next_follow_up).toLocaleDateString()}
                           </div>
                         )}
-                      </div>
-                    </div>
+                      </div></div>
 
                     {/* Card Footer */}
                     <div className="p-3 bg-gray-50 border-t border-gray-100">
@@ -975,9 +962,7 @@ export default function LeadsPage() {
                           </option>
                         ))}
                       </select>
-                    </div>
-                    </div>
-                  </div>
+                    </div></div></div>
                 );
               })}
             </div>
@@ -1095,10 +1080,7 @@ export default function LeadsPage() {
                               className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                             >
                               <Trash2 className="w-4 h-4" />
-                            </button>
-                          </div>
-                        </div>
-                      </div>
+                            </button></div></div></div>
                     );
                   })}
                 </div>
@@ -1131,12 +1113,10 @@ export default function LeadsPage() {
                               <span className="text-sm text-gray-600 w-12 text-right">
                                 {count} ({percentage}%)
                               </span>
-                            </div>
-                          </div>
+                            </div></div>
                         );
                       })}
-                    </div>
-                  </div>
+                    </div></div>
 
                   <div>
                     <h3 className="text-sm font-medium text-gray-700 mb-3">Leads by Source</h3>
@@ -1157,18 +1137,12 @@ export default function LeadsPage() {
                               <span className="text-sm text-gray-600 w-12 text-right">
                                 {count} ({percentage}%)
                               </span>
-                            </div>
-                          </div>
+                            </div></div>
                         ) : null;
                       })}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+                    </div></div></div></div></div>
           )}
-        </div>
-      </div>
+        </div></div>
 
       {/* Create/Edit Modal */}
       {showModal && (
@@ -1187,8 +1161,7 @@ export default function LeadsPage() {
                   <p className="text-sm text-gray-600 mt-0.5">
                     {editingLead ? 'Update lead information' : 'Add a new sales lead'}
                   </p>
-                </div>
-              </div>
+                </div></div>
               <button
                 onClick={() => {
                   setShowModal(false);
@@ -1197,8 +1170,7 @@ export default function LeadsPage() {
                 className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
               >
                 <XCircle className="w-5 h-5 text-gray-500" />
-              </button>
-            </div>
+              </button></div>
 
             {/* Modal Body */}
             <form className="p-6 space-y-6 max-h-[calc(90vh-180px)] overflow-y-auto">
@@ -1234,8 +1206,7 @@ export default function LeadsPage() {
                         className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
                         placeholder="ABC Corporation"
                       />
-                    </div>
-                  </div>
+                    </div></div>
 
                   {/* Phone first, then Email */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1253,8 +1224,7 @@ export default function LeadsPage() {
                           placeholder="(555) 123-4567"
                           required
                         />
-                      </div>
-                    </div>
+                      </div></div>
                     
                     <div>
                       <label className="block text-sm font-semibold text-gray-900 mb-2">
@@ -1270,9 +1240,7 @@ export default function LeadsPage() {
                           placeholder="john@example.com"
                           required
                         />
-                      </div>
-                    </div>
-                  </div>
+                      </div></div></div>
 
                   {/* Use AddressInput component */}
                   <div>
@@ -1287,9 +1255,7 @@ export default function LeadsPage() {
                       showCityProvincePostal={false}
                       label=""
                     />
-                  </div>
-                </div>
-              </div>
+                  </div></div></div>
 
               {/* Lead Qualification Card */}
               <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-6 backdrop-blur-sm">
@@ -1345,9 +1311,7 @@ export default function LeadsPage() {
                         className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
                         placeholder="0.00"
                       />
-                    </div>
-                  </div>
-                </div>
+                    </div></div></div>
 
                 <div>
                   <label className="block text-sm font-semibold text-gray-900 mb-2">
@@ -1360,8 +1324,7 @@ export default function LeadsPage() {
                     onChange={(e) => setFormData({ ...formData, next_follow_up: e.target.value })}
                     className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
                   />
-                </div>
-              </div>
+                </div></div>
 
               {/* Services Requested Card */}
               <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-6 backdrop-blur-sm">
@@ -1391,8 +1354,7 @@ export default function LeadsPage() {
                         }`}>
                           {service.label}
                         </p>
-                      </div>
-                    </button>
+                      </div></button>
                   ))}
                 </div>
                 
@@ -1413,8 +1375,7 @@ export default function LeadsPage() {
                           </span>
                         );
                       })}
-                    </div>
-                  </div>
+                    </div></div>
                 )}
               </div>
 
@@ -1462,8 +1423,7 @@ export default function LeadsPage() {
                             <div className="flex-1 min-w-0">
                               <p className="text-sm font-medium text-gray-900 truncate">{file.name}</p>
                               <p className="text-xs text-gray-500">{formatFileSize(file.size)}</p>
-                            </div>
-                          </div>
+                            </div></div>
                           <button
                             type="button"
                             onClick={() => removeFile(index)}
@@ -1471,13 +1431,11 @@ export default function LeadsPage() {
                             title="Remove file"
                           >
                             <X className="w-4 h-4" />
-                          </button>
-                        </div>
+                          </button></div>
                       ))}
                     </div>
                   )}
-                </div>
-              </div>
+                </div></div>
 
               {/* Notes Card */}
               <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-6 backdrop-blur-sm">
@@ -1492,8 +1450,7 @@ export default function LeadsPage() {
                   className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all resize-none"
                   placeholder="Additional notes about this lead..."
                 />
-              </div>
-            </form>
+              </div></form>
 
             {/* Modal Footer */}
             <div className="flex items-center justify-end gap-3 p-6 border-t border-gray-200/50">
@@ -1524,10 +1481,7 @@ export default function LeadsPage() {
                     {editingLead ? 'Update Lead' : 'Create Lead'}
                   </>
                 )}
-              </button>
-            </div>
-          </div>
-        </div>
+              </button></div></div></div>
       )}
 
       {/* Success Modal */}
@@ -1544,9 +1498,7 @@ export default function LeadsPage() {
               <p className="text-gray-600">
                 Lead {editingLead ? 'updated' : 'created'} successfully!
               </p>
-            </div>
-          </div>
-        </div>
+            </div></div></div>
       )}
 
       {/* Error Modal */}
@@ -1568,10 +1520,7 @@ export default function LeadsPage() {
                 className="w-full px-5 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-all shadow-sm hover:shadow-md font-semibold"
               >
                 Close
-              </button>
-            </div>
-          </div>
-        </div>
+              </button></div></div></div>
       )}
 
       {/* Bulk Action Modals */}
@@ -1600,11 +1549,7 @@ export default function LeadsPage() {
                   className="flex-1 px-5 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-all shadow-sm hover:shadow-md font-semibold"
                 >
                   Delete
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+                </button></div></div></div></div>
       )}
 
       {bulkActionType === 'status' && (
@@ -1643,11 +1588,7 @@ export default function LeadsPage() {
                   className="flex-1 px-5 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all shadow-sm hover:shadow-md font-semibold"
                 >
                   Update Status
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+                </button></div></div></div></div>
       )}
 
       {/* Quick View Panel */}
@@ -1667,15 +1608,13 @@ export default function LeadsPage() {
                 <div>
                   <h2 className="text-2xl font-bold">{quickViewLead.name}</h2>
                   <p className="text-blue-100 text-sm">Quick View</p>
-                </div>
-              </div>
+                </div></div>
               <button
                 onClick={() => setShowQuickView(false)}
                 className="p-2 hover:bg-white/20 rounded-lg transition-colors"
               >
                 <X className="w-6 h-6" />
-              </button>
-            </div>
+              </button></div>
 
             {/* Content */}
             <div className="p-6 space-y-6">
@@ -1725,8 +1664,7 @@ export default function LeadsPage() {
                       <span className="text-gray-900">{quickViewLead.address}</span>
                     </div>
                   )}
-                </div>
-              </div>
+                </div></div>
 
               {/* Lead Details */}
               <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6">
@@ -1759,8 +1697,7 @@ export default function LeadsPage() {
                       </p>
                     </div>
                   )}
-                </div>
-              </div>
+                </div></div>
 
               {/* Services Requested */}
               {quickViewLead.services_requested && quickViewLead.services_requested.length > 0 && (
@@ -1783,8 +1720,7 @@ export default function LeadsPage() {
                         </span>
                       );
                     })}
-                  </div>
-                </div>
+                  </div></div>
               )}
 
               {/* Notes */}
@@ -1826,11 +1762,7 @@ export default function LeadsPage() {
                 >
                   <Trash2 className="w-5 h-5" />
                   Delete
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+                </button></div></div></div></div>
       )}
     </>
     );

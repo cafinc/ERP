@@ -177,8 +177,7 @@ export default function PhotoGalleryPage() {
           >
             <Upload className="w-5 h-5" />
             Upload Photos
-          </button>
-        </div>
+          </button></div>
 
         {/* Filters */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
@@ -227,8 +226,7 @@ export default function PhotoGalleryPage() {
                 }`}
               >
                 List
-              </button>
-            </div>
+              </button></div>
 
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -317,9 +315,7 @@ export default function PhotoGalleryPage() {
                           {tag}
                         </span>
                       ))}
-                    </div>
-                  </div>
-                </div>
+                    </div></div></div>
               ))
             )}
           </div>
@@ -364,8 +360,7 @@ export default function PhotoGalleryPage() {
                           className="text-red-600 hover:text-red-800"
                         >
                           <Trash2 className="w-4 h-4" />
-                        </button>
-                      </div>
+                        </button></div>
                     </td>
                   </tr>
                 ))}
@@ -420,10 +415,7 @@ export default function PhotoGalleryPage() {
                     {tag}
                   </span>
                 ))}
-              </div>
-        </div>
-        </div>
-        </div>
+              </div></div></div></div>
       )}
 
       {/* Upload Modal Placeholder */}
@@ -434,8 +426,7 @@ export default function PhotoGalleryPage() {
               <h2 className="text-2xl font-bold text-gray-900">Upload Photos</h2>
               <button onClick={() => setShowUploadModal(false)}>
                 <X className="w-6 h-6 text-gray-600" />
-              </button>
-            </div>
+              </button></div>
             <div className="border-2 border-dashed border-gray-300 rounded-lg p-12 text-center">
               <Upload className="w-12 h-12 mx-auto mb-4 text-gray-400" />
               <p className="text-gray-600 mb-2">Drag and drop photos here</p>
@@ -454,23 +445,8 @@ export default function PhotoGalleryPage() {
                 className="mt-4 px-4 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {uploading ? 'Uploading...' : 'Select Files'}
-              </button>
-            </div>
-          </div>
-        </div>
+              </button></div></div></div>
       )}
-      </div>
-      </div>
-      </div>
-      </div>
-      </div>
-      </div>
-      </div>
-      </div>
-      </div>
-      </div>
-      </div>
-      </div>
-      </div>
+      </div></div></div></div></div></div></div></div></div></div></div></div></div>
     );
 }

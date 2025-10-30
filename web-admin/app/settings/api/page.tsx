@@ -53,8 +53,7 @@ export default function ApiSettingsPage() {
             }}
           >
             View Docs
-          </button>
-        </div>
+          </button></div>
 
         {/* API Keys List */}
         <div style={{
@@ -86,8 +85,7 @@ export default function ApiSettingsPage() {
                 </div>
                 <div style={{ fontSize: '13px', color: '#94a3b8' }}>
                   Created: {apiKey.created} • Last used: {apiKey.lastUsed}
-                </div>
-              </div>
+                </div></div>
               <div style={{ display: 'flex', gap: '8px' }}>
                 <button
                   style={{
@@ -116,12 +114,8 @@ export default function ApiSettingsPage() {
                   }}
                 >
                   Revoke
-                </button>
-              </div>
-            </div>
+                </button></div></div>
           ))}
-        </div>
-      </div>
-    </div>
+        </div></div></div>
   );
 }

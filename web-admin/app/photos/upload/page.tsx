@@ -95,8 +95,7 @@ export default function PhotoUploadPage() {
           <div>
             <h1 className="text-3xl font-bold text-gray-900">Upload Photos</h1>
             <p className="text-gray-600 mt-1">Document your work with photos</p>
-          </div>
-        </div>
+          </div></div>
 
         {/* Upload Area */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
@@ -140,8 +139,7 @@ export default function PhotoUploadPage() {
                   <p className="text-xs text-gray-600 mt-1 truncate">{file.name}</p>
                 </div>
               ))}
-            </div>
-          </div>
+            </div></div>
         )}
 
         {/* Metadata */}
@@ -174,8 +172,7 @@ export default function PhotoUploadPage() {
               rows={3}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
             />
-          </div>
-        </div>
+          </div></div>
 
         {/* Upload Button */}
         <button
@@ -207,11 +204,7 @@ export default function PhotoUploadPage() {
               <CheckCircle className="w-16 h-16 text-green-600 mx-auto mb-4" />
               <h2 className="text-2xl font-bold text-gray-900 mb-2">Photos Uploaded!</h2>
               <p className="text-gray-600">{files.length} photo{files.length !== 1 ? 's' : ''} uploaded successfully</p>
-            </div>
-          </div>
+            </div></div>
         )}
-      </div>
-    </div>
-  
-    </div>);
+      </div></div></div>);
 }

@@ -165,8 +165,7 @@ export default function LearningDocumentsPage() {
           >
             <Plus className="w-5 h-5" />
             Add Document
-          </button>
-        </div>
+          </button></div>
 
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -178,9 +177,7 @@ export default function LearningDocumentsPage() {
               <div>
                 <p className="text-2xl font-bold text-gray-900">{documents.length}</p>
                 <p className="text-sm text-gray-600">Total Documents</p>
-              </div>
-            </div>
-          </div>
+              </div></div></div>
 
           {categories.slice(0, 3).map((category) => {
             const count = documents.filter(d => d.category === category).length;
@@ -193,9 +190,7 @@ export default function LearningDocumentsPage() {
                   <div>
                     <p className="text-2xl font-bold text-gray-900">{count}</p>
                     <p className="text-sm text-gray-600 capitalize">{category}</p>
-                  </div>
-                </div>
-              </div>
+                  </div></div></div>
             );
           })}
         </div>
@@ -223,8 +218,7 @@ export default function LearningDocumentsPage() {
                 <option key={cat} value={cat}>{cat.charAt(0).toUpperCase() + cat.slice(1)}</option>
               ))}
             </select>
-          </div>
-        </div>
+          </div></div>
 
         {/* Documents Grid */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
@@ -273,9 +267,7 @@ export default function LearningDocumentsPage() {
                         className="p-1 text-red-600 hover:bg-red-50 rounded"
                       >
                         <Trash2 className="w-4 h-4" />
-                      </button>
-                    </div>
-                  </div>
+                      </button></div></div>
 
                   <h3 className="font-semibold text-gray-900 mb-2">{doc.title}</h3>
                   {doc.description && (
@@ -293,8 +285,7 @@ export default function LearningDocumentsPage() {
                         Download
                       </button>
                     )}
-                  </div>
-                </div>
+                  </div></div>
               ))}
             </div>
           )}
@@ -311,9 +302,7 @@ export default function LearningDocumentsPage() {
                 className="w-full bg-[#3f72af] text-white py-2 rounded-lg hover:bg-[#2c5282]"
               >
                 Close
-              </button>
-            </div>
-          </div>
+              </button></div></div>
         )}
 
         {/* Edit Document Modal */}
@@ -373,11 +362,7 @@ export default function LearningDocumentsPage() {
                     className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 font-medium transition-colors"
                   >
                     Cancel
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+                  </button></div></div></div></div>
         )}
       </div>
   );

@@ -151,8 +151,7 @@ export default function HomePage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="text-xl text-gray-600">Loading dashboard...</div>
-      </div>
+        <div className="text-xl text-gray-600">Loading dashboard...</div></div>
     );
   }
 
@@ -181,8 +180,7 @@ export default function HomePage() {
                 </div>
                 <div className={`${stat.color} p-4 rounded-xl`}>
                   <stat.icon className="w-6 h-6 text-white" />
-                </div>
-              </div>
+                </div></div>
             </a>
           ))}
         </div>
@@ -201,8 +199,7 @@ export default function HomePage() {
                 <span className="font-medium text-gray-900">{action.label}</span>
               </a>
             ))}
-          </div>
-        </div>
+          </div></div>
 
         {/* Recent Activity */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -222,12 +219,9 @@ export default function HomePage() {
                     <div className="flex-1">
                       <p className="font-medium text-gray-900">{activity.message}</p>
                       <p className="text-sm text-gray-500">{activity.time}</p>
-                    </div>
-                  </div>
+                    </div></div>
                 ))}
-              </div>
-            </div>
-          </div>
+              </div></div></div>
 
           {/* Platform Health */}
           <div>
@@ -263,11 +257,6 @@ export default function HomePage() {
                     <span className="font-medium text-gray-900">Automation Success</span>
                   </div>
                   <span className="text-gray-600 font-medium">98.2%</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+                </div></div></div></div></div></div>
   );
 }

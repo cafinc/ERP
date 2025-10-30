@@ -43,8 +43,7 @@ export default function ServiceAreasPage() {
                     <div>
                       <p className="font-semibold text-gray-900">{area.name}</p>
                       <p className="text-sm text-gray-600">Radius: {area.radius} km</p>
-                    </div>
-                  </div>
+                    </div></div>
                   <div className="flex items-center gap-3">
                     <label className="relative inline-flex items-center cursor-pointer">
                       <input type="checkbox" checked={area.active} className="sr-only peer" />
@@ -52,14 +51,9 @@ export default function ServiceAreasPage() {
                     </label>
                     <button className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-all">
                       <Trash2 className="w-5 h-5" />
-                    </button>
-                  </div>
-                </div>
+                    </button></div></div>
               ))}
-            </div>
-          </div>
-        </div>
-      </div>
+            </div></div></div></div>
     </PageHeader>
   );
 }

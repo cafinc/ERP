@@ -177,10 +177,7 @@ export default function FeedbackDetailPage() {
             <div className="text-center">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#3f72af] mx-auto mb-4"></div>
               <p className="text-gray-600">Loading feedback...</p>
-            </div>
-          </div>
-        </div>
-      </div>
+            </div></div></div></div>
     );
   }
 
@@ -202,11 +199,7 @@ export default function FeedbackDetailPage() {
                 className="mt-4 px-6 py-2 bg-[#3f72af] hover:bg-[#2c5282] text-white rounded-lg font-medium transition-colors"
               >
                 Back to Communication Center
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+              </button></div></div></div></div>
     );
   }
 
@@ -230,8 +223,7 @@ export default function FeedbackDetailPage() {
             <div className="flex-1">
               <h1 className="text-3xl font-bold text-gray-900">Feedback Details</h1>
               <p className="text-gray-600 mt-1">Review and respond to feedback</p>
-            </div>
-          </div>
+            </div></div>
 
           {/* Message Info Card */}
           <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-4 mb-4 hover:shadow-md transition-shadow">
@@ -251,9 +243,7 @@ export default function FeedbackDetailPage() {
                       <Calendar className="w-4 h-4" />
                       <span>{new Date(message.created_at).toLocaleString()}</span>
                     </span>
-                  </div>
-                </div>
-              </div>
+                  </div></div></div>
               <span className={`px-4 py-2 rounded-full text-sm font-bold ${getStatusColor(message.status)}`}>
                 {message.status.replace('_', ' ').toUpperCase()}
               </span>
@@ -262,8 +252,7 @@ export default function FeedbackDetailPage() {
             <div className="mt-4 p-4 bg-gray-50 rounded-lg">
               <h3 className="font-semibold text-gray-900 mb-2">Message Content:</h3>
               <p className="text-gray-700 whitespace-pre-wrap">{message.content}</p>
-            </div>
-          </div>
+            </div></div>
 
           {/* Admin Response Section */}
           {isAdmin && (
@@ -336,9 +325,7 @@ export default function FeedbackDetailPage() {
                 >
                   <Save className="w-5 h-5" />
                   <span>{submitting ? 'Saving...' : 'Save Response'}</span>
-                </button>
-              </div>
-            </div>
+                </button></div></div>
           )}
 
           {/* Crew Acknowledgment Section */}
@@ -366,9 +353,7 @@ export default function FeedbackDetailPage() {
                 >
                   <CheckCircle className="w-5 h-5" />
                   <span>{submitting ? 'Submitting...' : 'Acknowledge Task'}</span>
-                </button>
-              </div>
-            </div>
+                </button></div></div>
           )}
 
           {/* Timeline */}
@@ -381,16 +366,14 @@ export default function FeedbackDetailPage() {
                   <div>
                     <p className="font-medium text-gray-900">Created</p>
                     <p className="text-sm text-gray-600">{new Date(message.created_at).toLocaleString()}</p>
-                  </div>
-                </div>
+                  </div></div>
                 {message.admin_responded_at && (
                   <div className="flex items-start space-x-3">
                     <CheckCircle className="w-5 h-5 text-[#3f72af] mt-1" />
                     <div>
                       <p className="font-medium text-gray-900">Admin Responded</p>
                       <p className="text-sm text-gray-600">{new Date(message.admin_responded_at).toLocaleString()}</p>
-                    </div>
-                  </div>
+                    </div></div>
                 )}
                 {message.resolved_at && (
                   <div className="flex items-start space-x-3">
@@ -398,14 +381,10 @@ export default function FeedbackDetailPage() {
                     <div>
                       <p className="font-medium text-gray-900">Resolved</p>
                       <p className="text-sm text-gray-600">{new Date(message.resolved_at).toLocaleString()}</p>
-                    </div>
-                  </div>
+                    </div></div>
                 )}
-              </div>
-            </div>
+              </div></div>
           )}
-        </div>
-      </div>
-    </div>
+        </div></div></div>
   );
 }

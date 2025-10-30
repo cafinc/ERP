@@ -201,9 +201,7 @@ export default function InventoryPage() {
               </div>
               <div className="bg-blue-100 p-4 rounded-xl">
                 <BarChart3 className="w-6 h-6 text-[#3f72af]" />
-              </div>
-            </div>
-          </div>
+              </div></div></div>
 
           <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
@@ -216,9 +214,7 @@ export default function InventoryPage() {
               </div>
               <div className="bg-green-100 p-4 rounded-xl">
                 <CheckCircle className="w-6 h-6 text-green-600" />
-              </div>
-            </div>
-          </div>
+              </div></div></div>
 
           <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
@@ -229,9 +225,7 @@ export default function InventoryPage() {
               </div>
               <div className="bg-yellow-100 p-4 rounded-xl">
                 <AlertTriangle className="w-6 h-6 text-yellow-600" />
-              </div>
-            </div>
-          </div>
+              </div></div></div>
 
           <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
@@ -242,10 +236,7 @@ export default function InventoryPage() {
               </div>
               <div className="bg-red-100 p-4 rounded-xl">
                 <TrendingDown className="w-6 h-6 text-red-600" />
-              </div>
-            </div>
-          </div>
-        </div>
+              </div></div></div></div>
 
         {/* Filters */}
         <div className="px-6 py-4 bg-white rounded-xl shadow-lg border border-gray-200 mt-6 mx-6">
@@ -293,9 +284,7 @@ export default function InventoryPage() {
             >
               <RefreshCw className="w-4 h-4" />
               Refresh
-            </button>
-          </div>
-        </div>
+            </button></div></div>
 
         {/* Inventory Table */}
         <div className="mx-6 mt-6">
@@ -350,8 +339,7 @@ export default function InventoryPage() {
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm">
                           <div className="font-medium text-gray-900">{item.quantity} {item.unit}</div>
-                          <div className="text-gray-500">Min: {item.min_quantity}</div>
-                        </div>
+                          <div className="text-gray-500">Min: {item.min_quantity}</div></div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <span className={`px-3 py-1 rounded-full text-xs font-medium border flex items-center gap-1 w-fit ${getStatusBadge(item.status)}`}>
@@ -375,8 +363,7 @@ export default function InventoryPage() {
                           <div className="font-medium text-gray-900">
                             ${(item.quantity * item.cost_per_unit).toLocaleString()}
                           </div>
-                          <div className="text-gray-500">${item.cost_per_unit}/unit</div>
-                        </div>
+                          <div className="text-gray-500">${item.cost_per_unit}/unit</div></div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm">
                         <div className="flex items-center gap-2">
@@ -393,8 +380,7 @@ export default function InventoryPage() {
                             title="Delete"
                           >
                             <Trash2 className="w-4 h-4" />
-                          </button>
-                        </div>
+                          </button></div>
                       </td>
                     </tr>
                   ))}
@@ -408,8 +394,7 @@ export default function InventoryPage() {
                 <p className="text-gray-600">No inventory items found</p>
               </div>
             )}
-          </div>
-        </div>
+          </div></div>
 
         {/* Low Stock Alert */}
         {lowStockCount > 0 && (
@@ -434,9 +419,7 @@ export default function InventoryPage() {
                     ))}
                   {lowStockCount > 3 && <li>and {lowStockCount - 3} more...</li>}
                 </ul>
-              </div>
-            </div>
-          </div>
+              </div></div></div>
         )}
       </div>
     );

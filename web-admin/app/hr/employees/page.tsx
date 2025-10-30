@@ -289,8 +289,7 @@ export default function EmployeesPage() {
             <p className="text-3xl font-bold text-[#3f72af]">
               {new Set(employees.map((e: any) => e.department)).size}
             </p>
-          </div>
-        </div>
+          </div></div>
 
         {/* Employee List */}
         <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
@@ -304,8 +303,7 @@ export default function EmployeesPage() {
                 className="text-blue-500 hover:text-[#3f72af]"
               >
                 Add your first employee
-              </button>
-            </div>
+              </button></div>
           ) : (
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-gray-200">
@@ -339,8 +337,7 @@ export default function EmployeesPage() {
                           <div className="flex-shrink-0 h-10 w-10">
                             <div className="h-10 w-10 rounded-full bg-[#5b8ec4] flex items-center justify-center text-white font-semibold">
                               {employee.first_name?.[0]}{employee.last_name?.[0]}
-                            </div>
-                          </div>
+                            </div></div>
                           <div className="ml-4">
                             <div className="text-sm font-medium text-gray-900">
                               {employee.first_name} {employee.last_name}
@@ -348,9 +345,7 @@ export default function EmployeesPage() {
                             <div className="text-sm text-gray-500 flex items-center gap-2">
                               <Mail className="h-3 w-3" />
                               {employee.email}
-                            </div>
-                          </div>
-                        </div>
+                            </div></div></div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm text-gray-900">{employee.job_title}</div>
@@ -388,8 +383,7 @@ export default function EmployeesPage() {
               </table>
             </div>
           )}
-        </div>
-      </div>
+        </div></div>
 
       {/* Add/Edit Modal */}
       {showModal && (
@@ -408,8 +402,7 @@ export default function EmployeesPage() {
                   <p className="text-sm text-gray-600 mt-0.5">
                     {editingEmployee ? "Update employee information" : "Add a new team member"}
                   </p>
-                </div>
-              </div>
+                </div></div>
               <button
                 onClick={() => {
                   setShowModal(false);
@@ -418,8 +411,7 @@ export default function EmployeesPage() {
                 className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
               >
                 <X className="w-5 h-5 text-gray-500" />
-              </button>
-            </div>
+              </button></div>
 
             {/* Modal Body */}
             <form id="employeeForm" onSubmit={handleSubmit} className="p-6 space-y-6 max-h-[calc(90vh-180px)] overflow-y-auto">
@@ -473,8 +465,7 @@ export default function EmployeesPage() {
                         className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
                         placeholder="(555) 123-4567"
                       />
-                    </div>
-                  </div>
+                    </div></div>
 
                   <div>
                     <label className="block text-sm font-semibold text-gray-900 mb-2">
@@ -490,10 +481,7 @@ export default function EmployeesPage() {
                         className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
                         placeholder="john@example.com"
                       />
-                    </div>
-                  </div>
-                </div>
-              </div>
+                    </div></div></div></div>
 
               {/* Employment Information Card */}
               <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-6 backdrop-blur-sm">
@@ -587,9 +575,7 @@ export default function EmployeesPage() {
                       className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
                       placeholder="50000.00"
                     />
-                  </div>
-                </div>
-              </div>
+                  </div></div></div>
 
               {/* Emergency Contact Card */}
               <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-6 backdrop-blur-sm">
@@ -621,8 +607,7 @@ export default function EmployeesPage() {
                         className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
                         placeholder="(555) 123-4567"
                       />
-                    </div>
-                  </div>
+                    </div></div>
 
                   <div>
                     <label className="block text-sm font-semibold text-gray-900 mb-2">Relationship</label>
@@ -633,9 +618,7 @@ export default function EmployeesPage() {
                       className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all"
                       placeholder="Spouse"
                     />
-                  </div>
-                </div>
-              </div>
+                  </div></div></div>
 
               {/* Document Upload Card */}
               <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-6 backdrop-blur-sm">
@@ -681,8 +664,7 @@ export default function EmployeesPage() {
                             <div className="flex-1 min-w-0">
                               <p className="text-sm font-medium text-gray-900 truncate">{file.name}</p>
                               <p className="text-xs text-gray-500">{formatFileSize(file.size)}</p>
-                            </div>
-                          </div>
+                            </div></div>
                           <button
                             type="button"
                             onClick={() => removeFile(index)}
@@ -690,14 +672,11 @@ export default function EmployeesPage() {
                             title="Remove file"
                           >
                             <X className="w-4 h-4" />
-                          </button>
-                        </div>
+                          </button></div>
                       ))}
                     </div>
                   )}
-                </div>
-              </div>
-            </form>
+                </div></div></form>
 
             {/* Modal Footer */}
             <div className="flex items-center justify-end gap-3 p-6 border-t border-gray-200/50">
@@ -718,10 +697,7 @@ export default function EmployeesPage() {
               >
                 <CheckCircle className="w-4 h-4" />
                 {editingEmployee ? "Update Employee" : "Add Employee"}
-              </button>
-            </div>
-          </div>
-        </div>
+              </button></div></div></div>
       )}
     </div>
   );

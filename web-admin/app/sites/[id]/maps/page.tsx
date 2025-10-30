@@ -417,8 +417,7 @@ export default function UnifiedSiteMapsBuilder() {
               <strong>${distanceFeet.toFixed(2)}</strong> feet<br/>
               <strong>${distanceMeters.toFixed(2)}</strong> meters<br/>
               <strong>${distanceMiles.toFixed(3)}</strong> miles
-            </div>
-          </div>
+            </div></div>
         `,
       });
       infoWindow.open(mapRef.current);
@@ -475,8 +474,7 @@ export default function UnifiedSiteMapsBuilder() {
               ${areaAcres.toFixed(4)} acres<br/>
               <strong>Perimeter:</strong><br/>
               ${perimeterFeet.toFixed(2)} feet
-            </div>
-          </div>
+            </div></div>
         `,
       });
       infoWindow.open(mapRef.current);
@@ -826,9 +824,7 @@ export default function UnifiedSiteMapsBuilder() {
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
             <p className="mt-4 text-gray-600">Loading site data...</p>
-          </div>
-        </div>
-      </div>
+          </div></div></div>
     );
   }
 
@@ -997,9 +993,7 @@ export default function UnifiedSiteMapsBuilder() {
                   >
                     <Circle className="w-4 h-4" />
                     <span className="text-xs">Circle</span>
-                  </button>
-                </div>
-              </div>
+                  </button></div></div>
 
               {/* Color Picker */}
               <div>
@@ -1015,9 +1009,7 @@ export default function UnifiedSiteMapsBuilder() {
                       style={{ backgroundColor: color }}
                     />
                   ))}
-                </div>
-              </div>
-            </div>
+                </div></div></div>
 
             {/* Measure Section */}
             <div className="space-y-3">
@@ -1046,8 +1038,7 @@ export default function UnifiedSiteMapsBuilder() {
               >
                 <Square className="w-4 h-4" />
                 <span className="text-sm">Measure Area</span>
-              </button>
-            </div>
+              </button></div>
 
             {/* Actions */}
             <div className="space-y-2 pt-4 border-t border-gray-200">
@@ -1071,8 +1062,7 @@ export default function UnifiedSiteMapsBuilder() {
               >
                 <Trash2 className="w-4 h-4" />
                 Clear All
-              </button>
-            </div>
+              </button></div>
 
             {/* Map Legend */}
             <div className="p-3 bg-gray-50 rounded-lg">
@@ -1080,8 +1070,7 @@ export default function UnifiedSiteMapsBuilder() {
                 <span className="text-xs font-medium text-gray-700">Map Legend</span>
                 <button onClick={() => setShowLegend(!showLegend)}>
                   {showLegend ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
-                </button>
-              </div>
+                </button></div>
               {showLegend && (
                 <div className="space-y-3 max-h-60 overflow-y-auto">
                   {/* Geofence */}
@@ -1090,8 +1079,7 @@ export default function UnifiedSiteMapsBuilder() {
                       <div className="flex items-center gap-2">
                         <div className="w-4 h-4 bg-purple-500 rounded border border-purple-700"></div>
                         <span className="text-xs font-semibold text-gray-800">Geofence Boundary</span>
-                      </div>
-                    </div>
+                      </div></div>
                   )}
                   
                   {/* Measurements */}
@@ -1146,9 +1134,7 @@ export default function UnifiedSiteMapsBuilder() {
                   )}
                 </div>
               )}
-            </div>
-          </div>
-        </div>
+            </div></div></div>
 
         {/* Map Container */}
         <div className="flex-1 relative">
@@ -1167,11 +1153,8 @@ export default function UnifiedSiteMapsBuilder() {
                 <p className="mt-4 text-gray-600">
                   {loading ? 'Loading site data...' : 'Initializing map...'}
                 </p>
-              </div>
-            </div>
+              </div></div>
           )}
-        </div>
-      </div>
-    </div>
+        </div></div></div>
   );
 }

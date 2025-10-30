@@ -95,9 +95,7 @@ export default function PreferencesPage() {
                 <option value="12h">12-hour (AM/PM)</option>
                 <option value="24h">24-hour</option>
               </select>
-            </div>
-          </div>
-        </div>
+            </div></div></div>
 
         {/* Language & Region */}
         <div style={{
@@ -152,9 +150,7 @@ export default function PreferencesPage() {
                 <option value="GBP">GBP (£)</option>
                 <option value="CAD">CAD ($)</option>
               </select>
-            </div>
-          </div>
-        </div>
+            </div></div></div>
 
         {/* Save Button */}
         <div>
@@ -171,9 +167,6 @@ export default function PreferencesPage() {
             }}
           >
             Save Preferences
-          </button>
-        </div>
-      </div>
-    </div>
+          </button></div></div></div>
   );
 }

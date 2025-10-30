@@ -180,9 +180,7 @@ export default function WorkflowHistoryPage() {
                 onChange={(e) => setDateRange({ ...dateRange, end: e.target.value })}
                 className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
               />
-            </div>
-          </div>
-        </div>
+            </div></div></div>
 
         {/* Execution Timeline */}
         <div className="mx-6 mt-6">
@@ -249,12 +247,7 @@ export default function WorkflowHistoryPage() {
                             <div className="flex items-center gap-1">
                               <Activity className="w-4 h-4" />
                               <span>{execution.steps.length} steps</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                            </div></div></div></div></div></div>
 
                   {/* Expanded Details */}
                   {expandedExecution === execution.id && (
@@ -308,10 +301,7 @@ export default function WorkflowHistoryPage() {
                                       </pre>
                                     </div>
                                   )}
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                                </div></div></div></div>
                         ))}
                       </div>
 
@@ -323,9 +313,7 @@ export default function WorkflowHistoryPage() {
                             <div>
                               <p className="font-semibold text-red-900 mb-1">Execution Failed</p>
                               <p className="text-sm text-red-700">{execution.error}</p>
-                            </div>
-                          </div>
-                        </div>
+                            </div></div></div>
                       )}
 
                       {execution.result && execution.status === 'success' && (
@@ -337,9 +325,7 @@ export default function WorkflowHistoryPage() {
                               <pre className="text-xs text-green-700 overflow-x-auto">
                                 {JSON.stringify(execution.result, null, 2)}
                               </pre>
-                            </div>
-                          </div>
-                        </div>
+                            </div></div></div>
                       )}
                     </div>
                   )}
@@ -347,8 +333,7 @@ export default function WorkflowHistoryPage() {
               ))}
             </div>
           )}
-        </div>
-      </div>
+        </div></div>
     </PageHeader>
   );
 }

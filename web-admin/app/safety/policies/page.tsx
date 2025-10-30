@@ -160,9 +160,7 @@ export default function SafetyPoliciesPage() {
               }`}
             >
               Equipment ({policies.filter(p => p.category === 'Equipment').length})
-            </button>
-          </div>
-        </div>
+            </button></div></div>
 
         {/* Search Bar */}
         <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-3 mb-4 mx-6 mt-6 hover:shadow-md transition-shadow">
@@ -176,9 +174,7 @@ export default function SafetyPoliciesPage() {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
               />
-            </div>
-          </div>
-        </div>
+            </div></div></div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mx-6">
           {filteredPolicies.map((policy, index) => {
@@ -199,9 +195,7 @@ export default function SafetyPoliciesPage() {
                     <div className="flex-1 min-w-0">
                       <h3 className="font-semibold text-gray-900 truncate">{policy.policy_number}</h3>
                       <p className="text-sm text-gray-600 truncate">{policy.title}</p>
-                    </div>
-                  </div>
-                </div>
+                    </div></div></div>
 
               <div className="flex items-center gap-2 mb-4">
                 <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${getCategoryColor(policy.category)}`}>
@@ -224,8 +218,7 @@ export default function SafetyPoliciesPage() {
                 <div className="flex items-center gap-2 text-sm text-gray-600">
                   <CheckCircle className="w-4 h-4" />
                   <span>Approved by: {policy.approved_by}</span>
-                </div>
-              </div>
+                </div></div>
 
               <div className="flex items-center space-x-2 pt-4 border-t border-gray-200">
                 <button
@@ -246,13 +239,10 @@ export default function SafetyPoliciesPage() {
                   className="px-4 py-2 border border-gray-300 hover:bg-gray-50 text-gray-700 rounded-lg transition-colors text-sm"
                 >
                   <Download className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
+                </button></div></div>
             );
           })}
-        </div>
-      </div>
+        </div></div>
     </PageHeader>
   );
 }

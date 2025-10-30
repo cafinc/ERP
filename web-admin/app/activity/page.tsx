@@ -116,8 +116,7 @@ export default function ActivityPage() {
                 <p className="text-2xl font-bold text-gray-900">{activities.length}</p>
               </div>
               <Activity className="w-8 h-8 text-gray-400" />
-            </div>
-          </div>
+            </div></div>
           
           <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
             <div className="flex items-center justify-between">
@@ -128,8 +127,7 @@ export default function ActivityPage() {
                 </p>
               </div>
               <DollarSign className="w-8 h-8 text-green-400" />
-            </div>
-          </div>
+            </div></div>
           
           <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
             <div className="flex items-center justify-between">
@@ -140,8 +138,7 @@ export default function ActivityPage() {
                 </p>
               </div>
               <FileText className="w-8 h-8 text-blue-400" />
-            </div>
-          </div>
+            </div></div>
           
           <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
             <div className="flex items-center justify-between">
@@ -152,9 +149,7 @@ export default function ActivityPage() {
                 </p>
               </div>
               <Users className="w-8 h-8 text-purple-400" />
-            </div>
-          </div>
-        </div>
+            </div></div></div>
 
         {/* Filter Tabs */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 mb-6">
@@ -172,8 +167,7 @@ export default function ActivityPage() {
                 {type.charAt(0).toUpperCase() + type.slice(1)}
               </button>
             ))}
-          </div>
-        </div>
+          </div></div>
 
         {/* Activity Timeline */}
         <div className="space-y-4">
@@ -234,15 +228,9 @@ export default function ActivityPage() {
                         }`}>
                           {activity.type.toUpperCase()}
                         </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                      </div></div></div></div></div>
             ))
           )}
-        </div>
-      </div>
-    </div>
+        </div></div></div>
   );
 }

@@ -176,9 +176,7 @@ export default function InspectionsDashboardPage() {
               }`}
             >
               Non-Compliant ({nonCompliantEquipment.length})
-            </button>
-          </div>
-        </div>
+            </button></div></div>
 
         {/* Search Bar */}
         <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-3 mb-4 mx-6 mt-6 hover:shadow-md transition-shadow">
@@ -199,9 +197,7 @@ export default function InspectionsDashboardPage() {
             >
               <RefreshCw className="w-4 h-4" />
               <span>Refresh</span>
-            </button>
-          </div>
-        </div>
+            </button></div></div>
 
         {/* Inspections Grid */}
         {filteredInspections.length === 0 ? (
@@ -244,9 +240,7 @@ export default function InspectionsDashboardPage() {
                     <div className="flex-1 min-w-0">
                       <h3 className="font-semibold text-gray-900 truncate">{item.equipment_name}</h3>
                       <p className="text-sm text-gray-600 truncate">{item.inspection_type}</p>
-                    </div>
-                  </div>
-                </div>
+                    </div></div></div>
 
                 {/* Status Badge */}
                 <div className="mb-4">
@@ -295,9 +289,7 @@ export default function InspectionsDashboardPage() {
                   >
                     <Edit className="w-4 h-4" />
                     <span>Edit</span>
-                  </button>
-                </div>
-              </div>
+                  </button></div></div>
             ))}
           </div>
         )}

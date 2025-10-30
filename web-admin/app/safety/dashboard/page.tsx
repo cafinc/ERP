@@ -50,8 +50,7 @@ export default function SafetyDashboardPage() {
               <div>
                 <p className="text-2xl font-bold text-gray-900">{stats.incidents.total}</p>
                 <p className="text-sm text-gray-600">Total Incidents</p>
-              </div>
-            </div>
+              </div></div>
             <div className="space-y-1">
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600">This Month:</span>
@@ -60,9 +59,7 @@ export default function SafetyDashboardPage() {
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600">Resolved:</span>
                 <span className="font-semibold text-green-600">{stats.incidents.resolved}</span>
-              </div>
-            </div>
-          </div>
+              </div></div></div>
 
           {/* Inspections */}
           <div 
@@ -76,8 +73,7 @@ export default function SafetyDashboardPage() {
               <div>
                 <p className="text-2xl font-bold text-gray-900">{stats.inspections.completed}</p>
                 <p className="text-sm text-gray-600">Inspections Done</p>
-              </div>
-            </div>
+              </div></div>
             <div className="space-y-1">
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600">Pending:</span>
@@ -86,9 +82,7 @@ export default function SafetyDashboardPage() {
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600">Overdue:</span>
                 <span className="font-semibold text-red-600">{stats.inspections.overdue}</span>
-              </div>
-            </div>
-          </div>
+              </div></div></div>
 
           {/* Training */}
           <div 
@@ -102,8 +96,7 @@ export default function SafetyDashboardPage() {
               <div>
                 <p className="text-2xl font-bold text-gray-900">{stats.training.certified}</p>
                 <p className="text-sm text-gray-600">Certified Staff</p>
-              </div>
-            </div>
+              </div></div>
             <div className="space-y-1">
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600">Expiring Soon:</span>
@@ -112,9 +105,7 @@ export default function SafetyDashboardPage() {
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600">Expired:</span>
                 <span className="font-semibold text-red-600">{stats.training.expired}</span>
-              </div>
-            </div>
-          </div>
+              </div></div></div>
 
           {/* Safety Meetings */}
           <div 
@@ -128,16 +119,12 @@ export default function SafetyDashboardPage() {
               <div>
                 <p className="text-2xl font-bold text-gray-900">{stats.meetings.thisMonth}</p>
                 <p className="text-sm text-gray-600">Meetings This Month</p>
-              </div>
-            </div>
+              </div></div>
             <div className="space-y-1">
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600">Avg Attendance:</span>
                 <span className="font-semibold text-green-600">{stats.meetings.attendance}%</span>
-              </div>
-            </div>
-          </div>
-        </div>
+              </div></div></div></div>
 
         {/* Quick Links */}
         <div className="mx-6 mt-6">
@@ -177,10 +164,6 @@ export default function SafetyDashboardPage() {
               <AlertTriangle className="w-8 h-8 text-red-600 mb-2" />
               <h3 className="font-semibold text-gray-900">Emergency Plans</h3>
               <p className="text-sm text-gray-600 mt-1">Emergency response procedures</p>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+            </button></div></div></div></div>
   );
 }

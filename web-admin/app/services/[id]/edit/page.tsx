@@ -128,11 +128,7 @@ export default function ServiceFormPage() {
       <div className="flex-1 overflow-auto p-6">
         <div className="flex items-center justify-center h-64">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
-        </div>
-    
-      </div>
-    </div>
-    </div>
+        </div></div></div></div>
     );
   }
 
@@ -154,8 +150,7 @@ export default function ServiceFormPage() {
             <p className="text-gray-600 mt-1">
               {isEdit ? 'Update service details' : 'Create a new service offering'}
             </p>
-          </div>
-        </div>
+          </div></div>
 
         {/* Service Details */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
@@ -233,8 +228,7 @@ export default function ServiceFormPage() {
             >
               <Plus className="w-4 h-4" />
               Add Pricing Tier
-            </button>
-          </div>
+            </button></div>
           
           <div className="space-y-3">
             {pricingEntries.map((entry, index) => (
@@ -302,11 +296,6 @@ export default function ServiceFormPage() {
                 {isEdit ? 'Update Service' : 'Create Service'}
               </>
             )}
-          </button>
-        </div>
-      </div>
-      </form>
-      </div>
-    </div>
+          </button></div></div></form></div></div>
   );
 }

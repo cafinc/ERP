@@ -146,9 +146,7 @@ export default function EditTemplatePage() {
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Templates", href: "/templates" }, { label: "[Type]", href: "/templates/[type]" }, { label: "[Id]", href: "/templates/[type]/[id]" }, { label: "Edit" }]}
       />
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-      </div>
-    </div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div></div></div>
     );
   }
 
@@ -244,8 +242,7 @@ export default function EditTemplatePage() {
               >
                 <SparklesIcon className="w-4 h-4" />
                 Browse Placeholders
-              </button>
-            </div>
+              </button></div>
             <p className="text-xs text-gray-500 mb-2">
               Use {`{{variable_name}}`} for placeholders. Click "Browse Placeholders" to see 70+ system variables.
             </p>
@@ -299,17 +296,7 @@ export default function EditTemplatePage() {
                   Save Changes
                 </>
               )}
-            </button>
-          </div>
-        </div>
-      </div>
-      </div>
-      </div>
-      </div>
-      </div>
-      </div>
-      </div>
-      </form>
+            </button></div></div></div></div></div></div></div></div></div></form>
 
       {/* Placeholder Browser Modal */}
       {showPlaceholderBrowser && (

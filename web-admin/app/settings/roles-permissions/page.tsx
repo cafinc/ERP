@@ -74,9 +74,7 @@ export default function RolesPermissionsPage() {
                   }}
                 >
                   Delete
-                </button>
-              </div>
-            </div>
+                </button></div></div>
             <div>
               <h4 style={{ fontSize: '14px', fontWeight: '600', marginBottom: '8px', color: '#64748b' }}>Permissions:</h4>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
@@ -95,11 +93,8 @@ export default function RolesPermissionsPage() {
                     {permission}
                   </span>
                 ))}
-              </div>
-            </div>
-          </div>
+              </div></div></div>
         ))}
-      </div>
-    </div>
+      </div></div>
   );
 }

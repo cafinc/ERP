@@ -122,10 +122,7 @@ export default function ConversationDetailPage() {
             <div className="text-center">
               <RefreshCw className="w-12 h-12 animate-spin text-[#3f72af] mx-auto mb-4" />
               <p className="text-gray-600">Loading conversation...</p>
-            </div>
-          </div>
-        </div>
-      </div>
+            </div></div></div></div>
     );
   }
 
@@ -147,11 +144,7 @@ export default function ConversationDetailPage() {
                 className="mt-4 px-6 py-2 bg-[#3f72af] hover:bg-[#2c5282] text-white rounded-lg font-medium transition-colors"
               >
                 Back to Communication Center
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+              </button></div></div></div></div>
     );
   }
 
@@ -183,18 +176,13 @@ export default function ConversationDetailPage() {
                   <span className="text-sm text-gray-500">
                     {conversation.other_user?.role?.charAt(0).toUpperCase() + conversation.other_user?.role?.slice(1)}
                   </span>
-                </div>
-              </div>
-            </div>
-          </div>
+                </div></div></div></div>
           <button
             onClick={fetchConversation}
             className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
           >
             <RefreshCw className="w-5 h-5 text-gray-600" />
-          </button>
-        </div>
-      </div>
+          </button></div></div>
 
         {/* Messages */}
         <div className="flex-1 overflow-y-auto bg-gray-50 p-6">
@@ -228,14 +216,11 @@ export default function ConversationDetailPage() {
                           minute: '2-digit',
                         })}
                       </span>
-                    </div>
-                  </div>
-                </div>
+                    </div></div></div>
               ))
             )}
             <div ref={messagesEndRef} />
-          </div>
-        </div>
+          </div></div>
 
         {/* Message Input */}
         <div className="bg-white shadow-sm border-t border-gray-200 px-6 py-4 hover:shadow-md transition-shadow">
@@ -264,11 +249,8 @@ export default function ConversationDetailPage() {
                 ) : (
                   <Send className="w-6 h-6" />
                 )}
-              </button>
-            </div>
+              </button></div>
             <p className="text-xs text-gray-500 mt-2">Press Enter to send, Shift+Enter for new line</p>
-          </form>
-        </div>
-      </div>
+          </form></div></div>
   );
 }

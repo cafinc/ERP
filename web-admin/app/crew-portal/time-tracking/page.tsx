@@ -130,8 +130,7 @@ export default function CrewTimeTrackingPage() {
             ) : (
               <><PlayCircle className="w-6 h-6" /> Clock In</>
             )}
-          </button>
-        </div>
+          </button></div>
 
         {/* Today's Summary */}
         <div className="bg-white rounded-lg shadow shadow-sm border border-gray-200 p-6 mb-8 hover:shadow-md transition-shadow">
@@ -152,10 +151,7 @@ export default function CrewTimeTrackingPage() {
                   currentEntry ? 'bg-green-500' : 'bg-gray-400'
                 }`}></div>
                 <span className="text-sm font-medium">{currentEntry ? 'Active' : 'Inactive'}</span>
-              </div>
-            </div>
-          </div>
-        </div>
+              </div></div></div></div>
 
         {/* Today's Entries */}
         {todayEntries.length > 0 && (
@@ -190,13 +186,10 @@ export default function CrewTimeTrackingPage() {
                         Duration: {((new Date(entry.clock_out).getTime() - new Date(entry.clock_in).getTime()) / (1000 * 60 * 60)).toFixed(2)} hours
                       </span>
                     )}
-                  </div>
-                </div>
+                  </div></div>
               ))}
-            </div>
-          </div>
+            </div></div>
         )}
-      </div>
-    </div>
+      </div></div>
   );
 }

@@ -231,8 +231,7 @@ export default function WorkflowEditorPage() {
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
             <p className="text-gray-600">Loading workflow...</p>
-          </div>
-        </div>
+          </div></div>
       </PageHeader>
     );
   }
@@ -325,8 +324,7 @@ export default function WorkflowEditorPage() {
                     className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg font-medium"
                   >
                     Add
-                  </button>
-                </div>
+                  </button></div>
                 <div className="flex flex-wrap gap-2">
                   {tags.map((tag) => (
                     <span key={tag} className="inline-flex items-center px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm">
@@ -336,10 +334,7 @@ export default function WorkflowEditorPage() {
                       </button>
                     </span>
                   ))}
-                </div>
-              </div>
-            </div>
-          </div>
+                </div></div></div></div>
 
           {/* Trigger Configuration */}
           <div className="bg-white rounded-lg shadow-lg shadow-sm border border-gray-200 p-8 hover:shadow-md transition-shadow">
@@ -360,8 +355,7 @@ export default function WorkflowEditorPage() {
                   >
                     <Icon className={`w-6 h-6 mx-auto mb-2 ${triggerType === type.value ? 'text-[#3f72af]' : 'text-gray-400'}`} />
                     <div className="text-sm font-medium text-gray-900">{type.label}</div>
-                    <div className="text-xs text-gray-500 mt-1">{type.description}</div>
-                  </button>
+                    <div className="text-xs text-gray-500 mt-1">{type.description}</div></button>
                 );
               })}
             </div>
@@ -414,8 +408,7 @@ export default function WorkflowEditorPage() {
               >
                 <Plus className="w-4 h-4" />
                 <span>Add Action</span>
-              </button>
-            </div>
+              </button></div>
 
             {actions.length === 0 ? (
               <div className="text-center py-12 border-2 border-dashed border-gray-300 rounded-lg">
@@ -444,8 +437,7 @@ export default function WorkflowEditorPage() {
                               className="font-medium text-gray-900 bg-transparent border-b border-transparent hover:border-gray-300 focus:border-gray-400 focus:outline-none"
                             />
                             <p className="text-xs opacity-75 capitalize">{action.action_type.replace('_', ' ')}</p>
-                          </div>
-                        </div>
+                          </div></div>
                         
                         <div className="flex items-center space-x-1">
                           <button
@@ -467,9 +459,7 @@ export default function WorkflowEditorPage() {
                             className="p-1 hover:bg-white rounded text-red-600"
                           >
                             <Trash2 className="w-4 h-4" />
-                          </button>
-                        </div>
-                      </div>
+                          </button></div></div>
 
                       {/* Action Configuration */}
                       <div className="space-y-2 bg-white rounded p-3">
@@ -551,8 +541,7 @@ export default function WorkflowEditorPage() {
                         <p className="text-xs opacity-75">
                           💡 Use {`{{variable}}`} syntax for dynamic content
                         </p>
-                      </div>
-                    </div>
+                      </div></div>
                   );
                 })}
               </div>
@@ -565,10 +554,7 @@ export default function WorkflowEditorPage() {
             <div className="text-sm text-blue-900">
               <p className="font-medium mb-1">Variable Syntax</p>
               <p>Use <code className="bg-blue-100 px-1 rounded">{`{{variable_name}}`}</code> in any text field to insert dynamic values like customer names, dispatch IDs, etc.</p>
-            </div>
-          </div>
-        </div>
-      </div>
+            </div></div></div></div>
 
       {/* Action Selector Modal */}
       {showActionSelector && (
@@ -582,8 +568,7 @@ export default function WorkflowEditorPage() {
                   className="p-2 hover:bg-gray-100 rounded-lg"
                 >
                   <X className="w-5 h-5" />
-                </button>
-              </div>
+                </button></div>
 
               <div className="grid grid-cols-2 gap-3">
                 {actionTypes.map((type) => {
@@ -596,14 +581,10 @@ export default function WorkflowEditorPage() {
                     >
                       <Icon className="w-6 h-6 text-gray-700 mb-2" />
                       <div className="font-medium text-gray-900">{type.label}</div>
-                      <div className="text-xs text-gray-500 mt-1">Click to add</div>
-                    </button>
+                      <div className="text-xs text-gray-500 mt-1">Click to add</div></button>
                   );
                 })}
-              </div>
-            </div>
-          </div>
-        </div>
+              </div></div></div></div>
       )}
     </PageHeader>
   );

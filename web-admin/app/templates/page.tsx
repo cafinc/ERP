@@ -161,27 +161,22 @@ export default function TemplatesPage() {
       <div className="grid grid-cols-4 gap-4 mb-6">
         <div className="bg-white rounded-lg shadow p-4">
           <div className="text-2xl font-bold text-gray-900">{templates.length}</div>
-          <div className="text-sm text-gray-600">Total Templates</div>
-        </div>
+          <div className="text-sm text-gray-600">Total Templates</div></div>
         <div className="bg-white rounded-lg shadow p-4">
           <div className="text-2xl font-bold text-blue-600">
             {templates.filter(t => t.type === 'estimate').length}
           </div>
-          <div className="text-sm text-gray-600">Estimates</div>
-        </div>
+          <div className="text-sm text-gray-600">Estimates</div></div>
         <div className="bg-white rounded-lg shadow p-4">
           <div className="text-2xl font-bold text-green-600">
             {templates.filter(t => t.type === 'invoice').length}
           </div>
-          <div className="text-sm text-gray-600">Invoices</div>
-        </div>
+          <div className="text-sm text-gray-600">Invoices</div></div>
         <div className="bg-white rounded-lg shadow p-4">
           <div className="text-2xl font-bold text-purple-600">
             {templates.filter(t => t.is_default).length}
           </div>
-          <div className="text-sm text-gray-600">Default Templates</div>
-        </div>
-      </div>
+          <div className="text-sm text-gray-600">Default Templates</div></div></div>
 
       {/* Filters & Search */}
       <div className="bg-white rounded-lg shadow p-4 mb-6">
@@ -224,8 +219,7 @@ export default function TemplatesPage() {
               className={`p-2 rounded ${viewMode === 'list' ? 'bg-blue-100 text-blue-600' : 'bg-gray-100'}`}
             >
               List
-            </button>
-          </div>
+            </button></div>
 
           {/* Create Button */}
           <button
@@ -234,9 +228,7 @@ export default function TemplatesPage() {
           >
             <PlusIcon className="w-5 h-5" />
             New Template
-          </button>
-        </div>
-      </div>
+          </button></div></div>
 
       {/* Templates Grid/List */}
       {loading ? (
@@ -254,8 +246,7 @@ export default function TemplatesPage() {
             className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
           >
             Create Template
-          </button>
-        </div>
+          </button></div>
       ) : (
         <div className="space-y-8">
           {Object.entries(templatesByType).map(([type, typeTemplates]) => {
@@ -291,8 +282,7 @@ export default function TemplatesPage() {
                             )}
                           </div>
                           <p className="text-sm text-gray-600 line-clamp-2">{template.description}</p>
-                        </div>
-                      </div>
+                        </div></div>
 
                       {/* Tags */}
                       {template.tags && template.tags.length > 0 && (
@@ -346,16 +336,13 @@ export default function TemplatesPage() {
                             <TrashIcon className="w-4 h-4" />
                           </button>
                         )}
-                      </div>
-                    </div>
+                      </div></div>
                   ))}
-                </div>
-              </div>
+                </div></div>
             );
           })}
         </div>
       )}
-    </div>
-    </div>
+    </div></div>
   );
 }

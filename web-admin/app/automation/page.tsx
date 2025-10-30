@@ -159,9 +159,7 @@ export default function AutomationDashboardPage() {
               </div>
               <div className="p-3 bg-blue-100 rounded-lg">
                 <Zap className="w-6 h-6 text-[#3f72af]" />
-              </div>
-            </div>
-          </div>
+              </div></div></div>
 
           <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
@@ -171,9 +169,7 @@ export default function AutomationDashboardPage() {
               </div>
               <div className="p-3 bg-green-100 rounded-lg">
                 <Activity className="w-6 h-6 text-green-600" />
-              </div>
-            </div>
-          </div>
+              </div></div></div>
 
           <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
@@ -183,9 +179,7 @@ export default function AutomationDashboardPage() {
               </div>
               <div className="p-3 bg-purple-100 rounded-lg">
                 <TrendingUp className="w-6 h-6 text-purple-600" />
-              </div>
-            </div>
-          </div>
+              </div></div></div>
 
           <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
@@ -195,10 +189,7 @@ export default function AutomationDashboardPage() {
               </div>
               <div className="p-3 bg-orange-100 rounded-lg">
                 <Clock className="w-6 h-6 text-orange-600" />
-              </div>
-            </div>
-          </div>
-        </div>
+              </div></div></div></div>
 
         {/* Workflow Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mx-6">
@@ -216,9 +207,7 @@ export default function AutomationDashboardPage() {
                     <div>
                       <h3 className="font-semibold text-gray-900">{workflow.name}</h3>
                       <p className="text-sm text-gray-600 mt-1">{workflow.description}</p>
-                    </div>
-                  </div>
-                </div>
+                    </div></div></div>
 
                 {/* Stats */}
                 {stats && (
@@ -236,8 +225,7 @@ export default function AutomationDashboardPage() {
                       <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${getStatusColor(stats.status)}`}>
                         {stats.status}
                       </span>
-                    </div>
-                  </div>
+                    </div></div>
                 )}
 
                 {/* Steps/Triggers */}
@@ -276,9 +264,7 @@ export default function AutomationDashboardPage() {
                     className="px-3 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg text-sm font-medium transition-colors"
                   >
                     <Activity className="w-4 h-4" />
-                  </button>
-                </div>
-              </div>
+                  </button></div></div>
             );
           })}
         </div>
@@ -305,17 +291,14 @@ export default function AutomationDashboardPage() {
                       <div>
                         <p className="text-sm font-medium text-gray-900">{workflow?.name}</p>
                         <p className="text-xs text-gray-600">{timeAgo} minutes ago</p>
-                      </div>
-                    </div>
+                      </div></div>
                     <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(stat.status)}`}>
                       {stat.status}
                     </span>
                   </div>
                 );
               })}
-            </div>
-          </div>
-        </div>
+            </div></div></div>
 
         {/* Workflow Details Modal */}
         {selectedWorkflow && (
@@ -331,8 +314,7 @@ export default function AutomationDashboardPage() {
                   className="text-gray-400 hover:text-gray-600"
                 >
                   ✕
-                </button>
-              </div>
+                </button></div>
 
               {/* Steps */}
               {selectedWorkflow.data.steps && selectedWorkflow.data.steps.length > 0 && (
@@ -346,11 +328,9 @@ export default function AutomationDashboardPage() {
                         </div>
                         <div className="flex-1">
                           <p className="text-gray-700">{step}</p>
-                        </div>
-                      </div>
+                        </div></div>
                     ))}
-                  </div>
-                </div>
+                  </div></div>
               )}
 
               {/* Required Context */}
@@ -363,8 +343,7 @@ export default function AutomationDashboardPage() {
                         {ctx}
                       </span>
                     ))}
-                  </div>
-                </div>
+                  </div></div>
               )}
 
               {/* Trigger Types */}
@@ -377,8 +356,7 @@ export default function AutomationDashboardPage() {
                         {trigger}
                       </span>
                     ))}
-                  </div>
-                </div>
+                  </div></div>
               )}
 
               <button
@@ -386,9 +364,7 @@ export default function AutomationDashboardPage() {
                 className="w-full px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg font-medium transition-colors"
               >
                 Close
-              </button>
-            </div>
-          </div>
+              </button></div></div>
         )}
       </div>
     );

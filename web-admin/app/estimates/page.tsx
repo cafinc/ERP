@@ -203,9 +203,7 @@ export default function EstimatesPage() {
               <span className="text-sm font-bold text-[#3f72af]">
                 ${estimates.reduce((sum, e) => sum + (e.total_amount || 0), 0).toLocaleString()}
               </span>
-            </div>
-          </div>
-        </div>
+            </div></div></div>
 
         {/* Search Bar */}
         <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-3 mb-4 mx-6 mt-6 hover:shadow-md transition-shadow">
@@ -228,9 +226,7 @@ export default function EstimatesPage() {
             >
               <RefreshCw className="w-4 h-4" />
               <span>Refresh</span>
-            </button>
-          </div>
-        </div>
+            </button></div></div>
 
         {/* Estimates Grid */}
         {filteredEstimates.length === 0 ? (
@@ -282,8 +278,7 @@ export default function EstimatesPage() {
                   <div className="text-sm text-gray-600 mb-1">Total Amount</div>
                   <div className="text-2xl font-bold text-[#3f72af]">
                     ${estimate.total_amount?.toLocaleString() || '0.00'}
-                  </div>
-                </div>
+                  </div></div>
 
                 {/* Dates */}
                 <div className="space-y-2 mb-4 text-sm text-gray-600">
@@ -300,8 +295,7 @@ export default function EstimatesPage() {
                       Valid Until
                     </span>
                     <span>{new Date(estimate.valid_until).toLocaleDateString()}</span>
-                  </div>
-                </div>
+                  </div></div>
 
                 {/* Actions */}
                 <div className="flex items-center space-x-2 pt-4 border-t border-gray-200">
@@ -324,9 +318,7 @@ export default function EstimatesPage() {
                   >
                     <Edit className="w-4 h-4" />
                     <span>Edit</span>
-                  </button>
-                </div>
-              </div>
+                  </button></div></div>
             ))}
           </div>
         )}

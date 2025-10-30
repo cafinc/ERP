@@ -153,8 +153,7 @@ export default function MasterUsersPage() {
           <p style={{ fontSize: '13px', color: '#78350f' }}>
             Master users have unrestricted access to all features, settings, and data. They can manage all other user roles including admins. Only assign this role to trusted platform owners.
           </p>
-        </div>
-      </div>
+        </div></div>
 
       {/* Master Users Table */}
       <div style={{
@@ -184,9 +183,7 @@ export default function MasterUsersPage() {
               <p style={{ fontSize: '14px', color: '#64748b' }}>
                 Users with complete platform control
               </p>
-            </div>
-          </div>
-        </div>
+            </div></div></div>
 
         {loading ? (
           <div style={{ padding: '40px', textAlign: 'center', color: '#64748b' }}>
@@ -245,9 +242,7 @@ export default function MasterUsersPage() {
                         </div>
                         <div style={{ fontSize: '12px', color: '#64748b' }}>
                           Master • Full Access
-                        </div>
-                      </div>
-                    </div>
+                        </div></div></div>
                   </td>
                   <td style={{ padding: '16px' }}>
                     <div style={{ fontSize: '14px', color: '#1e293b', marginBottom: '2px' }}>
@@ -373,8 +368,7 @@ export default function MasterUsersPage() {
             <p style={{ fontSize: '14px', color: '#64748b' }}>
               All permissions granted by default
             </p>
-          </div>
-        </div>
+          </div></div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '16px' }}>
           {[
@@ -405,8 +399,6 @@ export default function MasterUsersPage() {
               </span>
             </div>
           ))}
-        </div>
-      </div>
-    </div>
+        </div></div></div>
   );
 }

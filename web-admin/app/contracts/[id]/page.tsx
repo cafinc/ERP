@@ -247,10 +247,7 @@ export default function ContractDetailPage() {
       <div className="flex-1 overflow-auto p-6">
         <div className="flex items-center justify-center h-64">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
-        </div>
-      </div>
-    
-    </div>);
+        </div></div></div>);
   }
 
   if (!contract) {
@@ -270,10 +267,7 @@ export default function ContractDetailPage() {
               className="mt-4 text-[#3f72af] hover:text-blue-800"
             >
               Return to Contracts
-            </button>
-          </div>
-        </div>
-      </div>
+            </button></div></div></div>
     );
   }
 
@@ -300,8 +294,7 @@ export default function ContractDetailPage() {
                 {contract.contract_number}
               </h1>
               <p className="text-gray-600 mt-1">{contract.title}</p>
-            </div>
-          </div>
+            </div></div>
           
           <div className="flex gap-2">
             {contract.status === 'draft' && (
@@ -368,8 +361,7 @@ export default function ContractDetailPage() {
                 Terminate
               </button>
             )}
-          </div>
-        </div>
+          </div></div>
 
         {/* Status Badge */}
         <div className="flex items-center gap-4">
@@ -393,26 +385,22 @@ export default function ContractDetailPage() {
                 <div>
                   <p className="text-sm text-gray-600">Name</p>
                   <p className="text-sm font-medium text-gray-900">{contract.customer_name}</p>
-                </div>
-              </div>
+                </div></div>
               <div className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-gray-400" />
                 <div>
                   <p className="text-sm text-gray-600">Email</p>
                   <p className="text-sm font-medium text-gray-900">{contract.customer_email}</p>
-                </div>
-              </div>
+                </div></div>
               {contract.customer_phone && (
                 <div className="flex items-center gap-3">
                   <Phone className="w-5 h-5 text-gray-400" />
                   <div>
                     <p className="text-sm text-gray-600">Phone</p>
                     <p className="text-sm font-medium text-gray-900">{contract.customer_phone}</p>
-                  </div>
-                </div>
+                  </div></div>
               )}
-            </div>
-          </div>
+            </div></div>
 
           {/* Contract Details */}
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
@@ -428,8 +416,7 @@ export default function ContractDetailPage() {
                       maximumFractionDigits: 2
                     })}
                   </p>
-                </div>
-              </div>
+                </div></div>
               <div className="flex items-center gap-3">
                 <Calendar className="w-5 h-5 text-gray-400" />
                 <div>
@@ -438,18 +425,13 @@ export default function ContractDetailPage() {
                     {contract.service_start_date ? new Date(contract.service_start_date).toLocaleDateString() : 'N/A'} - 
                     {contract.service_end_date ? new Date(contract.service_end_date).toLocaleDateString() : 'N/A'}
                   </p>
-                </div>
-              </div>
+                </div></div>
               <div className="flex items-center gap-3">
                 <FileText className="w-5 h-5 text-gray-400" />
                 <div>
                   <p className="text-sm text-gray-600">Payment Terms</p>
                   <p className="text-sm font-medium text-gray-900">{contract.payment_terms || 'Net 30'}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+                </div></div></div></div></div>
 
         {/* Service Description */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
@@ -491,8 +473,7 @@ export default function ContractDetailPage() {
                 <div className="text-sm text-gray-600">
                   <p><strong>Signed by:</strong> {contract.customer_signature.typed_name}</p>
                   <p><strong>Date:</strong> {new Date(contract.customer_signature.signed_at).toLocaleString()}</p>
-                </div>
-              </div>
+                </div></div>
             ) : (
               <div className="text-center py-8 text-gray-500">
                 <FileSignature className="w-12 h-12 mx-auto mb-2 text-gray-400" />
@@ -527,8 +508,7 @@ export default function ContractDetailPage() {
                 <div className="text-sm text-gray-600">
                   <p><strong>Signed by:</strong> {contract.company_signature.typed_name}</p>
                   <p><strong>Date:</strong> {new Date(contract.company_signature.signed_at).toLocaleString()}</p>
-                </div>
-              </div>
+                </div></div>
             ) : (
               <div className="text-center py-8 text-gray-500">
                 <Shield className="w-12 h-12 mx-auto mb-2 text-gray-400" />
@@ -541,11 +521,9 @@ export default function ContractDetailPage() {
                   className="mt-4 text-[#3f72af] hover:text-blue-800 text-sm font-medium"
                 >
                   Add Company Signature
-                </button>
-              </div>
+                </button></div>
             )}
-          </div>
-        </div>
+          </div></div>
 
         {/* Notes */}
         {contract.notes && (
@@ -565,9 +543,7 @@ export default function ContractDetailPage() {
                 {contract.renewal_terms && (
                   <p className="text-sm text-yellow-700 mt-1">{contract.renewal_terms}</p>
                 )}
-              </div>
-            </div>
-          </div>
+              </div></div></div>
         )}
       </div>
 
@@ -583,10 +559,8 @@ export default function ContractDetailPage() {
               onCancel={() => setShowSignaturePad(false)}
               disabled={actionLoading}
             />
-          </div>
-        </div>
+          </div></div>
       )}
-      </div>
-    </div>
+      </div></div>
   );
 }

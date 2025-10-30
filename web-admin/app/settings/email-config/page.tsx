@@ -98,8 +98,7 @@ export default function EmailConfigPage() {
           <div>
             <h1 className="text-3xl font-bold text-gray-900">Email Configuration</h1>
             <p className="text-gray-600 mt-1">Configure SMTP settings for email notifications</p>
-          </div>
-        </div>
+          </div></div>
 
         {/* Info Card */}
         <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 flex items-start gap-3">
@@ -109,8 +108,7 @@ export default function EmailConfigPage() {
               Configure your SMTP server to enable email notifications for estimates, invoices, reports, and emergency alerts.
               Common providers: Gmail, Outlook, SendGrid, AWS SES.
             </p>
-          </div>
-        </div>
+          </div></div>
 
         {/* Configuration Form */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 space-y-6 hover:shadow-md transition-shadow">
@@ -151,8 +149,7 @@ export default function EmailConfigPage() {
                 placeholder="587"
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
-            </div>
-          </div>
+            </div></div>
 
           {/* SMTP User */}
           <div>
@@ -199,8 +196,7 @@ export default function EmailConfigPage() {
                 placeholder="SnowTrack"
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
-            </div>
-          </div>
+            </div></div>
 
           {/* Use TLS */}
           <label className="flex items-center gap-3">
@@ -224,8 +220,7 @@ export default function EmailConfigPage() {
           >
             <Save className="w-5 h-5" />
             {saving ? 'Saving...' : 'Save Configuration'}
-          </button>
-        </div>
+          </button></div>
 
         {/* Test Email */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 space-y-4 hover:shadow-md transition-shadow">
@@ -267,9 +262,6 @@ export default function EmailConfigPage() {
               </p>
             </div>
           )}
-        </div>
-      </div>
-    </div>
-    </div>
+        </div></div></div></div>
   );
 }

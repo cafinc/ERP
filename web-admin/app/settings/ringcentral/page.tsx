@@ -158,10 +158,7 @@ export default function RingCentralSettings() {
       <div className="flex-1 overflow-auto p-6">
         <div className="flex items-center justify-center h-full">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
-        </div>
-    
-    </div>
-    </div>
+        </div></div></div>
     );
   }
 
@@ -230,9 +227,7 @@ export default function RingCentralSettings() {
                   <span>Connect RingCentral</span>
                 </button>
               )}
-            </div>
-          </div>
-        </div>
+            </div></div></div>
 
         {/* Features Grid */}
         <div>
@@ -268,8 +263,7 @@ export default function RingCentralSettings() {
                             Coming Soon
                           </span>
                         )}
-                      </div>
-                    </div>
+                      </div></div>
 
                     {feature.status === 'active' && (
                       <label className="relative inline-flex items-center cursor-pointer">
@@ -320,11 +314,6 @@ export default function RingCentralSettings() {
           <p className="text-blue-700 text-sm mt-3">
             Subscribe to: <code className="bg-blue-100 px-2 py-0.5 rounded">Presence</code> events
           </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
+        </div></div></div></div></div></div>
   );
 }

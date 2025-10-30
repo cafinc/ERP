@@ -154,8 +154,7 @@ export default function AgreementsPage() {
         />
         <div className="flex items-center justify-center h-96">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
-        </div>
-      </div>
+        </div></div>
     );
   }
 
@@ -247,8 +246,7 @@ export default function AgreementsPage() {
                             <p className="text-sm font-medium text-gray-900">
                               {agreement.customer_name || 'N/A'}
                             </p>
-                          </div>
-                        </div>
+                          </div></div>
                         
                         <div className="flex items-start space-x-2">
                           <FileText className="w-4 h-4 text-[#3f72af] mt-0.5" />
@@ -257,8 +255,7 @@ export default function AgreementsPage() {
                             <p className="text-sm font-medium text-gray-900">
                               {agreement.agreement_type}
                             </p>
-                          </div>
-                        </div>
+                          </div></div>
                         
                         <div className="flex items-start space-x-2">
                           <DollarSign className="w-4 h-4 text-[#3f72af] mt-0.5" />
@@ -267,8 +264,7 @@ export default function AgreementsPage() {
                             <p className="text-sm font-medium text-gray-900">
                               ${agreement.agreement_value?.toLocaleString() || '0'}
                             </p>
-                          </div>
-                        </div>
+                          </div></div>
                         
                         <div className="flex items-start space-x-2">
                           <Calendar className="w-4 h-4 text-[#3f72af] mt-0.5" />
@@ -279,10 +275,7 @@ export default function AgreementsPage() {
                                 ? new Date(agreement.start_date).toLocaleDateString()
                                 : 'N/A'}
                             </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                          </div></div></div></div>
                     
                     <div className="flex items-center space-x-2 ml-4">
                       <button
@@ -305,15 +298,10 @@ export default function AgreementsPage() {
                         title="Delete"
                       >
                         <Trash2 className="w-5 h-5" />
-                      </button>
-                    </div>
-                  </div>
-                </div>
+                      </button></div></div></div>
               ))}
             </div>
           )}
-        </div>
-      </div>
-    </div>
+        </div></div></div>
   );
 }

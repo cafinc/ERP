@@ -94,10 +94,7 @@ export default function SubmenuHeaderOptions() {
               <button className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700">
                 <Plus className="w-4 h-4 inline mr-2" />
                 Add Employee
-              </button>
-            </div>
-          </div>
-        </div>
+              </button></div></div></div>
       )
     },
     {
@@ -126,10 +123,7 @@ export default function SubmenuHeaderOptions() {
               <button className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700">
                 <Plus className="w-4 h-4 inline mr-2" />
                 Add Employee
-              </button>
-            </div>
-          </div>
-        </div>
+              </button></div></div></div>
       )
     },
     {
@@ -158,10 +152,7 @@ export default function SubmenuHeaderOptions() {
               <button className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 shadow-sm">
                 <Plus className="w-4 h-4 inline mr-2" />
                 Add Employee
-              </button>
-            </div>
-          </div>
-        </div>
+              </button></div></div></div>
       )
     },
     {
@@ -176,9 +167,7 @@ export default function SubmenuHeaderOptions() {
               <button className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700">
                 <Plus className="w-4 h-4 inline mr-2" />
                 Add Employee
-              </button>
-            </div>
-          </div>
+              </button></div></div>
           <div className="px-6">
             <div className="flex gap-6 border-b border-gray-200">
               <button className="pb-3 text-sm font-medium text-blue-600 border-b-2 border-blue-600">
@@ -189,10 +178,7 @@ export default function SubmenuHeaderOptions() {
               </button>
               <button className="pb-3 text-sm font-medium text-gray-500 hover:text-gray-700">
                 Pending (3)
-              </button>
-            </div>
-          </div>
-        </div>
+              </button></div></div></div>
       )
     },
     {
@@ -206,8 +192,7 @@ export default function SubmenuHeaderOptions() {
             <button className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700">
               <Plus className="w-4 h-4 inline mr-2" />
               Add Employee
-            </button>
-          </div>
+            </button></div>
           <div className="flex gap-3">
             <div className="flex-1 relative">
               <Search className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
@@ -220,9 +205,7 @@ export default function SubmenuHeaderOptions() {
             <button className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">
               <Filter className="w-4 h-4 inline mr-2" />
               Filters
-            </button>
-          </div>
-        </div>
+            </button></div></div>
       )
     },
     {
@@ -239,14 +222,11 @@ export default function SubmenuHeaderOptions() {
               <div>
                 <h1 className="text-lg font-semibold text-gray-900">Employee Management</h1>
                 <p className="text-xs text-gray-500">32 employees</p>
-              </div>
-            </div>
+              </div></div>
             <button className="px-3 py-1.5 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700">
               <Plus className="w-4 h-4 inline mr-1" />
               Add
-            </button>
-          </div>
-        </div>
+            </button></div></div>
       )
     },
     {
@@ -276,11 +256,7 @@ export default function SubmenuHeaderOptions() {
                 <button className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700">
                   <Plus className="w-4 h-4 inline mr-2" />
                   Add Employee
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+                </button></div></div></div></div>
       )
     }
   ];
@@ -295,8 +271,7 @@ export default function SubmenuHeaderOptions() {
           </Link>
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Submenu Page Header Options</h1>
           <p className="text-gray-600">Choose the header style for pages within submenus (HR, Integrations, etc.)</p>
-        </div>
-      </div>
+        </div></div>
 
       <div className="max-w-7xl mx-auto px-6 py-8">
         {/* Selection Summary */}
@@ -330,9 +305,7 @@ export default function SubmenuHeaderOptions() {
                     }`}
                   >
                     {selectedOption === option.id ? '✓ Selected' : 'Select'}
-                  </button>
-                </div>
-              </div>
+                  </button></div></div>
 
               {/* Preview */}
               <div className="bg-white rounded-lg">
@@ -345,11 +318,7 @@ export default function SubmenuHeaderOptions() {
                   <div className="space-y-3">
                     <div className="h-4 bg-gray-200 rounded w-3/4"></div>
                     <div className="h-4 bg-gray-200 rounded w-1/2"></div>
-                    <div className="h-4 bg-gray-200 rounded w-5/6"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
+                    <div className="h-4 bg-gray-200 rounded w-5/6"></div></div></div></div></div>
           ))}
         </div>
 
@@ -382,10 +351,6 @@ export default function SubmenuHeaderOptions() {
               }`}
             >
               Apply to All Pages
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+            </button></div></div></div></div>
   );
 }

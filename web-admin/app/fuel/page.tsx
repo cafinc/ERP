@@ -308,8 +308,7 @@ export default function FuelPage() {
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af]"
                 />
-              </div>
-            </div>
+              </div></div>
 
             {/* Fuel Type Filter */}
             <select
@@ -341,10 +340,7 @@ export default function FuelPage() {
                 }`}
               >
                 <List className="w-5 h-5" />
-              </button>
-            </div>
-          </div>
-        </div>
+              </button></div></div></div>
 
         {/* Fuel Entries */}
         {filteredEntries.length === 0 ? (
@@ -360,8 +356,7 @@ export default function FuelPage() {
               className="px-6 py-3 bg-[#3f72af] text-white rounded-xl hover:bg-[#2c5282] transition-colors font-semibold"
             >
               Add Fuel Entry
-            </button>
-          </div>
+            </button></div>
         ) : viewMode === 'grid' ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredEntries.map(entry => (
@@ -377,8 +372,7 @@ export default function FuelPage() {
                     <div>
                       <h3 className="font-bold text-gray-900 capitalize">{entry.fuel_type}</h3>
                       <p className="text-sm text-gray-600">{new Date(entry.date).toLocaleDateString()}</p>
-                    </div>
-                  </div>
+                    </div></div>
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => handleEdit(entry)}
@@ -391,9 +385,7 @@ export default function FuelPage() {
                       className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                     >
                       <Trash2 className="w-4 h-4" />
-                    </button>
-                  </div>
-                </div>
+                    </button></div></div>
 
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
@@ -414,8 +406,7 @@ export default function FuelPage() {
                       <div className="flex items-center gap-2 text-sm">
                         {getResourceIcon(entry)}
                         <span className="font-medium text-gray-700">{getResourceName(entry)}</span>
-                      </div>
-                    </div>
+                      </div></div>
                   )}
                   
                   {entry.odometer_reading && (
@@ -423,8 +414,7 @@ export default function FuelPage() {
                       Odometer: {entry.odometer_reading.toLocaleString()} miles
                     </div>
                   )}
-                </div>
-              </div>
+                </div></div>
             ))}
           </div>
         ) : (
@@ -478,8 +468,7 @@ export default function FuelPage() {
                           className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                         >
                           <Trash2 className="w-4 h-4" />
-                        </button>
-                      </div>
+                        </button></div>
                     </td>
                   </tr>
                 ))}
@@ -502,8 +491,7 @@ export default function FuelPage() {
                 <div>
                   <h2 className="text-2xl font-bold">{editingEntry ? 'Edit' : 'Add'} Fuel Entry</h2>
                   <p className="text-orange-100 text-sm">Track fuel usage for your resources</p>
-                </div>
-              </div>
+                </div></div>
               <button
                 onClick={() => {
                   setShowModal(false);
@@ -512,8 +500,7 @@ export default function FuelPage() {
                 className="p-2 hover:bg-white/20 rounded-lg transition-colors"
               >
                 <X className="w-6 h-6" />
-              </button>
-            </div>
+              </button></div>
 
             <form onSubmit={handleSubmit} className="p-6 space-y-6">
               {/* Fuel Details Card */}
@@ -546,8 +533,7 @@ export default function FuelPage() {
                         className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af]"
                         required
                       />
-                    </div>
-                  </div>
+                    </div></div>
 
                   <div className="grid grid-cols-3 gap-4">
                     <div>
@@ -587,9 +573,7 @@ export default function FuelPage() {
                           placeholder="0.00"
                           required
                         />
-                      </div>
-                    </div>
-                  </div>
+                      </div></div></div>
 
                   {formData.quantity && formData.cost_per_unit && (
                     <div className="p-4 bg-green-50 border-2 border-green-200 rounded-xl">
@@ -598,11 +582,9 @@ export default function FuelPage() {
                         <span className="text-2xl font-bold text-green-600">
                           ${(parseFloat(formData.quantity) * parseFloat(formData.cost_per_unit)).toFixed(2)}
                         </span>
-                      </div>
-                    </div>
+                      </div></div>
                   )}
-                </div>
-              </div>
+                </div></div>
 
               {/* Resource Assignment Card */}
               <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 backdrop-blur-sm overflow-hidden">
@@ -679,9 +661,7 @@ export default function FuelPage() {
                       className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af]"
                       placeholder="Additional notes..."
                     />
-                  </div>
-                </div>
-              </div>
+                  </div></div></div>
 
               {/* Modal Footer */}
               <div className="flex gap-3">
@@ -701,11 +681,7 @@ export default function FuelPage() {
                 >
                   <Save className="w-5 h-5" />
                   {editingEntry ? 'Update Entry' : 'Add Entry'}
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
+                </button></div></form></div></div>
       )}
     </div>
   );

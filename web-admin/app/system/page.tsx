@@ -130,8 +130,7 @@ export default function SystemPage() {
             <div className="flex items-center justify-between mb-4">
               <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center">
                 <CheckCircle className="w-6 h-6 text-green-600" />
-              </div>
-            </div>
+              </div></div>
             <h3 className="text-sm font-semibold text-gray-600 mb-1">API Status</h3>
             <p className="text-2xl font-bold text-gray-900">Healthy</p>
             <p className="text-xs text-green-600 mt-1">99.9% uptime</p>
@@ -141,8 +140,7 @@ export default function SystemPage() {
             <div className="flex items-center justify-between mb-4">
               <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center">
                 <Database className="w-6 h-6 text-blue-600" />
-              </div>
-            </div>
+              </div></div>
             <h3 className="text-sm font-semibold text-gray-600 mb-1">Database</h3>
             <p className="text-2xl font-bold text-gray-900">Connected</p>
             <p className="text-xs text-blue-600 mt-1">12ms latency</p>
@@ -152,8 +150,7 @@ export default function SystemPage() {
             <div className="flex items-center justify-between mb-4">
               <div className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center">
                 <Wifi className="w-6 h-6 text-purple-600" />
-              </div>
-            </div>
+              </div></div>
             <h3 className="text-sm font-semibold text-gray-600 mb-1">Integrations</h3>
             <p className="text-2xl font-bold text-gray-900">{connectedCount}/{totalCount}</p>
             <p className="text-xs text-purple-600 mt-1">Active connections</p>
@@ -163,13 +160,11 @@ export default function SystemPage() {
             <div className="flex items-center justify-between mb-4">
               <div className="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center">
                 <RefreshCw className="w-6 h-6 text-orange-600" />
-              </div>
-            </div>
+              </div></div>
             <h3 className="text-sm font-semibold text-gray-600 mb-1">Last Sync</h3>
             <p className="text-2xl font-bold text-gray-900">2m ago</p>
             <p className="text-xs text-orange-600 mt-1">All systems synced</p>
-          </div>
-        </div>
+          </div></div>
 
         {/* Integrations Section */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 mb-6">
@@ -195,8 +190,7 @@ export default function SystemPage() {
                         <div>
                           <h3 className="font-semibold text-gray-900">{integration.name}</h3>
                           <p className="text-xs text-gray-500">{integration.category}</p>
-                        </div>
-                      </div>
+                        </div></div>
                       {getStatusBadge(integration.status)}
                     </div>
 
@@ -211,14 +205,10 @@ export default function SystemPage() {
                       )}
                       <button className="text-blue-600 hover:text-blue-700 text-sm font-medium flex items-center gap-1">
                         Configure <ExternalLink className="w-3 h-3" />
-                      </button>
-                    </div>
-                  </div>
+                      </button></div></div>
                 );
               })}
-            </div>
-          </div>
-        </div>
+            </div></div></div>
 
         {/* System Information */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -240,9 +230,7 @@ export default function SystemPage() {
               <div className="flex justify-between py-2">
                 <span className="text-sm text-gray-600">Uptime</span>
                 <span className="text-sm font-semibold text-gray-900">15 days 3 hours</span>
-              </div>
-            </div>
-          </div>
+              </div></div></div>
 
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
             <h3 className="text-lg font-bold text-gray-900 mb-4">Performance Metrics</h3>
@@ -262,11 +250,6 @@ export default function SystemPage() {
               <div className="flex justify-between py-2">
                 <span className="text-sm text-gray-600">Avg Response Time</span>
                 <span className="text-sm font-semibold text-gray-900">125ms</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+              </div></div></div></div></div></div>
   );
 }

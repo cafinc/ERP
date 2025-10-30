@@ -145,8 +145,7 @@ export default function FinanceDashboardPage() {
               <div className={`flex items-center gap-1 text-sm font-medium ${stats.revenue.change >= 0 ? 'text-green-600' : 'text-red-600'}`}>
                 {stats.revenue.change >= 0 ? <ArrowUpRight className="w-4 h-4" /> : <ArrowDownRight className="w-4 h-4" />}
                 {Math.abs(stats.revenue.change)}%
-              </div>
-            </div>
+              </div></div>
             <h3 className="text-2xl font-bold text-gray-900">${stats.revenue.thisMonth.toLocaleString()}</h3>
             <p className="text-sm text-gray-600 mt-1">Revenue This Month</p>
             <p className="text-xs text-gray-500 mt-2">vs ${stats.revenue.lastMonth.toLocaleString()} last month</p>
@@ -161,8 +160,7 @@ export default function FinanceDashboardPage() {
               <div className={`flex items-center gap-1 text-sm font-medium ${stats.expenses.change >= 0 ? 'text-red-600' : 'text-green-600'}`}>
                 {stats.expenses.change >= 0 ? <ArrowUpRight className="w-4 h-4" /> : <ArrowDownRight className="w-4 h-4" />}
                 {Math.abs(stats.expenses.change)}%
-              </div>
-            </div>
+              </div></div>
             <h3 className="text-2xl font-bold text-gray-900">${stats.expenses.thisMonth.toLocaleString()}</h3>
             <p className="text-sm text-gray-600 mt-1">Expenses This Month</p>
             <p className="text-xs text-gray-500 mt-2">vs ${stats.expenses.lastMonth.toLocaleString()} last month</p>
@@ -177,8 +175,7 @@ export default function FinanceDashboardPage() {
               <div className={`flex items-center gap-1 text-sm font-medium ${stats.profit.change >= 0 ? 'text-green-600' : 'text-red-600'}`}>
                 {stats.profit.change >= 0 ? <ArrowUpRight className="w-4 h-4" /> : <ArrowDownRight className="w-4 h-4" />}
                 {Math.abs(stats.profit.change)}%
-              </div>
-            </div>
+              </div></div>
             <h3 className="text-2xl font-bold text-gray-900">${stats.profit.thisMonth.toLocaleString()}</h3>
             <p className="text-sm text-gray-600 mt-1">Net Profit This Month</p>
             <p className="text-xs text-gray-500 mt-2">vs ${stats.profit.lastMonth.toLocaleString()} last month</p>
@@ -192,13 +189,11 @@ export default function FinanceDashboardPage() {
               </div>
               <div className="text-sm font-medium text-orange-600">
                 {stats.invoices.overdue} Overdue
-              </div>
-            </div>
+              </div></div>
             <h3 className="text-2xl font-bold text-gray-900">${stats.outstanding.total.toLocaleString()}</h3>
             <p className="text-sm text-gray-600 mt-1">Accounts Receivable</p>
             <p className="text-xs text-red-600 mt-2">${stats.outstanding.overdue.toLocaleString()} overdue</p>
-          </div>
-        </div>
+          </div></div>
 
         {/* Quick Actions & Stats */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mx-6 mt-6">
@@ -233,9 +228,7 @@ export default function FinanceDashboardPage() {
               >
                 <BarChart3 className="w-5 h-5 text-purple-600" />
                 <span className="text-sm font-medium text-gray-900">Financial Reports</span>
-              </button>
-            </div>
-          </div>
+              </button></div></div>
 
           {/* Invoice Status */}
           <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
@@ -249,9 +242,7 @@ export default function FinanceDashboardPage() {
                   <div>
                     <p className="text-2xl font-bold text-gray-900">{stats.invoices.paid}</p>
                     <p className="text-sm text-gray-600">Paid</p>
-                  </div>
-                </div>
-              </div>
+                  </div></div></div>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
@@ -260,9 +251,7 @@ export default function FinanceDashboardPage() {
                   <div>
                     <p className="text-2xl font-bold text-gray-900">{stats.invoices.pending}</p>
                     <p className="text-sm text-gray-600">Pending</p>
-                  </div>
-                </div>
-              </div>
+                  </div></div></div>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
@@ -271,11 +260,7 @@ export default function FinanceDashboardPage() {
                   <div>
                     <p className="text-2xl font-bold text-gray-900">{stats.invoices.overdue}</p>
                     <p className="text-sm text-gray-600">Overdue</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+                  </div></div></div></div></div>
 
           {/* Upcoming Payments */}
           <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
@@ -298,12 +283,9 @@ export default function FinanceDashboardPage() {
                     }`}>
                       {payment.status}
                     </span>
-                  </div>
-                </div>
+                  </div></div>
               ))}
-            </div>
-          </div>
-        </div>
+            </div></div></div>
 
         {/* Recent Transactions */}
         <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 mx-6 mt-6 hover:shadow-md transition-shadow">
@@ -311,8 +293,7 @@ export default function FinanceDashboardPage() {
             <h3 className="text-lg font-semibold text-gray-900">Recent Transactions</h3>
             <button className="text-sm text-[#3f72af] hover:text-blue-700 font-medium">
               View All
-            </button>
-          </div>
+            </button></div>
           <div className="divide-y divide-gray-200">
             {recentTransactions.map((transaction) => (
               <div key={transaction.id} className="px-6 py-4 hover:bg-gray-50 transition-colors">
@@ -332,8 +313,7 @@ export default function FinanceDashboardPage() {
                       <p className="text-sm text-gray-600">
                         {transaction.type === 'income' ? transaction.customer : transaction.vendor}
                       </p>
-                    </div>
-                  </div>
+                    </div></div>
                   <div className="text-right">
                     <p className={`text-lg font-bold ${
                       transaction.type === 'income' ? 'text-green-600' : 'text-red-600'
@@ -341,13 +321,8 @@ export default function FinanceDashboardPage() {
                       {transaction.type === 'income' ? '+' : ''}${Math.abs(transaction.amount).toLocaleString()}
                     </p>
                     <p className="text-xs text-gray-500">{new Date(transaction.date).toLocaleDateString()}</p>
-                  </div>
-                </div>
-              </div>
+                  </div></div></div>
             ))}
-          </div>
-        </div>
-      </div>
-    </div>
+          </div></div></div></div>
   );
 }

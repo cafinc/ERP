@@ -66,9 +66,7 @@ export default function HRModuleDesignA() {
             <span className="px-3 py-1 bg-blue-800 rounded text-sm font-medium">Current</span>
             <button onClick={() => router.push('/hr/design-option-b')} className="px-3 py-1 bg-gray-700 hover:bg-gray-600 rounded text-sm">View Option B</button>
             <button onClick={() => router.push('/hr/design-option-c')} className="px-3 py-1 bg-gray-700 hover:bg-gray-600 rounded text-sm">View Option C</button>
-            <button onClick={() => router.push('/hr')} className="px-3 py-1 bg-gray-700 hover:bg-gray-600 rounded text-sm">Back to Original</button>
-          </div>
-        </div>
+            <button onClick={() => router.push('/hr')} className="px-3 py-1 bg-gray-700 hover:bg-gray-600 rounded text-sm">Back to Original</button></div></div>
 
         <PageHeader
         title="Design Option A"
@@ -93,9 +91,7 @@ export default function HRModuleDesignA() {
               </div>
               <div className="bg-blue-50 p-3 rounded-lg">
                 <Users className="h-8 w-8 text-blue-900" />
-              </div>
-            </div>
-          </div>
+              </div></div></div>
 
           <div className="bg-white rounded-lg shadow shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
@@ -105,9 +101,7 @@ export default function HRModuleDesignA() {
               </div>
               <div className="bg-blue-50 p-3 rounded-lg">
                 <Clock className="h-8 w-8 text-blue-900" />
-              </div>
-            </div>
-          </div>
+              </div></div></div>
 
           <div className="bg-white rounded-lg shadow shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
@@ -117,10 +111,7 @@ export default function HRModuleDesignA() {
               </div>
               <div className="bg-blue-50 p-3 rounded-lg">
                 <Calendar className="h-8 w-8 text-blue-900" />
-              </div>
-            </div>
-          </div>
-        </div>
+              </div></div></div></div>
 
         {/* Module Grid - Conservative */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -168,10 +159,6 @@ export default function HRModuleDesignA() {
             >
               <Calendar className="h-5 w-5" />
               Approve PTO
-            </button>
-          </div>
-        </div>
-      </div>
-    </DashboardLayout>
+            </button></div></div></div></DashboardLayout>
   );
 }

@@ -85,8 +85,7 @@ export default function CrewTasksPage() {
                 {f.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}
               </button>
             ))}
-          </div>
-        </div>
+          </div></div>
 
         {/* Tasks List */}
         {loading ? (
@@ -132,14 +131,10 @@ export default function CrewTasksPage() {
                           Due: {new Date(task.due_date).toLocaleDateString()}
                         </span>
                       )}
-                    </div>
-                  </div>
-                </div>
-              </div>
+                    </div></div></div></div>
             ))}
           </div>
         )}
-      </div>
-    </div>
+      </div></div>
   );
 }

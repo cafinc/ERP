@@ -78,9 +78,7 @@ export default function HRModuleDesignC() {
             <button onClick={() => router.push('/hr/design-option-a')} className="px-3 py-1 bg-white/20 hover:bg-white/30 rounded text-sm">View Option A</button>
             <button onClick={() => router.push('/hr/design-option-b')} className="px-3 py-1 bg-white/20 hover:bg-white/30 rounded text-sm">View Option B</button>
             <span className="px-3 py-1 bg-white/90 text-purple-600 rounded text-sm font-medium">Current</span>
-            <button onClick={() => router.push('/hr')} className="px-3 py-1 bg-white/20 hover:bg-white/30 rounded text-sm">Back to Original</button>
-          </div>
-        </div>
+            <button onClick={() => router.push('/hr')} className="px-3 py-1 bg-white/20 hover:bg-white/30 rounded text-sm">Back to Original</button></div></div>
 
         <PageHeader
         title="Design Option C"
@@ -108,8 +106,7 @@ export default function HRModuleDesignC() {
                 </p>
               </div>
               <Users className="h-12 w-12 text-blue-200" />
-            </div>
-          </div>
+            </div></div>
 
           <div className="bg-gradient-to-br from-teal-500 to-teal-600 rounded-2xl shadow-lg p-6 text-white transform hover:scale-105 transition-transform">
             <div className="flex items-center justify-between">
@@ -122,8 +119,7 @@ export default function HRModuleDesignC() {
                 </p>
               </div>
               <Clock className="h-12 w-12 text-teal-200" />
-            </div>
-          </div>
+            </div></div>
 
           <div className="bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl shadow-lg p-6 text-white transform hover:scale-105 transition-transform">
             <div className="flex items-center justify-between">
@@ -136,9 +132,7 @@ export default function HRModuleDesignC() {
                 </p>
               </div>
               <Calendar className="h-12 w-12 text-purple-200" />
-            </div>
-          </div>
-        </div>
+            </div></div></div>
 
         {/* Module Grid - Modern Vibrant */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -160,8 +154,7 @@ export default function HRModuleDesignC() {
                   {module.title}
                 </h3>
                 <p className="text-sm text-gray-600">{module.description}</p>
-              </div>
-            </div>
+              </div></div>
           ))}
         </div>
 
@@ -189,10 +182,6 @@ export default function HRModuleDesignC() {
             >
               <Calendar className="h-5 w-5" />
               Approve PTO
-            </button>
-          </div>
-        </div>
-      </div>
-    </DashboardLayout>
+            </button></div></div></div></DashboardLayout>
   );
 }

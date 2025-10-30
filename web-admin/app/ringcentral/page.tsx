@@ -72,9 +72,7 @@ export default function RingCentralHub() {
               <p className="text-gray-600">
                 Comprehensive communication and telephony management
               </p>
-            </div>
-          </div>
-        </div>
+            </div></div></div>
 
         {/* Quick Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
@@ -86,9 +84,7 @@ export default function RingCentralHub() {
               <div>
                 <p className="text-sm text-gray-600">SMS Messages</p>
                 <p className="text-2xl font-bold text-gray-900">-</p>
-              </div>
-            </div>
-          </div>
+              </div></div></div>
           <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center space-x-4">
               <div className="p-3 bg-green-100 rounded-lg">
@@ -97,9 +93,7 @@ export default function RingCentralHub() {
               <div>
                 <p className="text-sm text-gray-600">Active Calls</p>
                 <p className="text-2xl font-bold text-gray-900">0</p>
-              </div>
-            </div>
-          </div>
+              </div></div></div>
           <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center space-x-4">
               <div className="p-3 bg-purple-100 rounded-lg">
@@ -108,9 +102,7 @@ export default function RingCentralHub() {
               <div>
                 <p className="text-sm text-gray-600">Recordings</p>
                 <p className="text-2xl font-bold text-gray-900">-</p>
-              </div>
-            </div>
-          </div>
+              </div></div></div>
           <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center space-x-4">
               <div className="p-3 bg-orange-100 rounded-lg">
@@ -119,10 +111,7 @@ export default function RingCentralHub() {
               <div>
                 <p className="text-sm text-gray-600">Contacts</p>
                 <p className="text-2xl font-bold text-gray-900">-</p>
-              </div>
-            </div>
-          </div>
-        </div>
+              </div></div></div></div>
 
         {/* Features Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -163,8 +152,7 @@ export default function RingCentralHub() {
                 <p className="text-sm text-gray-600">
                   Configure your RingCentral integration and credentials
                 </p>
-              </div>
-            </div>
+              </div></div>
             <Link
               href="/settings/ringcentral"
               className="flex items-center space-x-2 px-6 py-3 bg-[#3f72af] hover:bg-[#2c5282] text-white rounded-lg font-medium transition-colors"
@@ -172,8 +160,6 @@ export default function RingCentralHub() {
               <span>Settings</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
-          </div>
-        </div>
-      </div>
+          </div></div></div>
     );
 }

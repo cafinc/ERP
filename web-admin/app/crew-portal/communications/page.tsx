@@ -257,9 +257,7 @@ export default function CrewCommunicationsPage() {
             <div>
               <h2 className="text-xl font-bold text-white">My Projects</h2>
               <p className="text-sm text-blue-100 mt-1">Select project to chat</p>
-            </div>
-          </div>
-        </div>
+            </div></div></div>
         
         <div className="flex-1 overflow-y-auto">
           {projects.length === 0 ? (
@@ -287,8 +285,7 @@ export default function CrewCommunicationsPage() {
                       project.status === 'active' ? 'bg-green-500' : 'bg-gray-400'
                     }`} />
                     {project.status}
-                  </div>
-                </button>
+                  </div></button>
               ))}
             </div>
           )}
@@ -300,8 +297,7 @@ export default function CrewCommunicationsPage() {
             <div className="flex items-center gap-2 text-sm text-blue-700">
               <MapPinIcon className="w-4 h-4" />
               <span>Location tracking active</span>
-            </div>
-          </div>
+            </div></div>
         )}
       </div>
 
@@ -321,12 +317,10 @@ export default function CrewCommunicationsPage() {
                       {projects.find(p => p._id === selectedProject)?.name}
                     </h1>
                     <p className="text-sm text-gray-500 mt-1">Project Communication</p>
-                  </div>
-                </div>
+                  </div></div>
                 <div className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
                   {filteredMessages.length} messages
-                </div>
-              </div>
+                </div></div>
 
               {/* Search Bar */}
               <div className="mt-4 relative">
@@ -338,8 +332,7 @@ export default function CrewCommunicationsPage() {
                   placeholder="Search messages..."
                   className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
-              </div>
-            </div>
+              </div></div>
 
             {/* Messages */}
             <div className="flex-1 overflow-y-auto p-6">
@@ -408,8 +401,7 @@ export default function CrewCommunicationsPage() {
                           <span className="text-xs opacity-75 mt-1 block">
                             {new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                           </span>
-                        </div>
-                      </div>
+                        </div></div>
                     );
                   })}
                   <div ref={messagesEndRef} />
@@ -442,8 +434,7 @@ export default function CrewCommunicationsPage() {
                         className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 shadow-md"
                       >
                         <XMarkIcon className="w-4 h-4" />
-                      </button>
-                    </div>
+                      </button></div>
                   ))}
                 </div>
                 {uploadProgress > 0 && uploadProgress < 100 && (
@@ -467,8 +458,7 @@ export default function CrewCommunicationsPage() {
                   <h3 className="text-sm font-semibold text-gray-900">Quick Templates</h3>
                   <button onClick={() => setShowTemplates(false)} className="text-gray-400 hover:text-gray-600">
                     <XMarkIcon className="w-5 h-5" />
-                  </button>
-                </div>
+                  </button></div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2 max-h-60 overflow-y-auto">
                   {templates.length === 0 ? (
                     <p className="text-sm text-gray-500 col-span-2">No templates available</p>
@@ -484,8 +474,7 @@ export default function CrewCommunicationsPage() {
                       </button>
                     ))
                   )}
-                </div>
-              </div>
+                </div></div>
             )}
 
             {/* Input */}
@@ -542,8 +531,7 @@ export default function CrewCommunicationsPage() {
                   ) : (
                     <PaperAirplaneIcon className="w-6 h-6" />
                   )}
-                </button>
-              </div>
+                </button></div>
               <p className="text-xs text-gray-500 mt-2">
                 💼 Crew Portal • Real-time • Location sharing enabled
               </p>
@@ -555,11 +543,8 @@ export default function CrewCommunicationsPage() {
               <BriefcaseIcon className="w-20 h-20 mx-auto mb-4" />
               <p className="text-xl font-medium">Select a project</p>
               <p className="text-sm mt-2">Choose a project from the sidebar to start communicating</p>
-            </div>
-          </div>
+            </div></div>
         )}
-      </div>
-      </div>
-    </div>
+      </div></div></div>
   );
 }

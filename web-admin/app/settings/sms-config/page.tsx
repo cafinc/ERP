@@ -97,8 +97,7 @@ export default function SMSConfigPage() {
           <div>
             <h1 className="text-3xl font-bold text-gray-900">SMS Configuration</h1>
             <p className="text-gray-600 mt-1">Configure Twilio settings for SMS notifications</p>
-          </div>
-        </div>
+          </div></div>
 
         {/* Info Card */}
         <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 flex items-start gap-3">
@@ -108,8 +107,7 @@ export default function SMSConfigPage() {
               Configure your Twilio account to enable SMS notifications for emergency alerts, shift reminders, and customer communications.
               Get your credentials from <a href="https://console.twilio.com" target="_blank" className="underline">Twilio Console</a>.
             </p>
-          </div>
-        </div>
+          </div></div>
 
         {/* Configuration Form */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 space-y-6 hover:shadow-md transition-shadow">
@@ -174,8 +172,7 @@ export default function SMSConfigPage() {
           >
             <Save className="w-5 h-5" />
             {saving ? 'Saving...' : 'Save Configuration'}
-          </button>
-        </div>
+          </button></div>
 
         {/* Test SMS */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 space-y-4 hover:shadow-md transition-shadow">
@@ -217,9 +214,5 @@ export default function SMSConfigPage() {
               </p>
             </div>
           )}
-        </div>
-      </div>
-    </div>
-  
-    </div>);
+        </div></div></div></div>);
 }

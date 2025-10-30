@@ -84,9 +84,7 @@ export default function HRModuleDesignB() {
             <button onClick={() => router.push('/hr/design-option-a')} className="px-3 py-1 bg-white/20 hover:bg-white/30 rounded text-sm">View Option A</button>
             <span className="px-3 py-1 bg-white/90 text-blue-600 rounded text-sm font-medium">Current</span>
             <button onClick={() => router.push('/hr/design-option-c')} className="px-3 py-1 bg-white/20 hover:bg-white/30 rounded text-sm">View Option C</button>
-            <button onClick={() => router.push('/hr')} className="px-3 py-1 bg-white/20 hover:bg-white/30 rounded text-sm">Back to Original</button>
-          </div>
-        </div>
+            <button onClick={() => router.push('/hr')} className="px-3 py-1 bg-white/20 hover:bg-white/30 rounded text-sm">Back to Original</button></div></div>
 
         <PageHeader
         title="Design Option B"
@@ -112,9 +110,7 @@ export default function HRModuleDesignB() {
               </div>
               <div className="bg-gradient-to-br from-blue-500 to-blue-600 p-3 rounded-xl shadow-sm">
                 <Users className="h-8 w-8 text-white" />
-              </div>
-            </div>
-          </div>
+              </div></div></div>
 
           <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
@@ -125,9 +121,7 @@ export default function HRModuleDesignB() {
               </div>
               <div className="bg-gradient-to-br from-teal-500 to-teal-600 p-3 rounded-xl shadow-sm">
                 <Clock className="h-8 w-8 text-white" />
-              </div>
-            </div>
-          </div>
+              </div></div></div>
 
           <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
@@ -138,10 +132,7 @@ export default function HRModuleDesignB() {
               </div>
               <div className="bg-gradient-to-br from-blue-500 to-blue-600 p-3 rounded-xl shadow-sm">
                 <Calendar className="h-8 w-8 text-white" />
-              </div>
-            </div>
-          </div>
-        </div>
+              </div></div></div></div>
 
         {/* Module Grid - Balanced */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -163,8 +154,7 @@ export default function HRModuleDesignB() {
                   {module.title}
                 </h3>
                 <p className="text-sm text-gray-600">{module.description}</p>
-              </div>
-            </div>
+              </div></div>
           ))}
         </div>
 
@@ -192,10 +182,6 @@ export default function HRModuleDesignB() {
             >
               <Calendar className="h-5 w-5" />
               Approve PTO
-            </button>
-          </div>
-        </div>
-      </div>
-    </DashboardLayout>
+            </button></div></div></div></DashboardLayout>
   );
 }

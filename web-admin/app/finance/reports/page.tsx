@@ -133,8 +133,7 @@ export default function ReportsPage() {
                 />
               </div>
             )}
-          </div>
-        </div>
+          </div></div>
 
         {/* Reports Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
@@ -163,9 +162,7 @@ export default function ReportsPage() {
                   className="px-3 py-1.5 text-sm bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-center gap-2"
                 >
                   <Download className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
+                </button></div></div>
           ))}
         </div>
 
@@ -196,9 +193,7 @@ export default function ReportsPage() {
             </div>
             <p className="text-3xl font-bold">$16,940</p>
             <p className="text-sm opacity-75 mt-1">This Month</p>
-          </div>
-        </div>
-      </div>
+          </div></div></div>
     </PageHeader>
   );
 }

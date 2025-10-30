@@ -211,9 +211,7 @@ export default function CustomerDetailPage() {
     return (
       <DashboardLayout>
         <div className="flex items-center justify-center h-full">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#3f72af]"></div>
-        </div>
-      </DashboardLayout>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#3f72af]"></div></div></DashboardLayout>
     );
   }
 
@@ -228,9 +226,7 @@ export default function CustomerDetailPage() {
             className="mt-4 px-6 py-3 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282]"
           >
             Back to Customers
-          </button>
-        </div>
-      </DashboardLayout>
+          </button></div></DashboardLayout>
     );
   }
 
@@ -268,9 +264,7 @@ export default function CustomerDetailPage() {
                 }`}>
                   {isCompany ? 'Company' : 'Individual'}
                 </span>
-              </div>
-            </div>
-          </div>
+              </div></div></div>
           <div className="flex items-center space-x-3">
             <button
               onClick={() => setShowServiceRequestModal(true)}
@@ -285,9 +279,7 @@ export default function CustomerDetailPage() {
             >
               <Edit className="w-5 h-5" />
               <span>Edit</span>
-            </button>
-          </div>
-        </div>
+            </button></div></div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           {/* Left Column - Customer Info */}
@@ -301,24 +293,19 @@ export default function CustomerDetailPage() {
                   <div>
                     <p className="text-sm text-gray-600">Email</p>
                     <p className="text-gray-900">{customer.email}</p>
-                  </div>
-                </div>
+                  </div></div>
                 <div className="flex items-start space-x-3">
                   <Phone className="w-5 h-5 text-gray-400 mt-0.5" />
                   <div>
                     <p className="text-sm text-gray-600">Phone</p>
                     <p className="text-gray-900">{customer.phone}</p>
-                  </div>
-                </div>
+                  </div></div>
                 <div className="flex items-start space-x-3">
                   <MapPin className="w-5 h-5 text-gray-400 mt-0.5" />
                   <div>
                     <p className="text-sm text-gray-600">Address</p>
                     <p className="text-gray-900">{customer.address}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+                  </div></div></div></div>
 
             {/* Company Link (for individuals) */}
             {!isCompany && customer.company_name && (
@@ -333,8 +320,7 @@ export default function CustomerDetailPage() {
                   className="mt-3 text-sm text-[#3f72af] hover:text-blue-800 font-medium"
                 >
                   View Company →
-                </button>
-              </div>
+                </button></div>
             )}
 
             {/* Company Accounting (for companies) */}
@@ -361,9 +347,7 @@ export default function CustomerDetailPage() {
                   <div>
                     <p className="text-sm text-gray-600">PO Required</p>
                     <p className="text-gray-900">{customer.accounting.po_required ? 'Yes' : 'No'}</p>
-                  </div>
-                </div>
-              </div>
+                  </div></div></div>
             )}
           </div>
 
@@ -380,8 +364,7 @@ export default function CustomerDetailPage() {
                   >
                     <Plus className="w-4 h-4" />
                     <span>Link Contact</span>
-                  </button>
-                </div>
+                  </button></div>
                 {contacts.length === 0 ? (
                   <p className="text-gray-600 text-center py-8">No contacts linked yet</p>
                 ) : (
@@ -405,9 +388,7 @@ export default function CustomerDetailPage() {
                             className="px-3 py-1 text-sm text-red-600 hover:bg-red-50 rounded"
                           >
                             Unlink
-                          </button>
-                        </div>
-                      </div>
+                          </button></div></div>
                     ))}
                   </div>
                 )}
@@ -460,9 +441,7 @@ export default function CustomerDetailPage() {
                           <p className="text-xs text-gray-500 mt-2">
                             Created: {new Date(request.created_at).toLocaleDateString()}
                           </p>
-                        </div>
-                      </div>
-                    </div>
+                        </div></div></div>
                   ))}
                 </div>
               )}
@@ -484,15 +463,11 @@ export default function CustomerDetailPage() {
                         className="px-3 py-1 text-sm text-[#3f72af] hover:bg-blue-50 rounded"
                       >
                         View
-                      </button>
-                    </div>
+                      </button></div>
                   ))}
-                </div>
-              </div>
+                </div></div>
             )}
-          </div>
-        </div>
-      </div>
+          </div></div></div>
 
       {/* Service Request Modal */}
       {showServiceRequestModal && (
@@ -505,8 +480,7 @@ export default function CustomerDetailPage() {
                 className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
               >
                 <X className="w-6 h-6 text-gray-600" />
-              </button>
-            </div>
+              </button></div>
 
             <div className="p-4 space-y-6">
               {/* Service Type */}
@@ -547,8 +521,7 @@ export default function CustomerDetailPage() {
                         <span className="text-gray-900">{service}</span>
                       </label>
                     ))}
-                  </div>
-                </div>
+                  </div></div>
               )}
 
               {/* Urgency */}
@@ -596,11 +569,7 @@ export default function CustomerDetailPage() {
                   className="px-6 py-2 bg-green-600 hover:bg-green-700 disabled:bg-gray-300 text-white rounded-lg font-medium transition-colors"
                 >
                   {submittingRequest ? 'Creating...' : 'Create Request'}
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+                </button></div></div></div></div>
       )}
 
       {/* Link Contact Modal */}
@@ -614,8 +583,7 @@ export default function CustomerDetailPage() {
                 className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
               >
                 <X className="w-6 h-6 text-gray-600" />
-              </button>
-            </div>
+              </button></div>
 
             <div className="p-4 space-y-6">
               {/* Search */}
@@ -637,9 +605,7 @@ export default function CustomerDetailPage() {
                     className="px-6 py-2 bg-[#3f72af] hover:bg-[#2c5282] text-white rounded-lg font-medium transition-colors"
                   >
                     <Search className="w-5 h-5" />
-                  </button>
-                </div>
-              </div>
+                  </button></div></div>
 
               {/* Search Results */}
               {searchResults.length > 0 && (
@@ -660,11 +626,9 @@ export default function CustomerDetailPage() {
                         >
                           <LinkIcon className="w-4 h-4 inline-block mr-1" />
                           Link
-                        </button>
-                      </div>
+                        </button></div>
                     ))}
-                  </div>
-                </div>
+                  </div></div>
               )}
 
               {searchQuery && searchResults.length === 0 && (
@@ -672,9 +636,7 @@ export default function CustomerDetailPage() {
                   No individuals found. Try a different search term.
                 </p>
               )}
-            </div>
-          </div>
-        </div>
+            </div></div></div>
       )}
     </DashboardLayout>
   );

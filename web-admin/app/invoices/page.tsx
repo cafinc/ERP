@@ -228,9 +228,7 @@ export default function InvoicesPage() {
               <span className="text-lg font-bold text-orange-600">
                 ${totalOutstanding.toLocaleString()}
               </span>
-            </div>
-          </div>
-        </div>
+            </div></div></div>
 
         {/* Search Bar */}
         <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-3 mb-4 mx-6 mt-6 hover:shadow-md transition-shadow">
@@ -271,9 +269,7 @@ export default function InvoicesPage() {
             >
               <RefreshCw className="w-4 h-4" />
               <span>Refresh</span>
-            </button>
-          </div>
-        </div>
+            </button></div></div>
 
         {/* Invoices List */}
         {filteredInvoices.length === 0 ? (
@@ -380,8 +376,7 @@ export default function InvoicesPage() {
                   ))}
                 </tbody>
               </table>
-            </div>
-          </div>
+            </div></div>
         )}
 
         {/* Customer Quick View Modal */}

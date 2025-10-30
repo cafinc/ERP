@@ -98,8 +98,7 @@ export default function FeedbackFormPage() {
           <div>
             <h1 className="text-3xl font-bold text-gray-900">Share Your Feedback</h1>
             <p className="text-gray-600 mt-1">Help us improve our snow removal service</p>
-          </div>
-        </div>
+          </div></div>
 
         <form onSubmit={handleSubmitFeedback} className="space-y-6">
           {/* Rating Section */}
@@ -196,9 +195,7 @@ export default function FeedbackFormPage() {
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </label>
-                </div>
-            </div>
-            </div>
+                </div></div></div>
           )}
 
           {/* Submit Button */}
@@ -229,8 +226,7 @@ export default function FeedbackFormPage() {
             <p className="text-sm text-gray-500 italic">
               Your feedback is important to us. Thank you for helping us provide better service.
             </p>
-          </div>
-        </form>
+          </div></form>
 
         {/* Success Modal */}
         {showSuccess && (
@@ -247,12 +243,8 @@ export default function FeedbackFormPage() {
                   className="w-full bg-[#3f72af] text-white py-3 rounded-lg font-semibold hover:bg-[#2c5282]"
                 >
                   Close
-                </button>
-              </div>
-          </div>
-          </div>
+                </button></div></div></div>
         )}
-      </div>
-    </div>
+      </div></div>
   );
 }

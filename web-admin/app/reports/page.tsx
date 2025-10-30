@@ -182,10 +182,7 @@ export default function ReportsPage() {
                 className="px-3 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors text-sm"
               >
                 Last 30 Days
-              </button>
-            </div>
-          </div>
-        </div>
+              </button></div></div></div>
 
         {/* Info Banner */}
         <div className="mx-6 mt-4 bg-blue-50 border border-blue-200 rounded-lg p-4">
@@ -197,9 +194,7 @@ export default function ReportsPage() {
                 Schedule reports to be automatically generated and emailed on a daily, weekly, or monthly basis. 
                 Perfect for keeping stakeholders informed without manual effort.
               </p>
-            </div>
-          </div>
-        </div>
+            </div></div></div>
 
         {/* Reports Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mx-6 mt-6">
@@ -215,8 +210,7 @@ export default function ReportsPage() {
                   <span className="text-xs font-medium bg-white/20 px-2 py-1 rounded-full">
                     {report.type.toUpperCase()}
                   </span>
-                </div>
-              </div>
+                </div></div>
 
               {/* Card Body */}
               <div className="p-5">
@@ -243,10 +237,7 @@ export default function ReportsPage() {
                   >
                     <Mail className="w-4 h-4" />
                     Schedule
-                  </button>
-                </div>
-              </div>
-            </div>
+                  </button></div></div></div>
           ))}
         </div>
 
@@ -259,8 +250,6 @@ export default function ReportsPage() {
             <p className="text-sm text-gray-500 mt-2">
               Click "Schedule" on any report above to set up automatic delivery.
             </p>
-          </div>
-        </div>
-      </div>
+          </div></div></div>
     );
 }

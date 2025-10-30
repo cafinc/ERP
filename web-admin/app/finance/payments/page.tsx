@@ -134,9 +134,7 @@ export default function PaymentsPage() {
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-9 pr-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
               />
-            </div>
-          </div>
-        </div>
+            </div></div></div>
 
         {/* Status Filter Buttons */}
         <div className="flex gap-2 mb-4">
@@ -179,8 +177,7 @@ export default function PaymentsPage() {
             }`}
           >
             Failed ({statusCounts.failed})
-          </button>
-        </div>
+          </button></div>
 
         {/* Payments List */}
         <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
@@ -242,9 +239,7 @@ export default function PaymentsPage() {
                 </tr>
               </tfoot>
             </table>
-          </div>
-        </div>
-      </div>
+          </div></div></div>
     </PageHeader>
   );
 }

@@ -254,8 +254,7 @@ export default function FormBuilderPage() {
                 {templateId ? 'Edit' : 'Create'} Form Template
               </h1>
               <p className="text-gray-600">Design your custom form</p>
-            </div>
-          </div>
+            </div></div>
           <button
             onClick={handleSave}
             disabled={saving}
@@ -263,8 +262,7 @@ export default function FormBuilderPage() {
           >
             <Save className="w-5 h-5" />
             <span>{saving ? 'Saving...' : 'Save Template'}</span>
-          </button>
-        </div>
+          </button></div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
@@ -283,8 +281,7 @@ export default function FormBuilderPage() {
                   </button>
                 );
               })}
-            </div>
-          </div>
+            </div></div>
 
           <div className="lg:col-span-2 space-y-6">
             <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
@@ -337,12 +334,10 @@ export default function FormBuilderPage() {
                               : `border-gray-200 bg-white hover:border-${type.color}-300 hover:shadow-sm`
                           }`}
                         >
-                          <div className="text-sm font-semibold">{type.label}</div>
-                        </button>
+                          <div className="text-sm font-semibold">{type.label}</div></button>
                       );
                     })}
-                  </div>
-                </div>
+                  </div></div>
 
                 {formType && selectedTypeData && (
                   <div>
@@ -364,11 +359,9 @@ export default function FormBuilderPage() {
                           {subtype}
                         </button>
                       ))}
-                    </div>
-                  </div>
+                    </div></div>
                 )}
-              </div>
-            </div>
+              </div></div>
 
             <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
               <h2 className="text-lg font-semibold text-gray-900 mb-4">Form Fields</h2>
@@ -396,8 +389,7 @@ export default function FormBuilderPage() {
                             className="p-1 hover:bg-gray-100 rounded disabled:opacity-30"
                           >
                             <GripVertical className="w-4 h-4 text-gray-400" />
-                          </button>
-                        </div>
+                          </button></div>
 
                         <div className="flex-1">
                           {editingField === field.id ? (
@@ -449,8 +441,7 @@ export default function FormBuilderPage() {
                                 className="text-sm text-[#3f72af] hover:text-blue-700 font-medium"
                               >
                                 Done Editing
-                              </button>
-                            </div>
+                              </button></div>
                           ) : (
                             <div onClick={() => setEditingField(field.id)} className="cursor-pointer">
                               <div className="flex items-center space-x-2 mb-1">
@@ -474,17 +465,9 @@ export default function FormBuilderPage() {
                           className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                         >
                           <X className="w-5 h-5" />
-                        </button>
-                      </div>
-                    </div>
+                        </button></div></div>
                   ))}
                 </div>
               )}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  
-    </div>);
+            </div></div></div></div></div></div>);
 }

@@ -168,8 +168,7 @@ export default function IntegrationsPage() {
                 </p>
               </div>
               <LinkIcon className="h-12 w-12 text-blue-500" />
-            </div>
-          </div>
+            </div></div>
 
           <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
@@ -183,8 +182,7 @@ export default function IntegrationsPage() {
                 </p>
               </div>
               <CheckCircle className="h-12 w-12 text-green-500" />
-            </div>
-          </div>
+            </div></div>
 
           <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
@@ -195,8 +193,7 @@ export default function IntegrationsPage() {
                 </p>
               </div>
               <RefreshCw className="h-12 w-12 text-purple-500" />
-            </div>
-          </div>
+            </div></div>
 
           <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
@@ -207,9 +204,7 @@ export default function IntegrationsPage() {
                 </p>
               </div>
               <BarChart3 className="h-12 w-12 text-orange-500" />
-            </div>
-          </div>
-        </div>
+            </div></div></div>
 
         {/* Quick Sync Actions */}
         <div className="bg-white rounded-lg shadow p-4 mb-8">
@@ -227,8 +222,7 @@ export default function IntegrationsPage() {
                 <span className="text-sm font-medium">{action.name}</span>
               </button>
             ))}
-          </div>
-        </div>
+          </div></div>
 
         {/* Integrations List */}
         <div className="bg-white rounded-lg shadow overflow-hidden mb-8">
@@ -239,8 +233,7 @@ export default function IntegrationsPage() {
             <button className="flex items-center gap-2 px-4 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-colors">
               <Plus className="h-4 w-4" />
               Add Integration
-            </button>
-          </div>
+            </button></div>
 
           <div className="divide-y divide-gray-200">
             {loading ? (
@@ -285,8 +278,7 @@ export default function IntegrationsPage() {
                             {new Date(integration.last_sync).toLocaleString()}
                           </p>
                         )}
-                      </div>
-                    </div>
+                      </div></div>
 
                     <div className="flex items-center gap-2">
                       {integration.status === "connected" ? (
@@ -305,13 +297,10 @@ export default function IntegrationsPage() {
                           Connect
                         </button>
                       )}
-                    </div>
-                  </div>
-                </div>
+                    </div></div></div>
               ))
             )}
-          </div>
-        </div>
+          </div></div>
 
         {/* Recent Sync Logs */}
         <div className="bg-white rounded-lg shadow overflow-hidden">
@@ -364,8 +353,6 @@ export default function IntegrationsPage() {
                 </div>
               ))
             )}
-          </div>
-        </div>
-      </div>
+          </div></div></div>
     );
 }

@@ -130,9 +130,7 @@ export default function ActiveCallsPage() {
             >
               <RefreshCw className="w-4 h-4" />
               <span>Refresh</span>
-            </button>
-          </div>
-        </div>
+            </button></div></div>
 
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
@@ -144,9 +142,7 @@ export default function ActiveCallsPage() {
               <div>
                 <p className="text-sm text-gray-600">Active Calls</p>
                 <p className="text-2xl font-bold text-gray-900">{activeCalls.length}</p>
-              </div>
-            </div>
-          </div>
+              </div></div></div>
           <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center space-x-4">
               <div className="p-3 bg-blue-100 rounded-lg">
@@ -155,10 +151,7 @@ export default function ActiveCallsPage() {
               <div>
                 <p className="text-sm text-gray-600">Live Monitoring</p>
                 <p className="text-2xl font-bold text-gray-900">{autoRefresh ? 'ON' : 'OFF'}</p>
-              </div>
-            </div>
-          </div>
-        </div>
+              </div></div></div></div>
 
         {/* Active Calls List */}
         <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
@@ -195,10 +188,7 @@ export default function ActiveCallsPage() {
                           <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">
                             {call.origin?.type}
                           </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                        </div></div></div></div>
 
                   {/* Parties */}
                   <div className="space-y-3">
@@ -222,8 +212,7 @@ export default function ActiveCallsPage() {
                               Status: {party.status?.code || 'Unknown'}
                               {party.muted && ' • Muted'}
                             </p>
-                          </div>
-                        </div>
+                          </div></div>
 
                         {/* Call Controls */}
                         <div className="flex items-center space-x-2">
@@ -250,18 +239,11 @@ export default function ActiveCallsPage() {
                             title="Hangup"
                           >
                             <PhoneOff className="w-5 h-5" />
-                          </button>
-                        </div>
-                      </div>
+                          </button></div></div>
                     ))}
-                  </div>
-                </div>
+                  </div></div>
               ))}
             </div>
           )}
-        </div>
-      </div>
-    </div>
-  
-    </div>);
+        </div></div></div></div>);
 }

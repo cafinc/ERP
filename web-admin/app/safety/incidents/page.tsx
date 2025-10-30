@@ -184,9 +184,7 @@ export default function IncidentReportingPage() {
               }`}
             >
               Resolved ({incidents.filter(i => i.status === 'resolved').length})
-            </button>
-          </div>
-        </div>
+            </button></div></div>
 
         {/* Search Bar */}
         <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-3 mb-4 mx-6 mt-6 hover:shadow-md transition-shadow">
@@ -199,8 +197,7 @@ export default function IncidentReportingPage() {
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-9 pr-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
-          </div>
-        </div>
+          </div></div>
 
         {/* Incidents Grid */}
         {filteredIncidents.length === 0 ? (
@@ -230,9 +227,7 @@ export default function IncidentReportingPage() {
                     <div className="flex-1 min-w-0">
                       <h3 className="font-semibold text-gray-900 truncate">{incident.incident_number}</h3>
                       <p className="text-sm text-gray-600 truncate">{incident.description}</p>
-                    </div>
-                  </div>
-                </div>
+                    </div></div></div>
 
                 {/* Badges */}
                 <div className="flex items-center gap-2 mb-4 flex-wrap">
@@ -290,9 +285,7 @@ export default function IncidentReportingPage() {
                   >
                     <Edit className="w-4 h-4" />
                     <span>Edit</span>
-                  </button>
-                </div>
-              </div>
+                  </button></div></div>
             ))}
           </div>
         )}

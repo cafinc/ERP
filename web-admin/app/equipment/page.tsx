@@ -191,9 +191,7 @@ export default function EquipmentPage() {
               }`}
             >
               Unavailable ({equipment.filter(e => e.status === 'unavailable').length})
-            </button>
-          </div>
-        </div>
+            </button></div></div>
 
         {/* Search Bar */}
         <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-3 mb-4 mx-6 mt-6 hover:shadow-md transition-shadow">
@@ -230,9 +228,7 @@ export default function EquipmentPage() {
             >
               <RefreshCw className="w-4 h-4" />
               <span>Refresh</span>
-            </button>
-          </div>
-        </div>
+            </button></div></div>
 
         {/* Equipment Grid */}
         {filteredEquipment.length === 0 ? (
@@ -271,8 +267,7 @@ export default function EquipmentPage() {
                     <div className="flex-1 min-w-0">
                       <h3 className="font-semibold text-gray-900 truncate">{item.name}</h3>
                       <p className="text-sm text-gray-600">{getTypeLabel(item.equipment_type)}</p>
-                    </div>
-                  </div>
+                    </div></div>
                   <div className="flex items-center space-x-2">
                     {isMaintenanceDue(item.maintenance_due) && (
                       <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0" />
@@ -280,8 +275,7 @@ export default function EquipmentPage() {
                     <span className={`flex items-center px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(item.status)}`}>
                       {getStatusLabel(item.status)}
                     </span>
-                  </div>
-                </div>
+                  </div></div>
 
                 {/* Details */}
                 <div className="space-y-2 mb-4">
@@ -336,8 +330,7 @@ export default function EquipmentPage() {
                   >
                     <Edit className="w-4 h-4" />
                     <span>Edit</span>
-                  </button>
-                </div>
+                  </button></div>
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
@@ -347,8 +340,7 @@ export default function EquipmentPage() {
                 >
                   <Eye className="w-4 h-4" />
                   View Details
-                </button>
-              </div>
+                </button></div>
             ))}
           </div>
         )}

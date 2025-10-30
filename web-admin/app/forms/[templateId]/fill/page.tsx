@@ -258,8 +258,7 @@ export default function FillFormPage() {
                   className="absolute top-2 right-2 p-1 bg-red-100 text-red-600 rounded-full hover:bg-red-200"
                 >
                   <X className="w-4 h-4" />
-                </button>
-              </div>
+                </button></div>
             ) : (
               <button
                 type="button"
@@ -284,8 +283,7 @@ export default function FillFormPage() {
                   className="absolute top-2 right-2 p-1 bg-red-100 text-red-600 rounded-full hover:bg-red-200"
                 >
                   <X className="w-4 h-4" />
-                </button>
-              </div>
+                </button></div>
             ) : (
               <label className="block w-full px-4 py-8 border-2 border-dashed border-gray-300 rounded-lg hover:border-blue-400 hover:bg-blue-50 transition-colors cursor-pointer">
                 <div className="flex flex-col items-center space-y-2 text-gray-600 hover:text-[#3f72af]">
@@ -328,8 +326,7 @@ export default function FillFormPage() {
               }`}
             >
               ✗ Fail
-            </button>
-          </div>
+            </button></div>
         );
 
       case 'yes_no':
@@ -356,8 +353,7 @@ export default function FillFormPage() {
               }`}
             >
               No
-            </button>
-          </div>
+            </button></div>
         );
 
       case 'yes_no_na':
@@ -395,8 +391,7 @@ export default function FillFormPage() {
               }`}
             >
               N/A
-            </button>
-          </div>
+            </button></div>
         );
 
       case 'condition':
@@ -474,10 +469,7 @@ export default function FillFormPage() {
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#3f72af] mx-auto"></div>
             <p className="mt-4 text-gray-600">Loading form...</p>
-          </div>
-        </div>
-      </div>
-    </div>
+          </div></div></div></div>
     );
   }
 
@@ -543,10 +535,7 @@ export default function FillFormPage() {
               >
                 <Save className="w-5 h-5" />
                 <span>{submitting ? 'Submitting...' : 'Submit Form'}</span>
-              </button>
-            </div>
-          </form>
-        </div>
+              </button></div></form></div>
 
       {/* Signature Modal */}
       {showSignatureModal && (
@@ -557,12 +546,8 @@ export default function FillFormPage() {
               onSave={handleSignatureSave}
               onCancel={() => setShowSignatureModal(false)}
             />
-          </div>
-        </div>
+          </div></div>
       )}
-      </div>
-      </div>
-    </div>
-      </div>
+      </div></div></div></div>
   );
 }

@@ -78,8 +78,7 @@ export default function CompleteDesignSelector() {
           <div className="bg-blue-100 h-8 rounded"></div>
           <div className="bg-green-100 h-8 rounded"></div>
           <div className="bg-purple-100 h-8 rounded"></div>
-          <div className="bg-white shadow-sm border h-16 rounded col-span-3 hover:shadow-md transition-shadow"></div>
-        </div>
+          <div className="bg-white shadow-sm border h-16 rounded col-span-3 hover:shadow-md transition-shadow"></div></div>
       ),
       bestFor: "Dashboards, Overview pages, Analytics",
     },
@@ -94,8 +93,7 @@ export default function CompleteDesignSelector() {
             {[1, 2, 3].map((i) => (
               <div key={i} className="bg-gray-50 h-3 mb-1 rounded"></div>
             ))}
-          </div>
-        </div>
+          </div></div>
       ),
       bestFor: "Customers, Projects, Invoices",
     },
@@ -110,8 +108,7 @@ export default function CompleteDesignSelector() {
               <div key={i} className="bg-white h-3 mb-1 rounded"></div>
             ))}
           </div>
-          <div className="flex-1 bg-white border rounded"></div>
-        </div>
+          <div className="flex-1 bg-white border rounded"></div></div>
       ),
       bestFor: "Messages, Contacts, Documents",
     },
@@ -124,8 +121,7 @@ export default function CompleteDesignSelector() {
           {[1, 2, 3].map((i) => (
             <div key={i} className="flex-1 bg-gray-100 rounded p-1">
               <div className="bg-white h-4 mb-1 rounded"></div>
-              <div className="bg-white h-3 rounded"></div>
-            </div>
+              <div className="bg-white h-3 rounded"></div></div>
           ))}
         </div>
       ),
@@ -148,8 +144,7 @@ export default function CompleteDesignSelector() {
               </div>
             ))}
           </div>
-          <div className="bg-white shadow-sm border rounded h-16 hover:shadow-md transition-shadow"></div>
-        </div>
+          <div className="bg-white shadow-sm border rounded h-16 hover:shadow-md transition-shadow"></div></div>
       ),
       bestFor: "Settings, HR sections, Multi-view pages",
     },
@@ -164,8 +159,7 @@ export default function CompleteDesignSelector() {
               <div key={i} className="bg-gray-200 h-2 mb-1 rounded"></div>
             ))}
           </div>
-          <div className="flex-1 bg-white border rounded"></div>
-        </div>
+          <div className="flex-1 bg-white border rounded"></div></div>
       ),
       bestFor: "Complex settings, Wizards",
     },
@@ -311,12 +305,9 @@ export default function CompleteDesignSelector() {
                     <div>
                       <p className="text-xs text-gray-500 capitalize">{key}</p>
                       <p className="text-sm font-medium capitalize">{value}</p>
-                    </div>
-                  </div>
+                    </div></div>
                 ))}
-              </div>
-            </div>
-          </div>
+              </div></div></div>
 
           {/* 1. Header Options */}
           <section className="mb-8">
@@ -349,10 +340,7 @@ export default function CompleteDesignSelector() {
                       <div>
                         <span className="text-amber-600 font-semibold">Cons:</span>
                         <ul className="ml-2">{option.cons.map((c, i) => <li key={i}>• {c}</li>)}</ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                      </div></div></div></div>
               ))}
             </div>
           </section>
@@ -381,8 +369,7 @@ export default function CompleteDesignSelector() {
                     <p className="text-xs text-[#3f72af] font-medium">
                       Best for: {option.bestFor}
                     </p>
-                  </div>
-                </div>
+                  </div></div>
               ))}
             </div>
           </section>
@@ -411,8 +398,7 @@ export default function CompleteDesignSelector() {
                     <p className="text-xs text-[#3f72af] font-medium">
                       Best for: {option.bestFor}
                     </p>
-                  </div>
-                </div>
+                  </div></div>
               ))}
             </div>
           </section>
@@ -465,8 +451,7 @@ export default function CompleteDesignSelector() {
                   <h3 className="font-semibold text-gray-900 mb-2">{option.name}</h3>
                   <p className="text-sm text-gray-600 mb-3">{option.description}</p>
                   <div className={`${option.padding} ${option.gap} border border-gray-200 rounded`}>
-                    <div className="bg-blue-100 h-8 rounded"></div>
-                  </div>
+                    <div className="bg-blue-100 h-8 rounded"></div></div>
                   <p className="text-xs text-[#3f72af] font-medium mt-3">
                     Best for: {option.bestFor}
                   </p>
@@ -520,9 +505,7 @@ export default function CompleteDesignSelector() {
                   <div>
                     <p className="font-semibold">Components</p>
                     <p className="text-blue-200">All pages</p>
-                  </div>
-                </div>
-              </div>
+                  </div></div></div>
               <button
                 disabled={!allSelectionsComplete}
                 className={`px-8 py-4 rounded-xl font-bold text-lg shadow-2xl transition-all ${
@@ -533,9 +516,7 @@ export default function CompleteDesignSelector() {
               >
                 <Eye className="w-6 h-6 inline mr-2" />
                 Apply Complete Design System
-              </button>
-            </div>
-          </div>
+              </button></div></div>
 
           {/* Info */}
           <div className="mt-6 bg-blue-50 border border-blue-200 rounded-xl p-4">
@@ -543,10 +524,6 @@ export default function CompleteDesignSelector() {
               <strong>💡 Pro Tip:</strong> Take your time reviewing each option. Once you click "Apply",
               we'll implement everything across your entire platform in one comprehensive update.
             </p>
-          </div>
-        </div>
-      </div>
-    </DashboardLayout>
-    </div>
+          </div></div></div></DashboardLayout></div>
   );
 }

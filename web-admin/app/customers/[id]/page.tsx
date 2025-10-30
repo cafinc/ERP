@@ -489,8 +489,7 @@ export default function CustomerDetailPage() {
   if (loading) {
     return (
         <div className="flex items-center justify-center h-full">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#3f72af]"></div>
-        </div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#3f72af]"></div></div>
       );
   }
 
@@ -504,8 +503,7 @@ export default function CustomerDetailPage() {
             className="mt-4 px-6 py-3 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282]"
           >
             Back to Customers
-          </button>
-        </div>
+          </button></div>
       );
   }
 
@@ -619,31 +617,27 @@ export default function CustomerDetailPage() {
                         <div>
                           <p className="text-sm text-gray-600">Operating As</p>
                           <p className="text-gray-900">{customer.operating_as}</p>
-                        </div>
-                      </div>
+                        </div></div>
                     )}
                     <div className="flex items-start space-x-3">
                       <Mail className="w-5 h-5 text-gray-400 mt-0.5" />
                       <div>
                         <p className="text-sm text-gray-600">Email</p>
                         <p className="text-gray-900">{customer.email}</p>
-                      </div>
-                    </div>
+                      </div></div>
                     <div className="flex items-start space-x-3">
                       <Phone className="w-5 h-5 text-gray-400 mt-0.5" />
                       <div>
                         <p className="text-sm text-gray-600">{isCompany ? 'Office Number' : 'Phone'}</p>
                         <p className="text-gray-900">{formatPhoneNumber(customer.phone)}</p>
-                      </div>
-                    </div>
+                      </div></div>
                     {customer.address && (
                       <div className="flex items-start space-x-3">
                         <MapPin className="w-5 h-5 text-gray-400 mt-0.5" />
                         <div>
                           <p className="text-sm text-gray-600">{isCompany ? 'Company Address' : 'Address'}</p>
                           <p className="text-gray-900">{customer.address}</p>
-                        </div>
-                      </div>
+                        </div></div>
                     )}
                     {!isCompany && customer.company_name && (
                       <div className="flex items-start space-x-3 pt-2 border-t border-gray-200">
@@ -655,12 +649,9 @@ export default function CustomerDetailPage() {
                             className="text-[#3f72af] hover:text-blue-800 font-medium hover:underline"
                           >
                             {customer.company_name}
-                          </button>
-                        </div>
-                      </div>
+                          </button></div></div>
                     )}
-                  </div>
-                </div>
+                  </div></div>
 
                 {/* Company Accounting Information - Only for Companies */}
                 {isCompany && customer.accounting && (
@@ -676,43 +667,37 @@ export default function CustomerDetailPage() {
                           <div>
                             <p className="text-sm text-gray-600">Business Number</p>
                             <p className="text-gray-900">{customer.accounting.business_number}</p>
-                          </div>
-                        </div>
+                          </div></div>
                       )}
                       <div className="flex items-start space-x-3">
                         <DollarSign className="w-5 h-5 text-gray-400 mt-0.5" />
                         <div>
                           <p className="text-sm text-gray-600">Payment Terms</p>
                           <p className="text-gray-900 capitalize">{customer.accounting.payment_terms?.replace('_', ' ') || 'Due on Receipt'}</p>
-                        </div>
-                      </div>
+                        </div></div>
                       {customer.accounting.credit_limit && (
                         <div className="flex items-start space-x-3">
                           <CreditCard className="w-5 h-5 text-gray-400 mt-0.5" />
                           <div>
                             <p className="text-sm text-gray-600">Credit Limit</p>
                             <p className="text-gray-900">${parseFloat(customer.accounting.credit_limit).toLocaleString()}</p>
-                          </div>
-                        </div>
+                          </div></div>
                       )}
                       <div className="flex items-start space-x-3">
                         <Wallet className="w-5 h-5 text-gray-400 mt-0.5" />
                         <div>
                           <p className="text-sm text-gray-600">Preferred Payment Method</p>
                           <p className="text-gray-900 capitalize">{customer.accounting.preferred_payment_method?.replace('_', ' ') || 'E-Transfer'}</p>
-                        </div>
-                      </div>
+                        </div></div>
                       {customer.accounting.po_required && (
                         <div className="flex items-start space-x-3">
                           <CheckCircle className="w-5 h-5 text-green-500 mt-0.5" />
                           <div>
                             <p className="text-sm text-gray-600">Purchase Order Required</p>
                             <p className="text-gray-900">Yes</p>
-                          </div>
-                        </div>
+                          </div></div>
                       )}
-                    </div>
-                  </div>
+                    </div></div>
                 )}
 
                 {!isCompany && customer.company_name && (
@@ -727,8 +712,7 @@ export default function CustomerDetailPage() {
                       className="mt-3 text-sm text-[#3f72af] hover:text-blue-800 font-medium"
                     >
                       View Company →
-                    </button>
-                  </div>
+                    </button></div>
                 )}
 
                 {customer.custom_fields && customer.custom_fields.length > 0 && (
@@ -741,8 +725,7 @@ export default function CustomerDetailPage() {
                           <p className="text-gray-900">{field.field_value}</p>
                         </div>
                       ))}
-                    </div>
-                  </div>
+                    </div></div>
                 )}
               </div>
 
@@ -757,9 +740,7 @@ export default function CustomerDetailPage() {
                       <div>
                         <p className="text-sm text-gray-600">Sites</p>
                         <p className="text-2xl font-bold text-gray-900">{sites.length}</p>
-                      </div>
-                    </div>
-                  </div>
+                      </div></div></div>
                   <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
                     <div className="flex items-center space-x-3">
                       <div className="p-3 bg-green-100 rounded-lg">
@@ -768,9 +749,7 @@ export default function CustomerDetailPage() {
                       <div>
                         <p className="text-sm text-gray-600">Requests</p>
                         <p className="text-2xl font-bold text-gray-900">{serviceRequests.length}</p>
-                      </div>
-                    </div>
-                  </div>
+                      </div></div></div>
                   <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
                     <div className="flex items-center space-x-3">
                       <div className="p-3 bg-purple-100 rounded-lg">
@@ -779,10 +758,7 @@ export default function CustomerDetailPage() {
                       <div>
                         <p className="text-sm text-gray-600">Contracts</p>
                         <p className="text-2xl font-bold text-gray-900">{contracts.length}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                      </div></div></div></div>
 
                 {/* Recent Activity */}
                 <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
@@ -809,15 +785,11 @@ export default function CustomerDetailPage() {
                             }`}>
                               {request.status}
                             </span>
-                          </div>
-                        </div>
+                          </div></div>
                       ))}
                     </div>
                   )}
-                </div>
-              </div>
-              </div>
-            </div>
+                </div></div></div></div>
           )}
 
           {/* Sites Tab */}
@@ -831,8 +803,7 @@ export default function CustomerDetailPage() {
                   >
                     <Plus className="w-4 h-4" />
                     <span>Add Site</span>
-                  </button>
-                </div>
+                  </button></div>
                 {sites.length === 0 ? (
                   <p className="text-gray-600 text-center py-8">No sites yet</p>
                 ) : (
@@ -863,8 +834,7 @@ export default function CustomerDetailPage() {
                 >
                   <Plus className="w-4 h-4" />
                   <span>New Estimate</span>
-                </button>
-              </div>
+                </button></div>
               {estimates.length === 0 ? (
                 <div className="text-center py-12">
                   <FileText className="w-16 h-16 text-gray-300 mx-auto mb-4" />
@@ -878,8 +848,7 @@ export default function CustomerDetailPage() {
                   >
                     <Plus className="w-5 h-5" />
                     <span>Create Estimate</span>
-                  </button>
-                </div>
+                  </button></div>
               ) : (
                 <div className="space-y-3">
                   {estimates.map((estimate: any) => (
@@ -912,8 +881,7 @@ export default function CustomerDetailPage() {
                             {estimate.valid_until && (
                               <span>Valid Until: {new Date(estimate.valid_until).toLocaleDateString()}</span>
                             )}
-                          </div>
-                        </div>
+                          </div></div>
                         <div className="text-right">
                           <p className="text-2xl font-bold text-gray-900">
                             ${estimate.total?.toLocaleString() || estimate.total_amount?.toLocaleString() || '0.00'}
@@ -921,9 +889,7 @@ export default function CustomerDetailPage() {
                           {estimate.tax && (
                             <p className="text-xs text-gray-500 mt-1">+${estimate.tax.toLocaleString()} tax</p>
                           )}
-                        </div>
-                      </div>
-                    </div>
+                        </div></div></div>
                   ))}
                 </div>
               )}
@@ -941,8 +907,7 @@ export default function CustomerDetailPage() {
                 >
                   <Plus className="w-4 h-4" />
                   <span>New Project</span>
-                </button>
-              </div>
+                </button></div>
               {projects.length === 0 ? (
                 <div className="text-center py-12">
                   <FolderOpen className="w-16 h-16 text-gray-300 mx-auto mb-4" />
@@ -956,8 +921,7 @@ export default function CustomerDetailPage() {
                   >
                     <Plus className="w-5 h-5" />
                     <span>Create Project</span>
-                  </button>
-                </div>
+                  </button></div>
               ) : (
                 <div className="space-y-3">
                   {projects.map((project: any) => (
@@ -996,8 +960,7 @@ export default function CustomerDetailPage() {
                                 <span className="font-medium text-[#3f72af]">{project.completion_percentage}%</span>
                               </span>
                             )}
-                          </div>
-                        </div>
+                          </div></div>
                         <div className="text-right">
                           <p className="text-2xl font-bold text-gray-900">
                             ${project.total_amount?.toLocaleString() || project.budget?.toLocaleString() || '0.00'}
@@ -1005,8 +968,7 @@ export default function CustomerDetailPage() {
                           {project.estimate_number && (
                             <p className="text-xs text-gray-500 mt-1">from {project.estimate_number}</p>
                           )}
-                        </div>
-                      </div>
+                        </div></div>
                       {project.completion_percentage !== undefined && (
                         <div className="mt-3">
                           <div className="w-full bg-gray-200 rounded-full h-2">
@@ -1014,8 +976,7 @@ export default function CustomerDetailPage() {
                               className="bg-[#3f72af] h-2 rounded-full transition-all"
                               style={{ width: `${project.completion_percentage}%` }}
                             />
-                          </div>
-                        </div>
+                          </div></div>
                       )}
                     </div>
                   ))}
@@ -1045,10 +1006,7 @@ export default function CustomerDetailPage() {
                     >
                       <Plus className="w-4 h-4" />
                       <span>New Agreement</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
+                    </button></div></div></div>
 
               {/* Pending Signature Estimates Section */}
               {estimates.filter((e: any) => e.status === 'sent' && !e.requires_agreement).length > 0 && (
@@ -1091,8 +1049,7 @@ export default function CustomerDetailPage() {
                                   <span>Valid Until: {new Date(estimate.valid_until).toLocaleDateString()}</span>
                                 </span>
                               )}
-                            </div>
-                          </div>
+                            </div></div>
                           <div className="text-right">
                             <p className="text-2xl font-bold text-gray-900">
                               ${estimate.total?.toLocaleString() || estimate.total_amount?.toLocaleString() || '0.00'}
@@ -1105,13 +1062,9 @@ export default function CustomerDetailPage() {
                               className="mt-2 text-xs text-[#3f72af] hover:text-[#3f72af]/80 font-medium"
                             >
                               Send Reminder →
-                            </button>
-                          </div>
-                        </div>
-                      </div>
+                            </button></div></div></div>
                     ))}
-                  </div>
-                </div>
+                  </div></div>
               )}
 
               {/* Active Agreements Section */}
@@ -1130,8 +1083,7 @@ export default function CustomerDetailPage() {
                     >
                       <Plus className="w-5 h-5" />
                       <span>Create Agreement</span>
-                    </button>
-                  </div>
+                    </button></div>
                 ) : contracts.length === 0 ? (
                   <p className="text-center text-gray-600 py-8">No active agreements yet</p>
                 ) : (
@@ -1173,8 +1125,7 @@ export default function CustomerDetailPage() {
                                   <span>Auto-Renew</span>
                                 </span>
                               )}
-                            </div>
-                          </div>
+                            </div></div>
                           <div className="text-right">
                             <p className="text-2xl font-bold text-gray-900">
                               ${(agreement.agreement_value || agreement.contract_value)?.toLocaleString() || '0'}
@@ -1182,14 +1133,11 @@ export default function CustomerDetailPage() {
                             {agreement.payment_terms && (
                               <p className="text-xs text-gray-500 mt-1">{agreement.payment_terms}</p>
                             )}
-                          </div>
-                        </div>
-                      </div>
+                          </div></div></div>
                     ))}
                   </div>
                 )}
-              </div>
-            </div>
+              </div></div>
           )}
 
           {/* Tasks Tab */}
@@ -1203,8 +1151,7 @@ export default function CustomerDetailPage() {
                 >
                   <Plus className="w-4 h-4" />
                   <span>New Task</span>
-                </button>
-              </div>
+                </button></div>
               {tasks.length === 0 ? (
                 <div className="text-center py-12">
                   <CheckCircle className="w-16 h-16 text-gray-300 mx-auto mb-4" />
@@ -1218,8 +1165,7 @@ export default function CustomerDetailPage() {
                   >
                     <Plus className="w-5 h-5" />
                     <span>Create Task</span>
-                  </button>
-                </div>
+                  </button></div>
               ) : (
                 <div className="space-y-3">
                   {tasks.map((task: any) => (
@@ -1259,10 +1205,7 @@ export default function CustomerDetailPage() {
                             {task.due_date && (
                               <span>Due: {new Date(task.due_date).toLocaleDateString()}</span>
                             )}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                          </div></div></div></div>
                   ))}
                 </div>
               )}
@@ -1281,8 +1224,7 @@ export default function CustomerDetailPage() {
                   >
                     <Plus className="w-4 h-4" />
                     <span>Link Contact</span>
-                  </button>
-                </div>
+                  </button></div>
                 {contacts.length === 0 ? (
                   <p className="text-gray-600 text-center py-8">No contacts linked yet</p>
                 ) : (
@@ -1306,14 +1248,11 @@ export default function CustomerDetailPage() {
                             className="px-3 py-1 text-sm text-red-600 hover:bg-red-50 rounded"
                           >
                             Unlink
-                          </button>
-                        </div>
-                      </div>
+                          </button></div></div>
                     ))}
                   </div>
                 )}
-              </div>
-            </div>
+              </div></div>
           )}
 
           {/* Accounting Tab (Company only) */}
@@ -1359,8 +1298,7 @@ export default function CustomerDetailPage() {
                 ) : (
                   <p className="text-gray-600 text-center py-8">No accounting information available</p>
                 )}
-              </div>
-            </div>
+              </div></div>
           )}
 
           {/* Contracts Tab */}
@@ -1380,8 +1318,7 @@ export default function CustomerDetailPage() {
                     ))}
                   </div>
                 )}
-              </div>
-            </div>
+              </div></div>
           )}
 
           {/* Invoices Tab */}
@@ -1410,8 +1347,7 @@ export default function CustomerDetailPage() {
                     ))}
                   </div>
                 )}
-              </div>
-            </div>
+              </div></div>
           )}
         </div>
 
@@ -1428,8 +1364,7 @@ export default function CustomerDetailPage() {
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
-              </button>
-            </div>
+              </button></div>
 
             {communications.length === 0 ? (
               <p className="text-center text-gray-500 py-8">No communications recorded yet</p>
@@ -1561,8 +1496,7 @@ export default function CustomerDetailPage() {
                 className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
               >
                 <X className="w-6 h-6 text-gray-600" />
-              </button>
-            </div>
+              </button></div>
 
             <div className="p-4 space-y-6">
               <div>
@@ -1601,8 +1535,7 @@ export default function CustomerDetailPage() {
                         <span className="text-gray-900">{service}</span>
                       </label>
                     ))}
-                  </div>
-                </div>
+                  </div></div>
               )}
 
               <div>
@@ -1647,11 +1580,7 @@ export default function CustomerDetailPage() {
                   className="px-6 py-2 bg-green-600 hover:bg-green-700 disabled:bg-gray-300 text-white rounded-lg font-medium transition-colors"
                 >
                   {submittingRequest ? 'Creating...' : 'Create Request'}
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+                </button></div></div></div></div>
       )}
 
       {/* Link Contact Modal */}
@@ -1665,8 +1594,7 @@ export default function CustomerDetailPage() {
                 className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
               >
                 <X className="w-6 h-6 text-gray-600" />
-              </button>
-            </div>
+              </button></div>
 
             <div className="p-4 space-y-6">
               <div>
@@ -1687,9 +1615,7 @@ export default function CustomerDetailPage() {
                     className="px-6 py-2 bg-[#3f72af] hover:bg-[#2c5282] text-white rounded-lg font-medium transition-colors"
                   >
                     <Search className="w-5 h-5" />
-                  </button>
-                </div>
-              </div>
+                  </button></div></div>
 
               {searchResults.length > 0 && (
                 <div>
@@ -1709,11 +1635,9 @@ export default function CustomerDetailPage() {
                         >
                           <LinkIcon className="w-4 h-4 inline-block mr-1" />
                           Link
-                        </button>
-                      </div>
+                        </button></div>
                     ))}
-                  </div>
-                </div>
+                  </div></div>
               )}
 
               {searchQuery && searchResults.length === 0 && (
@@ -1721,9 +1645,7 @@ export default function CustomerDetailPage() {
                   No individuals found. Try a different search term.
                 </p>
               )}
-            </div>
-          </div>
-        </div>
+            </div></div></div>
       )}
 
       {/* Attach Form Modal */}
@@ -1737,8 +1659,7 @@ export default function CustomerDetailPage() {
                 className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
               >
                 <X className="w-6 h-6 text-gray-600" />
-              </button>
-            </div>
+              </button></div>
 
             <div className="p-4 space-y-6">
               <p className="text-sm text-gray-600">
@@ -1763,15 +1684,11 @@ export default function CustomerDetailPage() {
                         <div>
                           <h3 className="font-semibold text-gray-900">{form.name}</h3>
                           <p className="text-sm text-gray-600 mt-1">{form.description || 'No description'}</p>
-                        </div>
-                      </div>
-                    </button>
+                        </div></div></button>
                   ))}
                 </div>
               )}
-            </div>
-          </div>
-        </div>
+            </div></div></div>
       )}
 
       {/* Archive Confirmation Modal */}
@@ -1790,9 +1707,7 @@ export default function CustomerDetailPage() {
                       ? 'Please review the information before archiving' 
                       : 'Please review the information before unarchiving'}
                   </p>
-                </div>
-              </div>
-            </div>
+                </div></div></div>
 
             <div className="p-6">
               <div className="space-y-4">
@@ -1813,10 +1728,7 @@ export default function CustomerDetailPage() {
                             {customer.active ? 'Active' : 'Archived'}
                           </span>
                         </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                      </div></div></div></div>
 
                 {customer.active ? (
                   <div className="bg-orange-50 border border-orange-200 rounded-lg p-4">
@@ -1831,9 +1743,7 @@ export default function CustomerDetailPage() {
                           <li>You can unarchive them at any time to restore access</li>
                           <li>Archived customers still appear in reports and analytics</li>
                         </ul>
-                      </div>
-                    </div>
-                  </div>
+                      </div></div></div>
                 ) : (
                   <div className="bg-green-50 border border-green-200 rounded-lg p-4">
                     <div className="flex gap-2">
@@ -1846,12 +1756,9 @@ export default function CustomerDetailPage() {
                           <li>All features and functionality will be restored</li>
                           <li>You can create new projects, estimates, and invoices</li>
                         </ul>
-                      </div>
-                    </div>
-                  </div>
+                      </div></div></div>
                 )}
-              </div>
-            </div>
+              </div></div>
 
             <div className="border-t p-6 bg-gray-50 flex justify-end gap-3">
               <button
@@ -1871,10 +1778,7 @@ export default function CustomerDetailPage() {
                 }`}
               >
                 {archiving ? 'Processing...' : customer.active ? 'Yes, Archive Customer' : 'Yes, Unarchive Customer'}
-              </button>
-            </div>
-          </div>
-        </div>
+              </button></div></div></div>
       )}
 
       {/* Archive Success Modal */}
@@ -1893,17 +1797,13 @@ export default function CustomerDetailPage() {
                   <p className="text-white/90 mt-1">
                     {archiveSuccessMessage}
                   </p>
-                </div>
-              </div>
-            </div>
+                </div></div></div>
 
             <div className="p-6 text-center">
               <p className="text-gray-600">
                 Customer status has been updated
               </p>
-            </div>
-          </div>
-        </div>
+            </div></div></div>
       )}
     </div>
     );

@@ -450,8 +450,7 @@ export default function UnifiedCommunicationsCenter() {
               <div>
                 <h1 className="text-2xl font-bold text-gray-900">Unified Communications Center</h1>
                 <p className="text-sm text-gray-500 mt-1">All messages, emails, SMS, and calls in one place</p>
-              </div>
-            </div>
+              </div></div>
             <div className="flex items-center gap-3">
               <button
                 onClick={fetchAllCommunications}
@@ -466,37 +465,28 @@ export default function UnifiedCommunicationsCenter() {
               >
                 <Download className="w-4 h-4" />
                 Export
-              </button>
-            </div>
-          </div>
+              </button></div></div>
 
           {/* Stats */}
           <div className="grid grid-cols-6 gap-4 mt-4">
             <div className="bg-gradient-to-br from-gray-50 to-white p-4 rounded-lg border border-gray-200">
               <div className="text-2xl font-bold text-gray-900">{stats.total}</div>
-              <div className="text-xs text-gray-500 mt-1">Total</div>
-            </div>
+              <div className="text-xs text-gray-500 mt-1">Total</div></div>
             <div className="bg-gradient-to-br from-orange-50 to-white p-4 rounded-lg border border-orange-200">
               <div className="text-2xl font-bold text-orange-700">{stats.inapp}</div>
-              <div className="text-xs text-orange-600 mt-1">InApp</div>
-            </div>
+              <div className="text-xs text-orange-600 mt-1">InApp</div></div>
             <div className="bg-gradient-to-br from-green-50 to-white p-4 rounded-lg border border-green-200">
               <div className="text-2xl font-bold text-green-700">{stats.sms}</div>
-              <div className="text-xs text-green-600 mt-1">SMS</div>
-            </div>
+              <div className="text-xs text-green-600 mt-1">SMS</div></div>
             <div className="bg-gradient-to-br from-blue-50 to-white p-4 rounded-lg border border-blue-200">
               <div className="text-2xl font-bold text-blue-700">{stats.email}</div>
-              <div className="text-xs text-blue-600 mt-1">Email</div>
-            </div>
+              <div className="text-xs text-blue-600 mt-1">Email</div></div>
             <div className="bg-gradient-to-br from-purple-50 to-white p-4 rounded-lg border border-purple-200">
               <div className="text-2xl font-bold text-purple-700">{stats.phone}</div>
-              <div className="text-xs text-purple-600 mt-1">Phone</div>
-            </div>
+              <div className="text-xs text-purple-600 mt-1">Phone</div></div>
             <div className="bg-gradient-to-br from-red-50 to-white p-4 rounded-lg border border-red-200">
               <div className="text-2xl font-bold text-red-700">{stats.unread}</div>
-              <div className="text-xs text-red-600 mt-1">Unread</div>
-            </div>
-          </div>
+              <div className="text-xs text-red-600 mt-1">Unread</div></div></div>
 
           {/* Search & Filters */}
           <div className="flex items-center gap-3 mt-4">
@@ -518,8 +508,7 @@ export default function UnifiedCommunicationsCenter() {
             >
               <Filter className="w-4 h-4" />
               Filters
-            </button>
-          </div>
+            </button></div>
 
           {/* Filter Options */}
           {showFilters && (
@@ -540,9 +529,7 @@ export default function UnifiedCommunicationsCenter() {
                       {dir.charAt(0).toUpperCase() + dir.slice(1)}
                     </button>
                   ))}
-                </div>
-              </div>
-            </div>
+                </div></div></div>
           )}
         </div>
 
@@ -574,8 +561,7 @@ export default function UnifiedCommunicationsCenter() {
               </span>
             </button>
           ))}
-        </div>
-      </div>
+        </div></div>
 
       {/* Communications List */}
       <div className="flex-1 overflow-y-auto p-6 pb-32">
@@ -584,8 +570,7 @@ export default function UnifiedCommunicationsCenter() {
             <div className="text-center">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4" />
               <p className="text-gray-600">Loading communications...</p>
-            </div>
-          </div>
+            </div></div>
         ) : filteredComms.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full text-gray-400">
             <MessageSquare className="w-20 h-20 mb-4 opacity-50" />
@@ -655,8 +640,7 @@ export default function UnifiedCommunicationsCenter() {
                         ) : (
                           <div className="w-2 h-2 bg-blue-500 rounded-full" title="Unread" />
                         )}
-                      </div>
-                    </div>
+                      </div></div>
 
                     <p className="text-gray-700 text-sm line-clamp-2">
                       {getMessagePreview(comm)}
@@ -671,9 +655,7 @@ export default function UnifiedCommunicationsCenter() {
                         </span>
                       </div>
                     )}
-                  </div>
-                </div>
-              </div>
+                  </div></div></div>
             ))}
           </div>
         )}
@@ -697,8 +679,7 @@ export default function UnifiedCommunicationsCenter() {
                     <p className="text-sm text-gray-600 mt-1">
                       To: {selectedComm.customer_name || selectedComm.from || selectedComm.to || 'Unknown'}
                     </p>
-                  </div>
-                </div>
+                  </div></div>
                 <button
                   onClick={() => {
                     setShowReplyModal(false);
@@ -709,9 +690,7 @@ export default function UnifiedCommunicationsCenter() {
                   className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
                 >
                   <X className="w-5 h-5 text-gray-600" />
-                </button>
-              </div>
-            </div>
+                </button></div></div>
 
             {/* Conversation History - Text Message Style */}
             <div className="flex-1 overflow-y-auto p-6 bg-gradient-to-b from-gray-50 to-gray-100">
@@ -830,11 +809,7 @@ export default function UnifiedCommunicationsCenter() {
                                 {!isInbound && msg.read && (
                                   <CheckCircle className="w-3 h-3" />
                                 )}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                              </div></div></div></div></div>
                     );
                   })}
                 </div>
@@ -903,8 +878,7 @@ export default function UnifiedCommunicationsCenter() {
                       title="Add emoji"
                     >
                       <Smile className="w-5 h-5" />
-                    </button>
-                  </div>
+                    </button></div>
                   
                   {/* Hidden file input */}
                   <input
@@ -943,8 +917,7 @@ export default function UnifiedCommunicationsCenter() {
                               {emoji}
                             </button>
                           ))}
-                        </div>
-                      </div>
+                        </div></div>
                     ))}
                   </div>
                 )}
@@ -968,13 +941,11 @@ export default function UnifiedCommunicationsCenter() {
                           className="text-gray-400 hover:text-red-500"
                         >
                           <X className="w-4 h-4" />
-                        </button>
-                      </div>
+                        </button></div>
                     ))}
                   </div>
                 )}
-              </div>
-            </div>
+              </div></div>
 
             {/* Action Buttons - Fixed at bottom */}
             <div className="p-6 border-t border-gray-200 bg-gray-50 flex-shrink-0">
@@ -1005,11 +976,7 @@ export default function UnifiedCommunicationsCenter() {
                       {selectedComm.type === 'phone' ? 'Save Note' : 'Send Reply'}
                     </>
                   )}
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+                </button></div></div></div></div>
       )}
     </div>
   );

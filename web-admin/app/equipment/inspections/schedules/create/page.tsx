@@ -158,10 +158,7 @@ export default function CreateInspectionSchedulePage() {
       <div className="flex-1 overflow-auto p-6">
         <div className="flex items-center justify-center h-64">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
-        </div>
-    
-    </div>
-    </div>
+        </div></div></div>
     );
   }
 
@@ -352,8 +349,7 @@ export default function CreateInspectionSchedulePage() {
               >
                 <Plus className="w-4 h-4" />
                 Add Rule
-              </button>
-            </div>
+              </button></div>
 
             {complianceRules.length === 0 ? (
               <div className="text-center py-8 bg-gray-50 rounded-lg">
@@ -380,8 +376,7 @@ export default function CreateInspectionSchedulePage() {
                         className="text-red-600 hover:text-red-800"
                       >
                         <Trash2 className="w-4 h-4" />
-                      </button>
-                    </div>
+                      </button></div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                       <div>
@@ -437,9 +432,7 @@ export default function CreateInspectionSchedulePage() {
                           placeholder="e.g., Critical safety requirement"
                           className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         />
-                      </div>
-                    </div>
-                  </div>
+                      </div></div></div>
                 ))}
               </div>
             )}
@@ -470,12 +463,6 @@ export default function CreateInspectionSchedulePage() {
               className="px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50"
             >
               Cancel
-            </button>
-          </div>
-        </div>
-        </form>
-        </div>
-      </div>
-    </div>
+            </button></div></div></form></div></div></div>
   );
 }

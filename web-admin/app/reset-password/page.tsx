@@ -64,10 +64,7 @@ export default function ResetPasswordPage() {
             className="w-full bg-[#3f72af] text-white py-3 rounded-lg font-semibold hover:bg-[#2c5282]"
           >
             Request New Link
-          </button>
-        </div>
-      </div>
-    </div>
+          </button></div></div></div>
     );
   }
 
@@ -85,9 +82,7 @@ export default function ResetPasswordPage() {
             className="w-full bg-[#3f72af] text-white py-3 rounded-lg font-semibold hover:bg-[#2c5282]"
           >
             Go to Login
-          </button>
-        </div>
-      </div>
+          </button></div></div>
     );
   }
 
@@ -131,8 +126,7 @@ export default function ResetPasswordPage() {
                 className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
               >
                 {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-              </button>
-            </div>
+              </button></div>
             <p className="text-xs text-gray-500 mt-1">At least 8 characters</p>
           </div>
 
@@ -150,8 +144,7 @@ export default function ResetPasswordPage() {
                 required
                 className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
-            </div>
-          </div>
+            </div></div>
 
           <button
             type="submit"
@@ -159,9 +152,6 @@ export default function ResetPasswordPage() {
             className="w-full bg-[#3f72af] text-white py-3 rounded-lg font-semibold hover:bg-[#2c5282] disabled:opacity-50"
           >
             {submitting ? 'Resetting Password...' : 'Reset Password'}
-          </button>
-        </form>
-      </div>
-    </div>
+          </button></form></div></div>
   );
 }

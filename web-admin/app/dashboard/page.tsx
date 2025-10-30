@@ -225,8 +225,7 @@ export default function DashboardPage() {
               className="mt-4 w-full px-4 py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors text-sm font-medium"
             >
               View Leads
-            </button>
-          </div>
+            </button></div>
 
           {/* Customers Card */}
           <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 hover:shadow-xl transition-shadow">
@@ -253,8 +252,7 @@ export default function DashboardPage() {
               className="mt-4 w-full px-4 py-2 bg-green-50 text-green-600 rounded-lg hover:bg-green-100 transition-colors text-sm font-medium"
             >
               View Customers
-            </button>
-          </div>
+            </button></div>
 
           {/* Sites Card */}
           <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 hover:shadow-xl transition-shadow">
@@ -281,8 +279,7 @@ export default function DashboardPage() {
               className="mt-4 w-full px-4 py-2 bg-purple-50 text-purple-600 rounded-lg hover:bg-purple-100 transition-colors text-sm font-medium"
             >
               View Sites
-            </button>
-          </div>
+            </button></div>
 
           {/* Revenue Card */}
           <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 hover:shadow-xl transition-shadow">
@@ -309,9 +306,7 @@ export default function DashboardPage() {
               className="mt-4 w-full px-4 py-2 bg-yellow-50 text-yellow-600 rounded-lg hover:bg-yellow-100 transition-colors text-sm font-medium"
             >
               View Pipeline
-            </button>
-          </div>
-        </div>
+            </button></div></div>
 
         {/* Secondary Metrics Row */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -334,8 +329,7 @@ export default function DashboardPage() {
                     className="bg-blue-500 h-3 rounded-full transition-all"
                     style={{ width: '100%' }}
                   />
-                </div>
-              </div>
+                </div></div>
               <div>
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-sm font-medium text-gray-700">Contacted</span>
@@ -348,8 +342,7 @@ export default function DashboardPage() {
                     className="bg-purple-500 h-3 rounded-full transition-all"
                     style={{ width: '70%' }}
                   />
-                </div>
-              </div>
+                </div></div>
               <div>
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-sm font-medium text-gray-700">Converted</span>
@@ -360,18 +353,14 @@ export default function DashboardPage() {
                     className="bg-green-500 h-3 rounded-full transition-all"
                     style={{ width: `${stats?.leads.conversionRate || 0}%` }}
                   />
-                </div>
-              </div>
-            </div>
+                </div></div></div>
             <div className="mt-6 pt-6 border-t border-gray-200">
               <div className="flex items-center justify-between">
                 <span className="text-sm font-medium text-gray-600">Conversion Rate</span>
                 <span className="text-2xl font-bold text-green-600">
                   {stats?.leads.conversionRate.toFixed(1)}%
                 </span>
-              </div>
-            </div>
-          </div>
+              </div></div></div>
 
           {/* Inventory Alerts */}
           <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6">
@@ -391,8 +380,7 @@ export default function DashboardPage() {
                     {stats?.consumables.lowStock || 0}
                   </p>
                   <p className="text-sm text-gray-600">Low Stock Items</p>
-                </div>
-              </div>
+                </div></div>
               <div className="pt-4 border-t border-gray-200">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-sm font-medium text-gray-600">Total Inventory Value</span>
@@ -400,16 +388,14 @@ export default function DashboardPage() {
                 <p className="text-2xl font-bold text-gray-900">
                   ${(stats?.consumables.totalValue || 0).toLocaleString()}
                 </p>
-              </div>
-            </div>
+              </div></div>
             <button
               onClick={() => router.push('/consumables')}
               className="mt-6 w-full px-4 py-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition-colors text-sm font-medium flex items-center justify-center gap-2"
             >
               View Inventory
               <ArrowRight className="w-4 h-4" />
-            </button>
-          </div>
+            </button></div>
 
           {/* Recent Activity */}
           <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6">
@@ -437,16 +423,13 @@ export default function DashboardPage() {
                       <p className="text-xs text-gray-400 mt-1">
                         {new Date(activity.timestamp).toLocaleTimeString()}
                       </p>
-                    </div>
-                  </div>
+                    </div></div>
                 );
               })}
             </div>
             <button className="mt-6 w-full px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm font-medium">
               View All Activity
-            </button>
-          </div>
-        </div>
+            </button></div></div>
 
         {/* Quick Actions */}
         <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6">
@@ -487,10 +470,7 @@ export default function DashboardPage() {
               <p className="text-sm font-semibold text-gray-700 group-hover:text-yellow-600">
                 Manage Inventory
               </p>
-            </button>
-          </div>
-        </div>
-      </div>
+            </button></div></div></div>
 
       {/* Create Lead Modal */}
       {showLeadModal && (
@@ -504,9 +484,7 @@ export default function DashboardPage() {
                   className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
                 >
                   <XCircle className="w-6 h-6 text-gray-500" />
-                </button>
-              </div>
-            </div>
+                </button></div></div>
             <div className="p-6">
               <p className="text-gray-600 mb-4">
                 To create a full lead with all details, please use the{' '}
@@ -536,11 +514,7 @@ export default function DashboardPage() {
                   className="px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 font-semibold transition-all"
                 >
                   Go to Leads Page
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+                </button></div></div></div></div>
       )}
     </div>
   );

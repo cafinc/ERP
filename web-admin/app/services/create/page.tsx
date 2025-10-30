@@ -157,8 +157,7 @@ export default function ServiceFormPage() {
         <div className="flex-1 overflow-auto p-6">
           <div className="flex items-center justify-center h-64">
             <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
-          </div>
-        </div>
+          </div></div>
       </>
     );
   }
@@ -194,8 +193,7 @@ export default function ServiceFormPage() {
                       className="sr-only peer"
                     />
                     <div className="w-14 h-7 bg-gray-300 rounded-full peer peer-checked:bg-[#3f72af] transition-all duration-300 shadow-inner"></div>
-                    <div className="absolute left-1 top-1 w-5 h-5 bg-white rounded-full transition-all duration-300 peer-checked:translate-x-7 shadow-md"></div>
-                  </div>
+                    <div className="absolute left-1 top-1 w-5 h-5 bg-white rounded-full transition-all duration-300 peer-checked:translate-x-7 shadow-md"></div></div>
                 </label>
               </div>
               
@@ -234,8 +232,7 @@ export default function ServiceFormPage() {
                         </option>
                       ))}
                     </select>
-                  </div>
-                </div>
+                  </div></div>
 
                 {/* Description */}
                 <div>
@@ -250,9 +247,7 @@ export default function ServiceFormPage() {
                     className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-all resize-none"
                     placeholder="Describe this service in detail..."
                   />
-                </div>
-              </div>
-            </div>
+                </div></div></div>
 
             {/* Default Pricing Card */}
             <div className="bg-white/60 rounded-2xl shadow-lg border border-white/40 p-8 backdrop-blur-sm hover:shadow-md transition-shadow">
@@ -268,8 +263,7 @@ export default function ServiceFormPage() {
                 >
                   <Plus className="w-4 h-4" />
                   Add Pricing Tier
-                </button>
-              </div>
+                </button></div>
               
               <div className="space-y-4">
                 {pricingEntries.map((entry, index) => (
@@ -304,8 +298,7 @@ export default function ServiceFormPage() {
                             className="w-full pl-8 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] font-bold text-[#3f72af]"
                             placeholder="0.00"
                           />
-                        </div>
-                      </div>
+                        </div></div>
                       
                       {/* Delete Button */}
                       {pricingEntries.length > 1 && (
@@ -317,11 +310,9 @@ export default function ServiceFormPage() {
                             title="Remove pricing tier"
                           >
                             <Trash2 className="w-5 h-5" />
-                          </button>
-                        </div>
+                          </button></div>
                       )}
-                    </div>
-                  </div>
+                    </div></div>
                 ))}
                 
                 {pricingEntries.length === 0 && (
@@ -331,8 +322,7 @@ export default function ServiceFormPage() {
                     <p className="text-sm text-gray-400 mt-1">Click "Add Pricing Tier" to get started</p>
                   </div>
                 )}
-              </div>
-            </div>
+              </div></div>
 
             {/* Submit Actions */}
             <div className="flex items-center justify-between gap-4 pt-4">
@@ -360,11 +350,7 @@ export default function ServiceFormPage() {
                     {isEdit ? 'Update Service' : 'Create Service'}
                   </>
                 )}
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
+              </button></div></form></div></div>
     </>
   );
 }

@@ -406,12 +406,9 @@ export default function ProfileSettings() {
                           {emoji}
                         </button>
                       ))}
-                    </div>
-                  </div>
+                    </div></div>
                 )}
-              </div>
-            </div>
-          </div>
+              </div></div></div>
 
           {/* Profile Information Card */}
           <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-4 mb-4 hover:shadow-md transition-shadow">
@@ -436,8 +433,7 @@ export default function ProfileSettings() {
                     className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="John Doe"
                   />
-                </div>
-              </div>
+                </div></div>
 
               {/* Email */}
               <div>
@@ -495,9 +491,7 @@ export default function ProfileSettings() {
                   className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-600 cursor-not-allowed"
                 />
                 <p className="mt-1 text-xs text-gray-500">Contact admin to change your role</p>
-              </div>
-            </div>
-          </div>
+              </div></div></div>
 
           {/* Change Password Card */}
           <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-4 mb-4 hover:shadow-md transition-shadow">
@@ -528,9 +522,7 @@ export default function ProfileSettings() {
                     className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
                   >
                     {showCurrentPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-                  </button>
-                </div>
-              </div>
+                  </button></div></div>
 
               {/* New Password */}
               <div>
@@ -553,9 +545,7 @@ export default function ProfileSettings() {
                     className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
                   >
                     {showNewPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-                  </button>
-                </div>
-              </div>
+                  </button></div></div>
 
               {/* Confirm Password */}
               <div>
@@ -578,15 +568,12 @@ export default function ProfileSettings() {
                     className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
                   >
                     {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-                  </button>
-                </div>
-              </div>
+                  </button></div></div>
 
               <p className="text-sm text-gray-600 bg-blue-50 border border-blue-200 rounded-lg p-3">
                 <strong>Note:</strong> Leave password fields empty if you don't want to change your password
               </p>
-            </div>
-          </div>
+            </div></div>
 
           {/* Save Button */}
           <div className="flex justify-end">
@@ -606,11 +593,7 @@ export default function ProfileSettings() {
                   <span>Save Changes</span>
                 </>
               )}
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+            </button></div></div></div></div>
     </>
   );
 }

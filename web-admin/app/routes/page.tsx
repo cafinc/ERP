@@ -44,9 +44,7 @@ export default function RoutesPage() {
                 </div>
                 <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center">
                   <Map className="w-6 h-6 text-white" />
-                </div>
-              </div>
-            </div>
+                </div></div></div>
 
             <div className="bg-white rounded-xl shadow-lg p-4 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between">
@@ -56,9 +54,7 @@ export default function RoutesPage() {
                 </div>
                 <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center">
                   <Navigation className="w-6 h-6 text-white" />
-                </div>
-              </div>
-            </div>
+                </div></div></div>
 
             <div className="bg-white rounded-xl shadow-lg p-4 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between">
@@ -68,9 +64,7 @@ export default function RoutesPage() {
                 </div>
                 <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center">
                   <MapPin className="w-6 h-6 text-white" />
-                </div>
-              </div>
-            </div>
+                </div></div></div>
 
             <div className="bg-white rounded-xl shadow-lg p-4 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between">
@@ -80,10 +74,7 @@ export default function RoutesPage() {
                 </div>
                 <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-600 rounded-lg flex items-center justify-center">
                   <Clock className="w-6 h-6 text-white" />
-                </div>
-              </div>
-            </div>
-          </div>
+                </div></div></div></div>
 
           {/* Search and Filter */}
           <div className="bg-white rounded-xl shadow-lg p-4 shadow-sm border border-gray-200 mb-4 hover:shadow-md transition-shadow">
@@ -97,9 +88,7 @@ export default function RoutesPage() {
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="w-full pl-10 pr-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
-              </div>
-            </div>
-          </div>
+              </div></div></div>
 
           {/* Empty State */}
           <div className="bg-white rounded-xl shadow-lg p-12 shadow-sm border border-gray-200 text-center hover:shadow-md transition-shadow">
@@ -110,9 +99,6 @@ export default function RoutesPage() {
             <p className="text-gray-600 mb-4">Create your first route to start optimizing your service delivery</p>
             <button className="px-6 py-3 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-all shadow-md hover:shadow-lg font-semibold">
               Create First Route
-            </button>
-          </div>
-        </div>
-      </div>
+            </button></div></div></div>
     );
 }

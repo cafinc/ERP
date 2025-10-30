@@ -236,8 +236,7 @@ export default function OperationsDashboard() {
           />
           <div className="flex items-center justify-center h-96">
             <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
-          </div>
-        </div>
+          </div></div>
       </PageHeader>
     );
   }
@@ -284,8 +283,7 @@ export default function OperationsDashboard() {
                   <p className="text-2xl font-bold text-gray-900">{stats.totalItems}</p>
                 </div>
                 <BarChart3 className="w-8 h-8 text-[#3f72af]" />
-              </div>
-            </div>
+              </div></div>
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
               <div className="flex items-center justify-between">
                 <div>
@@ -293,8 +291,7 @@ export default function OperationsDashboard() {
                   <p className="text-2xl font-bold text-gray-900">{stats.workOrders}</p>
                 </div>
                 <ClipboardList className="w-8 h-8 text-blue-600" />
-              </div>
-            </div>
+              </div></div>
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
               <div className="flex items-center justify-between">
                 <div>
@@ -302,8 +299,7 @@ export default function OperationsDashboard() {
                   <p className="text-2xl font-bold text-gray-900">{stats.purchaseOrders}</p>
                 </div>
                 <ShoppingCart className="w-8 h-8 text-green-600" />
-              </div>
-            </div>
+              </div></div>
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
               <div className="flex items-center justify-between">
                 <div>
@@ -311,10 +307,7 @@ export default function OperationsDashboard() {
                   <p className="text-2xl font-bold text-gray-900">{stats.projects}</p>
                 </div>
                 <FolderOpen className="w-8 h-8 text-purple-600" />
-              </div>
-            </div>
-          </div>
-        </div>
+              </div></div></div></div>
 
         {/* Pipeline Board */}
         <div className="flex-1 p-6 overflow-x-auto">
@@ -333,8 +326,7 @@ export default function OperationsDashboard() {
                     <span className="bg-white px-2 py-0.5 rounded-full text-xs font-medium text-gray-700">
                       {stage.items.length}
                     </span>
-                  </div>
-                </div>
+                  </div></div>
 
                 {/* Stage Items */}
                 <div className="space-y-3">
@@ -378,9 +370,7 @@ export default function OperationsDashboard() {
                         <div className="flex items-center gap-2">
                           <Calendar className="w-3 h-3" />
                           <span>{formatDate(item.due_date)}</span>
-                        </div>
-                      </div>
-                    </div>
+                        </div></div></div>
                   ))}
 
                   {/* Add New Button */}
@@ -393,13 +383,9 @@ export default function OperationsDashboard() {
                     className="w-full p-3 border-2 border-dashed border-gray-300 rounded-lg text-gray-500 hover:border-[#3f72af] hover:text-[#3f72af] transition-colors"
                   >
                     <Plus className="w-4 h-4 mx-auto" />
-                  </button>
-                </div>
-              </div>
+                  </button></div></div>
             ))}
-          </div>
-        </div>
-      </div>
+          </div></div></div>
     </PageHeader>
   );
 }

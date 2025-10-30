@@ -143,8 +143,7 @@ export default function DispatchCreatePage() {
       <div className="flex-1 overflow-auto p-6">
         <div className="flex items-center justify-center h-full">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
-        </div>
-      </div>
+        </div></div>
     );
   }
 
@@ -161,8 +160,7 @@ export default function DispatchCreatePage() {
           <div>
             <h1 className="text-3xl font-bold text-gray-900">Create Dispatch</h1>
             <p className="text-gray-600 mt-1">Schedule a new service route</p>
-          </div>
-        </div>
+          </div></div>
 
         <form onSubmit={handleSubmit} className="max-w-5xl">
           <div className="space-y-6">
@@ -198,8 +196,7 @@ export default function DispatchCreatePage() {
                       required
                       className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                     />
-                  </div>
-                </div>
+                  </div></div>
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -214,10 +211,7 @@ export default function DispatchCreatePage() {
                       required
                       className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                     />
-                  </div>
-                </div>
-              </div>
-            </div>
+                  </div></div></div></div>
 
             {/* Services */}
             <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-8 hover:shadow-md transition-shadow">
@@ -244,8 +238,7 @@ export default function DispatchCreatePage() {
                     )}
                   </button>
                 ))}
-              </div>
-            </div>
+              </div></div>
 
             {/* Crew Selection */}
             <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-8 hover:shadow-md transition-shadow">
@@ -257,8 +250,7 @@ export default function DispatchCreatePage() {
                 <div className="text-sm text-gray-600">
                   <Users className="w-4 h-4 inline mr-1" />
                   {dispatchForm.crew_ids.length} selected
-                </div>
-              </div>
+                </div></div>
               
               {users.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -278,8 +270,7 @@ export default function DispatchCreatePage() {
                         <div className="text-left">
                           <p className="text-sm font-medium">{user.username || user.email}</p>
                           <p className="text-xs text-gray-500">{user.role}</p>
-                        </div>
-                      </div>
+                        </div></div>
                       {dispatchForm.crew_ids.includes(user._id) ? (
                         <CheckSquare className="w-5 h-5 text-[#3f72af]" />
                       ) : (
@@ -303,8 +294,7 @@ export default function DispatchCreatePage() {
                 <div className="text-sm text-gray-600">
                   <Truck className="w-4 h-4 inline mr-1" />
                   {dispatchForm.equipment_ids.length} selected
-                </div>
-              </div>
+                </div></div>
               
               {equipment.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -324,8 +314,7 @@ export default function DispatchCreatePage() {
                         <div className="text-left">
                           <p className="text-sm font-medium">{equip.name}</p>
                           <p className="text-xs text-gray-500">{equip.type}</p>
-                        </div>
-                      </div>
+                        </div></div>
                       {dispatchForm.equipment_ids.includes(equip._id || equip.id) ? (
                         <CheckSquare className="w-5 h-5 text-[#3f72af]" />
                       ) : (
@@ -349,8 +338,7 @@ export default function DispatchCreatePage() {
                 <div className="text-sm text-gray-600">
                   <MapPin className="w-4 h-4 inline mr-1" />
                   {dispatchForm.site_ids.length} selected
-                </div>
-              </div>
+                </div></div>
               
               {sites.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-96 overflow-y-auto">
@@ -370,8 +358,7 @@ export default function DispatchCreatePage() {
                         <div className="text-left">
                           <p className="text-sm font-medium">{site.name}</p>
                           <p className="text-xs text-gray-500 truncate max-w-xs">{site.address}</p>
-                        </div>
-                      </div>
+                        </div></div>
                       {dispatchForm.site_ids.includes(site._id || site.id) ? (
                         <CheckSquare className="w-5 h-5 text-[#3f72af]" />
                       ) : (
@@ -422,10 +409,6 @@ export default function DispatchCreatePage() {
                 className="flex-1 px-6 py-3 border border-gray-300 hover:bg-gray-50 text-gray-700 rounded-lg font-medium transition-colors"
               >
                 Cancel
-              </button>
-            </div>
-          </div>
-        </form>
-      </div>
+              </button></div></div></form></div>
   );
 }

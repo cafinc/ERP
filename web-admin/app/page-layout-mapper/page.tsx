@@ -37,8 +37,7 @@ export default function PageLayoutMapper() {
           <div className="bg-blue-200 h-4 rounded"></div>
           <div className="bg-green-200 h-4 rounded"></div>
           <div className="bg-purple-200 h-4 rounded"></div>
-          <div className="bg-white shadow-sm border h-8 rounded col-span-3 hover:shadow-md transition-shadow"></div>
-        </div>
+          <div className="bg-white shadow-sm border h-8 rounded col-span-3 hover:shadow-md transition-shadow"></div></div>
       ),
     },
     {
@@ -54,8 +53,7 @@ export default function PageLayoutMapper() {
             {[1, 2, 3].map((i) => (
               <div key={i} className="bg-gray-100 h-2 mb-1 rounded"></div>
             ))}
-          </div>
-        </div>
+          </div></div>
       ),
     },
     {
@@ -71,8 +69,7 @@ export default function PageLayoutMapper() {
               <div key={i} className="bg-white h-2 mb-1 rounded"></div>
             ))}
           </div>
-          <div className="flex-1 bg-white border rounded"></div>
-        </div>
+          <div className="flex-1 bg-white border rounded"></div></div>
       ),
     },
     {
@@ -86,8 +83,7 @@ export default function PageLayoutMapper() {
           {[1, 2, 3].map((i) => (
             <div key={i} className="flex-1 bg-gray-200 rounded p-1">
               <div className="bg-white h-3 mb-1 rounded"></div>
-              <div className="bg-white h-2 rounded"></div>
-            </div>
+              <div className="bg-white h-2 rounded"></div></div>
           ))}
         </div>
       ),
@@ -259,13 +255,10 @@ export default function PageLayoutMapper() {
                         <p className="text-xs text-gray-600">{layout.description}</p>
                         <div className="mt-2 bg-white rounded border border-gray-200 h-16">
                           {layout.preview}
-                        </div>
-                      </div>
-                    </div>
+                        </div></div></div>
                   );
                 })}
-              </div>
-            </div>
+              </div></div>
 
           {/* Page Groups */}
           {pageGroups.map((group) => {
@@ -340,15 +333,10 @@ export default function PageLayoutMapper() {
                                     </button>
                                   );
                                 })}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                              </div></div></div></div>
                       );
                     })}
-                  </div>
-                </div>
-              </div>
+                  </div></div></div>
             );
           })}
 
@@ -371,12 +359,10 @@ export default function PageLayoutMapper() {
                       <div>
                         <p className="font-semibold">{layout.name}</p>
                         <p className="text-sm text-blue-200">{count} pages</p>
-                      </div>
-                    </div>
+                      </div></div>
                   );
                 })}
-              </div>
-            </div>
+              </div></div>
 
             <div className="flex items-center justify-between pt-4 border-t border-white/20">
               <div>
@@ -401,9 +387,7 @@ export default function PageLayoutMapper() {
                 className="px-8 py-4 bg-white text-[#3f72af] rounded-xl font-bold text-lg shadow-2xl hover:bg-blue-50 hover:scale-105 transition-all"
               >
                 Save & Continue to Implementation
-              </button>
-            </div>
-          </div>
+              </button></div></div>
 
           {/* Info */}
           <div className="mt-6 bg-amber-50 border border-amber-200 rounded-xl p-4">
@@ -412,9 +396,6 @@ export default function PageLayoutMapper() {
               its layout. Your suggested layouts are pre-selected based on best practices, but
               feel free to customize!
             </p>
-          </div>
-        </div>
-      </div>
-    </DashboardLayout>
+          </div></div></div></DashboardLayout>
   );
 }

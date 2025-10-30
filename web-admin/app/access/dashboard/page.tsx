@@ -106,9 +106,7 @@ export default function AccessDashboardPage() {
                 </div>
                 <div className={`${stat.color} p-3 rounded-lg`}>
                   <stat.icon className="w-6 h-6 text-white" />
-                </div>
-              </div>
-            </button>
+                </div></div></button>
           ))}
         </div>
 
@@ -143,9 +141,7 @@ export default function AccessDashboardPage() {
             >
               <MapPin className="w-8 h-8 text-gray-400 mb-2" />
               <span className="text-sm font-medium text-gray-700">Live Tracking</span>
-            </button>
-          </div>
-        </div>
+            </button></div></div>
 
         {/* Team Overview */}
         <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
@@ -171,10 +167,7 @@ export default function AccessDashboardPage() {
                 <p className="text-sm text-gray-600">Active Now</p>
               </div>
               <p className="text-3xl font-bold text-gray-900">{stats.onlineNow}</p>
-            </div>
-          </div>
-        </div>
-      </div>
+            </div></div></div></div>
     </PageHeader>
   );
 }

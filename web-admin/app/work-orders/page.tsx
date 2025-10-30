@@ -172,8 +172,7 @@ export default function WorkOrdersPage() {
           />
           <div className="flex items-center justify-center h-96">
             <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
-          </div>
-        </div>
+          </div></div>
       </PageHeader>
     );
   }
@@ -236,8 +235,7 @@ export default function WorkOrdersPage() {
                         <span className="text-sm text-gray-700 capitalize">{p}</span>
                       </label>
                     ))}
-                  </div>
-                </div>
+                  </div></div>
 
                 <div className="pt-3 border-t border-gray-200 flex gap-2">
                   <button
@@ -254,10 +252,7 @@ export default function WorkOrdersPage() {
                     className="flex-1 px-3 py-2 text-sm text-white bg-[#3f72af] rounded-md hover:bg-[#2c5282]"
                   >
                     Apply
-                  </button>
-                </div>
-              </div>
-            </div>
+                  </button></div></div></div>
           ) : undefined}
         />
 
@@ -279,8 +274,7 @@ export default function WorkOrdersPage() {
               >
                 <Plus className="w-4 h-4 mr-2" />
                 Create Work Order
-              </button>
-            </div>
+              </button></div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredWorkOrders.map((workOrder) => (
@@ -306,8 +300,7 @@ export default function WorkOrdersPage() {
                         <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusBadge(workOrder.status)}`}>
                           {workOrder.status.replace('_', ' ')}
                         </span>
-                      </div>
-                    </div>
+                      </div></div>
 
                     {/* Description */}
                     <p className="text-sm text-gray-600 mb-4 line-clamp-2">
@@ -380,15 +373,11 @@ export default function WorkOrdersPage() {
                       >
                         <Edit className="w-4 h-4 mr-1" />
                         Edit
-                      </button>
-                    </div>
-                  </div>
-                </div>
+                      </button></div></div></div>
               ))}
             </div>
           )}
-        </div>
-      </div>
+        </div></div>
       
       {/* Customer Quick View Modal */}
       {selectedCustomerId && (

@@ -215,9 +215,7 @@ export default function CreateAgreementTemplatePage() {
                   />
                   <span className="text-sm font-medium text-gray-700">Auto-renew agreement</span>
                 </label>
-              </div>
-            </div>
-          </div>
+              </div></div></div>
 
           {/* Sections Editor */}
           <div className="bg-white/60 rounded-2xl shadow-lg shadow-sm border border-white/40 backdrop-blur-sm overflow-hidden hover:shadow-md transition-shadow">
@@ -229,8 +227,7 @@ export default function CreateAgreementTemplatePage() {
               >
                 <Plus className="w-4 h-4" />
                 <span>Add Section</span>
-              </button>
-            </div>
+              </button></div>
             
             <div className="flex">
               {/* Sections Sidebar */}
@@ -305,11 +302,7 @@ export default function CreateAgreementTemplatePage() {
                     </p>
                   </div>
                 )}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+              </div></div></div></div></div>
     </>
   );
 }

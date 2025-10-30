@@ -214,11 +214,7 @@ export default function ProjectDetailPage() {
       <div className="flex-1 overflow-auto p-6">
         <div className="flex items-center justify-center h-full">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
-        </div>
-    
-        </div>
-    </div>
-    </div>
+        </div></div></div></div>
     );
   }
 
@@ -235,9 +231,7 @@ export default function ProjectDetailPage() {
             >
               <ArrowLeft className="w-5 h-5" />
               <span>Back to Projects</span>
-            </button>
-          </div>
-        </div>
+            </button></div></div>
     );
   }
 
@@ -272,8 +266,7 @@ export default function ProjectDetailPage() {
             >
               <Edit className="w-4 h-4" />
               <span>Edit Project</span>
-            </button>
-          </div>
+            </button></div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           {/* Main Content */}
@@ -400,8 +393,7 @@ export default function ProjectDetailPage() {
                 >
                   <Plus className="w-4 h-4" />
                   <span>Add Task</span>
-                </button>
-              </div>
+                </button></div>
 
               {project.tasks && project.tasks.length > 0 ? (
                 <div className="space-y-3">
@@ -448,10 +440,7 @@ export default function ProjectDetailPage() {
                                     {new Date(task.due_date).toLocaleDateString()}
                                   </span>
                                 )}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                              </div></div></div></div>
                         <div className="flex items-center space-x-2 ml-4">
                           <span className={`px-2 py-1 rounded-full text-xs font-medium ${getTaskStatusColor(task.status)}`}>
                             {task.status.replace('_', ' ')}
@@ -461,10 +450,7 @@ export default function ProjectDetailPage() {
                             className="p-1 hover:bg-red-50 text-red-600 rounded transition-colors"
                           >
                             <Trash2 className="w-4 h-4" />
-                          </button>
-                        </div>
-                      </div>
-                    </div>
+                          </button></div></div></div>
                   ))}
                 </div>
               ) : (
@@ -602,14 +588,8 @@ export default function ProjectDetailPage() {
                   className="flex-1 px-4 py-2 border border-gray-300 hover:bg-gray-50 rounded-lg font-medium transition-colors"
                 >
                   Cancel
-                </button>
-              </div>
-          </div>
-        </div>
-        </div>
+                </button></div></div></div></div>
         )}
-        </div>
-        </div>
-    </div>
+        </div></div></div>
   );
 }
