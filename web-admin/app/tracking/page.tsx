@@ -403,6 +403,6 @@ export default function LiveTrackingPage() {
           transform: scale(1.1);
         }
       `}</style>
-      </div>
+    </div>
     );
 }
