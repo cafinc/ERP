@@ -282,5 +282,8 @@ export default function TermsOfService() {
             © 2024 F Property Services. All rights reserved.
           </p>
         </div>
+      </div>
+      </div>
+    </div>
   );
 }
