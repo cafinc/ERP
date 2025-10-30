@@ -269,6 +269,7 @@ export default function InspectionSchedulesPage() {
                         {getFrequencyLabel(schedule.frequency, schedule.custom_interval_days)}
                       </p>
                     </div>
+                  </div>
 
                   <div className="flex items-center gap-3">
                     <Calendar className="w-5 h-5 text-gray-400" />
@@ -278,6 +279,7 @@ export default function InspectionSchedulesPage() {
                         {formatDate(schedule.next_due_date)}
                       </p>
                     </div>
+                  </div>
 
                   {schedule.assigned_inspector_name && (
                     <div className="flex items-center gap-3">
