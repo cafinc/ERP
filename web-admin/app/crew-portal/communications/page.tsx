@@ -557,5 +557,7 @@ export default function CrewCommunicationsPage() {
           </div>
         )}
       </div>
+      </div>
+    </div>
   );
 }
