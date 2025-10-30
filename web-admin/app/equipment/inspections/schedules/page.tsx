@@ -204,6 +204,7 @@ export default function InspectionSchedulesPage() {
               Inactive Only
             </button>
           </div>
+        </div>
         {/* Schedules List */}
         <div className="space-y-4">
           {schedules.length === 0 ? (
