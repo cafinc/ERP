@@ -250,6 +250,7 @@ export default function ContractDetailPage() {
         </div>
       </div>
     </div>
+    );
   }
 
   if (!contract) {
