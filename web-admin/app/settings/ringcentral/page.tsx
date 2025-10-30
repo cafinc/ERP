@@ -267,6 +267,7 @@ export default function RingCentralSettings() {
                           </span>
                         )}
                       </div>
+                    </div>
 
                     {feature.status === 'active' && (
                       <label className="relative inline-flex items-center cursor-pointer">
