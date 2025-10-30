@@ -373,6 +373,4 @@ export default function DesignSystemDemo() {
       </div>
     </DashboardLayout>
   );
-      </div>
-      </div>
 }

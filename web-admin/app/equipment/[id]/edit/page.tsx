@@ -293,9 +293,6 @@ export default function EquipmentFormPage() {
             )}
           </button>
         </div>
-      </div>
-      </div>
-      </div>
       </form>
     </div>
   );
