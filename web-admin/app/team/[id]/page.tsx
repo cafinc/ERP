@@ -153,7 +153,8 @@ export default function TeamMemberDetailPage() {
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div></div>
       </div>
-    </div>);
+    </div>
+          );
   }
 
   if (!user) {
@@ -166,7 +167,8 @@ export default function TeamMemberDetailPage() {
             className="mt-4 text-[#3f72af] hover:text-blue-800"
           >
             Return to Team
-          </button></div>);
+          </button></div>
+          );
   }
 
   return (
@@ -260,7 +262,8 @@ export default function TeamMemberDetailPage() {
                   <div>
                     <p className="text-sm text-gray-600">Phone</p>
                     <p className="text-sm font-medium text-gray-900">{user.phone}</p>
-                  </div></div>)}
+                  </div></div>
+          )}
               <div className="flex items-center gap-3">
                 <Bell className="w-5 h-5 text-gray-400" />
                 <div>
@@ -309,18 +312,22 @@ export default function TeamMemberDetailPage() {
                 <div>
                   <p className="text-sm text-gray-600">Name</p>
                   <p className="text-sm font-medium text-gray-900">{user.emergency_contact_name}</p>
-                </div>)}
+                </div>
+          )}
               {user.emergency_contact_phone && (
                 <div>
                   <p className="text-sm text-gray-600">Phone</p>
                   <p className="text-sm font-medium text-gray-900">{user.emergency_contact_phone}</p>
-                </div>)}
+                </div>
+          )}
               {user.emergency_contact_relationship && (
                 <div>
                   <p className="text-sm text-gray-600">Relationship</p>
                   <p className="text-sm font-medium text-gray-900">{user.emergency_contact_relationship}</p>
-                </div>)}
-            </div></div>)}
+                </div>
+          )}
+            </div></div>
+          )}
 
         {/* Driver License */}
         {user.is_driver && user.driver_license_photo && (
@@ -335,7 +342,8 @@ export default function TeamMemberDetailPage() {
                 alt="Driver's License"
                 className="max-w-md mx-auto rounded"
               />
-            </div></div>)}
+            </div></div>
+          )}
 
         {/* Documents */}
         {user.documents && user.documents.length > 0 && (
@@ -364,11 +372,13 @@ export default function TeamMemberDetailPage() {
                   >
                     <Download className="w-5 h-5" />
                   </a>
-                </div>))}
+                </div>
+          ))}
             </div></div>
           </div>
         </div>
-      </div>)}
+      </div>
+          )}
       </div></div>
     </div>
   </div>
@@ -378,5 +388,6 @@ export default function TeamMemberDetailPage() {
 </div>
 </div>
 </div>
-</div>);
+</div>
+          );
 }

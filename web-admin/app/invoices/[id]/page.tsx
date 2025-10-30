@@ -147,7 +147,8 @@ export default function InvoiceDetailPage() {
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
         </div></div>
       </div>
-    </div>);
+    </div>
+          );
   }
 
   if (!invoice) {
@@ -164,7 +165,8 @@ export default function InvoiceDetailPage() {
               <ArrowLeft className="w-5 h-5" />
               <span>Back to Invoices</span>
             </button></div>
-          </div>);
+          </div>
+          );
   }
 
   return (
@@ -197,7 +199,8 @@ export default function InvoiceDetailPage() {
               >
                 <Plus className="w-4 h-4" />
                 <span>Record Payment</span>
-              </button>)}
+              </button>
+          )}
             <button className="flex items-center space-x-2 px-4 py-2 border border-gray-300 hover:bg-gray-50 rounded-lg font-medium transition-colors">
               <Download className="w-4 h-4" />
               <span>Download PDF</span>
@@ -251,7 +254,8 @@ export default function InvoiceDetailPage() {
                 <div className="mt-6 pt-6 border-t border-gray-200">
                   <label className="text-sm text-gray-600">Notes</label>
                   <p className="text-base text-gray-900 mt-2">{invoice.notes}</p>
-                </div>)}
+                </div>
+          )}
             </div>
             {/* Line Items */}
             <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
@@ -290,7 +294,8 @@ export default function InvoiceDetailPage() {
                   <div className="flex items-center justify-between text-sm">
                     <span className="text-gray-600">Discount</span>
                     <span className="font-medium text-red-600">-${invoice.discount_amount.toFixed(2)}</span>
-                  </div>)}
+                  </div>
+          )}
                 <div className="flex items-center justify-between text-sm">
                   <span className="text-gray-600">Tax ({invoice.tax_rate}%)</span>
                   <span className="font-medium text-gray-900">${invoice.tax_amount.toFixed(2)}</span>
@@ -332,8 +337,10 @@ export default function InvoiceDetailPage() {
                       {payment.notes && (
                         <p className="text-sm text-gray-600 mt-2 ml-11">{payment.notes}</p>
                       )}
-                    </div>))}
-                </div></div>)}
+                    </div>
+          ))}
+                </div></div>
+          )}
           </div>
           {/* Sidebar */}
           <div className="space-y-6">
@@ -369,7 +376,8 @@ export default function InvoiceDetailPage() {
                     <span className={`text-sm font-medium ${invoice.deposit_paid ? 'text-green-600' : 'text-orange-600'}`}>
                       {invoice.deposit_paid ? 'Deposit Paid' : 'Deposit Pending'}
                     </span>
-                  </div></div>)}
+                  </div></div>
+          )}
             </div>
             {/* Quick Stats */}
             <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
@@ -481,7 +489,8 @@ export default function InvoiceDetailPage() {
                 </button></div>
               </div>
             </div>
-          </div>)}
+          </div>
+          )}
         </div></div>
       </div>
     </div>
@@ -493,5 +502,6 @@ export default function InvoiceDetailPage() {
 </div>
 </div>
 </div>
-</div>);
+</div>
+          );
 }

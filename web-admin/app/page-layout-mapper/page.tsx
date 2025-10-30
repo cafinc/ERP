@@ -52,7 +52,8 @@ export default function PageLayoutMapper() {
           <div className="bg-gray-200 h-2 rounded mb-1"></div>
           <div className="bg-white shadow-sm border rounded p-1 hover:shadow-md transition-shadow">
             {[1, 2, 3].map((i) => (
-              <div key={i} className="bg-gray-100 h-2 mb-1 rounded"></div>))}
+              <div key={i} className="bg-gray-100 h-2 mb-1 rounded"></div>
+          ))}
           </div>
         </div>
       ),
@@ -67,7 +68,8 @@ export default function PageLayoutMapper() {
         <div className="flex gap-1 p-1">
           <div className="w-1/3 bg-gray-200 rounded p-1">
             {[1, 2, 3].map((i) => (
-              <div key={i} className="bg-white h-2 mb-1 rounded"></div>))}
+              <div key={i} className="bg-white h-2 mb-1 rounded"></div>
+          ))}
           </div>          <div className="flex-1 bg-white border rounded">
           </div>
         </div>
@@ -85,7 +87,8 @@ export default function PageLayoutMapper() {
             <div key={i} className="flex-1 bg-gray-200 rounded p-1">
               <div className="bg-white h-3 mb-1 rounded"></div>              <div className="bg-white h-2 rounded">
               </div>
-            </div>))}
+            </div>
+          ))}
         </div>
       ),
     },
@@ -258,7 +261,8 @@ export default function PageLayoutMapper() {
                         <div className="mt-2 bg-white rounded border border-gray-200 h-16">
                           {layout.preview}
                         </div></div>
-                      </div>);
+                      </div>
+          );
                 })}
               </div>
             </div>
@@ -332,14 +336,17 @@ export default function PageLayoutMapper() {
                                             : "text-gray-400"
                                         }`}
                                       />
-                                    </button>);
+                                    </button>
+          );
                                 })}
                               </div></div>
                             </div>
-                          </div>);
+                          </div>
+          );
                     })}
                   </div></div>
-                </div>);
+                </div>
+          );
           })}
 
           {/* Summary & Apply */}
@@ -361,7 +368,8 @@ export default function PageLayoutMapper() {
                       <div>
                         <p className="font-semibold">{layout.name}</p>
                         <p className="text-sm text-blue-200">{count} pages</p>
-                      </div></div>);
+                      </div></div>
+          );
                 })}
               </div>
             </div>
@@ -400,6 +408,7 @@ export default function PageLayoutMapper() {
             </p>
           </div></div>
         </div>
-      </DashboardLayout>);
+      </DashboardLayout>
+          );
     </div>
 }

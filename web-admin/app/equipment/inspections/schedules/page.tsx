@@ -142,7 +142,8 @@ export default function InspectionSchedulesPage() {
       <div className="flex-1 overflow-auto p-6">
         <div className="flex items-center justify-center h-64">
           <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
-        </div></div></div>);
+        </div></div></div>
+          );
   }
 
   return (
@@ -286,7 +287,8 @@ export default function InspectionSchedulesPage() {
                       <div>
                         <p className="text-xs text-gray-500">Assigned Inspector</p>
                         <p className="text-sm font-medium text-gray-900">{schedule.assigned_inspector_name}</p>
-                      </div></div>)}
+                      </div></div>
+          )}
                 </div>
 
                 {/* Features */}
@@ -362,9 +364,11 @@ export default function InspectionSchedulesPage() {
                     {schedule.active ? 'Deactivate Schedule' : 'Activate Schedule'}
                   </button>
                 </div>
-              </div>))
+              </div>
+          ))
           )}
         </div>
       </div>
-    </div>);
+    </div>
+          );
 }

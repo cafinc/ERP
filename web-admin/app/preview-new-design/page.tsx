@@ -160,7 +160,8 @@ export default function PreviewNewDesign() {
                 </h3>
                 <p className="text-sm text-gray-600">{module.description}</p>
               </div>
-            </div>))}
+            </div>
+          ))}
         </div>
 
         {/* Button Styles Showcase */}
@@ -248,5 +249,6 @@ export default function PreviewNewDesign() {
 </div>
 </div>
 </div>
-</div>);
+</div>
+          );
 }

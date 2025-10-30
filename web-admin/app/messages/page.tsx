@@ -361,7 +361,8 @@ export default function MessagesPage() {
                       <Archive className="w-4 h-4 text-gray-400" />
                     </button>
                   </div>
-                </div>))
+                </div>
+          ))
             )}
           </div>
         {/* Main Chat Area */}
@@ -426,7 +427,8 @@ export default function MessagesPage() {
                                   <span className="text-sm truncate">{att.file_name}</span>
                                 </a>
                               ))}
-                            </div>)}
+                            </div>
+          )}
                           
                           <div className="flex items-center justify-between mt-1">
                             <p className={`text-xs ${isOwnMessage ? 'text-white/70' : 'text-gray-500'}`}>
@@ -438,7 +440,8 @@ export default function MessagesPage() {
                             )}
                           </div></div>
                         </div>
-                      </div>);
+                      </div>
+          );
                 })}
                 <div ref={messagesEndRef} />
               </div>
@@ -462,10 +465,12 @@ export default function MessagesPage() {
                             <X className="w-3 h-3 text-gray-600" />
                           </button>
                         </div>
-                      </div>))}
+                      </div>
+          ))}
               </div></div>
             </div>
-          </div>)}
+          </div>
+          )}
                 
                 <div className="flex items-end space-x-2">
                   <input
@@ -521,7 +526,8 @@ export default function MessagesPage() {
                 <MessageSquare className="w-16 h-16 text-gray-300 mx-auto mb-4" />
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">No conversation selected</h3>
                 <p className="text-gray-600">Select a conversation from the list or start a new one</p>
-              </div>)}
+              </div>
+          )}
         </div>
         {/* New Conversation Modal */}
         {showNewConversation && (
@@ -574,7 +580,8 @@ export default function MessagesPage() {
                     placeholder="Enter group name"
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
-                </div>)}
+                </div>
+          )}
 
               {/* Participants */}
               <div className="mb-4">
@@ -631,6 +638,8 @@ export default function MessagesPage() {
                 >
                   Create Conversation
                 </button></div>
-              </div>)}
-      </div>);
+              </div>
+          )}
+      </div>
+          );
 }
