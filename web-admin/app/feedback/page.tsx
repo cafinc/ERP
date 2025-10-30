@@ -252,5 +252,6 @@ export default function FeedbackFormPage() {
           </div>
         )}
       </div>
-    );
+    </div>
+  );
 }
