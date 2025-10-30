@@ -263,4 +263,5 @@ export default function ActiveCallsPage() {
       </div>
     </div>
   </div>
+  );
 }

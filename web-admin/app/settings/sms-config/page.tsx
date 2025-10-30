@@ -221,4 +221,5 @@ export default function SMSConfigPage() {
       </div>
     </div>
   </div>
+  );
 }

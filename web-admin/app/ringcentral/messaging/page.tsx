@@ -255,4 +255,5 @@ export default function TeamMessagingPage() {
       </div>
     </div>
   </div>
+  );
 }

@@ -236,9 +236,7 @@ export default function PreviewNewDesign() {
             <li>• <strong>More Screen Space</strong> - Maximum content area with easy navigation</li>
             <li>• <strong>Hover Tooltips</strong> - Sidebar icons show labels on hover</li>
           </ul>
-        </div>
-      </div>
-    </HybridNavigationLayout>
+        </div></div></HybridNavigationLayout>
   </div>
 </div>
 </div>

@@ -213,4 +213,5 @@ export default function PhotoUploadPage() {
       </div>
     </div>
   </div>
+  );
 }

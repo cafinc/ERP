@@ -217,6 +217,7 @@ export default function PageLayoutMapper() {
   };
 
   return (
+    <div>
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <PageHeader
         title="Page Layout Mapper"
@@ -414,4 +415,5 @@ export default function PageLayoutMapper() {
       </div>
     </DashboardLayout>
   );
+    </div>
 }

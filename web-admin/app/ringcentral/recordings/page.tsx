@@ -308,4 +308,5 @@ export default function RecordingsPage() {
       </div>
     </div>
   </div>
+  );
 }

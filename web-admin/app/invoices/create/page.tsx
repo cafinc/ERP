@@ -463,4 +463,5 @@ export default function InvoiceCreatePage() {
       </div>
     </div>
   </div>
+  );
 }

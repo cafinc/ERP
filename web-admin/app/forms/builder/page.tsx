@@ -485,4 +485,5 @@ export default function FormBuilderPage() {
       </div>
     </div>
   </div>
+  );
 }

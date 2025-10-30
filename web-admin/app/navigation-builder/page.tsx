@@ -410,6 +410,7 @@ export default function NavigationBuilder() {
   };
 
   return (
+    <div>
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <PageHeader
         title="Navigation Builder"
@@ -614,4 +615,5 @@ export default function NavigationBuilder() {
             </div>
           </DashboardLayout>
   );
+    </div>
 }
