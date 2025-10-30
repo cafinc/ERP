@@ -99,6 +99,7 @@ export default function FeedbackFormPage() {
             <h1 className="text-3xl font-bold text-gray-900">Share Your Feedback</h1>
             <p className="text-gray-600 mt-1">Help us improve our snow removal service</p>
           </div>
+        </div>
 
         <form onSubmit={handleSubmitFeedback} className="space-y-6">
           {/* Rating Section */}
