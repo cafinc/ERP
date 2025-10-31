@@ -241,7 +241,7 @@ export default function TasksPage() {
             )}
           </div>
         ) : (
-          <div className="space-y-3">
+          <div className="space-y-2">
             {filteredTasks.map((task) => (
               <TaskCard key={task.id} task={task} onClick={() => router.push(`/tasks/${task.id}`)} />
             ))}
