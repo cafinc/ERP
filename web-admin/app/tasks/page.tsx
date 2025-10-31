@@ -153,30 +153,30 @@ export default function TasksPage() {
 
         {/* Search and Filter */}
         <div className="bg-white rounded-lg shadow-sm p-4 border border-gray-200 mb-4">
-          {/* Search Bar */}
-          <div className="relative mb-3">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
-            <input
-              type="text"
-              placeholder="Search tasks..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-9 pr-9 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af]"
-            />
-            {searchTerm && (
-              <button
-                onClick={() => setSearchTerm('')}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            )}
-          </div>
+          <div className="flex flex-wrap items-center gap-3">
+            {/* Search Bar */}
+            <div className="relative flex-1 min-w-[200px]">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+              <input
+                type="text"
+                placeholder="Search tasks..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full pl-9 pr-9 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af]"
+              />
+              {searchTerm && (
+                <button
+                  onClick={() => setSearchTerm('')}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              )}
+            </div>
 
-          {/* Status Filter */}
-          <div className="mb-3">
-            <label className="block text-xs font-medium text-gray-700 mb-1.5">Status</label>
-            <div className="flex flex-wrap gap-1.5">
+            {/* Status Filters */}
+            <div className="flex items-center gap-1.5">
+              <Filter className="w-4 h-4 text-gray-500" />
               {statuses.map((status) => (
                 <button
                   key={status}
@@ -191,12 +191,9 @@ export default function TasksPage() {
                 </button>
               ))}
             </div>
-          </div>
 
-          {/* Priority Filter */}
-          <div>
-            <label className="block text-xs font-medium text-gray-700 mb-1.5">Priority</label>
-            <div className="flex flex-wrap gap-1.5">
+            {/* Priority Filters */}
+            <div className="flex items-center gap-1.5">
               {priorities.map((priority) => (
                 <button
                   key={priority}
@@ -207,7 +204,7 @@ export default function TasksPage() {
                       : 'bg-white border border-gray-300 text-gray-700 hover:border-[#3f72af] hover:text-[#3f72af]'
                   }`}
                 >
-                  {priority === 'all' ? 'All' : `${priority === 'urgent' ? '🚨' : priority === 'high' ? '⚡' : priority === 'medium' ? '📋' : '📝'} ${priority.charAt(0).toUpperCase() + priority.slice(1)}`}
+                  {priority === 'all' ? '🎯' : priority === 'urgent' ? '🚨' : priority === 'high' ? '⚡' : priority === 'medium' ? '📋' : '📝'}
                 </button>
               ))}
             </div>
