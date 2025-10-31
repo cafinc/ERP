@@ -86,6 +86,15 @@ export default function UnifiedSiteMapsBuilder() {
   const [showLabelInput, setShowLabelInput] = useState(false);
   const [currentLabel, setCurrentLabel] = useState('');
   
+  // Modal states
+  const [showMeasurementModal, setShowMeasurementModal] = useState(false);
+  const [showAnnotationModal, setShowAnnotationModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [pendingMeasurement, setPendingMeasurement] = useState<any>(null);
+  const [pendingAnnotation, setPendingAnnotation] = useState<any>(null);
+  const [editingItem, setEditingItem] = useState<any>(null);
+  const [modalLabel, setModalLabel] = useState('');
+  
   // Refs
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<any>(null);
