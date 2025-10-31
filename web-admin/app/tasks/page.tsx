@@ -88,61 +88,45 @@ export default function TasksPage() {
     <div className="min-h-screen bg-gray-50">
       <PageHeader
         title="Tasks"
-        subtitle={`${filteredTasks.length} ${filteredTasks.length === 1 ? 'task' : 'tasks'}`}
+        subtitle={
+          <div className="flex items-center gap-4 mt-2">
+            <div className="flex items-center gap-1.5">
+              <CheckSquare className="w-4 h-4 text-[#3f72af]" />
+              <span className="text-sm font-medium text-gray-700">{stats.total}</span>
+              <span className="text-xs text-gray-500">Total</span>
+            </div>
+            <div className="h-4 w-px bg-gray-300"></div>
+            <div className="flex items-center gap-1.5">
+              <PlayCircle className="w-4 h-4 text-blue-600" />
+              <span className="text-sm font-medium text-blue-600">{stats.in_progress}</span>
+              <span className="text-xs text-gray-500">In Progress</span>
+            </div>
+            <div className="h-4 w-px bg-gray-300"></div>
+            <div className="flex items-center gap-1.5">
+              <CheckCircle2 className="w-4 h-4 text-green-600" />
+              <span className="text-sm font-medium text-green-600">{stats.completed}</span>
+              <span className="text-xs text-gray-500">Completed</span>
+            </div>
+            <div className="h-4 w-px bg-gray-300"></div>
+            <div className="flex items-center gap-1.5">
+              <AlertCircle className="w-4 h-4 text-red-600" />
+              <span className="text-sm font-medium text-red-600">{stats.overdue}</span>
+              <span className="text-xs text-gray-500">Overdue</span>
+            </div>
+          </div>
+        }
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Tasks" }]}
         actions={[
           {
             label: 'Create Task',
             onClick: () => router.push('/tasks/create'),
-            icon: <Plus className="w-4 h-4 mr-2" />,
+            icon: <Plus className="w-5 h-5" />,
             variant: 'primary' as const,
           },
         ]}
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-        {/* Quick Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-3 mb-4">
-          <div className="bg-white rounded-lg shadow-sm p-4 border border-gray-200 hover:shadow-md transition-shadow">
-            <div className="flex items-center justify-between mb-2">
-              <div className="flex items-center gap-2">
-                <CheckSquare className="w-4 h-4 text-[#3f72af]" />
-                <p className="text-xs font-medium text-gray-600">Total Tasks</p>
-              </div>
-            </div>
-            <p className="text-2xl font-bold text-gray-900">{stats.total}</p>
-          </div>
-
-          <div className="bg-white rounded-lg shadow-sm p-4 border border-gray-200 hover:shadow-md transition-shadow">
-            <div className="flex items-center justify-between mb-2">
-              <div className="flex items-center gap-2">
-                <PlayCircle className="w-4 h-4 text-blue-600" />
-                <p className="text-xs font-medium text-gray-600">In Progress</p>
-              </div>
-            </div>
-            <p className="text-2xl font-bold text-blue-600">{stats.in_progress}</p>
-          </div>
-
-          <div className="bg-white rounded-lg shadow-sm p-4 border border-gray-200 hover:shadow-md transition-shadow">
-            <div className="flex items-center justify-between mb-2">
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-green-600" />
-                <p className="text-xs font-medium text-gray-600">Completed</p>
-              </div>
-            </div>
-            <p className="text-2xl font-bold text-green-600">{stats.completed}</p>
-          </div>
-
-          <div className="bg-white rounded-lg shadow-sm p-4 border border-gray-200 hover:shadow-md transition-shadow">
-            <div className="flex items-center justify-between mb-2">
-              <div className="flex items-center gap-2">
-                <AlertCircle className="w-4 h-4 text-red-600" />
-                <p className="text-xs font-medium text-gray-600">Overdue</p>
-              </div>
-            </div>
-            <p className="text-2xl font-bold text-red-600">{stats.overdue}</p>
-          </div>
-        </div>
 
         {/* Search and Filter */}
         <div className="bg-white rounded-lg shadow-sm p-4 border border-gray-200 mb-4">
