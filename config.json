@@ -1,0 +1,21 @@
+{
+  "services": {
+    "web-admin": {
+      "port": 3000,
+      "path": "/",
+      "priority": 1
+    },
+    "backend": {
+      "port": 8001,
+      "path": "/api",
+      "priority": 2
+    },
+    "expo": {
+      "port": 3001,
+      "path": "/mobile",
+      "priority": 3,
+      "enabled": false
+    }
+  },
+  "defaultService": "web-admin"
+}
