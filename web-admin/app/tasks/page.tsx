@@ -8,6 +8,7 @@ import {
   CheckSquare,
   Plus,
   Search,
+  Filter,
   Calendar,
   Clock,
   Flame,
