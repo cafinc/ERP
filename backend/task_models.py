@@ -143,19 +143,44 @@ class TaskCreate(BaseModel):
     title: str
     description: Optional[str] = None
     type: TaskType
+    
+    # Legacy relation fields
     related_id: Optional[str] = None
     related_type: Optional[str] = None
-    assigned_to: List[str] = []
+    
+    # Enhanced relation fields
+    site_id: Optional[str] = None
+    customer_id: Optional[str] = None
+    work_order_id: Optional[str] = None
+    project_id: Optional[str] = None
+    service_ids: List[str] = []
+    form_ids: List[str] = []
+    equipment_ids: List[str] = []
+    
+    # Assignment with notification preferences
+    assigned_to: List[Dict[str, Any]] = []  # [{user_id, name, role, notify_email, notify_app}]
     assigned_by: str
     assigned_by_name: str
+    
     priority: TaskPriority = TaskPriority.MEDIUM
+    status: Optional[TaskStatus] = TaskStatus.PENDING
     due_date: Optional[datetime] = None
     start_date: Optional[datetime] = None
     tags: List[str] = []
-    checklist: List[Dict[str, Any]] = []
+    
+    # Checklist with required flag
+    checklist: List[Dict[str, Any]] = []  # [{id, text, completed, required}]
+    
+    # Time & Billing
     estimated_hours: Optional[float] = None
+    billable: bool = True
+    
+    # Recurrence
     is_recurring: bool = False
     recurrence_pattern: Optional[str] = None
+    
+    # Template
+    template_id: Optional[str] = None
 
 class TaskUpdate(BaseModel):
     """Update an existing task"""
