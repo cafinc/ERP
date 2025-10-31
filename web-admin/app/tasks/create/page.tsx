@@ -59,6 +59,10 @@ export default function CreateTaskPage() {
     checklist: [] as any[],
   });
 
+  // File upload state
+  const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
+  const [filePreview, setFilePreview] = useState<string[]>([]);
+
   // Options data
   const [sites, setSites] = useState<SelectOption[]>([]);
   const [customers, setCustomers] = useState<SelectOption[]>([]);
