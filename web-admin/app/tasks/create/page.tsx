@@ -117,9 +117,38 @@ export default function CreateTaskPage() {
 
     try {
       setSubmitting(true);
+      
+      // First, upload files if any
+      let uploadedFileUrls: string[] = [];
+      if (uploadedFiles.length > 0) {
+        const fileFormData = new FormData();
+        uploadedFiles.forEach((file) => {
+          fileFormData.append('files', file);
+        });
+        
+        try {
+          const uploadResponse = await api.post('/upload', fileFormData, {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+          });
+          uploadedFileUrls = uploadResponse.data.urls || [];
+        } catch (uploadError) {
+          console.error('File upload error:', uploadError);
+          // Continue even if upload fails
+        }
+      }
+      
+      // Create task with file URLs
       await api.post('/tasks', {
         ...formData,
         estimated_hours: formData.estimated_hours ? parseFloat(formData.estimated_hours) : null,
+        photos: uploadedFileUrls.map((url, index) => ({
+          url,
+          caption: uploadedFiles[index]?.name || '',
+          tag: 'attachment',
+          uploaded_at: new Date().toISOString(),
+        })),
       });
       
       router.push('/tasks');
