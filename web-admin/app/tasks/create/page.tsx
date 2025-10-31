@@ -566,9 +566,18 @@ export default function CreateTaskPage() {
                   accept="image/*,.pdf,.doc,.docx,.xls,.xlsx"
                   onChange={(e) => {
                     const files = Array.from(e.target.files || []);
-                    console.log('Files selected:', files);
-                    // TODO: Handle file upload
-                    alert('File upload will be implemented. Selected: ' + files.map(f => f.name).join(', '));
+                    setUploadedFiles([...uploadedFiles, ...files]);
+                    
+                    // Create previews for images
+                    files.forEach(file => {
+                      if (file.type.startsWith('image/')) {
+                        const reader = new FileReader();
+                        reader.onloadend = () => {
+                          setFilePreview(prev => [...prev, reader.result as string]);
+                        };
+                        reader.readAsDataURL(file);
+                      }
+                    });
                   }}
                   className="hidden"
                   id="task-file-upload"
@@ -587,12 +596,55 @@ export default function CreateTaskPage() {
                 </label>
               </div>
 
-              {/* File Preview (placeholder) */}
-              <div className="text-sm text-gray-500 text-center">
-                <p>📸 Upload before/after photos</p>
-                <p>📄 Attach documents, PDFs, spreadsheets</p>
-                <p>📋 Add inspection forms or reports</p>
-              </div>
+              {/* File List */}
+              {uploadedFiles.length > 0 && (
+                <div className="space-y-2">
+                  <p className="text-sm font-medium text-gray-700">
+                    Uploaded Files ({uploadedFiles.length})
+                  </p>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    {uploadedFiles.map((file, index) => (
+                      <div
+                        key={index}
+                        className="relative group border border-gray-200 rounded-lg p-2 hover:border-[#3f72af] transition-colors"
+                      >
+                        {file.type.startsWith('image/') && filePreview[index] ? (
+                          <img
+                            src={filePreview[index]}
+                            alt={file.name}
+                            className="w-full h-24 object-cover rounded"
+                          />
+                        ) : (
+                          <div className="w-full h-24 bg-gray-100 rounded flex items-center justify-center">
+                            <FileText className="w-8 h-8 text-gray-400" />
+                          </div>
+                        )}
+                        <p className="text-xs text-gray-600 mt-2 truncate">
+                          {file.name}
+                        </p>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setUploadedFiles(uploadedFiles.filter((_, i) => i !== index));
+                            setFilePreview(filePreview.filter((_, i) => i !== index));
+                          }}
+                          className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                        >
+                          <X className="w-3 h-3" />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {uploadedFiles.length === 0 && (
+                <div className="text-sm text-gray-500 text-center py-2">
+                  <p>📸 Upload before/after photos</p>
+                  <p>📄 Attach documents, PDFs, spreadsheets</p>
+                  <p>📋 Add inspection forms or reports</p>
+                </div>
+              )}
             </div>
           </div>
 
