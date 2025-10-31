@@ -101,89 +101,89 @@ export default function TasksPage() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         {/* Quick Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-          <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200 hover:shadow-md transition-shadow">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-3 mb-4">
+          <div className="bg-white rounded-lg shadow-sm p-4 border border-gray-200 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600">Total Tasks</p>
-                <p className="text-3xl font-bold text-gray-900 mt-1">{stats.total}</p>
+                <p className="text-xs text-gray-600">Total Tasks</p>
+                <p className="text-2xl font-bold text-gray-900 mt-0.5">{stats.total}</p>
               </div>
-              <div className="w-12 h-12 bg-[#3f72af] rounded-lg flex items-center justify-center">
-                <CheckSquare className="w-6 h-6 text-white" />
+              <div className="w-10 h-10 bg-[#3f72af] rounded-lg flex items-center justify-center">
+                <CheckSquare className="w-5 h-5 text-white" />
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200 hover:shadow-md transition-shadow">
+          <div className="bg-white rounded-lg shadow-sm p-4 border border-gray-200 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600">In Progress</p>
-                <p className="text-3xl font-bold text-blue-600 mt-1">{stats.in_progress}</p>
+                <p className="text-xs text-gray-600">In Progress</p>
+                <p className="text-2xl font-bold text-blue-600 mt-0.5">{stats.in_progress}</p>
               </div>
-              <div className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center">
-                <PlayCircle className="w-6 h-6 text-white" />
+              <div className="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center">
+                <PlayCircle className="w-5 h-5 text-white" />
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200 hover:shadow-md transition-shadow">
+          <div className="bg-white rounded-lg shadow-sm p-4 border border-gray-200 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600">Completed</p>
-                <p className="text-3xl font-bold text-green-600 mt-1">{stats.completed}</p>
+                <p className="text-xs text-gray-600">Completed</p>
+                <p className="text-2xl font-bold text-green-600 mt-0.5">{stats.completed}</p>
               </div>
-              <div className="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center">
-                <CheckCircle2 className="w-6 h-6 text-white" />
+              <div className="w-10 h-10 bg-green-500 rounded-lg flex items-center justify-center">
+                <CheckCircle2 className="w-5 h-5 text-white" />
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200 hover:shadow-md transition-shadow">
+          <div className="bg-white rounded-lg shadow-sm p-4 border border-gray-200 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600">Overdue</p>
-                <p className="text-3xl font-bold text-red-600 mt-1">{stats.overdue}</p>
+                <p className="text-xs text-gray-600">Overdue</p>
+                <p className="text-2xl font-bold text-red-600 mt-0.5">{stats.overdue}</p>
               </div>
-              <div className="w-12 h-12 bg-red-500 rounded-lg flex items-center justify-center">
-                <AlertCircle className="w-6 h-6 text-white" />
+              <div className="w-10 h-10 bg-red-500 rounded-lg flex items-center justify-center">
+                <AlertCircle className="w-5 h-5 text-white" />
               </div>
             </div>
           </div>
         </div>
 
         {/* Search and Filter */}
-        <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200 mb-6">
+        <div className="bg-white rounded-lg shadow-sm p-4 border border-gray-200 mb-4">
           {/* Search Bar */}
-          <div className="relative mb-4">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+          <div className="relative mb-3">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
             <input
               type="text"
               placeholder="Search tasks..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-colors"
+              className="w-full pl-9 pr-9 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af]"
             />
             {searchTerm && (
               <button
                 onClick={() => setSearchTerm('')}
                 className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
               >
-                <X className="w-5 h-5" />
+                <X className="w-4 h-4" />
               </button>
             )}
           </div>
 
           {/* Status Filter */}
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-2">Status</label>
-            <div className="flex flex-wrap gap-2">
+          <div className="mb-3">
+            <label className="block text-xs font-medium text-gray-700 mb-1.5">Status</label>
+            <div className="flex flex-wrap gap-1.5">
               {statuses.map((status) => (
                 <button
                   key={status}
                   onClick={() => setFilterStatus(status)}
-                  className={`px-4 py-2 rounded-lg font-medium text-sm transition-all ${
+                  className={`px-3 py-1.5 rounded-md font-medium text-xs transition-all ${
                     filterStatus === status
-                      ? 'bg-[#3f72af] text-white shadow-md'
+                      ? 'bg-[#3f72af] text-white shadow-sm'
                       : 'bg-white border border-gray-300 text-gray-700 hover:border-[#3f72af] hover:text-[#3f72af]'
                   }`}
                 >
@@ -195,15 +195,15 @@ export default function TasksPage() {
 
           {/* Priority Filter */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Priority</label>
-            <div className="flex flex-wrap gap-2">
+            <label className="block text-xs font-medium text-gray-700 mb-1.5">Priority</label>
+            <div className="flex flex-wrap gap-1.5">
               {priorities.map((priority) => (
                 <button
                   key={priority}
                   onClick={() => setPriorityFilter(priority)}
-                  className={`px-4 py-2 rounded-lg font-medium text-sm transition-all ${
+                  className={`px-3 py-1.5 rounded-md font-medium text-xs transition-all ${
                     priorityFilter === priority
-                      ? 'bg-[#3f72af] text-white shadow-md'
+                      ? 'bg-[#3f72af] text-white shadow-sm'
                       : 'bg-white border border-gray-300 text-gray-700 hover:border-[#3f72af] hover:text-[#3f72af]'
                   }`}
                 >
