@@ -447,15 +447,6 @@ export default function NavigationBuilder() {
                             {(() => {
                               const Icon = iconMap[key];
                               return <Icon className="w-4 h-4" />;
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </DashboardLayout>
-            </div>
-          </div>
                             })()}
                           </span>
                         )}
