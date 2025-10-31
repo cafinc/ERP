@@ -217,6 +217,8 @@ export default function EquipmentFormsPage() {
                             <option key={template.id} value={template.id}>
                               {template.name}
                             </option>
+                          ))}
+                        </select>
                         </div>
                       </div>
                     </div>
