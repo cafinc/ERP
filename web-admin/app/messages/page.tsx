@@ -427,12 +427,8 @@ export default function MessagesPage() {
                                   )}
                                   <span className="text-sm truncate">{att.file_name}</span>
                                 </a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                              ))}
+                              </div>
+                            ))}
           )}
                           
                           <div className="flex items-center justify-between mt-1">
