@@ -179,17 +179,17 @@ sudo supervisorctl tail backend
 # QuickBooks Online Integration (production)
 QUICKBOOKS_CLIENT_ID=ABSb9lt1OEqUsOO4tsf3UewtCe9OHGCSgbXTfr7xX56iqhy9i9
 QUICKBOOKS_CLIENT_SECRET=qB6XscWqZsKgT3RRdZHojQqS48UjyzjfZd6S4ALA
-QUICKBOOKS_REDIRECT_URI=https://webadmin-rescue.preview.emergentagent.com/api/quickbooks/auth/callback
+QUICKBOOKS_REDIRECT_URI=https://webadmin-jsx.preview.emergentagent.com/api/quickbooks/auth/callback
 QUICKBOOKS_ENVIRONMENT=production
 ```
 
 **URLs Configured in Intuit Portal:**
 - Host Domain: `plowpro-admin.preview.emergentagent.com`
-- Launch URL: `https://webadmin-rescue.preview.emergentagent.com/settings/quickbooks`
-- Disconnect URL: `https://webadmin-rescue.preview.emergentagent.com/settings/quickbooks`
-- Privacy Policy: `https://webadmin-rescue.preview.emergentagent.com/legal/privacy`
-- Terms of Service: `https://webadmin-rescue.preview.emergentagent.com/legal/terms`
-- Redirect URI: `https://webadmin-rescue.preview.emergentagent.com/api/quickbooks/auth/callback`
+- Launch URL: `https://webadmin-jsx.preview.emergentagent.com/settings/quickbooks`
+- Disconnect URL: `https://webadmin-jsx.preview.emergentagent.com/settings/quickbooks`
+- Privacy Policy: `https://webadmin-jsx.preview.emergentagent.com/legal/privacy`
+- Terms of Service: `https://webadmin-jsx.preview.emergentagent.com/legal/terms`
+- Redirect URI: `https://webadmin-jsx.preview.emergentagent.com/api/quickbooks/auth/callback`
 
 ---
 

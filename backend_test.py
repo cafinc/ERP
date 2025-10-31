@@ -12,7 +12,7 @@ from typing import Dict, Any, List
 import uuid
 
 # Configuration
-BACKEND_URL = "https://webadmin-rescue.preview.emergentagent.com/api"
+BACKEND_URL = "https://webadmin-jsx.preview.emergentagent.com/api"
 TIMEOUT = 30
 
 class BackendTester:
