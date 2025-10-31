@@ -306,26 +306,26 @@ function TaskCard({ task, onClick }: { task: Task; onClick: () => void }) {
   return (
     <div
       onClick={onClick}
-      className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow cursor-pointer group"
+      className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow cursor-pointer group"
     >
       <div className="flex items-start justify-between gap-4">
         <div className="flex-1 min-w-0">
-          <h3 className="text-lg font-semibold text-gray-900 group-hover:text-[#3f72af] transition-colors mb-2 truncate">
+          <h3 className="text-base font-semibold text-gray-900 group-hover:text-[#3f72af] transition-colors mb-1.5 truncate">
             {task.title}
           </h3>
           {task.description && (
-            <p className="text-sm text-gray-600 mb-4 line-clamp-2">{task.description}</p>
+            <p className="text-xs text-gray-600 mb-2 line-clamp-1">{task.description}</p>
           )}
 
-          <div className="flex flex-wrap items-center gap-3">
-            <span className={`inline-flex items-center px-3 py-1 rounded-md text-xs font-medium border ${getPriorityColor(task.priority)}`}>
+          <div className="flex flex-wrap items-center gap-2">
+            <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium border ${getPriorityColor(task.priority)}`}>
               {getPriorityIcon(task.priority)}
-              <span className="ml-1.5 capitalize">{task.priority}</span>
+              <span className="ml-1 capitalize">{task.priority}</span>
             </span>
             
-            <span className={`inline-flex items-center px-3 py-1 rounded-md text-xs font-medium border ${getStatusColor(task.status)}`}>
+            <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium border ${getStatusColor(task.status)}`}>
               {getStatusIcon(task.status)}
-              <span className="ml-1.5 capitalize">{task.status.replace('_', ' ')}</span>
+              <span className="ml-1 capitalize">{task.status.replace('_', ' ')}</span>
             </span>
 
             <span className="inline-flex items-center text-xs text-gray-500">
