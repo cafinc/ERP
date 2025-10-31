@@ -93,15 +93,24 @@ export default function CreateTaskPage() {
         api.get('/users'),
       ]);
 
-      setSites(sitesRes.data || []);
-      setCustomers(customersRes.data || []);
-      setWorkOrders(workOrdersRes.data || []);
-      setServices(servicesRes.data || []);
-      setForms(formsRes.data || []);
-      setEquipment(equipmentRes.data || []);
-      setUsers(usersRes.data || []);
+      // Ensure all responses are arrays
+      setSites(Array.isArray(sitesRes.data) ? sitesRes.data : []);
+      setCustomers(Array.isArray(customersRes.data) ? customersRes.data : []);
+      setWorkOrders(Array.isArray(workOrdersRes.data) ? workOrdersRes.data : []);
+      setServices(Array.isArray(servicesRes.data) ? servicesRes.data : []);
+      setForms(Array.isArray(formsRes.data) ? formsRes.data : []);
+      setEquipment(Array.isArray(equipmentRes.data) ? equipmentRes.data : []);
+      setUsers(Array.isArray(usersRes.data) ? usersRes.data : []);
     } catch (error) {
       console.error('Error fetching options:', error);
+      // Set empty arrays on error
+      setSites([]);
+      setCustomers([]);
+      setWorkOrders([]);
+      setServices([]);
+      setForms([]);
+      setEquipment([]);
+      setUsers([]);
     } finally {
       setLoading(false);
     }
