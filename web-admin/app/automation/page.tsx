@@ -136,13 +136,13 @@ export default function AutomationDashboardPage() {
             },
             {
               label: 'Manage Workflows',
-              icon: Settings,
+              icon: <Settings className="w-4 h-4 mr-2" />,
               onClick: () => router.push('/automation/workflows'),
               variant: 'secondary',
             },
             {
               label: 'Refresh',
-              icon: RefreshCw,
+              icon: <RefreshCw className="w-4 h-4 mr-2" />,
               onClick: loadAutomationData,
               variant: 'secondary',
             },
