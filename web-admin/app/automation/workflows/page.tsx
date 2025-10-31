@@ -364,6 +364,5 @@ export default function WorkflowBuilderPage() {
           )}
         </div>
       </div>
-    </div>
-  );
+    </div>);
 }
