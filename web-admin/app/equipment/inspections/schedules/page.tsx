@@ -365,8 +365,7 @@ export default function InspectionSchedulesPage() {
                   </button>
                 </div>
               </div>
-            </div>
-          {/* End schedule item */}))}
+            </div>))}
         </div>
       </div>
     </div>
