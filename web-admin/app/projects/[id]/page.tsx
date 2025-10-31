@@ -232,8 +232,12 @@ export default function ProjectDetailPage() {
             >
               <ArrowLeft className="w-5 h-5" />
               <span>Back to Projects</span>
-            </button></div>
-          );
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
   }
 
   return (
