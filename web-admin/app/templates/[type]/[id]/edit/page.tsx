@@ -298,7 +298,8 @@ export default function EditTemplatePage() {
                   Save Changes
                 </>
               )}
-            </button></div>
+            </button>
+            </div>
           </div></div>
         </div></div>
       </div></div>
