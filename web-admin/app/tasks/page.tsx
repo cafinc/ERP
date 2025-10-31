@@ -84,119 +84,264 @@ export default function TasksPage() {
   const stats = getStats();
 
   return (
-      <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
-        <div className="max-w-7xl mx-auto">
-          <PageHeader
+    <div className="min-h-screen bg-gray-50">
+      <PageHeader
         title="Tasks"
-        subtitle="Manage and assign tasks to team members"
+        subtitle={`${filteredTasks.length} ${filteredTasks.length === 1 ? 'task' : 'tasks'}`}
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Tasks" }]}
-        title="Tasks"
-            subtitle="Manage your team's tasks and assignments"
-          actions={[
-              {
-                label: 'Create Task',
-                onClick: () => {},
-                icon: <Plus className="w-4 h-4 mr-2" />,
-                variant: 'primary' as const,
-              },
-            ]}
-          />
+        actions={[
+          {
+            label: 'Create Task',
+            onClick: () => router.push('/tasks/create'),
+            icon: <Plus className="w-4 h-4 mr-2" />,
+            variant: 'primary' as const,
+          },
+        ]}
+      />
 
-          {/* Quick Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
-            <div className="bg-white rounded-xl shadow-lg p-4 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-gray-600">Total Tasks</p>
-                  <p className="text-3xl font-bold text-gray-900 mt-1">0</p>
-                </div>
-                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center">
-                  <CheckSquare className="w-6 h-6 text-white" />
-                </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        {/* Quick Stats */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+          <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200 hover:shadow-md transition-shadow">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-gray-600">Total Tasks</p>
+                <p className="text-3xl font-bold text-gray-900 mt-1">{stats.total}</p>
               </div>
-            </div>
-
-            <div className="bg-white rounded-xl shadow-lg p-4 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-gray-600">In Progress</p>
-                  <p className="text-3xl font-bold text-orange-600 mt-1">0</p>
-                </div>
-                <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-600 rounded-lg flex items-center justify-center">
-                  <Clock className="w-6 h-6 text-white" />
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-xl shadow-lg p-4 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-gray-600">Completed</p>
-                  <p className="text-3xl font-bold text-green-600 mt-1">0</p>
-                </div>
-                <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center">
-                  <CheckSquare className="w-6 h-6 text-white" />
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-xl shadow-lg p-4 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-gray-600">Overdue</p>
-                  <p className="text-3xl font-bold text-red-600 mt-1">0</p>
-                </div>
-                <div className="w-12 h-12 bg-gradient-to-br from-red-500 to-pink-600 rounded-lg flex items-center justify-center">
-                  <Calendar className="w-6 h-6 text-white" />
-                </div>
+              <div className="w-12 h-12 bg-[#3f72af] rounded-lg flex items-center justify-center">
+                <CheckSquare className="w-6 h-6 text-white" />
               </div>
             </div>
           </div>
 
-          {/* Search and Filter */}
-          <div className="bg-white rounded-xl shadow-lg p-4 shadow-sm border border-gray-200 mb-4 hover:shadow-md transition-shadow">
-            <div className="flex items-center gap-4 flex-wrap">
-              <div className="flex-1 min-w-[250px] relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-                <input
-                  type="text"
-                  placeholder="Search tasks..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
+          <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200 hover:shadow-md transition-shadow">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-gray-600">In Progress</p>
+                <p className="text-3xl font-bold text-blue-600 mt-1">{stats.in_progress}</p>
               </div>
-
-              <div className="flex gap-2">
-                {statuses.map((status) => (
-                  <button
-                    key={status}
-                    onClick={() => setFilterStatus(status)}
-                    className={`px-4 py-2 rounded-lg font-medium text-sm transition-all ${
-                      filterStatus === status
-                        ? 'bg-[#3f72af] text-white shadow-md'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                    }`}
-                  >
-                    {status.charAt(0).toUpperCase() + status.slice(1)}
-                  </button>
-                ))}
+              <div className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center">
+                <PlayCircle className="w-6 h-6 text-white" />
               </div>
             </div>
           </div>
 
-          {/* Empty State */}
-          <div className="bg-white rounded-xl shadow-lg p-12 shadow-sm border border-gray-200 text-center hover:shadow-md transition-shadow">
-            <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4">
+          <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200 hover:shadow-md transition-shadow">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-gray-600">Completed</p>
+                <p className="text-3xl font-bold text-green-600 mt-1">{stats.completed}</p>
+              </div>
+              <div className="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center">
+                <CheckCircle2 className="w-6 h-6 text-white" />
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200 hover:shadow-md transition-shadow">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-gray-600">Overdue</p>
+                <p className="text-3xl font-bold text-red-600 mt-1">{stats.overdue}</p>
+              </div>
+              <div className="w-12 h-12 bg-red-500 rounded-lg flex items-center justify-center">
+                <AlertCircle className="w-6 h-6 text-white" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Search and Filter */}
+        <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200 mb-6">
+          {/* Search Bar */}
+          <div className="relative mb-4">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+            <input
+              type="text"
+              placeholder="Search tasks..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] transition-colors"
+            />
+            {searchTerm && (
+              <button
+                onClick={() => setSearchTerm('')}
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            )}
+          </div>
+
+          {/* Status Filter */}
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700 mb-2">Status</label>
+            <div className="flex flex-wrap gap-2">
+              {statuses.map((status) => (
+                <button
+                  key={status}
+                  onClick={() => setFilterStatus(status)}
+                  className={`px-4 py-2 rounded-lg font-medium text-sm transition-all ${
+                    filterStatus === status
+                      ? 'bg-[#3f72af] text-white shadow-md'
+                      : 'bg-white border border-gray-300 text-gray-700 hover:border-[#3f72af] hover:text-[#3f72af]'
+                  }`}
+                >
+                  {status === 'all' ? 'All' : status.charAt(0).toUpperCase() + status.slice(1).replace('_', ' ')}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Priority Filter */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Priority</label>
+            <div className="flex flex-wrap gap-2">
+              {priorities.map((priority) => (
+                <button
+                  key={priority}
+                  onClick={() => setPriorityFilter(priority)}
+                  className={`px-4 py-2 rounded-lg font-medium text-sm transition-all ${
+                    priorityFilter === priority
+                      ? 'bg-[#3f72af] text-white shadow-md'
+                      : 'bg-white border border-gray-300 text-gray-700 hover:border-[#3f72af] hover:text-[#3f72af]'
+                  }`}
+                >
+                  {priority === 'all' ? 'All' : `${priority === 'urgent' ? '🚨' : priority === 'high' ? '⚡' : priority === 'medium' ? '📋' : '📝'} ${priority.charAt(0).toUpperCase() + priority.slice(1)}`}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Tasks List */}
+        {loading ? (
+          <div className="flex items-center justify-center h-64 bg-white rounded-lg shadow-sm border border-gray-200">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#3f72af]"></div>
+          </div>
+        ) : filteredTasks.length === 0 ? (
+          <div className="bg-white rounded-lg shadow-sm p-12 border border-gray-200 text-center">
+            <div className="w-20 h-20 bg-[#3f72af] rounded-full flex items-center justify-center mx-auto mb-4">
               <CheckSquare className="w-10 h-10 text-white" />
             </div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-2">No Tasks Yet</h3>
-            <p className="text-gray-600 mb-4">Create your first task to start managing your team's work</p>
-            <button className="px-6 py-3 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-all shadow-md hover:shadow-lg font-semibold">
-              Create First Task
-            </button>
+            <h3 className="text-2xl font-bold text-gray-900 mb-2">
+              {searchTerm ? 'No tasks found' : 'No Tasks Yet'}
+            </h3>
+            <p className="text-gray-600 mb-6">
+              {searchTerm ? 'Try adjusting your search or filters' : "Create your first task to start managing your team's work"}
+            </p>
+            {!searchTerm && (
+              <button
+                onClick={() => router.push('/tasks/create')}
+                className="inline-flex items-center px-6 py-3 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-colors shadow-md font-semibold"
+              >
+                <Plus className="w-5 h-5 mr-2" />
+                Create First Task
+              </button>
+            )}
+          </div>
+        ) : (
+          <div className="space-y-3">
+            {filteredTasks.map((task) => (
+              <TaskCard key={task.id} task={task} onClick={() => router.push(`/tasks/${task.id}`)} />
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function TaskCard({ task, onClick }: { task: Task; onClick: () => void }) {
+  const getPriorityColor = (priority: string) => {
+    switch (priority) {
+      case 'urgent': return 'text-red-700 bg-red-50 border-red-200';
+      case 'high': return 'text-orange-700 bg-orange-50 border-orange-200';
+      case 'medium': return 'text-blue-700 bg-blue-50 border-blue-200';
+      case 'low': return 'text-gray-700 bg-gray-50 border-gray-200';
+      default: return 'text-gray-700 bg-gray-50 border-gray-200';
+    }
+  };
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'completed': return 'text-green-700 bg-green-50 border-green-200';
+      case 'in_progress': return 'text-blue-700 bg-blue-50 border-blue-200';
+      case 'pending': return 'text-orange-700 bg-orange-50 border-orange-200';
+      case 'cancelled': return 'text-gray-700 bg-gray-50 border-gray-200';
+      default: return 'text-gray-700 bg-gray-50 border-gray-200';
+    }
+  };
+
+  const getPriorityIcon = (priority: string) => {
+    switch (priority) {
+      case 'urgent': return <Flame className="w-4 h-4" />;
+      case 'high': return <ArrowUpCircle className="w-4 h-4" />;
+      case 'medium': return <FileText className="w-4 h-4" />;
+      case 'low': return <Circle className="w-4 h-4" />;
+      default: return <Circle className="w-4 h-4" />;
+    }
+  };
+
+  const getStatusIcon = (status: string) => {
+    switch (status) {
+      case 'completed': return <CheckCircle2 className="w-4 h-4" />;
+      case 'in_progress': return <PlayCircle className="w-4 h-4" />;
+      case 'pending': return <Clock className="w-4 h-4" />;
+      case 'cancelled': return <X className="w-4 h-4" />;
+      default: return <Circle className="w-4 h-4" />;
+    }
+  };
+
+  const formatDate = (dateString?: string) => {
+    if (!dateString) return null;
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+    });
+  };
+
+  return (
+    <div
+      onClick={onClick}
+      className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow cursor-pointer group"
+    >
+      <div className="flex items-start justify-between gap-4">
+        <div className="flex-1 min-w-0">
+          <h3 className="text-lg font-semibold text-gray-900 group-hover:text-[#3f72af] transition-colors mb-2 truncate">
+            {task.title}
+          </h3>
+          {task.description && (
+            <p className="text-sm text-gray-600 mb-4 line-clamp-2">{task.description}</p>
+          )}
+
+          <div className="flex flex-wrap items-center gap-3">
+            <span className={`inline-flex items-center px-3 py-1 rounded-md text-xs font-medium border ${getPriorityColor(task.priority)}`}>
+              {getPriorityIcon(task.priority)}
+              <span className="ml-1.5 capitalize">{task.priority}</span>
+            </span>
+            
+            <span className={`inline-flex items-center px-3 py-1 rounded-md text-xs font-medium border ${getStatusColor(task.status)}`}>
+              {getStatusIcon(task.status)}
+              <span className="ml-1.5 capitalize">{task.status.replace('_', ' ')}</span>
+            </span>
+
+            <span className="inline-flex items-center text-xs text-gray-500">
+              <FileText className="w-3 h-3 mr-1" />
+              {task.type.replace('_', ' ')}
+            </span>
+
+            {task.due_date && (
+              <span className="inline-flex items-center text-xs text-gray-500">
+                <Calendar className="w-3 h-3 mr-1" />
+                Due {formatDate(task.due_date)}
+              </span>
+            )}
           </div>
         </div>
       </div>
+    </div>
   );
 }
