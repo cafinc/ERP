@@ -102,8 +102,17 @@ class Task(BaseModel):
     related_id: Optional[str] = None  # ID of related work order, estimate, etc.
     related_type: Optional[str] = None  # Type of related object
     
-    # Assignment
-    assigned_to: List[str] = []  # Can be assigned to multiple users
+    # Enhanced Relations
+    site_id: Optional[str] = None
+    customer_id: Optional[str] = None
+    work_order_id: Optional[str] = None
+    project_id: Optional[str] = None
+    service_ids: List[str] = []
+    form_ids: List[str] = []
+    equipment_ids: List[str] = []
+    
+    # Assignment with notification preferences
+    assigned_to: List[Dict[str, Any]] = []  # [{user_id, name, role, notify_email, notify_app}]
     assigned_by: str
     assigned_by_name: str
     
@@ -120,18 +129,30 @@ class Task(BaseModel):
     
     # Additional Data
     attachments: List[TaskAttachment] = []
+    photos: List[Dict[str, Any]] = []  # Photo gallery with tags
     tags: List[str] = []
-    checklist: List[Dict[str, Any]] = []  # Subtasks/checklist items
+    checklist: List[Dict[str, Any]] = []  # Subtasks/checklist items with required flag
     
-    # Metadata
+    # Metadata & Billing
     estimated_hours: Optional[float] = None
     actual_hours: Optional[float] = None
+    billable: bool = True
+    estimated_cost: Optional[float] = None
+    actual_cost: Optional[float] = None
+    invoice_id: Optional[str] = None
     completion_notes: Optional[str] = None
+    
+    # Time Tracking
+    time_entries: List[Dict[str, Any]] = []  # [{user_id, start, end, hours, billable}]
     
     # Collaboration
     watchers: List[str] = []  # Users watching this task
     is_recurring: bool = False
     recurrence_pattern: Optional[str] = None
+    template_id: Optional[str] = None
+    
+    # Activities
+    activities: List[Dict[str, Any]] = []  # Activity log
     
     class Config:
         json_encoders = {
