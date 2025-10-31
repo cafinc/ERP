@@ -161,6 +161,7 @@ export default function PreviewNewDesign() {
                 <p className="text-sm text-gray-600">{module.description}</p>
               </div>
             </div>
+            ))}
           </div>
         </div>
       </div>

@@ -269,6 +269,9 @@ export default function ServiceFormPage() {
                 )}
 
               </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -173,6 +173,7 @@ export default function PermissionsMatrixPage() {
             >
               {role}
             </button>
+          ))}
         </div>
       </div>
     </div>

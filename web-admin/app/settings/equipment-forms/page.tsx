@@ -219,8 +219,8 @@ export default function EquipmentFormsPage() {
                             </option>
                           ))}
                         </select>
-                        </div>
-                      </div>
+                        </td>
+                      </td>
                     </div>
                   </div>
                 </div>

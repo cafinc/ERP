@@ -235,6 +235,8 @@ export default function ProjectDetailPage() {
             </button>
           </div>
         </div>
+          )}
+        </div>
       </div>
     </div>
   );

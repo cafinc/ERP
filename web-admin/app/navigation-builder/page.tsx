@@ -464,6 +464,7 @@ export default function NavigationBuilder() {
                               {page.name}                              <div className="text-gray-500 hover:text-blue-200 text-[10px]">{page.path}
                               </div>
                             </div>
+          ))}
         </div>
 </DashboardLayout>
           ))
