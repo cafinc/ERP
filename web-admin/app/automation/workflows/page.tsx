@@ -358,12 +358,12 @@ export default function WorkflowBuilderPage() {
                       </button>
                     </div>
                   </div>
-  );
+                );
               })}
             </div>
           )}
         </div>
       </div>
-    </PageHeader>
+    </div>
   );
 }
