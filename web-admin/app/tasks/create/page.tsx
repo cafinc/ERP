@@ -546,6 +546,52 @@ export default function CreateTaskPage() {
             )}
           </div>
 
+          {/* Photos & Attachments */}
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+              <ImageIcon className="w-5 h-5" />
+              Photos & Files
+            </h3>
+
+            <div className="space-y-4">
+              {/* File Upload */}
+              <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-[#3f72af] transition-colors">
+                <input
+                  type="file"
+                  multiple
+                  accept="image/*,.pdf,.doc,.docx,.xls,.xlsx"
+                  onChange={(e) => {
+                    const files = Array.from(e.target.files || []);
+                    console.log('Files selected:', files);
+                    // TODO: Handle file upload
+                    alert('File upload will be implemented. Selected: ' + files.map(f => f.name).join(', '));
+                  }}
+                  className="hidden"
+                  id="task-file-upload"
+                />
+                <label
+                  htmlFor="task-file-upload"
+                  className="cursor-pointer"
+                >
+                  <ImageIcon className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                  <p className="text-sm font-medium text-gray-900 mb-2">
+                    Click to upload photos or files
+                  </p>
+                  <p className="text-xs text-gray-500">
+                    PNG, JPG, PDF, DOC, XLS up to 10MB each
+                  </p>
+                </label>
+              </div>
+
+              {/* File Preview (placeholder) */}
+              <div className="text-sm text-gray-500 text-center">
+                <p>📸 Upload before/after photos</p>
+                <p>📄 Attach documents, PDFs, spreadsheets</p>
+                <p>📋 Add inspection forms or reports</p>
+              </div>
+            </div>
+          </div>
+
           {/* Checklist */}
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
