@@ -103,51 +103,43 @@ export default function TasksPage() {
         {/* Quick Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-3 mb-4">
           <div className="bg-white rounded-lg shadow-sm p-4 border border-gray-200 hover:shadow-md transition-shadow">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-xs text-gray-600">Total Tasks</p>
-                <p className="text-2xl font-bold text-gray-900 mt-0.5">{stats.total}</p>
-              </div>
-              <div className="w-10 h-10 bg-[#3f72af] rounded-lg flex items-center justify-center">
-                <CheckSquare className="w-5 h-5 text-white" />
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2">
+                <CheckSquare className="w-4 h-4 text-[#3f72af]" />
+                <p className="text-xs font-medium text-gray-600">Total Tasks</p>
               </div>
             </div>
+            <p className="text-2xl font-bold text-gray-900">{stats.total}</p>
           </div>
 
           <div className="bg-white rounded-lg shadow-sm p-4 border border-gray-200 hover:shadow-md transition-shadow">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-xs text-gray-600">In Progress</p>
-                <p className="text-2xl font-bold text-blue-600 mt-0.5">{stats.in_progress}</p>
-              </div>
-              <div className="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center">
-                <PlayCircle className="w-5 h-5 text-white" />
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2">
+                <PlayCircle className="w-4 h-4 text-blue-600" />
+                <p className="text-xs font-medium text-gray-600">In Progress</p>
               </div>
             </div>
+            <p className="text-2xl font-bold text-blue-600">{stats.in_progress}</p>
           </div>
 
           <div className="bg-white rounded-lg shadow-sm p-4 border border-gray-200 hover:shadow-md transition-shadow">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-xs text-gray-600">Completed</p>
-                <p className="text-2xl font-bold text-green-600 mt-0.5">{stats.completed}</p>
-              </div>
-              <div className="w-10 h-10 bg-green-500 rounded-lg flex items-center justify-center">
-                <CheckCircle2 className="w-5 h-5 text-white" />
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-green-600" />
+                <p className="text-xs font-medium text-gray-600">Completed</p>
               </div>
             </div>
+            <p className="text-2xl font-bold text-green-600">{stats.completed}</p>
           </div>
 
           <div className="bg-white rounded-lg shadow-sm p-4 border border-gray-200 hover:shadow-md transition-shadow">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-xs text-gray-600">Overdue</p>
-                <p className="text-2xl font-bold text-red-600 mt-0.5">{stats.overdue}</p>
-              </div>
-              <div className="w-10 h-10 bg-red-500 rounded-lg flex items-center justify-center">
-                <AlertCircle className="w-5 h-5 text-white" />
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2">
+                <AlertCircle className="w-4 h-4 text-red-600" />
+                <p className="text-xs font-medium text-gray-600">Overdue</p>
               </div>
             </div>
+            <p className="text-2xl font-bold text-red-600">{stats.overdue}</p>
           </div>
         </div>
 
