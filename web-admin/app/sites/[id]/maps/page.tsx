@@ -412,8 +412,17 @@ export default function UnifiedSiteMapsBuilder() {
       const distanceFeet = distanceMeters * 3.28084;
       const distanceMiles = distanceMeters / 1609.34;
       
-      // Prompt for label
-      const label = prompt('Enter name for this measurement:') || 'Distance';
+      // Store pending measurement and show modal
+      setPendingMeasurement({
+        overlay,
+        type: 'distance',
+        distanceFeet,
+        distanceMeters,
+        distanceMiles,
+        path
+      });
+      setModalLabel('Distance Measurement');
+      setShowMeasurementModal(true);
       
       // Add info window with measurement
       const midPoint = path.getAt(Math.floor(path.getLength() / 2));
