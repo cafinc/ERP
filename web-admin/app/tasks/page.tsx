@@ -1,16 +1,87 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import PageHeader from '@/components/PageHeader';
-import { CheckSquare, Plus, Search, Calendar, User, Filter, Clock } from 'lucide-react';
+import api from '@/lib/api';
+import {
+  CheckSquare,
+  Plus,
+  Search,
+  Calendar,
+  Clock,
+  Flame,
+  ArrowUpCircle,
+  FileText,
+  Circle,
+  CheckCircle2,
+  AlertCircle,
+  X,
+  PlayCircle,
+} from 'lucide-react';
+
+interface Task {
+  id: string;
+  title: string;
+  description: string;
+  type: string;
+  priority: string;
+  status: string;
+  assigned_to: string[];
+  assigned_by_name: string;
+  created_at: string;
+  due_date?: string;
+}
 
 export default function TasksPage() {
-  const [tasks, setTasks] = useState([]);
+  const router = useRouter();
+  const [tasks, setTasks] = useState<Task[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterStatus, setFilterStatus] = useState('all');
-  const [loading, setLoading] = useState(false);
+  const [priorityFilter, setPriorityFilter] = useState('all');
+  const [loading, setLoading] = useState(true);
 
-  const statuses = ['all', 'pending', 'in-progress', 'completed'];
+  useEffect(() => {
+    fetchTasks();
+  }, [filterStatus, priorityFilter]);
+
+  const fetchTasks = async () => {
+    try {
+      setLoading(true);
+      const params = new URLSearchParams();
+      if (filterStatus !== 'all') params.append('status', filterStatus);
+      if (priorityFilter !== 'all') params.append('priority', priorityFilter);
+      
+      const response = await api.get(`/tasks?${params.toString()}`);
+      setTasks(response.data || []);
+    } catch (error) {
+      console.error('Error fetching tasks:', error);
+      setTasks([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const filteredTasks = tasks.filter((task) =>
+    task.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const statuses = ['all', 'pending', 'in_progress', 'completed', 'cancelled'];
+  const priorities = ['all', 'urgent', 'high', 'medium', 'low'];
+
+  const getStats = () => {
+    return {
+      total: tasks.length,
+      in_progress: tasks.filter(t => t.status === 'in_progress').length,
+      completed: tasks.filter(t => t.status === 'completed').length,
+      overdue: tasks.filter(t => {
+        if (!t.due_date) return false;
+        return new Date(t.due_date) < new Date() && t.status !== 'completed';
+      }).length,
+    };
+  };
+
+  const stats = getStats();
 
   return (
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
