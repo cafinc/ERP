@@ -260,13 +260,15 @@ export default function PageLayoutMapper() {
                         <p className="text-xs text-gray-600">{layout.description}</p>
                         <div className="mt-2 bg-white rounded border border-gray-200 h-16">
                           {layout.preview}
-                        </div></div>
+                        </div>
                       </div>
+                    </div>
+                  ))
+                )}
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
 </DashboardLayout>
 </div>
 </div>
