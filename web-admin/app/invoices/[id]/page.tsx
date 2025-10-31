@@ -287,8 +287,9 @@ export default function InvoiceDetailPage() {
                         <td className="py-3 text-right text-sm text-gray-600">${item.unit_price.toFixed(2)}</td>
                         <td className="py-3 text-right text-sm font-medium text-gray-900">${item.total.toFixed(2)}</td>
                       </tr>
-                  </div>
-                </div>
+                  ))}
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
