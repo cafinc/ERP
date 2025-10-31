@@ -177,27 +177,24 @@ export default function WorkflowBuilderPage() {
   }
 
   return (
-    <PageHeader>
-      <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
-        <PageHeader
-        title="Workflows"
+    <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
+      <PageHeader
+        title="Workflow Builder"
         subtitle="Manage automated workflows"
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Automation", href: "/automation" }, { label: "Workflows" }]}
-        title="Workflow Builder"
-          icon={Zap}
-          badges={[
-            { label: `${workflows.length} Workflows`, color: 'blue' },
-            { label: `${workflows.filter(w => w.enabled).length} Active`, color: 'green' },
-          ]}
-          actions={[
-            {
-              label: 'Create Workflow',
-              icon: Plus,
-              onClick: handleCreateWorkflow,
-              variant: 'primary',
-            },
-          ]}
-        />
+        badges={[
+          { label: `${workflows.length} Workflows`, color: 'blue' },
+          { label: `${workflows.filter(w => w.enabled).length} Active`, color: 'green' },
+        ]}
+        actions={[
+          {
+            label: 'Create Workflow',
+            icon: <Plus className="w-4 h-4 mr-2" />,
+            onClick: handleCreateWorkflow,
+            variant: 'primary',
+          },
+        ]}
+      />
 
         {/* Info Banner */}
         <div className="mx-6 mb-4 bg-blue-50 border border-blue-200 rounded-lg p-4 flex items-start space-x-3">
