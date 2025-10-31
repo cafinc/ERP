@@ -346,8 +346,269 @@ export default function CreateTaskPage() {
             </div>
           </div>
 
-          {/* Relations - Continued in next message due to length */}
-          
+          {/* Relations */}
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+              <Building2 className="w-5 h-5" />
+              Link to Records
+            </h3>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Site
+                </label>
+                <select
+                  value={formData.site_id}
+                  onChange={(e) => setFormData({ ...formData, site_id: e.target.value })}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af]"
+                >
+                  <option value="">Select a site...</option>
+                  {sites.map((site) => (
+                    <option key={site.id} value={site.id}>
+                      {site.name} {site.address && `- ${site.address}`}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Customer
+                </label>
+                <select
+                  value={formData.customer_id}
+                  onChange={(e) => setFormData({ ...formData, customer_id: e.target.value })}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af]"
+                >
+                  <option value="">Select a customer...</option>
+                  {customers.map((customer) => (
+                    <option key={customer.id} value={customer.id}>
+                      {customer.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Work Order
+                </label>
+                <select
+                  value={formData.work_order_id}
+                  onChange={(e) => setFormData({ ...formData, work_order_id: e.target.value })}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af]"
+                >
+                  <option value="">Select a work order...</option>
+                  {workOrders.map((wo) => (
+                    <option key={wo.id} value={wo.id}>
+                      {wo.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Services
+                </label>
+                <select
+                  multiple
+                  value={formData.service_ids}
+                  onChange={(e) => {
+                    const selected = Array.from(e.target.selectedOptions, (option) => option.value);
+                    setFormData({ ...formData, service_ids: selected });
+                  }}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] h-24"
+                >
+                  {services.map((service) => (
+                    <option key={service.id} value={service.id}>
+                      {service.name}
+                    </option>
+                  ))}
+                </select>
+                <p className="text-xs text-gray-500 mt-1">Hold Ctrl/Cmd to select multiple</p>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Forms
+                </label>
+                <select
+                  multiple
+                  value={formData.form_ids}
+                  onChange={(e) => {
+                    const selected = Array.from(e.target.selectedOptions, (option) => option.value);
+                    setFormData({ ...formData, form_ids: selected });
+                  }}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] h-24"
+                >
+                  {forms.map((form) => (
+                    <option key={form.id} value={form.id}>
+                      {form.name}
+                    </option>
+                  ))}
+                </select>
+                <p className="text-xs text-gray-500 mt-1">Hold Ctrl/Cmd to select multiple</p>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Equipment
+                </label>
+                <select
+                  multiple
+                  value={formData.equipment_ids}
+                  onChange={(e) => {
+                    const selected = Array.from(e.target.selectedOptions, (option) => option.value);
+                    setFormData({ ...formData, equipment_ids: selected });
+                  }}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af] h-24"
+                >
+                  {equipment.map((eq) => (
+                    <option key={eq.id} value={eq.id}>
+                      {eq.name}
+                    </option>
+                  ))}
+                </select>
+                <p className="text-xs text-gray-500 mt-1">Hold Ctrl/Cmd to select multiple</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Assignments */}
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+              <Users className="w-5 h-5" />
+              Assign To
+            </h3>
+
+            <div className="mb-4">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <input
+                  type="text"
+                  placeholder="Search users..."
+                  value={searchUser}
+                  onChange={(e) => setSearchUser(e.target.value)}
+                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af]"
+                />
+              </div>
+            </div>
+
+            <div className="space-y-2 max-h-64 overflow-y-auto">
+              {filteredUsers.map((user) => {
+                const isAssigned = formData.assigned_to.some((a) => a.user_id === user.id);
+                return (
+                  <div
+                    key={user.id}
+                    onClick={() => toggleAssignment(user.id, user.name)}
+                    className={`p-3 rounded-lg border cursor-pointer transition-colors ${
+                      isAssigned
+                        ? 'bg-[#3f72af] bg-opacity-10 border-[#3f72af]'
+                        : 'bg-white border-gray-200 hover:border-[#3f72af]'
+                    }`}
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="font-medium text-gray-900">{user.name}</span>
+                      {isAssigned && (
+                        <span className="text-[#3f72af] text-sm font-medium">✓ Assigned</span>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {formData.assigned_to.length > 0 && (
+              <div className="mt-4 pt-4 border-t border-gray-200">
+                <p className="text-sm font-medium text-gray-700 mb-2">
+                  Selected ({formData.assigned_to.length})
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {formData.assigned_to.map((assignment) => (
+                    <span
+                      key={assignment.user_id}
+                      className="inline-flex items-center gap-1 px-3 py-1 bg-[#3f72af] text-white rounded-full text-sm"
+                    >
+                      {assignment.name}
+                      <button
+                        type="button"
+                        onClick={() => toggleAssignment(assignment.user_id, assignment.name)}
+                        className="hover:bg-white hover:bg-opacity-20 rounded-full p-0.5"
+                      >
+                        <X className="w-3 h-3" />
+                      </button>
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Checklist */}
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+              <ClipboardList className="w-5 h-5" />
+              Checklist
+            </h3>
+
+            <div className="flex gap-2 mb-4">
+              <input
+                type="text"
+                placeholder="Add checklist item..."
+                value={newChecklistItem}
+                onChange={(e) => setNewChecklistItem(e.target.value)}
+                onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addChecklistItem())}
+                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3f72af] focus:border-[#3f72af]"
+              />
+              <button
+                type="button"
+                onClick={addChecklistItem}
+                className="px-4 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-colors flex items-center gap-2"
+              >
+                <Plus className="w-4 h-4" />
+                Add
+              </button>
+            </div>
+
+            {formData.checklist.length > 0 && (
+              <div className="space-y-2">
+                {formData.checklist.map((item) => (
+                  <div
+                    key={item.id}
+                    className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg border border-gray-200"
+                  >
+                    <input
+                      type="checkbox"
+                      checked={item.required}
+                      onChange={() => toggleChecklistRequired(item.id)}
+                      className="w-4 h-4 text-[#3f72af] border-gray-300 rounded focus:ring-[#3f72af]"
+                      title="Required item"
+                    />
+                    <span className="flex-1 text-gray-900">{item.text}</span>
+                    {item.required && (
+                      <span className="text-xs text-red-600 font-medium">Required</span>
+                    )}
+                    <button
+                      type="button"
+                      onClick={() => removeChecklistItem(item.id)}
+                      className="text-red-600 hover:text-red-700"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {formData.checklist.length === 0 && (
+              <p className="text-sm text-gray-500 text-center py-4">
+                No checklist items added yet
+              </p>
+            )}
+          </div>
+
           <div className="flex items-center justify-end gap-4 pt-4">
             <button
               type="button"
