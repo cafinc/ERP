@@ -31,7 +31,8 @@ from models import (
 # Initialize Async MongoDB client
 mongo_url = os.getenv("MONGO_URL", "mongodb://localhost:27017")
 client = AsyncIOMotorClient(mongo_url)
-db = client["snow_removal_db"]
+db_name = os.getenv("DB_NAME", "snow_removal_db")
+db = client[db_name]
 
 # Collections
 employees_collection = db["employees"]
