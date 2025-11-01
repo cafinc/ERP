@@ -1,0 +1,491 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import PageHeader from '@/components/PageHeader';
+import api from '@/lib/api';
+import {
+  Calendar as CalendarIcon,
+  ChevronLeft,
+  ChevronRight,
+  Plus,
+  Settings,
+  Download,
+  Upload,
+  CheckCircle,
+  Clock,
+  MapPin,
+  Users,
+  AlertCircle,
+  RefreshCw,
+} from 'lucide-react';
+
+interface CalendarEvent {
+  id: string;
+  title: string;
+  description?: string;
+  start: string;
+  end: string;
+  location?: string;
+  attendees?: string[];
+  type: 'appointment' | 'task' | 'meeting' | 'event';
+  status: 'confirmed' | 'tentative' | 'cancelled';
+  google_event_id?: string;
+  color?: string;
+}
+
+export default function CalendarPage() {
+  const router = useRouter();
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [view, setView] = useState<'month' | 'week' | 'day'>('month');
+  const [events, setEvents] = useState<CalendarEvent[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [googleConnected, setGoogleConnected] = useState(false);
+  const [syncing, setSyncing] = useState(false);
+  const [showEventModal, setShowEventModal] = useState(false);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+
+  useEffect(() => {
+    loadEvents();
+    checkGoogleConnection();
+  }, [currentDate, view]);
+
+  const loadEvents = async () => {
+    try {
+      setLoading(true);
+      // Fetch events from backend
+      const response = await api.get('/calendar/events', {
+        params: {
+          start: getStartDate().toISOString(),
+          end: getEndDate().toISOString(),
+        }
+      });
+      setEvents(response.data || []);
+    } catch (error) {
+      console.error('Error loading calendar events:', error);
+      // Use mock data for now
+      setEvents(getMockEvents());
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const checkGoogleConnection = async () => {
+    try {
+      const response = await api.get('/calendar/google/status');
+      setGoogleConnected(response.data.connected || false);
+    } catch (error) {
+      console.error('Error checking Google connection:', error);
+      setGoogleConnected(false);
+    }
+  };
+
+  const connectGoogleCalendar = async () => {
+    try {
+      setSyncing(true);
+      // Redirect to Google OAuth flow
+      const response = await api.get('/calendar/google/auth-url');
+      if (response.data.auth_url) {
+        window.location.href = response.data.auth_url;
+      }
+    } catch (error) {
+      console.error('Error connecting to Google Calendar:', error);
+      alert('Failed to connect to Google Calendar. Please try again.');
+    } finally {
+      setSyncing(false);
+    }
+  };
+
+  const syncGoogleCalendar = async () => {
+    try {
+      setSyncing(true);
+      await api.post('/calendar/google/sync');
+      await loadEvents();
+      alert('Calendar synced successfully!');
+    } catch (error) {
+      console.error('Error syncing calendar:', error);
+      alert('Failed to sync calendar. Please try again.');
+    } finally {
+      setSyncing(false);
+    }
+  };
+
+  const getStartDate = () => {
+    const date = new Date(currentDate);
+    if (view === 'month') {
+      date.setDate(1);
+      date.setHours(0, 0, 0, 0);
+    } else if (view === 'week') {
+      const day = date.getDay();
+      date.setDate(date.getDate() - day);
+      date.setHours(0, 0, 0, 0);
+    } else {
+      date.setHours(0, 0, 0, 0);
+    }
+    return date;
+  };
+
+  const getEndDate = () => {
+    const date = new Date(currentDate);
+    if (view === 'month') {
+      date.setMonth(date.getMonth() + 1);
+      date.setDate(0);
+      date.setHours(23, 59, 59, 999);
+    } else if (view === 'week') {
+      const day = date.getDay();
+      date.setDate(date.getDate() - day + 6);
+      date.setHours(23, 59, 59, 999);
+    } else {
+      date.setHours(23, 59, 59, 999);
+    }
+    return date;
+  };
+
+  const getMockEvents = (): CalendarEvent[] => {
+    const today = new Date();
+    return [
+      {
+        id: '1',
+        title: 'Follow up: Smith Estimate',
+        description: 'Call customer about EST-2024-156',
+        start: new Date(today.getFullYear(), today.getMonth(), today.getDate(), 10, 0).toISOString(),
+        end: new Date(today.getFullYear(), today.getMonth(), today.getDate(), 11, 0).toISOString(),
+        type: 'appointment',
+        status: 'confirmed',
+        color: 'blue',
+      },
+      {
+        id: '2',
+        title: 'Site Inspection - Elm Street',
+        description: 'Parking lot inspection',
+        start: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1, 14, 0).toISOString(),
+        end: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1, 16, 0).toISOString(),
+        location: 'Elm Street Parking Lot',
+        type: 'appointment',
+        status: 'confirmed',
+        color: 'green',
+      },
+      {
+        id: '3',
+        title: 'Team Meeting',
+        start: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 2, 9, 0).toISOString(),
+        end: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 2, 10, 0).toISOString(),
+        attendees: ['Team'],
+        type: 'meeting',
+        status: 'confirmed',
+        color: 'purple',
+      },
+      {
+        id: '4',
+        title: 'Contract Renewal - Downtown Plaza',
+        description: 'Season 2025 contract discussion',
+        start: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 4, 13, 0).toISOString(),
+        end: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 4, 15, 0).toISOString(),
+        type: 'meeting',
+        status: 'tentative',
+        color: 'orange',
+      },
+    ];
+  };
+
+  const getDaysInMonth = () => {
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+    const firstDay = new Date(year, month, 1);
+    const lastDay = new Date(year, month + 1, 0);
+    const daysInMonth = lastDay.getDate();
+    const startingDayOfWeek = firstDay.getDay();
+
+    const days = [];
+    // Add empty cells for days before the start of the month
+    for (let i = 0; i < startingDayOfWeek; i++) {
+      days.push(null);
+    }
+    // Add days of the month
+    for (let day = 1; day <= daysInMonth; day++) {
+      days.push(new Date(year, month, day));
+    }
+    return days;
+  };
+
+  const getEventsForDate = (date: Date | null) => {
+    if (!date) return [];
+    return events.filter(event => {
+      const eventDate = new Date(event.start);
+      return (
+        eventDate.getFullYear() === date.getFullYear() &&
+        eventDate.getMonth() === date.getMonth() &&
+        eventDate.getDate() === date.getDate()
+      );
+    });
+  };
+
+  const formatMonthYear = () => {
+    return currentDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+  };
+
+  const goToPreviousMonth = () => {
+    setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1));
+  };
+
+  const goToNextMonth = () => {
+    setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1));
+  };
+
+  const goToToday = () => {
+    setCurrentDate(new Date());
+  };
+
+  const isToday = (date: Date | null) => {
+    if (!date) return false;
+    const today = new Date();
+    return (
+      date.getFullYear() === today.getFullYear() &&
+      date.getMonth() === today.getMonth() &&
+      date.getDate() === today.getDate()
+    );
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <PageHeader
+        title="Calendar"
+        subtitle="Manage appointments, meetings, and events with Google Calendar sync"
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "Calendar" },
+        ]}
+        actions={[
+          {
+            label: googleConnected ? "Sync with Google" : "Connect Google Calendar",
+            icon: googleConnected ? <RefreshCw className="w-4 h-4 mr-2" /> : <Upload className="w-4 h-4 mr-2" />,
+            variant: googleConnected ? "secondary" : "primary",
+            onClick: googleConnected ? syncGoogleCalendar : connectGoogleCalendar,
+            disabled: syncing,
+          },
+          {
+            label: "New Event",
+            icon: <Plus className="w-4 h-4 mr-2" />,
+            variant: "primary",
+            onClick: () => setShowEventModal(true),
+          },
+        ]}
+      />
+
+      <div className="p-6 space-y-6">
+        {/* Google Calendar Status */}
+        {!googleConnected && (
+          <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 flex items-start gap-3">
+            <AlertCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+            <div className="flex-1">
+              <h3 className="font-semibold text-blue-900 mb-1">Connect Google Calendar</h3>
+              <p className="text-sm text-blue-700 mb-3">
+                Sync your events with Google Calendar to access them across all your devices and never miss an appointment.
+              </p>
+              <button
+                onClick={connectGoogleCalendar}
+                disabled={syncing}
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium disabled:opacity-50"
+              >
+                {syncing ? 'Connecting...' : 'Connect Now'}
+              </button>
+            </div>
+          </div>
+        )}
+
+        {googleConnected && (
+          <div className="bg-green-50 border border-green-200 rounded-xl p-4 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <CheckCircle className="w-5 h-5 text-green-600" />
+              <div>
+                <h3 className="font-semibold text-green-900">Google Calendar Connected</h3>
+                <p className="text-sm text-green-700">Your calendar is synced with Google Calendar</p>
+              </div>
+            </div>
+            <button
+              onClick={syncGoogleCalendar}
+              disabled={syncing}
+              className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm font-medium flex items-center gap-2 disabled:opacity-50"
+            >
+              <RefreshCw className={`w-4 h-4 ${syncing ? 'animate-spin' : ''}`} />
+              {syncing ? 'Syncing...' : 'Sync Now'}
+            </button>
+          </div>
+        )}
+
+        {/* Calendar Controls */}
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <button
+                onClick={goToPreviousMonth}
+                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              <h2 className="text-lg font-semibold text-gray-900 min-w-[200px] text-center">
+                {formatMonthYear()}
+              </h2>
+              <button
+                onClick={goToNextMonth}
+                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+              <button
+                onClick={goToToday}
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
+              >
+                Today
+              </button>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setView('month')}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  view === 'month'
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+              >
+                Month
+              </button>
+              <button
+                onClick={() => setView('week')}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  view === 'week'
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+              >
+                Week
+              </button>
+              <button
+                onClick={() => setView('day')}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  view === 'day'
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+              >
+                Day
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Calendar Grid */}
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          {loading ? (
+            <div className="flex items-center justify-center py-12">
+              <div className="text-center">
+                <RefreshCw className="w-8 h-8 text-blue-600 animate-spin mx-auto mb-2" />
+                <p className="text-gray-600">Loading calendar...</p>
+              </div>
+            </div>
+          ) : (
+            <>
+              {/* Day headers */}
+              <div className="grid grid-cols-7 gap-2 mb-2">
+                {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
+                  <div key={day} className="text-center text-sm font-semibold text-gray-600 py-2">
+                    {day}
+                  </div>
+                ))}
+              </div>
+
+              {/* Calendar days */}
+              <div className="grid grid-cols-7 gap-2">
+                {getDaysInMonth().map((date, index) => {
+                  const dayEvents = getEventsForDate(date);
+                  const today = isToday(date);
+
+                  return (
+                    <button
+                      key={index}
+                      onClick={() => date && setSelectedDate(date)}
+                      disabled={!date}
+                      className={`min-h-[120px] p-2 rounded-lg border transition-all ${
+                        !date
+                          ? 'bg-gray-50 border-transparent'
+                          : today
+                          ? 'bg-blue-50 border-blue-500 border-2'
+                          : 'bg-white border-gray-200 hover:border-blue-300 hover:shadow-sm'
+                      }`}
+                    >
+                      {date && (
+                        <>
+                          <div className={`text-sm font-semibold mb-2 ${
+                            today ? 'text-blue-600' : 'text-gray-900'
+                          }`}>
+                            {date.getDate()}
+                          </div>
+                          <div className="space-y-1">
+                            {dayEvents.slice(0, 3).map(event => (
+                              <div
+                                key={event.id}
+                                className={`text-xs px-2 py-1 rounded bg-${event.color}-100 text-${event.color}-700 truncate text-left`}
+                              >
+                                {event.title}
+                              </div>
+                            ))}
+                            {dayEvents.length > 3 && (
+                              <div className="text-xs text-gray-500 font-medium">
+                                +{dayEvents.length - 3} more
+                              </div>
+                            )}
+                          </div>
+                        </>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+            </>
+          )}
+        </div>
+
+        {/* Upcoming Events */}
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">Upcoming Events</h2>
+          <div className="space-y-3">
+            {events.slice(0, 5).map(event => (
+              <div
+                key={event.id}
+                className="flex items-start gap-4 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer"
+              >
+                <div className={`w-1 h-full bg-${event.color}-500 rounded-full flex-shrink-0`}></div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-semibold text-gray-900">{event.title}</h3>
+                  {event.description && (
+                    <p className="text-sm text-gray-600 mt-1">{event.description}</p>
+                  )}
+                  <div className="flex items-center gap-4 mt-2 text-xs text-gray-500">
+                    <div className="flex items-center gap-1">
+                      <Clock className="w-3 h-3" />
+                      {new Date(event.start).toLocaleString()}
+                    </div>
+                    {event.location && (
+                      <div className="flex items-center gap-1">
+                        <MapPin className="w-3 h-3" />
+                        {event.location}
+                      </div>
+                    )}
+                  </div>
+                </div>
+                <div className={`px-2 py-1 rounded text-xs font-medium ${
+                  event.status === 'confirmed' ? 'bg-green-100 text-green-700' :
+                  event.status === 'tentative' ? 'bg-yellow-100 text-yellow-700' :
+                  'bg-red-100 text-red-700'
+                }`}>
+                  {event.status}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
