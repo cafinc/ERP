@@ -177,10 +177,12 @@ async def google_calendar_callback(code: str = Query(..., description="OAuth aut
     try:
         # Exchange code for access token
         import requests
+        from motor.motor_asyncio import AsyncIOMotorClient
         
         client_id = os.getenv("GOOGLE_CALENDAR_CLIENT_ID")
         client_secret = os.getenv("GOOGLE_CALENDAR_CLIENT_SECRET")
         redirect_uri = os.getenv("GOOGLE_CALENDAR_REDIRECT_URI")
+        mongo_url = os.getenv("MONGO_URL", "mongodb://localhost:27017")
         
         # Exchange authorization code for tokens
         token_url = "https://oauth2.googleapis.com/token"
@@ -211,8 +213,33 @@ async def google_calendar_callback(code: str = Query(..., description="OAuth aut
         
         tokens = token_response.json()
         
-        # In production: Store tokens in database associated with user
-        # For now, we'll return success and redirect to calendar page
+        # Store tokens in MongoDB
+        try:
+            mongo_client = AsyncIOMotorClient(mongo_url)
+            db = mongo_client.snow_removal_db
+            
+            # Store or update the Google Calendar tokens
+            token_doc = {
+                "service": "google_calendar",
+                "access_token": tokens.get("access_token"),
+                "refresh_token": tokens.get("refresh_token"),
+                "token_type": tokens.get("token_type"),
+                "expires_in": tokens.get("expires_in"),
+                "scope": tokens.get("scope"),
+                "created_at": datetime.now(),
+                "updated_at": datetime.now()
+            }
+            
+            # Upsert the token document
+            await db.oauth_tokens.update_one(
+                {"service": "google_calendar"},
+                {"$set": token_doc},
+                upsert=True
+            )
+            
+            print(f"Google Calendar tokens stored successfully")
+        except Exception as e:
+            print(f"Error storing tokens: {e}")
         
         # Return HTML that redirects to calendar page with success message
         return HTMLResponse(content="""
@@ -227,6 +254,7 @@ async def google_calendar_callback(code: str = Query(..., description="OAuth aut
             </head>
             <body style="font-family: Arial, sans-serif; text-align: center; padding: 50px;">
                 <h1>✅ Google Calendar Connected!</h1>
+                <p>Your calendar is now synced with Google Calendar.</p>
                 <p>Redirecting back to calendar...</p>
             </body>
         </html>
