@@ -185,9 +185,12 @@ export default function PageHeader({
 
         {/* Title, Stats, and Actions Row */}
         <div className="flex items-center justify-between mb-4">
-          <div>
-            <h1 className="text-2xl font-semibold text-gray-900">{title}</h1>
-            {subtitle && <p className="text-sm text-gray-600 mt-1">{subtitle}</p>}
+          <div className="flex items-center gap-3">
+            {icon && <div className="text-[#3f72af]">{icon}</div>}
+            <div>
+              <h1 className="text-2xl font-semibold text-gray-900">{title}</h1>
+              {subtitle && <p className="text-sm text-gray-600 mt-1">{subtitle}</p>}
+            </div>
           </div>
           
           <div className="flex items-center gap-4">
