@@ -191,199 +191,407 @@ export default function HomePage() {
     }
   };
 
-  const statCards = [
-    {
-      label: 'Total Customers',
-      value: stats.customers,
-      icon: Users,
-      color: 'bg-[#5b8ec4]',
-      change: '+12%',
-      href: '/customers',
-    },
-    {
-      label: 'Active Projects',
-      value: stats.activeProjects,
-      icon: FileText,
-      color: 'bg-green-500',
-      change: '+8%',
-      href: '/projects',
-    },
-    {
-      label: 'Pending Invoices',
-      value: stats.pendingInvoices,
-      icon: DollarSign,
-      color: 'bg-yellow-500',
-      change: '-5%',
-      href: '/invoices',
-    },
-    {
-      label: 'Total Revenue',
-      value: `$${stats.revenue.toLocaleString()}`,
-      icon: TrendingUp,
-      color: 'bg-purple-500',
-      change: '+23%',
-      href: '/invoices?filter=paid',
-    },
-    {
-      label: 'Low Stock Items',
-      value: stats.lowStockItems,
-      icon: Package,
-      color: 'bg-orange-500',
-      change: stats.lowStockItems > 0 ? 'Alert' : 'OK',
-      href: '/inventory',
-    },
-    {
-      label: 'Active Users',
-      value: stats.activeUsers,
-      icon: Shield,
-      color: 'bg-indigo-500',
-      change: 'Online',
-      href: '/access',
-    },
-    {
-      label: 'Automation Runs',
-      value: stats.automationRuns,
-      icon: Zap,
-      color: 'bg-teal-500',
-      change: 'Today',
-      href: '/automation/analytics',
-    },
-    {
-      label: 'Pending Tasks',
-      value: stats.pendingTasks,
-      icon: CheckSquare,
-      color: 'bg-pink-500',
-      change: 'This Week',
-      href: '/tasks',
-    },
-  ];
-
-  const quickActions = [
-    { label: 'Schedule Service', icon: Calendar, href: '/dispatch' },
-    { label: 'Call Customer', icon: Phone, href: '/customers' },
-    { label: 'Send Email', icon: Mail, href: '/gmail' },
-    { label: 'Create Task', icon: CheckSquare, href: '/tasks' },
-  ];
-
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-64">
-        <div className="text-xl text-gray-600">Loading dashboard...</div></div>
-  );
+      <div className="flex items-center justify-center h-screen">
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-[#3f72af]"></div>
+          <p className="mt-4 text-gray-600">Loading dashboard...</p>
+        </div>
+      </div>
+    );
   }
 
   return (
-      <div className="p-4 space-y-6">
-        {/* Compact Header */}
-        <PageHeader
-          title="Dashboard"
-          subtitle="Overview of your snow removal operations"
-          breadcrumbs={[{ label: "Home" }]}
-        />
+    <div className="min-h-screen bg-[#f8f8f8]">
+      {/* Header Section */}
+      <PageHeader
+        title="Dashboard"
+        subtitle="Overview of your business metrics and performance"
+        breadcrumbs={[{ label: 'Home', href: '/' }]}
+      />
 
-        {/* Stats Grid - More Compact - Now Clickable */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {statCards.map((stat) => (
-            <a
-              key={stat.label}
-              href={stat.href}
-              className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-5 hover:shadow-lg hover:border-blue-500 transition-all cursor-pointer transform hover:scale-105 hover:shadow-md transition-shadow"
-            >
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-gray-600 mb-1">{stat.label}</p>
-                  <p className="text-3xl font-bold text-gray-900">{stat.value}</p>
-                  <p className="text-sm text-green-600 mt-2">{stat.change} from last month</p>
+      <div className="p-6 space-y-6">
+        {/* Stats Cards - Top Row */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* Total Leads */}
+          <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 hover:shadow-xl transition-shadow">
+            <div className="flex items-center justify-between">
+              <div className="flex-1">
+                <div className="flex items-center gap-2 mb-2">
+                  <Users className="w-5 h-5 text-[#3f72af]" />
+                  <p className="text-sm font-medium text-gray-600">Total Leads</p>
                 </div>
-                <div className={`${stat.color} p-4 rounded-xl`}>
-                  <stat.icon className="w-6 h-6 text-white" />
+                <p className="text-3xl font-bold text-gray-900">{stats?.leads.total || 0}</p>
+                <div className="flex items-center gap-2 mt-2">
+                  <p className="text-xs text-gray-500">{stats?.leads.new || 0} new</p>
+                  <span className="text-xs text-gray-400">•</span>
+                  <p className="text-xs text-gray-500">{stats?.leads.conversionRate.toFixed(1)}% conversion</p>
                 </div>
               </div>
-            </a>
-          ))}
-        </div>
-
-        {/* Quick Actions */}
-        <div>
-          <h2 className="text-lg font-bold text-gray-900 mb-3">Quick Actions</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {quickActions.map((action) => (
-              <a
-                key={action.label}
-                href={action.href}
-                className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-5 hover:shadow-md hover:border-blue-300 transition-all flex flex-col items-center justify-center text-center gap-3 hover:shadow-md transition-shadow"
-              >
-                <action.icon className="w-8 h-8 text-[#3f72af]" />
-                <span className="font-medium text-gray-900">{action.label}</span>
-              </a>
-            ))}
-          </div>
-        </div>
-
-        {/* Recent Activity */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          {/* Activity Feed */}
-          <div>
-            <h2 className="text-lg font-bold text-gray-900 mb-3">Recent Activity</h2>
-            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-5 hover:shadow-md transition-shadow">
-              <div className="space-y-4">
-                {recentActivity.map((activity, index) => (
-                  <div 
-                    key={index}
-                    className={`flex items-center gap-4 ${index < recentActivity.length - 1 ? 'pb-4 border-b' : ''}`}
-                  >
-                    <div className={`w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center`}>
-                      <activity.icon className={`w-5 h-5 ${activity.color}`} />
-                    </div>
-                    <div className="flex-1">
-                      <p className="font-medium text-gray-900">{activity.message}</p>
-                      <p className="text-sm text-gray-500">{activity.time}</p>
-                    </div>
-                  </div>
-                ))}
+              <div className="text-right">
+                <div className="flex items-center gap-1 text-green-600">
+                  <TrendingUp className="w-4 h-4" />
+                  <span className="text-sm font-semibold">{stats?.leads.trend || 0}%</span>
+                </div>
               </div>
             </div>
+            <button
+              onClick={() => router.push('/leads')}
+              className="mt-4 w-full px-4 py-2 bg-blue-50 text-[#3f72af] rounded-lg hover:bg-blue-100 transition-colors text-sm font-medium"
+            >
+              View Leads
+            </button>
           </div>
 
-          {/* Platform Health */}
-          <div>
-            <h2 className="text-lg font-bold text-gray-900 mb-3">Platform Health</h2>
-            <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-5 hover:shadow-md transition-shadow">
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <Activity className="w-5 h-5 text-green-600" />
-                    <span className="font-medium text-gray-900">System Status</span>
-                  </div>
-                  <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">
-                    Operational
+          {/* Total Customers */}
+          <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 hover:shadow-xl transition-shadow">
+            <div className="flex items-center justify-between">
+              <div className="flex-1">
+                <div className="flex items-center gap-2 mb-2">
+                  <Briefcase className="w-5 h-5 text-green-600" />
+                  <p className="text-sm font-medium text-gray-600">Total Customers</p>
+                </div>
+                <p className="text-3xl font-bold text-gray-900">{stats?.customers.total || 0}</p>
+                <p className="text-xs text-gray-500 mt-2">{stats?.customers.active || 0} active</p>
+              </div>
+              <div className="text-right">
+                <div className="flex items-center gap-1 text-green-600">
+                  <TrendingUp className="w-4 h-4" />
+                  <span className="text-sm font-semibold">{stats?.customers.trend || 0}%</span>
+                </div>
+              </div>
+            </div>
+            <button
+              onClick={() => router.push('/customers')}
+              className="mt-4 w-full px-4 py-2 bg-green-50 text-green-600 rounded-lg hover:bg-green-100 transition-colors text-sm font-medium"
+            >
+              View Customers
+            </button>
+          </div>
+
+          {/* Total Sites */}
+          <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 hover:shadow-xl transition-shadow">
+            <div className="flex items-center justify-between">
+              <div className="flex-1">
+                <div className="flex items-center gap-2 mb-2">
+                  <MapPin className="w-5 h-5 text-purple-600" />
+                  <p className="text-sm font-medium text-gray-600">Total Sites</p>
+                </div>
+                <p className="text-3xl font-bold text-gray-900">{stats?.sites.total || 0}</p>
+                <p className="text-xs text-gray-500 mt-2">{stats?.sites.active || 0} active</p>
+              </div>
+              <div className="text-right">
+                <div className="flex items-center gap-1 text-green-600">
+                  <TrendingUp className="w-4 h-4" />
+                  <span className="text-sm font-semibold">{stats?.sites.trend || 0}%</span>
+                </div>
+              </div>
+            </div>
+            <button
+              onClick={() => router.push('/sites')}
+              className="mt-4 w-full px-4 py-2 bg-purple-50 text-purple-600 rounded-lg hover:bg-purple-100 transition-colors text-sm font-medium"
+            >
+              View Sites
+            </button>
+          </div>
+
+          {/* Total Revenue */}
+          <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 hover:shadow-xl transition-shadow">
+            <div className="flex items-center justify-between">
+              <div className="flex-1">
+                <div className="flex items-center gap-2 mb-2">
+                  <DollarSign className="w-5 h-5 text-emerald-600" />
+                  <p className="text-sm font-medium text-gray-600">Total Revenue</p>
+                </div>
+                <p className="text-3xl font-bold text-gray-900">
+                  ${(stats?.revenue.total || 0).toLocaleString()}
+                </p>
+                <p className="text-xs text-gray-500 mt-2">${(stats?.revenue.monthly || 0).toLocaleString()} avg/month</p>
+              </div>
+              <div className="text-right">
+                <div className="flex items-center gap-1 text-green-600">
+                  <TrendingUp className="w-4 h-4" />
+                  <span className="text-sm font-semibold">{stats?.revenue.trend || 0}%</span>
+                </div>
+              </div>
+            </div>
+            <button
+              onClick={() => router.push('/invoices')}
+              className="mt-4 w-full px-4 py-2 bg-yellow-50 text-yellow-600 rounded-lg hover:bg-yellow-100 transition-colors text-sm font-medium"
+            >
+              View Pipeline
+            </button>
+          </div>
+        </div>
+
+        {/* Middle Section - 3 Columns */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Lead Conversion Funnel */}
+          <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6">
+            <div className="flex items-center gap-2 mb-6">
+              <BarChart3 className="w-5 h-5 text-[#3f72af]" />
+              <h3 className="text-lg font-bold text-gray-900">Lead Conversion Funnel</h3>
+            </div>
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-gray-600">New Leads</span>
+                  <span className="font-semibold text-gray-900">{stats?.leads.new || 0}</span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div className="bg-blue-500 h-2 rounded-full" style={{ width: '100%' }}></div>
+                </div>
+              </div>
+              <div className="space-y-2">
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-gray-600">Contacted</span>
+                  <span className="font-semibold text-gray-900">
+                    {Math.floor((stats?.leads.total || 0) * 0.6)}
                   </span>
                 </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <BarChart3 className="w-5 h-5 text-[#3f72af]" />
-                    <span className="font-medium text-gray-900">API Response Time</span>
-                  </div>
-                  <span className="text-gray-600 font-medium">125ms</span>
+                <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div className="bg-purple-500 h-2 rounded-full" style={{ width: '60%' }}></div>
                 </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <Clock className="w-5 h-5 text-purple-600" />
-                    <span className="font-medium text-gray-900">Uptime</span>
-                  </div>
-                  <span className="text-gray-600 font-medium">99.9%</span>
+              </div>
+              <div className="space-y-2">
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-gray-600">Converted</span>
+                  <span className="font-semibold text-gray-900">{stats?.leads.converted || 0}</span>
                 </div>
+                <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div className="bg-green-500 h-2 rounded-full" style={{ width: `${stats?.leads.conversionRate || 0}%` }}></div>
+                </div>
+              </div>
+              <div className="pt-4 border-t border-gray-200">
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <Zap className="w-5 h-5 text-yellow-600" />
-                    <span className="font-medium text-gray-900">Automation Success</span>
-                  </div>
-                  <span className="text-gray-600 font-medium">98.2%</span>
+                  <span className="text-sm font-medium text-gray-600">Conversion Rate</span>
+                  <span className="text-2xl font-bold text-green-600">
+                    {(stats?.leads.conversionRate || 0).toFixed(1)}%
+                  </span>
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* Inventory Status */}
+          <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6">
+            <div className="flex items-center gap-2 mb-6">
+              <Package className="w-5 h-5 text-orange-600" />
+              <h3 className="text-lg font-bold text-gray-900">Inventory Status</h3>
+            </div>
+            <div className="flex items-center gap-4 mb-4">
+              <div className="bg-red-100 rounded-full p-3">
+                <AlertCircle className="w-8 h-8 text-red-600" />
+              </div>
+              <div className="flex-1">
+                <p className="text-2xl font-bold text-gray-900">
+                  {stats?.consumables.lowStock || 0}
+                </p>
+                <p className="text-sm text-gray-600">Low Stock Items</p>
+              </div>
+            </div>
+            <div className="pt-4 border-t border-gray-200">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm font-medium text-gray-600">Total Inventory Value</span>
+              </div>
+              <p className="text-2xl font-bold text-gray-900">
+                ${(stats?.consumables.totalValue || 0).toLocaleString()}
+              </p>
+            </div>
+            <button
+              onClick={() => router.push('/consumables')}
+              className="mt-6 w-full px-4 py-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition-colors text-sm font-medium flex items-center justify-center gap-2"
+            >
+              View Inventory
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+
+          {/* Recent Activity */}
+          <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+                <Activity className="w-5 h-5 text-[#3f72af]" />
+                Recent Activity
+              </h3>
+            </div>
+            <div className="space-y-4">
+              {recentActivity.map((activity) => {
+                const Icon = activity.icon;
+                return (
+                  <div key={activity.id} className="flex items-start gap-3">
+                    <div className={`bg-${activity.color}-100 rounded-lg p-2 mt-1`}>
+                      <Icon className={`w-4 h-4 text-${activity.color}-600`} />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-semibold text-gray-900">
+                        {activity.action}
+                      </p>
+                      <p className="text-xs text-gray-600 truncate">
+                        {activity.description}
+                      </p>
+                      <p className="text-xs text-gray-400 mt-1">
+                        {new Date(activity.timestamp).toLocaleTimeString()}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            <button 
+              onClick={() => router.push('/activity')}
+              className="mt-6 w-full px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm font-medium flex items-center justify-center gap-2"
+            >
+              View All Activity
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+
+        {/* Platform Health - Full Width */}
+        {systemHealth && (
+          <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+                <Activity className="w-5 h-5 text-[#3f72af]" />
+                Platform Health
+              </h3>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {systemHealth.services && systemHealth.services.map((service: any) => (
+                <div key={service.name} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                  <div className="flex items-center gap-3">
+                    <div className={`w-3 h-3 rounded-full ${service.status === 'healthy' ? 'bg-green-500' : service.status === 'degraded' ? 'bg-yellow-500' : 'bg-red-500'}`}></div>
+                    <span className="text-sm font-medium text-gray-900">{service.name}</span>
+                  </div>
+                  <span className={`text-xs font-semibold px-2 py-1 rounded ${
+                    service.status === 'healthy' ? 'bg-green-100 text-green-700' :
+                    service.status === 'degraded' ? 'bg-yellow-100 text-yellow-700' :
+                    'bg-red-100 text-red-700'
+                  }`}>
+                    {service.status}
+                  </span>
+                </div>
+              ))}
+              {systemHealth.database && (
+                <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                  <div className="flex items-center gap-3">
+                    <div className={`w-3 h-3 rounded-full ${systemHealth.database.connected ? 'bg-green-500' : 'bg-red-500'}`}></div>
+                    <span className="text-sm font-medium text-gray-900">Database</span>
+                  </div>
+                  <span className={`text-xs font-semibold px-2 py-1 rounded ${
+                    systemHealth.database.connected ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+                  }`}>
+                    {systemHealth.database.connected ? 'Connected' : 'Disconnected'}
+                  </span>
+                </div>
+              )}
+            </div>
+            <button 
+              onClick={() => router.push('/system')}
+              className="mt-6 px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm font-medium flex items-center gap-2"
+            >
+              View System Details
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+        )}
+
+        {/* Quick Actions */}
+        <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6">
+          <h3 className="text-lg font-bold text-gray-900 mb-4">Quick Actions</h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <button
+              onClick={() => setShowLeadModal(true)}
+              className="p-4 border-2 border-gray-200 rounded-xl hover:border-blue-500 hover:bg-blue-50 transition-all group"
+            >
+              <Users className="w-8 h-8 text-gray-400 group-hover:text-blue-600 mb-2 mx-auto" />
+              <p className="text-sm font-semibold text-gray-700 group-hover:text-blue-600">
+                Add Lead
+              </p>
+            </button>
+            <button
+              onClick={() => router.push('/customers/create')}
+              className="p-4 border-2 border-gray-200 rounded-xl hover:border-green-500 hover:bg-green-50 transition-all group"
+            >
+              <Briefcase className="w-8 h-8 text-gray-400 group-hover:text-green-600 mb-2 mx-auto" />
+              <p className="text-sm font-semibold text-gray-700 group-hover:text-green-600">
+                Add Customer
+              </p>
+            </button>
+            <button
+              onClick={() => router.push('/sites/create')}
+              className="p-4 border-2 border-gray-200 rounded-xl hover:border-purple-500 hover:bg-purple-50 transition-all group"
+            >
+              <MapPin className="w-8 h-8 text-gray-400 group-hover:text-purple-600 mb-2 mx-auto" />
+              <p className="text-sm font-semibold text-gray-700 group-hover:text-purple-600">
+                Add Site
+              </p>
+            </button>
+            <button
+              onClick={() => router.push('/consumables')}
+              className="p-4 border-2 border-gray-200 rounded-xl hover:border-yellow-500 hover:bg-yellow-50 transition-all group"
+            >
+              <Package className="w-8 h-8 text-gray-400 group-hover:text-yellow-600 mb-2 mx-auto" />
+              <p className="text-sm font-semibold text-gray-700 group-hover:text-yellow-600">
+                Manage Inventory
+              </p>
+            </button>
           </div>
         </div>
       </div>
+
+      {/* Create Lead Modal */}
+      {showLeadModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl max-w-2xl w-full shadow-2xl max-h-[90vh] overflow-y-auto">
+            <div className="p-6 border-b border-gray-200">
+              <div className="flex items-center justify-between">
+                <h2 className="text-2xl font-bold text-gray-900">Create New Lead</h2>
+                <button
+                  onClick={() => setShowLeadModal(false)}
+                  className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                >
+                  <XCircle className="w-6 h-6 text-gray-500" />
+                </button>
+              </div>
+            </div>
+            <div className="p-6">
+              <p className="text-gray-600 mb-4">
+                To create a full lead with all details, please use the{' '}
+                <button
+                  onClick={() => {
+                    setShowLeadModal(false);
+                    router.push('/leads');
+                  }}
+                  className="text-blue-600 hover:text-blue-700 font-semibold underline"
+                >
+                  Leads Page
+                </button>
+              </p>
+              
+              <div className="flex gap-3 justify-end mt-6">
+                <button
+                  onClick={() => setShowLeadModal(false)}
+                  className="px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 font-semibold transition-all"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={() => {
+                    setShowLeadModal(false);
+                    router.push('/leads');
+                  }}
+                  className="px-6 py-3 bg-[#3f72af] text-white rounded-xl hover:bg-[#2c5282] font-semibold transition-all"
+                >
+                  Go to Leads Page
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
