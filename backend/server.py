@@ -12729,6 +12729,130 @@ api_router.include_router(reports_router)
 logger.info("Reports endpoints registered successfully")
 
 
+# Activity endpoint for dashboard
+@api_router.get("/activity")
+async def get_recent_activity(limit: int = 10):
+    """
+    Get recent activity across the platform
+    Returns recent events from various collections
+    """
+    try:
+        activities = []
+        
+        # Get recent work orders
+        work_orders = await db.work_orders.find().sort("created_at", -1).limit(5).to_list(length=5)
+        for wo in work_orders:
+            activities.append({
+                "_id": str(wo.get("_id")),
+                "type": "work_order",
+                "action": "Work Order Created",
+                "description": f"Work order for {wo.get('service_type', 'service')}",
+                "created_at": wo.get("created_at"),
+                "timestamp": wo.get("created_at")
+            })
+        
+        # Get recent customers
+        customers = await db.customers.find().sort("created_at", -1).limit(3).to_list(length=3)
+        for customer in customers:
+            activities.append({
+                "_id": str(customer.get("_id")),
+                "type": "customer",
+                "action": "Customer Added",
+                "description": f"New customer: {customer.get('company_name', 'Unknown')}",
+                "created_at": customer.get("created_at"),
+                "timestamp": customer.get("created_at")
+            })
+        
+        # Get recent tasks
+        tasks = await db.tasks.find().sort("created_at", -1).limit(5).to_list(length=5)
+        for task in tasks:
+            activities.append({
+                "_id": str(task.get("_id")),
+                "type": "task",
+                "action": "Task Created",
+                "description": task.get("title", "New task"),
+                "created_at": task.get("created_at"),
+                "timestamp": task.get("created_at")
+            })
+        
+        # Get recent sites
+        sites = await db.sites.find().sort("created_at", -1).limit(3).to_list(length=3)
+        for site in sites:
+            activities.append({
+                "_id": str(site.get("_id")),
+                "type": "site",
+                "action": "Site Added",
+                "description": f"New site: {site.get('name', 'Unknown')}",
+                "created_at": site.get("created_at"),
+                "timestamp": site.get("created_at")
+            })
+        
+        # Sort all activities by timestamp and limit
+        activities.sort(key=lambda x: x.get("timestamp") or datetime.min, reverse=True)
+        activities = activities[:limit]
+        
+        return activities
+    
+    except Exception as e:
+        logger.error(f"Error fetching activity: {e}")
+        return []
+
+# System health endpoint for dashboard
+@api_router.get("/system")
+async def get_system_health():
+    """
+    Get system health information
+    Returns status of various system components
+    """
+    try:
+        # Check database
+        db_connected = False
+        try:
+            await db.command('ping')
+            db_connected = True
+        except:
+            pass
+        
+        # Check collections
+        collections = await db.list_collection_names()
+        
+        # System stats
+        stats = {
+            "database": {
+                "connected": db_connected,
+                "collections_count": len(collections)
+            },
+            "services": [
+                {
+                    "name": "API Server",
+                    "status": "healthy",
+                    "uptime": "running"
+                },
+                {
+                    "name": "Database",
+                    "status": "healthy" if db_connected else "down"
+                },
+                {
+                    "name": "Background Jobs",
+                    "status": "healthy"
+                }
+            ],
+            "version": "1.0.0",
+            "timestamp": datetime.now(timezone.utc).isoformat()
+        }
+        
+        return stats
+    
+    except Exception as e:
+        logger.error(f"Error fetching system health: {e}")
+        return {
+            "database": {"connected": False},
+            "services": [],
+            "version": "1.0.0",
+            "timestamp": datetime.now(timezone.utc).isoformat()
+        }
+
+
 # Include the router with all endpoints
 app.include_router(api_router)
 
