@@ -674,25 +674,14 @@ export default function CalendarPage() {
           <div className="bg-white rounded-2xl max-w-2xl w-full shadow-2xl max-h-[90vh] overflow-y-auto"
                onClick={(e) => e.stopPropagation()}>
             <div className="p-6 border-b border-gray-200">
-              <div className="flex items-center justify-between">
-                <h2 className="text-2xl font-bold text-gray-900">
-                  {selectedDate.toLocaleDateString('en-US', { 
-                    weekday: 'long', 
-                    month: 'long', 
-                    day: 'numeric',
-                    year: 'numeric' 
-                  })}
-                </h2>
-                <button
-                  onClick={() => {
-                    setShowEventModal(false);
-                    setSelectedDate(null);
-                  }}
-                  className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-                >
-                  <XCircle className="w-6 h-6 text-gray-500" />
-                </button>
-              </div>
+              <h2 className="text-2xl font-bold text-gray-900">
+                {selectedDate.toLocaleDateString('en-US', { 
+                  weekday: 'long', 
+                  month: 'long', 
+                  day: 'numeric',
+                  year: 'numeric' 
+                })}
+              </h2>
             </div>
             <div className="p-6">
               {getEventsForDate(selectedDate).length === 0 ? (
