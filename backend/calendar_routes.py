@@ -92,6 +92,48 @@ async def create_calendar_event(event: CalendarEvent):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+@router.put("/calendar/events/{event_id}")
+async def update_calendar_event(event_id: str, event: CalendarEvent):
+    """Update an existing calendar event"""
+    try:
+        # In production, update in database and optionally sync with Google Calendar
+        updated_event = event.dict()
+        updated_event["id"] = event_id
+        return updated_event
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.delete("/calendar/events/{event_id}")
+async def delete_calendar_event(event_id: str):
+    """Delete a calendar event"""
+    try:
+        # In production, delete from database and optionally sync with Google Calendar
+        return {
+            "success": True,
+            "message": f"Event {event_id} deleted successfully"
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.post("/calendar/events/check-conflicts")
+async def check_event_conflicts(event: CalendarEvent):
+    """Check for conflicting events"""
+    try:
+        # In production: Query database for overlapping events
+        # Mock response for now
+        conflicts = []
+        
+        # Example conflict detection logic would go here
+        # Check if event.start and event.end overlap with existing events
+        
+        return {
+            "has_conflicts": len(conflicts) > 0,
+            "conflicts": conflicts,
+            "message": "No conflicts found" if len(conflicts) == 0 else f"Found {len(conflicts)} conflicting event(s)"
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
 @router.get("/calendar/google/status")
 async def get_google_calendar_status():
     """Check if Google Calendar is connected"""
