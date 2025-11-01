@@ -48,6 +48,19 @@ export default function CalendarPage() {
   useEffect(() => {
     loadEvents();
     checkGoogleConnection();
+    
+    // Check if we just returned from OAuth with success
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('connected') === 'true') {
+        // Remove the query param
+        window.history.replaceState({}, '', '/calendar');
+        // Force reload the connection status
+        setTimeout(() => {
+          checkGoogleConnection();
+        }, 500);
+      }
+    }
   }, [currentDate, view]);
 
   const loadEvents = async () => {
