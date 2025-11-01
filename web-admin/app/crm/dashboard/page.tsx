@@ -225,10 +225,22 @@ export default function CRMDashboardPage() {
           </div>
 
           {/* Upcoming Tasks */}
-          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
+          <div 
+            onClick={() => router.push('/tasks')}
+            className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow cursor-pointer group"
+          >
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-semibold text-gray-900">Upcoming Tasks</h2>
-              <button className="text-sm text-blue-600 hover:text-blue-700">Add Task</button></div>
+              <h2 className="text-lg font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">Upcoming Tasks</h2>
+              <button 
+                onClick={(e) => {
+                  e.stopPropagation();
+                  router.push('/tasks');
+                }}
+                className="text-sm text-blue-600 hover:text-blue-700 font-medium"
+              >
+                Add Task
+              </button>
+            </div>
             <div className="space-y-3">
               <div className="flex items-start gap-3 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
                 <input type="checkbox" className="mt-1 rounded border-gray-300" />
