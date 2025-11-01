@@ -116,36 +116,42 @@ export default function DashboardPage() {
         (sum: number, c: any) => sum + (c.current_stock * (c.unit_cost || 0)), 0
       );
 
-      // Generate recent activity (mock data for now)
-      const activity: RecentActivity[] = [
-        {
-          id: '1',
-          type: 'lead',
-          action: 'New Lead',
-          description: 'New lead created from website',
-          timestamp: new Date().toISOString(),
-          icon: Users,
-          color: 'blue',
-        },
-        {
-          id: '2',
-          type: 'customer',
-          action: 'Customer Converted',
-          description: 'Lead converted to customer',
-          timestamp: new Date(Date.now() - 3600000).toISOString(),
-          icon: CheckCircle,
-          color: 'green',
-        },
-        {
-          id: '3',
-          type: 'site',
-          action: 'New Site Added',
-          description: 'Site added for commercial customer',
-          timestamp: new Date(Date.now() - 7200000).toISOString(),
-          icon: MapPin,
-          color: 'purple',
-        },
-      ];
+      // Map activity data to dashboard format
+      const activityMapped: RecentActivity[] = activities.map((act: any) => {
+        const getActivityIcon = (type: string) => {
+          switch (type) {
+            case 'lead': return Users;
+            case 'customer': return CheckCircle;
+            case 'site': return MapPin;
+            case 'work_order': return Briefcase;
+            case 'invoice': return DollarSign;
+            case 'task': return CheckCircle;
+            default: return Activity;
+          }
+        };
+
+        const getActivityColor = (type: string) => {
+          switch (type) {
+            case 'lead': return 'blue';
+            case 'customer': return 'green';
+            case 'site': return 'purple';
+            case 'work_order': return 'orange';
+            case 'invoice': return 'emerald';
+            case 'task': return 'indigo';
+            default: return 'gray';
+          }
+        };
+
+        return {
+          id: act._id || act.id,
+          type: act.type || 'order',
+          action: act.action || 'Activity',
+          description: act.description || act.message || '',
+          timestamp: act.created_at || act.timestamp,
+          icon: getActivityIcon(act.type),
+          color: getActivityColor(act.type),
+        };
+      });
 
       setStats({
         leads: {
