@@ -147,6 +147,7 @@ export default function ModernHeaderWithNav() {
         { label: 'Sales Dashboard', href: '/crm/dashboard', icon: LayoutDashboard },
         { label: 'Customers', href: '/customers', icon: Users },
         { label: 'Leads', href: '/leads', icon: Users },
+        { label: 'Calendar', href: '/calendar', icon: Calendar },
         { label: 'Estimates', href: '/estimates', icon: FileText },
         { label: 'Agreements', href: '/contracts', icon: FileText },
         { label: 'Agreement Templates', href: '/agreements/templates', icon: FileText },
