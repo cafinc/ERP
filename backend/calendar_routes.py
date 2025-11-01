@@ -171,7 +171,7 @@ async def sync_google_calendar():
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@router.get("/calendar/google/callback")
+@router.get("/calendar/google/callback", response_class=HTMLResponse)
 async def google_calendar_callback(code: str = Query(..., description="OAuth authorization code")):
     """Handle Google OAuth callback"""
     try:
@@ -195,7 +195,19 @@ async def google_calendar_callback(code: str = Query(..., description="OAuth aut
         token_response = requests.post(token_url, data=token_data)
         
         if token_response.status_code != 200:
-            raise HTTPException(status_code=400, detail="Failed to exchange authorization code")
+            error_detail = token_response.json() if token_response.text else "Unknown error"
+            return HTMLResponse(content=f"""
+            <html>
+                <head>
+                    <title>Connection Error</title>
+                </head>
+                <body style="font-family: Arial, sans-serif; text-align: center; padding: 50px;">
+                    <h1>❌ Failed to Exchange Authorization Code</h1>
+                    <p>Error: {error_detail}</p>
+                    <p><a href="/calendar">Return to Calendar</a></p>
+                </body>
+            </html>
+            """)
         
         tokens = token_response.json()
         
@@ -203,15 +215,14 @@ async def google_calendar_callback(code: str = Query(..., description="OAuth aut
         # For now, we'll return success and redirect to calendar page
         
         # Return HTML that redirects to calendar page with success message
-        return """
+        return HTMLResponse(content="""
         <html>
             <head>
                 <title>Google Calendar Connected</title>
                 <script>
-                    window.opener.postMessage({type: 'google-calendar-connected', success: true}, '*');
                     setTimeout(() => {
                         window.location.href = '/calendar?connected=true';
-                    }, 1000);
+                    }, 2000);
                 </script>
             </head>
             <body style="font-family: Arial, sans-serif; text-align: center; padding: 50px;">
@@ -219,10 +230,10 @@ async def google_calendar_callback(code: str = Query(..., description="OAuth aut
                 <p>Redirecting back to calendar...</p>
             </body>
         </html>
-        """
+        """)
     except Exception as e:
         print(f"Error in Google Calendar callback: {e}")
-        return f"""
+        return HTMLResponse(content=f"""
         <html>
             <head>
                 <title>Connection Error</title>
@@ -233,7 +244,7 @@ async def google_calendar_callback(code: str = Query(..., description="OAuth aut
                 <p><a href="/calendar">Return to Calendar</a></p>
             </body>
         </html>
-        """
+        """)
 
 @router.delete("/calendar/google/disconnect")
 async def disconnect_google_calendar():
