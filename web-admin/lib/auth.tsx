@@ -34,10 +34,22 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const checkAuth = async () => {
     try {
+      // Only check auth if token exists
+      const token = typeof window !== 'undefined' ? localStorage.getItem('session_token') : null;
+      if (!token) {
+        setUser(null);
+        setLoading(false);
+        return;
+      }
+      
       const response = await api.get('/auth/me');
       setUser(response.data);
     } catch (error) {
       setUser(null);
+      // Clear invalid token
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('session_token');
+      }
     } finally {
       setLoading(false);
     }
