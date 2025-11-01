@@ -30,7 +30,7 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      // Only redirect to login if we're not already there and token exists
+      // Handle 401 silently - this is expected when not logged in or token expired
       if (typeof window !== 'undefined') {
         const hasToken = localStorage.getItem('session_token');
         const onLoginPage = window.location.pathname.includes('/login');
@@ -42,14 +42,15 @@ api.interceptors.response.use(
           
           // Redirect to login only if not already there
           if (!onLoginPage) {
+            console.log('Session expired. Redirecting to login...');
             window.location.href = '/login';
           }
         }
-        // If no token, don't redirect (user is already logged out)
+        // If no token exists, this is expected - user needs to log in
       }
-    } else {
-      // Log other errors
-      console.error('API Error:', error.response?.status, error.response?.data);
+    } else if (error.response?.status >= 500) {
+      // Only log server errors (5xx)
+      console.error('Server Error:', error.response?.status, error.response?.data);
     }
     return Promise.reject(error);
   }
