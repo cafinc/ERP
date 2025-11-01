@@ -348,15 +348,17 @@ export default function CalendarPage() {
               <button
                 onClick={goToPreviousMonth}
                 className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                aria-label={view === 'month' ? 'Previous month' : view === 'week' ? 'Previous week' : 'Previous day'}
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
-              <h2 className="text-lg font-semibold text-gray-900 min-w-[200px] text-center">
-                {formatMonthYear()}
+              <h2 className="text-lg font-semibold text-gray-900 min-w-[300px] text-center transition-all duration-300">
+                {formatDateHeader()}
               </h2>
               <button
                 onClick={goToNextMonth}
                 className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                aria-label={view === 'month' ? 'Next month' : view === 'week' ? 'Next week' : 'Next day'}
               >
                 <ChevronRight className="w-5 h-5" />
               </button>
@@ -368,33 +370,33 @@ export default function CalendarPage() {
               </button>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 bg-gray-100 rounded-lg p-1">
               <button
                 onClick={() => setView('month')}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                   view === 'month'
-                    ? 'bg-[#3f72af] text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    ? 'bg-[#3f72af] text-white shadow-sm'
+                    : 'text-gray-700 hover:text-gray-900'
                 }`}
               >
                 Month
               </button>
               <button
                 onClick={() => setView('week')}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                   view === 'week'
-                    ? 'bg-[#3f72af] text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    ? 'bg-[#3f72af] text-white shadow-sm'
+                    : 'text-gray-700 hover:text-gray-900'
                 }`}
               >
                 Week
               </button>
               <button
                 onClick={() => setView('day')}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                   view === 'day'
-                    ? 'bg-[#3f72af] text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    ? 'bg-[#3f72af] text-white shadow-sm'
+                    : 'text-gray-700 hover:text-gray-900'
                 }`}
               >
                 Day
