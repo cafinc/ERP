@@ -43,6 +43,7 @@ import {
   Database,
   Server,
   Fuel,
+  Calendar,
 } from 'lucide-react';
 
 interface MenuItem {
