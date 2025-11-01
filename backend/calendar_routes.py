@@ -3,6 +3,7 @@ Calendar Routes - Manage calendar events and Google Calendar integration
 """
 
 from fastapi import APIRouter, HTTPException, Query, Depends
+from fastapi.responses import HTMLResponse
 from datetime import datetime, timedelta
 from typing import Optional, List
 from pydantic import BaseModel
