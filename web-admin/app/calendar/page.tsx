@@ -44,6 +44,8 @@ export default function CalendarPage() {
   const [syncing, setSyncing] = useState(false);
   const [showEventModal, setShowEventModal] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [showConnectionError, setShowConnectionError] = useState(false);
+  const [connectionErrorMessage, setConnectionErrorMessage] = useState('');
 
   useEffect(() => {
     loadEvents();
