@@ -12733,6 +12733,16 @@ from calendar_routes import router as calendar_router
 api_router.include_router(calendar_router)
 logger.info("Calendar endpoints registered successfully")
 
+# Team routes
+from team_routes import router as team_router
+api_router.include_router(team_router)
+logger.info("Team endpoints registered successfully")
+
+# Forms routes
+from forms_routes import router as forms_router
+api_router.include_router(forms_router)
+logger.info("Forms endpoints registered successfully")
+
 
 # Activity endpoint for dashboard
 @api_router.get("/activity")
