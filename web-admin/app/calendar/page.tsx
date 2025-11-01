@@ -232,6 +232,21 @@ export default function CalendarPage() {
     return days;
   };
 
+  const getWeekDays = () => {
+    const days = [];
+    const startOfWeek = getStartDate();
+    for (let i = 0; i < 7; i++) {
+      const day = new Date(startOfWeek);
+      day.setDate(startOfWeek.getDate() + i);
+      days.push(day);
+    }
+    return days;
+  };
+
+  const getCurrentDayEvents = () => {
+    return getEventsForDate(currentDate);
+  };
+
   const getEventsForDate = (date: Date | null) => {
     if (!date) return [];
     return events.filter(event => {
