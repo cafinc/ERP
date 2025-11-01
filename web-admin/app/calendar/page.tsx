@@ -79,6 +79,7 @@ export default function CalendarPage() {
   useEffect(() => {
     loadEvents();
     checkGoogleConnection();
+    loadRelatedData();
     
     // Check if we just returned from OAuth with success
     if (typeof window !== 'undefined') {
@@ -93,6 +94,24 @@ export default function CalendarPage() {
       }
     }
   }, [currentDate, view]);
+
+  const loadRelatedData = async () => {
+    try {
+      const [customersRes, sitesRes, formsRes, teamRes] = await Promise.all([
+        api.get('/customers').catch(() => ({ data: { customers: [] } })),
+        api.get('/sites').catch(() => ({ data: [] })),
+        api.get('/forms/templates').catch(() => ({ data: [] })),
+        api.get('/team').catch(() => ({ data: [] })),
+      ]);
+
+      setCustomers(customersRes.data.customers || customersRes.data || []);
+      setSites(sitesRes.data || []);
+      setForms(formsRes.data || []);
+      setTeamMembers(teamRes.data || []);
+    } catch (error) {
+      console.error('Error loading related data:', error);
+    }
+  };
 
   const loadEvents = async () => {
     try {
