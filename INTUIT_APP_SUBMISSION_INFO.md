@@ -10,7 +10,7 @@ When setting up your QuickBooks app in the Intuit Developer Portal, you'll need 
 
 **URL to provide:**
 ```
-https://webadmin-jsx.preview.emergentagent.com/legal/terms
+https://mapbuilder-3.preview.emergentagent.com/legal/terms
 ```
 
 **What it contains:**
@@ -29,7 +29,7 @@ https://webadmin-jsx.preview.emergentagent.com/legal/terms
 
 **URL to provide:**
 ```
-https://webadmin-jsx.preview.emergentagent.com/legal/privacy
+https://mapbuilder-3.preview.emergentagent.com/legal/privacy
 ```
 
 **What it contains:**
@@ -48,7 +48,7 @@ https://webadmin-jsx.preview.emergentagent.com/legal/privacy
 
 **URL to provide:**
 ```
-https://webadmin-jsx.preview.emergentagent.com/api/quickbooks/auth/callback
+https://mapbuilder-3.preview.emergentagent.com/api/quickbooks/auth/callback
 ```
 
 **Important:**
@@ -73,7 +73,7 @@ Category: Business Management / Field Services
 ### Keys & OAuth Tab
 ```
 Redirect URIs:
-  ✓ https://webadmin-jsx.preview.emergentagent.com/api/quickbooks/auth/callback
+  ✓ https://mapbuilder-3.preview.emergentagent.com/api/quickbooks/auth/callback
 
 Scopes:
   ✓ com.intuit.quickbooks.accounting (already configured)
@@ -82,10 +82,10 @@ Scopes:
 ### Legal & Compliance Tab
 ```
 End-User License Agreement URL:
-  https://webadmin-jsx.preview.emergentagent.com/legal/terms
+  https://mapbuilder-3.preview.emergentagent.com/legal/terms
 
 Privacy Policy URL:
-  https://webadmin-jsx.preview.emergentagent.com/legal/privacy
+  https://mapbuilder-3.preview.emergentagent.com/legal/privacy
 
 App Logo: (optional - upload your company logo)
 
@@ -106,7 +106,7 @@ Support Phone: +1 (587) 877-0293
 ### 2. Configure Keys & OAuth
 - Go to "Keys & OAuth" tab
 - Under "Redirect URIs", click "Add URI"
-- Enter: `https://webadmin-jsx.preview.emergentagent.com/api/quickbooks/auth/callback`
+- Enter: `https://mapbuilder-3.preview.emergentagent.com/api/quickbooks/auth/callback`
 - Click "Save"
 
 ### 3. Configure App Settings
@@ -132,15 +132,15 @@ Enter the URLs provided above.
 Before submitting or connecting, verify:
 
 - [ ] Privacy Policy URL loads correctly
-  - Visit: https://webadmin-jsx.preview.emergentagent.com/legal/privacy
+  - Visit: https://mapbuilder-3.preview.emergentagent.com/legal/privacy
   - Should display privacy policy page
   
 - [ ] Terms of Service URL loads correctly
-  - Visit: https://webadmin-jsx.preview.emergentagent.com/legal/terms
+  - Visit: https://mapbuilder-3.preview.emergentagent.com/legal/terms
   - Should display terms page
   
 - [ ] Redirect URI is exactly as specified
-  - `https://webadmin-jsx.preview.emergentagent.com/api/quickbooks/auth/callback`
+  - `https://mapbuilder-3.preview.emergentagent.com/api/quickbooks/auth/callback`
   - No typos, no trailing slash, HTTPS protocol
   
 - [ ] All changes are saved in Intuit portal
@@ -191,17 +191,17 @@ For quick copy-paste into Intuit forms:
 
 **Privacy Policy URL:**
 ```
-https://webadmin-jsx.preview.emergentagent.com/legal/privacy
+https://mapbuilder-3.preview.emergentagent.com/legal/privacy
 ```
 
 **Terms of Service URL:**
 ```
-https://webadmin-jsx.preview.emergentagent.com/legal/terms
+https://mapbuilder-3.preview.emergentagent.com/legal/terms
 ```
 
 **Redirect URI:**
 ```
-https://webadmin-jsx.preview.emergentagent.com/api/quickbooks/auth/callback
+https://mapbuilder-3.preview.emergentagent.com/api/quickbooks/auth/callback
 ```
 
 ---

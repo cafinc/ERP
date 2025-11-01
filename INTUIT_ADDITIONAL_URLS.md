@@ -27,14 +27,14 @@ plowpro-admin.preview.emergentagent.com
 
 **URL to provide:**
 ```
-https://webadmin-jsx.preview.emergentagent.com/settings/quickbooks
+https://mapbuilder-3.preview.emergentagent.com/settings/quickbooks
 ```
 
 **What it is:** The page customers are redirected to after successfully connecting their QuickBooks account. This shows the connection status, sync settings, and activity logs.
 
 **Alternative option (if you prefer dashboard):**
 ```
-https://webadmin-jsx.preview.emergentagent.com
+https://mapbuilder-3.preview.emergentagent.com
 ```
 (Main dashboard - if you want users to start at the home page)
 
@@ -48,7 +48,7 @@ https://webadmin-jsx.preview.emergentagent.com
 
 **URL to provide:**
 ```
-https://webadmin-jsx.preview.emergentagent.com/settings/quickbooks
+https://mapbuilder-3.preview.emergentagent.com/settings/quickbooks
 ```
 
 **What it is:** The page customers are redirected to after disconnecting their QuickBooks integration. Same as Launch URL so they can reconnect if needed.
@@ -62,16 +62,16 @@ Here's a complete list of ALL URLs you need to configure in Intuit Developer Por
 ### Legal & Compliance
 ```
 Privacy Policy URL:
-https://webadmin-jsx.preview.emergentagent.com/legal/privacy
+https://mapbuilder-3.preview.emergentagent.com/legal/privacy
 
 End-User License Agreement URL (Terms of Service):
-https://webadmin-jsx.preview.emergentagent.com/legal/terms
+https://mapbuilder-3.preview.emergentagent.com/legal/terms
 ```
 
 ### OAuth Configuration
 ```
 Redirect URI:
-https://webadmin-jsx.preview.emergentagent.com/api/quickbooks/auth/callback
+https://mapbuilder-3.preview.emergentagent.com/api/quickbooks/auth/callback
 ```
 
 ### App Configuration
@@ -80,10 +80,10 @@ Host Domain:
 plowpro-admin.preview.emergentagent.com
 
 Launch URL:
-https://webadmin-jsx.preview.emergentagent.com/settings/quickbooks
+https://mapbuilder-3.preview.emergentagent.com/settings/quickbooks
 
 Disconnect URL:
-https://webadmin-jsx.preview.emergentagent.com/settings/quickbooks
+https://mapbuilder-3.preview.emergentagent.com/settings/quickbooks
 ```
 
 ---
@@ -95,11 +95,11 @@ For quick copy-paste into Intuit forms:
 | Field | Value |
 |-------|-------|
 | **Host Domain** | `plowpro-admin.preview.emergentagent.com` |
-| **Launch URL** | `https://webadmin-jsx.preview.emergentagent.com/settings/quickbooks` |
-| **Disconnect URL** | `https://webadmin-jsx.preview.emergentagent.com/settings/quickbooks` |
-| **Privacy Policy URL** | `https://webadmin-jsx.preview.emergentagent.com/legal/privacy` |
-| **Terms of Service URL** | `https://webadmin-jsx.preview.emergentagent.com/legal/terms` |
-| **Redirect URI** | `https://webadmin-jsx.preview.emergentagent.com/api/quickbooks/auth/callback` |
+| **Launch URL** | `https://mapbuilder-3.preview.emergentagent.com/settings/quickbooks` |
+| **Disconnect URL** | `https://mapbuilder-3.preview.emergentagent.com/settings/quickbooks` |
+| **Privacy Policy URL** | `https://mapbuilder-3.preview.emergentagent.com/legal/privacy` |
+| **Terms of Service URL** | `https://mapbuilder-3.preview.emergentagent.com/legal/terms` |
+| **Redirect URI** | `https://mapbuilder-3.preview.emergentagent.com/api/quickbooks/auth/callback` |
 
 ---
 
@@ -125,8 +125,8 @@ If you prefer different landing pages, here are alternatives:
 
 ### Option 1: QuickBooks Settings Page (Recommended) ✓
 ```
-Launch URL: https://webadmin-jsx.preview.emergentagent.com/settings/quickbooks
-Disconnect URL: https://webadmin-jsx.preview.emergentagent.com/settings/quickbooks
+Launch URL: https://mapbuilder-3.preview.emergentagent.com/settings/quickbooks
+Disconnect URL: https://mapbuilder-3.preview.emergentagent.com/settings/quickbooks
 ```
 **Pros:** 
 - Users see immediate connection status
@@ -136,8 +136,8 @@ Disconnect URL: https://webadmin-jsx.preview.emergentagent.com/settings/quickboo
 
 ### Option 2: Main Dashboard
 ```
-Launch URL: https://webadmin-jsx.preview.emergentagent.com
-Disconnect URL: https://webadmin-jsx.preview.emergentagent.com
+Launch URL: https://mapbuilder-3.preview.emergentagent.com
+Disconnect URL: https://mapbuilder-3.preview.emergentagent.com
 ```
 **Pros:**
 - Broader overview of the system
@@ -147,8 +147,8 @@ Disconnect URL: https://webadmin-jsx.preview.emergentagent.com
 
 ### Option 3: Settings Home Page
 ```
-Launch URL: https://webadmin-jsx.preview.emergentagent.com/settings
-Disconnect URL: https://webadmin-jsx.preview.emergentagent.com/settings
+Launch URL: https://mapbuilder-3.preview.emergentagent.com/settings
+Disconnect URL: https://mapbuilder-3.preview.emergentagent.com/settings
 ```
 **Pros:**
 - Shows all integration options
@@ -212,11 +212,11 @@ Location: Calgary, Alberta, Canada
 Before submitting or going live:
 
 - [ ] Host domain configured: `plowpro-admin.preview.emergentagent.com`
-- [ ] Launch URL configured: `https://webadmin-jsx.preview.emergentagent.com/settings/quickbooks`
-- [ ] Disconnect URL configured: `https://webadmin-jsx.preview.emergentagent.com/settings/quickbooks`
-- [ ] Privacy Policy URL configured: `https://webadmin-jsx.preview.emergentagent.com/legal/privacy`
-- [ ] Terms of Service URL configured: `https://webadmin-jsx.preview.emergentagent.com/legal/terms`
-- [ ] Redirect URI configured: `https://webadmin-jsx.preview.emergentagent.com/api/quickbooks/auth/callback`
+- [ ] Launch URL configured: `https://mapbuilder-3.preview.emergentagent.com/settings/quickbooks`
+- [ ] Disconnect URL configured: `https://mapbuilder-3.preview.emergentagent.com/settings/quickbooks`
+- [ ] Privacy Policy URL configured: `https://mapbuilder-3.preview.emergentagent.com/legal/privacy`
+- [ ] Terms of Service URL configured: `https://mapbuilder-3.preview.emergentagent.com/legal/terms`
+- [ ] Redirect URI configured: `https://mapbuilder-3.preview.emergentagent.com/api/quickbooks/auth/callback`
 - [ ] All URLs tested and accessible
 - [ ] OAuth flow tested successfully
 - [ ] Disconnect flow tested successfully
