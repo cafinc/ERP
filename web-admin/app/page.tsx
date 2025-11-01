@@ -1,77 +1,194 @@
 'use client';
 
-import PageHeader from '@/components/PageHeader';
-import { 
-  Users, FileText, DollarSign, TrendingUp, Calendar, Phone, Mail, CheckSquare, Home,
-  Package, Shield, BarChart3, Activity, AlertTriangle, TrendingDown, CheckCircle,
-  Clock, Zap
-} from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import PageHeader from '@/components/PageHeader';
 import api from '@/lib/api';
+import {
+  TrendingUp,
+  TrendingDown,
+  Users,
+  MapPin,
+  Briefcase,
+  DollarSign,
+  Package,
+  AlertCircle,
+  Clock,
+  CheckCircle,
+  XCircle,
+  Calendar,
+  Activity,
+  BarChart3,
+  PieChart,
+  ArrowRight,
+} from 'lucide-react';
+
+interface DashboardStats {
+  leads: {
+    total: number;
+    new: number;
+    converted: number;
+    conversionRate: number;
+    trend: number;
+  };
+  customers: {
+    total: number;
+    active: number;
+    trend: number;
+  };
+  sites: {
+    total: number;
+    active: number;
+    trend: number;
+  };
+  revenue: {
+    total: number;
+    monthly: number;
+    trend: number;
+  };
+  consumables: {
+    lowStock: number;
+    totalValue: number;
+  };
+}
+
+interface RecentActivity {
+  id: string;
+  type: 'lead' | 'customer' | 'site' | 'order';
+  action: string;
+  description: string;
+  timestamp: string;
+  icon: any;
+  color: string;
+}
 
 export default function HomePage() {
   const router = useRouter();
-  const [stats, setStats] = useState({
-    customers: 0,
-    activeProjects: 0,
-    pendingInvoices: 0,
-    revenue: 0,
-    lowStockItems: 0,
-    activeUsers: 0,
-    automationRuns: 0,
-    pendingTasks: 0,
-  });
   const [loading, setLoading] = useState(true);
-  const [recentActivity, setRecentActivity] = useState<any[]>([]);
+  const [stats, setStats] = useState<DashboardStats | null>(null);
+  const [recentActivity, setRecentActivity] = useState<RecentActivity[]>([]);
+  const [systemHealth, setSystemHealth] = useState<any>(null);
+  const [showLeadModal, setShowLeadModal] = useState(false);
 
   useEffect(() => {
-    loadStats();
-    loadRecentActivity();
+    loadDashboardData();
   }, []);
 
-  const loadStats = async () => {
+  const loadDashboardData = async () => {
     try {
-      // Load dashboard stats
-      const [customersRes, projectsRes, invoicesRes, inventoryRes] = await Promise.all([
-        api.get('/customers').catch(() => ({ data: [] })),
-        api.get('/projects').catch(() => ({ data: { projects: [] } })),
-        api.get('/invoices').catch(() => ({ data: [] })),
-        api.get('/inventory').catch(() => ({ data: [] })),
+      setLoading(true);
+      
+      // Fetch all necessary data including activity and system health
+      const [leadsRes, customersRes, sitesRes, consumablesRes, activityRes, systemRes] = await Promise.all([
+        api.get('/leads'),
+        api.get('/customers'),
+        api.get('/sites'),
+        api.get('/consumables'),
+        api.get('/activity?limit=10').catch(() => ({ data: [] })), // Fetch recent activity
+        api.get('/system').catch(() => ({ data: null })), // Fetch system health
       ]);
 
-      const customers = customersRes.data || [];
-      const projects = projectsRes.data?.projects || projectsRes.data || [];
-      const invoices = invoicesRes.data || [];
-      const inventory = inventoryRes.data || [];
+      const leads = leadsRes.data || [];
+      const customers = customersRes.data.customers || [];
+      const sites = sitesRes.data || [];
+      const consumables = consumablesRes.data || [];
+      const activities = activityRes.data || [];
+      const system = systemRes.data;
+
+      // Calculate stats
+      const leadsTotal = leads.length;
+      const leadsNew = leads.filter((l: any) => l.status === 'new').length;
+      const leadsConverted = leads.filter((l: any) => l.status === 'converted').length;
+      const conversionRate = leadsTotal > 0 ? (leadsConverted / leadsTotal) * 100 : 0;
+      
+      const customersActive = customers.filter((c: any) => c.active).length;
+      const sitesActive = sites.filter((s: any) => s.active).length;
+      
+      const totalRevenue = leads
+        .filter((l: any) => l.status === 'converted')
+        .reduce((sum: number, l: any) => sum + (l.estimated_value || 0), 0);
+      
+      const lowStockItems = consumables.filter(
+        (c: any) => c.current_stock <= (c.reorder_level || 0)
+      ).length;
+      
+      const consumablesValue = consumables.reduce(
+        (sum: number, c: any) => sum + (c.current_stock * (c.unit_cost || 0)), 0
+      );
+
+      // Map activity data to dashboard format
+      const activityMapped: RecentActivity[] = activities.map((act: any) => {
+        const getActivityIcon = (type: string) => {
+          switch (type) {
+            case 'lead': return Users;
+            case 'customer': return CheckCircle;
+            case 'site': return MapPin;
+            case 'work_order': return Briefcase;
+            case 'invoice': return DollarSign;
+            case 'task': return CheckCircle;
+            default: return Activity;
+          }
+        };
+
+        const getActivityColor = (type: string) => {
+          switch (type) {
+            case 'lead': return 'blue';
+            case 'customer': return 'green';
+            case 'site': return 'purple';
+            case 'work_order': return 'orange';
+            case 'invoice': return 'emerald';
+            case 'task': return 'indigo';
+            default: return 'gray';
+          }
+        };
+
+        return {
+          id: act._id || act.id,
+          type: act.type || 'order',
+          action: act.action || 'Activity',
+          description: act.description || act.message || '',
+          timestamp: act.created_at || act.timestamp,
+          icon: getActivityIcon(act.type),
+          color: getActivityColor(act.type),
+        };
+      });
 
       setStats({
-        customers: customers.length,
-        activeProjects: projects.filter((p: any) => p.status === 'active').length,
-        pendingInvoices: invoices.filter((i: any) => i.status !== 'paid').length,
-        revenue: invoices
-          .filter((i: any) => i.status === 'paid')
-          .reduce((sum: number, i: any) => sum + (i.total_amount || 0), 0),
-        lowStockItems: inventory.filter((i: any) => i.status === 'low_stock' || i.status === 'out_of_stock').length,
-        activeUsers: 4, // Mock data
-        automationRuns: 168, // Mock data
-        pendingTasks: 12, // Mock data
+        leads: {
+          total: leadsTotal,
+          new: leadsNew,
+          converted: leadsConverted,
+          conversionRate,
+          trend: 12.5,
+        },
+        customers: {
+          total: customers.length,
+          active: customersActive,
+          trend: 8.3,
+        },
+        sites: {
+          total: sites.length,
+          active: sitesActive,
+          trend: 5.7,
+        },
+        revenue: {
+          total: totalRevenue,
+          monthly: totalRevenue,
+          trend: 15.2,
+        },
+        consumables: {
+          lowStock: lowStockItems,
+          totalValue: consumablesValue,
+        },
       });
+
+      setRecentActivity(activityMapped);
+      setSystemHealth(system);
     } catch (error) {
-      console.error('Error loading stats:', error);
+      console.error('Error loading dashboard data:', error);
     } finally {
       setLoading(false);
     }
-  };
-
-  const loadRecentActivity = async () => {
-    // Mock recent activity
-    setRecentActivity([
-      { type: 'invoice', message: 'Invoice #1234 paid', time: '2 mins ago', icon: CheckCircle, color: 'text-green-600' },
-      { type: 'project', message: 'Project "Main St Plowing" updated', time: '15 mins ago', icon: FileText, color: 'text-[#3f72af]' },
-      { type: 'alert', message: 'Low stock alert: Rock Salt', time: '1 hour ago', icon: AlertTriangle, color: 'text-yellow-600' },
-      { type: 'customer', message: 'New customer added', time: '3 hours ago', icon: Users, color: 'text-purple-600' },
-    ]);
   };
 
   const statCards = [
