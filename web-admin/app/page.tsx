@@ -206,7 +206,7 @@ export default function HomePage() {
     {
       label: 'Add Lead',
       icon: <Users className="w-4 h-4 mr-2" />,
-      onClick: () => setShowLeadModal(true),
+      onClick: () => router.push('/leads'),
       variant: 'secondary' as const,
     },
     {
