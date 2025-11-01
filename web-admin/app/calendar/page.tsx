@@ -102,14 +102,16 @@ export default function CalendarPage() {
       const response = await api.get('/calendar/google/auth-url');
       
       if (response.data.setup_required) {
-        // Show setup message instead of redirecting
-        alert(response.data.message + '\n\nTo set up Google Calendar integration:\n1. Create a Google Cloud project\n2. Enable Google Calendar API\n3. Create OAuth 2.0 credentials\n4. Add GOOGLE_CALENDAR_CLIENT_ID to backend .env');
+        // Show setup message as popup
+        setConnectionErrorMessage(response.data.message + '\n\nTo set up Google Calendar integration:\n1. Create a Google Cloud project\n2. Enable Google Calendar API\n3. Create OAuth 2.0 credentials\n4. Add GOOGLE_CALENDAR_CLIENT_ID to backend .env');
+        setShowConnectionError(true);
       } else if (response.data.auth_url) {
         window.location.href = response.data.auth_url;
       }
     } catch (error) {
       console.error('Error connecting to Google Calendar:', error);
-      alert('Failed to connect to Google Calendar. The backend endpoints are ready, but Google OAuth credentials need to be configured.');
+      setConnectionErrorMessage('Failed to connect to Google Calendar. The backend endpoints are ready, but Google OAuth credentials need to be configured.');
+      setShowConnectionError(true);
     } finally {
       setSyncing(false);
     }
@@ -120,10 +122,13 @@ export default function CalendarPage() {
       setSyncing(true);
       await api.post('/calendar/google/sync');
       await loadEvents();
-      alert('Calendar synced successfully!');
+      // Show success popup
+      setConnectionErrorMessage('Calendar synced successfully!');
+      setShowConnectionError(true);
     } catch (error) {
       console.error('Error syncing calendar:', error);
-      alert('Failed to sync calendar. Please try again.');
+      setConnectionErrorMessage('Failed to sync calendar. Please try again.');
+      setShowConnectionError(true);
     } finally {
       setSyncing(false);
     }
