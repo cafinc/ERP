@@ -379,73 +379,213 @@ export default function CalendarPage() {
           {loading ? (
             <div className="flex items-center justify-center py-12">
               <div className="text-center">
-                <RefreshCw className="w-8 h-8 text-blue-600 animate-spin mx-auto mb-2" />
+                <RefreshCw className="w-8 h-8 text-[#3f72af] animate-spin mx-auto mb-2" />
                 <p className="text-gray-600">Loading calendar...</p>
               </div>
             </div>
           ) : (
             <>
-              {/* Day headers */}
-              <div className="grid grid-cols-7 gap-2 mb-2">
-                {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
-                  <div key={day} className="text-center text-sm font-semibold text-gray-600 py-2">
-                    {day}
+              {view === 'month' && (
+                <>
+                  {/* Day headers */}
+                  <div className="grid grid-cols-7 gap-2 mb-2">
+                    {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
+                      <div key={day} className="text-center text-sm font-semibold text-gray-600 py-2">
+                        {day}
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
 
-              {/* Calendar days */}
-              <div className="grid grid-cols-7 gap-2">
-                {getDaysInMonth().map((date, index) => {
-                  const dayEvents = getEventsForDate(date);
-                  const today = isToday(date);
+                  {/* Calendar days */}
+                  <div className="grid grid-cols-7 gap-2">
+                    {getDaysInMonth().map((date, index) => {
+                      const dayEvents = getEventsForDate(date);
+                      const today = isToday(date);
 
-                  return (
-                    <button
-                      key={index}
-                      onClick={() => {
-                        if (date) {
-                          setSelectedDate(date);
-                          setShowEventModal(true);
-                        }
-                      }}
-                      disabled={!date}
-                      className={`min-h-[120px] p-2 rounded-lg border transition-all ${
-                        !date
-                          ? 'bg-gray-50 border-transparent'
-                          : today
-                          ? 'bg-blue-50 border-[#3f72af] border-2'
-                          : 'bg-white border-gray-200 hover:border-[#3f72af] hover:shadow-sm cursor-pointer'
-                      }`}
-                    >
-                      {date && (
-                        <>
-                          <div className={`text-sm font-semibold mb-2 ${
-                            today ? 'text-blue-600' : 'text-gray-900'
-                          }`}>
-                            {date.getDate()}
-                          </div>
-                          <div className="space-y-1">
-                            {dayEvents.slice(0, 3).map(event => (
-                              <div
-                                key={event.id}
-                                className={`text-xs px-2 py-1 rounded bg-${event.color}-100 text-${event.color}-700 truncate text-left`}
-                              >
-                                {event.title}
+                      return (
+                        <button
+                          key={index}
+                          onClick={() => {
+                            if (date) {
+                              setSelectedDate(date);
+                              setShowEventModal(true);
+                            }
+                          }}
+                          disabled={!date}
+                          className={`min-h-[120px] p-2 rounded-lg border transition-all ${
+                            !date
+                              ? 'bg-gray-50 border-transparent'
+                              : today
+                              ? 'bg-blue-50 border-[#3f72af] border-2'
+                              : 'bg-white border-gray-200 hover:border-[#3f72af] hover:shadow-sm cursor-pointer'
+                          }`}
+                        >
+                          {date && (
+                            <div className="h-full flex flex-col">
+                              <div className={`text-left text-sm font-semibold mb-2 ${
+                                today ? 'text-[#3f72af]' : 'text-gray-900'
+                              }`}>
+                                {date.getDate()}
                               </div>
-                            ))}
-                            {dayEvents.length > 3 && (
-                              <div className="text-xs text-gray-500 font-medium">
-                                +{dayEvents.length - 3} more
+                              <div className="space-y-1 flex-1">
+                                {dayEvents.slice(0, 3).map(event => (
+                                  <div
+                                    key={event.id}
+                                    className={`text-xs px-2 py-1 rounded bg-${event.color}-100 text-${event.color}-700 truncate text-left`}
+                                  >
+                                    {event.title}
+                                  </div>
+                                ))}
+                                {dayEvents.length > 3 && (
+                                  <div className="text-xs text-gray-500 font-medium">
+                                    +{dayEvents.length - 3} more
+                                  </div>
+                                )}
                               </div>
-                            )}
+                            </div>
+                          )}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </>
+              )}
+
+              {view === 'week' && (
+                <>
+                  {/* Week view */}
+                  <div className="grid grid-cols-7 gap-2 mb-2">
+                    {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
+                      <div key={day} className="text-center text-sm font-semibold text-gray-600 py-2">
+                        {day}
+                      </div>
+                    ))}
+                  </div>
+                  <div className="grid grid-cols-7 gap-2">
+                    {getWeekDays().map((date, index) => {
+                      const dayEvents = getEventsForDate(date);
+                      const today = isToday(date);
+
+                      return (
+                        <button
+                          key={index}
+                          onClick={() => {
+                            setSelectedDate(date);
+                            setShowEventModal(true);
+                          }}
+                          className={`min-h-[400px] p-3 rounded-lg border transition-all ${
+                            today
+                              ? 'bg-blue-50 border-[#3f72af] border-2'
+                              : 'bg-white border-gray-200 hover:border-[#3f72af] hover:shadow-sm cursor-pointer'
+                          }`}
+                        >
+                          <div className="h-full flex flex-col">
+                            <div className={`text-left text-lg font-bold mb-3 ${
+                              today ? 'text-[#3f72af]' : 'text-gray-900'
+                            }`}>
+                              {date.getDate()}
+                            </div>
+                            <div className="space-y-2 flex-1 overflow-y-auto">
+                              {dayEvents.map(event => {
+                                const startTime = new Date(event.start).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                                return (
+                                  <div
+                                    key={event.id}
+                                    className={`text-xs px-2 py-2 rounded bg-${event.color}-100 text-${event.color}-700 text-left`}
+                                  >
+                                    <div className="font-semibold">{startTime}</div>
+                                    <div className="truncate">{event.title}</div>
+                                  </div>
+                                );
+                              })}
+                            </div>
                           </div>
-                        </>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </>
+              )}
+
+              {view === 'day' && (
+                <>
+                  {/* Day view */}
+                  <div className="max-w-4xl mx-auto">
+                    <div className="text-center mb-6">
+                      <h2 className="text-2xl font-bold text-gray-900">
+                        {currentDate.toLocaleDateString('en-US', { 
+                          weekday: 'long', 
+                          month: 'long', 
+                          day: 'numeric',
+                          year: 'numeric' 
+                        })}
+                      </h2>
+                    </div>
+                    <div className="space-y-3">
+                      {getCurrentDayEvents().length === 0 ? (
+                        <div className="text-center py-12 bg-gray-50 rounded-xl">
+                          <CalendarIcon className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+                          <p className="text-gray-500 text-lg">No events scheduled for this day</p>
+                        </div>
+                      ) : (
+                        getCurrentDayEvents().map((event) => (
+                          <div
+                            key={event.id}
+                            className="p-6 border-2 border-gray-200 rounded-xl hover:border-[#3f72af] transition-all cursor-pointer"
+                            onClick={() => {
+                              setSelectedDate(currentDate);
+                              setShowEventModal(true);
+                            }}
+                          >
+                            <div className="flex items-start justify-between gap-4">
+                              <div className="flex-1">
+                                <div className="flex items-center gap-3 mb-2">
+                                  <div className={`px-3 py-1 rounded-full text-xs font-medium bg-${event.color}-100 text-${event.color}-700`}>
+                                    {event.type}
+                                  </div>
+                                  <div className={`px-3 py-1 rounded-full text-xs font-medium ${
+                                    event.status === 'confirmed' ? 'bg-green-100 text-green-700' :
+                                    event.status === 'tentative' ? 'bg-yellow-100 text-yellow-700' :
+                                    'bg-red-100 text-red-700'
+                                  }`}>
+                                    {event.status}
+                                  </div>
+                                </div>
+                                <h3 className="font-bold text-gray-900 text-xl mb-2">{event.title}</h3>
+                                {event.description && (
+                                  <p className="text-sm text-gray-600 mb-3">{event.description}</p>
+                                )}
+                                <div className="flex flex-wrap gap-4 text-sm text-gray-500">
+                                  <div className="flex items-center gap-1">
+                                    <Clock className="w-4 h-4" />
+                                    <span>
+                                      {new Date(event.start).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                      {' - '}
+                                      {new Date(event.end).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                    </span>
+                                  </div>
+                                  {event.location && (
+                                    <div className="flex items-center gap-1">
+                                      <MapPin className="w-4 h-4" />
+                                      <span>{event.location}</span>
+                                    </div>
+                                  )}
+                                  {event.attendees && event.attendees.length > 0 && (
+                                    <div className="flex items-center gap-1">
+                                      <Users className="w-4 h-4" />
+                                      <span>{event.attendees.join(', ')}</span>
+                                    </div>
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        ))
                       )}
-                    </button>
-                  );
-                })}
-              </div>
+                    </div>
+                  </div>
+                </>
+              )}
             </>
           )}
         </div>
