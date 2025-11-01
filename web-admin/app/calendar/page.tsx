@@ -318,7 +318,7 @@ export default function CalendarPage() {
               </button>
               <button
                 onClick={goToToday}
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
+                className="px-4 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-colors text-sm font-medium"
               >
                 Today
               </button>
