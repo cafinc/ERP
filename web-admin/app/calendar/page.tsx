@@ -388,14 +388,19 @@ export default function CalendarPage() {
                   return (
                     <button
                       key={index}
-                      onClick={() => date && setSelectedDate(date)}
+                      onClick={() => {
+                        if (date) {
+                          setSelectedDate(date);
+                          setShowEventModal(true);
+                        }
+                      }}
                       disabled={!date}
                       className={`min-h-[120px] p-2 rounded-lg border transition-all ${
                         !date
                           ? 'bg-gray-50 border-transparent'
                           : today
-                          ? 'bg-blue-50 border-blue-500 border-2'
-                          : 'bg-white border-gray-200 hover:border-blue-300 hover:shadow-sm'
+                          ? 'bg-blue-50 border-[#3f72af] border-2'
+                          : 'bg-white border-gray-200 hover:border-[#3f72af] hover:shadow-sm cursor-pointer'
                       }`}
                     >
                       {date && (
