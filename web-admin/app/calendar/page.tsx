@@ -752,28 +752,6 @@ export default function CalendarPage() {
                   })}
                 </div>
               )}
-              
-              <div className="mt-6 pt-6 border-t border-gray-200 flex gap-3 justify-end">
-                <button
-                  onClick={() => {
-                    setShowEventModal(false);
-                    setSelectedDate(null);
-                  }}
-                  className="px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 font-semibold transition-all"
-                >
-                  Close
-                </button>
-                <button
-                  onClick={() => {
-                    // For now, just show alert. Can be enhanced with create event modal
-                    alert(`Create new event on ${selectedDate.toLocaleDateString()}`);
-                  }}
-                  className="px-6 py-3 bg-[#3f72af] text-white rounded-xl hover:bg-[#2c5282] font-semibold transition-all flex items-center gap-2"
-                >
-                  <Plus className="w-5 h-5" />
-                  New Event
-                </button>
-              </div>
             </div>
           </div>
         </div>
