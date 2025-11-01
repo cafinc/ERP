@@ -525,49 +525,6 @@ export default function HomePage() {
             </button>
           </div>
         )}
-
-        {/* Quick Actions */}
-        <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6">
-          <h3 className="text-lg font-bold text-gray-900 mb-4">Quick Actions</h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <button
-              onClick={() => setShowLeadModal(true)}
-              className="p-4 border-2 border-gray-200 rounded-xl hover:border-blue-500 hover:bg-blue-50 transition-all group"
-            >
-              <Users className="w-8 h-8 text-gray-400 group-hover:text-blue-600 mb-2 mx-auto" />
-              <p className="text-sm font-semibold text-gray-700 group-hover:text-blue-600">
-                Add Lead
-              </p>
-            </button>
-            <button
-              onClick={() => router.push('/customers/create')}
-              className="p-4 border-2 border-gray-200 rounded-xl hover:border-green-500 hover:bg-green-50 transition-all group"
-            >
-              <Briefcase className="w-8 h-8 text-gray-400 group-hover:text-green-600 mb-2 mx-auto" />
-              <p className="text-sm font-semibold text-gray-700 group-hover:text-green-600">
-                Add Customer
-              </p>
-            </button>
-            <button
-              onClick={() => router.push('/sites/create')}
-              className="p-4 border-2 border-gray-200 rounded-xl hover:border-purple-500 hover:bg-purple-50 transition-all group"
-            >
-              <MapPin className="w-8 h-8 text-gray-400 group-hover:text-purple-600 mb-2 mx-auto" />
-              <p className="text-sm font-semibold text-gray-700 group-hover:text-purple-600">
-                Add Site
-              </p>
-            </button>
-            <button
-              onClick={() => router.push('/consumables')}
-              className="p-4 border-2 border-gray-200 rounded-xl hover:border-yellow-500 hover:bg-yellow-50 transition-all group"
-            >
-              <Package className="w-8 h-8 text-gray-400 group-hover:text-yellow-600 mb-2 mx-auto" />
-              <p className="text-sm font-semibold text-gray-700 group-hover:text-yellow-600">
-                Manage Inventory
-              </p>
-            </button>
-          </div>
-        </div>
       </div>
 
       {/* Create Lead Modal */}
