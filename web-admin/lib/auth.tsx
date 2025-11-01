@@ -44,11 +44,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       
       const response = await api.get('/auth/me');
       setUser(response.data);
-    } catch (error) {
+    } catch (error: any) {
+      // Silently handle auth check failures
       setUser(null);
       // Clear invalid token
       if (typeof window !== 'undefined') {
         localStorage.removeItem('session_token');
+      }
+      // Only log if it's not a 401 error (which is expected)
+      if (error.response?.status !== 401) {
+        console.error('Auth check error:', error.response?.status);
       }
     } finally {
       setLoading(false);
