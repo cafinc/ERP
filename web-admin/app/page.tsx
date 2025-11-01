@@ -234,6 +234,7 @@ export default function HomePage() {
       {/* Header Section */}
       <PageHeader
         title="Dashboard"
+        icon={<LayoutDashboard className="w-7 h-7" />}
         subtitle="Overview of your business metrics and performance"
         breadcrumbs={[{ label: 'Home', href: '/' }]}
         actions={quickActions}
