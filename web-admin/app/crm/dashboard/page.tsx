@@ -290,10 +290,16 @@ export default function CRMDashboardPage() {
           </div>
 
           {/* Calendar Widget */}
-          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-lg font-semibold text-gray-900">Calendar</h2>
-              <button className="text-sm text-blue-600 hover:text-blue-700">View Full</button></div>
+              <button 
+                onClick={() => router.push('/calendar')}
+                className="text-sm text-blue-600 hover:text-blue-700 font-medium"
+              >
+                View Full
+              </button>
+            </div>
             <div className="mb-4">
               <div className="text-center mb-3">
                 <p className="text-sm text-gray-600">January 2025</p>
