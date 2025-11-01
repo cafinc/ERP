@@ -182,7 +182,8 @@ export default function DashboardPage() {
         },
       });
       
-      setRecentActivity(activity);
+      setRecentActivity(activityMapped);
+      setSystemHealth(system); // Set system health data
     } catch (error) {
       console.error('Error loading dashboard data:', error);
     } finally {
