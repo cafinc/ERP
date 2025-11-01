@@ -415,7 +415,7 @@ export default function CalendarPage() {
               </div>
             </div>
           ) : (
-            <>
+            <div className="transition-opacity duration-300 ease-in-out">
               {view === 'month' && (
                 <>
                   {/* Day headers */}
