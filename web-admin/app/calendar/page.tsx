@@ -329,7 +329,7 @@ export default function CalendarPage() {
                 onClick={() => setView('month')}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                   view === 'month'
-                    ? 'bg-blue-600 text-white'
+                    ? 'bg-[#3f72af] text-white'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
@@ -339,7 +339,7 @@ export default function CalendarPage() {
                 onClick={() => setView('week')}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                   view === 'week'
-                    ? 'bg-blue-600 text-white'
+                    ? 'bg-[#3f72af] text-white'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
@@ -349,7 +349,7 @@ export default function CalendarPage() {
                 onClick={() => setView('day')}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                   view === 'day'
-                    ? 'bg-blue-600 text-white'
+                    ? 'bg-[#3f72af] text-white'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
