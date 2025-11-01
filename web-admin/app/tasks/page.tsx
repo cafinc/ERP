@@ -91,45 +91,44 @@ export default function TasksPage() {
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Tasks" }]}
         actions={[
           {
-            label: (
-              <>
-                <span className="inline-flex items-center gap-1.5 mr-4">
-                  <CheckSquare className="w-5 h-5 text-[#3f72af]" />
-                  <span className="text-sm font-semibold text-gray-900">{stats.total}</span>
-                  <span className="text-xs text-gray-500">Total</span>
-                </span>
-                <span className="inline-block h-5 w-px bg-gray-300 mr-4"></span>
-                <span className="inline-flex items-center gap-1.5 mr-4">
-                  <PlayCircle className="w-5 h-5 text-blue-600" />
-                  <span className="text-sm font-semibold text-blue-600">{stats.in_progress}</span>
-                  <span className="text-xs text-gray-500">In Progress</span>
-                </span>
-                <span className="inline-block h-5 w-px bg-gray-300 mr-4"></span>
-                <span className="inline-flex items-center gap-1.5 mr-4">
-                  <CheckCircle2 className="w-5 h-5 text-green-600" />
-                  <span className="text-sm font-semibold text-green-600">{stats.completed}</span>
-                  <span className="text-xs text-gray-500">Completed</span>
-                </span>
-                <span className="inline-block h-5 w-px bg-gray-300 mr-4"></span>
-                <span className="inline-flex items-center gap-1.5 mr-6">
-                  <AlertCircle className="w-5 h-5 text-red-600" />
-                  <span className="text-sm font-semibold text-red-600">{stats.overdue}</span>
-                  <span className="text-xs text-gray-500">Overdue</span>
-                </span>
-                <button
-                  onClick={() => router.push('/tasks/create')}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-colors font-medium"
-                >
-                  <Plus className="w-5 h-5" />
-                  Create Task
-                </button>
-              </>
-            ),
-            onClick: () => {},
-            variant: 'custom' as const,
+            label: "Create Task",
+            icon: <Plus className="w-4 h-4 mr-2" />,
+            onClick: () => router.push('/tasks/create'),
+            variant: 'primary' as const,
           },
         ]}
       />
+      
+      {/* Stats Bar - Outside of PageHeader */}
+      <div className="bg-white border-b border-gray-200">
+        <div className="max-w-[2000px] mx-auto px-6 py-4">
+          <div className="flex items-center gap-6">
+            <div className="inline-flex items-center gap-2">
+              <CheckSquare className="w-5 h-5 text-[#3f72af]" />
+              <span className="text-sm font-semibold text-gray-900">{stats.total}</span>
+              <span className="text-xs text-gray-500">Total</span>
+            </div>
+            <div className="h-6 w-px bg-gray-300"></div>
+            <div className="inline-flex items-center gap-2">
+              <PlayCircle className="w-5 h-5 text-blue-600" />
+              <span className="text-sm font-semibold text-blue-600">{stats.in_progress}</span>
+              <span className="text-xs text-gray-500">In Progress</span>
+            </div>
+            <div className="h-6 w-px bg-gray-300"></div>
+            <div className="inline-flex items-center gap-2">
+              <CheckCircle2 className="w-5 h-5 text-green-600" />
+              <span className="text-sm font-semibold text-green-600">{stats.completed}</span>
+              <span className="text-xs text-gray-500">Completed</span>
+            </div>
+            <div className="h-6 w-px bg-gray-300"></div>
+            <div className="inline-flex items-center gap-2">
+              <AlertCircle className="w-5 h-5 text-red-600" />
+              <span className="text-sm font-semibold text-red-600">{stats.overdue}</span>
+              <span className="text-xs text-gray-500">Overdue</span>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
 
