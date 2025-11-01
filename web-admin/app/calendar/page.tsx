@@ -792,8 +792,13 @@ export default function CalendarPage() {
 
       {/* Connection Status Popup */}
       {showConnectionError && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl max-w-md w-full shadow-2xl">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4" onClick={(e) => {
+          if (e.target === e.currentTarget) {
+            setShowConnectionError(false);
+          }
+        }}>
+          <div className="bg-white rounded-2xl max-w-md w-full shadow-2xl"
+               onClick={(e) => e.stopPropagation()}>
             <div className="p-6">
               <div className="flex items-start gap-4">
                 <div className={`rounded-full p-3 ${
