@@ -476,6 +476,127 @@ export default function CalendarPage() {
         </div>
       </div>
 
+      {/* Day Events Modal */}
+      {showEventModal && selectedDate && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl max-w-2xl w-full shadow-2xl max-h-[90vh] overflow-y-auto">
+            <div className="p-6 border-b border-gray-200">
+              <div className="flex items-center justify-between">
+                <h2 className="text-2xl font-bold text-gray-900">
+                  {selectedDate.toLocaleDateString('en-US', { 
+                    weekday: 'long', 
+                    month: 'long', 
+                    day: 'numeric',
+                    year: 'numeric' 
+                  })}
+                </h2>
+                <button
+                  onClick={() => {
+                    setShowEventModal(false);
+                    setSelectedDate(null);
+                  }}
+                  className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                >
+                  <XCircle className="w-6 h-6 text-gray-500" />
+                </button>
+              </div>
+            </div>
+            <div className="p-6">
+              {getEventsForDate(selectedDate).length === 0 ? (
+                <div className="text-center py-12">
+                  <CalendarIcon className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+                  <p className="text-gray-500 text-lg mb-2">No events scheduled</p>
+                  <p className="text-gray-400 text-sm">Click "New Event" to add one</p>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {getEventsForDate(selectedDate).map((event) => {
+                    const Icon = CalendarIcon;
+                    return (
+                      <div
+                        key={event.id}
+                        className="p-4 border border-gray-200 rounded-xl hover:border-[#3f72af] transition-all"
+                      >
+                        <div className="flex items-start justify-between gap-4">
+                          <div className="flex-1">
+                            <h3 className="font-bold text-gray-900 text-lg mb-2">{event.title}</h3>
+                            {event.description && (
+                              <p className="text-sm text-gray-600 mb-3">{event.description}</p>
+                            )}
+                            <div className="flex flex-wrap gap-4 text-sm text-gray-500">
+                              <div className="flex items-center gap-1">
+                                <Clock className="w-4 h-4" />
+                                <span>
+                                  {new Date(event.start).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                  {' - '}
+                                  {new Date(event.end).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                </span>
+                              </div>
+                              {event.location && (
+                                <div className="flex items-center gap-1">
+                                  <MapPin className="w-4 h-4" />
+                                  <span>{event.location}</span>
+                                </div>
+                              )}
+                              {event.attendees && event.attendees.length > 0 && (
+                                <div className="flex items-center gap-1">
+                                  <Users className="w-4 h-4" />
+                                  <span>{event.attendees.join(', ')}</span>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                          <div className="flex flex-col gap-2">
+                            <div className={`px-3 py-1 rounded-full text-xs font-medium ${
+                              event.status === 'confirmed' ? 'bg-green-100 text-green-700' :
+                              event.status === 'tentative' ? 'bg-yellow-100 text-yellow-700' :
+                              'bg-red-100 text-red-700'
+                            }`}>
+                              {event.status}
+                            </div>
+                            <button
+                              onClick={() => {
+                                // For now, just show alert. Can be enhanced with edit modal
+                                alert(`Edit event: ${event.title}\n\nThis will open the event edit form.`);
+                              }}
+                              className="px-3 py-1 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-colors text-xs font-medium"
+                            >
+                              Edit
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+              
+              <div className="mt-6 pt-6 border-t border-gray-200 flex gap-3 justify-end">
+                <button
+                  onClick={() => {
+                    setShowEventModal(false);
+                    setSelectedDate(null);
+                  }}
+                  className="px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 font-semibold transition-all"
+                >
+                  Close
+                </button>
+                <button
+                  onClick={() => {
+                    // For now, just show alert. Can be enhanced with create event modal
+                    alert(`Create new event on ${selectedDate.toLocaleDateString()}`);
+                  }}
+                  className="px-6 py-3 bg-[#3f72af] text-white rounded-xl hover:bg-[#2c5282] font-semibold transition-all flex items-center gap-2"
+                >
+                  <Plus className="w-5 h-5" />
+                  New Event
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Connection Status Popup */}
       {showConnectionError && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
