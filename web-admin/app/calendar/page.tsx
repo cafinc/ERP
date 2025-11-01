@@ -792,7 +792,7 @@ export default function CalendarPage() {
 
       {/* Connection Status Popup */}
       {showConnectionError && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4" onClick={(e) => {
+        <div className="fixed inset-0 bg-gray-900/20 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fadeIn" onClick={(e) => {
           if (e.target === e.currentTarget) {
             setShowConnectionError(false);
           }
