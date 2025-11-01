@@ -96,8 +96,27 @@ async def create_calendar_event(event: CalendarEvent):
 async def get_google_calendar_status():
     """Check if Google Calendar is connected"""
     try:
-        # In production, check database for stored OAuth tokens
-        # For now, return not connected
+        from motor.motor_asyncio import AsyncIOMotorClient
+        
+        mongo_url = os.getenv("MONGO_URL", "mongodb://localhost:27017")
+        
+        # Check if tokens exist in database
+        try:
+            mongo_client = AsyncIOMotorClient(mongo_url)
+            db = mongo_client.snow_removal_db
+            
+            token_doc = await db.oauth_tokens.find_one({"service": "google_calendar"})
+            
+            if token_doc and token_doc.get("access_token"):
+                return GoogleCalendarStatus(
+                    connected=True,
+                    email=token_doc.get("email", "Connected"),
+                    calendar_id=token_doc.get("calendar_id", "primary")
+                )
+        except Exception as e:
+            print(f"Error checking Google Calendar status: {e}")
+        
+        # Not connected
         return GoogleCalendarStatus(
             connected=False,
             email=None,
