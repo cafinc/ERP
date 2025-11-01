@@ -21,6 +21,7 @@ import {
   BarChart3,
   PieChart,
   ArrowRight,
+  LayoutDashboard,
 } from 'lucide-react';
 
 interface DashboardStats {
