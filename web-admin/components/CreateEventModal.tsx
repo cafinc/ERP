@@ -15,6 +15,9 @@ interface CreateEventModalProps {
   forms: any[];
   teamMembers: any[];
   onSubmit: () => void;
+  isEditMode?: boolean;
+  eventToEdit?: any;
+  onDelete?: () => void;
 }
 
 export default function CreateEventModal({
@@ -29,6 +32,9 @@ export default function CreateEventModal({
   forms,
   teamMembers,
   onSubmit,
+  isEditMode = false,
+  eventToEdit,
+  onDelete,
 }: CreateEventModalProps) {
   if (!isOpen) return null;
 
