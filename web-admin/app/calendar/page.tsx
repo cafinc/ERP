@@ -383,7 +383,7 @@ export default function CalendarPage() {
             label: "New Event",
             icon: <Plus className="w-4 h-4 mr-2" />,
             variant: "primary",
-            onClick: () => setShowEventModal(true),
+            onClick: () => setShowCreateEventModal(true),
           },
         ]}
       />
