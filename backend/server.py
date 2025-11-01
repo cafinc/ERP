@@ -12728,6 +12728,11 @@ from reports_routes import router as reports_router
 api_router.include_router(reports_router)
 logger.info("Reports endpoints registered successfully")
 
+# Calendar routes
+from calendar_routes import router as calendar_router
+api_router.include_router(calendar_router)
+logger.info("Calendar endpoints registered successfully")
+
 
 # Activity endpoint for dashboard
 @api_router.get("/activity")
