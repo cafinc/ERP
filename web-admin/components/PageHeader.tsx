@@ -34,6 +34,7 @@ interface StatBadge {
 
 interface PageHeaderProps {
   title: string;
+  icon?: React.ReactNode;
   subtitle?: string;
   breadcrumbs?: BreadcrumbItem[];
   actions?: ActionButton[];
@@ -59,6 +60,7 @@ interface PageHeaderProps {
 
 export default function PageHeader({
   title,
+  icon,
   subtitle,
   breadcrumbs,
   actions,
