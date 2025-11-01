@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import PageHeader from '@/components/PageHeader';
+import CreateEventModal from '@/components/CreateEventModal';
 import api from '@/lib/api';
 import {
   Calendar as CalendarIcon,
