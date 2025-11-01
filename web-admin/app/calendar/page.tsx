@@ -189,6 +189,72 @@ export default function CalendarPage() {
     }
   };
 
+  const handleCreateEvent = async () => {
+    try {
+      // Validate required fields
+      if (!newEvent.title || !newEvent.start_date || !newEvent.start_time || !newEvent.end_date || !newEvent.end_time) {
+        setConnectionErrorMessage('Please fill in all required fields (Title, Start Date/Time, End Date/Time)');
+        setShowConnectionError(true);
+        return;
+      }
+
+      // Combine date and time
+      const startDateTime = `${newEvent.start_date}T${newEvent.start_time}:00`;
+      const endDateTime = `${newEvent.end_date}T${newEvent.end_time}:00`;
+
+      const eventData = {
+        ...newEvent,
+        start: startDateTime,
+        end: endDateTime,
+      };
+
+      // Create event
+      await api.post('/calendar/events', eventData);
+      
+      // TODO: Upload files if any
+      // if (eventFiles.length > 0) {
+      //   const formData = new FormData();
+      //   eventFiles.forEach(file => formData.append('files', file));
+      //   await api.post(`/calendar/events/${response.data.id}/files`, formData);
+      // }
+
+      // Reset form
+      setNewEvent({
+        title: '',
+        description: '',
+        start_date: '',
+        start_time: '',
+        end_date: '',
+        end_time: '',
+        type: 'appointment',
+        status: 'confirmed',
+        location: '',
+        customer_id: '',
+        site_id: '',
+        form_ids: [],
+        attendees: [],
+        priority: 'medium',
+        color: 'blue',
+        recurring: false,
+        recurring_frequency: 'weekly',
+        notes: '',
+      });
+      setEventFiles([]);
+      setShowCreateEventModal(false);
+
+      // Reload events
+      await loadEvents();
+
+      // Show success message
+      setConnectionErrorMessage('Event created successfully!');
+      setShowConnectionError(true);
+    } catch (error) {
+      console.error('Error creating event:', error);
+      setConnectionErrorMessage('Failed to create event. Please try again.');
+      setShowConnectionError(true);
+    }
+  };
+
   const getStartDate = () => {
     const date = new Date(currentDate);
     if (view === 'month') {
