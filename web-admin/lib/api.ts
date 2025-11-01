@@ -16,7 +16,6 @@ api.interceptors.request.use(
     // Get session token from localStorage
     if (typeof window !== 'undefined') {
       const token = localStorage.getItem('session_token');
-      console.log('API Request:', config.url, 'Token:', token ? `${token.substring(0, 10)}...` : 'NONE');
       if (token) {
         config.headers['Authorization'] = `Bearer ${token}`;
       }
