@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { X, Plus, Paperclip, FileText, Users, MapPin, Clock, Tag, Bell, Repeat } from 'lucide-react';
+import { X, Plus, Paperclip, FileText, Users, MapPin, Clock, Tag, Bell, Repeat, Upload } from 'lucide-react';
 
 interface CreateEventModalProps {
   isOpen: boolean;
