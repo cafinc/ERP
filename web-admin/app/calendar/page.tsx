@@ -44,9 +44,37 @@ export default function CalendarPage() {
   const [googleConnected, setGoogleConnected] = useState(false);
   const [syncing, setSyncing] = useState(false);
   const [showEventModal, setShowEventModal] = useState(false);
+  const [showCreateEventModal, setShowCreateEventModal] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [showConnectionError, setShowConnectionError] = useState(false);
   const [connectionErrorMessage, setConnectionErrorMessage] = useState('');
+
+  // New event form state
+  const [newEvent, setNewEvent] = useState({
+    title: '',
+    description: '',
+    start_date: '',
+    start_time: '',
+    end_date: '',
+    end_time: '',
+    type: 'appointment',
+    status: 'confirmed',
+    location: '',
+    customer_id: '',
+    site_id: '',
+    form_ids: [] as string[],
+    attendees: [] as string[],
+    priority: 'medium',
+    color: 'blue',
+    recurring: false,
+    recurring_frequency: 'weekly',
+    notes: '',
+  });
+  const [eventFiles, setEventFiles] = useState<File[]>([]);
+  const [customers, setCustomers] = useState<any[]>([]);
+  const [sites, setSites] = useState<any[]>([]);
+  const [forms, setForms] = useState<any[]>([]);
+  const [teamMembers, setTeamMembers] = useState<any[]>([]);
 
   useEffect(() => {
     loadEvents();
