@@ -454,10 +454,63 @@ export default function DashboardPage() {
   );
               })}
             </div>
-            <button className="mt-6 w-full px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm font-medium">
+            <button 
+              onClick={() => router.push('/activity')}
+              className="mt-6 w-full px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm font-medium flex items-center justify-center gap-2"
+            >
               View All Activity
+              <ArrowRight className="w-4 h-4" />
             </button>
           </div>
+
+          {/* Platform Health */}
+          {systemHealth && (
+            <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6">
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+                  <Activity className="w-5 h-5 text-[#3f72af]" />
+                  Platform Health
+                </h3>
+              </div>
+              <div className="space-y-4">
+                {systemHealth.services && systemHealth.services.map((service: any) => (
+                  <div key={service.name} className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className={`w-3 h-3 rounded-full ${service.status === 'healthy' ? 'bg-green-500' : service.status === 'degraded' ? 'bg-yellow-500' : 'bg-red-500'}`}></div>
+                      <span className="text-sm font-medium text-gray-900">{service.name}</span>
+                    </div>
+                    <span className={`text-xs font-semibold px-2 py-1 rounded ${
+                      service.status === 'healthy' ? 'bg-green-100 text-green-700' :
+                      service.status === 'degraded' ? 'bg-yellow-100 text-yellow-700' :
+                      'bg-red-100 text-red-700'
+                    }`}>
+                      {service.status}
+                    </span>
+                  </div>
+                ))}
+                {systemHealth.database && (
+                  <div className="flex items-center justify-between pt-4 border-t border-gray-200">
+                    <div className="flex items-center gap-3">
+                      <div className={`w-3 h-3 rounded-full ${systemHealth.database.connected ? 'bg-green-500' : 'bg-red-500'}`}></div>
+                      <span className="text-sm font-medium text-gray-900">Database</span>
+                    </div>
+                    <span className={`text-xs font-semibold px-2 py-1 rounded ${
+                      systemHealth.database.connected ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+                    }`}>
+                      {systemHealth.database.connected ? 'Connected' : 'Disconnected'}
+                    </span>
+                  </div>
+                )}
+              </div>
+              <button 
+                onClick={() => router.push('/system')}
+                className="mt-6 w-full px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm font-medium flex items-center justify-center gap-2"
+              >
+                View System Details
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Quick Actions */}
