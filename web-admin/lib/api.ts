@@ -30,16 +30,27 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    console.error('API Error:', error.response?.status, error.response?.data);
     if (error.response?.status === 401) {
-      // Clear token and redirect to login
+      // Only redirect to login if we're not already there and token exists
       if (typeof window !== 'undefined') {
-        localStorage.removeItem('session_token');
-        localStorage.removeItem('user');
-        if (!window.location.pathname.includes('/login')) {
-          window.location.href = '/login';
+        const hasToken = localStorage.getItem('session_token');
+        const onLoginPage = window.location.pathname.includes('/login');
+        
+        if (hasToken) {
+          // Token is invalid, clear it
+          localStorage.removeItem('session_token');
+          localStorage.removeItem('user');
+          
+          // Redirect to login only if not already there
+          if (!onLoginPage) {
+            window.location.href = '/login';
+          }
         }
+        // If no token, don't redirect (user is already logged out)
       }
+    } else {
+      // Log other errors
+      console.error('API Error:', error.response?.status, error.response?.data);
     }
     return Promise.reject(error);
   }
