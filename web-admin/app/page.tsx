@@ -436,95 +436,97 @@ export default function HomePage() {
             </button>
           </div>
 
-          {/* Recent Activity */}
-          <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6">
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+          {/* Platform Health */}
+          {systemHealth && (
+            <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6">
+              <div className="flex items-center gap-2 mb-6">
                 <Activity className="w-5 h-5 text-[#3f72af]" />
-                Recent Activity
-              </h3>
-            </div>
-            <div className="space-y-4">
-              {recentActivity.map((activity) => {
-                const Icon = activity.icon;
-                return (
-                  <div key={activity.id} className="flex items-start gap-3">
-                    <div className={`bg-${activity.color}-100 rounded-lg p-2 mt-1`}>
-                      <Icon className={`w-4 h-4 text-${activity.color}-600`} />
+                <h3 className="text-lg font-bold text-gray-900">Platform Health</h3>
+              </div>
+              <div className="space-y-3">
+                {systemHealth.services && systemHealth.services.slice(0, 3).map((service: any) => (
+                  <div key={service.name} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                    <div className="flex items-center gap-2">
+                      <div className={`w-2 h-2 rounded-full ${service.status === 'healthy' ? 'bg-green-500' : service.status === 'degraded' ? 'bg-yellow-500' : 'bg-red-500'}`}></div>
+                      <span className="text-sm font-medium text-gray-900">{service.name}</span>
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-semibold text-gray-900">
-                        {activity.action}
-                      </p>
-                      <p className="text-xs text-gray-600 truncate">
-                        {activity.description}
-                      </p>
-                      <p className="text-xs text-gray-400 mt-1">
-                        {new Date(activity.timestamp).toLocaleTimeString()}
-                      </p>
-                    </div>
+                    <span className={`text-xs font-semibold px-2 py-0.5 rounded ${
+                      service.status === 'healthy' ? 'bg-green-100 text-green-700' :
+                      service.status === 'degraded' ? 'bg-yellow-100 text-yellow-700' :
+                      'bg-red-100 text-red-700'
+                    }`}>
+                      {service.status}
+                    </span>
                   </div>
-                );
-              })}
+                ))}
+                {systemHealth.database && (
+                  <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                    <div className="flex items-center gap-2">
+                      <div className={`w-2 h-2 rounded-full ${systemHealth.database.connected ? 'bg-green-500' : 'bg-red-500'}`}></div>
+                      <span className="text-sm font-medium text-gray-900">Database</span>
+                    </div>
+                    <span className={`text-xs font-semibold px-2 py-0.5 rounded ${
+                      systemHealth.database.connected ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+                    }`}>
+                      {systemHealth.database.connected ? 'Connected' : 'Disconnected'}
+                    </span>
+                  </div>
+                )}
+              </div>
+              <button 
+                onClick={() => router.push('/system')}
+                className="mt-6 w-full px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm font-medium flex items-center justify-center gap-2"
+              >
+                View Details
+                <ArrowRight className="w-4 h-4" />
+              </button>
             </div>
-            <button 
-              onClick={() => router.push('/activity')}
-              className="mt-6 w-full px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm font-medium flex items-center justify-center gap-2"
-            >
-              View All Activity
-              <ArrowRight className="w-4 h-4" />
-            </button>
-          </div>
+          )}
         </div>
 
-        {/* Platform Health - Full Width */}
-        {systemHealth && (
-          <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6">
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-                <Activity className="w-5 h-5 text-[#3f72af]" />
-                Platform Health
-              </h3>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {systemHealth.services && systemHealth.services.map((service: any) => (
-                <div key={service.name} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                  <div className="flex items-center gap-3">
-                    <div className={`w-3 h-3 rounded-full ${service.status === 'healthy' ? 'bg-green-500' : service.status === 'degraded' ? 'bg-yellow-500' : 'bg-red-500'}`}></div>
-                    <span className="text-sm font-medium text-gray-900">{service.name}</span>
-                  </div>
-                  <span className={`text-xs font-semibold px-2 py-1 rounded ${
-                    service.status === 'healthy' ? 'bg-green-100 text-green-700' :
-                    service.status === 'degraded' ? 'bg-yellow-100 text-yellow-700' :
-                    'bg-red-100 text-red-700'
-                  }`}>
-                    {service.status}
-                  </span>
-                </div>
-              ))}
-              {systemHealth.database && (
-                <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                  <div className="flex items-center gap-3">
-                    <div className={`w-3 h-3 rounded-full ${systemHealth.database.connected ? 'bg-green-500' : 'bg-red-500'}`}></div>
-                    <span className="text-sm font-medium text-gray-900">Database</span>
-                  </div>
-                  <span className={`text-xs font-semibold px-2 py-1 rounded ${
-                    systemHealth.database.connected ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
-                  }`}>
-                    {systemHealth.database.connected ? 'Connected' : 'Disconnected'}
-                  </span>
-                </div>
-              )}
-            </div>
-            <button 
-              onClick={() => router.push('/system')}
-              className="mt-6 px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm font-medium flex items-center gap-2"
-            >
-              View System Details
-              <ArrowRight className="w-4 h-4" />
-            </button>
+        {/* Recent Activity - Full Width */}
+        <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6">
+          <div className="flex items-center justify-between mb-6">
+            <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+              <Activity className="w-5 h-5 text-[#3f72af]" />
+              Recent Activity
+            </h3>
           </div>
-        )}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {recentActivity.map((activity) => {
+              const Icon = activity.icon;
+              return (
+                <button
+                  key={activity.id}
+                  onClick={() => router.push('/activity')}
+                  className="flex items-start gap-3 p-4 rounded-lg border border-gray-200 hover:border-[#3f72af] hover:bg-blue-50 transition-all cursor-pointer text-left"
+                >
+                  <div className={`bg-${activity.color}-100 rounded-lg p-2 mt-1 flex-shrink-0`}>
+                    <Icon className={`w-4 h-4 text-${activity.color}-600`} />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-semibold text-gray-900">
+                      {activity.action}
+                    </p>
+                    <p className="text-xs text-gray-600 truncate">
+                      {activity.description}
+                    </p>
+                    <p className="text-xs text-gray-400 mt-1">
+                      {new Date(activity.timestamp).toLocaleTimeString()}
+                    </p>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+          <button 
+            onClick={() => router.push('/activity')}
+            className="mt-6 w-full px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm font-medium flex items-center justify-center gap-2"
+          >
+            View All Activity
+            <ArrowRight className="w-4 h-4" />
+          </button>
+        </div>
       </div>
 
       {/* Create Lead Modal */}
