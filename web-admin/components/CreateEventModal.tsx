@@ -418,20 +418,32 @@ export default function CreateEventModal({
         </div>
 
         {/* Footer */}
-        <div className="p-6 border-t border-gray-200 flex gap-3 justify-end sticky bottom-0 bg-white">
-          <button
-            onClick={onClose}
-            className="px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 font-semibold transition-all"
-          >
-            Cancel
-          </button>
-          <button
-            onClick={onSubmit}
-            className="px-6 py-3 bg-[#3f72af] text-white rounded-xl hover:bg-[#2c5282] font-semibold transition-all flex items-center gap-2"
-          >
-            <Plus className="w-5 h-5" />
-            Create Event
-          </button>
+        <div className="p-6 border-t border-gray-200 flex gap-3 justify-between sticky bottom-0 bg-white">
+          <div>
+            {isEditMode && onDelete && (
+              <button
+                onClick={onDelete}
+                className="px-6 py-3 bg-red-600 text-white rounded-xl hover:bg-red-700 font-semibold transition-all"
+              >
+                Delete Event
+              </button>
+            )}
+          </div>
+          <div className="flex gap-3">
+            <button
+              onClick={onClose}
+              className="px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 font-semibold transition-all"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={onSubmit}
+              className="px-6 py-3 bg-[#3f72af] text-white rounded-xl hover:bg-[#2c5282] font-semibold transition-all flex items-center gap-2"
+            >
+              <Plus className="w-5 h-5" />
+              {isEditMode ? 'Update Event' : 'Create Event'}
+            </button>
+          </div>
         </div>
       </div>
     </div>
