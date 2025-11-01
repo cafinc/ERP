@@ -470,6 +470,47 @@ export default function CalendarPage() {
           </div>
         </div>
       </div>
+
+      {/* Connection Status Popup */}
+      {showConnectionError && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl max-w-md w-full shadow-2xl">
+            <div className="p-6">
+              <div className="flex items-start gap-4">
+                <div className={`rounded-full p-3 ${
+                  connectionErrorMessage.includes('success') 
+                    ? 'bg-green-100' 
+                    : 'bg-red-100'
+                }`}>
+                  {connectionErrorMessage.includes('success') ? (
+                    <CheckCircle className="w-6 h-6 text-green-600" />
+                  ) : (
+                    <AlertCircle className="w-6 h-6 text-red-600" />
+                  )}
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">
+                    {connectionErrorMessage.includes('success') 
+                      ? 'Success' 
+                      : 'Connection Issue'}
+                  </h3>
+                  <p className="text-sm text-gray-600 whitespace-pre-line">
+                    {connectionErrorMessage}
+                  </p>
+                </div>
+              </div>
+              <div className="mt-6 flex justify-end">
+                <button
+                  onClick={() => setShowConnectionError(false)}
+                  className="px-6 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] transition-colors font-medium"
+                >
+                  OK
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
