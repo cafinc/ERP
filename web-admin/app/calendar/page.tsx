@@ -877,6 +877,21 @@ export default function CalendarPage() {
         </div>
       )}
 
+      {/* Create Event Modal */}
+      <CreateEventModal
+        isOpen={showCreateEventModal}
+        onClose={() => setShowCreateEventModal(false)}
+        newEvent={newEvent}
+        setNewEvent={setNewEvent}
+        eventFiles={eventFiles}
+        setEventFiles={setEventFiles}
+        customers={customers}
+        sites={sites}
+        forms={forms}
+        teamMembers={teamMembers}
+        onSubmit={handleCreateEvent}
+      />
+
       {/* Connection Status Popup */}
       {showConnectionError && (
         <div className="fixed inset-0 bg-gray-900/20 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fadeIn" onClick={(e) => {
