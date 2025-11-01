@@ -64,7 +64,9 @@ export default function CreateEventModal({
         {/* Header */}
         <div className="p-6 border-b border-gray-200 sticky top-0 bg-white z-10">
           <div className="flex items-center justify-between">
-            <h2 className="text-2xl font-bold text-gray-900">Create New Event</h2>
+            <h2 className="text-2xl font-bold text-gray-900">
+              {isEditMode ? 'Edit Event' : 'Create New Event'}
+            </h2>
             <button
               onClick={onClose}
               className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
