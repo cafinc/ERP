@@ -18,6 +18,7 @@ import {
   Users,
   AlertCircle,
   RefreshCw,
+  XCircle,
 } from 'lucide-react';
 
 interface CalendarEvent {
