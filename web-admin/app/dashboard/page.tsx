@@ -67,6 +67,7 @@ export default function DashboardPage() {
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [recentActivity, setRecentActivity] = useState<RecentActivity[]>([]);
+  const [systemHealth, setSystemHealth] = useState<any>(null);
   const [showLeadModal, setShowLeadModal] = useState(false);
 
   useEffect(() => {
