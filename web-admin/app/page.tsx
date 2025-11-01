@@ -202,6 +202,33 @@ export default function HomePage() {
     );
   }
 
+  const quickActions = [
+    {
+      label: 'Add Lead',
+      icon: <Users className="w-4 h-4 mr-2" />,
+      onClick: () => setShowLeadModal(true),
+      variant: 'secondary' as const,
+    },
+    {
+      label: 'Add Customer',
+      icon: <Briefcase className="w-4 h-4 mr-2" />,
+      onClick: () => router.push('/customers/create'),
+      variant: 'secondary' as const,
+    },
+    {
+      label: 'Add Site',
+      icon: <MapPin className="w-4 h-4 mr-2" />,
+      onClick: () => router.push('/sites/create'),
+      variant: 'secondary' as const,
+    },
+    {
+      label: 'Manage Inventory',
+      icon: <Package className="w-4 h-4 mr-2" />,
+      onClick: () => router.push('/consumables'),
+      variant: 'secondary' as const,
+    },
+  ];
+
   return (
     <div className="min-h-screen bg-[#f8f8f8]">
       {/* Header Section */}
@@ -209,6 +236,7 @@ export default function HomePage() {
         title="Dashboard"
         subtitle="Overview of your business metrics and performance"
         breadcrumbs={[{ label: 'Home', href: '/' }]}
+        actions={quickActions}
       />
 
       <div className="p-6 space-y-6">
