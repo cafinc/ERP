@@ -132,7 +132,10 @@ export default function PageHeader({
     return (
       <div className="bg-white border-b border-gray-200 px-6 py-4">
         <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-semibold text-gray-900">{title}</h1>
+          <div className="flex items-center gap-3">
+            {icon && <div className="text-[#3f72af]">{icon}</div>}
+            <h1 className="text-2xl font-semibold text-gray-900">{title}</h1>
+          </div>
           {actions && actions.length > 0 && (
             <div className="flex gap-2">
               {actions.map((action, index) => (
