@@ -78,18 +78,22 @@ export default function DashboardPage() {
     try {
       setLoading(true);
       
-      // Fetch all necessary data
-      const [leadsRes, customersRes, sitesRes, consumablesRes] = await Promise.all([
+      // Fetch all necessary data including activity and system health
+      const [leadsRes, customersRes, sitesRes, consumablesRes, activityRes, systemRes] = await Promise.all([
         api.get('/leads'),
         api.get('/customers'),
         api.get('/sites'),
         api.get('/consumables'),
+        api.get('/activity?limit=10').catch(() => ({ data: [] })), // Fetch recent activity
+        api.get('/system').catch(() => ({ data: null })), // Fetch system health
       ]);
 
       const leads = leadsRes.data || [];
       const customers = customersRes.data.customers || [];
       const sites = sitesRes.data || [];
       const consumables = consumablesRes.data || [];
+      const activities = activityRes.data || [];
+      const system = systemRes.data;
 
       // Calculate stats
       const leadsTotal = leads.length;
