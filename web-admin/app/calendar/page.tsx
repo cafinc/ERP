@@ -19,6 +19,12 @@ import {
   AlertCircle,
   RefreshCw,
   XCircle,
+  FileText,
+  Paperclip,
+  Repeat,
+  Bell,
+  Tag,
+  X,
 } from 'lucide-react';
 
 interface CalendarEvent {
