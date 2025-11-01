@@ -439,6 +439,7 @@ export default function CalendarPage() {
     <div className="min-h-screen bg-gray-50">
       <PageHeader
         title="Calendar"
+        icon={<CalendarIcon className="w-7 h-7" />}
         subtitle="Manage appointments, meetings, and events with Google Calendar sync"
         breadcrumbs={[
           { label: "Home", href: "/" },
