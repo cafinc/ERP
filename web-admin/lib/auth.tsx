@@ -45,6 +45,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const login = async (username: string, password: string) => {
     const response = await api.post('/auth/login', { username, password });
+    
+    // Store the token
+    if (response.data.session_token) {
+      localStorage.setItem('session_token', response.data.session_token);
+    }
+    
     setUser(response.data.user);
     router.push('/');
   };
