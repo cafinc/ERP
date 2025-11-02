@@ -101,6 +101,7 @@ export default function ActiveCallsPage() {
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <PageHeader
         title="Active Calls"
+        icon={<PhoneCall size={28} />}
         subtitle="Manage active calls"
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Ringcentral", href: "/ringcentral" }, { label: "Active Calls" }]}
       />
