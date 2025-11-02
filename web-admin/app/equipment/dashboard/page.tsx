@@ -72,10 +72,38 @@ export default function AssetDashboardPage() {
 
   const statCards = [
     {
-      label: 'Total Equipment',
-      value: stats.totalEquipment,
-      icon: Truck,
+      label: 'Total Assets',
+      value: stats.totalAssets,
+      icon: Package,
       color: 'bg-[#5b8ec4]',
+      href: '/equipment',
+    },
+    {
+      label: 'Equipment',
+      value: stats.equipment,
+      icon: Truck,
+      color: 'bg-blue-500',
+      href: '/equipment',
+    },
+    {
+      label: 'Vehicles',
+      value: stats.vehicles,
+      icon: Car,
+      color: 'bg-purple-500',
+      href: '/equipment',
+    },
+    {
+      label: 'Trailers',
+      value: stats.trailers,
+      icon: Truck,
+      color: 'bg-indigo-500',
+      href: '/equipment',
+    },
+    {
+      label: 'Tools',
+      value: stats.tools,
+      icon: Hammer,
+      color: 'bg-orange-500',
       href: '/equipment',
     },
     {
@@ -89,14 +117,14 @@ export default function AssetDashboardPage() {
       label: 'In Maintenance',
       value: stats.maintenance,
       icon: Wrench,
-      color: 'bg-orange-500',
+      color: 'bg-red-500',
       href: '/equipment/maintenance',
     },
     {
       label: 'Inspections Due',
       value: stats.inspectionsDue,
       icon: AlertTriangle,
-      color: 'bg-red-500',
+      color: 'bg-yellow-500',
       href: '/equipment/inspections',
     },
   ];
@@ -104,14 +132,17 @@ export default function AssetDashboardPage() {
   return (
     <div className="p-4 space-y-6">
       <PageHeader
-        title="Equipment Dashboard"
-        subtitle="Manage equipment fleet and maintenance"
-        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Equipment", href: "/equipment" }, { label: "Dashboard" }]}
+        title="Asset Dashboard"
+        subtitle="Manage equipment, vehicles, trailers, and tools"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Assets", href: "/equipment" }, { label: "Dashboard" }]}
         icon={<LayoutDashboard className="w-5 h-5" />}
         stats={[
-          { label: 'Total Equipment', value: stats.totalEquipment, color: 'blue' },
+          { label: 'Total Assets', value: stats.totalAssets, color: 'blue' },
           { label: 'Operational', value: stats.operational, color: 'green' },
         ]}
+        tabs={categoryTabs}
+        activeTab={activeCategory}
+        onTabChange={setActiveCategory}
       />
 
         {/* Stats Grid */}
