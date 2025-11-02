@@ -12279,7 +12279,6 @@ from custom_workflow_models import (
     CustomWorkflow, CustomWorkflowCreate, CustomWorkflowUpdate,
     WorkflowAction, WorkflowTrigger, TriggerType, ActionType
 )
-from custom_workflow_executor import CustomWorkflowExecutor
 
 # Note: custom_workflow_executor is initialized above with the background_scheduler
 
