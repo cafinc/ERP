@@ -78,19 +78,17 @@ export default function EquipmentDashboardPage() {
   ];
 
   return (
-    <PageHeader>
-      <div className="p-4 space-y-6">
-        <PageHeader
-        title="Dashboard"
-        subtitle="Manage dashboard"
-        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Equipment", href: "/equipment" }, { label: "Dashboard" }]}
+    <div className="p-4 space-y-6">
+      <PageHeader
         title="Equipment Dashboard"
-          icon={LayoutDashboard}
-          badges={[
-            { label: `${stats.totalEquipment} Total`, color: 'blue' },
-            { label: `${stats.operational} Operational`, color: 'green' },
-          ]}
-        />
+        subtitle="Manage equipment fleet and maintenance"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Equipment", href: "/equipment" }, { label: "Dashboard" }]}
+        icon={LayoutDashboard}
+        badges={[
+          { label: `${stats.totalEquipment} Total`, color: 'blue' },
+          { label: `${stats.operational} Operational`, color: 'green' },
+        ]}
+      />
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
