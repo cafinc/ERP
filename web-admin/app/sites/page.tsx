@@ -236,6 +236,7 @@ export default function SitesPage() {
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto">
         <PageHeader
           title="Sites"
+          icon={<MapPin size={28} />}
           subtitle="Manage service locations and properties"
           breadcrumbs={[{ label: "Home", href: "/" }, { label: "Dispatch", href: "/dispatch" }, { label: "Sites" }]}
           actions={[
