@@ -1,21 +1,20 @@
 #!/usr/bin/env python3
 """
-Backend API Testing Suite
-Tests core backend APIs after map enhancements to ensure system functionality
+Backend API Testing Script for Calendar Event CRUD Operations
+Tests all calendar endpoints comprehensively as requested in the review.
 """
 
 import requests
 import json
-import time
+import os
 from datetime import datetime, timedelta
-from typing import Dict, Any, List
-import uuid
+from typing import Dict, Any
 
-# Configuration
-BACKEND_URL = "https://fieldservice-hub-1.preview.emergentagent.com/api"
-TIMEOUT = 30
+# Get backend URL from environment
+BACKEND_URL = os.getenv('REACT_APP_BACKEND_URL', 'https://fieldservice-hub-1.preview.emergentagent.com')
+API_BASE = f"{BACKEND_URL}/api"
 
-class BackendTester:
+class CalendarEventTester:
     def __init__(self):
         self.session = requests.Session()
         self.session.timeout = TIMEOUT
