@@ -1437,6 +1437,173 @@ export default function UnifiedSiteMapsBuilder() {
           )}
         </div>
       </div>
+
+      {/* Measurement Modal */}
+      {showMeasurementModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 w-96 max-w-full mx-4">
+            <h3 className="text-lg font-semibold mb-4">Save Measurement</h3>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Measurement Name
+                </label>
+                <input
+                  type="text"
+                  value={modalLabel}
+                  onChange={(e) => setModalLabel(e.target.value)}
+                  placeholder="Enter measurement name..."
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  autoFocus
+                />
+              </div>
+              {pendingMeasurement && (
+                <div className="bg-gray-50 p-3 rounded-md">
+                  <p className="text-sm text-gray-600">
+                    {pendingMeasurement.type === 'distance' ? (
+                      <>
+                        <strong>Distance:</strong><br/>
+                        {pendingMeasurement.distanceFeet?.toFixed(2)} feet<br/>
+                        {pendingMeasurement.distanceMeters?.toFixed(2)} meters<br/>
+                        {pendingMeasurement.distanceMiles?.toFixed(3)} miles
+                      </>
+                    ) : (
+                      <>
+                        <strong>Area:</strong><br/>
+                        {pendingMeasurement.areaSquareFeet?.toLocaleString(undefined, {maximumFractionDigits: 0})} sq ft<br/>
+                        {pendingMeasurement.areaSquareMeters?.toLocaleString(undefined, {maximumFractionDigits: 0})} sq m<br/>
+                        {pendingMeasurement.areaAcres?.toFixed(4)} acres<br/>
+                        <strong>Perimeter:</strong> {pendingMeasurement.perimeterFeet?.toFixed(2)} feet
+                      </>
+                    )}
+                  </p>
+                </div>
+              )}
+            </div>
+            <div className="flex gap-3 mt-6">
+              <button
+                onClick={handleSaveMeasurement}
+                className="flex-1 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+              >
+                Save
+              </button>
+              <button
+                onClick={() => {
+                  setShowMeasurementModal(false);
+                  setPendingMeasurement(null);
+                  setModalLabel('');
+                }}
+                className="flex-1 bg-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-400"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Annotation Modal */}
+      {showAnnotationModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 w-96 max-w-full mx-4">
+            <h3 className="text-lg font-semibold mb-4">Add Marker</h3>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Marker Label
+                </label>
+                <input
+                  type="text"
+                  value={modalLabel}
+                  onChange={(e) => setModalLabel(e.target.value)}
+                  placeholder="Enter marker label..."
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  autoFocus
+                />
+              </div>
+              {pendingAnnotation && (
+                <div className="bg-gray-50 p-3 rounded-md">
+                  <p className="text-sm text-gray-600">
+                    <strong>Category:</strong> {ANNOTATION_CATEGORIES.find(c => c.value === pendingAnnotation.category)?.label}
+                  </p>
+                </div>
+              )}
+            </div>
+            <div className="flex gap-3 mt-6">
+              <button
+                onClick={handleSaveAnnotation}
+                className="flex-1 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+              >
+                Save
+              </button>
+              <button
+                onClick={() => {
+                  setShowAnnotationModal(false);
+                  setPendingAnnotation(null);
+                  setModalLabel('');
+                }}
+                className="flex-1 bg-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-400"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Edit Modal */}
+      {showEditModal && editingItem && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 w-96 max-w-full mx-4">
+            <h3 className="text-lg font-semibold mb-4">Edit Item</h3>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Label
+                </label>
+                <input
+                  type="text"
+                  value={modalLabel}
+                  onChange={(e) => setModalLabel(e.target.value)}
+                  placeholder="Enter label..."
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  autoFocus
+                />
+              </div>
+              <div className="bg-gray-50 p-3 rounded-md">
+                <p className="text-sm text-gray-600">
+                  <strong>Type:</strong> {editingItem.type}<br/>
+                  <strong>Current Label:</strong> {editingItem.label}
+                </p>
+              </div>
+            </div>
+            <div className="flex gap-3 mt-6">
+              <button
+                onClick={handleUpdateItem}
+                className="flex-1 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+              >
+                Update
+              </button>
+              <button
+                onClick={handleDeleteItem}
+                className="flex-1 bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700"
+              >
+                Delete
+              </button>
+              <button
+                onClick={() => {
+                  setShowEditModal(false);
+                  setEditingItem(null);
+                  setModalLabel('');
+                }}
+                className="flex-1 bg-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-400"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
