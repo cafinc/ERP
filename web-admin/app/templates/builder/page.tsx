@@ -723,6 +723,9 @@ export default function TemplateBuilderPage() {
             <div
               ref={canvasRef}
               onClick={() => setSelectedComponent(null)}
+              onMouseMove={handleMouseMove}
+              onMouseUp={handleMouseUp}
+              onMouseLeave={handleMouseUp}
               className="bg-white shadow-lg relative"
               style={{
                 width: template.pageSetup.size === 'letter' ? '816px' : '794px',
@@ -733,6 +736,7 @@ export default function TemplateBuilderPage() {
                   'linear-gradient(#e5e7eb 1px, transparent 1px), linear-gradient(90deg, #e5e7eb 1px, transparent 1px)' : 
                   'none',
                 backgroundSize: showGrid ? '20px 20px' : 'auto',
+                cursor: isDragging ? 'grabbing' : 'default',
               }}
             >
               {/* Page margins guide */}
