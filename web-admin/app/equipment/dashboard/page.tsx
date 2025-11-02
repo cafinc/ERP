@@ -177,6 +177,5 @@ export default function EquipmentDashboardPage() {
           </div>
         </div>
       </div>
-    </PageHeader>
   );
 }
