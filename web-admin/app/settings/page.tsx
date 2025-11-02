@@ -32,6 +32,58 @@ export default function SettingsPage() {
 
   const settings = [
     {
+      category: 'Workflow Automation',
+      description: 'Enterprise-grade workflow automation with version control, analytics, and templates',
+      items: [
+        {
+          icon: Workflow,
+          title: 'Custom Workflows',
+          description: 'Create, edit, and manage automated workflows',
+          href: '/automation/workflows',
+          color: 'blue',
+          badge: 'Enterprise'
+        },
+        {
+          icon: Zap,
+          title: 'Workflow Templates',
+          description: 'Browse and use pre-built workflow templates',
+          href: '/automation/workflows',
+          color: 'purple',
+          badge: '11 Templates'
+        },
+        {
+          icon: History,
+          title: 'Execution History',
+          description: 'View workflow execution logs and history',
+          href: '/automation/workflows',
+          color: 'green'
+        },
+        {
+          icon: GitBranch,
+          title: 'Version Control',
+          description: 'Manage workflow versions and rollbacks',
+          href: '/automation/workflows',
+          color: 'orange',
+          badge: 'New'
+        },
+        {
+          icon: BarChart3,
+          title: 'Analytics & Insights',
+          description: 'Performance metrics and error analysis',
+          href: '/automation/workflows',
+          color: 'red'
+        },
+        {
+          icon: FileSearch,
+          title: 'Audit Logs',
+          description: 'Compliance and audit trail management',
+          href: '/automation/workflows',
+          color: 'gray',
+          badge: 'Compliance'
+        }
+      ]
+    },
+    {
       category: 'Account',
       items: [
         {
