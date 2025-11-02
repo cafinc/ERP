@@ -85,39 +85,75 @@ export default function EquipmentPage() {
     }
   };
 
+  const getTypeIcon = (type: string) => {
+    switch (type?.toLowerCase()) {
+      case 'vehicle': return Car;
+      case 'trailer': return Truck;
+      case 'tool': return Hammer;
+      default: return Package;
+    }
+  };
+
   const getTypeLabel = (type: string) => {
     const typeMap: { [key: string]: string } = {
+      'equipment': 'Equipment',
+      'vehicle': 'Vehicle',
+      'trailer': 'Trailer',
+      'tool': 'Tool',
       'plow_truck': 'Plow Truck',
       'truck': 'Truck',
       'loader': 'Loader',
       'skid_steer': 'Skid Steer',
       'sanding_truck': 'Sanding Truck',
       'brine_truck': 'Brine Truck',
-      'cab_sweeper': 'Cab Sweeper',
-      'single_stage_thrower': 'Single Stage Thrower',
-      'gravely_sweeper': 'Gravely Sweeper'
     };
     return typeMap[type] || type;
   };
 
   const getStatusColor = (status: string) => {
     switch (status?.toLowerCase()) {
-      case 'available': return 'bg-green-100 text-green-700';
-      case 'in_use': return 'bg-blue-100 text-blue-700';
-      case 'maintenance': return 'bg-orange-100 text-orange-700';
-      case 'unavailable': return 'bg-red-100 text-red-700';
-      default: return 'bg-gray-100 text-gray-700';
+      case 'operational':
+      case 'available': 
+        return 'bg-green-100 text-green-700';
+      case 'in_use': 
+        return 'bg-blue-100 text-blue-700';
+      case 'maintenance': 
+        return 'bg-orange-100 text-orange-700';
+      case 'retired':
+      case 'unavailable': 
+        return 'bg-red-100 text-red-700';
+      default: 
+        return 'bg-gray-100 text-gray-700';
     }
   };
 
   const getStatusLabel = (status: string) => {
     const statusMap: { [key: string]: string } = {
+      'operational': 'Operational',
       'available': 'Available',
       'in_use': 'In Use',
       'maintenance': 'Maintenance',
+      'retired': 'Retired',
       'unavailable': 'Unavailable'
     };
     return statusMap[status] || status;
+  };
+
+  const handleSort = (field: SortField) => {
+    if (sortField === field) {
+      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+    } else {
+      setSortField(field);
+      setSortOrder('asc');
+    }
+  };
+
+  const clearFilters = () => {
+    setSearchQuery('');
+    setFilterType('all');
+    setFilterStatus('all');
+    setSortField('name');
+    setSortOrder('asc');
   };
 
   const isMaintenanceDue = (dueDate?: string) => {
@@ -128,17 +164,58 @@ export default function EquipmentPage() {
     return daysUntilDue <= 7;
   };
 
-  const filteredEquipment = equipment.filter(item => {
-    const matchesSearch = 
-      item.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.unit_number?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.license_plate?.toLowerCase().includes(searchQuery.toLowerCase());
-    
-    const matchesType = filterType === 'all' || item.equipment_type === filterType;
-    const matchesStatus = filterStatus === 'all' || item.status === filterStatus;
-    
-    return matchesSearch && matchesType && matchesStatus;
-  });
+  // Filter and sort equipment
+  const filteredAndSortedEquipment = equipment
+    .filter(item => {
+      const itemType = item.type || item.equipment_type;
+      const matchesSearch = 
+        item.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.unit_number?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.license_plate?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.make?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.model?.toLowerCase().includes(searchQuery.toLowerCase());
+      
+      const matchesType = filterType === 'all' || itemType === filterType;
+      const matchesStatus = filterStatus === 'all' || item.status === filterStatus;
+      
+      return matchesSearch && matchesType && matchesStatus;
+    })
+    .sort((a, b) => {
+      let aVal, bVal;
+      
+      switch (sortField) {
+        case 'name':
+          aVal = a.name?.toLowerCase() || '';
+          bVal = b.name?.toLowerCase() || '';
+          break;
+        case 'type':
+          aVal = (a.type || a.equipment_type || '').toLowerCase();
+          bVal = (b.type || b.equipment_type || '').toLowerCase();
+          break;
+        case 'status':
+          aVal = a.status?.toLowerCase() || '';
+          bVal = b.status?.toLowerCase() || '';
+          break;
+        case 'created_at':
+          aVal = new Date(a.created_at).getTime();
+          bVal = new Date(b.created_at).getTime();
+          break;
+        case 'maintenance_due':
+          aVal = a.maintenance_due ? new Date(a.maintenance_due).getTime() : 0;
+          bVal = b.maintenance_due ? new Date(b.maintenance_due).getTime() : 0;
+          break;
+        default:
+          return 0;
+      }
+      
+      if (aVal < bVal) return sortOrder === 'asc' ? -1 : 1;
+      if (aVal > bVal) return sortOrder === 'asc' ? 1 : -1;
+      return 0;
+    });
+
+  // Get unique types and statuses for filter options
+  const availableTypes = ['all', ...new Set(equipment.map(e => e.type || e.equipment_type).filter(Boolean))];
+  const availableStatuses = ['all', ...new Set(equipment.map(e => e.status).filter(Boolean))];
 
   if (loading) {
     return (
