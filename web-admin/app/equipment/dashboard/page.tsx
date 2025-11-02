@@ -83,10 +83,10 @@ export default function EquipmentDashboardPage() {
         title="Equipment Dashboard"
         subtitle="Manage equipment fleet and maintenance"
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Equipment", href: "/equipment" }, { label: "Dashboard" }]}
-        icon={LayoutDashboard}
-        badges={[
-          { label: `${stats.totalEquipment} Total`, color: 'blue' },
-          { label: `${stats.operational} Operational`, color: 'green' },
+        icon={<LayoutDashboard className="w-5 h-5" />}
+        stats={[
+          { label: 'Total Equipment', value: stats.totalEquipment, color: 'blue' },
+          { label: 'Operational', value: stats.operational, color: 'green' },
         ]}
       />
 
