@@ -219,6 +219,7 @@ export default function CustomersPage() {
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <PageHeader
         title="Customers"
+        icon={<Users size={28} />}
         subtitle="Manage your customer database and contacts"
         breadcrumbs={[
           { label: "Home", href: "/" },
