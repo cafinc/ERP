@@ -135,10 +135,6 @@ export default function AssetDashboardPage() {
         title="Asset Dashboard"
         subtitle="Manage equipment, vehicles, trailers, and tools"
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Assets", href: "/equipment" }, { label: "Dashboard" }]}
-        stats={[
-          { label: 'Total Assets', value: stats.totalAssets, color: 'blue' },
-          { label: 'Operational', value: stats.operational, color: 'green' },
-        ]}
         actions={[
           { 
             label: 'Add Asset', 
