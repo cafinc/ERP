@@ -12,53 +12,58 @@ import {
   Trash2,
   CheckCircle,
   XCircle,
-  Settings,
-  Eye,
-  Lock,
-  Unlock,
   AlertCircle,
   Search,
-  Filter,
+  HardHat,
+  UserCog,
+  Building2,
+  TrendingUp,
+  Clock,
+  Activity,
+  Eye,
 } from 'lucide-react';
 
-interface UserAccess {
+type TabType = 'overview' | 'team' | 'crew' | 'external' | 'roles' | 'audit';
+
+interface User {
   id: string;
   name: string;
   email: string;
-  role: 'admin' | 'internal' | 'subcontractor';
-  access_group: 'Internal' | 'Subcontractor';
+  phone?: string;
+  role: string;
   status: 'active' | 'inactive';
-  permissions: string[];
   created_at: string;
   last_login?: string;
+  team?: string;
 }
 
-interface AccessGroup {
-  name: string;
-  description: string;
-  permissions: string[];
-  color: string;
-  icon: any;
-}
-
-export default function AccessDashboardPage() {
+export default function UnifiedAccessPage() {
   const router = useRouter();
-  const [users, setUsers] = useState<UserAccess[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState<TabType>('overview');
   const [searchQuery, setSearchQuery] = useState('');
-  const [filterGroup, setFilterGroup] = useState<string>('all');
-  const [filterStatus, setFilterStatus] = useState<string>('all');
   const [showAddUserModal, setShowAddUserModal] = useState(false);
   const [showRolesModal, setShowRolesModal] = useState(false);
-  const [newUser, setNewUser] = useState({
-    name: '',
-    email: '',
-    role: 'crew',
-    password: '',
-    phone: ''
-  });
+  
+  // Mock data for different user types
+  const [teamMembers] = useState<User[]>([
+    { id: '1', name: 'John Admin', email: 'john@company.com', phone: '+1 (555) 234-5678', role: 'Admin', status: 'active', created_at: '2025-01-15', last_login: '2025-06-21' },
+    { id: '2', name: 'Sarah Manager', email: 'sarah@company.com', phone: '+1 (555) 345-6789', role: 'Manager', status: 'active', created_at: '2025-02-10', last_login: '2025-06-20' },
+    { id: '3', name: 'Alex Supervisor', email: 'alex@company.com', phone: '+1 (555) 456-7890', role: 'Supervisor', status: 'active', created_at: '2025-03-05', last_login: '2025-06-21' },
+  ]);
 
-  const [roles, setRoles] = useState([
+  const [crewMembers] = useState<User[]>([
+    { id: '4', name: 'Mike Johnson', email: 'mike@company.com', phone: '+1 (555) 456-7890', role: 'Crew Lead', status: 'active', created_at: '2025-01-20', last_login: '2025-06-21', team: 'Team A' },
+    { id: '5', name: 'Tom Wilson', email: 'tom@company.com', phone: '+1 (555) 567-8901', role: 'Operator', status: 'active', created_at: '2025-02-15', last_login: '2025-06-21', team: 'Team B' },
+    { id: '6', name: 'David Brown', email: 'david@company.com', phone: '+1 (555) 678-9012', role: 'Operator', status: 'inactive', created_at: '2025-03-10', last_login: '2025-06-15', team: 'Team A' },
+  ]);
+
+  const [externalUsers] = useState<User[]>([
+    { id: '7', name: 'ABC Corp', email: 'contact@abccorp.com', phone: '+1 (555) 111-2222', role: 'Customer', status: 'active', created_at: '2025-01-05', last_login: '2025-06-20' },
+    { id: '8', name: 'XYZ Contractors', email: 'info@xyzcontractors.com', phone: '+1 (555) 333-4444', role: 'Subcontractor', status: 'active', created_at: '2025-02-01', last_login: '2025-06-19' },
+    { id: '9', name: 'Supply Co', email: 'sales@supplyco.com', phone: '+1 (555) 555-6666', role: 'Vendor', status: 'active', created_at: '2025-03-15', last_login: '2025-06-18' },
+  ]);
+
+  const [roles] = useState([
     { 
       id: 1, 
       name: 'Admin', 
@@ -89,578 +94,437 @@ export default function AccessDashboardPage() {
     },
   ]);
 
-  const accessGroups: AccessGroup[] = [
-    {
-      name: 'Internal',
-      description: 'Full platform access for internal staff and administrators',
-      permissions: [
-        'view_all_customers',
-        'manage_customers',
-        'view_all_projects',
-        'manage_projects',
-        'view_all_invoices',
-        'manage_invoices',
-        'view_reports',
-        'manage_users',
-        'manage_settings',
-        'view_analytics',
-        'manage_estimates',
-        'manage_dispatch',
-      ],
-      color: 'blue',
-      icon: Shield,
-    },
-    {
-      name: 'Subcontractor',
-      description: 'Limited access for external subcontractors and field staff',
-      permissions: [
-        'view_assigned_projects',
-        'update_project_status',
-        'upload_photos',
-        'view_assigned_tasks',
-        'update_task_status',
-        'view_assigned_dispatch',
-        'submit_timesheets',
-      ],
-      color: 'orange',
-      icon: Users,
-    },
+  const [auditLogs] = useState([
+    { id: 1, action: 'User Created', user: 'John Admin', target: 'Mike Johnson', timestamp: '2025-06-21 10:30 AM', ip: '192.168.1.100' },
+    { id: 2, action: 'Role Modified', user: 'Sarah Manager', target: 'Manager Role', timestamp: '2025-06-21 09:15 AM', ip: '192.168.1.101' },
+    { id: 3, action: 'Permission Changed', user: 'John Admin', target: 'Tom Wilson', timestamp: '2025-06-20 04:45 PM', ip: '192.168.1.100' },
+    { id: 4, action: 'User Deactivated', user: 'Sarah Manager', target: 'David Brown', timestamp: '2025-06-20 02:30 PM', ip: '192.168.1.101' },
+  ]);
+
+  const tabs = [
+    { id: 'overview' as TabType, label: 'Overview', icon: TrendingUp },
+    { id: 'team' as TabType, label: 'Team', icon: UserCog },
+    { id: 'crew' as TabType, label: 'Crew', icon: HardHat },
+    { id: 'external' as TabType, label: 'External', icon: Building2 },
+    { id: 'roles' as TabType, label: 'Roles', icon: Shield },
+    { id: 'audit' as TabType, label: 'Audit Log', icon: Activity },
   ];
 
-  useEffect(() => {
-    loadUsers();
-  }, []);
-
-  const loadUsers = async () => {
-    try {
-      setLoading(true);
-      const response = await api.get('/users/access');
-      setUsers(response.data || []);
-    } catch (error) {
-      console.error('Error loading users:', error);
-      setUsers([]);
-      alert('Failed to load users. Please try again.');
-    } finally {
-      setLoading(false);
-    }
+  const getStats = () => {
+    return {
+      totalUsers: teamMembers.length + crewMembers.length + externalUsers.length,
+      activeUsers: [...teamMembers, ...crewMembers, ...externalUsers].filter(u => u.status === 'active').length,
+      teamCount: teamMembers.length,
+      crewCount: crewMembers.length,
+      externalCount: externalUsers.length,
+      rolesCount: roles.length,
+    };
   };
 
-  const filteredUsers = users.filter(user => {
-    const matchesSearch = user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         user.email.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesGroup = filterGroup === 'all' || user.access_group === filterGroup;
-    const matchesStatus = filterStatus === 'all' || user.status === filterStatus;
-    return matchesSearch && matchesGroup && matchesStatus;
-  });
+  const stats = getStats();
 
-  const handleAddUser = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (!newUser.name || !newUser.email || !newUser.password) {
-      alert('Please fill in all required fields');
-      return;
-    }
+  const renderUserTable = (users: User[], title: string) => {
+    const filteredUsers = users.filter(user =>
+      user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      user.email.toLowerCase().includes(searchQuery.toLowerCase())
+    );
 
-    try {
-      await api.post('/users', newUser);
-      alert('User created successfully!');
-      setShowAddUserModal(false);
-      setNewUser({ name: '', email: '', role: 'crew', password: '', phone: '' });
-      
-      // Refresh users list
-      const response = await api.get('/users');
-      setUsers(response.data || []);
-    } catch (error) {
-      console.error('Error creating user:', error);
-      alert('Failed to create user. Please try again.');
-    }
-  };
+    return (
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+        <div className="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
+          <h3 className="text-lg font-semibold text-gray-900">{title}</h3>
+          <button
+            onClick={() => setShowAddUserModal(true)}
+            className="px-4 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#2d5a8f] font-medium transition-colors flex items-center gap-2"
+          >
+            <UserPlus className="w-4 h-4" />
+            Add User
+          </button>
+        </div>
 
-  const internalCount = users.filter(u => u.access_group === 'Internal').length;
-  const subcontractorCount = users.filter(u => u.access_group === 'Subcontractor').length;
-  const activeCount = users.filter(u => u.status === 'active').length;
-
-  const getGroupColor = (group: string) => {
-    return group === 'Internal' ? 'blue' : 'orange';
-  };
-
-  const getGroupBadgeColor = (group: string) => {
-    return group === 'Internal' 
-      ? 'bg-blue-100 text-blue-700 border-blue-200' 
-      : 'bg-orange-100 text-orange-700 border-orange-200';
-  };
-
-  const getStatusBadge = (status: string) => {
-    return status === 'active'
-      ? 'bg-green-100 text-green-700 border-green-200'
-      : 'bg-gray-100 text-gray-600 border-gray-200';
-  };
-
-  const handleToggleStatus = async (userId: string) => {
-    try {
-      await api.patch(`/users/${userId}/toggle-status`);
-      loadUsers();
-    } catch (error) {
-      console.error('Error toggling user status:', error);
-      alert('Failed to update user status');
-    }
-  };
-
-  const handleDeleteUser = async (userId: string) => {
-    if (!confirm('Are you sure you want to delete this user? This action cannot be undone.')) {
-      return;
-    }
-
-    try {
-      await api.delete(`/users/${userId}`);
-      loadUsers();
-      alert('User deleted successfully');
-    } catch (error) {
-      console.error('Error deleting user:', error);
-      alert('Failed to delete user');
-    }
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            <thead className="bg-gray-50 border-b border-gray-200">
+              <tr>
+                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Name</th>
+                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Email</th>
+                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Role</th>
+                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Status</th>
+                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Last Login</th>
+                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Actions</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-200">
+              {filteredUsers.map((user) => (
+                <tr key={user.id} className="hover:bg-gray-50 transition-colors">
+                  <td className="px-6 py-4">
+                    <div className="font-medium text-gray-900">{user.name}</div>
+                    {user.team && <div className="text-sm text-gray-500">{user.team}</div>}
+                  </td>
+                  <td className="px-6 py-4 text-sm text-gray-600">{user.email}</td>
+                  <td className="px-6 py-4">
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                      {user.role}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4">
+                    {user.status === 'active' ? (
+                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                        <CheckCircle className="w-3 h-3" />
+                        Active
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                        <XCircle className="w-3 h-3" />
+                        Inactive
+                      </span>
+                    )}
+                  </td>
+                  <td className="px-6 py-4 text-sm text-gray-600">{user.last_login || 'Never'}</td>
+                  <td className="px-6 py-4">
+                    <div className="flex items-center gap-2">
+                      <button className="p-1 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors">
+                        <Edit className="w-4 h-4" />
+                      </button>
+                      <button className="p-1 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded transition-colors">
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    );
   };
 
   return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
-        {/* Header */}
-        <PageHeader
-          title="Access Control Dashboard"
-          icon={<Shield size={28} />}
-          subtitle="Manage user access and permissions"
-          breadcrumbs={[{ label: "Home", href: "/" }, { label: "Access" }]}
-          actions={[
-            {
-              label: 'Manage Roles',
-              icon: <Shield className="w-4 h-4 mr-2" />,
-              onClick: () => setShowRolesModal(true),
-              variant: 'secondary',
-            },
-            {
-              label: 'Add User',
-              icon: <UserPlus className="w-4 h-4 mr-2" />,
-              onClick: () => setShowAddUserModal(true),
-              variant: 'primary',
-            },
-          ]}
-        />
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
+      <PageHeader
+        title="Universal Access Control"
+        subtitle="Manage users, roles, and permissions across your organization"
+        icon={<Shield size={28} />}
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "Access Control" }
+        ]}
+        actions={[
+          {
+            label: 'Manage Roles',
+            icon: <Shield className="w-4 h-4 mr-2" />,
+            onClick: () => setShowRolesModal(true),
+            variant: 'secondary',
+          },
+          {
+            label: 'Add User',
+            icon: <UserPlus className="w-4 h-4 mr-2" />,
+            onClick: () => setShowAddUserModal(true),
+            variant: 'primary',
+          },
+        ]}
+      />
 
-        {/* Access Groups Overview */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mx-6 mt-6">
-          {accessGroups.map((group) => (
-            <div
-              key={group.name}
-              className={`bg-gradient-to-br ${
-                group.color === 'blue' 
-                  ? 'from-blue-500 to-blue-600' 
-                  : 'from-orange-500 to-orange-600'
-              } rounded-xl shadow-sm p-4 text-white`}
+      {/* Tabs Navigation */}
+      <div className="mt-6 bg-white rounded-xl shadow-sm border border-gray-200 p-1 flex items-center gap-1 overflow-x-auto">
+        {tabs.map((tab) => {
+          const Icon = tab.icon;
+          return (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`flex items-center gap-2 px-4 py-2.5 rounded-lg font-medium transition-all whitespace-nowrap ${
+                activeTab === tab.id
+                  ? 'bg-[#3f72af] text-white shadow-sm'
+                  : 'text-gray-600 hover:bg-gray-100'
+              }`}
             >
-              <div className="flex items-start justify-between mb-4">
-                <div className="flex items-center gap-3">
-                  <div className="bg-white/20 p-3 rounded-xl">
-                    <group.icon className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold">{group.name}</h3>
-                    <p className="text-sm opacity-90 mt-1">{group.description}</p>
-                  </div>
-                </div>
-                <span className="bg-white/20 px-3 py-1 rounded-full text-sm font-medium">
-                  {users.filter(u => u.access_group === group.name).length} users
-                </span>
-              </div>
+              <Icon className="w-4 h-4" />
+              {tab.label}
+            </button>
+          );
+        })}
+      </div>
 
-              {/* Permissions List */}
-              <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
-                <h4 className="font-semibold mb-3 text-sm">Permissions:</h4>
-                <div className="grid grid-cols-2 gap-2">
-                  {group.permissions.slice(0, 8).map((permission, index) => (
-                    <div key={index} className="flex items-center gap-2 text-xs">
-                      <CheckCircle className="w-3 h-3" />
-                      <span className="opacity-90">{permission.replace(/_/g, ' ')}</span>
-                    </div>
-                  ))}
-                </div>
-                {group.permissions.length > 8 && (
-                  <p className="text-xs opacity-75 mt-2">
-                    +{group.permissions.length - 8} more permissions
-                  </p>
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Filters */}
-        <div className="px-6 py-4 bg-white rounded-xl shadow-lg border border-gray-200 mt-6 mx-6">
-          <div className="flex flex-col md:flex-row gap-4">
-            {/* Search */}
-            <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-              <input
-                type="text"
-                placeholder="Search by name or email..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              />
-            </div>
-
-            {/* Group Filter */}
-            <select
-              value={filterGroup}
-              onChange={(e) => setFilterGroup(e.target.value)}
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            >
-              <option value="all">All Groups</option>
-              <option value="Internal">Internal</option>
-              <option value="Subcontractor">Subcontractor</option>
-            </select>
-
-            {/* Status Filter */}
-            <select
-              value={filterStatus}
-              onChange={(e) => setFilterStatus(e.target.value)}
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            >
-              <option value="all">All Status</option>
-              <option value="active">Active</option>
-              <option value="inactive">Inactive</option>
-            </select>
+      {/* Search Bar */}
+      {(activeTab === 'team' || activeTab === 'crew' || activeTab === 'external') && (
+        <div className="mt-6">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search users by name or email..."
+              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
           </div>
         </div>
+      )}
 
-        {/* Users Table */}
-        <div className="mx-6 mt-6">
-          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+      {/* Tab Content */}
+      <div className="mt-6">
+        {/* Overview Tab */}
+        {activeTab === 'overview' && (
+          <div className="space-y-6">
+            {/* Stats Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <div className="flex items-center gap-4">
+                  <div className="p-3 bg-blue-100 rounded-xl">
+                    <Users className="w-6 h-6 text-blue-600" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-600">Total Users</p>
+                    <p className="text-2xl font-bold text-gray-900">{stats.totalUsers}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <div className="flex items-center gap-4">
+                  <div className="p-3 bg-green-100 rounded-xl">
+                    <CheckCircle className="w-6 h-6 text-green-600" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-600">Active Users</p>
+                    <p className="text-2xl font-bold text-gray-900">{stats.activeUsers}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <div className="flex items-center gap-4">
+                  <div className="p-3 bg-purple-100 rounded-xl">
+                    <Shield className="w-6 h-6 text-purple-600" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-600">Roles Defined</p>
+                    <p className="text-2xl font-bold text-gray-900">{stats.rolesCount}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <div className="flex items-center gap-4">
+                  <div className="p-3 bg-orange-100 rounded-xl">
+                    <Clock className="w-6 h-6 text-orange-600" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-600">Recent Activity</p>
+                    <p className="text-2xl font-bold text-gray-900">{auditLogs.length}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* User Distribution */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="font-semibold text-gray-900">Team Members</h3>
+                  <UserCog className="w-5 h-5 text-blue-600" />
+                </div>
+                <div className="text-3xl font-bold text-gray-900 mb-2">{stats.teamCount}</div>
+                <p className="text-sm text-gray-600">Internal staff & admins</p>
+                <button
+                  onClick={() => setActiveTab('team')}
+                  className="mt-4 w-full px-4 py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 font-medium transition-colors"
+                >
+                  View Team
+                </button>
+              </div>
+
+              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="font-semibold text-gray-900">Crew Members</h3>
+                  <HardHat className="w-5 h-5 text-green-600" />
+                </div>
+                <div className="text-3xl font-bold text-gray-900 mb-2">{stats.crewCount}</div>
+                <p className="text-sm text-gray-600">Field workers & operators</p>
+                <button
+                  onClick={() => setActiveTab('crew')}
+                  className="mt-4 w-full px-4 py-2 bg-green-50 text-green-600 rounded-lg hover:bg-green-100 font-medium transition-colors"
+                >
+                  View Crew
+                </button>
+              </div>
+
+              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="font-semibold text-gray-900">External Users</h3>
+                  <Building2 className="w-5 h-5 text-purple-600" />
+                </div>
+                <div className="text-3xl font-bold text-gray-900 mb-2">{stats.externalCount}</div>
+                <p className="text-sm text-gray-600">Customers, vendors, contractors</p>
+                <button
+                  onClick={() => setActiveTab('external')}
+                  className="mt-4 w-full px-4 py-2 bg-purple-50 text-purple-600 rounded-lg hover:bg-purple-100 font-medium transition-colors"
+                >
+                  View External
+                </button>
+              </div>
+            </div>
+
+            {/* Recent Activity */}
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+              <div className="px-6 py-4 border-b border-gray-200">
+                <h3 className="text-lg font-semibold text-gray-900">Recent Activity</h3>
+              </div>
+              <div className="divide-y divide-gray-200">
+                {auditLogs.slice(0, 5).map((log) => (
+                  <div key={log.id} className="px-6 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-blue-100 rounded-lg">
+                        <Activity className="w-4 h-4 text-blue-600" />
+                      </div>
+                      <div>
+                        <p className="text-sm font-medium text-gray-900">{log.action}</p>
+                        <p className="text-xs text-gray-600">
+                          {log.user} → {log.target}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-xs text-gray-600">{log.timestamp}</p>
+                      <p className="text-xs text-gray-500">{log.ip}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Team Tab */}
+        {activeTab === 'team' && renderUserTable(teamMembers, 'Team Members')}
+
+        {/* Crew Tab */}
+        {activeTab === 'crew' && renderUserTable(crewMembers, 'Crew Members')}
+
+        {/* External Tab */}
+        {activeTab === 'external' && renderUserTable(externalUsers, 'External Users')}
+
+        {/* Roles Tab */}
+        {activeTab === 'roles' && (
+          <div className="space-y-4">
+            {roles.map((role) => (
+              <div
+                key={role.id}
+                className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow"
+              >
+                <div className="flex justify-between items-start mb-4">
+                  <div className="flex items-center gap-3">
+                    <div className={`p-3 rounded-xl ${
+                      role.color === 'blue' ? 'bg-blue-100' :
+                      role.color === 'green' ? 'bg-green-100' :
+                      role.color === 'orange' ? 'bg-orange-100' :
+                      'bg-gray-100'
+                    }`}>
+                      <Shield className={`w-5 h-5 ${
+                        role.color === 'blue' ? 'text-blue-600' :
+                        role.color === 'green' ? 'text-green-600' :
+                        role.color === 'orange' ? 'text-orange-600' :
+                        'text-gray-600'
+                      }`} />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-gray-900">{role.name}</h3>
+                      <p className="text-sm text-gray-600">
+                        {role.users} {role.users === 1 ? 'user' : 'users'} assigned
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex gap-2">
+                    <button className="p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
+                      <Edit className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+
+                <div className="bg-gray-50 rounded-lg p-4 border border-gray-100">
+                  <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">
+                    Permissions ({role.permissions.length})
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {role.permissions.map((permission, idx) => (
+                      <span
+                        key={idx}
+                        className={`px-3 py-1.5 rounded-full text-xs font-medium ${
+                          role.color === 'blue' ? 'bg-blue-100 text-blue-700' :
+                          role.color === 'green' ? 'bg-green-100 text-green-700' :
+                          role.color === 'orange' ? 'bg-orange-100 text-orange-700' :
+                          'bg-gray-100 text-gray-700'
+                        }`}
+                      >
+                        <CheckCircle className="w-3 h-3 inline mr-1" />
+                        {permission}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Audit Log Tab */}
+        {activeTab === 'audit' && (
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+            <div className="px-6 py-4 border-b border-gray-200">
+              <h3 className="text-lg font-semibold text-gray-900">Security Audit Log</h3>
+              <p className="text-sm text-gray-600 mt-1">Track all access control changes and user activities</p>
+            </div>
+
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead className="bg-gray-50 border-b border-gray-200">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      User
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Access Group
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Status
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Last Login
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Permissions
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Actions
-                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Action</th>
+                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">User</th>
+                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Target</th>
+                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Timestamp</th>
+                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">IP Address</th>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                  {filteredUsers.map((user) => (
-                    <tr key={user.id} className="hover:bg-gray-50 transition-colors hover:bg-gray-50">
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div>
-                          <div className="text-sm font-medium text-gray-900">{user.name}</div>
-                          <div className="text-sm text-gray-500">{user.email}</div></div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <span className={`px-3 py-1 rounded-full text-xs font-medium border ${getGroupBadgeColor(user.access_group)}`}>
-                          {user.access_group}
+                <tbody className="divide-y divide-gray-200">
+                  {auditLogs.map((log) => (
+                    <tr key={log.id} className="hover:bg-gray-50 transition-colors">
+                      <td className="px-6 py-4">
+                        <span className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                          <Activity className="w-3 h-3" />
+                          {log.action}
                         </span>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <span className={`px-3 py-1 rounded-full text-xs font-medium border flex items-center gap-1 w-fit ${getStatusBadge(user.status)}`}>
-                          {user.status === 'active' ? (
-                            <CheckCircle className="w-3 h-3" />
-                          ) : (
-                            <XCircle className="w-3 h-3" />
-                          )}
-                          {user.status}
-                        </span>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                        {user.last_login 
-                          ? new Date(user.last_login).toLocaleString()
-                          : 'Never'
-                        }
-                      </td>
-                      <td className="px-6 py-4 text-sm text-gray-900">
-                        <button
-                          onClick={() => alert(`Permissions:\n${user.permissions.join('\n')}`)}
-                          className="text-[#3f72af] hover:text-[#2c5282] flex items-center gap-1"
-                        >
-                          <Eye className="w-4 h-4" />
-                          View ({user.permissions.length})
-                        </button>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm">
-                        <div className="flex items-center gap-2">
-                          <button
-                            onClick={() => handleToggleStatus(user.id)}
-                            className="text-gray-600 hover:text-gray-900"
-                            title={user.status === 'active' ? 'Deactivate' : 'Activate'}
-                          >
-                            {user.status === 'active' ? (
-                              <Lock className="w-4 h-4" />
-                            ) : (
-                              <Unlock className="w-4 h-4" />
-                            )}
-                          </button>
-                          <button
-                            onClick={() => router.push(`/access/users/${user.id}/edit`)}
-                            className="text-[#3f72af] hover:text-blue-900"
-                            title="Edit"
-                          >
-                            <Edit className="w-4 h-4" />
-                          </button>
-                          <button
-                            onClick={() => handleDeleteUser(user.id)}
-                            className="text-red-600 hover:text-red-900"
-                            title="Delete"
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </button>
-                        </div>
-                      </td>
+                      <td className="px-6 py-4 text-sm font-medium text-gray-900">{log.user}</td>
+                      <td className="px-6 py-4 text-sm text-gray-600">{log.target}</td>
+                      <td className="px-6 py-4 text-sm text-gray-600">{log.timestamp}</td>
+                      <td className="px-6 py-4 text-sm text-gray-500 font-mono">{log.ip}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
-
-            {filteredUsers.length === 0 && (
-              <div className="p-12 text-center">
-                <AlertCircle className="w-12 h-12 text-gray-300 mx-auto mb-3" />
-                <p className="text-gray-600">No users found matching your filters</p>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Audit Log Notice */}
-        <div className="mx-6 mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
-          <div className="flex items-start gap-3">
-            <Shield className="w-5 h-5 text-[#3f72af] mt-0.5" />
-            <div>
-              <h3 className="text-sm font-semibold text-blue-900 mb-1">Audit Logging Enabled</h3>
-              <p className="text-sm text-blue-700">
-                All access changes and permission modifications are automatically logged for security and compliance purposes. 
-                View audit logs in Settings → Security.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Add User Modal */}
-        {showAddUserModal && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-            <div className="bg-white rounded-lg shadow-xl max-w-md w-full p-6">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">Add New User</h2>
-              
-              <form onSubmit={handleAddUser} className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Name *</label>
-                  <input
-                    type="text"
-                    value={newUser.name}
-                    onChange={(e) => setNewUser({...newUser, name: e.target.value})}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3f72af]"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Email *</label>
-                  <input
-                    type="email"
-                    value={newUser.email}
-                    onChange={(e) => setNewUser({...newUser, email: e.target.value})}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3f72af]"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
-                  <input
-                    type="tel"
-                    value={newUser.phone}
-                    onChange={(e) => setNewUser({...newUser, phone: e.target.value})}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3f72af]"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Role *</label>
-                  <select
-                    value={newUser.role}
-                    onChange={(e) => setNewUser({...newUser, role: e.target.value})}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3f72af]"
-                    required
-                  >
-                    <option value="crew">Crew Member</option>
-                    <option value="admin">Admin</option>
-                    <option value="subcontractor">Subcontractor</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Password *</label>
-                  <input
-                    type="password"
-                    value={newUser.password}
-                    onChange={(e) => setNewUser({...newUser, password: e.target.value})}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3f72af]"
-                    required
-                    minLength={6}
-                  />
-                  <p className="text-xs text-gray-500 mt-1">Minimum 6 characters</p>
-                </div>
-
-                <div className="flex space-x-3 pt-4">
-                  <button
-                    type="submit"
-                    className="flex-1 px-4 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#2c5282] font-medium transition-colors"
-                  >
-                    Create User
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setShowAddUserModal(false)}
-                    className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 font-medium transition-colors"
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        )}
-
-        {/* Roles & Permissions Modal */}
-        {showRolesModal && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-            <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-auto">
-              <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
-                <div>
-                  <h2 className="text-2xl font-bold text-gray-900">Roles & Permissions</h2>
-                  <p className="text-sm text-gray-600 mt-1">Manage user roles and access permissions</p>
-                </div>
-                <button
-                  onClick={() => setShowRolesModal(false)}
-                  className="text-gray-400 hover:text-gray-600 transition-colors"
-                >
-                  <XCircle className="w-6 h-6" />
-                </button>
-              </div>
-
-              <div className="p-6">
-                <div className="mb-6 flex items-center justify-between">
-                  <p className="text-sm text-gray-600">
-                    Define roles and assign granular permissions to control user access across the platform
-                  </p>
-                  <button
-                    onClick={() => alert('Create new role functionality')}
-                    className="px-4 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#2d5a8f] font-medium transition-colors flex items-center gap-2"
-                  >
-                    <UserPlus className="w-4 h-4" />
-                    New Role
-                  </button>
-                </div>
-
-                <div className="space-y-4">
-                  {roles.map((role) => (
-                    <div
-                      key={role.id}
-                      className="bg-gradient-to-br from-gray-50 to-white rounded-xl border border-gray-200 p-6 hover:shadow-md transition-shadow"
-                    >
-                      <div className="flex justify-between items-start mb-4">
-                        <div className="flex items-center gap-3">
-                          <div className={`p-3 rounded-xl ${
-                            role.color === 'blue' ? 'bg-blue-100 text-blue-600' :
-                            role.color === 'green' ? 'bg-green-100 text-green-600' :
-                            role.color === 'orange' ? 'bg-orange-100 text-orange-600' :
-                            'bg-gray-100 text-gray-600'
-                          }`}>
-                            <Shield className="w-5 h-5" />
-                          </div>
-                          <div>
-                            <h3 className="text-lg font-bold text-gray-900">{role.name}</h3>
-                            <p className="text-sm text-gray-600">
-                              {role.users} {role.users === 1 ? 'user' : 'users'} assigned
-                            </p>
-                          </div>
-                        </div>
-                        <div className="flex gap-2">
-                          <button
-                            onClick={() => alert(`Edit ${role.name} role`)}
-                            className="p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
-                            title="Edit role"
-                          >
-                            <Edit className="w-4 h-4" />
-                          </button>
-                          <button
-                            onClick={() => {
-                              if (confirm(`Are you sure you want to delete ${role.name} role?`)) {
-                                alert('Delete functionality');
-                              }
-                            }}
-                            className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
-                            title="Delete role"
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </button>
-                        </div>
-                      </div>
-
-                      <div className="bg-white rounded-lg p-4 border border-gray-100">
-                        <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">
-                          Permissions ({role.permissions.length})
-                        </h4>
-                        <div className="flex flex-wrap gap-2">
-                          {role.permissions.map((permission, idx) => (
-                            <span
-                              key={idx}
-                              className={`px-3 py-1.5 rounded-full text-xs font-medium ${
-                                role.color === 'blue' ? 'bg-blue-100 text-blue-700' :
-                                role.color === 'green' ? 'bg-green-100 text-green-700' :
-                                role.color === 'orange' ? 'bg-orange-100 text-orange-700' :
-                                'bg-gray-100 text-gray-700'
-                              }`}
-                            >
-                              <CheckCircle className="w-3 h-3 inline mr-1" />
-                              {permission}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                  <div className="flex gap-3">
-                    <AlertCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <h4 className="text-sm font-semibold text-blue-900 mb-1">
-                        Role Management Best Practices
-                      </h4>
-                      <ul className="text-xs text-blue-800 space-y-1">
-                        <li>• Assign the minimum permissions required for each role</li>
-                        <li>• Regularly review and update role permissions</li>
-                        <li>• Use role-based access control (RBAC) for scalability</li>
-                        <li>• Document permission changes for audit trails</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         )}
       </div>
+
+      {/* Modals would go here */}
+      {showAddUserModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-xl shadow-2xl max-w-md w-full p-6">
+            <h3 className="text-xl font-bold text-gray-900 mb-4">Add New User</h3>
+            <p className="text-gray-600 mb-4">Feature coming soon - User creation modal</p>
+            <button
+              onClick={() => setShowAddUserModal(false)}
+              className="w-full px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
