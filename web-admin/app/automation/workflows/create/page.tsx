@@ -571,7 +571,6 @@ export default function WorkflowEditorPage() {
                 })}
               </div>
             )}
-          </div>
 
           {/* Info */}
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 flex items-start space-x-3">
