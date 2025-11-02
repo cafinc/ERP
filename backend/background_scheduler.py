@@ -15,10 +15,12 @@ logger = logging.getLogger(__name__)
 class BackgroundScheduler:
     """Scheduler for running automated workflows periodically"""
     
-    def __init__(self, db, automation_engine: AutomationEngine):
+    def __init__(self, db, automation_engine: AutomationEngine, custom_workflow_executor: CustomWorkflowExecutor = None):
         self.db = db
         self.automation_engine = automation_engine
+        self.custom_workflow_executor = custom_workflow_executor
         self.running = False
+        self.scheduled_workflows_cache = {}  # Cache for scheduled workflows
     
     async def start(self):
         """Start the background scheduler"""
@@ -31,6 +33,11 @@ class BackgroundScheduler:
         asyncio.create_task(self._hourly_inventory_check())
         asyncio.create_task(self._weather_forecast_check())
         asyncio.create_task(self._invoice_reminder_check())
+        
+        # Start custom workflow scheduler if executor is available
+        if self.custom_workflow_executor:
+            asyncio.create_task(self._custom_workflow_scheduler())
+            logger.info("Custom workflow scheduler started")
     
     async def stop(self):
         """Stop the background scheduler"""
