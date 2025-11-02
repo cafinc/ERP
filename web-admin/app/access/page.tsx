@@ -253,14 +253,48 @@ export default function UnifiedAccessPage() {
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-2">
                       <button 
+                        onClick={() => showToast('success', `Viewing ${user.name}'s details`)}
+                        className="p-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                        title="View Details"
+                      >
+                        <Eye className="w-4 h-4" />
+                      </button>
+                      <button 
                         onClick={() => showToast('success', `Editing ${user.name}'s profile`)}
-                        className="p-1 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors"
+                        className="p-2 text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors"
+                        title="Edit User"
                       >
                         <Edit className="w-4 h-4" />
                       </button>
                       <button 
-                        onClick={() => showToast('error', `Cannot delete ${user.name} - user has active sessions`)}
-                        className="p-1 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded transition-colors"
+                        onClick={() => {
+                          if (user.status === 'active') {
+                            showToast('success', `${user.name} has been deactivated`);
+                          } else {
+                            showToast('success', `${user.name} has been activated`);
+                          }
+                        }}
+                        className={`p-2 rounded-lg transition-colors ${
+                          user.status === 'active' 
+                            ? 'text-gray-600 hover:text-orange-600 hover:bg-orange-50' 
+                            : 'text-gray-600 hover:text-green-600 hover:bg-green-50'
+                        }`}
+                        title={user.status === 'active' ? 'Deactivate User' : 'Activate User'}
+                      >
+                        {user.status === 'active' ? (
+                          <Lock className="w-4 h-4" />
+                        ) : (
+                          <Unlock className="w-4 h-4" />
+                        )}
+                      </button>
+                      <button 
+                        onClick={() => {
+                          if (window.confirm(`Are you sure you want to delete ${user.name}? This action cannot be undone.`)) {
+                            showToast('success', `${user.name} has been deleted`);
+                          }
+                        }}
+                        className="p-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                        title="Delete User"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
