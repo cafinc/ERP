@@ -49,6 +49,7 @@ export default function AccessDashboardPage() {
   const [filterGroup, setFilterGroup] = useState<string>('all');
   const [filterStatus, setFilterStatus] = useState<string>('all');
   const [showAddUserModal, setShowAddUserModal] = useState(false);
+  const [showRolesModal, setShowRolesModal] = useState(false);
   const [newUser, setNewUser] = useState({
     name: '',
     email: '',
