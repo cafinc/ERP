@@ -17,1343 +17,721 @@ API_BASE = f"{BACKEND_URL}/api"
 class CalendarEventTester:
     def __init__(self):
         self.session = requests.Session()
-        self.session.timeout = TIMEOUT
+        self.session.headers.update({
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        })
         self.test_results = []
-        self.test_data = {}
+        self.created_event_ids = []
         
-    def log_test(self, test_name: str, success: bool, details: str = "", response_data: Any = None):
-        """Log test result"""
+    def log_test(self, test_name: str, success: bool, details: str, response_data: Any = None):
+        """Log test results"""
         result = {
-            "test": test_name,
-            "success": success,
-            "details": details,
-            "timestamp": datetime.now().isoformat(),
-            "response_data": response_data
+            'test': test_name,
+            'success': success,
+            'details': details,
+            'response_data': response_data,
+            'timestamp': datetime.now().isoformat()
         }
         self.test_results.append(result)
         status = "✅ PASS" if success else "❌ FAIL"
         print(f"{status}: {test_name}")
-        if details:
-            print(f"   Details: {details}")
-        if not success and response_data:
+        print(f"   Details: {details}")
+        if response_data and not success:
             print(f"   Response: {response_data}")
         print()
 
-    def test_health_check(self):
-        """Test 1: Health Check - Verify API is running"""
+    def test_get_all_events(self):
+        """Test GET /api/calendar/events - Retrieve all calendar events"""
         try:
-            response = self.session.get(f"{BACKEND_URL}/")
+            response = self.session.get(f"{API_BASE}/calendar/events")
             
             if response.status_code == 200:
-                data = response.json()
-                if "message" in data and "version" in data:
+                events = response.json()
+                if isinstance(events, list):
                     self.log_test(
-                        "Health Check - API Running", 
-                        True, 
-                        f"API responding with version {data.get('version')}"
+                        "GET /api/calendar/events - Basic retrieval",
+                        True,
+                        f"Successfully retrieved {len(events)} events. Response structure is valid list.",
+                        {"event_count": len(events), "sample_event": events[0] if events else None}
                     )
-                    return True
-                else:
-                    self.log_test(
-                        "Health Check - API Running", 
-                        False, 
-                        "API responding but missing expected fields",
-                        data
-                    )
-                    return False
-            else:
-                self.log_test(
-                    "Health Check - API Running", 
-                    False, 
-                    f"HTTP {response.status_code}: {response.text}"
-                )
-                return False
-                
-        except Exception as e:
-            self.log_test(
-                "Health Check - API Running", 
-                False, 
-                f"Connection error: {str(e)}"
-            )
-            return False
-
-    def test_sites_api(self):
-        """Test 2: Sites API - Test site retrieval and creation"""
-        success_count = 0
-        total_tests = 4
-        
-        # Test 2.1: Get all sites
-        try:
-            response = self.session.get(f"{BACKEND_URL}/sites")
-            if response.status_code == 200:
-                sites = response.json()
-                self.log_test(
-                    "Sites API - Get All Sites", 
-                    True, 
-                    f"Retrieved {len(sites)} sites"
-                )
-                success_count += 1
-                
-                # Store a site ID for later tests if available
-                if sites and len(sites) > 0:
-                    self.test_data['existing_site_id'] = sites[0].get('id')
-            else:
-                self.log_test(
-                    "Sites API - Get All Sites", 
-                    False, 
-                    f"HTTP {response.status_code}: {response.text}"
-                )
-        except Exception as e:
-            self.log_test(
-                "Sites API - Get All Sites", 
-                False, 
-                f"Error: {str(e)}"
-            )
-
-        # Test 2.2: Create a new site
-        try:
-            # First get a customer to link the site to
-            customers_response = self.session.get(f"{BACKEND_URL}/customers")
-            if customers_response.status_code == 200:
-                customers = customers_response.json()
-                if customers and len(customers) > 0:
-                    customer_id = customers[0].get('id')
                     
-                    site_data = {
-                        "name": f"Test Site {uuid.uuid4().hex[:8]}",
-                        "customer_id": customer_id,
-                        "site_type": "parking_lot",
-                        "location": {
-                            "address": "123 Test Street, Test City, TC 12345",
-                            "latitude": 43.6532,
-                            "longitude": -79.3832
-                        },
-                        "area_size": 5000.0,
-                        "internal_notes": "Test site for API verification",
-                        "crew_notes": "Handle with care - test site"
-                    }
-                    
-                    response = self.session.post(f"{BACKEND_URL}/sites", json=site_data)
-                    if response.status_code == 200:
-                        created_site = response.json()
-                        self.test_data['created_site_id'] = created_site.get('id')
-                        self.log_test(
-                            "Sites API - Create Site", 
-                            True, 
-                            f"Created site with ID: {created_site.get('id')}"
-                        )
-                        success_count += 1
-                    else:
-                        self.log_test(
-                            "Sites API - Create Site", 
-                            False, 
-                            f"HTTP {response.status_code}: {response.text}"
-                        )
+                    # Verify event structure
+                    if events:
+                        event = events[0]
+                        required_fields = ['id', 'title', 'start', 'end']
+                        missing_fields = [field for field in required_fields if field not in event]
+                        
+                        if not missing_fields:
+                            self.log_test(
+                                "GET /api/calendar/events - Event structure validation",
+                                True,
+                                f"Event structure contains all required fields: {required_fields}",
+                                {"event_structure": list(event.keys())}
+                            )
+                        else:
+                            self.log_test(
+                                "GET /api/calendar/events - Event structure validation",
+                                False,
+                                f"Missing required fields: {missing_fields}",
+                                {"event_structure": list(event.keys())}
+                            )
                 else:
                     self.log_test(
-                        "Sites API - Create Site", 
-                        False, 
-                        "No customers available to link site to"
+                        "GET /api/calendar/events - Basic retrieval",
+                        False,
+                        f"Expected list response, got {type(events)}",
+                        events
                     )
             else:
                 self.log_test(
-                    "Sites API - Create Site", 
-                    False, 
-                    f"Failed to get customers: HTTP {customers_response.status_code}"
-                )
-        except Exception as e:
-            self.log_test(
-                "Sites API - Create Site", 
-                False, 
-                f"Error: {str(e)}"
-            )
-
-        # Test 2.3: Get specific site
-        site_id = self.test_data.get('created_site_id') or self.test_data.get('existing_site_id')
-        if site_id:
-            try:
-                response = self.session.get(f"{BACKEND_URL}/sites/{site_id}")
-                if response.status_code == 200:
-                    site = response.json()
-                    self.log_test(
-                        "Sites API - Get Specific Site", 
-                        True, 
-                        f"Retrieved site: {site.get('name')}"
-                    )
-                    success_count += 1
-                else:
-                    self.log_test(
-                        "Sites API - Get Specific Site", 
-                        False, 
-                        f"HTTP {response.status_code}: {response.text}"
-                    )
-            except Exception as e:
-                self.log_test(
-                    "Sites API - Get Specific Site", 
-                    False, 
-                    f"Error: {str(e)}"
-                )
-        else:
-            self.log_test(
-                "Sites API - Get Specific Site", 
-                False, 
-                "No site ID available for testing"
-            )
-
-        # Test 2.4: Update site
-        if site_id:
-            try:
-                update_data = {
-                    "internal_notes": f"Updated at {datetime.now().isoformat()}"
-                }
-                response = self.session.put(f"{BACKEND_URL}/sites/{site_id}", json=update_data)
-                if response.status_code == 200:
-                    self.log_test(
-                        "Sites API - Update Site", 
-                        True, 
-                        "Site updated successfully"
-                    )
-                    success_count += 1
-                else:
-                    self.log_test(
-                        "Sites API - Update Site", 
-                        False, 
-                        f"HTTP {response.status_code}: {response.text}"
-                    )
-            except Exception as e:
-                self.log_test(
-                    "Sites API - Update Site", 
-                    False, 
-                    f"Error: {str(e)}"
-                )
-        else:
-            self.log_test(
-                "Sites API - Update Site", 
-                False, 
-                "No site ID available for testing"
-            )
-
-        return success_count, total_tests
-
-    def test_service_history_api(self):
-        """Test 3: Site Service History - Test service history CRUD operations"""
-        success_count = 0
-        total_tests = 6
-        
-        site_id = self.test_data.get('created_site_id') or self.test_data.get('existing_site_id')
-        if not site_id:
-            self.log_test(
-                "Service History API - All Tests", 
-                False, 
-                "No site ID available for service history testing"
-            )
-            return 0, total_tests
-
-        # Test 3.1: Create service history entry
-        try:
-            service_data = {
-                "site_id": site_id,
-                "service_date": datetime.now().isoformat(),
-                "service_type": "Snow Plowing",
-                "crew_lead": "John Doe",
-                "crew_members": ["Jane Smith", "Bob Johnson"],
-                "description": "Regular snow plowing service",
-                "notes": "Test service entry for API verification",
-                "status": "completed",
-                "duration_hours": 2.5,
-                "weather_conditions": "Light snow, -5°C",
-                "equipment_used": ["Snow Plow Truck", "Salt Spreader"]
-            }
-            
-            response = self.session.post(f"{BACKEND_URL}/sites/{site_id}/service-history", json=service_data)
-            if response.status_code == 200:
-                result = response.json()
-                self.test_data['service_history_id'] = result.get('service_history_id')
-                self.log_test(
-                    "Service History API - Create Entry", 
-                    True, 
-                    f"Created service history entry: {result.get('service_history_id')}"
-                )
-                success_count += 1
-            else:
-                self.log_test(
-                    "Service History API - Create Entry", 
-                    False, 
-                    f"HTTP {response.status_code}: {response.text}"
-                )
-        except Exception as e:
-            self.log_test(
-                "Service History API - Create Entry", 
-                False, 
-                f"Error: {str(e)}"
-            )
-
-        # Test 3.2: Get service history for site
-        try:
-            response = self.session.get(f"{BACKEND_URL}/sites/{site_id}/service-history")
-            if response.status_code == 200:
-                result = response.json()
-                history_count = result.get('count', 0)
-                self.log_test(
-                    "Service History API - Get Site History", 
-                    True, 
-                    f"Retrieved {history_count} service history entries"
-                )
-                success_count += 1
-            else:
-                self.log_test(
-                    "Service History API - Get Site History", 
-                    False, 
-                    f"HTTP {response.status_code}: {response.text}"
-                )
-        except Exception as e:
-            self.log_test(
-                "Service History API - Get Site History", 
-                False, 
-                f"Error: {str(e)}"
-            )
-
-        # Test 3.3: Get service history with filters
-        try:
-            response = self.session.get(f"{BACKEND_URL}/sites/{site_id}/service-history?service_type=Snow Plowing&limit=10")
-            if response.status_code == 200:
-                result = response.json()
-                self.log_test(
-                    "Service History API - Get with Filters", 
-                    True, 
-                    f"Filtered query returned {result.get('count', 0)} entries"
-                )
-                success_count += 1
-            else:
-                self.log_test(
-                    "Service History API - Get with Filters", 
-                    False, 
-                    f"HTTP {response.status_code}: {response.text}"
-                )
-        except Exception as e:
-            self.log_test(
-                "Service History API - Get with Filters", 
-                False, 
-                f"Error: {str(e)}"
-            )
-
-        # Test 3.4: Get service history statistics
-        try:
-            response = self.session.get(f"{BACKEND_URL}/sites/{site_id}/service-history/stats")
-            if response.status_code == 200:
-                result = response.json()
-                total_services = result.get('total_services', 0)
-                self.log_test(
-                    "Service History API - Get Statistics", 
-                    True, 
-                    f"Statistics show {total_services} total services"
-                )
-                success_count += 1
-            else:
-                self.log_test(
-                    "Service History API - Get Statistics", 
-                    False, 
-                    f"HTTP {response.status_code}: {response.text}"
-                )
-        except Exception as e:
-            self.log_test(
-                "Service History API - Get Statistics", 
-                False, 
-                f"Error: {str(e)}"
-            )
-
-        # Test 3.5: Get specific service history entry
-        history_id = self.test_data.get('service_history_id')
-        if history_id:
-            try:
-                response = self.session.get(f"{BACKEND_URL}/sites/{site_id}/service-history/{history_id}")
-                if response.status_code == 200:
-                    result = response.json()
-                    self.log_test(
-                        "Service History API - Get Specific Entry", 
-                        True, 
-                        f"Retrieved specific service history entry"
-                    )
-                    success_count += 1
-                else:
-                    self.log_test(
-                        "Service History API - Get Specific Entry", 
-                        False, 
-                        f"HTTP {response.status_code}: {response.text}"
-                    )
-            except Exception as e:
-                self.log_test(
-                    "Service History API - Get Specific Entry", 
-                    False, 
-                    f"Error: {str(e)}"
-                )
-        else:
-            self.log_test(
-                "Service History API - Get Specific Entry", 
-                False, 
-                "No service history ID available"
-            )
-
-        # Test 3.6: Update service history entry
-        if history_id:
-            try:
-                update_data = {
-                    "notes": f"Updated test notes at {datetime.now().isoformat()}",
-                    "status": "completed"
-                }
-                response = self.session.patch(f"{BACKEND_URL}/sites/{site_id}/service-history/{history_id}", json=update_data)
-                if response.status_code == 200:
-                    self.log_test(
-                        "Service History API - Update Entry", 
-                        True, 
-                        "Service history entry updated successfully"
-                    )
-                    success_count += 1
-                else:
-                    self.log_test(
-                        "Service History API - Update Entry", 
-                        False, 
-                        f"HTTP {response.status_code}: {response.text}"
-                    )
-            except Exception as e:
-                self.log_test(
-                    "Service History API - Update Entry", 
-                    False, 
-                    f"Error: {str(e)}"
-                )
-        else:
-            self.log_test(
-                "Service History API - Update Entry", 
-                False, 
-                "No service history ID available"
-            )
-
-        return success_count, total_tests
-
-    def test_site_maps_api(self):
-        """Test 4: Site Maps API - Test site maps retrieval and creation"""
-        success_count = 0
-        total_tests = 6
-        
-        site_id = self.test_data.get('created_site_id') or self.test_data.get('existing_site_id')
-        if not site_id:
-            self.log_test(
-                "Site Maps API - All Tests", 
-                False, 
-                "No site ID available for site maps testing"
-            )
-            return 0, total_tests
-
-        # Test 4.1: Create site map
-        try:
-            map_data = {
-                "site_id": site_id,
-                "name": f"Test Map {uuid.uuid4().hex[:8]}",
-                "base_map_type": "satellite",
-                "base_map_url": "https://maps.googleapis.com/maps/api/staticmap?center=43.6532,-79.3832&zoom=18&size=800x600&maptype=satellite",
-                "annotations": [
-                    {
-                        "id": str(uuid.uuid4()),
-                        "type": "polygon",
-                        "category": "plowing_zone",
-                        "color": "#3B82F6",
-                        "coordinates": [
-                            {"lat": 43.6532, "lng": -79.3832},
-                            {"lat": 43.6533, "lng": -79.3831},
-                            {"lat": 43.6534, "lng": -79.3833},
-                            {"lat": 43.6532, "lng": -79.3832}
-                        ],
-                        "notes": "Main plowing area"
-                    }
-                ],
-                "legend_items": [
-                    {"color": "#3B82F6", "label": "Plowing Zone", "type": "polygon"}
-                ]
-            }
-            
-            response = self.session.post(f"{BACKEND_URL}/site-maps", json=map_data)
-            if response.status_code == 200:
-                created_map = response.json()
-                self.test_data['site_map_id'] = created_map.get('id')
-                self.log_test(
-                    "Site Maps API - Create Map", 
-                    True, 
-                    f"Created site map: {created_map.get('name')} (v{created_map.get('version')})"
-                )
-                success_count += 1
-            else:
-                self.log_test(
-                    "Site Maps API - Create Map", 
-                    False, 
-                    f"HTTP {response.status_code}: {response.text}"
-                )
-        except Exception as e:
-            self.log_test(
-                "Site Maps API - Create Map", 
-                False, 
-                f"Error: {str(e)}"
-            )
-
-        # Test 4.2: Get site maps by site
-        try:
-            response = self.session.get(f"{BACKEND_URL}/site-maps/site/{site_id}")
-            if response.status_code == 200:
-                maps = response.json()
-                self.log_test(
-                    "Site Maps API - Get Maps by Site", 
-                    True, 
-                    f"Retrieved {len(maps)} maps for site"
-                )
-                success_count += 1
-            else:
-                self.log_test(
-                    "Site Maps API - Get Maps by Site", 
-                    False, 
-                    f"HTTP {response.status_code}: {response.text}"
-                )
-        except Exception as e:
-            self.log_test(
-                "Site Maps API - Get Maps by Site", 
-                False, 
-                f"Error: {str(e)}"
-            )
-
-        # Test 4.3: Get current map only
-        try:
-            response = self.session.get(f"{BACKEND_URL}/site-maps/site/{site_id}?current_only=true")
-            if response.status_code == 200:
-                maps = response.json()
-                current_maps = [m for m in maps if m.get('is_current')]
-                self.log_test(
-                    "Site Maps API - Get Current Map", 
-                    True, 
-                    f"Retrieved {len(current_maps)} current map(s)"
-                )
-                success_count += 1
-            else:
-                self.log_test(
-                    "Site Maps API - Get Current Map", 
-                    False, 
-                    f"HTTP {response.status_code}: {response.text}"
-                )
-        except Exception as e:
-            self.log_test(
-                "Site Maps API - Get Current Map", 
-                False, 
-                f"Error: {str(e)}"
-            )
-
-        # Test 4.4: Get specific site map
-        map_id = self.test_data.get('site_map_id')
-        if map_id:
-            try:
-                response = self.session.get(f"{BACKEND_URL}/site-maps/{map_id}")
-                if response.status_code == 200:
-                    site_map = response.json()
-                    self.log_test(
-                        "Site Maps API - Get Specific Map", 
-                        True, 
-                        f"Retrieved map: {site_map.get('name')}"
-                    )
-                    success_count += 1
-                else:
-                    self.log_test(
-                        "Site Maps API - Get Specific Map", 
-                        False, 
-                        f"HTTP {response.status_code}: {response.text}"
-                    )
-            except Exception as e:
-                self.log_test(
-                    "Site Maps API - Get Specific Map", 
-                    False, 
-                    f"Error: {str(e)}"
-                )
-        else:
-            self.log_test(
-                "Site Maps API - Get Specific Map", 
-                False, 
-                "No site map ID available"
-            )
-
-        # Test 4.5: Update site map
-        if map_id:
-            try:
-                update_data = {
-                    "name": f"Updated Test Map {datetime.now().strftime('%H:%M:%S')}",
-                    "annotations": [
-                        {
-                            "id": str(uuid.uuid4()),
-                            "type": "marker",
-                            "category": "entrance",
-                            "color": "#10B981",
-                            "coordinates": [{"lat": 43.6532, "lng": -79.3832}],
-                            "notes": "Main entrance - updated"
-                        }
-                    ]
-                }
-                response = self.session.put(f"{BACKEND_URL}/site-maps/{map_id}", json=update_data)
-                if response.status_code == 200:
-                    self.log_test(
-                        "Site Maps API - Update Map", 
-                        True, 
-                        "Site map updated successfully"
-                    )
-                    success_count += 1
-                else:
-                    self.log_test(
-                        "Site Maps API - Update Map", 
-                        False, 
-                        f"HTTP {response.status_code}: {response.text}"
-                    )
-            except Exception as e:
-                self.log_test(
-                    "Site Maps API - Update Map", 
-                    False, 
-                    f"Error: {str(e)}"
-                )
-        else:
-            self.log_test(
-                "Site Maps API - Update Map", 
-                False, 
-                "No site map ID available"
-            )
-
-        # Test 4.6: Set current map version
-        if map_id:
-            try:
-                response = self.session.post(f"{BACKEND_URL}/site-maps/{map_id}/set-current")
-                if response.status_code == 200:
-                    self.log_test(
-                        "Site Maps API - Set Current Version", 
-                        True, 
-                        "Map set as current version successfully"
-                    )
-                    success_count += 1
-                else:
-                    self.log_test(
-                        "Site Maps API - Set Current Version", 
-                        False, 
-                        f"HTTP {response.status_code}: {response.text}"
-                    )
-            except Exception as e:
-                self.log_test(
-                    "Site Maps API - Set Current Version", 
-                    False, 
-                    f"Error: {str(e)}"
-                )
-        else:
-            self.log_test(
-                "Site Maps API - Set Current Version", 
-                False, 
-                "No site map ID available"
-            )
-
-        return success_count, total_tests
-
-    def test_site_geofence_api(self):
-        """Test 5: Site Geofence API - Test geofence functionality"""
-        success_count = 0
-        total_tests = 4
-        
-        site_id = self.test_data.get('created_site_id') or self.test_data.get('existing_site_id')
-        if not site_id:
-            self.log_test(
-                "Site Geofence API - All Tests", 
-                False, 
-                "No site ID available for geofence testing"
-            )
-            return 0, total_tests
-
-        # Test 5.1: Create geofence
-        try:
-            geofence_data = {
-                "site_id": site_id,
-                "name": "Property Boundary",
-                "polygon_coordinates": [
-                    {"lat": 43.6530, "lng": -79.3830},
-                    {"lat": 43.6535, "lng": -79.3830},
-                    {"lat": 43.6535, "lng": -79.3835},
-                    {"lat": 43.6530, "lng": -79.3835},
-                    {"lat": 43.6530, "lng": -79.3830}
-                ],
-                "center_point": {"lat": 43.6532, "lng": -79.3832},
-                "area_square_meters": 2500.0,
-                "perimeter_meters": 200.0,
-                "color": "#3B82F6",
-                "opacity": 0.3,
-                "stroke_color": "#1E40AF",
-                "stroke_weight": 2
-            }
-            
-            response = self.session.post(f"{BACKEND_URL}/sites/{site_id}/geofence", json=geofence_data)
-            if response.status_code == 200:
-                result = response.json()
-                self.test_data['geofence_id'] = result.get('geofence_id')
-                self.log_test(
-                    "Site Geofence API - Create Geofence", 
-                    True, 
-                    f"Created geofence: {result.get('geofence_id')}"
-                )
-                success_count += 1
-            else:
-                self.log_test(
-                    "Site Geofence API - Create Geofence", 
-                    False, 
-                    f"HTTP {response.status_code}: {response.text}"
-                )
-        except Exception as e:
-            self.log_test(
-                "Site Geofence API - Create Geofence", 
-                False, 
-                f"Error: {str(e)}"
-            )
-
-        # Test 5.2: Get geofence
-        try:
-            response = self.session.get(f"{BACKEND_URL}/sites/{site_id}/geofence")
-            if response.status_code == 200:
-                geofence = response.json()
-                self.log_test(
-                    "Site Geofence API - Get Geofence", 
-                    True, 
-                    f"Retrieved geofence: {geofence.get('name', 'Unknown')}"
-                )
-                success_count += 1
-            else:
-                self.log_test(
-                    "Site Geofence API - Get Geofence", 
-                    False, 
-                    f"HTTP {response.status_code}: {response.text}"
-                )
-        except Exception as e:
-            self.log_test(
-                "Site Geofence API - Get Geofence", 
-                False, 
-                f"Error: {str(e)}"
-            )
-
-        # Test 5.3: Update geofence
-        geofence_id = self.test_data.get('geofence_id')
-        if geofence_id:
-            try:
-                update_data = {
-                    "name": "Updated Property Boundary",
-                    "color": "#10B981"
-                }
-                response = self.session.put(f"{BACKEND_URL}/sites/{site_id}/geofence", json=update_data)
-                if response.status_code == 200:
-                    self.log_test(
-                        "Site Geofence API - Update Geofence", 
-                        True, 
-                        "Geofence updated successfully"
-                    )
-                    success_count += 1
-                else:
-                    self.log_test(
-                        "Site Geofence API - Update Geofence", 
-                        False, 
-                        f"HTTP {response.status_code}: {response.text}"
-                    )
-            except Exception as e:
-                self.log_test(
-                    "Site Geofence API - Update Geofence", 
-                    False, 
-                    f"Error: {str(e)}"
-                )
-        else:
-            self.log_test(
-                "Site Geofence API - Update Geofence", 
-                False, 
-                "No geofence ID available"
-            )
-
-        # Test 5.4: Test geofence validation (point in polygon)
-        try:
-            test_point = {"lat": 43.6532, "lng": -79.3832}
-            response = self.session.post(f"{BACKEND_URL}/sites/{site_id}/geofence/validate", json=test_point)
-            if response.status_code == 200:
-                result = response.json()
-                self.log_test(
-                    "Site Geofence API - Validate Point", 
-                    True, 
-                    f"Point validation: {result.get('inside', 'unknown')}"
-                )
-                success_count += 1
-            else:
-                # This endpoint might not exist, so we'll count it as success if 404
-                if response.status_code == 404:
-                    self.log_test(
-                        "Site Geofence API - Validate Point", 
-                        True, 
-                        "Validation endpoint not implemented (expected)"
-                    )
-                    success_count += 1
-                else:
-                    self.log_test(
-                        "Site Geofence API - Validate Point", 
-                        False, 
-                        f"HTTP {response.status_code}: {response.text}"
-                    )
-        except Exception as e:
-            self.log_test(
-                "Site Geofence API - Validate Point", 
-                False, 
-                f"Error: {str(e)}"
-            )
-
-        return success_count, total_tests
-
-    def test_fuel_management_api(self):
-        """Test 6: Fuel Management API - Test all fuel CRUD operations"""
-        success_count = 0
-        total_tests = 11
-        
-        # Test 6.1: Get all fuel entries (should be empty initially)
-        try:
-            response = self.session.get(f"{BACKEND_URL}/fuel")
-            if response.status_code == 200:
-                data = response.json()
-                if isinstance(data, list):
-                    self.log_test(
-                        "Fuel API - Get All Entries (Empty)", 
-                        True, 
-                        f"Retrieved {len(data)} fuel entries"
-                    )
-                    success_count += 1
-                else:
-                    self.log_test(
-                        "Fuel API - Get All Entries (Empty)", 
-                        False, 
-                        "Response is not a list", 
-                        data
-                    )
-            else:
-                self.log_test(
-                    "Fuel API - Get All Entries (Empty)", 
-                    False, 
-                    f"HTTP {response.status_code}: {response.text}"
-                )
-        except Exception as e:
-            self.log_test(
-                "Fuel API - Get All Entries (Empty)", 
-                False, 
-                f"Error: {str(e)}"
-            )
-
-        # Test 6.2: Create fuel entry
-        try:
-            fuel_data = {
-                "vehicle_id": "TRUCK-001",
-                "driver_name": "John Doe",
-                "fuel_type": "Diesel",
-                "quantity": 50.5,
-                "cost": 175.25,
-                "odometer": 45000,
-                "location": "Shell Gas Station, Main St",
-                "notes": "Regular refueling",
-                "date": "2025-01-15T10:30:00"
-            }
-            
-            response = self.session.post(f"{BACKEND_URL}/fuel", json=fuel_data)
-            if response.status_code == 200:
-                data = response.json()
-                if "id" in data and data.get("vehicle_id") == "TRUCK-001":
-                    self.test_data['fuel_entry_id'] = data["id"]
-                    self.log_test(
-                        "Fuel API - Create Entry", 
-                        True, 
-                        f"Created fuel entry with ID: {data['id']}"
-                    )
-                    success_count += 1
-                else:
-                    self.log_test(
-                        "Fuel API - Create Entry", 
-                        False, 
-                        "Missing ID or incorrect data", 
-                        data
-                    )
-            else:
-                self.log_test(
-                    "Fuel API - Create Entry", 
-                    False, 
-                    f"HTTP {response.status_code}: {response.text}"
-                )
-        except Exception as e:
-            self.log_test(
-                "Fuel API - Create Entry", 
-                False, 
-                f"Error: {str(e)}"
-            )
-
-        # Test 6.3: Get specific fuel entry
-        fuel_entry_id = self.test_data.get('fuel_entry_id')
-        if fuel_entry_id:
-            try:
-                response = self.session.get(f"{BACKEND_URL}/fuel/{fuel_entry_id}")
-                if response.status_code == 200:
-                    data = response.json()
-                    if data.get("id") == fuel_entry_id:
-                        self.log_test(
-                            "Fuel API - Get Specific Entry", 
-                            True, 
-                            f"Retrieved entry: {data.get('vehicle_id')}"
-                        )
-                        success_count += 1
-                    else:
-                        self.log_test(
-                            "Fuel API - Get Specific Entry", 
-                            False, 
-                            "ID mismatch", 
-                            data
-                        )
-                else:
-                    self.log_test(
-                        "Fuel API - Get Specific Entry", 
-                        False, 
-                        f"HTTP {response.status_code}: {response.text}"
-                    )
-            except Exception as e:
-                self.log_test(
-                    "Fuel API - Get Specific Entry", 
-                    False, 
-                    f"Error: {str(e)}"
-                )
-        else:
-            self.log_test(
-                "Fuel API - Get Specific Entry", 
-                False, 
-                "No fuel entry ID available"
-            )
-
-        # Test 6.4: Test invalid ID handling
-        try:
-            invalid_id = "invalid_id_123"
-            response = self.session.get(f"{BACKEND_URL}/fuel/{invalid_id}")
-            if response.status_code in [400, 404]:
-                self.log_test(
-                    "Fuel API - Invalid ID Handling", 
-                    True, 
-                    f"Proper error handling: {response.status_code}"
-                )
-                success_count += 1
-            else:
-                self.log_test(
-                    "Fuel API - Invalid ID Handling", 
-                    False, 
-                    f"Unexpected status: {response.status_code}", 
+                    "GET /api/calendar/events - Basic retrieval",
+                    False,
+                    f"HTTP {response.status_code}: {response.text}",
                     response.text
                 )
         except Exception as e:
             self.log_test(
-                "Fuel API - Invalid ID Handling", 
-                False, 
-                f"Error: {str(e)}"
+                "GET /api/calendar/events - Basic retrieval",
+                False,
+                f"Exception occurred: {str(e)}",
+                str(e)
             )
 
-        # Test 6.5: Create multiple entries for statistics
-        additional_entries = [
-            {
-                "vehicle_id": "TRUCK-002",
-                "driver_name": "Jane Smith",
-                "fuel_type": "Diesel",
-                "quantity": 45.0,
-                "cost": 157.50,
-                "odometer": 32000,
-                "location": "Petro-Canada, Highway 1",
-                "notes": "Highway refuel",
-                "date": "2025-01-14T14:20:00"
-            },
-            {
-                "vehicle_id": "VAN-001",
-                "driver_name": "Mike Johnson",
-                "fuel_type": "Gasoline",
-                "quantity": 35.2,
-                "cost": 126.72,
-                "odometer": 28500,
-                "location": "Esso Station, Downtown",
-                "notes": "City route fuel",
-                "date": "2025-01-13T09:15:00"
+    def test_get_events_with_date_filters(self):
+        """Test GET /api/calendar/events with date range filters"""
+        try:
+            # Test with start date filter
+            start_date = datetime.now().isoformat()
+            response = self.session.get(f"{API_BASE}/calendar/events?start={start_date}")
+            
+            if response.status_code == 200:
+                events = response.json()
+                self.log_test(
+                    "GET /api/calendar/events - With start date filter",
+                    True,
+                    f"Successfully retrieved events with start date filter. Found {len(events)} events.",
+                    {"filter_applied": f"start={start_date}", "event_count": len(events)}
+                )
+            else:
+                self.log_test(
+                    "GET /api/calendar/events - With start date filter",
+                    False,
+                    f"HTTP {response.status_code}: {response.text}",
+                    response.text
+                )
+            
+            # Test with both start and end date filters
+            end_date = (datetime.now() + timedelta(days=7)).isoformat()
+            response = self.session.get(f"{API_BASE}/calendar/events?start={start_date}&end={end_date}")
+            
+            if response.status_code == 200:
+                events = response.json()
+                self.log_test(
+                    "GET /api/calendar/events - With date range filter",
+                    True,
+                    f"Successfully retrieved events with date range filter. Found {len(events)} events.",
+                    {"filter_applied": f"start={start_date}&end={end_date}", "event_count": len(events)}
+                )
+            else:
+                self.log_test(
+                    "GET /api/calendar/events - With date range filter",
+                    False,
+                    f"HTTP {response.status_code}: {response.text}",
+                    response.text
+                )
+                
+        except Exception as e:
+            self.log_test(
+                "GET /api/calendar/events - Date filters",
+                False,
+                f"Exception occurred: {str(e)}",
+                str(e)
+            )
+
+    def test_create_event_required_fields(self):
+        """Test POST /api/calendar/events - Create event with required fields only"""
+        try:
+            event_data = {
+                "title": "Test Event - Required Fields Only",
+                "start": datetime.now().isoformat(),
+                "end": (datetime.now() + timedelta(hours=1)).isoformat()
             }
-        ]
-        
-        created_count = 0
-        for entry_data in additional_entries:
-            try:
-                response = self.session.post(f"{BACKEND_URL}/fuel", json=entry_data)
-                if response.status_code == 200:
-                    data = response.json()
-                    if "id" in data:
-                        if 'additional_fuel_ids' not in self.test_data:
-                            self.test_data['additional_fuel_ids'] = []
-                        self.test_data['additional_fuel_ids'].append(data["id"])
-                        created_count += 1
-            except Exception as e:
-                pass
-        
-        self.log_test(
-            "Fuel API - Create Multiple Entries", 
-            created_count == len(additional_entries), 
-            f"Created {created_count}/{len(additional_entries)} additional entries"
-        )
-        if created_count == len(additional_entries):
-            success_count += 1
-
-        # Test 6.6: Get fuel statistics
-        try:
-            response = self.session.get(f"{BACKEND_URL}/fuel/stats/summary")
-            if response.status_code == 200:
-                data = response.json()
-                required_fields = ["total_quantity", "total_cost", "avg_cost_per_gallon", "entry_count"]
-                if all(field in data for field in required_fields):
+            
+            response = self.session.post(f"{API_BASE}/calendar/events", json=event_data)
+            
+            if response.status_code in [200, 201]:
+                created_event = response.json()
+                if 'id' in created_event:
+                    self.created_event_ids.append(created_event['id'])
                     self.log_test(
-                        "Fuel API - Get Statistics", 
-                        True, 
-                        f"Stats: {data['entry_count']} entries, ${data['total_cost']:.2f} total"
+                        "POST /api/calendar/events - Required fields only",
+                        True,
+                        f"Successfully created event with ID: {created_event['id']}",
+                        {"created_event": created_event}
                     )
-                    success_count += 1
                 else:
                     self.log_test(
-                        "Fuel API - Get Statistics", 
-                        False, 
-                        "Missing required fields", 
-                        data
+                        "POST /api/calendar/events - Required fields only",
+                        False,
+                        "Event created but no ID returned",
+                        created_event
                     )
             else:
                 self.log_test(
-                    "Fuel API - Get Statistics", 
-                    False, 
-                    f"HTTP {response.status_code}: {response.text}"
+                    "POST /api/calendar/events - Required fields only",
+                    False,
+                    f"HTTP {response.status_code}: {response.text}",
+                    response.text
                 )
         except Exception as e:
             self.log_test(
-                "Fuel API - Get Statistics", 
-                False, 
-                f"Error: {str(e)}"
+                "POST /api/calendar/events - Required fields only",
+                False,
+                f"Exception occurred: {str(e)}",
+                str(e)
             )
 
-        # Test 6.7: Get vehicles list
+    def test_create_event_all_fields(self):
+        """Test POST /api/calendar/events - Create event with all optional fields"""
         try:
-            response = self.session.get(f"{BACKEND_URL}/fuel/vehicles")
-            if response.status_code == 200:
-                data = response.json()
-                if isinstance(data, list):
-                    self.log_test(
-                        "Fuel API - Get Vehicles List", 
-                        True, 
-                        f"Found {len(data)} vehicles"
+            event_data = {
+                "title": "Comprehensive Test Event",
+                "description": "This is a test event with all possible fields populated",
+                "start": (datetime.now() + timedelta(hours=2)).isoformat(),
+                "end": (datetime.now() + timedelta(hours=3)).isoformat(),
+                "location": "123 Test Street, Test City",
+                "attendees": ["john@example.com", "jane@example.com"],
+                "type": "meeting",
+                "status": "confirmed",
+                "color": "green"
+            }
+            
+            response = self.session.post(f"{API_BASE}/calendar/events", json=event_data)
+            
+            if response.status_code in [200, 201]:
+                created_event = response.json()
+                if 'id' in created_event:
+                    self.created_event_ids.append(created_event['id'])
+                    
+                    # Verify all fields were preserved
+                    fields_preserved = all(
+                        created_event.get(key) == value 
+                        for key, value in event_data.items()
                     )
-                    success_count += 1
+                    
+                    self.log_test(
+                        "POST /api/calendar/events - All optional fields",
+                        True,
+                        f"Successfully created comprehensive event with ID: {created_event['id']}. All fields preserved: {fields_preserved}",
+                        {"created_event": created_event, "fields_preserved": fields_preserved}
+                    )
                 else:
                     self.log_test(
-                        "Fuel API - Get Vehicles List", 
-                        False, 
-                        "Response is not a list", 
-                        data
+                        "POST /api/calendar/events - All optional fields",
+                        False,
+                        "Event created but no ID returned",
+                        created_event
                     )
             else:
                 self.log_test(
-                    "Fuel API - Get Vehicles List", 
-                    False, 
-                    f"HTTP {response.status_code}: {response.text}"
+                    "POST /api/calendar/events - All optional fields",
+                    False,
+                    f"HTTP {response.status_code}: {response.text}",
+                    response.text
                 )
         except Exception as e:
             self.log_test(
-                "Fuel API - Get Vehicles List", 
-                False, 
-                f"Error: {str(e)}"
+                "POST /api/calendar/events - All optional fields",
+                False,
+                f"Exception occurred: {str(e)}",
+                str(e)
             )
 
-        # Test 6.8: Update fuel entry
-        if fuel_entry_id:
-            try:
-                update_data = {
-                    "vehicle_id": "TRUCK-001",
-                    "driver_name": "John Doe",
-                    "fuel_type": "Diesel",
-                    "quantity": 50.5,
-                    "cost": 180.00,  # Updated cost
-                    "odometer": 45000,
-                    "location": "Shell Gas Station, Main St",
-                    "notes": "Regular refueling - Updated cost",  # Updated notes
-                    "date": "2025-01-15T10:30:00"
-                }
-                
-                response = self.session.put(f"{BACKEND_URL}/fuel/{fuel_entry_id}", json=update_data)
-                if response.status_code == 200:
-                    data = response.json()
-                    if data.get("cost") == 180.00 and "updated_at" in data:
-                        self.log_test(
-                            "Fuel API - Update Entry", 
-                            True, 
-                            f"Updated cost to ${data['cost']:.2f}"
-                        )
-                        success_count += 1
-                    else:
-                        self.log_test(
-                            "Fuel API - Update Entry", 
-                            False, 
-                            "Update not reflected or missing updated_at", 
-                            data
-                        )
-                else:
-                    self.log_test(
-                        "Fuel API - Update Entry", 
-                        False, 
-                        f"HTTP {response.status_code}: {response.text}"
-                    )
-            except Exception as e:
-                self.log_test(
-                    "Fuel API - Update Entry", 
-                    False, 
-                    f"Error: {str(e)}"
-                )
-        else:
-            self.log_test(
-                "Fuel API - Update Entry", 
-                False, 
-                "No fuel entry ID available"
-            )
-
-        # Test 6.9: Delete fuel entry
-        if fuel_entry_id:
-            try:
-                response = self.session.delete(f"{BACKEND_URL}/fuel/{fuel_entry_id}")
-                if response.status_code == 200:
-                    data = response.json()
-                    if "message" in data:
-                        self.log_test(
-                            "Fuel API - Delete Entry", 
-                            True, 
-                            f"Deleted successfully: {data['message']}"
-                        )
-                        success_count += 1
-                    else:
-                        self.log_test(
-                            "Fuel API - Delete Entry", 
-                            False, 
-                            "No success message", 
-                            data
-                        )
-                else:
-                    self.log_test(
-                        "Fuel API - Delete Entry", 
-                        False, 
-                        f"HTTP {response.status_code}: {response.text}"
-                    )
-            except Exception as e:
-                self.log_test(
-                    "Fuel API - Delete Entry", 
-                    False, 
-                    f"Error: {str(e)}"
-                )
-        else:
-            self.log_test(
-                "Fuel API - Delete Entry", 
-                False, 
-                "No fuel entry ID available"
-            )
-
-        # Test 6.10: Verify deletion
-        if fuel_entry_id:
-            try:
-                response = self.session.get(f"{BACKEND_URL}/fuel/{fuel_entry_id}")
-                if response.status_code == 404:
-                    self.log_test(
-                        "Fuel API - Verify Deletion", 
-                        True, 
-                        "Entry properly deleted (404 returned)"
-                    )
-                    success_count += 1
-                else:
-                    self.log_test(
-                        "Fuel API - Verify Deletion", 
-                        False, 
-                        f"Entry still exists: {response.status_code}"
-                    )
-            except Exception as e:
-                self.log_test(
-                    "Fuel API - Verify Deletion", 
-                    False, 
-                    f"Error: {str(e)}"
-                )
-        else:
-            self.log_test(
-                "Fuel API - Verify Deletion", 
-                False, 
-                "No fuel entry ID available"
-            )
-
-        # Test 6.11: Clean up additional entries
-        additional_ids = self.test_data.get('additional_fuel_ids', [])
-        cleanup_count = 0
-        for entry_id in additional_ids:
-            try:
-                response = self.session.delete(f"{BACKEND_URL}/fuel/{entry_id}")
-                if response.status_code == 200:
-                    cleanup_count += 1
-            except:
-                pass
-        
-        self.log_test(
-            "Fuel API - Cleanup Test Data", 
-            cleanup_count == len(additional_ids), 
-            f"Cleaned up {cleanup_count}/{len(additional_ids)} test entries"
-        )
-        if len(additional_ids) == 0 or cleanup_count == len(additional_ids):
-            success_count += 1
-
-        return success_count, total_tests
-
-    def test_rate_limiting(self):
-        """Test rate limiting functionality"""
+    def test_create_event_validation(self):
+        """Test POST /api/calendar/events - Validation for missing required fields"""
         try:
-            # Make multiple rapid requests to test rate limiting
-            responses = []
-            for i in range(10):
-                response = self.session.get(f"{BACKEND_URL}/")
-                responses.append(response.status_code)
-                time.sleep(0.1)  # Small delay between requests
+            # Test missing title
+            invalid_event = {
+                "start": datetime.now().isoformat(),
+                "end": (datetime.now() + timedelta(hours=1)).isoformat()
+            }
             
-            # Check if any requests were rate limited (429 status)
-            rate_limited = any(status == 429 for status in responses)
-            successful = any(status == 200 for status in responses)
+            response = self.session.post(f"{API_BASE}/calendar/events", json=invalid_event)
             
-            if successful:
-                if rate_limited:
-                    self.log_test(
-                        "Rate Limiting - Active", 
-                        True, 
-                        f"Rate limiting detected: {responses.count(429)} requests limited"
-                    )
-                else:
-                    self.log_test(
-                        "Rate Limiting - Active", 
-                        True, 
-                        "Rate limiting not triggered (normal for light testing)"
-                    )
-                return True
+            if response.status_code == 422:
+                self.log_test(
+                    "POST /api/calendar/events - Missing title validation",
+                    True,
+                    "Correctly returned 422 for missing title field",
+                    {"status_code": response.status_code, "response": response.text}
+                )
             else:
                 self.log_test(
-                    "Rate Limiting - Active", 
-                    False, 
-                    f"No successful requests: {responses}"
+                    "POST /api/calendar/events - Missing title validation",
+                    False,
+                    f"Expected 422, got {response.status_code}",
+                    response.text
                 )
-                return False
+            
+            # Test missing start time
+            invalid_event = {
+                "title": "Test Event",
+                "end": (datetime.now() + timedelta(hours=1)).isoformat()
+            }
+            
+            response = self.session.post(f"{API_BASE}/calendar/events", json=invalid_event)
+            
+            if response.status_code == 422:
+                self.log_test(
+                    "POST /api/calendar/events - Missing start time validation",
+                    True,
+                    "Correctly returned 422 for missing start time",
+                    {"status_code": response.status_code, "response": response.text}
+                )
+            else:
+                self.log_test(
+                    "POST /api/calendar/events - Missing start time validation",
+                    False,
+                    f"Expected 422, got {response.status_code}",
+                    response.text
+                )
                 
         except Exception as e:
             self.log_test(
-                "Rate Limiting - Active", 
-                False, 
-                f"Error: {str(e)}"
+                "POST /api/calendar/events - Validation tests",
+                False,
+                f"Exception occurred: {str(e)}",
+                str(e)
             )
-            return False
+
+    def test_update_event(self):
+        """Test PUT /api/calendar/events/{event_id} - Update existing event"""
+        if not self.created_event_ids:
+            self.log_test(
+                "PUT /api/calendar/events/{event_id} - Update event",
+                False,
+                "No events available to update. Create events first.",
+                None
+            )
+            return
+        
+        try:
+            event_id = self.created_event_ids[0]
+            
+            # Update event data
+            updated_data = {
+                "title": "Updated Test Event Title",
+                "description": "This event has been updated via PUT request",
+                "start": (datetime.now() + timedelta(hours=4)).isoformat(),
+                "end": (datetime.now() + timedelta(hours=5)).isoformat(),
+                "location": "Updated Location - 456 New Street",
+                "type": "appointment",
+                "status": "tentative",
+                "color": "red"
+            }
+            
+            response = self.session.put(f"{API_BASE}/calendar/events/{event_id}", json=updated_data)
+            
+            if response.status_code == 200:
+                updated_event = response.json()
+                
+                # Verify the event was updated
+                if updated_event.get('id') == event_id and updated_event.get('title') == updated_data['title']:
+                    self.log_test(
+                        "PUT /api/calendar/events/{event_id} - Update event",
+                        True,
+                        f"Successfully updated event {event_id}. Title changed to: {updated_event.get('title')}",
+                        {"updated_event": updated_event}
+                    )
+                else:
+                    self.log_test(
+                        "PUT /api/calendar/events/{event_id} - Update event",
+                        False,
+                        "Event update response doesn't match expected values",
+                        updated_event
+                    )
+            else:
+                self.log_test(
+                    "PUT /api/calendar/events/{event_id} - Update event",
+                    False,
+                    f"HTTP {response.status_code}: {response.text}",
+                    response.text
+                )
+        except Exception as e:
+            self.log_test(
+                "PUT /api/calendar/events/{event_id} - Update event",
+                False,
+                f"Exception occurred: {str(e)}",
+                str(e)
+            )
+
+    def test_update_nonexistent_event(self):
+        """Test PUT /api/calendar/events/{event_id} - Update non-existent event"""
+        try:
+            fake_event_id = "nonexistent_event_123"
+            
+            updated_data = {
+                "title": "This Should Fail",
+                "start": datetime.now().isoformat(),
+                "end": (datetime.now() + timedelta(hours=1)).isoformat()
+            }
+            
+            response = self.session.put(f"{API_BASE}/calendar/events/{fake_event_id}", json=updated_data)
+            
+            if response.status_code == 404:
+                self.log_test(
+                    "PUT /api/calendar/events/{event_id} - Non-existent event",
+                    True,
+                    "Correctly returned 404 for non-existent event",
+                    {"status_code": response.status_code, "response": response.text}
+                )
+            else:
+                self.log_test(
+                    "PUT /api/calendar/events/{event_id} - Non-existent event",
+                    False,
+                    f"Expected 404, got {response.status_code}",
+                    response.text
+                )
+        except Exception as e:
+            self.log_test(
+                "PUT /api/calendar/events/{event_id} - Non-existent event",
+                False,
+                f"Exception occurred: {str(e)}",
+                str(e)
+            )
+
+    def test_delete_event(self):
+        """Test DELETE /api/calendar/events/{event_id} - Delete event"""
+        if not self.created_event_ids:
+            self.log_test(
+                "DELETE /api/calendar/events/{event_id} - Delete event",
+                False,
+                "No events available to delete. Create events first.",
+                None
+            )
+            return
+        
+        try:
+            event_id = self.created_event_ids[-1]  # Use the last created event
+            
+            response = self.session.delete(f"{API_BASE}/calendar/events/{event_id}")
+            
+            if response.status_code == 200:
+                delete_response = response.json()
+                
+                if delete_response.get('success') == True:
+                    self.log_test(
+                        "DELETE /api/calendar/events/{event_id} - Delete event",
+                        True,
+                        f"Successfully deleted event {event_id}",
+                        delete_response
+                    )
+                    
+                    # Remove from our tracking list
+                    self.created_event_ids.remove(event_id)
+                    
+                    # Verify deletion by trying to update the deleted event
+                    verify_response = self.session.put(f"{API_BASE}/calendar/events/{event_id}", json={
+                        "title": "This should fail",
+                        "start": datetime.now().isoformat(),
+                        "end": (datetime.now() + timedelta(hours=1)).isoformat()
+                    })
+                    
+                    if verify_response.status_code == 404:
+                        self.log_test(
+                            "DELETE /api/calendar/events/{event_id} - Deletion verification",
+                            True,
+                            f"Verified deletion: Event {event_id} no longer exists (404 on update attempt)",
+                            {"verification_status": verify_response.status_code}
+                        )
+                    else:
+                        self.log_test(
+                            "DELETE /api/calendar/events/{event_id} - Deletion verification",
+                            False,
+                            f"Event may not be properly deleted. Update attempt returned {verify_response.status_code}",
+                            verify_response.text
+                        )
+                else:
+                    self.log_test(
+                        "DELETE /api/calendar/events/{event_id} - Delete event",
+                        False,
+                        "Delete response doesn't indicate success",
+                        delete_response
+                    )
+            else:
+                self.log_test(
+                    "DELETE /api/calendar/events/{event_id} - Delete event",
+                    False,
+                    f"HTTP {response.status_code}: {response.text}",
+                    response.text
+                )
+        except Exception as e:
+            self.log_test(
+                "DELETE /api/calendar/events/{event_id} - Delete event",
+                False,
+                f"Exception occurred: {str(e)}",
+                str(e)
+            )
+
+    def test_delete_nonexistent_event(self):
+        """Test DELETE /api/calendar/events/{event_id} - Delete non-existent event"""
+        try:
+            fake_event_id = "nonexistent_event_456"
+            
+            response = self.session.delete(f"{API_BASE}/calendar/events/{fake_event_id}")
+            
+            if response.status_code == 404:
+                self.log_test(
+                    "DELETE /api/calendar/events/{event_id} - Non-existent event",
+                    True,
+                    "Correctly returned 404 for non-existent event",
+                    {"status_code": response.status_code, "response": response.text}
+                )
+            else:
+                self.log_test(
+                    "DELETE /api/calendar/events/{event_id} - Non-existent event",
+                    False,
+                    f"Expected 404, got {response.status_code}",
+                    response.text
+                )
+        except Exception as e:
+            self.log_test(
+                "DELETE /api/calendar/events/{event_id} - Non-existent event",
+                False,
+                f"Exception occurred: {str(e)}",
+                str(e)
+            )
+
+    def test_google_calendar_status(self):
+        """Test GET /api/calendar/google/status - Google Calendar integration status"""
+        try:
+            response = self.session.get(f"{API_BASE}/calendar/google/status")
+            
+            if response.status_code == 200:
+                status_data = response.json()
+                
+                # Verify response structure
+                required_fields = ['connected']
+                has_required_fields = all(field in status_data for field in required_fields)
+                
+                if has_required_fields:
+                    connection_status = "connected" if status_data.get('connected') else "not connected"
+                    self.log_test(
+                        "GET /api/calendar/google/status - Integration status",
+                        True,
+                        f"Successfully retrieved Google Calendar status: {connection_status}",
+                        status_data
+                    )
+                else:
+                    self.log_test(
+                        "GET /api/calendar/google/status - Integration status",
+                        False,
+                        f"Response missing required fields: {required_fields}",
+                        status_data
+                    )
+            else:
+                self.log_test(
+                    "GET /api/calendar/google/status - Integration status",
+                    False,
+                    f"HTTP {response.status_code}: {response.text}",
+                    response.text
+                )
+        except Exception as e:
+            self.log_test(
+                "GET /api/calendar/google/status - Integration status",
+                False,
+                f"Exception occurred: {str(e)}",
+                str(e)
+            )
+
+    def test_google_calendar_auth_url(self):
+        """Test GET /api/calendar/google/auth-url - Google Calendar OAuth URL"""
+        try:
+            response = self.session.get(f"{API_BASE}/calendar/google/auth-url")
+            
+            if response.status_code == 200:
+                auth_data = response.json()
+                
+                # Check if auth URL is provided or setup is required
+                if auth_data.get('setup_required'):
+                    self.log_test(
+                        "GET /api/calendar/google/auth-url - OAuth URL",
+                        True,
+                        "Google Calendar integration not configured (expected in test environment)",
+                        auth_data
+                    )
+                elif auth_data.get('auth_url'):
+                    self.log_test(
+                        "GET /api/calendar/google/auth-url - OAuth URL",
+                        True,
+                        "Successfully retrieved Google OAuth URL",
+                        {"has_auth_url": True, "message": auth_data.get('message')}
+                    )
+                else:
+                    self.log_test(
+                        "GET /api/calendar/google/auth-url - OAuth URL",
+                        False,
+                        "No auth URL or setup message provided",
+                        auth_data
+                    )
+            else:
+                self.log_test(
+                    "GET /api/calendar/google/auth-url - OAuth URL",
+                    False,
+                    f"HTTP {response.status_code}: {response.text}",
+                    response.text
+                )
+        except Exception as e:
+            self.log_test(
+                "GET /api/calendar/google/auth-url - OAuth URL",
+                False,
+                f"Exception occurred: {str(e)}",
+                str(e)
+            )
+
+    def test_event_conflict_check(self):
+        """Test POST /api/calendar/events/check-conflicts - Event conflict detection"""
+        try:
+            # Create a test event for conflict checking
+            test_event = {
+                "title": "Conflict Test Event",
+                "start": (datetime.now() + timedelta(hours=6)).isoformat(),
+                "end": (datetime.now() + timedelta(hours=7)).isoformat(),
+                "type": "meeting"
+            }
+            
+            response = self.session.post(f"{API_BASE}/calendar/events/check-conflicts", json=test_event)
+            
+            if response.status_code == 200:
+                conflict_data = response.json()
+                
+                # Verify response structure
+                required_fields = ['has_conflicts', 'conflicts', 'message']
+                has_required_fields = all(field in conflict_data for field in required_fields)
+                
+                if has_required_fields:
+                    conflicts_found = conflict_data.get('has_conflicts', False)
+                    conflict_count = len(conflict_data.get('conflicts', []))
+                    
+                    self.log_test(
+                        "POST /api/calendar/events/check-conflicts - Conflict detection",
+                        True,
+                        f"Successfully checked for conflicts. Found conflicts: {conflicts_found}, Count: {conflict_count}",
+                        conflict_data
+                    )
+                else:
+                    self.log_test(
+                        "POST /api/calendar/events/check-conflicts - Conflict detection",
+                        False,
+                        f"Response missing required fields: {required_fields}",
+                        conflict_data
+                    )
+            else:
+                self.log_test(
+                    "POST /api/calendar/events/check-conflicts - Conflict detection",
+                    False,
+                    f"HTTP {response.status_code}: {response.text}",
+                    response.text
+                )
+        except Exception as e:
+            self.log_test(
+                "POST /api/calendar/events/check-conflicts - Conflict detection",
+                False,
+                f"Exception occurred: {str(e)}",
+                str(e)
+            )
 
     def run_all_tests(self):
-        """Run all backend API tests"""
-        print("🚀 Starting Backend API Testing Suite")
-        print("=" * 60)
+        """Run all calendar event CRUD tests"""
+        print("🗓️  CALENDAR EVENT CRUD OPERATIONS - COMPREHENSIVE BACKEND TESTING")
+        print("=" * 80)
+        print(f"Testing against: {API_BASE}")
+        print(f"Test started at: {datetime.now().isoformat()}")
         print()
         
-        start_time = time.time()
+        # Test sequence following the review request priorities
+        print("📋 PHASE 1: CORE CRUD OPERATIONS")
+        print("-" * 40)
         
-        # Test 1: Health Check
-        print("📋 Test 1: Health Check")
-        health_ok = self.test_health_check()
-        print()
+        # GET operations
+        self.test_get_all_events()
+        self.test_get_events_with_date_filters()
         
-        if not health_ok:
-            print("❌ Health check failed - aborting remaining tests")
-            return self.generate_summary()
+        # POST operations
+        self.test_create_event_required_fields()
+        self.test_create_event_all_fields()
+        self.test_create_event_validation()
         
-        # Test 2: Sites API
-        print("📋 Test 2: Sites API")
-        sites_success, sites_total = self.test_sites_api()
-        print()
+        # PUT operations
+        self.test_update_event()
+        self.test_update_nonexistent_event()
         
-        # Test 3: Service History API
-        print("📋 Test 3: Site Service History API")
-        history_success, history_total = self.test_service_history_api()
-        print()
+        # DELETE operations
+        self.test_delete_event()
+        self.test_delete_nonexistent_event()
         
-        # Test 4: Site Maps API
-        print("📋 Test 4: Site Maps API")
-        maps_success, maps_total = self.test_site_maps_api()
-        print()
+        print("📋 PHASE 2: ADDITIONAL FEATURES")
+        print("-" * 40)
         
-        # Test 5: Site Geofence API
-        print("📋 Test 5: Site Geofence API")
-        geofence_success, geofence_total = self.test_site_geofence_api()
-        print()
+        # Google Calendar Integration
+        self.test_google_calendar_status()
+        self.test_google_calendar_auth_url()
         
-        # Test 6: Fuel Management API
-        print("📋 Test 6: Fuel Management API")
-        fuel_success, fuel_total = self.test_fuel_management_api()
-        print()
+        # Event conflict checking
+        self.test_event_conflict_check()
         
-        # Test 7: Rate Limiting
-        print("📋 Test 7: Rate Limiting")
-        rate_limit_ok = self.test_rate_limiting()
-        print()
-        
-        end_time = time.time()
-        duration = end_time - start_time
-        
-        return self.generate_summary(duration)
+        # Generate summary
+        self.generate_summary()
 
-    def generate_summary(self, duration: float = 0):
+    def generate_summary(self):
         """Generate test summary"""
+        print("\n" + "=" * 80)
+        print("📊 TEST SUMMARY")
+        print("=" * 80)
+        
         total_tests = len(self.test_results)
         passed_tests = sum(1 for result in self.test_results if result['success'])
         failed_tests = total_tests - passed_tests
         success_rate = (passed_tests / total_tests * 100) if total_tests > 0 else 0
         
-        print("=" * 60)
-        print("📊 BACKEND API TEST SUMMARY")
-        print("=" * 60)
         print(f"Total Tests: {total_tests}")
-        print(f"Passed: {passed_tests} ✅")
-        print(f"Failed: {failed_tests} ❌")
+        print(f"Passed: {passed_tests}")
+        print(f"Failed: {failed_tests}")
         print(f"Success Rate: {success_rate:.1f}%")
-        if duration > 0:
-            print(f"Duration: {duration:.2f} seconds")
         print()
         
         if failed_tests > 0:
             print("❌ FAILED TESTS:")
             for result in self.test_results:
                 if not result['success']:
-                    print(f"  • {result['test']}: {result['details']}")
+                    print(f"   • {result['test']}: {result['details']}")
             print()
         
-        # Test categories summary
-        categories = {
-            "Health Check": [r for r in self.test_results if "Health Check" in r['test']],
-            "Sites API": [r for r in self.test_results if "Sites API" in r['test']],
-            "Service History API": [r for r in self.test_results if "Service History API" in r['test']],
-            "Site Maps API": [r for r in self.test_results if "Site Maps API" in r['test']],
-            "Site Geofence API": [r for r in self.test_results if "Site Geofence API" in r['test']],
-            "Fuel Management API": [r for r in self.test_results if "Fuel API" in r['test']],
-            "Rate Limiting": [r for r in self.test_results if "Rate Limiting" in r['test']]
-        }
+        print("✅ PASSED TESTS:")
+        for result in self.test_results:
+            if result['success']:
+                print(f"   • {result['test']}")
         
-        print("📈 CATEGORY BREAKDOWN:")
-        for category, results in categories.items():
-            if results:
-                passed = sum(1 for r in results if r['success'])
-                total = len(results)
-                rate = (passed / total * 100) if total > 0 else 0
-                status = "✅" if rate == 100 else "⚠️" if rate >= 50 else "❌"
-                print(f"  {status} {category}: {passed}/{total} ({rate:.0f}%)")
+        print("\n" + "=" * 80)
+        print(f"Calendar Event CRUD Testing completed at: {datetime.now().isoformat()}")
+        print("=" * 80)
         
-        return {
-            "total_tests": total_tests,
-            "passed_tests": passed_tests,
-            "failed_tests": failed_tests,
-            "success_rate": success_rate,
-            "duration": duration,
-            "results": self.test_results
-        }
+        # Save detailed results to file
+        with open('/app/calendar_test_results.json', 'w') as f:
+            json.dump({
+                'summary': {
+                    'total_tests': total_tests,
+                    'passed_tests': passed_tests,
+                    'failed_tests': failed_tests,
+                    'success_rate': success_rate,
+                    'test_completed_at': datetime.now().isoformat()
+                },
+                'detailed_results': self.test_results
+            }, f, indent=2)
+        
+        print(f"\n📄 Detailed results saved to: /app/calendar_test_results.json")
 
 if __name__ == "__main__":
-    tester = BackendTester()
-    summary = tester.run_all_tests()
+    tester = CalendarEventTester()
+    tester.run_all_tests()
