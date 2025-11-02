@@ -575,8 +575,6 @@ const styles = StyleSheet.create({
     padding: 12,
     fontSize: 16,
     color: Colors.textPrimary,
-    border: 'none',
-    outline: 'none',
     backgroundColor: 'transparent',
   },
   formActions: {
