@@ -247,6 +247,144 @@ export default function EquipmentPage() {
     alert(`Exported ${selectedIds.length} asset(s) to CSV`);
   };
 
+  const handleAdvancedExport = (format: 'csv' | 'excel' | 'print', scope: 'all' | 'filtered' | 'selected') => {
+    let dataToExport: Equipment[] = [];
+    
+    // Determine which data to export
+    if (scope === 'all') {
+      dataToExport = equipment;
+    } else if (scope === 'filtered') {
+      dataToExport = filteredAndSortedEquipment;
+    } else {
+      dataToExport = equipment.filter(item => selectedIds.includes(item.id));
+    }
+
+    if (dataToExport.length === 0) {
+      alert('No data to export');
+      return;
+    }
+
+    if (format === 'print') {
+      handlePrintView(dataToExport);
+      return;
+    }
+
+    // Create CSV/Excel content
+    const headers = ['Name', 'Type', 'Status', 'Unit Number', 'License Plate', 'Make', 'Model', 'Year', 'Maintenance Due', 'License Required', 'Active', 'Notes', 'Created Date'];
+    const rows = dataToExport.map(item => [
+      `"${item.name || ''}"`,
+      `"${getTypeLabel(item.equipment_type) || ''}"`,
+      `"${getStatusLabel(item.status) || ''}"`,
+      `"${item.unit_number || ''}"`,
+      `"${item.license_plate || ''}"`,
+      `"${item.make || ''}"`,
+      `"${item.model || ''}"`,
+      `"${item.year || ''}"`,
+      `"${item.maintenance_due ? new Date(item.maintenance_due).toLocaleDateString() : ''}"`,
+      `"${item.license_required ? 'Yes' : 'No'}"`,
+      `"${item.active ? 'Yes' : 'No'}"`,
+      `"${item.notes || ''}"`,
+      `"${item.created_at ? new Date(item.created_at).toLocaleDateString() : ''}"`
+    ].join(','));
+
+    const csvContent = [headers.join(','), ...rows].join('\n');
+    
+    // Create blob with appropriate MIME type
+    const mimeType = format === 'excel' ? 'application/vnd.ms-excel' : 'text/csv;charset=utf-8;';
+    const extension = format === 'excel' ? 'xls' : 'csv';
+    const blob = new Blob([csvContent], { type: mimeType });
+    
+    // Download file
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    link.setAttribute('href', url);
+    link.setAttribute('download', `assets_${scope}_${new Date().toISOString().split('T')[0]}.${extension}`);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    setShowExportModal(false);
+    alert(`Successfully exported ${dataToExport.length} asset(s) to ${format.toUpperCase()}`);
+  };
+
+  const handlePrintView = (data: Equipment[]) => {
+    const printWindow = window.open('', '_blank');
+    if (!printWindow) {
+      alert('Please allow popups to print');
+      return;
+    }
+
+    const printContent = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>Assets Report - ${new Date().toLocaleDateString()}</title>
+        <style>
+          body { font-family: Arial, sans-serif; padding: 20px; }
+          h1 { color: #3f72af; border-bottom: 2px solid #3f72af; padding-bottom: 10px; }
+          .meta { color: #666; margin-bottom: 20px; }
+          table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+          th { background-color: #3f72af; color: white; padding: 10px; text-align: left; font-weight: bold; }
+          td { padding: 8px; border-bottom: 1px solid #ddd; }
+          tr:hover { background-color: #f5f5f5; }
+          .status { padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; }
+          .status-available { background-color: #d4edda; color: #155724; }
+          .status-in-use { background-color: #d1ecf1; color: #0c5460; }
+          .status-maintenance { background-color: #fff3cd; color: #856404; }
+          .status-unavailable { background-color: #f8d7da; color: #721c24; }
+          @media print {
+            button { display: none; }
+          }
+        </style>
+      </head>
+      <body>
+        <h1>Assets Report</h1>
+        <div class="meta">
+          <p><strong>Generated:</strong> ${new Date().toLocaleString()}</p>
+          <p><strong>Total Assets:</strong> ${data.length}</p>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Status</th>
+              <th>Unit #</th>
+              <th>License Plate</th>
+              <th>Make/Model</th>
+              <th>Year</th>
+              <th>Maintenance Due</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${data.map(item => `
+              <tr>
+                <td><strong>${item.name}</strong></td>
+                <td>${getTypeLabel(item.equipment_type)}</td>
+                <td><span class="status status-${item.status}">${getStatusLabel(item.status)}</span></td>
+                <td>${item.unit_number || '-'}</td>
+                <td>${item.license_plate || '-'}</td>
+                <td>${item.make || ''} ${item.model || ''}</td>
+                <td>${item.year || '-'}</td>
+                <td>${item.maintenance_due ? new Date(item.maintenance_due).toLocaleDateString() : '-'}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+        <div style="margin-top: 20px;">
+          <button onclick="window.print()" style="padding: 10px 20px; background-color: #3f72af; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;">Print Report</button>
+          <button onclick="window.close()" style="padding: 10px 20px; background-color: #6c757d; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; margin-left: 10px;">Close</button>
+        </div>
+      </body>
+      </html>
+    `;
+
+    printWindow.document.write(printContent);
+    printWindow.document.close();
+    setShowExportModal(false);
+  };
+
   const isMaintenanceDue = (dueDate?: string) => {
     if (!dueDate) return false;
     const due = new Date(dueDate);
