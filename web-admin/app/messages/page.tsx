@@ -522,7 +522,7 @@ export default function MessagesPage() {
                   Press Enter to send, Shift+Enter for new line
                 </p>
               </div>
-            </>
+            </div>
           ) : (
             <div className="flex-1 flex items-center justify-center">
               <div className="text-center">
