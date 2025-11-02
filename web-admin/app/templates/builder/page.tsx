@@ -115,8 +115,142 @@ export default function TemplateBuilderPage() {
   const [resizeHandle, setResizeHandle] = useState<'se' | 'sw' | 'ne' | 'nw' | 'e' | 's' | null>(null);
   const [showGrid, setShowGrid] = useState(true);
   const [zoom, setZoom] = useState(100);
-  const [history, setHistory] = useState<Template[]>([template]);
+  const [history, setHistory] = useState<Template[]>([]);
   const [historyIndex, setHistoryIndex] = useState(0);
+
+  // Load starter template or create default layout on mount
+  useEffect(() => {
+    if (starterTemplateId) {
+      // Load starter template
+      import('@/lib/starterTemplates').then(({ starterTemplates }) => {
+        const allTemplates = Object.values(starterTemplates).flat();
+        const starter = allTemplates.find(t => t.id === starterTemplateId);
+        if (starter) {
+          setTemplate(starter.template);
+          setHistory([starter.template]);
+        }
+      });
+    } else {
+      // Create default layout based on type
+      const defaultTemplate = createDefaultTemplate(templateType);
+      setTemplate(defaultTemplate);
+      setHistory([defaultTemplate]);
+    }
+  }, [starterTemplateId, templateType]);
+
+  // Create default template with basic layout
+  const createDefaultTemplate = (type: 'invoice' | 'estimate' | 'agreement' | 'work_order'): Template => {
+    const baseTemplate: Template = {
+      type,
+      name: `New ${type.charAt(0).toUpperCase() + type.slice(1)}`,
+      description: '',
+      pageSetup: {
+        size: 'letter',
+        orientation: 'portrait',
+        margins: { top: 48, right: 48, bottom: 48, left: 48 },
+      },
+      branding: {
+        primaryColor: '#3f72af',
+        secondaryColor: '#1a1a1a',
+        fontFamily: 'Inter',
+      },
+      components: [
+        {
+          id: 'header-default',
+          type: 'header',
+          position: { x: 60, y: 60 },
+          size: { width: 700, height: 60 },
+          content: { text: type.toUpperCase(), size: 'xl' },
+          styles: {
+            fontSize: 36,
+            fontWeight: 'bold',
+            color: '#3f72af',
+            backgroundColor: '#ffffff',
+            textAlign: 'left',
+            padding: 0,
+          },
+        },
+        {
+          id: 'company-default',
+          type: 'company-info',
+          position: { x: 60, y: 150 },
+          size: { width: 340, height: 120 },
+          content: {
+            showLogo: true,
+            showName: true,
+            showAddress: true,
+            showPhone: true,
+            showEmail: true,
+          },
+          styles: {
+            fontSize: 14,
+            color: '#1a1a1a',
+            backgroundColor: '#ffffff',
+            textAlign: 'left',
+            padding: 16,
+          },
+        },
+        {
+          id: 'customer-default',
+          type: 'customer-info',
+          position: { x: 420, y: 150 },
+          size: { width: 340, height: 120 },
+          content: {
+            title: 'Bill To:',
+            showName: true,
+            showAddress: true,
+            showPhone: true,
+            showEmail: true,
+          },
+          styles: {
+            fontSize: 14,
+            color: '#1a1a1a',
+            backgroundColor: '#f9fafb',
+            textAlign: 'left',
+            padding: 16,
+          },
+        },
+        {
+          id: 'lineitems-default',
+          type: 'line-items',
+          position: { x: 60, y: 300 },
+          size: { width: 700, height: 200 },
+          content: {
+            columns: ['Description', 'Quantity', 'Rate', 'Amount'],
+            showSubtotal: true,
+          },
+          styles: {
+            fontSize: 14,
+            color: '#1a1a1a',
+            backgroundColor: '#ffffff',
+            textAlign: 'left',
+            padding: 16,
+          },
+        },
+        {
+          id: 'totals-default',
+          type: 'totals',
+          position: { x: 460, y: 530 },
+          size: { width: 300, height: 140 },
+          content: {
+            showSubtotal: true,
+            showTax: true,
+            showDiscount: false,
+            showTotal: true,
+          },
+          styles: {
+            fontSize: 14,
+            color: '#1a1a1a',
+            backgroundColor: '#ffffff',
+            textAlign: 'right',
+            padding: 16,
+          },
+        },
+      ],
+    };
+
+    return baseTemplate;
+  };
 
   // Available components library
   const componentLibrary = [
