@@ -402,6 +402,7 @@ export default function TemplateBuilderPage() {
     return (
       <div
         key={component.id}
+        onMouseDown={(e) => handleMouseDown(e, component.id)}
         onClick={(e) => {
           e.stopPropagation();
           setSelectedComponent(component.id);
@@ -415,10 +416,48 @@ export default function TemplateBuilderPage() {
           border: isSelected ? '2px solid #3f72af' : '1px solid #e5e7eb',
           backgroundColor: component.styles.backgroundColor,
           padding: component.styles.padding,
-          cursor: 'move',
+          cursor: isDragging ? 'grabbing' : 'grab',
+          userSelect: 'none',
         }}
         className={`group hover:border-blue-400 transition-colors ${isSelected ? 'ring-2 ring-blue-300' : ''}`}
       >
+        {/* Resize Handles - Only show when selected */}
+        {isSelected && (
+          <>
+            {/* Corner handles */}
+            <div
+              onMouseDown={(e) => handleResizeMouseDown(e, component.id, 'nw')}
+              className="absolute -top-2 -left-2 w-4 h-4 bg-[#3f72af] border-2 border-white rounded-full cursor-nw-resize hover:scale-125 transition-transform"
+              style={{ zIndex: 10 }}
+            />
+            <div
+              onMouseDown={(e) => handleResizeMouseDown(e, component.id, 'ne')}
+              className="absolute -top-2 -right-2 w-4 h-4 bg-[#3f72af] border-2 border-white rounded-full cursor-ne-resize hover:scale-125 transition-transform"
+              style={{ zIndex: 10 }}
+            />
+            <div
+              onMouseDown={(e) => handleResizeMouseDown(e, component.id, 'sw')}
+              className="absolute -bottom-2 -left-2 w-4 h-4 bg-[#3f72af] border-2 border-white rounded-full cursor-sw-resize hover:scale-125 transition-transform"
+              style={{ zIndex: 10 }}
+            />
+            <div
+              onMouseDown={(e) => handleResizeMouseDown(e, component.id, 'se')}
+              className="absolute -bottom-2 -right-2 w-4 h-4 bg-[#3f72af] border-2 border-white rounded-full cursor-se-resize hover:scale-125 transition-transform"
+              style={{ zIndex: 10 }}
+            />
+            {/* Side handles */}
+            <div
+              onMouseDown={(e) => handleResizeMouseDown(e, component.id, 'e')}
+              className="absolute top-1/2 -right-2 w-4 h-8 bg-[#3f72af] border-2 border-white rounded-full cursor-e-resize hover:scale-125 transition-transform -translate-y-1/2"
+              style={{ zIndex: 10 }}
+            />
+            <div
+              onMouseDown={(e) => handleResizeMouseDown(e, component.id, 's')}
+              className="absolute left-1/2 -bottom-2 w-8 h-4 bg-[#3f72af] border-2 border-white rounded-full cursor-s-resize hover:scale-125 transition-transform -translate-x-1/2"
+              style={{ zIndex: 10 }}
+            />
+          </>
+        )}
         {/* Component content based on type */}
         {component.type === 'header' && (
           <div
