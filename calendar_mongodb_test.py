@@ -11,7 +11,7 @@ from datetime import datetime, timedelta
 from typing import Dict, Any, List
 
 # Get backend URL from environment
-BACKEND_URL = os.getenv('REACT_APP_BACKEND_URL', 'https://erp-automation-2.preview.emergentagent.com')
+BACKEND_URL = os.getenv('REACT_APP_BACKEND_URL', 'https://access-unified.preview.emergentagent.com')
 BASE_URL = f"{BACKEND_URL}/api"
 
 class EnhancedCalendarTester:
