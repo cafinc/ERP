@@ -79,8 +79,9 @@ export default function WorkflowBuilderPage() {
 
   const loadTemplates = async () => {
     try {
-      const response = await api.get('/workflow-templates');
-      setTemplates(response.data || []);
+      // Use the new template library endpoint
+      const response = await api.get('/workflow-templates/library');
+      setTemplates(response.data?.templates || response.data || []);
     } catch (error) {
       console.error('Error loading templates:', error);
       setTemplates([]);
