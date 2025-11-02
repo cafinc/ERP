@@ -426,7 +426,7 @@ class WorkflowAPITester:
         self.test_audit_logging()
         
         # Generate summary
-        self.generate_summary()
+        return self.generate_summary()
 
     def generate_summary(self):
         """Generate test summary"""
