@@ -355,9 +355,9 @@ export default function WorkflowEditorPage() {
             </div>
           </div>
 
-          {/* Trigger Configuration */}
-          <div className="bg-white rounded-lg shadow-lg shadow-sm border border-gray-200 p-8 hover:shadow-md transition-shadow">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Trigger Configuration</h3>
+        {/* Trigger Configuration */}
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">Trigger Configuration</h3>
             
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
               {triggerTypes.map((type) => {
