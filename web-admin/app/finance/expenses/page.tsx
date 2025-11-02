@@ -132,14 +132,13 @@ export default function ExpensesPage() {
   };
 
   return (
-    <PageHeader>
+    <div className="min-h-screen bg-gray-50">
       <PageHeader
         title="Expenses"
-        subtitle="Track and categorize business expenses"
-        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Finance", href: "/finance/dashboard" }, { label: "Expenses" }]}
-        title="Expenses"
+        icon={<Receipt size={28} />}
         subtitle={`${filteredExpenses.length} expense${filteredExpenses.length !== 1 ? 's' : ''} • Total: $${totalExpenses.toLocaleString()}`}
-          actions={
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Finance", href: "/finance/dashboard" }, { label: "Expenses" }]}
+        actions={
           <>
             <button className="px-3 py-1.5 text-sm bg-white border border-gray-300 rounded-lg hover:bg-gray-50 flex items-center gap-2">
               <Download className="w-4 h-4" />
