@@ -343,9 +343,9 @@ export default function WorkflowHistoryPage() {
                             </div>
                           </div>
                         </div>
-                      </div>
-                    )}
-                  </div>
+                      )}
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
