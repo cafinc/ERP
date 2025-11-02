@@ -58,6 +58,37 @@ export default function AccessDashboardPage() {
     phone: ''
   });
 
+  const [roles, setRoles] = useState([
+    { 
+      id: 1, 
+      name: 'Admin', 
+      users: 3, 
+      permissions: ['All Access', 'Manage Users', 'Manage Settings', 'View Reports', 'Manage Billing', 'System Configuration'],
+      color: 'blue'
+    },
+    { 
+      id: 2, 
+      name: 'Manager', 
+      users: 5, 
+      permissions: ['View Reports', 'Manage Teams', 'Edit Sites', 'Manage Projects', 'Approve Timesheets'],
+      color: 'green'
+    },
+    { 
+      id: 3, 
+      name: 'Operator', 
+      users: 12, 
+      permissions: ['View Sites', 'Update Status', 'Upload Photos', 'Submit Timesheets', 'View Assigned Tasks'],
+      color: 'orange'
+    },
+    { 
+      id: 4, 
+      name: 'Viewer', 
+      users: 8, 
+      permissions: ['View Only', 'Download Reports'],
+      color: 'gray'
+    },
+  ]);
+
   const accessGroups: AccessGroup[] = [
     {
       name: 'Internal',
