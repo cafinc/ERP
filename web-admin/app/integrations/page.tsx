@@ -146,11 +146,10 @@ export default function IntegrationsPage() {
   return (
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         <PageHeader
-        title="Integrations"
-        subtitle="Connect third-party services and tools"
-        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Integrations" }]}
-        title="Integration Hub"
-          icon={LinkIcon}
+          title="Integration Hub"
+          subtitle="Connect third-party services and tools"
+          breadcrumbs={[{ label: "Home", href: "/" }, { label: "Integrations" }]}
+          icon={<LinkIcon size={28} />}
           badges={[
             { label: `${integrations.length} Total`, color: "blue" },
             { label: `${integrations.filter((i: any) => i.status === "connected").length} Connected`, color: "green" },
