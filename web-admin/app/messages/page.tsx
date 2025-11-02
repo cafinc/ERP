@@ -545,6 +545,9 @@ export default function MessagesPage() {
                   className="p-1 hover:bg-gray-100 rounded"
                 >
                   <X className="w-5 h-5 text-gray-600" />
+                </button>
+              </div>
+              
               {/* Conversation Type */}
               <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700 mb-2">Type</label>
