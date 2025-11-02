@@ -924,6 +924,145 @@ export default function EquipmentPage() {
           </div>
           </>
         )}
+
+        {/* Export Modal */}
+        {showExportModal && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+            <div className="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+              {/* Header */}
+              <div className="p-6 border-b border-gray-200">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                      <Download className="w-6 h-6 text-green-600" />
+                    </div>
+                    <div>
+                      <h2 className="text-2xl font-bold text-gray-900">Export Assets</h2>
+                      <p className="text-sm text-gray-600">Choose export format and scope</p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => setShowExportModal(false)}
+                    className="text-gray-400 hover:text-gray-600 transition-colors"
+                  >
+                    <X className="w-6 h-6" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Content */}
+              <div className="p-6 space-y-6">
+                {/* Export Scope */}
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Select Data Scope</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <button
+                      onClick={() => handleAdvancedExport('csv', 'all')}
+                      className="p-4 border-2 border-gray-200 rounded-lg hover:border-[#3f72af] hover:bg-blue-50 transition-all text-left group"
+                    >
+                      <div className="flex items-center gap-3 mb-2">
+                        <FileSpreadsheet className="w-5 h-5 text-gray-600 group-hover:text-[#3f72af]" />
+                        <span className="font-semibold text-gray-900">All Assets</span>
+                      </div>
+                      <p className="text-sm text-gray-600">Export all {equipment.length} assets</p>
+                      <p className="text-xs text-gray-500 mt-1">CSV Format</p>
+                    </button>
+
+                    <button
+                      onClick={() => handleAdvancedExport('csv', 'filtered')}
+                      className="p-4 border-2 border-gray-200 rounded-lg hover:border-[#3f72af] hover:bg-blue-50 transition-all text-left group"
+                    >
+                      <div className="flex items-center gap-3 mb-2">
+                        <Filter className="w-5 h-5 text-gray-600 group-hover:text-[#3f72af]" />
+                        <span className="font-semibold text-gray-900">Filtered Results</span>
+                      </div>
+                      <p className="text-sm text-gray-600">Export {filteredAndSortedEquipment.length} filtered assets</p>
+                      <p className="text-xs text-gray-500 mt-1">CSV Format</p>
+                    </button>
+
+                    <button
+                      onClick={() => handleAdvancedExport('csv', 'selected')}
+                      disabled={selectedIds.length === 0}
+                      className="p-4 border-2 border-gray-200 rounded-lg hover:border-[#3f72af] hover:bg-blue-50 transition-all text-left group disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:border-gray-200 disabled:hover:bg-white"
+                    >
+                      <div className="flex items-center gap-3 mb-2">
+                        <CheckSquare className="w-5 h-5 text-gray-600 group-hover:text-[#3f72af]" />
+                        <span className="font-semibold text-gray-900">Selected Only</span>
+                      </div>
+                      <p className="text-sm text-gray-600">Export {selectedIds.length} selected assets</p>
+                      <p className="text-xs text-gray-500 mt-1">CSV Format</p>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Export Format */}
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Select Format</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <button
+                      onClick={() => handleAdvancedExport('csv', 'filtered')}
+                      className="p-4 border-2 border-green-500 bg-green-50 rounded-lg hover:bg-green-100 transition-all text-left"
+                    >
+                      <div className="flex items-center gap-3 mb-2">
+                        <FileText className="w-5 h-5 text-green-600" />
+                        <span className="font-semibold text-gray-900">CSV</span>
+                      </div>
+                      <p className="text-sm text-gray-600">Universal compatibility</p>
+                    </button>
+
+                    <button
+                      onClick={() => handleAdvancedExport('excel', 'filtered')}
+                      className="p-4 border-2 border-gray-200 rounded-lg hover:border-green-500 hover:bg-green-50 transition-all text-left"
+                    >
+                      <div className="flex items-center gap-3 mb-2">
+                        <FileSpreadsheet className="w-5 h-5 text-gray-600" />
+                        <span className="font-semibold text-gray-900">Excel</span>
+                      </div>
+                      <p className="text-sm text-gray-600">Microsoft Excel format</p>
+                    </button>
+
+                    <button
+                      onClick={() => handleAdvancedExport('print', 'filtered')}
+                      className="p-4 border-2 border-gray-200 rounded-lg hover:border-gray-400 hover:bg-gray-50 transition-all text-left"
+                    >
+                      <div className="flex items-center gap-3 mb-2">
+                        <Printer className="w-5 h-5 text-gray-600" />
+                        <span className="font-semibold text-gray-900">Print</span>
+                      </div>
+                      <p className="text-sm text-gray-600">Print-friendly view</p>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Info Box */}
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                  <div className="flex gap-3">
+                    <AlertCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                    <div className="text-sm text-blue-900">
+                      <p className="font-medium mb-1">Export includes:</p>
+                      <ul className="list-disc list-inside space-y-1 text-blue-800">
+                        <li>Name, Type, Status, Unit Number</li>
+                        <li>License Plate, Make, Model, Year</li>
+                        <li>Maintenance Due, License Required</li>
+                        <li>Active Status, Notes, Created Date</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Footer */}
+              <div className="p-6 border-t border-gray-200 bg-gray-50 rounded-b-xl">
+                <button
+                  onClick={() => setShowExportModal(false)}
+                  className="w-full px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg font-medium transition-colors"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
   );
 }
