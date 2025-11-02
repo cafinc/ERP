@@ -1084,6 +1084,207 @@ export default function EquipmentPage() {
             </div>
           </div>
         )}
+
+        {/* Comparison Modal */}
+        {showCompareModal && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+            <div className="bg-white rounded-xl shadow-2xl max-w-7xl w-full max-h-[90vh] overflow-y-auto">
+              {/* Header */}
+              <div className="p-6 border-b border-gray-200 sticky top-0 bg-white z-10">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                      <GitCompare className="w-6 h-6 text-purple-600" />
+                    </div>
+                    <div>
+                      <h2 className="text-2xl font-bold text-gray-900">Compare Assets</h2>
+                      <p className="text-sm text-gray-600">Side-by-side comparison of {selectedIds.length} selected assets</p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => setShowCompareModal(false)}
+                    className="text-gray-400 hover:text-gray-600 transition-colors"
+                  >
+                    <X className="w-6 h-6" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Comparison Table */}
+              <div className="p-6">
+                <div className="overflow-x-auto">
+                  <table className="w-full border-collapse">
+                    <thead>
+                      <tr className="border-b-2 border-gray-300">
+                        <th className="p-4 text-left font-semibold text-gray-700 bg-gray-50 sticky left-0 z-10 min-w-[180px]">
+                          Property
+                        </th>
+                        {equipment.filter(item => selectedIds.includes(item.id)).map((item, idx) => (
+                          <th key={item.id} className="p-4 text-left min-w-[220px] bg-gray-50">
+                            <div className="flex items-center gap-2">
+                              <div className={`w-10 h-10 bg-gradient-to-br ${
+                                idx % 4 === 0 ? 'from-blue-500 to-blue-600' :
+                                idx % 4 === 1 ? 'from-green-500 to-green-600' :
+                                idx % 4 === 2 ? 'from-orange-500 to-orange-600' :
+                                'from-purple-500 to-purple-600'
+                              } rounded-lg flex items-center justify-center flex-shrink-0`}>
+                                <Truck className="w-5 h-5 text-white" />
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <p className="font-semibold text-gray-900 truncate">{item.name}</p>
+                                <p className="text-xs text-gray-600">{getTypeLabel(item.equipment_type)}</p>
+                              </div>
+                            </div>
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {/* Status */}
+                      <tr className="border-b border-gray-200 hover:bg-gray-50">
+                        <td className="p-4 font-medium text-gray-700 bg-gray-50 sticky left-0">Status</td>
+                        {equipment.filter(item => selectedIds.includes(item.id)).map(item => (
+                          <td key={item.id} className="p-4">
+                            <span className={`inline-flex px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(item.status)}`}>
+                              {getStatusLabel(item.status)}
+                            </span>
+                          </td>
+                        ))}
+                      </tr>
+
+                      {/* Unit Number */}
+                      <tr className="border-b border-gray-200 hover:bg-gray-50">
+                        <td className="p-4 font-medium text-gray-700 bg-gray-50 sticky left-0">Unit Number</td>
+                        {equipment.filter(item => selectedIds.includes(item.id)).map(item => (
+                          <td key={item.id} className="p-4 text-gray-900">{item.unit_number || '-'}</td>
+                        ))}
+                      </tr>
+
+                      {/* License Plate */}
+                      <tr className="border-b border-gray-200 hover:bg-gray-50">
+                        <td className="p-4 font-medium text-gray-700 bg-gray-50 sticky left-0">License Plate</td>
+                        {equipment.filter(item => selectedIds.includes(item.id)).map(item => (
+                          <td key={item.id} className="p-4 text-gray-900">{item.license_plate || '-'}</td>
+                        ))}
+                      </tr>
+
+                      {/* Make */}
+                      <tr className="border-b border-gray-200 hover:bg-gray-50">
+                        <td className="p-4 font-medium text-gray-700 bg-gray-50 sticky left-0">Make</td>
+                        {equipment.filter(item => selectedIds.includes(item.id)).map(item => (
+                          <td key={item.id} className="p-4 text-gray-900">{item.make || '-'}</td>
+                        ))}
+                      </tr>
+
+                      {/* Model */}
+                      <tr className="border-b border-gray-200 hover:bg-gray-50">
+                        <td className="p-4 font-medium text-gray-700 bg-gray-50 sticky left-0">Model</td>
+                        {equipment.filter(item => selectedIds.includes(item.id)).map(item => (
+                          <td key={item.id} className="p-4 text-gray-900">{item.model || '-'}</td>
+                        ))}
+                      </tr>
+
+                      {/* Year */}
+                      <tr className="border-b border-gray-200 hover:bg-gray-50">
+                        <td className="p-4 font-medium text-gray-700 bg-gray-50 sticky left-0">Year</td>
+                        {equipment.filter(item => selectedIds.includes(item.id)).map(item => (
+                          <td key={item.id} className="p-4 text-gray-900">{item.year || '-'}</td>
+                        ))}
+                      </tr>
+
+                      {/* Maintenance Due */}
+                      <tr className="border-b border-gray-200 hover:bg-gray-50">
+                        <td className="p-4 font-medium text-gray-700 bg-gray-50 sticky left-0">Maintenance Due</td>
+                        {equipment.filter(item => selectedIds.includes(item.id)).map(item => (
+                          <td key={item.id} className="p-4">
+                            {item.maintenance_due ? (
+                              <div className="flex items-center gap-2">
+                                <span className="text-gray-900">{new Date(item.maintenance_due).toLocaleDateString()}</span>
+                                {isMaintenanceDue(item.maintenance_due) && (
+                                  <span className="text-xs bg-red-100 text-red-700 px-2 py-1 rounded-full font-medium">Due Soon</span>
+                                )}
+                              </div>
+                            ) : '-'}
+                          </td>
+                        ))}
+                      </tr>
+
+                      {/* License Required */}
+                      <tr className="border-b border-gray-200 hover:bg-gray-50">
+                        <td className="p-4 font-medium text-gray-700 bg-gray-50 sticky left-0">License Required</td>
+                        {equipment.filter(item => selectedIds.includes(item.id)).map(item => (
+                          <td key={item.id} className="p-4">
+                            {item.license_required ? (
+                              <span className="text-green-600 font-medium">Yes</span>
+                            ) : (
+                              <span className="text-gray-500">No</span>
+                            )}
+                          </td>
+                        ))}
+                      </tr>
+
+                      {/* Active Status */}
+                      <tr className="border-b border-gray-200 hover:bg-gray-50">
+                        <td className="p-4 font-medium text-gray-700 bg-gray-50 sticky left-0">Active</td>
+                        {equipment.filter(item => selectedIds.includes(item.id)).map(item => (
+                          <td key={item.id} className="p-4">
+                            {item.active ? (
+                              <CheckCircle className="w-5 h-5 text-green-600" />
+                            ) : (
+                              <X className="w-5 h-5 text-gray-400" />
+                            )}
+                          </td>
+                        ))}
+                      </tr>
+
+                      {/* Created Date */}
+                      <tr className="border-b border-gray-200 hover:bg-gray-50">
+                        <td className="p-4 font-medium text-gray-700 bg-gray-50 sticky left-0">Created Date</td>
+                        {equipment.filter(item => selectedIds.includes(item.id)).map(item => (
+                          <td key={item.id} className="p-4 text-gray-900">
+                            {item.created_at ? new Date(item.created_at).toLocaleDateString() : '-'}
+                          </td>
+                        ))}
+                      </tr>
+
+                      {/* Notes */}
+                      <tr className="hover:bg-gray-50">
+                        <td className="p-4 font-medium text-gray-700 bg-gray-50 sticky left-0">Notes</td>
+                        {equipment.filter(item => selectedIds.includes(item.id)).map(item => (
+                          <td key={item.id} className="p-4 text-gray-700 text-sm max-w-xs">
+                            {item.notes ? (
+                              <div className="line-clamp-3">{item.notes}</div>
+                            ) : '-'}
+                          </td>
+                        ))}
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              {/* Footer */}
+              <div className="p-6 border-t border-gray-200 bg-gray-50 rounded-b-xl flex gap-3">
+                <button
+                  onClick={() => {
+                    handleAdvancedExport('print', 'selected');
+                    setShowCompareModal(false);
+                  }}
+                  className="flex-1 px-4 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
+                >
+                  <Printer className="w-4 h-4" />
+                  Print Comparison
+                </button>
+                <button
+                  onClick={() => setShowCompareModal(false)}
+                  className="flex-1 px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg font-medium transition-colors"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
   );
 }
