@@ -183,6 +183,7 @@ export default function WorkOrdersPage() {
       <div className="min-h-screen bg-gray-50 flex flex-col">
         <PageHeader
           title="Work Orders"
+          icon={<ClipboardList size={28} />}
           subtitle="Manage and track all work orders"
           breadcrumbs={[
             { label: "Home", href: "/" },
