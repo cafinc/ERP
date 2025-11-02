@@ -127,12 +127,9 @@ export default function EquipmentPage() {
         title="Equipment"
         subtitle="Manage your snow removal equipment inventory"
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Assets", href: "/equipment/dashboard" }, { label: "Equipment" }]}
-        title="Equipment"
-          
           actions={[
             {
               label: 'Add Equipment',
-              icon: Plus,
               onClick: () => router.push('/equipment/create'),
               variant: 'primary',
             },
