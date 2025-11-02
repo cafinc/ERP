@@ -124,11 +124,10 @@ export default function TeamPage() {
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         {/* Compact Header */}
         <PageHeader
-        title="Team"
-        subtitle="Manage your team members and staff"
-        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Team" }]}
-        title="Team Members"
-          icon={Users}
+          title="Team Members"
+          icon={<Users size={28} />}
+          subtitle="Manage your team members and staff"
+          breadcrumbs={[{ label: "Home", href: "/" }, { label: "Team" }]}
           badges={[
             { label: `${users.length} Total`, color: 'blue' },
             { label: `${users.filter(u => u.role === 'admin').length} Admins`, color: 'purple' },
