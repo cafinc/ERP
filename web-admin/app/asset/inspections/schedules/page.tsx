@@ -221,8 +221,7 @@ export default function InspectionSchedulesPage() {
               </button>
             </div>
           ) : (
-            <>
-            {schedules.map((schedule) => (
+            schedules.map((schedule) => (
               <div
                 key={schedule.id}
                 className={`bg-white rounded-lg border ${
