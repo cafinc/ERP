@@ -219,19 +219,6 @@ export default function EquipmentFormsPage() {
                             </option>
                           ))}
                         </select>
-                        </td>
-                      </td>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-                          ))}
-                        </select>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <button
@@ -241,6 +228,7 @@ export default function EquipmentFormsPage() {
                         >
                           <Save className="w-4 h-4" />
                           Save
+                        </button>
                       </td>
                     </tr>
                   ))}
