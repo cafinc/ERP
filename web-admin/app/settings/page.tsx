@@ -208,15 +208,45 @@ export default function SettingsPage() {
       ]
     },
     {
-      category: 'System',
+      category: 'Documents & Templates',
+      description: 'Design and manage custom document templates for estimates, invoices, and agreements',
       items: [
         {
           icon: FileText,
           title: 'Document Templates',
-          description: 'Manage estimate, invoice, and document templates',
+          description: 'Create and manage invoice, estimate, and contract templates',
           href: '/templates',
-          color: 'blue'
+          color: 'blue',
+          badge: 'Visual Builder'
         },
+        {
+          icon: Zap,
+          title: 'Template Builder',
+          description: 'Design custom templates with drag-and-drop editor',
+          href: '/templates/select',
+          color: 'purple',
+          badge: 'New'
+        },
+        {
+          icon: Palette,
+          title: 'Template Branding',
+          description: 'Customize logos, colors, and fonts for all templates',
+          href: '/settings/branding',
+          color: 'pink'
+        },
+        {
+          icon: FileSearch,
+          title: 'Template Library',
+          description: 'Browse professional pre-designed templates',
+          href: '/templates/select',
+          color: 'green',
+          badge: '5 Templates'
+        }
+      ]
+    },
+    {
+      category: 'System',
+      items: [
         {
           icon: Clock,
           title: 'Business Hours',
