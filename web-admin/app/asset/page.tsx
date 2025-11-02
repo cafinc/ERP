@@ -720,6 +720,17 @@ export default function EquipmentPage() {
                 <span className="font-medium">{selectedIds.length} asset(s) selected</span>
               </div>
               <div className="flex items-center gap-2 flex-wrap">
+                {/* Compare Button - only show when 2 or more selected */}
+                {selectedIds.length >= 2 && selectedIds.length <= 5 && (
+                  <button
+                    onClick={() => setShowCompareModal(true)}
+                    className="px-4 py-2 bg-purple-600 text-white rounded-lg font-medium transition-colors hover:bg-purple-700 flex items-center space-x-2"
+                  >
+                    <GitCompare className="w-4 h-4" />
+                    <span>Compare</span>
+                  </button>
+                )}
+                
                 {/* Status Update Dropdown */}
                 <div className="relative">
                   <select
@@ -764,6 +775,14 @@ export default function EquipmentPage() {
                 </button>
               </div>
             </div>
+            
+            {/* Comparison limit warning */}
+            {selectedIds.length > 5 && (
+              <div className="mt-3 text-sm text-yellow-200 flex items-center gap-2">
+                <AlertCircle className="w-4 h-4" />
+                <span>Select up to 5 assets for comparison. Currently {selectedIds.length} selected.</span>
+              </div>
+            )}
           </div>
         )}
 
