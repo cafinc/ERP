@@ -88,6 +88,7 @@ export default function TasksPage() {
     <div className="min-h-screen bg-gray-50">
       <PageHeader
         title="Tasks"
+        icon={<CheckSquare size={28} />}
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Tasks" }]}
         actions={[
           {
