@@ -458,8 +458,6 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 16,
     color: Colors.textPrimary,
-    border: 'none',
-    outline: 'none',
     backgroundColor: 'transparent',
   },
   lineItemCard: {
