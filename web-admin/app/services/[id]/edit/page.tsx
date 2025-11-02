@@ -267,16 +267,9 @@ export default function ServiceFormPage() {
                     <Trash2 className="w-5 h-5" />
                   </button>
                 )}
-
               </div>
-              ))}
-            </div>
+            ))}
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-          ))}
 
         {/* Submit Actions */}
         <div className="flex justify-end gap-4">
