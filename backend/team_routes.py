@@ -61,7 +61,8 @@ async def get_team_member(member_id: str):
     try:
         mongo_url = os.getenv("MONGO_URL", "mongodb://localhost:27017")
         client = AsyncIOMotorClient(mongo_url)
-        db = client.snow_removal_db
+        db_name = os.getenv("DB_NAME", "snow_removal_db")
+        db = client[db_name]
         
         from bson import ObjectId
         user = await db.users.find_one({"_id": ObjectId(member_id)})
