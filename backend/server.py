@@ -8162,13 +8162,13 @@ async def gmail_oauth_callback(code: str, state: str):
         await db.gmail_oauth_states.delete_one({"_id": state_doc["_id"]})
         
         # Redirect to Gmail page
-        redirect_base = "https://asset-dashboard-36.preview.emergentagent.com"
-        return RedirectResponse(url=f"{redirect_base}/gmail?connected=true")
+        frontend_url = os.getenv("FRONTEND_URL", "")
+        return RedirectResponse(url=f"{frontend_url}/gmail?connected=true")
         
     except Exception as e:
         print(f"Error in Gmail OAuth callback: {e}")
-        redirect_base = "https://asset-dashboard-36.preview.emergentagent.com"
-        return RedirectResponse(url=f"{redirect_base}/gmail?error=connection_failed")
+        frontend_url = os.getenv("FRONTEND_URL", "")
+        return RedirectResponse(url=f"{frontend_url}/gmail?error=connection_failed")
 
 
 @api_router.get("/gmail/status")
