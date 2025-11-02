@@ -12280,8 +12280,7 @@ from custom_workflow_models import (
 )
 from custom_workflow_executor import CustomWorkflowExecutor
 
-# Initialize custom workflow executor
-custom_workflow_executor = CustomWorkflowExecutor(db)
+# Note: custom_workflow_executor is initialized above with the background_scheduler
 
 @api_router.get("/custom-workflows", tags=["Custom Workflows"])
 async def list_custom_workflows(
