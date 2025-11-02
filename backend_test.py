@@ -11,7 +11,7 @@ from datetime import datetime, timedelta
 from typing import Dict, List, Any
 
 # Backend URL from environment
-BACKEND_URL = "https://asset-mgmt-portal.preview.emergentagent.com/api"
+BACKEND_URL = "https://asset-dashboard-36.preview.emergentagent.com/api"
 
 class WorkflowAPITester:
     def __init__(self):
