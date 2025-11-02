@@ -795,13 +795,14 @@ export default function UnifiedAccessPage() {
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Phone Number
+                        Mobile Number (for SMS)
                       </label>
                       <input
                         type="tel"
                         placeholder="+1 (555) 123-4567"
                         className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       />
+                      <p className="mt-1 text-xs text-gray-500">Required for SMS notifications</p>
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
