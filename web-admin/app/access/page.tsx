@@ -1001,7 +1001,20 @@ export default function UnifiedAccessPage() {
             <div className="px-6 py-4 border-t border-gray-200 flex items-center justify-between bg-gray-50 rounded-b-xl">
               <button
                 type="button"
-                onClick={() => setShowAddUserModal(false)}
+                onClick={() => {
+                  setShowAddUserModal(false);
+                  setAddUserForm({
+                    name: '',
+                    email: '',
+                    phone: '',
+                    role: '',
+                    team: '',
+                    company: '',
+                    userType: 'team',
+                    status: 'active',
+                  });
+                  setAddUserErrors({});
+                }}
                 className="px-4 py-2 text-gray-700 hover:bg-gray-200 rounded-lg font-medium transition-colors"
               >
                 Cancel
@@ -1015,10 +1028,7 @@ export default function UnifiedAccessPage() {
                 </button>
                 <button
                   type="button"
-                  onClick={() => {
-                    setShowAddUserModal(false);
-                    showToast('success', 'User created successfully!');
-                  }}
+                  onClick={handleAddUserSubmit}
                   className="px-6 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#2d5a8f] font-medium transition-colors flex items-center gap-2"
                 >
                   <UserPlus className="w-4 h-4" />
