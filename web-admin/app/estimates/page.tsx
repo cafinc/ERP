@@ -118,11 +118,10 @@ export default function EstimatesPage() {
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
         {/* Compact Header */}
         <PageHeader
-        title="Estimates"
-        subtitle="Create and manage service estimates"
-        breadcrumbs={[{ label: "Home", href: "/" }, { label: "CRM", href: "/crm/dashboard" }, { label: "Estimates" }]}
-        title="Estimates"
-          
+          title="Estimates"
+          icon={<FileText size={28} />}
+          subtitle="Create and manage service estimates"
+          breadcrumbs={[{ label: "Home", href: "/" }, { label: "CRM", href: "/crm/dashboard" }, { label: "Estimates" }]}
           actions={[
             {
               label: 'New Estimate',
