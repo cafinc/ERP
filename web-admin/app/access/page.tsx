@@ -902,20 +902,29 @@ export default function UnifiedAccessPage() {
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       Assign Role <span className="text-red-500">*</span>
                     </label>
-                    <select className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    <select 
+                      value={addUserForm.role}
+                      onChange={(e) => setAddUserForm({...addUserForm, role: e.target.value})}
+                      className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                        addUserErrors.role ? 'border-red-500' : 'border-gray-300'
+                      }`}
+                    >
                       <option value="">Select a role...</option>
                       <optgroup label="Internal Roles">
-                        <option value="admin">Admin - All Access</option>
-                        <option value="manager">Manager - Manage Teams & Projects</option>
-                        <option value="operator">Operator - Field Operations</option>
-                        <option value="viewer">Viewer - Read Only</option>
+                        <option value="Admin">Admin - All Access</option>
+                        <option value="Manager">Manager - Manage Teams & Projects</option>
+                        <option value="Operator">Operator - Field Operations</option>
+                        <option value="Viewer">Viewer - Read Only</option>
                       </optgroup>
                       <optgroup label="External Roles">
-                        <option value="subcontractor">Subcontractor - Project Access</option>
-                        <option value="customer">Customer - Service Portal</option>
-                        <option value="vendor">Vendor - Supply Chain</option>
+                        <option value="Subcontractor">Subcontractor - Project Access</option>
+                        <option value="Customer">Customer - Service Portal</option>
+                        <option value="Vendor">Vendor - Supply Chain</option>
                       </optgroup>
                     </select>
+                    {addUserErrors.role && (
+                      <p className="mt-1 text-xs text-red-600">{addUserErrors.role}</p>
+                    )}
                   </div>
                   <div className="mt-3 p-3 bg-blue-50 border border-blue-200 rounded-lg">
                     <p className="text-xs text-blue-800 flex items-start gap-2">
