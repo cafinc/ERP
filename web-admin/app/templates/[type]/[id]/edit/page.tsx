@@ -303,9 +303,6 @@ export default function EditTemplatePage() {
           </div>
         </div>
         </form>
-    </form>
-      </div></div>
-    </div></div>
       {/* Placeholder Browser Modal */}
       {showPlaceholderBrowser && (
         <PlaceholderBrowser
