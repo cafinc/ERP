@@ -162,6 +162,88 @@ export default function EquipmentPage() {
     setSortOrder('asc');
   };
 
+  const toggleSelectAll = () => {
+    if (selectedIds.length === filteredAndSortedEquipment.length) {
+      setSelectedIds([]);
+    } else {
+      setSelectedIds(filteredAndSortedEquipment.map(item => item.id));
+    }
+  };
+
+  const toggleSelectItem = (id: string) => {
+    setSelectedIds(prev => 
+      prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id]
+    );
+  };
+
+  const handleBulkDelete = async () => {
+    if (!confirm(`Are you sure you want to delete ${selectedIds.length} asset(s)?`)) return;
+    
+    try {
+      await Promise.all(selectedIds.map(id => api.delete(`/equipment/${id}`)));
+      alert(`Successfully deleted ${selectedIds.length} asset(s)`);
+      setSelectedIds([]);
+      loadEquipment();
+    } catch (error) {
+      console.error('Error deleting assets:', error);
+      alert('Failed to delete some assets. Please try again.');
+    }
+  };
+
+  const handleBulkStatusUpdate = async (newStatus: string) => {
+    if (!confirm(`Update status for ${selectedIds.length} asset(s) to "${newStatus}"?`)) return;
+    
+    try {
+      await Promise.all(
+        selectedIds.map(id => 
+          api.put(`/equipment/${id}`, { status: newStatus })
+        )
+      );
+      alert(`Successfully updated ${selectedIds.length} asset(s)`);
+      setSelectedIds([]);
+      loadEquipment();
+    } catch (error) {
+      console.error('Error updating assets:', error);
+      alert('Failed to update some assets. Please try again.');
+    }
+  };
+
+  const handleBulkExport = () => {
+    const selectedEquipment = equipment.filter(item => selectedIds.includes(item.id));
+    
+    // Create CSV content
+    const headers = ['Name', 'Type', 'Status', 'Unit Number', 'License Plate', 'Make', 'Model', 'Year', 'Maintenance Due', 'Notes'];
+    const csvRows = [
+      headers.join(','),
+      ...selectedEquipment.map(item => [
+        `"${item.name || ''}"`,
+        `"${getTypeLabel(item.equipment_type) || ''}"`,
+        `"${getStatusLabel(item.status) || ''}"`,
+        `"${item.unit_number || ''}"`,
+        `"${item.license_plate || ''}"`,
+        `"${item.make || ''}"`,
+        `"${item.model || ''}"`,
+        `"${item.year || ''}"`,
+        `"${item.maintenance_due ? new Date(item.maintenance_due).toLocaleDateString() : ''}"`,
+        `"${item.notes || ''}"`
+      ].join(','))
+    ];
+    
+    // Create and download file
+    const csvContent = csvRows.join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    link.setAttribute('href', url);
+    link.setAttribute('download', `assets_export_${new Date().toISOString().split('T')[0]}.csv`);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    alert(`Exported ${selectedIds.length} asset(s) to CSV`);
+  };
+
   const isMaintenanceDue = (dueDate?: string) => {
     if (!dueDate) return false;
     const due = new Date(dueDate);
