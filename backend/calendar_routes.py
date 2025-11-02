@@ -19,7 +19,8 @@ router = APIRouter()
 # MongoDB connection
 mongo_url = os.getenv("MONGO_URL", "mongodb://localhost:27017")
 mongo_client = AsyncIOMotorClient(mongo_url)
-db = mongo_client.snow_removal_db
+db_name = os.getenv("DB_NAME", "snow_removal_db")
+db = mongo_client[db_name]
 
 # Pydantic Models
 class CalendarEvent(BaseModel):
