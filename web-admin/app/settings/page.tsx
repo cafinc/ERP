@@ -265,7 +265,7 @@ export default function SettingsPage() {
                   const Icon = item.icon;
                   return (
                     <button
-                      key={item.href}
+                      key={`${category.category}-${item.title}`}
                       onClick={() => router.push(item.href)}
                       className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow text-left"
                     >
