@@ -614,18 +614,236 @@ export default function UnifiedAccessPage() {
         )}
       </div>
 
-      {/* Modals would go here */}
+      {/* Add User Modal */}
       {showAddUserModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-xl shadow-2xl max-w-md w-full p-6">
-            <h3 className="text-xl font-bold text-gray-900 mb-4">Add New User</h3>
-            <p className="text-gray-600 mb-4">Feature coming soon - User creation modal</p>
-            <button
-              onClick={() => setShowAddUserModal(false)}
-              className="w-full px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300"
-            >
-              Close
-            </button>
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 overflow-y-auto">
+          <div className="bg-white rounded-xl shadow-2xl max-w-2xl w-full my-8">
+            {/* Modal Header */}
+            <div className="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-blue-100 rounded-lg">
+                  <UserPlus className="w-5 h-5 text-blue-600" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900">Add New User</h3>
+                  <p className="text-sm text-gray-600">Create a new user account and assign permissions</p>
+                </div>
+              </div>
+              <button
+                onClick={() => setShowAddUserModal(false)}
+                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              >
+                <XCircle className="w-5 h-5 text-gray-500" />
+              </button>
+            </div>
+
+            {/* Modal Body */}
+            <div className="px-6 py-4 max-h-[calc(100vh-200px)] overflow-y-auto">
+              <form className="space-y-6">
+                {/* User Type Selection */}
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    User Type <span className="text-red-500">*</span>
+                  </label>
+                  <div className="grid grid-cols-3 gap-3">
+                    <button
+                      type="button"
+                      className="p-4 border-2 border-blue-200 bg-blue-50 rounded-lg hover:border-blue-400 transition-colors"
+                    >
+                      <UserCog className="w-6 h-6 text-blue-600 mx-auto mb-2" />
+                      <div className="text-sm font-semibold text-blue-900">Team Member</div>
+                      <div className="text-xs text-blue-600 mt-1">Internal staff</div>
+                    </button>
+                    <button
+                      type="button"
+                      className="p-4 border-2 border-gray-200 rounded-lg hover:border-blue-400 transition-colors"
+                    >
+                      <HardHat className="w-6 h-6 text-gray-600 mx-auto mb-2" />
+                      <div className="text-sm font-semibold text-gray-900">Crew Member</div>
+                      <div className="text-xs text-gray-600 mt-1">Field worker</div>
+                    </button>
+                    <button
+                      type="button"
+                      className="p-4 border-2 border-gray-200 rounded-lg hover:border-blue-400 transition-colors"
+                    >
+                      <Building2 className="w-6 h-6 text-gray-600 mx-auto mb-2" />
+                      <div className="text-sm font-semibold text-gray-900">External</div>
+                      <div className="text-xs text-gray-600 mt-1">Customer/Vendor</div>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Basic Information */}
+                <div className="border-t border-gray-200 pt-6">
+                  <h4 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                    <Users className="w-4 h-4" />
+                    Basic Information
+                  </h4>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Full Name <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="John Doe"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Email Address <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="email"
+                        placeholder="john@company.com"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Phone Number
+                      </label>
+                      <input
+                        type="tel"
+                        placeholder="+1 (555) 123-4567"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Company/Organization
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="ABC Corp"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Role Assignment */}
+                <div className="border-t border-gray-200 pt-6">
+                  <h4 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                    <Shield className="w-4 h-4" />
+                    Role Assignment
+                  </h4>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Assign Role <span className="text-red-500">*</span>
+                    </label>
+                    <select className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                      <option value="">Select a role...</option>
+                      <optgroup label="Internal Roles">
+                        <option value="admin">Admin - All Access</option>
+                        <option value="manager">Manager - Manage Teams & Projects</option>
+                        <option value="operator">Operator - Field Operations</option>
+                        <option value="viewer">Viewer - Read Only</option>
+                      </optgroup>
+                      <optgroup label="External Roles">
+                        <option value="subcontractor">Subcontractor - Project Access</option>
+                        <option value="customer">Customer - Service Portal</option>
+                        <option value="vendor">Vendor - Supply Chain</option>
+                      </optgroup>
+                    </select>
+                  </div>
+                  <div className="mt-3 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                    <p className="text-xs text-blue-800 flex items-start gap-2">
+                      <AlertCircle className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                      <span>Selected role will determine user permissions and access level throughout the system.</span>
+                    </p>
+                  </div>
+                </div>
+
+                {/* Team Assignment (for Crew Members) */}
+                <div className="border-t border-gray-200 pt-6">
+                  <h4 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                    <HardHat className="w-4 h-4" />
+                    Team Assignment
+                  </h4>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Assign to Team
+                    </label>
+                    <select className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                      <option value="">No team assignment</option>
+                      <option value="team-a">Team A - North Division</option>
+                      <option value="team-b">Team B - South Division</option>
+                      <option value="team-c">Team C - East Division</option>
+                      <option value="team-d">Team D - West Division</option>
+                    </select>
+                  </div>
+                </div>
+
+                {/* Account Settings */}
+                <div className="border-t border-gray-200 pt-6">
+                  <h4 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                    <Eye className="w-4 h-4" />
+                    Account Settings
+                  </h4>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Account Status
+                      </label>
+                      <select className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Temporary Password
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="Auto-generated"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50"
+                        disabled
+                      />
+                    </div>
+                  </div>
+                  <div className="mt-4 flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      id="sendEmail"
+                      className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                      defaultChecked
+                    />
+                    <label htmlFor="sendEmail" className="text-sm text-gray-700">
+                      Send welcome email with login credentials
+                    </label>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            {/* Modal Footer */}
+            <div className="px-6 py-4 border-t border-gray-200 flex items-center justify-between bg-gray-50 rounded-b-xl">
+              <button
+                type="button"
+                onClick={() => setShowAddUserModal(false)}
+                className="px-4 py-2 text-gray-700 hover:bg-gray-200 rounded-lg font-medium transition-colors"
+              >
+                Cancel
+              </button>
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 font-medium transition-colors"
+                >
+                  Save as Draft
+                </button>
+                <button
+                  type="button"
+                  className="px-6 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#2d5a8f] font-medium transition-colors flex items-center gap-2"
+                >
+                  <UserPlus className="w-4 h-4" />
+                  Create User
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       )}
