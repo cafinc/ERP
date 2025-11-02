@@ -226,41 +226,55 @@ export default function WorkflowEditorPage() {
 
   if (loading) {
     return (
-      <PageHeader>
-        <div className="flex items-center justify-center h-full">
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
+        <PageHeader
+          title={isEdit ? 'Edit Workflow' : 'Create Workflow'}
+          icon={<Zap size={28} />}
+          subtitle={isEdit ? 'Update workflow configuration' : 'Build a new automated workflow'}
+          breadcrumbs={[
+            { label: "Home", href: "/" },
+            { label: "Automation", href: "/automation" },
+            { label: "Workflows", href: "/automation/workflows" },
+            { label: isEdit ? 'Edit' : 'Create' }
+          ]}
+        />
+        <div className="flex items-center justify-center h-64">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
             <p className="text-gray-600">Loading workflow...</p>
           </div>
         </div>
-      </PageHeader>
+      </div>
     );
   }
 
   return (
-    <PageHeader>
-      <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto">
-        <PageHeader
-        title="Create Workflow"
-        subtitle="Build a new automated workflow"
-        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Automation", href: "/automation" }, { label: "Workflows", href: "/automation/workflows" }, { label: "Create" }]}
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
+      <PageHeader
         title={isEdit ? 'Edit Workflow' : 'Create Workflow'}
-          icon={Zap}
-          actions={[
-            {
-              label: 'Cancel',
-              onClick: () => router.push('/automation/workflows'),
-              variant: 'secondary',
-            },
-            {
-              label: saving ? 'Saving...' : 'Save Workflow',
-              icon: Save,
-              onClick: handleSave,
-              variant: 'primary',
-              disabled: saving,
-            },
-          ]}
-        />
+        icon={<Zap size={28} />}
+        subtitle={isEdit ? 'Update workflow configuration' : 'Build a new automated workflow'}
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "Automation", href: "/automation" },
+          { label: "Workflows", href: "/automation/workflows" },
+          { label: isEdit ? 'Edit' : 'Create' }
+        ]}
+        actions={[
+          {
+            label: 'Cancel',
+            onClick: () => router.push('/automation/workflows'),
+            variant: 'secondary',
+          },
+          {
+            label: saving ? 'Saving...' : 'Save Workflow',
+            icon: <Save className="w-4 h-4 mr-2" />,
+            onClick: handleSave,
+            variant: 'primary',
+            disabled: saving,
+          },
+        ]}
+      />
 
         <div className="mx-6 space-y-6">
           {/* Basic Info */}
