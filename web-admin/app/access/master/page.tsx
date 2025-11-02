@@ -2,10 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/lib/auth';
+import { useRouter } from 'next/navigation';
 import api from '@/lib/api';
 import PageHeader from '@/components/PageHeader';
 import UserFormModal from '@/components/UserFormModal';
-import { Crown, Plus, Edit, Trash2, Shield, AlertCircle, CheckCircle, XCircle } from 'lucide-react';
+import { Crown, Plus, Edit, Trash2, Shield, AlertCircle, CheckCircle, XCircle, Lock } from 'lucide-react';
 
 interface MasterUser {
   id: string;
@@ -20,11 +21,25 @@ interface MasterUser {
 
 export default function MasterUsersPage() {
   const { user } = useAuth();
+  const router = useRouter();
   const [masterUsers, setMasterUsers] = useState<MasterUser[]>([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState<MasterUser | undefined>();
   const [modalMode, setModalMode] = useState<'add' | 'edit'>('add');
+
+  // Check environment - block access in production/deployed environment
+  const isDevelopment = process.env.NODE_ENV === 'development' || 
+                        process.env.NEXT_PUBLIC_ENABLE_MASTER_ACCESS === 'true';
+
+  useEffect(() => {
+    // Redirect if in production/deployed environment
+    if (!isDevelopment) {
+      router.push('/access');
+      return;
+    }
+    fetchMasterUsers();
+  }, [isDevelopment, router]);
 
   useEffect(() => {
     fetchMasterUsers();
