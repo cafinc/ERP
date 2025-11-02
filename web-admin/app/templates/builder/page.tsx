@@ -251,6 +251,104 @@ export default function TemplateBuilderPage() {
     }
   };
 
+  // Handle mouse down on component for dragging
+  const handleMouseDown = (e: React.MouseEvent, componentId: string) => {
+    if (e.button !== 0) return; // Only left click
+    e.stopPropagation();
+    
+    setSelectedComponent(componentId);
+    setIsDragging(true);
+    setDragStart({
+      x: e.clientX,
+      y: e.clientY,
+    });
+  };
+
+  // Handle mouse down on resize handle
+  const handleResizeMouseDown = (e: React.MouseEvent, componentId: string, handle: 'se' | 'sw' | 'ne' | 'nw' | 'e' | 's') => {
+    e.stopPropagation();
+    setSelectedComponent(componentId);
+    setIsResizing(true);
+    setResizeHandle(handle);
+    setDragStart({
+      x: e.clientX,
+      y: e.clientY,
+    });
+  };
+
+  // Handle mouse move for drag and resize
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!dragStart || !selectedComponent) return;
+
+    const component = template.components.find(c => c.id === selectedComponent);
+    if (!component) return;
+
+    const deltaX = e.clientX - dragStart.x;
+    const deltaY = e.clientY - dragStart.y;
+
+    if (isDragging) {
+      // Update position
+      const newX = Math.max(0, component.position.x + deltaX);
+      const newY = Math.max(0, component.position.y + deltaY);
+      
+      updateComponent(selectedComponent, {
+        position: { x: newX, y: newY },
+      });
+      
+      setDragStart({ x: e.clientX, y: e.clientY });
+    } else if (isResizing && resizeHandle) {
+      // Update size based on handle
+      let newWidth = component.size.width;
+      let newHeight = component.size.height;
+      let newX = component.position.x;
+      let newY = component.position.y;
+
+      switch (resizeHandle) {
+        case 'se': // Southeast (bottom-right)
+          newWidth = Math.max(100, component.size.width + deltaX);
+          newHeight = Math.max(50, component.size.height + deltaY);
+          break;
+        case 'sw': // Southwest (bottom-left)
+          newWidth = Math.max(100, component.size.width - deltaX);
+          newHeight = Math.max(50, component.size.height + deltaY);
+          newX = component.position.x + deltaX;
+          break;
+        case 'ne': // Northeast (top-right)
+          newWidth = Math.max(100, component.size.width + deltaX);
+          newHeight = Math.max(50, component.size.height - deltaY);
+          newY = component.position.y + deltaY;
+          break;
+        case 'nw': // Northwest (top-left)
+          newWidth = Math.max(100, component.size.width - deltaX);
+          newHeight = Math.max(50, component.size.height - deltaY);
+          newX = component.position.x + deltaX;
+          newY = component.position.y + deltaY;
+          break;
+        case 'e': // East (right)
+          newWidth = Math.max(100, component.size.width + deltaX);
+          break;
+        case 's': // South (bottom)
+          newHeight = Math.max(50, component.size.height + deltaY);
+          break;
+      }
+
+      updateComponent(selectedComponent, {
+        size: { width: newWidth, height: newHeight },
+        position: { x: newX, y: newY },
+      });
+      
+      setDragStart({ x: e.clientX, y: e.clientY });
+    }
+  };
+
+  // Handle mouse up to stop dragging/resizing
+  const handleMouseUp = () => {
+    setIsDragging(false);
+    setIsResizing(false);
+    setDragStart(null);
+    setResizeHandle(null);
+  };
+
   // History management
   const addToHistory = (newTemplate: Template) => {
     const newHistory = history.slice(0, historyIndex + 1);
