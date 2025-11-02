@@ -284,7 +284,8 @@ async def get_google_calendar_status():
         # Check if tokens exist in database
         try:
             mongo_client = AsyncIOMotorClient(mongo_url)
-            db = mongo_client.snow_removal_db
+            db_name = os.getenv("DB_NAME", "snow_removal_db")
+            db = mongo_client[db_name]
             
             token_doc = await db.oauth_tokens.find_one({"service": "google_calendar"})
             
