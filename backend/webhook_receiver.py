@@ -10,10 +10,21 @@ from fastapi import APIRouter, HTTPException, Request, Header
 from typing import Optional
 from datetime import datetime
 from bson import ObjectId
+from motor.motor_asyncio import AsyncIOMotorClient
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/webhooks", tags=["webhooks"])
+
+# Database connection
+mongo_url = os.getenv("MONGO_URL", "mongodb://localhost:27017")
+db_name = os.getenv("DB_NAME", "snow_removal_db")
+client = AsyncIOMotorClient(mongo_url)
+db = client[db_name]
 
 @router.post("/{webhook_id}")
 async def receive_webhook(
