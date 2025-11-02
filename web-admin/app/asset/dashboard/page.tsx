@@ -134,26 +134,26 @@ export default function AssetDashboardPage() {
       <PageHeader
         title="Asset Dashboard"
         subtitle="Manage equipment, vehicles, trailers, and tools"
-        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Assets", href: "/equipment" }, { label: "Dashboard" }]}
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Assets", href: "/asset/dashboard" }, { label: "Dashboard" }]}
         actions={[
           { 
             label: 'Add Asset', 
-            onClick: () => router.push('/equipment/create'), 
+            onClick: () => router.push('/asset/create'), 
             variant: 'primary'
           },
           { 
             label: 'Schedule Maintenance', 
-            onClick: () => router.push('/equipment/maintenance'), 
+            onClick: () => router.push('/asset/maintenance'), 
             variant: 'secondary'
           },
           { 
             label: 'View Inspections', 
-            onClick: () => router.push('/equipment/inspections'), 
+            onClick: () => router.push('/asset/inspections'), 
             variant: 'secondary'
           },
           { 
             label: 'All Assets', 
-            onClick: () => router.push('/equipment'), 
+            onClick: () => router.push('/asset'), 
             variant: 'secondary'
           },
         ]}
