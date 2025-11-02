@@ -260,6 +260,7 @@ export default function InspectionSchedulesPage() {
                       <Trash2 className="w-4 h-4" />
                     </button>
                   </div>
+                </div>
                 {/* Details Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                   <div className="flex items-center gap-3">
