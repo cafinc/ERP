@@ -372,7 +372,8 @@ async def update_user(user_id: str, user_update: UserUpdate):
     # Send notifications if user is newly marked as driver and doesn't have license yet
     if is_now_driver and not was_driver and not user.get("driver_license_photo"):
         user_id_str = user.get("id") or str(user.get("_id"))
-        upload_link = f"https://asset-dashboard-36.preview.emergentagent.com/upload-license/{user_id_str}"
+        frontend_url = os.getenv("FRONTEND_URL", "")
+        upload_link = f"{frontend_url}/upload-license/{user_id_str}"
         
         # Send email notification
         try:
