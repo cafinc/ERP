@@ -129,35 +129,38 @@ export default function WorkflowHistoryPage() {
   }
 
   return (
-    <PageHeader>
-      <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
-        {/* Header */}
-        <PageHeader
-        title="History"
-        subtitle="Manage history"
-        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Automation", href: "/automation" }, { label: "Workflows", href: "/automation/workflows" }, { label: "Details" }]}
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
+      {/* Header */}
+      <PageHeader
         title={`${workflowName} - Execution History`}
-          icon={Activity}
-          badges={[
-            { label: `${executions.length} Executions`, color: 'blue' },
-            { label: `${executions.filter(e => e.status === 'success').length} Successful`, color: 'green' },
-            { label: `${executions.filter(e => e.status === 'failed').length} Failed`, color: 'red' },
-          ]}
-          actions={[
-            {
-              label: 'Back to Analytics',
-              icon: ArrowLeft,
-              onClick: () => router.push('/automation/analytics'),
-              variant: 'secondary',
-            },
-            {
-              label: 'Refresh',
-              icon: RefreshCw,
-              onClick: loadExecutions,
-              variant: 'secondary',
-            },
-          ]}
-        />
+        icon={<Activity size={28} />}
+        subtitle="View detailed execution logs and performance"
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "Automation", href: "/automation" },
+          { label: "Workflows", href: "/automation/workflows" },
+          { label: "History" }
+        ]}
+        badges={[
+          { label: `${executions.length} Executions`, color: 'blue' },
+          { label: `${executions.filter(e => e.status === 'success').length} Successful`, color: 'green' },
+          { label: `${executions.filter(e => e.status === 'failed').length} Failed`, color: 'red' },
+        ]}
+        actions={[
+          {
+            label: 'Back to Workflows',
+            icon: <ArrowLeft className="w-4 h-4 mr-2" />,
+            onClick: () => router.push('/automation/workflows'),
+            variant: 'secondary',
+          },
+          {
+            label: 'Refresh',
+            icon: <RefreshCw className="w-4 h-4 mr-2" />,
+            onClick: loadExecutions,
+            variant: 'secondary',
+          },
+        ]}
+      />
 
         {/* Date Range Filter */}
         <div className="px-6 py-4 bg-white rounded-xl shadow-lg border border-gray-200 mt-6 mx-6">
