@@ -1,20 +1,19 @@
 #!/usr/bin/env python3
 """
-Backend API Testing Script for Calendar Event CRUD Operations
-Tests all calendar endpoints comprehensively as requested in the review.
+Backend API Testing for Phase 3 Enterprise Workflow Automation Features
+Tests all new endpoints for Workflow Template Library, Version Control, Analytics & Audit Logging
 """
 
 import requests
 import json
-import os
+import sys
 from datetime import datetime, timedelta
-from typing import Dict, Any
+from typing import Dict, List, Any
 
-# Get backend URL from environment
-BACKEND_URL = os.getenv('REACT_APP_BACKEND_URL', 'https://erp-automation-2.preview.emergentagent.com')
-API_BASE = f"{BACKEND_URL}/api"
+# Backend URL from environment
+BACKEND_URL = "https://erp-automation-2.preview.emergentagent.com/api"
 
-class CalendarEventTester:
+class WorkflowAPITester:
     def __init__(self):
         self.session = requests.Session()
         self.session.headers.update({
