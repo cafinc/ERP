@@ -21,6 +21,11 @@ import {
   Clock,
   Activity,
   Eye,
+  Lock,
+  Unlock,
+  Settings,
+  Save,
+  Plus,
 } from 'lucide-react';
 
 type TabType = 'overview' | 'team' | 'crew' | 'external' | 'roles' | 'audit';
