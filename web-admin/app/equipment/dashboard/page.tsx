@@ -13,16 +13,23 @@ import {
   Clock,
   LayoutDashboard,
   Plus,
+  Car,
+  Package,
+  Hammer,
 } from 'lucide-react';
 
-export default function EquipmentDashboardPage() {
+export default function AssetDashboardPage() {
   const router = useRouter();
+  const [activeCategory, setActiveCategory] = useState('all');
   const [stats, setStats] = useState({
-    totalEquipment: 0,
+    totalAssets: 0,
     operational: 0,
     maintenance: 0,
     inspectionsDue: 0,
-    inspectionsCompleted: 0,
+    equipment: 0,
+    vehicles: 0,
+    trailers: 0,
+    tools: 0,
   });
 
   useEffect(() => {
@@ -34,17 +41,34 @@ export default function EquipmentDashboardPage() {
       const equipmentRes = await api.get('/equipment');
       const equipmentData = equipmentRes.data?.equipment || [];
       
+      // Categorize assets
+      const equipment = equipmentData.filter((e: any) => e.type === 'equipment' || !e.type);
+      const vehicles = equipmentData.filter((e: any) => e.type === 'vehicle');
+      const trailers = equipmentData.filter((e: any) => e.type === 'trailer');
+      const tools = equipmentData.filter((e: any) => e.type === 'tool');
+      
       setStats({
-        totalEquipment: equipmentData.length,
+        totalAssets: equipmentData.length,
         operational: equipmentData.filter((e: any) => e.status === 'operational').length,
         maintenance: equipmentData.filter((e: any) => e.status === 'maintenance').length,
-        inspectionsDue: 0, // Will be calculated from inspections
-        inspectionsCompleted: 0,
+        inspectionsDue: 0,
+        equipment: equipment.length,
+        vehicles: vehicles.length,
+        trailers: trailers.length,
+        tools: tools.length,
       });
     } catch (error) {
-      console.error('Error loading equipment stats:', error);
+      console.error('Error loading asset stats:', error);
     }
   };
+
+  const categoryTabs = [
+    { label: 'All Assets', value: 'all', count: stats.totalAssets },
+    { label: 'Equipment', value: 'equipment', count: stats.equipment },
+    { label: 'Vehicles', value: 'vehicles', count: stats.vehicles },
+    { label: 'Trailers', value: 'trailers', count: stats.trailers },
+    { label: 'Tools', value: 'tools', count: stats.tools },
+  ];
 
   const statCards = [
     {
