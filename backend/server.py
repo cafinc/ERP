@@ -12949,6 +12949,125 @@ async def get_workflow_performance(workflow_id: str, days: int = 30):
 
 logger.info("Enterprise workflow features endpoints registered successfully")
 
+# ===== Workflow Templates Library Endpoints =====
+
+@api_router.get("/workflow-templates/library", tags=["Workflow Templates"])
+async def get_template_library(category: Optional[str] = None):
+    """
+    Get all workflow templates from the library
+    
+    Query params:
+    - category: Filter by category (optional)
+    """
+    try:
+        templates = template_library.get_all_templates(category)
+        return {
+            'success': True,
+            'count': len(templates),
+            'templates': templates
+        }
+    except Exception as e:
+        logger.error(f"Error getting template library: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.get("/workflow-templates/library/{template_id}", tags=["Workflow Templates"])
+async def get_template_by_id(template_id: str):
+    """Get a specific template by ID"""
+    try:
+        template = template_library.get_template_by_id(template_id)
+        if not template:
+            raise HTTPException(status_code=404, detail="Template not found")
+        return template
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error getting template: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.get("/workflow-templates/categories", tags=["Workflow Templates"])
+async def get_template_categories():
+    """Get list of all template categories"""
+    try:
+        categories = template_library.get_template_categories()
+        return {
+            'success': True,
+            'categories': categories,
+            'count': len(categories)
+        }
+    except Exception as e:
+        logger.error(f"Error getting template categories: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.get("/workflow-templates/search", tags=["Workflow Templates"])
+async def search_templates(q: str):
+    """
+    Search templates by name, description, or tags
+    
+    Query params:
+    - q: Search query
+    """
+    try:
+        results = template_library.search_templates(q)
+        return {
+            'success': True,
+            'query': q,
+            'count': len(results),
+            'results': results
+        }
+    except Exception as e:
+        logger.error(f"Error searching templates: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.post("/workflow-templates/instantiate/{template_id}", tags=["Workflow Templates"])
+async def instantiate_template(
+    template_id: str,
+    customizations: dict,
+    current_user: dict = Depends(get_current_user)
+):
+    """
+    Create a new workflow from a template
+    
+    Body:
+    {
+        "name": "My Custom Workflow",
+        "description": "Custom description",
+        "enabled": false,
+        "tags": ["custom"],
+        "trigger_config": {...},
+        "action_customizations": [{...}]
+    }
+    """
+    try:
+        user_id = current_user.get('_id') or current_user.get('id')
+        
+        workflow = await template_library.instantiate_template(
+            template_id=template_id,
+            customizations=customizations,
+            created_by=str(user_id)
+        )
+        
+        # Log audit event
+        await audit_logger.log_event(
+            event_type=AuditEventType.WORKFLOW_CREATED,
+            workflow_id=workflow['id'],
+            user_id=str(user_id),
+            details={
+                'template_id': template_id,
+                'template_name': workflow.get('name')
+            }
+        )
+        
+        return {
+            'success': True,
+            'message': 'Workflow created from template',
+            'workflow': workflow
+        }
+    except Exception as e:
+        logger.error(f"Error instantiating template: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+logger.info("Workflow template library endpoints registered successfully")
+
 @api_router.post("/users/upload-avatar")
 async def upload_avatar(
     avatar_data: dict,
