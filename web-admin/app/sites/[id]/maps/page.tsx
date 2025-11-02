@@ -528,8 +528,15 @@ export default function UnifiedSiteMapsBuilder() {
       console.log('📐 Area measured:', measurement);
       
     } else if (activeTool === 'marker') {
-      // Icon marker with label
-      const label = prompt('Enter label for this marker:') || ANNOTATION_CATEGORIES.find(c => c.value === selectedCategory)?.label || 'Marker';
+      // Icon marker with label - show modal instead of prompt
+      setPendingAnnotation({
+        overlay,
+        category: selectedCategory,
+        color: selectedColor,
+        position: overlay.getPosition()
+      });
+      setModalLabel('');
+      setShowAnnotationModal(true);
       
       // Add info window
       const infoWindow = new window.google.maps.InfoWindow({
