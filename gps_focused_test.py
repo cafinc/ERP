@@ -8,7 +8,7 @@ import json
 import time
 from datetime import datetime, timedelta
 
-BASE_URL = "https://asset-dashboard-36.preview.emergentagent.com/api"
+BASE_URL = "https://admin-jsx-fixes.preview.emergentagent.com/api"
 HEADERS = {"Content-Type": "application/json"}
 
 def test_enhanced_gps_system():

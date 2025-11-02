@@ -98,7 +98,7 @@
 
 **Option 2: Public Access** (requires routing configuration)
 The web-admin needs to be configured to serve on the main domain:
-`https://asset-dashboard-36.preview.emergentagent.com`
+`https://admin-jsx-fixes.preview.emergentagent.com`
 
 ---
 

@@ -3,7 +3,7 @@
 ## All Errors Fixed ✅
 
 ### 1. **Hardcoded Backend URLs (CORS Errors)** ✅
-**Problem**: Old deployment URL `https://asset-dashboard-36.preview.emergentagent.com/api` was hardcoded, causing CORS errors
+**Problem**: Old deployment URL `https://admin-jsx-fixes.preview.emergentagent.com/api` was hardcoded, causing CORS errors
 
 **Files Fixed**:
 - `/app/web-admin/.env.local` → Changed to `/api`
