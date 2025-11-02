@@ -299,10 +299,10 @@ export default function EditTemplatePage() {
                 </>
               )}
             </button>
-            </div>
           </div>
         </div>
-        </form>
+      </form>
+
       {/* Placeholder Browser Modal */}
       {showPlaceholderBrowser && (
         <PlaceholderBrowser
@@ -311,5 +311,6 @@ export default function EditTemplatePage() {
           onClose={() => setShowPlaceholderBrowser(false)}
         />
       )}
-          );
+    </div>
+  );
 }
