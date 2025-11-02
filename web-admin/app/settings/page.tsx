@@ -254,10 +254,21 @@ export default function SettingsPage() {
         <div className="space-y-8 mx-6 mt-6">
           {settings.map((category) => (
             <div key={category.category}>
-              <div className="mb-4">
-                <h2 className="text-xl font-semibold text-gray-900">{category.category}</h2>
-                {category.description && (
-                  <p className="text-sm text-gray-600 mt-1">{category.description}</p>
+              <div className="mb-4 flex items-center justify-between">
+                <div>
+                  <h2 className="text-xl font-semibold text-gray-900">{category.category}</h2>
+                  {category.description && (
+                    <p className="text-sm text-gray-600 mt-1">{category.description}</p>
+                  )}
+                </div>
+                {category.category === 'Workflow Automation' && (
+                  <button
+                    onClick={() => router.push('/automation')}
+                    className="px-4 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#2d5a8f] transition-colors flex items-center gap-2 shadow-sm"
+                  >
+                    <BarChart3 className="w-4 h-4" />
+                    View Dashboard
+                  </button>
                 )}
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
