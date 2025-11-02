@@ -104,6 +104,7 @@ from google_tasks_service import google_tasks_service
 from ringcentral_service import ringcentral_service
 from webhook_handler import init_webhook_handler
 from automation_engine import AutomationEngine
+from custom_workflow_executor import CustomWorkflowExecutor
 from background_scheduler import BackgroundScheduler
 
 ROOT_DIR = Path(__file__).parent
