@@ -140,6 +140,32 @@ export default function AssetDashboardPage() {
           { label: 'Total Assets', value: stats.totalAssets, color: 'blue' },
           { label: 'Operational', value: stats.operational, color: 'green' },
         ]}
+        actions={[
+          { 
+            label: 'Add Asset', 
+            onClick: () => router.push('/equipment/create'), 
+            variant: 'primary',
+            icon: Plus
+          },
+          { 
+            label: 'Schedule Maintenance', 
+            onClick: () => router.push('/equipment/maintenance'), 
+            variant: 'secondary',
+            icon: Wrench
+          },
+          { 
+            label: 'View Inspections', 
+            onClick: () => router.push('/equipment/inspections'), 
+            variant: 'secondary',
+            icon: ClipboardList
+          },
+          { 
+            label: 'All Assets', 
+            onClick: () => router.push('/equipment'), 
+            variant: 'secondary',
+            icon: Package
+          },
+        ]}
       />
 
         {/* Stats Grid */}
