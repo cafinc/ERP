@@ -86,8 +86,13 @@ export default function TemplateBuilderPage() {
   const router = useRouter();
   const canvasRef = useRef<HTMLDivElement>(null);
   
+  // Get query parameters
+  const searchParams = new URLSearchParams(typeof window !== 'undefined' ? window.location.search : '');
+  const starterTemplateId = searchParams.get('starter');
+  const templateType = searchParams.get('type') as 'invoice' | 'estimate' | 'agreement' | 'work_order' || 'invoice';
+  
   const [template, setTemplate] = useState<Template>({
-    type: 'invoice',
+    type: templateType,
     name: 'New Template',
     description: '',
     pageSetup: {
