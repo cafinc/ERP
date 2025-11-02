@@ -44,14 +44,14 @@ export default function CreateEquipmentPage() {
         subtitle="Create a new asset entry"
         breadcrumbs={[
           { label: "Home", href: "/" },
-          { label: "Assets", href: "/equipment/dashboard" },
-          { label: "Equipment", href: "/equipment" },
+          { label: "Assets", href: "/asset/dashboard" },
+          { label: "Equipment", href: "/asset" },
           { label: "Add New" }
         ]}
         actions={[
           {
             label: 'Cancel',
-            onClick: () => router.push('/equipment'),
+            onClick: () => router.push('/asset'),
             variant: 'secondary',
           },
         ]}
