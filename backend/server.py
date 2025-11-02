@@ -105,6 +105,7 @@ from ringcentral_service import ringcentral_service
 from webhook_handler import init_webhook_handler
 from automation_engine import AutomationEngine
 from custom_workflow_executor import CustomWorkflowExecutor
+from event_emitter import EventEmitter, set_event_emitter
 from background_scheduler import BackgroundScheduler
 
 ROOT_DIR = Path(__file__).parent
