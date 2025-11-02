@@ -586,37 +586,36 @@ export default function WorkflowEditorPage() {
       {/* Action Selector Modal */}
       {showActionSelector && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full mx-4 max-h-[80vh] overflow-y-auto">
-            <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-gray-900">Select Action Type</h3>
-                <button
-                  onClick={() => setShowActionSelector(false)}
-                  className="p-2 hover:bg-gray-100 rounded-lg"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
+          <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full mx-4 max-h-[80vh] overflow-y-auto p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-semibold text-gray-900">Select Action Type</h3>
+              <button
+                onClick={() => setShowActionSelector(false)}
+                className="p-2 hover:bg-gray-100 rounded-lg"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
 
-              <div className="grid grid-cols-2 gap-3">
-                {actionTypes.map((type) => {
-                  const Icon = type.icon;
-                  return (
-                    <button
-                      key={type.value}
-                      onClick={() => addAction(type.value)}
-                      className="p-4 border-2 border-gray-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 text-left transition-all"
-                    >
-                      <Icon className="w-6 h-6 text-gray-700 mb-2" />
-                      <div className="font-medium text-gray-900">{type.label}</div>
-                      <div className="text-xs text-gray-500 mt-1">Click to add</div></button>
-  );
-                })}
-              </div>
+            <div className="grid grid-cols-2 gap-3">
+              {actionTypes.map((type) => {
+                const Icon = type.icon;
+                return (
+                  <button
+                    key={type.value}
+                    onClick={() => addAction(type.value)}
+                    className="p-4 border-2 border-gray-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 text-left transition-all"
+                  >
+                    <Icon className="w-6 h-6 text-gray-700 mb-2" />
+                    <div className="font-medium text-gray-900">{type.label}</div>
+                    <div className="text-xs text-gray-500 mt-1">Click to add</div>
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>
       )}
-    </PageHeader>
+    </div>
   );
 }
