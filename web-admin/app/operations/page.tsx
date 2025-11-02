@@ -247,6 +247,7 @@ export default function OperationsDashboard() {
       <div className="min-h-screen bg-gray-50 flex flex-col">
         <PageHeader
           title="Operations Dashboard"
+          icon={<BarChart3 size={28} />}
           subtitle="Visual pipeline for all operations"
           breadcrumbs={[
             { label: "Home", href: "/" },
