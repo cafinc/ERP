@@ -492,6 +492,8 @@ export default function MessagesPage() {
                     ) : (
                       <Paperclip className="w-5 h-5 text-gray-600" />
                     )}
+                  </button>
+                  
                   <textarea
                     value={newMessage}
                     onChange={(e) => setNewMessage(e.target.value)}
@@ -513,9 +515,13 @@ export default function MessagesPage() {
                     className="p-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#3f72af]/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <Send className="w-5 h-5" />
+                  </button>
+                </div>
+                
                 <p className="text-xs text-gray-500 mt-2">
                   Press Enter to send, Shift+Enter for new line
                 </p>
+              </div>
             </>
           ) : (
             <div className="flex-1 flex items-center justify-center">
@@ -523,7 +529,11 @@ export default function MessagesPage() {
                 <MessageSquare className="w-16 h-16 text-gray-300 mx-auto mb-4" />
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">No conversation selected</h3>
                 <p className="text-gray-600">Select a conversation from the list or start a new one</p>
+              </div>
+            </div>
           )}
+        </div>
+
         {/* New Conversation Modal */}
         {showNewConversation && (
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
