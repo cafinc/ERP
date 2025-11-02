@@ -276,6 +276,7 @@ export default function MessagesPage() {
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <PageHeader
         title="Messages"
+        icon={<MessageSquare size={28} />}
         subtitle="Manage messages"
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Messages" }]}
       />
