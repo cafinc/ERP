@@ -16,6 +16,14 @@ import {
   Car,
   Package,
   Hammer,
+  TrendingUp,
+  TrendingDown,
+  DollarSign,
+  Calendar,
+  BarChart3,
+  PieChart,
+  Activity,
+  Zap,
 } from 'lucide-react';
 
 export default function AssetDashboardPage() {
