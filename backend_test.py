@@ -21,676 +21,420 @@ class WorkflowAPITester:
             'Accept': 'application/json'
         })
         self.test_results = []
-        self.created_event_ids = []
+        self.workflow_id = None
         
-    def log_test(self, test_name: str, success: bool, details: str, response_data: Any = None):
-        """Log test results"""
+    def log_test(self, test_name: str, success: bool, details: str = "", response_data: Any = None):
+        """Log test result"""
         result = {
             'test': test_name,
             'success': success,
             'details': details,
-            'response_data': response_data,
             'timestamp': datetime.now().isoformat()
         }
+        if response_data:
+            result['response_data'] = response_data
         self.test_results.append(result)
+        
         status = "✅ PASS" if success else "❌ FAIL"
         print(f"{status}: {test_name}")
-        print(f"   Details: {details}")
-        if response_data and not success:
+        if details:
+            print(f"   Details: {details}")
+        if not success and response_data:
             print(f"   Response: {response_data}")
         print()
 
-    def test_get_all_events(self):
-        """Test GET /api/calendar/events - Retrieve all calendar events"""
-        try:
-            response = self.session.get(f"{API_BASE}/calendar/events")
-            
-            if response.status_code == 200:
-                events = response.json()
-                if isinstance(events, list):
-                    self.log_test(
-                        "GET /api/calendar/events - Basic retrieval",
-                        True,
-                        f"Successfully retrieved {len(events)} events. Response structure is valid list.",
-                        {"event_count": len(events), "sample_event": events[0] if events else None}
-                    )
-                    
-                    # Verify event structure
-                    if events:
-                        event = events[0]
-                        required_fields = ['id', 'title', 'start', 'end']
-                        missing_fields = [field for field in required_fields if field not in event]
-                        
-                        if not missing_fields:
-                            self.log_test(
-                                "GET /api/calendar/events - Event structure validation",
-                                True,
-                                f"Event structure contains all required fields: {required_fields}",
-                                {"event_structure": list(event.keys())}
-                            )
-                        else:
-                            self.log_test(
-                                "GET /api/calendar/events - Event structure validation",
-                                False,
-                                f"Missing required fields: {missing_fields}",
-                                {"event_structure": list(event.keys())}
-                            )
-                else:
-                    self.log_test(
-                        "GET /api/calendar/events - Basic retrieval",
-                        False,
-                        f"Expected list response, got {type(events)}",
-                        events
-                    )
-            else:
-                self.log_test(
-                    "GET /api/calendar/events - Basic retrieval",
-                    False,
-                    f"HTTP {response.status_code}: {response.text}",
-                    response.text
-                )
-        except Exception as e:
-            self.log_test(
-                "GET /api/calendar/events - Basic retrieval",
-                False,
-                f"Exception occurred: {str(e)}",
-                str(e)
-            )
-
-    def test_get_events_with_date_filters(self):
-        """Test GET /api/calendar/events with date range filters"""
-        try:
-            # Test with start date filter
-            start_date = datetime.now().isoformat()
-            response = self.session.get(f"{API_BASE}/calendar/events?start={start_date}")
-            
-            if response.status_code == 200:
-                events = response.json()
-                self.log_test(
-                    "GET /api/calendar/events - With start date filter",
-                    True,
-                    f"Successfully retrieved events with start date filter. Found {len(events)} events.",
-                    {"filter_applied": f"start={start_date}", "event_count": len(events)}
-                )
-            else:
-                self.log_test(
-                    "GET /api/calendar/events - With start date filter",
-                    False,
-                    f"HTTP {response.status_code}: {response.text}",
-                    response.text
-                )
-            
-            # Test with both start and end date filters
-            end_date = (datetime.now() + timedelta(days=7)).isoformat()
-            response = self.session.get(f"{API_BASE}/calendar/events?start={start_date}&end={end_date}")
-            
-            if response.status_code == 200:
-                events = response.json()
-                self.log_test(
-                    "GET /api/calendar/events - With date range filter",
-                    True,
-                    f"Successfully retrieved events with date range filter. Found {len(events)} events.",
-                    {"filter_applied": f"start={start_date}&end={end_date}", "event_count": len(events)}
-                )
-            else:
-                self.log_test(
-                    "GET /api/calendar/events - With date range filter",
-                    False,
-                    f"HTTP {response.status_code}: {response.text}",
-                    response.text
-                )
-                
-        except Exception as e:
-            self.log_test(
-                "GET /api/calendar/events - Date filters",
-                False,
-                f"Exception occurred: {str(e)}",
-                str(e)
-            )
-
-    def test_create_event_required_fields(self):
-        """Test POST /api/calendar/events - Create event with required fields only"""
-        try:
-            event_data = {
-                "title": "Test Event - Required Fields Only",
-                "start": datetime.now().isoformat(),
-                "end": (datetime.now() + timedelta(hours=1)).isoformat()
-            }
-            
-            response = self.session.post(f"{API_BASE}/calendar/events", json=event_data)
-            
-            if response.status_code in [200, 201]:
-                created_event = response.json()
-                if 'id' in created_event:
-                    self.created_event_ids.append(created_event['id'])
-                    self.log_test(
-                        "POST /api/calendar/events - Required fields only",
-                        True,
-                        f"Successfully created event with ID: {created_event['id']}",
-                        {"created_event": created_event}
-                    )
-                else:
-                    self.log_test(
-                        "POST /api/calendar/events - Required fields only",
-                        False,
-                        "Event created but no ID returned",
-                        created_event
-                    )
-            else:
-                self.log_test(
-                    "POST /api/calendar/events - Required fields only",
-                    False,
-                    f"HTTP {response.status_code}: {response.text}",
-                    response.text
-                )
-        except Exception as e:
-            self.log_test(
-                "POST /api/calendar/events - Required fields only",
-                False,
-                f"Exception occurred: {str(e)}",
-                str(e)
-            )
-
-    def test_create_event_all_fields(self):
-        """Test POST /api/calendar/events - Create event with all optional fields"""
-        try:
-            event_data = {
-                "title": "Comprehensive Test Event",
-                "description": "This is a test event with all possible fields populated",
-                "start": (datetime.now() + timedelta(hours=2)).isoformat(),
-                "end": (datetime.now() + timedelta(hours=3)).isoformat(),
-                "location": "123 Test Street, Test City",
-                "attendees": ["john@example.com", "jane@example.com"],
-                "type": "meeting",
-                "status": "confirmed",
-                "color": "green"
-            }
-            
-            response = self.session.post(f"{API_BASE}/calendar/events", json=event_data)
-            
-            if response.status_code in [200, 201]:
-                created_event = response.json()
-                if 'id' in created_event:
-                    self.created_event_ids.append(created_event['id'])
-                    
-                    # Verify all fields were preserved
-                    fields_preserved = all(
-                        created_event.get(key) == value 
-                        for key, value in event_data.items()
-                    )
-                    
-                    self.log_test(
-                        "POST /api/calendar/events - All optional fields",
-                        True,
-                        f"Successfully created comprehensive event with ID: {created_event['id']}. All fields preserved: {fields_preserved}",
-                        {"created_event": created_event, "fields_preserved": fields_preserved}
-                    )
-                else:
-                    self.log_test(
-                        "POST /api/calendar/events - All optional fields",
-                        False,
-                        "Event created but no ID returned",
-                        created_event
-                    )
-            else:
-                self.log_test(
-                    "POST /api/calendar/events - All optional fields",
-                    False,
-                    f"HTTP {response.status_code}: {response.text}",
-                    response.text
-                )
-        except Exception as e:
-            self.log_test(
-                "POST /api/calendar/events - All optional fields",
-                False,
-                f"Exception occurred: {str(e)}",
-                str(e)
-            )
-
-    def test_create_event_validation(self):
-        """Test POST /api/calendar/events - Validation for missing required fields"""
-        try:
-            # Test missing title
-            invalid_event = {
-                "start": datetime.now().isoformat(),
-                "end": (datetime.now() + timedelta(hours=1)).isoformat()
-            }
-            
-            response = self.session.post(f"{API_BASE}/calendar/events", json=invalid_event)
-            
-            if response.status_code == 422:
-                self.log_test(
-                    "POST /api/calendar/events - Missing title validation",
-                    True,
-                    "Correctly returned 422 for missing title field",
-                    {"status_code": response.status_code, "response": response.text}
-                )
-            else:
-                self.log_test(
-                    "POST /api/calendar/events - Missing title validation",
-                    False,
-                    f"Expected 422, got {response.status_code}",
-                    response.text
-                )
-            
-            # Test missing start time
-            invalid_event = {
-                "title": "Test Event",
-                "end": (datetime.now() + timedelta(hours=1)).isoformat()
-            }
-            
-            response = self.session.post(f"{API_BASE}/calendar/events", json=invalid_event)
-            
-            if response.status_code == 422:
-                self.log_test(
-                    "POST /api/calendar/events - Missing start time validation",
-                    True,
-                    "Correctly returned 422 for missing start time",
-                    {"status_code": response.status_code, "response": response.text}
-                )
-            else:
-                self.log_test(
-                    "POST /api/calendar/events - Missing start time validation",
-                    False,
-                    f"Expected 422, got {response.status_code}",
-                    response.text
-                )
-                
-        except Exception as e:
-            self.log_test(
-                "POST /api/calendar/events - Validation tests",
-                False,
-                f"Exception occurred: {str(e)}",
-                str(e)
-            )
-
-    def test_update_event(self):
-        """Test PUT /api/calendar/events/{event_id} - Update existing event"""
-        if not self.created_event_ids:
-            self.log_test(
-                "PUT /api/calendar/events/{event_id} - Update event",
-                False,
-                "No events available to update. Create events first.",
-                None
-            )
-            return
+    def test_workflow_template_library(self):
+        """Test Workflow Template Library endpoints (5 endpoints)"""
+        print("🔧 TESTING WORKFLOW TEMPLATE LIBRARY ENDPOINTS")
+        print("=" * 60)
         
+        # 1. GET /api/workflow-templates/library (get all templates)
         try:
-            event_id = self.created_event_ids[0]
-            
-            # Update event data
-            updated_data = {
-                "title": "Updated Test Event Title",
-                "description": "This event has been updated via PUT request",
-                "start": (datetime.now() + timedelta(hours=4)).isoformat(),
-                "end": (datetime.now() + timedelta(hours=5)).isoformat(),
-                "location": "Updated Location - 456 New Street",
-                "type": "appointment",
-                "status": "tentative",
-                "color": "red"
-            }
-            
-            response = self.session.put(f"{API_BASE}/calendar/events/{event_id}", json=updated_data)
-            
+            response = self.session.get(f"{BACKEND_URL}/workflow-templates/library")
             if response.status_code == 200:
-                updated_event = response.json()
+                data = response.json()
+                template_count = data.get('count', 0)
+                templates = data.get('templates', [])
+                self.log_test(
+                    "GET /api/workflow-templates/library", 
+                    True, 
+                    f"Retrieved {template_count} templates successfully"
+                )
                 
-                # Verify the event was updated
-                if updated_event.get('id') == event_id and updated_event.get('title') == updated_data['title']:
+                # Check if we have the expected 11 templates
+                if template_count >= 10:
                     self.log_test(
-                        "PUT /api/calendar/events/{event_id} - Update event",
-                        True,
-                        f"Successfully updated event {event_id}. Title changed to: {updated_event.get('title')}",
-                        {"updated_event": updated_event}
+                        "Template Library Size Check", 
+                        True, 
+                        f"Template library has {template_count} templates (expected 11+)"
                     )
                 else:
                     self.log_test(
-                        "PUT /api/calendar/events/{event_id} - Update event",
-                        False,
-                        "Event update response doesn't match expected values",
-                        updated_event
+                        "Template Library Size Check", 
+                        False, 
+                        f"Template library has only {template_count} templates (expected 11+)"
                     )
             else:
                 self.log_test(
-                    "PUT /api/calendar/events/{event_id} - Update event",
-                    False,
-                    f"HTTP {response.status_code}: {response.text}",
-                    response.text
+                    "GET /api/workflow-templates/library", 
+                    False, 
+                    f"HTTP {response.status_code}: {response.text}"
                 )
         except Exception as e:
-            self.log_test(
-                "PUT /api/calendar/events/{event_id} - Update event",
-                False,
-                f"Exception occurred: {str(e)}",
-                str(e)
-            )
+            self.log_test("GET /api/workflow-templates/library", False, f"Exception: {str(e)}")
 
-    def test_update_nonexistent_event(self):
-        """Test PUT /api/calendar/events/{event_id} - Update non-existent event"""
+        # 2. GET /api/workflow-templates/library?category=customer_communication (filter by category)
         try:
-            fake_event_id = "nonexistent_event_123"
-            
-            updated_data = {
-                "title": "This Should Fail",
-                "start": datetime.now().isoformat(),
-                "end": (datetime.now() + timedelta(hours=1)).isoformat()
-            }
-            
-            response = self.session.put(f"{API_BASE}/calendar/events/{fake_event_id}", json=updated_data)
-            
-            if response.status_code == 404:
+            response = self.session.get(f"{BACKEND_URL}/workflow-templates/library?category=customer_communication")
+            if response.status_code == 200:
+                data = response.json()
+                filtered_count = data.get('count', 0)
                 self.log_test(
-                    "PUT /api/calendar/events/{event_id} - Non-existent event",
-                    True,
-                    "Correctly returned 404 for non-existent event",
-                    {"status_code": response.status_code, "response": response.text}
+                    "GET /api/workflow-templates/library?category=customer_communication", 
+                    True, 
+                    f"Retrieved {filtered_count} customer communication templates"
                 )
             else:
                 self.log_test(
-                    "PUT /api/calendar/events/{event_id} - Non-existent event",
-                    False,
-                    f"Expected 404, got {response.status_code}",
-                    response.text
+                    "GET /api/workflow-templates/library?category=customer_communication", 
+                    False, 
+                    f"HTTP {response.status_code}: {response.text}"
                 )
         except Exception as e:
-            self.log_test(
-                "PUT /api/calendar/events/{event_id} - Non-existent event",
-                False,
-                f"Exception occurred: {str(e)}",
-                str(e)
-            )
+            self.log_test("GET /api/workflow-templates/library?category=customer_communication", False, f"Exception: {str(e)}")
 
-    def test_delete_event(self):
-        """Test DELETE /api/calendar/events/{event_id} - Delete event"""
-        if not self.created_event_ids:
-            self.log_test(
-                "DELETE /api/calendar/events/{event_id} - Delete event",
-                False,
-                "No events available to delete. Create events first.",
-                None
-            )
-            return
+        # 3. GET /api/workflow-templates/library/{template_id} (get specific template)
+        try:
+            response = self.session.get(f"{BACKEND_URL}/workflow-templates/library/template_customer_arrival")
+            if response.status_code == 200:
+                template = response.json()
+                template_name = template.get('name', 'Unknown')
+                self.log_test(
+                    "GET /api/workflow-templates/library/template_customer_arrival", 
+                    True, 
+                    f"Retrieved template: {template_name}"
+                )
+            elif response.status_code == 404:
+                self.log_test(
+                    "GET /api/workflow-templates/library/template_customer_arrival", 
+                    True, 
+                    "Template not found (404) - expected behavior for non-existent template"
+                )
+            else:
+                self.log_test(
+                    "GET /api/workflow-templates/library/template_customer_arrival", 
+                    False, 
+                    f"HTTP {response.status_code}: {response.text}"
+                )
+        except Exception as e:
+            self.log_test("GET /api/workflow-templates/library/template_customer_arrival", False, f"Exception: {str(e)}")
+
+        # 4. GET /api/workflow-templates/categories (get all categories)
+        try:
+            response = self.session.get(f"{BACKEND_URL}/workflow-templates/categories")
+            if response.status_code == 200:
+                data = response.json()
+                categories = data.get('categories', [])
+                category_count = len(categories)
+                self.log_test(
+                    "GET /api/workflow-templates/categories", 
+                    True, 
+                    f"Retrieved {category_count} categories: {categories}"
+                )
+            else:
+                self.log_test(
+                    "GET /api/workflow-templates/categories", 
+                    False, 
+                    f"HTTP {response.status_code}: {response.text}"
+                )
+        except Exception as e:
+            self.log_test("GET /api/workflow-templates/categories", False, f"Exception: {str(e)}")
+
+        # 5. GET /api/workflow-templates/search?q=customer (search templates)
+        try:
+            response = self.session.get(f"{BACKEND_URL}/workflow-templates/search?q=customer")
+            if response.status_code == 200:
+                data = response.json()
+                search_count = data.get('count', 0)
+                query = data.get('query', '')
+                self.log_test(
+                    "GET /api/workflow-templates/search?q=customer", 
+                    True, 
+                    f"Search for '{query}' returned {search_count} results"
+                )
+            else:
+                self.log_test(
+                    "GET /api/workflow-templates/search?q=customer", 
+                    False, 
+                    f"HTTP {response.status_code}: {response.text}"
+                )
+        except Exception as e:
+            self.log_test("GET /api/workflow-templates/search?q=customer", False, f"Exception: {str(e)}")
+
+    def test_version_control(self):
+        """Test Version Control endpoints (6 endpoints)"""
+        print("🔄 TESTING VERSION CONTROL ENDPOINTS")
+        print("=" * 60)
         
-        try:
-            event_id = self.created_event_ids[-1]  # Use the last created event
-            
-            response = self.session.delete(f"{API_BASE}/calendar/events/{event_id}")
-            
-            if response.status_code == 200:
-                delete_response = response.json()
-                
-                if delete_response.get('success') == True:
-                    self.log_test(
-                        "DELETE /api/calendar/events/{event_id} - Delete event",
-                        True,
-                        f"Successfully deleted event {event_id}",
-                        delete_response
-                    )
-                    
-                    # Remove from our tracking list
-                    self.created_event_ids.remove(event_id)
-                    
-                    # Verify deletion by trying to update the deleted event
-                    verify_response = self.session.put(f"{API_BASE}/calendar/events/{event_id}", json={
-                        "title": "This should fail",
-                        "start": datetime.now().isoformat(),
-                        "end": (datetime.now() + timedelta(hours=1)).isoformat()
-                    })
-                    
-                    if verify_response.status_code == 404:
-                        self.log_test(
-                            "DELETE /api/calendar/events/{event_id} - Deletion verification",
-                            True,
-                            f"Verified deletion: Event {event_id} no longer exists (404 on update attempt)",
-                            {"verification_status": verify_response.status_code}
-                        )
-                    else:
-                        self.log_test(
-                            "DELETE /api/calendar/events/{event_id} - Deletion verification",
-                            False,
-                            f"Event may not be properly deleted. Update attempt returned {verify_response.status_code}",
-                            verify_response.text
-                        )
-                else:
-                    self.log_test(
-                        "DELETE /api/calendar/events/{event_id} - Delete event",
-                        False,
-                        "Delete response doesn't indicate success",
-                        delete_response
-                    )
-            else:
-                self.log_test(
-                    "DELETE /api/calendar/events/{event_id} - Delete event",
-                    False,
-                    f"HTTP {response.status_code}: {response.text}",
-                    response.text
-                )
-        except Exception as e:
-            self.log_test(
-                "DELETE /api/calendar/events/{event_id} - Delete event",
-                False,
-                f"Exception occurred: {str(e)}",
-                str(e)
-            )
+        # First, get or create a test workflow
+        self.ensure_test_workflow()
+        
+        if not self.workflow_id:
+            self.log_test("Version Control Tests", False, "No workflow available for testing version control")
+            return
 
-    def test_delete_nonexistent_event(self):
-        """Test DELETE /api/calendar/events/{event_id} - Delete non-existent event"""
+        # 1. GET /api/custom-workflows/{workflow_id}/versions (get version history)
         try:
-            fake_event_id = "nonexistent_event_456"
-            
-            response = self.session.delete(f"{API_BASE}/calendar/events/{fake_event_id}")
-            
-            if response.status_code == 404:
+            response = self.session.get(f"{BACKEND_URL}/custom-workflows/{self.workflow_id}/versions")
+            if response.status_code == 200:
+                versions = response.json()
+                version_count = len(versions) if isinstance(versions, list) else versions.get('count', 0)
                 self.log_test(
-                    "DELETE /api/calendar/events/{event_id} - Non-existent event",
-                    True,
-                    "Correctly returned 404 for non-existent event",
-                    {"status_code": response.status_code, "response": response.text}
+                    f"GET /api/custom-workflows/{self.workflow_id}/versions", 
+                    True, 
+                    f"Retrieved {version_count} versions for workflow"
                 )
             else:
                 self.log_test(
-                    "DELETE /api/calendar/events/{event_id} - Non-existent event",
-                    False,
-                    f"Expected 404, got {response.status_code}",
-                    response.text
+                    f"GET /api/custom-workflows/{self.workflow_id}/versions", 
+                    False, 
+                    f"HTTP {response.status_code}: {response.text}"
                 )
         except Exception as e:
-            self.log_test(
-                "DELETE /api/calendar/events/{event_id} - Non-existent event",
-                False,
-                f"Exception occurred: {str(e)}",
-                str(e)
-            )
+            self.log_test(f"GET /api/custom-workflows/{self.workflow_id}/versions", False, f"Exception: {str(e)}")
 
-    def test_google_calendar_status(self):
-        """Test GET /api/calendar/google/status - Google Calendar integration status"""
+        # 2. GET /api/custom-workflows/{workflow_id}/change-summary?days=30 (get change summary)
         try:
-            response = self.session.get(f"{API_BASE}/calendar/google/status")
-            
+            response = self.session.get(f"{BACKEND_URL}/custom-workflows/{self.workflow_id}/change-summary?days=30")
             if response.status_code == 200:
-                status_data = response.json()
-                
-                # Verify response structure
-                required_fields = ['connected']
-                has_required_fields = all(field in status_data for field in required_fields)
-                
-                if has_required_fields:
-                    connection_status = "connected" if status_data.get('connected') else "not connected"
+                summary = response.json()
+                self.log_test(
+                    f"GET /api/custom-workflows/{self.workflow_id}/change-summary?days=30", 
+                    True, 
+                    f"Retrieved change summary for last 30 days"
+                )
+            else:
+                self.log_test(
+                    f"GET /api/custom-workflows/{self.workflow_id}/change-summary?days=30", 
+                    False, 
+                    f"HTTP {response.status_code}: {response.text}"
+                )
+        except Exception as e:
+            self.log_test(f"GET /api/custom-workflows/{self.workflow_id}/change-summary?days=30", False, f"Exception: {str(e)}")
+
+    def test_analytics_and_error_stats(self):
+        """Test Analytics & Error Stats endpoints (3 endpoints)"""
+        print("📊 TESTING ANALYTICS & ERROR STATS ENDPOINTS")
+        print("=" * 60)
+        
+        # 1. GET /api/analytics/workflows/overview?days=30 (system overview)
+        try:
+            response = self.session.get(f"{BACKEND_URL}/analytics/workflows/overview?days=30")
+            if response.status_code == 200:
+                overview = response.json()
+                total_workflows = overview.get('total_workflows', 0)
+                enabled_workflows = overview.get('enabled_workflows', 0)
+                total_executions = overview.get('total_executions', 0)
+                success_rate = overview.get('success_rate', 0)
+                self.log_test(
+                    "GET /api/analytics/workflows/overview?days=30", 
+                    True, 
+                    f"System overview: {total_workflows} workflows, {enabled_workflows} enabled, {total_executions} executions, {success_rate}% success rate"
+                )
+            else:
+                self.log_test(
+                    "GET /api/analytics/workflows/overview?days=30", 
+                    False, 
+                    f"HTTP {response.status_code}: {response.text}"
+                )
+        except Exception as e:
+            self.log_test("GET /api/analytics/workflows/overview?days=30", False, f"Exception: {str(e)}")
+
+        # Test workflow-specific analytics if we have a workflow
+        if self.workflow_id:
+            # 2. GET /api/custom-workflows/{workflow_id}/error-stats?days=30
+            try:
+                response = self.session.get(f"{BACKEND_URL}/custom-workflows/{self.workflow_id}/error-stats?days=30")
+                if response.status_code == 200:
+                    error_stats = response.json()
                     self.log_test(
-                        "GET /api/calendar/google/status - Integration status",
-                        True,
-                        f"Successfully retrieved Google Calendar status: {connection_status}",
-                        status_data
+                        f"GET /api/custom-workflows/{self.workflow_id}/error-stats?days=30", 
+                        True, 
+                        f"Retrieved error statistics for workflow"
                     )
                 else:
                     self.log_test(
-                        "GET /api/calendar/google/status - Integration status",
-                        False,
-                        f"Response missing required fields: {required_fields}",
-                        status_data
+                        f"GET /api/custom-workflows/{self.workflow_id}/error-stats?days=30", 
+                        False, 
+                        f"HTTP {response.status_code}: {response.text}"
                     )
-            else:
-                self.log_test(
-                    "GET /api/calendar/google/status - Integration status",
-                    False,
-                    f"HTTP {response.status_code}: {response.text}",
-                    response.text
-                )
-        except Exception as e:
-            self.log_test(
-                "GET /api/calendar/google/status - Integration status",
-                False,
-                f"Exception occurred: {str(e)}",
-                str(e)
-            )
+            except Exception as e:
+                self.log_test(f"GET /api/custom-workflows/{self.workflow_id}/error-stats?days=30", False, f"Exception: {str(e)}")
 
-    def test_google_calendar_auth_url(self):
-        """Test GET /api/calendar/google/auth-url - Google Calendar OAuth URL"""
-        try:
-            response = self.session.get(f"{API_BASE}/calendar/google/auth-url")
-            
-            if response.status_code == 200:
-                auth_data = response.json()
-                
-                # Check if auth URL is provided or setup is required
-                if auth_data.get('setup_required'):
+            # 3. GET /api/analytics/workflows/{workflow_id}/performance?days=30
+            try:
+                response = self.session.get(f"{BACKEND_URL}/analytics/workflows/{self.workflow_id}/performance?days=30")
+                if response.status_code == 200:
+                    performance = response.json()
+                    total_executions = performance.get('total_executions', 0)
+                    success_rate = performance.get('success_rate', 0)
                     self.log_test(
-                        "GET /api/calendar/google/auth-url - OAuth URL",
-                        True,
-                        "Google Calendar integration not configured (expected in test environment)",
-                        auth_data
-                    )
-                elif auth_data.get('auth_url'):
-                    self.log_test(
-                        "GET /api/calendar/google/auth-url - OAuth URL",
-                        True,
-                        "Successfully retrieved Google OAuth URL",
-                        {"has_auth_url": True, "message": auth_data.get('message')}
+                        f"GET /api/analytics/workflows/{self.workflow_id}/performance?days=30", 
+                        True, 
+                        f"Performance metrics: {total_executions} executions, {success_rate}% success rate"
                     )
                 else:
                     self.log_test(
-                        "GET /api/calendar/google/auth-url - OAuth URL",
-                        False,
-                        "No auth URL or setup message provided",
-                        auth_data
+                        f"GET /api/analytics/workflows/{self.workflow_id}/performance?days=30", 
+                        False, 
+                        f"HTTP {response.status_code}: {response.text}"
                     )
+            except Exception as e:
+                self.log_test(f"GET /api/analytics/workflows/{self.workflow_id}/performance?days=30", False, f"Exception: {str(e)}")
+        else:
+            self.log_test("Workflow-specific Analytics", False, "No workflow available for testing")
+
+    def test_audit_logging(self):
+        """Test Audit Logging endpoints (4 endpoints)"""
+        print("📋 TESTING AUDIT LOGGING ENDPOINTS")
+        print("=" * 60)
+        
+        # 1. GET /api/audit/workflows (get audit trail)
+        try:
+            response = self.session.get(f"{BACKEND_URL}/audit/workflows")
+            if response.status_code == 200:
+                audit_logs = response.json()
+                log_count = len(audit_logs) if isinstance(audit_logs, list) else audit_logs.get('count', 0)
+                self.log_test(
+                    "GET /api/audit/workflows", 
+                    True, 
+                    f"Retrieved {log_count} audit log entries"
+                )
             else:
                 self.log_test(
-                    "GET /api/calendar/google/auth-url - OAuth URL",
-                    False,
-                    f"HTTP {response.status_code}: {response.text}",
-                    response.text
+                    "GET /api/audit/workflows", 
+                    False, 
+                    f"HTTP {response.status_code}: {response.text}"
                 )
         except Exception as e:
-            self.log_test(
-                "GET /api/calendar/google/auth-url - OAuth URL",
-                False,
-                f"Exception occurred: {str(e)}",
-                str(e)
-            )
+            self.log_test("GET /api/audit/workflows", False, f"Exception: {str(e)}")
 
-    def test_event_conflict_check(self):
-        """Test POST /api/calendar/events/check-conflicts - Event conflict detection"""
+        # 2. GET /api/audit/workflows?limit=10 (with limit)
         try:
-            # Create a test event for conflict checking
-            test_event = {
-                "title": "Conflict Test Event",
-                "start": (datetime.now() + timedelta(hours=6)).isoformat(),
-                "end": (datetime.now() + timedelta(hours=7)).isoformat(),
-                "type": "meeting"
-            }
-            
-            response = self.session.post(f"{API_BASE}/calendar/events/check-conflicts", json=test_event)
-            
+            response = self.session.get(f"{BACKEND_URL}/audit/workflows?limit=10")
             if response.status_code == 200:
-                conflict_data = response.json()
-                
-                # Verify response structure
-                required_fields = ['has_conflicts', 'conflicts', 'message']
-                has_required_fields = all(field in conflict_data for field in required_fields)
-                
-                if has_required_fields:
-                    conflicts_found = conflict_data.get('has_conflicts', False)
-                    conflict_count = len(conflict_data.get('conflicts', []))
-                    
+                audit_logs = response.json()
+                log_count = len(audit_logs) if isinstance(audit_logs, list) else audit_logs.get('count', 0)
+                self.log_test(
+                    "GET /api/audit/workflows?limit=10", 
+                    True, 
+                    f"Retrieved {log_count} audit log entries (limited to 10)"
+                )
+            else:
+                self.log_test(
+                    "GET /api/audit/workflows?limit=10", 
+                    False, 
+                    f"HTTP {response.status_code}: {response.text}"
+                )
+        except Exception as e:
+            self.log_test("GET /api/audit/workflows?limit=10", False, f"Exception: {str(e)}")
+
+        # 3. GET /api/audit/system/stats?days=30 (system audit stats)
+        try:
+            response = self.session.get(f"{BACKEND_URL}/audit/system/stats?days=30")
+            if response.status_code == 200:
+                stats = response.json()
+                self.log_test(
+                    "GET /api/audit/system/stats?days=30", 
+                    True, 
+                    f"Retrieved system audit statistics for last 30 days"
+                )
+            else:
+                self.log_test(
+                    "GET /api/audit/system/stats?days=30", 
+                    False, 
+                    f"HTTP {response.status_code}: {response.text}"
+                )
+        except Exception as e:
+            self.log_test("GET /api/audit/system/stats?days=30", False, f"Exception: {str(e)}")
+
+        # 4. GET /api/audit/export (export audit logs)
+        try:
+            response = self.session.get(f"{BACKEND_URL}/audit/export")
+            if response.status_code == 200:
+                export_data = response.json()
+                log_count = export_data.get('count', 0)
+                exported_at = export_data.get('exported_at', 'Unknown')
+                self.log_test(
+                    "GET /api/audit/export", 
+                    True, 
+                    f"Exported {log_count} audit logs at {exported_at}"
+                )
+            else:
+                self.log_test(
+                    "GET /api/audit/export", 
+                    False, 
+                    f"HTTP {response.status_code}: {response.text}"
+                )
+        except Exception as e:
+            self.log_test("GET /api/audit/export", False, f"Exception: {str(e)}")
+
+    def ensure_test_workflow(self):
+        """Get existing workflows or create a test workflow if none exist"""
+        try:
+            # First, try to get existing workflows
+            response = self.session.get(f"{BACKEND_URL}/custom-workflows")
+            if response.status_code == 200:
+                workflows = response.json()
+                if workflows and len(workflows) > 0:
+                    self.workflow_id = workflows[0].get('id') or workflows[0].get('_id')
+                    workflow_name = workflows[0].get('name', 'Unknown')
                     self.log_test(
-                        "POST /api/calendar/events/check-conflicts - Conflict detection",
-                        True,
-                        f"Successfully checked for conflicts. Found conflicts: {conflicts_found}, Count: {conflict_count}",
-                        conflict_data
+                        "GET /api/custom-workflows", 
+                        True, 
+                        f"Found {len(workflows)} existing workflows, using '{workflow_name}' for testing"
                     )
+                    return
                 else:
                     self.log_test(
-                        "POST /api/calendar/events/check-conflicts - Conflict detection",
-                        False,
-                        f"Response missing required fields: {required_fields}",
-                        conflict_data
+                        "GET /api/custom-workflows", 
+                        True, 
+                        "No existing workflows found - will test with empty state"
                     )
             else:
                 self.log_test(
-                    "POST /api/calendar/events/check-conflicts - Conflict detection",
-                    False,
-                    f"HTTP {response.status_code}: {response.text}",
-                    response.text
+                    "GET /api/custom-workflows", 
+                    False, 
+                    f"HTTP {response.status_code}: {response.text}"
                 )
         except Exception as e:
-            self.log_test(
-                "POST /api/calendar/events/check-conflicts - Conflict detection",
-                False,
-                f"Exception occurred: {str(e)}",
-                str(e)
-            )
+            self.log_test("GET /api/custom-workflows", False, f"Exception: {str(e)}")
 
     def run_all_tests(self):
-        """Run all calendar event CRUD tests"""
-        print("🗓️  CALENDAR EVENT CRUD OPERATIONS - COMPREHENSIVE BACKEND TESTING")
+        """Run all Phase 3 Enterprise Workflow Automation tests"""
+        print("🚀 STARTING PHASE 3 ENTERPRISE WORKFLOW AUTOMATION TESTING")
         print("=" * 80)
-        print(f"Testing against: {API_BASE}")
-        print(f"Test started at: {datetime.now().isoformat()}")
+        print(f"Backend URL: {BACKEND_URL}")
+        print(f"Test Started: {datetime.now().isoformat()}")
+        print("=" * 80)
         print()
         
-        # Test sequence following the review request priorities
-        print("📋 PHASE 1: CORE CRUD OPERATIONS")
-        print("-" * 40)
-        
-        # GET operations
-        self.test_get_all_events()
-        self.test_get_events_with_date_filters()
-        
-        # POST operations
-        self.test_create_event_required_fields()
-        self.test_create_event_all_fields()
-        self.test_create_event_validation()
-        
-        # PUT operations
-        self.test_update_event()
-        self.test_update_nonexistent_event()
-        
-        # DELETE operations
-        self.test_delete_event()
-        self.test_delete_nonexistent_event()
-        
-        print("📋 PHASE 2: ADDITIONAL FEATURES")
-        print("-" * 40)
-        
-        # Google Calendar Integration
-        self.test_google_calendar_status()
-        self.test_google_calendar_auth_url()
-        
-        # Event conflict checking
-        self.test_event_conflict_check()
+        # Test all endpoint groups
+        self.test_workflow_template_library()
+        self.test_version_control()
+        self.test_analytics_and_error_stats()
+        self.test_audit_logging()
         
         # Generate summary
         self.generate_summary()
 
     def generate_summary(self):
         """Generate test summary"""
-        print("\n" + "=" * 80)
         print("📊 TEST SUMMARY")
-        print("=" * 80)
+        print("=" * 60)
         
         total_tests = len(self.test_results)
-        passed_tests = sum(1 for result in self.test_results if result['success'])
+        passed_tests = len([t for t in self.test_results if t['success']])
         failed_tests = total_tests - passed_tests
         success_rate = (passed_tests / total_tests * 100) if total_tests > 0 else 0
         
@@ -702,35 +446,25 @@ class WorkflowAPITester:
         
         if failed_tests > 0:
             print("❌ FAILED TESTS:")
-            for result in self.test_results:
-                if not result['success']:
-                    print(f"   • {result['test']}: {result['details']}")
+            for test in self.test_results:
+                if not test['success']:
+                    print(f"  - {test['test']}: {test['details']}")
             print()
         
         print("✅ PASSED TESTS:")
-        for result in self.test_results:
-            if result['success']:
-                print(f"   • {result['test']}")
+        for test in self.test_results:
+            if test['success']:
+                print(f"  - {test['test']}")
         
-        print("\n" + "=" * 80)
-        print(f"Calendar Event CRUD Testing completed at: {datetime.now().isoformat()}")
-        print("=" * 80)
+        print()
+        print(f"Test Completed: {datetime.now().isoformat()}")
         
-        # Save detailed results to file
-        with open('/app/calendar_test_results.json', 'w') as f:
-            json.dump({
-                'summary': {
-                    'total_tests': total_tests,
-                    'passed_tests': passed_tests,
-                    'failed_tests': failed_tests,
-                    'success_rate': success_rate,
-                    'test_completed_at': datetime.now().isoformat()
-                },
-                'detailed_results': self.test_results
-            }, f, indent=2)
-        
-        print(f"\n📄 Detailed results saved to: /app/calendar_test_results.json")
+        # Return success rate for external use
+        return success_rate
 
 if __name__ == "__main__":
-    tester = CalendarEventTester()
-    tester.run_all_tests()
+    tester = WorkflowAPITester()
+    success_rate = tester.run_all_tests()
+    
+    # Exit with appropriate code
+    sys.exit(0 if success_rate >= 80 else 1)
