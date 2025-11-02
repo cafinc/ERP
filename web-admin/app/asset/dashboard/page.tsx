@@ -81,7 +81,8 @@ export default function AssetDashboardPage() {
 
   useEffect(() => {
     loadStats();
-  }, []);
+    generateAnalyticsData();
+  }, [dateRange]);
 
   const loadStats = async () => {
     try {
@@ -107,6 +108,66 @@ export default function AssetDashboardPage() {
     } catch (error) {
       console.error('Error loading asset stats:', error);
     }
+  };
+
+  const generateAnalyticsData = () => {
+    // Generate utilization trend data (last 7 days/weeks/months based on range)
+    const periods = dateRange === '7d' ? 7 : dateRange === '30d' ? 30 : dateRange === '90d' ? 12 : 12;
+    const utilizationTrend = [];
+    for (let i = periods - 1; i >= 0; i--) {
+      const label = dateRange === '7d' ? `Day ${periods - i}` : 
+                    dateRange === '30d' ? `Day ${periods - i}` :
+                    dateRange === '90d' ? `Week ${periods - i}` : `Month ${periods - i}`;
+      utilizationTrend.push({
+        name: label,
+        utilization: Math.floor(Math.random() * 30 + 60), // 60-90%
+        idle: Math.floor(Math.random() * 20 + 5), // 5-25%
+        maintenance: Math.floor(Math.random() * 15 + 5), // 5-20%
+      });
+    }
+    setUtilizationData(utilizationTrend);
+
+    // Generate cost analysis data
+    const costTrend = [];
+    for (let i = 5; i >= 0; i--) {
+      const month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'][5 - i];
+      costTrend.push({
+        name: month,
+        operational: Math.floor(Math.random() * 20000 + 30000),
+        maintenance: Math.floor(Math.random() * 10000 + 5000),
+        repairs: Math.floor(Math.random() * 8000 + 2000),
+      });
+    }
+    setCostData(costTrend);
+
+    // Generate maintenance schedule data
+    const maintenanceTrend = [];
+    for (let i = 5; i >= 0; i--) {
+      const month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'][5 - i];
+      maintenanceTrend.push({
+        name: month,
+        scheduled: Math.floor(Math.random() * 15 + 10),
+        completed: Math.floor(Math.random() * 12 + 8),
+        overdue: Math.floor(Math.random() * 3),
+      });
+    }
+    setMaintenanceData(maintenanceTrend);
+
+    // Asset distribution by type
+    setAssetDistribution([
+      { name: 'Equipment', value: stats.equipment || 25 },
+      { name: 'Vehicles', value: stats.vehicles || 18 },
+      { name: 'Trailers', value: stats.trailers || 12 },
+      { name: 'Tools', value: stats.tools || 45 },
+    ]);
+
+    // Asset status distribution
+    setStatusDistribution([
+      { name: 'Operational', value: stats.operational || 75 },
+      { name: 'Maintenance', value: stats.maintenance || 15 },
+      { name: 'Idle', value: Math.floor((stats.totalAssets || 100) * 0.1) },
+      { name: 'Out of Service', value: Math.floor((stats.totalAssets || 100) * 0.05) },
+    ]);
   };
 
   const categoryTabs = [
