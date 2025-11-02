@@ -12162,6 +12162,11 @@ automation_engine = AutomationEngine(db)
 custom_workflow_executor = CustomWorkflowExecutor(db)
 background_scheduler = BackgroundScheduler(db, automation_engine, custom_workflow_executor)
 
+# Initialize event emitter
+event_emitter = EventEmitter(db, custom_workflow_executor)
+set_event_emitter(event_emitter)
+logger.info("Event emitter initialized")
+
 @api_router.post("/automation/trigger/{workflow_name}", tags=["Automation"])
 async def trigger_workflow(workflow_name: str, context: Dict):
     """
