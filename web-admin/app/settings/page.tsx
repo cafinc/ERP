@@ -156,6 +156,14 @@ export default function SettingsPage() {
           badge: 'Central Hub'
         },
         {
+          icon: Key,
+          title: 'API Settings',
+          description: 'API keys, endpoints, and developer settings',
+          href: '/settings/api',
+          color: 'purple',
+          badge: 'Developer'
+        },
+        {
           icon: Mail,
           title: 'Email Configuration',
           description: 'SMTP settings and email service providers',
