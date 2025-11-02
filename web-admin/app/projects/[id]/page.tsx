@@ -206,17 +206,18 @@ export default function ProjectDetailPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex flex-col">
-      <PageHeader
-        title="Projects Details"
-        subtitle="View and manage details"
-        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Projects", href: "/projects" }, { label: "Details" }]}
-      />
-      <div className="flex-1 overflow-auto p-6">
-        <div className="flex items-center justify-center h-full">
-          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
-        </div></div>
+        <PageHeader
+          title="Projects Details"
+          subtitle="View and manage details"
+          breadcrumbs={[{ label: "Home", href: "/" }, { label: "Projects", href: "/projects" }, { label: "Details" }]}
+        />
+        <div className="flex-1 overflow-auto p-6">
+          <div className="flex items-center justify-center h-full">
+            <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
+          </div>
+        </div>
       </div>
-          );
+    );
   }
 
   if (!project) {
