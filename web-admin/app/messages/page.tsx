@@ -443,9 +443,11 @@ export default function MessagesPage() {
                           </div>
                         </div>
                       </div>
-                    );
-                  })}
-                  <div ref={messagesEndRef} />
+                    </div>
+                  );
+                })}
+                <div ref={messagesEndRef} />
+              </div>
 
               {/* Message Input */}
               <div className="p-4 bg-white border-t border-gray-200">
