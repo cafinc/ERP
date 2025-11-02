@@ -128,6 +128,7 @@ export default function ContactsPage() {
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <PageHeader
         title="Contacts"
+        icon={<Users size={28} />}
         subtitle="Manage contacts"
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Ringcentral", href: "/ringcentral" }, { label: "Contacts" }]}
       />
