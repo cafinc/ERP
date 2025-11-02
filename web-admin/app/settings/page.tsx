@@ -145,7 +145,16 @@ export default function SettingsPage() {
     },
     {
       category: 'Integrations',
+      description: 'Connect and manage third-party services',
       items: [
+        {
+          icon: Link2,
+          title: 'Integration Hub',
+          description: 'Manage all third-party integrations and connections',
+          href: '/integrations',
+          color: 'blue',
+          badge: 'Central Hub'
+        },
         {
           icon: Mail,
           title: 'Email Configuration',
