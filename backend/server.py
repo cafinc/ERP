@@ -12573,6 +12573,379 @@ async def get_workflow_templates():
 
 logger.info("Custom workflow management endpoints registered successfully")
 
+# ==================== ENTERPRISE WORKFLOW FEATURES ====================
+
+# ===== Error Handling & Retry Endpoints =====
+
+@api_router.get("/custom-workflows/{workflow_id}/error-stats", tags=["Workflow Analytics"])
+async def get_workflow_error_stats(workflow_id: str, days: int = 30):
+    """Get comprehensive error statistics for a workflow"""
+    try:
+        stats = await retry_handler.get_workflow_error_summary(workflow_id, days)
+        return stats
+    except Exception as e:
+        logger.error(f"Error getting workflow error stats: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.get("/custom-workflows/{workflow_id}/actions/{action_name}/errors", tags=["Workflow Analytics"])
+async def get_action_error_stats(workflow_id: str, action_name: str, days: int = 7):
+    """Get error statistics for a specific action"""
+    try:
+        stats = await retry_handler.get_action_error_stats(workflow_id, action_name, days)
+        return stats
+    except Exception as e:
+        logger.error(f"Error getting action error stats: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+# ===== Version Control Endpoints =====
+
+@api_router.post("/custom-workflows/{workflow_id}/versions", tags=["Workflow Versions"])
+async def create_workflow_version(
+    workflow_id: str, 
+    version_data: dict,
+    current_user: dict = Depends(get_current_user)
+):
+    """
+    Create a new version of a workflow
+    
+    Body:
+    {
+        "workflow_data": {...},
+        "change_description": "Added new notification action"
+    }
+    """
+    try:
+        user_id = current_user.get('_id') or current_user.get('id')
+        
+        version = await version_control.create_version(
+            workflow_id=workflow_id,
+            workflow_data=version_data.get('workflow_data'),
+            change_description=version_data.get('change_description', 'Manual save'),
+            changed_by=str(user_id)
+        )
+        
+        # Log audit event
+        await audit_logger.log_event(
+            event_type=AuditEventType.VERSION_CREATED,
+            workflow_id=workflow_id,
+            user_id=str(user_id),
+            details={'version_number': version['version_number']}
+        )
+        
+        return version
+    except Exception as e:
+        logger.error(f"Error creating workflow version: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.get("/custom-workflows/{workflow_id}/versions", tags=["Workflow Versions"])
+async def get_version_history(workflow_id: str, limit: int = 50):
+    """Get version history for a workflow"""
+    try:
+        versions = await version_control.get_version_history(workflow_id, limit)
+        return versions
+    except Exception as e:
+        logger.error(f"Error getting version history: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.get("/custom-workflows/{workflow_id}/versions/{version_number}", tags=["Workflow Versions"])
+async def get_specific_version(workflow_id: str, version_number: int):
+    """Get a specific version of a workflow"""
+    try:
+        version = await version_control.get_specific_version(workflow_id, version_number)
+        if not version:
+            raise HTTPException(status_code=404, detail="Version not found")
+        return version
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error getting specific version: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.post("/custom-workflows/{workflow_id}/rollback", tags=["Workflow Versions"])
+async def rollback_workflow(
+    workflow_id: str,
+    rollback_data: dict,
+    current_user: dict = Depends(get_current_user)
+):
+    """
+    Rollback workflow to a specific version
+    
+    Body:
+    {
+        "version_number": 5,
+        "reason": "Previous version had bugs"
+    }
+    """
+    try:
+        user_id = current_user.get('_id') or current_user.get('id')
+        
+        result = await version_control.rollback_to_version(
+            workflow_id=workflow_id,
+            version_number=rollback_data.get('version_number'),
+            rolled_back_by=str(user_id),
+            reason=rollback_data.get('reason', '')
+        )
+        
+        # Log audit event
+        await audit_logger.log_event(
+            event_type=AuditEventType.WORKFLOW_ROLLED_BACK,
+            workflow_id=workflow_id,
+            user_id=str(user_id),
+            details={
+                'version_number': rollback_data.get('version_number'),
+                'reason': rollback_data.get('reason', '')
+            }
+        )
+        
+        return {'success': True, 'workflow': result}
+    except Exception as e:
+        logger.error(f"Error rolling back workflow: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.get("/custom-workflows/{workflow_id}/versions/compare", tags=["Workflow Versions"])
+async def compare_versions(
+    workflow_id: str,
+    version_a: int,
+    version_b: int
+):
+    """Compare two versions of a workflow"""
+    try:
+        diff = await version_control.compare_versions(workflow_id, version_a, version_b)
+        return diff
+    except Exception as e:
+        logger.error(f"Error comparing versions: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.get("/custom-workflows/{workflow_id}/change-summary", tags=["Workflow Versions"])
+async def get_change_summary(workflow_id: str, days: int = 30):
+    """Get summary of changes made to a workflow over time"""
+    try:
+        summary = await version_control.get_change_summary(workflow_id, days)
+        return summary
+    except Exception as e:
+        logger.error(f"Error getting change summary: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+# ===== Audit & Compliance Endpoints =====
+
+@api_router.get("/audit/workflows", tags=["Audit & Compliance"])
+async def get_audit_trail(
+    workflow_id: Optional[str] = None,
+    user_id: Optional[str] = None,
+    event_types: Optional[str] = None,  # Comma-separated list
+    start_date: Optional[str] = None,
+    end_date: Optional[str] = None,
+    limit: int = 100
+):
+    """
+    Get audit trail with filters
+    
+    Query params:
+    - workflow_id: Filter by workflow
+    - user_id: Filter by user
+    - event_types: Comma-separated event types (e.g., "workflow_created,workflow_executed")
+    - start_date: ISO format start date
+    - end_date: ISO format end date
+    - limit: Max records to return
+    """
+    try:
+        # Parse event types
+        event_type_list = None
+        if event_types:
+            event_type_list = [AuditEventType(et.strip()) for et in event_types.split(',')]
+        
+        # Parse dates
+        start = datetime.fromisoformat(start_date) if start_date else None
+        end = datetime.fromisoformat(end_date) if end_date else None
+        
+        logs = await audit_logger.get_audit_trail(
+            workflow_id=workflow_id,
+            user_id=user_id,
+            event_types=event_type_list,
+            start_date=start,
+            end_date=end,
+            limit=limit
+        )
+        
+        return logs
+    except Exception as e:
+        logger.error(f"Error getting audit trail: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.get("/audit/workflows/{workflow_id}/summary", tags=["Audit & Compliance"])
+async def get_workflow_audit_summary(workflow_id: str, days: int = 30):
+    """Get audit summary for a specific workflow"""
+    try:
+        summary = await audit_logger.get_workflow_audit_summary(workflow_id, days)
+        return summary
+    except Exception as e:
+        logger.error(f"Error getting workflow audit summary: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.get("/audit/users/{user_id}/activity", tags=["Audit & Compliance"])
+async def get_user_activity_log(user_id: str, days: int = 7):
+    """Get activity log for a specific user"""
+    try:
+        activity = await audit_logger.get_user_activity_log(user_id, days)
+        return activity
+    except Exception as e:
+        logger.error(f"Error getting user activity log: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.get("/audit/system/stats", tags=["Audit & Compliance"])
+async def get_system_audit_stats(days: int = 30):
+    """Get system-wide audit statistics"""
+    try:
+        stats = await audit_logger.get_system_audit_stats(days)
+        return stats
+    except Exception as e:
+        logger.error(f"Error getting system audit stats: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.get("/audit/export", tags=["Audit & Compliance"])
+async def export_audit_logs(
+    workflow_id: Optional[str] = None,
+    start_date: Optional[str] = None,
+    end_date: Optional[str] = None
+):
+    """
+    Export audit logs for compliance or reporting
+    Returns downloadable JSON file
+    """
+    try:
+        start = datetime.fromisoformat(start_date) if start_date else None
+        end = datetime.fromisoformat(end_date) if end_date else None
+        
+        logs = await audit_logger.export_audit_logs(
+            workflow_id=workflow_id,
+            start_date=start,
+            end_date=end,
+            format='json'
+        )
+        
+        return {
+            'success': True,
+            'count': len(logs),
+            'logs': logs,
+            'exported_at': datetime.utcnow().isoformat()
+        }
+    except Exception as e:
+        logger.error(f"Error exporting audit logs: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+# ===== Workflow Analytics Dashboard Endpoints =====
+
+@api_router.get("/analytics/workflows/overview", tags=["Workflow Analytics"])
+async def get_workflows_overview(days: int = 30):
+    """Get overview of all workflows with key metrics"""
+    try:
+        start_date = datetime.utcnow() - timedelta(days=days)
+        
+        # Get all workflows
+        workflows = await db.custom_workflows.find({}).to_list(length=1000)
+        
+        # Get execution stats
+        execution_logs = await db.workflow_execution_logs.find({
+            'created_at': {'$gte': start_date}
+        }).to_list(length=100000)
+        
+        # Calculate metrics
+        total_workflows = len(workflows)
+        enabled_workflows = len([w for w in workflows if w.get('enabled', True)])
+        total_executions = len(execution_logs)
+        failed_executions = len([log for log in execution_logs if log['execution']['status'] == 'failed'])
+        success_rate = ((total_executions - failed_executions) / total_executions * 100) if total_executions > 0 else 0
+        
+        # Most active workflows
+        workflow_execution_counts = {}
+        for log in execution_logs:
+            wf_id = log['workflow_id']
+            workflow_execution_counts[wf_id] = workflow_execution_counts.get(wf_id, 0) + 1
+        
+        most_active = sorted(
+            [{'workflow_id': k, 'execution_count': v} for k, v in workflow_execution_counts.items()],
+            key=lambda x: x['execution_count'],
+            reverse=True
+        )[:10]
+        
+        # Add workflow names
+        for item in most_active:
+            wf = await db.custom_workflows.find_one({'_id': ObjectId(item['workflow_id'])})
+            item['workflow_name'] = wf.get('name') if wf else 'Unknown'
+        
+        return {
+            'period_days': days,
+            'total_workflows': total_workflows,
+            'enabled_workflows': enabled_workflows,
+            'total_executions': total_executions,
+            'failed_executions': failed_executions,
+            'success_rate': round(success_rate, 2),
+            'most_active_workflows': most_active
+        }
+    except Exception as e:
+        logger.error(f"Error getting workflows overview: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.get("/analytics/workflows/{workflow_id}/performance", tags=["Workflow Analytics"])
+async def get_workflow_performance(workflow_id: str, days: int = 30):
+    """Get detailed performance metrics for a workflow"""
+    try:
+        start_date = datetime.utcnow() - timedelta(days=days)
+        
+        # Get execution logs
+        logs = await db.workflow_execution_logs.find({
+            'workflow_id': workflow_id,
+            'created_at': {'$gte': start_date}
+        }).to_list(length=10000)
+        
+        if not logs:
+            return {
+                'workflow_id': workflow_id,
+                'message': 'No executions found in the specified period'
+            }
+        
+        # Calculate performance metrics
+        total_executions = len(logs)
+        successful = len([log for log in logs if log['execution']['status'] == 'success'])
+        failed = len([log for log in logs if log['execution']['status'] == 'failed'])
+        
+        # Calculate average execution time
+        execution_times = []
+        for log in logs:
+            exec_data = log['execution']
+            if exec_data.get('completed_at') and exec_data.get('started_at'):
+                duration = (exec_data['completed_at'] - exec_data['started_at']).total_seconds()
+                execution_times.append(duration)
+        
+        avg_execution_time = sum(execution_times) / len(execution_times) if execution_times else 0
+        
+        # Execution trend by day
+        executions_by_day = {}
+        for log in logs:
+            day = log['created_at'].date().isoformat()
+            if day not in executions_by_day:
+                executions_by_day[day] = {'total': 0, 'success': 0, 'failed': 0}
+            executions_by_day[day]['total'] += 1
+            if log['execution']['status'] == 'success':
+                executions_by_day[day]['success'] += 1
+            else:
+                executions_by_day[day]['failed'] += 1
+        
+        return {
+            'workflow_id': workflow_id,
+            'period_days': days,
+            'total_executions': total_executions,
+            'successful_executions': successful,
+            'failed_executions': failed,
+            'success_rate': round((successful / total_executions * 100) if total_executions > 0 else 0, 2),
+            'avg_execution_time_seconds': round(avg_execution_time, 2),
+            'executions_by_day': executions_by_day
+        }
+    except Exception as e:
+        logger.error(f"Error getting workflow performance: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+logger.info("Enterprise workflow features endpoints registered successfully")
 
 @api_router.post("/users/upload-avatar")
 async def upload_avatar(
