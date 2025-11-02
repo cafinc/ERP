@@ -171,6 +171,7 @@ export default function InventoryPage() {
         {/* Header */}
         <PageHeader
           title="Inventory & Assets"
+          icon={<Package size={28} />}
           subtitle="Manage parts and supplies inventory"
           breadcrumbs={[{ label: "Home", href: "/" }, { label: "Assets", href: "/equipment/dashboard" }, { label: "Inventory" }]}
           
