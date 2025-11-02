@@ -303,17 +303,26 @@ export default function InvoiceDetailPage() {
                 <div className="flex items-center justify-between text-sm">
                   <span className="text-gray-600">Subtotal</span>
                   <span className="font-medium text-gray-900">${invoice.subtotal.toFixed(2)}</span>
+                </div>
                 {invoice.discount_amount > 0 && (
                   <div className="flex items-center justify-between text-sm">
                     <span className="text-gray-600">Discount</span>
                     <span className="font-medium text-red-600">-${invoice.discount_amount.toFixed(2)}</span>
-          )}
+                  </div>
+                )}
                 <div className="flex items-center justify-between text-sm">
                   <span className="text-gray-600">Tax ({invoice.tax_rate}%)</span>
                   <span className="font-medium text-gray-900">${invoice.tax_amount.toFixed(2)}</span>
+                </div>
                 <div className="flex items-center justify-between text-lg font-bold pt-2 border-t border-gray-200">
                   <span className="text-gray-900">Total</span>
                   <span className="text-[#3f72af]">${invoice.total_amount.toFixed(2)}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
             {/* Payment History */}
             {invoice.payments && invoice.payments.length > 0 && (
