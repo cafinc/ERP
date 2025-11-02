@@ -287,7 +287,6 @@ export default function ModernHeaderWithNav() {
         { label: 'Notifications', href: '/settings/notifications', icon: Settings },
         { label: 'Document Templates', href: '/templates', icon: FileText },
         { label: 'API Settings', href: '/settings/api', icon: Link2 },
-        { label: 'Webhooks', href: '/settings/webhooks', icon: Link2 },
         { label: 'Preferences', href: '/settings/preferences', icon: Settings },
         { label: 'Support', href: '/settings/support', icon: Settings },
         { label: 'Team', href: '/team', icon: Users },
