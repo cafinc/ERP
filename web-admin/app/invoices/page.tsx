@@ -149,6 +149,7 @@ export default function InvoicesPage() {
         {/* Compact Header */}
         <PageHeader
           title="Invoices"
+          icon={<FileText size={28} />}
           subtitle="Manage customer invoices and billing"
           breadcrumbs={[{ label: "Home", href: "/" }, { label: "Finance", href: "/finance/dashboard" }, { label: "Invoices" }]}
           actions={[
