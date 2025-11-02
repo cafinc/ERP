@@ -225,7 +225,7 @@ export default function ModernHeaderWithNav() {
       href: '/communication/dashboard',
       submenu: [
         { label: 'Comms Dashboard', href: '/communication/dashboard', icon: LayoutDashboard },
-        { label: 'Messages', href: '/messages', icon: Users },
+        { label: 'Communications Center', href: '/communications/center', icon: MessageSquare },
         { label: 'RingCentral', href: '/ringcentral', icon: Users },
         { label: 'Gmail', href: '/gmail', icon: Users },
         { label: 'Emergency Alert', href: '/emergency-alert', icon: Users },
