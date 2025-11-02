@@ -181,7 +181,10 @@ export default function ModernHeaderWithNav() {
       href: '/access',
       submenu: [
         { label: 'Access Dashboard', href: '/access', icon: LayoutDashboard },
-        { label: 'Master Users', href: '/access/master', icon: Users },
+        ...(process.env.NODE_ENV === 'development' || process.env.NEXT_PUBLIC_ENABLE_MASTER_ACCESS === 'true'
+          ? [{ label: 'Master Users', href: '/access/master', icon: Users }]
+          : []
+        ),
         { label: 'Admins', href: '/access/admins', icon: Users },
         { label: 'Crew', href: '/access/crew', icon: Users },
         { label: 'Subcontractors', href: '/access/subcontractors', icon: Users },
