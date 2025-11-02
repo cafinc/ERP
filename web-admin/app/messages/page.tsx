@@ -464,9 +464,12 @@ export default function MessagesPage() {
                             className="p-0.5 hover:bg-gray-200 rounded"
                           >
                             <X className="w-3 h-3 text-gray-600" />
-          ))}
-              </div></div>
-          )}
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
                 
                 <div className="flex items-end space-x-2">
                   <input
