@@ -762,6 +762,233 @@ export default function UnifiedSiteMapsBuilder() {
     }
   };
 
+  const handleSaveMeasurement = () => {
+    if (!pendingMeasurement || !modalLabel.trim()) {
+      alert('Please enter a name for this measurement');
+      return;
+    }
+
+    const label = modalLabel.trim();
+    const { overlay, type } = pendingMeasurement;
+
+    if (type === 'distance') {
+      const { distanceFeet, distanceMeters, distanceMiles, path } = pendingMeasurement;
+      
+      // Add info window with measurement
+      const midPoint = path.getAt(Math.floor(path.getLength() / 2));
+      const infoWindow = new window.google.maps.InfoWindow({
+        position: midPoint,
+        content: `
+          <div style="padding: 12px; font-family: sans-serif;">
+            <strong style="font-size: 14px; color: #1f2937;">${label}</strong><br/>
+            <div style="margin-top: 8px; font-size: 13px;">
+              <strong>${distanceFeet.toFixed(2)}</strong> feet<br/>
+              <strong>${distanceMeters.toFixed(2)}</strong> meters<br/>
+              <strong>${distanceMiles.toFixed(3)}</strong> miles
+            </div>
+            <button onclick="this.closest('.gm-style-iw').previousSibling.click()" 
+              style="margin-top: 8px; padding: 4px 12px; background: #3B82F6; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">
+              Edit
+            </button>
+          </div>
+        `,
+      });
+      
+      // Make overlay clickable
+      window.google.maps.event.addListener(overlay, 'click', () => {
+        setEditingItem({
+          id: Date.now().toString(),
+          type: 'distance',
+          label: label,
+          ...pendingMeasurement
+        });
+        setShowEditModal(true);
+      });
+      
+      infoWindow.open(mapRef.current);
+      overlaysRef.current.push(infoWindow);
+      
+      const measurement = {
+        id: Date.now().toString(),
+        type: 'distance',
+        label: label,
+        distanceFeet: distanceFeet.toFixed(2),
+        distanceMeters: distanceMeters.toFixed(2),
+        distanceMiles: distanceMiles.toFixed(3),
+        overlay: overlay,
+        infoWindow: infoWindow,
+      };
+      setMeasurements([...measurements, measurement]);
+      
+    } else if (type === 'area') {
+      const { areaSquareFeet, areaSquareMeters, areaAcres, perimeterFeet, center } = pendingMeasurement;
+      
+      const infoWindow = new window.google.maps.InfoWindow({
+        position: center,
+        content: `
+          <div style="padding: 12px; font-family: sans-serif;">
+            <strong style="font-size: 14px; color: #1f2937;">${label}</strong><br/>
+            <div style="margin-top: 8px; font-size: 13px;">
+              <strong>Area:</strong><br/>
+              ${areaSquareFeet.toLocaleString(undefined, {maximumFractionDigits: 0})} sq ft<br/>
+              ${areaSquareMeters.toLocaleString(undefined, {maximumFractionDigits: 0})} sq m<br/>
+              ${areaAcres.toFixed(4)} acres<br/>
+              <strong>Perimeter:</strong><br/>
+              ${perimeterFeet.toFixed(2)} feet
+            </div>
+            <button onclick="this.closest('.gm-style-iw').previousSibling.click()" 
+              style="margin-top: 8px; padding: 4px 12px; background: #3B82F6; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">
+              Edit
+            </button>
+          </div>
+        `,
+      });
+      
+      // Make overlay clickable
+      window.google.maps.event.addListener(overlay, 'click', () => {
+        setEditingItem({
+          id: Date.now().toString(),
+          type: 'area',
+          label: label,
+          ...pendingMeasurement
+        });
+        setShowEditModal(true);
+      });
+      
+      infoWindow.open(mapRef.current);
+      overlaysRef.current.push(infoWindow);
+      
+      const measurement = {
+        id: Date.now().toString(),
+        type: 'area',
+        label: label,
+        areaSquareFeet: areaSquareFeet.toLocaleString(undefined, {maximumFractionDigits: 0}),
+        areaSquareMeters: areaSquareMeters.toLocaleString(undefined, {maximumFractionDigits: 0}),
+        areaAcres: areaAcres.toFixed(4),
+        perimeterFeet: perimeterFeet.toFixed(2),
+        overlay: overlay,
+        infoWindow: infoWindow,
+      };
+      setMeasurements([...measurements, measurement]);
+    }
+
+    // Close modal and reset
+    setShowMeasurementModal(false);
+    setPendingMeasurement(null);
+    setModalLabel('');
+  };
+
+  const handleSaveAnnotation = () => {
+    if (!pendingAnnotation || !modalLabel.trim()) {
+      alert('Please enter a label for this marker');
+      return;
+    }
+
+    const label = modalLabel.trim();
+    const { overlay, category, color } = pendingAnnotation;
+    
+    // Add info window
+    const infoWindow = new window.google.maps.InfoWindow({
+      content: `
+        <div style="padding: 8px; font-family: sans-serif;">
+          <strong style="font-size: 13px; color: #1f2937;">${label}</strong><br/>
+          <span style="font-size: 11px; color: #6b7280;">
+            ${ANNOTATION_CATEGORIES.find(c => c.value === category)?.label}
+          </span>
+          <button onclick="this.closest('.gm-style-iw').previousSibling.click()" 
+            style="margin-top: 8px; padding: 4px 12px; background: #3B82F6; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 11px;">
+            Edit
+          </button>
+        </div>
+      `,
+    });
+    
+    // Make marker clickable
+    window.google.maps.event.addListener(overlay, 'click', () => {
+      infoWindow.open(mapRef.current, overlay);
+      setEditingItem({
+        id: Date.now().toString(),
+        type: 'marker',
+        label: label,
+        category,
+        color,
+        overlay
+      });
+    });
+    
+    overlaysRef.current.push(infoWindow);
+    
+    const annotation = {
+      id: Date.now().toString(),
+      type: 'marker',
+      category: category,
+      label: label,
+      color: color,
+      overlay: overlay,
+      infoWindow: infoWindow,
+    };
+    setAnnotations([...annotations, annotation]);
+
+    // Close modal and reset
+    setShowAnnotationModal(false);
+    setPendingAnnotation(null);
+    setModalLabel('');
+  };
+
+  const handleUpdateItem = () => {
+    if (!editingItem || !modalLabel.trim()) {
+      alert('Please enter a label');
+      return;
+    }
+
+    // Update the item in the respective array
+    if (editingItem.type === 'distance' || editingItem.type === 'area') {
+      setMeasurements(measurements.map(m => 
+        m.id === editingItem.id ? { ...m, label: modalLabel.trim() } : m
+      ));
+    } else if (editingItem.type === 'marker') {
+      setAnnotations(annotations.map(a => 
+        a.id === editingItem.id ? { ...a, label: modalLabel.trim() } : a
+      ));
+    }
+
+    // Update info window content
+    if (editingItem.infoWindow) {
+      // Recreate info window with new label
+      editingItem.infoWindow.close();
+      // The info window will be recreated on next click
+    }
+
+    setShowEditModal(false);
+    setEditingItem(null);
+    setModalLabel('');
+    alert('Item updated successfully!');
+  };
+
+  const handleDeleteItem = () => {
+    if (!editingItem) return;
+
+    if (confirm(`Delete "${editingItem.label}"?`)) {
+      // Remove from map
+      if (editingItem.overlay) {
+        editingItem.overlay.setMap(null);
+      }
+      if (editingItem.infoWindow) {
+        editingItem.infoWindow.close();
+      }
+
+      // Remove from state
+      if (editingItem.type === 'distance' || editingItem.type === 'area') {
+        setMeasurements(measurements.filter(m => m.id !== editingItem.id));
+      } else if (editingItem.type === 'marker') {
+        setAnnotations(annotations.filter(a => a.id !== editingItem.id));
+      }
+
+      setShowEditModal(false);
+      setEditingItem(null);
+    }
+  };
+
   const saveMap = async () => {
     // Implementation for saving
     alert('Save functionality will save geofence boundary and annotations');
