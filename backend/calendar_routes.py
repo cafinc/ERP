@@ -172,19 +172,104 @@ async def delete_calendar_event(event_id: str):
 async def check_event_conflicts(event: CalendarEvent):
     """Check for conflicting events"""
     try:
-        # In production: Query database for overlapping events
-        # Mock response for now
-        conflicts = []
+        # Parse event start and end times
+        event_start = datetime.fromisoformat(event.start.replace('Z', '+00:00'))
+        event_end = datetime.fromisoformat(event.end.replace('Z', '+00:00'))
         
-        # Example conflict detection logic would go here
-        # Check if event.start and event.end overlap with existing events
+        # Query database for overlapping events
+        # Events overlap if:
+        # (event_start < existing_end) AND (event_end > existing_start)
+        query = {
+            "$and": [
+                {"start": {"$lt": event.end}},
+                {"end": {"$gt": event.start}}
+            ]
+        }
+        
+        # Exclude current event if updating
+        if event.id:
+            try:
+                query["_id"] = {"$ne": ObjectId(event.id)}
+            except Exception:
+                pass
+        
+        # Find conflicting events
+        conflicts_cursor = db.calendar_events.find(query)
+        conflicts = await conflicts_cursor.to_list(length=100)
+        
+        # Serialize conflicts
+        serialized_conflicts = [serialize_event(conflict) for conflict in conflicts]
         
         return {
-            "has_conflicts": len(conflicts) > 0,
-            "conflicts": conflicts,
-            "message": "No conflicts found" if len(conflicts) == 0 else f"Found {len(conflicts)} conflicting event(s)"
+            "has_conflicts": len(serialized_conflicts) > 0,
+            "conflicts": serialized_conflicts,
+            "message": "No conflicts found" if len(serialized_conflicts) == 0 else f"Found {len(serialized_conflicts)} conflicting event(s)"
         }
     except Exception as e:
+        print(f"Error checking event conflicts: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.post("/calendar/seed-events")
+async def seed_calendar_events():
+    """Seed initial calendar events (for development/testing only)"""
+    try:
+        # Check if events already exist
+        count = await db.calendar_events.count_documents({})
+        if count > 0:
+            return {
+                "success": False,
+                "message": f"Calendar already has {count} events. Skipping seed.",
+                "existing_events": count
+            }
+        
+        # Create sample events
+        sample_events = [
+            {
+                "title": "Follow up: Smith Estimate",
+                "description": "Call customer about EST-2024-156",
+                "start": datetime.now().isoformat(),
+                "end": (datetime.now() + timedelta(hours=1)).isoformat(),
+                "type": "appointment",
+                "status": "confirmed",
+                "color": "blue",
+                "created_at": datetime.now().isoformat(),
+                "updated_at": datetime.now().isoformat(),
+            },
+            {
+                "title": "Site Inspection - Elm Street",
+                "description": "Parking lot inspection",
+                "start": (datetime.now() + timedelta(days=1)).isoformat(),
+                "end": (datetime.now() + timedelta(days=1, hours=2)).isoformat(),
+                "location": "Elm Street Parking Lot",
+                "type": "appointment",
+                "status": "confirmed",
+                "color": "green",
+                "created_at": datetime.now().isoformat(),
+                "updated_at": datetime.now().isoformat(),
+            },
+            {
+                "title": "Team Meeting",
+                "start": (datetime.now() + timedelta(days=2)).isoformat(),
+                "end": (datetime.now() + timedelta(days=2, hours=1)).isoformat(),
+                "attendees": ["Team"],
+                "type": "meeting",
+                "status": "confirmed",
+                "color": "purple",
+                "created_at": datetime.now().isoformat(),
+                "updated_at": datetime.now().isoformat(),
+            },
+        ]
+        
+        # Insert sample events
+        result = await db.calendar_events.insert_many(sample_events)
+        
+        return {
+            "success": True,
+            "message": f"Seeded {len(result.inserted_ids)} calendar events",
+            "event_ids": [str(id) for id in result.inserted_ids]
+        }
+    except Exception as e:
+        print(f"Error seeding calendar events: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.get("/calendar/google/status")
