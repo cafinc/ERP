@@ -431,7 +431,8 @@ async def google_calendar_callback(code: str = Query(..., description="OAuth aut
         # Store tokens in MongoDB
         try:
             mongo_client = AsyncIOMotorClient(mongo_url)
-            db = mongo_client.snow_removal_db
+            db_name = os.getenv("DB_NAME", "snow_removal_db")
+            db = mongo_client[db_name]
             
             # Store or update the Google Calendar tokens
             token_doc = {
