@@ -471,8 +471,21 @@ export default function UnifiedSiteMapsBuilder() {
       }
       const perimeterFeet = perimeter * 3.28084;
       
-      // Prompt for label
-      const label = prompt('Enter name for this measurement:') || 'Area';
+      // Store pending measurement and show modal
+      setPendingMeasurement({
+        overlay,
+        type: 'area',
+        areaSquareFeet,
+        areaSquareMeters,
+        areaAcres,
+        perimeterFeet,
+        center
+      });
+      setModalLabel('');
+      setShowMeasurementModal(true);
+      
+      // Temp label until modal is submitted
+      const label = 'Area (pending)';
       
       // Add info window
       const bounds = new window.google.maps.LatLngBounds();
