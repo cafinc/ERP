@@ -26,6 +26,8 @@ import {
   Settings,
   Save,
   Plus,
+  Check,
+  X,
 } from 'lucide-react';
 
 type TabType = 'overview' | 'team' | 'crew' | 'external' | 'roles' | 'audit';
