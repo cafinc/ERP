@@ -25,6 +25,7 @@ import {
   FileSearch,
   Workflow,
   History,
+  Link2,
 } from 'lucide-react';
 
 export default function SettingsPage() {
