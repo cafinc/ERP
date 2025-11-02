@@ -259,14 +259,20 @@ export default function UnifiedAccessPage() {
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-2">
                       <button 
-                        onClick={() => showToast('success', `Viewing ${user.name}'s details`)}
+                        onClick={() => {
+                          setSelectedViewUser(user);
+                          setShowViewUserModal(true);
+                        }}
                         className="p-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
                         title="View Details"
                       >
                         <Eye className="w-4 h-4" />
                       </button>
                       <button 
-                        onClick={() => showToast('success', `Editing ${user.name}'s profile`)}
+                        onClick={() => {
+                          setSelectedEditUser(user);
+                          setShowEditUserModal(true);
+                        }}
                         className="p-2 text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors"
                         title="Edit User"
                       >
