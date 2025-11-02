@@ -11,7 +11,7 @@ from datetime import datetime, timedelta
 from typing import Dict, List, Any
 
 # Backend URL from frontend/.env
-BACKEND_URL = "https://access-unified.preview.emergentagent.com/api"
+BACKEND_URL = "https://asset-admin-1.preview.emergentagent.com/api"
 
 class HRModuleTester:
     def __init__(self):

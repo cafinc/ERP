@@ -297,43 +297,176 @@ export default function EquipmentPage() {
           </div>
         </div>
 
-        {/* Search Bar */}
-        <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-3 mb-4 mx-6 mt-6 hover:shadow-md transition-shadow">
-          <div className="flex flex-col md:flex-row gap-4">
-            {/* Search */}
-            <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-              <input
-                type="text"
-                placeholder="Search by name, unit number, or license plate..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
-              />
+        {/* Search, Filter, and Sort Bar */}
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-4 mx-6 mt-6 hover:shadow-md transition-shadow">
+          <div className="flex flex-col gap-4">
+            {/* Top Row: Search and Actions */}
+            <div className="flex flex-col md:flex-row gap-3">
+              {/* Search */}
+              <div className="flex-1 relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <input
+                  type="text"
+                  placeholder="Search by name, unit number, license plate, make, or model..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                />
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex gap-2">
+                <button
+                  onClick={() => setShowFilters(!showFilters)}
+                  className={`px-4 py-2 rounded-lg transition-colors flex items-center space-x-2 ${
+                    showFilters || filterType !== 'all' || filterStatus !== 'all'
+                      ? 'bg-[#3f72af] text-white'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
+                >
+                  <Filter className="w-4 h-4" />
+                  <span>Filters</span>
+                  {(filterType !== 'all' || filterStatus !== 'all') && (
+                    <span className="bg-white text-[#3f72af] rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold">
+                      {(filterType !== 'all' ? 1 : 0) + (filterStatus !== 'all' ? 1 : 0)}
+                    </span>
+                  )}
+                </button>
+                
+                <button
+                  onClick={loadEquipment}
+                  className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors flex items-center space-x-2"
+                >
+                  <RefreshCw className="w-4 h-4" />
+                  <span>Refresh</span>
+                </button>
+              </div>
             </div>
 
-            <select
-              value={filterType}
-              onChange={(e) => setFilterType(e.target.value)}
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            >
-              <option value="all">All Types</option>
-              <option value="plow_truck">Plow Truck</option>
-              <option value="truck">Truck</option>
-              <option value="loader">Loader</option>
-              <option value="skid_steer">Skid Steer</option>
-              <option value="sanding_truck">Sanding Truck</option>
-              <option value="brine_truck">Brine Truck</option>
-            </select>
+            {/* Collapsible Filters Section */}
+            {showFilters && (
+              <div className="pt-4 border-t border-gray-200">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {/* Type Filter */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Equipment Type
+                    </label>
+                    <select
+                      value={filterType}
+                      onChange={(e) => setFilterType(e.target.value)}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    >
+                      <option value="all">All Types</option>
+                      {availableTypes.filter(t => t !== 'all').map(type => (
+                        <option key={type} value={type}>{getTypeLabel(type)}</option>
+                      ))}
+                    </select>
+                  </div>
 
-            <button
-              onClick={loadEquipment}
-              className="px-4 py-2 bg-gray-100 hover:bg-gray-100 transition-all text-gray-700 rounded-lg transition-colors flex items-center space-x-2"
-            >
-              <RefreshCw className="w-4 h-4" />
-              <span>Refresh</span>
-            </button>
+                  {/* Status Filter */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Status
+                    </label>
+                    <select
+                      value={filterStatus}
+                      onChange={(e) => setFilterStatus(e.target.value)}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    >
+                      <option value="all">All Statuses</option>
+                      {availableStatuses.filter(s => s !== 'all').map(status => (
+                        <option key={status} value={status}>{getStatusLabel(status)}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* Sort Options */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Sort By
+                    </label>
+                    <div className="flex gap-2">
+                      <select
+                        value={sortField}
+                        onChange={(e) => setSortField(e.target.value as SortField)}
+                        className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      >
+                        <option value="name">Name</option>
+                        <option value="type">Type</option>
+                        <option value="status">Status</option>
+                        <option value="created_at">Date Added</option>
+                        <option value="maintenance_due">Maintenance Due</option>
+                      </select>
+                      <button
+                        onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
+                        className="px-3 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors"
+                        title={sortOrder === 'asc' ? 'Ascending' : 'Descending'}
+                      >
+                        {sortOrder === 'asc' ? (
+                          <ArrowUp className="w-5 h-5" />
+                        ) : (
+                          <ArrowDown className="w-5 h-5" />
+                        )}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Clear Filters Button */}
+                {(searchQuery || filterType !== 'all' || filterStatus !== 'all' || sortField !== 'name' || sortOrder !== 'asc') && (
+                  <div className="mt-4 flex justify-end">
+                    <button
+                      onClick={clearFilters}
+                      className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors flex items-center space-x-2 text-sm"
+                    >
+                      <X className="w-4 h-4" />
+                      <span>Clear All Filters</span>
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Active Filters Display */}
+            {!showFilters && (filterType !== 'all' || filterStatus !== 'all') && (
+              <div className="flex flex-wrap gap-2">
+                <span className="text-sm text-gray-600">Active filters:</span>
+                {filterType !== 'all' && (
+                  <span className="inline-flex items-center gap-1 px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm">
+                    Type: {getTypeLabel(filterType)}
+                    <button
+                      onClick={() => setFilterType('all')}
+                      className="hover:bg-blue-200 rounded-full p-0.5"
+                    >
+                      <X className="w-3 h-3" />
+                    </button>
+                  </span>
+                )}
+                {filterStatus !== 'all' && (
+                  <span className="inline-flex items-center gap-1 px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm">
+                    Status: {getStatusLabel(filterStatus)}
+                    <button
+                      onClick={() => setFilterStatus('all')}
+                      className="hover:bg-green-200 rounded-full p-0.5"
+                    >
+                      <X className="w-3 h-3" />
+                    </button>
+                  </span>
+                )}
+              </div>
+            )}
           </div>
+        </div>
+
+        {/* Results Summary */}
+        <div className="mx-6 mb-4">
+          <p className="text-sm text-gray-600">
+            Showing <span className="font-semibold">{filteredAndSortedEquipment.length}</span> of <span className="font-semibold">{equipment.length}</span> assets
+            {sortField !== 'name' && (
+              <span> • Sorted by <span className="font-semibold">{sortField === 'created_at' ? 'Date Added' : sortField === 'maintenance_due' ? 'Maintenance Due' : sortField.charAt(0).toUpperCase() + sortField.slice(1)}</span> ({sortOrder === 'asc' ? 'ascending' : 'descending'})</span>
+            )}
+          </p>
         </div>
 
         {/* Equipment Grid */}
