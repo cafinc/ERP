@@ -11,297 +11,368 @@ import {
   CheckCircle,
   Clock,
   Filter,
-  RefreshCw,
-  Bell,
   FileText,
-  TrendingUp,
   ClipboardCheck,
   Eye,
   Edit,
   Search,
+  Package,
+  Truck,
+  Car,
+  Hammer,
 } from 'lucide-react';
 
-interface InspectionDashboard {
-  summary: {
-    total_scheduled: number;
-    due_today: number;
-    due_this_week: number;
-    overdue: number;
-    completed_this_month: number;
-    non_compliant_equipment_count: number;
-  };
-  upcoming_inspections: any[];
-  overdue_inspections: any[];
-  non_compliant_equipment: any[];
-}
-
-export default function InspectionsDashboardPage() {
+export default function AssetInspectionsPage() {
   const router = useRouter();
-  const [dashboard, setDashboard] = useState<InspectionDashboard | null>(null);
+  const [activeTab, setActiveTab] = useState<'scheduled' | 'completed' | 'overdue'>('scheduled');
+  const [inspections, setInspections] = useState<any[]>([]);
+  const [forms, setForms] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<'upcoming' | 'overdue' | 'non-compliant'>('upcoming');
   const [searchQuery, setSearchQuery] = useState('');
+  const [stats, setStats] = useState({
+    scheduled: 0,
+    completed: 0,
+    overdue: 0,
+    dueToday: 0,
+  });
 
   useEffect(() => {
-    loadDashboard();
+    loadData();
   }, []);
 
-  const loadDashboard = async () => {
+  const loadData = async () => {
+    setLoading(true);
     try {
-      setLoading(true);
-      const response = await api.get('/equipment-inspections/dashboard/overview');
-      setDashboard(response.data);
+      // Load forms that can be used for inspections
+      const formsRes = await api.get('/forms');
+      const formsData = formsRes.data?.forms || [];
+      setForms(formsData);
+
+      // Mock inspection data - replace with actual API
+      const mockInspections = [
+        {
+          id: 1,
+          asset_name: 'Excavator 2024',
+          asset_type: 'equipment',
+          form_name: 'Heavy Equipment Inspection',
+          form_id: 'form-1',
+          scheduled_date: '2025-06-22',
+          due_date: '2025-06-22',
+          status: 'scheduled',
+          inspector: 'John Doe',
+          priority: 'high',
+        },
+        {
+          id: 2,
+          asset_name: 'Pickup Truck #123',
+          asset_type: 'vehicle',
+          form_name: 'Vehicle Safety Inspection',
+          form_id: 'form-2',
+          scheduled_date: '2025-06-20',
+          completed_date: '2025-06-20',
+          status: 'completed',
+          inspector: 'Jane Smith',
+          result: 'passed',
+        },
+        {
+          id: 3,
+          asset_name: 'Trailer Unit A',
+          asset_type: 'trailer',
+          form_name: 'Trailer Inspection Form',
+          form_id: 'form-3',
+          scheduled_date: '2025-06-15',
+          due_date: '2025-06-15',
+          status: 'overdue',
+          inspector: 'Mike Johnson',
+          priority: 'urgent',
+          days_overdue: 7,
+        },
+      ];
+
+      setInspections(mockInspections);
+      setStats({
+        scheduled: mockInspections.filter(i => i.status === 'scheduled').length,
+        completed: mockInspections.filter(i => i.status === 'completed').length,
+        overdue: mockInspections.filter(i => i.status === 'overdue').length,
+        dueToday: mockInspections.filter(i => i.due_date === new Date().toISOString().split('T')[0]).length,
+      });
     } catch (error) {
-      console.error('Error loading dashboard:', error);
+      console.error('Error loading inspections:', error);
     } finally {
       setLoading(false);
     }
   };
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'scheduled': return 'bg-blue-100 text-blue-700';
-      case 'due': return 'bg-yellow-100 text-yellow-700';
-      case 'overdue': return 'bg-red-100 text-red-700';
-      case 'completed': return 'bg-green-100 text-green-700';
-      default: return 'bg-gray-100 text-gray-700';
+  const getAssetIcon = (type: string) => {
+    switch (type) {
+      case 'vehicle': return Car;
+      case 'trailer': return Truck;
+      case 'tool': return Hammer;
+      default: return Package;
     }
   };
 
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-  };
+  const filteredInspections = inspections.filter(inspection => {
+    const matchesTab = inspection.status === activeTab;
+    const matchesSearch = !searchQuery || 
+      inspection.asset_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      inspection.form_name.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesTab && matchesSearch;
+  });
 
-  const getDaysUntilDue = (dueDate: string) => {
-    const due = new Date(dueDate);
-    const now = new Date();
-    const diffTime = due.getTime() - now.getTime();
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    return diffDays;
-  };
-
-  if (loading) {
-    return (
-      <PageHeader>
-        <div className="flex items-center justify-center h-full">
-          <RefreshCw className="w-8 h-8 animate-spin text-[#3f72af]" />
-        </div>
-      </PageHeader>
-    );
-  }
-
-  const summary = dashboard?.summary || {
-    total_scheduled: 0,
-    due_today: 0,
-    due_this_week: 0,
-    overdue: 0,
-    completed_this_month: 0,
-    non_compliant_equipment_count: 0,
-  };
-
-  const upcomingInspections = dashboard?.upcoming_inspections || [];
-  const overdueInspections = dashboard?.overdue_inspections || [];
-  const nonCompliantEquipment = dashboard?.non_compliant_equipment || [];
-
-  const activeInspections =
-    activeTab === 'upcoming'
-      ? upcomingInspections
-      : activeTab === 'overdue'
-      ? overdueInspections
-      : nonCompliantEquipment;
-
-  const filteredInspections = activeInspections.filter((item: any) =>
-    searchQuery
-      ? item.equipment_name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.inspection_type?.toLowerCase().includes(searchQuery.toLowerCase())
-      : true
-  );
+  const tabs = [
+    { label: 'Scheduled', value: 'scheduled', count: stats.scheduled },
+    { label: 'Completed', value: 'completed', count: stats.completed },
+    { label: 'Overdue', value: 'overdue', count: stats.overdue },
+  ];
 
   return (
-    <PageHeader>
-      <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-6">
-        {/* Compact Header */}
-        <PageHeader
-        title="Inspections"
-        subtitle="Schedule and track equipment inspections"
-        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Assets", href: "/equipment/dashboard" }, { label: "Inspections" }]}
-        title="Equipment Inspections"
-          
-          actions={[
-            {
-              label: 'Manage Schedules',
-              icon: Calendar,
-              onClick: () => router.push('/equipment/inspections/schedules'),
-              variant: 'secondary',
-            },
-            {
-              label: 'New Inspection',
-              icon: <Plus className="w-4 h-4 mr-2" />,
-              onClick: () => router.push('/equipment/inspections/create'),
-              variant: 'primary',
-            },
-          ]}
-        />
+    <div className="p-4">
+      <PageHeader
+        title="Asset Inspections"
+        subtitle="Schedule and track asset inspections using forms"
+        breadcrumbs={[
+          { label: 'Home', href: '/' },
+          { label: 'Assets', href: '/asset/dashboard' },
+          { label: 'Inspections' },
+        ]}
+        actions={[
+          {
+            label: 'Schedule Inspection',
+            onClick: () => router.push('/asset/inspections/create'),
+            variant: 'primary',
+          },
+          {
+            label: 'Manage Forms',
+            onClick: () => router.push('/forms'),
+            variant: 'secondary',
+          },
+        ]}
+      />
 
-        {/* Tab Filter Buttons */}
-        <div className="px-6 py-4 bg-white border-b border-gray-200">
-          <div className="flex items-center space-x-2 flex-wrap gap-y-2">
-            <button
-              onClick={() => setActiveTab('upcoming')}
-              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                activeTab === 'upcoming'
-                  ? 'bg-[#3f72af] text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
-            >
-              Upcoming ({upcomingInspections.length})
-            </button>
-            <button
-              onClick={() => setActiveTab('overdue')}
-              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                activeTab === 'overdue'
-                  ? 'bg-red-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
-            >
-              Overdue ({overdueInspections.length})
-            </button>
-            <button
-              onClick={() => setActiveTab('non-compliant')}
-              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                activeTab === 'non-compliant'
-                  ? 'bg-orange-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
-            >
-              Non-Compliant ({nonCompliantEquipment.length})
-            </button>
+      <div className="max-w-7xl mx-auto mt-6 space-y-6">
+        {/* Stats Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-gray-600">Scheduled</p>
+                <p className="text-2xl font-bold text-gray-900">{stats.scheduled}</p>
+              </div>
+              <div className="p-3 bg-blue-100 rounded-lg">
+                <Calendar className="w-6 h-6 text-blue-600" />
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-gray-600">Due Today</p>
+                <p className="text-2xl font-bold text-gray-900">{stats.dueToday}</p>
+              </div>
+              <div className="p-3 bg-orange-100 rounded-lg">
+                <Clock className="w-6 h-6 text-orange-600" />
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-gray-600">Completed</p>
+                <p className="text-2xl font-bold text-gray-900">{stats.completed}</p>
+              </div>
+              <div className="p-3 bg-green-100 rounded-lg">
+                <CheckCircle className="w-6 h-6 text-green-600" />
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-gray-600">Overdue</p>
+                <p className="text-2xl font-bold text-gray-900">{stats.overdue}</p>
+              </div>
+              <div className="p-3 bg-red-100 rounded-lg">
+                <AlertTriangle className="w-6 h-6 text-red-600" />
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Search Bar */}
-        <div className="bg-white rounded-xl shadow-lg shadow-sm border border-gray-200 p-3 mb-4 mx-6 mt-6 hover:shadow-md transition-shadow">
-          <div className="flex items-center gap-4">
-            <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+        {/* Tabs and Search */}
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-2">
+              {tabs.map((tab) => (
+                <button
+                  key={tab.value}
+                  onClick={() => setActiveTab(tab.value as any)}
+                  className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                    activeTab === tab.value
+                      ? 'bg-blue-100 text-blue-700'
+                      : 'text-gray-600 hover:bg-gray-100'
+                  }`}
+                >
+                  {tab.label} ({tab.count})
+                </button>
+              ))}
+            </div>
+
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
               <input
                 type="text"
-                placeholder="Search by equipment or inspection type..."
+                placeholder="Search inspections..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
             </div>
-            <button
-              onClick={loadDashboard}
-              className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors flex items-center space-x-2"
-            >
-              <RefreshCw className="w-4 h-4" />
-              <span>Refresh</span>
-            </button>
+          </div>
+
+          {/* Inspections List */}
+          <div className="space-y-3">
+            {loading ? (
+              <div className="text-center py-8 text-gray-500">Loading inspections...</div>
+            ) : filteredInspections.length === 0 ? (
+              <div className="text-center py-8 text-gray-500">
+                No {activeTab} inspections found
+              </div>
+            ) : (
+              filteredInspections.map((inspection) => {
+                const AssetIcon = getAssetIcon(inspection.asset_type);
+                return (
+                  <div
+                    key={inspection.id}
+                    className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors"
+                  >
+                    <div className="flex items-start justify-between">
+                      <div className="flex items-start gap-3">
+                        <div className="p-2 bg-white rounded-lg">
+                          <AssetIcon className="w-5 h-5 text-gray-600" />
+                        </div>
+                        <div>
+                          <h3 className="font-semibold text-gray-900">{inspection.asset_name}</h3>
+                          <div className="flex items-center gap-4 mt-1 text-sm text-gray-600">
+                            <span className="flex items-center gap-1">
+                              <FileText className="w-4 h-4" />
+                              {inspection.form_name}
+                            </span>
+                            <span className="flex items-center gap-1">
+                              <Calendar className="w-4 h-4" />
+                              {inspection.status === 'completed' 
+                                ? `Completed: ${inspection.completed_date}`
+                                : `Due: ${inspection.due_date}`}
+                            </span>
+                            <span>Inspector: {inspection.inspector}</span>
+                          </div>
+                          {inspection.status === 'overdue' && (
+                            <span className="inline-flex items-center gap-1 mt-2 px-2 py-1 bg-red-100 text-red-700 text-xs font-medium rounded-full">
+                              <AlertTriangle className="w-3 h-3" />
+                              {inspection.days_overdue} days overdue
+                            </span>
+                          )}
+                          {inspection.status === 'completed' && inspection.result && (
+                            <span className={`inline-flex items-center gap-1 mt-2 px-2 py-1 text-xs font-medium rounded-full ${
+                              inspection.result === 'passed'
+                                ? 'bg-green-100 text-green-700'
+                                : 'bg-red-100 text-red-700'
+                            }`}>
+                              <CheckCircle className="w-3 h-3" />
+                              {inspection.result === 'passed' ? 'Passed' : 'Failed'}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-2">
+                        {inspection.status === 'scheduled' && (
+                          <button
+                            onClick={() => router.push(`/forms/${inspection.form_id}?asset=${inspection.id}`)}
+                            className="px-3 py-1.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium flex items-center gap-1"
+                          >
+                            <ClipboardCheck className="w-4 h-4" />
+                            Start Inspection
+                          </button>
+                        )}
+                        {inspection.status === 'completed' && (
+                          <button
+                            onClick={() => router.push(`/forms/${inspection.form_id}/submissions/${inspection.id}`)}
+                            className="px-3 py-1.5 text-gray-700 hover:bg-white rounded-lg transition-colors text-sm font-medium flex items-center gap-1"
+                          >
+                            <Eye className="w-4 h-4" />
+                            View Report
+                          </button>
+                        )}
+                        {inspection.status === 'overdue' && (
+                          <button
+                            onClick={() => router.push(`/forms/${inspection.form_id}?asset=${inspection.id}`)}
+                            className="px-3 py-1.5 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors text-sm font-medium flex items-center gap-1"
+                          >
+                            <AlertTriangle className="w-4 h-4" />
+                            Complete Now
+                          </button>
+                        )}
+                        <button
+                          className="p-2 text-gray-600 hover:bg-white rounded-lg transition-colors"
+                        >
+                          <Edit className="w-4 h-4" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })
+            )}
           </div>
         </div>
 
-        {/* Inspections Grid */}
-        {filteredInspections.length === 0 ? (
-          <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-12 text-center mx-6 hover:shadow-md transition-shadow">
-            <ClipboardCheck className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">No Inspections Found</h3>
-            <p className="text-gray-600 mb-4">
-              {searchQuery
-                ? 'Try adjusting your search'
-                : activeTab === 'upcoming'
-                ? 'No upcoming inspections scheduled'
-                : activeTab === 'overdue'
-                ? 'No overdue inspections'
-                : 'No non-compliant equipment'}
-            </p>
-            {!searchQuery && activeTab === 'upcoming' && (
-              <button
-                onClick={() => router.push('/equipment/inspections/schedules')}
-                className="inline-flex items-center space-x-2 px-6 py-3 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
-              >
-                <Calendar className="w-5 h-5" />
-                <span>Manage Schedules</span>
-              </button>
-            )}
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mx-6">
-            {filteredInspections.map((item: any, index: number) => (
-              <div
-                key={item.id || `inspection-${index}`}
-                className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow cursor-pointer hover:shadow-md transition-shadow"
-                onClick={() => router.push(`/equipment/inspections/${item.id}`)}
-              >
-                {/* Header */}
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex items-center gap-3 flex-1">
-                    <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <ClipboardCheck className="w-6 h-6 text-white" />
+        {/* Available Inspection Forms */}
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+            <FileText className="w-5 h-5" />
+            Available Inspection Forms
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {forms.length === 0 ? (
+              <div className="col-span-3 text-center py-8 text-gray-500">
+                No inspection forms available. <button onClick={() => router.push('/forms')} className="text-blue-600 hover:underline">Create one</button>
+              </div>
+            ) : (
+              forms.slice(0, 6).map((form) => (
+                <button
+                  key={form.id || form._id}
+                  onClick={() => router.push(`/forms/${form.id || form._id}`)}
+                  className="p-4 border-2 border-gray-200 rounded-lg hover:border-blue-400 hover:bg-blue-50 transition-colors text-left"
+                >
+                  <div className="flex items-start gap-3">
+                    <div className="p-2 bg-gray-100 rounded-lg">
+                      <FileText className="w-5 h-5 text-gray-600" />
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-gray-900 truncate">{item.equipment_name}</h3>
-                      <p className="text-sm text-gray-600 truncate">{item.inspection_type}</p>
+                    <div>
+                      <h3 className="font-semibold text-gray-900">{form.title || form.name || 'Untitled Form'}</h3>
+                      <p className="text-sm text-gray-600 mt-1">{form.description || 'No description'}</p>
                     </div>
                   </div>
-                </div>
-
-                {/* Status Badge */}
-                <div className="mb-4">
-                  <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${getStatusColor(item.status || 'scheduled')}`}>
-                    {item.status || 'Scheduled'}
-                  </span>
-                </div>
-
-                {/* Details */}
-                <div className="space-y-2 mb-4">
-                  {item.due_date && (
-                    <div className="flex items-center gap-2 text-sm text-gray-600">
-                      <Calendar className="w-4 h-4" />
-                      <span>Due: {formatDate(item.due_date)}</span>
-                      {getDaysUntilDue(item.due_date) < 0 && (
-                        <span className="text-red-600 font-medium">Overdue</span>
-                      )}
-                    </div>
-                  )}
-                  {item.inspector && (
-                    <div className="flex items-center gap-2 text-sm text-gray-600">
-                      <FileText className="w-4 h-4" />
-                      <span>{item.inspector}</span>
-                    </div>
-                  )}
-                </div>
-
-                {/* Actions */}
-                <div className="flex items-center space-x-2 pt-4 border-t border-gray-200">
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      router.push(`/equipment/inspections/${item.id}`);
-                    }}
-                    className="flex-1 flex items-center justify-center space-x-2 px-4 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors text-sm"
-                  >
-                    <Eye className="w-4 h-4" />
-                    <span>View</span>
-                  </button>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      router.push(`/equipment/inspections/${item.id}/edit`);
-                    }}
-                    className="flex-1 flex items-center justify-center space-x-2 px-4 py-2 border border-gray-300 hover:bg-gray-50 text-gray-700 rounded-lg font-medium transition-colors text-sm"
-                  >
-                    <Edit className="w-4 h-4" />
-                    <span>Edit</span>
-                  </button>
-                </div>
-              </div>
-            ))}
+                </button>
+              ))
+            )}
           </div>
-        )}
+          {forms.length > 6 && (
+            <div className="mt-4 text-center">
+              <button
+                onClick={() => router.push('/forms')}
+                className="text-blue-600 hover:underline text-sm font-medium"
+              >
+                View all {forms.length} forms →
+              </button>
+            </div>
+          )}
+        </div>
       </div>
-    </PageHeader>
+    </div>
   );
 }
