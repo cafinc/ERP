@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import PageHeader from '@/components/PageHeader';
 import api from '@/lib/api';
 import {
@@ -17,11 +17,20 @@ import {
   Hash,
   FileText,
   Edit,
+  Filter,
+  ArrowUpDown,
+  ArrowUp,
+  ArrowDown,
+  X,
+  Package,
+  Car,
+  Hammer,
 } from 'lucide-react';
 
 interface Equipment {
   id: string;
   name: string;
+  type?: string;
   equipment_type: string;
   unit_number?: string;
   license_plate?: string;
@@ -31,25 +40,44 @@ interface Equipment {
   notes?: string;
   active: boolean;
   created_at: string;
+  make?: string;
+  model?: string;
+  year?: number;
 }
+
+type SortField = 'name' | 'type' | 'status' | 'created_at' | 'maintenance_due';
+type SortOrder = 'asc' | 'desc';
 
 export default function EquipmentPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [equipment, setEquipment] = useState<Equipment[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
-  const [filterType, setFilterType] = useState('all');
+  const [filterType, setFilterType] = useState(searchParams.get('type') || 'all');
   const [filterStatus, setFilterStatus] = useState('all');
+  const [sortField, setSortField] = useState<SortField>('name');
+  const [sortOrder, setSortOrder] = useState<SortOrder>('asc');
+  const [showFilters, setShowFilters] = useState(false);
 
   useEffect(() => {
     loadEquipment();
   }, []);
 
+  useEffect(() => {
+    // Update filter from URL query params
+    const typeParam = searchParams.get('type');
+    if (typeParam && typeParam !== 'all') {
+      setFilterType(typeParam);
+      setShowFilters(true);
+    }
+  }, [searchParams]);
+
   const loadEquipment = async () => {
     try {
       setLoading(true);
       const response = await api.get('/equipment');
-      setEquipment(response.data || []);
+      setEquipment(response.data?.equipment || response.data || []);
     } catch (error) {
       console.error('Error loading equipment:', error);
     } finally {
