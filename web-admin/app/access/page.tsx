@@ -194,6 +194,7 @@ export default function AccessDashboardPage() {
         {/* Header */}
         <PageHeader
           title="Access Control Dashboard"
+          icon={<Shield size={28} />}
           subtitle="Manage user access and permissions"
           breadcrumbs={[{ label: "Home", href: "/" }, { label: "Access" }]}
           actions={[
