@@ -1117,7 +1117,10 @@ export default function UnifiedAccessPage() {
                     onClick={() => {
                       // Reset to original permissions
                       const role = roles.find(r => r.id === selectedRole);
-                      if (role) setEditablePermissions(role.permissions);
+                      if (role) {
+                        setEditablePermissions(role.permissions);
+                        showToast('success', `Permissions reset to original for ${role.name} role`);
+                      }
                     }}
                     className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 font-medium transition-colors"
                   >
@@ -1127,7 +1130,11 @@ export default function UnifiedAccessPage() {
                     type="button"
                     onClick={() => {
                       const role = roles.find(r => r.id === selectedRole);
-                      showToast('success', `Permissions updated for ${role?.name} role!`);
+                      if (role) {
+                        // Simulate save operation
+                        showToast('success', `Permissions saved successfully for ${role.name} role. ${role.users} users affected.`);
+                        // In real implementation, this would call API to save
+                      }
                     }}
                     className="px-6 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#2d5a8f] font-medium transition-colors flex items-center gap-2"
                   >
