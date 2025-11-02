@@ -352,6 +352,6 @@ export default function WorkflowHistoryPage() {
           )}
         </div>
       </div>
-    </PageHeader>
+    </div>
   );
 }
