@@ -878,6 +878,10 @@ export default function UnifiedAccessPage() {
                 </button>
                 <button
                   type="button"
+                  onClick={() => {
+                    setShowAddUserModal(false);
+                    showToast('success', 'User created successfully!');
+                  }}
                   className="px-6 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#2d5a8f] font-medium transition-colors flex items-center gap-2"
                 >
                   <UserPlus className="w-4 h-4" />
