@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+// For local development, use relative path; otherwise use environment variable
 const API_URL = process.env.EXPO_PUBLIC_BACKEND_URL || '';
 
 const api = axios.create({
