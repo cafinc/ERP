@@ -9502,6 +9502,12 @@ async def startup_event():
     init_webhook_handler(db)
     logger.info("Webhook handler initialized")
     
+    # Initialize event emitter for workflow automation
+    from event_emitter import EventEmitter, set_event_emitter
+    event_emitter_instance = EventEmitter(db, custom_workflow_executor)
+    set_event_emitter(event_emitter_instance)
+    logger.info("Event emitter initialized")
+    
     # Start background scheduler for automation workflows
     await background_scheduler.start()
     logger.info("Background scheduler started")
