@@ -286,7 +286,6 @@ export default function ModernHeaderWithNav() {
         { label: 'Billing', href: '/settings/billing', icon: DollarSign },
         { label: 'Notifications', href: '/settings/notifications', icon: Settings },
         { label: 'Document Templates', href: '/templates', icon: FileText },
-        { label: 'Roles & Permissions', href: '/settings/roles-permissions', icon: UserCog },
         { label: 'API Settings', href: '/settings/api', icon: Link2 },
         { label: 'Webhooks', href: '/settings/webhooks', icon: Link2 },
         { label: 'Preferences', href: '/settings/preferences', icon: Settings },
