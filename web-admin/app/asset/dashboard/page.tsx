@@ -45,9 +45,22 @@ import {
   AreaChart,
 } from 'recharts';
 
+// Color palette for charts
+const CHART_COLORS = {
+  primary: '#5b8ec4',
+  secondary: '#10b981',
+  accent: '#f59e0b',
+  danger: '#ef4444',
+  purple: '#a855f7',
+  indigo: '#6366f1',
+};
+
+const PIE_COLORS = ['#5b8ec4', '#10b981', '#f59e0b', '#ef4444', '#a855f7', '#6366f1'];
+
 export default function AssetDashboardPage() {
   const router = useRouter();
   const [activeCategory, setActiveCategory] = useState('all');
+  const [dateRange, setDateRange] = useState('30d'); // 7d, 30d, 90d, 1y
   const [stats, setStats] = useState({
     totalAssets: 0,
     operational: 0,
@@ -58,6 +71,13 @@ export default function AssetDashboardPage() {
     trailers: 0,
     tools: 0,
   });
+
+  // Analytics data
+  const [utilizationData, setUtilizationData] = useState<any[]>([]);
+  const [costData, setCostData] = useState<any[]>([]);
+  const [maintenanceData, setMaintenanceData] = useState<any[]>([]);
+  const [assetDistribution, setAssetDistribution] = useState<any[]>([]);
+  const [statusDistribution, setStatusDistribution] = useState<any[]>([]);
 
   useEffect(() => {
     loadStats();
