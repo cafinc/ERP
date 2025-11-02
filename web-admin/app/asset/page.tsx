@@ -470,7 +470,7 @@ export default function EquipmentPage() {
         </div>
 
         {/* Equipment Grid */}
-        {filteredEquipment.length === 0 ? (
+        {filteredAndSortedEquipment.length === 0 ? (
           <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-12 text-center mx-6 hover:shadow-md transition-shadow">
             <Truck className="w-16 h-16 text-gray-300 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-gray-900 mb-2">No Equipment Found</h3>
@@ -491,7 +491,7 @@ export default function EquipmentPage() {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mx-6">
-            {filteredEquipment.map((item, index) => (
+            {filteredAndSortedEquipment.map((item, index) => (
               <div
                 key={item.id || `equipment-${index}`}
                 className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow cursor-pointer hover:shadow-md transition-shadow"
