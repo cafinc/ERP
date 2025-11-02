@@ -370,7 +370,7 @@ export default function MessagesPage() {
         {/* Main Chat Area */}
         <div className="flex-1 flex flex-col bg-gray-50">
           {selectedConversation ? (
-            <>
+            <div className="flex-1 flex flex-col">
               {/* Chat Header */}
               <div className="p-4 bg-white border-b border-gray-200 flex items-center justify-between">
                 <div>
