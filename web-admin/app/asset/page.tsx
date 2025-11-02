@@ -25,6 +25,10 @@ import {
   Package,
   Car,
   Hammer,
+  Trash2,
+  Download,
+  CheckSquare,
+  Square,
 } from 'lucide-react';
 
 interface Equipment {
