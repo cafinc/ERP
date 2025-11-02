@@ -428,9 +428,9 @@ export default function MessagesPage() {
                                   )}
                                   <span className="text-sm truncate">{att.file_name}</span>
                                 </a>
-                              </div>
-                            ))}
-          )}
+                              ))}
+                            </div>
+                          )}
                           
                           <div className="flex items-center justify-between mt-1">
                             <p className={`text-xs ${isOwnMessage ? 'text-white/70' : 'text-gray-500'}`}>
@@ -440,10 +440,12 @@ export default function MessagesPage() {
                             {isOwnMessage && (
                               <CheckCheck className="w-4 h-4" />
                             )}
-                          </div></div>
-          );
-                })}
-                <div ref={messagesEndRef} />
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                  <div ref={messagesEndRef} />
 
               {/* Message Input */}
               <div className="p-4 bg-white border-t border-gray-200">
