@@ -511,6 +511,7 @@ export default function LeadsPage() {
           {/* Compact Header */}
           <PageHeader
             title="Lead Management"
+            icon={<UserPlus size={28} />}
             subtitle="Track and convert potential customers"
             breadcrumbs={[
               { label: "Home", href: "/" },
