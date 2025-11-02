@@ -12172,10 +12172,12 @@ background_scheduler = BackgroundScheduler(db, automation_engine, custom_workflo
 from workflow_retry_handler import WorkflowRetryHandler, RetryStrategy
 from workflow_version_control import WorkflowVersionControl
 from workflow_audit_logger import WorkflowAuditLogger, AuditEventType
+from workflow_template_library import WorkflowTemplateLibrary
 
 retry_handler = WorkflowRetryHandler(db)
 version_control = WorkflowVersionControl(db)
 audit_logger = WorkflowAuditLogger(db)
+template_library = WorkflowTemplateLibrary(db)
 
 @api_router.post("/automation/trigger/{workflow_name}", tags=["Automation"])
 async def trigger_workflow(workflow_name: str, context: Dict):
