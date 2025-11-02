@@ -272,6 +272,7 @@ export default function LiveTrackingPage() {
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <PageHeader
         title="Tracking"
+        icon={<Navigation size={28} />}
         subtitle="Manage tracking"
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Tracking" }]}
       />
