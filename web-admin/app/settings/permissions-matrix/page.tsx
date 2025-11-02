@@ -176,7 +176,6 @@ export default function PermissionsMatrixPage() {
           ))}
         </div>
       </div>
-    </div>
 
       {/* Bulk Actions */}
       <div style={{
