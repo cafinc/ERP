@@ -11,7 +11,7 @@ import uuid
 from datetime import datetime
 
 # Get backend URL from environment
-BACKEND_URL = os.getenv('EXPO_PUBLIC_BACKEND_URL', 'https://mapbuilder-3.preview.emergentagent.com')
+BACKEND_URL = os.getenv('EXPO_PUBLIC_BACKEND_URL', 'https://fieldservice-hub-1.preview.emergentagent.com')
 API_BASE = f"{BACKEND_URL}/api"
 
 class ConditionalFormsTest:

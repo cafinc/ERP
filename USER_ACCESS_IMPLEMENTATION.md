@@ -237,7 +237,7 @@ const [userRole, setUserRole] = useState('customer');
 
 **Create Customer with Access:**
 ```bash
-curl -X POST https://mapbuilder-3.preview.emergentagent.com/api/customers/with-access \
+curl -X POST https://fieldservice-hub-1.preview.emergentagent.com/api/customers/with-access \
   -H "Content-Type: application/json" \
   -d '{
     "customer": {

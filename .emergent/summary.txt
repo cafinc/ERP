@@ -1,123 +1,108 @@
 <analysis>
-The AI engineer's work spanned initial feature implementations, extensive backend integrations, and persistent frontend build issue resolution. Key phases included: establishing backend routes for a new Fuel page, correcting module imports, and adjusting authentication. Subsequently, numerous UI/UX enhancements and features for Site Maps (export/screenshot, clickable items) and a list of 9 incomplete items (Reports, Estimates PDF, Customer Profile, Access Management, Inventory, Shifts History, Automation, Learning Documents) were integrated and declared complete. A significant portion of the trajectory focused on tackling pervasive JSX build errors in the  application, causing repeated internal server errors due to corrupted Next.js cache. Multiple automated and manual attempts were made to fix unbalanced  tags and incorrect component usage across various pages, with recurring fixes and restarts. The work concluded amidst ongoing JSX error debugging, specifically on the , leading to a persistent internal server error requiring cache clearing.
+The trajectory details a comprehensive development effort on an ERP web administration application. Initially, the AI engineer addressed critical infrastructure issues, including resolving 24 persistent JSX build errors, fixing deployment issues, and rectifying a white screen port mismatch. Subsequent work focused on feature development for the  Next.js frontend and FastAPI backend.
+
+Key feature implementations included: merging the dashboard into the home page; refactoring UI elements like Quick Actions into the header and reorganizing the layout of Recent Activity and Platform Health; enhancing authentication error handling; and a significant overhaul of the CRM dashboard and calendar system. The calendar now boasts Google Calendar integration, dynamic view filters (Month/Week/Day), clickable days with event popups, and comprehensive event creation and editing capabilities via a dedicated modal. Backend endpoints for calendar, team, and forms data were created. The main navigation was updated to include the new calendar page, and the  was extended to support icons. The process involved continuous iterative development, addressing user feedback, and resolving runtime and build errors. The last observed action was troubleshooting a Next.js cache issue after implementing event editing, with the application now loading.
 </analysis>
 
 <product_requirements>
-The core objective is to modernize an ERP web administration application, focusing on UI/UX enhancements and expanding field service management capabilities. Key features include a New Lead button on the Dashboard for modal-based lead creation, a robust Customer Creation Form with conditional validation and distinct address states (Google Maps autocomplete removed), a detailed Service History section on Site Detail Pages (with data display and export), and an advanced Site Map Building System. This map system integrates geofencing with annotation tools, measurement functions, map screenshotting, and a unified interface for property overview, geofence, and annotations. Implementation has progressed with fixed dropdown layering, refined validation, and separated address states in customer forms. For the map builder, measurement tools, export buttons, resolved map loading issues, and geofence saving are complete, with ongoing work on drag-and-drop icons, arrows, text boxes, clickable items, and a dynamic map legend. Comprehensive testing, security fixes (password hashing, WebSocket auth), UX cleanup, performance optimization (DB indexing), and deployment guide generation are also critical.
+The primary objective is to modernize an ERP web administration and enhance field service management. Initial tasks involved resolving 24 JSX build errors, deployment issues, and fixing a white screen port mismatch. Key feature requests included a New Lead button (evolved to direct navigation), Customer Creation Form, Service History, and an advanced Site Map Building System. More recently, the user explicitly requested:
+1.  A comprehensive Tasks feature with extensive relations (sites, services, forms), message center integration, assignment to all roles, and customer notifications; with UI/UX refinements (compact layout, inline filters/stats in header).
+2.  An authentication fix for persistent user logins.
+3.  Real-time Recent Activity and Platform Health data on the main dashboard.
+4.  Merging the  page into the home page ().
+5.  Moving Quick Actions (Add Lead, Customer, Site, Manage Inventory) into the header.
+6.  Making Recent Activity full-width and clickable, and placing Platform Health in the 3-column grid.
+7.  Updating the CRM Dashboard to link Tasks to  and the calendar to a new Google-synced calendar page.
+8.  Developing a full calendar page with Google Calendar sync, consolidated header controls, popups for connection issues, brand-consistent button colors, clickable days for event viewing/editing, Month/Week/Day filters, date display on calendar days, smooth view transitions, and matching modal overlays.
+9.  A comprehensive New Event creation modal allowing additions of customers, sites, forms, files, and team members.
+10. Adding the  page to the main navigation under Sales and reorganizing the Sales submenu (Dashboard, Calendar, Leads, Customers, Estimates, Agreements).
+11. Updating all page headers to display corresponding icons.
+12. Implementing event editing functionality for the calendar.
 </product_requirements>
 
 <key_technical_concepts>
--   **Full-Stack Development**: Next.js (frontend), FastAPI (backend), MongoDB (database).
--   **UI/UX Patterns**: Modals, conditional rendering, tabbed navigation, form validation, responsive design.
--   **State Management**: React , , , , .
--   **API Integration**: RESTful APIs, JWT for authentication, WebSocket.
--   **Security**: bcrypt for password hashing, PyJWT for token validation, SlowAPI for rate limiting.
--   **Performance**: MongoDB indexing, frontend rendering optimizations.
--   **Mapping**: Google Maps API (drawing, geometry), custom overlays, event listeners, dynamic map legend.
+-   **Full-Stack Development**: Next.js (web-admin), FastAPI (backend), MongoDB.
+-   **API Integration**: Fetching/sending data from backend endpoints (activity, system, tasks, calendar, team, forms).
+-   **Authentication**:  for session tokens, , Axios interceptors, graceful 401 handling.
+-   **UI/UX Patterns**: Modals, forms with conditional logic, compact layouts, header integration, dynamic routing, component-based design.
+-   **Google Calendar API**: OAuth2 for authentication, event management.
+-   **JSX Management**: Addressing Turbopack strict parsing errors, script-based fixes.
 </key_technical_concepts>
 
 <code_architecture>
 
+The application maintains a monorepo-like structure with  (FastAPI),  (Expo), and  (Next.js).
 
--   :
-    -   **Importance**: Unified Map Builder for geofence and annotations.
-    -   **Changes**: Implemented actual map export/screenshot functionality; click listeners were already present on overlays.
--   :
-    -   **Importance**: Central header component.
-    -   **Changes**: Added Fuel page to the Assets submenu.
--   :
-    -   **Importance**: Frontend page to display fuel entries.
-    -   **Changes**: Created and integrated into navigation.
--   :
-    -   **Importance**: New backend module for fuel entries.
-    -   **Changes**: Created, initially had import errors ( corrected to ), and authentication dependency removed.
--   :
-    -   **Importance**: Main FastAPI application entry point.
-    -   **Changes**: Registered , , added estimate PDF generation endpoint, added customer reminder and task creation endpoints, and updated CORS configuration to include production domain.
--   :
-    -   **Importance**: New backend module for reports.
-    -   **Changes**: Created to support reporting functionality.
--   :
-    -   **Importance**: New utility for PDF generation.
-    -   **Changes**: Created to handle estimate PDF downloads.
--   :
-    -   **Importance**: Frontend page for reports.
-    -   **Changes**: Removed coming soon messages and updated to use backend API.
--   :
-    -   **Importance**: Detail page for estimates.
-    -   **Changes**: Added PDF download button and handler, fixed JSX wrapper issues.
--   :
-    -   **Importance**: Customer profile page.
-    -   **Changes**: Added Send Reminders and Create Task functionality with UI and handlers.
--   :
-    -   **Importance**: Access management page.
-    -   **Changes**: Added Add User modal and  handler.
--   :
-    -   **Importance**: Inventory management page.
-    -   **Changes**: Added delete button and  handler.
--   :
-    -   **Importance**: Shift history page.
-    -   **Changes**: Added export button and  handler.
--   :
-    -   **Importance**: Automation workflow page.
-    -   **Changes**: Added View Details modal and  handler.
--   :
-    -   **Importance**: Learning documents management.
-    -   **Changes**: Added edit/upload state, handlers, and modals. Encountered multiple JSX parsing errors requiring iterative fixes.
--   :
-    -   **Importance**: Script for user migration/updates.
-    -   **Changes**: Fixed hardcoded  usage.
--   :
-    -   **Importance**: Team member settings page.
-    -   **Changes**: Fixed hardcoded URL for API calls.
--   :
-    -   **Importance**: Forms management page.
-    -   **Changes**: Fixed  component usage (removed duplicate title prop, correctly rendered icon).
--   :
-    -   **Importance**: Equipment detail page.
-    -   **Changes**: Fixed multiple JSX errors related to missing wrapping divs and incorrect JSX syntax.
--   :
-    -   **Importance**: Equipment creation page.
-    -   **Changes**: Fixed JSX errors related to missing/extra divs and form tag nesting.
--   :
-    -   **Importance**: Invoice detail page.
-    -   **Changes**: Fixed JSX errors related to missing page wrapper.
--   :
-    -   **Importance**: Project detail page.
-    -   **Changes**: Fixed JSX errors related to missing page wrapper.
--   :
-    -   **Importance**: Team member edit page.
-    -   **Changes**: Fixed JSX errors related to form tag nesting and missing page wrapper.
--   :
-    -   **Importance**: Team member creation page.
-    -   **Changes**: Fixed JSX errors related to form tag nesting and missing page wrapper.
--   :
-    -   **Importance**: RingCentral integration settings page.
-    -   **Changes**: Fixed multiple JSX errors related to missing closing divs within map functions and incorrect structural nesting.
--   :
-    -   **Importance**: Crew communications portal.
-    -   **Changes**: Repeatedly fixed JSX errors, primarily involving unbalanced  tags within conditional (ternary) rendering.
--   :
-    -   **Importance**: Customer communications portal.
-    -   **Changes**: Fixed JSX errors, specifically missing closing  tags.
--   :
-    -   **Importance**: Subcontractor communications portal.
-    -   **Changes**: Fixed JSX errors, specifically missing closing  tags.
--    (e.g., , , , , , , , ):
-    -   **Importance**: Various Python scripts created for automated JSX error fixing.
-    -   **Changes**: Created, used, and often discarded or refined due to the complexity and varied nature of the JSX build errors, with limited sustained success.
+-   ****: The FastAPI application's main entry point.
+    -   **Summary**: Registers API routes and handles core server logic.
+    -   **Changes**: Added , , and  imports and registrations.
+-   ****: Pydantic models for tasks.
+    -   **Summary**: Defines task data structures.
+    -   **Changes**: Updated to include comprehensive task relations (sites, services, forms) and attachments.
+-   ** (NEW)**: FastAPI routes for Google Calendar integration.
+    -   **Summary**: Handles Google OAuth flow, calendar status, and CRUD operations for calendar events.
+    -   **Changes**: Newly created. Includes , , , , , . Stores Google tokens in MongoDB.
+-   ** (NEW)**: FastAPI routes for team data.
+    -   **Summary**: Provides mock data for team members.
+    -   **Changes**: Newly created with  endpoint.
+-   ** (NEW)**: FastAPI routes for form templates.
+    -   **Summary**: Provides mock data for form templates.
+    -   **Changes**: Newly created with  endpoint.
+-   ****: Now the main home/dashboard page.
+    -   **Summary**: Displays an overview of application metrics, recent activities, and quick actions.
+    -   **Changes**: Merged dashboard functionality into this file. Updated to fetch and display real-time Recent Activity and Platform Health data. Quick Actions moved into the . Layout adjusted for full-width Recent Activity and 3-column grid for Platform Health. Add Lead button now navigates directly to . Removed  state and related JSX. Added  icon to the .
+-   ****: Old dashboard page.
+    -   **Summary**: Previously the main dashboard.
+    -   **Changes**: Content merged into  and now contains only a redirect to .
+-   ****: Web-admin's tasks list page.
+    -   **Summary**: Displays a list of tasks.
+    -   **Changes**: Fixed a nested button error by restructuring how stats and filters are passed to .
+-   ****: CRM dashboard page.
+    -   **Summary**: Displays CRM-related information.
+    -   **Changes**: Updated Add Task button and Upcoming Tasks section to link to . Updated View Full calendar button to link to .
+-   ** (NEW)**: Comprehensive calendar page.
+    -   **Summary**: Provides a full-featured calendar with Google Calendar integration and event management.
+    -   **Changes**: Newly created. Includes UI for Google Calendar connection, consolidated sync buttons, popups for connection status, updated button colors, clickable days with event popups, Month/Week/Day view filters, date display on each day, smooth view transitions, updated modal backgrounds/overlays, and removed close/+New Event buttons from day events modal. Imports and uses . Fixed  icon import.
+-   ****: Client-side authentication context.
+    -   **Summary**: Manages user authentication state.
+    -   **Changes**: Refined session token handling and  to prevent unnecessary API calls and gracefully handle 401 errors.
+-   ****: Centralized Axios instance for API requests.
+    -   **Summary**: Configures Axios with base URL and interceptors.
+    -   **Changes**: Improved response error interceptor to silently handle 401 errors.
+-   ****: Reusable page header component.
+    -   **Summary**: Provides a consistent header for pages, including title, subtitle, and actions.
+    -   **Changes**: Modified to accept and display an  prop, allowing an icon to appear to the left of the page title.
+-   ****: Main navigation component.
+    -   **Summary**: Defines the application's primary navigation structure.
+    -   **Changes**: Added  icon import and  link under the  submenu. Removed Agreement Templates and reordered the Sales submenu.
+-   ** (NEW)**: Modal for creating/editing calendar events.
+    -   **Summary**: Provides a form for comprehensive event creation, including fields for customers, sites, forms, team members, and file attachments. Supports edit mode.
+    -   **Changes**: Newly created. Includes UI for all specified fields and supports dynamic titles/delete buttons for edit mode. Fixed  icon import.
+-   ** (NEW)**: Python script.
+    -   **Summary**: Created to systematically fix JSX structure mismatch patterns in  functions.
+    -   **Changes**: Newly created.
+-   ** (NEW)**: Documentation file.
+    -   **Summary**: Outlines the plan for adding icons to all major page headers.
+    -   **Changes**: Newly created.
 </code_architecture>
 
 <pending_tasks>
+-   Fix Production Build JSX Errors (24 errors identified, script created but not fully implemented/verified).
 -   Fully implement specific measurement tools functionality and popups for Measure Area and Measure Distance in the Site Maps.
--   Fully implement clickable items on the map for editing/viewing after placement, beyond simple  calls.
--   Address all remaining JSX build errors across the  application to ensure a clean production build, as these currently lead to persistent internal server errors and require frequent cache clearing.
+-   Fully implement clickable items on the map for editing/viewing after placement (beyond simple  calls).
+-   Refactor the original  to be compatible with Turbopack, or rebuild it.
+-   Implement event conflict detection for the calendar events.
+-   Systematically add icons to *all* major page headers (beyond the dashboard example).
 </pending_tasks>
 
 <current_work>
-The AI engineer has been actively engaged in resolving persistent JSX build errors within the  frontend, which are causing Internal Server Errors and requiring frequent clearing of the Next.js  cache. Most recently, the focus was on  where JSX parsing errors (missing closing divs within  functions and incorrect structural nesting) were identified and addressed. The agent applied fixes to lines 295, 301, and 309 to properly balance the  tags. Although the agent declared the  page fixed after the last edit (Chat Message 822), the subsequent system response immediately reported another internal server error (Chat Message 823), indicating the issue either persists, a new one was introduced, or the Next.js cache needs another restart to reflect the changes cleanly. The last action was to clear the cache and restart the web-admin service.
+The most recent development focused on enhancing the calendar feature by implementing event editing and deletion functionality. This involved modifying the  to support an 'edit mode', which allows the modal title to change (e.g., Edit Event) and introduces a Delete Event button in the modal's footer for existing events.
+
+On the backend,  was updated to include new API endpoints: a  endpoint for updating event details and a  endpoint for removing events from the database. These additions complete the CRUD (Create, Read, Update, Delete) operations for calendar events, ensuring full programmatic control over event data.
+
+After these modifications, both the backend and web-admin services were restarted to apply the changes. During the verification phase, the user reported a Not loading issue, which was subsequently diagnosed as a Next.js cache problem in the . The cache was cleared, and the  service was restarted. The application is now loading correctly again, and the next step is to verify the functionality of the newly implemented event editing and deletion features on the calendar page.
 </current_work>
 
 <optional_next_step>
-Clear the web-admin cache, restart the web-admin service, and then verify the  again.
+Verify the functionality of the newly implemented event editing and deletion features in the calendar.
 </optional_next_step>

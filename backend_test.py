@@ -12,7 +12,7 @@ from typing import Dict, Any, List
 import uuid
 
 # Configuration
-BACKEND_URL = "https://mapbuilder-3.preview.emergentagent.com/api"
+BACKEND_URL = "https://fieldservice-hub-1.preview.emergentagent.com/api"
 TIMEOUT = 30
 
 class BackendTester:
