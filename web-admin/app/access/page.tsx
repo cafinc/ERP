@@ -127,6 +127,25 @@ export default function UnifiedAccessPage() {
     },
   ]);
 
+  // State for managing role permissions
+  const [selectedRole, setSelectedRole] = useState<number | null>(null);
+  const [editablePermissions, setEditablePermissions] = useState<string[]>([]);
+
+  // All available permissions in the system
+  const allPermissions = [
+    { category: 'Core Access', items: ['All Access', 'View Only', 'Dashboard Access'] },
+    { category: 'User Management', items: ['Manage Users', 'View Users', 'Edit User Profiles', 'Delete Users'] },
+    { category: 'Project Management', items: ['Manage Projects', 'View Projects', 'Edit Projects', 'View Assigned Projects', 'Approve Projects'] },
+    { category: 'Site Management', items: ['View Sites', 'Edit Sites', 'Create Sites', 'Delete Sites', 'Access Site Details'] },
+    { category: 'Reports & Analytics', items: ['View Reports', 'Download Reports', 'Create Reports', 'Export Data'] },
+    { category: 'Team Operations', items: ['Manage Teams', 'View Teams', 'Approve Timesheets', 'Submit Timesheets'] },
+    { category: 'Field Operations', items: ['Update Status', 'Upload Photos', 'Upload Documentation', 'View Assigned Tasks', 'Update Work Progress'] },
+    { category: 'Financial', items: ['Manage Billing', 'View Invoices', 'Submit Invoices', 'Make Payments', 'View Purchase Orders'] },
+    { category: 'Customer Service', items: ['Request Services', 'Track Work Orders', 'Submit Support Tickets', 'View Project Schedule'] },
+    { category: 'Inventory', items: ['Manage Inventory', 'View Inventory', 'Update Delivery Status'] },
+    { category: 'System', items: ['System Configuration', 'Manage Settings', 'View Activity Logs'] },
+  ];
+
   const [auditLogs] = useState([
     { id: 1, action: 'User Created', user: 'John Admin', target: 'Mike Johnson', timestamp: '2025-06-21 10:30 AM', ip: '192.168.1.100' },
     { id: 2, action: 'Role Modified', user: 'Sarah Manager', target: 'Manager Role', timestamp: '2025-06-21 09:15 AM', ip: '192.168.1.101' },
