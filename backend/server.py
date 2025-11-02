@@ -10330,13 +10330,13 @@ async def google_tasks_oauth_callback(code: str, state: str):
         await db.google_tasks_oauth_states.delete_one({"_id": state_doc["_id"]})
         
         # Redirect to settings page
-        redirect_base = "https://asset-dashboard-36.preview.emergentagent.com"
-        return RedirectResponse(url=f"{redirect_base}/settings?google_tasks_connected=true")
+        frontend_url = os.getenv("FRONTEND_URL", "")
+        return RedirectResponse(url=f"{frontend_url}/settings?google_tasks_connected=true")
         
     except Exception as e:
         logger.error(f"Error in Google Tasks OAuth callback: {e}")
-        redirect_base = "https://asset-dashboard-36.preview.emergentagent.com"
-        return RedirectResponse(url=f"{redirect_base}/settings?error=google_tasks_connection_failed")
+        frontend_url = os.getenv("FRONTEND_URL", "")
+        return RedirectResponse(url=f"{frontend_url}/settings?error=google_tasks_connection_failed")
 
 
 @api_router.get("/google-tasks/status")
