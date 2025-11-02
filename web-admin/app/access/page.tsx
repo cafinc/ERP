@@ -140,6 +140,12 @@ export default function UnifiedAccessPage() {
     message: ''
   });
 
+  // View and Edit user modals
+  const [showViewUserModal, setShowViewUserModal] = useState(false);
+  const [showEditUserModal, setShowEditUserModal] = useState(false);
+  const [selectedViewUser, setSelectedViewUser] = useState<any>(null);
+  const [selectedEditUser, setSelectedEditUser] = useState<any>(null);
+
   // Function to show toast
   const showToast = (type: 'success' | 'error', message: string) => {
     setToast({ show: true, type, message });
