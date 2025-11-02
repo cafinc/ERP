@@ -366,7 +366,6 @@ export default function InspectionSchedulesPage() {
                   </button>
                 </div>
               </div>
-            </div>
             ))}
           )}
         </div>
