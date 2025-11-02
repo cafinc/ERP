@@ -554,8 +554,67 @@ export default function EquipmentPage() {
             {sortField !== 'name' && (
               <span> • Sorted by <span className="font-semibold">{sortField === 'created_at' ? 'Date Added' : sortField === 'maintenance_due' ? 'Maintenance Due' : sortField.charAt(0).toUpperCase() + sortField.slice(1)}</span> ({sortOrder === 'asc' ? 'ascending' : 'descending'})</span>
             )}
+            {selectedIds.length > 0 && (
+              <span className="ml-2">• <span className="font-semibold text-[#3f72af]">{selectedIds.length} selected</span></span>
+            )}
           </p>
         </div>
+
+        {/* Bulk Actions Toolbar */}
+        {selectedIds.length > 0 && (
+          <div className="mx-6 mb-4 bg-[#3f72af] text-white rounded-lg p-4 shadow-lg">
+            <div className="flex items-center justify-between flex-wrap gap-4">
+              <div className="flex items-center gap-2">
+                <CheckSquare className="w-5 h-5" />
+                <span className="font-medium">{selectedIds.length} asset(s) selected</span>
+              </div>
+              <div className="flex items-center gap-2 flex-wrap">
+                {/* Status Update Dropdown */}
+                <div className="relative">
+                  <select
+                    onChange={(e) => {
+                      if (e.target.value) {
+                        handleBulkStatusUpdate(e.target.value);
+                        e.target.value = '';
+                      }
+                    }}
+                    className="px-4 py-2 bg-white text-gray-700 rounded-lg font-medium transition-colors cursor-pointer"
+                  >
+                    <option value="">Update Status</option>
+                    <option value="available">Available</option>
+                    <option value="in_use">In Use</option>
+                    <option value="maintenance">Maintenance</option>
+                    <option value="unavailable">Unavailable</option>
+                  </select>
+                </div>
+                
+                <button
+                  onClick={handleBulkExport}
+                  className="px-4 py-2 bg-white text-[#3f72af] rounded-lg font-medium transition-colors hover:bg-gray-100 flex items-center space-x-2"
+                >
+                  <Download className="w-4 h-4" />
+                  <span>Export</span>
+                </button>
+                
+                <button
+                  onClick={handleBulkDelete}
+                  className="px-4 py-2 bg-red-600 text-white rounded-lg font-medium transition-colors hover:bg-red-700 flex items-center space-x-2"
+                >
+                  <Trash2 className="w-4 h-4" />
+                  <span>Delete</span>
+                </button>
+                
+                <button
+                  onClick={() => setSelectedIds([])}
+                  className="px-4 py-2 bg-white/20 text-white rounded-lg font-medium transition-colors hover:bg-white/30 flex items-center space-x-2"
+                >
+                  <X className="w-4 h-4" />
+                  <span>Clear</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Equipment Grid */}
         {filteredAndSortedEquipment.length === 0 ? (
