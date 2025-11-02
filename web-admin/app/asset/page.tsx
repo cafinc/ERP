@@ -29,6 +29,8 @@ import {
   Download,
   CheckSquare,
   Square,
+  FileSpreadsheet,
+  Printer,
 } from 'lucide-react';
 
 interface Equipment {
