@@ -264,6 +264,7 @@ export default function FuelPage() {
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
       <PageHeader
         title="Fuel Management"
+        icon={<Fuel size={28} />}
         subtitle="Track fuel usage across equipment, vehicles, and tools"
         breadcrumbs={[
           { label: "Home", href: "/" },
