@@ -146,6 +146,63 @@ export default function UnifiedAccessPage() {
   const [selectedViewUser, setSelectedViewUser] = useState<any>(null);
   const [selectedEditUser, setSelectedEditUser] = useState<any>(null);
 
+  // Add User form state and validation
+  const [addUserForm, setAddUserForm] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    role: '',
+    team: '',
+    company: '',
+    userType: 'team',
+    status: 'active',
+  });
+  const [addUserErrors, setAddUserErrors] = useState<any>({});
+
+  // Validate Add User form
+  const validateAddUserForm = () => {
+    const errors: any = {};
+    
+    if (!addUserForm.name.trim()) {
+      errors.name = 'Full name is required';
+    }
+    
+    if (!addUserForm.email.trim()) {
+      errors.email = 'Email address is required';
+    } else if (!/\S+@\S+\.\S+/.test(addUserForm.email)) {
+      errors.email = 'Email address is invalid';
+    }
+    
+    if (!addUserForm.role) {
+      errors.role = 'Role selection is required';
+    }
+    
+    setAddUserErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  // Handle Add User form submission
+  const handleAddUserSubmit = () => {
+    if (validateAddUserForm()) {
+      setShowAddUserModal(false);
+      showToast('success', `User ${addUserForm.name} created successfully!`);
+      // Reset form
+      setAddUserForm({
+        name: '',
+        email: '',
+        phone: '',
+        role: '',
+        team: '',
+        company: '',
+        userType: 'team',
+        status: 'active',
+      });
+      setAddUserErrors({});
+    } else {
+      showToast('error', 'Please fill in all required fields');
+    }
+  };
+
   // Function to show toast
   const showToast = (type: 'success' | 'error', message: string) => {
     setToast({ show: true, type, message });
