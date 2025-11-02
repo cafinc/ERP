@@ -291,6 +291,7 @@ export default function ServicesPage() {
       <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto">
         <PageHeader
           title="Services"
+          icon={<Briefcase size={28} />}
           subtitle="Manage service offerings, pricing, and availability"
           breadcrumbs={[
             { label: "Home", href: "/" },
