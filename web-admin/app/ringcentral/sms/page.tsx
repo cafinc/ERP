@@ -120,9 +120,10 @@ export default function SMSPage() {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <PageHeader
-        title="Sms"
-        subtitle="Manage sms"
-        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Ringcentral", href: "/ringcentral" }, { label: "Sms" }]}
+        title="SMS"
+        icon={<MessageCircle size={28} />}
+        subtitle="Manage SMS messages"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Ringcentral", href: "/ringcentral" }, { label: "SMS" }]}
       />
       <div className="flex-1 overflow-auto p-6">
       <div className="p-8">
