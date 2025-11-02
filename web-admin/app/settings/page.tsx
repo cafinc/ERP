@@ -254,7 +254,12 @@ export default function SettingsPage() {
         <div className="space-y-8 mx-6 mt-6">
           {settings.map((category) => (
             <div key={category.category}>
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">{category.category}</h2>
+              <div className="mb-4">
+                <h2 className="text-xl font-semibold text-gray-900">{category.category}</h2>
+                {category.description && (
+                  <p className="text-sm text-gray-600 mt-1">{category.description}</p>
+                )}
+              </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {category.items.map((item) => {
                   const Icon = item.icon;
@@ -262,14 +267,21 @@ export default function SettingsPage() {
                     <button
                       key={item.href}
                       onClick={() => router.push(item.href)}
-                      className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow text-left hover:shadow-md transition-shadow"
+                      className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow text-left"
                     >
                       <div className="flex items-start gap-4">
                         <div className={`rounded-lg p-3 ${getColorClasses(item.color)}`}>
                           <Icon className="w-6 h-6" />
                         </div>
                         <div className="flex-1">
-                          <h3 className="font-semibold text-gray-900 mb-1">{item.title}</h3>
+                          <div className="flex items-center gap-2 mb-1">
+                            <h3 className="font-semibold text-gray-900">{item.title}</h3>
+                            {item.badge && (
+                              <span className="px-2 py-0.5 text-xs font-medium bg-blue-100 text-[#3f72af] rounded-full">
+                                {item.badge}
+                              </span>
+                            )}
+                          </div>
                           <p className="text-sm text-gray-600">{item.description}</p>
                         </div>
                       </div>
