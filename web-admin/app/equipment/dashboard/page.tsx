@@ -140,9 +140,6 @@ export default function AssetDashboardPage() {
           { label: 'Total Assets', value: stats.totalAssets, color: 'blue' },
           { label: 'Operational', value: stats.operational, color: 'green' },
         ]}
-        tabs={categoryTabs}
-        activeTab={activeCategory}
-        onTabChange={setActiveCategory}
       />
 
         {/* Stats Grid */}
