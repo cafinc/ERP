@@ -263,6 +263,7 @@ export default function ModernHeaderWithNav() {
         { label: 'HR Dashboard', href: '/hr', icon: Briefcase },
         { label: 'Employees', href: '/hr/employees', icon: Users },
         { label: 'Time & Attendance', href: '/hr/time-attendance', icon: LayoutDashboard },
+        { label: 'Shift History', href: '/shifts/history', icon: FileText },
         { label: 'PTO Management', href: '/hr/pto', icon: FileText },
         { label: 'Training', href: '/hr/training', icon: FolderOpen },
         { label: 'Performance', href: '/hr/performance', icon: DollarSign },
