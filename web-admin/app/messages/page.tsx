@@ -562,6 +562,7 @@ export default function MessagesPage() {
                   >
                     <User className="w-5 h-5 inline mr-2" />
                     Direct Message
+                  </button>
                   <button
                     onClick={() => setConversationType('group')}
                     className={`flex-1 py-2 px-4 rounded-lg border ${
@@ -572,6 +573,10 @@ export default function MessagesPage() {
                   >
                     <Users className="w-5 h-5 inline mr-2" />
                     Group Chat
+                  </button>
+                </div>
+              </div>
+              
               {/* Group Name */}
               {conversationType === 'group' && (
                 <div className="mb-4">
