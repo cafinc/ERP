@@ -417,10 +417,10 @@ export default function WorkflowEditorPage() {
             )}
           </div>
 
-          {/* Actions */}
-          <div className="bg-white rounded-lg shadow-lg shadow-sm border border-gray-200 p-8 hover:shadow-md transition-shadow">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-gray-900">Actions</h3>
+        {/* Actions */}
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-lg font-semibold text-gray-900">Actions</h3>
               <button
                 onClick={() => setShowActionSelector(true)}
                 className="flex items-center space-x-2 px-4 py-2 bg-[#3f72af] hover:bg-[#3f72af]/90 text-white rounded-lg font-medium transition-colors"
