@@ -38,7 +38,8 @@ export default function CreateEquipmentPage() {
   };
 
   return (
-    <div className="p-4">\n      <PageHeader
+    <div className="p-4">
+      <PageHeader
         title="Add New Asset"
         subtitle="Create a new asset entry"
         breadcrumbs={[
