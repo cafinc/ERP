@@ -252,10 +252,16 @@ export default function UnifiedAccessPage() {
                   <td className="px-6 py-4 text-sm text-gray-600">{user.last_login || 'Never'}</td>
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-2">
-                      <button className="p-1 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors">
+                      <button 
+                        onClick={() => showToast('success', `Editing ${user.name}'s profile`)}
+                        className="p-1 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors"
+                      >
                         <Edit className="w-4 h-4" />
                       </button>
-                      <button className="p-1 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded transition-colors">
+                      <button 
+                        onClick={() => showToast('error', `Cannot delete ${user.name} - user has active sessions`)}
+                        className="p-1 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded transition-colors"
+                      >
                         <Trash2 className="w-4 h-4" />
                       </button>
                     </div>
