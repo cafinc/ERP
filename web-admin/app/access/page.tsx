@@ -1194,6 +1194,276 @@ export default function UnifiedAccessPage() {
         </div>
       )}
 
+      {/* View User Modal */}
+      {showViewUserModal && selectedViewUser && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-xl shadow-2xl max-w-2xl w-full">
+            {/* Modal Header */}
+            <div className="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-blue-100 rounded-lg">
+                  <Eye className="w-5 h-5 text-blue-600" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900">User Details</h3>
+                  <p className="text-sm text-gray-600">View user information</p>
+                </div>
+              </div>
+              <button
+                onClick={() => setShowViewUserModal(false)}
+                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              >
+                <XCircle className="w-5 h-5 text-gray-500" />
+              </button>
+            </div>
+
+            {/* Modal Body */}
+            <div className="px-6 py-6 space-y-6">
+              {/* User Info Grid */}
+              <div className="grid grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Full Name</label>
+                  <div className="px-4 py-3 bg-gray-50 rounded-lg border border-gray-200">
+                    <p className="text-gray-900">{selectedViewUser.name}</p>
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
+                  <div className="px-4 py-3 bg-gray-50 rounded-lg border border-gray-200">
+                    <p className="text-gray-900">{selectedViewUser.email}</p>
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Role</label>
+                  <div className="px-4 py-3 bg-gray-50 rounded-lg border border-gray-200">
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                      {selectedViewUser.role}
+                    </span>
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Status</label>
+                  <div className="px-4 py-3 bg-gray-50 rounded-lg border border-gray-200">
+                    {selectedViewUser.status === 'active' ? (
+                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                        <CheckCircle className="w-3 h-3" />
+                        Active
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                        <XCircle className="w-3 h-3" />
+                        Inactive
+                      </span>
+                    )}
+                  </div>
+                </div>
+                {selectedViewUser.team && (
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">Team</label>
+                    <div className="px-4 py-3 bg-gray-50 rounded-lg border border-gray-200">
+                      <p className="text-gray-900">{selectedViewUser.team}</p>
+                    </div>
+                  </div>
+                )}
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Last Login</label>
+                  <div className="px-4 py-3 bg-gray-50 rounded-lg border border-gray-200">
+                    <p className="text-gray-900">{selectedViewUser.last_login || 'Never'}</p>
+                  </div>
+                </div>
+                <div className="col-span-2">
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Created At</label>
+                  <div className="px-4 py-3 bg-gray-50 rounded-lg border border-gray-200">
+                    <p className="text-gray-900">{selectedViewUser.created_at}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Modal Footer */}
+            <div className="px-6 py-4 border-t border-gray-200 flex items-center justify-end bg-gray-50 rounded-b-xl gap-2">
+              <button
+                type="button"
+                onClick={() => {
+                  setShowViewUserModal(false);
+                  setSelectedEditUser(selectedViewUser);
+                  setShowEditUserModal(true);
+                }}
+                className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-medium transition-colors flex items-center gap-2"
+              >
+                <Edit className="w-4 h-4" />
+                Edit User
+              </button>
+              <button
+                type="button"
+                onClick={() => setShowViewUserModal(false)}
+                className="px-4 py-2 text-gray-700 hover:bg-gray-200 rounded-lg font-medium transition-colors"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Edit User Modal */}
+      {showEditUserModal && selectedEditUser && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 overflow-y-auto">
+          <div className="bg-white rounded-xl shadow-2xl max-w-2xl w-full my-8">
+            {/* Modal Header */}
+            <div className="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-indigo-100 rounded-lg">
+                  <Edit className="w-5 h-5 text-indigo-600" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900">Edit User</h3>
+                  <p className="text-sm text-gray-600">Update user information and settings</p>
+                </div>
+              </div>
+              <button
+                onClick={() => setShowEditUserModal(false)}
+                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              >
+                <XCircle className="w-5 h-5 text-gray-500" />
+              </button>
+            </div>
+
+            {/* Modal Body */}
+            <div className="px-6 py-4 max-h-[calc(100vh-200px)] overflow-y-auto">
+              <form className="space-y-6">
+                {/* Basic Information */}
+                <div>
+                  <h4 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                    <Users className="w-4 h-4" />
+                    Basic Information
+                  </h4>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Full Name <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        defaultValue={selectedEditUser.name}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Email Address <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="email"
+                        defaultValue={selectedEditUser.email}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Role Assignment */}
+                <div className="border-t border-gray-200 pt-6">
+                  <h4 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                    <Shield className="w-4 h-4" />
+                    Role & Permissions
+                  </h4>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Assign Role <span className="text-red-500">*</span>
+                    </label>
+                    <select 
+                      defaultValue={selectedEditUser.role}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                    >
+                      <option value="">Select a role...</option>
+                      <optgroup label="Internal Roles">
+                        <option value="Admin">Admin - All Access</option>
+                        <option value="Manager">Manager - Manage Teams & Projects</option>
+                        <option value="Operator">Operator - Field Operations</option>
+                        <option value="Viewer">Viewer - Read Only</option>
+                      </optgroup>
+                      <optgroup label="External Roles">
+                        <option value="Subcontractor">Subcontractor - Project Access</option>
+                        <option value="Customer">Customer - Service Portal</option>
+                        <option value="Vendor">Vendor - Supply Chain</option>
+                      </optgroup>
+                    </select>
+                  </div>
+                </div>
+
+                {/* Team Assignment */}
+                {selectedEditUser.team && (
+                  <div className="border-t border-gray-200 pt-6">
+                    <h4 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                      <HardHat className="w-4 h-4" />
+                      Team Assignment
+                    </h4>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Assign to Team
+                      </label>
+                      <select 
+                        defaultValue={selectedEditUser.team}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                      >
+                        <option value="">No team assignment</option>
+                        <option value="Team A - North Division">Team A - North Division</option>
+                        <option value="Team B - South Division">Team B - South Division</option>
+                        <option value="Team C - East Division">Team C - East Division</option>
+                        <option value="Team D - West Division">Team D - West Division</option>
+                      </select>
+                    </div>
+                  </div>
+                )}
+
+                {/* Account Status */}
+                <div className="border-t border-gray-200 pt-6">
+                  <h4 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                    <Eye className="w-4 h-4" />
+                    Account Status
+                  </h4>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Status
+                    </label>
+                    <select 
+                      defaultValue={selectedEditUser.status}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                    >
+                      <option value="active">Active</option>
+                      <option value="inactive">Inactive</option>
+                    </select>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            {/* Modal Footer */}
+            <div className="px-6 py-4 border-t border-gray-200 flex items-center justify-between bg-gray-50 rounded-b-xl">
+              <button
+                type="button"
+                onClick={() => setShowEditUserModal(false)}
+                className="px-4 py-2 text-gray-700 hover:bg-gray-200 rounded-lg font-medium transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setShowEditUserModal(false);
+                  showToast('success', `${selectedEditUser.name}'s profile has been updated successfully!`);
+                }}
+                className="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-medium transition-colors flex items-center gap-2"
+              >
+                <Save className="w-4 h-4" />
+                Save Changes
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Toast Notification */}
       {toast.show && (
         <div className="fixed top-4 right-4 z-50">
