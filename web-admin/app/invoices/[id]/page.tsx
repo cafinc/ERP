@@ -291,12 +291,6 @@ export default function InvoiceDetailPage() {
                   </tbody>
                 </table>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
               {/* Totals */}
               <div className="mt-6 pt-6 border-t border-gray-200 space-y-2">
@@ -320,9 +314,6 @@ export default function InvoiceDetailPage() {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
 
             {/* Payment History */}
             {invoice.payments && invoice.payments.length > 0 && (
