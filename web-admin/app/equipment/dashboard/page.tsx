@@ -144,26 +144,22 @@ export default function AssetDashboardPage() {
           { 
             label: 'Add Asset', 
             onClick: () => router.push('/equipment/create'), 
-            variant: 'primary',
-            icon: Plus
+            variant: 'primary'
           },
           { 
             label: 'Schedule Maintenance', 
             onClick: () => router.push('/equipment/maintenance'), 
-            variant: 'secondary',
-            icon: Wrench
+            variant: 'secondary'
           },
           { 
             label: 'View Inspections', 
             onClick: () => router.push('/equipment/inspections'), 
-            variant: 'secondary',
-            icon: ClipboardList
+            variant: 'secondary'
           },
           { 
             label: 'All Assets', 
             onClick: () => router.push('/equipment'), 
-            variant: 'secondary',
-            icon: Package
+            variant: 'secondary'
           },
         ]}
       />
