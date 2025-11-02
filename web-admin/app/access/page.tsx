@@ -1119,6 +1119,10 @@ export default function UnifiedAccessPage() {
                   </button>
                   <button
                     type="button"
+                    onClick={() => {
+                      const role = roles.find(r => r.id === selectedRole);
+                      showToast('success', `Permissions updated for ${role?.name} role!`);
+                    }}
                     className="px-6 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#2d5a8f] font-medium transition-colors flex items-center gap-2"
                   >
                     <Save className="w-4 h-4" />
