@@ -19,6 +19,12 @@ import {
   Webhook,
   Settings as SettingsIcon,
   HelpCircle,
+  Zap,
+  GitBranch,
+  BarChart3,
+  FileSearch,
+  Workflow,
+  History,
 } from 'lucide-react';
 
 export default function SettingsPage() {
