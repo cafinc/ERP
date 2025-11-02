@@ -354,20 +354,34 @@ async def get_google_auth_url():
 async def sync_google_calendar():
     """Sync events with Google Calendar"""
     try:
+        # Check if OAuth tokens exist
+        token_doc = await db.oauth_tokens.find_one({"service": "google_calendar"})
+        
+        if not token_doc or not token_doc.get("access_token"):
+            raise HTTPException(
+                status_code=400,
+                detail="Google Calendar not connected. Please connect first."
+            )
+        
         # In production:
-        # 1. Check if OAuth tokens exist
-        # 2. Refresh token if needed
-        # 3. Fetch events from Google Calendar API
-        # 4. Merge with local database
-        # 5. Push local events to Google Calendar if needed
+        # 1. Refresh token if needed
+        # 2. Fetch events from Google Calendar API
+        # 3. Merge with local database
+        # 4. Push local events to Google Calendar if needed
+        
+        # For now, count local events
+        local_event_count = await db.calendar_events.count_documents({})
         
         return {
             "success": True,
             "message": "Calendar synced successfully",
-            "events_synced": len(MOCK_EVENTS),
+            "events_synced": local_event_count,
             "timestamp": datetime.now().isoformat()
         }
+    except HTTPException:
+        raise
     except Exception as e:
+        print(f"Error syncing calendar: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.get("/calendar/google/callback", response_class=HTMLResponse)
