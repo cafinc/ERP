@@ -231,6 +231,12 @@ export default function AccessDashboardPage() {
           breadcrumbs={[{ label: "Home", href: "/" }, { label: "Access" }]}
           actions={[
             {
+              label: 'Manage Roles',
+              icon: <Shield className="w-4 h-4 mr-2" />,
+              onClick: () => setShowRolesModal(true),
+              variant: 'secondary',
+            },
+            {
               label: 'Add User',
               icon: <UserPlus className="w-4 h-4 mr-2" />,
               onClick: () => setShowAddUserModal(true),
