@@ -670,10 +670,11 @@ def sync_customer_to_quickbooks(customer_data: dict):
                 try:
                     # Use run_in_executor to make blocking requests.post non-blocking
                     loop = asyncio.get_event_loop()
+                    backend_url = os.getenv("BACKEND_URL", "http://localhost:8001")
                     response = await loop.run_in_executor(
                         None,
                         lambda: requests.post(
-                            f"https://asset-dashboard-36.preview.emergentagent.com/api/quickbooks/customers?user_id={user_id}",
+                            f"{backend_url}/api/quickbooks/customers?user_id={user_id}",
                             json=qb_customer_data,
                             timeout=10
                         )
