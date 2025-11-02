@@ -124,6 +124,56 @@ export default function MasterUsersPage() {
     }
   };
 
+  // If not in development, show access denied page
+  if (!isDevelopment) {
+    return (
+      <div style={{ padding: '24px', backgroundColor: '#f8fafc', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{
+          backgroundColor: 'white',
+          borderRadius: '16px',
+          boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+          padding: '48px',
+          maxWidth: '500px',
+          textAlign: 'center'
+        }}>
+          <div style={{
+            width: '80px',
+            height: '80px',
+            background: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)',
+            borderRadius: '50%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            margin: '0 auto 24px'
+          }}>
+            <Lock style={{ width: '40px', height: '40px', color: 'white' }} />
+          </div>
+          <h2 style={{ fontSize: '24px', fontWeight: '700', color: '#1e293b', marginBottom: '12px' }}>
+            Access Restricted
+          </h2>
+          <p style={{ fontSize: '16px', color: '#64748b', marginBottom: '24px' }}>
+            Master User management is only available in development environments for security reasons.
+          </p>
+          <button
+            onClick={() => router.push('/access')}
+            style={{
+              padding: '12px 24px',
+              backgroundColor: '#3f72af',
+              color: 'white',
+              border: 'none',
+              borderRadius: '8px',
+              fontSize: '14px',
+              fontWeight: '600',
+              cursor: 'pointer'
+            }}
+          >
+            Return to Access Control
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div style={{ padding: '24px', backgroundColor: '#f8fafc', minHeight: '100vh' }}>
       <PageHeader
