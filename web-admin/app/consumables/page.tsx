@@ -208,6 +208,7 @@ export default function ConsumablesPage() {
     <>
       <PageHeader
         title="Consumable Management"
+        icon={<Box size={28} />}
         subtitle="Track and manage consumable materials for winter operations"
         breadcrumbs={[
           { label: "Home", href: "/" },
