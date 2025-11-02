@@ -193,7 +193,6 @@ export default function ModernHeaderWithNav() {
       href: '/asset/dashboard',
       submenu: [
         { label: 'Assets Dashboard', href: '/asset/dashboard', icon: LayoutDashboard },
-        { label: 'All Assets', href: '/asset', icon: Settings },
         { label: 'Equipment', href: '/asset?type=equipment', icon: Settings },
         { label: 'Vehicles', href: '/asset?type=vehicle', icon: MapPin },
         { label: 'Trailers', href: '/asset?type=trailer', icon: Settings },
