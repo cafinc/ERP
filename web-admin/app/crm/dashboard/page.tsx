@@ -117,6 +117,7 @@ export default function CRMDashboardPage() {
     <div className="min-h-screen bg-gray-50">
       <PageHeader
         title="CRM Dashboard"
+        icon={<TrendingUp size={28} />}
         subtitle="Manage customers, leads, estimates, projects, and revenue"
         breadcrumbs={[
           { label: "Home", href: "/" },
