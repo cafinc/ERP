@@ -94,6 +94,19 @@ async def create_work_order(work_order: WorkOrderCreate):
         result = await work_orders_collection.insert_one(work_order_dict)
         work_order_dict["_id"] = result.inserted_id
         
+        # Emit event for workflow automation
+        event_emitter = get_event_emitter()
+        if event_emitter:
+            await event_emitter.emit('work_order_created', {
+                'work_order_id': str(result.inserted_id),
+                'customer_id': work_order.customer_id,
+                'customer_name': work_order_dict["customer_name"],
+                'title': work_order.title,
+                'status': work_order.status,
+                'priority': work_order.priority,
+                'service_type': work_order.service_type
+            })
+        
         return {"success": True, "work_order": serialize_doc(work_order_dict)}
     except HTTPException:
         raise
