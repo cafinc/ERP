@@ -69,6 +69,7 @@ export default function EquipmentPage() {
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [showBulkActions, setShowBulkActions] = useState(false);
   const [showExportModal, setShowExportModal] = useState(false);
+  const [showCompareModal, setShowCompareModal] = useState(false);
 
   useEffect(() => {
     loadEquipment();
