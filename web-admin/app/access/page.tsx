@@ -133,6 +133,21 @@ export default function UnifiedAccessPage() {
   const [selectedRole, setSelectedRole] = useState<number | null>(null);
   const [editablePermissions, setEditablePermissions] = useState<string[]>([]);
 
+  // Toast notification state
+  const [toast, setToast] = useState<{ show: boolean; type: 'success' | 'error'; message: string }>({
+    show: false,
+    type: 'success',
+    message: ''
+  });
+
+  // Function to show toast
+  const showToast = (type: 'success' | 'error', message: string) => {
+    setToast({ show: true, type, message });
+    setTimeout(() => {
+      setToast({ show: false, type: 'success', message: '' });
+    }, 3000);
+  };
+
   // All available permissions in the system
   const allPermissions = [
     { category: 'Core Access', items: ['All Access', 'View Only', 'Dashboard Access'] },
