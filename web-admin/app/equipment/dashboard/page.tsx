@@ -151,7 +151,7 @@ export default function AssetDashboardPage() {
             <button
               key={stat.label}
               onClick={() => router.push(stat.href)}
-              className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-5 hover:shadow-md transition-all text-left hover:shadow-md transition-shadow"
+              className="bg-white rounded-xl shadow-sm border border-gray-200 p-5 hover:shadow-md transition-all text-left"
             >
               <div className="flex items-center justify-between">
                 <div className="flex-1">
@@ -166,9 +166,48 @@ export default function AssetDashboardPage() {
           ))}
         </div>
 
+        {/* Asset Categories Overview */}
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">Asset Categories</h2>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div>
+              <div className="flex items-center space-x-2 mb-2">
+                <Truck className="w-5 h-5 text-blue-500" />
+                <p className="text-sm text-gray-600">Equipment</p>
+              </div>
+              <p className="text-3xl font-bold text-gray-900">{stats.equipment}</p>
+              <p className="text-xs text-gray-500 mt-1">Heavy machinery</p>
+            </div>
+            <div>
+              <div className="flex items-center space-x-2 mb-2">
+                <Car className="w-5 h-5 text-purple-500" />
+                <p className="text-sm text-gray-600">Vehicles</p>
+              </div>
+              <p className="text-3xl font-bold text-gray-900">{stats.vehicles}</p>
+              <p className="text-xs text-gray-500 mt-1">Cars and trucks</p>
+            </div>
+            <div>
+              <div className="flex items-center space-x-2 mb-2">
+                <Truck className="w-5 h-5 text-indigo-500" />
+                <p className="text-sm text-gray-600">Trailers</p>
+              </div>
+              <p className="text-3xl font-bold text-gray-900">{stats.trailers}</p>
+              <p className="text-xs text-gray-500 mt-1">Transport trailers</p>
+            </div>
+            <div>
+              <div className="flex items-center space-x-2 mb-2">
+                <Hammer className="w-5 h-5 text-orange-500" />
+                <p className="text-sm text-gray-600">Tools</p>
+              </div>
+              <p className="text-3xl font-bold text-gray-900">{stats.tools}</p>
+              <p className="text-xs text-gray-500 mt-1">Hand and power tools</p>
+            </div>
+          </div>
+        </div>
+
         {/* Equipment Status Overview */}
-        <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Equipment Status</h2>
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">Asset Status</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
               <div className="flex items-center space-x-2 mb-2">
@@ -180,7 +219,7 @@ export default function AssetDashboardPage() {
             </div>
             <div>
               <div className="flex items-center space-x-2 mb-2">
-                <Wrench className="w-5 h-5 text-orange-500" />
+                <Wrench className="w-5 h-5 text-red-500" />
                 <p className="text-sm text-gray-600">In Maintenance</p>
               </div>
               <p className="text-3xl font-bold text-gray-900">{stats.maintenance}</p>
@@ -188,7 +227,7 @@ export default function AssetDashboardPage() {
             </div>
             <div>
               <div className="flex items-center space-x-2 mb-2">
-                <Clock className="w-5 h-5 text-red-500" />
+                <Clock className="w-5 h-5 text-yellow-500" />
                 <p className="text-sm text-gray-600">Inspections Due</p>
               </div>
               <p className="text-3xl font-bold text-gray-900">{stats.inspectionsDue}</p>
