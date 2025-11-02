@@ -31,6 +31,7 @@ import {
   Square,
   FileSpreadsheet,
   Printer,
+  GitCompare,
 } from 'lucide-react';
 
 interface Equipment {
