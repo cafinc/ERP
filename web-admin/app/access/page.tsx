@@ -69,28 +69,56 @@ export default function UnifiedAccessPage() {
       name: 'Admin', 
       users: 3, 
       permissions: ['All Access', 'Manage Users', 'Manage Settings', 'View Reports', 'Manage Billing', 'System Configuration'],
-      color: 'blue'
+      color: 'blue',
+      category: 'Internal'
     },
     { 
       id: 2, 
       name: 'Manager', 
       users: 5, 
       permissions: ['View Reports', 'Manage Teams', 'Edit Sites', 'Manage Projects', 'Approve Timesheets'],
-      color: 'green'
+      color: 'green',
+      category: 'Internal'
     },
     { 
       id: 3, 
       name: 'Operator', 
       users: 12, 
       permissions: ['View Sites', 'Update Status', 'Upload Photos', 'Submit Timesheets', 'View Assigned Tasks'],
-      color: 'orange'
+      color: 'orange',
+      category: 'Internal'
     },
     { 
       id: 4, 
       name: 'Viewer', 
       users: 8, 
       permissions: ['View Only', 'Download Reports'],
-      color: 'gray'
+      color: 'gray',
+      category: 'Internal'
+    },
+    { 
+      id: 5, 
+      name: 'Subcontractor', 
+      users: 4, 
+      permissions: ['View Assigned Projects', 'Update Work Progress', 'Upload Documentation', 'Submit Invoices', 'View Project Schedule', 'Access Site Details'],
+      color: 'purple',
+      category: 'External'
+    },
+    { 
+      id: 6, 
+      name: 'Customer', 
+      users: 15, 
+      permissions: ['View Projects', 'Request Services', 'View Invoices', 'Make Payments', 'Track Work Orders', 'Submit Support Tickets'],
+      color: 'indigo',
+      category: 'External'
+    },
+    { 
+      id: 7, 
+      name: 'Vendor', 
+      users: 7, 
+      permissions: ['View Purchase Orders', 'Update Delivery Status', 'Submit Invoices', 'Manage Inventory', 'View Order History'],
+      color: 'pink',
+      category: 'External'
     },
   ]);
 
