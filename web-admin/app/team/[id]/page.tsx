@@ -378,5 +378,5 @@ export default function TeamMemberDetailPage() {
         </div>
       </div>
     </div>
-  </div>
+  );
 }
