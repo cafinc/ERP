@@ -155,17 +155,42 @@ export default function WorkflowBuilderPage() {
 
   const handleUseTemplate = async (template: WorkflowTemplate) => {
     try {
-      const workflow: any = {
-        ...template,
-        name: `${template.name} (from template)`,
-      };
-      
-      await api.post('/custom-workflows', workflow);
-      alert('Workflow created from template!');
-      loadWorkflows();
-    } catch (error) {
+      // Check if template has an ID (from new template library)
+      if (template.id) {
+        // Use the new instantiate endpoint
+        const response = await api.post(`/workflow-templates/instantiate/${template.id}`, {
+          name: `${template.name}`,
+          description: template.description,
+          enabled: false, // Start disabled
+        });
+        
+        if (response.data?.success) {
+          alert('Workflow created from template!');
+          loadWorkflows();
+        } else {
+          throw new Error('Failed to create workflow from template');
+        }
+      } else {
+        // Fallback to old method for legacy templates
+        const workflow: any = {
+          ...template,
+          name: `${template.name} (from template)`,
+          enabled: false,
+        };
+        
+        await api.post('/custom-workflows', workflow);
+        alert('Workflow created from template!');
+        loadWorkflows();
+      }
+    } catch (error: any) {
       console.error('Error creating workflow from template:', error);
-      alert('Error creating workflow from template');
+      
+      // Provide more helpful error message
+      if (error.response?.status === 401) {
+        alert('Please log in to create workflows from templates');
+      } else {
+        alert('Error creating workflow from template. Please try again.');
+      }
     }
   };
 
