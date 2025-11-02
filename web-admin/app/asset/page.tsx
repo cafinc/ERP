@@ -768,9 +768,12 @@ export default function EquipmentPage() {
                   <Eye className="w-4 h-4" />
                   View Details
                 </button>
+                </div>
               </div>
-            ))}
+            );
+            })}
           </div>
+          </>
         )}
       </div>
   );
