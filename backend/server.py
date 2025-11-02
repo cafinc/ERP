@@ -12157,7 +12157,8 @@ logger.info("Messaging system endpoints registered successfully")
 
 # Initialize automation engine
 automation_engine = AutomationEngine(db)
-background_scheduler = BackgroundScheduler(db, automation_engine)
+custom_workflow_executor = CustomWorkflowExecutor(db)
+background_scheduler = BackgroundScheduler(db, automation_engine, custom_workflow_executor)
 
 @api_router.post("/automation/trigger/{workflow_name}", tags=["Automation"])
 async def trigger_workflow(workflow_name: str, context: Dict):
