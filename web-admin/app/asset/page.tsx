@@ -637,15 +637,53 @@ export default function EquipmentPage() {
             )}
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mx-6">
-            {filteredAndSortedEquipment.map((item, index) => (
+          <>
+            {/* Select All Option */}
+            <div className="mx-6 mb-3 flex items-center gap-3">
+              <button
+                onClick={toggleSelectAll}
+                className="flex items-center gap-2 text-sm font-medium text-gray-700 hover:text-[#3f72af] transition-colors"
+              >
+                {selectedIds.length === filteredAndSortedEquipment.length ? (
+                  <CheckSquare className="w-5 h-5 text-[#3f72af]" />
+                ) : (
+                  <Square className="w-5 h-5" />
+                )}
+                <span>Select All ({filteredAndSortedEquipment.length})</span>
+              </button>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mx-6">
+            {filteredAndSortedEquipment.map((item, index) => {
+              const isSelected = selectedIds.includes(item.id);
+              return (
               <div
                 key={item.id || `equipment-${index}`}
-                className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow cursor-pointer hover:shadow-md transition-shadow"
-                onClick={() => router.push(`/equipment/${item.id}`)}
+                className={`bg-white rounded-xl shadow-sm border-2 p-4 hover:shadow-md transition-all cursor-pointer relative ${
+                  isSelected ? 'border-[#3f72af] ring-2 ring-[#3f72af]/20' : 'border-gray-200'
+                }`}
               >
+                {/* Selection Checkbox */}
+                <div className="absolute top-3 left-3 z-10">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleSelectItem(item.id);
+                    }}
+                    className="bg-white rounded border-2 border-gray-300 hover:border-[#3f72af] transition-colors"
+                  >
+                    {isSelected ? (
+                      <CheckSquare className="w-6 h-6 text-[#3f72af]" />
+                    ) : (
+                      <Square className="w-6 h-6 text-gray-400" />
+                    )}
+                  </button>
+                </div>
+
+                {/* Card Content - with left padding for checkbox */}
+                <div onClick={() => router.push(`/equipment/${item.id}`)}>
                 {/* Header */}
-                <div className="flex items-start justify-between mb-4">
+                <div className="flex items-start justify-between mb-4 pl-9">
                   <div className="flex items-center gap-3 flex-1">
                     <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-600 rounded-lg flex items-center justify-center flex-shrink-0">
                       <Truck className="w-6 h-6 text-white" />
