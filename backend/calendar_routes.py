@@ -61,44 +61,111 @@ async def get_calendar_events(
 ):
     """Get calendar events within a date range"""
     try:
-        # For now, return mock data
-        # In production, fetch from database and sync with Google Calendar
-        return MOCK_EVENTS
+        query = {}
+        
+        # Add date range filter if provided
+        if start or end:
+            date_filter = {}
+            if start:
+                date_filter["$gte"] = start
+            if end:
+                date_filter["$lte"] = end
+            query["start"] = date_filter
+        
+        # Fetch events from database
+        events_cursor = db.calendar_events.find(query).sort("start", 1)
+        events = await events_cursor.to_list(length=1000)
+        
+        # Serialize events
+        return [serialize_event(event) for event in events]
     except Exception as e:
+        print(f"Error fetching calendar events: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.post("/calendar/events")
 async def create_calendar_event(event: CalendarEvent):
     """Create a new calendar event"""
     try:
-        # In production, save to database and optionally sync with Google Calendar
-        new_event = event.dict()
-        new_event["id"] = f"evt_{datetime.now().timestamp()}"
-        return new_event
+        # Prepare event document
+        event_dict = event.dict(exclude={"id"})
+        event_dict["created_at"] = datetime.now().isoformat()
+        event_dict["updated_at"] = datetime.now().isoformat()
+        
+        # Insert into database
+        result = await db.calendar_events.insert_one(event_dict)
+        
+        # Fetch the created event
+        created_event = await db.calendar_events.find_one({"_id": result.inserted_id})
+        
+        return serialize_event(created_event)
     except Exception as e:
+        print(f"Error creating calendar event: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.put("/calendar/events/{event_id}")
 async def update_calendar_event(event_id: str, event: CalendarEvent):
     """Update an existing calendar event"""
     try:
-        # In production, update in database and optionally sync with Google Calendar
-        updated_event = event.dict()
-        updated_event["id"] = event_id
-        return updated_event
+        # Validate ObjectId
+        try:
+            obj_id = ObjectId(event_id)
+        except Exception:
+            raise HTTPException(status_code=404, detail="Event not found")
+        
+        # Check if event exists
+        existing_event = await db.calendar_events.find_one({"_id": obj_id})
+        if not existing_event:
+            raise HTTPException(status_code=404, detail="Event not found")
+        
+        # Prepare update document
+        event_dict = event.dict(exclude={"id", "created_at"})
+        event_dict["updated_at"] = datetime.now().isoformat()
+        
+        # Update in database
+        await db.calendar_events.update_one(
+            {"_id": obj_id},
+            {"$set": event_dict}
+        )
+        
+        # Fetch and return updated event
+        updated_event = await db.calendar_events.find_one({"_id": obj_id})
+        
+        return serialize_event(updated_event)
+    except HTTPException:
+        raise
     except Exception as e:
+        print(f"Error updating calendar event: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.delete("/calendar/events/{event_id}")
 async def delete_calendar_event(event_id: str):
     """Delete a calendar event"""
     try:
-        # In production, delete from database and optionally sync with Google Calendar
+        # Validate ObjectId
+        try:
+            obj_id = ObjectId(event_id)
+        except Exception:
+            raise HTTPException(status_code=404, detail="Event not found")
+        
+        # Check if event exists
+        existing_event = await db.calendar_events.find_one({"_id": obj_id})
+        if not existing_event:
+            raise HTTPException(status_code=404, detail="Event not found")
+        
+        # Delete from database
+        result = await db.calendar_events.delete_one({"_id": obj_id})
+        
+        if result.deleted_count == 0:
+            raise HTTPException(status_code=404, detail="Event not found")
+        
         return {
             "success": True,
             "message": f"Event {event_id} deleted successfully"
         }
+    except HTTPException:
+        raise
     except Exception as e:
+        print(f"Error deleting calendar event: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.post("/calendar/events/check-conflicts")
