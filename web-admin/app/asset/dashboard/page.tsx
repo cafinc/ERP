@@ -24,7 +24,26 @@ import {
   PieChart,
   Activity,
   Zap,
+  Filter,
+  Download,
 } from 'lucide-react';
+import { 
+  BarChart, 
+  Bar, 
+  LineChart, 
+  Line, 
+  PieChart as RePieChart, 
+  Pie, 
+  Cell, 
+  XAxis, 
+  YAxis, 
+  CartesianGrid, 
+  Tooltip, 
+  Legend, 
+  ResponsiveContainer,
+  Area,
+  AreaChart,
+} from 'recharts';
 
 export default function AssetDashboardPage() {
   const router = useRouter();
