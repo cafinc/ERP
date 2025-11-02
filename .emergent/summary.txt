@@ -1,108 +1,99 @@
 <analysis>
-The trajectory details a comprehensive development effort on an ERP web administration application. Initially, the AI engineer addressed critical infrastructure issues, including resolving 24 persistent JSX build errors, fixing deployment issues, and rectifying a white screen port mismatch. Subsequent work focused on feature development for the  Next.js frontend and FastAPI backend.
-
-Key feature implementations included: merging the dashboard into the home page; refactoring UI elements like Quick Actions into the header and reorganizing the layout of Recent Activity and Platform Health; enhancing authentication error handling; and a significant overhaul of the CRM dashboard and calendar system. The calendar now boasts Google Calendar integration, dynamic view filters (Month/Week/Day), clickable days with event popups, and comprehensive event creation and editing capabilities via a dedicated modal. Backend endpoints for calendar, team, and forms data were created. The main navigation was updated to include the new calendar page, and the  was extended to support icons. The process involved continuous iterative development, addressing user feedback, and resolving runtime and build errors. The last observed action was troubleshooting a Next.js cache issue after implementing event editing, with the application now loading.
+The AI engineer successfully progressed through multiple critical development phases for the ERP web administration application. Initially, it resolved infrastructure and frontend issues, including database persistence for calendar routes that were previously mocked. A significant effort was dedicated to enhancing the UI/UX by systematically adding icons to 20 high-priority page headers, which involved iterative file modifications and debugging. Subsequently, a major refactoring of the workflow automation pages ( and ) was undertaken to ensure Turbopack compatibility, addressing complex JSX syntax errors, nested components, and structural inconsistencies. This involved detailed line-by-line debugging and iterative fixes. The work then transitioned to implementing Enterprise Grade workflow automation features, completing Phase 1 (Executor, Edit UI, History UI), Phase 2 (Scheduled Execution with  and Event-Based Triggers), and initiating Phase 3 with a functional Webhook Receiver. The development was highly iterative, marked by continuous testing, error resolution, and user confirmation at key junctures.
 </analysis>
 
 <product_requirements>
-The primary objective is to modernize an ERP web administration and enhance field service management. Initial tasks involved resolving 24 JSX build errors, deployment issues, and fixing a white screen port mismatch. Key feature requests included a New Lead button (evolved to direct navigation), Customer Creation Form, Service History, and an advanced Site Map Building System. More recently, the user explicitly requested:
-1.  A comprehensive Tasks feature with extensive relations (sites, services, forms), message center integration, assignment to all roles, and customer notifications; with UI/UX refinements (compact layout, inline filters/stats in header).
-2.  An authentication fix for persistent user logins.
-3.  Real-time Recent Activity and Platform Health data on the main dashboard.
-4.  Merging the  page into the home page ().
-5.  Moving Quick Actions (Add Lead, Customer, Site, Manage Inventory) into the header.
-6.  Making Recent Activity full-width and clickable, and placing Platform Health in the 3-column grid.
-7.  Updating the CRM Dashboard to link Tasks to  and the calendar to a new Google-synced calendar page.
-8.  Developing a full calendar page with Google Calendar sync, consolidated header controls, popups for connection issues, brand-consistent button colors, clickable days for event viewing/editing, Month/Week/Day filters, date display on calendar days, smooth view transitions, and matching modal overlays.
-9.  A comprehensive New Event creation modal allowing additions of customers, sites, forms, files, and team members.
-10. Adding the  page to the main navigation under Sales and reorganizing the Sales submenu (Dashboard, Calendar, Leads, Customers, Estimates, Agreements).
-11. Updating all page headers to display corresponding icons.
-12. Implementing event editing functionality for the calendar.
+The overarching goal is to modernize an ERP web administration and enhance field service management. Initial problem-solving included resolving 24 JSX build errors, deployment issues, and a white screen port mismatch. Subsequent feature development focused on a comprehensive Tasks feature, authentication fixes, real-time data on the dashboard, merging the dashboard into the home page, moving quick actions to the header, and enhancing the CRM dashboard. A major request was a full calendar page with Google Calendar sync, consolidated controls, connection status popups, brand-consistent button colors, clickable days for events, Month/Week/Day filters, date display, smooth transitions, matching modal overlays, and a comprehensive New Event creation modal (customers, sites, forms, files, team members). This also included adding the  page to the main navigation under Sales, reorganizing the Sales submenu, updating all page headers to display corresponding icons, and implementing event editing functionality for the calendar. Most recently, the user requested to implement Enterprise Grade workflow automation.
 </product_requirements>
 
 <key_technical_concepts>
--   **Full-Stack Development**: Next.js (web-admin), FastAPI (backend), MongoDB.
--   **API Integration**: Fetching/sending data from backend endpoints (activity, system, tasks, calendar, team, forms).
--   **Authentication**:  for session tokens, , Axios interceptors, graceful 401 handling.
--   **UI/UX Patterns**: Modals, forms with conditional logic, compact layouts, header integration, dynamic routing, component-based design.
--   **Google Calendar API**: OAuth2 for authentication, event management.
--   **JSX Management**: Addressing Turbopack strict parsing errors, script-based fixes.
+-   **Full-Stack Development**: Next.js (web-admin frontend), FastAPI (Python backend), MongoDB (database).
+-   **API Integration**: RESTful API calls for CRUD operations, Google Calendar API (OAuth2).
+-   **UI/UX Patterns**: Component-based design, modals, forms, header integration, dynamic routing, component reuse.
+-   **Backend Automation**: Background scheduling (), event-driven architecture, webhook integration.
+-   **JSX Management**: Strict Turbopack parsing, script-based fixes, manual debugging of JSX structure.
 </key_technical_concepts>
 
 <code_architecture>
 
-The application maintains a monorepo-like structure with  (FastAPI),  (Expo), and  (Next.js).
-
--   ****: The FastAPI application's main entry point.
-    -   **Summary**: Registers API routes and handles core server logic.
-    -   **Changes**: Added , , and  imports and registrations.
--   ****: Pydantic models for tasks.
-    -   **Summary**: Defines task data structures.
-    -   **Changes**: Updated to include comprehensive task relations (sites, services, forms) and attachments.
--   ** (NEW)**: FastAPI routes for Google Calendar integration.
-    -   **Summary**: Handles Google OAuth flow, calendar status, and CRUD operations for calendar events.
-    -   **Changes**: Newly created. Includes , , , , , . Stores Google tokens in MongoDB.
--   ** (NEW)**: FastAPI routes for team data.
-    -   **Summary**: Provides mock data for team members.
+-   ****: Main FastAPI application.
+    -   **Summary**: Registers API routes, handles startup events, and integrates core services.
+    -   **Changes**: Integrated , , . Updated  initialization to include  and . Registered .
+-   ****: FastAPI routes for calendar events.
+    -   **Summary**: Manages Google Calendar OAuth and CRUD operations for events.
+    -   **Changes**: Refactored to use MongoDB for event persistence instead of mock data. Implemented actual , ,  endpoints, conflict detection, and a more realistic sync logic.
+-   ****: Python dependencies for the backend.
+    -   **Summary**: Lists all required Python packages.
+    -   **Changes**: Added  for scheduled workflow execution.
+-   ****: Manages background tasks.
+    -   **Summary**: Handles scheduled tasks like reminders and now custom workflows.
+    -   **Changes**: Added logic to check and execute scheduled custom workflows using . Modified  to accept .
+-   ** (NEW)**: Backend event dispatching system.
+    -   **Summary**: A central hub for emitting system events, enabling event-driven workflows.
+    -   **Changes**: Newly created.
+-   ** (NEW)**: Helper for workflow event definitions.
+    -   **Summary**: Centralizes definitions for events that trigger workflows.
+    -   **Changes**: Newly created.
+-   ** (NEW)**: FastAPI routes for receiving webhooks.
+    -   **Summary**: Provides endpoints for external services to trigger workflows via webhooks.
     -   **Changes**: Newly created with  endpoint.
--   ** (NEW)**: FastAPI routes for form templates.
-    -   **Summary**: Provides mock data for form templates.
-    -   **Changes**: Newly created with  endpoint.
--   ****: Now the main home/dashboard page.
-    -   **Summary**: Displays an overview of application metrics, recent activities, and quick actions.
-    -   **Changes**: Merged dashboard functionality into this file. Updated to fetch and display real-time Recent Activity and Platform Health data. Quick Actions moved into the . Layout adjusted for full-width Recent Activity and 3-column grid for Platform Health. Add Lead button now navigates directly to . Removed  state and related JSX. Added  icon to the .
+-   ****: FastAPI routes for work orders.
+    -   **Summary**: Manages CRUD operations for work orders.
+    -   **Changes**: Added event emissions for work order creation and completion using .
+-   ****: Home/dashboard page.
+    -   **Summary**: Consolidated dashboard information.
+    -   **Changes**: Merged old dashboard content, integrated Quick Actions into , updated layout for Recent Activity and Platform Health.
 -   ****: Old dashboard page.
-    -   **Summary**: Previously the main dashboard.
-    -   **Changes**: Content merged into  and now contains only a redirect to .
--   ****: Web-admin's tasks list page.
-    -   **Summary**: Displays a list of tasks.
-    -   **Changes**: Fixed a nested button error by restructuring how stats and filters are passed to .
--   ****: CRM dashboard page.
-    -   **Summary**: Displays CRM-related information.
-    -   **Changes**: Updated Add Task button and Upcoming Tasks section to link to . Updated View Full calendar button to link to .
--   ** (NEW)**: Comprehensive calendar page.
-    -   **Summary**: Provides a full-featured calendar with Google Calendar integration and event management.
-    -   **Changes**: Newly created. Includes UI for Google Calendar connection, consolidated sync buttons, popups for connection status, updated button colors, clickable days with event popups, Month/Week/Day view filters, date display on each day, smooth view transitions, updated modal backgrounds/overlays, and removed close/+New Event buttons from day events modal. Imports and uses . Fixed  icon import.
--   ****: Client-side authentication context.
-    -   **Summary**: Manages user authentication state.
-    -   **Changes**: Refined session token handling and  to prevent unnecessary API calls and gracefully handle 401 errors.
--   ****: Centralized Axios instance for API requests.
-    -   **Summary**: Configures Axios with base URL and interceptors.
-    -   **Changes**: Improved response error interceptor to silently handle 401 errors.
+    -   **Summary**: Redirects to the new home page.
+    -   **Changes**: Redirects to .
+-   ****: Calendar page.
+    -   **Summary**: Full-featured calendar with Google Calendar integration and event management.
+    -   **Changes**: Implemented event editing, dynamic view filters, clickable days, and improved UI consistency.
+-   ****: Workflow listing page.
+    -   **Summary**: Displays available workflow templates and custom workflows.
+    -   **Changes**: Refactored from  to fix JSX errors, nested s, and Turbopack compatibility issues.
+-   ****: Workflow creation page.
+    -   **Summary**: Form for building new automated workflows.
+    -   **Changes**: Refactored to fix numerous JSX errors, duplicate  props, incorrect icon passing, duplicate shadow classes, and structural issues for Turbopack compatibility. Supports both create and edit modes.
+-   ****: Workflow editing page.
+    -   **Summary**: Reuses the create page component for editing existing workflows.
+    -   **Changes**:  to reuse  for edit functionality.
+-   ****: Workflow execution history.
+    -   **Summary**: Displays logs and details of workflow executions.
+    -   **Changes**: Fixed duplicate title and nested  issues, and duplicate shadow classes.
 -   ****: Reusable page header component.
-    -   **Summary**: Provides a consistent header for pages, including title, subtitle, and actions.
+    -   **Summary**: Provides consistent page headers with title, subtitle, actions, and an icon.
     -   **Changes**: Modified to accept and display an  prop, allowing an icon to appear to the left of the page title.
--   ****: Main navigation component.
-    -   **Summary**: Defines the application's primary navigation structure.
-    -   **Changes**: Added  icon import and  link under the  submenu. Removed Agreement Templates and reordered the Sales submenu.
--   ** (NEW)**: Modal for creating/editing calendar events.
-    -   **Summary**: Provides a form for comprehensive event creation, including fields for customers, sites, forms, team members, and file attachments. Supports edit mode.
-    -   **Changes**: Newly created. Includes UI for all specified fields and supports dynamic titles/delete buttons for edit mode. Fixed  icon import.
--   ** (NEW)**: Python script.
-    -   **Summary**: Created to systematically fix JSX structure mismatch patterns in  functions.
-    -   **Changes**: Newly created.
--   ** (NEW)**: Documentation file.
-    -   **Summary**: Outlines the plan for adding icons to all major page headers.
-    -   **Changes**: Newly created.
+-   **Many  files (e.g., , , , , , , , , , , , , , , , , , , , )**:
+    -   **Summary**: Various application pages.
+    -   **Changes**: Updated to pass an appropriate icon to the  component, fixed duplicate  props in several pages, and corrected icon component syntax (e.g., ).
 </code_architecture>
 
 <pending_tasks>
 -   Fix Production Build JSX Errors (24 errors identified, script created but not fully implemented/verified).
 -   Fully implement specific measurement tools functionality and popups for Measure Area and Measure Distance in the Site Maps.
 -   Fully implement clickable items on the map for editing/viewing after placement (beyond simple  calls).
--   Refactor the original  to be compatible with Turbopack, or rebuild it.
--   Implement event conflict detection for the calendar events.
--   Systematically add icons to *all* major page headers (beyond the dashboard example).
+-   Systematically add icons to *all* major page headers (beyond the currently completed 20 high-priority pages).
+-   Continue implementing remaining Enterprise Grade workflow automation features (beyond the Webhook Receiver).
 </pending_tasks>
 
 <current_work>
-The most recent development focused on enhancing the calendar feature by implementing event editing and deletion functionality. This involved modifying the  to support an 'edit mode', which allows the modal title to change (e.g., Edit Event) and introduces a Delete Event button in the modal's footer for existing events.
+The most recent work centered on implementing Enterprise Grade workflow automation, following a phased approach.
+**Phase 1: Critical MVP Features** has been completed:
+1.  **Custom Workflow Executor**: Verified as existing and functional ().
+2.  **Edit Workflow Page**: Implemented by reusing the  component via , which inherently supports both creation and editing.
+3.  **Execution History UI**: The  exists and was fixed for minor JSX issues.
 
-On the backend,  was updated to include new API endpoints: a  endpoint for updating event details and a  endpoint for removing events from the database. These additions complete the CRUD (Create, Read, Update, Delete) operations for calendar events, ensuring full programmatic control over event data.
+**Phase 2: Production Features - Scheduled Execution and Event-Based Triggers** has also been completed:
+1.  **Scheduled Execution**:  was installed and integrated into  to allow custom workflows to run on a schedule.  was updated to properly initialize the scheduler with the workflow executor.
+2.  **Event-Based Triggers**: An  was created and initialized in 's startup. Event emissions were added to key endpoints like work order creation/completion in , and a  helper was created.
 
-After these modifications, both the backend and web-admin services were restarted to apply the changes. During the verification phase, the user reported a Not loading issue, which was subsequently diagnosed as a Next.js cache problem in the . The cache was cleared, and the  service was restarted. The application is now loading correctly again, and the next step is to verify the functionality of the newly implemented event editing and deletion features on the calendar page.
+**Phase 3: Enterprise Features - Webhook Receiver** has been initiated and the first item completed:
+1.  **Webhook Receiver**: The  was created and its routes registered in . Despite a lack of explicit log confirmation, testing confirmed the  endpoint is active and functional.
+
+Before this, significant progress was made in adding icons to 20 high-priority page headers across the  application, resolving numerous JSX parsing errors, duplicate  props, and incorrect icon passing syntax in pages like Customers, Tasks, Sites, Team, Leads, Estimates, Invoices, Projects, Reports, Work Orders, Services, Inventory, Fuel, Forms, CRM Dashboard, Access, Consumables, Operations, Tracking, and Messages.
 </current_work>
 
 <optional_next_step>
-Verify the functionality of the newly implemented event editing and deletion features in the calendar.
+Continue with the remaining items within Phase 3 (Enterprise Grade workflow automation).
 </optional_next_step>

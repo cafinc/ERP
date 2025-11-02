@@ -23,7 +23,7 @@ Client Secret: qB6XscWqZsKgT3RRdZHojQqS48UjyzjfZd6S4ALA
 
 **Redirect URI (CRITICAL):**
 ```
-https://fieldservice-hub-1.preview.emergentagent.com/api/quickbooks/auth/callback
+https://erp-automation-2.preview.emergentagent.com/api/quickbooks/auth/callback
 ```
 
 **⚠️ Common Issues:**
@@ -40,7 +40,7 @@ https://fieldservice-hub-1.preview.emergentagent.com/api/quickbooks/auth/callbac
 ### **Test Authorization URL Generation:**
 
 ```bash
-curl 'https://fieldservice-hub-1.preview.emergentagent.com/api/quickbooks/auth/connect?user_id=test_user'
+curl 'https://erp-automation-2.preview.emergentagent.com/api/quickbooks/auth/connect?user_id=test_user'
 ```
 
 **Expected Response:**
@@ -61,7 +61,7 @@ curl 'https://fieldservice-hub-1.preview.emergentagent.com/api/quickbooks/auth/c
 ### **Follow These Steps:**
 
 1. **Open Browser Developer Tools** (F12)
-2. **Go to:** https://fieldservice-hub-1.preview.emergentagent.com/settings/quickbooks
+2. **Go to:** https://erp-automation-2.preview.emergentagent.com/settings/quickbooks
 3. **Click "Connect to QuickBooks"**
 4. **Watch the Network tab**
 
@@ -105,7 +105,7 @@ Browser redirects to: /settings/quickbooks?connected=true
 1. Go to Intuit Developer Portal → Your App → Keys & OAuth
 2. Verify redirect URI is EXACTLY:
    ```
-   https://fieldservice-hub-1.preview.emergentagent.com/api/quickbooks/auth/callback
+   https://erp-automation-2.preview.emergentagent.com/api/quickbooks/auth/callback
    ```
 3. Save and try again
 
@@ -142,7 +142,7 @@ Browser redirects to: /settings/quickbooks?connected=true
 2. Look for MongoDB connection issues
 3. Check if callback endpoint is accessible:
    ```bash
-   curl -I https://fieldservice-hub-1.preview.emergentagent.com/api/quickbooks/auth/callback
+   curl -I https://erp-automation-2.preview.emergentagent.com/api/quickbooks/auth/callback
    ```
 
 ---
@@ -177,7 +177,7 @@ grep QUICKBOOKS .env
 ```
 QUICKBOOKS_CLIENT_ID=ABSb9lt1OEqUsOO4tsf3UewtCe9OHGCSgbXTfr7xX56iqhy9i9
 QUICKBOOKS_CLIENT_SECRET=qB6XscWqZsKgT3RRdZHojQqS48UjyzjfZd6S4ALA
-QUICKBOOKS_REDIRECT_URI=https://fieldservice-hub-1.preview.emergentagent.com/api/quickbooks/auth/callback
+QUICKBOOKS_REDIRECT_URI=https://erp-automation-2.preview.emergentagent.com/api/quickbooks/auth/callback
 QUICKBOOKS_ENVIRONMENT=production
 ```
 
@@ -240,7 +240,7 @@ Then try to connect from the UI and watch the logs.
 
 ```bash
 # Test authorization URL generation
-curl -s 'https://fieldservice-hub-1.preview.emergentagent.com/api/quickbooks/auth/connect?user_id=test' | python3 -m json.tool
+curl -s 'https://erp-automation-2.preview.emergentagent.com/api/quickbooks/auth/connect?user_id=test' | python3 -m json.tool
 
 # Check if URL contains production client ID
 # Look for: ABSb9lt1OEqUsOO4tsf3UewtCe9OHGCSgbXTfr7xX56iqhy9i9
@@ -299,7 +299,7 @@ Before reporting an issue, verify:
 
 Make sure in Intuit Developer Portal:
 ```
-https://fieldservice-hub-1.preview.emergentagent.com/api/quickbooks/auth/callback
+https://erp-automation-2.preview.emergentagent.com/api/quickbooks/auth/callback
 ```
 
 - ✅ Starts with https:// (not http://)

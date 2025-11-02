@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://fieldservice-hub-1.preview.emergentagent.com/api';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://erp-automation-2.preview.emergentagent.com/api';
 
 const api = axios.create({
   baseURL: API_URL,
