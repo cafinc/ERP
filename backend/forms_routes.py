@@ -30,7 +30,8 @@ async def get_form_templates():
     try:
         mongo_url = os.getenv("MONGO_URL", "mongodb://localhost:27017")
         client = AsyncIOMotorClient(mongo_url)
-        db = client.snow_removal_db
+        db_name = os.getenv("DB_NAME", "snow_removal_db")
+        db = client[db_name]
         
         # Fetch form templates
         templates = await db.form_templates.find({"active": True}).to_list(length=100)
@@ -98,7 +99,8 @@ async def get_form_template(template_id: str):
     try:
         mongo_url = os.getenv("MONGO_URL", "mongodb://localhost:27017")
         client = AsyncIOMotorClient(mongo_url)
-        db = client.snow_removal_db
+        db_name = os.getenv("DB_NAME", "snow_removal_db")
+        db = client[db_name]
         
         from bson import ObjectId
         template = await db.form_templates.find_one({"_id": ObjectId(template_id)})
@@ -127,7 +129,8 @@ async def create_form_template(template: FormTemplate):
     try:
         mongo_url = os.getenv("MONGO_URL", "mongodb://localhost:27017")
         client = AsyncIOMotorClient(mongo_url)
-        db = client.snow_removal_db
+        db_name = os.getenv("DB_NAME", "snow_removal_db")
+        db = client[db_name]
         
         template_doc = {
             "name": template.name,
