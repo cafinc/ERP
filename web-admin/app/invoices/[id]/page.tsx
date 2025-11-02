@@ -297,10 +297,6 @@ export default function InvoiceDetailPage() {
       </div>
     </div>
   </div>
-                    )
-                  )}
-                  </tbody>
-                </table>
 
               {/* Totals */}
               <div className="mt-6 pt-6 border-t border-gray-200 space-y-2">
