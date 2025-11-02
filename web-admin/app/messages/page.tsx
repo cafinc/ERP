@@ -617,8 +617,10 @@ export default function MessagesPage() {
                         }`}>
                           {contact.type === 'team' ? 'Team' : 'Customer'}
                         </span>
+                      </div>
                     </label>
                   ))}
+                </div>
 
               {/* Action Buttons */}
               <div className="flex items-center justify-end space-x-3">
