@@ -348,11 +348,12 @@ export default function InvoiceDetailPage() {
                         <p className="text-sm text-gray-600 mt-2 ml-11">{payment.notes}</p>
                       )}
                     </div>
-        </div>
-          ))}
-                </div></div>
-          )}
-          {/* Sidebar */}
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* Sidebar */}
           <div className="space-y-6">
             {/* Payment Summary */}
             <div className="bg-white rounded-xl shadow-sm shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
