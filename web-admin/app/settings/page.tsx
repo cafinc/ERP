@@ -183,11 +183,10 @@ export default function SettingsPage() {
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
         {/* Compact Header */}
         <PageHeader
-        title="Settings"
-        subtitle="Configure system settings and preferences"
-        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Settings" }]}
-        title="Settings"
-          icon={SettingsIcon}
+          title="Settings"
+          subtitle="Configure system settings and preferences"
+          breadcrumbs={[{ label: "Home", href: "/" }, { label: "Settings" }]}
+          icon={<SettingsIcon size={28} />}
           badges={[
             { label: 'System Configuration', color: 'blue' },
           ]}
