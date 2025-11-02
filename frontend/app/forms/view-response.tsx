@@ -53,7 +53,7 @@ export default function ViewResponseScreen() {
     setDownloadingPdf(true);
     try {
       // For web, we can open the PDF in a new tab
-      const pdfUrl = `${process.env.EXPO_PUBLIC_API_URL}/api/form-responses/${response.id}/pdf`;
+      const pdfUrl = `${process.env.EXPO_PUBLIC_BACKEND_URL}/api/form-responses/${response.id}/pdf`;
       
       if (typeof window !== 'undefined') {
         // Web browser - open in new tab
