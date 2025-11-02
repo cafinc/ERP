@@ -43,12 +43,15 @@ interface Workflow {
 }
 
 interface WorkflowTemplate {
+  id?: string;
   name: string;
   description: string;
   trigger: {
     trigger_type: string;
   };
   actions: Array<any>;
+  tags?: string[];
+  categories?: string[];
 }
 
 export default function WorkflowBuilderPage() {
