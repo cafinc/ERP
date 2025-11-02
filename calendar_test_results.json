@@ -1,101 +1,80 @@
 {
   "summary": {
-    "total_tests": 16,
-    "passed_tests": 13,
-    "failed_tests": 3,
-    "success_rate": 81.25,
-    "test_completed_at": "2025-11-02T01:08:38.759617"
+    "total_tests": 15,
+    "passed_tests": 15,
+    "failed_tests": 0,
+    "success_rate": 100.0,
+    "test_completed_at": "2025-11-02T01:13:01.897948"
   },
   "detailed_results": [
     {
       "test": "GET /api/calendar/events - Basic retrieval",
       "success": true,
-      "details": "Successfully retrieved 3 events. Response structure is valid list.",
+      "details": "Successfully retrieved 0 events. Response structure is valid list.",
       "response_data": {
-        "event_count": 3,
-        "sample_event": {
-          "id": "1",
-          "title": "Follow up: Smith Estimate",
-          "description": "Call customer about EST-2024-156",
-          "start": "2025-11-02T00:48:26.249941",
-          "end": "2025-11-02T01:48:26.249949",
-          "type": "appointment",
-          "status": "confirmed",
-          "color": "blue"
-        }
+        "event_count": 0,
+        "sample_event": null
       },
-      "timestamp": "2025-11-02T01:08:38.331162"
-    },
-    {
-      "test": "GET /api/calendar/events - Event structure validation",
-      "success": true,
-      "details": "Event structure contains all required fields: ['id', 'title', 'start', 'end']",
-      "response_data": {
-        "event_structure": [
-          "id",
-          "title",
-          "description",
-          "start",
-          "end",
-          "type",
-          "status",
-          "color"
-        ]
-      },
-      "timestamp": "2025-11-02T01:08:38.331194"
+      "timestamp": "2025-11-02T01:13:01.353889"
     },
     {
       "test": "GET /api/calendar/events - With start date filter",
       "success": true,
-      "details": "Successfully retrieved events with start date filter. Found 3 events.",
+      "details": "Successfully retrieved events with start date filter. Found 0 events.",
       "response_data": {
-        "filter_applied": "start=2025-11-02T01:08:38.331208",
-        "event_count": 3
+        "filter_applied": "start=2025-11-02T01:13:01.353924",
+        "event_count": 0
       },
-      "timestamp": "2025-11-02T01:08:38.344019"
+      "timestamp": "2025-11-02T01:13:01.366967"
     },
     {
       "test": "GET /api/calendar/events - With date range filter",
       "success": true,
-      "details": "Successfully retrieved events with date range filter. Found 3 events.",
+      "details": "Successfully retrieved events with date range filter. Found 0 events.",
       "response_data": {
-        "filter_applied": "start=2025-11-02T01:08:38.331208&end=2025-11-09T01:08:38.344040",
-        "event_count": 3
+        "filter_applied": "start=2025-11-02T01:13:01.353924&end=2025-11-09T01:13:01.366990",
+        "event_count": 0
       },
-      "timestamp": "2025-11-02T01:08:38.394725"
+      "timestamp": "2025-11-02T01:13:01.418466"
     },
     {
       "test": "POST /api/calendar/events - Required fields only",
       "success": true,
-      "details": "Successfully created event with ID: evt_1762045718.40168",
+      "details": "Successfully created event with ID: 6906b01d2661359a262d20df",
       "response_data": {
         "created_event": {
-          "id": "evt_1762045718.40168",
           "title": "Test Event - Required Fields Only",
           "description": null,
-          "start": "2025-11-02T01:08:38.394759",
-          "end": "2025-11-02T02:08:38.394761",
+          "start": "2025-11-02T01:13:01.418499",
+          "end": "2025-11-02T02:13:01.418500",
           "location": null,
           "attendees": [],
           "type": "event",
           "status": "confirmed",
           "google_event_id": null,
-          "color": "blue"
+          "color": "blue",
+          "customers": [],
+          "sites": [],
+          "forms": [],
+          "team_members": [],
+          "attachments": [],
+          "created_at": "2025-11-02T01:13:01.425527",
+          "updated_at": "2025-11-02T01:13:01.425532",
+          "id": "6906b01d2661359a262d20df"
         }
       },
-      "timestamp": "2025-11-02T01:08:38.404621"
+      "timestamp": "2025-11-02T01:13:01.453890"
     },
     {
       "test": "POST /api/calendar/events - All optional fields",
       "success": true,
-      "details": "Successfully created comprehensive event with ID: evt_1762045718.411434. All fields preserved: True",
+      "details": "Successfully created comprehensive event with ID: 6906b01d2661359a262d20e0. All fields preserved: True",
       "response_data": {
         "created_event": {
-          "id": "evt_1762045718.411434",
           "title": "Comprehensive Test Event",
           "description": "This is a test event with all possible fields populated",
-          "start": "2025-11-02T03:08:38.404646",
-          "end": "2025-11-02T04:08:38.404649",
+          "start": "2025-11-02T03:13:01.453922",
+          "end": "2025-11-02T04:13:01.453926",
           "location": "123 Test Street, Test City",
           "attendees": [
             "john@example.com",
@@ -104,11 +83,19 @@
           "type": "meeting",
           "status": "confirmed",
           "google_event_id": null,
-          "color": "green"
+          "color": "green",
+          "customers": [],
+          "sites": [],
+          "forms": [],
+          "team_members": [],
+          "attachments": [],
+          "created_at": "2025-11-02T01:13:01.460751",
+          "updated_at": "2025-11-02T01:13:01.460755",
+          "id": "6906b01d2661359a262d20e0"
         },
         "fields_preserved": true
       },
-      "timestamp": "2025-11-02T01:08:38.455632"
+      "timestamp": "2025-11-02T01:13:01.506622"
     },
     {
       "test": "POST /api/calendar/events - Missing title validation",
@@ -116,9 +103,9 @@
       "details": "Correctly returned 422 for missing title field",
       "response_data": {
         "status_code": 422,
-        "response": "{\"detail\":[{\"type\":\"missing\",\"loc\":[\"body\",\"title\"],\"msg\":\"Field required\",\"input\":{\"start\":\"2025-11-02T01:08:38.455668\",\"end\":\"2025-11-02T02:08:38.455670\"},\"url\":\"https://errors.pydantic.dev/2.12/v/missing\"}]}"
+        "response": "{\"detail\":[{\"type\":\"missing\",\"loc\":[\"body\",\"title\"],\"msg\":\"Field required\",\"input\":{\"start\":\"2025-11-02T01:13:01.506657\",\"end\":\"2025-11-02T02:13:01.506658\"},\"url\":\"https://errors.pydantic.dev/2.12/v/missing\"}]}"
       },
-      "timestamp": "2025-11-02T01:08:38.465469"
+      "timestamp": "2025-11-02T01:13:01.516724"
     },
     {
       "test": "POST /api/calendar/events - Missing start time validation",
@@ -126,61 +113,76 @@
       "details": "Correctly returned 422 for missing start time",
       "response_data": {
         "status_code": 422,
-        "response": "{\"detail\":[{\"type\":\"missing\",\"loc\":[\"body\",\"start\"],\"msg\":\"Field required\",\"input\":{\"title\":\"Test Event\",\"end\":\"2025-11-02T02:08:38.465493\"},\"url\":\"https://errors.pydantic.dev/2.12/v/missing\"}]}"
+        "response": "{\"detail\":[{\"type\":\"missing\",\"loc\":[\"body\",\"start\"],\"msg\":\"Field required\",\"input\":{\"title\":\"Test Event\",\"end\":\"2025-11-02T02:13:01.516742\"},\"url\":\"https://errors.pydantic.dev/2.12/v/missing\"}]}"
       },
-      "timestamp": "2025-11-02T01:08:38.515739"
+      "timestamp": "2025-11-02T01:13:01.567731"
     },
     {
       "test": "PUT /api/calendar/events/{event_id} - Update event",
       "success": true,
-      "details": "Successfully updated event evt_1762045718.40168. Title changed to: Updated Test Event Title",
+      "details": "Successfully updated event 6906b01d2661359a262d20df. Title changed to: Updated Test Event Title",
       "response_data": {
         "updated_event": {
-          "id": "evt_1762045718.40168",
           "title": "Updated Test Event Title",
           "description": "This event has been updated via PUT request",
-          "start": "2025-11-02T05:08:38.515771",
-          "end": "2025-11-02T06:08:38.515775",
+          "start": "2025-11-02T05:13:01.567759",
+          "end": "2025-11-02T06:13:01.567763",
           "location": "Updated Location - 456 New Street",
           "attendees": [],
           "type": "appointment",
           "status": "tentative",
           "google_event_id": null,
-          "color": "red"
+          "color": "red",
+          "customers": [],
+          "sites": [],
+          "forms": [],
+          "team_members": [],
+          "attachments": [],
+          "created_at": "2025-11-02T01:13:01.425527",
+          "updated_at": "2025-11-02T01:13:01.575284",
+          "id": "6906b01d2661359a262d20df"
         }
       },
-      "timestamp": "2025-11-02T01:08:38.526574"
+      "timestamp": "2025-11-02T01:13:01.579256"
     },
     {
       "test": "PUT /api/calendar/events/{event_id} - Non-existent event",
-      "success": false,
-      "details": "Expected 404, got 200",
-      "response_data": "{\"id\":\"nonexistent_event_123\",\"title\":\"This Should Fail\",\"description\":null,\"start\":\"2025-11-02T01:08:38.526605\",\"end\":\"2025-11-02T02:08:38.526607\",\"location\":null,\"attendees\":[],\"type\":\"event\",\"status\":\"confirmed\",\"google_event_id\":null,\"color\":\"blue\"}",
-      "timestamp": "2025-11-02T01:08:38.577575"
+      "success": true,
+      "details": "Correctly returned 404 for non-existent event",
+      "response_data": {
+        "status_code": 404,
+        "response": "{\"detail\":\"Event not found\"}"
+      },
+      "timestamp": "2025-11-02T01:13:01.629581"
     },
     {
       "test": "DELETE /api/calendar/events/{event_id} - Delete event",
       "success": true,
-      "details": "Successfully deleted event evt_1762045718.411434",
+      "details": "Successfully deleted event 6906b01d2661359a262d20e0",
       "response_data": {
         "success": true,
-        "message": "Event evt_1762045718.411434 deleted successfully"
+        "message": "Event 6906b01d2661359a262d20e0 deleted successfully"
       },
-      "timestamp": "2025-11-02T01:08:38.587445"
+      "timestamp": "2025-11-02T01:13:01.680841"
     },
     {
       "test": "DELETE /api/calendar/events/{event_id} - Deletion verification",
-      "success": false,
-      "details": "Event may not be properly deleted. Update attempt returned 200",
-      "response_data": "{\"id\":\"evt_1762045718.411434\",\"title\":\"This should fail\",\"description\":null,\"start\":\"2025-11-02T01:08:38.587465\",\"end\":\"2025-11-02T02:08:38.587467\",\"location\":null,\"attendees\":[],\"type\":\"event\",\"status\":\"confirmed\",\"google_event_id\":null,\"color\":\"blue\"}",
-      "timestamp": "2025-11-02T01:08:38.637517"
+      "success": true,
+      "details": "Verified deletion: Event 6906b01d2661359a262d20e0 no longer exists (404 on update attempt)",
+      "response_data": {
+        "verification_status": 404
+      },
+      "timestamp": "2025-11-02T01:13:01.733031"
     },
     {
       "test": "DELETE /api/calendar/events/{event_id} - Non-existent event",
-      "success": false,
-      "details": "Expected 404, got 200",
-      "response_data": "{\"success\":true,\"message\":\"Event nonexistent_event_456 deleted successfully\"}",
-      "timestamp": "2025-11-02T01:08:38.646499"
+      "success": true,
+      "details": "Correctly returned 404 for non-existent event",
+      "response_data": {
+        "status_code": 404,
+        "response": "{\"detail\":\"Event not found\"}"
+      },
+      "timestamp": "2025-11-02T01:13:01.742683"
     },
     {
       "test": "GET /api/calendar/google/status - Integration status",
@@ -191,7 +193,7 @@
         "email": "Connected",
         "calendar_id": "primary"
       },
-      "timestamp": "2025-11-02T01:08:38.699732"
+      "timestamp": "2025-11-02T01:13:01.795659"
     },
     {
       "test": "GET /api/calendar/google/auth-url - OAuth URL",
@@ -201,7 +203,7 @@
         "has_auth_url": true,
         "message": "Redirect to Google OAuth"
       },
-      "timestamp": "2025-11-02T01:08:38.709822"
+      "timestamp": "2025-11-02T01:13:01.846387"
     },
     {
       "test": "POST /api/calendar/events/check-conflicts - Conflict detection",
@@ -212,7 +214,7 @@
         "conflicts": [],
         "message": "No conflicts found"
       },
-      "timestamp": "2025-11-02T01:08:38.759422"
+      "timestamp": "2025-11-02T01:13:01.897756"
     }
   ]
 }
