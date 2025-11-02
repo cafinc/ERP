@@ -7,12 +7,19 @@ from fastapi.responses import HTMLResponse
 from datetime import datetime, timedelta
 from typing import Optional, List
 from pydantic import BaseModel
+from bson import ObjectId
 import os
 from dotenv import load_dotenv
+from motor.motor_asyncio import AsyncIOMotorClient
 
 load_dotenv()
 
 router = APIRouter()
+
+# MongoDB connection
+mongo_url = os.getenv("MONGO_URL", "mongodb://localhost:27017")
+mongo_client = AsyncIOMotorClient(mongo_url)
+db = mongo_client.snow_removal_db
 
 # Pydantic Models
 class CalendarEvent(BaseModel):
@@ -27,46 +34,25 @@ class CalendarEvent(BaseModel):
     status: str = "confirmed"  # confirmed, tentative, cancelled
     google_event_id: Optional[str] = None
     color: Optional[str] = "blue"
+    customers: Optional[List[str]] = []
+    sites: Optional[List[str]] = []
+    forms: Optional[List[str]] = []
+    team_members: Optional[List[str]] = []
+    attachments: Optional[List[dict]] = []
+    created_at: Optional[str] = None
+    updated_at: Optional[str] = None
 
 class GoogleCalendarStatus(BaseModel):
     connected: bool
     email: Optional[str] = None
     calendar_id: Optional[str] = None
 
-# Mock data for now - replace with actual database calls
-MOCK_EVENTS = [
-    {
-        "id": "1",
-        "title": "Follow up: Smith Estimate",
-        "description": "Call customer about EST-2024-156",
-        "start": datetime.now().isoformat(),
-        "end": (datetime.now() + timedelta(hours=1)).isoformat(),
-        "type": "appointment",
-        "status": "confirmed",
-        "color": "blue",
-    },
-    {
-        "id": "2",
-        "title": "Site Inspection - Elm Street",
-        "description": "Parking lot inspection",
-        "start": (datetime.now() + timedelta(days=1)).isoformat(),
-        "end": (datetime.now() + timedelta(days=1, hours=2)).isoformat(),
-        "location": "Elm Street Parking Lot",
-        "type": "appointment",
-        "status": "confirmed",
-        "color": "green",
-    },
-    {
-        "id": "3",
-        "title": "Team Meeting",
-        "start": (datetime.now() + timedelta(days=2)).isoformat(),
-        "end": (datetime.now() + timedelta(days=2, hours=1)).isoformat(),
-        "attendees": ["Team"],
-        "type": "meeting",
-        "status": "confirmed",
-        "color": "purple",
-    },
-]
+def serialize_event(event: dict) -> dict:
+    """Convert MongoDB document to API response format"""
+    if event and "_id" in event:
+        event["id"] = str(event["_id"])
+        del event["_id"]
+    return event
 
 @router.get("/calendar/events")
 async def get_calendar_events(
