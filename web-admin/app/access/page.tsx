@@ -1234,6 +1234,12 @@ export default function UnifiedAccessPage() {
                   </div>
                 </div>
                 <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Mobile Number</label>
+                  <div className="px-4 py-3 bg-gray-50 rounded-lg border border-gray-200">
+                    <p className="text-gray-900">{selectedViewUser.phone || 'Not provided'}</p>
+                  </div>
+                </div>
+                <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">Role</label>
                   <div className="px-4 py-3 bg-gray-50 rounded-lg border border-gray-200">
                     <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
@@ -1277,6 +1283,14 @@ export default function UnifiedAccessPage() {
                     <p className="text-gray-900">{selectedViewUser.created_at}</p>
                   </div>
                 </div>
+              </div>
+              
+              {/* SMS Notification Info */}
+              <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                <p className="text-xs text-blue-800 flex items-start gap-2">
+                  <AlertCircle className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                  <span>Mobile number is used for SMS notifications and two-factor authentication.</span>
+                </p>
               </div>
             </div>
 
