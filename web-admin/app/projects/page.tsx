@@ -114,6 +114,7 @@ export default function ProjectsPage() {
         {/* Compact Header */}
         <PageHeader
           title="Projects"
+          icon={<FolderOpen size={28} />}
           subtitle="Manage your service projects and milestones"
           breadcrumbs={[{ label: "Home", href: "/" }, { label: "CRM", href: "/crm/dashboard" }, { label: "Projects" }]}
           actions={[
