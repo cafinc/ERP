@@ -185,12 +185,6 @@ export default function ModernHeaderWithNav() {
           ? [{ label: 'Master Users', href: '/access/master', icon: Users }]
           : []
         ),
-        { label: 'Admins', href: '/access/admins', icon: Users },
-        { label: 'Crew', href: '/access/crew', icon: Users },
-        { label: 'Subcontractors', href: '/access/subcontractors', icon: Users },
-        { label: 'Customer Users', href: '/access/customers', icon: Users },
-        { label: 'Vendors', href: '/access/vendors', icon: Users },
-        { label: 'Shift History', href: '/shifts/history', icon: FileText },
       ],
     },
     {
