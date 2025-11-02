@@ -629,13 +629,18 @@ export default function MessagesPage() {
                   className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
                 >
                   Cancel
+                </button>
                 <button
                   onClick={handleCreateConversation}
                   disabled={selectedUsers.length === 0}
                   className="px-4 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#3f72af]/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Create Conversation
-                </button></div>
-          )}
-          );
-}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  }
