@@ -30,7 +30,8 @@ async def get_team_members():
     try:
         mongo_url = os.getenv("MONGO_URL", "mongodb://localhost:27017")
         client = AsyncIOMotorClient(mongo_url)
-        db = client.snow_removal_db
+        db_name = os.getenv("DB_NAME", "snow_removal_db")
+        db = client[db_name]
         
         # Fetch team members from users collection
         users = await db.users.find({"active": True}).to_list(length=100)
