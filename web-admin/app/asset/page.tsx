@@ -546,6 +546,14 @@ export default function EquipmentPage() {
               {/* Action Buttons */}
               <div className="flex gap-2">
                 <button
+                  onClick={() => setShowExportModal(true)}
+                  className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors flex items-center space-x-2"
+                >
+                  <Download className="w-4 h-4" />
+                  <span>Export</span>
+                </button>
+                
+                <button
                   onClick={() => setShowFilters(!showFilters)}
                   className={`px-4 py-2 rounded-lg transition-colors flex items-center space-x-2 ${
                     showFilters || filterType !== 'all' || filterStatus !== 'all'
