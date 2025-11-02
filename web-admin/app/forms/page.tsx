@@ -176,6 +176,7 @@ export default function FormsPage() {
         {/* Compact Header */}
         <PageHeader
           title="Forms Management"
+          icon={<ClipboardList size={28} />}
           subtitle="Create and manage custom forms"
           breadcrumbs={[{ label: "Home", href: "/" }, { label: "Forms" }]}
           actions={[
