@@ -539,6 +539,128 @@ export default function AccessDashboardPage() {
             </div>
           </div>
         )}
+
+        {/* Roles & Permissions Modal */}
+        {showRolesModal && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+            <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-auto">
+              <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-900">Roles & Permissions</h2>
+                  <p className="text-sm text-gray-600 mt-1">Manage user roles and access permissions</p>
+                </div>
+                <button
+                  onClick={() => setShowRolesModal(false)}
+                  className="text-gray-400 hover:text-gray-600 transition-colors"
+                >
+                  <XCircle className="w-6 h-6" />
+                </button>
+              </div>
+
+              <div className="p-6">
+                <div className="mb-6 flex items-center justify-between">
+                  <p className="text-sm text-gray-600">
+                    Define roles and assign granular permissions to control user access across the platform
+                  </p>
+                  <button
+                    onClick={() => alert('Create new role functionality')}
+                    className="px-4 py-2 bg-[#3f72af] text-white rounded-lg hover:bg-[#2d5a8f] font-medium transition-colors flex items-center gap-2"
+                  >
+                    <UserPlus className="w-4 h-4" />
+                    New Role
+                  </button>
+                </div>
+
+                <div className="space-y-4">
+                  {roles.map((role) => (
+                    <div
+                      key={role.id}
+                      className="bg-gradient-to-br from-gray-50 to-white rounded-xl border border-gray-200 p-6 hover:shadow-md transition-shadow"
+                    >
+                      <div className="flex justify-between items-start mb-4">
+                        <div className="flex items-center gap-3">
+                          <div className={`p-3 rounded-xl ${
+                            role.color === 'blue' ? 'bg-blue-100 text-blue-600' :
+                            role.color === 'green' ? 'bg-green-100 text-green-600' :
+                            role.color === 'orange' ? 'bg-orange-100 text-orange-600' :
+                            'bg-gray-100 text-gray-600'
+                          }`}>
+                            <Shield className="w-5 h-5" />
+                          </div>
+                          <div>
+                            <h3 className="text-lg font-bold text-gray-900">{role.name}</h3>
+                            <p className="text-sm text-gray-600">
+                              {role.users} {role.users === 1 ? 'user' : 'users'} assigned
+                            </p>
+                          </div>
+                        </div>
+                        <div className="flex gap-2">
+                          <button
+                            onClick={() => alert(`Edit ${role.name} role`)}
+                            className="p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+                            title="Edit role"
+                          >
+                            <Edit className="w-4 h-4" />
+                          </button>
+                          <button
+                            onClick={() => {
+                              if (confirm(`Are you sure you want to delete ${role.name} role?`)) {
+                                alert('Delete functionality');
+                              }
+                            }}
+                            className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                            title="Delete role"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </div>
+
+                      <div className="bg-white rounded-lg p-4 border border-gray-100">
+                        <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">
+                          Permissions ({role.permissions.length})
+                        </h4>
+                        <div className="flex flex-wrap gap-2">
+                          {role.permissions.map((permission, idx) => (
+                            <span
+                              key={idx}
+                              className={`px-3 py-1.5 rounded-full text-xs font-medium ${
+                                role.color === 'blue' ? 'bg-blue-100 text-blue-700' :
+                                role.color === 'green' ? 'bg-green-100 text-green-700' :
+                                role.color === 'orange' ? 'bg-orange-100 text-orange-700' :
+                                'bg-gray-100 text-gray-700'
+                              }`}
+                            >
+                              <CheckCircle className="w-3 h-3 inline mr-1" />
+                              {permission}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                  <div className="flex gap-3">
+                    <AlertCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <h4 className="text-sm font-semibold text-blue-900 mb-1">
+                        Role Management Best Practices
+                      </h4>
+                      <ul className="text-xs text-blue-800 space-y-1">
+                        <li>• Assign the minimum permissions required for each role</li>
+                        <li>• Regularly review and update role permissions</li>
+                        <li>• Use role-based access control (RBAC) for scalability</li>
+                        <li>• Document permission changes for audit trails</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
   );
 }
