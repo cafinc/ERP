@@ -170,6 +170,9 @@ export default function EditTemplatePage() {
               <h1 className="text-3xl font-bold text-gray-900">Edit Template</h1>
               <p className="text-gray-600 mt-1">Modify your template content and settings</p>
             </div>
+          </div>
+        </div>
+      </div>
 
       {/* Form */}
       <form onSubmit={handleSubmit} className="max-w-4xl mx-auto">
