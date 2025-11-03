@@ -14,7 +14,7 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-router = APIRouter(prefix="/api/ar", tags=["Accounts Receivable"])
+router = APIRouter(prefix="/ar", tags=["Accounts Receivable"])
 
 # Database connection
 MONGO_URL = os.getenv("MONGO_URL", "mongodb://localhost:27017")
