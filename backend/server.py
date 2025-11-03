@@ -13268,6 +13268,11 @@ from vendor_routes import router as vendor_router
 api_router.include_router(vendor_router)
 logger.info("Vendor Management endpoints registered successfully")
 
+# Accounts Receivable (Phase 1, Sprint 1.2)
+from accounts_receivable_routes import router as ar_router
+api_router.include_router(ar_router)
+logger.info("Accounts Receivable endpoints registered successfully")
+
 
 # Activity endpoint for dashboard
 @api_router.get("/activity")
