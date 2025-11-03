@@ -1,19 +1,20 @@
 #!/usr/bin/env python3
 """
-Backend API Testing for Phase 3 Enterprise Workflow Automation Features
-Tests all new endpoints for Workflow Template Library, Version Control, Analytics & Audit Logging
+Accounts Receivable (AR) Module Backend Testing
+Testing all AR endpoints as requested in the review
 """
 
 import requests
 import json
-import sys
 from datetime import datetime, timedelta
-from typing import Dict, List, Any
+import os
+from bson import ObjectId
 
-# Backend URL from environment
-BACKEND_URL = "https://admin-dashboard-374.preview.emergentagent.com/api"
+# Get backend URL from environment
+BACKEND_URL = os.getenv("REACT_APP_BACKEND_URL", "https://admin-dashboard-374.preview.emergentagent.com")
+API_BASE = f"{BACKEND_URL}/api"
 
-class WorkflowAPITester:
+class ARTester:
     def __init__(self):
         self.session = requests.Session()
         self.session.headers.update({
