@@ -11,7 +11,7 @@ from datetime import datetime, timedelta
 from typing import Dict, Any, Optional
 
 # Configuration
-BASE_URL = "https://admin-jsx-fixes.preview.emergentagent.com/api"
+BASE_URL = "https://admin-dashboard-374.preview.emergentagent.com/api"
 HEADERS = {"Content-Type": "application/json"}
 
 class GeofenceRouteTestSuite:
