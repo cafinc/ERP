@@ -22,6 +22,7 @@ import {
   Shield,
   Camera,
   BarChart3,
+  AlertTriangle,
 } from 'lucide-react';
 
 interface MenuItem {
