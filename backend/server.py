@@ -13259,6 +13259,15 @@ from forms_routes import router as forms_router
 api_router.include_router(forms_router)
 logger.info("Forms endpoints registered successfully")
 
+# Accounts Payable & Vendor Management (Phase 1, Sprint 1.1)
+from accounts_payable_routes import router as ap_router
+api_router.include_router(ap_router)
+logger.info("Accounts Payable endpoints registered successfully")
+
+from vendor_routes import router as vendor_router
+api_router.include_router(vendor_router)
+logger.info("Vendor Management endpoints registered successfully")
+
 
 # Activity endpoint for dashboard
 @api_router.get("/activity")
