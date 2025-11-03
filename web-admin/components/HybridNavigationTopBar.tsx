@@ -68,6 +68,8 @@ export default function HybridNavigationTopBar({ children }: { children: React.R
         { label: 'AR Dashboard', href: '/finance/ar-dashboard', icon: LayoutDashboard },
         { label: 'AR Aging Report', href: '/finance/ar-aging', icon: FileText },
         { label: 'Collections', href: '/finance/collections', icon: AlertTriangle },
+        { label: 'Customer Statements', href: '/finance/statements', icon: FileText },
+        { label: 'Record Payment', href: '/finance/payments/record', icon: DollarSign },
         { label: 'Expenses', href: '/finance/expenses', icon: DollarSign },
         { label: 'Payments', href: '/finance/payments', icon: DollarSign },
         { label: 'Reports', href: '/finance/reports', icon: FileText },
