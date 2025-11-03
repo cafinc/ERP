@@ -44,6 +44,7 @@ import {
   Server,
   Fuel,
   Calendar,
+  AlertTriangle,
 } from 'lucide-react';
 
 interface MenuItem {
